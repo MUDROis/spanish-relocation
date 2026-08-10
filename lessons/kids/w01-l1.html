@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 1: ¡Hola, España! — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.2}
+
+  /* ---------- NAVIGATION ---------- */
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:6px;transition:.2s}
+  .back-btn:hover{background:#f3ebc8}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FFE9B8 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--terra);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;letter-spacing:.5px}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--terra)}
+  .hero .sub{max-width:600px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+  .progress{max-width:500px;margin:28px auto 0;background:rgba(255,255,255,.7);border-radius:999px;height:14px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.08)}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--terra),var(--sun));border-radius:999px;width:1.6%;transition:width 1s ease}
+  .progress-text{font-size:.85rem;font-weight:800;color:var(--ink-soft);margin-top:8px}
+
+  /* ---------- CONTENT ---------- */
+  .container{max-width:860px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:30px}
+  .goals h2{font-size:1.4rem;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .goal-item{background:var(--soft);border-radius:14px;padding:14px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.4rem;margin-right:6px}
+
+  /* ---------- LESSON BLOCKS ---------- */
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .block-title{font-size:1.4rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:14px}
+  .block h4{margin:16px 0 8px;font-size:1.1rem}
+
+  /* ---------- SCRIPT BOXES ---------- */
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:14px 18px;border-radius:12px;margin:12px 0;font-style:italic;color:var(--ink)}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px;letter-spacing:.5px}
+
+  /* ---------- FLASHCARDS ---------- */
+  .flashcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .flashcard{background:linear-gradient(135deg,#fff,var(--soft));border-radius:18px;padding:20px;text-align:center;cursor:pointer;border:3px solid transparent;transition:.25s;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+  .flashcard:hover{transform:translateY(-4px);border-color:var(--c)}
+  .flashcard.active{border-color:var(--c);transform:scale(1.03)}
+  .fc-emoji{font-size:3rem;margin-bottom:8px}
+  .fc-phrase{font-family:'Baloo 2',cursive;font-size:1.6rem;color:var(--terra);margin-bottom:4px}
+  .fc-context{font-weight:800;font-size:.95rem;margin-bottom:6px}
+  .fc-meaning{color:var(--ink-soft);font-size:.9rem;margin-bottom:12px}
+  .speak-btn{background:var(--c);color:#fff;border:none;border-radius:10px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+  .speak-btn:active{transform:scale(.95)}
+  .fc-level{display:inline-block;background:var(--ink);color:#fff;border-radius:999px;padding:2px 10px;font-size:.75rem;font-weight:800;margin-bottom:8px}
+
+  /* ---------- PASSPORT ---------- */
+  .passport{background:linear-gradient(135deg,#8B2635,#C44536);color:#fff;border-radius:20px;padding:30px;margin:20px 0;box-shadow:0 10px 26px rgba(139,38,53,.3)}
+  .passport-header{text-align:center;margin-bottom:20px;border-bottom:2px solid rgba(255,255,255,.3);padding-bottom:14px}
+  .passport-header h3{font-size:1.8rem}
+  .passport-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;align-items:center}
+  .passport-photo{aspect-ratio:1;background:rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:3rem;border:3px dashed rgba(255,255,255,.4);cursor:pointer}
+  .passport-photo:hover{background:rgba(255,255,255,.25)}
+  .passport-fields{display:flex;flex-direction:column;gap:10px}
+  .passport-field{display:flex;flex-direction:column;gap:2px}
+  .passport-field label{font-size:.85rem;font-weight:800;opacity:.9}
+  .passport-field input{background:rgba(255,255,255,.15);border:none;border-bottom:2px dashed rgba(255,255,255,.5);color:#fff;font-family:'Nunito';font-size:1.05rem;font-weight:700;padding:6px 4px;outline:none}
+  .passport-field input:focus{border-bottom-color:#FFC93C;background:rgba(255,255,255,.25)}
+  .passport-field input::placeholder{color:rgba(255,255,255,.5)}
+  .passport-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+  .passport-btn{background:#FFC93C;color:#333;border:none;border-radius:12px;padding:10px 20px;font-family:'Nunito';font-weight:800;cursor:pointer;transition:.15s;flex:1;min-width:140px}
+  .passport-btn:hover{background:#ffd354}
+  .passport-btn.secondary{background:rgba(255,255,255,.2);color:#fff}
+  .passport-stamp{display:none;text-align:center;margin-top:14px;padding:10px;background:rgba(255,255,255,.2);border-radius:12px;font-weight:800}
+  .passport-stamp.show{display:block;animation:popIn .5s}
+
+  @keyframes popIn{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.1) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+
+  /* ---------- BALL GAME ---------- */
+  .ball-game{background:linear-gradient(135deg,#E5F4F1,#d4ebe6);border-radius:20px;padding:26px;margin:20px 0;text-align:center}
+  .ball{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FFD93D,#E8604C);margin:20px auto;display:flex;align-items:center;justify-content:center;font-size:3rem;cursor:pointer;box-shadow:0 10px 30px rgba(232,96,76,.4);transition:.25s;user-select:none}
+  .ball:hover{transform:scale(1.05) rotate(10deg)}
+  .ball:active{transform:scale(.9)}
+  .ball-question{font-family:'Baloo 2',cursive;font-size:1.5rem;color:var(--terra);margin:16px 0;min-height:40px}
+  .ball-options{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  .ball-option{background:#fff;border:2px solid var(--teal);border-radius:12px;padding:10px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito'}
+  .ball-option:hover{background:var(--teal);color:#fff}
+
+  /* ---------- HOMEWORK ---------- */
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.4rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;align-items:start;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--terra);color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+
+  /* ---------- NAVIGATION ---------- */
+  .next-lesson{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff;border-radius:22px;padding:26px;text-align:center;margin:30px 0;text-decoration:none;display:block;transition:.2s}
+  .next-lesson:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(42,157,143,.4)}
+  .next-lesson .small{opacity:.9;font-weight:700}
+  .next-lesson h3{font-size:1.5rem;margin:6px 0}
+
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+
+  @media(max-width:600px){
+    .passport-grid{grid-template-columns:1fr}
+    .passport-photo{max-width:150px;margin:0 auto}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 1 · Supervivencia · Урок 1 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">УРОК 1 / НЕДЕЛЯ 1</span>
+  <h1>¡Hola, <span>España</span>! 🇪🇸</h1>
+  <p class="sub">Твой первый шаг в новую жизнь. Сегодня ты получишь собственный испанский паспорт и научишься здороваться как настоящий испанец.</p>
+  <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+  <div class="progress-text">1 из 60 уроков — 2% пути 🚀</div>
+</header>
+
+<main class="container">
+
+  <!-- ЦЕЛИ -->
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">👋</span> Здороваться по-испански тремя способами</div>
+      <div class="goal-item"><span class="emoji">🗣</span> Представлять себя: имя, возраст, страна</div>
+      <div class="goal-item"><span class="emoji">📘</span> Сделаешь свой испанский паспорт</div>
+      <div class="goal-item"><span class="emoji">🌍</span> Узнаешь, куда именно ты едешь</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1: ПОГРУЖЕНИЕ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🗺️ Куда мы едем?</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Знакомство со страной, куда ты скоро переедешь</p>
+    
+    <div class="script">
+      Сегодня мы начинаем большое путешествие! Мы летим в страну, где солнце светит 300 дней в году, где едят паэлью, а дети играют во дворе до самой ночи.
+    </div>
+
+    <h4>🔥 3 интересных факта об Испании:</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
+      <div style="background:var(--soft);padding:14px;border-radius:12px;font-weight:700">🍊 Испания — родина апельсинов. Их здесь больше, чем людей!</div>
+      <div style="background:var(--soft);padding:14px;border-radius:12px;font-weight:700">⚽ Здесь придумали фламенко, тапас и футбол как религию</div>
+      <div style="background:var(--soft);padding:14px;border-radius:12px;font-weight:700">🕐 Ужинают в 21:00! А в 15:00 вся страна отдыхает — это сиеста</div>
+    </div>
+
+    <h4 style="margin-top:20px">🇪🇸 Карта Испании</h4>
+    <p style="color:var(--ink-soft);font-weight:700;margin:10px 0">На карте 17 автономных сообществ. Каждая со своим характером, едой и даже диалектом!</p>
+    <div style="background:#fff;border:3px solid var(--soft);border-radius:16px;padding:20px;text-align:center">
+      <div style="font-size:4rem;margin-bottom:10px">🗺️</div>
+      <div style="font-weight:800;color:var(--terra)">Главные города:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px">
+        <span style="background:var(--soft);padding:6px 14px;border-radius:999px;font-weight:700">🏛 Мадрид (столица)</span>
+        <span style="background:var(--soft);padding:6px 14px;border-radius:999px;font-weight:700">🎭 Барселона</span>
+        <span style="background:var(--soft);padding:6px 14px;border-radius:999px;font-weight:700">🍊 Валенсия</span>
+        <span style="background:var(--soft);padding:6px 14px;border-radius:999px;font-weight:700">💃 Севилья</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ПРИВЕТСТВИЯ -->
+  <section class="block" style="--c:#F4A261">
+    <div class="block-head">
+      <h2 class="block-title">👋 Три способа сказать «Привет»</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <p class="block-sub">В Испании приветствие зависит от того, К КОМУ ты обращаешься. Нажимай на карточки и слушай!</p>
+
+    <div class="flashcards">
+      <div class="flashcard" style="--c:#E8604C" onclick="speak('Buenos días', this)">
+        <span class="fc-level">ФОРМАЛЬНОЕ</span>
+        <div class="fc-emoji">🎩</div>
+        <div class="fc-phrase">Buenos días</div>
+        <div class="fc-context">Учителю, врачу, директору</div>
+        <div class="fc-meaning">«Добрый день»</div>
+        <button class="speak-btn" style="--c:#E8604C">🔊 Послушать</button>
+      </div>
+      <div class="flashcard" style="--c:#2A9D8F" onclick="speak('Hola', this)">
+        <span class="fc-level">НЕЙТРАЛЬНОЕ</span>
+        <div class="fc-emoji">👋</div>
+        <div class="fc-phrase">¡Hola!</div>
+        <div class="fc-context">Всем подряд</div>
+        <div class="fc-meaning">«Привет»</div>
+        <button class="speak-btn" style="--c:#2A9D8F">🔊 Послушать</button>
+      </div>
+      <div class="flashcard" style="--c:#2274A5" onclick="speak('¡Buenas, tío!', this)">
+        <span class="fc-level">МОЛОДЁЖНОЕ</span>
+        <div class="fc-emoji">🤙</div>
+        <div class="fc-phrase">¡Buenas, tío!</div>
+        <div class="fc-context">Друзьям, ровесникам</div>
+        <div class="fc-meaning">«Привет, чувак!»</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊 Послушать</button>
+      </div>
+    </div>
+
+    <div class="script">
+      Помни: в Испании буква <strong>H — невидимка</strong> 👻! Она пишется, но не читается. Поэтому <strong>Hola</strong> звучит как «О́ла», а не «Хола».
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ВИЗИТКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎤 Три волшебные фразы</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <p class="block-sub">Эти фразы — твой код доступа в испанскую жизнь. Выучи их!</p>
+
+    <div style="background:var(--soft);border-radius:16px;padding:22px;margin:16px 0">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed rgba(0,0,0,.1);cursor:pointer" onclick="speak('Me llamo Anna')">
+        <div style="font-size:2rem">🏷</div>
+        <div style="flex:1">
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Me llamo...</div>
+          <div style="font-weight:700;color:var(--ink-soft)">«Меня зовут...»</div>
+        </div>
+        <button class="speak-btn" style="--c:#2A9D8F">🔊</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed rgba(0,0,0,.1);cursor:pointer" onclick="speak('Tengo ocho años')">
+        <div style="font-size:2rem">🎂</div>
+        <div style="flex:1">
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Tengo ___ años</div>
+          <div style="font-weight:700;color:var(--ink-soft)">«Мне ... лет» (дословно: у меня есть ... лет)</div>
+        </div>
+        <button class="speak-btn" style="--c:#2A9D8F">🔊</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;cursor:pointer" onclick="speak('Soy de Rusia')">
+        <div style="font-size:2rem">🌍</div>
+        <div style="flex:1">
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Soy de...</div>
+          <div style="font-weight:700;color:var(--ink-soft)">«Я из...»</div>
+        </div>
+        <button class="speak-btn" style="--c:#2A9D8F">🔊</button>
+      </div>
+    </div>
+
+    <div class="script">
+      <strong>Важно!</strong> По-испански возраст — это то, что у тебя <em>есть</em>, как сокровище. Поэтому говорим <strong>tengo 8 años</strong> (у меня есть 8 лет), а не «soy 8 años».
+    </div>
+
+    <h4>🔤 Первые буквы-герои:</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px">
+      <div style="background:#fff;padding:14px;border-radius:12px;text-align:center;border:2px solid var(--soft)">
+        <div style="font-size:2rem;font-family:'Baloo 2',cursive;color:var(--terra)">LL</div>
+        <div style="font-weight:800;font-size:.85rem">Звук [й]</div>
+        <div style="font-size:.85rem;color:var(--ink-soft)">Me llamo</div>
+      </div>
+      <div style="background:#fff;padding:14px;border-radius:12px;text-align:center;border:2px solid var(--soft)">
+        <div style="font-size:2rem;font-family:'Baloo 2',cursive;color:var(--terra)">Ñ</div>
+        <div style="font-weight:800;font-size:.85rem">Буква-улитка 🐌</div>
+        <div style="font-size:.85rem;color:var(--ink-soft)">Espa<strong>ñ</strong>a</div>
+      </div>
+      <div style="background:#fff;padding:14px;border-radius:12px;text-align:center;border:2px solid var(--soft)">
+        <div style="font-size:2rem;font-family:'Baloo 2',cursive;color:var(--terra)">H</div>
+        <div style="font-weight:800;font-size:.85rem">Невидимка 👻</div>
+        <div style="font-size:.85rem;color:var(--ink-soft)">Hola = [о́ла]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: ПАСПОРТ -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">📘 Твой испанский паспорт</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <p class="block-sub">Заполни свой паспорт. Этот документ останется с тобой до конца курса!</p>
+
+    <div class="passport">
+      <div class="passport-header">
+        <div style="font-size:2rem">🇪🇸</div>
+        <h3>PASAPORTE ESPAÑOL</h3>
+        <div style="font-weight:700;opacity:.9">Escuela MUDRO · 2026</div>
+      </div>
+      <div class="passport-grid">
+        <div class="passport-photo" onclick="document.getElementById('photo-input').click()" id="photo">
+          📸
+        </div>
+        <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="loadPhoto(event)">
+        <div class="passport-fields">
+          <div class="passport-field">
+            <label>Me llamo (Меня зовут)</label>
+            <input type="text" id="p-name" placeholder="Nombre...">
+          </div>
+          <div class="passport-field">
+            <label>Tengo (Мне лет)</label>
+            <input type="number" id="p-age" placeholder="___ años" min="1" max="99">
+          </div>
+          <div class="passport-field">
+            <label>Soy de (Я из)</label>
+            <input type="text" id="p-country" placeholder="País...">
+          </div>
+        </div>
+      </div>
+      <div class="passport-actions">
+        <button class="passport-btn" onclick="stampPassport()">🎖 Получить визу</button>
+        <button class="passport-btn secondary" onclick="printPassport()">🖨 Распечатать</button>
+      </div>
+      <div class="passport-stamp" id="stamp">
+        🎉 ¡VISA APROBADA! ¡Bienvenido a España, <span id="stamp-name">amigo</span>!
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: ИГРА С МЯЧОМ -->
+  <section class="block" style="--c:#3A86FF">
+    <div class="block-head">
+      <h2 class="block-title">🎾 Игра «La Pelota Preguntona»</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Лови мяч и отвечай на вопрос! Нажимай на мяч, чтобы получить новый вопрос.</p>
+
+    <div class="ball-game">
+      <div class="ball" onclick="throwBall()" id="ball">🎾</div>
+      <div class="ball-question" id="question">Нажми на мяч!</div>
+      <div class="ball-options" id="options"></div>
+    </div>
+  </section>
+
+  <!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание: Стань учителем для родителей!</h3>
+    <div class="task">
+      <div class="task-num">1</div>
+      <div>
+        <strong>Научи маму и папу здороваться</strong> всеми тремя способами: <em>Buenos días, Hola, ¡Buenas!</em>
+      </div>
+    </div>
+    <div class="task">
+      <div class="task-num">2</div>
+      <div>
+        <strong>Представь родителей друг другу</strong> по-испански: <em>«Mamá, este es papá. Se llama...»</em>
+      </div>
+    </div>
+    <div class="task">
+      <div class="task-num">3</div>
+      <div>
+        <strong>Распечатай паспорт</strong> и повесь на холодильник. Пусть вся семья видит твой первый испанский документ!
+      </div>
+    </div>
+    <div class="task">
+      <div class="task-num">4</div>
+      <div>
+        <strong>Сделай селфи</strong> с паспортом и отправь учителю в чат. Это твоя первая победа! 🏆
+      </div>
+    </div>
+  </section>
+
+  <!-- СЛЕДУЮЩИЙ УРОК -->
+  <a href="./w01-l2.html" class="next-lesson">
+    <div class="small">Следующий урок →</div>
+    <h3>🆘 SOS-фразы: «Я не понимаю» и «Мне нужна помощь»</h3>
+    <div class="small">Урок 2 / Неделя 1</div>
+  </a>
+
+  <div class="footer">
+    Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · 2026
+  </div>
+
+</main>
+
+<script>
+/* ========== ОЗВУЧКА ========== */
+let esVoice=null;
+function loadVoices(){
+  const voices=speechSynthesis.getVoices();
+  esVoice=voices.find(v=>v.lang.startsWith('es')) || voices.find(v=>v.lang.startsWith('es-ES'));
+}
+speechSynthesis.onvoiceschanged=loadVoices;
+loadVoices();
+
+function speak(text, card){
+  if(!text) return;
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.lang='es-ES';
+  utter.rate=0.85;
+  utter.pitch=1.05;
+  if(esVoice) utter.voice=esVoice;
+  
+  if(card){
+    document.querySelectorAll('.flashcard').forEach(c=>c.classList.remove('active'));
+    card.classList.add('active');
+  }
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utter);
+}
+
+/* ========== ПАСПОРТ ========== */
+function loadPhoto(e){
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    const photo=document.getElementById('photo');
+    photo.style.backgroundImage=`url(${ev.target.result})`;
+    photo.style.backgroundSize='cover';
+    photo.style.backgroundPosition='center';
+    photo.textContent='';
+  };
+  reader.readAsDataURL(file);
+}
+
+function stampPassport(){
+  const name=document.getElementById('p-name').value || 'amigo';
+  const age=document.getElementById('p-age').value;
+  const country=document.getElementById('p-country').value;
+  
+  if(!name || !age){
+    alert('Заполни имя и возраст, чтобы получить визу! 😉');
+    return;
+  }
+  
+  const stamp=document.getElementById('stamp');
+  document.getElementById('stamp-name').textContent=name;
+  stamp.classList.add('show');
+  
+  speak(`¡Enhorabuena, ${name}! Bienvenido a España`);
+  
+  // Сохраняем в localStorage
+  localStorage.setItem('mudro_passport', JSON.stringify({name, age, country, date: new Date().toISOString()}));
+}
+
+function printPassport(){
+  window.print();
+}
+
+/* ========== ИГРА С МЯЧОМ ========== */
+const questions=[
+  {q:'¿Cómo te llamas?', options:['Me llamo Max','Tengo 8 años','Soy de Rusia'], correct:0},
+  {q:'¿Cuántos años tienes?', options:['Hola','Tengo 8 años','Buenos días'], correct:1},
+  {q:'¿De dónde eres?', options:['Me llamo Anna','Tengo 12 años','Soy de Rusia'], correct:2},
+  {q:'¿Cómo se dice «Привет»?', options:['Gracias','Hola','Adiós'], correct:1},
+  {q:'¿Cómo se dice «Добрый день»?', options:['Buenos días','Buenas noches','Buenas'], correct:0},
+  {q:'¿Cómo te llamas? (молодёжное)', options:['Buenos días, señor','Hola','¡Buenas, tío!'], correct:2}
+];
+let currentQ=null;
+
+function throwBall(){
+  const ball=document.getElementById('ball');
+  ball.style.transform='scale(.8) rotate(-20deg)';
+  setTimeout(()=>{ball.style.transform='scale(1.05) rotate(10deg)'},150);
+  setTimeout(()=>{ball.style.transform=''},300);
+  
+  currentQ=questions[Math.floor(Math.random()*questions.length)];
+  document.getElementById('question').textContent=currentQ.q;
+  
+  const opts=document.getElementById('options');
+  opts.innerHTML='';
+  currentQ.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='ball-option';
+    btn.textContent=opt;
+    btn.onclick=()=>checkAnswer(i, btn);
+    opts.appendChild(btn);
+  });
+  
+  speak(currentQ.q);
+}
+
+function checkAnswer(i, btn){
+  const all=document.querySelectorAll('.ball-option');
+  all.forEach(b=>b.disabled=true);
+  
+  if(i===currentQ.correct){
+    btn.style.background='var(--teal)';
+    btn.style.color='#fff';
+    btn.textContent='✅ '+btn.textContent;
+    speak('¡Muy bien!');
+  } else {
+    btn.style.background='#f0d0d0';
+    btn.textContent='❌ '+btn.textContent;
+    all[currentQ.correct].style.background='var(--teal)';
+    all[currentQ.correct].style.color='#fff';
+    speak(currentQ.options[currentQ.correct]);
+  }
+  
+  setTimeout(()=>{
+    if(all.length) throwBall();
+  }, 2500);
+}
+
+/* ========== ПРОГРЕСС ========== */
+// Анимация прогресс-бара при загрузке
+setTimeout(()=>{
+  document.getElementById('progress-bar').style.width='1.6%';
+},300);
+
+/* ========== ВОССТАНОВЛЕНИЕ ПАСПОРТА ========== */
+const saved=localStorage.getItem('mudro_passport');
+if(saved){
+  try{
+    const data=JSON.parse(saved);
+    if(data.name) document.getElementById('p-name').value=data.name;
+    if(data.age) document.getElementById('p-age').value=data.age;
+    if(data.country) document.getElementById('p-country').value=data.country;
+  }catch(e){}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF7EF">
+<title>Урок 1.1 · Misión Cita Previa — МУДРО</title>
+<meta name="description" content="Урок 1: учимся представляться, диктовать данные по буквам и записываться на приём в Испании. Испанский с нуля для переезда.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF7EF; --ink:#2B2118; --muted:#7A6A5C; --card:#fff;
+  --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --gold:#D4A017;
+  --radius:18px; --shadow:0 10px 30px rgba(43,33,24,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+button{font-family:inherit}
+.speak{cursor:pointer}
+
+/* ---------- шапка урока ---------- */
+.lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+.lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+.back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+.back-link:hover{color:var(--p1)}
+.lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+
+/* ---------- hero урока ---------- */
+.lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px}
+.phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+h1 em{font-style:normal;color:var(--p1)}
+.lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+/* ---------- таймер ---------- */
+.timer-box{display:inline-flex;align-items:center;gap:14px;background:#2B2118;color:#fff;border-radius:999px;padding:10px 20px;box-shadow:var(--shadow)}
+.timer-box .time{font-weight:900;font-size:1.3rem;font-variant-numeric:tabular-nums}
+.timer-box button{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:999px;padding:6px 14px;font-weight:900;font-size:.8rem;cursor:pointer}
+.timer-box button:hover{background:rgba(255,255,255,.28)}
+
+/* ---------- секции ---------- */
+.section{max-width:1100px;margin:0 auto;padding:34px 20px}
+.step-head{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.step-num{flex:0 0 46px;height:46px;border-radius:50%;background:var(--p1);color:#fff;font-weight:900;display:grid;place-items:center;font-size:1.2rem}
+.step-time{font-weight:900;color:var(--muted);font-size:.82rem;letter-spacing:.3px;text-transform:uppercase}
+h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
+.section .sub{color:var(--muted);margin:8px 0 22px;max-width:700px}
+
+/* ---------- карточки лексики ---------- */
+.flash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.flash{perspective:1000px;height:190px;cursor:pointer}
+.flash-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flash.flipped .flash-inner{transform:rotateY(180deg)}
+.flash-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--radius);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center}
+.flash-front{background:var(--card);border-top:5px solid var(--p1)}
+.flash-back{background:linear-gradient(160deg,var(--p1),#C05A45);color:#fff;transform:rotateY(180deg)}
+.flash-word{font-weight:900;font-size:1.2rem}
+.flash-hint{font-size:.8rem;color:var(--muted)}
+.flash-back .flash-hint{color:rgba(255,255,255,.85)}
+.speak-btn{background:rgba(0,0,0,.06);border:none;border-radius:999px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;font-size:1.1rem;transition:.2s}
+.flash-back .speak-btn{background:rgba(255,255,255,.2)}
+.speak-btn:hover{transform:scale(1.12)}
+
+/* ---------- блок грамматики ---------- */
+.gram-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.gram-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.gram-card .gc-formula{font-weight:900;font-size:1.25rem;color:var(--p1)}
+.gram-card .gc-ex{margin-top:10px;background:var(--bg);border-radius:12px;padding:12px;font-size:.95rem}
+.gram-card .gc-ex b{display:block;margin-bottom:3px}
+.mini-speak{background:none;border:none;cursor:pointer;font-size:1rem;opacity:.6}
+.mini-speak:hover{opacity:1}
+
+/* ---------- числа ---------- */
+.num-wrap{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.num-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.num-chip{background:var(--bg);border:2px solid transparent;border-radius:12px;padding:9px 14px;font-weight:800;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.num-chip:hover{border-color:var(--p3);transform:translateY(-2px)}
+.num-chip small{color:var(--muted);font-weight:700}
+.year-tool{margin-top:24px;border-top:1px dashed rgba(43,33,24,.15);padding-top:20px}
+.year-tool input{padding:12px 16px;border-radius:12px;border:2px solid rgba(43,33,24,.15);font-family:inherit;font-weight:800;font-size:1rem;width:130px}
+.year-result{margin-top:12px;font-weight:900;font-size:1.15rem;color:var(--p2);min-height:28px}
+
+/* ---------- алфавит ---------- */
+.alphabet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px}
+.key{background:#fff;border-radius:12px;box-shadow:var(--shadow);border:none;padding:12px 0;font-weight:900;font-size:1.1rem;cursor:pointer;transition:.15s;border-bottom:3px solid transparent}
+.key:hover{transform:translateY(-3px);border-bottom-color:var(--p4)}
+.key.active{background:var(--p4);color:#fff;border-bottom-color:#2C5E8A}
+.alpha-detail{margin-top:18px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;display:none;align-items:center;gap:20px;flex-wrap:wrap}
+.alpha-detail.show{display:flex;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.alpha-big{font-size:3rem;font-weight:900;color:var(--p4);line-height:1}
+.alpha-name{font-weight:900;font-size:1.15rem}
+.alpha-example{color:var(--muted);font-weight:800}
+.alpha-note{width:100%;background:var(--bg);border-radius:12px;padding:10px 14px;font-size:.9rem;margin-top:4px}
+
+/* ---------- симуляция звонка ---------- */
+.phone-sim{background:#fff;border-radius:24px;box-shadow:var(--shadow);max-width:460px;margin:0 auto;overflow:hidden;border:8px solid #2B2118}
+.phone-screen{background:linear-gradient(180deg,#2B2118,#3a3025);color:#fff;padding:26px 22px;min-height:300px;display:flex;flex-direction:column}
+.phone-header{text-align:center;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:12px;margin-bottom:14px}
+.phone-header b{font-size:1rem}
+.phone-header span{display:block;font-size:.75rem;opacity:.7}
+.call-log{flex:1;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:340px}
+.msg{max-width:80%;padding:10px 14px;border-radius:16px;font-size:.9rem;line-height:1.35}
+.msg.clerk{background:rgba(255,255,255,.14);border-bottom-left-radius:4px;align-self:flex-start}
+.msg.you{background:var(--p2);border-bottom-right-radius:4px;align-self:flex-end}
+.msg .speak-inline{background:none;border:none;color:#FFD75E;cursor:pointer;font-size:.85rem;margin-left:6px}
+.phone-controls{display:flex;gap:10px;justify-content:center;padding:16px;background:#2B2118}
+.phone-controls button{background:var(--p2);color:#fff;border:none;border-radius:999px;padding:12px 22px;font-weight:900;cursor:pointer;font-size:.9rem}
+.phone-controls button.secondary{background:rgba(255,255,255,.15)}
+
+/* ---------- форма EX-15 ---------- */
+.form-ex15{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;max-width:720px}
+.form-ex15 .stamp{text-align:right;color:#C05A45;font-weight:900;font-size:.8rem;letter-spacing:1px;margin-bottom:8px}
+.form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.form-row label{font-weight:800;font-size:.85rem;color:var(--muted)}
+.form-row input{padding:12px 14px;border-radius:10px;border:2px solid rgba(43,33,24,.12);font-family:inherit;font-weight:700;font-size:1rem}
+.form-row input:focus{outline:none;border-color:var(--p4)}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font-weight:900;font-size:.95rem;cursor:pointer;border:none;text-decoration:none;transition:.2s}
+.btn-primary{background:var(--p1);color:#fff}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{background:#fff;border:2px solid rgba(43,33,24,.15);color:var(--ink)}
+.form-preview{margin-top:20px;background:var(--bg);border-radius:12px;padding:18px;font-size:.95rem;display:none}
+.form-preview.show{display:block;animation:fadeUp .3s}
+.form-preview p{margin:4px 0}
+
+/* ---------- домашка ---------- */
+.homework{background:linear-gradient(160deg,#FFF3DC,#FFE7B8);border-radius:24px;padding:30px 26px;box-shadow:var(--shadow)}
+.homework h3{font-weight:900;margin-bottom:8px}
+.homework ul{margin:14px 0 0 20px}
+.homework li{margin:8px 0;font-weight:700}
+
+/* ---------- навигация между уроками ---------- */
+.lesson-nav{display:flex;justify-content:space-between;gap:14px;max-width:1100px;margin:0 auto;padding:10px 20px 60px;flex-wrap:wrap}
+.lesson-nav a{flex:1;min-width:220px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;text-decoration:none;color:var(--ink);font-weight:900;transition:.2s}
+.lesson-nav a:hover{transform:translateY(-3px)}
+.lesson-nav a small{display:block;color:var(--muted);font-weight:800;font-size:.78rem;margin-bottom:3px}
+.lesson-nav a.next{text-align:right}
+
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;font-size:.85rem}
+@media(max-width:560px){.timer-box{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 1 · Урок 1 из 3 · Фаза 1 Misión Residencia</span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🏠 Фаза 1 · Документы и жильё</span>
+  <h1>Урок 1.1 · <em>Misión Cita Previa</em><br>Ваш первый звонок в испанскую бюрократию</h1>
+  <div class="lesson-meta">
+    <span class="meta-chip">⏱ 50 минут</span>
+    <span class="meta-chip">🎯 Цель: представиться и записаться на приём</span>
+    <span class="meta-chip">🗣 5 слов-спасателей</span>
+  </div>
+  <div style="margin-top:22px">
+    <div class="timer-box">
+      <span class="time" id="timerDisplay">50:00</span>
+      <button id="timerStart">▶ Старт</button>
+      <button id="timerPause">⏸ Пауза</button>
+      <button id="timerReset">↺ Сброс</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ШАГ 1: РАЗОГРЕВ ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">1</span><div><span class="step-time">00:00 – 05:00 · Разогрев</span><h2>Культурный шок: почему нельзя просто прийти</h2></div></div>
+  <p class="sub">В Испании нет очередей «по живой». Есть волшебное словосочетание <b>la cita previa</b> — предварительная запись. Без неё вас не пустят даже в дверь. Запомните главную фразу-спасатель 👇 Нажмите на динамик, чтобы услышать.</p>
+  <div class="gram-card" style="max-width:560px">
+    <div class="gc-formula">Buenos días. Quisiera pedir una cita previa. <button class="mini-speak speak" data-text="Buenos días. Quisiera pedir una cita previa.">🔊</button></div>
+    <div class="gc-ex"><b>Добрый день. Я бы хотел записаться на приём.</b>Произносится вежливо и спокойно — с улыбкой работает лучше всего.</div>
+  </div>
+</section>
+
+<!-- ===== ШАГ 2: ЛЕКСИКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">2</span><div><span class="step-time">05:00 – 15:00 · Лексика</span><h2>5 слов, без которых переезд невозможен</h2></div></div>
+  <p class="sub">Нажмите на карточку, чтобы перевернуть. Нажмите 🔊 — чтобы услышать испанское произношение.</p>
+  <div class="flash-grid" id="flashGrid"></div>
+</section>
+
+<!-- ===== ШАГ 3: ГРАММАТИКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">3</span><div><span class="step-time">15:00 – 25:00 · Грамматика</span><h2>Кто я? Конструктор «Me llamo / Soy / Tengo»</h2></div></div>
+  <p class="sub">В испанском часто не нужны «связки» вроде английского am/is. Три глагола — и вы уже рассказываете о себе.</p>
+  <div class="gram-grid">
+    <div class="gram-card">
+      <div class="gc-formula">Me llamo… <button class="mini-speak speak" data-text="Me llamo Ana.">🔊</button></div>
+      <div class="gc-ex"><b>Меня зовут…</b>Me llamo Ana. — Меня зовут Анна.</div>
+    </div>
+    <div class="gram-card">
+      <div class="gc-formula">Soy… <button class="mini-speak speak" data-text="Soy rusa. Soy ruso.">🔊</button></div>
+      <div class="gc-ex"><b>Я [кто по национальности/профессии]</b>Soy rusa (ж.) / Soy ruso (м.). — Я русская / русский.</div>
+    </div>
+    <div class="gram-card">
+      <div class="gc-formula">Tengo… <button class="mini-speak speak" data-text="Tengo treinta y cinco años.">🔊</button></div>
+      <div class="gc-ex"><b>Мне … лет (дословно «я имею годы»)</b>Tengo treinta y cinco años. — Мне 35 лет.</div>
+    </div>
+  </div>
+
+  <div class="num-wrap" style="margin-top:22px">
+    <h2 style="font-size:1.2rem">Цифры для выживания: год рождения и возраст</h2>
+    <p class="sub" style="margin-bottom:0">Нажмите на число, чтобы услышать его по-испански.</p>
+    <div class="num-chips" id="numChips"></div>
+    <div class="year-tool">
+      <b>✏️ Практика: введите свой год рождения</b>
+      <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <input type="number" id="yearInput" min="1900" max="2020" placeholder="1985">
+        <button class="btn btn-primary" id="yearBtn">Перевести на испанский</button>
+        <button class="mini-speak speak" id="yearSpeak" data-text="" style="font-size:1.4rem;display:none">🔊</button>
+      </div>
+      <div class="year-result" id="yearResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ШАГ 4: АЛФАВИТ ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">4</span><div><span class="step-time">25:00 – 40:00 · Ролевая игра</span><h2>Испанский алфавит: как продиктовать фамилию</h2></div></div>
+  <p class="sub">Испанцы не поймут, если вы скажете «эм» или «ви». У каждой буквы есть имя. Нажмите на клавишу — увидите имя буквы и слово-подсказку, как у испанцев.</p>
+  <div class="alphabet-grid" id="alphaGrid"></div>
+  <div class="alpha-detail" id="alphaDetail">
+    <div class="alpha-big" id="adLetter">A</div>
+    <div>
+      <div class="alpha-name" id="adName">A de Antonio</div>
+      <div class="alpha-example" id="adExample">«А как в слове Antonio»</div>
+    </div>
+    <button class="btn btn-primary speak" id="adSpeak" style="margin-left:auto">🔊 Послушать</button>
+    <div class="alpha-note" id="adNote"></div>
+  </div>
+</section>
+
+<!-- ===== ШАГ 5: СИМУЛЯЦИЯ ЗВОНКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">5</span><div><span class="step-time">40:00 – 48:00 · Симуляция</span><h2>Звонок в Oficina de Extranjería</h2></div></div>
+  <p class="sub">Ваша задача — записаться на приём. Нажмите «Начать звонок» и следите за диалогом. Испанский клерк говорит быстро — это нормально! Нажмите «Дальше», чтобы продолжить.</p>
+  <div class="phone-sim">
+    <div class="phone-screen">
+      <div class="phone-header"><b>Oficina de Extranjería</b><span id="callStatus">Вызов не начат</span></div>
+      <div class="call-log" id="callLog"></div>
+    </div>
+    <div class="phone-controls">
+      <button id="callStart">📞 Начать звонок</button>
+      <button id="callNext" class="secondary" style="display:none">Дальше →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ШАГ 6: PBL ФОРМА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">6</span><div><span class="step-time">48:00 – 50:00 · Проект</span><h2>Заполняем формуляр EX-15</h2></div></div>
+  <p class="sub">Это упрощённая копия реального заявления на NIE. Заполните поля по-испански и нажмите «Проверить» — увидите, как выглядит ваш документ.</p>
+  <div class="form-ex15">
+    <div class="stamp">MINISTERIO DEL INTERIOR · FORMULARIO EX-15 (SIMULACIÓN)</div>
+    <div class="form-row"><label>Nombre (Имя)</label><input type="text" id="fNombre" placeholder="Ana"></div>
+    <div class="form-row"><label>Apellidos (Фамилии)</label><input type="text" id="fApellidos" placeholder="Ivanova"></div>
+    <div class="form-row"><label>Nacionalidad (Национальность)</label><input type="text" id="fNac" placeholder="Rusa"></div>
+    <div class="form-row"><label>Fecha de nacimiento (Дата рождения: ДД/ММ/ГГГГ)</label><input type="text" id="fFecha" placeholder="15/03/1985"></div>
+    <div class="form-row"><label>Número de pasaporte</label><input type="text" id="fPass" placeholder="75 1234567"></div>
+    <div class="form-actions">
+      <button class="btn btn-primary" id="checkForm">✅ Проверить форму</button>
+      <button class="btn btn-ghost" id="printForm">🖨 Распечатать</button>
+    </div>
+    <div class="form-preview" id="formPreview"></div>
+  </div>
+</section>
+
+<!-- ===== ДОМАШКА ===== -->
+<section class="section">
+  <div class="homework">
+    <h3>🏠 Семейная миссия на выходные</h3>
+    <ul>
+      <li><b>Для родителей:</b> найдите сайт испанской полиции (Policía Nacional) и сделайте скриншот кнопки, где запрашивается <b>Cita Previa</b>.</li>
+      <li><b>Для детей:</b> найдите на карте Испании города <b>Madrid, Valencia, Pamplona, Oviedo</b> (те самые, что помогали нам с алфавитом!) и отметьте их.</li>
+      <li><b>Вместе:</b> запишите голосовое сообщение в семейный чат — каждый представляет себя по-испански: <i>Me llamo… Soy… Tengo…</i></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== НАВИГАЦИЯ ===== -->
+<div class="lesson-nav">
+  <a href="../../index.html"><small>← Вернуться</small>Карта курса</a>
+  <a href="w01-l2.html" class="next"><small>Следующий →</small>Урок 1.2 · Охота за жильём (скоро)</a>
+</div>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España!</footer>
+<div id="toast" role="status"></div>
+
+<script>
+/* ====== СИНТЕЗ РЕЧИ (испанский голос) ====== */
+function speak(text){
+  if(!('speechSynthesis' in window)){toast('Ваш браузер не поддерживает озвучку 😔');return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-ES';
+  u.rate=.9;
+  const voices=speechSynthesis.getVoices();
+  const es=voices.find(v=>v.lang.startsWith('es'));
+  if(es)u.voice=es;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){speechSynthesis.getVoices();}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('.speak,.mini-speak');
+  if(s&&s.dataset.text){e.stopPropagation();speak(s.dataset.text);}
+});
+
+/* ====== ТАЙМЕР ====== */
+let seconds=50*60,timerInt=null;
+const td=document.getElementById('timerDisplay');
+function renderTime(){const m=String(Math.floor(seconds/60)).padStart(2,'0');const s=String(seconds%60).padStart(2,'0');td.textContent=`${m}:${s}`;}
+document.getElementById('timerStart').onclick=()=>{if(timerInt)return;timerInt=setInterval(()=>{if(seconds>0){seconds--;renderTime();}else{clearInterval(timerInt);timerInt=null;toast('⏰ Время урока вышло! ¡Buen trabajo!');}},1000);};
+document.getElementById('timerPause').onclick=()=>{clearInterval(timerInt);timerInt=null;};
+document.getElementById('timerReset').onclick=()=>{clearInterval(timerInt);timerInt=null;seconds=50*60;renderTime();};
+
+/* ====== КАРТОЧКИ ЛЕКСИКИ ====== */
+const VOCAB=[
+ {es:'la cita previa',ru:'предварительная запись',example:'Necesito una cita previa.',note:'Без неё в Испании никуда.'},
+ {es:'el NIE',ru:'номер иностранца (ID)',example:'Mi NIE es Y-1234567-A.',note:'Главный документ экспата.'},
+ {es:'el empadronamiento',ru:'регистрация по месту жительства',example:'Quiero empadronarme.',note:'Нужно для школы и врача.'},
+ {es:'las tasas',ru:'госпошлины',example:'Hay que pagar las tasas.',note:'Платёж за каждую бумагу.'},
+ {es:'la oficina de extranjería',ru:'офис по делам иностранцев',example:'La oficina está cerrada.',note:'Сюда идём за NIE.'}
+];
+document.getElementById('flashGrid').innerHTML=VOCAB.map(v=>`
+ <div class="flash" onclick="this.classList.toggle('flipped')">
+   <div class="flash-inner">
+     <div class="flash-face flash-front">
+       <div class="flash-word">${v.es}</div>
+       <button class="speak-btn speak" data-text="${v.es}" onclick="event.stopPropagation()">🔊</button>
+       <div class="flash-hint">нажмите, чтобы перевернуть</div>
+     </div>
+     <div class="flash-face flash-back">
+       <div class="flash-word">${v.ru}</div>
+       <div class="flash-hint">${v.example}</div>
+       <button class="speak-btn speak" data-text="${v.example}" onclick="event.stopPropagation()">🔊</button>
+       <div class="flash-hint">${v.note}</div>
+     </div>
+   </div>
+ </div>`).join('');
+
+/* ====== ЧИСЛА ====== */
+const NUMS=[[0,'cero'],[10,'diez'],[15,'quince'],[20,'veinte'],[30,'treinta'],[40,'cuarenta'],[50,'cincuenta'],[35,'treinta y cinco'],[100,'cien']];
+document.getElementById('numChips').innerHTML=NUMS.map(([n,w])=>`<button class="num-chip speak" data-text="${w}">${n} <small>${w}</small> 🔊</button>`).join('');
+
+/* перевод года рождения (упрощённо для 1900-2020) */
+const UNIDADES=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+const DECENAS=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+function twoDigits(n){if(n<30)return UNIDADES[n];const d=Math.floor(n/10),u=n%10;return u?`${DECENAS[d]} y ${UNIDADES[u]}`:DECENAS[d];}
+function yearToSpanish(y){
+  const mil='mil';
+  const rest=y-1000;
+  if(rest<=0)return mil;
+  const h=Math.floor(rest/100),r=rest%100;
+  let cien='';
+  if(h===9)cien='novecientos';
+  else if(h>0)cien=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'][h];
+  let out=`${mil} ${h?cien:''}`;
+  if(r>0)out+=` ${twoDigits(r)}`;
+  return out.replace(/\s+/g,' ').trim();
+}
+document.getElementById('yearBtn').onclick=()=>{
+  const y=+document.getElementById('yearInput').value;
+  const res=document.getElementById('yearResult');
+  const sp=document.getElementById('yearSpeak');
+  if(!y||y<1900||y>2020){res.textContent='Введите год от 1900 до 2020';res.style.color='#C05A45';sp.style.display='none';return;}
+  const text=yearToSpanish(y);
+  res.textContent=`${y} → ${text}`;
+  res.style.color='var(--p2)';
+  sp.dataset.text=text;sp.style.display='inline-block';
+};
+
+/* ====== АЛФАВИТ ====== */
+const ALPHA=[
+ ['A','A de Antonio','«А как в слове Antonio»',''],
+ ['B','B de Barcelona','«Б как в слове Barcelona»',''],
+ ['C','C de Carmen','«С как в слове Carmen»','Перед E/I читается как «θ» (межзубный).'],
+ ['D','D de Daniel','«Д как в слове Daniel»',''],
+ ['E','E de España','«Э как в слове España»',''],
+ ['F','F de Francia','«Ф как в слове Francia»',''],
+ ['G','G de Granada','«Г как в слове Granada»','Перед E/I читается как «Х».'],
+ ['H','H de Hache','«Аче» — НЕМая!','⚠️ Не произносится! Hola читается как «Ола».'],
+ ['I','I de Italia','«И как в слове Italia»',''],
+ ['J','J de Jota','«Хота»','Читается как «Х». Jueves = «хуэвэс».'],
+ ['L','L de Lola','«Л как в слове Lola»',''],
+ ['M','M de Madrid','«М как в слове Madrid»',''],
+ ['N','N de Navarra','«Н как в слове Navarra»',''],
+ ['Ñ','Ñ de Ñandú','«Энье»','Нь. España = «Эспанья».'],
+ ['O','O de Oviedo','«О как в слове Oviedo»',''],
+ ['P','P de Pamplona','«П как в слове Pamplona»',''],
+ ['Q','Q de queso','«К как в слове queso»',''],
+ ['R','R de Rosa','«Р как в слове Rosa»',''],
+ ['S','S de Sevilla','«С как в слове Sevilla»',''],
+ ['T','T de Toledo','«Т как в слове Toledo»',''],
+ ['U','U de Uruguay','«У как в слове Uruguay»',''],
+ ['V','V de Valencia','«В как в слове Valencia»','Звучит почти как «Б»!'],
+ ['X','X de Xilófono','«Экис»',''],
+ ['Y','Y de Yema','«И гриега»',''],
+ ['Z','Z de Zaragoza','«Сэта»','Читается как межзубный «θ».']
+];
+document.getElementById('alphaGrid').innerHTML=ALPHA.map((a,i)=>`<button class="key" data-i="${i}">${a[0]}</button>`).join('');
+document.getElementById('alphaGrid').addEventListener('click',e=>{
+  const k=e.target.closest('.key');if(!k)return;
+  document.querySelectorAll('.key').forEach(x=>x.classList.remove('active'));
+  k.classList.add('active');
+  const a=ALPHA[+k.dataset.i];
+  document.getElementById('adLetter').textContent=a[0];
+  document.getElementById('adName').textContent=a[1];
+  document.getElementById('adExample').textContent=a[2];
+  document.getElementById('adNote').textContent=a[3]||'';
+  document.getElementById('adNote').style.display=a[3]?'block':'none';
+  document.getElementById('adSpeak').dataset.text=`${a[1]}. ${a[0]} de ${a[1].split(' de ')[1]||''}`;
+  document.getElementById('adDetail').classList.add('show');
+  speak(a[1]);
+});
+
+/* ====== СИМУЛЯЦИЯ ЗВОНКА ====== */
+const DIALOG=[
+ {who:'clerk',text:'Oficina de Extranjería, buenos días, ¿en qué puedo ayudarle?'},
+ {who:'you',text:'Buenos días. Quisiera pedir una cita previa para el NIE.'},
+ {who:'clerk',text:'Perfecto. ¿Me puede decir su nombre completo, por favor?'},
+ {who:'you',text:'Sí. Me llamo Ana Ivanova.'},
+ {who:'clerk',text:'¿Me puede deletrear su apellido, por favor?'},
+ {who:'you',text:'Sí. I de Italia, V de Valencia, A de Antonio, N de Navarra, O de Oviedo, V de Valencia, A de Antonio.'},
+ {who:'clerk',text:'Muy bien. ¿Y su número de pasaporte?'},
+ {who:'you',text:'Es siete, cinco, uno, dos, tres, cuatro, cinco, seis, siete.'},
+ {who:'clerk',text:'Perfecto. Su cita es el martes a las diez. Hasta luego.'},
+ {who:'you',text:'Muchas gracias. Hasta luego.'}
+];
+let dIdx=0,callStarted=false;
+const log=document.getElementById('callLog');
+const startBtn=document.getElementById('callStart');
+const nextBtn=document.getElementById('callNext');
+const status=document.getElementById('callStatus');
+function addMsg(m){
+  const d=document.createElement('div');
+  d.className=`msg ${m.who==='clerk'?'clerk':'you'}`;
+  d.innerHTML=`${m.text} <button class="speak-inline speak" data-text="${m.text}">🔊</button>`;
+  log.appendChild(d);
+  log.scrollTop=log.scrollHeight;
+}
+startBtn.onclick=()=>{
+  if(callStarted)return;
+  callStarted=true;
+  status.textContent='Соединение…';
+  startBtn.style.display='none';
+  setTimeout(()=>{status.textContent='Идёт разговор · 00:01';addMsg(DIALOG[0]);dIdx=1;nextBtn.style.display='inline-block';speak(DIALOG[0].text);},900);
+};
+nextBtn.onclick=()=>{
+  if(dIdx>=DIALOG.length)return;
+  addMsg(DIALOG[dIdx]);
+  speak(DIALOG[dIdx].text);
+  dIdx++;
+  if(dIdx>=DIALOG.length){
+    nextBtn.style.display='none';
+    status.textContent='Разговор завершён ✅';
+    toast('🎉 ¡Enhorabuena! Вы прошли первый испанский звонок!');
+  }
+};
+
+/* ====== ФОРМА EX-15 ====== */
+document.getElementById('checkForm').onclick=()=>{
+  const n=document.getElementById('fNombre').value.trim();
+  const a=document.getElementById('fApellidos').value.trim();
+  const nac=document.getElementById('fNac').value.trim();
+  const f=document.getElementById('fFecha').value.trim();
+  const p=document.getElementById('fPass').value.trim();
+  const pv=document.getElementById('formPreview');
+  if(!n||!a){toast('Заполните хотя бы имя и фамилию 🙂');return;}
+  pv.innerHTML=`
+    <p><b>SOLICITANTE:</b> ${n} ${a}</p>
+    <p><b>NACIONALIDAD:</b> ${nac||'—'}</p>
+    <p><b>FECHA DE NACIMIENTO:</b> ${f||'—'}</p>
+    <p><b>PASAPORTE:</b> ${p||'—'}</p>
+    <p style="margin-top:12px;color:var(--p2);font-weight:900">✅ Форма готова к подаче (в симуляции). ¡Muy bien!</p>`;
+  pv.classList.add('show');
+};
+document.getElementById('printForm').onclick=()=>window.print();
+
+/* ====== тост ====== */
+let tId;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tId);tId=setTimeout(()=>t.classList.remove('show'),3200);}
+</script>
+</body>
+</html>
