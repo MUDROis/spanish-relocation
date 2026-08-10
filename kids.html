@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Миссия: Испанская школа 🇪🇸 — Интерактивная школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);padding-bottom:100px}
+  h1,h2,h3,.card h3{font-family:'Baloo 2',cursive}
+
+  /* ---------- HEADER ---------- */
+  .header{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{height:44px;width:auto}
+  .brand-name{font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:800;color:var(--ink)}
+  .brand-name span{color:var(--terra)}
+  
+  .mode-toggle{display:flex;background:var(--soft);border-radius:999px;padding:4px;gap:4px}
+  .mode-btn{border:none;background:transparent;padding:8px 18px;border-radius:999px;font-family:'Nunito';font-weight:800;font-size:.95rem;cursor:pointer;transition:.2s;color:#8a857b}
+  .mode-btn.active{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1);color:var(--terra)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:70px 20px 60px;
+    background:linear-gradient(180deg,#FFE9B8 0%,var(--cream) 100%)}
+  .hero .float{position:absolute;font-size:42px;animation:float 6s ease-in-out infinite;opacity:.85}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-18px) rotate(6deg)}}
+  .kicker{display:inline-block;background:#fff;border-radius:999px;padding:8px 18px;font-weight:800;color:var(--terra);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+  .hero h1{font-size:clamp(2rem,6vw,3.6rem);margin:18px 0 10px}
+  .hero h1 span{color:var(--terra)}
+  .hero .sub{max-width:640px;margin:0 auto;font-size:1.15rem;font-weight:700;color:#6b675f}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+  .stat{background:#fff;border-radius:16px;padding:12px 20px;font-weight:800;box-shadow:0 6px 16px rgba(0,0,0,.07)}
+  .stat b{color:var(--terra)}
+
+  /* ---------- MAP ---------- */
+  .map{max-width:1050px;margin:40px auto;padding:0 20px}
+  .map h2{text-align:center;font-size:2rem;margin-bottom:6px}
+  .hint{text-align:center;font-weight:700;color:#8a857b;margin-bottom:40px}
+  .path{position:relative}
+  .path::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
+    background-image:linear-gradient(to bottom,var(--terra) 0 14px,transparent 14px 28px);background-size:6px 28px;background-repeat:repeat-y;border-radius:3px}
+  .node{position:relative;width:50%;margin:26px 0;opacity:0;transform:translateY(30px);transition:all .6s ease}
+  .node.visible{opacity:1;transform:none}
+  .node.left{padding-right:52px}
+  .node.right{margin-left:50%;padding-left:52px}
+  .node::before{content:'';position:absolute;top:30px;width:22px;height:22px;border-radius:50%;background:var(--c,#ccc);border:4px solid #fff;box-shadow:0 0 0 4px var(--c,#ccc)33}
+  .node.left::before{right:-11px}
+  .node.right::before{left:-11px}
+  .pill{width:fit-content;margin:0 auto;background:var(--ink);color:#fff;border-radius:999px;padding:12px 26px;font-weight:800;font-size:1.05rem;box-shadow:0 8px 20px rgba(0,0,0,.18)}
+  .pill.finish{background:var(--teal);font-size:1.2rem}
+  .node.center{width:100%;padding:0;text-align:center}
+  .node.center::before{display:none}
+
+  .card{background:#fff;border-radius:22px;padding:22px;border-top:8px solid var(--c);box-shadow:0 10px 26px rgba(0,0,0,.09);transition:transform .25s;cursor:pointer}
+  .card:hover{transform:translateY(-6px) rotate(-.5deg)}
+  .card .top{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+  .card .emo{font-size:46px;line-height:1}
+  .card h3{font-size:1.35rem}
+  .card .weeks{display:inline-block;background:var(--c);color:#fff;border-radius:999px;padding:3px 12px;font-size:.8rem;font-weight:800;margin-top:4px}
+  .card .tag-line{font-weight:800;color:#6b675f;margin-bottom:12px}
+  .card ul{list-style:none;margin-bottom:14px}
+  .card li{padding:3px 0;font-weight:700}
+  .open-btn{background:var(--c);color:#fff;border:none;border-radius:14px;padding:10px 18px;font-family:'Nunito';font-weight:800;font-size:.95rem;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.15);transition:.15s}
+  .open-btn:active{transform:translateY(3px);box-shadow:none}
+
+  /* ---------- MODAL ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(40,35,25,.55);display:flex;align-items:center;justify-content:center;padding:18px;z-index:100;opacity:0;pointer-events:none;transition:.25s}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .modal{background:#fff;border-radius:26px;max-width:740px;width:100%;max-height:88vh;overflow:auto;padding:30px;position:relative;transform:translateY(24px);transition:.25s}
+  .overlay.show .modal{transform:none}
+  .modal .close{position:absolute;top:14px;right:16px;background:#f3efe6;border:none;border-radius:50%;width:38px;height:38px;font-size:18px;cursor:pointer;font-weight:800}
+  .m-head{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+  .m-head .emo{font-size:56px}
+  .m-head h3{font-size:1.6rem}
+  .m-sec{margin:18px 0}
+  .m-sec h4{font-size:1.05rem;margin-bottom:8px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{background:var(--soft);border-radius:999px;padding:7px 14px;font-weight:700}
+  .tag.g{background:#E5F4F1}
+  .project-box{background:linear-gradient(90deg,#FFF3D6,#FFE9B8);border-radius:16px;padding:14px 18px;font-weight:800}
+  .lessons{display:flex;flex-wrap:wrap;gap:8px}
+  .lesson{border:2px dashed #d8d2c4;color:#a49d8e;border-radius:12px;padding:7px 12px;font-weight:800;background:#fbf9f4;cursor:not-allowed;font-size:.85rem;text-decoration:none}
+  .lesson.unlocked{border-style:solid;border-color:#2A9D8F;color:#2A9D8F;background:#E5F4F1;cursor:pointer}
+  .sticker-btn{margin-top:20px;width:100%;background:var(--sun);border:none;border-radius:16px;padding:14px;font-family:'Nunito';font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;transition:.15s}
+  .sticker-btn:active{transform:translateY(3px);box-shadow:none}
+  .sticker-btn.done{background:#dff0dd;box-shadow:none;color:#3c7a3c;cursor:default}
+
+  /* ---------- ALBUM ---------- */
+  .album{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:10px 18px;display:flex;gap:8px;align-items:center;z-index:90}
+  .album .lbl{font-weight:800;font-size:.85rem;margin-right:4px}
+  .slot{width:38px;height:38px;border-radius:50%;background:#f0ede6;display:flex;align-items:center;justify-content:center;font-size:20px;filter:grayscale(1);opacity:.3;transition:.3s}
+  .slot.got{filter:none;opacity:1;background:var(--soft);transform:scale(1.1)}
+
+  /* ---------- PARENTS MODE ---------- */
+  .parents-mode{display:none;max-width:1050px;margin:40px auto;padding:0 20px}
+  .parents-mode h2{font-size:2rem;text-align:center;margin-bottom:8px}
+  .parents-mode .subtitle{text-align:center;font-size:1.15rem;color:#6b675f;font-weight:700;margin-bottom:36px}
+  
+  .method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:40px}
+  .method-card{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.08);border-left:6px solid var(--c)}
+  .method-card h3{font-size:1.3rem;margin-bottom:10px;color:var(--c)}
+  .method-card p{line-height:1.6;color:#555}
+  
+  .structure{background:#fff;border-radius:22px;padding:30px;margin-bottom:40px;box-shadow:0 8px 22px rgba(0,0,0,.08)}
+  .structure h3{font-size:1.4rem;margin-bottom:18px;text-align:center}
+  .structure-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  .struct-item{text-align:center;padding:16px;background:var(--soft);border-radius:16px}
+  .struct-item .num{font-size:2rem;font-weight:800;color:var(--terra);font-family:'Baloo 2',cursive}
+  .struct-item .label{font-weight:700;margin-top:6px}
+  
+  .benefits{background:linear-gradient(135deg,#FFE9B8 0%,#FFF3D6 100%);border-radius:22px;padding:30px;margin-bottom:40px}
+  .benefits h3{font-size:1.4rem;text-align:center;margin-bottom:20px}
+  .benefits-list{list-style:none;max-width:700px;margin:0 auto}
+  .benefits-list li{padding:12px 0;font-weight:700;font-size:1.05rem;display:flex;align-items:start;gap:12px}
+  .benefits-list li::before{content:'✓';color:var(--teal);font-size:1.4rem;font-weight:800;flex-shrink:0}
+  
+  .format{background:#fff;border-radius:22px;padding:30px;margin-bottom:40px;box-shadow:0 8px 22px rgba(0,0,0,.08)}
+  .format h3{font-size:1.4rem;text-align:center;margin-bottom:20px}
+  .format-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+  .format-item{text-align:center}
+  .format-item .icon{font-size:3rem;margin-bottom:10px}
+  .format-item h4{font-size:1.1rem;margin-bottom:6px}
+  .format-item p{color:#666;font-weight:700}
+
+  /* ---------- CTA ---------- */
+  .cta{text-align:center;margin:50px 0}
+  .cta-btn{display:inline-block;background:var(--terra);color:#fff;text-decoration:none;border-radius:18px;padding:18px 42px;font-weight:800;font-size:1.2rem;box-shadow:0 6px 0 #b93f30;transition:.15s}
+  .cta-btn:active{transform:translateY(4px);box-shadow:none}
+  .cta-btn:hover{background:#d14a38}
+
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+
+  @media(max-width:820px){
+    .path::before{left:20px}
+    .node,.node.right{width:100%;margin-left:0;padding:0 0 0 52px}
+    .node.left{padding-right:0}
+    .node.left::before,.node.right::before{left:9px;right:auto}
+    .header{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="brand">
+    <img src="logo.png" alt="МУДРО" onerror="this.style.display='none'">
+    <div class="brand-name">Интерактивная школа <span>МУДРО</span></div>
+  </div>
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="btn-kids" onclick="switchMode('kids')">🎒 Детям</button>
+    <button class="mode-btn" id="btn-parents" onclick="switchMode('parents')">👨‍👩‍👧 Родителям</button>
+  </div>
+</header>
+
+<!-- РЕЖИМ: ДЕТЯМ -->
+<div id="kids-mode">
+  <header class="hero">
+    <span class="float" style="top:12%;left:8%">🍊</span>
+    <span class="float" style="top:20%;right:10%;animation-delay:1.2s">🌞</span>
+    <span class="float" style="bottom:18%;left:14%;animation-delay:2s">⚽</span>
+    <span class="float" style="bottom:12%;right:16%;animation-delay:.6s">🥐</span>
+    <span class="kicker">Курс испанского для детей-релокантов</span>
+    <h1>Миссия: <span>Испанская школа</span> 🇪🇸</h1>
+    <p class="sub">Твоя личная карта приключений: 20 недель — и ты готов учиться, дружить и жить в Испании!</p>
+    <div class="stats">
+      <div class="stat">📅 <b>20</b> недель</div>
+      <div class="stat">🕐 <b>60</b> уроков по 50 мин</div>
+      <div class="stat">🗺️ <b>7</b> станций</div>
+      <div class="stat">🏆 <b>1</b> большая цель</div>
+    </div>
+  </header>
+
+  <section class="map">
+    <h2>Твой маршрут 🗺️</h2>
+    <p class="hint">Нажимай на станции, чтобы узнать, что тебя ждёт, и собирай наклейки! 👇</p>
+    <div class="path" id="path"></div>
+  </section>
+</div>
+
+<!-- РЕЖИМ: РОДИТЕЛЯМ -->
+<div class="parents-mode" id="parents-mode">
+  <h2>Курс подготовки к испанской школе</h2>
+  <p class="subtitle">Интенсивная программа для детей 8–12 лет перед переездом в Испанию</p>
+
+  <div class="method-grid">
+    <div class="method-card" style="--c:#E8604C">
+      <h3>🧠 CLIL — язык через предметы</h3>
+      <p>Математика, естествознание и география изучаются сразу на испанском. Ребёнок не просто учит слова, а думает на языке, как в реальной испанской школе.</p>
+    </div>
+    <div class="method-card" style="--c:#2A9D8F">
+      <h3>🤖 STEAM — наука и творчество</h3>
+      <p>Эксперименты, 3D-моделирование, карты и проекты вместо зубрёжки. Развиваем критическое мышление и творческий подход к языку.</p>
+    </div>
+    <div class="method-card" style="--c:#2274A5">
+      <h3>🛠️ PBL — проектное обучение</h3>
+      <p>Каждый модуль заканчивается реальным продуктом: видео-визитка для учителя, маршрут до школы, меню столовой. Это портфолио для адаптации.</p>
+    </div>
+  </div>
+
+  <div class="structure">
+    <h3>📚 Структура курса</h3>
+    <div class="structure-grid">
+      <div class="struct-item">
+        <div class="num">20</div>
+        <div class="label">недель обучения</div>
+      </div>
+      <div class="struct-item">
+        <div class="num">60</div>
+        <div class="label">уроков по 50 мин</div>
+      </div>
+      <div class="struct-item">
+        <div class="num">3</div>
+        <div class="label">занятия в неделю</div>
+      </div>
+      <div class="struct-item">
+        <div class="num">7</div>
+        <div class="label">тематических блоков</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="benefits">
+    <h3>✨ Что получит ребёнок</h3>
+    <ul class="benefits-list">
+      <li>Снимет языковой барьер и страх перед новой школой</li>
+      <li>Выучит школьный survival-кит: как попросить помощи, найти класс, подружиться</li>
+      <li>Освоит базовые предметы (математика, природа) на испанском</li>
+      <li>Создаст видео-визитку для будущего учителя и одноклассников</li>
+      <li>Научится ориентироваться в городе и пользоваться транспортом</li>
+      <li>Поймёт испанскую культуру: siesta, horarios, традиции</li>
+    </ul>
+  </div>
+
+  <div class="format">
+    <h3>📖 Как проходит обучение</h3>
+    <div class="format-grid">
+      <div class="format-item">
+        <div class="icon">🎯</div>
+        <h4>Живые уроки</h4>
+        <p>Онлайн-занятия с преподавателем 3 раза в неделю</p>
+      </div>
+      <div class="format-item">
+        <div class="icon">🎮</div>
+        <h4>Игровой формат</h4>
+        <p>Квесты, проекты, симуляции вместо скучных упражнений</p>
+      </div>
+      <div class="format-item">
+        <div class="icon">👨‍👩‍👧</div>
+        <h4>Family Tasks</h4>
+        <p>Семейные задания для закрепления в реальной жизни</p>
+      </div>
+      <div class="format-item">
+        <div class="icon">🏆</div>
+        <h4>Геймификация</h4>
+        <p>Наклейки, достижения и финальный квест-экзамен</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <a href="https://max.ru/u/f9LHodD0cOLeX0YTAIs-m5_VEIws3V8eJ-QqhrrcqEO8NV3HWD4S8tbgDO0" class="cta-btn" target="_blank">🚀 Записаться на курс</a>
+  </div>
+</div>
+
+<div class="album" id="album"><span class="lbl">Мой альбом:</span></div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+/* ============ ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМОВ ============ */
+function switchMode(mode){
+  const kids=document.getElementById('kids-mode');
+  const parents=document.getElementById('parents-mode');
+  const btnKids=document.getElementById('btn-kids');
+  const btnParents=document.getElementById('btn-parents');
+  
+  if(mode==='kids'){
+    kids.style.display='block';
+    parents.style.display='none';
+    btnKids.classList.add('active');
+    btnParents.classList.remove('active');
+    document.querySelector('.album').style.display='flex';
+  }else{
+    kids.style.display='none';
+    parents.style.display='block';
+    btnKids.classList.remove('active');
+    btnParents.classList.add('active');
+    document.querySelector('.album').style.display='none';
+  }
+}
+
+/* ============ ДАННЫЕ КУРСА ============ */
+const STATIONS=[
+ {id:'s1',emoji:'🛟',name:'Supervivencia',ru:'Выживание и первые слова',weeks:'Недели 1–3',lessons:9,color:'#E8604C',
+  tagline:'Учимся знакомиться и просить о помощи',
+  canDo:['Поздороваться и представиться по-испански','Сказать «я не понимаю» и попросить помощи','Рассказать о своём настроении'],
+  lexis:['приветствия','эмоции','части тела','«мне нужно»'],
+  grammar:['me llamo — «меня зовут»','tengo … años — «мне … лет»','ser и estar — два слова «быть»'],
+  project:'Паспорт испанского школьника + Emoji-дневник настроения'},
+ {id:'s2',emoji:'🎒',name:'Mi Colegio',ru:'Моя школа',weeks:'Недели 4–7',lessons:12,color:'#F4A261',
+  tagline:'Рюкзак, расписание и правила класса',
+  canDo:['Собрать рюкзак и назвать все предметы','Понять расписание и дни недели','Спросить: «Можно выйти?»'],
+  lexis:['канцелярия','школьные предметы','дни недели','время','правила'],
+  grammar:['el / la — род слов','hay и estar — «есть» и «находится»','puedo / tengo que — «можно» и «надо»'],
+  project:'3D-макет идеального класса + Конституция ученика'},
+ {id:'s3',emoji:'🏡',name:'Mi Mundo',ru:'Мой мир',weeks:'Недели 8–11',lessons:12,color:'#2A9D8F',
+  tagline:'Семья, дом, хобби и твой день',
+  canDo:['Рассказать о семье и питомцах','Описать свою комнату и свой день','Поделиться хобби: «мне нравится…»'],
+  lexis:['семья','дом и комнаты','утренняя рутина','хобби и спорт'],
+  grammar:['mi / tu / su — «мой, твой»','me despierto — возвратные глаголы','me gusta — «мне нравится»'],
+  project:'Профиль в соцсети на испанском + видео-визитка'},
+ {id:'s4',emoji:'🧪',name:'Mates y Ciencias',ru:'Уроки как в испанской школе',weeks:'Недели 12–14',lessons:9,color:'#2274A5',
+  tagline:'Математика, природа и погода — по-испанскому!',
+  canDo:['Решать примеры на испанском','Рассказать о погоде за окном','Показать на карте, куда ты едешь'],
+  lexis:['числа до 1000','математика','природа','погода','города Испании'],
+  grammar:['hace sol — «светит солнце»','más que — «больше, чем»','voy / vengo — «иду / прихожу»'],
+  project:'Дневник учёного + карта «Мой будущий регион»'},
+ {id:'s5',emoji:'🍕',name:'¡A Comer!',ru:'Время есть!',weeks:'Недели 15–17',lessons:9,color:'#E76F51',
+  tagline:'Рынок, магазин и школьная столовая',
+  canDo:['Купить продукты на рынке','Выбрать обед в столовой','Сказать про аллергию: «я не ем…»'],
+  lexis:['продукты','рынок и деньги','меню','столовая'],
+  grammar:['quiero / prefiero — «хочу / предпочитаю»','¿cuánto cuesta? — «сколько стоит?»','¡come! — просьбы и команды'],
+  project:'Собственное меню недели для школьной столовой'},
+ {id:'s6',emoji:'🚌',name:'Mi Ciudad',ru:'Мой город',weeks:'Недели 18–19',lessons:6,color:'#3A86FF',
+  tagline:'Транспорт, улицы и маршруты',
+  canDo:['Спросить дорогу и понять ответ','Купить билет на автобус','Построить маршрут до школы'],
+  lexis:['город и улицы','транспорт','направления'],
+  grammar:['gira / sigue — «поверни / иди»','voy a + действие — планы на завтра'],
+  project:'Маршрут «дом → школа» на настоящей карте'},
+ {id:'s7',emoji:'🎓',name:'¡Preparados!',ru:'Финальный квест',weeks:'Неделя 20',lessons:3,color:'#FFBE0B',
+  tagline:'Симуляция первого дня в испанской школе',
+  canDo:['Пройти весь школьный день по-испански','Показать всё, чему научился','Получить диплом курса!'],
+  lexis:['все слова вместе','слова-связки','школьные фразы'],
+  grammar:['говорим быстро и смело','повторяем все суперсилы'],
+  project:'Квест «Первый день» + диплом 🏆'}
+];
+
+/* ============ РЕНДЕР КАРТЫ ============ */
+const path=document.getElementById('path');
+let html=`<div class="node center visible"><div class="pill">🚀 СТАРТ — ты здесь! Уровень: новичок-исследователь</div></div>`;
+STATIONS.forEach((s,i)=>{
+  html+=`<div class="node ${i%2?'right':'left'}" style="--c:${s.color}">
+    <div class="card" onclick="openModal('${s.id}')">
+      <div class="top"><span class="emo">${s.emoji}</span>
+        <div><h3>${s.name}</h3><span class="weeks">${s.weeks} · ${s.lessons} уроков</span></div></div>
+      <p class="tag-line">${s.tagline}</p>
+      <ul>${s.canDo.map(c=>`<li>✅ ${c}</li>`).join('')}</ul>
+      <button class="open-btn">Открыть станцию 🔍</button>
+    </div></div>`;
+});
+html+=`<div class="node center visible"><div class="pill finish">🏫 ФИНИШ — Испанская школа! Уровень: уверенный ученик</div></div>`;
+path.innerHTML=html;
+
+/* появление при скролле */
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.15});
+document.querySelectorAll('.node').forEach(n=>io.observe(n));
+
+/* ============ МОДАЛКА ============ */
+const overlay=document.getElementById('overlay'),modal=document.getElementById('modal');
+function openModal(id){
+  const s=STATIONS.find(x=>x.id===id);
+  let lessons='';
+  for(let i=1;i<=s.lessons;i++) lessons+=`<span class="lesson" data-station="${s.id}" data-lesson="${i}">🔒 Урок ${i}</span>`;
+  modal.innerHTML=`<button class="close" onclick="closeModal()">✕</button>
+    <div class="m-head"><span class="emo">${s.emoji}</span><div><h3>${s.name} · ${s.ru}</h3><span class="weeks" style="background:${s.color};color:#fff;border-radius:999px;padding:3px 12px;font-weight:800">${s.weeks}</span></div></div>
+    <div class="m-sec"><h4>✅ Ты сможешь:</h4><ul style="list-style:none">${s.canDo.map(c=>`<li style="padding:3px 0;font-weight:700">⭐ ${c}</li>`).join('')}</ul></div>
+    <div class="m-sec"><h4>🗣 Новые слова:</h4><div class="tags">${s.lexis.map(l=>`<span class="tag">${l}</span>`).join('')}</div></div>
+    <div class="m-sec"><h4>⚡ Твои суперсилы:</h4><div class="tags">${s.grammar.map(g=>`<span class="tag g">${g}</span>`).join('')}</div></div>
+    <div class="m-sec"><h4>🛠 Твой проект:</h4><div class="project-box">${s.project}</div></div>
+    <div class="m-sec"><h4>🔗 Уроки станции <small>(откроются совсем скоро!)</small>:</h4><div class="lessons">${lessons}</div></div>
+    <button class="sticker-btn ${got(id)?'done':''}" id="sb-${id}" onclick="collect('${id}')">${got(id)?'Наклейка собрана! ✅':'Забрать наклейку '+s.emoji}</button>`;
+  overlay.classList.add('show');
+}
+function closeModal(){overlay.classList.remove('show')}
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ============ НАКЛЕЙКИ ============ */
+let stickers=JSON.parse(localStorage.getItem('spain_stickers')||'[]');
+function got(id){return stickers.includes(id)}
+function collect(id){
+  if(got(id))return;
+  stickers.push(id);localStorage.setItem('spain_stickers',JSON.stringify(stickers));
+  renderAlbum();openModalRefresh(id);confetti(STATIONS.find(s=>s.id===id).emoji);
+}
+function openModalRefresh(id){const b=document.getElementById('sb-'+id);if(b){b.classList.add('done');b.textContent='Наклейка собрана! ✅'}}
+function renderAlbum(){
+  const a=document.getElementById('album');
+  a.innerHTML='<span class="lbl">Мой альбом '+stickers.length+'/7:</span>'+STATIONS.map(s=>`<span class="slot ${got(s.id)?'got':''}">${s.emoji}</span>`).join('');
+}
+renderAlbum();
+
+/* ============ КОНФЕТТИ ============ */
+function confetti(emoji){
+  for(let i=0;i<14;i++){
+    const c=document.createElement('span');c.className='confetti';
+    c.textContent=Math.random()>.5?emoji:'🎉';
+    c.style.left=Math.random()*100+'vw';
+    c.style.animationDuration=(1.2+Math.random()*1.2)+'s';
+    c.style.animationDelay=(Math.random()*.4)+'s';
+    document.body.appendChild(c);setTimeout(()=>c.remove(),3000);
+  }
+}
+
+/* ============ ХЕЛПЕР ДЛЯ ПОДКЛЮЧЕНИЯ УРОКОВ ============
+   Вызывай: attachLessonLink('s1', 1, './lessons/station-01/lesson-01.html')
+   Чип урока станет кликабельной ссылкой */
+window.attachLessonLink=function(station,lesson,url){
+  const el=document.querySelector(`.lesson[data-station="${station}"][data-lesson="${lesson}"]`);
+  if(el){
+    const a=document.createElement('a');
+    a.href=url;
+    a.className='lesson unlocked';
+    a.textContent='▶ Урок '+lesson;
+    el.replaceWith(a);
+  }
+};
+
+/* ============ ПРИМЕР: как подключать уроки ============
+   Когда уроки будут готовы в репозитории, раскомментируй:
+   
+attachLessonLink('s1', 1, './lessons/station-01/lesson-01.html');
+attachLessonLink('s1', 2, './lessons/station-01/lesson-02.html');
+...и так далее для всех уроков
+*/
+</script>
+</body>
+</html>
