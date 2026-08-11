@@ -1,9 +1,9 @@
 window.FIREBASE_CONFIG = {
-  apiKey: "PASTE_API_KEY",
+  apiKey: "AIzaSyDhS5iJWK--KnKeJaEz0VNihIXlHuGYqUI",
   authDomain: "spanish-relocation.firebaseapp.com",
   projectId: "spanish-relocation",
-  storageBucket: "spanish-relocation.appspot.com",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId: "PASTE_APP_ID"
+  storageBucket: "spanish-relocation.firebasestorage.app",
+  messagingSenderId: "403582724422",
+  appId: "1:403582724422:web:58966f26bd8348a826dd47"
 };
-window.ADMIN_EMAILS = ["admin@example.com"];
+window.ADMIN_EMAILS = ["mudro.is@yandex.ru"];
