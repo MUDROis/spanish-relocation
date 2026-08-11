@@ -99,8 +99,25 @@
 
   async function createStudent(email, password, name, audience) {
     if (!ready()) throw new Error('Firebase не инициализирован');
-    const cred = await auth.createUserWithEmailAndPassword(email, password);
-    const uid = cred.user.uid;
+    const endpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + encodeURIComponent(window.FIREBASE_CONFIG.apiKey);
+    const res = await window.fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: password, returnSecureToken: true })
+    });
+    const data = await res.json();
+    if (!data.localId) {
+      const code = data.error && data.error.message ? data.error.message : 'Не удалось создать аккаунт';
+      const ERR = {
+        EMAIL_EXISTS: 'Пользователь с таким email уже существует',
+        INVALID_EMAIL: 'Некорректный email',
+        WEAK_PASSWORD: 'Слишком слабый пароль (минимум 6 символов)',
+        TOO_MANY_ATTEMPTS_TRY_LATER: 'Слишком много попыток, попробуйте позже',
+        OPERATION_NOT_ALLOWED: 'Регистрация отключена'
+      };
+      throw new Error(ERR[code] || code);
+    }
+    const uid = data.localId;
     await db.collection('students').doc(uid).set({
       email: email,
       name: name,
@@ -109,7 +126,7 @@
       suspended: false,
       createdAt: ts()
     });
-    return cred.user;
+    return { uid: uid, email: email };
   }
 
   function setSuspended(uid, suspended) {
