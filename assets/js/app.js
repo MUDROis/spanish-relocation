@@ -22,9 +22,15 @@
     auth.onAuthStateChanged(function (user) { cb(user); });
   }
 
-  function signIn(email, password) { return auth.signInWithEmailAndPassword(email, password); }
+  function signIn(email, password) {
+    if (!ready()) return Promise.reject(new Error('Firebase не инициализирован'));
+    return auth.signInWithEmailAndPassword(email, password);
+  }
 
-  function signOut() { return auth.signOut(); }
+  function signOut() {
+    if (!ready()) return Promise.resolve();
+    return auth.signOut();
+  }
 
   async function ensureProfile(uid) {
     if (!ready()) return null;
@@ -80,6 +86,7 @@
   }
 
   function saveStickers(uid, stickers) {
+    if (!ready()) return Promise.reject(new Error('Firebase не инициализирован'));
     return db.collection('progress').doc(uid).doc('stickers').set(stickers, { merge: true });
   }
 
@@ -91,6 +98,7 @@
   }
 
   async function createStudent(email, password, name, audience) {
+    if (!ready()) throw new Error('Firebase не инициализирован');
     const cred = await auth.createUserWithEmailAndPassword(email, password);
     const uid = cred.user.uid;
     await db.collection('students').doc(uid).set({
@@ -105,14 +113,17 @@
   }
 
   function setSuspended(uid, suspended) {
+    if (!ready()) return Promise.reject(new Error('Firebase не инициализирован'));
     return db.collection('students').doc(uid).update({ suspended: suspended });
   }
 
   function resetPassword(email) {
+    if (!ready()) return Promise.reject(new Error('Firebase не инициализирован'));
     return auth.sendPasswordResetEmail(email);
   }
 
   async function deleteStudentData(uid) {
+    if (!ready()) throw new Error('Firebase не инициализирован');
     const lessons = await db.collection('progress').doc(uid).collection('lessons').get();
     await Promise.all(lessons.docs.map(function (d) { return d.ref.delete(); }));
     const acts = await db.collection('progress').doc(uid).collection('activity').get();
@@ -130,6 +141,7 @@
   }
 
   function getStudentDoc(uid) {
+    if (!ready()) return Promise.resolve(null);
     return db.collection('students').doc(uid).get().then(function (s) { return s.exists ? s.data() : null; });
   }
 
