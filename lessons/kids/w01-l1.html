@@ -29,9 +29,6 @@
   .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
   .hero h1 span{color:var(--terra)}
   .hero .sub{max-width:600px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
-  .progress{max-width:500px;margin:28px auto 0;background:rgba(255,255,255,.7);border-radius:999px;height:14px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.08)}
-  .progress-bar{height:100%;background:linear-gradient(90deg,var(--terra),var(--sun));border-radius:999px;width:1.6%;transition:width 1s ease}
-  .progress-text{font-size:.85rem;font-weight:800;color:var(--ink-soft);margin-top:8px}
 
   /* ---------- CONTENT ---------- */
   .container{max-width:860px;margin:40px auto;padding:0 20px}
@@ -95,16 +92,91 @@
   .ball{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FFD93D,#E8604C);margin:20px auto;display:flex;align-items:center;justify-content:center;font-size:3rem;cursor:pointer;box-shadow:0 10px 30px rgba(232,96,76,.4);transition:.25s;user-select:none}
   .ball:hover{transform:scale(1.05) rotate(10deg)}
   .ball:active{transform:scale(.9)}
-  .ball-question{font-family:'Baloo 2',cursive;font-size:1.5rem;color:var(--terra);margin:16px 0;min-height:40px}
+  .ball-question{font-family:'Baloo 2',cursive;font-size:1.5rem;color:var(--terra);margin:16px 0 4px;min-height:40px}
+  .ball-trans{font-weight:800;color:var(--ink-soft);margin-bottom:10px;min-height:20px}
   .ball-options{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
   .ball-option{background:#fff;border:2px solid var(--teal);border-radius:12px;padding:10px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito'}
   .ball-option:hover{background:var(--teal);color:#fff}
+
+  /* ---------- NUMBERS ---------- */
+  .num-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:10px;margin:16px 0}
+  .num-card{background:#fff;border-radius:14px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid var(--soft);transition:.2s;box-shadow:0 4px 12px rgba(0,0,0,.06);user-select:none}
+  .num-card:hover{transform:translateY(-3px);border-color:var(--sun)}
+  .num-card .n{font-family:'Baloo 2',cursive;font-size:1.7rem;color:var(--terra)}
+  .num-card .w{font-weight:800;font-size:.9rem}
+  .num-card.correct{border-color:var(--teal);background:#E5F4F1}
+  .num-card.wrong{border-color:var(--terra);background:#fde8e5;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+  .num-game{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:18px;padding:20px;margin:18px 0;text-align:center}
+  .num-game-btn{background:var(--terra);color:#fff;border:none;border-radius:14px;padding:12px 24px;font-family:'Nunito';font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #b93f30;transition:.15s}
+  .num-game-btn:active{transform:translateY(3px);box-shadow:none}
+  .num-feedback{font-weight:800;margin-top:12px;min-height:24px;color:var(--ink)}
+
+  /* ---------- TRANSLATOR ---------- */
+  .translator{background:linear-gradient(135deg,#E5F4F1,#d4ebe6);border-radius:20px;padding:24px;margin:18px 0}
+  .translator h4{margin-bottom:6px}
+  .trans-input-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:14px 0}
+  .translator input[type=number]{width:110px;padding:12px;border-radius:14px;border:3px solid var(--teal);font-family:'Nunito';font-size:1.4rem;font-weight:800;text-align:center;outline:none}
+  .translator input[type=range]{flex:1;min-width:160px;accent-color:var(--teal)}
+  .quick-ages{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .quick-age{background:#fff;border:2px solid var(--teal);border-radius:999px;padding:6px 14px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito'}
+  .quick-age:hover{background:var(--teal);color:#fff}
+  .trans-result{background:#fff;border-radius:16px;padding:20px;text-align:center;margin-top:14px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+  .trans-word{font-family:'Baloo 2',cursive;font-size:2rem;color:var(--teal);margin-bottom:12px}
+  .trans-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .trans-btn{background:var(--teal);color:#fff;border:none;border-radius:12px;padding:10px 18px;font-family:'Nunito';font-weight:800;cursor:pointer;transition:.15s}
+  .trans-btn:hover{filter:brightness(1.1)}
+  .trans-note{font-size:.85rem;color:var(--ink-soft);font-weight:700;margin-top:12px}
+
+  /* ---------- ФРАЗА-КОНСТРУКТОР ---------- */
+  .builder{background:#fff;border:3px dashed var(--teal);border-radius:16px;padding:20px;margin-top:16px}
+  .builder .b-row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .builder label{font-size:.8rem;font-weight:800;color:var(--ink-soft);display:block;margin-bottom:2px}
+  .builder input,.builder select{padding:10px 12px;border-radius:12px;border:2px solid var(--teal);font-family:'Nunito';font-weight:800;font-size:1rem;outline:none;color:var(--ink);background:#fff}
+  .builder input:focus,.builder select:focus{border-color:var(--terra)}
+  .builder .b-field{flex:1;min-width:120px}
+  .b-result{background:var(--soft);border-radius:12px;padding:12px 14px;margin-top:12px;text-align:center}
+  .b-result .es{font-family:'Baloo 2',cursive;font-size:1.35rem;color:var(--terra);font-weight:800}
+  .b-result .ru{font-size:.85rem;color:var(--ink-soft);font-weight:700;margin-top:2px}
+
+  /* ---------- ТРЕНАЖЁР ДОМА ---------- */
+  .word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
+  .word-card{background:#fff;border:2px solid var(--soft);border-radius:12px;padding:10px;text-align:center;cursor:pointer;transition:.15s}
+  .word-card:hover{border-color:var(--sun);transform:translateY(-2px)}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--terra);font-weight:800}
+  .word-card .ru{font-size:.82rem;color:var(--ink-soft);font-weight:700;margin-top:2px}
+  .match-area{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .match-col{display:flex;flex-direction:column;gap:8px}
+  .match-chip{background:#fff;border:2px solid var(--teal);border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer;text-align:center;transition:.15s;font-family:'Nunito'}
+  .match-chip:hover{background:var(--soft)}
+  .match-chip.selected{border-color:var(--terra);background:var(--soft)}
+  .match-chip.done{background:#E5F4F1;border-color:var(--teal);cursor:default;opacity:.85}
+  .match-chip.wrong{animation:shake .4s;border-color:var(--terra)}
+  .match-msg{font-weight:800;margin-top:10px;min-height:22px}
+  .sb-answer{background:#fff;border:3px dashed var(--teal);border-radius:14px;padding:12px 14px;font-family:'Baloo 2',cursive;font-size:1.35rem;color:var(--terra);min-height:54px;margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .sb-chip{background:#fff;border:2px solid var(--sun);border-radius:10px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:1rem}
+  .sb-chip:hover{background:var(--soft)}
+  .sb-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .sb-feedback{font-weight:800;margin-top:8px;min-height:22px}
+  .sb-done{background:#E5F4F1;border-color:var(--teal);animation:popIn .4s}
+  @media(max-width:600px){.match-area{grid-template-columns:1fr}}
 
   /* ---------- HOMEWORK ---------- */
   .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
   .homework h3{color:var(--terra);font-size:1.4rem;margin-bottom:14px}
   .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;align-items:start;box-shadow:0 4px 12px rgba(0,0,0,.05)}
   .task-num{background:var(--terra);color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+
+  /* ---------- САМОПРОВЕРКА ---------- */
+  .tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem}
+  .tl-table th,.tl-table td{border:2px solid var(--soft);padding:8px 10px;text-align:left;background:#fff}
+  .tl-table th{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .tl-cell{display:inline-flex;align-items:center;justify-content:center;min-width:54px;padding:8px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1.3rem;transition:.15s;background:#fff}
+  .tl-cell:hover{background:var(--soft);transform:scale(1.06)}
+  .tl-cell.active{border-color:var(--teal);background:var(--soft);box-shadow:0 0 0 2px var(--teal)}
+  .tl-reset{background:#fff;border:2px solid var(--teal);color:var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;margin-top:10px;font-size:.9rem}
+  .tl-reset:hover{background:var(--soft)}
 
   /* ---------- NAVIGATION ---------- */
   .next-lesson{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff;border-radius:22px;padding:26px;text-align:center;margin:30px 0;text-decoration:none;display:block;transition:.2s}
@@ -117,6 +189,13 @@
   @media(max-width:600px){
     .passport-grid{grid-template-columns:1fr}
     .passport-photo{max-width:150px;margin:0 auto}
+  }
+
+  /* ---------- ПЕЧАТЬ ТОЛЬКО ПАСПОРТА ---------- */
+  @media print{
+    body *{visibility:hidden !important}
+    .passport,.passport *{visibility:visible !important}
+    .passport{position:absolute;left:0;top:0;width:100%;max-width:100%;margin:0;border-radius:0;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
 </style>
 </head>
@@ -134,8 +213,6 @@
   <span class="lesson-tag">УРОК 1 / НЕДЕЛЯ 1</span>
   <h1>¡Hola, <span>España</span>! 🇪🇸</h1>
   <p class="sub">Твой первый шаг в новую жизнь. Сегодня ты получишь собственный испанский паспорт и научишься здороваться как настоящий испанец.</p>
-  <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
-  <div class="progress-text">1 из 60 уроков — 2% пути 🚀</div>
 </header>
 
 <main class="container">
@@ -146,6 +223,8 @@
     <div class="goals-grid">
       <div class="goal-item"><span class="emoji">👋</span> Здороваться по-испански тремя способами</div>
       <div class="goal-item"><span class="emoji">🗣</span> Представлять себя: имя, возраст, страна</div>
+      <div class="goal-item"><span class="emoji">🤝</span> Представлять маму и папу по-испански</div>
+      <div class="goal-item"><span class="emoji">🔢</span> Считать до 12 и говорить свой возраст</div>
       <div class="goal-item"><span class="emoji">📘</span> Сделаешь свой испанский паспорт</div>
       <div class="goal-item"><span class="emoji">🌍</span> Узнаешь, куда именно ты едешь</div>
     </div>
@@ -155,7 +234,7 @@
   <section class="block" style="--c:#E8604C">
     <div class="block-head">
       <h2 class="block-title">🗺️ Куда мы едем?</h2>
-      <span class="time-badge">⏱ 10 минут</span>
+      <span class="time-badge">⏱ 7 минут</span>
     </div>
     <p class="block-sub">Знакомство со страной, куда ты скоро переедешь</p>
     
@@ -166,7 +245,7 @@
     <h4>🔥 3 интересных факта об Испании:</h4>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
       <div style="background:var(--soft);padding:14px;border-radius:12px;font-weight:700">🍊 Испания — родина апельсинов. Их здесь больше, чем людей!</div>
-      <div style="background:var(--soft);padding:14px;border-radius:12px;font-weight:700">⚽ Здесь придумали фламенко, тапас и футбол как религию</div>
+      <div style="background:var(--soft);padding:14px;border-radius:12px;font-weight:700">⚽ Здесь придумали фламенко и тапас, а ещё футбол — им болеет вся страна!</div>
       <div style="background:var(--soft);padding:14px;border-radius:12px;font-weight:700">🕐 Ужинают в 21:00! А в 15:00 вся страна отдыхает — это сиеста</div>
     </div>
 
@@ -181,6 +260,8 @@
         <span style="background:var(--soft);padding:6px 14px;border-radius:999px;font-weight:700">🍊 Валенсия</span>
         <span style="background:var(--soft);padding:6px 14px;border-radius:999px;font-weight:700">💃 Севилья</span>
       </div>
+      <iframe src="https://maps.google.com/maps?q=Espa%C3%B1a&t=&z=5&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;border-radius:12px;margin-top:14px" loading="lazy" allowfullscreen title="Карта Испании"></iframe>
+      <a href="https://www.google.com/maps?q=Espa%C3%B1a" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;background:var(--terra);color:#fff;border-radius:999px;padding:8px 18px;font-weight:800;text-decoration:none">Открыть карту в Google Maps ↗</a>
     </div>
   </section>
 
@@ -188,7 +269,7 @@
   <section class="block" style="--c:#F4A261">
     <div class="block-head">
       <h2 class="block-title">👋 Три способа сказать «Привет»</h2>
-      <span class="time-badge">⏱ 12 минут</span>
+      <span class="time-badge">⏱ 10 минут</span>
     </div>
     <p class="block-sub">В Испании приветствие зависит от того, К КОМУ ты обращаешься. Нажимай на карточки и слушай!</p>
 
@@ -228,7 +309,7 @@
   <section class="block" style="--c:#2A9D8F">
     <div class="block-head">
       <h2 class="block-title">🎤 Три волшебные фразы</h2>
-      <span class="time-badge">⏱ 12 минут</span>
+      <span class="time-badge">⏱ 10 минут</span>
     </div>
     <p class="block-sub">Эти фразы — твой код доступа в испанскую жизнь. Выучи их!</p>
 
@@ -259,6 +340,29 @@
       </div>
     </div>
 
+    <div class="builder">
+      <div style="font-weight:900">📇 Твоя визитка: собери и озвучь!</div>
+      <div class="b-row">
+        <div class="b-field">
+          <label>Имя (Nombre)</label>
+          <input type="text" id="v-name" placeholder="Anna" oninput="buildVizitka()">
+        </div>
+        <div class="b-field">
+          <label>Возраст (Edad)</label>
+          <input type="number" id="v-age" min="1" max="100" placeholder="8" oninput="buildVizitka()">
+        </div>
+        <div class="b-field">
+          <label>Страна (País)</label>
+          <input type="text" id="v-country" placeholder="Rusia" oninput="buildVizitka()">
+        </div>
+      </div>
+      <div class="b-result">
+        <div class="es" id="v-phrase">¡Hola! Me llamo ___. Tengo ___ años. Soy de ___.</div>
+        <div class="ru" id="v-trans">«Привет! Меня зовут ___. Мне ___ лет. Я из ___.»</div>
+      </div>
+      <button class="speak-btn" style="--c:#2A9D8F;margin-top:10px" onclick="speakVizitka()">🔊 Озвучить визитку</button>
+    </div>
+
     <div class="script">
       <strong>Важно!</strong> По-испански возраст — это то, что у тебя <em>есть</em>, как сокровище. Поэтому говорим <strong>tengo 8 años</strong> (у меня есть 8 лет), а не «soy 8 años».
     </div>
@@ -283,11 +387,118 @@
     </div>
   </section>
 
-  <!-- БЛОК 4: ПАСПОРТ -->
+  <!-- БЛОК 4: ПРЕДСТАВЛЯЕМ ДРУГИХ -->
+  <section class="block" style="--c:#9B5DE5">
+    <div class="block-head">
+      <h2 class="block-title">🤝 Представляем других</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Теперь то же самое про маму, папу или друга — как настоящий репортёр!</p>
+
+    <div style="background:var(--soft);border-radius:16px;padding:22px;margin:16px 0">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed rgba(0,0,0,.1);cursor:pointer" onclick="speak('Este es papá')">
+        <div style="font-size:2rem">👋</div>
+        <div style="flex:1">
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Este es...</div>
+          <div style="font-weight:700;color:var(--ink-soft)">«Это...» (про человека рядом) · Este es papá</div>
+        </div>
+        <button class="speak-btn" style="--c:#9B5DE5">🔊</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed rgba(0,0,0,.1);cursor:pointer" onclick="speak('Se llama Anna')">
+        <div style="font-size:2rem">🏷</div>
+        <div style="flex:1">
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Se llama...</div>
+          <div style="font-weight:700;color:var(--ink-soft)">«Его/её зовут...» (вместо Me llamo)</div>
+        </div>
+        <button class="speak-btn" style="--c:#9B5DE5">🔊</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;cursor:pointer" onclick="speak('Tiene cuarenta años')">
+        <div style="font-size:2rem">🎂</div>
+        <div style="flex:1">
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Tiene ___ años</div>
+          <div style="font-weight:700;color:var(--ink-soft)">«Ему/ей ... лет» (вместо Tengo)</div>
+        </div>
+        <button class="speak-btn" style="--c:#9B5DE5">🔊</button>
+      </div>
+    </div>
+
+    <div class="script">
+      <strong>Секрет:</strong> это те же самые волшебные фразы, только про другого человека. Поменяй <strong>Me llamo</strong> → <strong>Se llama</strong>, <strong>Tengo</strong> → <strong>Tiene</strong> — и «визитка» готова для мамы или папы!
+    </div>
+
+    <div class="builder" style="border-color:#9B5DE5">
+      <div style="font-weight:900">🎤 Мини-практика: представь другу</div>
+      <p style="font-weight:700;color:var(--ink-soft);font-size:.9rem;margin-top:4px">Выбери, кого представить, впиши имя и возраст — и озвучь!</p>
+      <div class="b-row">
+        <div class="b-field">
+          <label>Кого представляем?</label>
+          <select id="p-person" onchange="buildPresent()">
+            <option value="hermana">сестра</option>
+            <option value="hermano">брат</option>
+            <option value="mama" selected>мама</option>
+            <option value="papa">папа</option>
+            <option value="amigo">друг</option>
+            <option value="amiga">подруга</option>
+          </select>
+        </div>
+        <div class="b-field">
+          <label>Имя (Nombre)</label>
+          <input type="text" id="p-name" placeholder="Anna" oninput="buildPresent()">
+        </div>
+        <div class="b-field">
+          <label>Возраст (Edad)</label>
+          <input type="number" id="p-age" min="1" max="100" placeholder="40" oninput="buildPresent()">
+        </div>
+      </div>
+      <div class="b-result">
+        <div class="es" id="p-phrase">Este es mamá. Se llama ___. Tiene ___ años.</div>
+        <div class="ru" id="p-trans">«Это мама. Её зовут ___. Ей ___ лет.»</div>
+      </div>
+      <button class="speak-btn" style="--c:#9B5DE5;margin-top:10px" onclick="speakPresent()">🔊 Озвучить</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: ЦИФРЫ -->
+  <section class="block" style="--c:#FFBE0B">
+    <div class="block-head">
+      <h2 class="block-title">🔢 Цифры: сколько тебе лет?</h2>
+      <span class="time-badge">⏱ 6 мин в классе + дома</span>
+    </div>
+    <p class="block-sub">Чтобы сказать <em>tengo ocho años</em>, нужны цифры! Нажимай на карточки — слушай и повторяй.</p>
+
+    <div class="num-grid" id="num-grid"></div>
+
+    <div class="num-game">
+      <h4>🎧 Игра «Поймай число!»</h4>
+      <p style="font-weight:700;color:var(--ink-soft);margin:8px 0">Нажми кнопку, услышь число и найди его карточку!</p>
+      <button class="num-game-btn" onclick="playRandomNumber()">🔊 Сыграть число</button>
+      <div class="num-feedback" id="num-feedback"></div>
+    </div>
+
+    <div class="translator">
+      <h4>🧮 Волшебный переводчик чисел (1–100)</h4>
+      <p style="font-weight:700;color:var(--ink-soft)">Хочешь сказать, сколько лет маме или папе? Введи число или потяни ползунок!</p>
+      <div class="trans-input-row">
+        <input type="number" id="num-input" min="1" max="100" value="8" oninput="syncSlider(this.value); updateTranslator()">
+        <input type="range" id="num-slider" min="1" max="100" value="8" oninput="syncInput(this.value); updateTranslator()">
+      </div>
+      <div class="quick-ages">
+        <span style="font-weight:800;align-self:center">Быстро:</span>
+        <button class="quick-age" onclick="setNumber(30)">30</button>
+        <button class="quick-age" onclick="setNumber(35)">35</button>
+        <button class="quick-age" onclick="setNumber(40)">40</button>
+        <button class="quick-age" onclick="setNumber(45)">45</button>
+      </div>
+      <div class="trans-result" id="trans-result"></div>
+      <div class="trans-note">💡 Запомни: возраст по-испански — это тоже «иметь»: <strong>¡Tengo treinta y ocho años!</strong> (а не «soy 38»)</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 6: ПАСПОРТ -->
   <section class="block" style="--c:#2274A5">
     <div class="block-head">
       <h2 class="block-title">📘 Твой испанский паспорт</h2>
-      <span class="time-badge">⏱ 12 минут</span>
+      <span class="time-badge">⏱ 7 минут</span>
     </div>
     <p class="block-sub">Заполни свой паспорт. Этот документ останется с тобой до конца курса!</p>
 
@@ -319,7 +530,7 @@
       </div>
       <div class="passport-actions">
         <button class="passport-btn" onclick="stampPassport()">🎖 Получить визу</button>
-        <button class="passport-btn secondary" onclick="printPassport()">🖨 Распечатать</button>
+        <button class="passport-btn secondary" onclick="savePassportImage()">🖼 Сохранить картинку</button>
       </div>
       <div class="passport-stamp" id="stamp">
         🎉 ¡VISA APROBADA! ¡Bienvenido a España, <span id="stamp-name">amigo</span>!
@@ -327,17 +538,18 @@
     </div>
   </section>
 
-  <!-- БЛОК 5: ИГРА С МЯЧОМ -->
+  <!-- БЛОК 7: ИГРА С МЯЧОМ -->
   <section class="block" style="--c:#3A86FF">
     <div class="block-head">
       <h2 class="block-title">🎾 Игра «La Pelota Preguntona»</h2>
-      <span class="time-badge">⏱ 10 минут</span>
+      <span class="time-badge">⏱ 3 минуты</span>
     </div>
     <p class="block-sub">Лови мяч и отвечай на вопрос! Нажимай на мяч, чтобы получить новый вопрос.</p>
 
     <div class="ball-game">
       <div class="ball" onclick="throwBall()" id="ball">🎾</div>
       <div class="ball-question" id="question">Нажми на мяч!</div>
+      <div class="ball-trans" id="ball-trans"></div>
       <div class="ball-options" id="options"></div>
     </div>
   </section>
@@ -348,25 +560,81 @@
     <div class="task">
       <div class="task-num">1</div>
       <div>
-        <strong>Научи маму и папу здороваться</strong> всеми тремя способами: <em>Buenos días, Hola, ¡Buenas!</em>
+        <strong>Научи родителей здороваться</strong> — то, что мы учили сегодня. Покажи им три карточки: <em>Buenos días / Hola / ¡Buenas!</em> Пусть каждый выберет своё любимое.
       </div>
     </div>
     <div class="task">
       <div class="task-num">2</div>
       <div>
-        <strong>Представь родителей друг другу</strong> по-испански: <em>«Mamá, este es papá. Se llama...»</em>
+        <strong>Представь СЕБЯ родителям по-испански</strong> — то, что мы учили сегодня. Встань перед ними и скажи:
+        <em>«¡Hola! Me llamo [имя]. Tengo [возраст] años. Soy de [страна].»</em>
+        Родители аплодируют! 👏
       </div>
     </div>
     <div class="task">
       <div class="task-num">3</div>
       <div>
-        <strong>Распечатай паспорт</strong> и повесь на холодильник. Пусть вся семья видит твой первый испанский документ!
+        <strong>Собери информацию о родителях</strong> (подготовка). Спроси у мамы и папы по-русски:
+        <ul style="margin:6px 0 0 18px;padding:0">
+          <li>Как тебя зовут?</li>
+          <li>Сколько тебе лет?</li>
+          <li>Откуда ты?</li>
+        </ul>
+        Запиши ответы в свой блокнот-шпаргалку.
       </div>
     </div>
     <div class="task">
       <div class="task-num">4</div>
       <div>
-        <strong>Сделай селфи</strong> с паспортом и отправь учителю в чат. Это твоя первая победа! 🏆
+        <strong>Представь родителей друг другу</strong> — новое, но с опорой на шпаргалку:
+        <div style="background:var(--soft);border-radius:12px;padding:12px;margin-top:8px;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--terra)">
+          Папе про маму: «Este es mamá. Se llama [имя]. Tiene [возраст] años.»<br>
+          Маме про папу: «Este es papá. Se llama [имя]. Tiene [возраст] años.»
+        </div>
+        <div style="font-size:.85rem;color:var(--ink-soft);font-weight:700;margin-top:8px">💡 Не знаешь число по-испански? Открой «Волшебный переводчик чисел» в блоке «Цифры» — он сам всё озвучит! 🧮</div>
+      </div>
+    </div>
+    <div class="task">
+      <div class="task-num">5</div>
+      <div style="flex:1">
+        <strong>Повтори все новые слова</strong> — нажимай на карточки, слушай и повторяй вслух. Это займёт 2 минуты!
+        <div class="word-grid" id="word-grid"></div>
+      </div>
+    </div>
+    <div class="task">
+      <div class="task-num">6</div>
+      <div style="flex:1">
+        <strong>Сыграй в тренажёр</strong> — сначала сопоставь испанские слова с переводом, потом собери предложения!
+        <div style="font-weight:800;margin-top:12px">🧩 Сопоставление: нажми испанское слово, потом его перевод</div>
+        <div class="match-area">
+          <div class="match-col" id="match-es"></div>
+          <div class="match-col" id="match-ru"></div>
+        </div>
+        <div class="match-msg" id="match-msg"></div>
+        <div style="font-weight:800;margin-top:16px">🎂 Собери предложение «Мне 8 лет»:</div>
+        <div class="sb-answer" id="sb8-answer"></div>
+        <div class="sb-chips" id="sb8-chips"></div>
+        <div class="sb-feedback" id="sb8-feedback"></div>
+        <div style="font-weight:800;margin-top:16px">🎂 Собери предложение «Мне 12 лет»:</div>
+        <div class="sb-answer" id="sb12-answer"></div>
+        <div class="sb-chips" id="sb12-chips"></div>
+        <div class="sb-feedback" id="sb12-feedback"></div>
+      </div>
+    </div>
+    <div class="task">
+      <div class="task-num">7</div>
+      <div style="flex:1">
+        <strong>Самопроверка «Смайлик»</strong> — честно отметь, как у тебя получается. Просто нажми на смайлик!
+        <table class="tl-table" id="kids-tl">
+          <tr><th>Умею</th><th>😄 отлично</th><th>🙂 чуть помогли</th><th>😅 пока сложно</th></tr>
+          <tr><td>Поздороваться по-испански</td><td><button class="tl-cell" data-row="0" data-color="1">😄</button></td><td><button class="tl-cell" data-row="0" data-color="2">🙂</button></td><td><button class="tl-cell" data-row="0" data-color="3">😅</button></td></tr>
+          <tr><td>Сказать, как меня зовут</td><td><button class="tl-cell" data-row="1" data-color="1">😄</button></td><td><button class="tl-cell" data-row="1" data-color="2">🙂</button></td><td><button class="tl-cell" data-row="1" data-color="3">😅</button></td></tr>
+          <tr><td>Сказать, сколько мне лет</td><td><button class="tl-cell" data-row="2" data-color="1">😄</button></td><td><button class="tl-cell" data-row="2" data-color="2">🙂</button></td><td><button class="tl-cell" data-row="2" data-color="3">😅</button></td></tr>
+          <tr><td>Сказать, откуда я</td><td><button class="tl-cell" data-row="3" data-color="1">😄</button></td><td><button class="tl-cell" data-row="3" data-color="2">🙂</button></td><td><button class="tl-cell" data-row="3" data-color="3">😅</button></td></tr>
+          <tr><td>Представить маму и папу</td><td><button class="tl-cell" data-row="4" data-color="1">😄</button></td><td><button class="tl-cell" data-row="4" data-color="2">🙂</button></td><td><button class="tl-cell" data-row="4" data-color="3">😅</button></td></tr>
+        </table>
+        <button class="tl-reset" id="kids-tl-reset">↺ Сбросить</button>
+        <div style="font-size:.85rem;color:var(--ink-soft);font-weight:700;margin-top:8px">📸 Покажи смайлик родителям — вместе разберём всё, что 😅!</div>
       </div>
     </div>
   </section>
@@ -442,21 +710,40 @@ function stampPassport(){
   speak(`¡Enhorabuena, ${name}! Bienvenido a España`);
   
   // Сохраняем в localStorage
-  localStorage.setItem('mudro_passport', JSON.stringify({name, age, country, date: new Date().toISOString()}));
+  try{localStorage.setItem('mudro_passport', JSON.stringify({name, age, country, date: new Date().toISOString()}));}catch(e){}
 }
 
 function printPassport(){
   window.print();
 }
 
+function savePassportImage(){
+  const passport=document.querySelector('.passport');
+  if(!passport) return;
+  const exportPng=(lib)=>{
+    lib(passport,{backgroundColor:null,scale:2}).then(canvas=>{
+      const a=document.createElement('a');
+      a.download='mi-pasaporte.png';
+      a.href=canvas.toDataURL('image/png');
+      a.click();
+    });
+  };
+  if(window.html2canvas){ exportPng(window.html2canvas); return; }
+  const s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+  s.onload=()=>exportPng(window.html2canvas);
+  s.onerror=()=>printPassport();
+  document.head.appendChild(s);
+}
+
 /* ========== ИГРА С МЯЧОМ ========== */
 const questions=[
-  {q:'¿Cómo te llamas?', options:['Me llamo Max','Tengo 8 años','Soy de Rusia'], correct:0},
-  {q:'¿Cuántos años tienes?', options:['Hola','Tengo 8 años','Buenos días'], correct:1},
-  {q:'¿De dónde eres?', options:['Me llamo Anna','Tengo 12 años','Soy de Rusia'], correct:2},
-  {q:'¿Cómo se dice «Привет»?', options:['Gracias','Hola','Adiós'], correct:1},
-  {q:'¿Cómo se dice «Добрый день»?', options:['Buenos días','Buenas noches','Buenas'], correct:0},
-  {q:'¿Cómo te llamas? (молодёжное)', options:['Buenos días, señor','Hola','¡Buenas, tío!'], correct:2}
+  {q:'¿Cómo te llamas?', t:'«Как тебя зовут?»', options:['Me llamo Max','Tengo 8 años','Soy de Rusia'], correct:0},
+  {q:'¿Cuántos años tienes?', t:'«Сколько тебе лет?»', options:['Hola','Tengo 8 años','Buenos días'], correct:1},
+  {q:'¿De dónde eres?', t:'«Откуда ты?»', options:['Me llamo Anna','Tengo 12 años','Soy de Rusia'], correct:2},
+  {q:'¿Cómo se dice «Привет»?', t:'«Как сказать «Привет»?»', options:['Gracias','Hola','Adiós'], correct:1},
+  {q:'¿Cómo se dice «Добрый день»?', t:'«Как сказать «Добрый день»?»', options:['Buenos días','Buenas noches','Buenas'], correct:0},
+  {q:'¿Cómo te llamas? (молодёжное)', t:'«Как тебя зовут? (молодёжное)»', options:['Buenos días, señor','Hola','¡Buenas, tío!'], correct:2}
 ];
 let currentQ=null;
 
@@ -468,6 +755,7 @@ function throwBall(){
   
   currentQ=questions[Math.floor(Math.random()*questions.length)];
   document.getElementById('question').textContent=currentQ.q;
+  document.getElementById('ball-trans').textContent=currentQ.t || '';
   
   const opts=document.getElementById('options');
   opts.innerHTML='';
@@ -504,14 +792,9 @@ function checkAnswer(i, btn){
   }, 2500);
 }
 
-/* ========== ПРОГРЕСС ========== */
-// Анимация прогресс-бара при загрузке
-setTimeout(()=>{
-  document.getElementById('progress-bar').style.width='1.6%';
-},300);
-
 /* ========== ВОССТАНОВЛЕНИЕ ПАСПОРТА ========== */
-const saved=localStorage.getItem('mudro_passport');
+let saved=null;
+try{saved=localStorage.getItem('mudro_passport');}catch(e){};
 if(saved){
   try{
     const data=JSON.parse(saved);
@@ -520,6 +803,309 @@ if(saved){
     if(data.country) document.getElementById('p-country').value=data.country;
   }catch(e){}
 }
+
+/* ========== ЦИФРЫ 1-12 ========== */
+const NUM_WORDS=['uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce'];
+let targetNum=null;
+
+const numGrid=document.getElementById('num-grid');
+NUM_WORDS.forEach((w,i)=>{
+  const card=document.createElement('div');
+  card.className='num-card';
+  card.dataset.n=i+1;
+  card.innerHTML=`<div class="n">${i+1}</div><div class="w">${w}</div>`;
+  card.onclick=()=>handleNumCard(card,i+1,w);
+  numGrid.appendChild(card);
+});
+
+function handleNumCard(card,n,w){
+  if(targetNum!==null){
+    if(n===targetNum){
+      card.classList.add('correct');
+      document.getElementById('num-feedback').textContent='🎉 ¡Muy bien! Это '+w+' ('+n+')';
+      speak('¡Muy bien! '+w);
+      targetNum=null;
+      setTimeout(()=>card.classList.remove('correct'),1500);
+    }else{
+      card.classList.add('wrong');
+      document.getElementById('num-feedback').textContent=' Не то! Слушай ещё раз...';
+      speak('otra vez');
+      setTimeout(()=>card.classList.remove('wrong'),600);
+    }
+  }else{
+    speak(w);
+    card.classList.add('correct');
+    setTimeout(()=>card.classList.remove('correct'),800);
+  }
+}
+
+function playRandomNumber(){
+  targetNum=Math.floor(Math.random()*12)+1;
+  document.getElementById('num-feedback').textContent='🎧 Слушай внимательно и нажми нужную карточку!';
+  speak(NUM_WORDS[targetNum-1]);
+}
+
+/* ========== ПЕРЕВОДЧИК 1-100 ========== */
+const UNITS=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve'];
+const TEENS=['diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve'];
+const TWENTIES=['veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+const TENS=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+
+function numberToSpanish(n){
+  n=parseInt(n);
+  if(isNaN(n)||n<1||n>100) return null;
+  if(n===100) return 'cien';
+  if(n<10) return UNITS[n];
+  if(n<20) return TEENS[n-10];
+  if(n<30) return TWENTIES[n-20];
+  const t=Math.floor(n/10), u=n%10;
+  if(u===0) return TENS[t];
+  return TENS[t]+' y '+UNITS[u];
+}
+
+function ageToSpanish(n){
+  n=parseInt(n);
+  if(n===1) return 'un año';
+  if(n===21) return 'veintiún años';
+  return numberToSpanish(n)+' años';
+}
+
+function updateTranslator(){
+  const n=parseInt(document.getElementById('num-input').value);
+  const res=document.getElementById('trans-result');
+  const word=numberToSpanish(n);
+  if(!word){res.innerHTML='<div class="trans-word">Введи число от 1 до 100 😉</div>';return;}
+  const age=ageToSpanish(n);
+  res.innerHTML=`
+    <div class="trans-word">${n} = ${word}</div>
+    <div class="trans-actions">
+      <button class="trans-btn" onclick="speak('${word}')">🔊 Послушать число</button>
+      <button class="trans-btn" onclick="speak('Tiene ${age}')">🎂 Tiene ${age}</button>
+    </div>`;
+}
+
+function syncSlider(v){document.getElementById('num-slider').value=v}
+function syncInput(v){document.getElementById('num-input').value=v}
+function setNumber(v){
+  document.getElementById('num-input').value=v;
+  document.getElementById('num-slider').value=v;
+  updateTranslator();
+  speak(numberToSpanish(v));
+}
+
+updateTranslator();
+
+/* ========== ВИЗИТКА ========== */
+function buildVizitka(){
+  const name=document.getElementById('v-name').value.trim();
+  const age=document.getElementById('v-age').value.trim();
+  const country=document.getElementById('v-country').value.trim();
+  document.getElementById('v-phrase').textContent=`¡Hola! Me llamo ${name||'___'}. Tengo ${age||'___'} años. Soy de ${country||'___'}.`;
+  document.getElementById('v-trans').textContent=`«Привет! Меня зовут ${name||'___'}. Мне ${age||'___'} лет. Я из ${country||'___'}.»`;
+}
+function speakVizitka(){
+  const name=document.getElementById('v-name').value.trim();
+  const age=document.getElementById('v-age').value.trim();
+  const country=document.getElementById('v-country').value.trim();
+  const ageWord=age&&numberToSpanish(age);
+  let phrase=`¡Hola! Me llamo ${name||'amigo'}.`;
+  if(ageWord) phrase+=` Tengo ${ageWord} años.`;
+  if(country) phrase+=` Soy de ${country}.`;
+  speak(phrase);
+}
+
+/* ========== ПРЕДСТАВЛЯЕМ ДРУГИХ ========== */
+const PERSONS={
+  hermana:{ru:'сестра', es:'hermana', f:true},
+  hermano:{ru:'брат', es:'hermano', f:false},
+  mama:{ru:'мама', es:'mamá', f:true},
+  papa:{ru:'папа', es:'papá', f:false},
+  amigo:{ru:'друг', es:'amigo', f:false},
+  amiga:{ru:'подруга', es:'amiga', f:true},
+};
+function buildPresent(){
+  const p=PERSONS[document.getElementById('p-person').value];
+  const name=document.getElementById('p-name').value.trim();
+  const age=document.getElementById('p-age').value.trim();
+  const he=p.f?'Её зовут':'Его зовут';
+  const him=p.f?'Ей':'Ему';
+  document.getElementById('p-phrase').textContent=`Este es ${p.es}. Se llama ${name||'___'}. Tiene ${age||'___'} años.`;
+  document.getElementById('p-trans').textContent=`«Это ${p.ru}. ${he} ${name||'___'}. ${him} ${age||'___'} лет.»`;
+}
+function speakPresent(){
+  const p=PERSONS[document.getElementById('p-person').value];
+  const name=document.getElementById('p-name').value.trim();
+  const age=document.getElementById('p-age').value.trim();
+  const ageWord=age&&numberToSpanish(age);
+  let phrase=`Este es ${p.es}.`;
+  if(name) phrase+=` Se llama ${name}.`;
+  if(ageWord) phrase+=` Tiene ${ageWord} años.`;
+  speak(phrase);
+}
+buildVizitka();
+buildPresent();
+
+/* ========== ТРЕНАЖЁР ДОМА ========== */
+const WORDS=[
+  {es:'¡Hola!',ru:'Привет!'},
+  {es:'Buenos días',ru:'Добрый день'},
+  {es:'¡Buenas!',ru:'Привет!'},
+  {es:'Me llamo',ru:'Меня зовут'},
+  {es:'Tengo 8 años',ru:'Мне 8 лет'},
+  {es:'Soy de Rusia',ru:'Я из России'},
+  {es:'Este es papá',ru:'Это папа'},
+  {es:'Se llama',ru:'Его/её зовут'},
+  {es:'Tiene 40 años',ru:'Ему/ей 40 лет'},
+  {es:'¿Cómo te llamas?',ru:'Как тебя зовут?'},
+  {es:'¿De dónde eres?',ru:'Откуда ты?'},
+  {es:'1 · uno',ru:'один',say:'uno'},
+  {es:'2 · dos',ru:'два',say:'dos'},
+  {es:'3 · tres',ru:'три',say:'tres'},
+  {es:'4 · cuatro',ru:'четыре',say:'cuatro'},
+  {es:'5 · cinco',ru:'пять',say:'cinco'},
+  {es:'6 · seis',ru:'шесть',say:'seis'},
+  {es:'7 · siete',ru:'семь',say:'siete'},
+  {es:'8 · ocho',ru:'восемь',say:'ocho'},
+  {es:'9 · nueve',ru:'девять',say:'nueve'},
+  {es:'10 · diez',ru:'десять',say:'diez'},
+  {es:'11 · once',ru:'одиннадцать',say:'once'},
+  {es:'12 · doce',ru:'двенадцать',say:'doce'},
+];
+const wordGrid=document.getElementById('word-grid');
+WORDS.forEach(w=>{
+  const c=document.createElement('div');
+  c.className='word-card';
+  c.innerHTML=`<div class="es">${w.es}</div><div class="ru">${w.ru}</div>`;
+  c.onclick=()=>speak(w.say||w.es);
+  wordGrid.appendChild(c);
+});
+
+const MATCH_PAIRS=[
+  {es:'¡Hola!',ru:'Привет!'},
+  {es:'Buenos días',ru:'Добрый день'},
+  {es:'Me llamo',ru:'Меня зовут'},
+  {es:'Tengo 8 años',ru:'Мне 8 лет'},
+  {es:'Soy de Rusia',ru:'Я из России'},
+  {es:'Este es papá',ru:'Это папа'},
+  {es:'Tiene 40 años',ru:'Ему 40 лет'},
+];
+let selEs=null, selRu=null, matched=0;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function initMatch(){
+  matched=0;
+  selEs=null; selRu=null;
+  const esCol=document.getElementById('match-es');
+  const ruCol=document.getElementById('match-ru');
+  esCol.innerHTML=''; ruCol.innerHTML='';
+  document.getElementById('match-msg').textContent='';
+  const esItems=shuffle(MATCH_PAIRS.map((p,i)=>({...p,id:i})));
+  const ruItems=shuffle(MATCH_PAIRS.map((p,i)=>({...p,id:i})));
+  esItems.forEach(p=>{
+    const b=document.createElement('button');
+    b.className='match-chip'; b.dataset.id=p.id; b.textContent=p.es;
+    b.onclick=()=>selectMatch('es',b);
+    esCol.appendChild(b);
+  });
+  ruItems.forEach(p=>{
+    const b=document.createElement('button');
+    b.className='match-chip'; b.dataset.id=p.id; b.textContent=p.ru;
+    b.onclick=()=>selectMatch('ru',b);
+    ruCol.appendChild(b);
+  });
+}
+
+function selectMatch(side, btn){
+  const msg=document.getElementById('match-msg');
+  if(btn.classList.contains('done')) return;
+  const box=side==='es'?'#match-es':'#match-ru';
+  document.querySelectorAll(box+' .selected').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  if(side==='es') selEs=btn; else selRu=btn;
+  if(selEs && selRu){
+    if(selEs.dataset.id===selRu.dataset.id){
+      selEs.classList.remove('selected'); selEs.classList.add('done');
+      selRu.classList.remove('selected'); selRu.classList.add('done');
+      speak(selEs.textContent);
+      matched++;
+      msg.textContent=`✅ Верно! ${matched} из ${MATCH_PAIRS.length}`;
+      if(matched===MATCH_PAIRS.length) msg.textContent='🎉 ¡Muy bien! Все пары собраны!';
+    }else{
+      msg.textContent='❌ Не пара! Попробуй ещё раз';
+      selEs.classList.add('wrong'); selRu.classList.add('wrong');
+      setTimeout(()=>{
+        selEs.classList.remove('selected','wrong');
+        selRu.classList.remove('selected','wrong');
+      },600);
+    }
+    selEs=null; selRu=null;
+  }
+}
+initMatch();
+
+const BUILDERS=[
+  {id:'sb8', chips:['Tengo','ocho','años','Soy','once'], target:['Tengo','ocho','años'], label:'Tengo ocho años'},
+  {id:'sb12', chips:['Tengo','doce','años','Soy','ocho'], target:['Tengo','doce','años'], label:'Tengo doce años'},
+];
+BUILDERS.forEach(b=>initSB(b));
+
+function initSB(b){
+  const answerBox=document.getElementById(b.id+'-answer');
+  const chipsBox=document.getElementById(b.id+'-chips');
+  const fb=document.getElementById(b.id+'-feedback');
+  let pool=shuffle(b.chips.slice());
+  let answer=[];
+  function render(){
+    answerBox.innerHTML=''; chipsBox.innerHTML='';
+    answer.forEach((w,i)=>{
+      const s=document.createElement('span');
+      s.className='sb-chip';
+      s.textContent=w;
+      s.onclick=()=>{
+        pool.push(w);
+        answer=answer.filter((_,j)=>j!==i);
+        render();
+      };
+      answerBox.appendChild(s);
+    });
+    pool.forEach(w=>{
+      const s=document.createElement('span');
+      s.className='sb-chip';
+      s.textContent=w;
+      s.onclick=()=>{
+        answer.push(w);
+        pool=pool.filter(x=>x!==w);
+        render();
+      };
+      chipsBox.appendChild(s);
+    });
+    if(answer.length===b.target.length){
+      if(b.target.every((w,i)=>answer[i]===w)){
+        answerBox.classList.add('sb-done');
+        fb.textContent='🎉 ¡Perfecto! Слушай:';
+        speak(b.label);
+      }else{
+        answerBox.classList.remove('sb-done');
+        fb.textContent='🤔 Порядок слов не тот. Поменяй местами!';
+      }
+    }else{
+      answerBox.classList.remove('sb-done');
+      fb.textContent='';
+    }
+  }
+  render();
+}
+
+/* ========== САМОПРОВЕРКА «СМАЙЛИК» ========== */
+document.querySelectorAll('.tl-cell').forEach(c=>{
+  c.addEventListener('click',()=>{
+    const row=c.dataset.row;
+    document.querySelectorAll(`.tl-cell[data-row="${row}"]`).forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+  });
+});
+document.getElementById('kids-tl-reset').onclick=()=>document.querySelectorAll('.tl-cell').forEach(c=>c.classList.remove('active'));
 </script>
 </body>
 </html>

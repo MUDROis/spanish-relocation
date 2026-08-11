@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{
   --bg:#FFF7EF; --ink:#2B2118; --muted:#7A6A5C; --card:#fff;
@@ -37,11 +38,69 @@ h1 em{font-style:normal;color:var(--p1)}
 .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
 
-/* ---------- таймер ---------- */
-.timer-box{display:inline-flex;align-items:center;gap:14px;background:#2B2118;color:#fff;border-radius:999px;padding:10px 20px;box-shadow:var(--shadow)}
-.timer-box .time{font-weight:900;font-size:1.3rem;font-variant-numeric:tabular-nums}
-.timer-box button{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:999px;padding:6px 14px;font-weight:900;font-size:.8rem;cursor:pointer}
-.timer-box button:hover{background:rgba(255,255,255,.28)}
+/* ---------- конструктор визитки ---------- */
+.vcard-fields{display:flex;flex-wrap:wrap;gap:10px}
+.vcard-fields input{padding:12px 14px;border-radius:12px;border:2px solid rgba(43,33,24,.15);font-family:inherit;font-weight:800;font-size:1rem;min-width:170px}
+.vcard-fields input:focus{outline:none;border-color:var(--p1)}
+.vcard-builder .btn-primary{margin-top:10px}
+.vcard-out{margin-top:14px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.vcard-ru{font-weight:800;color:var(--muted)}
+
+/* ---------- числа ---------- */
+.num-group{margin-top:18px}
+.num-group>b{display:block;margin-bottom:8px;font-size:.95rem}
+.translator{margin-top:18px;border-top:1px dashed rgba(43,33,24,.15);padding-top:18px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.translator input[type=range]{width:min(100%,320px)}
+.translator .t-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.translator input[type=number]{padding:10px 14px;border-radius:10px;border:2px solid rgba(43,33,24,.15);font-family:inherit;font-weight:800;font-size:1rem;width:110px}
+
+/* ---------- карточки лексики: перевод примера ---------- */
+.flash-trans{font-size:.82rem;font-weight:800;font-style:italic;color:rgba(255,255,255,.92)}
+
+/* ---------- симуляция: перевод фраз ---------- */
+.msg-ru{font-size:.72rem;opacity:.7;margin-top:3px;line-height:1.25}
+
+/* ---------- тренажёр ---------- */
+.tr-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tr-tab{background:#fff;border:2px solid rgba(43,33,24,.15);border-radius:999px;padding:9px 16px;font-weight:900;cursor:pointer;font-size:.85rem;transition:.15s}
+.tr-tab:hover{border-color:var(--p3)}
+.tr-tab.active{background:var(--p1);color:#fff;border-color:var(--p1)}
+.tr-deck{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:14px}
+.tr-card{perspective:1000px;width:min(100%,320px);height:180px;cursor:pointer}
+.tr-card-inner{position:relative;width:100%;height:100%;transition:transform .3s;transform-style:preserve-3d}
+.tr-card.flipped .tr-card-inner{transform:rotateY(180deg)}
+.tr-card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;border:2px solid rgba(43,33,24,.1);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center}
+.tr-card-face .es{font-weight:900;font-size:1.3rem;color:var(--ink)}
+.tr-card-face .ru{font-size:1.1rem;color:var(--p2);font-weight:800}
+.tr-card-face small{font-size:.75rem;color:var(--muted);font-weight:800}
+.tr-card-back{background:#F3F6EA;border-color:var(--p2);transform:rotateY(180deg)}
+.tr-deck-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+.tr-count{font-weight:900;color:var(--muted);min-width:64px;text-align:center}
+.tr-match{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.tr-col{display:flex;flex-direction:column;gap:8px}
+.tr-chip{background:#fff;border:2px solid var(--p4);border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer;text-align:center;transition:.15s;font-size:.9rem}
+.tr-chip:hover{background:#EFF5FA}
+.tr-chip.selected{border-color:var(--p3);background:#FCF0DC}
+.tr-chip.done{background:#EFF2E4;border-color:var(--p2);cursor:default;opacity:.85}
+.tr-chip.wrong{animation:shake .4s;border-color:var(--p1)}
+.tr-msg{font-weight:800;margin-top:10px;min-height:22px;font-size:.9rem}
+.sb-answer{background:#fff;border:3px dashed var(--p2);border-radius:14px;padding:12px 14px;font-weight:900;font-size:1.05rem;color:var(--ink);min-height:54px;margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sb-chip{background:#fff;border:2px solid var(--p3);border-radius:10px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s;font-size:.95rem}
+.sb-chip:hover{background:#FCF0DC}
+.sb-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sb-feedback{font-weight:800;margin-top:8px;min-height:22px}
+.sb-done{background:#EFF2E4;border-color:var(--p2);animation:popIn .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes popIn{from{transform:scale(.96)}to{transform:none}}
+@media(max-width:600px){.tr-match{grid-template-columns:1fr}}
+
+/* ---------- светофор ---------- */
+.tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem}
+.tl-table th,.tl-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+.tl-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+.tl-cell{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:52px;padding:7px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1rem;font-weight:800;transition:.15s;text-align:center}
+.tl-cell:hover{background:#FFF7EF}
+.tl-cell.active{border-color:#2B2118;background:#FFF3DC}
 
 /* ---------- секции ---------- */
 .section{max-width:1100px;margin:0 auto;padding:34px 20px}
@@ -131,9 +190,23 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 
 /* ---------- домашка ---------- */
 .homework{background:linear-gradient(160deg,#FFF3DC,#FFE7B8);border-radius:24px;padding:30px 26px;box-shadow:var(--shadow)}
-.homework h3{font-weight:900;margin-bottom:8px}
+.homework h3{font-weight:900;margin-bottom:6px}
 .homework ul{margin:14px 0 0 20px}
 .homework li{margin:8px 0;font-weight:700}
+.hw-meta{font-weight:800;font-size:.9rem;color:var(--muted);margin:4px 0 18px}
+.hw-block{background:rgba(255,255,255,.82);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:0 4px 14px rgba(43,33,24,.06)}
+.hw-block h4{font-weight:900;font-size:1rem;margin-bottom:4px}
+.hw-block p{margin:6px 0;font-weight:700;font-size:.93rem}
+.hw-block .goal{color:var(--muted);font-size:.85rem;font-weight:800;margin-bottom:4px}
+.hw-phrase{background:#fff;border-left:4px solid var(--p3);border-radius:10px;padding:10px 14px;font-weight:900;font-size:.95rem;margin:8px 0;overflow-x:auto}
+.hw-tip{background:#FFF7EF;border-radius:10px;padding:10px 12px;font-size:.88rem;font-weight:700;color:var(--muted);margin-top:6px}
+.hw-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem}
+.hw-table th,.hw-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 12px;text-align:left;background:#fff}
+.hw-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+.hw-send{margin-top:16px;background:#2B2118;color:#FFD75E;border-radius:14px;padding:16px 20px;font-weight:800;font-size:.93rem}
+.hw-send p{color:#fff;margin-bottom:6px}
+.hw-send li{margin:4px 0;list-style:none;padding-left:26px;position:relative;color:#fff}
+.hw-send li::before{content:'🎯';position:absolute;left:0}
 
 /* ---------- навигация между уроками ---------- */
 .lesson-nav{display:flex;justify-content:space-between;gap:14px;max-width:1100px;margin:0 auto;padding:10px 20px 60px;flex-wrap:wrap}
@@ -145,7 +218,6 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;font-size:.85rem}
-@media(max-width:560px){.timer-box{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
@@ -157,19 +229,10 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 
 <section class="lesson-hero">
   <span class="phase-tag">🏠 Фаза 1 · Документы и жильё</span>
-  <h1>Урок 1.1 · <em>Misión Cita Previa</em><br>Ваш первый звонок в испанскую бюрократию</h1>
+  <h1>Урок 1.1 · <em>Misión Cita Previa</em><br>Первый звонок в Испанию: записываемся на приём без паники</h1>
   <div class="lesson-meta">
-    <span class="meta-chip">⏱ 50 минут</span>
     <span class="meta-chip">🎯 Цель: представиться и записаться на приём</span>
     <span class="meta-chip">🗣 5 слов-спасателей</span>
-  </div>
-  <div style="margin-top:22px">
-    <div class="timer-box">
-      <span class="time" id="timerDisplay">50:00</span>
-      <button id="timerStart">▶ Старт</button>
-      <button id="timerPause">⏸ Пауза</button>
-      <button id="timerReset">↺ Сброс</button>
-    </div>
   </div>
 </section>
 
@@ -209,10 +272,37 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
     </div>
   </div>
 
+  <div class="vcard-builder" style="margin-top:22px">
+    <h2 style="font-size:1.2rem">🪪 Соберите свою визитку</h2>
+    <p class="sub" style="margin-bottom:14px">Впишите свои данные — получите готовую фразу для первого звонка.</p>
+    <div class="vcard-fields">
+      <input type="text" id="vcName" placeholder="Имя · Ana">
+      <input type="number" id="vcAge" placeholder="Возраст · 35" min="1" max="99">
+      <input type="text" id="vcNac" placeholder="Национальность · rusa / ruso">
+    </div>
+    <button class="btn btn-primary" id="vcBtn">🔧 Собрать визитку</button>
+    <div class="vcard-out" id="vcOut" hidden>
+      <div class="hw-phrase" id="vcPhrase"></div>
+      <div class="vcard-ru" id="vcRu"></div>
+      <button class="btn btn-ghost speak" id="vcSpeak">🔊 Прослушать</button>
+    </div>
+  </div>
+
   <div class="num-wrap" style="margin-top:22px">
-    <h2 style="font-size:1.2rem">Цифры для выживания: год рождения и возраст</h2>
-    <p class="sub" style="margin-bottom:0">Нажмите на число, чтобы услышать его по-испански.</p>
-    <div class="num-chips" id="numChips"></div>
+    <h2 style="font-size:1.2rem">Цифры для выживания</h2>
+    <p class="sub" style="margin-bottom:0">Нажимайте на числа — слушайте испанское произношение.</p>
+    <div class="num-group"><b>🔢 Цифры 1–20</b><div class="num-chips" id="numChips1"></div></div>
+    <div class="num-group"><b>💯 Десятки до 100</b><div class="num-chips" id="numChips2"></div></div>
+    <div class="translator">
+      <b>🧮 Переводчик цифр 1–100</b>
+      <input type="range" id="numRange" min="1" max="100" value="35">
+      <div class="t-row">
+        <input type="number" id="numInput" min="1" max="100" value="35">
+        <button class="btn btn-primary" id="numBtn">Перевести</button>
+        <button class="mini-speak speak" id="numSpeak" data-text="" style="font-size:1.4rem">🔊</button>
+      </div>
+      <div class="year-result" id="numResult"></div>
+    </div>
     <div class="year-tool">
       <b>✏️ Практика: введите свой год рождения</b>
       <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
@@ -270,7 +360,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
     <div class="form-row"><label>Número de pasaporte</label><input type="text" id="fPass" placeholder="75 1234567"></div>
     <div class="form-actions">
       <button class="btn btn-primary" id="checkForm">✅ Проверить форму</button>
-      <button class="btn btn-ghost" id="printForm">🖨 Распечатать</button>
+      <button class="btn btn-ghost" id="saveForm">💾 Сохранить картинкой</button>
     </div>
     <div class="form-preview" id="formPreview"></div>
   </div>
@@ -279,12 +369,119 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 <!-- ===== ДОМАШКА ===== -->
 <section class="section">
   <div class="homework">
-    <h3>🏠 Семейная миссия на выходные</h3>
-    <ul>
-      <li><b>Для родителей:</b> найдите сайт испанской полиции (Policía Nacional) и сделайте скриншот кнопки, где запрашивается <b>Cita Previa</b>.</li>
-      <li><b>Для детей:</b> найдите на карте Испании города <b>Madrid, Valencia, Pamplona, Oviedo</b> (те самые, что помогали нам с алфавитом!) и отметьте их.</li>
-      <li><b>Вместе:</b> запишите голосовое сообщение в семейный чат — каждый представляет себя по-испански: <i>Me llamo… Soy… Tengo…</i></li>
-    </ul>
+    <h3>🏠 Домашнее задание · Урок 1.1 «Misión Cita Previa»</h3>
+    <p class="hw-meta">⏱ ~25–30 минут (можно разбить на 2–3 подхода) · Формат: голосовые + письмо + реальное действие</p>
+
+    <div class="hw-block">
+      <h4>🎤 Задание 1. «Визитка» (говорение) · 5 мин</h4>
+      <p class="goal">Цель: закрепить Me llamo / Soy / Tengo и снять страх говорить вслух.</p>
+      <p>Запишите голосовое сообщение в семейный чат (или преподавателю), где вы представляетесь по-испански:</p>
+      <div class="hw-phrase">¡Hola! Buenos días. Me llamo ___ . Soy ruso/a. Tengo ___ años.</div>
+      <p>🔁 Запишите минимум <b>2 дубля</b> — второй всегда лучше первого. Это нормально!</p>
+    </div>
+
+    <div class="hw-block">
+      <h4>🔤 Задание 2. «Моя фамилия по буквам» (диктовка) · 7 мин</h4>
+      <p class="goal">Цель: закрепить испанский алфавит со словами-подсказками.</p>
+      <p>Продиктуйте вслух (в то же голосовое или отдельным) свою фамилию по-испански, используя города-подсказки:</p>
+      <div class="hw-phrase">Mi apellido es ___ . I de Italia, V de Valencia…</div>
+      <div class="hw-tip">💡 Лайфхак: если в фамилии есть буквы, которых нет в нашей шпаргалке (например, K, W, Y), придумайте свою подсказку по образцу испанцев: <b>K de Kiwi · W de Waterpolo · Y de Yogur</b></div>
+    </div>
+
+    <div class="hw-block">
+      <h4>🔢 Задание 3. «Мои цифры» (числа) · 5 мин</h4>
+      <p class="goal">Цель: закрепить цифры и год рождения.</p>
+      <p>Напишите и произнесите вслух по-испански:</p>
+      <ul>
+        <li>Свой год рождения → <i>mil novecientos…</i></li>
+        <li>Номер телефона (по одной цифре) → <i>siete, cinco, uno…</i></li>
+        <li>Возраст → <i>Tengo ___ años.</i></li>
+      </ul>
+    </div>
+
+    <div class="hw-block">
+      <h4>🌍 Задание 4. «Реальная разведка» (PBL) · 5 мин ⭐</h4>
+      <p class="goal">Цель: перенести навык в настоящую жизнь.</p>
+      <p>Зайдите на сайт испанской полиции <b>Policía Nacional</b> и найдите раздел записи на приём. Сделайте скриншот кнопки / страницы, где запрашивается <b>Cita Previa</b>, и отправьте преподавателю.</p>
+      <div class="hw-tip">🔗 Подсказка для поиска: <i>cita previa Policía Nacional España</i></div>
+      <p>Это и есть ваш первый шаг в реальную испанскую бюрократию! 🇪🇸</p>
+    </div>
+
+    <div class="hw-block">
+      <h4>🎮 Тренажёр «Слова-спасатели» (лексика + цифры) · 10 мин</h4>
+      <p class="goal">Цель: выучить все слова и фразы урока, включая цифры.</p>
+      <p>🃏 Карточки — называйте перевод ДО того, как перевернёте. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+      <div class="trainer">
+        <div class="tr-tabs">
+          <button class="tr-tab active" data-tab="cards">🃏 Карточки</button>
+          <button class="tr-tab" data-tab="match">🧩 Сопоставление</button>
+          <button class="tr-tab" data-tab="build">🔤 Собери фразу</button>
+        </div>
+        <div class="tr-pane" id="trCards">
+          <div class="tr-deck">
+            <div class="tr-card" id="trCard">
+              <div class="tr-card-inner">
+                <div class="tr-card-face tr-card-front">
+                  <div class="es" id="trCardEs"></div>
+                  <small>нажми, чтобы увидеть перевод</small>
+                </div>
+                <div class="tr-card-face tr-card-back">
+                  <div class="ru" id="trCardRu"></div>
+                  <small id="trCardBackEs"></small>
+                </div>
+              </div>
+            </div>
+            <div class="tr-deck-controls">
+              <button class="btn btn-ghost" id="trPrev">← Назад</button>
+              <span class="tr-count" id="trCount">1 / 41</span>
+              <button class="btn btn-ghost" id="trNext">Дальше →</button>
+            </div>
+            <button class="btn btn-ghost" id="trShuffle">↺ Перемешать</button>
+          </div>
+        </div>
+        <div class="tr-pane" id="trMatch" hidden>
+          <div class="tr-match">
+            <div class="tr-col" id="tr-match-es"></div>
+            <div class="tr-col" id="tr-match-ru"></div>
+          </div>
+          <div class="tr-msg" id="tr-match-msg"></div>
+          <button class="btn btn-ghost" id="trMatchReset" style="margin-top:10px">↺ Перемешать заново</button>
+        </div>
+        <div class="tr-pane" id="trBuild" hidden>
+          <div class="sb-area" id="trBuild1"></div>
+          <div class="sb-area" id="trBuild2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hw-block" style="border:2px dashed rgba(212,160,23,.55);background:rgba(255,255,255,.55)">
+      <h4>👨‍👩‍👧 Семейная миссия (бонус, вместе с детьми) · 5 мин</h4>
+      <p>Пока родители делают задания выше, дети находят на карте Испании города-подсказки из алфавита: <b>Madrid, Valencia, Pamplona, Oviedo, Barcelona</b>.</p>
+      <p>Вместе: каждый член семьи представляется по-испански. Получится мини-видео или голосовой «семейный паспорт»! 🎬</p>
+    </div>
+
+    <div class="hw-block">
+      <h4>✅ Самопроверка «Светофор»</h4>
+      <p>В конце отметьте себя честно — просто нажмите на нужный цвет, он подсветится.</p>
+      <table class="tl-table" id="tlTable">
+        <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        <tr><td>Представиться (Me llamo / Soy / Tengo)</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+        <tr><td>Продиктовать фамилию по буквам</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+        <tr><td>Назвать год рождения и цифры</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+        <tr><td>Вспомнить 5 слов-спасателей (лексика шага 2)</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
+      </table>
+      <button class="btn btn-ghost tl-reset" id="tlReset">↺ Сбросить отметки</button>
+      <p>📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+    </div>
+
+    <div class="hw-send">
+      <p>🎯 Что прислать преподавателю</p>
+      <ul>
+        <li>Голосовое с представлением + диктовкой фамилии</li>
+        <li>Скриншот Cita Previa с сайта полиции</li>
+        <li>«Светофор» самопроверки</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -316,47 +513,66 @@ document.addEventListener('click',e=>{
   if(s&&s.dataset.text){e.stopPropagation();speak(s.dataset.text);}
 });
 
-/* ====== ТАЙМЕР ====== */
-let seconds=50*60,timerInt=null;
-const td=document.getElementById('timerDisplay');
-function renderTime(){const m=String(Math.floor(seconds/60)).padStart(2,'0');const s=String(seconds%60).padStart(2,'0');td.textContent=`${m}:${s}`;}
-document.getElementById('timerStart').onclick=()=>{if(timerInt)return;timerInt=setInterval(()=>{if(seconds>0){seconds--;renderTime();}else{clearInterval(timerInt);timerInt=null;toast('⏰ Время урока вышло! ¡Buen trabajo!');}},1000);};
-document.getElementById('timerPause').onclick=()=>{clearInterval(timerInt);timerInt=null;};
-document.getElementById('timerReset').onclick=()=>{clearInterval(timerInt);timerInt=null;seconds=50*60;renderTime();};
-
 /* ====== КАРТОЧКИ ЛЕКСИКИ ====== */
 const VOCAB=[
- {es:'la cita previa',ru:'предварительная запись',example:'Necesito una cita previa.',note:'Без неё в Испании никуда.'},
- {es:'el NIE',ru:'номер иностранца (ID)',example:'Mi NIE es Y-1234567-A.',note:'Главный документ экспата.'},
- {es:'el empadronamiento',ru:'регистрация по месту жительства',example:'Quiero empadronarme.',note:'Нужно для школы и врача.'},
- {es:'las tasas',ru:'госпошлины',example:'Hay que pagar las tasas.',note:'Платёж за каждую бумагу.'},
- {es:'la oficina de extranjería',ru:'офис по делам иностранцев',example:'La oficina está cerrada.',note:'Сюда идём за NIE.'}
+ {es:'la cita previa',ru:'предварительная запись',example:'Necesito una cita previa.',exampleRu:'Мне нужна предварительная запись.',note:'Без неё в Испании никуда.'},
+ {es:'el NIE',ru:'номер иностранца (ID)',example:'Mi NIE es Y-1234567-A.',exampleRu:'Мой NIE — Y-1234567-A.',note:'Главный документ экспата.'},
+ {es:'el empadronamiento',ru:'регистрация по месту жительства',example:'Quiero empadronarme.',exampleRu:'Я хочу прописаться.',note:'Нужно для школы и врача.'},
+ {es:'las tasas',ru:'госпошлины',example:'Hay que pagar las tasas.',exampleRu:'Нужно оплатить госпошлины.',note:'Платёж за каждую бумагу.'},
+ {es:'la oficina de extranjería',ru:'офис по делам иностранцев',example:'La oficina está cerrada.',exampleRu:'Офис закрыт.',note:'Сюда идём за NIE.'}
 ];
 document.getElementById('flashGrid').innerHTML=VOCAB.map(v=>`
- <div class="flash" onclick="this.classList.toggle('flipped')">
+ <div class="flash" onclick="if(!event.target.closest('.speak')) this.classList.toggle('flipped')">
    <div class="flash-inner">
      <div class="flash-face flash-front">
        <div class="flash-word">${v.es}</div>
-       <button class="speak-btn speak" data-text="${v.es}" onclick="event.stopPropagation()">🔊</button>
+       <button class="speak-btn speak" data-text="${v.es}">🔊</button>
        <div class="flash-hint">нажмите, чтобы перевернуть</div>
      </div>
      <div class="flash-face flash-back">
        <div class="flash-word">${v.ru}</div>
        <div class="flash-hint">${v.example}</div>
-       <button class="speak-btn speak" data-text="${v.example}" onclick="event.stopPropagation()">🔊</button>
+       <div class="flash-trans">«${v.exampleRu}»</div>
+       <button class="speak-btn speak" data-text="${v.example}">🔊</button>
        <div class="flash-hint">${v.note}</div>
      </div>
    </div>
  </div>`).join('');
 
 /* ====== ЧИСЛА ====== */
-const NUMS=[[0,'cero'],[10,'diez'],[15,'quince'],[20,'veinte'],[30,'treinta'],[40,'cuarenta'],[50,'cincuenta'],[35,'treinta y cinco'],[100,'cien']];
-document.getElementById('numChips').innerHTML=NUMS.map(([n,w])=>`<button class="num-chip speak" data-text="${w}">${n} <small>${w}</small> 🔊</button>`).join('');
-
-/* перевод года рождения (упрощённо для 1900-2020) */
 const UNIDADES=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
 const DECENAS=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
 function twoDigits(n){if(n<30)return UNIDADES[n];const d=Math.floor(n/10),u=n%10;return u?`${DECENAS[d]} y ${UNIDADES[u]}`:DECENAS[d];}
+function pnum(n){
+  if(n===100)return 'cien';
+  if(n<30)return UNIDADES[n];
+  const d=Math.floor(n/10),u=n%10;
+  return u?`${DECENAS[d]} y ${UNIDADES[u]}`:DECENAS[d];
+}
+const NUMS1=[];for(let n=1;n<=20;n++)NUMS1.push([n,pnum(n)]);
+const NUMS2=[[10,'diez'],[20,'veinte'],[30,'treinta'],[40,'cuarenta'],[50,'cincuenta'],[60,'sesenta'],[70,'setenta'],[80,'ochenta'],[90,'noventa'],[100,'cien']];
+document.getElementById('numChips1').innerHTML=NUMS1.map(([n,w])=>`<button class="num-chip speak" data-text="${w}">${n} <small>${w}</small> 🔊</button>`).join('');
+document.getElementById('numChips2').innerHTML=NUMS2.map(([n,w])=>`<button class="num-chip speak" data-text="${w}">${n} <small>${w}</small> 🔊</button>`).join('');
+
+/* переводчик 1-100 */
+const numRange=document.getElementById('numRange');
+const numInput=document.getElementById('numInput');
+const numBtn=document.getElementById('numBtn');
+const numResult=document.getElementById('numResult');
+const numSpeak=document.getElementById('numSpeak');
+function renderNum(){
+  let n=Math.min(100,Math.max(1,+numInput.value||1));
+  numInput.value=n;numRange.value=n;
+  const t=pnum(n);
+  numResult.textContent=`${n} → ${t} · Tengo ${t} años.`;
+  numSpeak.dataset.text=`${t}. Tengo ${t} años.`;
+}
+numRange.oninput=()=>{numInput.value=numRange.value;renderNum();};
+numInput.oninput=renderNum;
+numBtn.onclick=renderNum;
+renderNum();
+
+/* перевод года рождения (упрощённо для 1900-2020) */
 function yearToSpanish(y){
   const mil='mil';
   const rest=y-1000;
@@ -379,6 +595,185 @@ document.getElementById('yearBtn').onclick=()=>{
   res.style.color='var(--p2)';
   sp.dataset.text=text;sp.style.display='inline-block';
 };
+
+/* ====== КОНСТРУКТОР ВИЗИТКИ ====== */
+document.getElementById('vcBtn').onclick=()=>{
+  const name=document.getElementById('vcName').value.trim();
+  const age=Math.min(99,Math.max(1,+document.getElementById('vcAge').value||0));
+  const nac=document.getElementById('vcNac').value.trim();
+  if(!name){toast('Введите хотя бы имя 🙂');return;}
+  const ageTxt=age>0?` Tengo ${pnum(age)} años.`:'';
+  const nacTxt=nac?` Soy ${nac}.`:'';
+  const phrase=`¡Hola! Me llamo ${name}.${nacTxt}${ageTxt}`;
+  document.getElementById('vcPhrase').textContent=phrase;
+  document.getElementById('vcRu').textContent=`Привет! Меня зовут ${name}.${nac?` Я ${nac}.`:''}${age>0?` Мне ${age} лет.`:''}`;
+  document.getElementById('vcSpeak').dataset.text=phrase;
+  document.getElementById('vcOut').hidden=false;
+  speak(phrase);
+};
+
+/* ====== ТРЕНАЖЁР ====== */
+const trTabs=document.querySelectorAll('.tr-tab');
+trTabs.forEach(t=>t.addEventListener('click',()=>{
+  trTabs.forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  const tab=t.dataset.tab;
+  ['cards','match','build'].forEach(k=>{
+    document.getElementById('tr'+k.charAt(0).toUpperCase()+k.slice(1)).hidden = k!==tab;
+  });
+}));
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* карточки */
+const TR_CARDS=[
+ ...VOCAB.map(v=>({es:v.es,ru:v.ru})),
+ {es:'Buenos días',ru:'Добрый день'},
+ {es:'Quisiera pedir una cita previa',ru:'Я бы хотел записаться на приём'},
+ {es:'Me llamo…',ru:'Меня зовут…'},
+ {es:'Soy ruso / rusa',ru:'Я русский / русская'},
+ {es:'Tengo … años',ru:'Мне … лет'},
+ {es:'Mi apellido es…',ru:'Моя фамилия…'},
+ {es:'Muchas gracias',ru:'Большое спасибо'},
+ {es:'Hasta luego',ru:'До свидания'}
+];
+for(let n=1;n<=20;n++)TR_CARDS.push({es:pnum(n),ru:String(n),say:pnum(n)});
+[30,40,50,60,70,80,90,100].forEach(n=>TR_CARDS.push({es:pnum(n),ru:String(n),say:pnum(n)}));
+/* карточки-дека: листаются как в Quizlet */
+let trIdx=0,trOrder=[...Array(TR_CARDS.length).keys()];
+const trCardEl=document.getElementById('trCard');
+function renderTrCard(){
+  const w=TR_CARDS[trOrder[trIdx]];
+  document.getElementById('trCardEs').textContent=w.es;
+  document.getElementById('trCardRu').textContent=w.ru;
+  document.getElementById('trCardBackEs').textContent=w.es;
+  document.getElementById('trCount').textContent=`${trIdx+1} / ${TR_CARDS.length}`;
+  trCardEl.classList.remove('flipped');
+}
+trCardEl.addEventListener('click',()=>{
+  trCardEl.classList.toggle('flipped');
+  if(trCardEl.classList.contains('flipped'))speak(TR_CARDS[trOrder[trIdx]].say||TR_CARDS[trOrder[trIdx]].es);
+});
+document.getElementById('trPrev').onclick=()=>{trIdx=(trIdx-1+TR_CARDS.length)%TR_CARDS.length;renderTrCard();};
+document.getElementById('trNext').onclick=()=>{trIdx=(trIdx+1)%TR_CARDS.length;renderTrCard();};
+document.getElementById('trShuffle').onclick=()=>{trOrder=shuffle([...Array(TR_CARDS.length).keys()]);trIdx=0;renderTrCard();};
+renderTrCard();
+
+/* сопоставление */
+const TR_MATCH=[
+ {es:'la cita previa',ru:'предварительная запись'},
+ {es:'el NIE',ru:'номер иностранца (ID)'},
+ {es:'el empadronamiento',ru:'регистрация по месту жительства'},
+ {es:'las tasas',ru:'госпошлины'},
+ {es:'la oficina de extranjería',ru:'офис по делам иностранцев'},
+ {es:'Me llamo…',ru:'Меня зовут…'},
+ {es:'Soy ruso / rusa',ru:'Я русский / русская'},
+ {es:'Tengo … años',ru:'Мне … лет'}
+];
+let mEs=null,mRu=null,mDone=0;
+function initTrMatch(){
+  mDone=0;mEs=null;mRu=null;
+  const ec=document.getElementById('tr-match-es');
+  const rc=document.getElementById('tr-match-ru');
+  ec.innerHTML='';rc.innerHTML='';
+  document.getElementById('tr-match-msg').textContent='';
+  shuffle(TR_MATCH.map((p,i)=>({...p,id:i}))).forEach(p=>{
+    const b=document.createElement('button');
+    b.className='tr-chip';b.dataset.id=p.id;b.textContent=p.es;
+    b.onclick=()=>pickTrMatch('es',b);
+    ec.appendChild(b);
+  });
+  shuffle(TR_MATCH.map((p,i)=>({...p,id:i}))).forEach(p=>{
+    const b=document.createElement('button');
+    b.className='tr-chip';b.dataset.id=p.id;b.textContent=p.ru;
+    b.onclick=()=>pickTrMatch('ru',b);
+    rc.appendChild(b);
+  });
+}
+function pickTrMatch(side,btn){
+  const msg=document.getElementById('tr-match-msg');
+  if(btn.classList.contains('done'))return;
+  const box=side==='es'?'#tr-match-es':'#tr-match-ru';
+  document.querySelectorAll(box+' .selected').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  if(side==='es')mEs=btn;else mRu=btn;
+  if(mEs&&mRu){
+    if(mEs.dataset.id===mRu.dataset.id){
+      mEs.classList.remove('selected');mEs.classList.add('done');
+      mRu.classList.remove('selected');mRu.classList.add('done');
+      speak(mEs.textContent);
+      mDone++;
+      msg.textContent=mDone===TR_MATCH.length?'🎉 ¡Muy bien! Все пары собраны!':`✅ Верно! ${mDone} из ${TR_MATCH.length}`;
+    }else{
+      msg.textContent='❌ Не пара! Попробуйте ещё раз';
+      mEs.classList.add('wrong');mRu.classList.add('wrong');
+      setTimeout(()=>{
+        mEs.classList.remove('selected','wrong');
+        mRu.classList.remove('selected','wrong');
+      },600);
+    }
+    mEs=null;mRu=null;
+  }
+}
+document.getElementById('trMatchReset').onclick=initTrMatch;
+initTrMatch();
+
+/* сборка фраз */
+const TR_SENT=[
+ {id:'p1',chips:['Quisiera','pedir','una','cita','previa.','pagar','un'],target:['Quisiera','pedir','una','cita','previa.'],label:'Quisiera pedir una cita previa.',ru:'Я бы хотел записаться на приём.'},
+ {id:'p2',chips:['Tengo','treinta','y','cinco','años.','cien','dos'],target:['Tengo','treinta','y','cinco','años.'],label:'Tengo treinta y cinco años.',ru:'Мне 35 лет.'}
+];
+document.getElementById('trBuild1').innerHTML=TR_SENT.map((b,i)=>`
+  <div style="font-weight:800;margin-top:${i?16:0}px">💬 Соберите фразу: «${b.ru}»</div>
+  <div class="sb-answer" id="${b.id}-answer"></div>
+  <div class="sb-chips" id="${b.id}-chips"></div>
+  <div class="sb-feedback" id="${b.id}-feedback"></div>`).join('');
+TR_SENT.forEach(b=>initTrSB(b));
+function initTrSB(b){
+  const answerBox=document.getElementById(b.id+'-answer');
+  const chipsBox=document.getElementById(b.id+'-chips');
+  const fb=document.getElementById(b.id+'-feedback');
+  let pool=shuffle(b.chips.slice());
+  let answer=[];
+  function render(){
+    answerBox.innerHTML='';chipsBox.innerHTML='';
+    answer.forEach((w,i)=>{
+      const s=document.createElement('span');
+      s.className='sb-chip';s.textContent=w;
+      s.onclick=()=>{pool.push(w);answer=answer.filter((_,j)=>j!==i);render();};
+      answerBox.appendChild(s);
+    });
+    pool.forEach(w=>{
+      const s=document.createElement('span');
+      s.className='sb-chip';s.textContent=w;
+      s.onclick=()=>{answer.push(w);pool=pool.filter(x=>x!==w);render();};
+      chipsBox.appendChild(s);
+    });
+    if(answer.length===b.target.length){
+      if(b.target.every((w,i)=>answer[i]===w)){
+        answerBox.classList.add('sb-done');
+        fb.textContent='🎉 ¡Perfecto! Слушайте:';
+        speak(b.label);
+      }else{
+        answerBox.classList.remove('sb-done');
+        fb.textContent='🤔 Порядок слов не тот. Поменяйте местами!';
+      }
+    }else{
+      answerBox.classList.remove('sb-done');
+      fb.textContent='';
+    }
+  }
+  render();
+}
+
+/* ====== СВЕТОФОР ====== */
+document.querySelectorAll('.tl-cell').forEach(c=>{
+  c.addEventListener('click',()=>{
+    const row=c.dataset.row;
+    document.querySelectorAll(`.tl-cell[data-row="${row}"]`).forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+  });
+});
+document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-cell').forEach(c=>c.classList.remove('active'));
 
 /* ====== АЛФАВИТ ====== */
 const ALPHA=[
@@ -420,22 +815,22 @@ document.getElementById('alphaGrid').addEventListener('click',e=>{
   document.getElementById('adNote').textContent=a[3]||'';
   document.getElementById('adNote').style.display=a[3]?'block':'none';
   document.getElementById('adSpeak').dataset.text=`${a[1]}. ${a[0]} de ${a[1].split(' de ')[1]||''}`;
-  document.getElementById('adDetail').classList.add('show');
+  document.getElementById('alphaDetail').classList.add('show');
   speak(a[1]);
 });
 
 /* ====== СИМУЛЯЦИЯ ЗВОНКА ====== */
 const DIALOG=[
- {who:'clerk',text:'Oficina de Extranjería, buenos días, ¿en qué puedo ayudarle?'},
- {who:'you',text:'Buenos días. Quisiera pedir una cita previa para el NIE.'},
- {who:'clerk',text:'Perfecto. ¿Me puede decir su nombre completo, por favor?'},
- {who:'you',text:'Sí. Me llamo Ana Ivanova.'},
- {who:'clerk',text:'¿Me puede deletrear su apellido, por favor?'},
- {who:'you',text:'Sí. I de Italia, V de Valencia, A de Antonio, N de Navarra, O de Oviedo, V de Valencia, A de Antonio.'},
- {who:'clerk',text:'Muy bien. ¿Y su número de pasaporte?'},
- {who:'you',text:'Es siete, cinco, uno, dos, tres, cuatro, cinco, seis, siete.'},
- {who:'clerk',text:'Perfecto. Su cita es el martes a las diez. Hasta luego.'},
- {who:'you',text:'Muchas gracias. Hasta luego.'}
+ {who:'clerk',text:'Oficina de Extranjería, buenos días, ¿en qué puedo ayudarle?',ru:'Офис по делам иностранцев, добрый день, чем могу помочь?'},
+ {who:'you',text:'Buenos días. Quisiera pedir una cita previa para el NIE.',ru:'Добрый день. Я бы хотел записаться на приём для получения NIE.'},
+ {who:'clerk',text:'Perfecto. ¿Me puede decir su nombre completo, por favor?',ru:'Отлично. Назовите, пожалуйста, ваше полное имя?'},
+ {who:'you',text:'Sí. Me llamo Ana Ivanova.',ru:'Да. Меня зовут Анна Иванова.'},
+ {who:'clerk',text:'¿Me puede deletrear su apellido, por favor?',ru:'Продиктуйте, пожалуйста, вашу фамилию по буквам?'},
+ {who:'you',text:'Sí. I de Italia, V de Valencia, A de Antonio, N de Navarra, O de Oviedo, V de Valencia, A de Antonio.',ru:'Да. И как в слове Italia, В как в Valencia, А как в Antonio, Н как в Navarra, О как в Oviedo, В как в Valencia, А как в Antonio.'},
+ {who:'clerk',text:'Muy bien. ¿Y su número de teléfono?',ru:'Отлично. И ваш номер телефона?'},
+ {who:'you',text:'Es siete, cinco, uno, dos, tres, cuatro, cinco, seis, siete.',ru:'Это семь, пять, один, два, три, четыре, пять, шесть, семь.'},
+ {who:'clerk',text:'Perfecto. Su cita es el martes a las diez. Hasta luego.',ru:'Отлично. Ваш приём во вторник в десять. До свидания.'},
+ {who:'you',text:'Muchas gracias. Hasta luego.',ru:'Большое спасибо. До свидания.'}
 ];
 let dIdx=0,callStarted=false;
 const log=document.getElementById('callLog');
@@ -445,7 +840,7 @@ const status=document.getElementById('callStatus');
 function addMsg(m){
   const d=document.createElement('div');
   d.className=`msg ${m.who==='clerk'?'clerk':'you'}`;
-  d.innerHTML=`${m.text} <button class="speak-inline speak" data-text="${m.text}">🔊</button>`;
+  d.innerHTML=`${m.text} <button class="speak-inline speak" data-text="${m.text}">🔊</button><div class="msg-ru">${m.ru}</div>`;
   log.appendChild(d);
   log.scrollTop=log.scrollHeight;
 }
@@ -485,7 +880,17 @@ document.getElementById('checkForm').onclick=()=>{
     <p style="margin-top:12px;color:var(--p2);font-weight:900">✅ Форма готова к подаче (в симуляции). ¡Muy bien!</p>`;
   pv.classList.add('show');
 };
-document.getElementById('printForm').onclick=()=>window.print();
+document.getElementById('saveForm').onclick=()=>{
+  const el=document.querySelector('.form-ex15');
+  if(typeof html2canvas==='undefined'){toast('Библиотека для картинок ещё загружается… попробуйте через пару секунд');return;}
+  html2canvas(el,{backgroundColor:'#ffffff',scale:2}).then(canvas=>{
+    const a=document.createElement('a');
+    a.download='EX15-cita-previa.png';
+    a.href=canvas.toDataURL('image/png');
+    a.click();
+    toast('💾 Картинка сохранена!');
+  }).catch(()=>toast('Не удалось сохранить картинку 😔'));
+};
 
 /* ====== тост ====== */
 let tId;

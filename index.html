@@ -71,15 +71,18 @@ img{max-width:100%;display:block}
 /* ---------- прогресс и шапка ---------- */
 #progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:60;
   background:linear-gradient(90deg,var(--p1),var(--p3),var(--p2),var(--p4))}
+.hero-progress{max-width:560px;margin:22px auto 0;background:rgba(255,255,255,.8);border-radius:18px;padding:16px 20px;box-shadow:var(--shadow)}
+.hero-progress .lesson-tag{display:inline-block;background:var(--p1);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.8rem;letter-spacing:.5px}
+.hero-progress .progress{height:14px;margin-top:14px;background:rgba(122,106,92,.15);border-radius:999px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.06)}
+.hero-progress .progress-bar{height:100%;background:linear-gradient(90deg,var(--p1),var(--p3));border-radius:999px;width:1.6%;transition:width 1s ease}
+.hero-progress .progress-text{font-size:.85rem;font-weight:800;color:var(--muted);margin-top:8px}
 .topbar{position:fixed;top:0;left:0;right:0;z-index:50;
   background:rgba(255,247,239,.92);backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(43,33,24,.06)}
 .topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1rem;white-space:nowrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:.92rem;color:var(--ink);text-decoration:none;white-space:nowrap}
+.logo:hover{color:var(--pc)}
 .logo img{height:36px;width:auto;border-radius:8px}
-.logo-text{display:flex;flex-direction:column;line-height:1.1}
-.logo-text b{font-size:1rem}
-.logo-text span{font-size:.72rem;color:var(--muted);font-weight:800;letter-spacing:.3px;text-transform:uppercase}
 nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:800;font-size:.92rem}
 nav a:hover{color:var(--ink)}
 
@@ -161,6 +164,8 @@ h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:900;text-align:center}
 .lesson-link:hover{background:#EFE6DA;color:var(--ink)}
 .lesson-link.live{background:var(--pc);color:#fff;border-color:var(--pc)}
 .lesson-link.live:hover{filter:brightness(.92);color:#fff}
+.lesson-link.locked{opacity:.55;cursor:not-allowed;background:#fff;border-style:dashed;border-color:rgba(43,33,24,.2);color:#b3aa9d}
+.week.live{border-color:var(--pc);box-shadow:0 0 0 3px var(--pc-soft),var(--shadow)}
 
 /* ---------- результаты ---------- */
 .results-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;margin-top:30px}
@@ -204,7 +209,6 @@ footer b{color:var(--ink)}
   .method-grid{grid-template-columns:1fr}
   .badge-cp{display:none}
   nav{display:none}
-  .logo-text span{display:none}
 }
 </style>
 </head>
@@ -212,10 +216,7 @@ footer b{color:var(--ink)}
 
 <div id="progress"></div>
 <header class="topbar"><div class="inner">
-  <a href="#" class="logo" aria-label="Интерактивная школа МУДРО">
-    <img src="logo.png" alt="МУДРО" onerror="this.style.display='none'">
-    <span class="logo-text"><b>МУДРО</b><span>школа языков</span></span>
-  </a>
+  <a href="#" class="logo" aria-label="Интерактивная школа МУДРО"><img src="logo.png" alt="МУДРО" onerror="this.style.display='none'">Интерактивная школа МУДРО</a>
   <nav aria-label="Основная навигация">
     <a href="#map">Маршрут</a><a href="#results">Результаты</a><a href="#method">Метод</a><a href="#start">Старт</a>
   </nav>
@@ -227,9 +228,15 @@ footer b{color:var(--ink)}
 
 <section class="hero">
   <span class="flag" aria-hidden="true">☀️</span>
-  <span class="badge">Семейный интенсив · август → январь</span>
+  <span class="badge">Семейный интенсив</span>
   <h1>¡Rumbo a España!<br><em>20 недель</em> до уверенной жизни в Испании</h1>
   <p class="lead">Документы, жильё, школа, врачи, соседи и бары — мы репетируем вашу будущую жизнь на испанском ещё до переезда. Нажмите на любую неделю карты и посмотрите, что вас ждёт.</p>
+
+  <div class="hero-progress">
+    <span class="lesson-tag">УРОК 1 / НЕДЕЛЯ 1</span>
+    <div class="progress"><div class="progress-bar" id="hero-progress-bar"></div></div>
+    <div class="progress-text">1 из 60 уроков — 2% пути 🚀</div>
+  </div>
 
   <!-- ====== Переключатель аудиторий перенесён в шапку ====== -->
 
@@ -298,7 +305,7 @@ footer b{color:var(--ink)}
 
 <section class="section" id="start">
   <div class="cta reveal">
-    <h2>Готовы встретить январь во всеоружии?</h2>
+    <h2>Готовы обрести уверенность в общении?</h2>
     <p>Напишите нам в Max — расскажем, как стартует группа, подстроимся под ваш график и обсудим адаптацию программы под вашу семью.</p>
     <a class="btn btn-white" href="https://max.ru/u/f9LHodD0cOLeX0YTAIs-m5_VEIws3V8eJ-QqhrrcqEO8NV3HWD4S8tbgDO0" target="_blank" rel="noopener">Написать в Max 💬</a>
   </div>
@@ -316,7 +323,7 @@ const LESSONS_BASE = "./lessons/parents/"; // сюда будем класть w
 
 const PHASES=[
 {icon:'🏠',title:'Фаза 1 · Misión Residencia',sub:'Недели 1–5 · Документы, жильё и первые звонки',color:'#E2725B',soft:'#FBEAE6',weeks:[
- {n:1,title:'NIE, cita previa и первые шаги',lexis:['la cita previa','la oficina de extranjería','las tasas','el empadronamiento','deletrear datos'],grammar:['ser · tener · llamarse','hay','род и число','алфавит и цифры'],outcome:'Представиться, продиктовать свои данные и записаться на приём по телефону.'},
+ {n:1,title:'NIE, cita previa и первые шаги',live:true,lexis:['la cita previa','la oficina de extranjería','las tasas','el empadronamiento','deletrear datos'],grammar:['ser · tener · llamarse','hay','род и число','алфавит и цифры'],outcome:'Представиться, продиктовать свои данные и записаться на приём по телефону.'},
  {n:2,title:'Охота за жильём: читаем Idealista',lexis:['el ático','el bajo','amueblado','luminoso','los gastos de comunidad','el trastero'],grammar:['Presente (правильные глаголы)','estar — где и какой','hay — есть / нет'],outcome:'Прочитать объявления и описать три квартиры со всеми плюсами и минусами.'},
  {n:3,title:'Просмотр квартиры: задаём вопросы',lexis:['las humedades','la caldera','¿Cuánto cuesta?','¿Qué incluye?'],grammar:['вопросительные слова','ser vs estar','gustar / encantar'],outcome:'Задать владельцу 10 вопросов на просмотре и понять ответы.'},
  {n:4,title:'Контракт, fianza и деньги',lexis:['la fianza','el contrato','firmar','la nómina','fechas y plazos'],grammar:['tener que / hay que','ir a + инфинитив','деньги и даты'],outcome:'Объяснить условия контракта аренды своими словами.'},
@@ -343,20 +350,21 @@ const PHASES=[
 
 /* ====== Рендер карты ====== */
 const container=document.getElementById('weeks-container');
+const READY=new Set(['1-1']); // готовые уроки: неделя-номер
 container.innerHTML=PHASES.map(ph=>`
  <section class="phase reveal" style="--pc:${ph.color};--pc-soft:${ph.soft}">
    <div class="phase-head"><span class="icon" aria-hidden="true">${ph.icon}</span>
      <div><h3>${ph.title}</h3><p>${ph.sub}</p></div>
    </div>
    <div class="weeks">${ph.weeks.map(w=>`
-     <article class="week${w.final?' final':''}">
+     <article class="week${w.final?' final':''}${w.live?' live':''}">
        <button class="week-head" aria-expanded="false">
          <span class="week-num" aria-hidden="true">${w.n}</span>
          <span class="week-titles">
            <span class="wtitle">${w.title}</span>
            <span class="week-teaser">${w.lexis.slice(0,3).join(' · ')}${w.lexis.length>3?' · …':''}</span>
          </span>
-         ${w.cp?`<span class="badge-cp">${w.final?'🏆 ФИНАЛ':'🏁 ЧЕКПОИНТ'}</span>`:''}
+         ${w.live?`<span class="badge-cp">📌 СЕЙЧАС</span>`:(w.cp?`<span class="badge-cp">${w.final?'🏆 ФИНАЛ':'🏁 ЧЕКПОИНТ'}</span>`:'')}
          <span class="chev" aria-hidden="true">▾</span>
        </button>
        <div class="week-body"><div class="week-body-inner"><div class="week-content">
@@ -365,13 +373,14 @@ container.innerHTML=PHASES.map(ph=>`
          <span class="block-label">🧩 Грамматика-каркас</span>
          <div class="chips">${w.grammar.map(g=>`<span class="chip gram">${g}</span>`).join('')}</div>
          <div class="outcome">🎯 <b>Результат недели:</b> ${w.outcome}</div>
-         <div class="lessons">
-           ${[1,2,3].map(i=>{
-             const nn=String(w.n).padStart(2,'0');
-             const href=`${LESSONS_BASE}w${nn}-l${i}.html`;
-             return `<a class="lesson-link" data-href="${href}" href="${href}">Урок ${i}</a>`;
-           }).join('')}
-         </div>
+          <div class="lessons">
+            ${[1,2,3].map(i=>{
+              const nn=String(w.n).padStart(2,'0');
+              const href=`${LESSONS_BASE}w${nn}-l${i}.html`;
+              const st=READY.has(`${w.n}-${i}`)?'live':'locked';
+              return `<a class="lesson-link ${st}" data-href="${href}" href="${href}">Урок ${i}</a>`;
+            }).join('')}
+          </div>
        </div></div></div>
      </article>`).join('')}
    </div>
@@ -429,6 +438,10 @@ addEventListener('scroll',()=>{
   const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
   document.getElementById('progress').style.width=p+'%';
 });
+setTimeout(()=>{
+  const pb=document.getElementById('hero-progress-bar');
+  if(pb) pb.style.width='1.6%';
+},300);
 
 /* ====== Счётчики ====== */
 const cio=new IntersectionObserver(es=>es.forEach(en=>{
