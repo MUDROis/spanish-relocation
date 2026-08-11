@@ -127,6 +127,7 @@
     <a class="mode-btn active" href="kids.html" aria-current="page">🎒 Детям</a>
     <a class="mode-btn" href="index.html">👨‍👩‍👧 Родителям</a>
   </div>
+  <div id="auth-area" style="display:flex;align-items:center;gap:10px"></div>
 </header>
 
 <!-- КАРТА ДЕТЕЙ -->
@@ -263,6 +264,11 @@ function collect(id){
   if(got(id))return;
   stickers.push(id);localStorage.setItem('spain_stickers',JSON.stringify(stickers));
   renderAlbum();openModalRefresh(id);confetti(STATIONS.find(s=>s.id===id).emoji);
+  if(window.App && window.App.getCurrentUser()){
+    const uid=window.App.getCurrentUser().uid;
+    window.App.saveStickers(uid,{[id]:true});
+    window.App.logActivity('sticker',null);
+  }
 }
 function openModalRefresh(id){const b=document.getElementById('sb-'+id);if(b){b.classList.add('done');b.textContent='Наклейка собрана! ✅'}}
 function renderAlbum(){
@@ -318,5 +324,12 @@ setTimeout(()=>{
   if(pb) pb.style.width='1.6%';
 },300);
 </script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/app-logic.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/personalize-kids.js"></script>
 </body>
 </html>
