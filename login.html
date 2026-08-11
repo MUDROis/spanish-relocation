@@ -77,15 +77,20 @@ input:focus{outline:none;border-color:var(--p1)}
     tId = setTimeout(function () { t.classList.remove('show'); }, 3200);
   }
 
-  function go() {
+  function audiencePage(profile) {
+    return profile && profile.audience === 'kids' ? 'kids.html' : 'index.html';
+  }
+
+  function go(page) {
     if (next && next.startsWith('/') && !next.startsWith('//')) location.href = next;
     else if (next && !next.startsWith('http')) location.href = next;
-    else location.href = 'index.html';
+    else location.href = page || 'index.html';
   }
 
   async function afterLogin(user) {
     const profile = await window.App.ensureProfile(user.uid).catch(function () { return null; });
-    if (profile) { go(); return; }
+    const page = audiencePage(profile);
+    if (profile) { go(page); return; }
     if (window.ADMIN_EMAILS.indexOf(user.email.toLowerCase()) !== -1) {
       const db = window.firebase.firestore();
       await db.collection('students').doc(user.uid).set({
@@ -96,7 +101,7 @@ input:focus{outline:none;border-color:var(--p1)}
         suspended: false,
         createdAt: window.firebase.firestore.FieldValue.serverTimestamp()
       }).catch(function () {});
-      go();
+      go(page);
       return;
     }
     await window.App.signOut().catch(function () {});
