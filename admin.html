@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF7EF">
+<title>Админ-панель · МУДРО</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF7EF;--ink:#2B2118;--muted:#7A6A5C;--card:#fff;--p1:#E2725B;--p2:#7A8B4C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+.topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+.topbar .logo{font-weight:900;text-decoration:none;color:var(--ink)}
+.topbar .email{font-weight:800;color:var(--muted);font-size:.9rem}
+.topbar .logout{font-weight:800;color:var(--p1);text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:30px 20px}
+h1{font-size:1.6rem;font-weight:900;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+h1 .add{background:var(--p2);color:#fff;border:none;border-radius:999px;padding:12px 22px;font-family:inherit;font-weight:900;font-size:.95rem;cursor:pointer;box-shadow:0 6px 16px rgba(122,139,76,.35)}
+table{width:100%;border-collapse:collapse;margin-top:20px;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid rgba(43,33,24,.08);font-size:.9rem;vertical-align:middle}
+th{background:#2B2118;color:#fff;font-size:.8rem;letter-spacing:.4px;text-transform:uppercase}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#FFF7EF}
+.row-actions button{background:#F5EFE7;border:1.5px solid rgba(43,33,24,.15);border-radius:999px;padding:6px 12px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer;margin:2px;color:var(--ink)}
+.row-actions button:hover{border-color:var(--ink)}
+.row-actions button.danger{background:#FDE8E5;border-color:rgba(192,90,69,.4);color:#A23B2A}
+.badge{padding:4px 12px;border-radius:999px;font-weight:900;font-size:.78rem}
+.badge.ok{background:#EFF2E4;color:#4F6B2F}
+.badge.warn{background:#FCF0DC;color:#8a6d1f}
+.overlay{position:fixed;inset:0;background:rgba(43,33,24,.55);display:flex;align-items:center;justify-content:center;padding:18px;z-index:100;opacity:0;pointer-events:none;transition:.25s}
+.overlay.show{opacity:1;pointer-events:auto}
+.modal{background:#fff;border-radius:22px;max-width:760px;width:100%;max-height:88vh;overflow:auto;padding:28px;position:relative;transform:translateY(20px);transition:.25s}
+.overlay.show .modal{transform:none}
+.close{position:absolute;top:14px;right:16px;background:#f3efe6;border:none;border-radius:50%;width:36px;height:36px;font-size:16px;cursor:pointer;font-weight:800}
+.modal h2{font-size:1.3rem;font-weight:900;margin-bottom:4px}
+.modal .sub{color:var(--muted);font-weight:700;font-size:.9rem;margin-bottom:18px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid label{display:block;font-weight:800;font-size:.82rem;color:var(--muted);margin-bottom:5px}
+.form-grid input,.form-grid select{width:100%;padding:11px 12px;border-radius:12px;border:2px solid rgba(43,33,24,.15);font-family:inherit;font-weight:800;font-size:.95rem}
+.form-grid input:focus,.form-grid select:focus{outline:none;border-color:var(--p2)}
+.modal .actions{margin-top:20px;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-family:inherit;font-weight:900;font-size:.92rem;cursor:pointer;border:none;transition:.2s}
+.btn-primary{background:var(--p1);color:#fff}
+.btn-ghost{background:#fff;border:2px solid rgba(43,33,24,.15);color:var(--ink)}
+.btn:disabled{opacity:.6;cursor:wait}
+h3{font-size:1rem;font-weight:900;margin:18px 0 8px}
+.scroll{overflow:auto;max-height:260px}
+table.inner{box-shadow:none;border:1px solid rgba(43,33,24,.1);margin-top:0}
+table.inner th{font-size:.72rem}
+ul.feed{list-style:none;font-size:.88rem;font-weight:700}
+ul.feed li{padding:5px 0;border-bottom:1px dashed rgba(43,33,24,.1)}
+.locked{max-width:480px;margin:80px auto;text-align:center;padding:30px;background:#fff;border-radius:22px;box-shadow:var(--shadow)}
+.locked a{display:inline-block;margin-top:14px;color:var(--p1);font-weight:800;text-decoration:none}
+.hidden{display:none!important}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:200;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a href="index.html" class="logo">🛠 Админ-панель · МУДРО</a>
+  <div style="display:flex;align-items:center;gap:14px"><span class="email" id="admin-email"></span><a href="#" class="logout" id="logout">Выйти</a></div>
+</div></div>
+
+<div id="screen" class="hidden">
+  <div class="wrap">
+    <h1>Ученики <button class="add" id="add-btn">＋ Добавить ученика</button></h1>
+    <p style="color:var(--muted);font-weight:700;font-size:.9rem;margin-top:6px" id="loading" class="hidden">Загружаем данные…</p>
+    <table id="students-table">
+      <thead><tr><th>Имя</th><th>Email</th><th>Программа</th><th>Статус</th><th>Уроков пройдено</th><th>Последняя активность</th><th>Действия</th></tr></thead>
+      <tbody id="students-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="overlay" id="modal">
+  <div class="modal">
+    <button class="close" id="modal-close">✕</button>
+    <h2 id="student-name"></h2>
+    <div class="sub" id="student-email"></div>
+    <h3>Уроки и самопроверка</h3>
+    <div class="scroll"><table class="inner"><thead><tr><th>Урок</th><th>Завершён</th><th>Открыт</th><th>Самопроверка</th></tr></thead><tbody id="student-lessons"></tbody></table></div>
+    <h3>Лента активности</h3>
+    <ul class="feed" id="student-feed"></ul>
+  </div>
+</div>
+
+<div class="overlay" id="add-modal">
+  <div class="modal" style="max-width:520px">
+    <button class="close" id="add-close">✕</button>
+    <h2>Добавить ученика</h2>
+    <div class="sub">Аккаунт создаётся сразу. Пароль выдайте ученику лично.</div>
+    <div class="form-grid">
+      <div><label>Имя</label><input id="add-name" placeholder="Анна Иванова"></div>
+      <div><label>Email</label><input id="add-email" type="email" placeholder="anna@example.com"></div>
+      <div><label>Пароль (мин. 6 символов)</label><input id="add-pass" type="text" placeholder="пароль"></div>
+      <div><label>Программа</label><select id="add-audience"><option value="parents">Родители</option><option value="kids">Дети</option></select></div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-ghost" id="add-cancel">Отмена</button>
+      <button class="btn btn-primary" id="add-submit">Создать аккаунт</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" role="status"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/app-logic.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
