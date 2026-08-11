@@ -134,7 +134,64 @@
     el('student-email').textContent = s.email;
     el('student-lessons').innerHTML = rows || '<tr><td colspan="4" style="text-align:center;color:#7A6A5C">Уроков ещё не открывал</td></tr>';
     el('student-feed').innerHTML = feed;
+    renderSelfCheck(s, lessons);
     el('modal').classList.add('show');
+  }
+
+  const SC_CACHE = {};
+
+  function lessonUrl(id) {
+    const m = String(id).match(/^(parents|kids)-w(\d{2})-l(\d+)$/);
+    return m ? './lessons/' + m[1] + '/w' + m[2] + '-l' + m[3] + '.html' : null;
+  }
+
+  async function selfCheckLabels(id) {
+    if (SC_CACHE[id]) return SC_CACHE[id];
+    const url = lessonUrl(id);
+    if (!url) return null;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+      const table = doc.querySelector('.tl-table');
+      if (!table) return null;
+      const labels = [];
+      table.querySelectorAll('tr').forEach(function (tr) {
+        const td = tr.querySelector('td');
+        if (td) labels.push(td.textContent.trim());
+      });
+      SC_CACHE[id] = labels;
+      return labels;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function renderSelfCheck(s, lessons) {
+    const box = el('student-selfcheck');
+    const rated = Object.keys(lessons).filter(function (id) {
+      return lessons[id] && lessons[id].selfCheck && Object.keys(lessons[id].selfCheck).length;
+    }).sort();
+    if (!rated.length) {
+      box.innerHTML = '<p style="color:var(--muted);font-weight:700;font-size:.9rem">Самопроверки пока нет</p>';
+      return;
+    }
+    box.innerHTML = '<p style="color:var(--muted);font-weight:700;font-size:.9rem">Загружаем детали…</p>';
+    const blocks = [];
+    for (const id of rated) {
+      const labels = await selfCheckLabels(id);
+      const sc = lessons[id].selfCheck;
+      const items = Object.keys(sc).map(function (k) {
+        const idx = parseInt(String(k).replace(/\D/g, ''), 10);
+        const label = labels && labels[idx] != null ? labels[idx] : k;
+        return { label: label, value: sc[k] };
+      });
+      blocks.push('<div style="margin-bottom:10px;padding:10px 14px;background:#FBF7F1;border-radius:12px;font-size:.86rem">'
+        + '<div style="font-weight:900;margin-bottom:6px">' + escapeHtml(id) + '</div>'
+        + items.map(function (it) { return '<div style="padding:2px 0">' + L.colorEmoji(it.value) + ' <span style="font-weight:700">' + escapeHtml(it.label) + '</span></div>'; }).join('')
+        + '</div>');
+    }
+    box.innerHTML = blocks.join('');
   }
 
   el('modal-close').onclick = function () { el('modal').classList.remove('show'); };
