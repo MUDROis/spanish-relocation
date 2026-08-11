@@ -72,12 +72,12 @@
   .speak-btn{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
   .speak-btn:active{transform:scale(.93)}
 
-  /* TOOLS TABLE */
-  .tools-table{width:100%;border-collapse:collapse;margin:14px 0}
-  .tools-table th{background:var(--c);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
-  .tools-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
-  .tools-table tr:hover td{background:var(--soft)}
-  .tools-table .emoji-col{font-size:1.4rem;width:40px}
+  /* TRAINER (тренажёр карточек) */
+  .word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:12px}
+  .word-card{background:#fff;border:2px solid var(--soft);border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:.15s}
+  .word-card:hover{border-color:var(--sun);transform:translateY(-2px)}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--terra);font-weight:800}
+  .word-card .ru{font-size:.85rem;color:var(--ink-soft);font-weight:700;margin-top:2px}
 
   /* SIGNS BOX */
   .signs-box{background:linear-gradient(135deg,#F3E8FF,#E8D5FF);border-radius:18px;padding:24px;margin:16px 0;text-align:center}
@@ -182,7 +182,7 @@
       <div class="goal-item"><span class="emoji">🔁</span> Просить повторить и замедлить</div>
       <div class="goal-item"><span class="emoji">🗣</span> Спрашивать «Как сказать…?»</div>
       <div class="goal-item"><span class="emoji">🤝</span> Просить помощи у учителя</div>
-      <div class="goal-item"><span class="emoji">❓</span> Узнать перевёрнутые знаки ¡¿</div>
+      <div class="goal-item"><span class="emoji">❓</span> Узнавать перевёрнутые знаки ¡¿</div>
       <div class="goal-item"><span class="emoji">🛡</span> Получить бейдж «Щит спасателя»</div>
     </div>
   </section>
@@ -213,6 +213,7 @@
         <span id="ball-warm-q" style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra);font-weight:800"></span>
         <span id="ball-warm-t" style="font-weight:700;color:var(--ink-soft)"></span>
       </div>
+      <p style="font-weight:700;font-size:.9rem;color:var(--ink-soft);margin-top:8px">Нажми на кнопку, когда будешь готов — услышишь вопрос учителя!</p>
     </div>
 
     <div class="script">
@@ -287,8 +288,8 @@
 
     <!-- ПЕРЕВЁРНУТЫЕ ЗНАКИ -->
     <div class="signs-box">
-      <h4>🎩 Буквы-герои: ¡ и ¿ — перевёрнутые знаки!</h4>
-      <p style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">В Испании вопросы и восклицания носят шляпы с ДВУХ сторон! Так читатель сразу видит, что это вопрос.</p>
+      <h4>🎩 Перевёрнутые знаки: ¿…? и ¡…!</h4>
+      <p style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">Это не буквы, а особые знаки препинания! В испанском вопросительный ¿…? и восклицательный ¡…! ставятся в начале И в конце предложения — как шляпы с двух сторон. Так читатель сразу видит, что дальше — вопрос или восклицание.</p>
       <div class="signs-demo">
         <div class="sign-item" onclick="speak('¿Cómo te llamas?')">
           <div class="big">¿...?</div>
@@ -309,37 +310,62 @@
       <h2 class="block-title">🛠 Три инструмента спасения</h2>
       <span class="time-badge">⏱ 10 минут</span>
     </div>
-    <p class="block-sub">Когда нужно, чтобы тебе объяснили по-другому.</p>
+    <p class="block-sub">Когда нужно, чтобы тебе объяснили по-другому. Нажимай на карточки — слушай и повторяй!</p>
 
-    <table class="tools-table">
-      <tr>
-        <th>Инструмент</th>
-        <th>Испанский</th>
-        <th>Перевод</th>
-        <th>🔊</th>
-      </tr>
-      <tr onclick="speak('¿Puedes repetir, por favor?')" style="cursor:pointer">
-        <td class="emoji-col">🔁</td>
-        <td><strong>¿Puedes repetir, por favor?</strong></td>
-        <td>Можешь повторить?</td>
-        <td><button class="speak-btn" style="--c:#2A9D8F;padding:4px 10px;font-size:.8rem">🔊</button></td>
-      </tr>
-      <tr onclick="speak('Más despacio, por favor')" style="cursor:pointer">
-        <td class="emoji-col">🐢</td>
-        <td><strong>Más despacio, por favor</strong></td>
-        <td>Помедленнее, пожалуйста</td>
-        <td><button class="speak-btn" style="--c:#2A9D8F;padding:4px 10px;font-size:.8rem">🔊</button></td>
-      </tr>
-      <tr onclick="speak('¿Cómo se dice manzana en español?')" style="cursor:pointer">
-        <td class="emoji-col">🗣</td>
-        <td><strong>¿Cómo se dice ___ en español?</strong></td>
-        <td>Как сказать ___ по-испански?</td>
-        <td><button class="speak-btn" style="--c:#2A9D8F;padding:4px 10px;font-size:.8rem">🔊</button></td>
-      </tr>
-    </table>
+    <div class="sos-grid">
+      <div class="sos-card" style="--c:#2A9D8F" onclick="speakCard(this,'¿Puedes repetir, por favor?')">
+        <div class="sos-emoji">🔁</div>
+        <div class="sos-phrase">¿Puedes repetir, por favor?</div>
+        <div class="sos-meaning">Можешь повторить, пожалуйста?</div>
+        <div class="sos-gesture">puedes = можешь · repetir = повторить</div>
+        <button class="speak-btn" style="--c:#2A9D8F">🔊 Послушать</button>
+      </div>
+      <div class="sos-card" style="--c:#2A9D8F" onclick="speakCard(this,'Más despacio, por favor')">
+        <div class="sos-emoji">🐢</div>
+        <div class="sos-phrase">Más despacio, por favor</div>
+        <div class="sos-meaning">Помедленнее, пожалуйста</div>
+        <div class="sos-gesture">más despacio = помедленнее · por favor = пожалуйста</div>
+        <button class="speak-btn" style="--c:#2A9D8F">🔊 Послушать</button>
+      </div>
+      <div class="sos-card" style="--c:#2A9D8F" onclick="speakCard(this,'¿Cómo se dice manzana en español?')">
+        <div class="sos-emoji">🗣</div>
+        <div class="sos-phrase">¿Cómo se dice ___ en español?</div>
+        <div class="sos-meaning">Как сказать ___ по-испански?</div>
+        <div class="sos-gesture">se dice = говорится</div>
+        <button class="speak-btn" style="--c:#2A9D8F">🔊 Послушать</button>
+      </div>
+    </div>
 
     <div class="script">
       <strong>Por favor</strong> = «пожалуйста» — это волшебное слово открывает ВСЕ двери в Испании! Добавляй его к любой просьбе.
+    </div>
+
+    <h4>✨ Волшебные слова</h4>
+    <div class="sos-grid">
+      <div class="sos-card" style="--c:#F4A261" onclick="speakCard(this,'Por favor')">
+        <div class="sos-emoji">🙏</div>
+        <div class="sos-phrase">Por favor</div>
+        <div class="sos-meaning">Пожалуйста</div>
+        <div class="sos-gesture">Волшебное слово</div>
+        <button class="speak-btn" style="--c:#F4A261">🔊 Послушать</button>
+      </div>
+      <div class="sos-card" style="--c:#F4A261" onclick="speakCard(this,'Gracias')">
+        <div class="sos-emoji">😊</div>
+        <div class="sos-phrase">Gracias</div>
+        <div class="sos-meaning">Спасибо</div>
+        <div class="sos-gesture">Говорим после помощи</div>
+        <button class="speak-btn" style="--c:#F4A261">🔊 Послушать</button>
+      </div>
+      <div class="sos-card" style="--c:#F4A261" onclick="speakCard(this,'Muchas gracias')">
+        <div class="sos-emoji">🥰</div>
+        <div class="sos-phrase">Muchas gracias</div>
+        <div class="sos-meaning">Большое спасибо</div>
+        <div class="sos-gesture">Если помогли очень</div>
+        <button class="speak-btn" style="--c:#F4A261">🔊 Послушать</button>
+      </div>
+    </div>
+    <div class="script">
+      Вежливость — это твоя суперсила: <strong>por favor</strong> перед просьбой и <strong>gracias</strong> после неё открывают любые двери!
     </div>
 
     <h4>🎯 Мини-практика:</h4>
@@ -410,7 +436,7 @@
       <h2 class="block-title">🎮 Симуляция «Быстрый учитель»</h2>
       <span class="time-badge">⏱ 7 минут</span>
     </div>
-    <p class="block-sub">Учитель говорит БЫСТРО. Твоя задача — вовремя нажать нужную SOS-кнопку!</p>
+    <p class="block-sub">Учитель говорит по-испански БЫСТРО. Послушай, что он сказал (прочитай перевод), и выбери, что ты ответишь. Ошибся — ничего страшного, попробуй ещё раз!</p>
 
     <div class="sim-game">
       <div class="sim-header">
@@ -420,8 +446,14 @@
 
       <div class="sim-teacher" id="sim-teacher">
         <div class="speed-label">👨‍🏫 Учитель говорит:</div>
-        <div class="speech" id="sim-speech">Нажми «Начать игру»!</div>
-        <div id="sim-trans" style="min-height:20px;font-size:.9rem;color:var(--ink-soft);font-weight:700;margin-top:4px"></div>
+        <div class="speech" id="sim-speech">Как играть 🎮</div>
+        <div id="sim-trans">Учитель говорит по-испански, а ты выбираешь, что ответить:<br>
+          🆘 не понял → No entiendo<br>
+          🐢 слишком быстро → Más despacio<br>
+          🤔 не знаешь слово → No sé<br>
+          🤝 нужна помощь → ¿Me puedes ayudar?<br><br>
+          Звезда ⭐ — только за правильный ответ с первой попытки!
+        </div>
       </div>
 
       <div class="sim-options" id="sim-options" style="display:none"></div>
@@ -460,6 +492,16 @@
     </div>
   </section>
 
+  <!-- ТРЕНАЖЁР КАРТОЧЕК -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🃏 Тренажёр SOS-карточек</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Все фразы урока в одном месте. Нажимай на карточку — слушай и повторяй вслух!</p>
+    <div class="word-grid" id="trainer-grid"></div>
+  </section>
+
   <!-- ДОМАШКА -->
   <section class="homework">
     <h3>🏡 Домашнее задание</h3>
@@ -492,7 +534,7 @@
       <div class="task-num">4</div>
       <div>
         <strong>Тренажёр карточек</strong> · 10 мин<br>
-        Повтори 8 SOS-карточек: слушай и повторяй вслух. Нажимай на карточки выше! 👆
+        Открой тренажёр чуть выше 👆: нажимай на карточки, слушай и повторяй вслух. 8 SOS-фраз + волшебные слова.
       </div>
     </div>
 
@@ -571,7 +613,6 @@ function ballWarmup(){
   document.getElementById('ball-warm-t').textContent='«Как тебя зовут?» — ответь: «Me llamo…»';
   speak(q);
 }
-ballWarmup();
 
 /* ========== КРАСНАЯ КНОПКА ========== */
 const SOS_MOTTO=[
@@ -589,37 +630,57 @@ function pressSOS(){
 
 /* ========== СИМУЛЯЦИЯ ========== */
 const SIM_ROUNDS=[
-  {speech:'¡Buenos días clase! Hoy vamos a hablar sobre los animales de la selva y vamos a hacer un ejercicio muy interesante.', speed:'🐇 Быстро', correct:'no-entiendo', options:[
-    {id:'no-entiendo', text:'🆘 No entiendo', correct:true},
-    {id:'despacio', text:'🐢 Más despacio', correct:false},
-    {id:'ayudar', text:'🤝 ¿Me puedes ayudar?', correct:false}
-  ]},
-  {speech:'¿Podéis abrir el libro en la página cuarenta y dos y hacer el ejercicio número tres?', speed:'🐇 Быстро', correct:'repetir', options:[
-    {id:'no-entiendo', text:'🆘 No entiendo', correct:false},
-    {id:'repetir', text:'🔁 ¿Puedes repetir?', correct:true},
-    {id:'nose', text:'🤔 No sé', correct:false}
-  ]},
-  {speech:'Mañana tenéis que traer el cuaderno, el estuche, las tijeras y el pegamento para hacer una manualidad.', speed:'🐇🐇 Очень быстро', correct:'despacio', options:[
-    {id:'despacio', text:'🐢 Más despacio, por favor', correct:true},
-    {id:'repetir', text:'🔁 ¿Puedes repetir?', correct:false},
-    {id:'duda', text:'🙋 Tengo una duda', correct:false}
-  ]},
-  {speech:'¿Alguien sabe cómo se dice "arcoíris" en español?', trans:'«Кто-нибудь знает, как по-испански будет "радуга"?»', speed:'🐢 Нормально', correct:'nose', options:[
-    {id:'nose', text:'🤔 No sé', correct:true},
-    {id:'no-entiendo', text:'🆘 No entiendo', correct:false},
-    {id:'ayuda', text:'🚨 Necesito ayuda', correct:false}
-  ]},
-  {speech:'Vamos a hacer un trabajo en grupos de tres. Tenéis que dibujar un mapa de España.', speed:'🐇 Быстро', correct:'ayudar', options:[
-    {id:'ayudar', text:'🤝 ¿Me puedes ayudar?', correct:true},
-    {id:'despacio', text:'🐢 Más despacio', correct:false},
-    {id:'no-entiendo', text:'🆘 No entiendo', correct:false}
-  ]}
+  {speed:'🐇 Быстро',
+   speech:'¡Buenos días clase! Hoy vamos a hablar sobre los animales de la selva y vamos a hacer un ejercicio muy interesante.',
+   trans:'«Доброе утро, класс! Сегодня мы поговорим о животных джунглей и сделаем очень интересное упражнение.»',
+   explain:'Учитель сказал сразу длинную фразу, и ты не понял почти ничего.',
+   options:[
+     {text:'🆘 No entiendo', say:'No entiendo', correct:true},
+     {text:'🐢 Más despacio', say:'Más despacio, por favor', correct:false},
+     {text:'🤝 ¿Me puedes ayudar?', say:'¿Me puedes ayudar?', correct:false}
+   ]},
+  {speed:'🐇 Быстро',
+   speech:'¿Podéis abrir el libro en la página cuarenta y dos y hacer el ejercicio número tres?',
+   trans:'«Откройте книгу на странице сорок два и сделайте упражнение номер три.»',
+   explain:'Ты расслышал только «книга» и «упражнение», но не всё — надо попросить повторить.',
+   options:[
+     {text:'🆘 No entiendo', say:'No entiendo', correct:false},
+     {text:'🔁 ¿Puedes repetir?', say:'¿Puedes repetir, por favor?', correct:true},
+     {text:'🤔 No sé', say:'No sé', correct:false}
+   ]},
+  {speed:'🐇🐇 Очень быстро',
+   speech:'Mañana tenéis que traer el cuaderno, el estuche, las tijeras y el pegamento para hacer una manualidad.',
+   trans:'«Завтра вам нужно принести тетрадь, пенал, ножницы и клей для поделки.»',
+   explain:'Учитель перечислил целый список очень быстро — ты не успел запомнить. Попроси говорить медленнее.',
+   options:[
+     {text:'🐢 Más despacio, por favor', say:'Más despacio, por favor', correct:true},
+     {text:'🔁 ¿Puedes repetir?', say:'¿Puedes repetir, por favor?', correct:false},
+     {text:'🙋 Tengo una duda', say:'Tengo una duda', correct:false}
+   ]},
+  {speed:'🐢 Нормально',
+   speech:'¿Alguien sabe cómo se dice "arcoíris" en español?',
+   trans:'«Кто-нибудь знает, как по-испански будет "радуга"?»',
+   explain:'Учитель спросил слово, которое ты ещё не выучил. Честно скажи, что не знаешь.',
+   options:[
+     {text:'🤔 No sé', say:'No sé', correct:true},
+     {text:'🆘 No entiendo', say:'No entiendo', correct:false},
+     {text:'🚨 Necesito ayuda', say:'Necesito ayuda', correct:false}
+   ]},
+  {speed:'🐇 Быстро',
+   speech:'Vamos a hacer un trabajo en grupos de tres. Tenéis que dibujar un mapa de España.',
+   trans:'«Мы сделаем работу в группах по трое. Вам нужно нарисовать карту Испании.»',
+   explain:'Задание понятно, но справиться одному тяжело — попроси о помощи.',
+   options:[
+     {text:'🤝 ¿Me puedes ayudar?', say:'¿Me puedes ayudar?', correct:true},
+     {text:'🐢 Más despacio', say:'Más despacio, por favor', correct:false},
+     {text:'🆘 No entiendo', say:'No entiendo', correct:false}
+   ]}
 ];
 
-let simRound=0, simStars=0, simActive=false, simCurrent=null;
+let simRound=0, simStars=0, simCurrent=null, simFirstTry=true;
 
 function startSim(){
-  simRound=0;simStars=0;simActive=true;
+  simRound=0;simStars=0;simFirstTry=true;
   document.getElementById('sim-start').style.display='none';
   updateStars();
   playRound();
@@ -632,7 +693,7 @@ function replaySim(){
 function playRound(){
   if(simRound>=SIM_ROUNDS.length){endSim();return;}
   const r=SIM_ROUNDS[simRound];
-  simCurrent=r;
+  simCurrent=r; simFirstTry=true;
   document.getElementById('sim-speech').textContent='';
   document.getElementById('sim-trans').textContent='';
   document.getElementById('sim-feedback').textContent='🎧 Слушай внимательно...';
@@ -645,7 +706,7 @@ function playRound(){
   const teacher=document.getElementById('sim-teacher');
   teacher.querySelector('.speed-label').textContent='👨‍🏫 Учитель говорит ('+r.speed+'): ';
 
-  // Показываем текст после озвучки
+  // Показываем текст и перевод после озвучки
   setTimeout(()=>{
     document.getElementById('sim-speech').textContent='«'+r.speech+'»';
     document.getElementById('sim-trans').textContent=r.trans||'';
@@ -657,37 +718,33 @@ function showOptions(r){
   const opts=document.getElementById('sim-options');
   opts.style.display='flex';
   opts.innerHTML='';
-  document.getElementById('sim-feedback').textContent='Что ты скажешь? 👇';
+  document.getElementById('sim-feedback').textContent='Что ты скажешь учителю? 👇';
 
   r.options.forEach(o=>{
     const btn=document.createElement('button');
     btn.className='sim-opt';
     btn.textContent=o.text;
-    btn.onclick=()=>checkSim(o.correct,btn,r);
+    btn.onclick=()=>checkSim(o,btn,r);
     opts.appendChild(btn);
   });
 }
 
-function checkSim(correct,btn,r){
-  document.querySelectorAll('.sim-opt').forEach(b=>b.disabled=true);
-  if(correct){
+function checkSim(opt,btn,r){
+  if(opt.correct){
     btn.classList.add('correct');
-    simStars++;
-    document.getElementById('sim-feedback').textContent='🎉 ¡Muy bien! Правильный выбор!';
-    speak('¡Muy bien!');
+    if(simFirstTry) simStars++;
+    simFirstTry=false;
+    document.getElementById('sim-feedback').textContent='🎉 ¡Muy bien! «'+opt.say+'» — '+r.explain;
+    speak(opt.say);
+    updateStars();
+    simRound++;
+    setTimeout(playRound,2600);
   }else{
     btn.classList.add('wrong');
-    document.getElementById('sim-feedback').textContent=' Не то! Попробуй подумать ещё раз...';
-    // Подсветить правильный
-    document.querySelectorAll('.sim-opt').forEach(b=>{
-      const opt=r.options.find(o=>o.text===b.textContent);
-      if(opt&&opt.correct)b.classList.add('correct');
-    });
-    speak(r.options.find(o=>o.correct).text.replace(/[🆘🔁🐢🤝🚨🤔🙋]\s*/,''));
+    btn.disabled=true;
+    simFirstTry=false;
+    document.getElementById('sim-feedback').textContent='🙈 Пока не то: '+r.explain+' Попробуй ещё раз!';
   }
-  updateStars();
-  simRound++;
-  setTimeout(playRound,2000);
 }
 
 function updateStars(){
@@ -732,6 +789,33 @@ if(localStorage.getItem('mudro_badge_sos')==='true'){
 
 /* ========== САМОПРОВЕРКА (сохранение — lesson-gate.js) ========== */
 document.getElementById('kids-tl-reset').onclick=()=>document.querySelectorAll('.tl-cell').forEach(c=>c.classList.remove('active'));
+
+/* ========== ТРЕНАЖЁР КАРТОЧЕК ========== */
+const TRAINER_CARDS=[
+  {es:'¿Puedes repetir, por favor?', ru:'Можешь повторить, пожалуйста?', emoji:'🔁'},
+  {es:'Más despacio, por favor', ru:'Помедленнее, пожалуйста', emoji:'🐢'},
+  {es:'¿Cómo se dice ___ en español?', ru:'Как сказать ___ по-испански?', emoji:'🗣'},
+  {es:'¿Me puedes ayudar?', ru:'Можешь мне помочь?', emoji:'🤝'},
+  {es:'Necesito ayuda', ru:'Мне нужна помощь', emoji:'🚨'},
+  {es:'No entiendo', ru:'Я не понимаю', emoji:'🆘'},
+  {es:'Tengo una duda', ru:'У меня есть вопрос', emoji:'🙋'},
+  {es:'No sé', ru:'Я не знаю', emoji:'🤔'},
+  {es:'Por favor', ru:'Пожалуйста', emoji:'🙏'},
+  {es:'Gracias', ru:'Спасибо', emoji:'😊'},
+  {es:'Muchas gracias', ru:'Большое спасибо', emoji:'🥰'}
+];
+
+function buildTrainer(){
+  const grid=document.getElementById('trainer-grid');
+  TRAINER_CARDS.forEach(c=>{
+    const card=document.createElement('div');
+    card.className='word-card';
+    card.onclick=()=>speak(c.es);
+    card.innerHTML='<div class="es">'+c.emoji+' '+c.es+'</div><div class="ru">'+c.ru+'</div>';
+    grid.appendChild(card);
+  });
+}
+buildTrainer();
 
 /* ========== КОНФЕТТИ ========== */
 function confetti(emoji){
