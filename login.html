@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF7EF">
+<title>Вход · Интерактивная школа МУДРО</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF7EF;--ink:#2B2118;--muted:#7A6A5C;--card:#fff;--p1:#E2725B;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:36px 32px;width:100%;max-width:400px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;justify-content:center;margin-bottom:6px}
+.logo img{height:38px;border-radius:8px}
+h1{font-size:1.4rem;font-weight:900;text-align:center;margin:10px 0 4px}
+.sub{text-align:center;color:var(--muted);font-weight:700;font-size:.9rem;margin-bottom:22px}
+label{display:block;font-weight:800;font-size:.85rem;color:var(--muted);margin:14px 0 6px}
+input{width:100%;padding:13px 14px;border-radius:12px;border:2px solid rgba(43,33,24,.15);font-family:inherit;font-weight:800;font-size:1rem}
+input:focus{outline:none;border-color:var(--p1)}
+.btn{width:100%;margin-top:20px;padding:14px;border-radius:999px;border:none;background:var(--p1);color:#fff;font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer;transition:.2s;box-shadow:0 8px 20px rgba(226,114,91,.35)}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.link-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap;gap:8px}
+.link-row a{color:var(--muted);font-weight:800;font-size:.85rem;text-decoration:none}
+.link-row a:hover{color:var(--ink)}
+.err{display:none;background:#FDE8E5;border:1px solid rgba(192,90,69,.4);color:#A23B2A;border-radius:12px;padding:11px 14px;font-weight:800;font-size:.88rem;margin-top:16px}
+.err.show{display:block}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo"><img src="logo.png" alt="МУДРО" onerror="this.style.display='none'">Интерактивная школа МУДРО</div>
+  <h1>Вход в личный кабинет</h1>
+  <p class="sub">Введите email и пароль, выданные администратором</p>
+  <label for="email">Email</label>
+  <input type="email" id="email" autocomplete="email" placeholder="student@example.com">
+  <label for="password">Пароль</label>
+  <input type="password" id="password" autocomplete="current-password" placeholder="••••••••">
+  <button class="btn" id="submit">Войти →</button>
+  <div class="err" id="err"></div>
+  <div class="link-row">
+    <a href="#" id="forgot">Забыли пароль?</a>
+    <a href="index.html">← На главную</a>
+  </div>
+</div>
+<div id="toast" role="status"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/app-logic.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  const err = document.getElementById('err');
+  const submit = document.getElementById('submit');
+  const emailEl = document.getElementById('email');
+  const passEl = document.getElementById('password');
+  const next = new URLSearchParams(location.search).get('next');
+
+  function showErr(msg) { err.textContent = msg; err.classList.add('show'); }
+  function clearErr() { err.classList.remove('show'); }
+  let tId;
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(tId);
+    tId = setTimeout(function () { t.classList.remove('show'); }, 3200);
+  }
+
+  function go() {
+    if (next && next.startsWith('/') && !next.startsWith('//')) location.href = next;
+    else if (next && !next.startsWith('http')) location.href = next;
+    else location.href = 'index.html';
+  }
+
+  async function afterLogin(user) {
+    const profile = await window.App.ensureProfile(user.uid).catch(function () { return null; });
+    if (profile) { go(); return; }
+    if (window.ADMIN_EMAILS.indexOf(user.email.toLowerCase()) !== -1) {
+      const db = window.firebase.firestore();
+      await db.collection('students').doc(user.uid).set({
+        email: user.email,
+        name: user.email,
+        audience: 'parents',
+        role: 'admin',
+        suspended: false,
+        createdAt: window.firebase.firestore.FieldValue.serverTimestamp()
+      }).catch(function () {});
+      go();
+      return;
+    }
+    await window.App.signOut().catch(function () {});
+    showErr('Аккаунт не активирован. Обратитесь к администратору.');
+  }
+
+  async function onLogin() {
+    clearErr();
+    const email = emailEl.value.trim();
+    const password = passEl.value;
+    if (!email || !password) { showErr('Введите email и пароль'); return; }
+    submit.disabled = true;
+    submit.textContent = 'Входим…';
+    try {
+      const cred = await window.App.signIn(email, password);
+      await afterLogin(cred.user);
+    } catch (e) {
+      submit.disabled = false;
+      submit.textContent = 'Войти →';
+      if (e.code === 'auth/user-not-found' || e.code === 'auth/invalid-credential' || e.code === 'auth/wrong-password') {
+        showErr('Неверный email или пароль');
+      } else if (e.code === 'auth/invalid-email') {
+        showErr('Некорректный email');
+      } else if (e.code === 'auth/too-many-requests') {
+        showErr('Слишком много попыток. Попробуйте позже');
+      } else {
+        showErr('Не удалось войти. Проверьте подключение');
+      }
+    }
+  }
+
+  submit.onclick = onLogin;
+  document.addEventListener('keydown', function (e) { if (e.key === 'Enter') onLogin(); });
+  document.getElementById('forgot').onclick = function (e) {
+    e.preventDefault();
+    const email = emailEl.value.trim();
+    if (!email) { showErr('Введите email в поле выше'); return; }
+    window.App.resetPassword(email).then(function () {
+      toast('📧 Письмо для сброса пароля отправлено');
+    }).catch(function () { toast('Не удалось отправить письмо'); });
+  };
+})();
+</script>
+</body>
+</html>
