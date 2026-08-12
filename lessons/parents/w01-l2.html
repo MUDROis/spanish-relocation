@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Урок 1.2 · Официальные бланки — МУДРО</title>
+  <meta name="description" content="Урок 1.2 для родителей: официальные бланки Испании. EX-15, Modelo 790, empadronamiento. Интерактивная практика, повторение урока 1, домашнее задание.">
+  <link rel="icon" type="image/png" href="../../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#FFF7EF; --ink:#2B2118; --muted:#7A6A5C; --card:#fff;
+      --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --gold:#D4A017;
+      --radius:18px; --shadow:0 10px 30px rgba(43,33,24,.08);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+    button{font-family:inherit}
+    a{color:inherit}
+
+    .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+    .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 20px;flex-wrap:wrap}
+    .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:900;font-size:.92rem}
+    .back-link:hover{color:var(--p1)}
+    .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+
+    .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px}
+    .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+    h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+    h1 em{font-style:normal;color:var(--p1)}
+    .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+    .section{max-width:1100px;margin:0 auto;padding:34px 20px}
+    .step-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+    .step-num{flex:0 0 46px;height:46px;border-radius:50%;background:var(--p1);color:#fff;font-weight:900;display:grid;place-items:center;font-size:1.2rem}
+    .step-time{font-weight:900;color:var(--muted);font-size:.82rem;letter-spacing:.3px;text-transform:uppercase}
+    h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
+    .sub{color:var(--muted);margin:8px 0 22px;max-width:760px}
+
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;border:none;font-weight:900;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+    .btn-primary{background:var(--p1);color:#fff}
+    .btn-primary:hover{transform:translateY(-2px)}
+    .btn-secondary{background:var(--p2);color:#fff}
+    .btn-secondary:hover{transform:translateY(-2px)}
+    .btn-blue{background:var(--p4);color:#fff}
+    .btn-blue:hover{transform:translateY(-2px)}
+    .btn-ghost{background:#fff;border:2px solid rgba(43,33,24,.14);color:var(--ink)}
+    .btn-ghost:hover{border-color:var(--ink)}
+    .btn-small{padding:9px 14px;font-size:.85rem;border-radius:12px}
+
+    .output-box{margin-top:18px;background:var(--bg);border-radius:14px;padding:18px;font-weight:800;display:none;white-space:pre-line}
+    .output-box.show{display:block;animation:fadeIn .25s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+    /* Grammar hint — всплывающая подсказка */
+    .gh{
+      border-bottom:1.5px dashed var(--p4);
+      cursor:help;
+      position:relative;
+      color:var(--p4);
+      font-weight:900;
+      display:inline;
+    }
+    .gh::after{
+      content:attr(data-tip);
+      position:absolute;
+      bottom:calc(100% + 8px);
+      left:50%;
+      transform:translateX(-50%);
+      background:#2B2118;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:12px;
+      font-size:.85rem;
+      font-weight:700;
+      white-space:normal;
+      min-width:220px;
+      max-width:320px;
+      line-height:1.4;
+      opacity:0;
+      pointer-events:none;
+      transition:.22s;
+      z-index:30;
+      box-shadow:0 8px 24px rgba(0,0,0,.25);
+      text-align:left;
+    }
+    .gh:hover::after,.gh.active::after{opacity:1;bottom:calc(100% + 12px)}
+    .gh::before{
+      content:'';
+      position:absolute;
+      bottom:calc(100% + 2px);
+      left:50%;
+      transform:translateX(-50%);
+      border:6px solid transparent;
+      border-top-color:#2B2118;
+      opacity:0;
+      transition:.22s;
+      z-index:31;
+    }
+    .gh:hover::before,.gh.active::before{opacity:1;bottom:calc(100% + 6px)}
+
+    /* Quiz */
+    .quiz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+    .quiz-card{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:18px}
+    .q-title{font-weight:900;margin-bottom:10px}
+    .q-options{display:flex;flex-direction:column;gap:8px}
+    .q-option{border:2px solid rgba(43,33,24,.12);background:#fff;border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer;text-align:left;transition:.2s}
+    .q-option:hover{border-color:var(--p4)}
+    .q-options.done .q-option{pointer-events:none;opacity:.9}
+    .q-option.correct{background:#E8F3DD;border-color:var(--p2);color:#3F4F27}
+    .q-option.wrong{background:#FBE7E4;border-color:var(--p1);color:#8C3B2C}
+    .q-feedback{margin-top:8px;font-weight:800;display:none}
+    .q-feedback.show{display:block}
+    .quiz-result{margin-top:18px;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:18px;font-weight:900;display:none}
+    .quiz-result.show{display:block;animation:fadeIn .25s ease}
+
+    /* Vocab */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+    .tab{border:none;background:#fff;color:var(--muted);padding:10px 16px;border-radius:999px;font-weight:900;cursor:pointer;box-shadow:var(--shadow)}
+    .tab.active{background:var(--p1);color:#fff}
+    .vocab-panel{display:none}
+    .vocab-panel.active{display:block;animation:fadeIn .25s ease}
+    .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+    .vcard{background:#fff;border:none;border-top:5px solid var(--p3);border-radius:16px;box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column;gap:6px;cursor:pointer;text-align:left;transition:.2s;min-height:110px}
+    .vcard:hover{transform:translateY(-3px)}
+    .v-es{font-weight:900;font-size:1.02rem}
+    .v-ru{color:var(--muted);font-weight:800;font-size:.9rem}
+    .v-hint{font-size:.8rem;color:var(--muted)}
+    .v-speak{margin-top:auto;font-size:1rem;opacity:.75}
+
+    /* Grammar */
+    .grammar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+    .grammar-card{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:18px;cursor:pointer}
+    .grammar-card:hover{transform:translateY(-2px)}
+    .grammar-es{font-weight:900;color:var(--p1);font-size:1.05rem}
+    .grammar-ru{color:var(--muted);font-weight:700;margin-top:6px}
+    .grammar-speak{margin-top:10px;font-size:1rem;opacity:.8}
+
+    /* Forms */
+    .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+    .field label{display:block;font-weight:900;font-size:.85rem;margin-bottom:6px;color:var(--muted)}
+    .field input,.field select{width:100%;padding:12px 14px;border-radius:12px;border:2px solid rgba(43,33,24,.12);font-family:inherit;font-weight:800;font-size:1rem;background:#fff}
+    .field input:focus,.field select:focus{outline:none;border-color:var(--p4)}
+    .field-hint{display:block;margin-top:8px;font-size:.88rem;color:var(--muted);font-weight:800}
+    .field-hint b{color:var(--ink)}
+    .check-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .check-chip{position:relative}
+    .check-chip input{position:absolute;opacity:0}
+    .check-chip span{display:inline-flex;flex-direction:column;padding:10px 14px;border-radius:12px;background:#fff;border:2px solid rgba(43,33,24,.12);font-weight:800;cursor:pointer;transition:.2s;gap:2px}
+    .check-chip small{font-size:.78rem;color:var(--muted);font-weight:800}
+    .check-chip input:checked + span{background:var(--p2);border-color:var(--p2);color:#fff}
+    .check-chip input:checked + span small{color:rgba(255,255,255,.9)}
+
+    .form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .stamp{text-align:right;color:var(--p1);font-weight:900;font-size:.8rem;letter-spacing:.6px;margin-bottom:10px}
+
+    /* Months */
+    .months-wrap{margin-top:22px;padding-top:18px;border-top:1px dashed rgba(43,33,24,.15)}
+    .months-wrap h3{font-weight:900;font-size:1.05rem;margin-bottom:6px}
+    .months-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:10px}
+    .month-chip{background:#fff;border:2px solid transparent;border-radius:12px;padding:10px 12px;font-weight:900;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:space-between;gap:8px;box-shadow:var(--shadow)}
+    .month-chip:hover{transform:translateY(-2px);border-color:var(--p4)}
+    .month-chip small{color:var(--muted);font-weight:700;font-size:.8rem}
+    .month-chip .m-speak{opacity:.7}
+
+    /* Resources */
+    .resources-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+    .resource-card{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:10px}
+    .resource-card h3{font-weight:900;font-size:1rem;margin-bottom:4px}
+    .resource-card small{color:var(--muted);font-weight:700}
+    .video-wrap{position:relative;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;margin-top:6px}
+    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .game-wrap{margin-top:6px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+    .game-wrap iframe{width:100%;height:420px;border:0;display:block}
+
+    .homework{background:linear-gradient(160deg,#FFF3DC,#FFE7B8);border-radius:24px;padding:30px 26px;box-shadow:var(--shadow)}
+    .homework h3{font-weight:900;margin-bottom:8px}
+    .homework ul{margin:14px 0 0 20px}
+    .homework li{margin:8px 0;font-weight:700}
+
+    .lesson-nav{display:flex;justify-content:space-between;gap:14px;max-width:1100px;margin:0 auto;padding:10px 20px 60px;flex-wrap:wrap}
+    .lesson-nav a{flex:1;min-width:220px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;text-decoration:none;color:var(--ink);font-weight:900;transition:.2s}
+    .lesson-nav a:hover{transform:translateY(-3px)}
+    .lesson-nav a small{display:block;color:var(--muted);font-weight:800;font-size:.78rem;margin-bottom:3px}
+    .lesson-nav a.next{text-align:right}
+
+    #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;font-size:.85rem}
+
+    @media (max-width:640px){
+      .lesson-topbar .inner{justify-content:center;text-align:center}
+      .step-head{flex-direction:column}
+      .resources-grid{grid-template-columns:1fr}
+      /* На мобильных подсказки по клику */
+      .gh::after,.gh::before{opacity:0}
+      .gh.active::after,.gh.active::before{opacity:1}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="lesson-topbar">
+    <div class="inner">
+      <a href="../../index.html" class="back-link">← К карте курса</a>
+      <span class="lesson-id">Неделя 1 · Урок 2 из 3 · Фаза 1 Misión Residencia</span>
+    </div>
+  </div>
+
+  <section class="lesson-hero">
+    <span class="phase-tag">🗂 Фаза 1 · Документы и жильё</span>
+    <h1>Урок 1.2 · <em>Официальные бланки</em><br>EX-15, Modelo 790 и empadronamiento</h1>
+
+    <div class="lesson-meta">
+      <span class="meta-chip">🎯 Цель: понимать и заполнять бланки</span>
+      <span class="meta-chip">🔁 Разминка: проверка Урока 1</span>
+      <span class="meta-chip">💡 Наведите на <span class="gh" data-tip="Грамматические подсказки всплывают по наведению или тапу" style="color:var(--p4)">синие слова</span> для подсказок</span>
+    </div>
+  </section>
+
+  <!-- ШАГ 1 -->
+  <section class="section">
+    <div class="step-head">
+      <span class="step-num">1</span>
+      <div>
+        <span class="step-time">00:00 – 07:00 · Разминка</span>
+        <h2>Проверка Урока 1</h2>
+      </div>
+    </div>
+    <p class="sub">Сначала повторяем то, что уже прошли: представление, алфавит, цифры и фразу для записи на приём. Пройдите мини-квиз.</p>
+    <div class="quiz-grid" id="quizContainer"></div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" id="resetQuiz">↺ Пройти квиз ещё раз</button>
+      <button class="btn btn-secondary" id="speakIntro">🔊 Послушать визитку</button>
+    </div>
+    <div class="quiz-result" id="quizResult"></div>
+  </section>
+
+  <!-- ШАГ 2 -->
+  <section class="section">
+    <div class="step-head">
+      <span class="step-num">2</span>
+      <div>
+        <span class="step-time">07:00 – 17:00 · Лексика</span>
+        <h2>Анатомия испанского бланка</h2>
+      </div>
+    </div>
+    <p class="sub">Почти все официальные формы Испании используют одни и те же поля. Нажмите на карточку, чтобы услышать слово.</p>
+    <div class="tabs">
+      <button class="tab active" data-vtab="fields">📋 Поля бланка</button>
+      <button class="tab" data-vtab="words">✨ Полезные слова</button>
+    </div>
+    <div id="vocab-fields" class="vocab-panel active card">
+      <div class="vocab-grid" id="vocabFields"></div>
+    </div>
+    <div id="vocab-words" class="vocab-panel card">
+      <div class="vocab-grid" id="vocabWords"></div>
+    </div>
+  </section>
+
+  <!-- ШАГ 3 -->
+  <section class="section">
+    <div class="step-head">
+      <span class="step-num">3</span>
+      <div>
+        <span class="step-time">17:00 – 25:00 · Грамматика</span>
+        <h2>Инструкции на бланках и дата</h2>
+      </div>
+    </div>
+    <p class="sub">
+      Бланки часто «говорят» <span class="gh" data-tip="Вежливая форма императива (повелительного наклонения) для «usted» — как «Извольте заполнить» в русском.">вежливым повелительным наклонением</span>:
+      Rellene, Firme, Adjunte. Вам нужно узнавать эти формы — наведите на них, чтобы увидеть, как они образуются.
+    </p>
+    <div class="grammar-grid" id="imperativesGrid"></div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="font-weight:900">📅 Перевод даты</h3>
+      <p class="sub" style="margin-bottom:0">В испанских бланках дата пишется так: <b>DD/MM/AAAA</b>. Введите дату и получите испанский вариант с озвучкой.</p>
+      <div class="form-grid">
+        <div class="field">
+          <label for="dateInput">Дата в формате ДД/ММ/ГГГГ</label>
+          <input type="text" id="dateInput" placeholder="02/03/1985">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="dateBtn">Перевести дату</button>
+        <button class="btn btn-ghost" id="speakDate">🔊 Озвучить</button>
+      </div>
+      <div class="output-box" id="dateOutput"></div>
+
+      <div class="months-wrap">
+        <h3>🗓 Месяцы по-испански</h3>
+        <p class="sub" style="margin-bottom:0">Нажмите на месяц, чтобы услышать произношение. Все 12 месяцев — с января по декабрь.</p>
+        <div class="months-grid" id="monthsGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ШАГ 4 -->
+  <section class="section">
+    <div class="step-head">
+      <span class="step-num">4</span>
+      <div>
+        <span class="step-time">25:00 – 35:00 · Бланк 1</span>
+        <h2>EX-15: <span class="gh" data-tip="Solicitud = заявление, форма для подачи запроса.">заявление</span> на NIE</h2>
+      </div>
+    </div>
+    <p class="sub">Упрощённая учебная версия формы EX-15. Заполните поля по-испански и проверьте результат.</p>
+    <div class="card">
+      <div class="stamp">MINISTERIO DEL INTERIOR · EX-15 · SIMULACIÓN</div>
+      <div class="form-grid">
+        <div class="field"><label for="exNombre">Nombre</label><input type="text" id="exNombre" placeholder="Ana"></div>
+        <div class="field"><label for="exApellidos">Apellidos</label><input type="text" id="exApellidos" placeholder="Ivanova"></div>
+        <div class="field"><label for="exNacionalidad">Nacionalidad</label><input type="text" id="exNacionalidad" placeholder="Rusa"></div>
+        <div class="field"><label for="exFecha">Fecha de nacimiento</label><input type="text" id="exFecha" placeholder="02/03/1985"></div>
+        <div class="field"><label for="exPasaporte">Número de pasaporte</label><input type="text" id="exPasaporte" placeholder="75 1234567"></div>
+        <div class="field">
+          <label for="exMotivo"><span class="gh" data-tip="Motivo = причина, основание для запроса.">Motivo</span></label>
+          <select id="exMotivo">
+            <option value="Solicitar NIE" selected><span class="gh" data-tip="Solicitar = запрашивать, подавать заявление. Инфинитив.">Solicitar</span> NIE (запрос NIE)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-ghost" id="exExample">🧪 Заполнить примером</button>
+        <button class="btn btn-primary" id="exCheck">✅ Проверить EX-15</button>
+        <button class="btn btn-blue" id="exDownload">⬇ Скачать .txt</button>
+      </div>
+      <div class="output-box" id="exPreview"></div>
+    </div>
+  </section>
+
+  <!-- ШАГ 5 -->
+  <section class="section">
+    <div class="step-head">
+      <span class="step-num">5</span>
+      <div>
+        <span class="step-time">35:00 – 42:00 · Бланк 2</span>
+        <h2>Modelo 790: оплата tasas</h2>
+      </div>
+    </div>
+    <p class="sub">Modelo 790 — форма для оплаты госпошлины. Для NIE обычно используется código 052. Заполните данные, поймите сумму и не потеряйте justificante — подтверждение оплаты.</p>
+    <div class="card">
+      <div class="stamp">AGENCIA ESTATAL · MODELO 790 · SIMULACIÓN</div>
+      <div class="form-grid">
+        <div class="field"><label>Código de la <span class="gh" data-tip="Tasa = госпошлина, сбор за официальную услугу.">tasa</span> (код пошлины)</label><input type="text" value="052" disabled></div>
+        <div class="field"><label for="mNombre">Nombre</label><input type="text" id="mNombre" placeholder="Ana"></div>
+        <div class="field"><label for="mApellidos">Apellidos</label><input type="text" id="mApellidos" placeholder="Ivanova"></div>
+        <div class="field"><label for="mDocumento">Documento (паспорт / NIE)</label><input type="text" id="mDocumento" placeholder="75 1234567"></div>
+        <div class="field">
+          <label for="mImporte"><span class="gh" data-tip="Importe = сумма к оплате. От глагола importar (иметь значение, стоить).">Importe</span>, € (сумма)</label>
+          <input type="text" id="mImporte" placeholder="10.72">
+          <small class="field-hint">Пример: <b>10.72 €</b> = <b>diez euros con setenta y dos céntimos</b> <button class="btn btn-small btn-ghost" id="speakImporte" style="padding:4px 10px;font-size:.75rem">🔊</button></small>
+        </div>
+      </div>
+      <div class="check-row">
+        <label class="check-chip"><input type="checkbox" id="mEjBanco"><span><span class="gh" data-tip="Ejemplar = экземпляр, копия документа.">Ejemplar</span> para el banco <small>экземпляр для банка</small></span></label>
+        <label class="check-chip"><input type="checkbox" id="mEjInteresado"><span>Ejemplar para el <span class="gh" data-tip="Interesado = заявитель, заинтересованное лицо. От глагола interesar.">interesado</span> <small>экземпляр для заявителя (вам)</small></span></label>
+        <label class="check-chip"><input type="checkbox" id="mEjAdmin"><span>Ejemplar para la administración <small>экземпляр для госоргана</small></span></label>
+        <label class="check-chip"><input type="checkbox" id="mJustificante"><span>Tengo <span class="gh" data-tip="Justificante = квитанция, документ-подтверждение. От глагола justificar (обосновывать, подтверждать).">justificante</span> de pago <small>у меня есть квитанция об оплате</small></span></label>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="mCheck">✅ Проверить Modelo 790</button>
+        <button class="btn btn-blue" id="mDownload">⬇ Скачать .txt</button>
+      </div>
+      <div class="output-box" id="mPreview"></div>
+    </div>
+  </section>
+
+  <!-- ШАГ 6 -->
+  <section class="section">
+    <div class="step-head">
+      <span class="step-num">6</span>
+      <div>
+        <span class="step-time">42:00 – 50:00 · PBL</span>
+        <h2><span class="gh" data-tip="Empadronamiento = регистрация по месту жительства. От глагола empadronar (вносить в муниципальный реестр).">Empadronamiento</span>: регистрация семьи</h2>
+      </div>
+    </div>
+    <p class="sub">Empadronamiento — регистрация по месту жительства. Позже, когда вы найдёте жильё, этот бланк станет настоящим. Сегодня тренируемся на учебном адресе.</p>
+    <div class="card">
+      <div class="stamp">AYUNTAMIENTO · HOJA DE EMPADRONAMIENTO · SIMULACIÓN</div>
+      <div class="form-grid">
+        <div class="field"><label for="pCalle">Calle (улица)</label><input type="text" id="pCalle" placeholder="Calle Mayor"></div>
+        <div class="field"><label for="pNumero">Número (номер дома)</label><input type="text" id="pNumero" placeholder="5"></div>
+        <div class="field"><label for="pPiso">Piso / Puerta (этаж / квартира)</label><input type="text" id="pPiso" placeholder="2º B"></div>
+        <div class="field"><label for="pMunicipio"><span class="gh" data-tip="Municipio = муниципалитет, городская администрация.">Municipio</span></label><input type="text" id="pMunicipio" placeholder="Valencia"></div>
+        <div class="field"><label for="pProvincia">Provincia (провинция)</label><input type="text" id="pProvincia" placeholder="Valencia"></div>
+        <div class="field"><label for="pCP">Código postal</label><input type="text" id="pCP" placeholder="46001"></div>
+        <div class="field" style="grid-column:1/-1">
+          <label for="pPersons"><span class="gh" data-tip="Empadronadas = зарегистрированные. Причастие прошедшего времени от empadronar.">Personas empadronadas</span> (через запятую)</label>
+          <input type="text" id="pPersons" placeholder="Ana, Sergey, María, Pablo">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="pCheck">✅ Проверить empadronamiento</button>
+        <button class="btn btn-blue" id="pDownload">⬇ Скачать .txt</button>
+      </div>
+      <div class="output-box" id="pPreview"></div>
+    </div>
+  </section>
+
+  <!-- РЕСУРСЫ -->
+  <section class="section">
+    <div class="step-head">
+      <span class="step-num">🔗</span>
+      <div>
+        <span class="step-time">Внешняя практика</span>
+        <h2>Ресурсы для тренировки</h2>
+      </div>
+    </div>
+    <p class="sub">Видео по месяцам и интерактивная игра — чтобы потренироваться прямо на странице.</p>
+
+    <div class="resources-grid">
+      <div class="resource-card">
+        <h3>📺 Видео: Los meses del año</h3>
+        <small>Учим все 12 месяцев с песней</small>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/YO6xXV2BFO8" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="resource-card">
+        <h3>🎮 Игра: Los meses del año</h3>
+        <small>Тренируем месяцы — от enero до diciembre</small>
+        <div class="game-wrap">
+          <iframe src="https://wordwall.net/embed/88933a67d8c946858c5f7f7b48ef9425?themeId=1&templateId=50&fontStackId=0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="section">
+    <div class="homework">
+      <h3>🏠 Домашнее задание урока 1.2</h3>
+      <ul>
+        <li><b>1. Заполни EX-15:</b> используйте учебный бланк на этой странице и пришлите скриншот.</li>
+        <li><b>2. Найди реальный Modelo 790:</b> найдите в интернете código 052 и отметьте поле importe.</li>
+        <li><b>3. Голосовое:</b> назовите 6 полей бланка: Nombre, Apellidos, Fecha de nacimiento, Nacionalidad, Domicilio, Firma.</li>
+        <li><b>4. Пройдите игру Los meses:</b> на этой странице, сохраните результат.</li>
+        <li><b>5. Семейная миссия:</b> дети называют имена и возраст членов семьи, а родители вписывают их в empadronamiento.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="lesson-nav">
+    <a href="w01-l1.html"><small>← Назад</small>Урок 1.1 · Misión Cita Previa</a>
+    <a href="w01-l3.html" class="next"><small>Дальше →</small>Урок 1.3 · Визит в офис</a>
+  </div>
+
+  <footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España!</footer>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // ===== TTS =====
+    function speak(text){
+      if(!('speechSynthesis' in window)){toast('Ваш браузер не поддерживает озвучку 😔');return;}
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'es-ES';
+      u.rate = .92;
+      const voices = speechSynthesis.getVoices();
+      const esVoice = voices.find(v => v.lang.startsWith('es'));
+      if(esVoice) u.voice = esVoice;
+      speechSynthesis.speak(u);
+    }
+    if('speechSynthesis' in window){ speechSynthesis.getVoices(); }
+
+    // ===== Toast =====
+    let toastTimer;
+    function toast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+    }
+
+    // ===== Grammar hints: тап на мобильных =====
+    document.addEventListener('click', e => {
+      const gh = e.target.closest('.gh');
+      if(!gh) {
+        document.querySelectorAll('.gh.active').forEach(el => el.classList.remove('active'));
+        return;
+      }
+      // На мобильных показываем по тапу
+      if(window.innerWidth <= 640){
+        document.querySelectorAll('.gh.active').forEach(el => { if(el !== gh) el.classList.remove('active'); });
+        gh.classList.toggle('active');
+      }
+    });
+
+    // ===== Испанские числа =====
+    const UNIDADES = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve',
+      'diez', 'once', 'doce', 'trece', 'catorce', 'quince',
+      'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve',
+      'veinte', 'veintiuno', 'veintidós', 'veintitrés', 'veinticuatro',
+      'veinticinco', 'veintiséis', 'veintisiete', 'veintiocho', 'veintinueve'];
+    const DECENAS = ['', '', '', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+    const CENTENAS = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+
+    function twoDigits(n){
+      if(n < 30) return UNIDADES[n];
+      const d = Math.floor(n / 10);
+      const u = n % 10;
+      if(u === 0) return DECENAS[d];
+      return `${DECENAS[d]} y ${UNIDADES[u]}`;
+    }
+
+    function esNumber(n){
+      n = Math.floor(n);
+      if(n === 0) return 'cero';
+      if(n < 100) return twoDigits(n);
+      if(n === 100) return 'cien';
+
+      let out = '';
+
+      if(n >= 1000){
+        const miles = Math.floor(n / 1000);
+        out += miles === 1 ? 'mil' : `${twoDigits(miles)} mil`;
+        n = n % 1000;
+        if(n > 0) out += ' ';
+      }
+
+      if(n >= 100){
+        const h = Math.floor(n / 100);
+        const r = n % 100;
+        if(h === 1 && r === 0){
+          out += 'cien';
+        } else {
+          out += CENTENAS[h];
+          if(r > 0) out += ` ${twoDigits(r)}`;
+        }
+      } else if(n > 0){
+        out += twoDigits(n);
+      }
+
+      return out.trim();
+    }
+
+    // ===== Quiz с grammar hints =====
+    const QUIZ = [
+      {
+        q: 'Как сказать «Меня зовут»?',
+        options: ['Tengo', 'Me llamo', 'Soy de', 'Quisiera'],
+        correct: 1,
+        hint: 'Me llamo — возвратный глагол llamarse (называться) в 1 лице ед.ч.'
+      },
+      {
+        q: 'Что такое «cita previa»?',
+        options: ['Госпошлина', 'Офис', 'Предварительная запись', 'Паспорт'],
+        correct: 2,
+        hint: ''
+      },
+      {
+        q: 'Как читается буква H в слове Hola?',
+        options: ['Как Х', 'Не читается', 'Как Г', 'Как С'],
+        correct: 1,
+        hint: ''
+      },
+      {
+        q: 'Как по-испански 35?',
+        options: ['veinticinco', 'cincuenta', 'treinta y cuatro', 'treinta y cinco'],
+        correct: 3,
+        hint: ''
+      },
+      {
+        q: 'Какая фраза нужна, чтобы записаться на приём?',
+        options: ['¿Cuánto cuesta?', 'Se alquila.', 'Buenos días. Quisiera pedir una cita previa.', 'Hasta luego.'],
+        correct: 2,
+        hint: 'Quisiera — условное наклонение от querer (хотеть), звучит очень вежливо.'
+      }
+    ];
+    let quizScore = 0, quizAnswered = 0;
+
+    function renderQuiz(){
+      quizScore = 0; quizAnswered = 0;
+      document.getElementById('quizResult').classList.remove('show');
+      document.getElementById('quizResult').textContent = '';
+      document.getElementById('quizContainer').innerHTML = QUIZ.map((item, qi) => `
+        <div class="quiz-card">
+          <div class="q-title">Вопрос ${qi + 1}. ${item.q}</div>
+          <div class="q-options" data-q="${qi}">
+            ${item.options.map((opt, oi) => `<button class="q-option" data-oi="${oi}">${opt}</button>`).join('')}
+          </div>
+          <div class="q-feedback" id="q-feedback-${qi}"></div>
+        </div>
+      `).join('');
+    }
+    document.getElementById('quizContainer').addEventListener('click', e => {
+      const btn = e.target.closest('.q-option');
+      if(!btn) return;
+      const options = btn.parentElement;
+      if(options.classList.contains('done')) return;
+      const qi = +options.dataset.q;
+      const oi = +btn.dataset.oi;
+      const correctIndex = QUIZ[qi].correct;
+      const feedback = document.getElementById(`q-feedback-${qi}`);
+      options.classList.add('done');
+      [...options.children].forEach((button, idx) => { if(idx === correctIndex) button.classList.add('correct'); });
+      if(oi === correctIndex){
+        quizScore++;
+        feedback.innerHTML = '✅ ¡Muy bien!' + (QUIZ[qi].hint ? `<br><small style="color:var(--p4);font-weight:700">${QUIZ[qi].hint}</small>` : '');
+        feedback.style.color = 'var(--p2)';
+      } else {
+        btn.classList.add('wrong');
+        feedback.innerHTML = `❌ Правильный ответ: <b>${QUIZ[qi].options[correctIndex]}</b>` + (QUIZ[qi].hint ? `<br><small style="color:var(--p4);font-weight:700">💡 ${QUIZ[qi].hint}</small>` : '');
+        feedback.style.color = 'var(--p1)';
+      }
+      feedback.classList.add('show');
+      quizAnswered++;
+      if(quizAnswered === QUIZ.length){
+        const result = document.getElementById('quizResult');
+        result.textContent = `Результат разминки: ${quizScore} из ${QUIZ.length}. ` +
+          (quizScore === QUIZ.length ? '¡Perfecto! Вы готовы к бланкам.' : 'Повторите нужные блоки Урока 1 и возвращайтесь.');
+        result.classList.add('show');
+        toast('Разминка завершена ✅');
+      }
+    });
+    document.getElementById('resetQuiz').onclick = renderQuiz;
+    document.getElementById('speakIntro').onclick = () => speak('Buenos días. Me llamo Ana. Soy rusa. Tengo treinta y cinco años. Quisiera pedir una cita previa.');
+    renderQuiz();
+
+    // ===== Vocabulary =====
+    const FORM_FIELDS = [
+      { es: 'Nombre', ru: 'Имя', note: 'Ana' },
+      { es: 'Apellidos', ru: 'Фамилии', note: '1er / 2º apellido' },
+      { es: 'Fecha de nacimiento', ru: 'Дата рождения', note: '02/03/1985' },
+      { es: 'Nacionalidad', ru: 'Гражданство', note: 'Rusa' },
+      { es: 'Domicilio', ru: 'Адрес проживания', note: 'общий адрес' },
+      { es: 'Calle', ru: 'Улица', note: 'Calle Mayor' },
+      { es: 'Número', ru: 'Номер дома', note: '5' },
+      { es: 'Piso / Puerta', ru: 'Этаж / Квартира', note: '2º B' },
+      { es: 'Localidad / Municipio', ru: 'Город / Муниципалитет', note: 'Valencia' },
+      { es: 'Provincia', ru: 'Провинция', note: 'Valencia' },
+      { es: 'Código postal', ru: 'Почтовый индекс', note: '46001' },
+      { es: 'Teléfono', ru: 'Телефон', note: '612 345 678' },
+      { es: 'Número de pasaporte', ru: 'Номер паспорта', note: '75 1234567' },
+      { es: 'Documento', ru: 'Документ', note: 'паспорт / NIE' },
+      { es: 'Motivo', ru: 'Причина / основание', note: 'Solicitar NIE' },
+      { es: 'Importe', ru: 'Сумма (€)', note: '10.72 €' },
+      { es: 'Personas empadronadas', ru: 'Зарегистрированные лица', note: 'список семьи' },
+      { es: 'Firma', ru: 'Подпись', note: '✍️' }
+    ];
+
+    const FORM_WORDS = [
+      { es: 'la solicitud / el formulario', ru: 'заявление / бланк' },
+      { es: 'la casilla', ru: 'поле / клеточка' },
+      { es: 'rellenar / cumplimentar', ru: 'заполнять' },
+      { es: 'firmar', ru: 'подписывать' },
+      { es: 'adjuntar', ru: 'прикладывать документ' },
+      { es: 'presentar', ru: 'подавать' },
+      { es: 'el justificante', ru: 'квитанция / подтверждение' },
+      { es: 'el ejemplar', ru: 'экземпляр' },
+      { es: 'el código de la tasa', ru: 'код пошлины' },
+      { es: 'los datos del interesado', ru: 'данные заявителя' },
+      { es: 'en mayúsculas', ru: 'заглавными буквами' },
+      { es: 'con letra clara', ru: 'разборчивым почерком' }
+    ];
+
+    function renderVocab(containerId, data){
+      document.getElementById(containerId).innerHTML = data.map(item => `
+        <button class="vcard" data-text="${item.es}">
+          <span class="v-es">${item.es}</span>
+          <span class="v-ru">${item.ru}</span>
+          ${item.note ? `<span class="v-hint">${item.note}</span>` : ''}
+          <span class="v-speak">🔊 нажмите, чтобы послушать</span>
+        </button>
+      `).join('');
+    }
+    renderVocab('vocabFields', FORM_FIELDS);
+    renderVocab('vocabWords', FORM_WORDS);
+
+    document.addEventListener('click', e => {
+      const card = e.target.closest('.vcard');
+      if(card && card.dataset.text) speak(card.dataset.text);
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.vocab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(`vocab-${tab.dataset.vtab}`).classList.add('active');
+      });
+    });
+
+    // ===== Imperatives с grammar hints =====
+    const IMPERATIVES = [
+      { es: '<span class="gh" data-tip="Rellene = вежливая форма (usted) от инфинитива rellenar (заполнять). Окончание -e.">Rellene</span> todos los campos.', ru: 'Заполните все поля.' },
+      { es: '<span class="gh" data-tip="Firme = вежливая форма от firmar (подписывать). -e для usted.">Firme</span> al final.', ru: 'Подпишите в конце.' },
+      { es: '<span class="gh" data-tip="Adjunte = вежливая форма от adjuntar (прикладывать). -e для usted.">Adjunte</span> una copia del pasaporte.', ru: 'Приложите копию паспорта.' },
+      { es: '<span class="gh" data-tip="Marque = вежливая форма от marcar (отмечать). -e для usted.">Marque</span> la casilla.', ru: 'Отметьте клеточку.' },
+      { es: 'No <span class="gh" data-tip="Deje = вежливая форма от dejar (оставлять). После No тоже -e.">deje</span> campos en blanco.', ru: 'Не оставляйте пустые поля.' },
+      { es: '<span class="gh" data-tip="Escriba = вежливая форма от escribir (писать). Неправильная форма: -a вместо -e.">Escriba</span> en mayúsculas.', ru: 'Пишите заглавными буквами.' }
+    ];
+    document.getElementById('imperativesGrid').innerHTML = IMPERATIVES.map(item => `
+      <div class="grammar-card" data-text="${item.es.replace(/<[^>]*>/g, '')}">
+        <div class="grammar-es">${item.es}</div>
+        <div class="grammar-ru">${item.ru}</div>
+        <div class="grammar-speak">🔊 Нажмите, чтобы послушать</div>
+      </div>
+    `).join('');
+    document.querySelectorAll('.grammar-card').forEach(card => {
+      card.addEventListener('click', e => {
+        if(e.target.closest('.gh')) return; // клик по gh не запускает озвучку
+        speak(card.dataset.text);
+      });
+    });
+
+    // ===== Месяцы =====
+    const MONTHS = [
+      { es: 'enero', ru: 'январь' }, { es: 'febrero', ru: 'февраль' },
+      { es: 'marzo', ru: 'март' }, { es: 'abril', ru: 'апрель' },
+      { es: 'mayo', ru: 'май' }, { es: 'junio', ru: 'июнь' },
+      { es: 'julio', ru: 'июль' }, { es: 'agosto', ru: 'август' },
+      { es: 'septiembre', ru: 'сентябрь' }, { es: 'octubre', ru: 'октябрь' },
+      { es: 'noviembre', ru: 'ноябрь' }, { es: 'diciembre', ru: 'декабрь' }
+    ];
+    document.getElementById('monthsGrid').innerHTML = MONTHS.map(m => `
+      <button class="month-chip" data-month="${m.es}">
+        <span>${m.es} <small>${m.ru}</small></span>
+        <span class="m-speak">🔊</span>
+      </button>
+    `).join('');
+    document.querySelectorAll('.month-chip').forEach(chip => {
+      chip.addEventListener('click', () => speak(chip.dataset.month));
+    });
+
+    // ===== Date converter =====
+    let currentSpeechDate = '';
+    function parseDate(str){
+      const match = str.trim().match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);
+      if(!match) return null;
+      const d = +match[1], m = +match[2], y = +match[3];
+      if(d < 1 || d > 31 || m < 1 || m > 12 || y < 1900 || y > 2100) return null;
+      return { d, m, y };
+    }
+    document.getElementById('dateBtn').onclick = () => {
+      const parsed = parseDate(document.getElementById('dateInput').value);
+      const out = document.getElementById('dateOutput');
+      if(!parsed){ out.textContent = 'Введите дату в формате 02/03/1985'; out.classList.add('show'); currentSpeechDate = ''; toast('Проверьте формат даты: ДД/ММ/ГГГГ'); return; }
+      const text = `el ${esNumber(parsed.d)} de ${MONTHS[parsed.m - 1].es} de ${esNumber(parsed.y)}`;
+      currentSpeechDate = text;
+      out.textContent = `${document.getElementById('dateInput').value.trim()} → ${text}`;
+      out.classList.add('show');
+    };
+    document.getElementById('speakDate').onclick = () => {
+      if(!currentSpeechDate){ toast('Сначала нажмите «Перевести дату» 🙂'); return; }
+      speak(currentSpeechDate);
+    };
+
+    // ===== Озвучка Importe =====
+    document.getElementById('speakImporte').onclick = () => speak('diez euros con setenta y dos céntimos');
+
+    // ===== Download =====
+    function downloadTxt(filename, text){
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    // ===== EX-15 =====
+    let exText = '';
+    document.getElementById('exExample').onclick = () => {
+      document.getElementById('exNombre').value = 'Ana';
+      document.getElementById('exApellidos').value = 'Ivanova';
+      document.getElementById('exNacionalidad').value = 'Rusa';
+      document.getElementById('exFecha').value = '02/03/1985';
+      document.getElementById('exPasaporte').value = '75 1234567';
+      toast('Пример заполнен ✅');
+    };
+    function buildEX15(){
+      const nombre = document.getElementById('exNombre').value.trim().toUpperCase();
+      const apellidos = document.getElementById('exApellidos').value.trim().toUpperCase();
+      const nacionalidad = document.getElementById('exNacionalidad').value.trim().toUpperCase();
+      const fecha = document.getElementById('exFecha').value.trim();
+      const pasaporte = document.getElementById('exPasaporte').value.trim().toUpperCase();
+      const motivo = document.getElementById('exMotivo').value;
+      if(!nombre || !apellidos || !fecha || !pasaporte){ toast('Заполните обязательные поля: имя, фамилии, дата рождения, паспорт.'); return null; }
+      const parsedDate = parseDate(fecha);
+      const dateSpeech = parsedDate ? `el ${esNumber(parsedDate.d)} de ${MONTHS[parsedDate.m - 1].es} de ${esNumber(parsedDate.y)}` : '';
+      exText = `EX-15 · SOLICITUD DE NIE (SIMULACIÓN)\n\nNombre: ${nombre}\nApellidos: ${apellidos}\nNacionalidad: ${nacionalidad || '—'}\nFecha de nacimiento: ${fecha}\nFecha en español: ${dateSpeech || '—'}\nNúmero de pasaporte: ${pasaporte}\nMotivo: ${motivo}\n\nFirma: ______________________`;
+      const preview = document.getElementById('exPreview');
+      preview.textContent = exText; preview.classList.add('show');
+      toast('EX-15 проверен ✅');
+      return exText;
+    }
+    document.getElementById('exCheck').onclick = buildEX15;
+    document.getElementById('exDownload').onclick = () => { const text = buildEX15(); if(text) downloadTxt('ex-15-simulacion.txt', text); };
+
+    // ===== Modelo 790 =====
+    let mText = '';
+    function buildModelo790(){
+      const nombre = document.getElementById('mNombre').value.trim().toUpperCase();
+      const apellidos = document.getElementById('mApellidos').value.trim().toUpperCase();
+      const documento = document.getElementById('mDocumento').value.trim().toUpperCase();
+      const importe = document.getElementById('mImporte').value.trim();
+      if(!nombre || !apellidos || !documento || !importe){ toast('Заполните: Nombre, Apellidos, Documento, Importe.'); return null; }
+      const banco = document.getElementById('mEjBanco').checked;
+      const interesado = document.getElementById('mEjInteresado').checked;
+      const admin = document.getElementById('mEjAdmin').checked;
+      const justificante = document.getElementById('mJustificante').checked;
+      const missing = [];
+      if(!banco) missing.push('banco');
+      if(!interesado) missing.push('interesado');
+      if(!admin) missing.push('administración');
+      let ejemplaresStatus = '✅ Три экземпляра отмечены.';
+      if(missing.length) ejemplaresStatus = `⚠️ Не отмечены экземпляры для: ${missing.join(', ')}.`;
+      const justificanteStatus = justificante ? '✅ Justificante adjuntado.' : '⚠️ No olvide el justificante de pago.';
+      mText = `MODELO 790 · CÓDIGO 052 (SIMULACIÓN)\n\nDatos del interesado:\nNombre: ${nombre}\nApellidos: ${apellidos}\nDocumento: ${documento}\n\nImporte: ${importe} €\n\nEjemplares:\n- Para el banco: ${banco ? 'sí' : 'no'}\n- Para el interesado: ${interesado ? 'sí' : 'no'}\n- Para la administración: ${admin ? 'sí' : 'no'}\n\nEstado:\n${ejemplaresStatus}\n${justificanteStatus}`;
+      const preview = document.getElementById('mPreview');
+      preview.textContent = mText; preview.classList.add('show');
+      if(justificante && !missing.length) toast('Modelo 790 готов ✅');
+      else toast('Проверьте предупреждения в превью ⚠️');
+      return mText;
+    }
+    document.getElementById('mCheck').onclick = buildModelo790;
+    document.getElementById('mDownload').onclick = () => { const text = buildModelo790(); if(text) downloadTxt('modelo-790-simulacion.txt', text); };
+
+    // ===== Empadronamiento =====
+    let pText = '';
+    function buildEmpadronamiento(){
+      const calle = document.getElementById('pCalle').value.trim();
+      const numero = document.getElementById('pNumero').value.trim();
+      const piso = document.getElementById('pPiso').value.trim();
+      const municipio = document.getElementById('pMunicipio').value.trim();
+      const provincia = document.getElementById('pProvincia').value.trim();
+      const cp = document.getElementById('pCP').value.trim();
+      const personsRaw = document.getElementById('pPersons').value.trim();
+      if(!calle || !municipio || !provincia || !cp || !personsRaw){ toast('Заполните адрес и список людей.'); return null; }
+      const persons = personsRaw.split(',').map(p => p.trim()).filter(Boolean);
+      if(!persons.length){ toast('Добавьте хотя бы одного человека через запятую.'); return null; }
+      const address = `${calle}${numero ? ', ' + numero : ''}${piso ? ', ' + piso : ''}, ${cp} ${municipio}, ${provincia}`;
+      pText = `HOJA DE EMPADRONAMIENTO (SIMULACIÓN)\n\nDomicilio:\n${address}\n\nPersonas empadronadas (${persons.length}):\n${persons.map((p, i) => `${i + 1}. ${p}`).join('\n')}\n\nFecha: ______________________\nFirma: ______________________`;
+      const preview = document.getElementById('pPreview');
+      preview.textContent = pText; preview.classList.add('show');
+      toast('Empadronamiento проверено ✅');
+      return pText;
+    }
+    document.getElementById('pCheck').onclick = buildEmpadronamiento;
+    document.getElementById('pDownload').onclick = () => { const text = buildEmpadronamiento(); if(text) downloadTxt('empadronamiento-simulacion.txt', text); };
+  </script>
+</body>
+</html>
