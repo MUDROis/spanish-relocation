@@ -487,6 +487,16 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   </div>
 </section>
 
+<!-- ===== КАРТОЧКИ QUIZLET ===== -->
+<section class="section">
+  <div style="background:linear-gradient(135deg,#4255FF,#6B7BFF);border-radius:24px;padding:32px 26px;text-align:center;color:#fff;box-shadow:0 12px 30px rgba(66,85,255,.28)">
+    <div style="font-size:2.2rem">🃏</div>
+    <h3 style="font-weight:900;font-size:1.35rem;margin:12px 0 6px;color:#fff">Карточки Quizlet · Слова урока 1.1</h3>
+    <p style="font-weight:700;opacity:.94;margin:0 0 20px;font-size:.95rem">Повторите слова урока в приложении Quizlet</p>
+    <a href="https://quizlet.com/fi/1199336124/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-1-%D1%83%D1%80%D0%BE%D0%BA-1-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#4255FF;border-radius:999px;padding:13px 30px;font-weight:900;text-decoration:none;font-size:.98rem">Открыть карточки →</a>
+  </div>
+</section>
+
 <!-- ===== НАВИГАЦИЯ ===== -->
 <div class="lesson-nav">
   <a href="../../index.html"><small>← Вернуться</small>Карта курса</a>
@@ -542,7 +552,7 @@ document.getElementById('flashGrid').innerHTML=VOCAB.map(v=>`
  </div>`).join('');
 
 /* ====== ЧИСЛА ====== */
-const UNIDADES=['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+const UNIDADES=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
 const DECENAS=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
 function twoDigits(n){if(n<30)return UNIDADES[n];const d=Math.floor(n/10),u=n%10;return u?`${DECENAS[d]} y ${UNIDADES[u]}`:DECENAS[d];}
 function pnum(n){
@@ -551,7 +561,7 @@ function pnum(n){
   const d=Math.floor(n/10),u=n%10;
   return u?`${DECENAS[d]} y ${UNIDADES[u]}`:DECENAS[d];
 }
-const NUMS1=[];for(let n=1;n<=20;n++)NUMS1.push([n,pnum(n)]);
+const NUMS1=[];for(let n=0;n<=20;n++)NUMS1.push([n,pnum(n)]);
 const NUMS2=[[10,'diez'],[20,'veinte'],[30,'treinta'],[40,'cuarenta'],[50,'cincuenta'],[60,'sesenta'],[70,'setenta'],[80,'ochenta'],[90,'noventa'],[100,'cien']];
 document.getElementById('numChips1').innerHTML=NUMS1.map(([n,w])=>`<button class="num-chip speak" data-text="${w}">${n} <small>${w}</small> 🔊</button>`).join('');
 document.getElementById('numChips2').innerHTML=NUMS2.map(([n,w])=>`<button class="num-chip speak" data-text="${w}">${n} <small>${w}</small> 🔊</button>`).join('');
@@ -779,34 +789,34 @@ document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-ce
 
 /* ====== АЛФАВИТ ====== */
 const ALPHA=[
- ['A','A de Antonio','«А как в слове Antonio»',''],
- ['B','B de Barcelona','«Б как в слове Barcelona»',''],
- ['C','C de Carmen','«С как в слове Carmen»','Перед E/I читается как «θ» (межзубный).'],
- ['D','D de Daniel','«Д как в слове Daniel»',''],
- ['E','E de España','«Э как в слове España»',''],
- ['F','F de Francia','«Ф как в слове Francia»',''],
- ['G','G de Granada','«Г как в слове Granada»','Перед E/I читается как «Х».'],
- ['H','H de Hache','Немая: Hola = «ола», hotel = «отэль»','⚠️ Не произносится!'],
- ['I','I de Italia','«И как в слове Italia»',''],
- ['J','J de Jota','«Х»: jamón = «хамон», jueves = «хуэвэс»','Читается как «Х».'],
- ['K','K de kilo','«Ка»','Только в заимствованных словах.'],
- ['L','L de Lola','«Л как в слове Lola»',''],
- ['LL','LL de Lluvia','«Элье» (двойная эле)','Звучит как «Й» (в Аргентине — «Ж»). Lluvia = «ювиа».'],
- ['M','M de Madrid','«М как в слове Madrid»',''],
- ['N','N de Navarra','«Н как в слове Navarra»',''],
- ['Ñ','Ñ de Ñandú','«Энье»','Нь. España = «Эспанья».'],
- ['O','O de Oviedo','«О как в слове Oviedo»',''],
- ['P','P de Pamplona','«П как в слове Pamplona»',''],
- ['Q','Q de queso','«К как в слове queso»',''],
- ['R','R de Rosa','«Р как в слове Rosa»',''],
- ['S','S de Sevilla','«С как в слове Sevilla»',''],
- ['T','T de Toledo','«Т как в слове Toledo»',''],
- ['U','U de Uruguay','«У как в слове Uruguay»',''],
- ['V','V de Valencia','«В как в слове Valencia»','Звучит почти как «Б»!'],
- ['W','W de wáter','«Уве добле»','Только в заимствованных словах.'],
- ['X','X de Xilófono','«Экис»',''],
- ['Y','I griega · Y de Yema','«И гриега»','Как гласный звучит «И», как согласный — «Й» (в Аргентине — «Ж»).'],
- ['Z','Z de Zaragoza','«Сэта»','Читается как межзубный «θ».']
+ ['A','a de Antonio','«А»',''],
+ ['B','be de Barcelona','«Бе»',''],
+ ['C','ce de Carmen','«Се» (межзубный звук)','Перед E/I читается как «θ» (межзубный).'],
+ ['D','de de Daniel','«Де»',''],
+ ['E','e de España','«Э»',''],
+ ['F','efe de Francia','«Эфе»',''],
+ ['G','ge de Granada','«Хе»','Перед E/I читается как «Х».'],
+ ['H','hache de Hola','«Аче»','⚠️ Не произносится! Hola = «ола», hotel = «отэль».'],
+ ['I','i de Italia','«И»',''],
+ ['J','jota de jamón','«Хота»','Читается как «Х»: jamón = «хамон», jueves = «хуэвэс».'],
+ ['K','ka de kilo','«Ка»','Только в заимствованных словах.'],
+ ['L','ele de Lola','«Эле»',''],
+ ['LL','elle de Lluvia','«Элье» (двойная эле)','Звучит как «Й» (в Аргентине — «Ж»). Lluvia = «ювиа».'],
+ ['M','eme de Madrid','«Эме»',''],
+ ['N','ene de Navarra','«Эне»',''],
+ ['Ñ','eñe de Ñandú','«Энье»','Нь. España = «Эспанья».'],
+ ['O','o de Oviedo','«О»',''],
+ ['P','pe de Pamplona','«Пе»',''],
+ ['Q','cu de queso','«Ку»',''],
+ ['R','erre de Rosa','«Эрре»',''],
+ ['S','ese de Sevilla','«Эсе»',''],
+ ['T','te de Toledo','«Те»',''],
+ ['U','u de Uruguay','«У»',''],
+ ['V','uve de Valencia','«Уве»','Звучит почти как «Б»!'],
+ ['W','uve doble de wáter','«Уве добле»','Только в заимствованных словах.'],
+ ['X','equis de Xilófono','«Экис»',''],
+ ['Y','ye de Yema','«Йе» (раньше — «и гриега»)','Как гласный звучит «И», как согласный — «Й» (в Аргентине — «Ж»).'],
+ ['Z','zeta de Zaragoza','«Сэта»','Читается как межзубный «θ».']
 ];
 document.getElementById('alphaGrid').innerHTML=ALPHA.map((a,i)=>`<button class="key" data-i="${i}">${a[0]}</button>`).join('');
 document.getElementById('alphaGrid').addEventListener('click',e=>{
