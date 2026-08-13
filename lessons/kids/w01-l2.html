@@ -30,9 +30,6 @@
   .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
   .hero h1 span{color:var(--red)}
   .hero .sub{max-width:640px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
-  .progress{max-width:500px;margin:28px auto 0;background:rgba(255,255,255,.7);border-radius:999px;height:14px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.08)}
-  .progress-bar{height:100%;background:linear-gradient(90deg,var(--red),var(--sun));border-radius:999px;width:3.3%;transition:width 1s ease}
-  .progress-text{font-size:.85rem;font-weight:800;color:var(--ink-soft);margin-top:8px}
 
   /* ---------- CONTENT ---------- */
   .container{max-width:860px;margin:40px auto;padding:0 20px}
@@ -314,7 +311,7 @@
 
 <nav class="top-nav">
   <div class="nav-left">
-    <a href="../../index.html" class="back-btn">← К карте</a>
+    <a href="../../kids.html" class="back-btn">← К карте</a>
     <div class="brand">Школа <span>МУДРО</span></div>
   </div>
   <div class="nav-right">Станция 1 · Supervivencia · Урок 2 из 60</div>
@@ -324,8 +321,6 @@
   <span class="lesson-tag">🆘 УРОК 2 · НЕДЕЛЯ 1</span>
   <h1>SOS-фразы: <span>«Я не понимаю!»</span></h1>
   <p class="sub">Сегодня ты получишь суперсилу: когда вокруг говорят быстро и непонятно, ты не будешь паниковать — ты спасёшь себя сам!</p>
-  <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
-  <div class="progress-text">2 из 60 уроков — 3.3% пути 🚀</div>
 </header>
 
 <main class="container">
@@ -875,7 +870,7 @@ loadVoices();
 function speak(text){
   if(!text) return;
   const u=new SpeechSynthesisUtterance(text);
-  u.lang='es-ES';u.rate=0.85;u.pitch=1.05;
+  u.lang='es-ES';u.rate=0.8;u.pitch=1.05;
   if(esVoice)u.voice=esVoice;
   speechSynthesis.cancel();
   speechSynthesis.speak(u);
@@ -1300,9 +1295,6 @@ function confetti(emoji){
     setTimeout(()=>c.remove(),3000);
   }
 }
-
-/* ========== ПРОГРЕСС ========== */
-setTimeout(()=>{document.getElementById('progress-bar').style.width='3.3%'},300);
 
 /* ========== СОХРАНЕНИЕ САМОПРОВЕРКИ ========== */
 document.querySelectorAll('.selfcheck-table input[type=radio]').forEach(input=>{

@@ -133,7 +133,6 @@
     .v-es{font-weight:900;font-size:1.02rem}
     .v-ru{color:var(--muted);font-weight:800;font-size:.9rem}
     .v-hint{font-size:.8rem;color:var(--muted)}
-    .v-speak{margin-top:auto;font-size:1rem;opacity:.75}
 
     /* Grammar */
     .grammar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
@@ -141,7 +140,6 @@
     .grammar-card:hover{transform:translateY(-2px)}
     .grammar-es{font-weight:900;color:var(--p1);font-size:1.05rem}
     .grammar-ru{color:var(--muted);font-weight:700;margin-top:6px}
-    .grammar-speak{margin-top:10px;font-size:1rem;opacity:.8}
 
     /* Forms */
     .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
@@ -466,7 +464,7 @@
       speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'es-ES';
-      u.rate = .92;
+      u.rate = .8;
       const voices = speechSynthesis.getVoices();
       const esVoice = voices.find(v => v.lang.startsWith('es'));
       if(esVoice) u.voice = esVoice;
@@ -672,7 +670,6 @@
           <span class="v-es">${item.es}</span>
           <span class="v-ru">${item.ru}</span>
           ${item.note ? `<span class="v-hint">${item.note}</span>` : ''}
-          <span class="v-speak">🔊 нажмите, чтобы послушать</span>
         </button>
       `).join('');
     }
@@ -706,7 +703,6 @@
       <div class="grammar-card" data-text="${item.es.replace(/<[^>]*>/g, '')}">
         <div class="grammar-es">${item.es}</div>
         <div class="grammar-ru">${item.ru}</div>
-        <div class="grammar-speak">🔊 Нажмите, чтобы послушать</div>
       </div>
     `).join('');
     document.querySelectorAll('.grammar-card').forEach(card => {
