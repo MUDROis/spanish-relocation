@@ -425,10 +425,6 @@
         <button class="speak-btn" style="--c:#2274A5">🔊 Послушать</button>
       </div>
     </div>
-
-    <div class="script">
-      <strong>Методическая подсказка для учителя:</strong> начинаем не со всех эмоций сразу, а с трёх, которые вытекают из Урока 2. Так эмоции становятся «частью твоей жизни», а не абстрактным списком.
-    </div>
   </section>
 
   <!-- БЛОК 2: ЭМОЦИИ ЭТО НОРМАЛЬНО -->
@@ -563,44 +559,28 @@
     <div class="se-score" id="se-score">Выбери правильный глагол для каждой фразы! 🚀</div>
   </section>
 
-  <!-- ДОПОЛНИТЕЛЬНО ДЛЯ 12 ЛЕТ -->
+  <!-- ДОПОЛНИТЕЛЬНО ДЛЯ ЛЮБОПЫТНЫХ -->
   <section class="block" style="--c:#FFBE0B">
     <div class="block-head">
-      <h2 class="block-title">🚀 Дополнительно для 12 лет (и любопытных!)</h2>
+      <h2 class="block-title">🚀 Дополнительно для любопытных!</h2>
     </div>
     <p class="block-sub">Этот блок — для тех, кто хочет копнуть глубже. Прочитай, если чувствуешь, что готов!</p>
 
     <h4>🗓 ВСЕ формы глагола ESTAR (быть — сейчас)</h4>
-    <table class="tools-table">
-      <tr><th>Лицо</th><th>Форма</th><th>Пример</th></tr>
-      <tr><td>yo</td><td><strong>estoy</strong></td><td>Estoy contento.</td></tr>
-      <tr><td>tú</td><td><strong>estás</strong></td><td>¿Cómo estás?</td></tr>
-      <tr><td>él / ella / usted</td><td><strong>está</strong></td><td>Está triste.</td></tr>
-      <tr><td>nosotros/as</td><td><strong>estamos</strong></td><td>Estamos nerviosos.</td></tr>
-      <tr><td>vosotros/as</td><td><strong>estáis</strong></td><td>¿Estáis cansados?</td></tr>
-      <tr><td>ellos / ustedes</td><td><strong>están</strong></td><td>Están enfadados.</td></tr>
-    </table>
+    <div id="table-estar"></div>
 
     <h4>🛂 ВСЕ формы глагола SER (быть — всегда)</h4>
-    <table class="tools-table">
-      <tr><th>Лицо</th><th>Форма</th><th>Пример</th></tr>
-      <tr><td>yo</td><td><strong>soy</strong></td><td>Soy ruso.</td></tr>
-      <tr><td>tú</td><td><strong>eres</strong></td><td>¿Eres simpático?</td></tr>
-      <tr><td>él / ella / usted</td><td><strong>es</strong></td><td>Es alto.</td></tr>
-      <tr><td>nosotros/as</td><td><strong>somos</strong></td><td>Somos rusos.</td></tr>
-      <tr><td>vosotros/as</td><td><strong>sois</strong></td><td>¿Sois españoles?</td></tr>
-      <tr><td>ellos / ustedes</td><td><strong>son</strong></td><td>Son simpáticos.</td></tr>
-    </table>
+    <div id="table-ser"></div>
 
     <div class="script">
-      <strong>Мнемоника для 12-летних:</strong><br>
+      <strong>Мнемоника:</strong><br>
       🔵 <strong>SER = DOCTOR</strong> — Description (описание), Occupation (профессия), Characteristic (черта), Time (время), Origin (происхождение), Relationship (отношение).<br>
       🟢 <strong>ESTAR = PLACE</strong> — Position (положение), Location (место), Action (действие), Condition (состояние), Emotion (эмоция).<br>
       Ещё пример: <em>Soy feliz</em> (я счастливый человек — черта характера) vs <em>Estoy feliz</em> (я счастлив сейчас). Но для простоты в нашем курсе: <strong>эмоции = ESTAR!</strong>
     </div>
 
     <div class="script">
-      <strong>Для 12-летних:</strong> добавь причину! <span class="grammar-hint" data-hint="Porque = «потому что». Глагол ser (быть) в 3 лице ед.ч. = es. Дословно: «Я нервничаю, потому что это мой первый день»">«Estoy nervioso porque es mi primer día»</span> — «Я нервничаю, потому что это мой первый день».
+      <strong>Добавь причину!</strong> <span class="grammar-hint" data-hint="Porque = «потому что». Глагол ser (быть) в 3 лице ед.ч. = es. Дословно: «Я нервничаю, потому что это мой первый день»">«Estoy nervioso porque es mi primer día»</span> — «Я нервничаю, потому что это мой первый день».
     </div>
   </section>
 
@@ -643,7 +623,7 @@
 
     <div class="diary-zone">
       <h4 style="text-align:center">😊 Как ты себя чувствуешь сегодня?</h4>
-      <p style="text-align:center;color:var(--ink-soft);font-weight:700;margin:6px 0">Выбери эмодзи → подпишись по-испански → сохрани в дневник!</p>
+      <p style="text-align:center;color:var(--ink-soft);font-weight:700;margin:6px 0">Выбери эмодзи → сохрани в дневник!</p>
       <div class="diary-pick" id="diary-pick"></div>
       <div class="diary-selected" id="diary-selected">Выбери эмодзи 👆</div>
       <button class="diary-save" onclick="saveDiary()">📔 Сохранить в дневник</button>
@@ -940,6 +920,9 @@ function setGender(g){
   renderThermoChips();
   renderDiaryPick();
   renderWords();
+  renderSeQuiz();
+  renderForms();
+  renderMatch();
 }
 
 function renderGenderButtons(){
@@ -1023,16 +1006,17 @@ function levelInfo(l){
 function updateThermo(){
   const l=parseInt(document.getElementById('thermo-slider').value,10);
   const info=levelInfo(l);
+  const emo=thermoEmotion;
   let es, ru;
   if(info.w==='normal'){
-    es='Estoy normal.';
-    ru='Я в порядке (нормально).';
+    es='¡Estoy '+adjOf(emo)+'!';
+    ru=emo.ru+' (нормально).';
   } else if(info.w==='muy'){
-    es='¡Estoy muy '+adjOf(thermoEmotion)+'!';
-    ru=thermoEmotion.ru+' (очень!).';
+    es='¡Estoy muy '+adjOf(emo)+'!';
+    ru=emo.ru+' (очень!).';
   } else {
-    es='Estoy un poco '+adjOf(thermoEmotion)+'.';
-    ru=thermoEmotion.ru+' (чуть-чуть).';
+    es='Estoy un poco '+adjOf(emo)+'.';
+    ru=emo.ru+' (чуть-чуть).';
   }
   document.getElementById('thermo-es').textContent=es;
   document.getElementById('thermo-ru').textContent=ru;
@@ -1040,13 +1024,17 @@ function updateThermo(){
 
 /* ========== БЛОК 5: SER vs ESTAR ========== */
 const SE_DATA=[
-  {blank:'___ ruso', correct:'Soy', adj:'ruso', why:'Национальность = всегда → SER'},
-  {blank:'___ cansado', correct:'Estoy', adj:'cansado', why:'Усталость = сейчас → ESTAR'},
-  {blank:'___ simpático', correct:'Soy', adj:'simpático', why:'Характер = всегда → SER'},
-  {blank:'___ nervioso', correct:'Estoy', adj:'nervioso', why:'Нервы = сейчас → ESTAR'},
-  {blank:'___ de Rusia', correct:'Soy', adj:'de Rusia', why:'Происхождение = всегда → SER'},
-  {blank:'___ triste', correct:'Estoy', adj:'triste', why:'Грусть = сейчас → ESTAR'}
+  {blank:'___ ruso', correct:'Soy', adj:'ruso', adjF:'rusa', why:'Национальность = всегда → SER', ru:{m:'Я русский', f:'Я русская'}},
+  {blank:'___ cansado', correct:'Estoy', adj:'cansado', adjF:'cansada', why:'Усталость = сейчас → ESTAR', ru:{m:'Я устал', f:'Я устала'}},
+  {blank:'___ simpático', correct:'Soy', adj:'simpático', adjF:'simpática', why:'Характер = всегда → SER', ru:{m:'Я добрый', f:'Я добрая'}},
+  {blank:'___ nervioso', correct:'Estoy', adj:'nervioso', adjF:'nerviosa', why:'Нервы = сейчас → ESTAR', ru:'Я нервничаю'},
+  {blank:'___ de Rusia', correct:'Soy', adj:'de Rusia', why:'Происхождение = всегда → SER', ru:'Я из России'},
+  {blank:'___ triste', correct:'Estoy', adj:'triste', why:'Грусть = сейчас → ESTAR', ru:'Мне грустно'}
 ];
+
+function seAdj(row){ return gender==='girl' && row.adjF ? row.adjF : row.adj; }
+function seFull(row){ return (row.correct==='Soy'?'Soy':'Estoy')+' '+seAdj(row); }
+function seRu(row){ return typeof row.ru==='string' ? row.ru : (gender==='girl'?row.ru.f:row.ru.m); }
 
 function renderSeQuiz(){
   const box=document.getElementById('se-quiz');
@@ -1054,7 +1042,7 @@ function renderSeQuiz(){
   SE_DATA.forEach((row,i)=>{
     const div=document.createElement('div');
     div.className='sos-scenario';
-    div.innerHTML='<div class="situation">Фраза '+(i+1)+': «'+row.blank.replace('___','<strong style="color:var(--blue)">___</strong>')+'»</div>'
+    div.innerHTML='<div class="situation">Фраза '+(i+1)+': «'+row.blank.replace('___','<strong style="color:var(--blue)">___</strong>')+'» · '+seRu(row)+'</div>'
       +'<div class="sos-choices">'
       +'<button class="sos-choice" onclick="checkSE(this,'+i+',\'Soy\')"><span class="emoji">🛂</span> Soy</button>'
       +'<button class="sos-choice" onclick="checkSE(this,'+i+',\'Estoy\')"><span class="emoji">📔</span> Estoy</button>'
@@ -1069,10 +1057,10 @@ function checkSE(btn,rowIdx,answer){
   const container=btn.closest('.sos-scenario');
   container.querySelectorAll('.sos-choice').forEach(b=>b.disabled=true);
   const fb=document.getElementById('se-fb-'+rowIdx);
+  const full=seFull(row);
   if(answer===row.correct){
     btn.classList.add('correct');
-    const full=answer==='Soy' ? 'Soy '+row.adj : 'Estoy '+row.adj;
-    fb.innerHTML='✅ <span style="color:var(--teal)">'+full+'</span> — '+row.why;
+    fb.innerHTML='✅ <span style="color:var(--teal)">'+full+'</span> — '+row.why+' · Перевод: '+seRu(row);
     fb.className='se-feedback ok';
     speak(full);
   }else{
@@ -1080,10 +1068,50 @@ function checkSE(btn,rowIdx,answer){
     container.querySelectorAll('.sos-choice').forEach(b=>{
       if(b.getAttribute('onclick').includes("'"+row.correct+"'")) b.classList.add('correct');
     });
-    const full=(row.correct==='Soy'?'Soy':'Estoy')+' '+row.adj;
-    fb.innerHTML='❌ Правильно: <strong>'+full+'</strong> — '+row.why;
+    fb.innerHTML='❌ Правильно: <strong>'+full+'</strong> — '+row.why+' · Перевод: '+seRu(row);
     fb.className='se-feedback bad';
   }
+}
+
+/* ========== ДОПОЛНИТЕЛЬНО: ВСЕ ФОРМЫ SER/ESTAR ========== */
+const ESTAR_FORMS=[
+  {p:'yo', f:'estoy', es:function(){ return 'Yo estoy '+adjOf(EMOS[0])+'.'; }, ru:'Я рад/рада (сейчас)'},
+  {p:'tú', f:'estás', es:function(){ return '¿Cómo estás?'; }, ru:'Как дела?'},
+  {p:'él / ella / usted', f:'está', es:function(){ return 'Está triste.'; }, ru:'Ему/ей грустно (сейчас)'},
+  {p:'nosotros/as', f:'estamos', es:function(){ return 'Estamos nerviosos.'; }, ru:'Мы нервничаем (сейчас)'},
+  {p:'vosotros/as', f:'estáis', es:function(){ return '¿Estáis cansados?'; }, ru:'Вы устали?'},
+  {p:'ellos / ustedes', f:'están', es:function(){ return 'Están enfadados.'; }, ru:'Они злятся (сейчас)'}
+];
+
+const SER_FORMS=[
+  {p:'yo', f:'soy', es:function(){ return gender==='girl' ? 'Soy rusa.' : 'Soy ruso.'; }, ru:'Я русский/русская'},
+  {p:'tú', f:'eres', es:function(){ return gender==='girl' ? '¿Eres simpática?' : '¿Eres simpático?'; }, ru:'Ты добрый/добрая?'},
+  {p:'él / ella / usted', f:'es', es:function(){ return 'Es alto.'; }, ru:'Он высокий'},
+  {p:'nosotros/as', f:'somos', es:function(){ return 'Somos rusos.'; }, ru:'Мы русские'},
+  {p:'vosotros/as', f:'sois', es:function(){ return '¿Sois españoles?'; }, ru:'Вы испанцы?'},
+  {p:'ellos / ustedes', f:'son', es:function(){ return 'Son simpáticos.'; }, ru:'Они добрые'}
+];
+
+function renderFormTable(id, forms){
+  const box=document.getElementById(id);
+  if(!box) return;
+  box.innerHTML='<table class="tools-table"><tr><th>Лицо</th><th>Форма</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr></table>';
+  const t=box.querySelector('table');
+  t.style.setProperty('--c','#8338EC');
+  forms.forEach(function(f){
+    const phrase=f.es();
+    const tr=document.createElement('tr');
+    tr.style.cursor='pointer';
+    tr.onclick=function(){ speak(phrase); };
+    tr.innerHTML='<td>'+f.p+'</td><td><strong>'+f.f+'</strong></td><td>'+phrase+'</td><td>'+f.ru+'</td>'
+      +'<td><button class="speak-btn" style="--c:#8338EC;padding:4px 10px;font-size:.8rem">🔊</button></td>';
+    t.appendChild(tr);
+  });
+}
+
+function renderForms(){
+  renderFormTable('table-estar', ESTAR_FORMS);
+  renderFormTable('table-ser', SER_FORMS);
 }
 
 /* ========== БЛОК 6: СИМУЛЯЦИЯ ========== */
@@ -1277,14 +1305,15 @@ if(localStorage.getItem('mudro_badge_emociones')==='true'){
 
 /* ========== СЛОВА УРОКА ========== */
 const WORDS_EMOTIONS=[
-  {es:'Estoy contento/a', ru:'Я рад/рада'},
-  {es:'Estoy triste', ru:'Мне грустно'},
-  {es:'Estoy enfadado/a', ru:'Я злюсь'},
-  {es:'Estoy cansado/a', ru:'Я устал/устала'},
-  {es:'Estoy nervioso/a', ru:'Я нервничаю'},
-  {es:'Estoy aburrido/a', ru:'Мне скучно'},
-  {es:'Estoy confundido/a', ru:'Я в замешательстве'},
-  {es:'Estoy bien / mal', ru:'Мне хорошо / плохо'}
+  {e:'contento', ru:'Я рад/рада'},
+  {e:'triste', ru:'Мне грустно'},
+  {e:'enfadado', ru:'Я злюсь'},
+  {e:'cansado', ru:'Я устал/устала'},
+  {e:'nervioso', ru:'Я нервничаю'},
+  {e:'aburrido', ru:'Мне скучно'},
+  {e:'confundido', ru:'Я в замешательстве'},
+  {es:'Estoy bien', ru:'Мне хорошо'},
+  {es:'Estoy mal', ru:'Мне плохо'}
 ];
 const WORDS_QUESTIONS=[
   {es:'¿Cómo estás?', ru:'Как дела?'},
@@ -1307,10 +1336,18 @@ function renderWordGrid(arr,containerId){
   const container=document.getElementById(containerId);
   container.innerHTML='';
   arr.forEach(w=>{
+    let es, ru;
+    if(w.e){
+      const e=emoById(w.e);
+      es='Estoy '+adjOf(e);
+      ru=w.ru;
+    }else{
+      es=w.es; ru=w.ru;
+    }
     const card=document.createElement('div');
     card.className='word-card';
-    card.innerHTML='<span class="w-es">'+w.es+'</span><span class="w-ru">'+w.ru+'</span>';
-    card.onclick=function(){ speak(w.es); };
+    card.innerHTML='<span class="w-es">'+es+'</span><span class="w-ru">'+ru+'</span>';
+    card.onclick=function(){ speak(es); };
     container.appendChild(card);
   });
 }
@@ -1323,16 +1360,18 @@ function renderWords(){
 }
 
 /* ========== MATCH GAME ========== */
-const MATCH_PAIRS=[
-  {es:'Estoy contento/a', ru:'Я рад/рада'},
-  {es:'Estoy triste', ru:'Мне грустно'},
-  {es:'Estoy enfadado/a', ru:'Я злюсь'},
-  {es:'Estoy cansado/a', ru:'Я устал/устала'},
-  {es:'Estoy nervioso/a', ru:'Я нервничаю'},
-  {es:'Estoy aburrido/a', ru:'Мне скучно'},
-  {es:'Estoy confundido/a', ru:'Я в замешательстве'},
-  {es:'Estoy bien', ru:'Мне хорошо'}
-];
+function getMatchPairs(){
+  return [
+    {es:'Estoy '+adjOf(EMOS[0]), ru:'Я рад/рада'},
+    {es:'Estoy '+adjOf(EMOS[1]), ru:'Мне грустно'},
+    {es:'Estoy '+adjOf(EMOS[2]), ru:'Я злюсь'},
+    {es:'Estoy '+adjOf(EMOS[3]), ru:'Я устал/устала'},
+    {es:'Estoy '+adjOf(EMOS[4]), ru:'Я нервничаю'},
+    {es:'Estoy '+adjOf(EMOS[5]), ru:'Мне скучно'},
+    {es:'Estoy '+adjOf(EMOS[6]), ru:'Я в замешательстве'},
+    {es:'Estoy bien', ru:'Мне хорошо'}
+  ];
+}
 let matchSelected=null, matchFound=0;
 
 function shuffle(arr){ return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]); }
@@ -1344,8 +1383,9 @@ function renderMatch(){
   matchSelected=null; matchFound=0;
   document.getElementById('match-feedback').textContent='Выбери слово слева 👈';
 
-  const leftItems=shuffle(MATCH_PAIRS.slice());
-  const rightItems=shuffle(MATCH_PAIRS.slice());
+  const pairs=getMatchPairs();
+  const leftItems=shuffle(pairs.slice());
+  const rightItems=shuffle(pairs.slice());
 
   leftItems.forEach((p,i)=>{
     const item=document.createElement('div');
@@ -1396,7 +1436,8 @@ function selectMatch(item){
 
   const es=matchSelected.dataset.side==='left'?matchSelected.dataset.value:item.dataset.value;
   const ru=matchSelected.dataset.side==='right'?matchSelected.dataset.value:item.dataset.value;
-  const pair=MATCH_PAIRS.find(p=>p.es===es && p.ru===ru);
+  const pairs=getMatchPairs();
+  const pair=pairs.find(p=>p.es===es && p.ru===ru);
 
   if(pair){
     matchSelected.classList.remove('selected');
@@ -1404,8 +1445,8 @@ function selectMatch(item){
     item.classList.add('matched');
     matchFound++;
     speak(pair.es);
-    document.getElementById('match-feedback').textContent='🎉 ¡Bien! Найдено '+matchFound+'/'+MATCH_PAIRS.length;
-    if(matchFound===MATCH_PAIRS.length){
+    document.getElementById('match-feedback').textContent='🎉 ¡Bien! Найдено '+matchFound+'/'+pairs.length;
+    if(matchFound===pairs.length){
       setTimeout(function(){
         document.getElementById('match-feedback').textContent='🏆 Отлично! Все пары найдены!';
         confetti('🎯');
@@ -1557,6 +1598,7 @@ renderEmotionCards();
 renderThermoChips();
 updateThermo();
 renderSeQuiz();
+renderForms();
 renderDiaryPick();
 renderDiarySlots();
 renderWords();
