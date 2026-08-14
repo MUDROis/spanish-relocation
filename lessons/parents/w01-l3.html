@@ -175,6 +175,14 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 .quest-answer .qa-es{font-weight:900;font-size:1rem;display:flex;gap:10px;align-items:flex-start}
 .quest-answer .qa-ru{color:var(--muted);font-weight:800;font-size:.85rem;margin-top:4px}
 .quest-progress{font-weight:900;color:var(--p2);margin-top:4px;font-size:.9rem}
+.quest-input{margin-top:10px;background:#FFF7EF;border:1px dashed var(--p3);border-radius:12px;padding:10px 12px;display:none}
+.quest-input.show{display:block;animation:fadeIn .3s}
+.quest-input label{font-weight:800;font-size:.85rem;display:block;margin-bottom:6px}
+.qi-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.qi-row input{border:1px solid #ddd;border-radius:10px;padding:8px 10px;font-family:inherit;font-weight:800;font-size:.9rem;width:150px;background:#fff}
+.qi-out{margin-top:8px;font-weight:900;font-size:.95rem;line-height:1.5}
+.qi-out .qa-ru{color:var(--muted);font-weight:800;font-size:.85rem;margin-top:3px}
+.ex-ru{display:block;color:#8a7a6a;font-size:.75rem;font-weight:700;margin-top:2px}
 
 /* ---------- ресурсы ---------- */
 .resources-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
@@ -312,7 +320,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   <div id="vocab-docs" class="vocab-panel"><div class="flash-grid" id="flashDocs"></div></div>
 
   <div class="false-friends">
-    <div class="friend-card"><b>⚠️ la cola</b>Это НЕ «кола» (напиток) и НЕ «кока». Это — очередь!</div>
+    <div class="friend-card"><b>⚠️ la cola</b>Это НЕ «кола» (напиток). Это — очередь!</div>
     <div class="friend-card"><b>⚠️ el turno</b>Это НЕ «тур» и НЕ «поворот». Это — очередь, номерок: Espere su turno.</div>
     <div class="friend-card"><b>⚠️ recoger</b>Это НЕ «рекогносцировать». Это просто «забрать»: Recoja su resguardo.</div>
   </div>
@@ -390,6 +398,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
     <div class="dlg-controls">
       <span class="dlg-count" id="dlgCount">1 / 21</span>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-ghost" id="dlgStart">⏪ Сначала</button>
         <button class="btn btn-ghost" id="dlgPrev">← Назад</button>
         <button class="btn btn-primary" id="dlgNext">Дальше →</button>
         <button class="btn btn-ghost" id="dlgSpeak">🔊 Ещё раз</button>
@@ -761,18 +770,18 @@ document.querySelector('#poderTable tbody').addEventListener('click',e=>{
 
 /* ====== ГРАММАТИКА: ИМПЕРАТИВ ====== */
 const IMPER=[
- {inf:'esperar',imp:'Espere',ru:'Ждите',ex:'Espere un momento.'},
- {inf:'entrar',imp:'Entre',ru:'Войдите',ex:'Entre, por favor.'},
- {inf:'sentarse',imp:'Siéntese',ru:'Садитесь',ex:'Siéntese aquí.'},
- {inf:'entregar',imp:'Entregue',ru:'Отдайте',ex:'Entregue los documentos.'},
- {inf:'presentar',imp:'Presente',ru:'Предъявите',ex:'Presente su pasaporte.'},
- {inf:'firmar',imp:'Firme',ru:'Подпишите',ex:'Firme aquí, por favor.'},
- {inf:'poner',imp:'Ponga',ru:'Положите',ex:'Ponga la huella aquí.'},
- {inf:'recoger',imp:'Recoja',ru:'Заберите',ex:'Recoja su resguardo.'},
- {inf:'volver',imp:'Vuelva',ru:'Вернитесь',ex:'Vuelva en 30 días.'}
+ {inf:'esperar',imp:'Espere',ru:'Ждите',ex:'Espere un momento.',exRu:'Подождите минутку.'},
+ {inf:'entrar',imp:'Entre',ru:'Войдите',ex:'Entre, por favor.',exRu:'Входите, пожалуйста.'},
+ {inf:'sentarse',imp:'Siéntese',ru:'Садитесь',ex:'Siéntese aquí.',exRu:'Садитесь здесь.'},
+ {inf:'entregar',imp:'Entregue',ru:'Сдайте',ex:'Entregue los documentos.',exRu:'Сдайте документы.'},
+ {inf:'presentar',imp:'Presente',ru:'Предъявите',ex:'Presente su pasaporte.',exRu:'Предъявите ваш паспорт.'},
+ {inf:'firmar',imp:'Firme',ru:'Подпишите',ex:'Firme aquí, por favor.',exRu:'Подпишите здесь, пожалуйста.'},
+ {inf:'poner',imp:'Ponga',ru:'Приложите',ex:'Ponga la huella aquí.',exRu:'Приложите отпечаток здесь.'},
+ {inf:'recoger',imp:'Recoja',ru:'Заберите',ex:'Recoja su resguardo.',exRu:'Заберите свою расписку.'},
+ {inf:'volver',imp:'Vuelva',ru:'Вернитесь',ex:'Vuelva en 30 días.',exRu:'Вернитесь через 30 дней.'}
 ];
 document.querySelector('#impTable tbody').innerHTML=IMPER.map(r=>`
-  <tr><td class="t-es">${r.inf}</td><td><b style="color:var(--p1)">${r.imp}</b></td><td class="t-ru">${r.ru}</td><td>${r.ex}</td><td class="t-speak">🔊</td></tr>`).join('');
+  <tr><td class="t-es">${r.inf}</td><td><b style="color:var(--p1)">${r.imp}</b></td><td class="t-ru">${r.ru}</td><td>${r.ex}<small class="ex-ru">${r.exRu}</small></td><td class="t-speak">🔊</td></tr>`).join('');
 document.querySelector('#impTable tbody').addEventListener('click',e=>{
   const tr=e.target.closest('tr');if(!tr)return;
   const i=[...tr.parentElement.children].indexOf(tr);
@@ -805,7 +814,7 @@ const DIALOG=[
  {who:'Охрана',es:'Allí, a la derecha. Cuando aparezca su número, vaya a la ventanilla tres.',ru:'Вон там, справа. Когда появится ваш номер, подойдите к окошку 3.'},
  {who:'Вы',es:'Perfecto, gracias.',ru:'Отлично, спасибо.'},
  {who:'Вы',es:'Buenos días. Tengo una cita previa.',ru:'Добрый день. У меня запись.'},
- {who:'Клерк',es:'Buenos días. ¿Me puede dar su DNI o pasaporte, por favor?',ru:'Добрый день. Дайте, пожалуйста, ваш паспорт.'},
+ {who:'Клерк',es:'Buenos días. ¿Me puede dar su DNI o pasaporte, por favor?',ru:'Добрый день. Дайте, пожалуйста, ваш DNI (удостоверение личности) или паспорт.'},
  {who:'Вы',es:'Sí, aquí está. Mi pasaporte.',ru:'Да, вот он. Мой паспорт.'},
  {who:'Клерк',es:'Gracias. ¿Ha traído el formulario EX-15?',ru:'Спасибо. Вы принесли форму EX-15?'},
  {who:'Вы',es:'Sí. Aquí tiene. Y también el justificante de pago.',ru:'Да. Вот. И ещё квитанцию об оплате пошлины.'},
@@ -834,10 +843,10 @@ function renderDlg(){
   const done=document.getElementById('dlgDone');
   if(dlgIdx===DIALOG.length-1)done.classList.add('show');
   else done.classList.remove('show');
-  speak(d.es);
 }
-document.getElementById('dlgNext').onclick=()=>{dlgIdx=Math.min(dlgIdx+1,DIALOG.length-1);renderDlg();};
-document.getElementById('dlgPrev').onclick=()=>{dlgIdx=Math.max(dlgIdx-1,0);renderDlg();};
+document.getElementById('dlgStart').onclick=()=>{dlgIdx=0;renderDlg();speak(DIALOG[0].es);};
+document.getElementById('dlgNext').onclick=()=>{dlgIdx=Math.min(dlgIdx+1,DIALOG.length-1);renderDlg();speak(DIALOG[dlgIdx].es);};
+document.getElementById('dlgPrev').onclick=()=>{dlgIdx=Math.max(dlgIdx-1,0);renderDlg();speak(DIALOG[dlgIdx].es);};
 document.getElementById('dlgSpeak').onclick=()=>speak(DIALOG[dlgIdx].es);
 renderDlg();
 
@@ -916,8 +925,8 @@ problemsWrap.addEventListener('click',e=>{
 /* ====== КВЕСТ НЕДЕЛИ ====== */
 const QUEST=[
  {from:'Урок 1.1 · cita previa',task:'Поздороваться и назвать цель визита',es:'Buenos días. Tengo una cita previa.',ru:'Добрый день. У меня приём.'},
- {from:'Урок 1.1 · алфавит',task:'Продиктовать фамилию по буквам',es:'Ivanova: I de Italia, V de Valencia, A de Antonio.',ru:'Иванова: И — Италия, В — Валенсия, А — Антонио.'},
- {from:'Урок 1.1 · цифры',task:'Назвать год рождения и возраст',es:'Nací en mil novecientos ochenta y cinco. Tengo treinta y un años.',ru:'Я родился в 1985. Мне 31 год.'},
+ {from:'Урок 1.1 · алфавит',task:'Продиктовать фамилию по буквам',es:'Ivanova: I de Italia, V de Valencia, A de Antonio.',ru:'Иванова: И — Италия, В — Валенсия, А — Антонио.',input:{label:'Напишите вашу фамилию латиницей — и клерк продиктует её по буквам:',ph:'Ivanova'}},
+ {from:'Урок 1.1 · цифры',task:'Назвать год рождения и возраст',es:'Nací en mil novecientos ochenta y cinco. Tengo treinta y un años.',ru:'Я родился(ась) в 1985. Мне 31 год.',input:{label:'Напишите ваш год рождения — озвучим по-испански с возрастом:',ph:'1985',num:true}},
  {from:'Урок 1.2 · EX-15',task:'Подать бланк и назвать его поля',es:'Aquí tiene el formulario EX-15: nombre, apellidos, fecha de nacimiento.',ru:'Вот форма EX-15: имя, фамилии, дата рождения.'},
  {from:'Урок 1.2 · Modelo 790',task:'Подтвердить оплату tasas',es:'Sí, aquí está el justificante de pago.',ru:'Да, вот квитанция об оплате пошлины.'},
  {from:'Урок 1.3 · визит',task:'Переспросить и попрощаться',es:'Perdone, ¿puede repetir? Muchas gracias. Hasta luego.',ru:'Извините, повторите, пожалуйста. Спасибо. До свидания.'}
@@ -929,6 +938,15 @@ questWrap.innerHTML=QUEST.map((q,i)=>`
     <div class="quest-body">
       <div class="quest-from">${q.from}</div>
       <div class="quest-task">${q.task}</div>
+      ${q.input?`
+        <div class="quest-input show" id="quest-inp-${i}">
+          <label>${q.input.label}</label>
+          <div class="qi-row">
+            <input type="${q.input.num?'number':'text'}" id="quest-in-${i}" placeholder="${q.input.ph}">
+            <button class="btn btn-ghost btn-small" id="quest-spk-${i}">🔊 Озвучить</button>
+          </div>
+          <div class="qi-out" id="quest-out-${i}"></div>
+        </div>`:''}
       <button class="btn btn-ghost btn-small" id="quest-btn-${i}">👀 Показать фразу</button>
       <div class="quest-answer" id="quest-ans-${i}">
         <div class="qa-es">${q.es} <button class="mini-speak speak" data-text="${q.es}">🔊</button></div>
@@ -953,6 +971,56 @@ QUEST.forEach((q,i)=>{
     document.getElementById('questProgress').textContent='Открыто фраз: '+questOpen+' из 6'+(questOpen===6?' — 🎉 квест готов к записи голосового!':'');
   };
 });
+const SPELL={A:'Antonio',B:'Barcelona',C:'Carmen',D:'Daniel',E:'España',F:'Francia',G:'Granada',H:'Hache',I:'Italia',J:'Jota',K:'Kilo',L:'Lola',LL:'Lluvia',M:'Madrid',N:'Navarra',Ñ:'Ñandú',O:'Oviedo',P:'Pamplona',Q:'Queso',R:'Rosa',S:'Sevilla',T:'Toledo',U:'Uruguay',V:'Valencia',W:'Wáter',X:'Xilófono',Y:'Yema',Z:'Zaragoza'};
+const UNI=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince'];
+const DEC2=['diez','veinte','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+function esNumber(n){
+  if(n<16)return UNI[n];
+  if(n<20)return 'dieci'+UNI[n-10];
+  if(n<100){
+    const d=Math.floor(n/10),u=n%10;
+    return DEC2[d-1]+(u?' y '+UNI[u]:'');
+  }
+  if(n<1000){
+    const c=Math.floor(n/100),r=n%100;
+    const cw=c===1?'cien':(c===5?'quinient':(c===7?'setecient':(c===9?'novecient':UNI[c]+'cient')))+'os';
+    return cw+(r?' '+esNumber(r):'');
+  }
+  if(n<2000)return 'mil'+(n%1000?' '+esNumber(n%1000):'');
+  if(n<1000000){
+    const m=Math.floor(n/1000),r=n%1000;
+    return (m===1?'mil':esNumber(m)+' mil')+(r?' '+esNumber(r):'');
+  }
+  return String(n);
+}
+QUEST.forEach((q,i)=>{
+  if(!q.input)return;
+  document.getElementById('quest-spk-'+i).onclick=()=>{
+    const out=document.getElementById('quest-out-'+i);
+    const val=document.getElementById('quest-in-'+i).value.trim();
+    if(!val){toast('✍️ Сначала введите данные в окошко');return;}
+    if(q.input.num){
+      const y=parseInt(val,10);
+      if(y<1900||y>2100){toast('📅 Год должен быть в диапазоне 1900–2100');return;}
+      const age=new Date().getFullYear()-y;
+      const txt='Nací en '+esNumber(y)+'. Tengo '+esNumber(age)+' años.';
+      out.innerHTML='<div>🗣 '+txt+'</div><div class="qa-ru">Я родился(ась) в '+y+'. Мне '+age+' '+ageStr(age)+'.</div>';
+      speak(txt);
+    }else{
+      const letters=val.normalize('NFD').toUpperCase().replace(/[^A-ZÑ]/g,'');
+      if(!letters){toast('🔤 Используйте латинские буквы A–Z, Ñ');return;}
+      const txt=letters.split('').map(l=>l+' de '+(SPELL[l]||SPELL[l.replace('LL','')]||l)).join(', ');
+      out.innerHTML='<div>🗣 '+txt+'</div>';
+      speak(txt);
+    }
+  };
+});
+function ageStr(a){
+  const d=a%10;
+  if(d===1&&a!==11)return 'год';
+  if(d>=2&&d<=4&&(a<10||a>20))return 'года';
+  return 'лет';
+}
 
 /* ====== СВЕТОФОР ====== */
 document.querySelectorAll('.tl-cell').forEach(c=>{
