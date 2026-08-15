@@ -446,7 +446,7 @@
         Смотри и повторяй за детьми! В испанской школе учителя спрашивают детей о настроении каждое утро.
       </p>
       <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/XZpB8227WSQ"
+        <iframe src="https://www.youtube.com/embed/-nBjyGO9l5s"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
       </div>
@@ -793,6 +793,17 @@
         Честно оцени себя по 5 критериям (таблица ниже).
       </div>
     </div>
+
+    <div class="task">
+      <div class="task-num star">8</div>
+      <div>
+        <strong>Дополнительная практика</strong> · 5 мин ⭐<br>
+        Продолжай тренироваться дома: посмотри видео и сыграй в игры по теме урока!
+        <a class="anchor" href="https://www.youtube.com/watch?v=YJaR7X5WyRY" target="_blank" rel="noopener">📺 Видео</a>
+        <a class="anchor" href="https://wordwall.net/ru/resource/6276129" target="_blank" rel="noopener">🎮 Emociones</a>
+        <a class="anchor" href="https://wordwall.net/ru/resource/12680483/emociones" target="_blank" rel="noopener">🎮 ¿Cómo estás?</a>
+      </div>
+    </div>
   </section>
 
   <!-- САМОПРОВЕРКА -->
@@ -901,7 +912,7 @@ let gender = localStorage.getItem('mudro_gender') === 'girl' ? 'girl' : 'boy';
 const EMOS=[
   {id:'contento', emoji:'😄', ru:'Я рад/рада', gesture:'Широкая улыбка + руки вверх', m:'contento', f:'contenta'},
   {id:'triste',   emoji:'😢', ru:'Мне грустно', gesture:'Опускаем уголки рта + плечи вниз', m:'triste', f:'triste'},
-  {id:'enfadado', emoji:'😡', ru:'Я злюсь', gesture:'Сжимаем кулаки + хмуримся', m:'enfadado', f:'enfadada'},
+  {id:'enojado', emoji:'😡', ru:'Я злюсь', gesture:'Сжимаем кулаки + хмуримся', m:'enojado', f:'enojada'},
   {id:'cansado',  emoji:'😴', ru:'Я устал/устала', gesture:'Зеваем + потираем глаза', m:'cansado', f:'cansada'},
   {id:'nervioso', emoji:'😰', ru:'Я нервничаю', gesture:'Трясём руками + кусаем губу', m:'nervioso', f:'nerviosa'},
   {id:'aburrido', emoji:'😐', ru:'Мне скучно', gesture:'Закатываем глаза + зеваем', m:'aburrido', f:'aburrida'},
@@ -1081,7 +1092,7 @@ const ESTAR_FORMS=[
   {p:'él / ella / usted', f:'está', es:function(){ return 'Está triste.'; }, ru:'Ему/ей грустно (сейчас)'},
   {p:'nosotros/as', f:'estamos', es:function(){ return 'Estamos nerviosos.'; }, ru:'Мы нервничаем (сейчас)'},
   {p:'vosotros/as', f:'estáis', es:function(){ return '¿Estáis cansados?'; }, ru:'Вы устали?'},
-  {p:'ellos / ustedes', f:'están', es:function(){ return 'Están enfadados.'; }, ru:'Они злятся (сейчас)'}
+  {p:'ellos / ustedes', f:'están', es:function(){ return 'Están enojados.'; }, ru:'Они злятся (сейчас)'}
 ];
 
 const SER_FORMS=[
@@ -1119,9 +1130,9 @@ function renderForms(){
 const SIM_ROUNDS=[
   {sit:'🎒 Первый день в школе: вокруг чужие лица, ты никого не знаешь', hint:'Неизвестность = нервы', correct:'nervioso', distract:['contento','triste']},
   {sit:'🎉 Учитель громко хвалит твою работу и показывает всем', hint:'Похвала = радость', correct:'contento', distract:['cansado','aburrido']},
-  {sit:'😴 Урок идёт уже второй час, глаза сами закрываются', hint:'Долго = усталость', correct:'cansado', distract:['contento','enfadado']},
-  {sit:'🙃 Одноклассник взял твой карандаш без спроса', hint:'Несправедливость = злость', correct:'enfadado', distract:['triste','nervioso']},
-  {sit:'📚 Учитель объясняет новую тему, а ты не понимаешь ни слова', hint:'Непонимание = замешательство', correct:'confundido', distract:['aburrido','enfadado']}
+  {sit:'😴 Урок идёт уже второй час, глаза сами закрываются', hint:'Долго = усталость', correct:'cansado', distract:['contento','enojado']},
+  {sit:'🙃 Одноклассник взял твой карандаш без спроса', hint:'Несправедливость = злость', correct:'enojado', distract:['triste','nervioso']},
+  {sit:'📚 Учитель объясняет новую тему, а ты не понимаешь ни слова', hint:'Непонимание = замешательство', correct:'confundido', distract:['aburrido','enojado']}
 ];
 
 let simRound=0, simStars=0;
@@ -1308,7 +1319,7 @@ if(localStorage.getItem('mudro_badge_emociones')==='true'){
 const WORDS_EMOTIONS=[
   {e:'contento', ru:'Я рад/рада'},
   {e:'triste', ru:'Мне грустно'},
-  {e:'enfadado', ru:'Я злюсь'},
+  {e:'enojado', ru:'Я злюсь'},
   {e:'cansado', ru:'Я устал/устала'},
   {e:'nervioso', ru:'Я нервничаю'},
   {e:'aburrido', ru:'Мне скучно'},
