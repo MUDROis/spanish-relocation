@@ -1024,15 +1024,16 @@ function updateThermo(){
 
 /* ========== БЛОК 5: SER vs ESTAR ========== */
 const SE_DATA=[
-  {blank:'___ ruso', correct:'Soy', adj:'ruso', adjF:'rusa', why:'Национальность = всегда → SER', ru:{m:'Я русский', f:'Я русская'}},
-  {blank:'___ cansado', correct:'Estoy', adj:'cansado', adjF:'cansada', why:'Усталость = сейчас → ESTAR', ru:{m:'Я устал', f:'Я устала'}},
-  {blank:'___ simpático', correct:'Soy', adj:'simpático', adjF:'simpática', why:'Характер = всегда → SER', ru:{m:'Я добрый', f:'Я добрая'}},
-  {blank:'___ nervioso', correct:'Estoy', adj:'nervioso', adjF:'nerviosa', why:'Нервы = сейчас → ESTAR', ru:'Я нервничаю'},
-  {blank:'___ de Rusia', correct:'Soy', adj:'de Rusia', why:'Происхождение = всегда → SER', ru:'Я из России'},
-  {blank:'___ triste', correct:'Estoy', adj:'triste', why:'Грусть = сейчас → ESTAR', ru:'Мне грустно'}
+  {correct:'Soy', adj:'ruso', adjF:'rusa', why:'Национальность = всегда → SER', ru:{m:'Я русский', f:'Я русская'}},
+  {correct:'Estoy', adj:'cansado', adjF:'cansada', why:'Усталость = сейчас → ESTAR', ru:{m:'Я устал', f:'Я устала'}},
+  {correct:'Soy', adj:'simpático', adjF:'simpática', why:'Характер = всегда → SER', ru:{m:'Я добрый', f:'Я добрая'}},
+  {correct:'Estoy', adj:'nervioso', adjF:'nerviosa', why:'Нервы = сейчас → ESTAR', ru:'Я нервничаю'},
+  {correct:'Soy', adj:'de Rusia', why:'Происхождение = всегда → SER', ru:'Я из России'},
+  {correct:'Estoy', adj:'triste', why:'Грусть = сейчас → ESTAR', ru:'Мне грустно'}
 ];
 
 function seAdj(row){ return gender==='girl' && row.adjF ? row.adjF : row.adj; }
+function seBlank(row){ return '___ '+seAdj(row); }
 function seFull(row){ return (row.correct==='Soy'?'Soy':'Estoy')+' '+seAdj(row); }
 function seRu(row){ return typeof row.ru==='string' ? row.ru : (gender==='girl'?row.ru.f:row.ru.m); }
 
@@ -1042,7 +1043,7 @@ function renderSeQuiz(){
   SE_DATA.forEach((row,i)=>{
     const div=document.createElement('div');
     div.className='sos-scenario';
-    div.innerHTML='<div class="situation">Фраза '+(i+1)+': «'+row.blank.replace('___','<strong style="color:var(--blue)">___</strong>')+'» · '+seRu(row)+'</div>'
+    div.innerHTML='<div class="situation">Фраза '+(i+1)+': «'+seBlank(row).replace('___','<strong style="color:var(--blue)">___</strong>')+'» · '+seRu(row)+'</div>'
       +'<div class="sos-choices">'
       +'<button class="sos-choice" onclick="checkSE(this,'+i+',\'Soy\')"><span class="emoji">🛂</span> Soy</button>'
       +'<button class="sos-choice" onclick="checkSE(this,'+i+',\'Estoy\')"><span class="emoji">📔</span> Estoy</button>'
