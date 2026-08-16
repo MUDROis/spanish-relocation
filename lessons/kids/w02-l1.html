@@ -891,31 +891,14 @@ document.addEventListener('click', function(e){
 /* ========== РОД (мальчик/девочка) ========== */
 let gender = localStorage.getItem('mudro_gender') === 'girl' ? 'girl' : 'boy';
 
-const EMOS=[
-  {id:'contento', emoji:'😄', ru:'Я рад/рада', gesture:'Широкая улыбка + руки вверх', m:'contento', f:'contenta'},
-  {id:'triste',   emoji:'😢', ru:'Мне грустно', gesture:'Опускаем уголки рта + плечи вниз', m:'triste', f:'triste'},
-  {id:'enojado', emoji:'😡', ru:'Я злюсь', gesture:'Сжимаем кулаки + хмуримся', m:'enojado', f:'enojada'},
-  {id:'cansado',  emoji:'😴', ru:'Я устал/устала', gesture:'Зеваем + потираем глаза', m:'cansado', f:'cansada'},
-  {id:'nervioso', emoji:'😰', ru:'Я нервничаю', gesture:'Трясём руками + кусаем губу', m:'nervioso', f:'nerviosa'},
-  {id:'aburrido', emoji:'😐', ru:'Мне скучно', gesture:'Закатываем глаза + зеваем', m:'aburrido', f:'aburrida'},
-  {id:'confundido', emoji:'😕', ru:'Я в замешательстве', gesture:'Чешем затылок + хмуримся', m:'confundido', f:'confundida'}
-];
-
-function adjOf(e){ return gender === 'girl' ? e.f : e.m; }
-function phraseOf(e){ return 'Estoy ' + adjOf(e); }
-
 function setGender(g){
   gender = g;
   localStorage.setItem('mudro_gender', g);
   document.getElementById('gb-boy').classList.toggle('active', g === 'boy');
   document.getElementById('gb-girl').classList.toggle('active', g === 'girl');
-  renderEmotionCards();
-  renderThermoChips();
-  renderDiaryPick();
+  renderWarmup();
+  renderSymptoms();
   renderWords();
-  renderSeQuiz();
-  renderForms();
-  renderMatch();
 }
 
 function renderGenderButtons(){
@@ -923,201 +906,260 @@ function renderGenderButtons(){
   document.getElementById('gb-girl').classList.toggle('active', gender === 'girl');
 }
 
-/* ========== БЛОК 1: РАЗОГРЕВ (SOS → эмоция) ========== */
-function revealEmotion(card, sosPhrase){
-  document.querySelectorAll('.sos-card').forEach(c=>c.classList.remove('active'));
-  card.classList.add('active');
-  const link = card.querySelector('.sos-emotion-link');
-  link.style.display = 'block';
-  speak(sosPhrase);
-  setTimeout(()=>card.classList.remove('active'), 1200);
-}
-
-/* ========== БЛОК 2: СЛУЧАЙНАЯ ФРАЗА ========== */
-const RANDOM_EMOTIONS=[
-  {es:'¡Estoy muy contento hoy!', ru:'Я очень рад сегодня!'},
-  {es:'Estoy un poco cansado.', ru:'Я немного устал.'},
-  {es:'¿Cómo estás tú?', ru:'А как ты?'},
-  {es:'Estoy nervioso porque es mi primer día.', ru:'Я нервничаю, потому что это мой первый день.'},
-  {es:'Estoy aburrido en clase.', ru:'Мне скучно на уроке.'}
-];
-function pressRandomEmotion(){
-  const m=RANDOM_EMOTIONS[Math.floor(Math.random()*RANDOM_EMOTIONS.length)];
-  const out=document.getElementById('rand-emotion-output');
-  out.innerHTML='<div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
-  speak(m.es);
-}
-
-/* ========== БЛОК 3: КАРТОЧКИ ЭМОЦИЙ ========== */
-function renderEmotionCards(){
-  const grid=document.getElementById('emotion-grid');
-  grid.innerHTML='';
-  EMOS.slice(0,6).forEach(e=>{
-    const card=document.createElement('div');
-    card.className='emotion-card';
-    card.style.setProperty('--ec','#FFE8E8');
-    card.innerHTML='<span class="emotion-emoji">'+e.emoji+'</span>'
-      +'<div class="emotion-es">'+phraseOf(e)+'</div>'
-      +'<div class="emotion-ru">'+e.ru+'</div>'
-      +'<div class="emotion-gesture">🤲 '+e.gesture+'</div>';
-    card.onclick=function(){ speakCard(card, phraseOf(e)); };
-    grid.appendChild(card);
-  });
-}
 function speakCard(card,text){
-  document.querySelectorAll('.emotion-card').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.body-card.active, .symptom-card.active').forEach(c=>c.classList.remove('active'));
   card.classList.add('active');
   speak(text);
   setTimeout(()=>card.classList.remove('active'),1200);
 }
 
-/* ========== БЛОК 4: ТЕРМОМЕТР ========== */
-let thermoEmotion = EMOS[0];
+/* ========== ДАННЫЕ: ЧАСТИ ТЕЛА ========== */
+const BODY_PARTS=[
+  {id:'ojos',    emoji:'👀', es:'los ojos',     ru:'глаза',  art:'los', gender:'m', gesture:'Покажи на свои глаза', phrase:'Me duelen los ojos',    phraseRu:'У меня болят глаза'},
+  {id:'oreja',   emoji:'👂', es:'la oreja',     ru:'ухо',    art:'la',  gender:'f', gesture:'Потрогай своё ухо',     phrase:'Me duele la oreja',     phraseRu:'У меня болит ухо'},
+  {id:'nariz',   emoji:'👃', es:'la nariz',     ru:'нос',    art:'la',  gender:'f', gesture:'Покажи на свой нос',    phrase:'Me duele la nariz',     phraseRu:'У меня болит нос'},
+  {id:'boca',    emoji:'👄', es:'la boca',      ru:'рот',    art:'la',  gender:'f', gesture:'Улыбнись и покажи рот', phrase:'Me duele la boca',      phraseRu:'У меня болит рот'},
+  {id:'dientes', emoji:'🦷', es:'los dientes',  ru:'зубы',   art:'los', gender:'m', gesture:'Покажи свои зубы',     phrase:'Me duelen los dientes', phraseRu:'У меня болят зубы'},
+  {id:'cabeza',  emoji:'🤯', es:'la cabeza',    ru:'голова', art:'la',  gender:'f', gesture:'Погладь себя по голове',phrase:'Me duele la cabeza',    phraseRu:'У меня болит голова'},
+  {id:'brazo',   emoji:'💪', es:'el brazo',     ru:'рука',   art:'el',  gender:'m', gesture:'Покажи свой бицепс',   phrase:'Me duele el brazo',     phraseRu:'У меня болит рука'},
+  {id:'mano',    emoji:'🖐', es:'la mano',      ru:'кисть',  art:'la',  gender:'f', gesture:'Помаши рукой',        phrase:'Me duele la mano',      phraseRu:'У меня болит кисть'},
+  {id:'dedo',    emoji:'🤚', es:'el dedo',      ru:'палец',  art:'el',  gender:'m', gesture:'Покажи один палец',   phrase:'Me duele el dedo',      phraseRu:'У меня болит палец'},
+  {id:'pierna',  emoji:'🦵', es:'la pierna',    ru:'нога',   art:'la',  gender:'f', gesture:'Покажи свою ногу',    phrase:'Me duele la pierna',    phraseRu:'У меня болит нога'},
+  {id:'pie',     emoji:'🦶', es:'el pie',       ru:'стопа',  art:'el',  gender:'m', gesture:'Топни ногой',         phrase:'Me duele el pie',       phraseRu:'У меня болит стопа'},
+  {id:'rodilla', emoji:'🧎', es:'la rodilla',   ru:'колено', art:'la',  gender:'f', gesture:'Похлопай по коленке', phrase:'Me duele la rodilla',   phraseRu:'У меня болит колено'}
+];
 
-function renderThermoChips(){
-  const box=document.getElementById('thermo-chips');
+function bodyById(id){ return BODY_PARTS.find(p=>p.id===id); }
+
+/* ========== БЛОК 1: РАЗОГРЕВ (эмоции → тело) ========== */
+const WARMUP=[
+  {emoji:'😴', m:'Estoy cansado', f:'Estoy cansada', ru:'Я устал(а) · Урок 3', body:'Me duelen los ojos',   bodyRu:'У меня болят глаза'},
+  {emoji:'😰', m:'Estoy nervioso', f:'Estoy nerviosa', ru:'Я нервничаю · Урок 3', body:'Me duele el estómago', bodyRu:'У меня болит живот'},
+  {emoji:'😡', m:'Estoy enojado', f:'Estoy enojada', ru:'Я злюсь · Урок 3', body:'Me duele la cabeza',    bodyRu:'У меня болит голова'}
+];
+
+function renderWarmup(){
+  const grid=document.getElementById('warmup-grid');
+  grid.innerHTML='';
+  WARMUP.forEach(w=>{
+    const es=gender==='girl'?w.f:w.m;
+    const card=document.createElement('div');
+    card.className='sos-card';
+    card.style.setProperty('--c','#F4A261');
+    card.innerHTML='<div class="sos-emoji">'+w.emoji+'</div>'
+      +'<div class="sos-phrase">'+es+'</div>'
+      +'<div class="sos-meaning">'+w.ru+'</div>'
+      +'<div class="sos-emotion-link" style="display:none"><span class="link-es">🩹 '+w.body+'</span><br>'+w.bodyRu+'</div>';
+    card.onclick=function(){ revealBody(card, w.body); };
+    grid.appendChild(card);
+  });
+}
+
+function revealBody(card,bodyPhrase){
+  document.querySelectorAll('#warmup-grid .sos-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+  card.querySelector('.sos-emotion-link').style.display='block';
+  speak(bodyPhrase);
+  setTimeout(()=>card.classList.remove('active'),1200);
+}
+
+/* ========== БЛОК 2: СЛУЧАЙНАЯ ФРАЗА (SOS) ========== */
+const RANDOM_BODY=[
+  {es:'¿Dónde te duele?', ru:'Где у тебя болит? (вопрос медсестры)'},
+  {es:'Me duele la cabeza.', ru:'У меня болит голова.'},
+  {es:'Me duelen los pies.', ru:'У меня болят стопы.'},
+  {es:'Me duele la barriga.', ru:'У меня болит живот.'},
+  {es:'Me duele la garganta.', ru:'У меня болит горло.'}
+];
+
+function pressRandomBody(){
+  const m=RANDOM_BODY[Math.floor(Math.random()*RANDOM_BODY.length)];
+  const out=document.getElementById('rand-body-output');
+  out.innerHTML='<div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+  speak(m.es);
+}
+
+/* ========== БЛОК 3: КАРТОЧКИ ЧАСТЕЙ ТЕЛА ========== */
+function renderBodyCards(){
+  const grid=document.getElementById('body-grid');
+  grid.innerHTML='';
+  BODY_PARTS.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='body-card';
+    card.innerHTML='<span class="body-art '+(p.gender==='f'?'fem':'masc')+'">'+p.art+'</span>'
+      +'<span class="body-emoji">'+p.emoji+'</span>'
+      +'<span class="body-es">'+p.es+'</span>'
+      +'<span class="body-ru">'+p.ru+'</span>'
+      +'<span class="body-gesture">👆 '+p.gesture+'</span>';
+    card.onclick=function(){ speakCard(card, p.es); };
+    grid.appendChild(card);
+  });
+}
+
+/* ========== БЛОК 3: ИГРА «SIMÓN DICE» ========== */
+const SIMON_ROUNDS=[
+  {cmd:'¡Simón dice: señala los ojos!', ru:'Симон говорит: покажи на глаза!', target:'ojos', trap:false},
+  {cmd:'¡Simón dice: toca la nariz!', ru:'Симон говорит: тронь нос!', target:'nariz', trap:false},
+  {cmd:'¡Toca la cabeza!', ru:'Тронь голову! (Симон НЕ говорил!)', target:'cabeza', trap:true},
+  {cmd:'¡Simón dice: toca la oreja!', ru:'Симон говорит: тронь ухо!', target:'oreja', trap:false},
+  {cmd:'¡Señala la boca!', ru:'Покажи на рот! (Симон НЕ говорил!)', target:'boca', trap:true},
+  {cmd:'¡Simón dice: señala la rodilla!', ru:'Симон говорит: покажи на колено!', target:'rodilla', trap:false}
+];
+
+let simonRound=0, simonStars=0;
+
+function startSimon(){
+  simonRound=0; simonStars=0;
+  document.getElementById('simon-start').style.display='none';
+  updateSimonStars();
+  playSimon();
+}
+
+function playSimon(){
+  if(simonRound>=SIMON_ROUNDS.length){ endSimon(); return; }
+  const r=SIMON_ROUNDS[simonRound];
+  const cmd=document.getElementById('simon-cmd');
+  cmd.innerHTML='<span class="es">'+r.cmd+'</span><span class="ru">'+r.ru+'</span>';
+  speak(r.cmd);
+  document.getElementById('simon-feedback').textContent='';
+  const opts=document.getElementById('simon-opts');
+  opts.innerHTML='';
+  const others=shuffle(BODY_PARTS.map(p=>p.id).filter(id=>id!==r.target)).slice(0,4);
+  const ids=[r.target].concat(others);
+  ids.forEach(id=>{
+    const p=bodyById(id);
+    const b=document.createElement('button');
+    b.className='simon-opt';
+    b.dataset.id=id;
+    b.textContent=p.emoji+' '+p.es;
+    b.onclick=function(){ checkSimon(id,b,r); };
+    opts.appendChild(b);
+  });
+  if(r.trap){
+    const b=document.createElement('button');
+    b.className='simon-opt trap';
+    b.textContent='🚫 ¡Me quedo quieto! (Стою спокойно)';
+    b.onclick=function(){ checkSimon('stay',b,r); };
+    opts.appendChild(b);
+  }
+}
+
+function checkSimon(id,btn,r){
+  document.querySelectorAll('.simon-opt').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('simon-feedback');
+  const good = r.trap ? id==='stay' : id===r.target;
+  if(good){
+    btn.classList.add('correct');
+    simonStars++;
+    fb.textContent=r.trap?'🎉 ¡Muy bien! Ты не попался!':'🎉 ¡Muy bien! Правильная часть тела!';
+    speak('¡Muy bien!');
+  }else{
+    btn.classList.add('wrong');
+    if(r.trap){
+      fb.textContent='😅 ¡Trampa! Симон не говорил «Simón dice» — надо стоять спокойно!';
+    }else{
+      fb.textContent='😅 Не то! Симон сказал: «'+r.cmd+'»';
+      document.querySelectorAll('.simon-opt').forEach(b=>{ if(b.dataset.id===r.target) b.classList.add('correct'); });
+    }
+  }
+  updateSimonStars();
+  simonRound++;
+  setTimeout(playSimon,2000);
+}
+
+function updateSimonStars(){
+  const el=document.getElementById('simon-stars');
+  let s='';
+  for(let i=0;i<6;i++) s+=i<simonStars?'⭐':'☆';
+  el.textContent=s;
+  document.getElementById('simon-score-txt').textContent='Звёзд Симона: '+simonStars+'/6';
+}
+
+function endSimon(){
+  document.getElementById('simon-opts').innerHTML='';
+  document.getElementById('simon-cmd').textContent=simonStars>=5?'🏆 Отлично! Ты мастер Симона!':simonStars>=3?'👍 Хорошо! Ещё чуть-чуть практики!':'💪 Повтори части тела и попробуй снова!';
+  document.getElementById('simon-start').style.display='block';
+  document.getElementById('simon-start').textContent='🔄 Играть снова';
+  if(simonStars>=5) confetti('🎲');
+}
+
+/* ========== БЛОК 4: ШКАЛА БОЛИ ========== */
+let painPart=BODY_PARTS[5];
+
+function renderPainChips(){
+  const box=document.getElementById('pain-chips');
   box.innerHTML='';
-  EMOS.slice(0,6).forEach(e=>{
+  BODY_PARTS.forEach(p=>{
     const chip=document.createElement('button');
-    chip.className='thermo-chip'+(e.id===thermoEmotion.id?' active':'');
-    chip.textContent=e.emoji+' '+phraseOf(e);
+    chip.className='thermo-chip'+(p.id===painPart.id?' active':'');
+    chip.textContent=p.emoji+' '+p.es;
     chip.onclick=function(){
-      thermoEmotion=e;
-      renderThermoChips();
-      updateThermo();
+      painPart=p;
+      renderPainChips();
+      updatePain();
     };
     box.appendChild(chip);
   });
 }
 
-function levelInfo(l){
-  if(l<=3) return {w:'un poco', t:'чуть-чуть', color:'var(--red)'};
-  if(l<=7) return {w:'normal', t:'нормально', color:'#c99200'};
-  return {w:'muy', t:'очень', color:'var(--teal)'};
+function painLevel(l){
+  if(l<=3) return {w:'un poco', t:'немного'};
+  if(l<=7) return {w:'bastante', t:'ощутимо'};
+  return {w:'mucho', t:'сильно'};
 }
 
-function updateThermo(){
-  const l=parseInt(document.getElementById('thermo-slider').value,10);
-  const info=levelInfo(l);
-  const emo=thermoEmotion;
-  let es, ru;
-  if(info.w==='normal'){
-    es='¡Estoy '+adjOf(emo)+'!';
-    ru=emo.ru+' (нормально).';
-  } else if(info.w==='muy'){
-    es='¡Estoy muy '+adjOf(emo)+'!';
-    ru=emo.ru+' (очень!).';
-  } else {
-    es='Estoy un poco '+adjOf(emo)+'.';
-    ru=emo.ru+' (чуть-чуть).';
-  }
-  document.getElementById('thermo-es').textContent=es;
-  document.getElementById('thermo-ru').textContent=ru;
+function updatePain(){
+  const l=parseInt(document.getElementById('pain-slider').value,10);
+  const info=painLevel(l);
+  const parts=painPart.phrase.split(' ');
+  const es=parts[0]+' '+parts[1]+' '+info.w+' '+parts.slice(2).join(' ');
+  const ru='У меня '+info.t+' '+painPart.phraseRu.replace(/^У меня\s+/,'');
+  document.getElementById('pain-es').textContent=es;
+  document.getElementById('pain-ru').textContent=ru;
 }
 
-/* ========== БЛОК 5: SER vs ESTAR ========== */
-const SE_DATA=[
-  {correct:'Soy', adj:'ruso', adjF:'rusa', why:'Национальность = всегда → SER', ru:{m:'Я русский', f:'Я русская'}},
-  {correct:'Estoy', adj:'cansado', adjF:'cansada', why:'Усталость = сейчас → ESTAR', ru:{m:'Я устал', f:'Я устала'}},
-  {correct:'Soy', adj:'simpático', adjF:'simpática', why:'Характер = всегда → SER', ru:{m:'Я добрый', f:'Я добрая'}},
-  {correct:'Estoy', adj:'nervioso', adjF:'nerviosa', why:'Нервы = сейчас → ESTAR', ru:'Я нервничаю'},
-  {correct:'Soy', adj:'de Rusia', why:'Происхождение = всегда → SER', ru:'Я из России'},
-  {correct:'Estoy', adj:'triste', why:'Грусть = сейчас → ESTAR', ru:'Мне грустно'}
+/* ========== БЛОК 5: СИМПТОМЫ ========== */
+const SYMPTOMS=[
+  {emoji:'🌡️', es:'Tengo fiebre', ru:'У меня температура', gender:false},
+  {emoji:'😮‍💨', es:'Tengo tos', ru:'Я кашляю', gender:false},
+  {emoji:'🤢', es:'Tengo náuseas', ru:'Меня тошнит', gender:false},
+  {emoji:'😵‍💫', es:'Estoy mareado/a', ru:'У меня кружится голова', gender:true},
+  {emoji:'😴', es:'Estoy cansado/a', ru:'Я устал(а)', gender:true},
+  {emoji:'🤒', es:'Estoy enfermo/a', ru:'Я болею', gender:true}
 ];
 
-function seAdj(row){ return gender==='girl' && row.adjF ? row.adjF : row.adj; }
-function seBlank(row){ return '___ '+seAdj(row); }
-function seFull(row){ return (row.correct==='Soy'?'Soy':'Estoy')+' '+seAdj(row); }
-function seRu(row){ return typeof row.ru==='string' ? row.ru : (gender==='girl'?row.ru.f:row.ru.m); }
+function symptomEs(s){
+  if(!s.gender) return s.es;
+  return gender==='girl' ? s.es.replace('/a','a') : s.es.replace('/a','o');
+}
 
-function renderSeQuiz(){
-  const box=document.getElementById('se-quiz');
-  box.innerHTML='';
-  SE_DATA.forEach((row,i)=>{
-    const div=document.createElement('div');
-    div.className='sos-scenario';
-    div.innerHTML='<div class="situation">Фраза '+(i+1)+': «'+seBlank(row).replace('___','<strong style="color:var(--blue)">___</strong>')+'» · '+seRu(row)+'</div>'
-      +'<div class="sos-choices">'
-      +'<button class="sos-choice" onclick="checkSE(this,'+i+',\'Soy\')"><span class="emoji">🛂</span> Soy</button>'
-      +'<button class="sos-choice" onclick="checkSE(this,'+i+',\'Estoy\')"><span class="emoji">📔</span> Estoy</button>'
-      +'</div>'
-      +'<div class="se-feedback" id="se-fb-'+i+'"></div>';
-    box.appendChild(div);
+function renderSymptoms(){
+  const grid=document.getElementById('symptom-grid');
+  grid.innerHTML='';
+  SYMPTOMS.forEach(s=>{
+    const es=symptomEs(s);
+    const card=document.createElement('div');
+    card.className='symptom-card';
+    card.innerHTML='<span class="symptom-emoji">'+s.emoji+'</span>'
+      +'<span class="symptom-es">'+es+'</span>'
+      +'<span class="symptom-ru">'+s.ru+'</span>';
+    card.onclick=function(){ speakCard(card, es); };
+    grid.appendChild(card);
   });
 }
 
-function checkSE(btn,rowIdx,answer){
-  const row=SE_DATA[rowIdx];
-  const container=btn.closest('.sos-scenario');
-  container.querySelectorAll('.sos-choice').forEach(b=>b.disabled=true);
-  const fb=document.getElementById('se-fb-'+rowIdx);
-  const full=seFull(row);
-  if(answer===row.correct){
-    btn.classList.add('correct');
-    fb.innerHTML='✅ <span style="color:var(--teal)">'+full+'</span> — '+row.why+' · Перевод: '+seRu(row);
-    fb.className='se-feedback ok';
-    speak(full);
-  }else{
-    btn.classList.add('wrong');
-    container.querySelectorAll('.sos-choice').forEach(b=>{
-      if(b.getAttribute('onclick').includes("'"+row.correct+"'")) b.classList.add('correct');
-    });
-    fb.innerHTML='❌ Правильно: <strong>'+full+'</strong> — '+row.why+' · Перевод: '+seRu(row);
-    fb.className='se-feedback bad';
-  }
-}
-
-/* ========== ДОПОЛНИТЕЛЬНО: ВСЕ ФОРМЫ SER/ESTAR ========== */
-const ESTAR_FORMS=[
-  {p:'yo', f:'estoy', es:function(){ return 'Yo estoy '+adjOf(EMOS[0])+'.'; }, ru:'Я рад/рада (сейчас)'},
-  {p:'tú', f:'estás', es:function(){ return '¿Cómo estás?'; }, ru:'Как дела?'},
-  {p:'él / ella / usted', f:'está', es:function(){ return 'Está triste.'; }, ru:'Ему/ей грустно (сейчас)'},
-  {p:'nosotros/as', f:'estamos', es:function(){ return 'Estamos nerviosos.'; }, ru:'Мы нервничаем (сейчас)'},
-  {p:'vosotros/as', f:'estáis', es:function(){ return '¿Estáis cansados?'; }, ru:'Вы устали?'},
-  {p:'ellos / ustedes', f:'están', es:function(){ return 'Están enojados.'; }, ru:'Они злятся (сейчас)'}
-];
-
-const SER_FORMS=[
-  {p:'yo', f:'soy', es:function(){ return gender==='girl' ? 'Soy rusa.' : 'Soy ruso.'; }, ru:'Я русский/русская'},
-  {p:'tú', f:'eres', es:function(){ return gender==='girl' ? '¿Eres simpática?' : '¿Eres simpático?'; }, ru:'Ты добрый/добрая?'},
-  {p:'él / ella / usted', f:'es', es:function(){ return 'Es alto.'; }, ru:'Он высокий'},
-  {p:'nosotros/as', f:'somos', es:function(){ return 'Somos rusos.'; }, ru:'Мы русские'},
-  {p:'vosotros/as', f:'sois', es:function(){ return '¿Sois españoles?'; }, ru:'Вы испанцы?'},
-  {p:'ellos / ustedes', f:'son', es:function(){ return 'Son simpáticos.'; }, ru:'Они добрые'}
-];
-
-function renderFormTable(id, forms){
-  const box=document.getElementById(id);
-  if(!box) return;
-  box.innerHTML='<table class="tools-table"><tr><th>Лицо</th><th>Форма</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr></table>';
-  const t=box.querySelector('table');
-  t.style.setProperty('--c','#8338EC');
-  forms.forEach(function(f){
-    const phrase=f.es();
-    const tr=document.createElement('tr');
-    tr.style.cursor='pointer';
-    tr.onclick=function(){ speak(phrase); };
-    tr.innerHTML='<td>'+f.p+'</td><td><strong>'+f.f+'</strong></td><td>'+phrase+'</td><td>'+f.ru+'</td>'
-      +'<td><button class="speak-btn" style="--c:#8338EC;padding:4px 10px;font-size:.8rem">🔊</button></td>';
-    t.appendChild(tr);
-  });
-}
-
-function renderForms(){
-  renderFormTable('table-estar', ESTAR_FORMS);
-  renderFormTable('table-ser', SER_FORMS);
-}
-
-/* ========== БЛОК 6: СИМУЛЯЦИЯ ========== */
-const SIM_ROUNDS=[
-  {sit:'🎒 Первый день в школе: вокруг чужие лица, ты никого не знаешь', hint:'Неизвестность = нервы', correct:'nervioso', distract:['contento','triste']},
-  {sit:'🎉 Учитель громко хвалит твою работу и показывает всем', hint:'Похвала = радость', correct:'contento', distract:['cansado','aburrido']},
-  {sit:'😴 Урок идёт уже второй час, глаза сами закрываются', hint:'Долго = усталость', correct:'cansado', distract:['contento','enojado']},
-  {sit:'🙃 Одноклассник взял твой карандаш без спроса', hint:'Несправедливость = злость', correct:'enojado', distract:['triste','nervioso']},
-  {sit:'📚 Учитель объясняет новую тему, а ты не понимаешь ни слова', hint:'Непонимание = замешательство', correct:'confundido', distract:['aburrido','enojado']}
+/* ========== БЛОК 6: СИМУЛЯЦИЯ «У ВРАЧА» ========== */
+const DOC_ROUNDS=[
+  {doc:'¿Qué te pasa?', docRu:'Что с тобой?', correct:'Me duele la cabeza.', distract:['Tengo tos','Estoy muy bien, gracias']},
+  {doc:'¿Dónde te duele?', docRu:'Где у тебя болит?', correct:'Aquí, en la rodilla.', distract:['Me llamo Masha','Soy de Rusia']},
+  {doc:'¿Tienes fiebre?', docRu:'У тебя температура?', correct:'Sí, tengo fiebre y tos.', distract:['No, soy de Rusia','Me duele nada']},
+  {doc:'¿Qué te pasa?', docRu:'Что с тобой?', correct:'Tengo náuseas.', distract:['Estoy muy contento','Tengo nueve años']},
+  {doc:'¿Estás mareado?', docRu:'У тебя кружится голова?', correct:function(){ return gender==='girl' ? 'Sí, estoy mareada.' : 'Sí, estoy mareado.'; }, distract:['Sí, tengo la mano grande','No, estoy muy contento']}
 ];
 
 let simRound=0, simStars=0;
+
+function docCorrect(r){ return typeof r.correct==='function' ? r.correct() : r.correct; }
 
 function startSim(){
   simRound=0; simStars=0;
@@ -1126,20 +1168,16 @@ function startSim(){
   playRound();
 }
 
-function emoById(id){ return EMOS.find(e=>e.id===id); }
-
 function playRound(){
-  if(simRound>=SIM_ROUNDS.length){ endSim(); return; }
-  const r=SIM_ROUNDS[simRound];
+  if(simRound>=DOC_ROUNDS.length){ endSim(); return; }
+  const r=DOC_ROUNDS[simRound];
   document.getElementById('sim-situation').textContent='';
   document.getElementById('sim-feedback').textContent='🎧 Читай внимательно...';
   document.getElementById('sim-prompt').style.display='none';
   document.getElementById('sim-options').style.display='none';
-  document.getElementById('sim-hint').textContent=r.hint;
-
-  document.querySelector('.round-label').textContent='🏫 Ситуация (раунд '+(simRound+1)+' из 5):';
-  document.getElementById('sim-situation').textContent=r.sit;
-
+  document.getElementById('sim-hint').textContent=r.docRu;
+  document.querySelector('.round-label').textContent='🩺 Вопрос врача (раунд '+(simRound+1)+' из 5):';
+  document.getElementById('sim-situation').textContent=r.doc+' «'+r.docRu+'»';
   setTimeout(()=>{
     document.getElementById('sim-prompt').style.display='block';
     showSimOptions(r);
@@ -1151,32 +1189,30 @@ function showSimOptions(r){
   opts.style.display='flex';
   opts.innerHTML='';
   document.getElementById('sim-feedback').textContent='';
-  const ids=[r.correct].concat(r.distract);
-  ids.forEach(id=>{
-    const e=emoById(id);
+  const correct=docCorrect(r);
+  const answers=shuffle([correct].concat(r.distract));
+  answers.forEach(a=>{
     const btn=document.createElement('button');
     btn.className='sim-opt';
-    btn.innerHTML=e.emoji+' '+phraseOf(e);
-    btn.onclick=function(){ checkSim(id,btn,r); };
+    btn.textContent=a;
+    btn.onclick=function(){ checkSim(a,btn,r); };
     opts.appendChild(btn);
   });
 }
 
-function checkSim(id,btn,r){
+function checkSim(ans,btn,r){
   document.querySelectorAll('.sim-opt').forEach(b=>b.disabled=true);
-  if(id===r.correct){
+  const correct=docCorrect(r);
+  if(ans===correct){
     btn.classList.add('correct');
     simStars++;
-    document.getElementById('sim-feedback').textContent='🎉 ¡Muy bien! Правильная эмоция!';
-    speak(phraseOf(emoById(id)));
+    document.getElementById('sim-feedback').textContent='🎉 ¡Muy bien! Правильный ответ!';
+    speak(correct);
   }else{
     btn.classList.add('wrong');
-    document.getElementById('sim-feedback').textContent='😅 Не то! Правильная эмоция: '+emoById(r.correct).emoji+' '+phraseOf(emoById(r.correct));
-    document.querySelectorAll('.sim-opt').forEach(b=>{
-      const txt=b.innerHTML.split(' ')[1];
-      const target=phraseOf(emoById(r.correct));
-      if(b.innerHTML.indexOf(target)!==-1) b.classList.add('correct');
-    });
+    document.getElementById('sim-feedback').textContent='😅 Не то! Правильный ответ: «'+correct+'»';
+    document.querySelectorAll('.sim-opt').forEach(b=>{ if(b.textContent===correct) b.classList.add('correct'); });
+    speak(correct);
   }
   updateStars();
   simRound++;
@@ -1188,184 +1224,85 @@ function updateStars(){
   let s='';
   for(let i=0;i<5;i++) s+=i<simStars?'⭐':'☆';
   starsEl.textContent=s;
-  document.getElementById('sim-score').textContent='Звёзд эмоций: '+simStars+'/5';
+  document.getElementById('sim-score').textContent='Звёзд доктора: '+simStars+'/5';
 }
 
 function endSim(){
   document.getElementById('sim-options').style.display='none';
   document.getElementById('sim-prompt').style.display='none';
   document.getElementById('sim-feedback').textContent='';
-  const msg=simStars>=4?'🏆 Отлично! Ты настоящий Мастер эмоций!':simStars>=2?'👍 Хорошо! Ещё чуть-чуть практики!':'💪 Ничего! Повтори карточки и попробуй снова!';
+  const msg=simStars>=4?'🏆 Отлично! Ты настоящий доктор!':simStars>=2?'👍 Хорошо! Ещё чуть-чуть практики!':'💪 Ничего! Повтори фразы и попробуй снова!';
   document.getElementById('sim-situation').textContent=msg;
   document.getElementById('sim-start').style.display='block';
   document.getElementById('sim-start').textContent='🔄 Играть снова';
-  if(simStars>=4) confetti('⭐');
+  if(simStars>=4) confetti('🩺');
 }
 
-/* ========== БЛОК 7: EMOJI-ДНЕВНИК ========== */
-const DIARY_KEY='mudro_emoji_diary';
-let diary=null;
-try{ diary=JSON.parse(localStorage.getItem(DIARY_KEY)); }catch(e){ diary=null; }
-if(!diary || typeof diary!=='object') diary={};
-
-let diarySelected=null;
-
-function renderDiaryPick(){
-  const box=document.getElementById('diary-pick');
-  box.innerHTML='';
-  EMOS.forEach(e=>{
-    const b=document.createElement('button');
-    b.className='diary-emo'+(e.id===diarySelected?' active':'');
-    b.textContent=e.emoji;
-    b.title=e.ru;
-    b.onclick=function(){
-      diarySelected=e.id;
-      renderDiaryPick();
-      updateDiarySelected();
-    };
-    box.appendChild(b);
-  });
-}
-
-function updateDiarySelected(){
-  const el=document.getElementById('diary-selected');
-  if(!diarySelected){ el.textContent='Выбери эмодзи 👆'; return; }
-  const e=emoById(diarySelected);
-  el.textContent=e.emoji+' '+phraseOf(e)+' — '+e.ru;
-}
-
-function nextEmptyDay(){
-  for(let i=1;i<=7;i++){
-    if(!diary['d'+i]) return i;
-  }
-  return null;
-}
-
-function saveDiary(){
-  if(!diarySelected){ return; }
-  const day=nextEmptyDay();
-  if(day===null){
-    alert('Дневник уже заполнен на все 7 дней! 🎉 Очисти его, чтобы начать заново.');
-    return;
-  }
-  const e=emoById(diarySelected);
-  diary['d'+day]={emoji:e.emoji, es:phraseOf(e), ru:e.ru};
-  localStorage.setItem(DIARY_KEY, JSON.stringify(diary));
-  renderDiarySlots();
-}
-
-function renderDiarySlots(){
-  const box=document.getElementById('diary-slots');
-  box.innerHTML='';
-  let filled=0;
-  for(let i=1;i<=7;i++){
-    const slot=document.createElement('div');
-    slot.className='diary-slot';
-    const d=diary['d'+i];
-    if(d){
-      filled++;
-      slot.classList.add('filled');
-      slot.innerHTML='<span class="d-num">День '+i+'</span><span class="d-emo">'+d.emoji+'</span><span class="d-es">'+d.es+'</span>';
-      slot.title=d.ru;
-    }else{
-      slot.innerHTML='<span class="d-num">День '+i+'</span><span class="d-emo">—</span>';
-    }
-    box.appendChild(slot);
-  }
-  document.getElementById('diary-progress').textContent='Заполнено '+filled+' из 7 дней';
-}
-
-function resetDiary(){
-  if(!confirm('Очистить весь Emoji-дневник?')) return;
-  diary={};
-  localStorage.setItem(DIARY_KEY, JSON.stringify(diary));
-  renderDiarySlots();
-}
-
-/* ========== БЕЙДЖ ========== */
+/* ========== БЛОК 7: БЕЙДЖ ========== */
 function stampBadge(){
   document.getElementById('badge-stamped').classList.add('show');
   document.getElementById('badge-btn').style.display='none';
-  speak('¡Enhorabuena! Eres un maestro de las emociones.');
-  confetti('🎭');
-  localStorage.setItem('mudro_badge_emociones','true');
-  localStorage.setItem('mudro_lesson_3_done', new Date().toISOString());
+  speak('¡Enhorabuena! Eres un doctor increíble.');
+  confetti('🩺');
+  localStorage.setItem('mudro_badge_doctor','true');
+  localStorage.setItem('mudro_lesson_4_done', new Date().toISOString());
 }
 
-if(localStorage.getItem('mudro_badge_emociones')==='true'){
+if(localStorage.getItem('mudro_badge_doctor')==='true'){
   document.getElementById('badge-stamped').classList.add('show');
   document.getElementById('badge-btn').style.display='none';
 }
 
 /* ========== СЛОВА УРОКА ========== */
-const WORDS_EMOTIONS=[
-  {e:'contento', ru:'Я рад/рада'},
-  {e:'triste', ru:'Мне грустно'},
-  {e:'enojado', ru:'Я злюсь'},
-  {e:'cansado', ru:'Я устал/устала'},
-  {e:'nervioso', ru:'Я нервничаю'},
-  {e:'aburrido', ru:'Мне скучно'},
-  {e:'confundido', ru:'Я в замешательстве'},
-  {es:'Estoy bien', ru:'Мне хорошо'},
-  {es:'Estoy mal', ru:'Мне плохо'}
-];
-const WORDS_QUESTIONS=[
-  {es:'¿Cómo estás?', ru:'Как дела?'},
-  {es:'¿Qué tal?', ru:'Как жизнь? (неформально)'},
-  {es:'¿Cómo te sientes?', ru:'Как ты себя чувствуешь?'}
-];
-const WORDS_LEVEL=[
-  {es:'muy', ru:'очень'},
+const WORDS_BODY=BODY_PARTS.map(p=>({es:p.es, ru:p.ru}));
+const WORDS_DOLER=[
+  {es:'Me duele la cabeza', ru:'У меня болит голова'},
+  {es:'Me duelen los ojos', ru:'У меня болят глаза'},
   {es:'un poco', ru:'немного'},
-  {es:'normal', ru:'нормально'}
+  {es:'bastante', ru:'ощутимо'},
+  {es:'mucho', ru:'сильно'},
+  {es:'¿Qué te pasa?', ru:'Что с тобой?'}
 ];
-const WORDS_PHRASES=[
-  {es:'Estoy bien, gracias.', ru:'У меня всё хорошо, спасибо.'},
-  {es:'¿Y tú?', ru:'А ты?'},
-  {es:'Porque...', ru:'Потому что...'},
-  {es:'Hoy estoy...', ru:'Сегодня я...'}
+const WORDS_SYMPTOMS=[
+  {es:'Tengo fiebre', ru:'У меня температура'},
+  {es:'Tengo tos', ru:'Я кашляю'},
+  {es:'Tengo náuseas', ru:'Меня тошнит'},
+  {es:'Estoy mareado/a', ru:'У меня кружится голова'},
+  {es:'Estoy cansado/a', ru:'Я устал(а)'},
+  {es:'Estoy enfermo/a', ru:'Я болею'}
+];
+const WORDS_DOC=[
+  {es:'Aquí, en la rodilla', ru:'Здесь, в колене'},
+  {es:'la enfermería', ru:'медпункт'},
+  {es:'¿Puedo ir a la enfermería?', ru:'Можно пойти в медпункт?'},
+  {es:'Por favor', ru:'пожалуйста'},
+  {es:'Tengo fiebre y tos', ru:'У меня температура и кашель'}
 ];
 
 function renderWordGrid(arr,containerId){
   const container=document.getElementById(containerId);
   container.innerHTML='';
   arr.forEach(w=>{
-    let es, ru;
-    if(w.e){
-      const e=emoById(w.e);
-      es='Estoy '+adjOf(e);
-      ru=w.ru;
-    }else{
-      es=w.es; ru=w.ru;
-    }
     const card=document.createElement('div');
     card.className='word-card';
-    card.innerHTML='<span class="w-es">'+es+'</span><span class="w-ru">'+ru+'</span>';
-    card.onclick=function(){ speak(es); };
+    card.innerHTML='<span class="w-es">'+w.es+'</span><span class="w-ru">'+w.ru+'</span>';
+    card.onclick=function(){ speak(w.es); };
     container.appendChild(card);
   });
 }
 
 function renderWords(){
-  renderWordGrid(WORDS_EMOTIONS,'words-emotions');
-  renderWordGrid(WORDS_QUESTIONS,'words-questions');
-  renderWordGrid(WORDS_LEVEL,'words-level');
-  renderWordGrid(WORDS_PHRASES,'words-phrases');
+  renderWordGrid(WORDS_BODY,'words-body');
+  renderWordGrid(WORDS_DOLER,'words-doler');
+  renderWordGrid(WORDS_SYMPTOMS,'words-symptoms');
+  renderWordGrid(WORDS_DOC,'words-doc');
 }
 
 /* ========== MATCH GAME ========== */
 function getMatchPairs(){
-  return [
-    {es:'Estoy '+adjOf(EMOS[0]), ru:'Я рад/рада'},
-    {es:'Estoy '+adjOf(EMOS[1]), ru:'Мне грустно'},
-    {es:'Estoy '+adjOf(EMOS[2]), ru:'Я злюсь'},
-    {es:'Estoy '+adjOf(EMOS[3]), ru:'Я устал/устала'},
-    {es:'Estoy '+adjOf(EMOS[4]), ru:'Я нервничаю'},
-    {es:'Estoy '+adjOf(EMOS[5]), ru:'Мне скучно'},
-    {es:'Estoy '+adjOf(EMOS[6]), ru:'Я в замешательстве'},
-    {es:'Estoy bien', ru:'Мне хорошо'}
-  ];
+  return BODY_PARTS.map(p=>({es:p.es, ru:p.ru}));
 }
+
 let matchSelected=null, matchFound=0;
 
 function shuffle(arr){ return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]); }
@@ -1464,13 +1401,14 @@ function resetMatch(){ renderMatch(); }
 /* ========== SENTENCE BUILDER ========== */
 function sbPhrases(){
   return [
-    {words:['Hoy','estoy','muy',adjOf(EMOS[0])+'.'], translation:'Сегодня я очень рад/рада.'},
-    {words:['Estoy','un','poco',adjOf(EMOS[4])+'.'], translation:'Я немного нервничаю.'},
-    {words:['Estoy','muy',adjOf(EMOS[3])+'.'], translation:'Я очень устал/устала.'},
-    {words:['Estoy',adjOf(EMOS[1])+'.'], translation:'Мне грустно.'},
-    {words:['No','estoy',adjOf(EMOS[2])+'.'], translation:'Я не злюсь.'}
+    {words:['Me','duele','la','cabeza.'], translation:'У меня болит голова.'},
+    {words:['Me','duelen','los','ojos.'], translation:'У меня болят глаза.'},
+    {words:['Me','duele','un','poco','la','rodilla.'], translation:'У меня немного болит колено.'},
+    {words:['Me','duele','mucho','el','brazo.'], translation:'У меня сильно болит рука.'},
+    {words:['Le','duelen','los','pies.'], translation:'У него/неё болят стопы.'}
   ];
 }
+
 let sbCurrent=0, sbPlaced=[], sbPhraseList=[];
 
 function renderSB(){
@@ -1527,12 +1465,12 @@ function nextSB(){
   renderSB();
 }
 
-/* ========== LEVEL QUIZ (ТЕРМОМЕТР-ТРЕНАЖЁР) ========== */
+/* ========== LEVEL QUIZ (ШКАЛА БОЛИ) ========== */
 const LEVEL_SCENARIOS=[
-  {sit:'🏆 Ты выиграл школьный чемпионат и подпрыгнул до потолка!', correct:'muy', es:'¡Estoy muy contento!', hint:'Радость огромная — уровень самый высокий!'},
-  {sit:'🌥 Настроение обычное, день как день, ничего особенного', correct:'normal', es:'Estoy normal.', hint:'Всё в порядке, без сильных эмоций.'},
-  {sit:'📝 Завтра контрольная, ты чуть-чуть волнуешься', correct:'un poco', es:'Estoy un poco nervioso.', hint:'Волнение маленькое — уровень низкий!'},
-  {sit:'🍦 Твоё мороженое упало в песок, и ты почти плачешь', correct:'muy', es:'¡Estoy muy triste!', hint:'Грусть очень сильная — самый высокий уровень!'}
+  {sit:'🚴 Ты упал с велосипеда и сильно ударил колено', correct:'mucho', es:'Me duele mucho la rodilla.', hint:'Боль сильная — самый высокий уровень!'},
+  {sit:'🍫 Съел много сладкого, живот чуть-чуть ноет', correct:'un poco', es:'Me duele un poco la barriga.', hint:'Боль маленькая — низкий уровень!'},
+  {sit:'📚 Весь день писал контрольную, глаза устали и болят ощутимо', correct:'bastante', es:'Me duelen bastante los ojos.', hint:'Боль заметная — средний уровень!'},
+  {sit:'🦷 Сходил к зубному, десна немного ноет', correct:'un poco', es:'Me duele un poco la encía.', hint:'Боль маленькая — низкий уровень!'}
 ];
 
 function renderLevelQuiz(){
@@ -1543,9 +1481,9 @@ function renderLevelQuiz(){
     div.className='level-scenario';
     div.innerHTML='<div class="situation">📌 Ситуация '+(i+1)+': '+s.sit+'</div>'
       +'<div class="level-choices">'
-      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'muy\')">muy (очень)</button>'
-      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'un poco\')">un poco (чуть-чуть)</button>'
-      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'normal\')">normal (нормально)</button>'
+      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'mucho\')">mucho (сильно)</button>'
+      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'bastante\')">bastante (ощутимо)</button>'
+      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'un poco\')">un poco (немного)</button>'
       +'</div>'
       +'<div class="level-feedback" id="lv-fb-'+i+'"></div>';
     box.appendChild(div);
@@ -1572,6 +1510,53 @@ function checkLevel(btn,idx,answer){
   }
 }
 
+/* ========== КВИЗ DUELE/DUELEN ========== */
+const DUELE_DATA=[
+  {blank:'Me ___ la cabeza', verb:'duele', ru:'голова — одна'},
+  {blank:'Me ___ los pies', verb:'duelen', ru:'стопы — несколько'},
+  {blank:'Me ___ los dientes', verb:'duelen', ru:'зубы — несколько'},
+  {blank:'Le ___ la rodilla', verb:'duele', ru:'колено — одно'}
+];
+
+function renderDueleQuiz(){
+  const box=document.getElementById('duele-scenarios');
+  box.innerHTML='';
+  DUELE_DATA.forEach((row,i)=>{
+    const div=document.createElement('div');
+    div.className='level-scenario';
+    div.innerHTML='<div class="situation">Фраза '+(i+1)+': «'+row.blank.replace('___','<strong style="color:var(--blue)">___</strong>')+'» · '+row.ru+'</div>'
+      +'<div class="level-choices">'
+      +'<button class="level-choice" onclick="checkDuele(this,'+i+',\'duele\')">duele (болит)</button>'
+      +'<button class="level-choice" onclick="checkDuele(this,'+i+',\'duelen\')">duelen (болят)</button>'
+      +'</div>'
+      +'<div class="level-feedback" id="dl-fb-'+i+'"></div>';
+    box.appendChild(div);
+  });
+}
+
+function checkDuele(btn,idx,answer){
+  const row=DUELE_DATA[idx];
+  const container=btn.closest('.level-scenario');
+  container.querySelectorAll('.level-choice').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('dl-fb-'+idx);
+  const full=row.blank.replace('___','<strong>'+row.verb+'</strong>');
+  const fullEs=row.blank.replace('___',row.verb);
+  if(answer===row.verb){
+    btn.classList.add('correct');
+    fb.innerHTML='✅ <span style="color:var(--teal)">'+full+'</span>';
+    fb.className='level-feedback ok';
+    speak(fullEs);
+  }else{
+    btn.classList.add('wrong');
+    container.querySelectorAll('.level-choice').forEach(b=>{
+      if(b.getAttribute('onclick').indexOf("'"+row.verb+"'")!==-1) b.classList.add('correct');
+    });
+    fb.innerHTML='❌ Правильно: '+full;
+    fb.className='level-feedback bad';
+    speak(fullEs);
+  }
+}
+
 /* ========== КОНФЕТТИ ========== */
 function confetti(emoji){
   for(let i=0;i<16;i++){
@@ -1588,17 +1573,16 @@ function confetti(emoji){
 
 /* ========== ИНИЦИАЛИЗАЦИЯ ========== */
 renderGenderButtons();
-renderEmotionCards();
-renderThermoChips();
-updateThermo();
-renderSeQuiz();
-renderForms();
-renderDiaryPick();
-renderDiarySlots();
+renderWarmup();
+renderBodyCards();
+renderPainChips();
+updatePain();
+renderSymptoms();
 renderWords();
 renderMatch();
 renderSB();
 renderLevelQuiz();
+renderDueleQuiz();
 
 /* ========== СОХРАНЕНИЕ САМОПРОВЕРКИ ========== */
 document.querySelectorAll('.selfcheck-table input[type=radio]').forEach(function(input){
@@ -1608,11 +1592,11 @@ document.querySelectorAll('.selfcheck-table input[type=radio]').forEach(function
       const selected=document.querySelector('input[name=q'+i+']:checked');
       if(selected) data['q'+i]=selected.value;
     }
-    localStorage.setItem('mudro_selfcheck_lesson3',JSON.stringify(data));
+    localStorage.setItem('mudro_selfcheck_lesson4',JSON.stringify(data));
   });
 });
 
-const savedCheck=localStorage.getItem('mudro_selfcheck_lesson3');
+const savedCheck=localStorage.getItem('mudro_selfcheck_lesson4');
 if(savedCheck){
   try{
     const data=JSON.parse(savedCheck);
