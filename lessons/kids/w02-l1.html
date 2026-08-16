@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 4: Части тела — «У меня болит» — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --purple:#8338EC; --red:#D62828;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4,h5{font-family:'Baloo 2',cursive;line-height:1.2}
+
+  /* ---------- NAV ---------- */
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:6px;transition:.2s}
+  .back-btn:hover{background:#f3ebc8}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FFE8D6 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--purple);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;letter-spacing:.5px}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--purple)}
+  .hero .sub{max-width:660px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+
+  /* ---------- CONTENT ---------- */
+  .container{max-width:860px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:30px}
+  .goals h2{font-size:1.4rem;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .goal-item{background:#FFE8E8;border-radius:14px;padding:14px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.4rem;margin-right:6px}
+
+  /* ---------- BLOCKS ---------- */
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .block-title{font-size:1.4rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:14px}
+  .block h4{margin:16px 0 8px;font-size:1.1rem}
+
+  /* ---------- SCRIPT ---------- */
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:14px 18px;border-radius:12px;margin:12px 0;font-style:italic;color:var(--ink)}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px;letter-spacing:.5px}
+
+  /* ---------- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ ---------- */
+  .grammar-hint{
+    position:relative;
+    color:var(--blue);
+    border-bottom:2px dashed var(--blue);
+    cursor:help;
+    font-weight:700;
+    display:inline;
+  }
+  .grammar-hint::after{
+    content:attr(data-hint);
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:.85rem;
+    font-weight:700;
+    line-height:1.4;
+    white-space:normal;
+    width:max-content;
+    max-width:280px;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+    font-style:normal;
+  }
+  .grammar-hint::before{
+    content:'';
+    position:absolute;
+    bottom:calc(100% + 2px);
+    left:50%;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:var(--ink);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+  }
+  @media (hover:hover){
+    .grammar-hint:hover::after,
+    .grammar-hint:hover::before{opacity:1}
+  }
+  .grammar-hint.active::after,
+  .grammar-hint.active::before{opacity:1}
+
+  /* ---------- VIDEO ---------- */
+  .video-zone{margin:16px 0}
+  .video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.1);background:#000}
+  .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+  .video-note{margin-top:10px;font-size:.85rem;color:var(--ink-soft);font-weight:700;text-align:center}
+
+  /* ---------- GENDER TOGGLE ---------- */
+  .gender-zone{background:#fff;border-radius:18px;padding:18px;margin:16px 0;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .gender-btns{display:flex;gap:12px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+  .gender-btn{background:#fff;border:3px solid #ddd;border-radius:14px;padding:12px 22px;font-family:'Nunito';font-weight:800;font-size:1rem;cursor:pointer;transition:.2s}
+  .gender-btn:hover{border-color:var(--sun)}
+  .gender-btn.active{border-color:var(--teal);background:#E5F4F1;transform:scale(1.05)}
+
+  /* ---------- SOS-EMOTION (разогрев) ---------- */
+  .sos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
+  .sos-card{background:#fff;border-radius:16px;padding:20px;text-align:center;cursor:pointer;border:3px solid #FFE8E8;transition:.25s;box-shadow:0 4px 14px rgba(0,0,0,.06);user-select:none}
+  .sos-card:hover{transform:translateY(-4px);border-color:var(--c)}
+  .sos-card.active{border-color:var(--c);transform:scale(1.02);background:#FFF5F5}
+  .sos-emoji{font-size:2.4rem;margin-bottom:8px}
+  .sos-phrase{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--terra);margin-bottom:4px}
+  .sos-meaning{color:var(--ink-soft);font-size:.9rem;font-weight:700;margin-bottom:10px}
+  .sos-gesture{font-size:.85rem;color:var(--purple);font-weight:800;background:#F3E8FF;padding:4px 10px;border-radius:999px;display:inline-block}
+  .speak-btn{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+  .sos-emotion-link{margin-top:12px;border-top:2px dashed #ffe0e0;padding-top:10px;font-size:.9rem;color:var(--ink-soft);font-weight:700}
+  .sos-emotion-link .link-es{font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--purple)}
+
+  /* ---------- RANDOM EMOTION BUTTON ---------- */
+  .sos-zone{text-align:center;padding:22px;background:linear-gradient(135deg,#FFE8E8,#FFD4D4);border-radius:18px;margin:16px 0}
+  .sos-big-btn{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFB45C,var(--sun));border:none;cursor:pointer;font-size:2.5rem;box-shadow:0 8px 24px rgba(255,201,60,.45);transition:.2s;display:inline-flex;align-items:center;justify-content:center}
+  .sos-big-btn:hover{transform:scale(1.08) rotate(5deg)}
+  .sos-big-btn:active{transform:scale(.92)}
+  .sos-output{margin-top:14px;font-family:'Baloo 2',cursive;font-size:1.4rem;color:var(--red);min-height:70px;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .sos-output .es{font-size:1.4rem;color:var(--red)}
+  .sos-output .ru{font-size:1rem;color:var(--ink-soft);font-weight:700;font-style:italic;font-family:'Nunito',sans-serif}
+
+  /* ---------- EMOTION CARDS (блок 3) ---------- */
+  .emotion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+  .emotion-card{background:#fff;border-radius:18px;padding:22px;text-align:center;cursor:pointer;border:4px solid var(--ec,#FFE8E8);transition:.25s;box-shadow:0 4px 14px rgba(0,0,0,.06);user-select:none}
+  .emotion-card:hover{transform:translateY(-5px);box-shadow:0 10px 22px rgba(0,0,0,.1)}
+  .emotion-card.active{transform:scale(1.03);background:#FFF5F5}
+  .emotion-emoji{font-size:3rem;margin-bottom:8px;display:block}
+  .emotion-es{font-family:'Baloo 2',cursive;font-size:1.35rem;color:var(--terra);margin-bottom:4px}
+  .emotion-ru{color:var(--ink-soft);font-size:.9rem;font-weight:700;margin-bottom:10px}
+  .emotion-gesture{font-size:.85rem;color:var(--purple);font-weight:800;background:#F3E8FF;padding:5px 12px;border-radius:999px;display:inline-block}
+
+  /* ---------- THERMOMETER ---------- */
+  .thermo-zone{background:linear-gradient(135deg,#EAF2FF,#DDEBFF);border-radius:18px;padding:22px;margin:16px 0;text-align:center}
+  .thermo-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+  .thermo-chip{background:#fff;border:3px solid #ddd;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.9rem}
+  .thermo-chip.active{border-color:var(--blue);background:#EAF2FF;transform:scale(1.05)}
+  .thermo-slider{width:100%;max-width:480px;margin:16px auto 6px;accent-color:var(--blue)}
+  .thermo-labels{display:flex;justify-content:space-between;max-width:480px;margin:0 auto;font-size:.8rem;font-weight:800}
+  .thermo-labels .l-red{color:var(--red)} .thermo-labels .l-yel{color:#c99200} .thermo-labels .l-grn{color:var(--teal)}
+  .thermo-output{margin-top:14px;min-height:60px;font-family:'Baloo 2',cursive}
+  .thermo-output .es{font-size:1.35rem;color:var(--blue)}
+  .thermo-output .ru{font-size:.95rem;color:var(--ink-soft);font-weight:700;font-style:italic;font-family:'Nunito',sans-serif}
+
+  /* ---------- TOOLS TABLE ---------- */
+  .tools-table{width:100%;border-collapse:collapse;margin:14px 0}
+  .tools-table th{background:var(--c);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .tools-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .tools-table tr:hover td{background:var(--soft)}
+  .tools-table .emoji-col{font-size:1.4rem;width:40px}
+
+  /* ---------- QUIZ (SER/ESTAR + сценарии) ---------- */
+  .sos-scenario{background:var(--soft);border-radius:12px;padding:16px;margin:12px 0}
+  .sos-scenario .situation{color:var(--terra);font-weight:800;margin-bottom:10px}
+  .sos-choices{display:grid;gap:8px}
+  .sos-choice{background:#fff;border:2px solid #ddd;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer;transition:.2s;text-align:left;font-family:'Nunito';font-size:1rem}
+  .sos-choice:hover:not(:disabled){border-color:var(--teal);transform:translateX(4px)}
+  .sos-choice.correct{background:#E5F4F1;border-color:var(--teal);color:var(--teal)}
+  .sos-choice.wrong{background:#fde8e5;border-color:var(--red);color:var(--red);animation:shake .4s}
+  .sos-choice:disabled{cursor:not-allowed;opacity:.9}
+  .sos-choice .emoji{margin-right:8px}
+
+  /* ---------- SER vs ESTAR ---------- */
+  .se-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .se-table th{background:var(--purple);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .se-table td{padding:12px 14px;border-bottom:1px solid #f0ede6;vertical-align:middle}
+  .se-table tr:last-child td{border-bottom:none}
+  .se-btns{display:flex;gap:8px;justify-content:center}
+  .se-btn{background:#fff;border:2px solid #ddd;border-radius:10px;padding:7px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito'}
+  .se-btn:hover:not(:disabled){border-color:var(--purple)}
+  .se-btn.correct{background:#E5F4F1;border-color:var(--teal);color:var(--teal)}
+  .se-btn.wrong{background:#fde8e5;border-color:var(--red);color:var(--red);animation:shake .4s}
+  .se-btn:disabled{cursor:not-allowed;opacity:.85}
+  .se-feedback{font-size:.9rem;font-weight:700;margin-top:6px;min-height:20px}
+  .se-feedback.ok{color:var(--teal)} .se-feedback.bad{color:var(--red)}
+  .se-score{text-align:center;font-weight:800;margin-top:12px;font-size:1.05rem}
+
+  /* ---------- SIMULATION ---------- */
+  .sim-game{background:linear-gradient(135deg,#E5F4F1,#d4ebe6);border-radius:20px;padding:26px;margin:20px 0}
+  .sim-header{text-align:center;margin-bottom:18px}
+  .sim-teacher{background:#fff;border-radius:16px;padding:20px;margin-bottom:16px;text-align:center;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .sim-teacher .situation{font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--blue);margin-top:8px;line-height:1.4}
+  .sim-teacher .round-label{font-size:.85rem;font-weight:800;color:var(--ink-soft)}
+  .sim-prompt{text-align:center;margin:14px 0;font-weight:800;font-size:1.1rem;color:var(--ink)}
+  .sim-prompt .hint{font-size:.9rem;color:var(--ink-soft)}
+  .sim-options{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  .sim-opt{background:#fff;border:3px solid var(--teal);border-radius:14px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem}
+  .sim-opt:hover:not(:disabled){background:var(--teal);color:#fff}
+  .sim-opt.correct{background:var(--teal);color:#fff;transform:scale(1.05)}
+  .sim-opt.wrong{background:#fde8e5;border-color:var(--red);animation:shake .4s}
+  .sim-opt:disabled{cursor:not-allowed}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .sim-score{text-align:center;font-weight:800;font-size:1.1rem;margin-top:14px}
+  .sim-stars{font-size:1.8rem;letter-spacing:4px;margin-bottom:8px}
+  .sim-btn{background:var(--teal);color:#fff;border:none;border-radius:14px;padding:12px 24px;font-family:'Nunito';font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #1f7a72;transition:.15s;display:block;margin:0 auto}
+  .sim-btn:active{transform:translateY(3px);box-shadow:none}
+  .sim-feedback{text-align:center;font-weight:800;margin-top:12px;min-height:24px;color:var(--ink)}
+
+  /* ---------- EMOJI DIARY ---------- */
+  .diary-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:18px;padding:22px;margin:16px 0}
+  .diary-pick{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+  .diary-emo{background:#fff;border:3px solid #ddd;border-radius:14px;padding:8px 12px;font-size:1.6rem;cursor:pointer;transition:.15s;line-height:1}
+  .diary-emo:hover{transform:scale(1.12)}
+  .diary-emo.active{border-color:var(--terra);background:#FFF5F5;transform:scale(1.12)}
+  .diary-selected{text-align:center;font-weight:800;min-height:28px;margin:8px 0}
+  .diary-save{background:var(--terra);color:#fff;border:none;border-radius:12px;padding:10px 22px;font-family:'Nunito';font-weight:800;font-size:1rem;cursor:pointer;display:block;margin:10px auto;box-shadow:0 4px 0 #b84436;transition:.15s}
+  .diary-save:active{transform:translateY(3px);box-shadow:none}
+  .diary-slots{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:16px 0}
+  .diary-slot{background:#fff;border:2px solid #eee;border-radius:12px;padding:10px 4px;text-align:center;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+  .diary-slot .d-num{font-size:.75rem;color:var(--ink-soft);font-weight:800}
+  .diary-slot .d-emo{font-size:1.5rem}
+  .diary-slot .d-es{font-size:.7rem;font-weight:800;color:var(--teal)}
+  .diary-slot.filled{background:#E5F4F1;border-color:var(--teal)}
+  .diary-reset{background:#fff;border:2px solid var(--red);color:var(--red);border-radius:10px;padding:7px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;display:block;margin:8px auto}
+  .diary-progress{text-align:center;font-weight:800;margin-top:8px;color:var(--ink-soft)}
+
+  /* ---------- BADGE ---------- */
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;transition:.15s;margin-top:12px}
+  .badge-btn:active{transform:translateY(3px);box-shadow:none}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--teal);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+
+  /* ---------- WORD GRID ---------- */
+  .word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:12px;padding:14px;text-align:center;cursor:pointer;border:2px solid var(--soft);transition:.2s;box-shadow:0 3px 10px rgba(0,0,0,.05)}
+  .word-card:hover{transform:translateY(-3px);border-color:var(--sun)}
+  .word-card .w-es{display:block;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--terra);margin-bottom:4px}
+  .word-card .w-ru{display:block;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  /* ---------- MATCH GAME ---------- */
+  .match-game{background:#fff;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .match-col{display:flex;flex-direction:column;gap:8px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:12px;font-weight:800;cursor:pointer;transition:.15s;text-align:center;font-size:.95rem}
+  .match-item:hover{transform:scale(1.02)}
+  .match-item.selected{border-color:var(--terra);background:#FFF5F5}
+  .match-item.matched{background:#E5F4F1;border-color:var(--teal);cursor:default;opacity:.85}
+  .match-item.wrong{background:#fde8e5;animation:shake .4s}
+  .match-feedback{text-align:center;font-weight:800;margin-top:12px;min-height:24px}
+  .match-reset{background:var(--teal);color:#fff;border:none;border-radius:12px;padding:10px 20px;font-family:'Nunito';font-weight:800;cursor:pointer;display:block;margin:14px auto 0}
+
+  /* ---------- SENTENCE BUILDER ---------- */
+  .sb{background:linear-gradient(135deg,#FFE8E8,#FFD4D4);border-radius:18px;padding:22px;margin:16px 0}
+  .sb h4{margin-bottom:12px;color:var(--red)}
+  .sb-target{background:#fff;border-radius:14px;padding:18px;min-height:70px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+  .sb-word{background:#fff;border:2px solid var(--terra);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;transition:.15s;user-select:none}
+  .sb-word:hover{background:var(--terra);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+  .sb-result{text-align:center;margin-top:12px;font-weight:800;min-height:30px}
+  .sb-translation{background:#fff;border-radius:12px;padding:12px;margin-top:10px;font-weight:700;color:var(--ink-soft);text-align:center}
+
+  /* ---------- LEVEL QUIZ (термометр-тренажёр) ---------- */
+  .level-quiz{background:#fff;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .level-scenario{background:var(--soft);border-radius:12px;padding:16px;margin:12px 0}
+  .level-scenario .situation{color:var(--terra);font-weight:800;margin-bottom:10px}
+  .level-choices{display:flex;gap:8px;flex-wrap:wrap}
+  .level-choice{background:#fff;border:2px solid #ddd;border-radius:12px;padding:10px 18px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem}
+  .level-choice:hover:not(:disabled){border-color:var(--teal)}
+  .level-choice.correct{background:#E5F4F1;border-color:var(--teal);color:var(--teal)}
+  .level-choice.wrong{background:#fde8e5;border-color:var(--red);color:var(--red)}
+  .level-choice:disabled{cursor:not-allowed}
+  .level-feedback{font-size:.9rem;font-weight:700;margin-top:8px;min-height:20px}
+  .level-feedback.ok{color:var(--teal)} .level-feedback.bad{color:var(--red)}
+
+  /* ---------- WORDWALL ---------- */
+  .ww-zone{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:16px 0}
+  .ww-card{background:#fff;border-radius:16px;padding:18px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.06);border:2px solid var(--soft)}
+  .ww-card h5{font-size:1.05rem;color:var(--purple);margin-bottom:6px}
+  .ww-card p{font-size:.85rem;color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+  .ww-frame-wrap{max-width:500px;margin:0 auto}
+  .ww-frame{max-width:100%}
+  .ww-card a.ww-link{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;border-radius:10px;padding:8px 16px;font-weight:800;font-size:.9rem;margin-top:12px;transition:.15s}
+  .ww-card a.ww-link:hover{background:#1a5d82}
+
+  /* ---------- HOMEWORK ---------- */
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.4rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;align-items:start;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--terra);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a.anchor{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;border-radius:10px;padding:6px 12px;font-weight:800;font-size:.85rem;margin-top:8px;margin-right:6px;transition:.15s}
+  .task a.anchor:hover{background:#1f7a72}
+
+  /* ---------- SELF-CHECK ---------- */
+  .selfcheck{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .selfcheck h4{margin-bottom:14px}
+  .selfcheck-table{width:100%;border-collapse:collapse;min-width:500px}
+  .selfcheck-table th{background:var(--soft);padding:10px 14px;text-align:left;font-weight:800;font-size:.9rem}
+  .selfcheck-table th:not(:first-child){text-align:center;width:90px}
+  .selfcheck-table td{padding:10px 14px;border-bottom:1px solid #f0ede6}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .selfcheck-table input[type=radio]{width:22px;height:22px;cursor:pointer;accent-color:var(--teal)}
+  .selfcheck-table tr:last-child td{border-bottom:none}
+
+  /* ---------- NAVIGATION ---------- */
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;transition:.2s;text-align:center}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-prev:hover{background:#f3ebc8}
+  .nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+  .nav-next:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(42,157,143,.3)}
+  .nav-locked{flex:1;min-width:200px;border-radius:18px;padding:20px;text-align:center;background:#e8e4dc;color:#8a867d;font-weight:700}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.1rem;margin-top:4px}
+
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+
+  /* ---------- CONFETTI ---------- */
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+
+  @media(max-width:600px){
+    .sos-grid{grid-template-columns:1fr 1fr}
+    .emotion-grid{grid-template-columns:1fr 1fr}
+    .match-columns{grid-template-columns:1fr}
+    .word-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+    .diary-slots{grid-template-columns:repeat(4,1fr)}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 1 · Supervivencia · Урок 4 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🩺 УРОК 4 · НЕДЕЛЯ 2</span>
+  <h1>Части тела: <span>«У меня болит…»</span></h1>
+  <p class="sub">Ты в Испании, и вдруг что-то заболело! Сегодня ты научишься говорить по-испански: «Me duele la cabeza» — и смело пойдёшь в enfermería, если что-то заболит.</p>
+</header>
+
+<main class="container">
+
+  <!-- ЦЕЛИ -->
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🧍</span> Называть 12 частей тела по-испански</div>
+      <div class="goal-item"><span class="emoji">🩹</span> Говорить «Me duele...» — что болит</div>
+      <div class="goal-item"><span class="emoji">🦷</span> Различать duele (болит) и duelen (болят)</div>
+      <div class="goal-item"><span class="emoji">🤒</span> Описывать симптомы: fiebre, tos, mareado</div>
+      <div class="goal-item"><span class="emoji">🩺</span> Отвечать врачу на 5 вопросов</div>
+      <div class="goal-item"><span class="emoji">🚨</span> Использовать SOS-фразы в медпункте</div>
+    </div>
+
+    <div class="script" style="margin-top:18px">
+      <strong>Итоговая ситуация:</strong> в испанской школе у тебя что-то заболело, и ты подходишь к учителю:<br>
+      <strong>«Profe, me duele la rodilla. ¿Puedo ir a la enfermería, por favor?»</strong> — «Учитель, у меня болит колено. Можно пойти в медпункт, пожалуйста?» 🩺
+    </div>
+  </section>
+
+  <!-- ПЕРЕКЛЮЧАТЕЛЬ РОДА -->
+  <section class="gender-zone">
+    <h4>👦👧 Кто ты?</h4>
+    <p style="color:var(--ink-soft);font-weight:700;margin:6px 0">В испанском мальчик говорит <em>mareado</em>, а девочка — <em>mareada</em>! Выбери, кто ты, и все фразы урока станут правильными.</p>
+    <div class="gender-btns">
+      <button class="gender-btn" id="gb-boy" onclick="setGender('boy')">👦 Я мальчик</button>
+      <button class="gender-btn" id="gb-girl" onclick="setGender('girl')">👧 Я девочка</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 1: РАЗОГРЕВ -->
+  <section class="block" style="--c:#F4A261">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разогрев: SOS-эмоции</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Вспоминаем Урок 2! Когда ты не понимаешь, что происходит, ты чувствуешь разные эмоции. Нажми на SOS-фразу — появится эмоция!</p>
+
+    <div class="script">
+      Учитель спрашивает: <strong>«Cuando no entiendes, ¿cómo te sientes?»</strong> — «Когда не понимаешь, как ты себя чувствуешь?»<br>
+      Нажимай на фразы из Урока 2 и смотри, какая эмоция с ними связана. 👇
+    </div>
+
+    <div class="sos-grid">
+      <div class="sos-card" style="--c:#F4A261" onclick="revealEmotion(this,'No entiendo')">
+        <div class="sos-emoji">🆘</div>
+        <div class="sos-phrase">No entiendo</div>
+        <div class="sos-meaning">Я не понимаю (Урок 2)</div>
+        <div class="sos-emotion-link" style="display:none"><span class="link-es">😕 Estoy confundido</span><br>Я в замешательстве</div>
+        <button class="speak-btn" style="--c:#F4A261">🔊 Послушать</button>
+      </div>
+      <div class="sos-card" style="--c:#D62828" onclick="revealEmotion(this,'Necesito ayuda')">
+        <div class="sos-emoji">🚨</div>
+        <div class="sos-phrase">Necesito ayuda</div>
+        <div class="sos-meaning">Мне нужна помощь (Урок 2)</div>
+        <div class="sos-emotion-link" style="display:none"><span class="link-es">😟 Estoy nervioso</span><br>Я нервничаю</div>
+        <button class="speak-btn" style="--c:#D62828">🔊 Послушать</button>
+      </div>
+      <div class="sos-card" style="--c:#2274A5" onclick="revealEmotion(this,'¿Puedes repetir?')">
+        <div class="sos-emoji">🙋</div>
+        <div class="sos-phrase">¿Puedes repetir?</div>
+        <div class="sos-meaning">Можешь повторить? (Урок 2)</div>
+        <div class="sos-emotion-link" style="display:none"><span class="link-es">🤩 Estoy interesado</span><br>Мне интересно</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊 Послушать</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ЭМОЦИИ ЭТО НОРМАЛЬНО -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">💪 Эмоции — это НОРМАЛЬНО!</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Снимаем барьер: в Испании говорить о чувствах — это не слабость, а культурная норма!</p>
+
+    <div class="script">
+      В Испании люди очень открытые. Они постоянно спрашивают <strong>«¿Cómo estás?»</strong> и ожидают честного ответа. Если тебе грустно — скажи! Если рад — скажи громко!<br>
+      Это <strong>не слабость</strong> — это способ общаться. 😊
+    </div>
+
+    <div class="video-zone">
+      <h4 style="margin-bottom:8px">📺 Видео: LAS EMOCIONES</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin-bottom:10px">
+        Смотри и повторяй за детьми! В испанской школе учителя спрашивают детей о настроении каждое утро.
+      </p>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/-nBjyGO9l5s"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <div class="video-note">💡 Включи субтитры (CC) → Испанский, если нужно</div>
+    </div>
+
+    <div class="sos-zone">
+      <p style="font-weight:800;margin-bottom:12px">Нажми на кнопку эмоций — услышишь случайную фразу с переводом!</p>
+      <button class="sos-big-btn" onclick="pressRandomEmotion()">🎲</button>
+      <div class="sos-output" id="rand-emotion-output">
+        <div class="es">Нажми кнопку 👆</div>
+        <div class="ru">—</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: 6 ГЛАВНЫХ ЭМОЦИЙ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">😄 6 главных эмоций</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Ядро урока! Нажимай на карточку — услышишь озвучку. Повторяй и показывай жест!</p>
+
+    <div class="emotion-grid" id="emotion-grid"></div>
+
+    <div class="script">
+      <strong>TPR-игра:</strong> я показываю жест — ты называешь эмоцию по-испански. Потом наоборот: ты показываешь жест — я угадываю!<br>
+      Запоминай: мальчик говорит <span class="grammar-hint" data-hint="Окончание -o для мальчиков: Estoy cansado. Окончание -a для девочек: Estoy cansada. Твоё окончание выбирает переключатель вверху!">cansad<span style="text-decoration:underline">o</span></span>, девочка — <span class="grammar-hint" data-hint="Девочка: Estoy cansada. Мальчик: Estoy cansado. Слово «triste» не меняется — оно одинаковое для всех!">cansad<span style="text-decoration:underline">a</span></span>.
+    </div>
+  </section>
+
+  <!-- БЛОК 4: ¿CÓMO ESTÁS? + ТЕРМОМЕТР -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">❓ ¿Cómo estás? — Вопросы и ответы</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Три способа спросить «Как дела?». Нажимай на строку, чтобы послушать!</p>
+
+    <table class="tools-table">
+      <tr>
+        <th>Фраза</th>
+        <th>Перевод</th>
+        <th>Когда использовать</th>
+        <th>🔊</th>
+      </tr>
+      <tr onclick="speak('¿Cómo estás?')" style="cursor:pointer">
+        <td><strong><span class="grammar-hint" data-hint="¿Cómo estás? — вопрос с глаголом estar (быть) во 2 лице. Дословно: «Как ты есть?» = «Как дела?»">¿Cómo estás?</span></strong></td>
+        <td>Как дела?</td>
+        <td>Нейтрально, всем</td>
+        <td><button class="speak-btn" style="--c:#2274A5;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('¿Qué tal?')" style="cursor:pointer">
+        <td><strong><span class="grammar-hint" data-hint="¿Qué tal? — короткий неформальный вопрос. Дословно: «Как так?» Друзьям и одноклассникам!">¿Qué tal?</span></strong></td>
+        <td>Как жизнь?</td>
+        <td>Друзьям, неформально</td>
+        <td><button class="speak-btn" style="--c:#2274A5;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('¿Cómo te sientes?')" style="cursor:pointer">
+        <td><strong><span class="grammar-hint" data-hint="¿Cómo te sientes? — глагол sentirse (чувствовать себя) со словом te (себя). Дословно: «Как ты себя чувствуешь?»">¿Cómo te sientes?</span></strong></td>
+        <td>Как ты себя чувствуешь?</td>
+        <td>Когда видим, что что-то не так</td>
+        <td><button class="speak-btn" style="--c:#2274A5;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+    </table>
+
+    <div class="thermo-zone">
+      <h4>🌡️ Термометр эмоций (шкала 1–10)</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:6px 0">Сначала выбери эмоцию, потом двигай ползунок! Уровень покажет: чуть-чуть (🔴 1–3), нормально (🟡 4–7) или очень (🟢 8–10).</p>
+
+      <div class="thermo-chips" id="thermo-chips"></div>
+
+      <input type="range" min="1" max="10" value="5" class="thermo-slider" id="thermo-slider" oninput="updateThermo()">
+      <div class="thermo-labels">
+        <span class="l-red">🔴 1–3 un poco</span>
+        <span class="l-yel">🟡 4–7 normal</span>
+        <span class="l-grn">🟢 8–10 muy</span>
+      </div>
+
+      <div class="thermo-output">
+        <div class="es" id="thermo-es">Estoy normal.</div>
+        <div class="ru" id="thermo-ru">Я в порядке (нормально).</div>
+      </div>
+      <button class="speak-btn" style="--c:#2274A5;font-size:.95rem;padding:10px 20px" onclick="speak(document.getElementById('thermo-es').textContent)">🔊 Произнести</button>
+    </div>
+
+    <div class="script">
+      <strong>В реальной школе:</strong> «Estoy un poco nervioso» звучит спокойнее, чем «Estoy muy nervioso». Термометр учит не просто называть эмоцию, а оценивать её силу! 😉
+    </div>
+  </section>
+
+  <!-- БЛОК 5: SER vs ESTAR -->
+  <section class="block" style="--c:#8338EC">
+    <div class="block-head">
+      <h2 class="block-title">🔄 SER vs ESTAR — два «быть»</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Ключевой грамматический блок урока! В испанском есть ДВА слова для «быть».</p>
+
+    <div class="script">
+      <strong>Метафора для тебя:</strong><br>
+      🛂 <strong>SER</strong> — это твой ПАСПОРТ: кто ты есть ВСЕГДА. <em>Soy ruso</em> (я русский), <em>Soy alto</em> (я высокий).<br>
+      📔 <strong>ESTAR</strong> — это твой ДНЕВНИК настроения: как ты СЕЙЧАС. <em>Estoy contento</em> (я рад), <em>Estoy cansado</em> (я устал).<br><br>
+      Паспорт не меняется каждый день, а настроение — да! <strong>Эмоции = всегда ESTAR!</strong>
+    </div>
+
+    <h4>🎯 Проверь себя: SER или ESTAR?</h4>
+    <div id="se-quiz"></div>
+    <div class="se-score" id="se-score">Выбери правильный глагол для каждой фразы! 🚀</div>
+  </section>
+
+  <!-- ДОПОЛНИТЕЛЬНО ДЛЯ ЛЮБОПЫТНЫХ -->
+  <section class="block" style="--c:#FFBE0B">
+    <div class="block-head">
+      <h2 class="block-title">🚀 Дополнительно для любопытных!</h2>
+    </div>
+    <p class="block-sub">Этот блок — для тех, кто хочет копнуть глубже. Прочитай, если чувствуешь, что готов!</p>
+
+    <h4>🗓 ВСЕ формы глагола ESTAR (быть — сейчас)</h4>
+    <div id="table-estar"></div>
+
+    <h4>🛂 ВСЕ формы глагола SER (быть — всегда)</h4>
+    <div id="table-ser"></div>
+
+    <div class="script">
+      <strong>Мнемоника:</strong><br>
+      🔵 <strong>SER = DOCTOR</strong> — Description (описание), Occupation (профессия), Characteristic (черта), Time (время), Origin (происхождение), Relationship (отношение).<br>
+      🟢 <strong>ESTAR = PLACE</strong> — Position (положение), Location (место), Action (действие), Condition (состояние), Emotion (эмоция).<br>
+      Ещё пример: <em>Soy feliz</em> (я счастливый человек — черта характера) vs <em>Estoy feliz</em> (я счастлив сейчас). Но для простоты в нашем курсе: <strong>эмоции = ESTAR!</strong>
+    </div>
+
+    <div class="script">
+      <strong>Добавь причину!</strong> <span class="grammar-hint" data-hint="Porque = «потому что». Глагол ser (быть) в 3 лице ед.ч. = es. Дословно: «Я нервничаю, потому что это мой первый день»">«Estoy nervioso porque es mi primer día»</span> — «Я нервничаю, потому что это мой первый день».
+    </div>
+  </section>
+
+  <!-- БЛОК 6: СИМУЛЯЦИЯ -->
+  <section class="block" style="--c:#D62828">
+    <div class="block-head">
+      <h2 class="block-title">🎮 Симуляция «Школьные ситуации»</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">На экране — ситуация из школьной жизни. Выбери подходящую эмоцию! 5 раундов.</p>
+
+    <div class="sim-game">
+      <div class="sim-header">
+        <div class="sim-stars" id="sim-stars">☆☆☆☆☆</div>
+        <div class="sim-score" id="sim-score">Собери 5 звёзд эмоций! ⭐</div>
+      </div>
+
+      <div class="sim-teacher" id="sim-teacher">
+        <div class="round-label">🏫 Ситуация:</div>
+        <div class="situation" id="sim-situation">Нажми «Начать игру»!</div>
+      </div>
+
+      <div class="sim-prompt" id="sim-prompt" style="display:none">
+        💡 <span class="hint" id="sim-hint">—</span><br>👇 Как ты себя чувствуешь? Выбери эмоцию:
+      </div>
+      <div class="sim-options" id="sim-options" style="display:none"></div>
+      <div class="sim-feedback" id="sim-feedback"></div>
+
+      <button class="sim-btn" id="sim-start" onclick="startSim()">🚀 Начать игру</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 7: EMOJI-ДНЕВНИК + БЕЙДЖ -->
+  <section class="block" style="--c:#FFBE0B">
+    <div class="block-head">
+      <h2 class="block-title">📔 Emoji-дневник + бейдж «Мастер эмоций»</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Проект станции! Каждый день рисуй одну эмодзи своего настроения и подписывай её по-испански. В конце недели — 7 эмодзи = твоя «эмоциональная карта»! 🗺️</p>
+
+    <div class="diary-zone">
+      <h4 style="text-align:center">😊 Как ты себя чувствуешь сегодня?</h4>
+      <p style="text-align:center;color:var(--ink-soft);font-weight:700;margin:6px 0">Выбери эмодзи → сохрани в дневник!</p>
+      <div class="diary-pick" id="diary-pick"></div>
+      <div class="diary-selected" id="diary-selected">Выбери эмодзи 👆</div>
+      <button class="diary-save" onclick="saveDiary()">📔 Сохранить в дневник</button>
+
+      <div class="diary-slots" id="diary-slots"></div>
+      <div class="diary-progress" id="diary-progress">Заполнено 0 из 7 дней</div>
+      <button class="diary-reset" onclick="resetDiary()">🗑 Очистить дневник</button>
+    </div>
+
+    <div class="badge-zone">
+      <div class="badge-icon">🎭</div>
+      <h3>Мастер эмоций</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты научился называть свои чувства по-испански!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">
+        🎉 ¡Enhorabuena! Бейдж «Мастер эмоций» 🎭 добавлен в твой паспорт!
+      </div>
+    </div>
+
+    <div class="script">
+      <strong>Рефлексия:</strong> Какую эмоцию ты чувствовал сегодня? Почему? Расскажи родителям по-испански: <em>«Hoy estoy...»</em> 🤔
+    </div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#8338EC">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Слова урока</h2>
+    </div>
+
+    <h4>😄 Эмоции</h4>
+    <div class="word-grid" id="words-emotions"></div>
+
+    <h4 style="margin-top:18px">❓ Вопросы «Как дела?»</h4>
+    <div class="word-grid" id="words-questions"></div>
+
+    <h4 style="margin-top:18px">🌡️ Наречия степени</h4>
+    <div class="word-grid" id="words-level"></div>
+
+    <h4 style="margin-top:18px">💬 Полезные фразы</h4>
+    <div class="word-grid" id="words-phrases"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁРЫ -->
+  <section class="block" style="--c:#2A9D8F" id="trainers">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Тренажёры для закрепления</h2>
+    </div>
+
+    <!-- Тренажёр 1: Match -->
+    <div class="match-game" id="trainer-match">
+      <h4>🧩 Сопоставление: «испанский ↔ русский»</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:8px 0">Выбери слово слева, потом его перевод справа. 8 пар!</p>
+      <div class="match-columns">
+        <div class="match-col" id="match-left"></div>
+        <div class="match-col" id="match-right"></div>
+      </div>
+      <div class="match-feedback" id="match-feedback"></div>
+      <button class="match-reset" onclick="resetMatch()">🔄 Начать заново</button>
+    </div>
+
+    <!-- Тренажёр 2: Sentence Builder -->
+    <div class="sb" id="trainer-builder">
+      <h4>🎯 Конструктор фраз: собери «Estoy + эмоция»</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:8px 0">Нажимай на слова в правильном порядке! Фразы учитывают твой род 👦👧</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="sb-result" id="sb-result"></div>
+      <button class="match-reset" style="background:var(--red);box-shadow:0 5px 0 #a82020" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+
+    <!-- Тренажёр 3: Термометр -->
+    <div class="level-quiz" id="trainer-thermo">
+      <h4>🌡️ Тренажёр термометра: подбери интенсивность</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:8px 0">В каждой ситуации выбери уровень эмоции: muy (очень), un poco (чуть-чуть) или normal (нормально).</p>
+      <div id="level-scenarios"></div>
+    </div>
+  </section>
+
+  <!-- WORDWALL -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">🎮 Wordwall-игры</h2>
+    </div>
+    <p class="block-sub">Поиграй в интерактивные игры по теме урока!</p>
+
+    <div class="ww-zone">
+      <div class="ww-card">
+        <h5>🎯 Emociones</h5>
+        <p>Собери пары и повтори эмоции по-испански!</p>
+        <div class="ww-frame-wrap">
+          <iframe class="ww-frame" src="https://wordwall.net/ru/embed/df154eeae0ea40d1ac8d0b6aa3dbe770?themeId=1&templateId=5&fontStackId=0" width="500" height="380" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <a class="ww-link" href="https://wordwall.net/ru/resource/6276129" target="_blank" rel="noopener">▶ Открыть в новой вкладке</a>
+      </div>
+      <div class="ww-card">
+        <h5>😄 ¿Cómo estás?</h5>
+        <p>Вторая игра: эмоции в ситуациях!</p>
+        <div class="ww-frame-wrap">
+          <iframe class="ww-frame" src="https://wordwall.net/ru/embed/3f0c9f7130ca4651918ac575e179fbd2?themeId=1&templateId=22&fontStackId=0" width="500" height="380" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <a class="ww-link" href="https://wordwall.net/ru/resource/12680483/emociones" target="_blank" rel="noopener">▶ Открыть в новой вкладке</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+
+    <div class="task">
+      <div class="task-num">1</div>
+      <div>
+        <strong>Научи родителей эмоциям</strong> · 5 мин<br>
+        Покажи маме и папе 6 карточек эмоций. Пусть каждый выберет свою эмоцию дня и скажет по-испански!
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num star">2</div>
+      <div>
+        <strong>Семейная игра «¿Cómo estás?»</strong> · 7 мин ⭐<br>
+        Каждый вечер за ужином вся семья по кругу отвечает на вопрос <em>«¿Cómo estás?»</em> по-испански. Можно добавлять <em>porque...</em> (потому что...).
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">3</div>
+      <div>
+        <strong>Волшебные слова: muy / un poco</strong> · 3 мин<br>
+        Потренируйся говорить эмоции с разной интенсивностью:<br>
+        <em>Estoy muy contento</em> (очень рад) · <em>Estoy un poco triste</em> (немного грустно) · <em>Estoy normal</em> (нормально)
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">4</div>
+      <div>
+        <strong>Повтори все новые слова</strong> · 2 мин<br>
+        Нажимай на карточки раздела «Слова урока»: слушай и повторяй вслух.
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num star">5</div>
+      <div>
+        <strong>Тренажёры</strong> · 10 мин ⭐<br>
+        Пройди все тренажёры урока:<br>
+        <a href="#trainer-match" class="anchor">🧩 Сопоставление (8 пар)</a>
+        <a href="#trainer-builder" class="anchor">🎯 Конструктор фраз (5 фраз)</a>
+        <a href="#trainer-thermo" class="anchor">🌡️ Термометр (4 ситуации)</a>
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">6</div>
+      <div>
+        <strong>Видео «Las Emociones»</strong> · 3 мин<br>
+        Посмотри ещё раз и повтори вслух все фразы за детьми.
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">7</div>
+      <div>
+        <strong>Самопроверка «Смайлик»</strong><br>
+        Честно оцени себя по 5 критериям (таблица ниже).
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num star">8</div>
+      <div>
+        <strong>Дополнительная практика</strong> · 5 мин ⭐<br>
+        Продолжай тренироваться дома: посмотри видео и сыграй в игры по теме урока!
+        <a class="anchor" href="https://www.youtube.com/watch?v=YJaR7X5WyRY" target="_blank" rel="noopener">📺 Видео</a>
+        <a class="anchor" href="https://wordwall.net/ru/resource/6276129" target="_blank" rel="noopener">🎮 Emociones</a>
+        <a class="anchor" href="https://wordwall.net/ru/resource/12680483/emociones" target="_blank" rel="noopener">🎮 ¿Cómo estás?</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- САМОПРОВЕРКА -->
+  <section class="selfcheck">
+    <h4>😊 Самопроверка «Смайлик»</h4>
+    <table class="selfcheck-table">
+      <thead>
+        <tr>
+          <th>Умею</th>
+          <th>😄 отлично</th>
+          <th>🙂 с подсказкой</th>
+          <th>😅 пока сложно</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Назвать 6 эмоций по-испански</td>
+          <td><input type="radio" name="q1" value="great"></td>
+          <td><input type="radio" name="q1" value="ok"></td>
+          <td><input type="radio" name="q1" value="hard"></td>
+        </tr>
+        <tr>
+          <td>Спросить «¿Cómo estás?»</td>
+          <td><input type="radio" name="q2" value="great"></td>
+          <td><input type="radio" name="q2" value="ok"></td>
+          <td><input type="radio" name="q2" value="hard"></td>
+        </tr>
+        <tr>
+          <td>Ответить «Estoy...»</td>
+          <td><input type="radio" name="q3" value="great"></td>
+          <td><input type="radio" name="q3" value="ok"></td>
+          <td><input type="radio" name="q3" value="hard"></td>
+        </tr>
+        <tr>
+          <td>Различать SER и ESTAR</td>
+          <td><input type="radio" name="q4" value="great"></td>
+          <td><input type="radio" name="q4" value="ok"></td>
+          <td><input type="radio" name="q4" value="hard"></td>
+        </tr>
+        <tr>
+          <td>Начать Emoji-дневник</td>
+          <td><input type="radio" name="q5" value="great"></td>
+          <td><input type="radio" name="q5" value="ok"></td>
+          <td><input type="radio" name="q5" value="hard"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="lesson-nav">
+    <a href="./w01-l2.html" class="nav-prev">
+      <div class="nav-small">← Предыдущий урок</div>
+      <div class="nav-title">Урок 2: SOS-фразы 🆘</div>
+    </a>
+    <div class="nav-locked">
+      <div class="nav-small">Следующий урок →</div>
+      <div class="nav-title">Урок 4: Части тела 🔒 скоро</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 1: Supervivencia · 2026
+  </div>
+
+</main>
+
+<script>
+/* ========== ОЗВУЧКА ========== */
+let esVoice=null;
+function loadVoices(){
+  const voices=speechSynthesis.getVoices();
+  esVoice=voices.find(v=>v.lang.startsWith('es'));
+}
+speechSynthesis.onvoiceschanged=loadVoices;
+loadVoices();
+
+function speak(text){
+  if(!text) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-ES';u.rate=0.8;u.pitch=1.05;
+  if(esVoice)u.voice=esVoice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+/* ========== ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ (мобильный тап) ========== */
+document.addEventListener('click', function(e){
+  const hint = e.target.closest('.grammar-hint');
+  if(hint){
+    document.querySelectorAll('.grammar-hint.active').forEach(el => {
+      if(el !== hint) el.classList.remove('active');
+    });
+    hint.classList.toggle('active');
+    e.stopPropagation();
+    return;
+  }
+  document.querySelectorAll('.grammar-hint.active').forEach(el => {
+    el.classList.remove('active');
+  });
+});
+
+/* ========== РОД (мальчик/девочка) ========== */
+let gender = localStorage.getItem('mudro_gender') === 'girl' ? 'girl' : 'boy';
+
+const EMOS=[
+  {id:'contento', emoji:'😄', ru:'Я рад/рада', gesture:'Широкая улыбка + руки вверх', m:'contento', f:'contenta'},
+  {id:'triste',   emoji:'😢', ru:'Мне грустно', gesture:'Опускаем уголки рта + плечи вниз', m:'triste', f:'triste'},
+  {id:'enojado', emoji:'😡', ru:'Я злюсь', gesture:'Сжимаем кулаки + хмуримся', m:'enojado', f:'enojada'},
+  {id:'cansado',  emoji:'😴', ru:'Я устал/устала', gesture:'Зеваем + потираем глаза', m:'cansado', f:'cansada'},
+  {id:'nervioso', emoji:'😰', ru:'Я нервничаю', gesture:'Трясём руками + кусаем губу', m:'nervioso', f:'nerviosa'},
+  {id:'aburrido', emoji:'😐', ru:'Мне скучно', gesture:'Закатываем глаза + зеваем', m:'aburrido', f:'aburrida'},
+  {id:'confundido', emoji:'😕', ru:'Я в замешательстве', gesture:'Чешем затылок + хмуримся', m:'confundido', f:'confundida'}
+];
+
+function adjOf(e){ return gender === 'girl' ? e.f : e.m; }
+function phraseOf(e){ return 'Estoy ' + adjOf(e); }
+
+function setGender(g){
+  gender = g;
+  localStorage.setItem('mudro_gender', g);
+  document.getElementById('gb-boy').classList.toggle('active', g === 'boy');
+  document.getElementById('gb-girl').classList.toggle('active', g === 'girl');
+  renderEmotionCards();
+  renderThermoChips();
+  renderDiaryPick();
+  renderWords();
+  renderSeQuiz();
+  renderForms();
+  renderMatch();
+}
+
+function renderGenderButtons(){
+  document.getElementById('gb-boy').classList.toggle('active', gender === 'boy');
+  document.getElementById('gb-girl').classList.toggle('active', gender === 'girl');
+}
+
+/* ========== БЛОК 1: РАЗОГРЕВ (SOS → эмоция) ========== */
+function revealEmotion(card, sosPhrase){
+  document.querySelectorAll('.sos-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+  const link = card.querySelector('.sos-emotion-link');
+  link.style.display = 'block';
+  speak(sosPhrase);
+  setTimeout(()=>card.classList.remove('active'), 1200);
+}
+
+/* ========== БЛОК 2: СЛУЧАЙНАЯ ФРАЗА ========== */
+const RANDOM_EMOTIONS=[
+  {es:'¡Estoy muy contento hoy!', ru:'Я очень рад сегодня!'},
+  {es:'Estoy un poco cansado.', ru:'Я немного устал.'},
+  {es:'¿Cómo estás tú?', ru:'А как ты?'},
+  {es:'Estoy nervioso porque es mi primer día.', ru:'Я нервничаю, потому что это мой первый день.'},
+  {es:'Estoy aburrido en clase.', ru:'Мне скучно на уроке.'}
+];
+function pressRandomEmotion(){
+  const m=RANDOM_EMOTIONS[Math.floor(Math.random()*RANDOM_EMOTIONS.length)];
+  const out=document.getElementById('rand-emotion-output');
+  out.innerHTML='<div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+  speak(m.es);
+}
+
+/* ========== БЛОК 3: КАРТОЧКИ ЭМОЦИЙ ========== */
+function renderEmotionCards(){
+  const grid=document.getElementById('emotion-grid');
+  grid.innerHTML='';
+  EMOS.slice(0,6).forEach(e=>{
+    const card=document.createElement('div');
+    card.className='emotion-card';
+    card.style.setProperty('--ec','#FFE8E8');
+    card.innerHTML='<span class="emotion-emoji">'+e.emoji+'</span>'
+      +'<div class="emotion-es">'+phraseOf(e)+'</div>'
+      +'<div class="emotion-ru">'+e.ru+'</div>'
+      +'<div class="emotion-gesture">🤲 '+e.gesture+'</div>';
+    card.onclick=function(){ speakCard(card, phraseOf(e)); };
+    grid.appendChild(card);
+  });
+}
+function speakCard(card,text){
+  document.querySelectorAll('.emotion-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+  speak(text);
+  setTimeout(()=>card.classList.remove('active'),1200);
+}
+
+/* ========== БЛОК 4: ТЕРМОМЕТР ========== */
+let thermoEmotion = EMOS[0];
+
+function renderThermoChips(){
+  const box=document.getElementById('thermo-chips');
+  box.innerHTML='';
+  EMOS.slice(0,6).forEach(e=>{
+    const chip=document.createElement('button');
+    chip.className='thermo-chip'+(e.id===thermoEmotion.id?' active':'');
+    chip.textContent=e.emoji+' '+phraseOf(e);
+    chip.onclick=function(){
+      thermoEmotion=e;
+      renderThermoChips();
+      updateThermo();
+    };
+    box.appendChild(chip);
+  });
+}
+
+function levelInfo(l){
+  if(l<=3) return {w:'un poco', t:'чуть-чуть', color:'var(--red)'};
+  if(l<=7) return {w:'normal', t:'нормально', color:'#c99200'};
+  return {w:'muy', t:'очень', color:'var(--teal)'};
+}
+
+function updateThermo(){
+  const l=parseInt(document.getElementById('thermo-slider').value,10);
+  const info=levelInfo(l);
+  const emo=thermoEmotion;
+  let es, ru;
+  if(info.w==='normal'){
+    es='¡Estoy '+adjOf(emo)+'!';
+    ru=emo.ru+' (нормально).';
+  } else if(info.w==='muy'){
+    es='¡Estoy muy '+adjOf(emo)+'!';
+    ru=emo.ru+' (очень!).';
+  } else {
+    es='Estoy un poco '+adjOf(emo)+'.';
+    ru=emo.ru+' (чуть-чуть).';
+  }
+  document.getElementById('thermo-es').textContent=es;
+  document.getElementById('thermo-ru').textContent=ru;
+}
+
+/* ========== БЛОК 5: SER vs ESTAR ========== */
+const SE_DATA=[
+  {correct:'Soy', adj:'ruso', adjF:'rusa', why:'Национальность = всегда → SER', ru:{m:'Я русский', f:'Я русская'}},
+  {correct:'Estoy', adj:'cansado', adjF:'cansada', why:'Усталость = сейчас → ESTAR', ru:{m:'Я устал', f:'Я устала'}},
+  {correct:'Soy', adj:'simpático', adjF:'simpática', why:'Характер = всегда → SER', ru:{m:'Я добрый', f:'Я добрая'}},
+  {correct:'Estoy', adj:'nervioso', adjF:'nerviosa', why:'Нервы = сейчас → ESTAR', ru:'Я нервничаю'},
+  {correct:'Soy', adj:'de Rusia', why:'Происхождение = всегда → SER', ru:'Я из России'},
+  {correct:'Estoy', adj:'triste', why:'Грусть = сейчас → ESTAR', ru:'Мне грустно'}
+];
+
+function seAdj(row){ return gender==='girl' && row.adjF ? row.adjF : row.adj; }
+function seBlank(row){ return '___ '+seAdj(row); }
+function seFull(row){ return (row.correct==='Soy'?'Soy':'Estoy')+' '+seAdj(row); }
+function seRu(row){ return typeof row.ru==='string' ? row.ru : (gender==='girl'?row.ru.f:row.ru.m); }
+
+function renderSeQuiz(){
+  const box=document.getElementById('se-quiz');
+  box.innerHTML='';
+  SE_DATA.forEach((row,i)=>{
+    const div=document.createElement('div');
+    div.className='sos-scenario';
+    div.innerHTML='<div class="situation">Фраза '+(i+1)+': «'+seBlank(row).replace('___','<strong style="color:var(--blue)">___</strong>')+'» · '+seRu(row)+'</div>'
+      +'<div class="sos-choices">'
+      +'<button class="sos-choice" onclick="checkSE(this,'+i+',\'Soy\')"><span class="emoji">🛂</span> Soy</button>'
+      +'<button class="sos-choice" onclick="checkSE(this,'+i+',\'Estoy\')"><span class="emoji">📔</span> Estoy</button>'
+      +'</div>'
+      +'<div class="se-feedback" id="se-fb-'+i+'"></div>';
+    box.appendChild(div);
+  });
+}
+
+function checkSE(btn,rowIdx,answer){
+  const row=SE_DATA[rowIdx];
+  const container=btn.closest('.sos-scenario');
+  container.querySelectorAll('.sos-choice').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('se-fb-'+rowIdx);
+  const full=seFull(row);
+  if(answer===row.correct){
+    btn.classList.add('correct');
+    fb.innerHTML='✅ <span style="color:var(--teal)">'+full+'</span> — '+row.why+' · Перевод: '+seRu(row);
+    fb.className='se-feedback ok';
+    speak(full);
+  }else{
+    btn.classList.add('wrong');
+    container.querySelectorAll('.sos-choice').forEach(b=>{
+      if(b.getAttribute('onclick').includes("'"+row.correct+"'")) b.classList.add('correct');
+    });
+    fb.innerHTML='❌ Правильно: <strong>'+full+'</strong> — '+row.why+' · Перевод: '+seRu(row);
+    fb.className='se-feedback bad';
+  }
+}
+
+/* ========== ДОПОЛНИТЕЛЬНО: ВСЕ ФОРМЫ SER/ESTAR ========== */
+const ESTAR_FORMS=[
+  {p:'yo', f:'estoy', es:function(){ return 'Yo estoy '+adjOf(EMOS[0])+'.'; }, ru:'Я рад/рада (сейчас)'},
+  {p:'tú', f:'estás', es:function(){ return '¿Cómo estás?'; }, ru:'Как дела?'},
+  {p:'él / ella / usted', f:'está', es:function(){ return 'Está triste.'; }, ru:'Ему/ей грустно (сейчас)'},
+  {p:'nosotros/as', f:'estamos', es:function(){ return 'Estamos nerviosos.'; }, ru:'Мы нервничаем (сейчас)'},
+  {p:'vosotros/as', f:'estáis', es:function(){ return '¿Estáis cansados?'; }, ru:'Вы устали?'},
+  {p:'ellos / ustedes', f:'están', es:function(){ return 'Están enojados.'; }, ru:'Они злятся (сейчас)'}
+];
+
+const SER_FORMS=[
+  {p:'yo', f:'soy', es:function(){ return gender==='girl' ? 'Soy rusa.' : 'Soy ruso.'; }, ru:'Я русский/русская'},
+  {p:'tú', f:'eres', es:function(){ return gender==='girl' ? '¿Eres simpática?' : '¿Eres simpático?'; }, ru:'Ты добрый/добрая?'},
+  {p:'él / ella / usted', f:'es', es:function(){ return 'Es alto.'; }, ru:'Он высокий'},
+  {p:'nosotros/as', f:'somos', es:function(){ return 'Somos rusos.'; }, ru:'Мы русские'},
+  {p:'vosotros/as', f:'sois', es:function(){ return '¿Sois españoles?'; }, ru:'Вы испанцы?'},
+  {p:'ellos / ustedes', f:'son', es:function(){ return 'Son simpáticos.'; }, ru:'Они добрые'}
+];
+
+function renderFormTable(id, forms){
+  const box=document.getElementById(id);
+  if(!box) return;
+  box.innerHTML='<table class="tools-table"><tr><th>Лицо</th><th>Форма</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr></table>';
+  const t=box.querySelector('table');
+  t.style.setProperty('--c','#8338EC');
+  forms.forEach(function(f){
+    const phrase=f.es();
+    const tr=document.createElement('tr');
+    tr.style.cursor='pointer';
+    tr.onclick=function(){ speak(phrase); };
+    tr.innerHTML='<td>'+f.p+'</td><td><strong>'+f.f+'</strong></td><td>'+phrase+'</td><td>'+f.ru+'</td>'
+      +'<td><button class="speak-btn" style="--c:#8338EC;padding:4px 10px;font-size:.8rem">🔊</button></td>';
+    t.appendChild(tr);
+  });
+}
+
+function renderForms(){
+  renderFormTable('table-estar', ESTAR_FORMS);
+  renderFormTable('table-ser', SER_FORMS);
+}
+
+/* ========== БЛОК 6: СИМУЛЯЦИЯ ========== */
+const SIM_ROUNDS=[
+  {sit:'🎒 Первый день в школе: вокруг чужие лица, ты никого не знаешь', hint:'Неизвестность = нервы', correct:'nervioso', distract:['contento','triste']},
+  {sit:'🎉 Учитель громко хвалит твою работу и показывает всем', hint:'Похвала = радость', correct:'contento', distract:['cansado','aburrido']},
+  {sit:'😴 Урок идёт уже второй час, глаза сами закрываются', hint:'Долго = усталость', correct:'cansado', distract:['contento','enojado']},
+  {sit:'🙃 Одноклассник взял твой карандаш без спроса', hint:'Несправедливость = злость', correct:'enojado', distract:['triste','nervioso']},
+  {sit:'📚 Учитель объясняет новую тему, а ты не понимаешь ни слова', hint:'Непонимание = замешательство', correct:'confundido', distract:['aburrido','enojado']}
+];
+
+let simRound=0, simStars=0;
+
+function startSim(){
+  simRound=0; simStars=0;
+  document.getElementById('sim-start').style.display='none';
+  updateStars();
+  playRound();
+}
+
+function emoById(id){ return EMOS.find(e=>e.id===id); }
+
+function playRound(){
+  if(simRound>=SIM_ROUNDS.length){ endSim(); return; }
+  const r=SIM_ROUNDS[simRound];
+  document.getElementById('sim-situation').textContent='';
+  document.getElementById('sim-feedback').textContent='🎧 Читай внимательно...';
+  document.getElementById('sim-prompt').style.display='none';
+  document.getElementById('sim-options').style.display='none';
+  document.getElementById('sim-hint').textContent=r.hint;
+
+  document.querySelector('.round-label').textContent='🏫 Ситуация (раунд '+(simRound+1)+' из 5):';
+  document.getElementById('sim-situation').textContent=r.sit;
+
+  setTimeout(()=>{
+    document.getElementById('sim-prompt').style.display='block';
+    showSimOptions(r);
+  },800);
+}
+
+function showSimOptions(r){
+  const opts=document.getElementById('sim-options');
+  opts.style.display='flex';
+  opts.innerHTML='';
+  document.getElementById('sim-feedback').textContent='';
+  const ids=[r.correct].concat(r.distract);
+  ids.forEach(id=>{
+    const e=emoById(id);
+    const btn=document.createElement('button');
+    btn.className='sim-opt';
+    btn.innerHTML=e.emoji+' '+phraseOf(e);
+    btn.onclick=function(){ checkSim(id,btn,r); };
+    opts.appendChild(btn);
+  });
+}
+
+function checkSim(id,btn,r){
+  document.querySelectorAll('.sim-opt').forEach(b=>b.disabled=true);
+  if(id===r.correct){
+    btn.classList.add('correct');
+    simStars++;
+    document.getElementById('sim-feedback').textContent='🎉 ¡Muy bien! Правильная эмоция!';
+    speak(phraseOf(emoById(id)));
+  }else{
+    btn.classList.add('wrong');
+    document.getElementById('sim-feedback').textContent='😅 Не то! Правильная эмоция: '+emoById(r.correct).emoji+' '+phraseOf(emoById(r.correct));
+    document.querySelectorAll('.sim-opt').forEach(b=>{
+      const txt=b.innerHTML.split(' ')[1];
+      const target=phraseOf(emoById(r.correct));
+      if(b.innerHTML.indexOf(target)!==-1) b.classList.add('correct');
+    });
+  }
+  updateStars();
+  simRound++;
+  setTimeout(playRound,2200);
+}
+
+function updateStars(){
+  const starsEl=document.getElementById('sim-stars');
+  let s='';
+  for(let i=0;i<5;i++) s+=i<simStars?'⭐':'☆';
+  starsEl.textContent=s;
+  document.getElementById('sim-score').textContent='Звёзд эмоций: '+simStars+'/5';
+}
+
+function endSim(){
+  document.getElementById('sim-options').style.display='none';
+  document.getElementById('sim-prompt').style.display='none';
+  document.getElementById('sim-feedback').textContent='';
+  const msg=simStars>=4?'🏆 Отлично! Ты настоящий Мастер эмоций!':simStars>=2?'👍 Хорошо! Ещё чуть-чуть практики!':'💪 Ничего! Повтори карточки и попробуй снова!';
+  document.getElementById('sim-situation').textContent=msg;
+  document.getElementById('sim-start').style.display='block';
+  document.getElementById('sim-start').textContent='🔄 Играть снова';
+  if(simStars>=4) confetti('⭐');
+}
+
+/* ========== БЛОК 7: EMOJI-ДНЕВНИК ========== */
+const DIARY_KEY='mudro_emoji_diary';
+let diary=null;
+try{ diary=JSON.parse(localStorage.getItem(DIARY_KEY)); }catch(e){ diary=null; }
+if(!diary || typeof diary!=='object') diary={};
+
+let diarySelected=null;
+
+function renderDiaryPick(){
+  const box=document.getElementById('diary-pick');
+  box.innerHTML='';
+  EMOS.forEach(e=>{
+    const b=document.createElement('button');
+    b.className='diary-emo'+(e.id===diarySelected?' active':'');
+    b.textContent=e.emoji;
+    b.title=e.ru;
+    b.onclick=function(){
+      diarySelected=e.id;
+      renderDiaryPick();
+      updateDiarySelected();
+    };
+    box.appendChild(b);
+  });
+}
+
+function updateDiarySelected(){
+  const el=document.getElementById('diary-selected');
+  if(!diarySelected){ el.textContent='Выбери эмодзи 👆'; return; }
+  const e=emoById(diarySelected);
+  el.textContent=e.emoji+' '+phraseOf(e)+' — '+e.ru;
+}
+
+function nextEmptyDay(){
+  for(let i=1;i<=7;i++){
+    if(!diary['d'+i]) return i;
+  }
+  return null;
+}
+
+function saveDiary(){
+  if(!diarySelected){ return; }
+  const day=nextEmptyDay();
+  if(day===null){
+    alert('Дневник уже заполнен на все 7 дней! 🎉 Очисти его, чтобы начать заново.');
+    return;
+  }
+  const e=emoById(diarySelected);
+  diary['d'+day]={emoji:e.emoji, es:phraseOf(e), ru:e.ru};
+  localStorage.setItem(DIARY_KEY, JSON.stringify(diary));
+  renderDiarySlots();
+}
+
+function renderDiarySlots(){
+  const box=document.getElementById('diary-slots');
+  box.innerHTML='';
+  let filled=0;
+  for(let i=1;i<=7;i++){
+    const slot=document.createElement('div');
+    slot.className='diary-slot';
+    const d=diary['d'+i];
+    if(d){
+      filled++;
+      slot.classList.add('filled');
+      slot.innerHTML='<span class="d-num">День '+i+'</span><span class="d-emo">'+d.emoji+'</span><span class="d-es">'+d.es+'</span>';
+      slot.title=d.ru;
+    }else{
+      slot.innerHTML='<span class="d-num">День '+i+'</span><span class="d-emo">—</span>';
+    }
+    box.appendChild(slot);
+  }
+  document.getElementById('diary-progress').textContent='Заполнено '+filled+' из 7 дней';
+}
+
+function resetDiary(){
+  if(!confirm('Очистить весь Emoji-дневник?')) return;
+  diary={};
+  localStorage.setItem(DIARY_KEY, JSON.stringify(diary));
+  renderDiarySlots();
+}
+
+/* ========== БЕЙДЖ ========== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! Eres un maestro de las emociones.');
+  confetti('🎭');
+  localStorage.setItem('mudro_badge_emociones','true');
+  localStorage.setItem('mudro_lesson_3_done', new Date().toISOString());
+}
+
+if(localStorage.getItem('mudro_badge_emociones')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+
+/* ========== СЛОВА УРОКА ========== */
+const WORDS_EMOTIONS=[
+  {e:'contento', ru:'Я рад/рада'},
+  {e:'triste', ru:'Мне грустно'},
+  {e:'enojado', ru:'Я злюсь'},
+  {e:'cansado', ru:'Я устал/устала'},
+  {e:'nervioso', ru:'Я нервничаю'},
+  {e:'aburrido', ru:'Мне скучно'},
+  {e:'confundido', ru:'Я в замешательстве'},
+  {es:'Estoy bien', ru:'Мне хорошо'},
+  {es:'Estoy mal', ru:'Мне плохо'}
+];
+const WORDS_QUESTIONS=[
+  {es:'¿Cómo estás?', ru:'Как дела?'},
+  {es:'¿Qué tal?', ru:'Как жизнь? (неформально)'},
+  {es:'¿Cómo te sientes?', ru:'Как ты себя чувствуешь?'}
+];
+const WORDS_LEVEL=[
+  {es:'muy', ru:'очень'},
+  {es:'un poco', ru:'немного'},
+  {es:'normal', ru:'нормально'}
+];
+const WORDS_PHRASES=[
+  {es:'Estoy bien, gracias.', ru:'У меня всё хорошо, спасибо.'},
+  {es:'¿Y tú?', ru:'А ты?'},
+  {es:'Porque...', ru:'Потому что...'},
+  {es:'Hoy estoy...', ru:'Сегодня я...'}
+];
+
+function renderWordGrid(arr,containerId){
+  const container=document.getElementById(containerId);
+  container.innerHTML='';
+  arr.forEach(w=>{
+    let es, ru;
+    if(w.e){
+      const e=emoById(w.e);
+      es='Estoy '+adjOf(e);
+      ru=w.ru;
+    }else{
+      es=w.es; ru=w.ru;
+    }
+    const card=document.createElement('div');
+    card.className='word-card';
+    card.innerHTML='<span class="w-es">'+es+'</span><span class="w-ru">'+ru+'</span>';
+    card.onclick=function(){ speak(es); };
+    container.appendChild(card);
+  });
+}
+
+function renderWords(){
+  renderWordGrid(WORDS_EMOTIONS,'words-emotions');
+  renderWordGrid(WORDS_QUESTIONS,'words-questions');
+  renderWordGrid(WORDS_LEVEL,'words-level');
+  renderWordGrid(WORDS_PHRASES,'words-phrases');
+}
+
+/* ========== MATCH GAME ========== */
+function getMatchPairs(){
+  return [
+    {es:'Estoy '+adjOf(EMOS[0]), ru:'Я рад/рада'},
+    {es:'Estoy '+adjOf(EMOS[1]), ru:'Мне грустно'},
+    {es:'Estoy '+adjOf(EMOS[2]), ru:'Я злюсь'},
+    {es:'Estoy '+adjOf(EMOS[3]), ru:'Я устал/устала'},
+    {es:'Estoy '+adjOf(EMOS[4]), ru:'Я нервничаю'},
+    {es:'Estoy '+adjOf(EMOS[5]), ru:'Мне скучно'},
+    {es:'Estoy '+adjOf(EMOS[6]), ru:'Я в замешательстве'},
+    {es:'Estoy bien', ru:'Мне хорошо'}
+  ];
+}
+let matchSelected=null, matchFound=0;
+
+function shuffle(arr){ return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]); }
+
+function renderMatch(){
+  const left=document.getElementById('match-left');
+  const right=document.getElementById('match-right');
+  left.innerHTML=''; right.innerHTML='';
+  matchSelected=null; matchFound=0;
+  document.getElementById('match-feedback').textContent='Выбери слово слева 👈';
+
+  const pairs=getMatchPairs();
+  const leftItems=shuffle(pairs.slice());
+  const rightItems=shuffle(pairs.slice());
+
+  leftItems.forEach((p,i)=>{
+    const item=document.createElement('div');
+    item.className='match-item';
+    item.textContent=p.es;
+    item.dataset.pair=i;
+    item.dataset.side='left';
+    item.dataset.value=p.es;
+    item.onclick=function(){ selectMatch(item); };
+    left.appendChild(item);
+  });
+
+  rightItems.forEach((p,i)=>{
+    const item=document.createElement('div');
+    item.className='match-item';
+    item.textContent=p.ru;
+    item.dataset.pair=i;
+    item.dataset.side='right';
+    item.dataset.value=p.ru;
+    item.onclick=function(){ selectMatch(item); };
+    right.appendChild(item);
+  });
+}
+
+function selectMatch(item){
+  if(item.classList.contains('matched')) return;
+
+  if(!matchSelected){
+    matchSelected=item;
+    item.classList.add('selected');
+    document.getElementById('match-feedback').textContent='Теперь выбери пару справа 👉';
+    return;
+  }
+
+  if(matchSelected===item){
+    item.classList.remove('selected');
+    matchSelected=null;
+    document.getElementById('match-feedback').textContent='Выбери слово слева 👈';
+    return;
+  }
+
+  if(matchSelected.dataset.side===item.dataset.side){
+    matchSelected.classList.remove('selected');
+    matchSelected=item;
+    item.classList.add('selected');
+    return;
+  }
+
+  const es=matchSelected.dataset.side==='left'?matchSelected.dataset.value:item.dataset.value;
+  const ru=matchSelected.dataset.side==='right'?matchSelected.dataset.value:item.dataset.value;
+  const pairs=getMatchPairs();
+  const pair=pairs.find(p=>p.es===es && p.ru===ru);
+
+  if(pair){
+    matchSelected.classList.remove('selected');
+    matchSelected.classList.add('matched');
+    item.classList.add('matched');
+    matchFound++;
+    speak(pair.es);
+    document.getElementById('match-feedback').textContent='🎉 ¡Bien! Найдено '+matchFound+'/'+pairs.length;
+    if(matchFound===pairs.length){
+      setTimeout(function(){
+        document.getElementById('match-feedback').textContent='🏆 Отлично! Все пары найдены!';
+        confetti('🎯');
+      },500);
+    }
+  }else{
+    matchSelected.classList.add('wrong');
+    item.classList.add('wrong');
+    document.getElementById('match-feedback').textContent='😅 Не пара! Попробуй ещё раз.';
+    const ms=matchSelected;
+    setTimeout(function(){
+      ms.classList.remove('wrong','selected');
+      item.classList.remove('wrong');
+    },600);
+  }
+  matchSelected=null;
+}
+
+function resetMatch(){ renderMatch(); }
+
+/* ========== SENTENCE BUILDER ========== */
+function sbPhrases(){
+  return [
+    {words:['Hoy','estoy','muy',adjOf(EMOS[0])+'.'], translation:'Сегодня я очень рад/рада.'},
+    {words:['Estoy','un','poco',adjOf(EMOS[4])+'.'], translation:'Я немного нервничаю.'},
+    {words:['Estoy','muy',adjOf(EMOS[3])+'.'], translation:'Я очень устал/устала.'},
+    {words:['Estoy',adjOf(EMOS[1])+'.'], translation:'Мне грустно.'},
+    {words:['No','estoy',adjOf(EMOS[2])+'.'], translation:'Я не злюсь.'}
+  ];
+}
+let sbCurrent=0, sbPlaced=[], sbPhraseList=[];
+
+function renderSB(){
+  sbPhraseList=sbPhrases();
+  const target=document.getElementById('sb-target');
+  const pool=document.getElementById('sb-pool');
+  const result=document.getElementById('sb-result');
+
+  const phrase=sbPhraseList[sbCurrent];
+  sbPlaced=[];
+  target.textContent='…';
+  result.textContent='';
+
+  pool.innerHTML='';
+  const shuffled=shuffle(phrase.words.slice());
+  shuffled.forEach((w,i)=>{
+    const btn=document.createElement('div');
+    btn.className='sb-word';
+    btn.textContent=w;
+    btn.dataset.idx=i;
+    btn.onclick=function(){ addWord(btn,w); };
+    pool.appendChild(btn);
+  });
+}
+
+function addWord(btn,w){
+  if(btn.classList.contains('placed')) return;
+  btn.classList.add('placed');
+  sbPlaced.push(w);
+  updateSBTarget();
+}
+
+function updateSBTarget(){
+  const target=document.getElementById('sb-target');
+  const phrase=sbPhraseList[sbCurrent];
+  target.textContent=sbPlaced.join(' ') || '…';
+
+  if(sbPlaced.length===phrase.words.length){
+    const correct=sbPlaced.every(function(w,i){ return w===phrase.words[i]; });
+    const result=document.getElementById('sb-result');
+    if(correct){
+      result.innerHTML='✅ <span style="color:var(--teal)">¡Perfecto!</span><div class="sb-translation">'+phrase.translation+'</div>';
+      speak(sbPlaced.join(' '));
+      confetti('🎯');
+    }else{
+      result.innerHTML='❌ Не совсем… Правильный порядок: <strong>'+phrase.words.join(' ')+'</strong><div class="sb-translation">'+phrase.translation+'</div>';
+      setTimeout(function(){ speak(phrase.words.join(' ')); },400);
+    }
+  }
+}
+
+function nextSB(){
+  sbCurrent=(sbCurrent+1)%sbPhraseList.length;
+  renderSB();
+}
+
+/* ========== LEVEL QUIZ (ТЕРМОМЕТР-ТРЕНАЖЁР) ========== */
+const LEVEL_SCENARIOS=[
+  {sit:'🏆 Ты выиграл школьный чемпионат и подпрыгнул до потолка!', correct:'muy', es:'¡Estoy muy contento!', hint:'Радость огромная — уровень самый высокий!'},
+  {sit:'🌥 Настроение обычное, день как день, ничего особенного', correct:'normal', es:'Estoy normal.', hint:'Всё в порядке, без сильных эмоций.'},
+  {sit:'📝 Завтра контрольная, ты чуть-чуть волнуешься', correct:'un poco', es:'Estoy un poco nervioso.', hint:'Волнение маленькое — уровень низкий!'},
+  {sit:'🍦 Твоё мороженое упало в песок, и ты почти плачешь', correct:'muy', es:'¡Estoy muy triste!', hint:'Грусть очень сильная — самый высокий уровень!'}
+];
+
+function renderLevelQuiz(){
+  const box=document.getElementById('level-scenarios');
+  box.innerHTML='';
+  LEVEL_SCENARIOS.forEach(function(s,i){
+    const div=document.createElement('div');
+    div.className='level-scenario';
+    div.innerHTML='<div class="situation">📌 Ситуация '+(i+1)+': '+s.sit+'</div>'
+      +'<div class="level-choices">'
+      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'muy\')">muy (очень)</button>'
+      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'un poco\')">un poco (чуть-чуть)</button>'
+      +'<button class="level-choice" onclick="checkLevel(this,'+i+',\'normal\')">normal (нормально)</button>'
+      +'</div>'
+      +'<div class="level-feedback" id="lv-fb-'+i+'"></div>';
+    box.appendChild(div);
+  });
+}
+
+function checkLevel(btn,idx,answer){
+  const s=LEVEL_SCENARIOS[idx];
+  const container=btn.closest('.level-scenario');
+  container.querySelectorAll('.level-choice').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('lv-fb-'+idx);
+  if(answer===s.correct){
+    btn.classList.add('correct');
+    fb.innerHTML='✅ <span style="color:var(--teal)">'+s.es+'</span> — '+s.hint;
+    fb.className='level-feedback ok';
+    speak(s.es);
+  }else{
+    btn.classList.add('wrong');
+    container.querySelectorAll('.level-choice').forEach(b=>{
+      if(b.getAttribute('onclick').indexOf("'"+s.correct+"'")!==-1) b.classList.add('correct');
+    });
+    fb.innerHTML='❌ Правильно: <strong>'+s.es+'</strong> — '+s.hint;
+    fb.className='level-feedback bad';
+  }
+}
+
+/* ========== КОНФЕТТИ ========== */
+function confetti(emoji){
+  for(let i=0;i<16;i++){
+    const c=document.createElement('span');
+    c.className='confetti';
+    c.textContent=Math.random()>.5?emoji:'🎉';
+    c.style.left=Math.random()*100+'vw';
+    c.style.animationDuration=(1.2+Math.random()*1.2)+'s';
+    c.style.animationDelay=(Math.random()*.4)+'s';
+    document.body.appendChild(c);
+    setTimeout(function(){ c.remove(); },3000);
+  }
+}
+
+/* ========== ИНИЦИАЛИЗАЦИЯ ========== */
+renderGenderButtons();
+renderEmotionCards();
+renderThermoChips();
+updateThermo();
+renderSeQuiz();
+renderForms();
+renderDiaryPick();
+renderDiarySlots();
+renderWords();
+renderMatch();
+renderSB();
+renderLevelQuiz();
+
+/* ========== СОХРАНЕНИЕ САМОПРОВЕРКИ ========== */
+document.querySelectorAll('.selfcheck-table input[type=radio]').forEach(function(input){
+  input.addEventListener('change',function(){
+    const data={};
+    for(let i=1;i<=5;i++){
+      const selected=document.querySelector('input[name=q'+i+']:checked');
+      if(selected) data['q'+i]=selected.value;
+    }
+    localStorage.setItem('mudro_selfcheck_lesson3',JSON.stringify(data));
+  });
+});
+
+const savedCheck=localStorage.getItem('mudro_selfcheck_lesson3');
+if(savedCheck){
+  try{
+    const data=JSON.parse(savedCheck);
+    Object.keys(data).forEach(function(key){
+      const input=document.querySelector('input[name='+key+'][value='+data[key]+']');
+      if(input) input.checked=true;
+    });
+  }catch(e){}
+}
+</script>
+</body>
+</html>
