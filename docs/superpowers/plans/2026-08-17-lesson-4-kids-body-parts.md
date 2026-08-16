@@ -1052,7 +1052,7 @@ const SYMPTOMS=[
 
 function symptomEs(s){
   if(!s.gender) return s.es;
-  return gender==='girl' ? s.es.replace('/a','a') : s.es.replace('/a','o');
+  return gender==='girl' ? s.es.replace('o/a','a') : s.es.replace('o/a','o');
 }
 
 function renderSymptoms(){

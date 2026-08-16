@@ -715,6 +715,27 @@
     </div>
   </section>
 
+  <!-- ПРАКТИКА ДОМА -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🎬 Практика дома</h2>
+    </div>
+    <p class="block-sub">Посмотри видео ещё раз дома и покажи части тела на себе! Ссылки открываются в новой вкладке.</p>
+
+    <div class="ww-zone">
+      <div class="ww-card">
+        <h5>📺 LAS PARTES DEL CUERPO</h5>
+        <p>Smile and Learn — части тела: смотри, слушай и повторяй!</p>
+        <a class="ww-link" href="https://www.youtube.com/watch?v=ppUnmAvLhwE" target="_blank" rel="noopener">🎬 Смотреть видео</a>
+      </div>
+      <div class="ww-card">
+        <h5>🎶 Cabeza, hombros, rodillas y pies</h5>
+        <p>CantaJuego — песня-зарядка: пой и показывай на себе!</p>
+        <a class="ww-link" href="https://www.youtube.com/watch?v=7EtQs96XBuA" target="_blank" rel="noopener">🎬 Смотреть видео</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ДОМАШКА -->
   <section class="homework">
     <h3>🏡 Домашнее задание</h3>
@@ -1130,7 +1151,7 @@ const SYMPTOMS=[
 
 function symptomEs(s){
   if(!s.gender) return s.es;
-  return gender==='girl' ? s.es.replace('/a','a') : s.es.replace('/a','o');
+  return gender==='girl' ? s.es.replace('o/a','a') : s.es.replace('o/a','o');
 }
 
 function renderSymptoms(){
@@ -1267,9 +1288,9 @@ const WORDS_SYMPTOMS=[
   {es:'Tengo fiebre', ru:'У меня температура'},
   {es:'Tengo tos', ru:'Я кашляю'},
   {es:'Tengo náuseas', ru:'Меня тошнит'},
-  {es:'Estoy mareado/a', ru:'У меня кружится голова'},
-  {es:'Estoy cansado/a', ru:'Я устал(а)'},
-  {es:'Estoy enfermo/a', ru:'Я болею'}
+  {es:'Estoy mareado/a', ru:'У меня кружится голова', gender:true},
+  {es:'Estoy cansado/a', ru:'Я устал(а)', gender:true},
+  {es:'Estoy enfermo/a', ru:'Я болею', gender:true}
 ];
 const WORDS_DOC=[
   {es:'Aquí, en la rodilla', ru:'Здесь, в колене'},
@@ -1283,10 +1304,11 @@ function renderWordGrid(arr,containerId){
   const container=document.getElementById(containerId);
   container.innerHTML='';
   arr.forEach(w=>{
+    const es=w.gender ? symptomEs(w) : w.es;
     const card=document.createElement('div');
     card.className='word-card';
-    card.innerHTML='<span class="w-es">'+w.es+'</span><span class="w-ru">'+w.ru+'</span>';
-    card.onclick=function(){ speak(w.es); };
+    card.innerHTML='<span class="w-es">'+es+'</span><span class="w-ru">'+w.ru+'</span>';
+    card.onclick=function(){ speak(es); };
     container.appendChild(card);
   });
 }
@@ -1322,7 +1344,6 @@ function renderMatch(){
     const item=document.createElement('div');
     item.className='match-item';
     item.textContent=p.es;
-    item.dataset.pair=i;
     item.dataset.side='left';
     item.dataset.value=p.es;
     item.onclick=function(){ selectMatch(item); };
@@ -1333,7 +1354,6 @@ function renderMatch(){
     const item=document.createElement('div');
     item.className='match-item';
     item.textContent=p.ru;
-    item.dataset.pair=i;
     item.dataset.side='right';
     item.dataset.value=p.ru;
     item.onclick=function(){ selectMatch(item); };
@@ -1428,7 +1448,6 @@ function renderSB(){
     const btn=document.createElement('div');
     btn.className='sb-word';
     btn.textContent=w;
-    btn.dataset.idx=i;
     btn.onclick=function(){ addWord(btn,w); };
     pool.appendChild(btn);
   });
