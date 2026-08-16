@@ -567,14 +567,14 @@
 
     <div class="script">
       <strong>Правило:</strong> <em>tener</em> (иметь) + что у тебя есть: <em>Tengo fiebre</em> (у меня температура).<br>
-      <em>estar</em> (быть) + какой ты: <em>Estoy cansado</em> (я устал). Вспомни SER vs ESTAR из Урока 3!
+      <em>estar</em> (быть) + какой ты: <em>Estoy mal</em> (мне плохо). Вспомни SER vs ESTAR из Урока 3!
     </div>
 
     <div class="symptom-grid" id="symptom-grid"></div>
 
     <div class="script">
       <strong>Связь с эмоциями (Урок 3):</strong> часто мы не болеем, а просто нервничаем: <em>Estoy nervioso → Me duele el estómago</em> (живот).<br>
-      Если ты устал: <em>Estoy cansado → Me duelen los ojos</em>. Эмоции живут в теле!
+      Если тебе совсем плохо: <em>Estoy mal → Me duele todo</em>. Эмоции живут в теле!
     </div>
   </section>
 
@@ -799,14 +799,6 @@
         Честно оцени себя по 5 критериям (таблица ниже).
       </div>
     </div>
-
-    <div class="task">
-      <div class="task-num star">8</div>
-      <div>
-        <strong>🏠 Семейная миссия недели 2</strong> · 5 мин ⭐<br>
-        «Осмотр дома на безопасность»: вместе с родителями проверьте дом — ты называешь части тела по-испански, а родители находят предметы и места вокруг (окна, двери, аптечку). Найди и опасные места — острые углы!
-      </div>
-    </div>
   </section>
 
   <!-- САМОПРОВЕРКА -->
@@ -985,19 +977,36 @@ function revealBody(card,bodyPhrase){
 }
 
 /* ========== БЛОК 2: СЛУЧАЙНАЯ ФРАЗА (SOS) ========== */
+const NURSE_QUESTION={es:'¿Dónde te duele?', ru:'Где у тебя болит? (вопрос медсестры)'};
 const RANDOM_BODY=[
-  {es:'¿Dónde te duele?', ru:'Где у тебя болит? (вопрос медсестры)'},
   {es:'Me duele la cabeza.', ru:'У меня болит голова.'},
   {es:'Me duelen los pies.', ru:'У меня болят стопы.'},
   {es:'Me duele la barriga.', ru:'У меня болит живот.'},
   {es:'Me duele la garganta.', ru:'У меня болит горло.'}
 ];
 
+function speakSeq(list){
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(list[0]);
+  u.lang='es-ES';u.rate=0.8;u.pitch=1.05;
+  if(esVoice)u.voice=esVoice;
+  u.onend=function(){
+    if(list[1]){
+      const v=new SpeechSynthesisUtterance(list[1]);
+      v.lang='es-ES';v.rate=0.8;v.pitch=1.05;
+      if(esVoice)v.voice=esVoice;
+      speechSynthesis.speak(v);
+    }
+  };
+  speechSynthesis.speak(u);
+}
+
 function pressRandomBody(){
   const m=RANDOM_BODY[Math.floor(Math.random()*RANDOM_BODY.length)];
   const out=document.getElementById('rand-body-output');
-  out.innerHTML='<div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
-  speak(m.es);
+  out.innerHTML='<div class="es">'+NURSE_QUESTION.es+'</div><div class="ru">'+NURSE_QUESTION.ru+'</div>'
+    +'<div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+  speakSeq([NURSE_QUESTION.es,m.es]);
 }
 
 /* ========== БЛОК 3: КАРТОЧКИ ЧАСТЕЙ ТЕЛА ========== */
@@ -1019,12 +1028,12 @@ function renderBodyCards(){
 
 /* ========== БЛОК 3: ИГРА «SIMÓN DICE» ========== */
 const SIMON_ROUNDS=[
-  {cmd:'¡Simón dice: señala los ojos!', ru:'Симон говорит: покажи на глаза!', target:'ojos', trap:false},
+  {cmd:'¡Simón dice: toca los ojos!', ru:'Симон говорит: тронь глаза!', target:'ojos', trap:false},
   {cmd:'¡Simón dice: toca la nariz!', ru:'Симон говорит: тронь нос!', target:'nariz', trap:false},
   {cmd:'¡Toca la cabeza!', ru:'Тронь голову! (Симон НЕ говорил!)', target:'cabeza', trap:true},
   {cmd:'¡Simón dice: toca la oreja!', ru:'Симон говорит: тронь ухо!', target:'oreja', trap:false},
-  {cmd:'¡Señala la boca!', ru:'Покажи на рот! (Симон НЕ говорил!)', target:'boca', trap:true},
-  {cmd:'¡Simón dice: señala la rodilla!', ru:'Симон говорит: покажи на колено!', target:'rodilla', trap:false}
+  {cmd:'¡Toca la boca!', ru:'Тронь рот! (Симон НЕ говорил!)', target:'boca', trap:true},
+  {cmd:'¡Simón dice: toca la rodilla!', ru:'Симон говорит: тронь колено!', target:'rodilla', trap:false}
 ];
 
 let simonRound=0, simonStars=0;
@@ -1145,7 +1154,7 @@ const SYMPTOMS=[
   {emoji:'😮‍💨', es:'Tengo tos', ru:'Я кашляю', gender:false},
   {emoji:'🤢', es:'Tengo náuseas', ru:'Меня тошнит', gender:false},
   {emoji:'😵‍💫', es:'Estoy mareado/a', ru:'У меня кружится голова', gender:true},
-  {emoji:'😴', es:'Estoy cansado/a', ru:'Я устал(а)', gender:true},
+  {emoji:'😖', es:'Estoy mal', ru:'Мне плохо', gender:false},
   {emoji:'🤒', es:'Estoy enfermo/a', ru:'Я болею', gender:true}
 ];
 
@@ -1171,7 +1180,7 @@ function renderSymptoms(){
 
 /* ========== БЛОК 6: СИМУЛЯЦИЯ «У ВРАЧА» ========== */
 const DOC_ROUNDS=[
-  {doc:'¿Qué te pasa?', docRu:'Что с тобой?', correct:'Me duele la cabeza.', distract:['Tengo tos','Estoy muy bien, gracias']},
+  {doc:'¿Qué te pasa?', docRu:'Что с тобой?', correct:'Me duele la cabeza.', distract:['Me llamo Marta','Soy de Rusia']},
   {doc:'¿Dónde te duele?', docRu:'Где у тебя болит?', correct:'Aquí, en la rodilla.', distract:['Me llamo Masha','Soy de Rusia']},
   {doc:'¿Tienes fiebre?', docRu:'У тебя температура?', correct:'Sí, tengo fiebre y tos.', distract:['No, soy de Rusia','Me duele nada']},
   {doc:'¿Qué te pasa?', docRu:'Что с тобой?', correct:'Tengo náuseas.', distract:['Estoy muy contento','Tengo nueve años']},
@@ -1289,7 +1298,7 @@ const WORDS_SYMPTOMS=[
   {es:'Tengo tos', ru:'Я кашляю'},
   {es:'Tengo náuseas', ru:'Меня тошнит'},
   {es:'Estoy mareado/a', ru:'У меня кружится голова', gender:true},
-  {es:'Estoy cansado/a', ru:'Я устал(а)', gender:true},
+  {es:'Estoy mal', ru:'Мне плохо'},
   {es:'Estoy enfermo/a', ru:'Я болею', gender:true}
 ];
 const WORDS_DOC=[
