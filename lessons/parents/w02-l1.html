@@ -228,6 +228,21 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 .hw-send li{margin:4px 0;list-style:none;padding-left:26px;position:relative;color:#fff}
 .hw-send li::before{content:'🎯';position:absolute;left:0}
 
+/* ---------- внешние ресурсы ---------- */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.res-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column}
+.res-card h4{font-weight:900;margin-bottom:6px}
+.res-card p{color:var(--muted);font-weight:700;font-size:.88rem;margin-bottom:14px;flex:1}
+.res-card a{display:inline-block;background:var(--p4);color:#fff;padding:10px 18px;border-radius:999px;font-weight:800;text-decoration:none;transition:.2s;align-self:flex-start}
+.res-card a:hover{background:var(--p1);transform:translateY(-2px)}
+
+/* ---------- quizlet ---------- */
+.quizlet-box{background:linear-gradient(160deg,var(--p2),#5F7040);color:#fff;border-radius:24px;padding:32px;text-align:center;box-shadow:var(--shadow)}
+.quizlet-box h3{font-weight:900;margin-bottom:6px}
+.quizlet-box p{font-weight:700;opacity:.92;margin-bottom:16px}
+.quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:13px 30px;border-radius:999px;font-weight:900;text-decoration:none;transition:.2s}
+.quizlet-box a:hover{transform:translateY(-2px)}
+
 /* ---------- навигация между уроками ---------- */
 .lesson-nav{display:flex;justify-content:space-between;gap:14px;max-width:1100px;margin:0 auto;padding:10px 20px 60px;flex-wrap:wrap}
 .lesson-nav a{flex:1;min-width:220px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;text-decoration:none;color:var(--ink);font-weight:900;transition:.2s}
@@ -254,13 +269,25 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   <h1>Урок 2.1 · <em>Misión Idealista</em><br>Охота за жильём: читаем объявления и находим квартиру</h1>
   <div class="lesson-meta">
     <span class="meta-chip">🎯 Цель: понять объявление и найти жильё семье</span>
-    <span class="meta-chip">🗣 8 слов-спасателей</span>
+    <span class="meta-chip">🗣 11 слов-спасателей</span>
+  </div>
+</section>
+
+<!-- ===== ШАГ 0: РАЗМИНКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">0</span><div><span class="step-time">00:00 – 06:00 · Разминка</span><h2>Повторяем неделю 1</h2></div></div>
+  <p class="sub">Перед тем как искать жильё, проверим базу: запись на приём, документы, числа и вежливые фразы. Отвечайте быстро!</p>
+  <div class="quiz-box" id="warmupBox">
+    <h2 style="font-size:1.2rem">⚡ Блиц-квиз недели 1</h2>
+    <p class="sub" style="margin-bottom:0">Нажимайте на ответ — сразу увидите, верно ли вы решили.</p>
+    <div id="warmupWrap"></div>
+    <button class="btn btn-ghost" id="warmupReset" style="margin-top:14px">↺ Пройти ещё раз</button>
   </div>
 </section>
 
 <!-- ===== ШАГ 1: РАЗОГРЕВ ===== -->
 <section class="section">
-  <div class="step-head"><span class="step-num">1</span><div><span class="step-time">00:00 – 05:00 · Разогрев</span><h2>Как снимают жильё в Испании</h2></div></div>
+  <div class="step-head"><span class="step-num">1</span><div><span class="step-time">06:00 – 10:00 · Разогрев</span><h2>Как снимают жильё в Испании</h2></div></div>
   <p class="sub">Квартиры в Испании ищут на сайтах <b>Idealista</b> и <b>Fotocasa</b>. Объявления там пишут сокращённо: <i>2 hab. · 65 m² · amueblado</i>. Научиться читать такой «шифр» — главный навык этого урока. Запомните фразу-спасатель 👇</p>
   <div class="gram-card" style="max-width:560px">
     <div class="gc-formula">Busco un piso en alquiler. <button class="mini-speak speak" data-text="Busco un piso en alquiler.">🔊</button></div>
@@ -277,14 +304,14 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 
 <!-- ===== ШАГ 2: ЛЕКСИКА ===== -->
 <section class="section">
-  <div class="step-head"><span class="step-num">2</span><div><span class="step-time">05:00 – 15:00 · Лексика</span><h2>8 слов, без которых Idealista не понять</h2></div></div>
+  <div class="step-head"><span class="step-num">2</span><div><span class="step-time">10:00 – 18:00 · Лексика</span><h2>11 слов, без которых Idealista не понять</h2></div></div>
   <p class="sub">Нажмите на карточку, чтобы перевернуть. Нажмите 🔊 — чтобы услышать испанское произношение.</p>
   <div class="flash-grid" id="flashGrid"></div>
 </section>
 
 <!-- ===== ШАГ 3: ГРАММАТИКА ===== -->
 <section class="section">
-  <div class="step-head"><span class="step-num">3</span><div><span class="step-time">15:00 – 25:00 · Грамматика</span><h2>Описываем жильё: busco, hay, está</h2></div></div>
+  <div class="step-head"><span class="step-num">3</span><div><span class="step-time">18:00 – 30:00 · Грамматика</span><h2>Описываем жильё: busco, hay, está</h2></div></div>
   <p class="sub">Чтобы рассказать о том, что вы ищете, нужны три кита: глагол <b>buscar</b> (искать), <b>hay</b> (есть/имеется) и <b>estar</b> (находиться).</p>
   <div class="gram-grid">
     <div class="gram-card">
@@ -346,7 +373,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 
 <!-- ===== ШАГ 4: ЧТЕНИЕ ОБЪЯВЛЕНИЯ ===== -->
 <section class="section">
-  <div class="step-head"><span class="step-num">4</span><div><span class="step-time">25:00 – 40:00 · Чтение</span><h2>Разбираем объявление с Idealista</h2></div></div>
+  <div class="step-head"><span class="step-num">4</span><div><span class="step-time">30:00 – 40:00 · Чтение</span><h2>Разбираем объявление с Idealista</h2></div></div>
   <p class="sub">Перед вами объявление как на Idealista. Нажимайте на синие слова — они объяснят себя. Ниже — словарь сокращений и викторина.</p>
 
   <div class="ad-card">
@@ -375,7 +402,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 
 <!-- ===== ШАГ 5: СИМУЛЯЦИЯ ===== -->
 <section class="section">
-  <div class="step-head"><span class="step-num">5</span><div><span class="step-time">40:00 – 48:00 · Симуляция</span><h2>Семейная миссия: найдите квартиру</h2></div></div>
+  <div class="step-head"><span class="step-num">5</span><div><span class="step-time">40:00 – 46:00 · Симуляция</span><h2>Семейная миссия: найдите квартиру</h2></div></div>
   <div class="mission-box">
     <h2 style="font-size:1.2rem">👨‍👩‍👧‍👦 Семья Ивановых переезжает в Мадрид</h2>
     <div class="mission-why">
@@ -391,7 +418,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 
 <!-- ===== ШАГ 6: PBL ПИСЬМО ===== -->
 <section class="section">
-  <div class="step-head"><span class="step-num">6</span><div><span class="step-time">48:00 – 50:00 · Проект</span><h2>Письмо арендодателю на Idealista</h2></div></div>
+  <div class="step-head"><span class="step-num">6</span><div><span class="step-time">46:00 – 50:00 · Проект</span><h2>Письмо арендодателю на Idealista</h2></div></div>
   <p class="sub">Заполните форму — и получите готовый запрос, который можно скопировать или отправить владельцу. Начните переписку по-испански!</p>
   <div class="msg-form">
     <div class="stamp">IDEALISTA · MENSAJE AL PROPIETARIO (SIMULACIÓN)</div>
@@ -532,6 +559,43 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   </div>
 </section>
 
+<!-- ===== ВНЕШНЯЯ ПРАКТИКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">🔗</span><div><span class="step-time">Ресурсы</span><h2>Внешняя практика</h2></div></div>
+  <p class="sub">Реальные сайты и материалы по теме аренды жилья в Испании.</p>
+  <div class="res-grid">
+    <div class="res-card">
+      <h4>🏠 Idealista</h4>
+      <p>Главный сайт аренды и покупки жилья в Испании.</p>
+      <a href="https://www.idealista.com/" target="_blank" rel="noopener">Открыть сайт →</a>
+    </div>
+    <div class="res-card">
+      <h4>🏡 Fotocasa</h4>
+      <p>Второй по популярности портал недвижимости.</p>
+      <a href="https://www.fotocasa.es/" target="_blank" rel="noopener">Открыть сайт →</a>
+    </div>
+    <div class="res-card">
+      <h4>📺 Видео: аренда жилья в Испании</h4>
+      <p>Разбор процесса аренды для иностранцев.</p>
+      <a href="https://www.youtube.com/results?search_query=как+снять+жилье+в+Испании+idealista" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="res-card">
+      <h4>🎮 Wordwall: la vivienda</h4>
+      <p>Интерактивные игры по лексике жилья.</p>
+      <a href="https://wordwall.net/es/search?query=la%20vivienda" target="_blank" rel="noopener">Играть →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUIZLET ===== -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 2.1</h3>
+    <p>Повторите слова урока в приложении Quizlet: жильё, аренда, сокращения объявлений.</p>
+    <a href="https://quizlet.com/XXXXXXXXX/неделя-2-урок-1-misión-idealista-flash-cards/" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+</section>
+
 <!-- ===== НАВИГАЦИЯ ===== -->
 <div class="lesson-nav">
   <a href="w01-l2.html"><small>← Предыдущий</small>Урок 1.2 · Официальные бланки</a>
@@ -570,7 +634,10 @@ const VOCAB=[
  {es:'la fianza',ru:'залог',example:'La fianza es de un mes.',exampleRu:'Залог — один месяц аренды.',note:'Возвращается при выезде.'},
  {es:'el contrato',ru:'договор',example:'Vamos a firmar el contrato.',exampleRu:'Мы собираемся подписать договор.',note:'Обычно заключается на год.'},
  {es:'amueblado',ru:'с мебелью',example:'El piso está amueblado.',exampleRu:'Квартира с мебелью.',note:'Бывает «sin amueblar» — без мебели.'},
- {es:'luminoso',ru:'светлый',example:'Es luminoso y silencioso.',exampleRu:'Она светлая и тихая.',note:'Ключевое слово для «хорошей» квартиры.'}
+ {es:'luminoso',ru:'светлый',example:'Es luminoso y silencioso.',exampleRu:'Она светлая и тихая.',note:'Ключевое слово для «хорошей» квартиры.'},
+ {es:'el ático',ru:'пентхаус / верхний этаж',example:'El ático tiene terraza.',exampleRu:'В пентхаусе есть терраса.',note:'Часто с террасой и панорамным видом.'},
+ {es:'el bajo',ru:'первый этаж',example:'El bajo es más barato.',exampleRu:'Первый этаж дешевле.',note:'У земли — лифт не нужен, детям удобно.'},
+ {es:'los gastos de comunidad',ru:'коммунальные расходы дома',example:'Los gastos de comunidad están incluidos.',exampleRu:'Коммунальные расходы дома включены.',note:'Уборка, лифт, общие помещения.'}
 ];
 document.getElementById('flashGrid').innerHTML=VOCAB.map(v=>`
  <div class="flash" onclick="if(!event.target.closest('.speak')) this.classList.toggle('flipped')">
@@ -705,7 +772,12 @@ const ABBR=[
  ['Trastero','кладовка'],
  ['Gastos de comunidad','коммунальные платежи дома'],
  ['Incluido(s)','включено'],
- ['€/mes','евро в месяц']
+ ['€/mes','евро в месяц'],
+ ['amuebl.','amueblado — с мебелью'],
+ ['pza.','plaza — место (например, парковка)'],
+ ['g.c.','gastos de comunidad — коммунальные платежи'],
+ ['a/a','aire acondicionado — кондиционер'],
+ ['terr.','terraza — терраса']
 ];
 document.getElementById('abbrGrid').innerHTML=ABBR.map(a=>`<div class="abbr-chip" title="Нажмите — и услышите произношение"><b>${a[0]}</b><small>${a[1]}</small></div>`).join('');
 document.getElementById('abbrGrid').addEventListener('click',e=>{
@@ -743,6 +815,43 @@ document.querySelectorAll('.quiz-opts').forEach(box=>{
     }
   });
 });
+
+/* ====== РАЗМИНКА: БЛИЦ-КВИЗ НЕДЕЛИ 1 ====== */
+const WARMUP=[
+ {q:'Как сказать «Я бы хотел записаться на приём»?',opts:[{t:'Quisiera pedir una cita previa',ok:true},{t:'Busco un piso',ok:false},{t:'Hay dos habitaciones',ok:false},{t:'Está amueblado',ok:false}]},
+ {q:'Что такое «resguardo»?',opts:[{t:'Расписка о приёме документов',ok:true},{t:'Договор аренды',ok:false},{t:'Залог',ok:false},{t:'Комната',ok:false}]},
+ {q:'Как сказать 900 по-испански?',opts:[{t:'Novecientos',ok:true},{t:'Nueve',ok:false},{t:'Noventa',ok:false},{t:'Novecientas',ok:false}]},
+ {q:'Что означает «tasas»?',opts:[{t:'Госпошлины',ok:true},{t:'Комнаты',ok:false},{t:'Этажи',ok:false},{t:'Лифты',ok:false}]},
+ {q:'Как сказать «Я из России»?',opts:[{t:'Soy de Rusia',ok:true},{t:'Estoy en Rusia',ok:false},{t:'Tengo Rusia',ok:false},{t:'Busco Rusia',ok:false}]},
+ {q:'Что означает «empadronamiento»?',opts:[{t:'Регистрация по месту жительства',ok:true},{t:'Паспорт',ok:false},{t:'Виза',ok:false},{t:'Страховка',ok:false}]}
+];
+function renderWarmup(){
+  const wrap=document.getElementById('warmupWrap');
+  wrap.innerHTML=WARMUP.map((w,i)=>`
+    <div class="quiz-q">${i+1}. ${w.q}</div>
+    <div class="quiz-opts" data-w="${i}">
+      ${w.opts.map(o=>`<button class="quiz-opt" data-ok="${o.ok}">${o.t}</button>`).join('')}
+    </div>
+    <div class="quiz-fb" id="warmup-fb-${i}"></div>`).join('');
+  wrap.querySelectorAll('.quiz-opts').forEach(box=>{
+    box.addEventListener('click',e=>{
+      const b=e.target.closest('.quiz-opt');if(!b)return;
+      const q=+box.dataset.w;
+      const fb=document.getElementById('warmup-fb-'+q);
+      box.querySelectorAll('.quiz-opt').forEach(x=>{x.disabled=true;x.classList.remove('correct','wrong');});
+      if(b.dataset.ok==='true'){
+        b.classList.add('correct');
+        fb.textContent='✅ Верно! Вспомнили неделю 1!';
+      }else{
+        b.classList.add('wrong');
+        box.querySelector('.quiz-opt[data-ok="true"]').classList.add('correct');
+        fb.textContent='🤔 Не совсем. Правильный ответ подсвечен зелёным.';
+      }
+    });
+  });
+}
+renderWarmup();
+document.getElementById('warmupReset').onclick=renderWarmup;
 
 /* ====== СИМУЛЯЦИЯ: ВЫБОР ЖИЛЬЯ ====== */
 const FLATS=[
@@ -879,7 +988,10 @@ const TR_MATCH=[
  {es:'la fianza',ru:'залог'},
  {es:'el contrato',ru:'договор'},
  {es:'el ascensor',ru:'лифт'},
- {es:'la terraza',ru:'балкон / терраса'}
+ {es:'la terraza',ru:'балкон / терраса'},
+ {es:'el ático',ru:'пентхаус'},
+ {es:'el bajo',ru:'первый этаж'},
+ {es:'los gastos de comunidad',ru:'коммунальные платежи'}
 ];
 let mEs=null,mRu=null,mDone=0;
 function initTrMatch(){
