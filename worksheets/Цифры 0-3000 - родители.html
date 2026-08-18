@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист · Цифры до 3000 — МУДРО (A4)</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  /* ═════ ЛИСТ A4 ═════ */
+  .sheet{
+    width:210mm; min-height:297mm;
+    margin:8mm auto; padding:10mm 11mm 12mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+    position:relative;
+  }
+  .sheet-footer{
+    position:absolute; bottom:5mm; left:11mm; right:11mm;
+    display:flex; justify-content:space-between;
+    font-size:9px; color:var(--muted); font-weight:600;
+    border-top:1px solid #E8DCCF; padding-top:2mm;
+  }
+
+  /* ═════ ШАПКА ═════ */
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:5mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  /* ═════ УПРАЖНЕНИЯ ═════ */
+  .ex{ margin:0 0 4.5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:13px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .level{ display:inline-block; font-size:9px; font-weight:800; border-radius:999px; padding:1px 7px; margin-left:4px; vertical-align:middle; }
+  .lv1{ background:#FBF3EA; color:var(--p1); border:1px solid var(--p1);}
+  .lv2{ background:#FFF7E0; color:#B8860B; border:1px solid var(--p3);}
+  .lv3{ background:#F0F4FF; color:var(--p4); border:1px solid var(--p4);}
+  .lv4{ background:#F0F7E6; color:var(--p2); border:1px solid var(--p2);}
+
+  .card{ background:var(--card); border-radius:10px; padding:3.5mm 4.5mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  /* ═════ Справочные сетки ═════ */
+  .refblock{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); margin-bottom:3mm; }
+  .refblock h3{ font-size:11.5px; margin:0 0 2mm; color:var(--p1); display:flex; align-items:center; gap:5px;}
+  .refblock.h3g h3{ color:var(--p2);} .refblock.h3b h3{ color:var(--p4);} .refblock.h3y h3{ color:#B8860B;}
+  .numgrid{ display:grid; gap:3px; }
+  .g4{ grid-template-columns:repeat(4,1fr);} .g5{ grid-template-columns:repeat(5,1fr);} .g3{ grid-template-columns:repeat(3,1fr);} .g2{ grid-template-columns:repeat(2,1fr);}
+  .g6{ grid-template-columns:repeat(6,1fr);}
+  .numcell{ background:#FFFDF9; border:1px solid #F0E4D6; border-radius:6px; padding:2px 5px; font-size:10px; display:flex; gap:5px; align-items:baseline; }
+  .numcell b{ color:var(--p1); min-width:22px; text-align:right; }
+  .numcell.hl{ background:#FFF3E0; border-color:var(--p3);} 
+  .note{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin-top:2mm; font-size:9.5px; }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+  .note.yellow{ background:#FFF7E0; border-left-color:var(--p3);}
+  .note.red{ background:#FBF0ED; border-left-color:var(--p1);}
+  .note b{ color:var(--ink);}
+
+  .formula{ background:#F0F4FF; border:1px solid var(--p4); border-radius:8px; padding:2.5mm 3.5mm; margin:2mm 0; font-size:10px; }
+  .formula b{ color:var(--p4);}
+
+  /* ═════ Типы заданий ═════ */
+  .match{ display:flex; gap:8mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2.5mm; }
+  .match .item{ border:1px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10.5px; }
+  .match .arrow{ flex:0 0 12mm; }
+  .inline{ display:flex; flex-wrap:wrap; gap:3mm 5mm; align-items:baseline; }
+  .chip{ display:inline-flex; align-items:center; gap:4px; }
+  .wline{ display:inline-block; min-width:30mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:16mm;} .wline.long{ min-width:50mm;}
+  .seq{ font-size:11px; letter-spacing:.5px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:3mm 6mm; }
+  .grid2x{ display:grid; grid-template-columns:1fr 1fr; gap:2.5mm 8mm; }
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .cut{ border-top:0.7mm dashed var(--muted); margin:5mm 0 3mm; text-align:center; font-size:10px; color:var(--muted); }
+  .keys h2{ font-size:14px; color:var(--p2); margin:0 0 2mm;}
+  .keys p{ margin:0 0 2mm; font-size:10px;}
+  .small{ font-size:9.5px; }
+  ul{ margin:1mm 0; padding-left:5mm; }
+
+  .big36{ display:flex; align-items:center; justify-content:center; gap:6mm; background:#FFF3E0; border:1.5px solid var(--p3); border-radius:10px; padding:3mm; margin:2mm 0;}
+  .big36 .n{ font-size:24px; font-weight:800; color:var(--p3);}
+  .big36 .w{ font-size:14px; font-weight:700;}
+
+  /* ═════ ПЕЧАТЬ ═════ */
+  @page{ size:A4; margin:0; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; min-height:auto; page-break-after:always; break-after:page; }
+    .sheet:last-child{ page-break-after:auto; break-after:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ ЛИСТ 1 · СПРАВОЧНИК ════════════════ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🔢 Рабочий лист · Цифры до 3000</h1>
+    <div class="meta">Практика целей из уроков 1.1 – 2.1: возраст, год рождения, телефон, цены на жильё, tasas</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- 0-23 -->
+  <div class="refblock">
+    <h3>📋 Числа 0–23 (выучить наизусть)</h3>
+    <div class="numgrid g4">
+      <div class="numcell"><b>0</b> cero</div><div class="numcell"><b>1</b> uno</div><div class="numcell"><b>2</b> dos</div><div class="numcell"><b>3</b> tres</div>
+      <div class="numcell"><b>4</b> cuatro</div><div class="numcell"><b>5</b> cinco</div><div class="numcell"><b>6</b> seis</div><div class="numcell"><b>7</b> siete</div>
+      <div class="numcell"><b>8</b> ocho</div><div class="numcell"><b>9</b> nueve</div><div class="numcell"><b>10</b> diez</div><div class="numcell"><b>11</b> once</div>
+      <div class="numcell"><b>12</b> doce</div><div class="numcell"><b>13</b> trece</div><div class="numcell"><b>14</b> catorce</div><div class="numcell"><b>15</b> quince</div>
+      <div class="numcell"><b>16</b> dieciséis</div><div class="numcell"><b>17</b> diecisiete</div><div class="numcell"><b>18</b> dieciocho</div><div class="numcell"><b>19</b> diecinueve</div>
+      <div class="numcell"><b>20</b> veinte</div><div class="numcell hl"><b>21</b> veintiuno</div><div class="numcell hl"><b>22</b> veintidós</div><div class="numcell hl"><b>23</b> veintitrés</div>
+    </div>
+  </div>
+
+  <!-- правило 21-29 vs 30+ -->
+  <div class="refblock h3y">
+    <h3>🧩 Как строить числа 21–99</h3>
+    <div class="note yellow"><b>21–29</b> пишутся <b>слитно</b>: veintiuno, veintidós, veintitrés, veinticuatro, veinticinco, veintiséis, veintisiete, veintiocho, veintinueve.</div>
+    <div class="note yellow"><b>31–99</b> пишутся через <b>«y»</b>: treinta <b>y</b> uno, cuarenta <b>y</b> dos…</div>
+    <div class="big36">
+      <div class="n">36</div>
+      <div>=</div>
+      <div class="w">treinta <span style="color:var(--p1);font-weight:800;">y</span> seis</div>
+      <div class="small" style="color:var(--muted);">(тридцать И шесть)</div>
+    </div>
+  </div>
+
+  <!-- десятки -->
+  <div class="refblock h3g">
+    <h3>🔟 Десятки 30–100</h3>
+    <div class="numgrid g4">
+      <div class="numcell"><b>30</b> treinta</div><div class="numcell"><b>40</b> cuarenta</div><div class="numcell"><b>50</b> cincuenta</div><div class="numcell"><b>60</b> sesenta</div>
+      <div class="numcell"><b>70</b> setenta</div><div class="numcell"><b>80</b> ochenta</div><div class="numcell"><b>90</b> noventa</div><div class="numcell"><b>100</b> cien</div>
+    </div>
+  </div>
+
+  <!-- сотни -->
+  <div class="refblock h3b">
+    <h3>💯 Сотни 100–900</h3>
+    <div class="numgrid g3">
+      <div class="numcell"><b>100</b> cien</div><div class="numcell"><b>200</b> doscientos</div><div class="numcell"><b>300</b> trescientos</div>
+      <div class="numcell"><b>400</b> cuatrocientos</div><div class="numcell"><b>500</b> quinientos</div><div class="numcell"><b>600</b> seiscientos</div>
+      <div class="numcell"><b>700</b> setecientos</div><div class="numcell"><b>800</b> ochocientos</div><div class="numcell"><b>900</b> novecientos</div>
+    </div>
+    <div class="note"><b>100</b> = <b>cien</b> (ровно сто), но <b>ciento…</b> перед другими числами: <b>ciento uno</b> (101), <b>ciento veinte</b> (120).</div>
+    <div class="note red"><b>Осторожно:</b> 500 = <b>quinientos</b> (не «cincocientos»), 700 = <b>setecientos</b>, 900 = <b>novecientos</b>.</div>
+  </div>
+
+  <!-- тысячи -->
+  <div class="refblock">
+    <h3>🏦 Тысячи 1000–3000</h3>
+    <div class="numgrid g3">
+      <div class="numcell"><b>1000</b> mil</div><div class="numcell"><b>2000</b> dos mil</div><div class="numcell"><b>3000</b> tres mil</div>
+    </div>
+    <div class="note"><b>1000 = mil</b> (НЕ «un mil»). Дальше: <b>dos mil, tres mil</b>.</div>
+    <div class="formula">
+      <b>Формула сборки:</b> [тысячи] mil + [сотни] + [десятки y единицы]<br>
+      1.850 = <b>mil</b> + ochocientos + cincuenta → <i>mil ochocientos cincuenta</i><br>
+      2.375 = <b>dos mil</b> + trescientos + setenta y cinco → <i>dos mil trescientos setenta y cinco</i>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Цифры до 3000 · стр. 1 / 4</span></div>
+</div>
+
+<!-- ════════════════ ЛИСТ 2 · УРОВНИ 1–2 ════════════════ -->
+<div class="sheet">
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🔗 Соедини число и слово <span class="level lv1">⭐ Уровень 1 · 0–23</span></h2><div class="tag">Проведи линию от числа к слову</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">7</div><div class="item">12</div><div class="item">15</div><div class="item">20</div>
+          <div class="item">3</div><div class="item">18</div><div class="item">11</div><div class="item">9</div>
+        </div>
+        <div class="arrow"></div>
+        <div class="col">
+          <div class="item">veinte</div><div class="item">doce</div><div class="item">siete</div><div class="item">quince</div>
+          <div class="item">dieciocho</div><div class="item">tres</div><div class="item">once</div><div class="item">nueve</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>✏️ Впиши пропущенные числа словами <span class="level lv1">⭐</span></h2><div class="tag">Продолжи последовательность</div></div></div>
+    <div class="card">
+      a) uno, dos, <span class="wline short"></span>, cuatro, <span class="wline short"></span><br>
+      b) diez, once, <span class="wline short"></span>, trece, <span class="wline short"></span><br>
+      c) dieciséis, diecisiete, <span class="wline short"></span>, diecinueve, <span class="wline short"></span><br>
+      d) ocho, <span class="wline short"></span>, diez, <span class="wline short"></span>, doce
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🔟 Заполни цепочку десятков <span class="level lv1">⭐</span></h2></div></div>
+    <div class="card seq">
+      10 → 20 → <span class="wline short"></span> → 40 → <span class="wline short"></span> → 60 → <span class="wline short"></span> → 80 → <span class="wline short"></span> → 100
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>⭕ Обведи правильное написание <span class="level lv1">⭐</span></h2></div></div>
+    <div class="card">
+      a) 13 = ( trece &nbsp;/&nbsp; treinta &nbsp;/&nbsp; tres )<br>
+      b) 19 = ( nueve &nbsp;/&nbsp; diecinueve &nbsp;/&nbsp; veintinueve )<br>
+      c) 16 = ( seise &nbsp;/&nbsp; dieciséis &nbsp;/&nbsp; seiscientos )<br>
+      d) 21 = ( veinte y uno &nbsp;/&nbsp; veintiuno &nbsp;/&nbsp; veinteyuno )
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>📝 Напиши словами <span class="level lv2">⭐⭐ Уровень 2 · 21–100</span></h2><div class="tag">Помни: 30+ пишется через «y»</div></div></div>
+    <div class="card grid2">
+      <div>24 → <span class="wline"></span></div>
+      <div>36 → <span class="wline"></span></div>
+      <div>47 → <span class="wline"></span></div>
+      <div>52 → <span class="wline"></span></div>
+      <div>68 → <span class="wline"></span></div>
+      <div>75 → <span class="wline"></span></div>
+      <div>89 → <span class="wline"></span></div>
+      <div>93 → <span class="wline"></span></div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>🔢 Напиши цифрами <span class="level lv2">⭐⭐</span></h2></div></div>
+    <div class="card grid2">
+      <div>veintiocho → <span class="wline short"></span></div>
+      <div>cuarenta y tres → <span class="wline short"></span></div>
+      <div>sesenta y uno → <span class="wline short"></span></div>
+      <div>setenta y siete → <span class="wline short"></span></div>
+      <div>noventa y cinco → <span class="wline short"></span></div>
+      <div>cincuenta → <span class="wline short"></span></div>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Цифры до 3000 · стр. 2 / 4</span></div>
+</div>
+
+<!-- ════════════════ ЛИСТ 3 · УРОВНИ 3–4 ════════════════ -->
+<div class="sheet">
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">7</div><div><h2>💯 Соедини сотни <span class="level lv3">⭐⭐⭐ Уровень 3 · сотни и тысячи</span></h2></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">200</div><div class="item">500</div><div class="item">300</div><div class="item">900</div>
+          <div class="item">400</div><div class="item">700</div><div class="item">600</div><div class="item">800</div>
+        </div>
+        <div class="arrow"></div>
+        <div class="col">
+          <div class="item">setecientos</div><div class="item">doscientos</div><div class="item">novecientos</div><div class="item">quinientos</div>
+          <div class="item">ochocientos</div><div class="item">trescientos</div><div class="item">seiscientos</div><div class="item">cuatrocientos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">8</div><div><h2>📝 Напиши словами <span class="level lv3">⭐⭐⭐</span></h2></div></div>
+    <div class="card grid2">
+      <div>120 → <span class="wline"></span></div>
+      <div>250 → <span class="wline"></span></div>
+      <div>380 → <span class="wline"></span></div>
+      <div>500 → <span class="wline"></span></div>
+      <div>1000 → <span class="wline"></span></div>
+      <div>1400 → <span class="wline"></span></div>
+      <div>2500 → <span class="wline"></span></div>
+      <div>3000 → <span class="wline"></span></div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">9</div><div><h2>🔢 Напиши цифрами <span class="level lv3">⭐⭐⭐</span></h2></div></div>
+    <div class="card grid2">
+      <div>trescientos → <span class="wline short"></span></div>
+      <div>seiscientos cuarenta → <span class="wline short"></span></div>
+      <div>ochocientos → <span class="wline short"></span></div>
+      <div>mil doscientos → <span class="wline short"></span></div>
+      <div>dos mil → <span class="wline short"></span></div>
+      <div>dos mil trescientos → <span class="wline short"></span></div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">10</div><div><h2>🎯 Применение — как в уроках <span class="level lv4">⭐⭐⭐⭐ Уровень 4</span></h2><div class="tag">Год рождения, аренда, телефон, цены</div></div></div>
+    <div class="card">
+      <b>🎂 Год рождения (Урок 1.1):</b> пример: 1985 → <i>mil novecientos ochenta y cinco</i><br>
+      1990 → <span class="wline"></span> &nbsp; 2000 → <span class="wline short"></span> &nbsp; Твой год: <span class="wline short"></span> → <span class="wline"></span><br><br>
+      <b>🏠 Аренда жилья, €/мес (Урок 2.1):</b><br>
+      850 € → <span class="wline"></span> &nbsp; 900 € → <span class="wline"></span><br>
+      1200 € → <span class="wline"></span> &nbsp; 2500 € → <span class="wline"></span><br><br>
+      <b>📞 Телефон — по одной цифре (Урок 1.1):</b> 612 345 678 → <span class="wline long"></span><br>
+      Твой номер: <span class="wline long"></span><br><br>
+      <b>🧮 Математика на испанском:</b> реши и запиши результат словами<br>
+      15 + 20 = <span class="wline"></span> &nbsp; 100 − 30 = <span class="wline"></span><br>
+      25 + 25 = <span class="wline"></span> &nbsp; 900 + 300 = <span class="wline"></span> &nbsp; 1000 + 500 = <span class="wline"></span>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">11</div><div><h2>🔐 Бонус: расшифруй слово <span class="level lv2">🎮</span></h2><div class="tag">Каждая буква = её номер в алфавите</div></div></div>
+    <div class="card">
+      <div class="hint">Ключ шифра:</div>
+      <div class="numgrid g6">
+        <div class="numcell"><b>A</b> 1</div><div class="numcell"><b>B</b> 2</div><div class="numcell"><b>C</b> 3</div><div class="numcell"><b>D</b> 4</div><div class="numcell"><b>E</b> 5</div><div class="numcell"><b>F</b> 6</div>
+        <div class="numcell"><b>G</b> 7</div><div class="numcell"><b>H</b> 8</div><div class="numcell"><b>I</b> 9</div><div class="numcell"><b>J</b> 10</div><div class="numcell"><b>K</b> 11</div><div class="numcell"><b>L</b> 12</div>
+        <div class="numcell"><b>M</b> 13</div><div class="numcell"><b>N</b> 14</div><div class="numcell"><b>O</b> 15</div><div class="numcell"><b>P</b> 16</div><div class="numcell"><b>Q</b> 17</div><div class="numcell"><b>R</b> 18</div>
+        <div class="numcell"><b>S</b> 19</div><div class="numcell"><b>T</b> 20</div><div class="numcell"><b>U</b> 21</div><div class="numcell"><b>V</b> 22</div><div class="numcell"><b>W</b> 23</div><div class="numcell"><b>X</b> 24</div>
+        <div class="numcell"><b>Y</b> 25</div><div class="numcell"><b>Z</b> 26</div>
+      </div>
+      <br>
+      16 – 9 – 19 – 15 = <span class="wline"></span><br>
+      3 – 1 – 19 – 1 = <span class="wline"></span>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">Обведи: 🟢 умею · 🟡 с подсказкой · 🔴 пока сложно</div></div></div>
+    <div class="card">
+      Назвать числа 0–23 и десятки до 100 — 🟢 🟡 🔴<br>
+      Построить числа 21–99 (слитно / через «y») — 🟢 🟡 🔴<br>
+      Написать сотни и тысячи словами — 🟢 🟡 🔴<br>
+      Назвать год рождения, цену аренды и телефон — 🟢 🟡 🔴
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Цифры до 3000 · стр. 3 / 4</span></div>
+</div>
+
+<!-- ════════════════ ЛИСТ 4 · КЛЮЧИ ════════════════ -->
+<div class="sheet">
+  <div class="cut">✂️ — линия отреза: ключи для преподавателя —</div>
+  <div class="keys">
+    <h2>🔑 Ключи для преподавателя · Цифры до 3000</h2>
+    <p><b>Упр. 1:</b> 7–siete, 12–doce, 15–quince, 20–veinte, 3–tres, 18–dieciocho, 11–once, 9–nueve.</p>
+    <p><b>Упр. 2:</b> a) tres, cinco; b) doce, catorce; c) dieciocho, veinte; d) nueve, once.</p>
+    <p><b>Упр. 3:</b> treinta, cincuenta, setenta, noventa.</p>
+    <p><b>Упр. 4:</b> a) trece; b) diecinueve; c) dieciséis; d) veintiuno.</p>
+    <p><b>Упр. 5:</b> 24 veinticuatro; 36 treinta y seis; 47 cuarenta y siete; 52 cincuenta y dos; 68 sesenta y ocho; 75 setenta y cinco; 89 ochenta y nueve; 93 noventa y tres.</p>
+    <p><b>Упр. 6:</b> 28, 43, 61, 77, 95, 50.</p>
+    <p><b>Упр. 7:</b> 200–doscientos, 500–quinientos, 300–trescientos, 900–novecientos, 400–cuatrocientos, 700–setecientos, 600–seiscientos, 800–ochocientos.</p>
+    <p><b>Упр. 8:</b> 120 ciento veinte; 250 doscientos cincuenta; 380 trescientos ochenta; 500 quinientos; 1000 mil; 1400 mil cuatrocientos; 2500 dos mil quinientos; 3000 tres mil.</p>
+    <p><b>Упр. 9:</b> 300, 640, 800, 1200, 2000, 2300.</p>
+    <p><b>Упр. 10:</b> Год: 1990 = mil novecientos noventa; 2000 = dos mil. Аренда: 850 = ochocientos cincuenta; 900 = novecientos; 1200 = mil doscientos; 2500 = dos mil quinientos. Телефон: seis, uno, dos, tres, cuatro, cinco, seis, siete, ocho. Математика: treinta y cinco; setenta; cincuenta; mil doscientos; mil quinientos.</p>
+    <p><b>Упр. 11 (бонус):</b> Ключ: A=1, B=2, C=3, D=4, E=5, F=6, G=7, H=8, I=9, J=10, K=11, L=12, M=13, N=14, O=15, P=16, Q=17, R=18, S=19, T=20, U=21, V=22, W=23, X=24, Y=25, Z=26. Ответы: 16-9-19-15 = PISO (квартира); 3-1-19-1 = CASA (дом).</p>
+    <p class="small">⏱ Рекомендуемое время: 30–40 минут. Уровни можно раздавать дозированно: ⭐ и ⭐⭐ — после уроков 1.1–1.2, ⭐⭐⭐ и ⭐⭐⭐⭐ — после урока 2.1 (цены до 3000 €).</p>
+  </div>
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Цифры до 3000 · стр. 4 / 4</span></div>
+</div>
+
+</body>
+</html>
