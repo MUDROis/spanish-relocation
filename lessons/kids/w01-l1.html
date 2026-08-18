@@ -162,6 +162,58 @@
   .sb-done{background:#E5F4F1;border-color:var(--teal);animation:popIn .4s}
   @media(max-width:600px){.match-area{grid-template-columns:1fr}}
 
+  /* ---------- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ ---------- */
+  .grammar-hint{
+    position:relative;
+    color:var(--blue);
+    border-bottom:2px dashed var(--blue);
+    cursor:help;
+    font-weight:700;
+    display:inline;
+  }
+  .grammar-hint::after{
+    content:attr(data-hint);
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:.85rem;
+    font-weight:700;
+    line-height:1.4;
+    white-space:normal;
+    width:max-content;
+    max-width:280px;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+    font-style:normal;
+  }
+  .grammar-hint::before{
+    content:'';
+    position:absolute;
+    bottom:calc(100% + 2px);
+    left:50%;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:var(--ink);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+  }
+  @media (hover:hover){
+    .grammar-hint:hover::after,
+    .grammar-hint:hover::before{opacity:1}
+  }
+  .grammar-hint.active::after,
+  .grammar-hint.active::before{opacity:1}
+
   /* ---------- ВИДЕО ---------- */
   .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:14px}
   .video-card{background:#fff;border:2px solid var(--soft);border-radius:16px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.07);transition:.2s}
@@ -288,7 +340,7 @@
       <div class="flashcard" style="--c:#E8604C" onclick="speak('Buenos días', this)">
         <span class="fc-level">ФОРМАЛЬНОЕ</span>
         <div class="fc-emoji">🎩</div>
-        <div class="fc-phrase">Buenos días</div>
+        <div class="fc-phrase"><span class="grammar-hint" data-hint="buenos días — дословно «добрые дни». Используем до обеда (примерно до 14:00). Во множественном числе: día → días">Buenos días</span></div>
         <div class="fc-context">Учителю, врачу, директору</div>
         <div class="fc-meaning">«Добрый день»</div>
         <button class="speak-btn" style="--c:#E8604C">🔊 Послушать</button>
@@ -296,7 +348,7 @@
       <div class="flashcard" style="--c:#2A9D8F" onclick="speak('Hola', this)">
         <span class="fc-level">НЕЙТРАЛЬНОЕ</span>
         <div class="fc-emoji">👋</div>
-        <div class="fc-phrase">¡Hola!</div>
+        <div class="fc-phrase"><span class="grammar-hint" data-hint="hola — универсальное приветствие в любое время дня. Буква H не читается: «ó-ла». Восклицательные знаки ставятся и в начале ¡ , и в конце !">¡Hola!</span></div>
         <div class="fc-context">Всем подряд</div>
         <div class="fc-meaning">«Привет»</div>
         <button class="speak-btn" style="--c:#2A9D8F">🔊 Послушать</button>
@@ -304,7 +356,7 @@
       <div class="flashcard" style="--c:#2274A5" onclick="speak('¡Buenas, tío!', this)">
         <span class="fc-level">МОЛОДЁЖНОЕ</span>
         <div class="fc-emoji">🤙</div>
-        <div class="fc-phrase">¡Buenas, tío!</div>
+        <div class="fc-phrase"><span class="grammar-hint" data-hint="¡Buenas! — сокращённое от buenos días/buenas tardes, «здорóво». Tío дословно «дядя», но среди друзей = «чувак, приятель»">¡Buenas, tío!</span></div>
         <div class="fc-context">Друзьям, ровесникам</div>
         <div class="fc-meaning">«Привет, чувак!»</div>
         <button class="speak-btn" style="--c:#2274A5">🔊 Послушать</button>
@@ -328,7 +380,7 @@
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed rgba(0,0,0,.1);cursor:pointer" onclick="speak('Me llamo Anna')">
         <div style="font-size:2rem">🏷</div>
         <div style="flex:1">
-          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Me llamo...</div>
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)"><span class="grammar-hint" data-hint="me llamo — возвратный глагол llamarse (называться). Me = мне, llamo = зову. Дословно: «Я называю себя». LL читается как [й]: «ме йá-мо»">Me llamo...</span></div>
           <div style="font-weight:700;color:var(--ink-soft)">«Меня зовут...»</div>
         </div>
         <button class="speak-btn" style="--c:#2A9D8F">🔊</button>
@@ -336,7 +388,7 @@
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed rgba(0,0,0,.1);cursor:pointer" onclick="speak('Tengo ocho años')">
         <div style="font-size:2rem">🎂</div>
         <div style="flex:1">
-          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Tengo ___ años</div>
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)"><span class="grammar-hint" data-hint="tengo ... años — глагол tener (иметь) в 1 лице ед.ч. Дословно: «У меня есть ... лет». Возраст в испанском «имеют», а не «являются»">Tengo ___ años</span></div>
           <div style="font-weight:700;color:var(--ink-soft)">«Мне ... лет» (дословно: у меня есть ... лет)</div>
         </div>
         <button class="speak-btn" style="--c:#2A9D8F">🔊</button>
@@ -344,7 +396,7 @@
       <div style="display:flex;align-items:center;gap:14px;cursor:pointer" onclick="speak('Soy de Rusia')">
         <div style="font-size:2rem">🌍</div>
         <div style="flex:1">
-          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Soy de...</div>
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)"><span class="grammar-hint" data-hint="soy de... — глагол ser (быть) + предлог de (из). Soy = я есть. Дословно: «Я есть из...»">Soy de...</span></div>
           <div style="font-weight:700;color:var(--ink-soft)">«Я из...»</div>
         </div>
         <button class="speak-btn" style="--c:#2A9D8F">🔊</button>
@@ -410,7 +462,7 @@
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed rgba(0,0,0,.1);cursor:pointer" onclick="speak('Este es papá')">
         <div style="font-size:2rem">👋</div>
         <div style="flex:1">
-          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Este es...</div>
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)"><span class="grammar-hint" data-hint="este es... — указательное местоимение este (этот) + глагол ser (есть). Про мужчину/мальчика. Про женщину: esta es...">Este es...</span></div>
           <div style="font-weight:700;color:var(--ink-soft)">«Это...» (про человека рядом) · Este es papá</div>
         </div>
         <button class="speak-btn" style="--c:#9B5DE5">🔊</button>
@@ -418,7 +470,7 @@
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:2px dashed rgba(0,0,0,.1);cursor:pointer" onclick="speak('Se llama Anna')">
         <div style="font-size:2rem">🏷</div>
         <div style="flex:1">
-          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Se llama...</div>
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)"><span class="grammar-hint" data-hint="se llama — то же llamarse, но про другого человека: se = его/её. Сравни: me llamo = меня зовут, se llama = его/её зовут">Se llama...</span></div>
           <div style="font-weight:700;color:var(--ink-soft)">«Его/её зовут...» (вместо Me llamo)</div>
         </div>
         <button class="speak-btn" style="--c:#9B5DE5">🔊</button>
@@ -426,7 +478,7 @@
       <div style="display:flex;align-items:center;gap:14px;cursor:pointer" onclick="speak('Tiene cuarenta años')">
         <div style="font-size:2rem">🎂</div>
         <div style="flex:1">
-          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)">Tiene ___ años</div>
+          <div style="font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)"><span class="grammar-hint" data-hint="tiene ... años — глагол tener (иметь) в 3 лице ед.ч.: у него/у неё есть. Сравни: tengo = у меня, tiene = у него/неё">Tiene ___ años</span></div>
           <div style="font-weight:700;color:var(--ink-soft)">«Ему/ей ... лет» (вместо Tengo)</div>
         </div>
         <button class="speak-btn" style="--c:#9B5DE5">🔊</button>
@@ -1153,6 +1205,22 @@ document.querySelectorAll('.tl-cell').forEach(c=>{
   });
 });
 document.getElementById('kids-tl-reset').onclick=()=>document.querySelectorAll('.tl-cell').forEach(c=>c.classList.remove('active'));
+
+/* ========== ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ (мобильный тап) ========== */
+document.addEventListener('click', function(e){
+  const hint = e.target.closest('.grammar-hint');
+  if(hint){
+    document.querySelectorAll('.grammar-hint.active').forEach(el => {
+      if(el !== hint) el.classList.remove('active');
+    });
+    hint.classList.toggle('active');
+    e.stopPropagation();
+    return;
+  }
+  document.querySelectorAll('.grammar-hint.active').forEach(el => {
+    el.classList.remove('active');
+  });
+});
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>

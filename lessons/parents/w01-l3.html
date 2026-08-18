@@ -259,6 +259,59 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 .lesson-nav a.next{text-align:right}
 
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+
+/* ---------- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ ---------- */
+.grammar-hint{
+  position:relative;
+  color:var(--p4);
+  border-bottom:2px dashed var(--p4);
+  cursor:help;
+  font-weight:700;
+  display:inline;
+}
+.grammar-hint::after{
+  content:attr(data-hint);
+  position:absolute;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--ink);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:.85rem;
+  font-weight:700;
+  line-height:1.4;
+  white-space:normal;
+  width:max-content;
+  max-width:280px;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:100;
+  font-style:normal;
+  text-align:left;
+}
+.grammar-hint::before{
+  content:'';
+  position:absolute;
+  bottom:calc(100% + 2px);
+  left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--ink);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:100;
+}
+@media (hover:hover){
+  .grammar-hint:hover::after,
+  .grammar-hint:hover::before{opacity:1}
+}
+.grammar-hint.active::after,
+.grammar-hint.active::before{opacity:1}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;font-size:.85rem}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font-weight:900;font-size:.95rem;cursor:pointer;border:none;text-decoration:none;transition:.2s}
@@ -352,23 +405,23 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 
   <div class="gram-grid" style="margin-top:16px">
     <div class="gram-card" onclick="speak('Sí, lo tengo.')">
-      <div class="gc-formula">Sí, lo tengo. <button class="mini-speak speak" data-text="Sí, lo tengo.">🔊</button></div>
+      <div class="gc-formula">Sí, <span class="grammar-hint" data-hint="lo — прямое дополнение «его/это» (заменяет паспорт, документ). СтоИт перед глаголом: lo tengo = «его имею»">lo</span> tengo. <button class="mini-speak speak" data-text="Sí, lo tengo.">🔊</button></div>
       <div class="gc-ex"><b>Да, у меня есть.</b>На вопрос «¿Tiene su pasaporte?» — У вас есть паспорт?</div>
     </div>
     <div class="gram-card" onclick="speak('No, no lo tengo.')">
-      <div class="gc-formula">No, no lo tengo. <button class="mini-speak speak" data-text="No, no lo tengo.">🔊</button></div>
+      <div class="gc-formula"><span class="grammar-hint" data-hint="No, no lo tengo — двойное «no» не ошибка: «Нет, у меня его нет». В испанском отрицание ставится прямо перед глаголом">No, no lo tengo.</span> <button class="mini-speak speak" data-text="No, no lo tengo.">🔊</button></div>
       <div class="gc-ex"><b>Нет, у меня нет.</b>Честно, но вежливо. Дальше решаете проблему.</div>
     </div>
     <div class="gram-card" onclick="speak('Sí, aquí está.')">
-      <div class="gc-formula">Sí, aquí está. <button class="mini-speak speak" data-text="Sí, aquí está.">🔊</button></div>
+      <div class="gc-formula">Sí, <span class="grammar-hint" data-hint="aquí está — «вот он/она». aquí = здесь, está от estar (находиться). Фраза-жест: протягиваете документ">aquí está</span>. <button class="mini-speak speak" data-text="Sí, aquí está.">🔊</button></div>
       <div class="gc-ex"><b>Да, вот он.</b>Протягивая документ через окошко.</div>
     </div>
     <div class="gram-card" onclick="speak('Lo he dejado en casa.')">
-      <div class="gc-formula">Lo he dejado en casa. <button class="mini-speak speak" data-text="Lo he dejado en casa.">🔊</button></div>
+      <div class="gc-formula"><span class="grammar-hint" data-hint="he dejado — Pretérito Perfecto (настоящее завершённое): he + причастие от dejar (оставить). «Я оставил» — результат виден сейчас">Lo he dejado</span> en casa. <button class="mini-speak speak" data-text="Lo he dejado en casa.">🔊</button></div>
       <div class="gc-ex"><b>Я оставил его дома.</b>Бывает. Спросите, можно ли принести завтра.</div>
     </div>
   </div>
-  <p class="sub" style="margin-top:12px"><b>💡 Lo</b> — прямое дополнение, заменяет «его» (паспорт). На этом уровне достаточно понимать эту конструкцию.</p>
+  <p class="sub" style="margin-top:12px"><b>💡 Lo</b> — прямое дополнение, заменяет «его» (паспорт). На этом уровне достаточно понимать эту конструкцию. <span style="color:var(--p4);font-weight:800">Наведите на синие фразы выше — появятся подсказки.</span></p>
 </section>
 
 <!-- ===== ШАГ 4: СИМУЛЯЦИЯ ===== -->
@@ -572,6 +625,15 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
         <li>«Светофор недели» — результат самопроверки</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- ===== КАРТОЧКИ QUIZLET ===== -->
+<section class="section">
+  <div style="background:linear-gradient(135deg,#4255FF,#6B7BFF);border-radius:24px;padding:32px 26px;text-align:center;color:#fff;box-shadow:0 12px 30px rgba(66,85,255,.28)">
+    <h3 style="font-weight:900;font-size:1.35rem;margin:0 0 6px;color:#fff">Карточки Quizlet · Слова урока 1.3</h3>
+    <p style="font-weight:700;opacity:.94;margin:0 0 20px;font-size:.95rem">Повторите слова урока в приложении Quizlet</p>
+    <a href="https://quizlet.com/ru/1199980357/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-1-%D1%83%D1%80%D0%BE%D0%BA-3-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#4255FF;border-radius:999px;padding:13px 30px;font-weight:900;text-decoration:none;font-size:.98rem">Открыть карточки →</a>
   </div>
 </section>
 

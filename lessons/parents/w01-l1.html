@@ -216,6 +216,59 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 .lesson-nav a.next{text-align:right}
 
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+
+/* ---------- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ ---------- */
+.grammar-hint{
+  position:relative;
+  color:var(--p4);
+  border-bottom:2px dashed var(--p4);
+  cursor:help;
+  font-weight:700;
+  display:inline;
+}
+.grammar-hint::after{
+  content:attr(data-hint);
+  position:absolute;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--ink);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:.85rem;
+  font-weight:700;
+  line-height:1.4;
+  white-space:normal;
+  width:max-content;
+  max-width:280px;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:100;
+  font-style:normal;
+  text-align:left;
+}
+.grammar-hint::before{
+  content:'';
+  position:absolute;
+  bottom:calc(100% + 2px);
+  left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--ink);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:100;
+}
+@media (hover:hover){
+  .grammar-hint:hover::after,
+  .grammar-hint:hover::before{opacity:1}
+}
+.grammar-hint.active::after,
+.grammar-hint.active::before{opacity:1}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;font-size:.85rem}
 </style>
@@ -243,7 +296,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   <div class="step-head"><span class="step-num">1</span><div><span class="step-time">00:00 – 05:00 · Разогрев</span><h2>Культурный шок: почему нельзя просто прийти</h2></div></div>
   <p class="sub">В Испании нет очередей «по живой». Есть волшебное словосочетание <b>la cita previa</b> — предварительная запись. Без неё вас не пустят даже в дверь. Запомните главную фразу-спасатель 👇 Нажмите на динамик, чтобы услышать.</p>
   <div class="gram-card" style="max-width:560px">
-    <div class="gc-formula">Buenos días. Quisiera pedir una cita previa. <button class="mini-speak speak" data-text="Buenos días. Quisiera pedir una cita previa.">🔊</button></div>
+    <div class="gc-formula"><span class="grammar-hint" data-hint="quisiera — вежливая форма «я бы хотел(а)» от глагола querer. Мягче, чем quiero: звучит как просьба, а не требование">Quisiera</span> pedir una <span class="grammar-hint" data-hint="cita previa — «предварительная запись». Cita = встреча/приём, previa = предварительная. Без неё в испанских офисах не принимают">cita previa</span>. <button class="mini-speak speak" data-text="Buenos días. Quisiera pedir una cita previa.">🔊</button></div>
     <div class="gc-ex"><b>Добрый день. Я бы хотел записаться на приём.</b>Произносится вежливо и спокойно — с улыбкой работает лучше всего.</div>
   </div>
 </section>
@@ -261,15 +314,15 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   <p class="sub">В испанском часто не нужны «связки» вроде английского am/is. Три глагола — и вы уже рассказываете о себе.</p>
   <div class="gram-grid">
     <div class="gram-card">
-      <div class="gc-formula">Me llamo… <button class="mini-speak speak" data-text="Me llamo Ana.">🔊</button></div>
+      <div class="gc-formula"><span class="grammar-hint" data-hint="me llamo — возвратный глагол llamarse (называться): me = мне, llamo = зову. Дословно: «Я называю себя»">Me llamo</span>… <button class="mini-speak speak" data-text="Me llamo Ana.">🔊</button></div>
       <div class="gc-ex"><b>Меня зовут…</b>Me llamo Ana. — Меня зовут Анна.</div>
     </div>
     <div class="gram-card">
-      <div class="gc-formula">Soy… <button class="mini-speak speak" data-text="Soy rusa. Soy ruso.">🔊</button></div>
+      <div class="gc-formula"><span class="grammar-hint" data-hint="soy — глагол ser (быть) в 1 лице ед.ч. Используется для постоянных характеристик: национальность, профессия">Soy</span>… <button class="mini-speak speak" data-text="Soy rusa. Soy ruso.">🔊</button></div>
       <div class="gc-ex"><b>Я [кто по национальности/профессии]</b>Soy rusa (ж.) / Soy ruso (м.). — Я русская / русский.</div>
     </div>
     <div class="gram-card">
-      <div class="gc-formula">Tengo… <button class="mini-speak speak" data-text="Tengo treinta y cinco años.">🔊</button></div>
+      <div class="gc-formula"><span class="grammar-hint" data-hint="tengo — глагол tener (иметь) в 1 лице ед.ч. Возраст «имеют»: tengo 35 años = «у меня есть 35 лет». Число лет всегда мн. ч.: años">Tengo</span>… <button class="mini-speak speak" data-text="Tengo treinta y cinco años.">🔊</button></div>
       <div class="gc-ex"><b>Мне … лет (дословно «я имею годы»)</b>Tengo treinta y cinco años. — Мне 35 лет.</div>
     </div>
   </div>
@@ -909,6 +962,21 @@ document.getElementById('saveForm').onclick=()=>{
 /* ====== тост ====== */
 let tId;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tId);tId=setTimeout(()=>t.classList.remove('show'),3200);}
+/* ========== ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ (мобильный тап) ========== */
+document.addEventListener('click', function(e){
+  const hint = e.target.closest('.grammar-hint');
+  if(hint){
+    document.querySelectorAll('.grammar-hint.active').forEach(el => {
+      if(el !== hint) el.classList.remove('active');
+    });
+    hint.classList.toggle('active');
+    e.stopPropagation();
+    return;
+  }
+  document.querySelectorAll('.grammar-hint.active').forEach(el => {
+    el.classList.remove('active');
+  });
+});
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>

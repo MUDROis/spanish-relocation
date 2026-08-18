@@ -251,6 +251,59 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 .lesson-nav a.next{text-align:right}
 
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+
+/* ---------- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ ---------- */
+.grammar-hint{
+  position:relative;
+  color:var(--p4);
+  border-bottom:2px dashed var(--p4);
+  cursor:help;
+  font-weight:700;
+  display:inline;
+}
+.grammar-hint::after{
+  content:attr(data-hint);
+  position:absolute;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--ink);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:.85rem;
+  font-weight:700;
+  line-height:1.4;
+  white-space:normal;
+  width:max-content;
+  max-width:280px;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:100;
+  font-style:normal;
+  text-align:left;
+}
+.grammar-hint::before{
+  content:'';
+  position:absolute;
+  bottom:calc(100% + 2px);
+  left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--ink);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:100;
+}
+@media (hover:hover){
+  .grammar-hint:hover::after,
+  .grammar-hint:hover::before{opacity:1}
+}
+.grammar-hint.active::after,
+.grammar-hint.active::before{opacity:1}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;font-size:.85rem}
 </style>
@@ -290,7 +343,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   <div class="step-head"><span class="step-num">1</span><div><span class="step-time">06:00 – 10:00 · Разогрев</span><h2>Как снимают жильё в Испании</h2></div></div>
   <p class="sub">Квартиры в Испании ищут на сайтах <b>Idealista</b> и <b>Fotocasa</b>. Объявления там пишут сокращённо: <i>2 hab. · 65 m² · amueblado</i>. Научиться читать такой «шифр» — главный навык этого урока. Запомните фразу-спасатель 👇</p>
   <div class="gram-card" style="max-width:560px">
-    <div class="gc-formula">Busco un piso en alquiler. <button class="mini-speak speak" data-text="Busco un piso en alquiler.">🔊</button></div>
+    <div class="gc-formula"><span class="grammar-hint" data-hint="busco — глагол buscar (искать) в 1 лице ед.ч. Presente. Окончание -o = «я»">Busco</span> un piso en <span class="grammar-hint" data-hint="en alquiler — «в аренду». alquiler от глагола alquilar (снимать/сдавать). Предлог en = «в»">alquiler</span>. <button class="mini-speak speak" data-text="Busco un piso en alquiler.">🔊</button></div>
     <div class="gc-ex"><b>Я ищу квартиру в аренду.</b>Говорите это агенту или владельцу — и вас поймут сразу. <i>Buscar</i> — искать, правильный глагол.</div>
   </div>
   <p class="sub" style="margin-top:18px">Что ещё важно знать перед поиском:</p>
@@ -315,15 +368,15 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   <p class="sub">Чтобы рассказать о том, что вы ищете, нужны три кита: глагол <b>buscar</b> (искать), <b>hay</b> (есть/имеется) и <b>estar</b> (находиться).</p>
   <div class="gram-grid">
     <div class="gram-card">
-      <div class="gc-formula">Busco… <button class="mini-speak speak" data-text="Busco un piso con dos habitaciones.">🔊</button></div>
+      <div class="gc-formula"><span class="grammar-hint" data-hint="busco — buscar (искать), 1 л. ед.ч. Правильный глагол: -ar → -o. Мы: buscamos">Busco</span>… <button class="mini-speak speak" data-text="Busco un piso con dos habitaciones.">🔊</button></div>
       <div class="gc-ex"><b>Я ищу… (Presente, правильные глаголы)</b>Busco un piso con dos habitaciones. — Я ищу квартиру с двумя комнатами.<br><span style="color:var(--muted);font-weight:800">buscar → busco · buscamos</span></div>
     </div>
     <div class="gram-card">
-      <div class="gc-formula">Hay… <button class="mini-speak speak" data-text="Hay dos habitaciones. No hay ascensor.">🔊</button></div>
+      <div class="gc-formula"><span class="grammar-hint" data-hint="hay — «есть/имеется», неизменяемая форма от haber. Про существование: Hay ascensor = лифт есть. Отрицание: No hay = нет">Hay</span>… <button class="mini-speak speak" data-text="Hay dos habitaciones. No hay ascensor.">🔊</button></div>
       <div class="gc-ex"><b>Есть / имеется (или нет)</b>Hay dos habitaciones. — Есть две комнаты.<br>No hay ascensor. — Нет лифта.</div>
     </div>
     <div class="gram-card">
-      <div class="gc-formula">Está… <button class="mini-speak speak" data-text="Está en el centro. Está amueblado.">🔊</button></div>
+      <div class="gc-formula"><span class="grammar-hint" data-hint="está — глагол estar (находиться/быть в состоянии), 3 л. ед.ч. Локация и состояние: Está en el centro / Está amueblado. Сравните с hay: hay — что есть, está — где/как">Está</span>… <button class="mini-speak speak" data-text="Está en el centro. Está amueblado.">🔊</button></div>
       <div class="gc-ex"><b>Находится / является (о состоянии)</b>Está en el centro. — Она в центре.<br>Está amueblado. — Она с мебелью.</div>
     </div>
   </div>
@@ -592,7 +645,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   <div class="quizlet-box">
     <h3>🃏 Карточки Quizlet · Слова урока 2.1</h3>
     <p>Повторите слова урока в приложении Quizlet: жильё, аренда, сокращения объявлений.</p>
-    <a href="https://quizlet.com/XXXXXXXXX/неделя-2-урок-1-misión-idealista-flash-cards/" target="_blank" rel="noopener">Открыть карточки →</a>
+    <a href="https://quizlet.com/ru/1199980627/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-2-%D1%83%D1%80%D0%BE%D0%BA-1-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
   </div>
 </section>
 
