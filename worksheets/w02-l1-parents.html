@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 2.1 · Misión Idealista — МУДРО (A4)</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:12px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  /* ═══════════ ЛИСТ A4 ═══════════ */
+  .sheet{
+    width:210mm;
+    min-height:297mm;
+    margin:8mm auto;
+    padding:11mm 12mm 9mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+    position:relative;
+  }
+  .sheet-footer{
+    position:absolute; bottom:5mm; left:12mm; right:12mm;
+    display:flex; justify-content:space-between;
+    font-size:9.5px; color:var(--muted); font-weight:600;
+    border-top:1px solid #E8DCCF; padding-top:2mm;
+  }
+
+  /* ═══════════ ШАПКА ═══════════ */
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:5mm;
+  }
+  .hero .brand{ font-size:10px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10.5px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10.5px; padding:0 2px; }
+
+  /* ═══════════ УПРАЖНЕНИЯ ═══════════ */
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2.5mm; }
+  .ex-num{
+    width:8mm; height:8mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:13px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2); } .ex-num.c3{ background:var(--p3); } .ex-num.c4{ background:var(--p4); }
+  .ex-head h2{ font-size:13.5px; margin:0; }
+  .ex-head .tag{ font-size:9.5px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:4mm 5mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:10px; font-style:italic; color:var(--muted); margin-bottom:2.5mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:1.8mm 2.5mm; vertical-align:top; text-align:left; }
+  th{ background:#FBF3EA; font-size:10.5px; color:var(--p1); }
+
+  .wline{ display:block; height:7mm; border-bottom:1.5px dashed #C9B8A6; }
+  .wline.short{ height:6mm; }
+  .cols2{ display:flex; gap:6mm; }
+  .cols2>div{ flex:1; }
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2.5mm 3.5mm; margin:0 0 3mm; font-size:10.5px; }
+  .formula b{ color:var(--p4); }
+  .tip{ background:#FFF3E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2.5mm 3.5mm; margin:0 0 3mm; font-size:10.5px; }
+
+  /* Объявление как в уроке */
+  .ad{ border:0.7mm solid var(--p4); border-radius:8px; overflow:hidden; margin-bottom:3mm; }
+  .ad-head{ background:var(--p4); color:#fff; padding:2.5mm 4mm; display:flex; justify-content:space-between; align-items:center; }
+  .ad-head .price{ font-size:14px; font-weight:800; }
+  .ad-body{ padding:3.5mm 4mm; background:#fff; }
+  .ad-body .loc{ font-weight:700; color:var(--p4); margin-bottom:1.5mm; font-size:11px; }
+
+  .cut{ border-top:0.7mm dashed var(--muted); margin:5mm 0 3mm; text-align:center; font-size:10px; color:var(--muted); }
+  .keys h2{ font-size:14px; color:var(--p2); margin:0 0 2.5mm; }
+  .keys p{ margin:0 0 2.2mm; }
+  .small{ font-size:10px; }
+  ul{ margin:1.5mm 0; padding-left:6mm; }
+
+  /* ═══════════ КНОПКА ПЕЧАТИ ═══════════ */
+  .no-print{ text-align:center; margin:14px auto 0; }
+  .no-print button{
+    background:var(--p1); color:#fff; border:none; border-radius:12px;
+    padding:12px 28px; font-size:15px; font-weight:800; cursor:pointer;
+    box-shadow:0 4px 14px rgba(226,114,91,.4);
+  }
+
+  /* ═══════════ ПЕЧАТЬ ═══════════ */
+  @page{ size:A4; margin:0; }
+  @media print{
+    body{ background:#fff; }
+    .no-print{ display:none; }
+    .sheet{
+      margin:0; box-shadow:none; width:auto; min-height:auto;
+      padding:10mm 11mm 12mm;
+      page-break-after:always; break-after:page;
+    }
+    .sheet:last-child{ page-break-after:auto; break-after:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print"><button onclick="window.print()">🖨 Распечатать (A4, 3 страницы)</button></div>
+
+<!-- ═══════════════════ ЛИСТ 1 ═══════════════════ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏠 Рабочий лист · Урок 2.1 «Misión Idealista»</h1>
+    <div class="meta">Неделя 2 · Охота за жильём: читаем объявления и находим квартиру</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🗣 Соедини 11 слов-спасателей с переводом</h2><div class="tag">Лексика урока · впиши букву рядом с цифрой</div></div></div>
+    <div class="card">
+      <div class="cols2">
+        <div>
+          1. el piso ____<br>
+          2. el alquiler ____<br>
+          3. la fianza ____<br>
+          4. el contrato ____<br>
+          5. la habitación ____<br>
+          6. amueblado/a ____<br>
+          7. luminoso/a ____<br>
+          8. el ático ____<br>
+          9. el bajo ____<br>
+          10. el ascensor ____<br>
+          11. los gastos de comunidad ____
+        </div>
+        <div>
+          а) светлый<br>
+          б) коммунальные расходы дома<br>
+          в) квартира<br>
+          г) первый этаж<br>
+          д) залог<br>
+          е) меблированный<br>
+          ж) пентхаус (верхний этаж)<br>
+          з) комната / спальня<br>
+          и) лифт<br>
+          к) аренда<br>
+          л) договор
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🔤 Расшифруй сокращения объявлений</h2><div class="tag">Словарь сокращений из шага 4 · первая строка — пример</div></div></div>
+    <div class="card">
+      <table>
+        <tr><th>Сокращение</th><th>Полностью (es)</th><th>Перевод (ru)</th></tr>
+        <tr><td>hab.</td><td>habitaciones</td><td>комнаты / спальни</td></tr>
+        <tr><td>m²</td><td style="height:6mm"></td><td style="height:6mm"></td></tr>
+        <tr><td>asc.</td><td style="height:6mm"></td><td style="height:6mm"></td></tr>
+        <tr><td>€/mes</td><td style="height:6mm"></td><td style="height:6mm"></td></tr>
+        <tr><td>amuebl.</td><td style="height:6mm"></td><td style="height:6mm"></td></tr>
+        <tr><td>g.c.</td><td style="height:6mm"></td><td style="height:6mm"></td></tr>
+        <tr><td>a/a</td><td style="height:6mm"></td><td style="height:6mm"></td></tr>
+        <tr><td>terr.</td><td style="height:6mm"></td><td style="height:6mm"></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- УПР 3 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧱 Вставь: Busco / Hay / Está</h2><div class="tag">Три кита из шага 3</div></div></div>
+    <div class="card">
+      <div class="formula"><b>Busco…</b> — я ищу · <b>Hay…</b> — есть / имеется · <b>Está…</b> — находится / является</div>
+      1. ______________ un piso en alquiler.<br>
+      2. En el piso ______________ dos habitaciones.<br>
+      3. El piso ______________ en el centro.<br>
+      4. ______________ amueblado y luminoso.<br>
+      5. No ______________ ascensor.<br>
+      6. ______________ un piso con terraza.
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.1 · стр. 1 / 3</span></div>
+</div>
+
+<!-- ═══════════════════ ЛИСТ 2 ═══════════════════ -->
+<div class="sheet">
+
+  <!-- УПР 4 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>💶 Напиши цены словами</h2><div class="tag">Числа до 3000 из шага 3 · пример: 900 € → novecientos euros</div></div></div>
+    <div class="card">
+      1. 850 € → <span class="wline short"></span>
+      2. 1200 € → <span class="wline short"></span>
+      3. 2500 € → <span class="wline short"></span>
+      4. Мой бюджет: ________ € → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>📖 Прочитай объявление и ответь</h2><div class="tag">То самое объявление из шага 4</div></div></div>
+    <div class="card">
+      <div class="ad">
+        <div class="ad-head"><span class="price">850 € / mes</span><span>Piso en alquiler</span></div>
+        <div class="ad-body">
+          <div class="loc">Barrio de Salamanca · Madrid</div>
+          Piso amueblado y muy luminoso en el centro de Madrid. Tiene 3 habitaciones, 2 baños, cocina equipada y salón grande. Ascensor y calefacción. Gastos de comunidad incluidos. Fianza: 1 mes. Disponible desde enero.
+        </div>
+      </div>
+      1. ¿Cuántas habitaciones hay? → <span class="wline short"></span>
+      2. ¿Cuánto cuesta el alquiler? → <span class="wline short"></span>
+      3. ¿Está amueblado? → <span class="wline short"></span>
+      4. ¿Hay ascensor? → <span class="wline short"></span>
+      5. ¿Están incluidos los gastos de comunidad? → <span class="wline short"></span>
+      6. ¿Cuánto es la fianza? → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>✉️ Письмо арендодателю на Idealista</h2><div class="tag">Проект из шага 6 · заполни пропуски</div></div></div>
+    <div class="card">
+      <div class="hint">Впиши: число комнат, район, amueblado / sin amueblar, бюджет, имя.</div>
+      <div style="border:0.7mm solid var(--p2); border-radius:8px; padding:3.5mm 4mm;">
+        <div class="small" style="color:var(--p2); font-weight:700; margin-bottom:2mm;">IDEALISTA · MENSAJE AL PROPIETARIO (SIMULACIÓN)</div>
+        Buenos días,<br><br>
+        Busco un piso en alquiler con ______________ habitaciones en ______________ (район).<br>
+        Me interesa un piso ______________ (amueblado / sin amueblar).<br>
+        Mi presupuesto máximo es de ______________ euros al mes.<br>
+        ¿Tiene algo disponible?<br><br>
+        Muchas gracias.<br>
+        Un saludo,<br>
+        ______________
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.1 · стр. 2 / 3</span></div>
+</div>
+
+<!-- ═══════════════════ ЛИСТ 3 ═══════════════════ -->
+<div class="sheet">
+
+  <!-- УПР 7 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>🏡 Моя идеальная квартира: 3 предложения</h2><div class="tag">Свободное письмо · используй Busco / Hay / Está</div></div></div>
+    <div class="card">
+      <div class="tip">💡 Подсказка: начни как в конструкторе из шага 3 — «Busco un piso en alquiler con…»</div>
+      1. Busco <span class="wline"></span>
+      2. Hay <span class="wline"></span>
+      3. Está <span class="wline"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">Обведи: 🟢 умею · 🟡 с подсказкой · 🔴 пока сложно</div></div></div>
+    <div class="card">
+      Прочитать объявление на Idealista (цена, комнаты, этаж) — 🟢 🟡 🔴<br>
+      Описать, какое жильё ищу (Busco un piso…) — 🟢 🟡 🔴<br>
+      Назвать цену и числа до 3000 по-испански — 🟢 🟡 🔴<br>
+      Понять сокращения в объявлениях (hab., m², asc.) — 🟢 🟡 🔴
+      <p class="small" style="margin-top:2.5mm;">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.1 · стр. 3 / 3</span></div>
+</div>
+
+</body>
+</html>
