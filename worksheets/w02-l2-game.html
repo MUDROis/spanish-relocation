@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игра: Какой глагол выбрать? — Урок 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --green:#2E7D32; --blue:#2274A5; --soft:#FFF3D6;
+    --ink-soft:#6b675f; --purple:#8338EC; --red:#D62828;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding:20px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .wrap{max-width:760px;margin:0 auto}
+
+  .head{text-align:center;margin-bottom:24px}
+  .head h1{font-size:1.9rem;margin-bottom:8px}
+  .head h1 span{color:var(--green)}
+  .head p{color:var(--ink-soft);font-weight:700}
+
+  .cheat{background:#fff;border-radius:18px;padding:20px;margin-bottom:20px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+  .cheat h3{color:var(--green);margin-bottom:12px;text-align:center}
+  .cheat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .cheat-card{border-radius:12px;padding:12px;text-align:center;font-size:.85rem;border:2px solid;transition:.2s;cursor:pointer}
+  .cheat-card:hover{transform:translateY(-3px)}
+  .cheat-card .verb{font-family:'Baloo 2',cursive;font-size:1.05rem;display:block;margin-bottom:4px}
+  .cheat-card .hint{color:var(--ink-soft);font-weight:700}
+  .c-puedo{border-color:var(--green);background:#F1F8E9}
+  .c-quiero{border-color:var(--blue);background:#E3F2FD}
+  .c-necesito{border-color:var(--terra);background:#FFF5F5}
+  .c-tengo{border-color:var(--purple);background:#F3E8FF}
+  .c-hay{border-color:#B8860B;background:#FFF8E1}
+
+  .game{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:20px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.08)}
+  .game-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+  .stars{font-size:1.5rem;letter-spacing:3px}
+  .progress{font-weight:800;background:#fff;padding:6px 14px;border-radius:999px}
+
+  .situation{background:#fff;border-radius:16px;padding:22px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .situation .emo{font-size:3rem;text-align:center;margin-bottom:10px}
+  .situation .text{font-size:1.15rem;font-weight:800;text-align:center;margin-bottom:12px}
+  .situation .type-hint{text-align:center;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .options{display:grid;gap:10px;margin-bottom:16px}
+  .opt{background:#fff;border:2.5px solid #ddd;border-radius:14px;padding:14px 18px;font-weight:800;font-size:1rem;cursor:pointer;transition:.15s;font-family:'Nunito';text-align:left}
+  .opt:hover:not(:disabled){border-color:var(--green);transform:translateX(4px)}
+  .opt:disabled{cursor:not-allowed;opacity:.85}
+  .opt.correct{background:#C8E6C9;border-color:var(--green);color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+  .feedback{background:#fff;border-radius:14px;padding:16px;margin-bottom:16px;display:none}
+  .feedback.show{display:block;animation:fadeIn .3s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .feedback .title{font-weight:800;font-size:1.05rem;margin-bottom:6px}
+  .feedback .title.good{color:var(--green)}
+  .feedback .title.bad{color:var(--red)}
+  .feedback .why{color:var(--ink-soft);font-weight:700;font-size:.95rem}
+  .feedback .say{background:var(--soft);border-radius:10px;padding:10px;margin-top:10px;font-weight:800}
+
+  .btn{display:block;margin:0 auto;background:var(--green);color:#fff;border:none;border-radius:14px;padding:12px 28px;font-family:'Nunito';font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #1B5E20;transition:.15s}
+  .btn:active{transform:translateY(3px);box-shadow:none}
+  .btn:disabled{background:#aaa;box-shadow:0 5px 0 #777;cursor:not-allowed}
+
+  .final{display:none;text-align:center;background:#fff;border-radius:20px;padding:34px;margin-top:20px}
+  .final.show{display:block;animation:fadeIn .4s}
+  .final .big{font-size:4rem;margin-bottom:10px}
+  .final h2{color:var(--green);margin-bottom:10px}
+  .final .score{font-size:1.4rem;font-weight:800;margin-bottom:16px}
+  .final .msg{color:var(--ink-soft);font-weight:700;margin-bottom:20px}
+
+  .no-print{text-align:center;margin:16px auto}
+  .no-print button{background:var(--green);color:#fff;border:none;border-radius:12px;padding:10px 24px;font-size:14px;font-weight:800;cursor:pointer}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .no-print{display:none}
+    .game,.final{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="no-print"><button onclick="window.print()">🖨 Распечатать шпаргалку</button></div>
+
+  <div class="head">
+    <h1>🎮 Какой <span>глагол</span> выбрать?</h1>
+    <p>Прочитай ситуацию и выбери правильную фразу! 10 вопросов · собери ⭐</p>
+  </div>
+
+  <div class="cheat">
+    <h3>📌 Шпаргалка: 5 волшебных глаголов</h3>
+    <div class="cheat-grid">
+      <div class="cheat-card c-puedo" onclick="speak('¿Puedo ir al baño?')">
+        <span class="verb">¿Puedo...?</span>
+        <span class="hint">🙋 Разрешение<br>спросить у учителя</span>
+      </div>
+      <div class="cheat-card c-quiero" onclick="speak('Quiero jugar.')">
+        <span class="verb">Quiero...</span>
+        <span class="hint">❤️ Желание<br>я хочу</span>
+      </div>
+      <div class="cheat-card c-necesito" onclick="speak('Necesito ayuda.')">
+        <span class="verb">Necesito...</span>
+        <span class="hint">🥤 Нужда<br>мне необходимо</span>
+      </div>
+      <div class="cheat-card c-tengo" onclick="speak('Tengo que estudiar.')">
+        <span class="verb">Tengo que...</span>
+        <span class="hint">📋 Личный долг<br>я должен</span>
+      </div>
+      <div class="cheat-card c-hay" onclick="speak('Hay que llegar a tiempo.')">
+        <span class="verb">Hay que...</span>
+        <span class="hint">👥 Правило для всех<br>нужно / все должны</span>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:12px;font-size:.85rem;color:var(--ink-soft)">Нажми на карточку — услышишь пример! 🔊</p>
+  </div>
+
+  <div class="game" id="game">
+    <div class="game-top">
+      <div class="stars" id="stars">☆☆☆☆☆☆☆☆☆☆</div>
+      <div class="progress" id="progress">Вопрос 1 / 10</div>
+    </div>
+
+    <div class="situation">
+      <div class="emo" id="emo">🚽</div>
+      <div class="text" id="sit-text">...</div>
+      <div class="type-hint" id="type-hint">Подумай: это разрешение, желание, нужда, личный долг или правило для всех?</div>
+    </div>
+
+    <div class="options" id="options"></div>
+
+    <div class="feedback" id="feedback">
+      <div class="title" id="fb-title"></div>
+      <div class="why" id="fb-why"></div>
+      <div class="say" id="fb-say"></div>
+    </div>
+
+    <button class="btn" id="next-btn" onclick="nextRound()" disabled>Дальше →</button>
+  </div>
+
+  <div class="final" id="final">
+    <div class="big">🏅</div>
+    <h2>Ты прошёл игру!</h2>
+    <div class="score" id="final-score"></div>
+    <div class="msg" id="final-msg"></div>
+    <button class="btn" onclick="restart()">🔄 Играть снова</button>
+  </div>
+
+</div>
+
+<script>
+let esVoice=null;
+function loadVoices(){
+  const voices=speechSynthesis.getVoices();
+  esVoice=voices.find(v=>v.lang.startsWith('es'));
+}
+speechSynthesis.onvoiceschanged=loadVoices;
+loadVoices();
+
+function speak(text){
+  if(!text) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-ES';u.rate=0.85;u.pitch=1.05;
+  if(esVoice)u.voice=esVoice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+const QUESTIONS=[
+  {
+    emo:'🚽',
+    text:'Ты на уроке. Тебе очень нужно выйти в туалет. Что ты скажешь учителю?',
+    type:'Разрешение: нужно спросить у учителя',
+    options:[
+      {t:'¿Puedo ir al baño, por favor?', ok:true},
+      {t:'Quiero ir al baño.', ok:false},
+      {t:'Hay que ir al baño.', ok:false}
+    ],
+    why:'Чтобы выйти из класса, нужно СПРОСИТЬ РАЗРЕШЕНИЯ у учителя. Для этого используем ¿Puedo...?',
+    say:'Profe, ¿puedo ir al baño, por favor?'
+  },
+  {
+    emo:'🍦',
+    text:'На перемене ты хочешь мороженое. Что ты скажешь?',
+    type:'Желание: то, что ты хочешь',
+    options:[
+      {t:'¿Puedo un helado?', ok:false},
+      {t:'Quiero un helado, por favor.', ok:true},
+      {t:'Hay que un helado.', ok:false}
+    ],
+    why:'Мороженое — это твоё ЖЕЛАНИЕ, то, что ты ХОЧЕШЬ. Для этого используем Quiero...',
+    say:'Quiero un helado, por favor.'
+  },
+  {
+    emo:'✏️',
+    text:'У тебя сломался карандаш, а писать нечем. Что ты скажешь?',
+    type:'Нужда: то, что тебе необходимо',
+    options:[
+      {t:'Quiero un lápiz.', ok:false},
+      {t:'Necesito un lápiz, por favor.', ok:true},
+      {t:'Tengo que un lápiz.', ok:false}
+    ],
+    why:'Карандаш нужен тебе, чтобы работать на уроке. Это НЕОБХОДИМОСТЬ, а не просто желание → Necesito...',
+    say:'Profe, necesito un lápiz, por favor.'
+  },
+  {
+    emo:'📚',
+    text:'Учитель задал домашнее задание. Что ты должен сделать дома?',
+    type:'Личный долг: то, что ТЫ должен',
+    options:[
+      {t:'Tengo que hacer los deberes.', ok:true},
+      {t:'Quiero hacer los deberes.', ok:false},
+      {t:'¿Puedo hacer los deberes?', ok:false}
+    ],
+    why:'Домашка — это твоя ЛИЧНАЯ ОБЯЗАННОСТЬ. Когда говоришь о своём долге → Tengo que...',
+    say:'Tengo que hacer los deberes.'
+  },
+  {
+    emo:'🏃',
+    text:'В классе нельзя бегать. Это правило для ВСЕХ учеников. Как сказать?',
+    type:'Правило для всех: общее правило',
+    options:[
+      {t:'Tengo que respetar las normas.', ok:false},
+      {t:'Hay que respetar las normas.', ok:true},
+      {t:'Quiero respetar las normas.', ok:false}
+    ],
+    why:'Когда правило касается ВСЕХ, а не только тебя → Hay que...',
+    say:'Hay que respetar las normas.'
+  },
+  {
+    emo:'⚽',
+    text:'После уроков ты хочешь поиграть в футбол с друзьями. Что ты скажешь?',
+    type:'Желание: то, что ты хочешь',
+    options:[
+      {t:'Necesito jugar al fútbol.', ok:false},
+      {t:'Quiero jugar al fútbol.', ok:true},
+      {t:'Tengo que jugar al fútbol.', ok:false}
+    ],
+    why:'Футбол — это то, что ты ХОЧЕШЬ делать для удовольствия. Это ЖЕЛАНИЕ → Quiero...',
+    say:'Quiero jugar al fútbol.'
+  },
+  {
+    emo:'🤔',
+    text:'Ты не понимаешь задание и тебе нужна помощь. Что ты скажешь?',
+    type:'Нужда: то, что тебе необходимо',
+    options:[
+      {t:'Necesito ayuda, por favor.', ok:true},
+      {t:'Quiero помощь.', ok:false},
+      {t:'Hay que ayuda.', ok:false}
+    ],
+    why:'Помощь нужна тебе, чтобы понять задание. Это НЕОБХОДИМОСТЬ → Necesito...',
+    say:'Profe, necesito ayuda, por favor.'
+  },
+  {
+    emo:'🙋',
+    text:'На уроке ты должен слушать учителя. Как сказать про СЕБЯ?',
+    type:'Личный долг: то, что ТЫ должен',
+    options:[
+      {t:'Hay que escuchar al profe.', ok:false},
+      {t:'Quiero escuchar al profe.', ok:false},
+      {t:'Tengo que escuchar al profe.', ok:true}
+    ],
+    why:'Когда говоришь о СВОЁМ личном долге (я должен) → Tengo que...',
+    say:'Tengo que escuchar al profe.'
+  },
+  {
+    emo:'🌬️',
+    text:'В классе очень душно. Что ты скажешь учителю?',
+    type:'Разрешение: нужно спросить у учителя',
+    options:[
+      {t:'Quiero abrir la ventana.', ok:false},
+      {t:'¿Puedo abrir la ventana, por favor?', ok:true},
+      {t:'Necesito abrir la ventana.', ok:false}
+    ],
+    why:'Чтобы открыть окно в классе, нужно СПРОСИТЬ РАЗРЕШЕНИЯ у учителя → ¿Puedo...?',
+    say:'Profe, ¿puedo abrir la ventana, por favor?'
+  },
+  {
+    emo:'⏰',
+    text:'В школе ВСЕ ученики должны приходить вовремя. Как сказать про это правило?',
+    type:'Правило для всех: общее правило',
+    options:[
+      {t:'Tengo que llegar a tiempo.', ok:false},
+      {t:'Quiero llegar a tiempo.', ok:false},
+      {t:'Hay que llegar a tiempo.', ok:true}
+    ],
+    why:'Когда правило касается ВСЕХ учеников школы → Hay que...',
+    say:'Hay que llegar a tiempo.'
+  }
+];
+
+let current=0, score=0, answered=false;
+
+function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1])}
+
+function renderRound(){
+  answered=false;
+  const q=QUESTIONS[current];
+  document.getElementById('emo').textContent=q.emo;
+  document.getElementById('sit-text').textContent=q.text;
+  document.getElementById('type-hint').textContent='💡 '+q.type;
+  document.getElementById('progress').textContent='Вопрос '+(current+1)+' / '+QUESTIONS.length;
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('next-btn').disabled=true;
+  document.getElementById('next-btn').textContent=(current<QUESTIONS.length-1)?'Дальше →':'Смотреть результат 🏅';
+
+  const box=document.getElementById('options');
+  box.innerHTML='';
+  const opts=shuffle(q.options.slice());
+  opts.forEach(function(o){
+    const b=document.createElement('button');
+    b.className='opt';
+    b.textContent=o.t;
+    b.onclick=function(){answer(o,b,q);};
+    box.appendChild(b);
+  });
+  updateStars();
+}
+
+function answer(opt,btn,q){
+  if(answered)return;
+  answered=true;
+  const all=document.querySelectorAll('.opt');
+  all.forEach(function(b){b.disabled=true;});
+
+  const fb=document.getElementById('feedback');
+  const title=document.getElementById('fb-title');
+  const why=document.getElementById('fb-why');
+  const say=document.getElementById('fb-say');
+
+  if(opt.ok){
+    btn.classList.add('correct');
+    score++;
+    title.className='title good';
+    title.textContent='✅ ¡Muy bien! Правильно!';
+    speak(opt.t);
+  }else{
+    btn.classList.add('wrong');
+    all.forEach(function(b){
+      const isCorrect=q.options.find(function(o){return o.t===b.textContent&&o.ok;});
+      if(isCorrect)b.classList.add('correct');
+    });
+    title.className='title bad';
+    title.textContent='❌ Не совсем! Смотри, почему:';
+  }
+
+  why.textContent=q.why;
+  say.textContent='🗣 Скажи: «'+q.say+'»';
+  fb.classList.add('show');
+  updateStars();
+  document.getElementById('next-btn').disabled=false;
+}
+
+function nextRound(){
+  if(current<QUESTIONS.length-1){
+    current++;
+    renderRound();
+  }else{
+    showFinal();
+  }
+}
+
+function updateStars(){
+  let s='';
+  for(let i=0;i<QUESTIONS.length;i++) s+=i<score?'⭐':'☆';
+  document.getElementById('stars').textContent=s;
+}
+
+function showFinal(){
+  document.getElementById('game').style.display='none';
+  const f=document.getElementById('final');
+  f.classList.add('show');
+  document.getElementById('final-score').textContent='Твой результат: '+score+' из '+QUESTIONS.length+' ⭐';
+
+  let msg='';
+  if(score===QUESTIONS.length){
+    msg='🏆 ¡Perfecto! Ты настоящий Мастер глаголов! Все ситуации решены верно!';
+    speak('¡Perfecto! Eres un maestro de los verbos.');
+  }else if(score>=7){
+    msg='🎉 ¡Muy bien! Отличный результат! Ты почти мастер — повтори пару ситуаций!';
+    speak('¡Muy bien! Casi eres un maestro.');
+  }else if(score>=5){
+    msg='👍 ¡Bien! Неплохо! Загляни в шпаргалку и попробуй ещё раз!';
+    speak('¡Bien! Inténtalo otra vez.');
+  }else{
+    msg='💪 ¡Ánimo! Не расстраивайся! Вспомни шпаргалку и сыграй ещё раз — у тебя получится!';
+    speak('¡Ánimo! Inténtalo otra vez.');
+  }
+  document.getElementById('final-msg').textContent=msg;
+}
+
+function restart(){
+  current=0;score=0;
+  document.getElementById('final').classList.remove('show');
+  document.getElementById('game').style.display='block';
+  renderRound();
+}
+
+renderRound();
+</script>
+
+</body>
+</html>

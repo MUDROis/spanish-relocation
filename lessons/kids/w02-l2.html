@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 5: Базовые просьбы — «Мне нужно» — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --purple:#8338EC; --red:#D62828; --green:#2E7D32;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.2}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:6px;transition:.2s}
+  .back-btn:hover{background:#f3ebc8}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{position:relative;overflow:hidden;text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E8F5E9 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--green);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;letter-spacing:.5px}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--green)}
+  .hero .sub{max-width:640px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+
+  .container{max-width:860px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:30px}
+  .goals h2{font-size:1.4rem;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .goal-item{background:#E8F5E9;border-radius:14px;padding:14px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.4rem;margin-right:6px}
+
+  .final-situation{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--green)}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .block-title{font-size:1.4rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:14px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:14px 18px;border-radius:12px;margin:12px 0;font-style:italic;color:var(--ink)}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px;letter-spacing:.5px}
+
+  .sos-card{background:#fff;border-radius:16px;padding:20px;text-align:center;cursor:pointer;border:3px solid #E8F5E9;transition:.25s;box-shadow:0 4px 14px rgba(0,0,0,.06);user-select:none}
+  .sos-card:hover{transform:translateY(-4px);border-color:var(--c)}
+  .sos-card.active{border-color:var(--c);transform:scale(1.02);background:#F1F8E9}
+  .sos-emoji{font-size:2.4rem;margin-bottom:8px}
+  .sos-phrase{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--green);margin-bottom:4px}
+  .sos-meaning{color:var(--ink-soft);font-size:.9rem;font-weight:700;margin-bottom:10px}
+  .sos-gesture{font-size:.85rem;color:var(--purple);font-weight:800;background:#F3E8FF;padding:4px 10px;border-radius:999px;display:inline-block}
+  .speak-btn{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+  .cards-grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:18px 0}
+  .cards-grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:18px 0}
+
+  .video-zone{margin:16px 0}
+  .video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.1);background:#000}
+  .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+  .video-note{margin-top:10px;font-size:.85rem;color:var(--ink-soft);font-weight:700;text-align:center}
+
+  .sos-zone{text-align:center;padding:22px;background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:18px;margin:16px 0}
+  .sos-big-btn{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#81C784,var(--green));border:none;cursor:pointer;font-size:2.5rem;box-shadow:0 8px 24px rgba(46,125,50,.4);transition:.2s;display:inline-flex;align-items:center;justify-content:center}
+  .sos-big-btn:hover{transform:scale(1.08) rotate(-5deg)}
+  .sos-big-btn:active{transform:scale(.92)}
+  .sos-output{margin-top:14px;font-family:'Baloo 2',cursive;font-size:1.4rem;color:var(--green);min-height:70px;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .sos-output .es{font-size:1.4rem;color:var(--green)}
+  .sos-output .ru{font-size:1rem;color:var(--ink-soft);font-weight:700;font-style:italic}
+
+  .grammar-table{width:100%;border-collapse:collapse;margin:14px 0}
+  .grammar-table th{background:var(--c);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .grammar-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .grammar-table tr:hover td{background:var(--soft)}
+  .grammar-table tr{cursor:pointer}
+
+  .politeness-scale{background:#fff;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .scale-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;margin:8px 0;cursor:pointer;transition:.2s}
+  .scale-item:hover{transform:translateX(4px)}
+  .scale-item.level-1{background:#FFEBEE;border-left:4px solid var(--red)}
+  .scale-item.level-2{background:#FFF8E1;border-left:4px solid var(--sun)}
+  .scale-item.level-3{background:#E8F5E9;border-left:4px solid var(--green)}
+  .scale-item.level-4{background:#E3F2FD;border-left:4px solid var(--blue)}
+  .scale-level{font-weight:800;font-size:1.1rem;min-width:30px}
+  .scale-phrase{font-family:'Baloo 2',cursive;font-size:1.1rem}
+  .scale-note{font-size:.85rem;color:var(--ink-soft)}
+
+  .sim-game{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:20px;padding:26px;margin:20px 0}
+  .sim-header{text-align:center;margin-bottom:18px}
+  .sim-stars{font-size:1.8rem;letter-spacing:4px;margin-bottom:8px}
+  .sim-score{text-align:center;font-weight:800;font-size:1.1rem;margin-top:14px}
+  .sim-teacher{background:#fff;border-radius:16px;padding:20px;margin-bottom:16px;text-align:center;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .sim-teacher .speech{font-family:'Baloo 2',cursive;font-size:1.2rem;color:var(--green);margin-top:8px;line-height:1.4}
+  .sim-teacher .speed-label{font-size:.85rem;font-weight:800;color:var(--ink-soft)}
+  .sim-prompt{text-align:center;margin:14px 0;font-weight:800;font-size:1.1rem;color:var(--ink)}
+  .sim-options{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  .sim-opt{background:#fff;border:3px solid var(--green);border-radius:14px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem}
+  .sim-opt:hover:not(:disabled){background:var(--green);color:#fff}
+  .sim-opt.correct{background:var(--green);color:#fff;transform:scale(1.05)}
+  .sim-opt.wrong{background:#fde8e5;border-color:var(--red);animation:shake .4s}
+  .sim-opt:disabled{cursor:not-allowed}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .sim-btn{background:var(--green);color:#fff;border:none;border-radius:14px;padding:12px 24px;font-family:'Nunito';font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #1B5E20;transition:.15s;display:block;margin:0 auto}
+  .sim-btn:active{transform:translateY(3px);box-shadow:none}
+  .sim-feedback{text-align:center;font-weight:800;margin-top:12px;min-height:24px;color:var(--ink)}
+
+  .quiz-scenario{background:var(--soft);border-radius:12px;padding:16px;margin:12px 0}
+  .quiz-scenario .situation{color:var(--green);font-weight:800;margin-bottom:10px}
+  .quiz-choices{display:grid;gap:8px}
+  .quiz-choice{background:#fff;border:2px solid #ddd;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer;transition:.2s;text-align:left;font-family:'Nunito';font-size:1rem}
+  .quiz-choice:hover:not(:disabled){border-color:var(--green);transform:translateX(4px)}
+  .quiz-choice.correct{background:#E8F5E9;border-color:var(--green);color:var(--green)}
+  .quiz-choice.wrong{background:#fde8e5;border-color:var(--red);color:var(--red)}
+  .quiz-choice:disabled{cursor:not-allowed;opacity:.9}
+  .quiz-choice .emoji{margin-right:8px}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;transition:.15s;margin-top:12px}
+  .badge-btn:active{transform:translateY(3px);box-shadow:none}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .match-col{display:flex;flex-direction:column;gap:8px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:12px;font-weight:800;cursor:pointer;transition:.15s;text-align:center;font-size:.95rem}
+  .match-item:hover{transform:scale(1.02)}
+  .match-item.selected{border-color:var(--green);background:#E8F5E9}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#fde8e5;animation:shake .4s}
+  .match-feedback{text-align:center;font-weight:800;margin-top:12px;min-height:24px}
+  .match-reset{background:var(--green);color:#fff;border:none;border-radius:12px;padding:10px 20px;font-family:'Nunito';font-weight:800;cursor:pointer;display:block;margin:14px auto 0}
+
+  .sb{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:18px;padding:22px;margin:16px 0}
+  .sb h4{margin-bottom:12px;color:var(--green)}
+  .sb-target{background:#fff;border-radius:14px;padding:18px;min-height:70px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--green)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+  .sb-word{background:#fff;border:2px solid var(--green);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;transition:.15s;user-select:none}
+  .sb-word:hover{background:var(--green);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+  .sb-result{text-align:center;margin-top:12px;font-weight:800;min-height:30px}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.4rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;align-items:start;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--green);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+
+  .selfcheck{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .selfcheck h4{margin-bottom:14px}
+  .selfcheck-table{width:100%;border-collapse:collapse;min-width:500px}
+  .selfcheck-table th{background:var(--soft);padding:10px 14px;text-align:left;font-weight:800;font-size:.9rem}
+  .selfcheck-table th:not(:first-child){text-align:center;width:90px}
+  .selfcheck-table td{padding:10px 14px;border-bottom:1px solid #f0ede6}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .selfcheck-table input[type=radio]{width:22px;height:22px;cursor:pointer;accent-color:var(--green)}
+  .selfcheck-table tr:last-child td{border-bottom:none}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;text-decoration:none;font-weight:800;font-size:1.05rem;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(66,85,255,.3)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;transition:.2s;text-align:center}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-prev:hover{background:#f3ebc8}
+  .nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+  .nav-next:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(42,157,143,.3)}
+  .nav-locked{flex:1;min-width:200px;border-radius:18px;padding:20px;text-align:center;background:#e8e4dc;color:#8a867d;font-weight:700}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.1rem;margin-top:4px}
+
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+
+  @media(max-width:600px){
+    .cards-grid{grid-template-columns:1fr 1fr}
+    .match-columns{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 1 · Supervivencia · Урок 5 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🙏 УРОК 5 · НЕДЕЛЯ 2</span>
+  <h1>Базовые просьбы: <span>«Мне нужно»</span></h1>
+  <p class="sub">В испанской школе нельзя просто встать и выйти! Нужно вежливо попросить разрешения. Сегодня ты научишься говорить «¿Puedo ir al baño, por favor?» — и учитель с радостью тебе разрешит!</p>
+</header>
+
+<main class="container">
+
+  <!-- ЦЕЛИ -->
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🙋</span> Вежливо просить разрешение: <em>¿Puedo...?</em></div>
+      <div class="goal-item"><span class="emoji">🥤</span> Говорить, что тебе нужно: <em>Necesito...</em></div>
+      <div class="goal-item"><span class="emoji">❤️</span> Выражать желания: <em>Quiero...</em></div>
+      <div class="goal-item"><span class="emoji">📋</span> Говорить об обязанностях: <em>Tengo que...</em></div>
+      <div class="goal-item"><span class="emoji">🎩</span> Использовать <em>por favor</em> и <em>gracias</em></div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Мастер просьб»</div>
+    </div>
+    <div class="final-situation">
+      <strong>Итоговая ситуация:</strong> на уроке математики тебе очень нужно в туалет, но ты не знаешь, как спросить. Вместо того чтобы терпеть или выбегать без спроса, ты поднимаешь руку и говоришь:<br><br>
+      <em>«Profe, ¿puedo ir al baño, por favor?»</em><br>
+      <em>«Учитель, можно мне в туалет, пожалуйста?»</em> 🚽
+    </div>
+  </section>
+
+  <!-- БЛОК 1: РАЗОГРЕВ -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: от SOS к просьбам</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Вспоминаем Урок 2! Когда что-то непонятно — мы просим помощи. А когда что-то нужно — мы просим разрешения!</p>
+    
+    <div class="script">
+      В прошлом уроке ты научился говорить <strong>«No entiendo»</strong>. Но что делать, когда тебе нужна вода? Или в туалет? Сегодня учимся <strong>ПРОСИТЬ</strong>!
+    </div>
+
+    <div class="cards-grid">
+      <div class="sos-card" style="--c:#2E7D32" onclick="speak('No entiendo. ¿Puedes repetir, por favor?')">
+        <div class="sos-emoji">🆘</div>
+        <div class="sos-phrase">No entiendo.<br>¿Puedes repetir?</div>
+        <div class="sos-meaning">Я не понимаю. Можешь повторить? (Урок 2 → Урок 5)</div>
+        <button class="speak-btn" style="--c:#2E7D32">🔊 Послушать</button>
+      </div>
+      <div class="sos-card" style="--c:#E8604C" onclick="speak('Necesito ayuda. ¿Me puedes ayudar, por favor?')">
+        <div class="sos-emoji">🤝</div>
+        <div class="sos-phrase">Necesito ayuda.<br>¿Me puedes ayudar?</div>
+        <div class="sos-meaning">Мне нужна помощь. Можешь помочь? (Урок 2 → Урок 5)</div>
+        <button class="speak-btn" style="--c:#E8604C">🔊 Послушать</button>
+      </div>
+      <div class="sos-card" style="--c:#2274A5" onclick="speak('Me duele la cabeza. ¿Puedo ir a la enfermería?')">
+        <div class="sos-emoji">🩺</div>
+        <div class="sos-phrase">Me duele la cabeza.<br>¿Puedo ir a la enfermería?</div>
+        <div class="sos-meaning">Болит голова. Можно в медпункт? (Урок 4 → Урок 5)</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊 Послушать</button>
+      </div>
+    </div>
+
+    <div class="script">
+      Видишь? <strong>Просьбы — это продолжение всего, что мы учили!</strong> SOS = когда плохо. Просьбы = каждый день. Сегодня учимся просить <strong>ВЕЖЛИВО</strong>!
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ТРИ ТИПА ПРОСЬБ -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">💪 Три типа просьб</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Когда просишь разрешение — PODER. Когда нужна вещь — NECESITAR. Когда хочешь что-то — QUERER.</p>
+
+    <div class="cards-grid-3">
+      <div class="sos-card" style="--c:#2E7D32" onclick="speak('¿Puedo ir al baño?')">
+        <div class="sos-emoji">🙋</div>
+        <div class="sos-phrase">¿Puedo...?</div>
+        <div class="sos-meaning">Можно мне...? (разрешение)</div>
+        <div class="sos-gesture">Когда нужно спросить</div>
+      </div>
+      <div class="sos-card" style="--c:#E8604C" onclick="speak('Necesito agua.')">
+        <div class="sos-emoji">🥤</div>
+        <div class="sos-phrase">Necesito...</div>
+        <div class="sos-meaning">Мне нужно... (нужда)</div>
+        <div class="sos-gesture">Когда что-то необходимо</div>
+      </div>
+      <div class="sos-card" style="--c:#2274A5" onclick="speak('Quiero jugar.')">
+        <div class="sos-emoji">❤️</div>
+        <div class="sos-phrase">Quiero...</div>
+        <div class="sos-meaning">Я хочу... (желание)</div>
+        <div class="sos-gesture">Когда чего-то желаешь</div>
+      </div>
+    </div>
+
+    <div class="script">
+      <strong>Секрет:</strong> В Испании <strong>вежливость обязательна</strong>. Без <strong>por favor</strong> просьба звучит как требование!
+    </div>
+
+    <div class="video-zone">
+      <h4 style="margin-bottom:8px">📺 Видео: QUIERO vs NECESITO</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin-bottom:10px">
+        Лисёнок выбирает между тем, что он <strong>хочет</strong> (QUIERO) и тем, что ему <strong>нужно</strong> (NECESITO). Смотрим!
+      </p>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/vDk5JdAnqN4" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen></iframe>
+      </div>
+      <div class="video-note">💡 Включи субтитры (CC) → Испанский, если нужно</div>
+      <div style="background:var(--soft);border-radius:14px;padding:16px;margin-top:14px;border-left:4px solid var(--green)">
+        <strong>🤔 Вопрос после просмотра:</strong><br>
+        Что лисёнок выбрал: что хочется <strong>QUIERO</strong> или что нужно <strong>NECESITO</strong>?
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ¿PUEDO...? -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🙋 ¿Puedo...? — Разрешение</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Самая важная конструкция в школе! Нажимай на строки и слушай!</p>
+
+    <table class="grammar-table">
+      <tr>
+        <th>Фраза</th>
+        <th>Перевод</th>
+        <th>🔊</th>
+      </tr>
+      <tr onclick="speak('¿Puedo ir al baño?')">
+        <td><strong>¿Puedo ir al baño?</strong></td>
+        <td>Можно мне в туалет?</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('¿Puedo salir?')">
+        <td><strong>¿Puedo salir?</strong></td>
+        <td>Можно мне выйти?</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('¿Puedo beber agua?')">
+        <td><strong>¿Puedo beber agua?</strong></td>
+        <td>Можно мне попить?</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('¿Puedo abrir la ventana?')">
+        <td><strong>¿Puedo abrir la ventana?</strong></td>
+        <td>Можно открыть окно?</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('¿Puedo ir a la enfermería?')">
+        <td><strong>¿Puedo ir a la enfermería?</strong></td>
+        <td>Можно в медпункт?</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('¿Puedo descansar un momento?')">
+        <td><strong>¿Puedo descansar un momento?</strong></td>
+        <td>Можно отдохнуть минутку?</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+    </table>
+
+    <div class="script">
+      <strong>Грамматика:</strong> <em>Poder</em> (мочь) — тот же глагол, что в уроке 2 (<em>¿Puedes repetir?</em>), но теперь в 1 лице (<em>puedo</em> = я могу).
+    </div>
+
+    <div class="sos-zone">
+      <p style="font-weight:800;margin-bottom:12px">Нажми на кнопку — услышишь случайную просьбу!</p>
+      <button class="sos-big-btn" onclick="pressPuedo()">🙋</button>
+      <div class="sos-output" id="puedo-output">
+        <div class="es">Нажми кнопку 👆</div>
+        <div class="ru">—</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: NECESITO / QUIERO -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🥤 Necesito / Quiero — Нужды и желания</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Два глагола, которые путают все новички!</p>
+
+    <div class="cards-grid-2">
+      <div class="sos-card" style="--c:#E8604C" onclick="speak('Necesito un lápiz.')">
+        <div class="sos-emoji">🥤</div>
+        <div class="sos-phrase">Necesito...</div>
+        <div class="sos-meaning">Мне нужно... (когда что-то необходимо)</div>
+        <button class="speak-btn" style="--c:#E8604C">🔊 Necesito un lápiz</button>
+      </div>
+      <div class="sos-card" style="--c:#2274A5" onclick="speak('Quiero jugar al fútbol.')">
+        <div class="sos-emoji">❤️</div>
+        <div class="sos-phrase">Quiero...</div>
+        <div class="sos-meaning">Я хочу... (когда чего-то желаешь)</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊 Quiero jugar</button>
+      </div>
+    </div>
+
+    <h4 style="margin:16px 0 10px">📊 Примеры:</h4>
+    <table class="grammar-table">
+      <tr>
+        <th>Нужда (Necesito)</th>
+        <th>Желание (Quiero)</th>
+      </tr>
+      <tr onclick="speak('Necesito un lápiz. Quiero jugar al fútbol.')">
+        <td>Necesito un lápiz (нужен карандаш)</td>
+        <td>Quiero jugar al fútbol (хочу играть)</td>
+      </tr>
+      <tr onclick="speak('Necesito ayuda. Quiero un helado.')">
+        <td>Necesito ayuda (нужна помощь)</td>
+        <td>Quiero un helado (хочу мороженое)</td>
+      </tr>
+      <tr onclick="speak('Necesito ir al baño. Quiero descansar.')">
+        <td>Necesito ir al baño (нужно в туалет)</td>
+        <td>Quiero descansar (хочу отдохнуть)</td>
+      </tr>
+    </table>
+
+    <h4 style="margin:20px 0 10px">🌡️ Шкала вежливости:</h4>
+    <div class="politeness-scale">
+      <div class="scale-item level-1" onclick="speak('Quiero agua.')">
+        <div class="scale-level">🔴 1</div>
+        <div>
+          <div class="scale-phrase">Quiero agua.</div>
+          <div class="scale-note">Я хочу воды. (Грубовато, как приказ)</div>
+        </div>
+      </div>
+      <div class="scale-item level-2" onclick="speak('Necesito agua, por favor.')">
+        <div class="scale-level">🟡 2</div>
+        <div>
+          <div class="scale-phrase">Necesito agua, por favor.</div>
+          <div class="scale-note">Мне нужна вода, пожалуйста. (Нейтрально)</div>
+        </div>
+      </div>
+      <div class="scale-item level-3" onclick="speak('¿Puedes darme agua, por favor?')">
+        <div class="scale-level">🟢 3</div>
+        <div>
+          <div class="scale-phrase">¿Puedes darme agua, por favor?</div>
+          <div class="scale-note">Можешь дать мне воды, пожалуйста? (Вежливо)</div>
+        </div>
+      </div>
+      <div class="scale-item level-4" onclick="speak('¿Podrías darme agua, por favor?')">
+        <div class="scale-level">🔵 4</div>
+        <div>
+          <div class="scale-phrase">¿Podrías darme agua, por favor?</div>
+          <div class="scale-note">Не мог бы ты дать мне воды? (Очень вежливо)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="script">
+      <strong>Запомни:</strong> В школе достаточно уровня 🟢 3. Уровень 🔵 4 — для учителей и взрослых. А уровень 🔴 1 — лучше не использовать!
+    </div>
+  </section>
+
+  <!-- БЛОК 5: TENGO QUE -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">📋 Tengo que... — Обязанности</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Когда ты ДОЛЖЕН что-то сделать!</p>
+
+    <table class="grammar-table">
+      <tr>
+        <th>Фраза</th>
+        <th>Перевод</th>
+        <th>🔊</th>
+      </tr>
+      <tr onclick="speak('Tengo que estudiar.')">
+        <td><strong>Tengo que estudiar</strong></td>
+        <td>Я должен учиться</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('Tengo que hacer los deberes.')">
+        <td><strong>Tengo que hacer los deberes</strong></td>
+        <td>Я должен делать домашку</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('Tengo que escuchar al profe.')">
+        <td><strong>Tengo que escuchar al profe</strong></td>
+        <td>Я должен слушать учителя</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('Tengo que levantar la mano.')">
+        <td><strong>Tengo que levantar la mano</strong></td>
+        <td>Я должен поднимать руку</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+      <tr onclick="speak('Tengo que ser puntual.')">
+        <td><strong>Tengo que ser puntual</strong></td>
+        <td>Я должен быть пунктуальным</td>
+        <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
+      </tr>
+    </table>
+
+    <div class="script">
+      <strong>Грамматика:</strong> <em>Tener</em> (иметь) + <em>que</em> + инфинитив. Дословно: «У меня есть [необходимость] делать что-то».<br><br>
+      <strong>Параллель с уроком 1:</strong> <em>Tengo ocho años</em> (у меня есть 8 лет) → <em>Tengo que estudiar</em> (у меня есть обязанность учиться). Тот же глагол!
+    </div>
+
+    <div style="background:#E3F2FD;border-radius:14px;padding:16px;margin:14px 0;border-left:4px solid var(--blue)">
+      <strong>💡 Hay que (безличная обязанность):</strong><br>
+      <em>Hay que respetar a los demás</em> — Нужно уважать других (общее правило)<br>
+      <em>Hay que llegar a tiempo</em> — Нужно приходить вовремя
+    </div>
+  </section>
+
+  <!-- БЛОК 6: СИМУЛЯЦИЯ -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🎮 Симуляция «В школе»</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">5 школьных ситуаций — выбирай правильную просьбу! За каждую верную + использование <em>por favor</em> — звезда ⭐</p>
+
+    <div class="sim-game">
+      <div class="sim-header">
+        <div class="sim-stars" id="sim-stars">☆☆☆☆☆</div>
+        <div class="sim-score" id="sim-score">Собери 5 звёзд вежливости! ⭐</div>
+      </div>
+
+      <div class="sim-teacher" id="sim-teacher">
+        <div class="speed-label">🏫 Ситуация:</div>
+        <div class="speech" id="sim-speech">Нажми «Начать игру»!</div>
+      </div>
+
+      <div class="sim-prompt" id="sim-prompt" style="display:none"></div>
+      <div class="sim-options" id="sim-options" style="display:none"></div>
+      <div class="sim-feedback" id="sim-feedback"></div>
+
+      <button class="sim-btn" id="sim-start" onclick="startSim()">🚀 Начать игру</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 7: БЕЙДЖ -->
+  <section class="block" style="--c:#FFC93C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Твоя награда: Мастер просьб</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Ты прошёл весь урок! Теперь ты умеешь вежливо просить по-испански — как в испанской школе.</p>
+
+    <div class="badge-zone">
+      <div class="badge-icon">🏅</div>
+      <h3>Мастер просьб</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты научился вежливо просить по-испански!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">
+        🎉 ¡Enhorabuena! Бейдж «Мастер просьб» 🏅 добавлен в твой паспорт!
+      </div>
+    </div>
+
+    <div class="script">
+      <strong>Итоговая ситуация урока:</strong><br>
+      Ты поднимаешь руку и говоришь:<br>
+      <em>«Profe, ¿puedo ir al baño, por favor?»</em><br>
+      Учитель: <em>«Sí, claro. Está allí.»</em><br>
+      Ты: <em>«¡Muchas gracias!»</em> 🎉
+    </div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Слова урока</h2>
+    </div>
+
+    <h4>🙋 Глаголы просьб</h4>
+    <div class="cards-grid">
+      <div class="sos-card" style="--c:#2E7D32" onclick="speak('¿Puedo ir al baño?')">
+        <div class="sos-phrase">¿Puedo...?</div>
+        <div class="sos-meaning">Можно мне...?</div>
+        <button class="speak-btn" style="--c:#2E7D32">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#E8604C" onclick="speak('Necesito agua.')">
+        <div class="sos-phrase">Necesito...</div>
+        <div class="sos-meaning">Мне нужно...</div>
+        <button class="speak-btn" style="--c:#E8604C">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#2274A5" onclick="speak('Quiero jugar.')">
+        <div class="sos-phrase">Quiero...</div>
+        <div class="sos-meaning">Я хочу...</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#8338EC" onclick="speak('¿Podrías darme agua?')">
+        <div class="sos-phrase">¿Podrías...?</div>
+        <div class="sos-meaning">Не мог бы ты...?</div>
+        <button class="speak-btn" style="--c:#8338EC">🔊</button>
+      </div>
+    </div>
+
+    <h4>🏫 Школьные просьбы (топ-10)</h4>
+    <div class="cards-grid">
+      <div class="sos-card" style="--c:#2E7D32" onclick="speak('¿Puedo ir al baño?')">
+        <div class="sos-phrase">¿Puedo ir al baño?</div>
+        <div class="sos-meaning">Можно в туалет?</div>
+        <button class="speak-btn" style="--c:#2E7D32">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#2E7D32" onclick="speak('¿Puedo salir?')">
+        <div class="sos-phrase">¿Puedo salir?</div>
+        <div class="sos-meaning">Можно выйти?</div>
+        <button class="speak-btn" style="--c:#2E7D32">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#2E7D32" onclick="speak('¿Puedo beber agua?')">
+        <div class="sos-phrase">¿Puedo beber agua?</div>
+        <div class="sos-meaning">Можно попить?</div>
+        <button class="speak-btn" style="--c:#2E7D32">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#2E7D32" onclick="speak('¿Puedo abrir la ventana?')">
+        <div class="sos-phrase">¿Puedo abrir la ventana?</div>
+        <div class="sos-meaning">Можно открыть окно?</div>
+        <button class="speak-btn" style="--c:#2E7D32">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#E8604C" onclick="speak('Necesito un lápiz.')">
+        <div class="sos-phrase">Necesito un lápiz</div>
+        <div class="sos-meaning">Мне нужен карандаш</div>
+        <button class="speak-btn" style="--c:#E8604C">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#E8604C" onclick="speak('Necesito ayuda.')">
+        <div class="sos-phrase">Necesito ayuda</div>
+        <div class="sos-meaning">Мне нужна помощь</div>
+        <button class="speak-btn" style="--c:#E8604C">🔊</button>
+      </div>
+    </div>
+
+    <h4>📋 Обязанности (Tengo que...)</h4>
+    <div class="cards-grid">
+      <div class="sos-card" style="--c:#2274A5" onclick="speak('Tengo que estudiar.')">
+        <div class="sos-phrase">Tengo que estudiar</div>
+        <div class="sos-meaning">Я должен учиться</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#2274A5" onclick="speak('Tengo que hacer los deberes.')">
+        <div class="sos-phrase">Tengo que hacer los deberes</div>
+        <div class="sos-meaning">Я должен делать домашку</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#2274A5" onclick="speak('Tengo que escuchar.')">
+        <div class="sos-phrase">Tengo que escuchar</div>
+        <div class="sos-meaning">Я должен слушать</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#2274A5" onclick="speak('Tengo que levantar la mano.')">
+        <div class="sos-phrase">Tengo que levantar la mano</div>
+        <div class="sos-meaning">Я должен поднимать руку</div>
+        <button class="speak-btn" style="--c:#2274A5">🔊</button>
+      </div>
+    </div>
+
+    <h4>🎩 Вежливые слова</h4>
+    <div class="cards-grid">
+      <div class="sos-card" style="--c:#FFC93C" onclick="speak('Por favor.')">
+        <div class="sos-phrase">Por favor</div>
+        <div class="sos-meaning">Пожалуйста</div>
+        <button class="speak-btn" style="--c:#FFC93C">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#FFC93C" onclick="speak('Muchas gracias.')">
+        <div class="sos-phrase">Muchas gracias</div>
+        <div class="sos-meaning">Большое спасибо</div>
+        <button class="speak-btn" style="--c:#FFC93C">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#FFC93C" onclick="speak('De nada.')">
+        <div class="sos-phrase">De nada</div>
+        <div class="sos-meaning">Не за что</div>
+        <button class="speak-btn" style="--c:#FFC93C">🔊</button>
+      </div>
+      <div class="sos-card" style="--c:#FFC93C" onclick="speak('Perdón.')">
+        <div class="sos-phrase">Perdón</div>
+        <div class="sos-meaning">Извините</div>
+        <button class="speak-btn" style="--c:#FFC93C">🔊</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁРЫ -->
+  <section class="block" style="--c:#2E7D32" id="trainers">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Тренажёры для закрепления</h2>
+    </div>
+
+    <!-- Тренажёр 1: Match -->
+    <div class="match-game" id="trainer-match">
+      <h4>🧩 Сопоставление: «ситуация ↔ просьба»</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:8px 0">Выбери ситуацию слева, потом подходящую просьбу справа. 8 пар!</p>
+      <div class="match-columns">
+        <div class="match-col" id="match-left"></div>
+        <div class="match-col" id="match-right"></div>
+      </div>
+      <div class="match-feedback" id="match-feedback"></div>
+      <button class="match-reset" onclick="resetMatch()">🔄 Начать заново</button>
+    </div>
+
+    <!-- Тренажёр 2: Sentence Builder -->
+    <div class="sb" id="trainer-builder">
+      <h4>🎯 Конструктор фраз: собери вежливую просьбу</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:8px 0">Нажимай на слова в правильном порядке!</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="sb-result" id="sb-result"></div>
+      <button class="match-reset" style="background:var(--green);box-shadow:0 5px 0 #1B5E20" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+
+    <!-- Тренажёр 3: Шкала вежливости -->
+    <div class="match-game" id="trainer-polite">
+      <h4>🎩 Тренажёр шкалы вежливости: подбери уровень</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:8px 0">В каждой ситуации выбери уровень вежливости: muy (очень вежливо), normal (нормально) или grosero (грубо).</p>
+      <div id="polite-questions"></div>
+    </div>
+  </section>
+
+  <!-- ИГРА-ТРЕНАЖЁР -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🎮 Игра-тренажёр: Какой глагол выбрать?</h2>
+    </div>
+    <p class="block-sub">10 школьных ситуаций — выбери правильный глагол! Шпаргалка встроена, озвучка включена.</p>
+    <div class="cards-grid-3">
+      <div class="sos-card" style="--c:#2E7D32">
+        <div class="sos-emoji">🎮</div>
+        <div class="sos-phrase">Какой глагол выбрать?</div>
+        <div class="sos-meaning">Игра-тренажёр на все глаголы урока: poder, querer, necesitar, tener que, hay que</div>
+        <a href="../../worksheets/w02-l2-game.html" target="_blank" rel="noopener" class="speak-btn" style="--c:#2E7D32;text-decoration:none;display:inline-block">🎮 Открыть игру</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    
+    <div class="task">
+      <div class="task-num">1</div>
+      <div>
+        <strong>Научи родителей просьбам</strong> · 5 мин<br>
+        Покажи маме и папе 3 главные конструкции: <em>¿Puedo...?</em> / <em>Necesito...</em> / <em>Quiero...</em> Пусть каждый выберет свою любимую.
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num star">2</div>
+      <div>
+        <strong>Семейная игра «Вежливый ужин»</strong> · 7 мин ⭐<br>
+        За ужином вся семья общается <strong>только</strong> через просьбы на испанском:<br>
+        <em>«¿Me puedes pasar la sal, por favor?»</em><br>
+        <em>«Necesito más pan, por favor.»</em><br>
+        Кто забыл сказать <em>por favor</em> — выполняет шуточное задание!
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">3</div>
+      <div>
+        <strong>Шкала вежливости</strong> · 3 мин<br>
+        Потренируйся говорить просьбы с разной степенью вежливости:<br>
+        <em>Quiero agua</em> (хочу воды) — грубовато<br>
+        <em>Necesito agua, por favor</em> (нужна вода) — нейтрально<br>
+        <em>¿Me puedes dar agua, por favor?</em> (можешь дать?) — вежливо
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">4</div>
+      <div>
+        <strong>Повтори все новые слова</strong> · 2 мин<br>
+        Нажимай на карточки раздела «Слова урока»: слушай и повторяй вслух.
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num star">5</div>
+      <div>
+        <strong>Тренажёры</strong> · 10 мин ⭐<br>
+        Пройди все тренажёры урока:<br>
+        🧩 <a href="#trainer-match" style="color:var(--green);font-weight:800">Сопоставление (8 пар)</a><br>
+        🎯 <a href="#trainer-builder" style="color:var(--green);font-weight:800">Конструктор фраз (5 фраз)</a><br>
+        🎩 <a href="#trainer-polite" style="color:var(--green);font-weight:800">Шкала вежливости (4 ситуации)</a>
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">6</div>
+      <div>
+        <strong>Видео «Pedir Ayuda»</strong> · 3 мин<br>
+        Посмотри ещё раз и повтори вслух все фразы за детьми.
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">7</div>
+      <div>
+        <strong>Самопроверка «Смайлик»</strong><br>
+        Честно оцени себя по 5 критериям (таблица ниже).
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num star">8</div>
+      <div>
+        <strong>Рабочий лист «Мне нужно»</strong> · 15 мин ⭐<br>
+        Попроси родителей распечатать рабочий лист, выполни 7 заданий и самопроверку. Принеси лист на следующий урок — проверим вместе!
+        <a href="../../worksheets/w02-l2-kids.html" target="_blank" rel="noopener" style="display:inline-block;background:var(--green);color:#fff;text-decoration:none;border-radius:10px;padding:6px 12px;font-weight:800;font-size:.85rem;margin-top:8px;transition:.15s">🖨 Открыть и распечатать</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- САМОПРОВЕРКА -->
+  <section class="selfcheck">
+    <h4>😊 Самопроверка «Смайлик»</h4>
+    <table class="selfcheck-table">
+      <thead>
+        <tr>
+          <th>Умею</th>
+          <th>😄 отлично</th>
+          <th>🙂 с подсказкой</th>
+          <th>😅 пока сложно</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Вежливо попросить разрешения (¿Puedo...?)</td>
+          <td><input type="radio" name="q1" value="green"></td>
+          <td><input type="radio" name="q1" value="yellow"></td>
+          <td><input type="radio" name="q1" value="red"></td>
+        </tr>
+        <tr>
+          <td>Сказать «Necesito...»</td>
+          <td><input type="radio" name="q2" value="green"></td>
+          <td><input type="radio" name="q2" value="yellow"></td>
+          <td><input type="radio" name="q2" value="red"></td>
+        </tr>
+        <tr>
+          <td>Сказать «Quiero...»</td>
+          <td><input type="radio" name="q3" value="green"></td>
+          <td><input type="radio" name="q3" value="yellow"></td>
+          <td><input type="radio" name="q3" value="red"></td>
+        </tr>
+        <tr>
+          <td>Использовать «por favor»</td>
+          <td><input type="radio" name="q4" value="green"></td>
+          <td><input type="radio" name="q4" value="yellow"></td>
+          <td><input type="radio" name="q4" value="red"></td>
+        </tr>
+        <tr>
+          <td>Говорить об обязанностях «Tengo que...»</td>
+          <td><input type="radio" name="q5" value="green"></td>
+          <td><input type="radio" name="q5" value="yellow"></td>
+          <td><input type="radio" name="q5" value="red"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- QUIZLET -->
+  <a href="https://quizlet.com/1200424773/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-1-%D1%83%D1%80%D0%BE%D0%BA-5-flash-cards/?i=2gqp1x&x=1qqt" class="quizlet-link" target="_blank" rel="noopener">
+    <span>📚 Карточки Quizlet · Слова урока 5</span>
+    <span>Открыть →</span>
+  </a>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="lesson-nav">
+    <a href="./w02-l1.html" class="nav-prev">
+      <div class="nav-small">← Предыдущий урок</div>
+      <div class="nav-title">Урок 4: Части тела 🩺</div>
+    </a>
+    <div class="nav-locked">
+      <div class="nav-small">Следующий урок →</div>
+      <div class="nav-title">Урок 6: 🔒 скоро</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 1: Supervivencia · 2026
+  </div>
+
+</main>
+
+<script>
+/* ========== ОЗВУЧКА ========== */
+let esVoice=null;
+function loadVoices(){
+  const voices=speechSynthesis.getVoices();
+  esVoice=voices.find(v=>v.lang.startsWith('es'));
+}
+speechSynthesis.onvoiceschanged=loadVoices;
+loadVoices();
+
+function speak(text){
+  if(!text) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-ES';u.rate=0.85;u.pitch=1.05;
+  if(esVoice)u.voice=esVoice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+/* ========== КНОПКА PUEDO ========== */
+const PUEDO_PHRASES=[
+  {es:'¿Puedo ir al baño, por favor?', ru:'Можно мне в туалет, пожалуйста?'},
+  {es:'¿Puedo salir, por favor?', ru:'Можно мне выйти, пожалуйста?'},
+  {es:'¿Puedo beber agua, por favor?', ru:'Можно мне попить, пожалуйста?'},
+  {es:'¿Puedo abrir la ventana, por favor?', ru:'Можно открыть окно, пожалуйста?'},
+  {es:'¿Puedo ir a la enfermería, por favor?', ru:'Можно в медпункт, пожалуйста?'},
+  {es:'¿Puedo descansar un momento, por favor?', ru:'Можно отдохнуть минутку, пожалуйста?'}
+];
+function pressPuedo(){
+  const m=PUEDO_PHRASES[Math.floor(Math.random()*PUEDO_PHRASES.length)];
+  const out=document.getElementById('puedo-output');
+  out.innerHTML='<div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+  speak(m.es);
+}
+
+/* ========== СИМУЛЯЦИЯ ========== */
+const SIM_ROUNDS=[
+  {speech:'🚽 Во время урока очень нужно в туалет', hint:'Требуется разрешение', correct:'poder', options:[
+    {id:'poder', text:'🙋 Profe, ¿puedo ir al baño, por favor?', correct:true},
+    {id:'quiero', text:'❤️ Quiero ir al baño.', correct:false},
+    {id:'necesitar', text:'🥤 Necesito ir al baño.', correct:false}
+  ]},
+  {speech:'✏️ Сломался карандаш, нечем писать', hint:'Это нужда, не желание', correct:'necesitar', options:[
+    {id:'necesitar', text:'🥤 Profe, necesito un lápiz, por favor.', correct:true},
+    {id:'poder', text:'🙋 ¿Puedo tener un láпиз?', correct:false},
+    {id:'quiero', text:'❤️ Quiero un láпиз.', correct:false}
+  ]},
+  {speech:'😴 Очень устал, не можешь сосредоточиться', hint:'Разрешение на отдых', correct:'poder', options:[
+    {id:'poder', text:'🙋 Profe, ¿puedo descansar un momento, por favor?', correct:true},
+    {id:'necesitar', text:'🥤 Necesito descansar.', correct:false},
+    {id:'quiero', text:'❤️ Quiero descansar.', correct:false}
+  ]},
+  {speech:'📚 Учитель задал много домашки', hint:'Обязанность', correct:'tengo', options:[
+    {id:'tengo', text:'📋 Tengo que hacer los deberes.', correct:true},
+    {id:'quiero', text:'❤️ Quiero hacer los deberes.', correct:false},
+    {id:'necesitar', text:'🥤 Necesito hacer los deberes.', correct:false}
+  ]},
+  {speech:'🥤 На перемене хочешь купить сок в автомате', hint:'Желание', correct:'quiero', options:[
+    {id:'quiero', text:'❤️ Quiero un zumo, por favor.', correct:true},
+    {id:'necesitar', text:'🥤 Necesito un zumo.', correct:false},
+    {id:'poder', text:'🙋 ¿Puedo tener un zumo?', correct:false}
+  ]}
+];
+
+let simRound=0, simStars=0;
+
+function startSim(){
+  simRound=0;simStars=0;
+  document.getElementById('sim-start').style.display='none';
+  updateStars();
+  playRound();
+}
+
+function playRound(){
+  if(simRound>=SIM_ROUNDS.length){endSim();return;}
+  const r=SIM_ROUNDS[simRound];
+  document.getElementById('sim-speech').textContent='';
+  document.getElementById('sim-feedback').textContent='🎧 Читай ситуацию...';
+  document.getElementById('sim-prompt').style.display='none';
+  document.getElementById('sim-options').style.display='none';
+  
+  const teacher=document.getElementById('sim-teacher');
+  teacher.querySelector('.speed-label').textContent='🏫 Ситуация ('+(simRound+1)+'/5):';
+  
+  setTimeout(function(){
+    document.getElementById('sim-speech').textContent=r.speech;
+    var prompt=document.getElementById('sim-prompt');
+    prompt.innerHTML='💡 <strong>Подсказка:</strong> '+r.hint+'<br>👇 <strong>Что ты скажешь?</strong>';
+    prompt.style.display='block';
+    showOptions(r);
+  },1500);
+}
+
+function showOptions(r){
+  var opts=document.getElementById('sim-options');
+  opts.style.display='flex';
+  opts.innerHTML='';
+  document.getElementById('sim-feedback').textContent='';
+  r.options.forEach(function(o){
+    var btn=document.createElement('button');
+    btn.className='sim-opt';
+    btn.textContent=o.text;
+    btn.onclick=function(){checkSim(o.correct,btn,r);};
+    opts.appendChild(btn);
+  });
+}
+
+function checkSim(correct,btn,r){
+  document.querySelectorAll('.sim-opt').forEach(function(b){b.disabled=true;});
+  if(correct){
+    btn.classList.add('correct');
+    simStars++;
+    document.getElementById('sim-feedback').textContent='🎉 ¡Muy bien! Правильная вежливая просьба!';
+    speak('¡Muy bien!');
+  }else{
+    btn.classList.add('wrong');
+    document.getElementById('sim-feedback').textContent='😅 Не совсем! Смотри правильный ответ...';
+    document.querySelectorAll('.sim-opt').forEach(function(b){
+      var opt=r.options.find(function(o){return o.text===b.textContent;});
+      if(opt&&opt.correct)b.classList.add('correct');
+    });
+  }
+  updateStars();
+  simRound++;
+  setTimeout(playRound,2200);
+}
+
+function updateStars(){
+  var starsEl=document.getElementById('sim-stars');
+  var s='';
+  for(var i=0;i<5;i++) s+=i<simStars?'⭐':'☆';
+  starsEl.textContent=s;
+  document.getElementById('sim-score').textContent='Звёзд вежливости: '+simStars+'/5';
+}
+
+function endSim(){
+  document.getElementById('sim-options').style.display='none';
+  document.getElementById('sim-prompt').style.display='none';
+  document.getElementById('sim-feedback').textContent='';
+  var msg=simStars>=4?'🏆 Отлично! Ты настоящий вежливый ученик!':simStars>=2?'👍 Хорошо! Ещё чуть-чуть практики!':'💪 Ничего! Повтори карточки и попробуй снова!';
+  document.getElementById('sim-speech').textContent=msg;
+  document.getElementById('sim-start').style.display='block';
+  document.getElementById('sim-start').textContent='🔄 Играть снова';
+  if(simStars>=4)confetti('⭐');
+}
+
+/* ========== БЕЙДЖ ========== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! Eres un maestro de las peticiones.');
+  confetti('🏅');
+  localStorage.setItem('mudro_badge_peticiones','true');
+}
+
+if(localStorage.getItem('mudro_badge_peticiones')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+
+/* ========== MATCH GAME ========== */
+var MATCH_PAIRS=[
+  {es:'Во время урока нужно в туалет',ru:'¿Puedo ir al baño, por favor?'},
+  {es:'Сломался карандаш',ru:'Necesito un lápiz, por favor.'},
+  {es:'Очень устал',ru:'¿Puedo descansar un momento?'},
+  {es:'Учитель задал домашку',ru:'Tengo que hacer los deberes.'},
+  {es:'Хочешь купить сок',ru:'Quiero un zumo, por favor.'},
+  {es:'Нужна помощь с заданием',ru:'Necesito ayuda, por favor.'},
+  {es:'Душно в классе',ru:'¿Puedo abrir la ventana?'},
+  {es:'Нужно выйти из класса',ru:'¿Puedo salir, por favor?'}
+];
+var matchSelected=null, matchFound=0;
+
+function shuffle(arr){return arr.map(function(v){return [Math.random(),v]}).sort(function(a,b){return a[0]-b[0]}).map(function(v){return v[1]})}
+
+function renderMatch(){
+  var left=document.getElementById('match-left');
+  var right=document.getElementById('match-right');
+  left.innerHTML='';right.innerHTML='';
+  matchSelected=null;matchFound=0;
+  document.getElementById('match-feedback').textContent='Выбери ситуацию слева 👈';
+  
+  var leftItems=shuffle(MATCH_PAIRS.slice());
+  var rightItems=shuffle(MATCH_PAIRS.slice());
+  
+  leftItems.forEach(function(p,i){
+    var item=document.createElement('div');
+    item.className='match-item';
+    item.textContent=p.es;
+    item.dataset.pair=i;
+    item.dataset.side='left';
+    item.dataset.value=p.es;
+    item.onclick=function(){selectMatch(item);};
+    left.appendChild(item);
+  });
+  
+  rightItems.forEach(function(p,i){
+    var item=document.createElement('div');
+    item.className='match-item';
+    item.textContent=p.ru;
+    item.dataset.pair=i;
+    item.dataset.side='right';
+    item.dataset.value=p.ru;
+    item.onclick=function(){selectMatch(item);};
+    right.appendChild(item);
+  });
+}
+
+function selectMatch(item){
+  if(item.classList.contains('matched')) return;
+  
+  if(!matchSelected){
+    matchSelected=item;
+    item.classList.add('selected');
+    document.getElementById('match-feedback').textContent='Теперь выбери просьбу справа 👉';
+    return;
+  }
+  
+  if(matchSelected===item){
+    item.classList.remove('selected');
+    matchSelected=null;
+    document.getElementById('match-feedback').textContent='Выбери ситуацию слева 👈';
+    return;
+  }
+  
+  if(matchSelected.dataset.side===item.dataset.side){
+    matchSelected.classList.remove('selected');
+    matchSelected=item;
+    item.classList.add('selected');
+    return;
+  }
+  
+  var es=matchSelected.dataset.side==='left'?matchSelected.dataset.value:item.dataset.value;
+  var ru=matchSelected.dataset.side==='right'?matchSelected.dataset.value:item.dataset.value;
+  var pair=MATCH_PAIRS.find(function(p){return p.es===es && p.ru===ru;});
+  
+  if(pair){
+    matchSelected.classList.remove('selected');
+    matchSelected.classList.add('matched');
+    item.classList.add('matched');
+    matchFound++;
+    speak(pair.ru);
+    document.getElementById('match-feedback').textContent='🎉 ¡Bien! Найдено '+matchFound+'/'+MATCH_PAIRS.length;
+    if(matchFound===MATCH_PAIRS.length){
+      setTimeout(function(){
+        document.getElementById('match-feedback').textContent='🏆 Отлично! Все пары найдены!';
+        confetti('🎯');
+      },500);
+    }
+  }else{
+    matchSelected.classList.add('wrong');
+    item.classList.add('wrong');
+    document.getElementById('match-feedback').textContent='😅 Не пара! Попробуй ещё раз.';
+    var ms=matchSelected;
+    setTimeout(function(){
+      ms.classList.remove('wrong','selected');
+      item.classList.remove('wrong');
+    },600);
+  }
+  matchSelected=null;
+}
+
+function resetMatch(){renderMatch()}
+renderMatch();
+
+/* ========== SENTENCE BUILDER ========== */
+var SB_PHRASES=[
+  {words:['Profe,','¿puedo','ir','al','baño,','por','favor?'], translation:'Учитель, можно мне в туалет, пожалуйста?'},
+  {words:['Necesito','un','lápiz,','por','favor.'], translation:'Мне нужен карандаш, пожалуйста.'},
+  {words:['¿Me','puedes','ayudar,','por','favor?'], translation:'Можешь мне помочь, пожалуйста?'},
+  {words:['Tengo','que','hacer','los','deberes.'], translation:'Я должен делать домашку.'},
+  {words:['Quiero','jugar,','por','favor.'], translation:'Хочу играть, пожалуйста.'}
+];
+var sbCurrent=0, sbPlaced=[];
+
+function renderSB(){
+  var target=document.getElementById('sb-target');
+  var pool=document.getElementById('sb-pool');
+  var result=document.getElementById('sb-result');
+  
+  var phrase=SB_PHRASES[sbCurrent];
+  sbPlaced=[];
+  target.textContent='…';
+  result.textContent='';
+  
+  pool.innerHTML='';
+  var shuffled=shuffle(phrase.words.slice());
+  shuffled.forEach(function(w,i){
+    var btn=document.createElement('div');
+    btn.className='sb-word';
+    btn.textContent=w;
+    btn.dataset.idx=i;
+    btn.onclick=function(){addWord(btn,w);};
+    pool.appendChild(btn);
+  });
+}
+
+function addWord(btn,w){
+  if(btn.classList.contains('placed')) return;
+  btn.classList.add('placed');
+  sbPlaced.push(w);
+  updateSBTarget();
+}
+
+function updateSBTarget(){
+  var target=document.getElementById('sb-target');
+  var phrase=SB_PHRASES[sbCurrent];
+  target.textContent=sbPlaced.join(' ') || '…';
+  
+  if(sbPlaced.length===phrase.words.length){
+    var correct=sbPlaced.every(function(w,i){return w===phrase.words[i];});
+    var result=document.getElementById('sb-result');
+    if(correct){
+      result.innerHTML='✅ <span style="color:var(--green)">¡Perfecto!</span><div style="font-weight:700;color:var(--ink-soft)">'+phrase.translation+'</div>';
+      speak(sbPlaced.join(' '));
+      confetti('🎯');
+    }else{
+      result.innerHTML='❌ Не совсем… Правильный порядок: <strong>'+phrase.words.join(' ')+'</strong><div style="font-weight:700;color:var(--ink-soft)">'+phrase.translation+'</div>';
+      setTimeout(function(){speak(phrase.words.join(' '));},400);
+    }
+  }
+}
+
+function nextSB(){
+  sbCurrent=(sbCurrent+1)%SB_PHRASES.length;
+  renderSB();
+}
+renderSB();
+
+/* ========== ТРЕНАЖЁР ШКАЛЫ ВЕЖЛИВОСТИ ========== */
+var POLITE_QUESTIONS=[
+  {situation:'Ты просишь учителя выйти в туалет.', options:[
+    {text:'¡Quiero salir!', level:'grosero'},
+    {text:'Profe, ¿puedo ir al baño, por favor?', level:'muy'},
+    {text:'Necesito salir.', level:'normal'}
+  ]},
+  {situation:'Ты просишь маму дать тебе воды.', options:[
+    {text:'¡Dame agua!', level:'grosero'},
+    {text:'Mamá, ¿podrías darme agua, por favor?', level:'muy'},
+    {text:'Necesito agua.', level:'normal'}
+  ]},
+  {situation:'Ты просишь одноклассника помочь с заданием.', options:[
+    {text:'¡Haz mi tarea!', level:'grosero'},
+    {text:'¿Me ayudas, por favor?', level:'muy'},
+    {text:'Necesito ayuda.', level:'normal'}
+  ]},
+  {situation:'Ты хочешь поиграть с друзьями на перемене.', options:[
+    {text:'¡Quiero jugar ahora!', level:'grosero'},
+    {text:'¿Puedo jugar, por favor?', level:'muy'},
+    {text:'Quiero jugar.', level:'normal'}
+  ]}
+];
+
+function renderPoliteTrainer(){
+  var container=document.getElementById('polite-questions');
+  container.innerHTML='';
+  POLITE_QUESTIONS.forEach(function(q,qi){
+    var div=document.createElement('div');
+    div.className='quiz-scenario';
+    div.innerHTML='<div class="situation">📌 Ситуация '+(qi+1)+': '+q.situation+'</div>';
+    var choices=document.createElement('div');
+    choices.className='quiz-choices';
+    q.options.forEach(function(opt){
+      var btn=document.createElement('button');
+      btn.className='quiz-choice';
+      btn.textContent=opt.text;
+      btn.onclick=function(){
+        choices.querySelectorAll('.quiz-choice').forEach(function(b){b.disabled=true;});
+        if(opt.level==='muy'){
+          btn.classList.add('correct');
+          speak(opt.text);
+        }else{
+          btn.classList.add('wrong');
+          var correctBtn=Array.from(choices.querySelectorAll('.quiz-choice')).find(function(b){
+            var o=q.options.find(function(o2){return o2.text===b.textContent;});
+            return o && o.level==='muy';
+          });
+          if(correctBtn) correctBtn.classList.add('correct');
+        }
+      };
+      choices.appendChild(btn);
+    });
+    div.appendChild(choices);
+    container.appendChild(div);
+  });
+}
+renderPoliteTrainer();
+
+/* ========== КОНФЕТТИ ========== */
+function confetti(emoji){
+  for(var i=0;i<16;i++){
+    var c=document.createElement('span');
+    c.className='confetti';
+    c.textContent=Math.random()>.5?emoji:'🎉';
+    c.style.left=Math.random()*100+'vw';
+    c.style.animationDuration=(1.2+Math.random()*1.2)+'s';
+    c.style.animationDelay=(Math.random()*.4)+'s';
+    document.body.appendChild(c);
+    setTimeout(function(){c.remove();},3000);
+  }
+}
+
+/* ========== СОХРАНЕНИЕ САМОПРОВЕРКИ ========== */
+document.querySelectorAll('.selfcheck-table input[type=radio]').forEach(function(input){
+  input.addEventListener('change',function(){
+    var data={};
+    for(var i=1;i<=5;i++){
+      var selected=document.querySelector('input[name=q'+i+']:checked');
+      if(selected) data['q'+i]=selected.value;
+    }
+    localStorage.setItem('mudro_selfcheck_lesson5',JSON.stringify(data));
+  });
+});
+
+var savedCheck=localStorage.getItem('mudro_selfcheck_lesson5');
+if(savedCheck){
+  try{
+    var data=JSON.parse(savedCheck);
+    Object.keys(data).forEach(function(key){
+      var input=document.querySelector('input[name='+key+'][value='+data[key]+']');
+      if(input) input.checked=true;
+    });
+  }catch(e){}
+}
+</script>
+</body>
+</html>
