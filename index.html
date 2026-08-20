@@ -326,7 +326,7 @@ const LESSONS_BASE = "./lessons/parents/"; // сюда будем класть w
 
 const PHASES=[
 {icon:'🏠',title:'Фаза 1 · Misión Residencia',sub:'Недели 1–5 · Документы, жильё и первые звонки',color:'#E2725B',soft:'#FBEAE6',weeks:[
- {n:1,title:'NIE, cita previa и первые шаги',live:true,lexis:['la cita previa','la oficina de extranjería','las tasas','el empadronamiento','deletrear datos'],grammar:['ser · tener · llamarse','hay','род и число','алфавит и цифры'],outcome:'Представиться, продиктовать свои данные и записаться на приём по телефону.'},
+ {n:1,title:'NIE, cita previa и первые шаги',lexis:['la cita previa','la oficina de extranjería','las tasas','el empadronamiento','deletrear datos'],grammar:['ser · tener · llamarse','hay','род и число','алфавит и цифры'],outcome:'Представиться, продиктовать свои данные и записаться на приём по телефону.'},
  {n:2,title:'Охота за жильём: читаем Idealista',lexis:['el ático','el bajo','amueblado','luminoso','los gastos de comunidad','el trastero'],grammar:['Presente (правильные глаголы)','estar — где и какой','hay — есть / нет'],outcome:'Прочитать объявления и описать три квартиры со всеми плюсами и минусами.'},
  {n:3,title:'Просмотр квартиры: задаём вопросы',lexis:['las humedades','la caldera','¿Cuánto cuesta?','¿Qué incluye?'],grammar:['вопросительные слова','ser vs estar','gustar / encantar'],outcome:'Задать владельцу 10 вопросов на просмотре и понять ответы.'},
  {n:4,title:'Контракт, fianza и деньги',lexis:['la fianza','el contrato','firmar','la nómina','fechas y plazos'],grammar:['tener que / hay que','ir a + инфинитив','деньги и даты'],outcome:'Объяснить условия контракта аренды своими словами.'},
@@ -353,21 +353,25 @@ const PHASES=[
 
 /* ====== Рендер карты ====== */
 const container=document.getElementById('weeks-container');
-const READY=new Set(['1-1','1-2','1-3','2-1']); // готовые уроки: неделя-номер
+const READY=new Set(['1-1','1-2','1-3','2-1','2-2']); // готовые уроки: неделя-номер
+
+// Определяем текущую неделю по READY: максимальный номер недели с готовым уроком
+const currentWeek=[...READY].reduce((max,id)=>{const w=parseInt(id.split('-')[0],10);return w>max?w:max;},0);
+
 container.innerHTML=PHASES.map(ph=>`
  <section class="phase reveal" style="--pc:${ph.color};--pc-soft:${ph.soft}">
    <div class="phase-head"><span class="icon" aria-hidden="true">${ph.icon}</span>
      <div><h3>${ph.title}</h3><p>${ph.sub}</p></div>
    </div>
    <div class="weeks">${ph.weeks.map(w=>`
-     <article class="week${w.final?' final':''}${w.live?' live':''}">
+     <article class="week${w.final?' final':''}${w.n===currentWeek?' live':''}">
        <button class="week-head" aria-expanded="false">
          <span class="week-num" aria-hidden="true">${w.n}</span>
          <span class="week-titles">
            <span class="wtitle">${w.title}</span>
            <span class="week-teaser">${w.lexis.slice(0,3).join(' · ')}${w.lexis.length>3?' · …':''}</span>
          </span>
-         ${w.live?`<span class="badge-cp">📌 СЕЙЧАС</span>`:(w.cp?`<span class="badge-cp">${w.final?'🏆 ФИНАЛ':'🏁 ЧЕКПОИНТ'}</span>`:'')}
+         ${w.n===currentWeek?`<span class="badge-cp">📌 СЕЙЧАС</span>`:(w.cp?`<span class="badge-cp">${w.final?'🏆 ФИНАЛ':'🏁 ЧЕКПОИНТ'}</span>`:'')}
          <span class="chev" aria-hidden="true">▾</span>
        </button>
        <div class="week-body"><div class="week-body-inner"><div class="week-content">

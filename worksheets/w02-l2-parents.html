@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 2.2 · Análisis del barrio — МУДРО (A4)</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:12px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .sheet{
+    width:210mm;
+    min-height:297mm;
+    margin:8mm auto;
+    padding:11mm 12mm 9mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+    position:relative;
+  }
+  .sheet-footer{
+    position:absolute; bottom:5mm; left:12mm; right:12mm;
+    display:flex; justify-content:space-between;
+    font-size:9.5px; color:var(--muted); font-weight:600;
+    border-top:1px solid #E8DCCF; padding-top:2mm;
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:5mm;
+  }
+  .hero .brand{ font-size:10px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10.5px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10.5px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2.5mm; }
+  .ex-num{
+    width:8mm; height:8mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:13px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2); } .ex-num.c3{ background:var(--p3); } .ex-num.c4{ background:var(--p4); }
+  .ex-head h2{ font-size:13.5px; margin:0; }
+  .ex-head .tag{ font-size:9.5px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:4mm 5mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:10px; font-style:italic; color:var(--muted); margin-bottom:2.5mm; }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:16mm; }
+  .wline.long{ min-width:45mm; }
+  .wline-blk{ display:block; height:7mm; border-bottom:1.5px dashed #C9B8A6; margin:1.5mm 0; }
+
+  .cols2{ display:grid; grid-template-columns:1fr 1fr; gap:2mm 5mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2mm 3mm; vertical-align:top; text-align:left; font-size:10.5px; }
+  th{ background:#FBF3EA; font-size:10px; color:var(--p1); }
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2.5mm 3.5mm; margin:0 0 3mm; font-size:10.5px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2.5mm 3.5mm; margin:0 0 3mm; font-size:10px; }
+  .note b{ color:var(--ink); }
+
+  .audio-wrap{ border:0.7mm solid var(--p4); border-radius:8px; overflow:hidden; margin-bottom:3mm; }
+  .audio-head{ background:var(--p4); color:#fff; padding:2.5mm 4mm; font-weight:700; font-size:11px; }
+  .audio-body{ padding:3.5mm 4mm; background:#fff; }
+
+  .hidden-text{
+    background:#F0F4FF; border:1.5px dashed var(--p4); border-radius:6px;
+    padding:3mm 4mm; margin:2mm 0; font-size:11px; line-height:1.6;
+    cursor:pointer; position:relative;
+  }
+  .hidden-text .cover{
+    position:absolute; top:0; left:0; right:0; bottom:0;
+    background:repeating-linear-gradient(45deg,#E8F0FE,#E8F0FE 4px,#D6E4F7 4px,#D6E4F7 8px);
+    border-radius:6px; display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:var(--p4); font-size:12px;
+  }
+  .hidden-text.revealed .cover{ display:none; }
+
+  .prep-sent{ margin:2mm 0; font-size:10.5px; line-height:1.6; }
+  .prep-sent .ru{ color:var(--muted); font-size:9.5px; font-style:italic; }
+
+  .cut{ border-top:0.7mm dashed var(--muted); margin:5mm 0 3mm; text-align:center; font-size:10px; color:var(--muted); }
+  .keys h2{ font-size:14px; color:var(--p2); margin:0 0 2.5mm; }
+  .keys p{ margin:0 0 2.2mm; }
+  .small{ font-size:10px; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  .no-print{ text-align:center; margin:14px auto 0; }
+  .no-print button{
+    background:var(--p1); color:#fff; border:none; border-radius:12px;
+    padding:12px 28px; font-size:15px; font-weight:800; cursor:pointer;
+    box-shadow:0 4px 14px rgba(226,114,91,.4);
+  }
+
+  @page{ size:A4; margin:0; }
+  @media print{
+    body{ background:#fff; }
+    .no-print{ display:none; }
+    .sheet{
+      margin:0; box-shadow:none; width:auto; min-height:auto;
+      padding:10mm 11mm 12mm;
+      page-break-after:always; break-after:page;
+    }
+    .sheet:last-child{ page-break-after:auto; break-after:auto; }
+    .hidden-text .cover{ display:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print"><button onclick="window.print()">🖨 Распечатать (A4, 3 страницы)</button></div>
+
+<!-- ═══════════════════ ЛИСТ 1 ═══════════════════ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🗺 Рабочий лист · Урок 2.2 «Análisis del barrio»</h1>
+    <div class="meta">Неделя 2 · Анализ района: оцениваем район и учимся спрашивать дорогу</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ТИПЫ РАЙОНОВ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🏘 Соедини типы районов с переводом</h2><div class="tag">Лексика урока · впиши букву рядом с цифрой</div></div></div>
+    <div class="card">
+      <div class="cols2">
+        <div>
+          1. el barrio ____<br>
+          2. el centro histórico ____<br>
+          3. la zona residencial ____<br>
+          4. la periferia ____<br>
+          5. el ensanche ____<br>
+          6. la zona turística ____
+        </div>
+        <div>
+          а) окраина<br>
+          б) жилой район<br>
+          в) туристический район<br>
+          г) район<br>
+          д) исторический центр<br>
+          е) новый район (расширение)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: МЕСТА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>📍 Впиши название места по описанию</h2><div class="tag">Ключевые места в районе</div></div></div>
+    <div class="card">
+      <div class="cols2">
+        <div>
+          1. Где продают свежие продукты → <span class="wline short"></span><br>
+          2. Где покупают лекарства → <span class="wline short"></span><br>
+          3. Где учатся дети → <span class="wline short"></span><br>
+          4. Зелёное место для прогулок → <span class="wline short"></span>
+        </div>
+        <div>
+          5. Где покупают хлеб утром → <span class="wline short"></span><br>
+          6. Сердце района, бары, фиесты → <span class="wline short"></span><br>
+          7. Где ходят к педиатру → <span class="wline short"></span><br>
+          8. Где пьют кофе и едят тапас → <span class="wline short"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 3: ПРИЛАГАТЕЛЬНЫЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>⭐ Выбери прилагательное по контексту</h2><div class="tag">Описание района · обведи правильный вариант</div></div></div>
+    <div class="card">
+      1. Este barrio no tiene ruido, es ( ruidoso / tranquilo / peligroso ).<br>
+      2. La zona está llena de bares, es muy ( animada / antigua / tranquila ).<br>
+      3. La periferia tiene pocos transportes, está ( bien comunicada / mal comunicada ).<br>
+      4. El centro histórico tiene muchos edificios viejos, es ( moderno / antiguo / verde ).<br>
+      5. Hay muchos parques, el barrio es muy ( verde / ruidoso / peligroso ).<br>
+      6. Para una familia con niños, lo más importante es que sea ( peligroso / seguro / antiguo ).
+    </div>
+  </div>
+
+  <!-- УПР 4: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>🎧 Аудирование: описание района</h2><div class="tag">Послушайте описание и ответьте на вопросы</div></div></div>
+    <div class="card">
+      <div class="audio-wrap">
+        <div class="audio-head">🎧 Текст для прослушивания — нажмите, чтобы показать / скрыть</div>
+        <div class="audio-body">
+          <div class="hidden-text" id="audio1" onclick="this.classList.toggle('revealed')">
+            <div class="cover">👆 Нажмите, чтобы показать текст</div>
+            El barrio está en la periferia de Valencia. Hay un colegio, una farmacia y un supermercado. Está cerca del parque. Es un barrio tranquilo y seguro. Está bien comunicado.
+          </div>
+        </div>
+      </div>
+      <p class="hint">Прослушайте текст (или прочитайте, скрыв его) и ответьте:</p>
+      1. ¿Dónde está el barrio? → <span class="wline long"></span><br>
+      2. ¿Qué hay en el barrio? (назови 3 места) → <span class="wline long"></span><br>
+      3. ¿Cómo es el barrio? (2 прилагательных) → <span class="wline long"></span><br>
+      4. ¿Está bien o mal comunicado? → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.2 · стр. 1 / 3</span></div>
+</div>
+
+<!-- ═══════════════════ ЛИСТ 2 ═══════════════════ -->
+<div class="sheet">
+
+  <!-- УПР 5: ПРЕДЛОГИ МЕСТА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>🧭 Вставь подходящий предлог</h2><div class="tag">cerca de · lejos de · al lado de · enfrente de · entre · detrás de · a 5 minutos de</div></div></div>
+    <div class="card">
+      <div class="formula"><b>de + el = del</b> · <b>a + el = al</b> — обязательное слияние!</div>
+      <div class="hint">Перевод поможет понять, какой предлог подходит. Обратите внимание на скрытое слово.</div>
+
+      <div class="prep-sent">
+        1. La farmacia está <span class="wline short"></span> del supermercado. <span class="ru">(Аптека находится сбоку от супермаркета.)</span>
+      </div>
+      <div class="prep-sent">
+        2. El colegio está <span class="wline short"></span> de casa. <span class="ru">(Школа находится рядом с домом.)</span>
+      </div>
+      <div class="prep-sent">
+        3. La plaza está <span class="wline short"></span> de la iglesia. <span class="ru">(Площадь находится напротив церкви.)</span>
+      </div>
+      <div class="prep-sent">
+        4. El mercado está <span class="wline short"></span> la plaza y el parque. <span class="ru">(Рынок находится между площадью и парком.)</span>
+      </div>
+      <div class="prep-sent">
+        5. La periferia está <span class="wline short"></span> del centro. <span class="ru">(Окраина находится далеко от центра.)</span>
+      </div>
+      <div class="prep-sent">
+        6. La cafetería está <span class="wline short"></span> de la panadería. <span class="ru">(Кафе находится позади пекарни.)</span>
+      </div>
+      <div class="prep-sent">
+        7. El colegio está <span class="wline short"></span> de casa. <span class="ru">(Школа находится в 5 минутах от дома.)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: СОБЕРИ ФРАЗУ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>🧩 Собери фразу правильно</h2><div class="tag">estar + предлог + del / de la / de los</div></div></div>
+    <div class="card">
+      <div class="hint">Помни: de + el = <b>del</b>, a + el = <b>al</b></div>
+      1. La farmacia / estar / cerca de / el colegio<br>
+      <span class="wline-blk"></span>
+      2. El parque / estar / al lado de / la plaza<br>
+      <span class="wline-blk"></span>
+      3. El metro / estar / enfrente de / el supermercado<br>
+      <span class="wline-blk"></span>
+      4. El colegio / estar / a 5 minutos de / casa<br>
+      <span class="wline-blk"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: IMPERATIVO -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">7</div><div><h2>🚶 Как пройти? Соедини команду и перевод</h2><div class="tag">Imperativo для направлений · впиши букву</div></div></div>
+    <div class="card">
+      <div class="cols2">
+        <div>
+          1. Siga todo recto ____<br>
+          2. Gire a la izquierda ____<br>
+          3. Gire a la derecha ____<br>
+          4. Cruce la calle ____<br>
+          5. Tome la primera calle ____<br>
+          6. Tome la segunda calle ____
+        </div>
+        <div>
+          а) Перейдите улицу<br>
+          б) Поверните направо<br>
+          в) Сверните на вторую улицу<br>
+          г) Идите прямо<br>
+          д) Сверните на первую улицу<br>
+          е) Поверните налево
+        </div>
+      </div>
+      <div class="formula" style="margin-top:3mm">
+        <b>¿Dónde está la farmacia?</b> — Где аптека?<br>
+        <b>Siga todo recto</b> — Идите прямо · <b>Gire a la izquierda / a la derecha</b> — Поверните налево / направо<br>
+        <b>Cruce la calle</b> — Перейдите улицу · <b>Tome la primera / segunda calle</b> — Сверните на первую / вторую улицу
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.2 · стр. 2 / 3</span></div>
+</div>
+
+<!-- ═══════════════════ ЛИСТ 3 ═══════════════════ -->
+<div class="sheet">
+
+  <!-- УПР 8: СВОБОДНОЕ ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">8</div><div><h2>✏️ Напиши по-испански: «Mi barrio»</h2><div class="tag">Свободное письмо · 6–8 предложений</div></div></div>
+    <div class="card">
+      <div class="note">💡 Подсказка: используй <b>hay / está / cerca de / al lado de / tranquilo / seguro / bien comunicado</b>. Опиши район, в котором ты хочешь жить.</div>
+      Опиши район (реальный или мечты):<br>
+      <span class="wline-blk"></span>
+      <span class="wline-blk"></span>
+      <span class="wline-blk"></span>
+      <span class="wline-blk"></span>
+      <span class="wline-blk"></span>
+      <span class="wline-blk"></span>
+      <span class="wline-blk"></span>
+      <span class="wline-blk"></span>
+    </div>
+  </div>
+
+  <!-- УПР 9: ЧЕК-ЛИСТ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">9</div><div><h2>✅ Чек-лист: «Идеальный район для семьи»</h2><div class="tag">Примени к реальному району из Google Maps</div></div></div>
+    <div class="card">
+      <div class="hint">Открой Google Maps и отметь ✓ если ДА, ✗ если НЕТ для выбранного района.</div>
+      <table>
+        <tr><th>Критерий</th><th>Вопрос</th><th>✓ / ✗</th></tr>
+        <tr><td>🏫 Школа</td><td>¿Hay un colegio cerca?</td><td style="text-align:center">⬜</td></tr>
+        <tr><td>🏥 Поликлиника</td><td>¿Hay un centro de salud cerca?</td><td style="text-align:center">⬜</td></tr>
+        <tr><td>🛒 Супермаркет</td><td>¿Hay un supermercado cerca?</td><td style="text-align:center">⬜</td></tr>
+        <tr><td>🌳 Парк</td><td>¿Hay un parque cerca?</td><td style="text-align:center">⬜</td></tr>
+        <tr><td>🚌 Транспорт</td><td>¿Está bien comunicado?</td><td style="text-align:center">⬜</td></tr>
+        <tr><td>🔇 Тишина</td><td>¿Es una zona tranquila?</td><td style="text-align:center">⬜</td></tr>
+        <tr><td>🔒 Безопасность</td><td>¿Es una zona segura?</td><td style="text-align:center">⬜</td></tr>
+      </table>
+      <div class="note" style="margin-top:2mm">💚 <b>5+ галочек</b> — отличный район! · <b>3–4</b> — приемлемо · <b>меньше 3</b> — стоит поискать другой район.</div>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">Обведи: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть типы районов (barrio, centro, periferia)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Называть места в районе (farmacia, colegio, parque)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать предлоги места (cerca de, al lado de)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описывать район (tranquilo, seguro, bien comunicado)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать описание района на слух</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Спрашивать и объяснять дорогу (Imperativo)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Сравнивать 2 района и аргументировать выбор</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="small" style="margin-top:2.5mm;">📸 Отправьте «светофор» преподавателю — разберём всё, что 🟡 и 🔴.</p>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.2 · стр. 3 / 3</span></div>
+</div>
+
+</body>
+</html>

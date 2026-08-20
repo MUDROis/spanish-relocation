@@ -205,10 +205,12 @@
 </head>
 
 <body>
+<script>document.body.insertAdjacentHTML('afterbegin','<div id="gate-overlay" style="position:fixed;inset:0;z-index:99999;background:#FFF7EF"></div>');</script>
 
   <div class="lesson-topbar">
     <div class="inner">
       <a href="../../index.html" class="back-link">← К карте курса</a>
+      <span id="auth-area"></span>
       <span class="lesson-id">Неделя 1 · Урок 2 из 3 · Фаза 1 Misión Residencia</span>
     </div>
   </div>
@@ -857,5 +859,12 @@
     document.getElementById('pCheck').onclick = buildEmpadronamiento;
     document.getElementById('pDownload').onclick = () => { const text = buildEmpadronamiento(); if(text) downloadTxt('empadronamiento-simulacion.txt', text); };
   </script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="../../assets/js/firebase-config.js"></script>
+  <script src="../../assets/js/app-logic.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/lesson-gate.js"></script>
 </body>
 </html>
