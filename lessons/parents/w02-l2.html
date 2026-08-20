@@ -499,14 +499,14 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
       <div class="builder-field">
         <label for="cpPrep">Предлог</label>
         <select id="cpPrep" class="nb-select">
-          <option value="está cerca del">cerca de (рядом с)</option>
-          <option value="está lejos del">lejos de (далеко от)</option>
-          <option value="está al lado del">al lado de (сбоку от)</option>
-          <option value="está enfrente de la">enfrente de (напротив)</option>
+          <option value="está cerca de">cerca de (рядом с)</option>
+          <option value="está lejos de">lejos de (далеко от)</option>
+          <option value="está al lado de">al lado de (сбоку от)</option>
+          <option value="está enfrente de">enfrente de (напротив)</option>
           <option value="está entre">entre (между)</option>
-          <option value="está detrás de la">detrás de (позади)</option>
-          <option value="está delante de la">delante de (перед)</option>
-          <option value="está a 5 minutos del">a 5 minutos de (в 5 мин от)</option>
+          <option value="está detrás de">detrás de (позади)</option>
+          <option value="está delante de">delante de (перед)</option>
+          <option value="está a 5 minutos de">a 5 minutos de (в 5 мин от)</option>
         </select>
       </div>
       <div class="builder-field">
@@ -1134,13 +1134,19 @@ document.getElementById('cpBtn').onclick=()=>{
   const place=document.getElementById('cpPlace').value;
   const prep=document.getElementById('cpPrep').value;
   const ref=document.getElementById('cpRef').value;
-  const phrase=`${place} ${prep} ${ref}.`;
+  const isFem=ref.startsWith('la ');
+  const noun=ref.replace(/^(el|la)\s+/,'');
+  let finalPrep=prep;
+  let showArticle='';
+  if(!isFem && prep.endsWith('de')){ finalPrep=prep.slice(0,-2)+'del'; }
+  else{ showArticle=(isFem?'la':'el')+' '; }
+  const phrase=`${place} ${finalPrep} ${showArticle}${noun}.`;
   const placeRu={'El supermercado':'Супермаркет','La farmacia':'Аптека','El colegio':'Школа','El parque':'Парк','La plaza':'Площадь','El mercado':'Рынок','La panadería':'Пекарня','La cafetería':'Кафе','El metro':'Метро','La parada de autobús':'Остановка автобуса','El centro de salud':'Поликлиника','La iglesia':'Церковь'};
   const refRu={'el parque':'парка','el colegio':'школы','la farmacia':'аптеки','el supermercado':'супермаркета','la plaza':'площади','el metro':'метро','la iglesia':'церкви','la panadería':'пекарни'};
-  const prepRu={'cerca del':'рядом с','lejos del':'далеко от','al lado del':'сбоку от','enfrente de la':'напротив','entre':'между','detrás de la':'позади','delante de la':'перед','a 5 minutos del':'в 5 минутах от'};
+  const prepRu={'está cerca de':'рядом с','está lejos de':'далеко от','está al lado de':'сбоку от','está enfrente de':'напротив','está entre':'между','está detrás de':'позади','está delante de':'перед','está a 5 minutos de':'в 5 минутах от'};
   const pRu=placeRu[place]||place;
   const rRu=refRu[ref]||ref;
-  const prRu=Object.entries(prepRu).find(([k])=>prep.includes(k));
+  const prRu=Object.entries(prepRu).find(([k])=>prep===k);
   const ruPhrase=`${pRu} ${prRu?prRu[1]:prep} ${rRu}.`;
   const el=document.getElementById('cpResult');
   el.innerHTML=`<div class="hw-phrase">${phrase} <button class="mini-speak speak" data-text="${phrase}" style="margin-left:8px">🔊</button></div><div class="builder-ru">${ruPhrase}</div>`;
