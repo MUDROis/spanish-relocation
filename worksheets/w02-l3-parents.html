@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 2.3 · Llamadas a inmobiliarias — МУДРО (A4)</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+    --ok:#7A8B4C; --bad:#E2725B;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    width:210mm; min-height:297mm;
+    margin:8mm auto; padding:10mm 11mm 12mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+    position:relative;
+  }
+  .sheet-footer{
+    position:absolute; bottom:5mm; left:11mm; right:11mm;
+    display:flex; justify-content:space-between;
+    font-size:9px; color:var(--muted); font-weight:600;
+    border-top:1px solid #E8DCCF; padding-top:2mm;
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:5mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 4mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:45mm;}
+
+  .cols2{ display:grid; grid-template-columns:1fr 1fr; gap:2mm 5mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+
+  .ad-box{ background:#fff; border:2px solid var(--p4); border-radius:10px; padding:3mm; margin-bottom:3mm; }
+  .ad-header{ background:var(--p4); color:#fff; padding:2mm 3mm; font-weight:700; font-size:11px; display:flex; justify-content:space-between;}
+  .ad-body{ padding:3mm; font-size:10.5px; line-height:1.5; }
+
+  .small{ font-size:9.5px; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:0; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; min-height:auto; page-break-after:always; break-after:page; }
+    .sheet:last-child{ page-break-after:auto; break-after:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ════════════════ ЛИСТ 1 ════════════════ -->
+<div class="sheet">
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>📞 Рабочий лист · Урок 2.3 «Llamadas a inmobiliarias»</h1>
+    <div class="meta">Неделя 2 · Звонки риелторам: вопросы, вежливость и запись на просмотр</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🗣 Соедини вопрос и перевод</h2><div class="tag">Ключевые фразы для звонка · впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. ¿Están incluidos los gastos?</div>
+          <div class="item">2. ¿Hay ascensor?</div>
+          <div class="item">3. ¿Es una zona tranquila?</div>
+          <div class="item">4. ¿Cuánto es la fianza?</div>
+          <div class="item">5. ¿Se puede visitar mañana?</div>
+        </div>
+        <div class="col">
+          <div class="item">а) Это спокойный район?</div>
+          <div class="item">б) Можно посмотреть завтра?</div>
+          <div class="item">в) Коммуналка включена?</div>
+          <div class="item">г) Есть лифт?</div>
+          <div class="item">д) Сколько депозит?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ВОПРОСИТЕЛЬНЫЕ СЛОВА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>❓ Вставь вопросительное слово</h2><div class="tag">Используй: ¿Qué?, ¿Cuánto?, ¿Cuántos?, ¿Dónde?, ¿Cuándo?</div></div></div>
+    <div class="card">
+      <div class="formula">⚠️ Помни: вопросительные слова всегда пишутся с ударением (tilde) и открывающим знаком ¿</div>
+      1. <span class="wline short"></span> cuesta el alquiler? (Сколько стоит аренда?)<br>
+      2. <span class="wline short"></span> está el piso? (Где находится квартира?)<br>
+      3. <span class="wline short"></span> se puede visitar? (Когда можно посмотреть?)<br>
+      4. <span class="wline short"></span> incluye el precio? (Что включает цена?)<br>
+      5. <span class="wline short"></span> meses mínimo? (Сколько месяцев минимум?)
+    </div>
+  </div>
+
+  <!-- УПР 3: ВЕЖЛИВОСТЬ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🙏 Сделай фразу вежливой</h2><div class="tag">Преобразуй грубые фразы, используя ¿Podría...? или Quisiera...</div></div></div>
+    <div class="card">
+      <div class="cols2">
+        <div>
+          <b>Грубо (не используй):</b><br>
+          1. Dime si hay ascensor.<br>
+          2. Quiero visitar el piso.<br>
+          3. ¿Cuánto cuesta?
+        </div>
+        <div>
+          <b>Вежливо (напиши здесь):</b><br>
+          1. <span class="wline long"></span><br>
+          2. <span class="wline long"></span><br>
+          3. <span class="wline long"></span>
+        </div>
+      </div>
+      <div class="note green" style="margin-top:2mm">💡 Подсказка: ¿Podría decirme...? (Не могли бы вы сказать...?) / Quisiera... (Я хотел бы...)</div>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.3 · стр. 1 / 2</span></div>
+</div>
+
+<!-- ════════════════ ЛИСТ 2 ════════════════ -->
+<div class="sheet">
+
+  <!-- УПР 4: СТРУКТУРА ЗВОНКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>📞 Расставь этапы звонка по порядку</h2><div class="tag">Проставь цифры от 1 до 5</div></div></div>
+    <div class="card">
+      <div class="item" style="margin-bottom:2mm; padding:2mm; background:#fff; border-radius:6px; border:1px solid #E8DCCF;">
+        <span class="wline short" style="min-width:10mm; margin-right:2mm;"></span> Despedirse: Muchas gracias por su tiempo. Hasta luego.
+      </div>
+      <div class="item" style="margin-bottom:2mm; padding:2mm; background:#fff; border-radius:6px; border:1px solid #E8DCCF;">
+        <span class="wline short" style="min-width:10mm; margin-right:2mm;"></span> Hacer 2-3 preguntas clave sobre el piso y la zona.
+      </div>
+      <div class="item" style="margin-bottom:2mm; padding:2mm; background:#fff; border-radius:6px; border:1px solid #E8DCCF;">
+        <span class="wline short" style="min-width:10mm; margin-right:2mm;"></span> Saludar y decir el motivo: Buenos días. Llamo por el anuncio de Idealista.
+      </div>
+      <div class="item" style="margin-bottom:2mm; padding:2mm; background:#fff; border-radius:6px; border:1px solid #E8DCCF;">
+        <span class="wline short" style="min-width:10mm; margin-right:2mm;"></span> Preguntar por las condiciones: fianza, gastos de agencia.
+      </div>
+      <div class="item" style="margin-bottom:2mm; padding:2mm; background:#fff; border-radius:6px; border:1px solid #E8DCCF;">
+        <span class="wline short" style="min-width:10mm; margin-right:2mm;"></span> Pedir una visita: Quisiera visitar el piso. ¿Se puede mañana?
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 5: ПРАКТИКА НАПИСАНИЯ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>📝 Подготовься к реальному звонку</h2><div class="tag">Прочитай объявление и напиши 3 вопроса для риелтора</div></div></div>
+    <div class="card">
+      <div class="ad-box">
+        <div class="ad-header"><span>850 € / mes</span><span>Zona residencial</span></div>
+        <div class="ad-body">
+          Piso reformado, 2 habitaciones, 1 baño, 60 m². Planta baja con ascensor. <b>Sin amueblar</b>. Gastos incluidos. Fianza: 1 mes. Cerca del colegio.
+        </div>
+      </div>
+      <div class="hint">Ты семья с ребенком 8 лет. Тебе важно знать про мебель, школу и точную сумму к оплате.</div>
+      <b>Твои 3 вопроса (на испанском):</b><br>
+      1. <span class="wline long"></span><br>
+      2. <span class="wline long"></span><br>
+      3. <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ФРАЗЫ-СПАСАТЕЛИ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">6</div><div><h2>🆘 Соедини ситуацию и фразу-спасатель</h2><div class="tag">Что сказать, если ты не понимаешь риелтора</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. Ты совсем не понял вопрос.</div>
+          <div class="item">2. Риелтор говорит слишком быстро.</div>
+          <div class="item">3. Ты не расслышал слово.</div>
+          <div class="item">4. Тебе нужно время подумать.</div>
+        </div>
+        <div class="col">
+          <div class="item">а) ¿Puede hablar más despacio, por favor?</div>
+          <div class="item">б) Perdone, no entiendo.</div>
+          <div class="item">в) ¿Cuál es su número? Le llamo más tarde.</div>
+          <div class="item">г) ¿Puede repetir, por favor?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">Обведи или закрась нужный цвет</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Использовать вопросительные слова (¿Qué?, ¿Cuánto?)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить вежливо (¿Podría...?, Quisiera...)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Начать звонок и объяснить цель</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Задать 3 ключевых вопроса о квартире</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать фразы-спасатели, если не понимаю</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Назначить просмотр на конкретное время</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="small" style="margin-top:2.5mm;">📸 Отправьте фото этого листа преподавателю.</p>
+    </div>
+  </div>
+
+  <!-- ЧЕК-ЛИСТ ОТПРАВКИ -->
+  <div class="ex">
+    <div class="card" style="background:#F0F7E6; border-left:4px solid var(--p2);">
+      <h4 style="color:var(--p2); margin-bottom:2mm;">🎯 Что прислать преподавателю:</h4>
+      <ul style="padding-left:5mm; margin:0; font-size:10.5px; line-height:1.6;">
+        <li>Фото этого заполненного рабочего листа.</li>
+        <li>Голосовое сообщение: запись твоего «звонка» по шаблону из урока (2 дубля).</li>
+        <li>Скриншот объявления + 3 написанных вопроса (из Упр. 5).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.3 · стр. 2 / 2</span></div>
+</div>
+
+</body>
+</html>
