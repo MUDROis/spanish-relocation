@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 6 · Навигация — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B;--oliva:#7A8B4C;--afran:#E9A13B;--ocean:#3E7CB1;
+    --ink:#2D2A26;--bg:#FFFDF7;--line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+  
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--terra);color:#fff;border:none;border-radius:12px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 12px rgba(226,114,91,.3)}
+  .print-btn:hover{background:#c9604b}
+  
+  .sheet{max-width:210mm;margin:0 auto 30px;background:#fff;padding:18mm 20mm;box-shadow:0 4px 20px rgba(0,0,0,.1);position:relative;min-height:297mm}
+  
+  .hero{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:16px;padding:24px;margin-bottom:20px;text-align:center}
+  .hero h1{font-size:22px;color:var(--ink);margin-bottom:6px}
+  .hero .sub{color:#555;font-size:13px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--terra);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  
+  .name-row{display:flex;gap:20px;margin-bottom:18px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+  
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .ex-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;flex-shrink:0}
+  .ex-num.c1{background:var(--terra)}.ex-num.c2{background:var(--ocean)}.ex-num.c3{background:var(--oliva)}.ex-num.c4{background:var(--afran)}.ex-num.c5{background:#8B5CF6}.ex-num.c6{background:#EC4899}.ex-num.c7{background:#6366F1}.ex-num.c8{background:#14B8A6}
+  .ex-title{font-weight:800;font-size:14px}
+  .ex-sub{color:#777;font-size:12px;font-weight:600;margin-left:auto}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+  
+  /* Таблица сопоставления */
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:#f8f6f2;padding:8px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:8px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .match-table .letter-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:22px;font-weight:800;margin-right:8px}
+  .match-table .emoji{font-size:18px}
+  
+  /* Кружки для ответов */
+  .circle{display:inline-block;width:20px;height:20px;border:2px solid #999;border-radius:50%;vertical-align:middle;margin:0 4px}
+  
+  /* Строки для письма */
+  .write-line{border-bottom:1.6px dashed var(--line);height:26px;margin:6px 0;width:100%}
+  .write-line.short{width:60%}
+  .write-line.inline{display:inline-block;min-width:100px;height:20px;vertical-align:bottom;margin:0 4px}
+  
+  /* Сетка */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  
+  /* Блок с подсказкой */
+  .hint-box{background:#FFF8E1;border:1.5px dashed var(--afran);border-radius:10px;padding:10px 14px;font-size:12px;margin-bottom:10px;color:#666}
+  .hint-box strong{color:var(--ink)}
+  
+  /* Карта */
+  .map-box{background:#f9f9f7;border:2px solid var(--line);border-radius:12px;padding:16px;margin:10px 0;position:relative}
+  .map-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+  .map-cell{background:#fff;border:1.5px solid #ddd;border-radius:8px;padding:12px 8px;font-size:12px;font-weight:700}
+  .map-cell .emoji{font-size:24px;display:block;margin-bottom:4px}
+  .map-cell.blank{border-style:dashed;background:#fafafa;color:#999}
+  .map-pasillo{grid-column:1/-1;background:#e8f5e9;border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:12px;color:#4CAF50}
+  
+  /* Текст для чтения */
+  .reading-box{background:#f8f6f2;border-radius:12px;padding:16px;margin:10px 0;font-size:13px;line-height:1.8}
+  .reading-box .speaker{font-weight:800;color:var(--ocean)}
+  .reading-box .dialogue{margin:6px 0;padding-left:12px;border-left:3px solid var(--ocean)}
+  
+  /* Самопроверка */
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .selfcheck-table th{background:#f0ede8;padding:8px;text-align:center;font-weight:800}
+  .selfcheck-table th:first-child{text-align:left}
+  .selfcheck-table td{padding:8px;border-bottom:1px solid #eee;text-align:center}
+  .selfcheck-table td:first-child{text-align:left;font-weight:600}
+  
+  /* Ключи */
+  .answers-page{page-break-before:always;border-top:3px dashed var(--line);padding-top:16px;margin-top:30px}
+  .answers-page h2{color:var(--terra);font-size:18px;margin-bottom:12px}
+  .answers-page .cut-line{text-align:center;color:#999;font-size:11px;margin-bottom:12px}
+  .ans-item{margin-bottom:10px;font-size:12.5px;padding-left:12px;border-left:3px solid var(--line)}
+  .ans-item b{color:var(--terra)}
+  
+  .footer{text-align:center;color:#999;font-size:10px;margin-top:20px;padding-top:10px;border-top:1px solid #eee}
+  
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;margin:0;padding:15mm;min-height:auto}
+    @page{size:A4;margin:10mm}
+    .answers-page{page-break-before:always}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- СТРАНИЦА 1 -->
+<div class="sheet">
+  <div class="hero">
+    <h1>🧭 Рабочий лист: «Первый день — не потеряться»</h1>
+    <div class="sub">Урок 6 · Станция 1: Supervivencia · Неделя 2</div>
+    <div class="tag">¿Dónde está el baño?</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:80px"></span></span>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 1: ЛЕКСИКА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c1">1</span>
+      <span class="ex-title">Соедини: помещение школы → перевод</span>
+      <span class="ex-sub">📖 Лексика</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода в квадратик рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr>
+        <th style="width:55%">Испанский</th>
+        <th>Перевод</th>
+      </tr>
+      <tr>
+        <td><span class="letter-box"></span><span class="emoji">🚽</span> el baño</td>
+        <td>а) столовая</td>
+      </tr>
+      <tr>
+        <td><span class="letter-box"></span><span class="emoji">🏫</span> la clase</td>
+        <td>б) двор / площадка</td>
+      </tr>
+      <tr>
+        <td><span class="letter-box"></span><span class="emoji">🌳</span> el patio</td>
+        <td>в) туалет</td>
+      </tr>
+      <tr>
+        <td><span class="letter-box"></span><span class="emoji">🍽️</span> el comedor</td>
+        <td>г) класс / аудитория</td>
+      </tr>
+      <tr>
+        <td><span class="letter-box"></span><span class="emoji">📚</span> la biblioteca</td>
+        <td>д) медпункт</td>
+      </tr>
+      <tr>
+        <td><span class="letter-box"></span><span class="emoji">🩺</span> la enfermería</td>
+        <td>е) библиотека</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 2: ГРАММАТИКА - ESTÁ / ESTÁN -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c2">2</span>
+      <span class="ex-title">Выбери: está или están?</span>
+      <span class="ex-sub">🧩 Грамматика</span>
+    </div>
+    <div class="hint-box">
+      💡 <strong>Правило:</strong> одно место → <strong>está</strong>. Несколько мест → <strong>están</strong>.<br>
+      ¿Dónde <strong>está</strong> el baño? / ¿Dónde <strong>están</strong> los baños?
+    </div>
+    <div class="ex-instruction">Обведи правильный вариант.</div>
+    <table class="match-table">
+      <tr><th>Фраза</th><th>Выбор</th></tr>
+      <tr>
+        <td>1. ¿Dónde <span class="circle"></span> <span class="circle"></span> la clase?</td>
+        <td>está / están</td>
+      </tr>
+      <tr>
+        <td>2. ¿Dónde <span class="circle"></span> <span class="circle"></span> los baños?</td>
+        <td>está / están</td>
+      </tr>
+      <tr>
+        <td>3. ¿Dónde <span class="circle"></span> <span class="circle"></span> el comedor?</td>
+        <td>está / están</td>
+      </tr>
+      <tr>
+        <td>4. ¿Dónde <span class="circle"></span> <span class="circle"></span> las bibliotecas?</td>
+        <td>está / están</td>
+      </tr>
+      <tr>
+        <td>5. ¿Dónde <span class="circle"></span> <span class="circle"></span> la enfermería?</td>
+        <td>está / están</td>
+      </tr>
+      <tr>
+        <td>6. ¿Dónde <span class="circle"></span> <span class="circle"></span> las oficinas?</td>
+        <td>está / están</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 3: НАПИШИ ВОПРОС -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c3">3</span>
+      <span class="ex-title">Напиши вопрос по-испански</span>
+      <span class="ex-sub">✍️ Письмо</span>
+    </div>
+    <div class="hint-box">
+      💡 Формула: <strong>¿Dónde está / están + [место]?</strong><br>
+      Не забудь: <strong>Perdón,</strong> перед вопросом — вежливость!
+    </div>
+    <div class="ex-instruction">Напиши полный вопрос, который ты задашь однокласснику или учителю.</div>
+    
+    <p style="margin:8px 0;font-weight:700">1. Ты хочешь найти туалет:</p>
+    <div class="write-line"></div>
+    
+    <p style="margin:8px 0;font-weight:700">2. Ты хочешь найти свой класс (3ºB):</p>
+    <div class="write-line"></div>
+    
+    <p style="margin:8px 0;font-weight:700">3. Ты хочешь найти столовую:</p>
+    <div class="write-line"></div>
+    
+    <p style="margin:8px 0;font-weight:700">4. Ты хочешь найти медпункт:</p>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 4: ОТВЕТЫ - ЗДЕСЬ / ТАМ / В КОНЦЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c4">4</span>
+      <span class="ex-title">Выбери правильный ответ</span>
+      <span class="ex-sub">📖 Понимание</span>
+    </div>
+    <div class="hint-box">
+      💡 <strong>Три ответа:</strong><br>
+      • <strong>Aquí</strong> = здесь (близко, под ногами)<br>
+      • <strong>Allí</strong> = там (далеко, показываем вдаль)<br>
+      • <strong>Al final del pasillo</strong> = в конце коридора
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию и выбери подходящий ответ.</div>
+    
+    <div class="grid-2">
+      <div style="background:#f8f6f2;border-radius:10px;padding:12px;margin-bottom:8px">
+        <p style="font-weight:700;margin-bottom:6px">1. Туалет рядом с твоим классом.</p>
+        <p>— ¿Dónde está el baño?</p>
+        <p>— <span class="circle"></span> Aquí &nbsp; <span class="circle"></span> Allí &nbsp; <span class="circle"></span> Al final</p>
+      </div>
+      <div style="background:#f8f6f2;border-radius:10px;padding:12px;margin-bottom:8px">
+        <p style="font-weight:700;margin-bottom:6px">2. Столовая далеко, в конце коридора.</p>
+        <p>— ¿Dónde está el comedor?</p>
+        <p>— <span class="circle"></span> Aquí &nbsp; <span class="circle"></span> Allí &nbsp; <span class="circle"></span> Al final</p>
+      </div>
+      <div style="background:#f8f6f2;border-radius:10px;padding:12px;margin-bottom:8px">
+        <p style="font-weight:700;margin-bottom:6px">3. Медпункт на другом конце школы.</p>
+        <p>— ¿Dónde está la enfermería?</p>
+        <p>— <span class="circle"></span> Aquí &nbsp; <span class="circle"></span> Allí &nbsp; <span class="circle"></span> Al final</p>
+      </div>
+      <div style="background:#f8f6f2;border-radius:10px;padding:12px;margin-bottom:8px">
+        <p style="font-weight:700;margin-bottom:6px">4. Библиотека прямо здесь, за дверью.</p>
+        <p>— ¿Dónde está la biblioteca?</p>
+        <p>— <span class="circle"></span> Aquí &nbsp; <span class="circle"></span> Allí &nbsp; <span class="circle"></span> Al final</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">стр. 1 / 3 · Интерактивная школа МУДРО · Урок 6</div>
+</div>
+
+<!-- СТРАНИЦА 2 -->
+<div class="sheet">
+  
+  <!-- УПРАЖНЕНИЕ 5: ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c5">5</span>
+      <span class="ex-title">Прочитай диалог и ответь на вопросы</span>
+      <span class="ex-sub">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      <p><em>Первый день в школе. Мария потерялась в коридоре.</em></p>
+      <div class="dialogue">
+        <p><span class="speaker">María:</span> Perdón, ¿dónde está la clase de 5ºA?</p>
+        <p><span class="speaker">Chico:</span> Está allí, al final del pasillo, a la derecha.</p>
+        <p><span class="speaker">María:</span> ¡Muchas gracias! ¿Y dónde está el baño?</p>
+        <p><span class="speaker">Chico:</span> El baño está aquí, al lado de la clase.</p>
+        <p><span class="speaker">María:</span> Perfecto. ¿Y el comedor?</p>
+        <p><span class="speaker">Chico:</span> El comedor está en la planta baja, al final de la escalera.</p>
+        <p><span class="speaker">María:</span> ¡Gracias! Eres muy amable.</p>
+      </div>
+    </div>
+    <div class="ex-instruction">Ответь на вопросы полными предложениями по-испански.</div>
+    
+    <p style="margin:8px 0;font-weight:700">1. ¿Dónde está la clase de 5ºA?</p>
+    <div class="write-line"></div>
+    
+    <p style="margin:8px 0;font-weight:700">2. ¿Dónde está el baño?</p>
+    <div class="write-line"></div>
+    
+    <p style="margin:8px 0;font-weight:700">3. ¿Dónde está el comedor?</p>
+    <div class="write-line"></div>
+    
+    <p style="margin:8px 0;font-weight:700">4. ¿Qué dice María al final? (Что Мария говорит в конце?)</p>
+    <div class="write-line short"></div>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 6: КАРТА ШКОЛЫ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c6">6</span>
+      <span class="ex-title">Заполни карту школы</span>
+      <span class="ex-sub">🗺️ Письмо + Лексика</span>
+    </div>
+    <div class="ex-instruction">Напиши названия помещений по-испански в пустые клетки. Используй слова: baño, clase, patio, comedor, biblioteca, enfermería.</div>
+    
+    <div class="map-box">
+      <div class="map-grid">
+        <div class="map-cell"><span class="emoji">🚽</span><span style="font-size:11px">el ______</span></div>
+        <div class="map-cell blank"><span style="font-size:20px">❓</span><span style="font-size:11px">la ______</span></div>
+        <div class="map-cell"><span class="emoji">🏫</span><span style="font-size:11px">la ______</span></div>
+        <div class="map-cell blank"><span style="font-size:20px">❓</span><span style="font-size:11px">el ______</span></div>
+      </div>
+      <div class="map-pasillo">🚶 PASILLO (коридор) → → →</div>
+      <div class="map-grid">
+        <div class="map-cell"><span class="emoji">🌳</span><span style="font-size:11px">el ______</span></div>
+        <div class="map-cell"><span class="emoji">🍽️</span><span style="font-size:11px">el ______</span></div>
+        <div class="map-cell blank"><span style="font-size:20px">❓</span><span style="font-size:11px">la ______</span></div>
+        <div class="map-cell blank"><span style="font-size:20px">❓</span><span style="font-size:11px">la ______</span></div>
+      </div>
+    </div>
+    
+    <p style="margin:10px 0;font-weight:700">Теперь напиши 2 предложения о карте:</p>
+    <p style="margin:6px 0">1. El baño está <span class="write-line inline"></span> de la clase.</p>
+    <p style="margin:6px 0">2. El comedor está <span class="write-line inline"></span>.</p>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 7: ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c7">7</span>
+      <span class="ex-title">Составь мини-диалог (для работы в паре)</span>
+      <span class="ex-sub">🗣️ Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай диалог вслух с партнёром (родитель/одноклассник). Потом поменяйтесь ролями.</div>
+    <div class="reading-box" style="background:#e8f5e9">
+      <div class="dialogue">
+        <p><span class="speaker">Tú:</span> Perdón, ¿dónde está <span class="write-line inline" style="min-width:80px"></span>?</p>
+        <p><span class="speaker">Compañero:</span> Está <span class="write-line inline" style="min-width:100px"></span>.</p>
+        <p><span class="speaker">Tú:</span> ¡Muchas gracias!</p>
+        <p><span class="speaker">Compañero:</span> ¡De nada!</p>
+      </div>
+    </div>
+    <div class="ex-instruction">Заполни пропуски своими словами и разыграй диалог 3 раза с разными помещениями.</div>
+    <div style="background:#FFF8E1;border-radius:8px;padding:8px 12px;font-size:12px;margin-top:8px">
+      ✅ Я разыграл(а) диалог 3 раза &nbsp; <span class="circle"></span>
+    </div>
+  </div>
+
+  <!-- УПРАЖНЕНИЕ 8: СВОБОДНОЕ ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c8">8</span>
+      <span class="ex-title">Мой первый день: напиши 5–7 предложений</span>
+      <span class="ex-sub">✍️ Письмо (свободное)</span>
+    </div>
+    <div class="hint-box">
+      💡 Опиши свой первый день в испанской школе. Используй фразы урока:<br>
+      <strong>¿Dónde está...?</strong> · <strong>Está aquí / allí / al final...</strong> · <strong>Perdón</strong> · <strong>Muchas gracias</strong> · <strong>No entiendo</strong>
+    </div>
+    <div class="ex-instruction">Напиши по-испански. Минимум 5 предложений. Можно рисовать смайлики!</div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c1">✓</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-sub">🚦 Оцени себя честно</span>
+    </div>
+    <table class="selfcheck-table">
+      <tr>
+        <th>Умею</th>
+        <th>🟢 Да!</th>
+        <th>🟡 Почти</th>
+        <th>🔴 Пока нет</th>
+      </tr>
+      <tr>
+        <td>Назвать 6 помещений школы</td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+      <tr>
+        <td>Спросить «¿Dónde está...?»</td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+      <tr>
+        <td>Понять ответ: aquí / allí / al final</td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+      <tr>
+        <td>Различать está / están</td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+      <tr>
+        <td>Найти место на карте школы</td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer">стр. 2 / 3 · Интерактивная школа МУДРО · Урок 6</div>
+</div>
+
+<!-- СТРАНИЦА 3: КЛЮЧИ -->
+<div class="sheet">
+  <div class="answers-page">
+    <div class="cut-line">✂️ ─────────────────────────────────────────── (линия отреза) ─────────────────────────────────────────── ✂️</div>
+    <h2>🔑 Ключи для преподавателя / родителей</h2>
+    
+    <div class="ans-item">
+      <b>Упражнение 1:</b> el baño → в) туалет · la clase → г) класс · el patio → б) двор · el comedor → а) столовая · la biblioteca → е) библиотека · la enfermería → д) медпункт
+    </div>
+    
+    <div class="ans-item">
+      <b>Упражнение 2:</b> 1. está (la clase — ед.ч.) · 2. están (los baños — мн.ч.) · 3. está (el comedor — ед.ч.) · 4. están (las bibliotecas — мн.ч.) · 5. está (la enfermería — ед.ч.) · 6. están (las oficinas — мн.ч.)
+    </div>
+    
+    <div class="ans-item">
+      <b>Упражнение 3 (примерные ответы):</b><br>
+      1. Perdón, ¿dónde está el baño?<br>
+      2. Perdón, ¿dónde está la clase de 3ºB?<br>
+      3. Perdón, ¿dónde está el comedor?<br>
+      4. Perdón, ¿dónde está la enfermería?
+    </div>
+    
+    <div class="ans-item">
+      <b>Упражнение 4:</b> 1. Aquí · 2. Al final · 3. Allí / Al final · 4. Aquí
+    </div>
+    
+    <div class="ans-item">
+      <b>Упражнение 5:</b><br>
+      1. La clase de 5ºA está allí, al final del pasillo, a la derecha.<br>
+      2. El baño está aquí, al lado de la clase.<br>
+      3. El comedor está en la planta baja, al final de la escalera.<br>
+      4. María dice: «¡Gracias! Eres muy amable.»
+    </div>
+    
+    <div class="ans-item">
+      <b>Упражнение 6:</b> Верхний ряд: el baño, la biblioteca, la clase, el patio. Нижний ряд: el patio, el comedor, la biblioteca, la enfermería. (Возможны варианты в зависимости от планировки.) Примеры: «El baño está al lado de la clase.» / «El comedor está al final del pasillo.»
+    </div>
+    
+    <div class="ans-item">
+      <b>Упражнение 7:</b> Проверяем устно. Убедитесь, что ребёнок использует «Perdón» перед вопросом и «Muchas gracias» в конце.
+    </div>
+    
+    <div class="ans-item">
+      <b>Упражнение 8:</b> Свободный ответ. Проверяем: минимум 5 предложений, использование «¿Dónde está...?», «Está aquí/allí/al final», «Perdón», «Muchas gracias». Бонус: использование «No entiendo» и связки с уроками 1–5.
+    </div>
+    
+    <div style="margin-top:20px;padding:12px;background:#f8f6f2;border-radius:10px;font-size:12px">
+      <b>📊 Рекомендация:</b><br>
+      • Все 🟢 → ребёнок готов к уроку 7 (Репетиция).<br>
+      • Есть 🟡 → повторите упражнения 2 и 4 перед следующим уроком.<br>
+      • Есть 🔴 → вернитесь к карточкам урока 6 и тренажёру «Найди место».
+    </div>
+  </div>
+  
+  <div class="footer">стр. 3 / 3 · Интерактивная школа МУДРО · Урок 6 · Ключи</div>
+</div>
+
+</body>
+</html>

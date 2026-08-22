@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист · Порядковые числительные · Этажи — МУДРО (A4)</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+    --ok:#7A8B4C; --bad:#E2725B;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    width:210mm; min-height:297mm;
+    margin:8mm auto; padding:10mm 11mm 12mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+    position:relative;
+  }
+  .sheet-footer{
+    position:absolute; bottom:5mm; left:11mm; right:11mm;
+    display:flex; justify-content:space-between;
+    font-size:9px; color:var(--muted); font-weight:600;
+    border-top:1px solid #E8DCCF; padding-top:2mm;
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:5mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 4mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:45mm;}
+
+  .cols2{ display:grid; grid-template-columns:1fr 1fr; gap:2mm 5mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+  .note.red{ background:#FBF0ED; border-left-color:var(--p1);}
+
+  .ad-box{ background:#fff; border:2px solid var(--p4); border-radius:10px; padding:3mm; margin-bottom:2mm; }
+  .ad-header{ background:var(--p4); color:#fff; padding:2mm 3mm; font-weight:700; font-size:11px; display:flex; justify-content:space-between;}
+  .ad-body{ padding:3mm; font-size:10.5px; line-height:1.5; }
+
+  .cut{ border-top:0.7mm dashed var(--muted); margin:5mm 0 3mm; text-align:center; font-size:10px; color:var(--muted); }
+  .keys h2{ font-size:13px; color:var(--p2); margin:0 0 2mm;}
+  .keys p{ margin:0 0 2mm; font-size:9.5px;}
+  .small{ font-size:9.5px; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:0; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; min-height:auto; page-break-after:always; break-after:page; }
+    .sheet:last-child{ page-break-after:auto; break-after:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ════════════════ ЛИСТ 1 · СПРАВОЧНИК ════════════════ -->
+<div class="sheet">
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪</div>
+    <h1>🔢 Рабочий лист · Порядковые числительные · Этажи</h1>
+    <div class="meta">Los números ordinales · учимся называть этажи как испанцы</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- СПРАВОЧНИК: ЧИСЛА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">📖</div><div><h2>Порядковые числительные 1–10</h2><div class="tag">Справочная страница · сохрани как шпаргалку</div></div></div>
+    <div class="card">
+      <table>
+        <tr><th>№</th><th>Муж. род (+ произношение)</th><th>Жен. род</th><th>Сокращение</th></tr>
+        <tr><td>1</td><td>primero [примэ́ро]</td><td>primera</td><td>1º / 1ª</td></tr>
+        <tr><td>2</td><td>segundo [сэгу́ндо]</td><td>segunda</td><td>2º / 2ª</td></tr>
+        <tr><td>3</td><td>tercero [тэрсэ́ро]</td><td>tercera</td><td>3º / 3ª</td></tr>
+        <tr><td>4</td><td>cuarto [куа́рто]</td><td>cuarta</td><td>4º / 4ª</td></tr>
+        <tr><td>5</td><td>quinto [ки́нто]</td><td>quinta</td><td>5º / 5ª</td></tr>
+        <tr><td>6</td><td>sexto [сэ́сто]</td><td>sexta</td><td>6º / 6ª</td></tr>
+        <tr><td>7</td><td>séptimo [сэ́птимо]</td><td>séptima</td><td>7º / 7ª</td></tr>
+        <tr><td>8</td><td>octavo [окта́во]</td><td>octava</td><td>8º / 8ª</td></tr>
+        <tr><td>9</td><td>noveno [новэ́но]</td><td>novena</td><td>9º / 9ª</td></tr>
+        <tr><td>10</td><td>décimo [дэ́симо]</td><td>décima</td><td>10º / 10ª</td></tr>
+      </table>
+      <div class="note red" style="margin-top:2mm">
+        ⚠️ <b>Правило:</b> <b>primero</b> и <b>tercero</b> теряют <b>-o</b> перед мужским словом: <b>primer piso</b>, <b>tercer piso</b>. Но с женским словом — полная форма: <b>primera planta</b>, <b>tercera planta</b>.
+      </div>
+    </div>
+  </div>
+
+  <!-- СПРАВОЧНИК: ЭТАЖИ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">🏢</div><div><h2>Этажи в Испании (сверху вниз)</h2><div class="tag">Как читать объявления Idealista</div></div></div>
+    <div class="card">
+      <table>
+        <tr><th>Испанский</th><th>Что это</th><th>По-русски (наш счёт)</th></tr>
+        <tr><td><b>el ático</b></td><td>последний этаж, пентхаус</td><td>верхний этаж</td></tr>
+        <tr><td><b>la 3ª planta</b> (tercera)</td><td>третий этаж (исп. счёт)</td><td>4-й этаж</td></tr>
+        <tr><td><b>la 2ª planta</b> (segunda)</td><td>второй этаж (исп. счёт)</td><td>3-й этаж</td></tr>
+        <tr><td><b>la 1ª planta</b> (primera)</td><td>первый этаж (исп. счёт)</td><td>2-й этаж</td></tr>
+        <tr><td><b>la planta baja (PB)</b></td><td>нижний / цокольный этаж</td><td>1-й этаж</td></tr>
+        <tr><td><b>el sótano</b></td><td>подвал</td><td>подвал</td></tr>
+      </table>
+      <div class="note" style="margin-top:2mm">
+        ⚠️ <b>Культурный нюанс:</b> в Испании отсчёт идёт от <b>planta baja</b> (наш 1-й этаж). Поэтому испанская «3ª planta» — это наш <b>4-й этаж</b>! Формула: <b>наш этаж = испанская planta + 1</b>.
+      </div>
+    </div>
+  </div>
+
+  <!-- СПРАВОЧНИК: ПРИМЕРЫ ИЗ УРОКОВ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">🏠</div><div><h2>Примеры из уроков (прочитай вслух)</h2><div class="tag">Как это звучит в объявлениях</div></div></div>
+    <div class="card">
+      <div class="formula"><b>Piso en la 3ª planta con ascensor.</b> — Квартира на 3-м этаже (исп. счёт = наш 4-й) с лифтом. → читается: <i>tercera planta</i></div>
+      <div class="formula"><b>Planta baja con ascensor.</b> — Нижний (наш 1-й) этаж с лифтом.</div>
+      <div class="formula"><b>Ático sin ascensor.</b> — Последний этаж без лифта.</div>
+      <div class="formula"><b>El piso está en la primera planta.</b> — Квартира на 1-м этаже (исп. счёт = наш 2-й).</div>
+      <div class="note green" style="margin-top:2mm">
+        💡 <b>Как читать сокращения:</b> 3ª planta → «терсэ́ра пла́нта» · 2º piso → «сэгу́ндо пи́со» · 1er piso → «примэ́р пи́со».
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Порядковые числительные · стр. 1 / 3</span></div>
+</div>
+
+<!-- ════════════════ ЛИСТ 2 · ПРАКТИКА ════════════════ -->
+<div class="sheet">
+
+  <!-- УПР 1 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>Распиши сокращение словами</h2><div class="tag">3ª planta → tercera planta</div></div></div>
+    <div class="card">
+      1. 1ª planta → <span class="wline"></span><br>
+      2. 3º piso → <span class="wline"></span> <span class="small">(осторожно: tercer!)</span><br>
+      3. 5ª planta → <span class="wline"></span><br>
+      4. 2º piso → <span class="wline"></span><br>
+      5. 7ª planta → <span class="wline"></span><br>
+      6. 10º piso → <span class="wline"></span>
+    </div>
+  </div>
+
+  <!-- УПР 2 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>Запиши сокращённо</h2><div class="tag">cuarta planta → 4ª planta</div></div></div>
+    <div class="card">
+      1. sexta planta → <span class="wline short"></span><br>
+      2. noveno piso → <span class="wline short"></span><br>
+      3. octava planta → <span class="wline short"></span><br>
+      4. segundo piso → <span class="wline short"></span><br>
+      5. primera planta → <span class="wline short"></span><br>
+      6. séptimo piso → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>Соедини этаж и название</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. Нижний (наш 1-й) этаж</div>
+          <div class="item">2. Последний этаж (пентхаус)</div>
+          <div class="item">3. Наш 2-й этаж (исп. счёт)</div>
+          <div class="item">4. Подвал</div>
+        </div>
+        <div class="col">
+          <div class="item">а) el ático</div>
+          <div class="item">б) la planta baja</div>
+          <div class="item">в) el sótano</div>
+          <div class="item">г) la primera planta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 4 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>Прочитай объявления и ответь</h2><div class="tag">из уроков 2.1–2.3</div></div></div>
+    <div class="card">
+      <div class="ad-box">
+        <div class="ad-header"><span>A · 950 €/mes</span><span>Centro</span></div>
+        <div class="ad-body">3 hab., 85 m². <b>3ª planta</b> con ascensor. Amueblado.</div>
+      </div>
+      <div class="ad-box">
+        <div class="ad-header"><span>B · 800 €/mes</span><span>Zona residencial</span></div>
+        <div class="ad-body">2 hab., 60 m². <b>Planta baja</b> con ascensor. Cerca del colegio.</div>
+      </div>
+      <div class="ad-box">
+        <div class="ad-header"><span>C · 1.100 €/mes</span><span>Ático</span></div>
+        <div class="ad-body">3 hab., 110 m². <b>Ático</b> sin ascensor. Terraza grande.</div>
+      </div>
+      1. ¿En qué planta está el piso A? (словами) → <span class="wline"></span><br>
+      2. Piso B — это какой этаж по-русски? → <span class="wline short"></span><br>
+      3. ¿Qué es el piso C? → <span class="wline short"></span><br>
+      4. В какой квартире <b>нет</b> лифта? → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Порядковые числительные · стр. 2 / 3</span></div>
+</div>
+
+<!-- ════════════════ ЛИСТ 3 · ПРАКТИКА 2 + КЛЮЧИ ════════════════ -->
+<div class="sheet">
+
+  <!-- УПР 5 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>Переведи на испанский (этажи по испанскому счёту)</h2><div class="tag">помни: наш этаж = planta + 1</div></div></div>
+    <div class="card">
+      1. Квартира на третьем этаже с лифтом. → <span class="wline long"></span><br>
+      2. Я живу на первом (нижнем) этаже. → <span class="wline long"></span><br>
+      3. Квартира на пятом этаже без лифта. → <span class="wline long"></span><br>
+      4. Мы ищем квартиру на последнем этаже. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>Расскажи про свою (будущую) квартиру</h2><div class="tag">3–4 предложения: этаж, лифт, что рядом</div></div></div>
+    <div class="card">
+      <div class="hint">Пример: <i>Mi piso está en la segunda planta. Hay ascensor. Está cerca del colegio.</i></div>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">✓</div><div><h2>Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Назвать порядковые числа 1–10</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Читать сокращения (3ª, 2º, 1er)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Назвать этажи (planta baja, ático)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Переводить этажи (рус ↔ исп)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описать этаж своей квартиры</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- КЛЮЧИ -->
+  <div class="cut">✂️ — линия отреза: ключи для преподавателя —</div>
+  <div class="keys">
+    <h2>🔑 Ключи · Порядковые числительные</h2>
+    <p><b>Упр. 1:</b> 1 primera planta · 2 tercer piso · 3 quinta planta · 4 segundo piso · 5 séptima planta · 6 décimo piso.</p>
+    <p><b>Упр. 2:</b> 1 6ª · 2 9º · 3 8ª · 4 2º · 5 1ª · 6 7º.</p>
+    <p><b>Упр. 3:</b> 1-б · 2-а · 3-г · 4-в.</p>
+    <p><b>Упр. 4:</b> 1 En la tercera planta (наш 4-й). 2 Первый (нижний) этаж. 3 Ático (последний этаж). 4 C (ático sin ascensor).</p>
+    <p><b>Упр. 5:</b> 1 El piso está en la segunda planta con ascensor. 2 Vivo en la planta baja. 3 El piso está en la cuarta planta sin ascensor. 4 Buscamos un ático. (допустимо: un piso en la última planta)</p>
+    <p><b>Упр. 6:</b> свободный ответ. Проверьте: этаж (en la … planta / planta baja / ático), лифт (hay/no hay ascensor), согласование рода.</p>
+    <p class="small">⏱ Рекомендация: раздавайте после уроков 2.1–2.3 (жильё). Упражнения 5–6 можно дать как домашнее задание.</p>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Порядковые числительные · стр. 3 / 3</span></div>
+</div>
+
+</body>
+</html>
