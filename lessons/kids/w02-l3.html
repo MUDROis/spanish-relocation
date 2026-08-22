@@ -316,7 +316,7 @@
   <!-- ГЕНДЕР -->
   <section class="gender-box">
     <h3>👦👧 Кто ты?</h3>
-    <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">В испанском мальчик говорит «Estoy perdido», а девочка — «Estoy perdida». Выбери, кто ты!</p>
+    <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">В испанском мальчик говорит «Estoy perdido» (я потерялся), а девочка — «Estoy perdida» (я потерялась). Выбери, кто ты!</p>
     <div class="gender-btns">
       <button class="gender-btn" onclick="setGender('m')" id="gb-m">👦 Я мальчик</button>
       <button class="gender-btn" onclick="setGender('f')" id="gb-f">👧 Я девочка</button>
@@ -737,16 +737,16 @@
       </div>
 
       <div style="display:flex;gap:10px;justify-content:flex-start;margin-top:14px;flex-wrap:wrap">
-        <button class="btn btn-blue" onclick="playAllOrdinals()">▶ Послушать все</button>
-        <button class="btn btn-ghost" onclick="shuffleOrdinals()">🔀 Перемешать карточки</button>
-        <button class="btn btn-primary" onclick="askNextOrdinal()">🧠 Начать упражнение</button>
+        <button class="speak-btn" style="--c:#1565C0" onclick="playAllOrdinals()">▶ Послушать все</button>
+        <button class="speak-btn" style="--c:#7A8B4C" onclick="shuffleOrdinals()">🔀 Перемешать карточки</button>
+        <button class="speak-btn" style="--c:#E8604C" onclick="askNextOrdinal()">🧠 Начать упражнение</button>
       </div>
 
       <div id="ord-quiz" style="margin-top:14px">
         <div id="ord-question" style="font-weight:900;margin:8px 0;color:var(--nav)"></div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <input id="ord-input" class="ord-input" type="text" placeholder="Напиши номер (напр. 3) или слово (tercero)">
-          <button class="btn btn-primary" onclick="submitOrdinalInput()">Ответить</button>
+          <button class="speak-btn" style="--c:#1565C0" onclick="submitOrdinalInput()">Ответить</button>
           <div id="ord-feedback" class="ord-feedback"></div>
         </div>
         <div style="margin-top:10px;color:var(--ink-soft);font-weight:700">Можно отвечать кликом по карточке или вписать номер/слово и нажать Ответить.</div>
@@ -775,7 +775,8 @@
           setTimeout(()=>elem.classList.remove('playing'),800);
         }
       }
-n      function playAllOrdinals(){
+
+n      function playAllOrdinals(){
         const words=ordinalsList.map(o=>o.word);
         let i=0;
         function next(){
@@ -804,7 +805,8 @@
         document.getElementById('ord-feedback').textContent='';
         document.getElementById('ord-input').value='';
       }
-n      function cardClickOrdinal(el){
+
+n      function cardClickOrdinal(el){
         const idx = parseInt(el.dataset.ordIndex,10);
         const w = el.dataset.ordWord;
         playOrdinal(w, el);
@@ -814,7 +816,8 @@
         }
         checkAnswer(idx, el);
       }
-n      function submitOrdinalInput(){
+
+n      function submitOrdinalInput(){
         const val = document.getElementById('ord-input').value.trim();
         if(!currentOrdinal){ document.getElementById('ord-feedback').textContent='Нажмите «Начать упражнение»'; return; }
         if(!val){ document.getElementById('ord-feedback').textContent='Введите номер или слово'; return; }
@@ -834,7 +837,8 @@
           showWrong();
         }
       }
-n      function checkAnswer(chosenIndex, el){
+
+n      function checkAnswer(chosenIndex, el){
         if(chosenIndex === currentOrdinal.index){
           showCorrect();
           if(el) el.classList.add('correct'); setTimeout(()=>{ if(el) el.classList.remove('correct'); },700);
@@ -843,7 +847,8 @@
           if(el) el.classList.add('wrong'); setTimeout(()=>{ if(el) el.classList.remove('wrong'); },700);
         }
       }
-n      function showCorrect(){
+
+n      function showCorrect(){
         const f=document.getElementById('ord-feedback');
         f.textContent='✅ Правильно!'; f.style.color='var(--green)';
         // after short pause — ask next
@@ -853,7 +858,8 @@
         const f=document.getElementById('ord-feedback');
         f.textContent='❌ Неправильно — попробуй ещё'; f.style.color='var(--red)';
       }
-n      function normalize(s){
+
+n      function normalize(s){
         return s.toLowerCase().replace(/[\u0300-\u036f]/g, '').normalize('NFD')
           .replace(/[áàäâã]/g,'a').replace(/[éèëê]/g,'e').replace(/[íìïî]/g,'i').replace(/[óòöôõ]/g,'o').replace(/[úùüû]/g,'u').replace(/ñ/g,'n').replace(/\s+/g,'').replace(/º/g,'');
       }
