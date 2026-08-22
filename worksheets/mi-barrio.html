@@ -250,9 +250,29 @@ button{font-family:inherit}
   .legend{display:none}
   .hdr p{display:none}
 }
+/* Оптимизация для печати на Mac */
+@media print{
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #map,.sun,.cloud,.bird,.skyline,.hdr-actions,.progress,.btn,.dialogue-overlay,.quiz-wrap,.info-card,.close-btn,.nav-btn,.counter,.legend,.cat-filter{display:none!important}
+  .hdr{padding:5mm;background:none;color:#000}
+  .hdr h1,.hdr p{color:#000}
+  .dict-wrap{position:static!important;transform:none!important;height:auto!important;overflow:visible!important}
+  .dict-cols{display:block}
+  .dict-section{margin-bottom:15mm;break-inside:auto;page-break-inside:auto}
+  .dict-section h3{color:#0a2233;margin-bottom:4mm;font-size:14pt}
+  .word-row{break-inside:auto;margin-bottom:2mm}
+  h1,h2,h3{break-after:avoid}
+  p{orphans:3;widows:3}
+}
 </style>
 </head>
 <body>
+
+<div class="no-print" style="text-align:center;padding:10px;background:#f4f1ea;">
+  <button onclick="window.print()" style="background:#E8604C;color:#fff;border:none;border-radius:12px;padding:12px 28px;font-size:15px;font-weight:800;cursor:pointer;margin:5px;">🖨 Распечатать</button>
+  <button onclick="window.print()" style="background:#2A9D8F;color:#fff;border:none;border-radius:12px;padding:12px 28px;font-size:15px;font-weight:800;cursor:pointer;margin:5px;">💾 Сохранить в PDF</button>
+</div>
+
 <div id="app">
   <header class="hdr">
     <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
@@ -831,6 +851,9 @@ function renderLegend() {
 /* старт */
 refreshProgress();
 updateQuizUI();
+</script>
+<script>
+  function saveAsPDF() { window.print(); }
 </script>
 </body>
 </html>

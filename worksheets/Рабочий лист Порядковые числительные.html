@@ -110,15 +110,32 @@
   @page{ size:A4; margin:0; }
   @media print{
     body{ background:#fff; }
-    .sheet{ margin:0; box-shadow:none; width:auto; min-height:auto; page-break-after:always; break-after:page; }
+    .sheet{ margin:0; box-shadow:none; width:auto; min-height:auto; page-break-after:auto; break-after:auto; }
     .sheet:last-child{ page-break-after:auto; break-after:auto; }
     .print-btn{ display:none; }
+    /* Убираем жесткие разрывы - пусть контент течет естественно */
+    .ex{ break-inside:auto; page-break-inside:auto; }
+  }
+  
+  /* Альтернативный стиль для одностраничного отображения */
+  @media screen{
+    .sheet{ 
+      page-break-after: auto;
+      break-after: auto;
+      margin-bottom: 20px;
+    }
   }
 </style>
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+<button class="print-btn" onclick="saveAsPDF()">🖨 Распечатать / Сохранить в PDF</button>
+
+<script>
+  function saveAsPDF() { window.print(); }
+</script>
+
+
 
 <!-- ════════════════ ЛИСТ 1 · СПРАВОЧНИК ════════════════ -->
 <div class="sheet">

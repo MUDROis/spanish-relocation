@@ -25,7 +25,7 @@
   .name-row{display:flex;gap:20px;margin-bottom:18px;font-weight:700;font-size:13px}
   .name-row .w{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
   
-  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .exercise{margin-bottom:22px;page-break-inside:auto}
   .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
   .ex-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;flex-shrink:0}
   .ex-num.c1{background:var(--terra)}.ex-num.c2{background:var(--ocean)}.ex-num.c3{background:var(--oliva)}.ex-num.c4{background:var(--afran)}.ex-num.c5{background:#8B5CF6}.ex-num.c6{background:#EC4899}.ex-num.c7{background:#6366F1}.ex-num.c8{background:#14B8A6}
@@ -85,18 +85,29 @@
   
   .footer{text-align:center;color:#999;font-size:10px;margin-top:20px;padding-top:10px;border-top:1px solid #eee}
   
-  @media print{
-    body{background:#fff;padding:0}
+  body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact
     .print-btn{display:none}
     .sheet{box-shadow:none;margin:0;padding:15mm;min-height:auto}
     @page{size:A4;margin:10mm}
     .answers-page{page-break-before:always}
   }
+
+  /* Оптимизация для печати на Mac и других системах */
+  @media print{
+    body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .sheet{box-shadow:none;max-width:none;width:100%;padding:0;margin:0;border-radius:0}
+    .no-print{display:none}
+    @page{size:A4;margin:10mm}
+    .task{margin-bottom:12px;break-inside:auto;page-break-inside:auto}
+    h1,h2,h3{break-after:avoid}
+    img{break-inside:auto}
+    p{orphans:3;widows:3}
+  }
 </style>
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
 
 <!-- СТРАНИЦА 1 -->
 <div class="sheet">
@@ -477,5 +488,8 @@
   <div class="footer">стр. 3 / 3 · Интерактивная школа МУДРО · Урок 6 · Ключи</div>
 </div>
 
+<script>
+  function saveAsPDF() { window.print(); }
+</script>
 </body>
 </html>

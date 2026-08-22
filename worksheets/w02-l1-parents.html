@@ -86,35 +86,51 @@
   .small{ font-size:10px; }
   ul{ margin:1.5mm 0; padding-left:6mm; }
 
-  /* ═══════════ КНОПКА ПЕЧАТИ ═══════════ */
-  .no-print{ text-align:center; margin:14px auto 0; }
+  /* ═══════════ КНОПКИ ПЕЧАТИ ═══════════ */
+  .no-print{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:14px auto 20px; }
   .no-print button{
     background:var(--p1); color:#fff; border:none; border-radius:12px;
     padding:12px 28px; font-size:15px; font-weight:800; cursor:pointer;
     box-shadow:0 4px 14px rgba(226,114,91,.4);
   }
+  .no-print button:hover{ filter:brightness(1.1); }
 
-  /* ═══════════ ПЕЧАТЬ ═══════════ */
+  /* ═══════════ ПЕЧАТЬ — ОПТИМИЗАЦИЯ ДЛЯ MAC ═══════════ */
   @page{ size:A4; margin:10mm; }
   @media print{
-    body{ background:#fff; }
+    body{ background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact; }
     .no-print{ display:none; }
     .sheet{
-      margin:0; box-shadow:none; width:186mm; min-height:auto; max-height:275mm; overflow:hidden;
-      padding:8mm 9mm 10mm;
-      page-break-after:always; break-after:page;
+      margin:0; box-shadow:none; width:100%; min-height:auto; max-height:none; overflow:visible;
+      padding:0;
+      break-inside:auto;
+      page-break-after:auto;
+      break-after:auto;
     }
-    .sheet:last-child{ page-break-after:auto; break-after:auto; }
     .hero{ padding:4mm 5mm; margin-bottom:4mm; }
     .hero h1{ font-size:16px; }
-    .ex{ margin:0 0 4mm; }
-    .card{ padding:3mm 4mm; }
+    .ex{ margin:0 0 4mm; break-inside:auto; page-break-inside:auto; }
+    .card{ padding:3mm 4mm; break-inside:auto; }
+    h1,h2,h3{ break-after:avoid; }
+    p{ orphans:3; widows:3; }
+  }
+  
+  /* Для экранного отображения */
+  @media screen{
+    .sheet{ page-break-after:auto; break-after:auto; margin-bottom:20px; }
   }
 </style>
 </head>
 <body>
 
-<div class="no-print"><button onclick="window.print()">🖨 Распечатать (A4, 3 страницы)</button></div>
+<div class="no-print">
+  <button onclick="window.print()">🖨 Распечатать</button>
+  <button onclick="saveAsPDF()">💾 Сохранить в PDF</button>
+</div>
+
+<script>
+  function saveAsPDF() { window.print(); }
+</script>
 
 <!-- ═══════════════════ ЛИСТ 1 ═══════════════════ -->
 <div class="sheet">
@@ -281,5 +297,8 @@
   <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.1 · стр. 3 / 3</span></div>
 </div>
 
+<script>
+  function saveAsPDF() { window.print(); }
+</script>
 </body>
 </html>

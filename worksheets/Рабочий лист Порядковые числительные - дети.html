@@ -31,7 +31,7 @@
   .cheat-item{background:#fff;border:1.5px solid var(--oliva);border-radius:8px;padding:6px 8px;text-align:center;font-weight:700}
   .cheat-item .num{color:var(--terra);font-weight:800}
 
-  .exercise{margin-bottom:20px;page-break-inside:avoid}
+  .exercise{margin-bottom:20px;page-break-inside:auto}
   .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
   .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
   .ex-num.c-terra{background:var(--terra)}
@@ -111,17 +111,28 @@
   .key-item b{color:var(--terra)}
   .key-note{background:var(--soft);border-radius:10px;padding:12px 14px;font-size:12px;margin-top:14px;color:#666}
 
-  @media print{
-    body{background:#fff;padding:0}
+  body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact
     .print-btn{display:none}
     .sheet{box-shadow:none;margin:0;max-width:none;padding:10mm}
     @page{size:A4;margin:10mm}
+  }
+
+  /* Оптимизация для печати на Mac и других системах */
+  @media print{
+    body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .sheet{box-shadow:none;max-width:none;width:100%;padding:0;margin:0;border-radius:0}
+    .no-print{display:none}
+    @page{size:A4;margin:10mm}
+    .task{margin-bottom:12px;break-inside:auto;page-break-inside:auto}
+    h1,h2,h3{break-after:avoid}
+    img{break-inside:auto}
+    p{orphans:3;widows:3}
   }
 </style>
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
 
 <!-- СТРАНИЦА 1 -->
 <div class="sheet">
@@ -387,5 +398,8 @@
   <div class="footer">стр. 4 / 4 · Интерактивная школа МУДРО · Ключи</div>
 </div>
 
+<script>
+  function saveAsPDF() { window.print(); }
+</script>
 </body>
 </html>
