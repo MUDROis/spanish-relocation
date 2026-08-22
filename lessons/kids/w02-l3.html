@@ -67,6 +67,17 @@
   .place-card:hover{transform:translateY(-4px);border-color:var(--nav)}
   .place-card.active{border-color:var(--nav);transform:scale(1.02);background:#E3F2FD}
   .place-emoji{font-size:2.6rem;margin-bottom:8px}
+
+  /* Карточки-перечисления (vcard) — стиль как у place-card */
+  .vcard{background:#fff;border-radius:16px;padding:14px;min-height:96px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;border:3px solid rgba(227,242,253,1);transition:.18s;box-shadow:0 6px 14px rgba(0,0,0,.06);font-weight:900}
+  .vcard:hover{transform:translateY(-4px);border-color:var(--nav)}
+  .vcard .v-es{font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--nav);margin-bottom:6px}
+  .vcard .v-ru{color:var(--ink-soft);font-weight:800}
+  .vcard.playing{background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border-color:var(--nav)}
+  .vcard.correct{background:#C8E6C9;border-color:var(--green)}
+  .vcard.wrong{background:#FFCDD2;border-color:var(--red)}
+  .vcard small{font-weight:700}
+
   .place-word{font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--nav);margin-bottom:4px}
   .place-meaning{color:var(--ink-soft);font-size:.9rem;font-weight:700;margin-bottom:8px}
   .place-gender{font-size:.85rem;font-weight:800;padding:4px 10px;border-radius:999px;display:inline-block}
@@ -696,6 +707,153 @@
       <div id="loc-feedback" style="text-align:center;font-weight:800;margin-top:12px;min-height:24px"></div>
       <button class="match-reset" style="background:var(--nav);margin-top:14px" onclick="startLoc()">▶ Начать</button>
     </div>
+  </section>
+
+  <!-- БЛОК: ПОРЯДКОВЫЕ ЧИСЛИТЕЛЬНЫЕ -->
+  <section class="block" style="--c:#1565C0">
+    <div class="block-head">
+      <h2 class="block-title">🔢 Интерактивное знакомство с порядковыми числительными</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">Потренируемся произносить порядковые числительные и подпишем порядок в школе.</p>
+
+    <div style="background:#fff;border-radius:16px;padding:18px;margin:12px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)">
+      <div style="font-weight:900;margin-bottom:8px">Нажми на карточку — послушай число по-испански:</div>
+      <div class="cards-grid" id="ordinals-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px">
+        <div class="vcard" data-ord-index="1" data-ord-word="primero" onclick="cardClickOrdinal(this)"><div class="v-es">primero <small style="font-weight:700">(1º)</small></div><div class="v-ru">первый</div></div>
+        <div class="vcard" data-ord-index="2" data-ord-word="segundo" onclick="cardClickOrdinal(this)"><div class="v-es">segundo <small style="font-weight:700">(2º)</small></div><div class="v-ru">второй</div></div>
+        <div class="vcard" data-ord-index="3" data-ord-word="tercero" onclick="cardClickOrdinal(this)"><div class="v-es">tercero <small style="font-weight:700">(3º)</small></div><div class="v-ru">третий</div></div>
+        <div class="vcard" data-ord-index="4" data-ord-word="cuarto" onclick="cardClickOrdinal(this)"><div class="v-es">cuarto <small style="font-weight:700">(4º)</small></div><div class="v-ru">четвёртый</div></div>
+        <div class="vcard" data-ord-index="5" data-ord-word="quinto" onclick="cardClickOrdinal(this)"><div class="v-es">quinto <small style="font-weight:700">(5º)</small></div><div class="v-ru">пятый</div></div>
+        <div class="vcard" data-ord-index="6" data-ord-word="sexto" onclick="cardClickOrdinal(this)"><div class="v-es">sexto <small style="font-weight:700">(6º)</small></div><div class="v-ru">шестой</div></div>
+        <div class="vcard" data-ord-index="7" data-ord-word="séptimo" onclick="cardClickOrdinal(this)"><div class="v-es">séptimo <small style="font-weight:700">(7º)</small></div><div class="v-ru">седьмой</div></div>
+        <div class="vcard" data-ord-index="8" data-ord-word="octavo" onclick="cardClickOrdinal(this)"><div class="v-es">octavo <small style="font-weight:700">(8º)</small></div><div class="v-ru">восьмой</div></div>
+        <div class="vcard" data-ord-index="9" data-ord-word="noveno" onclick="cardClickOrdinal(this)"><div class="v-es">noveno <small style="font-weight:700">(9º)</small></div><div class="v-ru">девятый</div></div>
+        <div class="vcard" data-ord-index="10" data-ord-word="décimo" onclick="cardClickOrdinal(this)"><div class="v-es">décimo <small style="font-weight:700">(10º)</small></div><div class="v-ru">десятый</div></div>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-start;margin-top:14px;flex-wrap:wrap">
+        <button class="btn btn-blue" onclick="playAllOrdinals()">▶ Послушать все</button>
+        <button class="btn btn-ghost" onclick="shuffleOrdinals()">🔀 Перемешать карточки</button>
+        <button class="btn btn-primary" onclick="askNextOrdinal()">🧠 Начать упражнение</button>
+      </div>
+
+      <div id="ord-quiz" style="margin-top:14px">
+        <div id="ord-question" style="font-weight:900;margin:8px 0;color:var(--nav)"></div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <input id="ord-input" type="text" placeholder="Напиши номер (напр. 3) или слово (tercero)" style="padding:8px;border-radius:8px;border:1px solid #ddd;font-weight:800;min-width:220px">
+          <button class="btn btn-ghost" onclick="submitOrdinalInput()">Ответить</button>
+          <div id="ord-feedback" style="margin-left:12px;font-weight:900"></div>
+        </div>
+        <div style="margin-top:10px;color:var(--ink-soft);font-weight:700">Можно отвечать кликом по карточке или вписать номер/слово и нажать Ответить.</div>
+      </div>
+    </div>
+
+    <script>
+      const ordinalsList = [
+        {index:1, word:'primero', label:'1º'},
+        {index:2, word:'segundo', label:'2º'},
+        {index:3, word:'tercero', label:'3º'},
+        {index:4, word:'cuarto', label:'4º'},
+        {index:5, word:'quinto', label:'5º'},
+        {index:6, word:'sexto', label:'6º'},
+        {index:7, word:'séptimo', label:'7º'},
+        {index:8, word:'octavo', label:'8º'},
+        {index:9, word:'noveno', label:'9º'},
+        {index:10, word:'décimo', label:'10º'}
+      ];
+      let currentOrdinal = null;
+
+      function playOrdinal(word,elem){
+        if(window.speak) speak(word); else console.log('speak()',word);
+        if(elem){
+          elem.classList.add('playing');
+          setTimeout(()=>elem.classList.remove('playing'),800);
+        }
+      }
+n      function playAllOrdinals(){
+        const words=ordinalsList.map(o=>o.word);
+        let i=0;
+        function next(){
+          if(i>=words.length) return;
+          const w=words[i];
+          const el=document.querySelector(`[data-ord-word="${w}"]`);
+          playOrdinal(w, el);
+          i++; setTimeout(next,900);
+        }
+        next();
+      }
+      function shuffleOrdinals(){
+        const grid=document.getElementById('ordinals-grid');
+        if(!grid) return;
+        for(let i=grid.children.length-1;i>0;i--){
+          const j=Math.floor(Math.random()*(i+1));
+          grid.insertBefore(grid.children[j],grid.children[i]);
+        }
+      }
+
+      function askNextOrdinal(){
+        const i=Math.floor(Math.random()*ordinalsList.length);
+        currentOrdinal = ordinalsList[i];
+        document.getElementById('ord-question').textContent = 'Найди карточку: ' + currentOrdinal.label;
+        playOrdinal(currentOrdinal.word);
+        document.getElementById('ord-feedback').textContent='';
+        document.getElementById('ord-input').value='';
+      }
+n      function cardClickOrdinal(el){
+        const idx = parseInt(el.dataset.ordIndex,10);
+        const w = el.dataset.ordWord;
+        playOrdinal(w, el);
+        if(!currentOrdinal){
+          // just play, no quiz active
+          return;
+        }
+        checkAnswer(idx, el);
+      }
+n      function submitOrdinalInput(){
+        const val = document.getElementById('ord-input').value.trim();
+        if(!currentOrdinal){ document.getElementById('ord-feedback').textContent='Нажмите «Начать упражнение»'; return; }
+        if(!val){ document.getElementById('ord-feedback').textContent='Введите номер или слово'; return; }
+        // numeric check
+        const asNum = parseInt(val,10);
+        if(!isNaN(asNum)){
+          // compare numbers
+          checkAnswer(asNum);
+          return;
+        }
+        // compare words (normalize)
+        const norm = normalize(val);
+        const targetNorm = normalize(currentOrdinal.word);
+        if(norm === targetNorm){
+          showCorrect();
+        } else {
+          showWrong();
+        }
+      }
+n      function checkAnswer(chosenIndex, el){
+        if(chosenIndex === currentOrdinal.index){
+          showCorrect();
+          if(el) el.classList.add('correct'); setTimeout(()=>{ if(el) el.classList.remove('correct'); },700);
+        } else {
+          showWrong();
+          if(el) el.classList.add('wrong'); setTimeout(()=>{ if(el) el.classList.remove('wrong'); },700);
+        }
+      }
+n      function showCorrect(){
+        const f=document.getElementById('ord-feedback');
+        f.textContent='✅ Правильно!'; f.style.color='var(--green)';
+        // after short pause — ask next
+        setTimeout(askNextOrdinal,900);
+      }
+      function showWrong(){
+        const f=document.getElementById('ord-feedback');
+        f.textContent='❌ Неправильно — попробуй ещё'; f.style.color='var(--red)';
+      }
+n      function normalize(s){
+        return s.toLowerCase().replace(/[\u0300-\u036f]/g, '').normalize('NFD')
+          .replace(/[áàäâã]/g,'a').replace(/[éèëê]/g,'e').replace(/[íìïî]/g,'i').replace(/[óòöôõ]/g,'o').replace(/[úùüû]/g,'u').replace(/ñ/g,'n').replace(/\s+/g,'').replace(/º/g,'');
+      }
+    </script>
   </section>
 
   <!-- ДОМАШКА -->
