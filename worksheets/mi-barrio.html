@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<!--
+  Mi barrio · 3D-словарь района Барселоны (испанский A1)
+  Полностью самостоятельный файл: сохраните его и откройте двойным кликом в браузере.
+  Ничего устанавливать не нужно. Шрифты подтягиваются из интернета, без сети работают системные.
+-->
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mi barrio · 3D-словарь района Барселоны — испанский A1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --navy-950:#071c2b; --navy-900:#0a2233; --navy-800:#0e3143; --navy-700:#14435c;
+  --foam:#eef4f2; --amber:#f2b441; --coral:#e2725b; --red:#c8402f; --blue:#3e9bc4;
+  --mut:#8fb2c4; --mut2:#7fa3b8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+body{
+  font-family:"Golos Text",system-ui,sans-serif; color:var(--foam); overflow:hidden;
+  background:linear-gradient(180deg,#175e8f 0%,#1b6fa8 26%,#4f9fc6 58%,#9fd0e2 82%,#cfe7ee 100%);
+}
+#app{display:flex;flex-direction:column;height:100vh}
+::selection{background:var(--amber);color:var(--navy-900)}
+button{font-family:inherit}
+
+/* ---------- шапка ---------- */
+.hdr{position:relative;z-index:30;display:flex;align-items:center;gap:12px;padding:14px 18px 8px}
+.titles{min-width:0;line-height:1.15}
+.hdr h1{font-family:"Comfortaa","Golos Text",sans-serif;font-size:24px;font-weight:700;margin:0;letter-spacing:-.01em}
+.hdr h1 .lvl{margin-left:8px;vertical-align:middle;background:var(--red);color:#fff;border-radius:5px;padding:2px 7px;font:800 10px "Golos Text",sans-serif;letter-spacing:.14em}
+.hdr p{margin:2px 0 0;font-size:12px;color:rgba(207,228,238,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.progress{position:relative;width:44px;height:44px}
+.progress svg{transform:rotate(-90deg)}
+.progress b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 11px "Comfortaa",sans-serif}
+.progress b i{font-style:normal;color:var(--mut)}
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:9px;padding:9px 14px;font:700 13px "Comfortaa","Golos Text",sans-serif;color:var(--foam);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s}
+.btn:hover{background:rgba(255,255,255,.13)}
+.btn:active{transform:scale(.96)}
+.btn.on{background:var(--amber);color:var(--navy-900);border-color:transparent;box-shadow:0 6px 18px rgba(242,180,65,.45)}
+.btn-icon{width:38px;height:38px;padding:0;justify-content:center}
+.btn-icon.on{background:rgba(242,180,65,.16);border-color:rgba(242,180,65,.5);color:var(--amber);box-shadow:none}
+
+/* ---------- сцена ---------- */
+#map{position:relative;flex:1;min-height:0;z-index:10}
+.sun{position:absolute;top:6px;right:9%;width:150px;height:150px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle,#fff6d8 0 24%,rgba(255,214,120,.55) 46%,rgba(255,190,80,0) 72%)}
+.cloud{position:absolute;height:34px;border-radius:999px;pointer-events:none;z-index:1;filter:blur(2px);
+  background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0));
+  animation:cloudDrift var(--dur) linear infinite;animation-delay:var(--del);will-change:transform}
+.bird{position:absolute;z-index:1;pointer-events:none;animation:birdFly var(--dur) linear infinite;animation-delay:var(--del);will-change:transform}
+.bird svg{animation:flap .5s ease-in-out infinite alternate;transform-origin:center}
+.skyline{position:absolute;left:0;right:0;bottom:0;height:96px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,34,51,0),rgba(10,34,51,.22) 60%,rgba(10,34,51,.34))}
+#stage-wrap{position:absolute;inset:0;overflow:hidden;user-select:none}
+.stage-shadow{position:absolute;left:50%;top:57%;width:900px;height:440px;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(7,28,43,.48),rgba(7,28,43,0));filter:blur(16px)}
+#stage{position:absolute;left:50%;top:50%;width:740px;height:740px;transform:translate(-50%,-52%);transform-style:preserve-3d}
+.plane{position:absolute;inset:0;transform:rotateX(var(--rx)) rotateZ(var(--rz));transform-style:preserve-3d}
+
+/* земля и бортики */
+.ground{position:absolute;inset:0;box-shadow:inset 0 0 0 3px rgba(20,32,42,.35);
+  background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.10),rgba(0,0,0,.16) 88%),
+  repeating-linear-gradient(45deg,rgba(255,255,255,.045) 0 3px,rgba(0,0,0,.05) 3px 6px),#7e8a92}
+.edge-b{position:absolute;left:0;width:100%;top:100%;height:30px;transform-origin:top;transform:rotateX(-90deg);background:linear-gradient(#5f6b74,#49545d)}
+.edge-l{position:absolute;top:0;height:100%;right:100%;width:30px;transform-origin:right;transform:rotateY(-90deg);background:linear-gradient(90deg,#3f4a53,#56626b)}
+
+/* кварталы */
+.lot{position:absolute;transform-style:preserve-3d;cursor:pointer}
+.plate{position:absolute;inset:0;background:var(--lotC,#e6d9bb);
+  clip-path:polygon(17px 0,calc(100% - 17px) 0,100% 17px,100% calc(100% - 17px),calc(100% - 17px) 100%,17px 100%,0 calc(100% - 17px),0 17px);
+  transform:translateZ(3px)}
+.plate::after{content:"";position:absolute;inset:13px;opacity:.85;background:var(--lotIn,#d9c8a2);
+  clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px)}
+.plate.parklot{background:#5e9e52}
+.plate.parklot::after{opacity:1;background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 10px,rgba(0,0,0,.05) 10px 20px),#55934a}
+.lift{position:absolute;inset:0;transform-style:preserve-3d;transform:translateZ(0);transition:transform .45s cubic-bezier(.2,1.5,.35,1)}
+.lot:hover .lift,.lot.hl .lift{transform:translateZ(16px)}
+#stage[data-view="top"] .lot:hover .lift,#stage[data-view="top"] .lot.hl .lift{transform:translate3d(-5px,-6px,16px)}
+.lot:hover .face,.lot.hl .face{filter:brightness(1.14)}
+
+/* 3D-коробки */
+.b3{position:absolute;transform-style:preserve-3d}
+.face{position:absolute;transition:filter .3s}
+.f-roof{inset:0;background-color:var(--roofC);transform:translateZ(var(--h));
+  background-image:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,0) 45%),linear-gradient(315deg,rgba(0,0,0,.16),rgba(0,0,0,0) 55%);
+  box-shadow:inset 0 0 0 3px rgba(20,30,40,.14),inset 0 0 16px rgba(20,30,40,.16)}
+.f-front{left:0;top:100%;width:100%;height:var(--h);transform-origin:top center;transform:rotateX(90deg)}
+.f-side{top:0;right:100%;height:100%;width:var(--h);transform-origin:right center;transform:rotateY(90deg)}
+.wall{background-color:var(--wallC);
+  background-image:repeating-linear-gradient(to bottom,rgba(18,32,46,.3) 0 7px,rgba(18,32,46,0) 7px 15px),
+  repeating-linear-gradient(to right,rgba(255,255,255,.16) 0 5px,rgba(255,255,255,0) 5px 12px),
+  linear-gradient(to bottom,rgba(15,25,35,.26),rgba(15,25,35,0) 16px),
+  linear-gradient(to top,rgba(15,25,35,.28),rgba(15,25,35,0) 6px)}
+.f-side.wall{filter:brightness(.82)}
+.lot:hover .f-side.wall,.lot.hl .f-side.wall{filter:brightness(.95)}
+.wall-cross{background-image:linear-gradient(var(--crossC),var(--crossC)),linear-gradient(var(--crossC),var(--crossC)),
+  repeating-linear-gradient(to bottom,rgba(18,32,46,.3) 0 7px,rgba(18,32,46,0) 7px 15px),
+  repeating-linear-gradient(to right,rgba(255,255,255,.16) 0 5px,rgba(255,255,255,0) 5px 12px),
+  linear-gradient(to bottom,rgba(15,25,35,.26),rgba(15,25,35,0) 16px);
+  background-size:8px 26px,26px 8px,100% 100%,100% 100%,100% 100%;
+  background-position:14px 26px,5px 35px,0 0,0 0,0 0;background-repeat:no-repeat,no-repeat,repeat,repeat,no-repeat}
+.awning{position:absolute;top:0;left:-3px;right:-3px;height:12px;z-index:2;border-bottom:2px solid rgba(20,30,40,.28);box-shadow:0 3px 5px rgba(10,20,30,.25);
+  background:repeating-linear-gradient(90deg,var(--awnC) 0 9px,#f7f0e0 9px 18px)}
+.marquee{position:absolute;top:0;left:0;right:0;height:13px;z-index:2;border-bottom:2px solid rgba(90,55,0,.5);
+  background:linear-gradient(#ffd479,#f2b441);box-shadow:0 0 14px rgba(242,180,65,.9),0 3px 6px rgba(10,20,30,.3)}
+.shadow-plate{position:absolute;border-radius:50%;pointer-events:none;transform:translateZ(4px);
+  background:radial-gradient(closest-side,rgba(12,26,38,.34),rgba(12,26,38,0))}
+
+/* природа */
+.trunk,.crown,.pond{pointer-events:none}
+.crown{position:absolute;border-radius:50%;transform:translateZ(var(--cz)) translate(-50%,-50%);animation:sway 4.5s ease-in-out infinite alternate;
+  background:radial-gradient(circle at 38% 32%,#7cbf66 0%,#4d8f42 55%,#39702f 100%);
+  box-shadow:0 0 0 3px rgba(28,58,24,.25),0 0 14px rgba(28,58,24,.35)}
+.crown.c2{background:radial-gradient(circle at 40% 35%,#93cf7c 0%,#5da04e 60%,#457d3a 100%);animation-duration:3.6s;animation-delay:-1.2s}
+.trunk{position:absolute;width:5px;height:5px;transform:translate(-50%,-50%);transform-style:preserve-3d}
+.trunk::before,.trunk::after{content:"";position:absolute;left:0;top:0;width:5px;height:var(--th);transform-origin:top;transform:rotateX(90deg);background:linear-gradient(#8a5a33,#6d4322)}
+.trunk::after{transform:rotateX(90deg) rotateY(90deg)}
+.pond{position:absolute;border-radius:50%;transform:translateZ(5px) translate(-50%,-50%);overflow:hidden;
+  background:radial-gradient(circle at 40% 35%,#7fc6dd 0%,#3e8fb0 60%,#2c6f8d 100%);
+  box-shadow:0 0 0 4px #cfe0c8,0 0 18px rgba(20,60,80,.4)}
+.pond::after{content:"";position:absolute;inset:0;animation:shimmer 5s linear infinite;
+  background:repeating-linear-gradient(100deg,rgba(255,255,255,.22) 0 3px,rgba(255,255,255,0) 3px 14px)}
+
+/* машины */
+.car{position:absolute;transform-style:preserve-3d;pointer-events:none}
+.car-body{position:absolute;inset:0;transform-style:preserve-3d}
+.c-roof{position:absolute;inset:3px;border-radius:3px;background:var(--carC);transform:translateZ(var(--ch));
+  background-image:linear-gradient(120deg,rgba(255,255,255,.5),rgba(255,255,255,0) 55%)}
+.c-front{position:absolute;left:0;top:100%;width:100%;height:var(--ch);transform-origin:top;transform:rotateX(90deg);border-radius:0 0 3px 3px;
+  background:linear-gradient(to bottom,var(--carC),color-mix(in srgb,var(--carC) 72%,#10202e))}
+.c-side{position:absolute;top:0;right:100%;height:100%;width:var(--ch);transform-origin:right;transform:rotateY(90deg);
+  background:color-mix(in srgb,var(--carC) 62%,#10202e)}
+.car-h{animation:carH var(--dur) linear infinite;animation-delay:var(--del)}
+.car-h.rev{animation-name:carHrev}
+.car-v{animation:carV var(--dur) linear infinite;animation-delay:var(--del)}
+
+/* бейджи, кольца, фидбек */
+.finial{animation:finialGlow 2.6s ease-in-out infinite}
+.crane-light{animation:blink 1.4s steps(2,start) infinite}
+.quizring{position:absolute;border:3px solid var(--amber);border-radius:50%;pointer-events:none;transform:translateZ(6px) translate(-50%,-50%);
+  box-shadow:0 0 22px rgba(242,180,65,.55),inset 0 0 18px rgba(242,180,65,.35);animation:ringPulse 1.5s ease-out infinite}
+.flash-ok{animation:flashOk .7s ease-out}
+.shake{animation:shakeX .45s cubic-bezier(.36,.07,.19,.97)}
+.pop-in{animation:popIn .5s cubic-bezier(.2,1.6,.4,1)}
+
+/* ---------- HUD ---------- */
+.viewtog{position:absolute;top:12px;right:14px;z-index:25;display:flex;gap:3px;padding:3px;border-radius:10px;
+  background:rgba(7,28,43,.85);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(4px)}
+.viewtog button{display:flex;align-items:center;gap:6px;border:0;border-radius:8px;padding:7px 12px;cursor:pointer;
+  font:700 12px "Comfortaa","Golos Text",sans-serif;color:var(--mut);background:transparent;transition:background .2s,color .2s}
+.viewtog button.on{background:var(--amber);color:var(--navy-900)}
+.legend{position:absolute;left:14px;bottom:12px;z-index:20;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.legend span{width:fit-content;border-radius:7px;border:1px solid rgba(255,255,255,.1);background:rgba(10,34,51,.82);
+  padding:5px 10px;font-size:11px;font-weight:500;color:rgba(207,228,238,.9);backdrop-filter:blur(4px)}
+.legend span:last-child{color:rgba(207,228,238,.68)}
+.toast{position:absolute;left:50%;bottom:92px;z-index:35;transform:translateX(-50%);pointer-events:none;white-space:nowrap;
+  border-radius:999px;padding:9px 20px;font:700 13px "Comfortaa","Golos Text",sans-serif;color:#fff;box-shadow:0 10px 24px rgba(6,26,41,.4);
+  animation:hudIn .35s cubic-bezier(.2,1.4,.4,1)}
+.toast.ok{background:#2f9e63}.toast.no{background:var(--red)}
+.quizbar{position:absolute;left:50%;bottom:14px;z-index:30;width:min(94%,580px);transform:translateX(-50%);
+  display:flex;align-items:center;gap:16px;border-radius:13px;padding:13px 20px;
+  border:1px solid rgba(242,180,65,.3);background:rgba(10,34,51,.94);box-shadow:0 18px 44px rgba(6,26,41,.55);
+  animation:hudIn .35s cubic-bezier(.2,1.4,.4,1)}
+.quizbar[hidden]{display:none}
+.quizbar .q-label{font:800 10px "Golos Text",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.quizbar .q-word{font-family:"Comfortaa",sans-serif;font-size:26px;font-weight:700;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.quizbar .q-word i{font-style:normal;font-size:15px;font-weight:500;color:var(--mut)}
+.q-stats{margin-left:auto;display:flex;align-items:center;gap:16px;flex-shrink:0}
+.q-stats b{display:block;font:700 21px "Comfortaa",sans-serif;line-height:1}
+.q-stats small{font:800 9px "Golos Text",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--mut2)}
+.q-stats .streak b{display:flex;align-items:center;gap:3px;color:#5d8299}
+.q-stats .streak.hot b{color:var(--coral)}
+.q-close{width:32px;height:32px;border-radius:9px;border:1px solid rgba(255,255,255,.15);background:none;color:var(--mut);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.q-close:hover{border-color:var(--red);color:var(--coral)}
+
+/* подсказка у здания */
+#tip{position:fixed;z-index:50;left:-999px;top:0;pointer-events:none;transform:translate(-50%,-100%)}
+.tip-card{background:#fff;color:var(--navy-900);border-radius:11px;padding:11px 16px 12px;
+  box-shadow:0 3px 0 #ffc400,0 6px 0 #c60b1e,0 18px 36px rgba(6,26,41,.5);animation:toastIn .3s cubic-bezier(.2,1.4,.4,1)}
+.tip-top{display:flex;align-items:center;gap:8px}
+.g{border-radius:5px;padding:3px 7px;font:800 10px "Golos Text",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.g-el{background:var(--blue)}.g-la{background:var(--red)}
+.tip-es{font-family:"Comfortaa",sans-serif;font-size:22px;font-weight:700;line-height:1}
+.tip-ru{margin:5px 0 0;font-size:13px;font-weight:500;color:var(--navy-700)}
+.tip-hint{margin:7px 0 0;padding-top:7px;border-top:1px solid rgba(10,34,51,.1);font:700 10px "Golos Text",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6b8798}
+.tip-arrow{width:0;height:0;margin:0 auto;border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid #c60b1e}
+
+/* ---------- словарь ---------- */
+.dictbar{position:relative;z-index:30;border-top:1px solid rgba(255,255,255,.1);background:rgba(7,28,43,.96);padding:10px 18px 12px;backdrop-filter:blur(4px)}
+.dict-head{display:flex;align-items:center;gap:12px;margin-bottom:7px}
+.dict-head h2{margin:0;font:700 13px "Comfortaa","Golos Text",sans-serif}
+.dict-head h2 b{color:var(--amber);font-weight:700}
+.dprog{height:6px;max-width:160px;flex:1;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
+.dprog i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--amber),var(--coral));transition:width .7s cubic-bezier(.2,.9,.3,1)}
+.dcount{font:700 12px "Comfortaa",sans-serif;color:var(--amber)}
+.dnote{margin-left:auto;font-size:11px;color:var(--mut2)}
+.dnote b{color:#7cc4e4}.dnote .f{color:#f0a08d}
+.dreset{flex-shrink:0;border-radius:7px;border:1px solid rgba(255,255,255,.15);background:none;padding:5px 10px;font:600 11px "Golos Text",sans-serif;color:#9db9c9;cursor:pointer;transition:color .2s,border-color .2s}
+.dreset:hover{color:var(--coral);border-color:rgba(200,64,47,.6)}
+.dict-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 26px;max-height:158px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(242,180,65,.5) transparent}
+.dict-cols::-webkit-scrollbar{width:6px}
+.dict-cols::-webkit-scrollbar-thumb{background:rgba(242,180,65,.45);border-radius:999px}
+.dcat h3{margin:0;padding:3px 0 5px;display:flex;align-items:center;gap:6px;font:600 10px "Golos Text",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut2)}
+.dcat h3 i{font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;color:#5d8299}
+.dcat ul{list-style:none;margin:0;padding:0}
+.word{display:flex;align-items:center;gap:9px;width:100%;border:0;background:none;padding:3px 7px;border-radius:8px;cursor:pointer;text-align:left;transition:background .15s}
+.word:hover,.word.hl{background:rgba(255,255,255,.08)}
+.chip{flex-shrink:0;width:25px;height:25px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fffdf5;
+  box-shadow:inset 0 -2px 0 var(--chipSide),0 0 0 1.5px rgba(255,255,255,.25)}
+.gdot{flex-shrink:0;width:6px;height:6px;border-radius:50%}
+.wtxt{min-width:0;flex:1;line-height:1.2}
+.wtxt b{display:block;font-size:13px;font-weight:600;color:var(--foam);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wtxt small{display:block;font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wplay{flex-shrink:0;color:var(--mut2);opacity:0;transition:opacity .15s}
+.word:hover .wplay{opacity:1}
+.wcheck{flex-shrink:0;color:#4fc487}
+.alldone{border-radius:7px;background:rgba(242,180,65,.15);padding:3px 10px;font:700 11px "Golos Text",sans-serif;color:var(--amber);animation:popIn .5s cubic-bezier(.2,1.6,.4,1)}
+
+/* ---------- keyframes ---------- */
+@keyframes sway{from{margin-left:-2px;margin-top:-1px}to{margin-left:3px;margin-top:2px}}
+@keyframes shimmer{to{background-position:60px 0}}
+@keyframes carH{from{transform:translateX(-110px)}to{transform:translateX(850px)}}
+@keyframes carHrev{from{transform:translateX(850px)}to{transform:translateX(-110px)}}
+@keyframes carV{from{transform:translateY(-110px)}to{transform:translateY(850px)}}
+@keyframes ringPulse{0%{opacity:.95;scale:.75}70%,100%{opacity:0;scale:1.25}}
+@keyframes shakeX{10%,90%{translate:-2px 0}20%,80%{translate:4px 0}30%,50%,70%{translate:-7px 0}40%,60%{translate:7px 0}}
+@keyframes flashOk{0%{filter:brightness(1)}35%{filter:brightness(1.9) saturate(1.3)}100%{filter:brightness(1)}}
+@keyframes toastIn{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes hudIn{from{opacity:0;transform:translate(-50%,14px) scale(.94)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+#tip .tip-card{animation-name:tipIn}
+@keyframes tipIn{from{opacity:0;transform:translateY(8px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes popIn{from{opacity:0;scale:.5}to{opacity:1;scale:1}}
+@keyframes finialGlow{0%,100%{box-shadow:0 0 8px 2px rgba(242,180,65,.7)}50%{box-shadow:0 0 18px 6px rgba(242,180,65,.95)}}
+@keyframes blink{50%{opacity:.15}}
+@keyframes cloudDrift{from{transform:translateX(-320px)}to{transform:translateX(calc(100vw + 320px))}}
+@keyframes birdFly{0%{transform:translate(-8vw,0)}50%{transform:translate(50vw,-26px)}100%{transform:translate(108vw,8px)}}
+@keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(.45)}}
+@media (prefers-reduced-motion:reduce){
+  .cloud,.bird,.bird svg,.car-h,.car-h.rev,.car-v,.crown,.pond::after,.quizring,.finial,.crane-light{animation:none!important}
+  .quizring{opacity:.8}
+}
+@media (max-width:900px){
+  .dict-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .legend{display:none}
+  .hdr p{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="hdr">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+      <path d="M10 3h20l7 7v20l-7 7H10l-7-7V10z" fill="#f2b441" stroke="#0a2233" stroke-width="2"/>
+      <rect x="13" y="17" width="14" height="12" fill="#c8402f"/>
+      <path d="M13 17 20 10l7 7z" fill="#e2725b"/>
+      <rect x="18" y="22" width="4" height="7" fill="#0a2233"/>
+    </svg>
+    <div class="titles">
+      <h1>Mi barrio <span class="lvl">A1</span></h1>
+      <p>3D-словарь района · Эшампле, Барселона · наведи на здание — узнай слово, кликни — выучи</p>
+    </div>
+    <div class="hdr-actions">
+      <div class="progress" id="progress" title="Выучено слов">
+        <svg width="44" height="44" viewBox="0 0 44 44">
+          <circle cx="22" cy="22" r="15" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="4.5"/>
+          <circle id="pring" cx="22" cy="22" r="15" fill="none" stroke="#f2b441" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="94.25" stroke-dashoffset="94.25" style="transition:stroke-dashoffset .7s cubic-bezier(.2,.9,.3,1)"/>
+        </svg>
+        <b><span id="pnum">0</span><i>/16</i></b>
+      </div>
+      <button class="btn" id="quizBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".5" fill="currentColor"/></svg>
+        <span id="quizLabel">Викторина</span>
+      </button>
+      <button class="btn btn-icon on" id="soundBtn" title="Озвучка слов"></button>
+    </div>
+  </header>
+
+  <main id="map">
+    <div class="sun"></div>
+    <div class="cloud" style="top:7%;width:220px;--dur:80s;--del:-20s"></div>
+    <div class="cloud" style="top:15%;width:150px;opacity:.8;--dur:64s;--del:-48s"></div>
+    <div class="cloud" style="top:3%;width:280px;opacity:.7;--dur:104s;--del:-70s"></div>
+    <div class="bird" style="top:12%;--dur:38s;--del:-8s">
+      <svg width="26" height="12" viewBox="0 0 26 12" fill="none" stroke="#123c55" stroke-width="2" stroke-linecap="round"><path d="M1 8c4-6 8-6 12 0 4-6 8-6 12 0"/></svg>
+    </div>
+    <div class="bird" style="top:20%;--dur:52s;--del:-30s">
+      <svg width="18" height="9" viewBox="0 0 26 12" fill="none" stroke="#123c55" stroke-width="2.4" stroke-linecap="round"><path d="M1 8c4-6 8-6 12 0 4-6 8-6 12 0"/></svg>
+    </div>
+    <div class="skyline"></div>
+
+    <div id="stage-wrap">
+      <div class="stage-shadow"></div>
+      <div id="stage" data-view="top">
+        <div class="plane" id="plane" style="--rx:0deg;--rz:0deg"></div>
+      </div>
+    </div>
+
+    <div class="viewtog" id="viewtog">
+      <button data-v="top" class="on">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16M12 4v16"/></svg>
+        Прямо
+      </button>
+      <button data-v="iso">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2.5 21 7v10l-9 4.5L3 17V7z"/><path d="M3 7l9 4.5L21 7M12 11.5V21.5"/></svg>
+        3D
+      </button>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="quizbar" id="quizbar" hidden>
+      <div style="min-width:0">
+        <p class="q-label">¿Dónde está…? · Где находится…?</p>
+        <p class="q-word" id="qword"></p>
+      </div>
+      <div class="q-stats">
+        <div><b id="qscore">0</b><small>очки</small></div>
+        <div class="streak" id="qstreakwrap"><b><svg width="12" height="14" viewBox="0 0 24 28" fill="currentColor"><path d="M12 0C13 6 19 8 19 16a7 7 0 0 1-14 0C5 10 10 9 9 3c2 1 3 3 3 6 2-2 1-6 0-9z"/></svg><span id="qstreak">0</span></b><small>серия</small></div>
+        <button class="q-close" id="qclose" title="Закрыть викторину">
+          <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M5 5l14 14M19 5 5 19"/></svg>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <section class="dictbar">
+    <div class="dict-head">
+      <h2>Словарь <b>· Vocabulario</b></h2>
+      <div class="dprog"><i id="dbar" style="width:0%"></i></div>
+      <span class="dcount" id="dcount">0/16</span>
+      <span class="alldone" id="alldone" hidden>¡Excelente! Всё выучено 🏆</span>
+      <span class="dnote"><b>el</b> — м.р. · <span class="f"><b>la</b> — ж.р.</span> · наведи на слово — здание подсветится</span>
+      <button class="dreset" id="resetBtn">Сбросить</button>
+    </div>
+    <div class="dict-cols" id="dict"></div>
+  </section>
+</div>
+
+<div id="tip" hidden>
+  <div class="tip-card">
+    <div class="tip-top"><span class="g" id="tipG">el</span><span class="tip-es" id="tipEs"></span></div>
+    <p class="tip-ru" id="tipRu"></p>
+    <p class="tip-hint" id="tipHint">клик — выучить и озвучить</p>
+  </div>
+  <div class="tip-arrow"></div>
+</div>
+
+<script>
+"use strict";
+/* ============================== ДАННЫЕ ============================== */
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+};
+const SIZE = 740, BLOCK = 140, STREET = 60;
+const CENTERS = [180, 380, 580];
+const BB = "rotateZ(calc(var(--rz) * -1)) rotateX(calc(var(--rx) * -1))";
+const VIEWS = { top: { rx: 0, rz: 0, amp: 1.6 }, iso: { rx: 57, rz: -43, amp: 3.4 } };
+
+const ICONS = {
+  casa: '<path d="M3.5 11 12 3.5 20.5 11"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5.5h4V20"/>',
+  panaderia: '<path d="M5 10c-1.2 1.2-1.5 3 .3 4.8L12 21.5l6.7-6.7c1.8-1.8 1.5-3.6.3-4.8-1-1-2.5-1-3.5 0l-1.8 1.8h-3.4L8.5 10c-1-1-2.5-1-3.5 0Z"/><path d="M9.5 12.5 7 15m5.5-2.5L10 15m5.5-4.5L13 13"/>',
+  supermercado: '<circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/><path d="M3 4h2.2l2.2 10.5h10.8l2-8H7"/><path d="M10 10.5h6"/>',
+  mercado: '<path d="M6 8.5 8 4.5h8l2 4"/><path d="M5.5 8.5h13v3a2.2 2.2 0 0 1-4.3.5 2.2 2.2 0 0 1-4.4 0 2.2 2.2 0 0 1-4.3-.5z"/><path d="M7 13.5V20h10v-6.5"/><path d="M10.5 20v-4h3v4"/>',
+  restaurante: '<path d="M6 3v6a2 2 0 0 0 4 0V3M8 3v18"/><path d="M16.5 3c-1.7 1.8-2.5 4.3-2.5 6.8 0 2 .9 3.2 2.5 3.2V21"/><path d="M16.5 3c.9 1.8 1.3 4.3 1.3 6.8 0 2-.6 3.2-1.3 3.2"/>',
+  cafe: '<path d="M4.5 9h11v5.5a4.5 4.5 0 0 1-4.5 4.5H9a4.5 4.5 0 0 1-4.5-4.5z"/><path d="M15.5 10.5h1.6a2.4 2.4 0 0 1 0 4.8h-2"/><path d="M7.5 5.5c-.8-1 .8-1.8 0-2.8M11 5.5c-.8-1 .8-1.8 0-2.8"/>',
+  escuela: '<path d="m12 3.5 9 4-9 4-9-4z"/><path d="M6.5 10v4.5c0 1.4 2.5 2.8 5.5 2.8s5.5-1.4 5.5-2.8V10"/><path d="M20.5 8v6"/>',
+  biblioteca: '<path d="M5 19.5A2.5 2.5 0 0 1 7.5 17H20"/><path d="M7.5 2.5h12.5v19.5H7.5a2.5 2.5 0 0 1 0-5H20"/>',
+  cine: '<rect x="3.5" y="6.5" width="17" height="12" rx="1.5"/><path d="m7.5 6.5 2 3-2 3 2 3-2 2.5M12 6.5l2 3-2 3 2 3-2 2.5M16.5 6.5l2 3-2 3 2 3-1.3 1.8"/>',
+  estacion: '<rect x="5" y="3.5" width="14" height="13" rx="3"/><path d="M5 10h14M9 6.8h6"/><circle cx="9" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1" fill="currentColor" stroke="none"/><path d="m7.5 19.5-1.5 2.5m10.5-2.5 1.5 2.5"/>',
+  hospital: '<path d="M12 6v12M6 12h12"/>',
+  farmacia: '<path d="M12 6v12M6 12h12"/>',
+  iglesia: '<path d="M6 21V12l6-4.5L18 12v9"/><path d="M9 21v-5a3 3 0 0 1 6 0v5"/><path d="M12 3v4.5M10 5h4"/><path d="M3.5 21h17"/><path d="M11 11h2v2h-2z" fill="currentColor" stroke="none"/>',
+  tienda: '<path d="M5.5 8 7 4h10l1.5 4"/><path d="M4.5 8h15v2.6a2.5 2.5 0 0 1-5 .2 2.5 2.5 0 0 1-5 0 2.5 2.5 0 0 1-5-.2z"/><path d="M6.5 13.5V20h11v-6.5"/><path d="M9.5 20v-4.5h5V20"/>',
+  banco: '<rect x="3.5" y="7" width="17" height="11" rx="2"/><circle cx="12" cy="12.5" r="2.6"/><path d="M7 12.5h1.2m7.6 0H17"/>',
+  parque: '<path d="M12 21v-6"/><path d="M12 3a6.5 6.5 0 0 1 4.4 11.3A4.6 4.6 0 0 1 12 15.6a4.6 4.6 0 0 1-4.4-1.3A6.5 6.5 0 0 1 12 3Z"/><path d="M8 21h8"/>',
+};
+function icon(id, s = 24, w = 2) {
+  return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${ICONS[id]}</svg>`;
+}
+
+const BUILDINGS = [
+  { id:"casa", es:"la casa", ru:"дом", g:"la", cat:"ciudad", lot:[0,0], h:52, fw:88, fd:74, roof:"#c8684f", front:"#e2725b", side:"#a8503c", boxes:[[52,12,16,12,7,"#8a5f4f"],[12,46,12,10,6,"#7d5546"]] },
+  { id:"iglesia", es:"la iglesia", ru:"церковь (Саграда Фамилия)", g:"la", cat:"cultura", lot:[0,1], h:64, fw:86, fd:72, roof:"#8f7f63", front:"#b3a078", side:"#7d6f57", special:"sagrada" },
+  { id:"panaderia", es:"la panadería", ru:"булочная", g:"la", cat:"comer", lot:[0,2], h:56, fw:78, fd:64, roof:"#e7913f", front:"#f4a460", side:"#bf7430", awn:"#b5432c", boxes:[[46,14,12,10,8,"#8c6a4a"]] },
+  { id:"escuela", es:"la escuela", ru:"школа", g:"la", cat:"cultura", lot:[0,3], h:72, fw:92, fd:76, roof:"#2f7ea6", front:"#4682b4", side:"#1e5f82", flag:true, boxes:[[56,44,14,12,7,"#8d9aa5"]] },
+  { id:"supermercado", es:"el supermercado", ru:"супермаркет", g:"el", cat:"comer", lot:[1,0], h:64, fw:96, fd:80, roof:"#3f9c3f", front:"#58b658", side:"#2f7d31", awn:"#e0762b", boxes:[[12,12,18,14,7,"#77848f"]] },
+  { id:"parque", es:"el parque", ru:"парк", g:"el", cat:"ciudad", lot:[1,1], h:0, fw:140, fd:140, roof:"#5e9e52", front:"#4d8b42", side:"#3f7036", special:"park" },
+  { id:"mercado", es:"el mercado", ru:"рынок", g:"el", cat:"comer", lot:[1,2], h:48, fw:110, fd:88, roof:"#d17a00", front:"#e8912a", side:"#a65e05", awn:"#3f7d6d" },
+  { id:"hospital", es:"el hospital", ru:"больница", g:"el", cat:"salud", lot:[1,3], h:82, fw:94, fd:78, roof:"#e06a55", front:"#ff4500", side:"#c23b05", cross:"#ffffff" },
+  { id:"farmacia", es:"la farmacia", ru:"аптека", g:"la", cat:"salud", lot:[2,0], h:50, fw:74, fd:62, roof:"#b393c9", front:"#d8bfd8", side:"#8e718e", cross:"#2f9e4f", awn:"#2f9e4f" },
+  { id:"tienda", es:"la tienda", ru:"магазин", g:"la", cat:"ciudad", lot:[2,1], h:62, fw:80, fd:66, roof:"#c99a1f", front:"#daa520", side:"#9a7511", awn:"#a63c28", boxes:[[44,12,14,10,7,"#6d5a2a"]] },
+  { id:"restaurante", es:"el restaurante", ru:"ресторан", g:"el", cat:"comer", lot:[2,2], h:54, fw:84, fd:70, roof:"#d05038", front:"#e2603f", side:"#a63c28", awn:"#2e6e5c", boxes:[[50,10,12,10,10,"#6d4a3a"]] },
+  { id:"biblioteca", es:"la biblioteca", ru:"библиотека", g:"la", cat:"cultura", lot:[2,3], h:78, fw:90, fd:74, roof:"#7d2aa6", front:"#9932cc", side:"#651f88", boxes:[[14,14,20,16,8,"#5b4a66"]] },
+  { id:"cafe", es:"el café", ru:"кафе", g:"el", cat:"comer", lot:[3,0], h:46, fw:70, fd:60, roof:"#a9713d", front:"#b9834e", side:"#8a5a33", awn:"#7d2f24", boxes:[[8,8,10,8,6,"#5d4632"]] },
+  { id:"banco", es:"el banco", ru:"банк", g:"el", cat:"ciudad", lot:[3,1], h:60, fw:78, fd:64, roof:"#4f8b8d", front:"#5f9ea0", side:"#3a6e70", boxes:[[42,10,16,12,8,"#41565a"]] },
+  { id:"cine", es:"el cine", ru:"кинотеатр", g:"el", cat:"cultura", lot:[3,2], h:86, fw:92, fd:78, roof:"#a2a9af", front:"#c0c0c0", side:"#7d858c", marquee:true, boxes:[[58,12,16,12,9,"#5a646d"]] },
+  { id:"estacion", es:"la estación", ru:"вокзал", g:"la", cat:"ciudad", lot:[3,3], h:58, fw:96, fd:70, roof:"#00787c", front:"#008b8b", side:"#005f63", boxes:[[30,20,36,26,12,"#b8c4cc"]] },
+];
+const byId = new Map(BUILDINGS.map(b => [b.id, b]));
+const CATS = [
+  { id:"comer", label:"Еда", es:"Comer y beber" },
+  { id:"ciudad", label:"Город", es:"Ciudad" },
+  { id:"salud", label:"Здоровье", es:"Salud" },
+  { id:"cultura", label:"Культура", es:"Cultura y saber" },
+];
+const blockPos = (r, c) => ({ x: 20 + c * (BLOCK + STREET), y: 20 + r * (BLOCK + STREET) });
+
+/* ============================== ПОСТРОЕНИЕ СЦЕНЫ ============================== */
+const plane = document.getElementById("plane");
+const stage = document.getElementById("stage");
+const anchors = new Map();
+const lots = new Map();
+const checks = new Map();
+
+function div(cls, css, html) {
+  const d = document.createElement("div");
+  if (cls) d.className = cls;
+  if (css) for (const k in css) {
+    if (k.indexOf("--") === 0) d.style.setProperty(k, css[k]);
+    else d.style[k] = css[k];
+  }
+  if (html != null) d.innerHTML = html;
+  return d;
+}
+function makeBox(o) {
+  const d = div("b3", { width: o.w + "px", height: o.d + "px", left: o.x + "px", top: o.y + "px", "--h": o.h + "px", "--roofC": o.roof, "--wallC": o.wall, ...(o.cross ? { "--crossC": o.cross } : {}) });
+  if (o.z) d.style.transform = "translateZ(" + o.z + "px)";
+  d.appendChild(div("face f-side wall" + (o.cross ? " wall-cross" : "")));
+  const front = div("face f-front wall" + (o.cross ? " wall-cross" : ""));
+  if (o.awn) front.appendChild(div("awning", { "--awnC": o.awn }));
+  if (o.marquee) front.appendChild(div("marquee"));
+  d.appendChild(front);
+  d.appendChild(div("face f-roof"));
+  return d;
+}
+function badge(id, z) {
+  const s = document.createElement("span");
+  s.style.cssText = "position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;background:#fffdf5;color:#0e3143;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 0 0 3.5px #0e3143,0 10px 20px rgba(6,26,41,.45);transform:translateZ(" + z + "px) " + BB;
+  s.innerHTML = icon(id, 25, 2.1);
+  return s;
+}
+function checkBadge(z) {
+  const s = document.createElement("span");
+  s.style.cssText = "position:absolute;left:50%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;background:#2f9e63;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 6px 14px rgba(10,30,20,.45);transform:translateZ(" + z + "px) " + BB + ";display:none";
+  s.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6.5" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  s.classList.add("pop-in");
+  return s;
+}
+function tree(x, y, r, z, v2) {
+  const f = document.createDocumentFragment();
+  f.appendChild(div("shadow-plate", { left: (x - r) + "px", top: (y - r + 5) + "px", width: r * 2 + "px", height: r * 2 + "px" }));
+  f.appendChild(div("trunk", { left: x + "px", top: y + "px", "--th": (z - 4) + "px" }));
+  f.appendChild(div("crown" + (v2 ? " c2" : ""), { left: x + "px", top: y + "px", width: r * 2 + "px", height: r * 2 + "px", "--cz": z + "px" }));
+  return f;
+}
+
+/* земля и улицы */
+plane.appendChild(div("ground"));
+plane.appendChild(div("edge-b"));
+plane.appendChild(div("edge-l"));
+CENTERS.forEach(c => {
+  plane.appendChild(div("", { position:"absolute", left:"14px", right:"14px", top:(c-1.5)+"px", height:"3px",
+    background:"repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 16px,rgba(255,255,255,0) 16px 30px)" }));
+  plane.appendChild(div("", { position:"absolute", top:"14px", bottom:"14px", left:(c-1.5)+"px", width:"3px",
+    background:"repeating-linear-gradient(0deg,rgba(255,255,255,.5) 0 16px,rgba(255,255,255,0) 16px 30px)" }));
+});
+[[CENTERS[0]-42, CENTERS[1]-(STREET-12)/2, 24, STREET-12, 0],
+ [CENTERS[1]-(STREET-12)/2, CENTERS[0]-42, STREET-12, 24, 90],
+ [CENTERS[1]+18, CENTERS[2]-(STREET-12)/2, 24, STREET-12, 0],
+ [CENTERS[2]-(STREET-12)/2, CENTERS[0]+18, STREET-12, 24, 90]
+].forEach(([x,y,w,h,a]) => plane.appendChild(div("", { position:"absolute", left:x+"px", top:y+"px", width:w+"px", height:h+"px",
+  background:`repeating-linear-gradient(${a}deg,rgba(255,255,255,.55) 0 6px,rgba(255,255,255,0) 6px 12px)` })));
+
+/* машины */
+function car(horizontal, pos, lane, w, d, h, color, dur, del, rev) {
+  const c = div("car " + (horizontal ? "car-h" + (rev ? " rev" : "") : "car-v"),
+    { left: (horizontal ? 0 : pos + lane) + "px", top: (horizontal ? pos + lane : 0) + "px", width: w + "px", height: d + "px",
+      "--dur": dur, "--del": del, "--carC": color, "--ch": h + "px" });
+  c.appendChild(div("car-body", null, '<div class="c-side"></div><div class="c-front"></div><div class="c-roof"></div>'));
+  plane.appendChild(c);
+}
+car(true, CENTERS[0], -17, 32, 14, 9, "#c8402f", "15s", "-3s");
+car(true, CENTERS[1], 5, 28, 13, 8, "#2e6e8c", "19s", "-11s", true);
+car(false, CENTERS[2], 7, 17, 46, 13, "#e8b23a", "23s", "-6s");
+[120, 340, 560].forEach((y, i) => plane.appendChild(tree(CENTERS[2] - 13, y, 9, 15, i % 2 === 1)));
+
+/* кварталы */
+const SPIRES = [[8,6,16,74],[62,6,16,74],[8,52,16,74],[62,52,16,74],[29,27,28,128]];
+const CRANE = { x: 112, y: 118, pole: 118, arm: 54 };
+const PARK_TREES = [[24,22,13,18,0],[112,26,15,22,1],[26,112,14,20,0],[116,110,12,17,1],[74,98,10,14,0],[100,64,9,12,1]];
+
+BUILDINGS.forEach(b => {
+  const [r, c] = b.lot;
+  const { x, y } = blockPos(r, c);
+  const lot = div("lot", { left: x + "px", top: y + "px", width: BLOCK + "px", height: BLOCK + "px" });
+  const plateCls = b.special === "park" ? "plate parklot" : "plate";
+  const plateCss = b.special === "park" ? { "--lotC": "#5e9e52", "--lotIn": "#55934a" }
+    : b.special === "sagrada" ? { "--lotC": "#e2d5b5", "--lotIn": "#d6c69f" }
+    : { "--lotC": "#e6d9bb", "--lotIn": "#d9c8a2" };
+  lot.appendChild(div(plateCls, plateCss));
+  const lift = div("lift");
+  let anchorZ = b.h + 12, tipLift = b.fd / 2 + 10;
+
+  if (b.special === "park") {
+    lift.appendChild(div("", { position:"absolute", left:"6px", right:"6px", top:"58px", height:"9px", background:"#d8c69e", transform:"translateZ(4px)", pointerEvents:"none" }));
+    lift.appendChild(div("", { position:"absolute", top:"6px", bottom:"6px", left:"48px", width:"9px", background:"#d8c69e", transform:"translateZ(4px)", pointerEvents:"none" }));
+    const pond = div("pond", { left:"40px", top:"34px", width:"26px", height:"26px" });
+    lift.appendChild(pond);
+    PARK_TREES.forEach(([tx,ty,tr,tz,v]) => lift.appendChild(tree(tx, ty, tr, tz, v)));
+    lift.appendChild(makeBox({ w:10, d:4, h:3.5, x:66, y:50, z:4, roof:"#8a5a33", wall:"#6d4322" }));
+    lift.appendChild(makeBox({ w:10, d:4, h:3.5, x:26, y:72, z:4, roof:"#8a5a33", wall:"#6d4322" }));
+    lift.appendChild(badge(b.id, 58));
+    anchorZ = 60; tipLift = 80;
+  } else if (b.special === "sagrada") {
+    lift.appendChild(makeBox({ w: b.fw, d: b.fd, h: b.h, x: 23, y: 27, roof: b.roof, wall: b.front }));
+    SPIRES.forEach(([dx, dy, sw, sh], i) => {
+      const sp = makeBox({ w: sw, d: sw, h: sh, x: 23 + dx, y: 27 + dy, roof: "#cdbb96", wall: i === 4 ? "#b3a078" : "#a8946f" });
+      const fin = document.createElement("span");
+      fin.className = i === 4 ? "finial" : "";
+      fin.style.cssText = "position:absolute;left:50%;top:50%;width:" + (i === 4 ? 12 : 8) + "px;height:" + (i === 4 ? 12 : 8) + "px;margin:" + (i === 4 ? -6 : -4) + "px 0 0 " + (i === 4 ? -6 : -4) + "px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe29a,#f2b441 60%,#c98a1e);transform:translateZ(" + (sh + 5) + "px) " + BB;
+      sp.appendChild(fin);
+      lift.appendChild(sp);
+    });
+    const pole = makeBox({ w: 5, d: 5, h: CRANE.pole, x: CRANE.x, y: CRANE.y, roof: "#e0a63c", wall: "#c9922f" });
+    const light = document.createElement("span");
+    light.className = "crane-light";
+    light.style.cssText = "position:absolute;left:-.5px;top:-.5px;width:6px;height:6px;border-radius:50%;background:#ff5a45;transform:translateZ(" + (CRANE.pole + 4) + "px) " + BB;
+    pole.appendChild(light);
+    lift.appendChild(pole);
+    lift.appendChild(div("", { position:"absolute", left:(CRANE.x - CRANE.arm + 5)+"px", top:(CRANE.y + .5)+"px", width:(CRANE.arm + 16)+"px", height:"4px",
+      transform:"translateZ(" + CRANE.pole + "px)", background:"linear-gradient(90deg,#8a6a24 0 13%,#e0a63c 13%)", boxShadow:"0 0 6px rgba(0,0,0,.28)" }));
+    lift.appendChild(badge(b.id, 150));
+    anchorZ = 155; tipLift = 150;
+  } else {
+    lift.appendChild(div("shadow-plate", { left: ((BLOCK - b.fw * 1.15) / 2 - 7) + "px", top: ((BLOCK - b.fd * 1.15) / 2 + 10) + "px", width: b.fw * 1.15 + "px", height: b.fd * 1.15 + "px" }));
+    const bx = makeBox({ w: b.fw, d: b.fd, h: b.h, x: (BLOCK - b.fw) / 2, y: (BLOCK - b.fd) / 2,
+      roof: b.roof, wall: b.front, cross: b.cross, awn: b.awn, marquee: b.marquee });
+    (b.boxes || []).forEach(([dx, dy, w, d2, h2, col]) =>
+      bx.appendChild(makeBox({ w, d: d2, h: h2, x: dx, y: dy, z: b.h, roof: col, wall: col })));
+    if (b.flag) {
+      bx.appendChild(makeBox({ w: 2.5, d: 2.5, h: 30, x: b.fw - 12, y: 8, z: b.h, roof: "#8d9aa5", wall: "#77848f" }));
+      const fl = document.createElement("span");
+      fl.style.cssText = "position:absolute;left:" + (b.fw - 9) + "px;top:9px;width:20px;height:13px;background:linear-gradient(180deg,#c8402f 0 26%,#f2b441 26% 74%,#c8402f 74% 100%);box-shadow:0 1px 4px rgba(10,20,30,.35);transform:translateZ(" + (b.h + 24) + "px) " + BB;
+      bx.appendChild(fl);
+    }
+    bx.appendChild(badge(b.id, b.h + 9));
+    lift.appendChild(bx);
+  }
+  const chk = checkBadge(b.special === "sagrada" ? 170 : b.special === "park" ? 66 : b.h + 20);
+  lift.appendChild(chk);
+  checks.set(b.id, chk);
+
+  const anchor = div("", { position:"absolute", left: BLOCK / 2 + "px", top: BLOCK / 2 + "px", width:"1px", height:"1px", transform:"translateZ(" + anchorZ + "px)", pointerEvents:"none" });
+  lift.appendChild(anchor);
+  anchors.set(b.id, anchor);
+  lot.appendChild(lift);
+  lot.dataset.id = b.id;
+  lot._tipLift = tipLift;
+  lots.set(b.id, lot);
+  plane.appendChild(lot);
+});
+
+/* ============================== КАМЕРА ============================== */
+let view = store.get("mb-view") === "iso" ? "iso" : "top";
+let tRx = VIEWS[view].rx, tRz = VIEWS[view].rz, tAmp = VIEWS[view].amp;
+const cur = { rx: tRx, rz: tRz, amp: tAmp };
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function applyStatic() {
+  plane.style.setProperty("--rx", tRx + "deg");
+  plane.style.setProperty("--rz", tRz + "deg");
+}
+if (reduced) applyStatic();
+else {
+  let mx = 0, my = 0, cx = 0, cy = 0, lastMove = performance.now();
+  addEventListener("mousemove", e => {
+    mx = (e.clientX / innerWidth - .5) * 2; my = (e.clientY / innerHeight - .5) * 2;
+    lastMove = performance.now();
+  });
+  (function loop(t) {
+    const idle = t - lastMove > 4000;
+    const ix = idle ? Math.sin(t / 2600) * .22 : 0;
+    const iy = idle ? Math.cos(t / 3100) * .16 : 0;
+    cx += (mx - cx) * .055; cy += (my - cy) * .055;
+    cur.rx += (tRx - cur.rx) * .09; cur.rz += (tRz - cur.rz) * .09; cur.amp += (tAmp - cur.amp) * .09;
+    plane.style.setProperty("--rx", (cur.rx - (cy + iy) * cur.amp) + "deg");
+    plane.style.setProperty("--rz", (cur.rz + (cx + ix) * (cur.amp + .4)) + "deg");
+    requestAnimationFrame(loop);
+  })(performance.now());
+}
+function setView(v) {
+  view = v;
+  tRx = VIEWS[v].rx; tRz = VIEWS[v].rz; tAmp = VIEWS[v].amp;
+  stage.dataset.view = v;
+  document.querySelectorAll("#viewtog button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
+  store.set("mb-view", v);
+  if (reduced) applyStatic();
+}
+document.querySelectorAll("#viewtog button").forEach(b => b.addEventListener("click", () => setView(b.dataset.v)));
+setView(view);
+
+/* масштаб */
+const wrap = document.getElementById("stage-wrap");
+function fit() {
+  const r = wrap.getBoundingClientRect();
+  const s = Math.max(Math.min((r.width - 10) / 1130, (r.height - 10) / 850, 1.18), .3);
+  stage.style.transform = `translate(-50%,-52%) scale(${s})`;
+}
+fit();
+addEventListener("resize", fit);
+
+/* ============================== СОСТОЯНИЕ ============================== */
+let learned = new Set();
+try { learned = new Set(JSON.parse(store.get("mb-learned") || "[]")); } catch (e) {}
+let sound = store.get("mb-sound") !== "0";
+let quiz = { on: false, target: null, score: 0, streak: 0, solved: false };
+let quizTimer = null, tipRaf = 0, toastTimer = 0, hoverId = null;
+
+function persist() { store.set("mb-learned", JSON.stringify([...learned])); }
+
+function speak(text) {
+  if (!sound || !("speechSynthesis" in window)) return;
+  try {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "es-ES"; u.rate = .92;
+    const v = speechSynthesis.getVoices().find(v => (v.lang || "").toLowerCase().startsWith("es"));
+    if (v) u.voice = v;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ============================== HUD ============================== */
+const tip = document.getElementById("tip");
+const tipG = document.getElementById("tipG"), tipEs = document.getElementById("tipEs"),
+      tipRu = document.getElementById("tipRu"), tipHint = document.getElementById("tipHint");
+
+function showTip(b) {
+  tipG.textContent = b.g;
+  tipG.className = "g " + (b.g === "el" ? "g-el" : "g-la");
+  tipEs.textContent = b.es;
+  tipRu.textContent = b.ru + (b.id === "iglesia" ? " · ещё строится!" : "");
+  tipHint.textContent = b.special === "park" ? "клик — выучить" : "клик — выучить и озвучить";
+  tip.hidden = false;
+  cancelAnimationFrame(tipRaf);
+  const anchor = anchors.get(b.id);
+  const lift = b.special === "sagrada" ? 150 : b.special === "park" ? 60 : (view === "top" ? b.fd / 2 + 12 : 12);
+  (function upd() {
+    const r = anchor.getBoundingClientRect();
+    tip.style.left = Math.min(Math.max(r.left + r.width / 2, 140), innerWidth - 140) + "px";
+    tip.style.top = Math.max(r.top - lift, 76) + "px";
+    tipRaf = requestAnimationFrame(upd);
+  })();
+}
+function hideTip() { tip.hidden = true; cancelAnimationFrame(tipRaf); }
+
+function toast(msg, kind) {
+  const old = document.querySelector(".toast"); if (old) old.remove();
+  const t = div("toast " + kind, null, msg);
+  document.getElementById("map").appendChild(t);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.remove(), 2100);
+}
+
+function fb(id, kind) {
+  const lot = lots.get(id); if (!lot) return;
+  lot.classList.remove("flash-ok", "shake");
+  void lot.offsetWidth;
+  lot.classList.add(kind === "ok" ? "flash-ok" : "shake");
+  setTimeout(() => lot.classList.remove("flash-ok", "shake"), 720);
+}
+
+function refreshProgress() {
+  const n = learned.size, total = BUILDINGS.length;
+  document.getElementById("pnum").textContent = n;
+  document.getElementById("pring").style.strokeDashoffset = 94.25 * (1 - n / total);
+  document.getElementById("dcount").textContent = n + "/" + total;
+  document.getElementById("dbar").style.width = (n / total * 100) + "%";
+  document.getElementById("alldone").hidden = n < total;
+  BUILDINGS.forEach(b => {
+    const c = checks.get(b.id); if (c) c.style.display = learned.has(b.id) ? "flex" : "none";
+    const w = document.querySelector(`.word[data-id="${b.id}"] .wcheck`);
+    if (w) w.style.display = learned.has(b.id) ? "" : "none";
+  });
+}
+
+function markLearned(id) {
+  if (learned.has(id)) return false;
+  learned.add(id); persist(); refreshProgress();
+  return true;
+}
+
+/* ============================== КЛИКИ И НАВЕДЕНИЕ ============================== */
+function setRing(id) {
+  document.querySelectorAll(".quizring").forEach(e => e.remove());
+  if (!id) return;
+  const b = byId.get(id), lot = lots.get(id);
+  const sz = b.special ? BLOCK + 28 : Math.max(b.fw, b.fd) + 46;
+  const ring = div("quizring", { left: BLOCK / 2 + "px", top: BLOCK / 2 + "px", width: sz + "px", height: sz + "px" });
+  lot.appendChild(ring);
+}
+
+function randomTarget(except) {
+  const pool = BUILDINGS.filter(b => b.id !== except);
+  return pool[Math.floor(Math.random() * pool.length)].id;
+}
+
+function updateQuizUI() {
+  const bar = document.getElementById("quizbar");
+  bar.hidden = !quiz.on;
+  document.getElementById("quizBtn").classList.toggle("on", quiz.on);
+  document.getElementById("quizLabel").textContent = quiz.on ? "Выйти" : "Викторина";
+  renderLegend();
+  if (quiz.on && quiz.target) {
+    const b = byId.get(quiz.target);
+    document.getElementById("qword").innerHTML = `${b.es} <i>— ${b.ru}</i>`;
+  }
+  document.getElementById("qscore").textContent = quiz.score;
+  document.getElementById("qstreak").textContent = quiz.streak;
+  document.getElementById("qstreakwrap").classList.toggle("hot", quiz.streak > 0);
+  setRing(quiz.on && !quiz.solved ? quiz.target : null);
+}
+
+function handlePick(id) {
+  if (quiz.on && quiz.target) {
+    const target = byId.get(quiz.target);
+    if (id === quiz.target) {
+      quiz.score++; quiz.streak++; quiz.solved = true;
+      fb(id, "ok"); markLearned(id);
+      toast(`¡Correcto! Это ${target.es} — ${target.ru}`, "ok");
+      speak(target.es); updateQuizUI();
+      clearTimeout(quizTimer);
+      quizTimer = setTimeout(() => { quiz.target = randomTarget(quiz.target); quiz.solved = false; updateQuizUI(); }, 1200);
+    } else {
+      const guess = byId.get(id);
+      quiz.streak = 0; fb(id, "no");
+      toast(`¡No! Вы кликнули на «${guess.es}» — ${guess.ru}`, "no");
+      updateQuizUI();
+    }
+    return;
+  }
+  const b = byId.get(id);
+  const first = markLearned(id);
+  if (sound && b.special !== "park") speak(b.es);
+  if (first) toast(`Слово выучено: ${b.es} — ${b.ru}`, "ok");
+  showTip(b);
+}
+
+function toggleQuiz() {
+  clearTimeout(quizTimer);
+  if (quiz.on) { quiz = { on: false, target: null, score: 0, streak: 0, solved: false }; hideTip(); }
+  else quiz = { on: true, target: randomTarget(), score: 0, streak: 0, solved: false };
+  updateQuizUI();
+}
+document.getElementById("quizBtn").addEventListener("click", toggleQuiz);
+document.getElementById("qclose").addEventListener("click", toggleQuiz);
+
+lots.forEach((lot, id) => {
+  lot.addEventListener("mouseenter", () => { hoverId = id; showTip(byId.get(id)); });
+  lot.addEventListener("mouseleave", () => { hoverId = null; hideTip(); });
+  lot.addEventListener("click", e => { e.stopPropagation(); handlePick(id); });
+});
+wrap.addEventListener("click", hideTip);
+
+/* звук */
+const soundBtn = document.getElementById("soundBtn");
+const SND_ON = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9.5 9.5 0 0 1 0 13"/></svg>';
+const SND_OFF = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none"/><path d="m16 9 6 6m0-6-6 6"/></svg>';
+function renderSound() {
+  soundBtn.innerHTML = sound ? SND_ON : SND_OFF;
+  soundBtn.classList.toggle("on", sound);
+  soundBtn.title = sound ? "Озвучка включена" : "Озвучка выключена";
+}
+soundBtn.addEventListener("click", () => {
+  sound = !sound; store.set("mb-sound", sound ? "1" : "0"); renderSound();
+  if (sound && hoverId) speak(byId.get(hoverId).es);
+});
+renderSound();
+
+/* сброс */
+document.getElementById("resetBtn").addEventListener("click", () => {
+  learned = new Set(); persist(); refreshProgress();
+  toast("Прогресс сброшен. ¡Buena suerte!", "ok");
+});
+
+/* ============================== СЛОВАРЬ ============================== */
+const dict = document.getElementById("dict");
+CATS.forEach(cat => {
+  const col = div("dcat");
+  col.innerHTML = `<h3>${cat.label} <i>${cat.es}</i></h3><ul></ul>`;
+  const ul = col.querySelector("ul");
+  BUILDINGS.filter(b => b.cat === cat.id).forEach(b => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "word"; btn.dataset.id = b.id;
+    btn.innerHTML =
+      `<span class="chip" style="background:linear-gradient(135deg,${b.roof},${b.front});--chipSide:${b.side}">${icon(b.id, 14, 2.1)}</span>` +
+      `<span class="gdot" style="background:${b.g === "el" ? "#3e9bc4" : "#e2725b"}" title="${b.g}"></span>` +
+      `<span class="wtxt"><b>${b.es}</b><small>${b.ru}</small></span>` +
+      `<span class="wplay"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>` +
+      `<span class="wcheck" style="display:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.5 17 19 7" stroke="#4fc487" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+    btn.addEventListener("mouseenter", () => lots.get(b.id).classList.add("hl"));
+    btn.addEventListener("mouseleave", () => lots.get(b.id).classList.remove("hl"));
+    btn.addEventListener("focus", () => lots.get(b.id).classList.add("hl"));
+    btn.addEventListener("blur", () => lots.get(b.id).classList.remove("hl"));
+    btn.addEventListener("click", () => {
+      markLearned(b.id);
+      lots.get(b.id).classList.add("hl");
+      setTimeout(() => lots.get(b.id).classList.remove("hl"), 1300);
+      if (sound) speak(b.es);
+    });
+    li.appendChild(btn); ul.appendChild(li);
+  });
+  dict.appendChild(col);
+});
+
+/* легенда */
+function renderLegend() {
+  const el = document.getElementById("legend");
+  const lines = quiz.on
+    ? ["Кликните по зданию, которое названо ниже", "Верно — очко и серия, ошибка — серия сбрасывается"]
+    : ["Наведите курсор на здание — всплывёт слово", "Клик — отметить выученным и озвучить"];
+  lines.push("Значок на крыше подскажет, что это за здание · карта слегка наклоняется за курсором");
+  el.innerHTML = lines.map(t => `<span>${t}</span>`).join("");
+}
+
+/* старт */
+refreshProgress();
+updateQuizUI();
+</script>
+</body>
+</html>
