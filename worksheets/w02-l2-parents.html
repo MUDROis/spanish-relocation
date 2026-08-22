@@ -43,7 +43,7 @@
   .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
   .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10.5px; padding:0 2px; }
 
-  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex{ margin:0 0 5mm; break-inside:auto; page-break-inside:auto; }
   .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2.5mm; }
   .ex-num{
     width:8mm; height:8mm; border-radius:50%; background:var(--p1); color:#fff;
@@ -139,7 +139,10 @@
 </head>
 <body>
 
-<div class="no-print"><button onclick="window.print()">🖨 Распечатать (A4, 3 страницы)</button></div>
+<div class="no-print">
+  <button onclick="window.print()">🖨 Распечатать</button>
+  <button onclick="window.print()">💾 Сохранить в PDF</button>
+</div>
 
 <!-- ═══════════════════ ЛИСТ 1 ═══════════════════ -->
 <div class="sheet">
@@ -377,5 +380,8 @@
   <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 2.2 · стр. 3 / 3</span></div>
 </div>
 
+<script>
+  function saveAsPDF() { window.print(); }
+</script>
 </body>
 </html>

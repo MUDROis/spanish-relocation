@@ -22,7 +22,7 @@
   .page:last-child{page-break-after:auto;min-height:auto}
   
   /* ЗАДАНИЯ */
-  .task{margin-bottom:18px;page-break-inside:avoid}
+  .task{margin-bottom:18px;page-break-inside:auto}
   .task h2{font-size:15px;margin-bottom:8px}
   .task h2 .num{display:inline-block;background:#2E7D32;color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;font-size:12px;margin-right:6px}
   .star{color:#E8604C;font-weight:800}
@@ -68,7 +68,8 @@
   .no-print button:hover{background:#1B5E20}
   
   @media print{
-    body{background:#fff;padding:0}
+    h1,h2,h3{break-after:avoid}
+    body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .sheet{box-shadow:none;max-width:none;padding:8mm 10mm;border-radius:0}
     .no-print{display:none}
     .page{page-break-after:always;min-height:auto;max-height:275mm;overflow:hidden}
@@ -80,7 +81,10 @@
 </head>
 <body>
 
-<div class="no-print"><button onclick="window.print()">🖨 Распечатать (A4, 2 страницы)</button></div>
+<div class="no-print">
+  <button onclick="window.print()">🖨 Распечатать</button>
+  <button onclick="window.print()">💾 Сохранить в PDF</button>
+</div>
 
 <div class="sheet">
 
@@ -364,5 +368,8 @@
 
 </div>
 
+<script>
+  function saveAsPDF() { window.print(); }
+</script>
 </body>
 </html>
