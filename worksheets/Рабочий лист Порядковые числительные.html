@@ -18,14 +18,7 @@
     -webkit-print-color-adjust:exact; print-color-adjust:exact;
   }
 
-  .print-btn{
-    position:fixed; top:15px; right:15px; z-index:1000;
-    background:var(--p1); color:#fff; border:none;
-    padding:10px 20px; border-radius:999px;
-    font-size:13px; font-weight:700; cursor:pointer;
-    box-shadow:0 6px 20px rgba(226,114,91,.4);
-    display:flex; align-items:center; gap:8px;
-  }
+  .print-btn{position:fixed;top:12px;right:12px;z-index:1000;background:#E2725B;color:#fff;border:none;border-radius:999px;padding:7px 16px;font-size:12.5px;font-weight:700;cursor:pointer;box-shadow:0 3px 12px rgba(226,114,91,.35)}
 
   .sheet{
     width:210mm; min-height:297mm;
@@ -33,12 +26,6 @@
     background:var(--bg);
     box-shadow:0 8px 28px rgba(43,33,24,.25);
     position:relative;
-  }
-  .sheet-footer{
-    position:absolute; bottom:5mm; left:11mm; right:11mm;
-    display:flex; justify-content:space-between;
-    font-size:9px; color:var(--muted); font-weight:600;
-    border-top:1px solid #E8DCCF; padding-top:2mm;
   }
 
   .hero{
@@ -108,6 +95,7 @@
 
   @page{ size:A4; margin:0; }
   @media print{
+    .print-btn{display:none}
     body{ background:#fff; }
     .sheet{ margin:0; box-shadow:none; width:auto; min-height:auto; page-break-after:auto; break-after:auto; }
     .sheet:last-child{ page-break-after:auto; break-after:auto; }
@@ -126,6 +114,7 @@
 </style>
 </head>
 <body>
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
 
 
 
@@ -194,7 +183,6 @@
     </div>
   </div>
 
-  <div class="sheet-footer"><span>¡Rumbo a España!</span><span>Порядковые числительные · стр. 1 / 3</span></div>
 </div>
 
 <!-- ════════════════ ЛИСТ 2 · ПРАКТИКА ════════════════ -->
@@ -270,7 +258,6 @@
     </div>
   </div>
 
-  <div class="sheet-footer"><span>¡Rumbo a España!</span><span>Порядковые числительные · стр. 2 / 3</span></div>
 </div>
 
 <!-- ════════════════ ЛИСТ 3 · ПРАКТИКА 2 + КЛЮЧИ ════════════════ -->
@@ -314,7 +301,6 @@
     </div>
   </div>
 
-  <div class="sheet-footer"><span>¡Rumbo a España!</span><span>Порядковые числительные · стр. 3 / 3</span></div>
 </div>
 
 </body>
