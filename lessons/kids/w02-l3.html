@@ -214,6 +214,53 @@
     .map-grid{grid-template-columns:repeat(2,1fr)}
     .match-columns{grid-template-columns:1fr}
   }
+
+  /* Grammar hint — всплывающая подсказка (используется в подсказках: .gh) */
+  .gh{
+    border-bottom:1.5px dashed var(--nav);
+    cursor:help;
+    position:relative;
+    color:var(--nav);
+    font-weight:900;
+    display:inline;
+  }
+  .gh::after{
+    content:attr(data-tip);
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:#2B2118;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:12px;
+    font-size:.9rem;
+    font-weight:700;
+    white-space:normal;
+    min-width:220px;
+    max-width:320px;
+    line-height:1.4;
+    opacity:0;
+    pointer-events:none;
+    transition:.22s;
+    z-index:30;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+    text-align:left;
+  }
+  .gh:hover::after,.gh.active::after{opacity:1;bottom:calc(100% + 12px)}
+  .gh::before{
+    content:'';
+    position:absolute;
+    bottom:calc(100% + 2px);
+    left:50%;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:#2B2118;
+    opacity:0;
+    transition:.22s;
+    z-index:31;
+  }
+  .gh:hover::before,.gh.active::before{opacity:1;bottom:calc(100% + 6px)}
 </style>
 </head>
 <body>
@@ -459,6 +506,28 @@
       😊 <em>«¡Muchas gracias!»</em> — Большое спасибо!
     </div>
     <button class="speak-btn" style="--c:#1565C0;margin-top:10px" onclick="speak('Perdón, ¿dónde está el baño? Está allí, al final del pasillo. ¡Muchas gracias!')">🔊 Озвучить весь диалог</button>
+
+    <!-- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ — всплывающие (синие слова с подсказками) -->
+    <div class="meta-chip" style="margin:12px 0">💡 Наведи или тапни на <span class="gh" data-tip="Подсказки всплывают при наведении или тапе на синие слова">синие слова</span>, чтобы увидеть краткие объяснения</div>
+    <ul style="margin-left:18px;font-weight:800;line-height:1.6">
+      <li><strong>Начни вежливо:</strong> <span class="gh" data-tip="Perdón — вежливое 'извините'. Disculpa — менее формально.">Perdón / Disculpa</span></li>
+      <li><strong>¿Dónde está…? / ¿Dónde están…?</strong> — <span class="gh" data-tip="¿Dónde está — для одного предмета (el baño). ¿Dónde están — для множественного (los baños).">разница</span></li>
+      <li><strong>Короткие ответы:</strong> <span class="gh" data-tip="Aquí = здесь. Allí = там. Al final del pasillo = в конце коридора.">Aquí / Allí / Al final del pasillo</span></li>
+      <li><strong>Жест + слово:</strong> <span class="gh" data-tip="Указывайте рукой и говорите коротко — помогает запомнить">сочетай жест с фразой</span></li>
+    </ul>
+    <div style="margin-top:10px;font-size:.95rem;color:#6b675f;font-weight:700">Пример: <span class="gh" data-tip="Пример: 'Perdón, ¿dónde está el comedor?' → 'Está allí, al final.'">«Perdón, ¿dónde está el comedor?» → «Está allí, al final.»</span></div>
+
+    <!-- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ (коротко и полезно для детей) -->
+    <div style="display:none;background:#FFF8E1;border-left:4px solid #E9A13B;border-radius:12px;padding:12px 14px;margin:18px 0;font-weight:800;color:#333">
+      <div style="margin-bottom:8px">📝 <strong>Грамматические подсказки</strong> — запомни быстро:</div>
+      <ol style="margin-left:18px;font-weight:700">
+        <li><strong>Начни вежливо:</strong> всегда можно сказать <em>Perdón</em> или <em>Disculpa</em> перед вопросом.</li>
+        <li><strong>¿Dónde está…?</strong> — для одного места (ej. <em>el baño</em>), <strong>¿Dónde están…?</strong> — для нескольких (ej. <em>los baños</em>).</li>
+        <li><strong>Aquí / Allí / Al final</strong> — три коротких ответа: <em>Aquí</em> = здесь, <em>Allí</em> = там, <em>Al final del pasillo</em> = в конце коридора.</li>
+        <li><strong>Сочетай жест + слово:</strong> указывай рукой и говори коротко — дети запомнят быстрее.</li>
+      </ol>
+      <div style="margin-top:10px;font-size:.95rem;color:#6b675f;font-weight:700">Пример: «Perdón, ¿dónde está el comedor?» → «Está allí, al final.»</div>
+    </div>
   </section>
 
   <!-- БЛОК 5: КАРТА ШКОЛЫ -->
