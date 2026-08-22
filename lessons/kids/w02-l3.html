@@ -769,14 +769,14 @@
       let currentOrdinal = null;
 
       function playOrdinal(word,elem){
-        if(window.speak) speak(word); else console.log('speak()',word);
+        if(window.speak) window.speak(word); else console.log('speak()',word);
         if(elem){
           elem.classList.add('playing');
           setTimeout(()=>elem.classList.remove('playing'),800);
         }
       }
 
-n      function playAllOrdinals(){
+      function playAllOrdinals(){
         const words=ordinalsList.map(o=>o.word);
         let i=0;
         function next(){
@@ -806,7 +806,7 @@ n      function playAllOrdinals(){
         document.getElementById('ord-input').value='';
       }
 
-n      function cardClickOrdinal(el){
+      function cardClickOrdinal(el){
         const idx = parseInt(el.dataset.ordIndex,10);
         const w = el.dataset.ordWord;
         playOrdinal(w, el);
@@ -817,7 +817,7 @@ n      function cardClickOrdinal(el){
         checkAnswer(idx, el);
       }
 
-n      function submitOrdinalInput(){
+      function submitOrdinalInput(){
         const val = document.getElementById('ord-input').value.trim();
         if(!currentOrdinal){ document.getElementById('ord-feedback').textContent='Нажмите «Начать упражнение»'; return; }
         if(!val){ document.getElementById('ord-feedback').textContent='Введите номер или слово'; return; }
@@ -838,7 +838,7 @@ n      function submitOrdinalInput(){
         }
       }
 
-n      function checkAnswer(chosenIndex, el){
+      function checkAnswer(chosenIndex, el){
         if(chosenIndex === currentOrdinal.index){
           showCorrect();
           if(el) el.classList.add('correct'); setTimeout(()=>{ if(el) el.classList.remove('correct'); },700);
@@ -848,7 +848,7 @@ n      function checkAnswer(chosenIndex, el){
         }
       }
 
-n      function showCorrect(){
+      function showCorrect(){
         const f=document.getElementById('ord-feedback');
         f.textContent='✅ Правильно!'; f.style.color='var(--green)';
         // after short pause — ask next
@@ -859,7 +859,7 @@ n      function showCorrect(){
         f.textContent='❌ Неправильно — попробуй ещё'; f.style.color='var(--red)';
       }
 
-n      function normalize(s){
+      function normalize(s){
         return s.toLowerCase().replace(/[\u0300-\u036f]/g, '').normalize('NFD')
           .replace(/[áàäâã]/g,'a').replace(/[éèëê]/g,'e').replace(/[íìïî]/g,'i').replace(/[óòöôõ]/g,'o').replace(/[úùüû]/g,'u').replace(/ñ/g,'n').replace(/\s+/g,'').replace(/º/g,'');
       }
