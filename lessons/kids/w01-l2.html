@@ -280,8 +280,15 @@
   .selfcheck-table th:not(:first-child){text-align:center;width:90px}
   .selfcheck-table td{padding:10px 14px;border-bottom:1px solid #f0ede6}
   .selfcheck-table td:not(:first-child){text-align:center}
-  .selfcheck-table input[type=radio]{width:22px;height:22px;cursor:pointer;accent-color:var(--teal)}
-  .selfcheck-table tr:last-child td{border-bottom:none}
+
+  .tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem}
+  .tl-table th,.tl-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+  .tl-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+  .tl-cell{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:52px;padding:7px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1rem;font-weight:800;transition:.15s;text-align:center}
+  .tl-cell:hover{background:#FFF7EF}
+  .tl-cell.active{border-color:#2B2118;background:#FFF3DC}
+  .tl-reset{background:#fff;border:2px solid var(--teal);color:var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;margin-top:12px;font-family:'Nunito';font-size:.9rem}
+  .tl-reset:hover{background:var(--soft)}
 
   /* ---------- NAVIGATION ---------- */
   .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
@@ -786,57 +793,26 @@
     <div class="task">
       <div class="task-num">7</div>
       <div>
-        <strong>Самопроверка «Смайлик»</strong><br>
-        Честно оцени себя по 5 критериям (таблица ниже).
+        <strong>Самопроверка «Светофор»</strong><br>
+        Честно оцени себя по 5 критериям — нажми на нужный цвет (таблица ниже).
       </div>
     </div>
   </section>
 
   <!-- САМОПРОВЕРКА -->
   <section class="selfcheck">
-    <h4>😊 Самопроверка «Смайлик»</h4>
-    <table class="selfcheck-table">
-      <thead>
-        <tr>
-          <th>Умею</th>
-          <th>😄 отлично</th>
-          <th>🙂 с подсказкой</th>
-          <th>😅 пока сложно</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Сказать «Я не понимаю»</td>
-          <td><input type="radio" name="q1" value="green"></td>
-          <td><input type="radio" name="q1" value="yellow"></td>
-          <td><input type="radio" name="q1" value="red"></td>
-        </tr>
-        <tr>
-          <td>Попросить повторить</td>
-          <td><input type="radio" name="q2" value="green"></td>
-          <td><input type="radio" name="q2" value="yellow"></td>
-          <td><input type="radio" name="q2" value="red"></td>
-        </tr>
-        <tr>
-          <td>Спросить «Как сказать?»</td>
-          <td><input type="radio" name="q3" value="green"></td>
-          <td><input type="radio" name="q3" value="yellow"></td>
-          <td><input type="radio" name="q3" value="red"></td>
-        </tr>
-        <tr>
-          <td>Попросить помощи</td>
-          <td><input type="radio" name="q4" value="green"></td>
-          <td><input type="radio" name="q4" value="yellow"></td>
-          <td><input type="radio" name="q4" value="red"></td>
-        </tr>
-        <tr>
-          <td>Помнить про знаки ¡¿</td>
-          <td><input type="radio" name="q5" value="green"></td>
-          <td><input type="radio" name="q5" value="yellow"></td>
-          <td><input type="radio" name="q5" value="red"></td>
-        </tr>
-      </tbody>
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <p style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">Нажми на нужный цвет — честно! 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно</p>
+    <table class="tl-table" id="tlTable">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Сказать «Я не понимаю»</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+      <tr><td>Попросить повторить</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+      <tr><td>Спросить «Как сказать?»</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+      <tr><td>Попросить помощи</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
+      <tr><td>Помнить про знаки ¡¿</td><td><button class="tl-cell" data-row="4" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="4" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="4" data-color="3">🔴</button></td></tr>
     </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p style="margin-top:10px;font-weight:700;color:var(--ink-soft)">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
   </section>
 
   <!-- КАРТОЧКИ QUIZLET -->
@@ -1303,28 +1279,15 @@ function confetti(emoji){
   }
 }
 
-/* ========== СОХРАНЕНИЕ САМОПРОВЕРКИ ========== */
-document.querySelectorAll('.selfcheck-table input[type=radio]').forEach(input=>{
-  input.addEventListener('change',()=>{
-    const data={};
-    for(let i=1;i<=5;i++){
-      const selected=document.querySelector(`input[name=q${i}]:checked`);
-      if(selected) data['q'+i]=selected.value;
-    }
-    localStorage.setItem('mudro_selfcheck_lesson2',JSON.stringify(data));
-  });
+/* ========== СВЕТОФОР ========== */
+document.querySelectorAll('.tl-cell').forEach(c=>{
+  c.onclick=()=>{
+    const row=c.dataset.row;
+    document.querySelectorAll(`.tl-cell[data-row="${row}"]`).forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+  };
 });
-
-const savedCheck=localStorage.getItem('mudro_selfcheck_lesson2');
-if(savedCheck){
-  try{
-    const data=JSON.parse(savedCheck);
-    Object.keys(data).forEach(key=>{
-      const input=document.querySelector(`input[name=${key}][value=${data[key]}]`);
-      if(input) input.checked=true;
-    });
-  }catch(e){}
-}
+document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-cell').forEach(c=>c.classList.remove('active'));
 </script>
 </body>
 </html>

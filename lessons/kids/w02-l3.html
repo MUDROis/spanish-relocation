@@ -198,12 +198,15 @@
   .selfcheck-table th:not(:first-child){text-align:center;width:90px}
   .selfcheck-table td{padding:10px 14px;border-bottom:1px solid #f0ede6;text-align:center}
   .selfcheck-table td:first-child{text-align:left;font-weight:600}
-  .selfcheck-table .sc-circle{display:inline-block;width:24px;height:24px;border:2px solid #ccc;border-radius:50%;cursor:pointer;transition:.15s}
-  .selfcheck-table .sc-circle:hover{transform:scale(1.15)}
-  .selfcheck-table .sc-circle.selected{border-width:4px}
-  .selfcheck-table .sc-circle.green.selected{border-color:var(--green);background:#C8E6C9}
-  .selfcheck-table .sc-circle.yellow.selected{border-color:#F9A825;background:#FFF9C4}
-  .selfcheck-table .sc-circle.red.selected{border-color:var(--red);background:#FFCDD2}
+
+  .tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem}
+  .tl-table th,.tl-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+  .tl-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+  .tl-cell{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:52px;padding:7px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1rem;font-weight:800;transition:.15s;text-align:center}
+  .tl-cell:hover{background:#F3E8FF}
+  .tl-cell.active{border-color:#2B2118;background:#FFF3DC}
+  .tl-reset{background:#fff;border:2px solid var(--purple);color:var(--purple);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;margin-top:12px;font-family:'Nunito';font-size:.9rem}
+  .tl-reset:hover{background:#F3E8FF}
 
   /* QUIZLET */
   .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;text-decoration:none;font-weight:800;font-size:1.05rem;transition:.2s}
@@ -923,7 +926,7 @@
     <div class="task">
       <div class="task-num">7</div>
       <div>
-        <strong>Самопроверка «Смайлик»</strong> ⭐<br>
+        <strong>Самопроверка «Светофор»</strong> ⭐<br>
         Честно оцени себя по 4 критериям (таблица ниже).
       </div>
     </div>
@@ -942,39 +945,17 @@
 
   <!-- САМОПРОВЕРКА -->
   <section class="selfcheck">
-    <h4>😊 Самопроверка «Смайлик»</h4>
-    <table class="selfcheck-table">
-      <tr>
-        <th>Умею</th>
-        <th>😄 отлично</th>
-        <th>🙂 с подсказкой</th>
-        <th>😅 пока сложно</th>
-      </tr>
-      <tr>
-        <td>Назвать 6 помещений школы</td>
-        <td><span class="sc-circle green" onclick="selectSC(this)"></span></td>
-        <td><span class="sc-circle yellow" onclick="selectSC(this)"></span></td>
-        <td><span class="sc-circle red" onclick="selectSC(this)"></span></td>
-      </tr>
-      <tr>
-        <td>Спросить «¿Dónde está...?»</td>
-        <td><span class="sc-circle green" onclick="selectSC(this)"></span></td>
-        <td><span class="sc-circle yellow" onclick="selectSC(this)"></span></td>
-        <td><span class="sc-circle red" onclick="selectSC(this)"></span></td>
-      </tr>
-      <tr>
-        <td>Понимать aquí / allí / al final</td>
-        <td><span class="sc-circle green" onclick="selectSC(this)"></span></td>
-        <td><span class="sc-circle yellow" onclick="selectSC(this)"></span></td>
-        <td><span class="sc-circle red" onclick="selectSC(this)"></span></td>
-      </tr>
-      <tr>
-        <td>Найти место на карте</td>
-        <td><span class="sc-circle green" onclick="selectSC(this)"></span></td>
-        <td><span class="sc-circle yellow" onclick="selectSC(this)"></span></td>
-        <td><span class="sc-circle red" onclick="selectSC(this)"></span></td>
-      </tr>
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <p style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">Нажми на нужный цвет — честно! 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно</p>
+    <table class="tl-table" id="tlTable">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Назвать 6 помещений школы</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+      <tr><td>Спросить «¿Dónde está...?»</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+      <tr><td>Понимать aquí / allí / al final</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+      <tr><td>Найти место на карте</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
     </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p style="margin-top:10px;font-weight:700;color:var(--ink-soft)">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
   </section>
 
   <!-- QUIZLET -->
@@ -985,11 +966,11 @@
 
   <!-- НАВИГАЦИЯ -->
   <div class="lesson-nav">
-    <a href="./w02-l1.html" class="nav-prev">
+    <a href="./w02-l2.html" class="nav-prev">
       <div class="nav-small">← Предыдущий урок</div>
       <div class="nav-title">Урок 5: Просьбы 🙏</div>
     </a>
-    <a href="./w02-l3.html" class="nav-next">
+    <a href="./w03-l1.html" class="nav-next">
       <div class="nav-small">Следующий урок →</div>
       <div class="nav-title">Урок 7: Репетиция 🎬</div>
     </a>
@@ -1580,11 +1561,15 @@ function locAnswer(o,btn,item){
   },1400);
 }
 
-/* ========== САМОПРОВЕРКА ========== */
-function selectSC(el){
-  el.parentElement.querySelectorAll('.sc-circle').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
-}
+/* ========== СВЕТОФОР ========== */
+document.querySelectorAll('.tl-cell').forEach(c=>{
+  c.onclick=()=>{
+    const row=c.dataset.row;
+    document.querySelectorAll(`.tl-cell[data-row="${row}"]`).forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+  };
+});
+document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-cell').forEach(c=>c.classList.remove('active'));
 
 /* ========== КОНФЕТТИ ========== */
 function confetti(emoji){

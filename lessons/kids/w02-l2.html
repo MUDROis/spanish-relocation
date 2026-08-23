@@ -163,8 +163,15 @@
   .selfcheck-table th:not(:first-child){text-align:center;width:90px}
   .selfcheck-table td{padding:10px 14px;border-bottom:1px solid #f0ede6}
   .selfcheck-table td:not(:first-child){text-align:center}
-  .selfcheck-table input[type=radio]{width:22px;height:22px;cursor:pointer;accent-color:var(--green)}
-  .selfcheck-table tr:last-child td{border-bottom:none}
+
+  .tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem}
+  .tl-table th,.tl-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+  .tl-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+  .tl-cell{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:52px;padding:7px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1rem;font-weight:800;transition:.15s;text-align:center}
+  .tl-cell:hover{background:#F0FFF4}
+  .tl-cell.active{border-color:#2B2118;background:#FFF3DC}
+  .tl-reset{background:#fff;border:2px solid var(--green);color:var(--green);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;margin-top:12px;font-family:'Nunito';font-size:.9rem}
+  .tl-reset:hover{background:#F0FFF4}
 
   .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;text-decoration:none;font-weight:800;font-size:1.05rem;transition:.2s}
   .quizlet-link:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(66,85,255,.3)}
@@ -791,8 +798,8 @@
     <div class="task">
       <div class="task-num">7</div>
       <div>
-        <strong>Самопроверка «Смайлик»</strong><br>
-        Честно оцени себя по 5 критериям (таблица ниже).
+        <strong>Самопроверка «Светофор»</strong><br>
+        Честно оцени себя по 5 критериям — нажми на нужный цвет (таблица ниже).
       </div>
     </div>
 
@@ -808,49 +815,18 @@
 
   <!-- САМОПРОВЕРКА -->
   <section class="selfcheck">
-    <h4>😊 Самопроверка «Смайлик»</h4>
-    <table class="selfcheck-table">
-      <thead>
-        <tr>
-          <th>Умею</th>
-          <th>😄 отлично</th>
-          <th>🙂 с подсказкой</th>
-          <th>😅 пока сложно</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Вежливо попросить разрешения (¿Puedo...?)</td>
-          <td><input type="radio" name="q1" value="green"></td>
-          <td><input type="radio" name="q1" value="yellow"></td>
-          <td><input type="radio" name="q1" value="red"></td>
-        </tr>
-        <tr>
-          <td>Сказать «Necesito...»</td>
-          <td><input type="radio" name="q2" value="green"></td>
-          <td><input type="radio" name="q2" value="yellow"></td>
-          <td><input type="radio" name="q2" value="red"></td>
-        </tr>
-        <tr>
-          <td>Сказать «Quiero...»</td>
-          <td><input type="radio" name="q3" value="green"></td>
-          <td><input type="radio" name="q3" value="yellow"></td>
-          <td><input type="radio" name="q3" value="red"></td>
-        </tr>
-        <tr>
-          <td>Использовать «por favor»</td>
-          <td><input type="radio" name="q4" value="green"></td>
-          <td><input type="radio" name="q4" value="yellow"></td>
-          <td><input type="radio" name="q4" value="red"></td>
-        </tr>
-        <tr>
-          <td>Говорить об обязанностях «Tengo que...»</td>
-          <td><input type="radio" name="q5" value="green"></td>
-          <td><input type="radio" name="q5" value="yellow"></td>
-          <td><input type="radio" name="q5" value="red"></td>
-        </tr>
-      </tbody>
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <p style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">Нажми на нужный цвет — честно! 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно</p>
+    <table class="tl-table" id="tlTable">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Вежливо попросить разрешения (¿Puedo...?)</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+      <tr><td>Сказать «Necesito...»</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+      <tr><td>Сказать «Quiero...»</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+      <tr><td>Использовать «por favor»</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
+      <tr><td>Говорить об обязанностях «Tengo que...»</td><td><button class="tl-cell" data-row="4" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="4" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="4" data-color="3">🔴</button></td></tr>
     </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p style="margin-top:10px;font-weight:700;color:var(--ink-soft)">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
   </section>
 
   <!-- QUIZLET -->
@@ -1279,28 +1255,17 @@ function confetti(emoji){
   }
 }
 
-/* ========== СОХРАНЕНИЕ САМОПРОВЕРКИ ========== */
-document.querySelectorAll('.selfcheck-table input[type=radio]').forEach(function(input){
-  input.addEventListener('change',function(){
-    var data={};
-    for(var i=1;i<=5;i++){
-      var selected=document.querySelector('input[name=q'+i+']:checked');
-      if(selected) data['q'+i]=selected.value;
-    }
-    localStorage.setItem('mudro_selfcheck_lesson5',JSON.stringify(data));
-  });
+/* ========== СВЕТОФОР ========== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.onclick=function(){
+    var row=c.dataset.row;
+    document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});
+    c.classList.add('active');
+  };
 });
-
-var savedCheck=localStorage.getItem('mudro_selfcheck_lesson5');
-if(savedCheck){
-  try{
-    var data=JSON.parse(savedCheck);
-    Object.keys(data).forEach(function(key){
-      var input=document.querySelector('input[name='+key+'][value='+data[key]+']');
-      if(input) input.checked=true;
-    });
-  }catch(e){}
-}
+document.getElementById('tlReset').onclick=function(){
+  document.querySelectorAll('.tl-cell').forEach(function(c){c.classList.remove('active');});
+};
 </script>
 </body>
 </html>

@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 7: Репетиция первого дня — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --purple:#8338EC; --red:#D62828; --green:#2E7D32; --pink:#E91E63;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:6px;transition:.2s}
+  .back-btn:hover{background:#f3ebc8}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{position:relative;overflow:hidden;text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#F3E8FF 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--purple);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;letter-spacing:.5px}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--purple)}
+  .hero .sub{max-width:640px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+
+  .final-situation{background:linear-gradient(135deg,#F3E8FF,#E9D5FF);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--purple);text-align:left}
+
+  .container{max-width:860px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:30px}
+  .goals h2{font-size:1.4rem;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .goal-item{background:#F3E8FF;border-radius:14px;padding:14px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.4rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .block-title{font-size:1.4rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:14px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:14px 18px;border-radius:12px;margin:12px 0;font-style:italic;color:var(--ink)}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px;letter-spacing:.5px}
+
+  /* ПЕСНЯ */
+  .song-zone{background:linear-gradient(135deg,#F3E8FF,#E9D5FF);border-radius:22px;padding:26px;margin:16px 0;border:3px dashed var(--purple);text-align:center}
+  .song-title{font-family:'Baloo 2',cursive;font-size:1.4rem;color:var(--purple);margin-bottom:10px}
+  .song-cover{width:140px;height:140px;margin:10px auto;border-radius:50%;background:radial-gradient(circle at 35% 35%,#C4B5FD,var(--purple));display:flex;align-items:center;justify-content:center;font-size:4rem;box-shadow:0 8px 24px rgba(139,92,246,.4);animation:spin 20s linear infinite}
+  .song-cover.playing{animation:spin 4s linear infinite}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .song-audio{width:100%;margin:16px 0;border-radius:999px}
+  .song-hint{background:#fff;border-radius:14px;padding:14px;margin-top:14px;font-weight:700;color:var(--ink-soft);font-size:.95rem}
+  .song-hint strong{color:var(--purple)}
+  .lyrics-toggle{background:var(--purple);color:#fff;border:none;border-radius:12px;padding:10px 20px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:14px;transition:.15s}
+  .lyrics-toggle:hover{background:#5B21B6}
+  .lyrics-box{display:none;background:#fff;border-radius:14px;padding:20px;margin-top:14px;text-align:left;font-size:.95rem;line-height:1.9;box-shadow:0 4px 14px rgba(0,0,0,.08);max-height:500px;overflow-y:auto}
+  .lyrics-box.show{display:block;animation:fadeIn .4s}
+  .lyrics-box .section{margin:12px 0}
+  .lyrics-box .section-title{font-weight:800;color:var(--purple);margin-bottom:4px;font-size:1rem}
+  .lyrics-box .line{padding:2px 0}
+  .lyrics-box .translation{color:var(--ink-soft);font-size:.85rem;font-style:italic;margin-left:10px}
+  .lyrics-box .chorus{background:#F3E8FF;border-left:3px solid var(--purple);padding:8px 12px;border-radius:8px;margin:8px 0}
+
+  /* ДВИЖЕНИЯ */
+  .moves-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+  .move-card{background:#fff;border-radius:12px;padding:12px;font-size:.85rem;font-weight:700;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .move-card .emo{font-size:1.6rem;display:block;margin-bottom:4px}
+  .move-card .es{color:var(--purple);font-weight:800}
+
+  /* КВЕСТ */
+  .quest-zone{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+  .quest-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:16px 0}
+  .station{background:var(--soft);border:3px solid transparent;border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:.2s;position:relative}
+  .station:hover{transform:translateY(-3px)}
+  .station.active{border-color:var(--purple);background:#F3E8FF}
+  .station.done{background:#C8E6C9;border-color:var(--green)}
+  .station .st-num{display:inline-block;width:28px;height:28px;border-radius:50%;background:var(--purple);color:#fff;font-weight:800;line-height:28px;margin-bottom:6px}
+  .station.done .st-num{background:var(--green)}
+  .station .st-emoji{font-size:2rem;display:block;margin:4px 0}
+  .station .st-title{font-weight:800;font-size:.85rem;color:var(--ink)}
+
+  .station-content{background:#fff;border:2px solid #e5e7eb;border-radius:16px;padding:22px;margin:16px 0;display:none}
+  .station-content.active{display:block;animation:fadeIn .4s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* ПАЗЛ */
+  .puzzle-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+  .puzzle-word{background:#fff;border:2px solid var(--purple);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;transition:.15s;user-select:none}
+  .puzzle-word:hover{background:var(--purple);color:#fff}
+  .puzzle-word.placed{opacity:.3;cursor:default}
+  .puzzle-target{background:#fff;border:2px dashed #ccc;border-radius:14px;padding:18px;min-height:70px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.2rem;color:var(--purple)}
+  .puzzle-result{text-align:center;margin-top:12px;font-weight:800;min-height:30px}
+
+  /* АУДИО-ДИКТАНТ */
+  .audio-zone{text-align:center;margin:16px 0}
+  .play-btn{width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#C4B5FD,var(--purple));border:none;cursor:pointer;font-size:2.5rem;box-shadow:0 6px 20px rgba(139,92,246,.4);transition:.2s;display:inline-flex;align-items:center;justify-content:center}
+  .play-btn:hover{transform:scale(1.08)}
+  .play-btn:active{transform:scale(.92)}
+  .audio-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:16px}
+  .audio-opt{background:#fff;border:2.5px solid #ddd;border-radius:14px;padding:14px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem}
+  .audio-opt:hover{border-color:var(--purple)}
+  .audio-opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .audio-opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+
+  /* ПРАВДА / ЛОЖЬ */
+  .tf-list{display:grid;gap:10px;margin:14px 0}
+  .tf-item{background:#fff;border:2px solid #e5e7eb;border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .tf-text{flex:1;font-weight:700;font-size:.95rem}
+  .tf-buttons{display:flex;gap:6px}
+  .tf-btn{padding:6px 14px;border-radius:999px;font-weight:800;cursor:pointer;border:2px solid transparent;background:#f5f5f5;font-family:'Nunito';transition:.15s}
+  .tf-btn.verdad:hover{background:#C8E6C9;border-color:var(--green)}
+  .tf-btn.falso:hover{background:#FFCDD2;border-color:var(--red)}
+  .tf-btn.selected.verdad{background:#C8E6C9;border-color:var(--green);color:var(--green)}
+  .tf-btn.selected.falso{background:#FFCDD2;border-color:var(--red);color:var(--red)}
+  .tf-item.correct{background:#C8E6C9}
+  .tf-item.wrong{background:#FFCDD2}
+
+  /* НАЙДИ ОШИБКУ */
+  .dialogue{background:#fff;border-radius:14px;padding:16px;margin:12px 0}
+  .d-line{display:flex;gap:10px;margin:8px 0;align-items:flex-start;flex-wrap:wrap}
+  .d-speaker{font-weight:800;color:var(--purple);min-width:80px}
+  .d-text{flex:1;padding:8px 12px;border-radius:10px;background:#f5f5f5;cursor:pointer;font-weight:700;transition:.15s;position:relative}
+  .d-text:hover{background:#F3E8FF}
+  .d-text.error-found{background:#FFCDD2;border:2px solid var(--red);text-decoration:line-through}
+  .d-text.correct-line{background:#C8E6C9;border:2px solid var(--green)}
+  .d-expl{flex:0 0 100%;font-size:.82rem;color:#B71C1C;background:#FFF5F5;border:1px dashed var(--red);border-radius:8px;padding:6px 10px;font-weight:700}
+  .error-counter{text-align:center;font-weight:800;font-size:1.1rem;color:var(--purple);margin:12px 0}
+
+  /* ИГРА НА ВРЕМЯ */
+  .timer-zone{text-align:center;margin:14px 0}
+  .timer-display{font-family:'Baloo 2',cursive;font-size:3rem;color:var(--red);font-weight:800}
+  .timer-display.safe{color:var(--green)}
+  .timer-display.warn{color:#F57F17}
+  .speed-question{background:#fff;border-radius:14px;padding:18px;margin:12px 0;font-weight:800;font-size:1.1rem;min-height:80px;display:flex;align-items:center;justify-content:center}
+  .speed-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+
+  /* КАРТА-ПРИКЛЮЧЕНИЕ */
+  .adventure-map{background:#f5f5f5;border-radius:16px;padding:18px;margin:14px 0}
+  .map-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .map-room{background:#fff;border:3px solid #e0e0e0;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;transition:.2s}
+  .map-room:hover{transform:scale(1.05);border-color:var(--purple)}
+  .map-room .room-emoji{font-size:1.8rem;display:block;margin-bottom:4px}
+  .map-room .room-label{font-weight:800;font-size:.75rem;color:var(--ink-soft)}
+  .map-room.correct{background:#C8E6C9;border-color:var(--green)}
+  .map-room.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .map-corridor{grid-column:1/-1;background:#FFF8E1;border-radius:12px;padding:10px;text-align:center;font-weight:800;color:#F57F17;font-size:.85rem}
+  .map-question{background:#fff;border:2px solid var(--purple);border-radius:12px;padding:14px;text-align:center;font-weight:800;margin:12px 0;color:var(--purple);font-size:1rem}
+
+  /* ОБЩИЕ КНОПКИ */
+  .btn{background:var(--purple);color:#fff;border:none;border-radius:12px;padding:10px 20px;font-family:'Nunito';font-weight:800;cursor:pointer;box-shadow:0 4px 0 #5B21B6;transition:.15s;margin:10px auto 0;display:inline-block}
+  .btn:active{transform:translateY(3px);box-shadow:none}
+  .btn.green{background:var(--green);box-shadow:0 4px 0 #1B5E20}
+  .btn.terra{background:var(--terra);box-shadow:0 4px 0 #b93f30}
+  .quest-result{text-align:center;font-weight:800;font-size:1.1rem;margin-top:14px;min-height:30px}
+
+  /* ЧИСЛИТЕЛЬНЫЕ */
+  .numbers-zone{background:#fff;border-radius:22px;padding:26px;margin:20px 0;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--pink)}
+  .numbers-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+  .numbers-tab{background:var(--soft);border:none;border-radius:12px;padding:10px 18px;font-weight:800;cursor:pointer;font-family:'Nunito';transition:.2s;font-size:.9rem}
+  .numbers-tab.active{background:var(--pink);color:#fff}
+  .numbers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px}
+  .num-card{background:#fff;border:2px solid #fce7f3;border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:.2s;user-select:none}
+  .num-card:hover{transform:translateY(-3px);border-color:var(--pink)}
+  .num-card .num{font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--pink);font-weight:800}
+  .num-card .word{font-size:.8rem;font-weight:700;color:var(--ink-soft)}
+
+  /* БЕЙДЖ */
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;transition:.15s;margin-top:12px}
+  .badge-btn:active{transform:translateY(3px);box-shadow:none}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+
+  /* ДОМАШКА */
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.4rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;align-items:start;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--purple);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task-num.creative{background:var(--pink)}
+
+  /* САМОПРОВЕРКА */
+  .selfcheck{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .selfcheck h4{margin-bottom:14px}
+  .selfcheck-table{width:100%;border-collapse:collapse;min-width:500px}
+  .selfcheck-table th{background:var(--soft);padding:10px 14px;text-align:left;font-weight:800;font-size:.9rem}
+  .selfcheck-table th:not(:first-child){text-align:center;width:90px}
+  .selfcheck-table td{padding:10px 14px;border-bottom:1px solid #f0ede6}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+
+  .tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem}
+  .tl-table th,.tl-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+  .tl-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+  .tl-cell{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:52px;padding:7px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1rem;font-weight:800;transition:.15s;text-align:center}
+  .tl-cell:hover{background:#F3E8FF}
+  .tl-cell.active{border-color:#2B2118;background:#FFF3DC}
+  .tl-reset{background:#fff;border:2px solid var(--purple);color:var(--purple);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;margin-top:12px;font-family:'Nunito';font-size:.9rem}
+  .tl-reset:hover{background:#F3E8FF}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;text-decoration:none;font-weight:800;font-size:1.05rem;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(66,85,255,.3)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;transition:.2s;text-align:center}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-prev:hover{background:#f3ebc8}
+  .nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+  .nav-next:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(42,157,143,.3)}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.1rem;margin-top:4px}
+
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+
+  @media(max-width:600px){
+    .map-grid{grid-template-columns:repeat(2,1fr)}
+    .moves-grid{grid-template-columns:1fr 1fr}
+    .d-speaker{min-width:60px;font-size:.85rem}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 1 · Supervivencia · Урок 7 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🎬 УРОК 7 · НЕДЕЛЯ 3</span>
+  <h1>Репетиция первого дня: <span>квест по станциям!</span></h1>
+  <p class="sub">Сегодня — генеральная репетиция! Ты пройдёшь 6 станций (по одной на каждый урок), встретишь новую тему (числительные) и получишь бейдж «Пережил первый день». ¡Vamos!</p>
+  <div class="final-situation">
+    <strong>Итог урока:</strong> ты проходишь все 6 станций без подсказок, учишься считать до 100 по-испански и получаешь финальный бейдж перед чекпоинтом!
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ЦЕЛИ -->
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🎵</span> Спеть песню «Mi primer día»</div>
+      <div class="goal-item"><span class="emoji">🎲</span> Пройти 6 станций-повторений</div>
+      <div class="goal-item"><span class="emoji">🔢</span> Считать от 1 до 100 по-испански</div>
+      <div class="goal-item"><span class="emoji">🏆</span> Знать порядковые: primero, segundo...</div>
+      <div class="goal-item"><span class="emoji">⏱️</span> Быстро отвечать на вопросы</div>
+      <div class="goal-item"><span class="emoji">🎖</span> Получить бейдж «Пережил первый день»</div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- БЛОК 1: ПЕСНЯ (С АУДИО) -->
+  <!-- ========================================= -->
+  <section class="block" style="--c:#8338EC">
+    <div class="block-head">
+      <h2 class="block-title">🎵 Блок 1: Песня «Mi primer día en la escuela»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Разогреваемся! Слушаем песню, повторяем и делаем движения. Каждая фраза — из уроков 1–6!</p>
+
+    <div class="song-zone">
+      <div class="song-title">🎶 ¡Mi primer día en la escuela!</div>
+      <div class="song-cover" id="song-cover">🎵</div>
+
+      <!-- АУДИО-ПЛЕЕР -->
+      <audio id="song-audio" class="song-audio" controls preload="metadata">
+        <source src="./Mi Primer Día en la Escuela.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио. Скачай файл и открой в плеере.
+      </audio>
+
+      <div class="song-hint">
+        <strong>👂 Слушай</strong> и <strong>повторяй</strong> вслух!
+        Во время припева делай движения: 👋 машем → 🙋 поднимаем руку → ☝️ палец вверх → 🎤 поём!
+      </div>
+
+      <button class="lyrics-toggle" onclick="toggleLyrics(this)">📜 Показать текст песни</button>
+
+      <!-- ТЕКСТ ПЕСНИ -->
+      <div class="lyrics-box" id="lyrics-box">
+
+        <div class="section">
+          <div class="section-title">🎤 Вступление (хлопки 👏)</div>
+          <div class="line">¡Uno, dos, tres!</div>
+          <div class="line">¡Cuatro, cinco, seis!</div>
+          <div class="line">¡Siete, ocho, nueve, diez!</div>
+          <div class="line">¡Mi primer día!</div>
+          <div class="translation">Раз, два, три! Четыре, пять, шесть! Семь, восемь, девять, десять! Мой первый день!</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">📚 Куплет 1 — Приветствие (Урок 1)</div>
+          <div class="line">¡Hola, hola, buenos días!</div>
+          <div class="line">Me llamo Anna, ¿cómo estás?</div>
+          <div class="line">Tengo ocho años, ¡qué bien!</div>
+          <div class="line">Soy de Rusia, ¡ven aquí!</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">🎵 Припев (повторяется)</div>
+          <div class="chorus">
+            <div class="line">¡Estoy listo, estoy lista!</div>
+            <div class="line">¡Mi primer día en la escuela!</div>
+            <div class="line">¡Estoy un poco nervioso...</div>
+            <div class="line">Pero muy, muy contento!</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">😄 Куплет 2 — Эмоции (Урок 3)</div>
+          <div class="line">¿Cómo estás? ¿Cómo estás?</div>
+          <div class="line">Estoy contento, ¡ja, ja, ja!</div>
+          <div class="line">Estoy triste, oh, no, no...</div>
+          <div class="line">Estoy cansado, tengo sueño.</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">🙋 Куплет 3 — Просьбы (Уроки 5, 6)</div>
+          <div class="line">Profe, profe, ¿puedo ir</div>
+          <div class="line">Al baño, por favor?</div>
+          <div class="line">¿Dónde está? ¿Dónde está?</div>
+          <div class="line">¡Está allí, al final!</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">🤕 Куплет 4 — Части тела (Урок 4)</div>
+          <div class="line">Me duele, me duele la cabeza,</div>
+          <div class="line">Me duele, me duele la rodilla.</div>
+          <div class="line">Tengo fiebre, tengo tos,</div>
+          <div class="line">¡Necesito ayuda, por favor!</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">🆘 Куплет 5 — Не понимаю (Урок 2)</div>
+          <div class="line">Perdón, perdón, no entiendo,</div>
+          <div class="line">¿Puedes repetir, por favor?</div>
+          <div class="line">Más despacio, más despacio,</div>
+          <div class="line">¡Muchas gracias, profe!</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">🎉 Финальный припев (×2 — быстрее!)</div>
+          <div class="chorus">
+            <div class="line">¡Estoy listo, estoy lista!</div>
+            <div class="line">¡Mi primer día en la escuela!</div>
+            <div class="line">¡Estoy un poco nervioso...</div>
+            <div class="line">Pero muy, muy contento!</div>
+          </div>
+          <div class="chorus">
+            <div class="line"><strong>¡ESTOY LISTO!</strong></div>
+            <div class="line"><strong>¡ESTOY LISTA!</strong></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ДВИЖЕНИЯ -->
+      <h4 style="margin-top:20px;margin-bottom:10px">🕺 Движения для песни:</h4>
+      <div class="moves-grid">
+        <div class="move-card">
+          <span class="emo">👋</span>
+          <div class="es">¡Hola!</div>
+          <div>Машем руками</div>
+        </div>
+        <div class="move-card">
+          <span class="emo">🙋</span>
+          <div class="es">¡Estoy aquí!</div>
+          <div>Поднимаем руку</div>
+        </div>
+        <div class="move-card">
+          <span class="emo">😬</span>
+          <div class="es">Nervioso</div>
+          <div>Корчим рожицу</div>
+        </div>
+        <div class="move-card">
+          <span class="emo">😄</span>
+          <div class="es">¡Contento!</div>
+          <div>Широкая улыбка</div>
+        </div>
+        <div class="move-card">
+          <span class="emo">🤕</span>
+          <div class="es">Me duele</div>
+          <div>Трогаем голову</div>
+        </div>
+        <div class="move-card">
+          <span class="emo">🧭</span>
+          <div class="es">¿Dónde está?</div>
+          <div>Ищем глазами</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="script">
+      Отлично! Ты разогрелся и вспомнил главные фразы всех 6 уроков. А теперь — в квест по станциям!
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- БЛОК 2: КВЕСТ -->
+  <!-- ========================================= -->
+  <section class="quest-zone">
+    <div class="block-head">
+      <h2 class="block-title">🎲 Блок 2: Квест по 6 станциям</h2>
+      <span class="time-badge">⏱ 25 минут</span>
+    </div>
+    <p class="block-sub">Каждая станция = один урок. Проходи по порядку, собирай ⭐ звёзды!</p>
+
+    <div class="quest-map" id="quest-map">
+      <div class="station active" data-st="1" onclick="openStation(1)">
+        <span class="st-num">1</span>
+        <span class="st-emoji">🧩</span>
+        <span class="st-title">Пазл визитки</span>
+      </div>
+      <div class="station" data-st="2" onclick="openStation(2)">
+        <span class="st-num">2</span>
+        <span class="st-emoji">🎧</span>
+        <span class="st-title">Аудио-диктант</span>
+      </div>
+      <div class="station" data-st="3" onclick="openStation(3)">
+        <span class="st-num">3</span>
+        <span class="st-emoji">✨</span>
+        <span class="st-title">Правда или ложь</span>
+      </div>
+      <div class="station" data-st="4" onclick="openStation(4)">
+        <span class="st-num">4</span>
+        <span class="st-emoji">🔍</span>
+        <span class="st-title">Найди ошибку</span>
+      </div>
+      <div class="station" data-st="5" onclick="openStation(5)">
+        <span class="st-num">5</span>
+        <span class="st-emoji">⏱️</span>
+        <span class="st-title">Игра на время</span>
+      </div>
+      <div class="station" data-st="6" onclick="openStation(6)">
+        <span class="st-num">6</span>
+        <span class="st-emoji">🗺️</span>
+        <span class="st-title">Карта-приключение</span>
+      </div>
+    </div>
+
+    <!-- СТАНЦИЯ 1: ПАЗЛ ВИЗИТКИ -->
+    <div class="station-content active" id="st-1">
+      <h3 style="color:var(--purple);margin-bottom:10px">🧩 Станция 1: Пазл визитки (Урок 1)</h3>
+      <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">Собери фразу-визитку из перемешанных слов. Нажимай на слова по порядку!</p>
+      <div class="puzzle-target" id="puzzle-1-target">…</div>
+      <div class="puzzle-pool" id="puzzle-1-pool"></div>
+      <div class="puzzle-result" id="puzzle-1-result"></div>
+      <button class="btn" onclick="nextPuzzle()" id="puzzle-1-btn" style="display:none">Дальше →</button>
+    </div>
+
+    <!-- СТАНЦИЯ 2: АУДИО-ДИКТАНТ -->
+    <div class="station-content" id="st-2">
+      <h3 style="color:var(--purple);margin-bottom:10px">🎧 Станция 2: Аудио-диктант (Урок 2)</h3>
+      <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">Слушай фразу учителя и выбери правильный перевод!</p>
+      <div class="audio-zone">
+        <button class="play-btn" onclick="playAudio()">🔊</button>
+        <div id="audio-hint" style="font-weight:800;margin-top:10px;color:var(--purple)">Нажми кнопку и послушай фразу!</div>
+      </div>
+      <div class="audio-options" id="audio-options"></div>
+      <div class="quest-result" id="audio-result"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 3: ПРАВДА ИЛИ ЛОЖЬ -->
+    <div class="station-content" id="st-3">
+      <h3 style="color:var(--purple);margin-bottom:10px">✨ Станция 3: Правда или ложь (Урок 3 — эмоции)</h3>
+      <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">Прочитай утверждения и выбери: правда (Verdad) или ложь (Falso)!</p>
+      <div class="tf-list" id="tf-list"></div>
+      <div class="quest-result" id="tf-result"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 4: НАЙДИ ОШИБКУ -->
+    <div class="station-content" id="st-4">
+      <h3 style="color:var(--purple);margin-bottom:10px">🔍 Станция 4: Найди ошибку учителя (Урок 4 — части тела)</h3>
+      <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">В диалоге у врача есть 3 ошибки. Нажимай на неправильные фразы!</p>
+      <div class="error-counter">Найдено ошибок: <span id="error-count">0</span> / 3</div>
+      <div class="dialogue" id="dialogue"></div>
+      <div class="quest-result" id="error-result"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 5: ИГРА НА ВРЕМЯ -->
+    <div class="station-content" id="st-5">
+      <h3 style="color:var(--purple);margin-bottom:10px">⏱️ Станция 5: Игра на время (Урок 5 — просьбы)</h3>
+      <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">Ответь на 5 вопросов за 60 секунд! Быстрее = лучше!</p>
+      <div class="timer-zone">
+        <div class="timer-display safe" id="timer">60</div>
+        <div style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">Правильных ответов: <span id="speed-score">0</span> / 5</div>
+      </div>
+      <div class="speed-question" id="speed-question">Нажми «Начать»!</div>
+      <div class="speed-options" id="speed-options"></div>
+      <button class="btn" id="speed-btn" onclick="startSpeed()">▶ Начать</button>
+      <div class="quest-result" id="speed-result"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 6: КАРТА-ПРИКЛЮЧЕНИЕ -->
+    <div class="station-content" id="st-6">
+      <h3 style="color:var(--purple);margin-bottom:10px">🗺️ Станция 6: Карта-приключение (Урок 6 — навигация)</h3>
+      <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">Прочитай задание и найди правильное помещение на карте!</p>
+      <div class="map-question" id="map-question">Нажми «Начать»!</div>
+      <div class="adventure-map">
+        <div class="map-grid">
+          <div class="map-room" data-room="bano"><span class="room-emoji">🚽</span><span class="room-label">el baño</span></div>
+          <div class="map-room" data-room="clase"><span class="room-emoji">🏫</span><span class="room-label">la clase</span></div>
+          <div class="map-room" data-room="patio"><span class="room-emoji">🌳</span><span class="room-label">el patio</span></div>
+          <div class="map-room" data-room="comedor"><span class="room-emoji">🍽️</span><span class="room-label">el comedor</span></div>
+          <div class="map-corridor">🚶 PASILLO</div>
+          <div class="map-room" data-room="biblioteca"><span class="room-emoji">📚</span><span class="room-label">la biblioteca</span></div>
+          <div class="map-room" data-room="enfermeria"><span class="room-emoji">🩺</span><span class="room-label">la enfermería</span></div>
+          <div class="map-room" data-room="salida"><span class="room-emoji">🏃</span><span class="room-label">la salida</span></div>
+          <div class="map-room" data-room="entrada"><span class="room-emoji">🚪</span><span class="room-label">la entrada</span></div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:10px;font-weight:800;color:var(--purple)">Прогресс: <span id="map-progress">0</span> / <span id="map-total">8</span></div>
+      <button class="btn" id="map-btn" onclick="startMap()">▶ Начать</button>
+      <div class="quest-result" id="map-result"></div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- БЛОК 3: ЧИСЛИТЕЛЬНЫЕ -->
+  <!-- ========================================= -->
+  <section class="numbers-zone">
+    <div class="block-head">
+      <h2 class="block-title">🔢 Блок 3: Числительные (новая тема)</h2>
+      <span class="time-badge" style="background:var(--pink)">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Время узнать, как считать по-испански! Это пригодится, чтобы называть возраст, этаж школы и номер автобуса.</p>
+
+    <div class="numbers-tabs">
+      <button class="numbers-tab active" onclick="showNumbers('1-20',this)">1–20</button>
+      <button class="numbers-tab" onclick="showNumbers('tens',this)">Десятки 20–100</button>
+      <button class="numbers-tab" onclick="showNumbers('ord',this)">Порядковые 1º–10º</button>
+    </div>
+
+    <div id="numbers-1-20">
+      <div class="numbers-grid" id="grid-1-20"></div>
+    </div>
+    <div id="numbers-tens" style="display:none">
+      <div class="script">
+        <strong>Десятки:</strong> 20=veinte, 30=treinta, 40=cuarenta, 50=cincuenta, 60=sesenta, 70=setenta, 80=ochenta, 90=noventa, 100=cien.<br>
+        <strong>Составные:</strong> 21–29 пишутся слитно (veintiuno), 31–99 через «y» (treinta y uno = 31).
+      </div>
+      <div class="numbers-grid" id="grid-tens"></div>
+    </div>
+    <div id="numbers-ord" style="display:none">
+      <div class="script">
+        <strong>Порядковые числительные</strong> — это «первый, второй, третий...».<br>
+        💡 Перед словом мужского рода пишем <strong>primer / tercer</strong> (без -o): <em>el primer día, el tercer patio</em>. Перед женским — полная форма: <em>la primera clase</em>.
+      </div>
+      <div class="numbers-grid" id="grid-ord"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:20px">
+      <button class="btn" style="background:var(--pink);box-shadow:0 4px 0 #880E4F" onclick="testNumbers()">🎯 Проверь себя: 10 вопросов</button>
+      <div id="numbers-test" style="margin-top:16px;min-height:40px"></div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- БЛОК 4: БЕЙДЖ -->
+  <!-- ========================================= -->
+  <section class="block" style="--c:#FFC93C">
+    <div class="block-head">
+      <h2 class="block-title">🎖 Бейдж «Пережил первый день»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Ты прошёл все 6 станций и выучил числительные! Получи финальный бейдж станции 1!</p>
+
+    <div class="badge-zone">
+      <div class="badge-icon">🎖</div>
+      <h3>Пережил первый день</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты готов к чекпоинту — экзамену станции 1!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">
+        🎉 ¡Enhorabuena! Бейдж «Пережил первый день» 🎖 добавлен в твой паспорт!
+      </div>
+    </div>
+
+    <div class="script">
+      <strong>Анонс следующего урока:</strong> На следующем уроке — <strong>ЧЕКПОИНТ!</strong> Настоящая проверка: 7 станций, как в реальной школе. Ты будешь один, без подсказок. Но не бойся — ты готов!
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- ДОМАШКА -->
+  <!-- ========================================= -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+
+    <div class="task">
+      <div class="task-num">1</div>
+      <div>
+        <strong>Повтори все 6 уроков</strong> · 10 мин<br>
+        Нажимай на карточки уроков 1–6, слушай и повторяй вслух.
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">2</div>
+      <div>
+        <strong>Спой песню «Mi primer día»</strong> · 3 мин ⭐<br>
+        Включи песню ещё раз и спой вместе с ней, делая все движения! Покажи родителям.
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">3</div>
+      <div>
+        <strong>Считай вслух до 100</strong> · 5 мин ⭐<br>
+        Скажи вслух: 1–20 (uno, dos, tres...), потом десятки (20=veinte, 30=treinta...), потом до 100 (cien).
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num star">4</div>
+      <div>
+        <strong>Порядковые в жизни</strong> · 5 мин ⭐<br>
+        Посмотри вокруг и скажи по-испански:<br>
+        <em>• el primer libro (первая книга)</em><br>
+        <em>• la segunda puerta (вторая дверь)</em><br>
+        <em>• el tercer día (третий день)</em>
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num creative">5</div>
+      <div>
+        <strong>🎨 Творческое задание: «Мой первый день»</strong> · 15 мин ⭐<br>
+        Нарисуй 3 картинки о твоём первом дне в испанской школе и подпиши каждую по-испански (2–3 предложения). Используй числительные!<br>
+        <em>Пример: «El primer día estoy nervioso. La primera clase está allí. Mi primer amigo se llama Pablo.»</em>
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">6</div>
+      <div>
+        <strong>Самопроверка «Светофор»</strong><br>
+        Честно оцени себя по 7 критериям — нажми на нужный цвет (таблица ниже).
+      </div>
+    </div>
+
+    <div class="task">
+      <div class="task-num">7</div>
+      <div>
+        <strong>Рабочий лист</strong> · 10–15 мин ⭐<br>
+        Выполни рабочий лист — повторение всей станции 1 перед чекпоинтом.<br>
+        • <a href="../../worksheets/w03-l1-kids.html" target="_blank">Рабочий лист — Урок 7 (повторение Станции 1)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- САМОПРОВЕРКА -->
+  <section class="selfcheck">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <p style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">Нажми на нужный цвет — честно! 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно</p>
+    <table class="tl-table" id="tlTable">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Спеть песню «Mi primer día»</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+      <tr><td>Представиться по-испански</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+      <tr><td>Использовать SOS-фразы</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+      <tr><td>Говорить об эмоциях</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
+      <tr><td>Сказать, что болит</td><td><button class="tl-cell" data-row="4" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="4" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="4" data-color="3">🔴</button></td></tr>
+      <tr><td>Вежливо попросить и найти место</td><td><button class="tl-cell" data-row="5" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="5" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="5" data-color="3">🔴</button></td></tr>
+      <tr><td>Считать до 100 по-испански</td><td><button class="tl-cell" data-row="6" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="6" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="6" data-color="3">🔴</button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p style="margin-top:10px;font-weight:700;color:var(--ink-soft)">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <!-- QUIZLET -->
+  <a href="https://quizlet.com/user/Interactive_school/folders/ninos" class="quizlet-link" target="_blank" rel="noopener">
+    <span>📚 Карточки Quizlet · Слова Станции 1</span>
+    <span>Открыть →</span>
+  </a>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="lesson-nav">
+    <a href="./w02-l3.html" class="nav-prev">
+      <div class="nav-small">← Предыдущий урок</div>
+      <div class="nav-title">Урок 6: Навигация 🧭</div>
+    </a>
+    <a href="./w03-l2.html" class="nav-next">
+      <div class="nav-small">Следующий урок →</div>
+      <div class="nav-title">Урок 8: Чекпоинт 🏆</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 1: Supervivencia · 2026
+  </div>
+
+</main>
+
+<script>
+/* ========== ОЗВУЧКА ========== */
+let esVoice=null;
+function loadVoices(){
+  const voices=speechSynthesis.getVoices();
+  esVoice=voices.find(v=>v.lang.startsWith('es'));
+}
+speechSynthesis.onvoiceschanged=loadVoices;
+loadVoices();
+
+function speak(text){
+  if(!text) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-ES';u.rate=0.85;u.pitch=1.05;
+  if(esVoice)u.voice=esVoice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+/* ========== ПЕСНЯ: управление обложкой ========== */
+const songAudio=document.getElementById('song-audio');
+const songCover=document.getElementById('song-cover');
+songAudio.addEventListener('play',()=>songCover.classList.add('playing'));
+songAudio.addEventListener('pause',()=>songCover.classList.remove('playing'));
+songAudio.addEventListener('ended',()=>songCover.classList.remove('playing'));
+
+function toggleLyrics(btn){
+  const box=document.getElementById('lyrics-box');
+  box.classList.toggle('show');
+  btn.textContent=box.classList.contains('show')?'🙈 Скрыть текст песни':'📜 Показать текст песни';
+}
+
+/* ========== КВЕСТ: ОТКРЫТИЕ СТАНЦИЙ ========== */
+function openStation(n){
+  document.querySelectorAll('.station').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.station-content').forEach(c=>c.classList.remove('active'));
+  document.querySelector(`.station[data-st="${n}"]`).classList.add('active');
+  document.getElementById('st-'+n).classList.add('active');
+}
+
+/* ========== СТАНЦИЯ 1: ПАЗЛ ========== */
+const PUZZLES=[
+  {words:['¡Hola,','me','llamo','Anna!'], translation:'Привет, меня зовут Анна!'},
+  {words:['Tengo','ocho','años.'], translation:'Мне восемь лет.'},
+  {words:['Tengo','doce','años.'], translation:'Мне двенадцать лет.'},
+  {words:['Tengo','veinte','años.'], translation:'Мне двадцать лет.'},
+  {words:['Soy','de','Rusia.'], translation:'Я из России.'}
+];
+let puzzleIdx=0, p1Placed=[];
+
+function renderPuzzle(){
+  const p=PUZZLES[puzzleIdx];
+  p1Placed=[];
+  document.getElementById('puzzle-1-target').textContent='…';
+  document.getElementById('puzzle-1-result').textContent='';
+  document.getElementById('puzzle-1-btn').style.display='none';
+  const pool=document.getElementById('puzzle-1-pool');
+  pool.innerHTML='';
+  const sh=shuffle([...p.words]);
+  sh.forEach(w=>{
+    const b=document.createElement('div');
+    b.className='puzzle-word';
+    b.textContent=w;
+    b.onclick=()=>p1Click(b,w);
+    pool.appendChild(b);
+  });
+}
+
+function p1Click(b,w){
+  if(b.classList.contains('placed')) return;
+  b.classList.add('placed');
+  p1Placed.push(w);
+  document.getElementById('puzzle-1-target').textContent=p1Placed.join(' ');
+  if(p1Placed.length===PUZZLES[puzzleIdx].words.length){
+    const correct=p1Placed.every((word,i)=>word===PUZZLES[puzzleIdx].words[i]);
+    const r=document.getElementById('puzzle-1-result');
+    if(correct){
+      r.innerHTML='✅ <span style="color:var(--green)">¡Perfecto!</span> '+PUZZLES[puzzleIdx].translation;
+      speak(p1Placed.join(' '));
+      markStationDone(1);
+      document.getElementById('puzzle-1-btn').style.display='inline-block';
+    }else{
+      r.innerHTML='❌ Не совсем. Попробуй ещё раз!';
+      setTimeout(()=>{
+        p1Placed=[];
+        document.querySelectorAll('#puzzle-1-pool .puzzle-word').forEach(btn=>btn.classList.remove('placed'));
+        document.getElementById('puzzle-1-target').textContent='…';
+        r.textContent='';
+      },1500);
+    }
+  }
+}
+
+function nextPuzzle(){
+  puzzleIdx=(puzzleIdx+1)%PUZZLES.length;
+  renderPuzzle();
+}
+renderPuzzle();
+
+/* ========== СТАНЦИЯ 2: АУДИО-ДИКТАНТ ========== */
+const AUDIO_Q=[
+  {es:'No entiendo. ¿Puedes repetir, por favor?', correct:'Я не понимаю. Повторишь, пожалуйста?', options:['Я не хочу повторять','Можно выйти?','Где мой карандаш?']},
+  {es:'Más despacio, por favor.', correct:'Помедленнее, пожалуйста.', options:['Побыстрее, пожалуйста','Ещё громче, пожалуйста','С самого начала, пожалуйста']},
+  {es:'Perdón, otra vez, por favor.', correct:'Прости, ещё раз, пожалуйста.', options:['Прости, я уже закончил.','Помедленнее, спасибо.','До свидания, профи!']},
+  {es:'Necesito ayuda con el ejercicio.', correct:'Мне нужна помощь с упражнением.', options:['Мне нужен новый карандаш.','Мне нужна твоя ручка.','Мне нужна вода для упражнения.']},
+  {es:'Perdón, profe, no entiendo.', correct:'Извини, учитель, я не понимаю.', options:['Извини, учитель, я опоздал.','Извини, учитель, я устал.','Спасибо, учитель, всё понятно.']},
+];
+let audioIdx=0;
+
+function playAudio(){
+  const q=AUDIO_Q[audioIdx];
+  speak(q.es);
+  document.getElementById('audio-hint').textContent='👂 Слушай внимательно!';
+  renderAudioOptions();
+}
+
+function renderAudioOptions(){
+  const q=AUDIO_Q[audioIdx];
+  const opts=document.getElementById('audio-options');
+  opts.innerHTML='';
+  const allOpts=shuffle([q.correct,...q.options.filter(o=>o!==q.correct)]);
+  allOpts.forEach(o=>{
+    const b=document.createElement('div');
+    b.className='audio-opt';
+    b.textContent=o;
+    b.onclick=()=>audioAnswer(o,b);
+    opts.appendChild(b);
+  });
+}
+
+function audioAnswer(o,b){
+  const q=AUDIO_Q[audioIdx];
+  document.querySelectorAll('.audio-opt').forEach(x=>x.style.pointerEvents='none');
+  const r=document.getElementById('audio-result');
+  if(o===q.correct){
+    b.classList.add('correct');
+    r.textContent='✅ ¡Muy bien!';
+    markStationDone(2);
+  }else{
+    b.classList.add('wrong');
+    document.querySelectorAll('.audio-opt').forEach(x=>{
+      if(x.textContent===q.correct) x.classList.add('correct');
+    });
+    r.textContent='❌ Правильный ответ подсвечен.';
+  }
+  audioIdx=(audioIdx+1)%AUDIO_Q.length;
+}
+
+/* ========== СТАНЦИЯ 3: ПРАВДА/ЛОЖЬ ========== */
+const TF_ITEMS=[
+  {text:'«Estoy contento» означает «Я грустный».', ans:false},
+  {text:'«Estoy nervioso» означает «Я нервничаю».', ans:true},
+  {text:'«Estoy cansado» означает «Я устал».', ans:true},
+  {text:'«Estoy enojado» означает «Я голодный».', ans:false},
+  {text:'«Estoy aburrido» означает «Мне скучно».', ans:true},
+];
+
+function renderTF(){
+  const list=document.getElementById('tf-list');
+  list.innerHTML='';
+  TF_ITEMS.forEach((it,i)=>{
+    const div=document.createElement('div');
+    div.className='tf-item';
+    div.innerHTML=`
+      <span class="tf-text">${i+1}. ${it.text}</span>
+      <div class="tf-buttons">
+        <button class="tf-btn verdad" onclick="tfAns(${i},true,this)">✓ Verdad</button>
+        <button class="tf-btn falso" onclick="tfAns(${i},false,this)">✗ Falso</button>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function tfAns(i,val,btn){
+  const it=TF_ITEMS[i];
+  const item=btn.closest('.tf-item');
+  if(item.classList.contains('correct')||item.classList.contains('wrong')) return;
+  btn.classList.add('selected');
+  item.querySelectorAll('.tf-btn').forEach(b=>b.style.pointerEvents='none');
+  if(val===it.ans){
+    item.classList.add('correct');
+  }else{
+    item.classList.add('wrong');
+  }
+  const allItems=document.querySelectorAll('.tf-item');
+  const allAnswered=[...allItems].every(el=>el.classList.contains('correct')||el.classList.contains('wrong'));
+  if(allAnswered){
+    const correct=[...allItems].filter(el=>el.classList.contains('correct')).length;
+    document.getElementById('tf-result').textContent=`Результат: ${correct} / ${TF_ITEMS.length}`;
+    if(correct>=3) markStationDone(3);
+  }
+}
+renderTF();
+
+/* ========== СТАНЦИЯ 4: НАЙДИ ОШИБКУ ========== */
+const DIALOGUE_LINES=[
+  {speaker:'Doctor', text:'¿Qué te pasa?', isError:false},
+  {speaker:'Tú', text:'Me duele el ojos.', isError:true, fix:'Me duelen los ojos.', why:'«los ojos» — множественное число, поэтому duelen, а не duele.'},
+  {speaker:'Doctor', text:'¿Te duele mucho?', isError:false},
+  {speaker:'Tú', text:'Sí, me duele mucho.', isError:false},
+  {speaker:'Tú', text:'Estoy fiebre.', isError:true, fix:'Tengo fiebre.', why:'С болезнью всегда TENER: Tengo fiebre / tos / hambre. Estoy — только про состояния (cansado, nervioso).'},
+  {speaker:'Doctor', text:'Bebe agua y descansa.', isError:false},
+  {speaker:'Tú', text:'Soy cansado, profe.', isError:true, fix:'Estoy cansado.', why:'Состояние сейчас → estar. Soy cansado = «я унылый по жизни».'},
+];
+let errorsFound=0;
+
+function renderDialogue(){
+  const box=document.getElementById('dialogue');
+  box.innerHTML='';
+  DIALOGUE_LINES.forEach((l,i)=>{
+    const div=document.createElement('div');
+    div.className='d-line';
+    div.innerHTML=`
+      <span class="d-speaker">${l.speaker}:</span>
+      <span class="d-text" onclick="checkError(${i},this)">${l.text}</span>
+    `;
+    box.appendChild(div);
+  });
+}
+
+function checkError(i,el){
+  const l=DIALOGUE_LINES[i];
+  if(el.classList.contains('error-found')||el.classList.contains('correct-line')) return;
+  if(l.isError){
+    el.classList.add('error-found');
+    const expl=document.createElement('div');
+    expl.className='d-expl';
+    expl.textContent='✅ Правильно: '+l.fix+' — '+l.why;
+    el.parentElement.appendChild(expl);
+    errorsFound++;
+    document.getElementById('error-count').textContent=errorsFound;
+    if(errorsFound===3){
+      document.getElementById('error-result').textContent='🏆 Все 3 ошибки найдены! ¡Excelente!';
+      markStationDone(4);
+    }
+  }else{
+    el.classList.add('correct-line');
+    setTimeout(()=>el.classList.remove('correct-line'),1000);
+  }
+}
+renderDialogue();
+
+/* ========== СТАНЦИЯ 5: ИГРА НА ВРЕМЯ ========== */
+const SPEED_Q=[
+  {q:'Вежливая просьба в туалет:', opts:['¡Quiero ir al baño!','¿Puedo ir al baño, por favor?','Necesito baño.'], correct:1},
+  {q:'Как сказать «Мне нужна вода»?', opts:['Necesito agua, por favor.','Quiero agua.','Doy agua.'], correct:0},
+  {q:'Как вежливо отказаться?', opts:['¡No!','No, gracias.','Yo no.'], correct:1},
+  {q:'Что сказать, когда дали то, что просил?', opts:['Perdón.','De nada.','¡Muchas gracias!'], correct:2},
+  {q:'Как попросить карандаш?', opts:['Necesito un lápiz, por favor.','Quiero lápiz ahora.','Tengo lápiz.'], correct:0},
+];
+let speedIdx=0, speedScore=0, timerId=null, timeLeft=60;
+
+function startSpeed(){
+  speedIdx=0;speedScore=0;timeLeft=60;
+  clearInterval(timerId);
+  document.getElementById('speed-score').textContent='0';
+  document.getElementById('speed-btn').style.display='none';
+  document.getElementById('speed-result').textContent='';
+  document.getElementById('timer').textContent='60';
+  document.getElementById('timer').className='timer-display safe';
+  renderSpeedQ();
+  timerId=setInterval(()=>{
+    timeLeft--;
+    const t=document.getElementById('timer');
+    t.textContent=timeLeft;
+    if(timeLeft<=20) t.className='timer-display warn';
+    if(timeLeft<=10) t.className='timer-display';
+    if(timeLeft<=0){
+      clearInterval(timerId);
+      endSpeed();
+    }
+  },1000);
+}
+
+function renderSpeedQ(){
+  if(speedIdx>=SPEED_Q.length){
+    clearInterval(timerId);
+    endSpeed();
+    return;
+  }
+  const q=SPEED_Q[speedIdx];
+  document.getElementById('speed-question').textContent=q.q;
+  const opts=document.getElementById('speed-options');
+  opts.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const b=document.createElement('div');
+    b.className='audio-opt';
+    b.textContent=o;
+    b.onclick=()=>speedAns(i,b);
+    opts.appendChild(b);
+  });
+}
+
+function speedAns(i,b){
+  const q=SPEED_Q[speedIdx];
+  document.querySelectorAll('#speed-options .audio-opt').forEach(x=>x.style.pointerEvents='none');
+  if(i===q.correct){
+    b.classList.add('correct');
+    speedScore++;
+    document.getElementById('speed-score').textContent=speedScore;
+  }else{
+    b.classList.add('wrong');
+  }
+  speedIdx++;
+  setTimeout(renderSpeedQ,600);
+}
+
+function endSpeed(){
+  document.getElementById('speed-options').innerHTML='';
+  document.getElementById('speed-question').textContent='Игра окончена!';
+  document.getElementById('speed-result').textContent=`Результат: ${speedScore} / ${SPEED_Q.length} за ${60-timeLeft} сек`;
+  if(speedScore>=3) markStationDone(5);
+  const btn=document.getElementById('speed-btn');
+  btn.style.display='inline-block';
+  btn.textContent='🔄 Сыграть ещё раз';
+  btn.onclick=startSpeed;
+}
+
+/* ========== СТАНЦИЯ 6: КАРТА ========== */
+const MAP_Q=[
+  {q:'Te duele la cabeza. ¿Adónde vas?', correct:'enfermeria'},
+  {q:'Tienes hambre. ¿Adónde vas a comer?', correct:'comedor'},
+  {q:'Es hora de jugar al fútbol. ¿Adónde vas?', correct:'patio'},
+  {q:'Termina la clase. ¿Por dónde sales?', correct:'salida'},
+  {q:'Necesitas ir al baño. ¿Adónde vas?', correct:'bano'},
+  {q:'Empieza la clase de español. ¿Adónde vas?', correct:'clase'},
+  {q:'Quieres leer un libro. ¿Adónde vas?', correct:'biblioteca'},
+  {q:'Tu amigo nuevo llega a la escuela. ¿Por dónde entra?', correct:'entrada'}
+];
+let mapIdx=0, mapDone=0;
+document.getElementById('map-total').textContent=MAP_Q.length;
+
+function startMap(){
+  mapIdx=0;mapDone=0;
+  document.getElementById('map-btn').style.display='none';
+  document.getElementById('map-progress').textContent='0';
+  document.getElementById('map-result').textContent='';
+  document.querySelectorAll('.map-room').forEach(r=>r.classList.remove('correct','wrong'));
+  nextMapQ();
+  document.querySelectorAll('.map-room').forEach(r=>{
+    r.onclick=()=>mapAnswer(r);
+  });
+}
+
+function nextMapQ(){
+  if(mapIdx>=MAP_Q.length){
+    document.getElementById('map-question').textContent='🏆 Карта пройдена!';
+    document.getElementById('map-result').textContent='Все '+MAP_Q.length+' локации найдены!';
+    markStationDone(6);
+    return;
+  }
+  document.getElementById('map-question').textContent=MAP_Q[mapIdx].q;
+}
+
+function mapAnswer(room){
+  if(mapIdx>=MAP_Q.length) return;
+  const correct=MAP_Q[mapIdx].correct;
+  if(room.dataset.room===correct){
+    room.classList.add('correct');
+    mapDone++;
+    mapIdx++;
+    document.getElementById('map-progress').textContent=mapDone;
+    speak('¡Muy bien!');
+    setTimeout(nextMapQ,1000);
+  }else{
+    room.classList.add('wrong');
+    setTimeout(()=>room.classList.remove('wrong'),600);
+  }
+}
+
+/* ========== ЧИСЛИТЕЛЬНЫЕ ========== */
+const NUM_1_20=[
+  {n:1,es:'uno'},{n:2,es:'dos'},{n:3,es:'tres'},{n:4,es:'cuatro'},{n:5,es:'cinco'},
+  {n:6,es:'seis'},{n:7,es:'siete'},{n:8,es:'ocho'},{n:9,es:'nueve'},{n:10,es:'diez'},
+  {n:11,es:'once'},{n:12,es:'doce'},{n:13,es:'trece'},{n:14,es:'catorce'},{n:15,es:'quince'},
+  {n:16,es:'dieciséis'},{n:17,es:'diecisiete'},{n:18,es:'dieciocho'},{n:19,es:'diecinueve'},{n:20,es:'veinte'}
+];
+const NUM_TENS=[
+  {n:10,es:'diez'},{n:20,es:'veinte'},{n:30,es:'treinta'},{n:40,es:'cuarenta'},{n:50,es:'cincuenta'},
+  {n:60,es:'sesenta'},{n:70,es:'setenta'},{n:80,es:'ochenta'},{n:90,es:'noventa'},{n:100,es:'cien'}
+];
+const NUM_ORD=[
+  {n:'1º',es:'primero / primer',note:'м.р. primer día'},
+  {n:'2º',es:'segundo',note:''},
+  {n:'3º',es:'tercero / tercer',note:'м.р. tercer piso'},
+  {n:'4º',es:'cuarto',note:''},
+  {n:'5º',es:'quinto',note:''},
+  {n:'6º',es:'sexto',note:''},
+  {n:'7º',es:'séptimo',note:''},
+  {n:'8º',es:'octavo',note:''},
+  {n:'9º',es:'noveno',note:''},
+  {n:'10º',es:'décimo',note:''},
+];
+
+function renderNumbers(){
+  const g1=document.getElementById('grid-1-20');
+  g1.innerHTML='';
+  NUM_1_20.forEach(x=>{
+    const c=document.createElement('div');
+    c.className='num-card';
+    c.innerHTML=`<div class="num">${x.n}</div><div class="word">${x.es}</div>`;
+    c.onclick=()=>speak(x.es);
+    g1.appendChild(c);
+  });
+  const g2=document.getElementById('grid-tens');
+  g2.innerHTML='';
+  NUM_TENS.forEach(x=>{
+    const c=document.createElement('div');
+    c.className='num-card';
+    c.innerHTML=`<div class="num">${x.n}</div><div class="word">${x.es}</div>`;
+    c.onclick=()=>speak(x.es);
+    g2.appendChild(c);
+  });
+  const g3=document.getElementById('grid-ord');
+  g3.innerHTML='';
+  NUM_ORD.forEach(x=>{
+    const c=document.createElement('div');
+    c.className='num-card';
+    c.innerHTML=`<div class="num">${x.n}</div><div class="word">${x.es}</div>${x.note?`<div style="font-size:.7rem;color:#999;margin-top:2px">${x.note}</div>`:''}`;
+    c.onclick=()=>speak(x.es.split(' ')[0]);
+    g3.appendChild(c);
+  });
+}
+renderNumbers();
+
+function showNumbers(tab,btn){
+  document.querySelectorAll('.numbers-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('numbers-1-20').style.display=tab==='1-20'?'block':'none';
+  document.getElementById('numbers-tens').style.display=tab==='tens'?'block':'none';
+  document.getElementById('numbers-ord').style.display=tab==='ord'?'block':'none';
+}
+
+/* Викторина: 10 случайных вопросов — количественные + порядковые */
+const NUM_POOL=[];
+NUM_1_20.forEach(x=>NUM_POOL.push({prompt:String(x.n),word:x.es,ord:false}));
+NUM_TENS.forEach(x=>{ if(x.n>20) NUM_POOL.push({prompt:String(x.n),word:x.es,ord:false}); });
+NUM_ORD.forEach(x=>{
+  const w=x.es.split(' / ')[0];
+  NUM_POOL.push({prompt:x.n,word:w,ord:true});
+});
+let numQuiz=null;
+
+function testNumbers(){
+  numQuiz={qs:shuffle([...NUM_POOL]).slice(0,10),idx:0,score:0};
+  renderNumQ();
+}
+
+function renderNumQ(){
+  const test=document.getElementById('numbers-test');
+  if(numQuiz.idx>=numQuiz.qs.length){
+    const ok=numQuiz.score>=7;
+    test.innerHTML=`
+      <div style="background:#fff;border-radius:14px;padding:16px;font-weight:800">
+        <div style="font-size:1.2rem;margin-bottom:6px">Результат: <span style="color:${ok?'var(--green)':'var(--red)'}">${numQuiz.score} / ${numQuiz.qs.length}</span></div>
+        <div style="color:var(--ink-soft)">${ok?'🎉 ¡Excelente! Ты готов к чекпоинту!':'💪 Ещё раз потренируйся и попробуй снова!'}</div>
+        <button class="btn" style="background:var(--pink);box-shadow:0 4px 0 #880E4F;margin-top:10px" onclick="testNumbers()">🔄 Ещё раз</button>
+      </div>`;
+    return;
+  }
+  const q=numQuiz.qs[numQuiz.idx];
+  const others=shuffle(NUM_POOL.filter(x=>x.word!==q.word)).slice(0,3).map(x=>x.word);
+  const opts=shuffle([q.word,...others]);
+  test.innerHTML=`
+    <div style="background:#fff;border-radius:14px;padding:16px">
+      <div style="font-weight:800;color:var(--ink-soft);margin-bottom:6px">Вопрос ${numQuiz.idx+1} / ${numQuiz.qs.length} · Очки: ${numQuiz.score}</div>
+      <div style="font-weight:800;color:var(--pink);font-size:1.2rem;margin-bottom:10px">
+        ¿Cómo se dice <span style="font-size:1.6rem">${q.prompt}</span>?
+        ${q.ord?'<span style="font-size:.75rem;background:#FCE7F3;color:#C2185B;border-radius:999px;padding:3px 10px;vertical-align:middle">порядковое</span>':''}
+      </div>
+      <div class="audio-options">
+        ${opts.map(o=>`<div class="audio-opt" onclick="numAns(this,'${o}','${q.word}')">${o}</div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function numAns(el,chosen,correct){
+  const box=el.parentElement;
+  [...box.children].forEach(x=>x.style.pointerEvents='none');
+  if(chosen===correct){
+    el.classList.add('correct');
+    numQuiz.score++;
+    speak(correct);
+  }else{
+    el.classList.add('wrong');
+    [...box.children].forEach(x=>{ if(x.textContent===correct) x.classList.add('correct'); });
+  }
+  numQuiz.idx++;
+  setTimeout(renderNumQ,700);
+}
+
+/* ========== БЕЙДЖ ========== */
+const BADGE_KEY='mudro_kids_w03l1_badge_survivor';
+
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! Has sobrevivido al primer día.');
+  confetti('🎖');
+  localStorage.setItem(BADGE_KEY,'true');
+}
+
+if(localStorage.getItem(BADGE_KEY)==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+
+/* ========== ПРОГРЕСС СТАНЦИЙ ========== */
+function markStationDone(n){
+  const st=document.querySelector(`.station[data-st="${n}"]`);
+  st.classList.add('done');
+}
+
+/* ========== КОНФЕТТИ ========== */
+function confetti(emoji){
+  for(let i=0;i<20;i++){
+    const c=document.createElement('span');
+    c.className='confetti';
+    c.textContent=Math.random()>.5?emoji:'🎉';
+    c.style.left=Math.random()*100+'vw';
+    c.style.animationDuration=(1.2+Math.random()*1.2)+'s';
+    c.style.animationDelay=(Math.random()*.4)+'s';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
+/* ========== СВЕТОФОР ========== */
+document.querySelectorAll('.tl-cell').forEach(c=>{
+  c.onclick=()=>{
+    const row=c.dataset.row;
+    document.querySelectorAll(`.tl-cell[data-row="${row}"]`).forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+  };
+});
+document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-cell').forEach(c=>c.classList.remove('active'));
+
+/* ========== УТИЛИТЫ ========== */
+function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1])}
+</script>
+</body>
+</html>

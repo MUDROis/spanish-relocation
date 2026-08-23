@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 7 · Повторение Станции 1 — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --ink:#2D2A26; --bg:#FFFDF7; --soft:#FFF8EC; --line:#D6CFC4;
+    --green:#2E7D32; --red:#D62828;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  /* КНОПКА ПЕЧАТИ */
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--terra);color:#fff;border:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(226,114,91,.4)}
+  .print-btn:hover{background:#c9604b}
+
+  /* ЛИСТ */
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:16mm 18mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  /* ШАПКА */
+  .hero{background:linear-gradient(135deg,#FFE3D6,#FFF3DC,#E8F4F0);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--terra)}
+  .hero h1{font-size:22px;color:var(--terra);margin-bottom:4px}
+  .hero .sub{font-size:13px;color:#666;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--terra);color:#fff;border-radius:999px;padding:4px 16px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:14px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  /* УПРАЖНЕНИЕ */
+  .exercise{margin-bottom:20px}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .ex-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .ex-num.c-terra{background:var(--terra)}
+  .ex-num.c-ocean{background:var(--ocean)}
+  .ex-num.c-oliva{background:var(--oliva)}
+  .ex-num.c-afran{background:var(--afran)}
+  .ex-title{font-weight:800;font-size:15px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#888;background:#f5f2ec;padding:3px 10px;border-radius:999px}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  /* ПОДСКАЗКА */
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+
+  /* СОПОСТАВЛЕНИЕ */
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .match-table .ans-box{display:inline-block;width:26px;height:26px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:23px;font-weight:800;margin-right:8px}
+
+  /* ГРАММАТИКА — ВСТАВЬ */
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:8px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .gap{display:inline-block;min-width:110px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;font-weight:700}
+  .gap-item .emoji{font-size:18px}
+
+  /* СОБЕРИ ФРАЗУ */
+  .build-item{margin:10px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--oliva);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--oliva)}
+  .build-line{border-bottom:1.6px dashed var(--oliva);height:24px}
+
+  /* ЧТЕНИЕ */
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:22px}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  /* АУДИРОВАНИЕ */
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;font-size:13px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:22px}
+  .listen-item .blank{display:inline-block;flex:1;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+
+  /* ГОВОРЕНИЕ */
+  .speak-box{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:12px 14px;font-size:12.5px;margin-bottom:8px}
+  .speak-templates{display:grid;gap:6px;margin-top:8px}
+  .speak-template{background:#fff;border-radius:8px;padding:8px 10px;font-size:12.5px}
+  .speak-template .tpl{color:#8B5CF6;font-weight:700}
+
+  /* ПИСЬМО */
+  .write-hint{background:#FFF0F6;border-left:4px solid #EC4899;border-radius:10px;padding:10px 14px;font-size:12px;margin-bottom:8px;color:#666}
+  .write-lines{display:grid;gap:0;margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:28px}
+
+  /* СВЕТОФОР */
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:90px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  /* ФУТЕР */
+  .footer{text-align:center;color:#999;font-size:10px;margin-top:18px;padding-top:8px;border-top:1px solid #eee}
+
+  /* ПЕЧАТЬ: лист один, браузер сам разбивает на страницы A4 */
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;margin:0;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+  <div class="hero">
+    <h1>🎬 Повторение Станции 1: «Первый день в Испании»</h1>
+    <div class="sub">Уроки 1–7 · Приветствия · Эмоции · Части тела · Просьбы · Навигация</div>
+    <div class="tag">Station 1 · Supervivencia · ¡Repaso!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+    <span>Я 👦 мальчик / 👧 девочка <span class="w" style="min-width:40px"></span></span>
+  </div>
+
+  <!-- УПР. 1 ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">1</span>
+      <span class="ex-title">Соедини испанскую фразу и перевод</span>
+      <span class="ex-skill">🗣 Лексика · все уроки</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода в квадратик рядом с испанской фразой. Фразы из всех 7 уроков станции 1!</div>
+    <table class="match-table">
+      <tr>
+        <th style="width:55%">Испанская фраза</th>
+        <th>Перевод</th>
+      </tr>
+      <tr>
+        <td><span class="ans-box"></span>¡Hola! Me llamo Ana.</td>
+        <td>а) Мне нужно в туалет.</td>
+      </tr>
+      <tr>
+        <td><span class="ans-box"></span>No entiendo. ¿Puedes repetir?</td>
+        <td>б) У меня болит голова.</td>
+      </tr>
+      <tr>
+        <td><span class="ans-box"></span>Estoy nervioso, pero contento.</td>
+        <td>в) Привет! Меня зовут Аня.</td>
+      </tr>
+      <tr>
+        <td><span class="ans-box"></span>Me duele la cabeza.</td>
+        <td>г) Где находится туалет?</td>
+      </tr>
+      <tr>
+        <td><span class="ans-box"></span>Necesito ir al baño.</td>
+        <td>д) Я нервничаю, но рад.</td>
+      </tr>
+      <tr>
+        <td><span class="ans-box"></span>¿Dónde está el baño?</td>
+        <td>е) Я не понимаю. Можешь повторить?</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- УПР. 2 ГРАММАТИКА: ВСТАВЬ ГЛАГОЛ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">2</span>
+      <span class="ex-title">Вставь правильный глагол</span>
+      <span class="ex-skill">🧩 Грамматика · сер/эстар/тенер</span>
+    </div>
+    <div class="hint-box">
+      💡 <strong>Подсказка:</strong>
+      <strong>ser</strong> = кто ты есть всегда (я из России) ·
+      <strong>estar</strong> = как ты сейчас (я рад, я устал) ·
+      <strong>tener</strong> = у тебя есть (возраст: мне 8 лет, у меня есть брат)
+    </div>
+    <div class="ex-instruction">Впиши: soy / estoy / tengo / es / está / tiene</div>
+    <div class="gap-grid">
+      <div class="gap-item">
+        <span class="num">1</span>
+        <span>Yo <span class="gap"></span> de Rusia.</span>
+        <span class="emoji">🌍</span>
+      </div>
+      <div class="gap-item">
+        <span class="num">2</span>
+        <span>Yo <span class="gap"></span> ocho años.</span>
+        <span class="emoji">🎂</span>
+      </div>
+      <div class="gap-item">
+        <span class="num">3</span>
+        <span>Yo <span class="gap"></span> contento.</span>
+        <span class="emoji">😄</span>
+      </div>
+      <div class="gap-item">
+        <span class="num">4</span>
+        <span>Yo <span class="gap"></span> nervioso.</span>
+        <span class="emoji">😬</span>
+      </div>
+      <div class="gap-item">
+        <span class="num">5</span>
+        <span>El baño <span class="gap"></span> allí.</span>
+        <span class="emoji">🚽</span>
+      </div>
+      <div class="gap-item">
+        <span class="num">6</span>
+        <span>El profesor <span class="gap"></span> simpático.</span>
+        <span class="emoji">👨‍🏫</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР. 3 ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">3</span>
+      <span class="ex-title">Собери фразу из слов</span>
+      <span class="ex-skill">🧩 Грамматика · порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу на строке.</div>
+
+    <div class="build-item">
+      <div class="build-words">
+        <span class="build-word">baño</span>
+        <span class="build-word">¿Puedo</span>
+        <span class="build-word">al</span>
+        <span class="build-word">ir</span>
+        <span class="build-word">?</span>
+      </div>
+      <div class="build-line"></div>
+    </div>
+
+    <div class="build-item">
+      <div class="build-words">
+        <span class="build-word">duele</span>
+        <span class="build-word">la</span>
+        <span class="build-word">Me</span>
+        <span class="build-word">cabeza</span>
+        <span class="build-word">.</span>
+      </div>
+      <div class="build-line"></div>
+    </div>
+
+    <div class="build-item">
+      <div class="build-words">
+        <span class="build-word">está</span>
+        <span class="build-word">allí</span>
+        <span class="build-word">El</span>
+        <span class="build-word">comedor</span>
+        <span class="build-word">.</span>
+      </div>
+      <div class="build-line"></div>
+    </div>
+
+    <div class="build-item">
+      <div class="build-words">
+        <span class="build-word">ocho</span>
+        <span class="build-word">Tengo</span>
+        <span class="build-word">años</span>
+        <span class="build-word">.</span>
+      </div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- УПР. 4 ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Прочитай текст и ответь на вопросы</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="ex-instruction">Прочитай рассказ о первом дне в испанской школе. Все слова ты знаешь из уроков 1–7!</div>
+
+    <div class="reading-box">
+      ¡Hola! Me llamo Max y tengo ocho años. Soy de Rusia.<br><br>
+      Hoy es mi primer día en la escuela española. Estoy un poco nervioso, pero muy contento.<br><br>
+      Entro en la clase y digo: «¡Buenos días, profe!». El profe dice: «¡Bienvenido, Max!». Me siento.<br><br>
+      El profe habla muy rápido. No entiendo. Levanto la mano y digo: «Perdón, profe, no entiendo. ¿Puede repetir, por favor?». El profe dice: «Claro, más despacio». ¡Muchas gracias!<br><br>
+      Tengo sed y necesito ir al baño. Digo: «Profe, ¿puedo ir al baño, por favor?». El profe dice: «Sí, claro. Está al final del pasillo».<br><br>
+      ¡Qué bien! Estoy muy contento.
+    </div>
+
+    <div class="ex-instruction">Ответь полными фразами по-испански (с опорой на текст):</div>
+    <div class="reading-q">
+      <span class="qnum">1.</span>
+      <span style="flex:1">¿Cómo se llama el niño? → <span class="blank"></span>
+        <small style="color:#888;display:block;font-size:11px">(Как зовут мальчика?)</small>
+      </span>
+    </div>
+    <div class="reading-q">
+      <span class="qnum">2.</span>
+      <span style="flex:1">¿Cuántos años tiene? → <span class="blank"></span>
+        <small style="color:#888;display:block;font-size:11px">(Сколько ему лет?)</small>
+      </span>
+    </div>
+    <div class="reading-q">
+      <span class="qnum">3.</span>
+      <span style="flex:1">¿Cómo está Max el primer día? → <span class="blank"></span>
+        <small style="color:#888;display:block;font-size:11px">(Как Макс чувствует себя в первый день?)</small>
+      </span>
+    </div>
+    <div class="reading-q">
+      <span class="qnum">4.</span>
+      <span style="flex:1">¿Qué dice Max cuando no entiende? → <span class="blank"></span>
+        <small style="color:#888;display:block;font-size:11px">(Что говорит Макс, когда не понимает?)</small>
+      </span>
+    </div>
+    <div class="reading-q">
+      <span class="qnum">5.</span>
+      <span style="flex:1">¿Dónde está el baño? → <span class="blank"></span>
+        <small style="color:#888;display:block;font-size:11px">(Где находится туалет?)</small>
+      </span>
+    </div>
+  </div>
+
+  <!-- УПР. 5 АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">5</span>
+      <span class="ex-title">Прослушай и напиши</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">
+      👂 <strong>Как выполнять:</strong> попроси родителя, брата или сестру прочитать фразы вслух по-испански. Ты слушаешь и пишешь, что услышал(а). Если не понимаешь — скажи: «¡Perdón, otra vez, por favor!»
+    </div>
+    <div class="ex-instruction">Напиши то, что услышал(а):</div>
+    <div class="listen-grid">
+      <div class="listen-item">
+        <span class="lnum">1.</span>
+        <span class="blank"></span>
+      </div>
+      <div class="listen-item">
+        <span class="lnum">2.</span>
+        <span class="blank"></span>
+      </div>
+      <div class="listen-item">
+        <span class="lnum">3.</span>
+        <span class="blank"></span>
+      </div>
+      <div class="listen-item">
+        <span class="lnum">4.</span>
+        <span class="blank"></span>
+      </div>
+      <div class="listen-item">
+        <span class="lnum">5.</span>
+        <span class="blank"></span>
+      </div>
+      <div class="listen-item">
+        <span class="lnum">6.</span>
+        <span class="blank"></span>
+      </div>
+    </div>
+    <div class="hint-box" style="margin-top:10px">
+      💡 <strong>Для родителя (что читать):</strong>
+      1) ¡Buenos días! ¿Cómo te llamas? · 2) Estoy cansado. · 3) Me duele la rodilla. ·
+      4) ¿Puedo beber agua, por favor? · 5) ¿Dónde está el comedor? · 6) ¡Muchas gracias!
+    </div>
+  </div>
+
+  <!-- УПР. 6 ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">6</span>
+      <span class="ex-title">Опиши ситуацию вслух</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="speak-box">
+      🗣 Прочитай ситуацию и скажи вслух, что ты сделаешь и что скажешь. Используй фразы-шаблоны!
+      Попроси родителя послушать тебя.
+    </div>
+    <div class="speak-templates">
+      <div class="speak-template">
+        <strong>Ситуация 1:</strong> Ты вошёл в класс. Поздоровайся и представься.<br>
+        <span class="tpl">¡Buenos días! Me llamo ___. Tengo ___ años. Soy de ___.</span>
+        <small style="color:#666;display:block;margin-top:4px">Перевод: Добрый день! Меня зовут ___. Мне ___ лет. Я из ___.</small>
+      </div>
+      <div class="speak-template">
+        <strong>Ситуация 2:</strong> Учитель говорит быстро, ты не понимаешь.<br>
+        <span class="tpl">Perdón, no ___. ¿Puede ___, por favor?</span>
+        <small style="color:#666;display:block;margin-top:4px">Перевод: Извини(те), я не понимаю. Повтори(те), пожалуйста.</small>
+      </div>
+      <div class="speak-template">
+        <strong>Ситуация 3:</strong> Тебе нужно в туалет.<br>
+        <span class="tpl">Profe, ¿puedo ir al ___, por favor?</span>
+        <small style="color:#666;display:block;margin-top:4px">Перевод: Учитель, можно выйти в туалет, пожалуйста?</small>
+      </div>
+      <div class="speak-template">
+        <strong>Ситуация 4:</strong> У тебя болит голова.<br>
+        <span class="tpl">Me ___ la cabeza. ¿Puedo ir a la enfermería?</span>
+        <small style="color:#666;display:block;margin-top:4px">Перевод: У меня болит голова. Можно пойти в медпункт?</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР. 7 ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Напиши сочинение «Мой первый день в Испании»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="write-hint">
+      ✍️ Напиши 7–8 предложений о своём первом дне в испанской школе. Используй слова из всех уроков станции 1.
+      Только настоящее время! Помни про <strong>por favor</strong> в просьбах.
+    </div>
+    <div class="hint-box">
+      💡 <strong>План сочинения:</strong><br>
+      1) Кто ты: Me llamo… Tengo… años. Soy de…<br>
+      2) Как ты себя чувствуешь: Estoy nervioso / contento…<br>
+      3) Что ты делаешь в классе: Entro en la clase. Digo «¡Buenos días!»<br>
+      4) Если не понимаешь: No entiendo. ¿Puede repetir, por favor?<br>
+      5) Если что-то нужно: Necesito… / ¿Puedo…?<br>
+      6) Если что-то болит: Me duele…<br>
+      7) Где что находится: ¿Dónde está…? Está allí.<br>
+      8) Итог: ¡Estoy muy contento!
+    </div>
+    <div class="write-lines">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- УПР. 8 САМОПРОВЕРКА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr>
+        <th>Умею</th>
+        <th>🟢</th><th>🟡</th><th>🔴</th>
+      </tr>
+      <tr>
+        <td>Поздороваться и представиться</td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+      </tr>
+      <tr>
+        <td>Сказать «Я не понимаю»</td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+      </tr>
+      <tr>
+        <td>Говорить об эмоциях (Estoy…)</td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+      </tr>
+      <tr>
+        <td>Сказать, что болит (Me duele…)</td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+      </tr>
+      <tr>
+        <td>Вежливо попросить (¿Puedo…?)</td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+      </tr>
+      <tr>
+        <td>Спросить, где что-то (¿Dónde está…?)</td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+      </tr>
+      <tr>
+        <td>Различать ser / estar / tener</td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+        <td><span class="sc-circle"></span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Повторение Станции 1 · Урок 7</div>
+</div>
+
+</body>
+</html>
