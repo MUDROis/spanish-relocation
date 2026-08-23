@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 3.1 · Осмотр квартиры — МУДРО (A4)</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    width:210mm;
+    margin:8mm auto; padding:10mm 11mm 12mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:5mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 4mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:45mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+
+  .ad-box{ background:#fff; border:2px solid var(--p4); border-radius:10px; padding:3mm; margin-bottom:3mm; font-family:monospace; font-size:10px; line-height:1.7; }
+  .ad-box .hdr{ background:var(--p4); color:#fff; padding:2mm 3mm; font-weight:700; font-size:11px; margin:-3mm -3mm 2mm; border-radius:8px 8px 0 0;}
+
+  .role-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .role-box b{ color:var(--p4);}
+  .role-box .ru{ font-size:9px; color:var(--muted); font-style:italic;}
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  .small{ font-size:9.5px; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🔍 Рабочий лист · Урок 3.1 «Осмотр квартиры»</h1>
+    <div class="meta">Замечаем проблемы и задаём вопросы хозяину на испанском</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ ПРОБЛЕМ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🔌 Соедини проблему и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. las humedades</div>
+          <div class="item">2. la caldera rota</div>
+          <div class="item">3. el grifo gotea</div>
+          <div class="item">4. la persiana rota</div>
+          <div class="item">5. el enchufe no funciona</div>
+          <div class="item">6. la puerta no cierra bien</div>
+          <div class="item">7. el suelo está rayado</div>
+          <div class="item">8. hay ruido</div>
+        </div>
+        <div class="col">
+          <div class="item">а) кран течёт</div>
+          <div class="item">б) плесень</div>
+          <div class="item">в) розетка не работает</div>
+          <div class="item">г) дверь плохо закрывается</div>
+          <div class="item">д) сломанный бойлер</div>
+          <div class="item">е) пол поцарапан</div>
+          <div class="item">ж) шумно</div>
+          <div class="item">з) сломанные жалюзи</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ЗОНЫ И ТЕХНИКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🏠 Впиши слово по описанию</h2><div class="tag">зоны и техника</div></div></div>
+    <div class="card">
+      1. Комната, где готовят: <span class="wline"></span><br>
+      2. Машина, которая стирает одежду: <span class="wline"></span><br>
+      3. Маленькое помещение вне квартиры для хранения вещей: <span class="wline"></span><br>
+      4. Комната, где спят: <span class="wline"></span><br>
+      5. Зимой включаем, чтобы было тепло: <span class="wline"></span><br>
+      6. Летом включаем, чтобы было прохладно: <span class="wline"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА · SER vs ESTAR -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Выбери ser или estar</h2><div class="tag">подчеркни правильный вариант</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>ser</b> = характеристика (не изменится) · <b>estar</b> = состояние (можно починить/перекрасить)</div>
+      1. El salón <b>( es / está )</b> amplio.<br>
+      2. La cocina <b>( es / está )</b> reformada.<br>
+      3. El grifo <b>( es / está )</b> roto.<br>
+      4. El edificio <b>( es / está )</b> antiguo.<br>
+      5. La pintura <b>( es / está )</b> vieja.<br>
+      6. El piso <b>( es / está )</b> luminoso.<br>
+      7. La caldera <b>( es / está )</b> rota.<br>
+      8. El dormitorio <b>( es / está )</b> moderno.
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА · КОНСТРУКЦИЯ HAY -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>⚠️ Построй фразу по формуле</h2><div class="tag">Hay + problema + en + zona</div></div></div>
+    <div class="card">
+      <div class="formula">Формула: <b>Hay</b> + [проблема] + <b>en</b> + [зона]</div>
+      <i>Пример: В ванной плесень. → <b>Hay humedades en el baño.</b></i><br><br>
+      1. На кухне течёт кран. → <span class="wline long"></span><br>
+      2. В спальне сломанные жалюзи. → <span class="wline long"></span><br>
+      3. В гостиной шумно. → <span class="wline long"></span><br>
+      4. В здании нет лифта. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ · ЧЕК-ЛИСТ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>📖 Прочитай чек-лист осмотра и ответь</h2><div class="tag">анализ реального документа</div></div></div>
+    <div class="card">
+      <div class="ad-box">
+        <div class="hdr">CHECKLIST DE VISITA — PISO EN CALLE MAYOR 15</div>
+        <b>COCINA:</b> ✅ Electrodomésticos: lavadora, frigorífico, horno · ⚠️ Grifo gotea · ❌ Persiana rota<br>
+        <b>BAÑO:</b> ✅ Ducha funciona · ❌ Hay humedades en la pared · ⚠️ Pintura vieja<br>
+        <b>SALÓN:</b> ✅ Amplio y luminoso · ✅ Suelo en buen estado · ⚠️ Ruido de la calle<br>
+        <b>DORMITORIO:</b> ✅ Armario empotrado · ✅ Ventana grande · ❌ Puerta no cierra bien<br>
+        <b>EDIFICIO:</b> ✅ Ascensor · ⚠️ Caldera antigua · ❌ No hay trastero
+      </div>
+      <span class="small">
+        1. Сколько серьёзных проблем (❌)? <span class="wline short"></span><br>
+        2. В какой зоне больше всего проблем? <span class="wline short"></span><br>
+        3. Есть ли в здании лифт? <span class="wline short"></span><br>
+        4. Почему salón — в хорошем состоянии? <span class="wline long"></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>👂 Прослушай и запиши</h2><div class="tag">попроси родителя прочитать текст вслух</div></div></div>
+    <div class="card">
+      <div class="hint">Запиши по-испански 3 проблемы, которые ты услышал(а):</div>
+      1. <span class="wline long"></span><br>
+      2. <span class="wline long"></span><br>
+      3. <span class="wline long"></span>
+
+      <div class="note green" style="margin-top:2mm">
+        <b>📢 Для родителя: что прочитать вслух (2 раза, медленно):</b><br>
+        <i>«Hola, buenos días. El piso está en la segunda planta. La cocina es moderna, pero el grifo gotea. En el baño hay humedades en la pared. El salón es amplio y luminoso. El dormitorio tiene una ventana grande, pero la puerta no cierra bien. En el edificio hay ascensor.»</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ · ФРАЗЫ-СПАСАТЕЛИ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>🎭 Ситуации: что сказать хозяину</h2><div class="tag">соедини ситуацию и фразу</div></div></div>
+    <div class="card">
+      <div class="role-box"><b>1. Ты заметил плесень в ванной.</b><br><span class="ru">→ Что скажешь?</span> <span class="wline long"></span></div>
+      <div class="role-box"><b>2. Ты хочешь узнать, включён ли ремонт.</b><br><span class="ru">→ Что спросишь?</span> <span class="wline long"></span></div>
+      <div class="role-box"><b>3. Ты хочешь узнать цену ремонта.</b><br><span class="ru">→ Что спросишь?</span> <span class="wline long"></span></div>
+      <div class="role-box"><b>4. Ты не расслышал ответ хозяина.</b><br><span class="ru">→ Что скажешь?</span> <span class="wline long"></span></div>
+      <div class="note" style="margin-top:2mm">
+        💡 <b>Шпаргалка-подсказка</b> (не подсматривай сразу!):<br>
+        <span class="small">• Perdone, hay humedades en el baño.<br>
+        • ¿Está incluida la reparación?<br>
+        • ¿Cuánto cuesta la reparación?<br>
+        • ¿Puede repetir, por favor?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">8</div><div><h2>✍️ Опиши квартиру своей мечты</h2><div class="tag">6–8 предложений по плану</div></div></div>
+    <div class="card">
+      <div class="hint">Используй лексику урока: зоны, техника, ser/estar, hay.</div>
+      <b>План:</b>
+      <span class="small">
+      1) Где находится квартира (в каком районе/этаже)?<br>
+      2) Сколько комнат и какие?<br>
+      3) Опиши кухню и ванную (техника, состояние).<br>
+      4) Опиши гостиную и спальню (характеристики).<br>
+      5) Есть ли проблемы, которые ты готов(а) принять?<br>
+      6) Почему именно эта квартира?
+      </span>
+      <br><br>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+      <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Замечать проблемы (humedades, caldera rota, grifo gotea)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Различать <b>ser</b> (характеристика) и <b>estar</b> (состояние)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить фразы <b>Hay + problema + en + zona</b></td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Задавать вопросы хозяину</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Заполнять чек-лист осмотра</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать фразы-спасатели</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="small" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист и отправь преподавателю.</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
