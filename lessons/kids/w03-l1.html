@@ -230,6 +230,15 @@
     .moves-grid{grid-template-columns:1fr 1fr}
     .d-speaker{min-width:60px;font-size:.85rem}
   }
+
+  /* ЗАВЕРШЕНИЕ УРОКА */
+  .finish-zone{background:linear-gradient(135deg,#FFF6E5,#FFEFD1);border:3px dashed #2A9D8F;border-radius:22px;text-align:center;padding:26px 20px;margin:24px 0}
+  .finish-zone .fz-icon{font-size:2.4rem;margin-bottom:6px}
+  .finish-zone .fz-title{display:block;font-size:1.25rem;font-weight:900;color:#2B2118}
+  .finish-zone .fz-sub{font-size:.88rem;font-weight:700;color:#7A6A5C;margin-top:4px}
+  .finish-btn{margin-top:14px;background:#2A9D8F;color:#fff;border:none;border-radius:16px;padding:14px 30px;font-family:'Nunito',inherit;font-weight:800;font-size:1.08rem;cursor:pointer;box-shadow:0 5px 0 #23867A;transition:.15s}
+  .finish-btn:active{transform:translateY(3px);box-shadow:none}
+  .finish-btn.done{background:#E8F3E4;color:#3c7a3c;box-shadow:none;cursor:default}
 </style>
 </head>
 <body>
@@ -688,6 +697,14 @@
     <span>📚 Карточки Quizlet · Слова Станции 1</span>
     <span>Открыть →</span>
   </a>
+
+  <!-- ЗАВЕРШЕНИЕ УРОКА -->
+  <section class="finish-zone" id="finish-zone">
+    <div class="fz-icon">🏁</div>
+    <strong class="fz-title">Прошёл весь урок?</strong>
+    <p class="fz-sub">Нажми кнопку — и урок засчитается на твоей карте прогресса! 🚀</p>
+    <button class="finish-btn" id="finish-btn">✅ Завершить урок</button>
+  </section>
 
   <!-- НАВИГАЦИЯ -->
   <div class="lesson-nav">
@@ -1247,6 +1264,22 @@ document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-ce
 
 /* ========== УТИЛИТЫ ========== */
 function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1])}
+</script>
+<script>
+(function(){
+  var KEY='mudro_done_kids',ID='w03-l1';
+  var btn=document.getElementById('finish-btn');if(!btn)return;
+  function getList(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
+  function markDoneUI(){btn.classList.add('done');btn.textContent='✓ Урок завершён';btn.onclick=null;}
+  if(getList().indexOf(ID)>=0)markDoneUI();
+  btn.onclick=function(){
+    var l=getList();
+    if(l.indexOf(ID)>=0)return;
+    l.push(ID);localStorage.setItem(KEY,JSON.stringify(l));
+    markDoneUI();
+    if(typeof confetti==='function')confetti('🎉');
+  };
+})();
 </script>
 </body>
 </html>

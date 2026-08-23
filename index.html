@@ -166,6 +166,7 @@ h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:900;text-align:center}
 .lesson-link:hover{background:#EFE6DA;color:var(--ink)}
 .lesson-link.live{background:var(--pc);color:#fff;border-color:var(--pc)}
 .lesson-link.live:hover{filter:brightness(.92);color:#fff}
+.lesson-link.passed{background:#2E7D32;color:#fff;border-style:solid;border-color:#2E7D32}
 .lesson-link.locked{opacity:.55;cursor:not-allowed;background:#fff;border-style:dashed;border-color:rgba(43,33,24,.2);color:#b3aa9d}
 .week.live{border-color:var(--pc);box-shadow:0 0 0 3px var(--pc-soft),var(--shadow)}
 
@@ -445,10 +446,27 @@ addEventListener('scroll',()=>{
   const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
   document.getElementById('progress').style.width=p+'%';
 });
-setTimeout(()=>{
+/* ====== Прогресс-бар: пройденные уроки ======
+   Уроки отмечаются кнопкой «Завершить урок» внутри самого урока
+   (localStorage: mudro_done_parents → ['w01-l1', ...]). */
+function getParentsDone(){try{return JSON.parse(localStorage.getItem('mudro_done_parents'))||[]}catch(e){return[]}}
+function updateHeroProgress(){
+  const links=[...document.querySelectorAll('.lesson-link')];
+  const total=links.length;
+  const doneIds=new Set(getParentsDone());
+  let done=0;
+  links.forEach(a=>{
+    const id=(a.dataset.href||'').split('/').pop().replace(/\.html$/,'');
+    if(doneIds.has(id)){done++;a.classList.add('passed');a.textContent='✓ Урок '+id.slice(-1);}
+  });
+  const pct=total?Math.round(done/total*100):0;
   const pb=document.getElementById('hero-progress-bar');
-  if(pb) pb.style.width='1.6%';
-},300);
+  const pt=document.querySelector('.hero-progress .progress-text');
+  if(pb)pb.style.width=Math.max(pct,1.6)+'%';
+  if(pt)pt.textContent=done+' из '+total+' уроков — '+pct+'% пути 🚀';
+}
+updateHeroProgress();
+window.addEventListener('storage',updateHeroProgress);
 
 /* ====== Счётчики ====== */
 const cio=new IntersectionObserver(es=>es.forEach(en=>{

@@ -93,6 +93,7 @@
   .lessons{display:flex;flex-wrap:wrap;gap:8px}
   .lesson{border:2px dashed #d8d2c4;color:#a49d8e;border-radius:12px;padding:7px 12px;font-weight:800;background:#fbf9f4;cursor:not-allowed;font-size:.85rem;text-decoration:none}
   .lesson.unlocked{border-style:solid;border-color:#2A9D8F;color:#2A9D8F;background:#E5F4F1;cursor:pointer}
+  .lesson.passed{border-color:#2E7D32;background:#E3F2E1;color:#2E7D32}
   .sticker-btn{margin-top:20px;width:100%;background:var(--sun);border:none;border-radius:16px;padding:14px;font-family:'Nunito';font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;transition:.15s}
   .sticker-btn:active{transform:translateY(3px);box-shadow:none}
   .sticker-btn.done{background:#dff0dd;box-shadow:none;color:#3c7a3c;cursor:default}
@@ -306,6 +307,10 @@ function applyLessonLink(station,lesson,url){
     a.href=url;
     a.className='lesson unlocked';
     a.textContent='▶ Урок '+lesson;
+    if(getDoneLessons().includes(lessonIdFromUrl(url))){
+      a.classList.add('passed');
+      a.textContent='✓ Урок '+lesson;
+    }
     el.replaceWith(a);
   }
 }
@@ -324,11 +329,23 @@ attachLessonLink('s1', 5, './lessons/kids/w02-l2.html');
 attachLessonLink('s1', 6, './lessons/kids/w02-l3.html');
 attachLessonLink('s1', 7, './lessons/kids/w03-l1.html');
 
-/* ============ ПРОГРЕСС ============ */
-setTimeout(()=>{
+/* ============ ПРОГРЕСС: пройденные уроки ============
+   Уроки отмечаются кнопкой «Завершить урок» внутри самого урока
+   (localStorage: mudro_done_kids → ['w01-l1', ...]). */
+function getDoneLessons(){try{return JSON.parse(localStorage.getItem('mudro_done_kids'))||[]}catch(e){return[]}}
+function lessonIdFromUrl(url){return (url||'').split('/').pop().replace(/\.html$/,'')}
+function updateHeroProgress(){
+  const total=STATIONS.reduce((a,s)=>a+s.lessons,0);
+  const doneIds=new Set(getDoneLessons());
+  const done=lessonLinks.filter(l=>doneIds.has(lessonIdFromUrl(l.url))).length;
+  const pct=total?Math.round(done/total*100):0;
   const pb=document.getElementById('progress-bar');
-  if(pb) pb.style.width='1.6%';
-},300);
+  const pt=document.querySelector('.hero-progress .progress-text');
+  if(pb)pb.style.width=Math.max(pct,1.6)+'%';
+  if(pt)pt.textContent=done+' из '+total+' уроков — '+pct+'% пути 🚀';
+}
+updateHeroProgress();
+window.addEventListener('storage',updateHeroProgress);
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
