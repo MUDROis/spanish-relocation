@@ -268,14 +268,6 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-  /* ЗАВЕРШЕНИЕ УРОКА */
-  .finish-zone{background:linear-gradient(135deg,#FFF6E5,#FFEFD1);border:3px dashed #E2725B;border-radius:22px;text-align:center;padding:26px 20px;margin:24px 0}
-  .finish-zone .fz-icon{font-size:2.4rem;margin-bottom:6px}
-  .finish-zone .fz-title{display:block;font-size:1.25rem;font-weight:900;color:#2B2118}
-  .finish-zone .fz-sub{font-size:.88rem;font-weight:700;color:#7A6A5C;margin-top:4px}
-  .finish-btn{margin-top:14px;background:#E2725B;color:#fff;border:none;border-radius:16px;padding:14px 30px;font-family:'Nunito',inherit;font-weight:800;font-size:1.08rem;cursor:pointer;box-shadow:0 5px 0 #C05A45;transition:.15s}
-  .finish-btn:active{transform:translateY(3px);box-shadow:none}
-  .finish-btn.done{background:#E8F3E4;color:#3c7a3c;box-shadow:none;cursor:default}
 </style>
 </head>
 <body>
@@ -724,15 +716,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
   </div>
 </section>
 
-<!-- ЗАВЕРШЕНИЕ УРОКА -->
-  <section class="finish-zone" id="finish-zone">
-    <div class="fz-icon">🏁</div>
-    <strong class="fz-title">Урок пройден?</strong>
-    <p class="fz-sub">Отметьте завершение — прогресс на главной странице курса обновится.</p>
-    <button class="finish-btn" id="finish-btn">✅ Завершить урок</button>
-  </section>
-
-  <div class="lesson-nav">
+<div class="lesson-nav">
   <a href="w02-l2.html"><small>← Предыдущий</small>Урок 2.2 · Análisis del barrio</a>
   <a href="../../index.html"><small>↺ Вернуться</small>Карта курса</a>
   <a href="w03-l1.html" class="next"><small>Следующий →</small>Урок 3.1 · Осмотр квартиры (скоро)</a>
@@ -1161,21 +1145,5 @@ document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-ce
 <script src="../../assets/js/app-logic.js"></script>
 <script src="../../assets/js/app.js"></script>
 <script src="../../assets/js/lesson-gate.js"></script>
-<script>
-(function(){
-  var KEY='mudro_done_parents',ID='w02-l3';
-  var btn=document.getElementById('finish-btn');if(!btn)return;
-  function getList(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
-  function markDoneUI(){btn.classList.add('done');btn.textContent='✓ Урок завершён';btn.onclick=null;}
-  if(getList().indexOf(ID)>=0)markDoneUI();
-  btn.onclick=function(){
-    var l=getList();
-    if(l.indexOf(ID)>=0)return;
-    l.push(ID);localStorage.setItem(KEY,JSON.stringify(l));
-    markDoneUI();
-    if(typeof confetti==='function')confetti('🎉');
-  };
-})();
-</script>
 </body>
 </html>

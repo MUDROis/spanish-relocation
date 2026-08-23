@@ -77,8 +77,25 @@
   let doneBtn = null;
   let completedFlag = false;
 
+  /* Зеркалим завершение в localStorage — по этим ключам
+     страницы kids.html и index.html считают прогресс-бар. */
+  function saveLocalDone() {
+    if (!lessonId) return;
+    try {
+      var track = lessonId.split('-')[0];           // kids | parents
+      var id = lessonId.replace(/^[^-]+-/, '');     // w03-l1
+      var key = 'mudro_done_' + track;
+      var list = JSON.parse(localStorage.getItem(key)) || [];
+      if (list.indexOf(id) < 0) {
+        list.push(id);
+        localStorage.setItem(key, JSON.stringify(list));
+      }
+    } catch (e) {}
+  }
+
   function markDone() {
     completedFlag = true;
+    saveLocalDone();
     doneBtn.classList.add('completed');
     doneBtn.textContent = '🎉 Урок пройден';
   }
@@ -101,8 +118,7 @@
       window.App.getLessonProgress(u.uid, lessonId).then(function (p) {
         if (p && p.completedAt) markDone();
       }).catch(function () {});
-    }
-  }
+    }  }
 
   function toast(msg) {
     let t = document.getElementById('gate-toast');
