@@ -225,6 +225,58 @@
   .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
   @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
 
+  /* ---------- ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ ---------- */
+  .grammar-hint{
+    position:relative;
+    color:var(--blue);
+    border-bottom:2px dashed var(--blue);
+    cursor:help;
+    font-weight:700;
+    display:inline;
+  }
+  .grammar-hint::after{
+    content:attr(data-hint);
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:.85rem;
+    font-weight:700;
+    line-height:1.4;
+    white-space:normal;
+    width:max-content;
+    max-width:280px;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+    font-style:normal;
+  }
+  .grammar-hint::before{
+    content:'';
+    position:absolute;
+    bottom:calc(100% + 2px);
+    left:50%;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:var(--ink);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+  }
+  @media (hover:hover){
+    .grammar-hint:hover::after,
+    .grammar-hint:hover::before{opacity:1}
+  }
+  .grammar-hint.active::after,
+  .grammar-hint.active::before{opacity:1}
+
   @media(max-width:600px){
     .map-grid{grid-template-columns:repeat(2,1fr)}
     .moves-grid{grid-template-columns:1fr 1fr}
@@ -246,7 +298,7 @@
 <header class="hero">
   <span class="lesson-tag">🎬 УРОК 7 · НЕДЕЛЯ 3</span>
   <h1>Репетиция первого дня: <span>квест по станциям!</span></h1>
-  <p class="sub">Сегодня — генеральная репетиция! Ты пройдёшь 6 станций (по одной на каждый урок), встретишь новую тему (числительные) и получишь бейдж «Пережил первый день». ¡Vamos!</p>
+  <p class="sub">Сегодня — генеральная репетиция! Ты пройдёшь 6 станций (по одной на каждый урок), встретишь новую тему (числительные) и получишь бейдж «Пережил первый день». <span class="grammar-hint" data-hint="¡Vamos! — «Идём! Поехали!» — от глагола ir (идти). Самое частое слово-подбадривание в Испании">¡Vamos!</span></p>
   <div class="final-situation">
     <strong>Итог урока:</strong> ты проходишь все 6 станций без подсказок, учишься считать до 100 по-испански и получаешь финальный бейдж перед чекпоинтом!
   </div>
@@ -302,7 +354,7 @@
           <div class="line">¡Uno, dos, tres!</div>
           <div class="line">¡Cuatro, cinco, seis!</div>
           <div class="line">¡Siete, ocho, nueve, diez!</div>
-          <div class="line">¡Mi primer día!</div>
+          <div class="line">¡<span class="grammar-hint" data-hint="primer — «первый». Это primero в сокращении: перед существительным мужского рода -o отпадает. primer día = первый день">Mi primer día</span>!</div>
           <div class="translation">Раз, два, три! Четыре, пять, шесть! Семь, восемь, девять, десять! Мой первый день!</div>
         </div>
 
@@ -311,7 +363,7 @@
           <div class="line">¡Hola, hola, buenos días!</div>
           <div class="line">Me llamo Anna, ¿cómo estás?</div>
           <div class="line">Tengo ocho años, ¡qué bien!</div>
-          <div class="line">Soy de Rusia, ¡ven aquí!</div>
+          <div class="line">Soy de Rusia, ¡<span class="grammar-hint" data-hint="ven aquí — «иди сюда». ven — приказная форма глагола venir (приходить). aquí — «сюда/здесь»">ven aquí</span>!</div>
         </div>
 
         <div class="section">
@@ -329,7 +381,7 @@
           <div class="line">¿Cómo estás? ¿Cómo estás?</div>
           <div class="line">Estoy contento, ¡ja, ja, ja!</div>
           <div class="line">Estoy triste, oh, no, no...</div>
-          <div class="line">Estoy cansado, tengo sueño.</div>
+          <div class="line">Estoy cansado, tengo <span class="grammar-hint" data-hint="tengo sueño — дословно «у меня есть сон» = «я хочу спить». Сон в испанском ИМЕЮТ, а не являюсь">sueño</span>.</div>
         </div>
 
         <div class="section">
@@ -352,7 +404,7 @@
           <div class="section-title">🆘 Куплет 5 — Не понимаю (Урок 2)</div>
           <div class="line">Perdón, perdón, no entiendo,</div>
           <div class="line">¿Puedes repetir, por favor?</div>
-          <div class="line">Más despacio, más despacio,</div>
+          <div class="line"><span class="grammar-hint" data-hint="más despacio — «помедленнее». despacio — медленно, тихо. Просьба №1 в испанской школе, когда быстро говорят!">Más despacio</span>, más despacio,</div>
           <div class="line">¡Muchas gracias, profe!</div>
         </div>
 
@@ -589,7 +641,7 @@
       <p style="font-weight:700;color:var(--ink-soft)">Ты готов к чекпоинту — экзамену станции 1!</p>
       <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
       <div class="badge-stamped" id="badge-stamped">
-        🎉 ¡Enhorabuena! Бейдж «Пережил первый день» 🎖 добавлен в твой паспорт!
+        🎉 ¡<span class="grammar-hint" data-hint="enhorabuena — «поздравляю!». Дословно: «в добрый час!». Говорят по любому поводу, когда поздравляют">Enhorabuena</span>! Бейдж «Пережил первый день» 🎖 добавлен в твой паспорт!
       </div>
     </div>
 
@@ -1248,6 +1300,18 @@ document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-ce
 
 /* ========== УТИЛИТЫ ========== */
 function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1])}
+
+/* ========== ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ (мобильный тап) ========== */
+document.addEventListener('click', function(e){
+  const hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(el => {
+    if(el !== hint) el.classList.remove('active');
+  });
+  if(hint){
+    hint.classList.toggle('active');
+    e.stopPropagation();
+  }
+});
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>

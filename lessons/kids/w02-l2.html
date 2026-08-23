@@ -191,6 +191,58 @@
   .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
   @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
 
+  /* ---------- ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ ---------- */
+  .grammar-hint{
+    position:relative;
+    color:var(--blue);
+    border-bottom:2px dashed var(--blue);
+    cursor:help;
+    font-weight:700;
+    display:inline;
+  }
+  .grammar-hint::after{
+    content:attr(data-hint);
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:.85rem;
+    font-weight:700;
+    line-height:1.4;
+    white-space:normal;
+    width:max-content;
+    max-width:280px;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+    font-style:normal;
+  }
+  .grammar-hint::before{
+    content:'';
+    position:absolute;
+    bottom:calc(100% + 2px);
+    left:50%;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:var(--ink);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+  }
+  @media (hover:hover){
+    .grammar-hint:hover::after,
+    .grammar-hint:hover::before{opacity:1}
+  }
+  .grammar-hint.active::after,
+  .grammar-hint.active::before{opacity:1}
+
   @media(max-width:600px){
     .cards-grid{grid-template-columns:1fr 1fr}
     .match-columns{grid-template-columns:1fr}
@@ -229,7 +281,7 @@
     </div>
     <div class="final-situation">
       <strong>Итоговая ситуация:</strong> на уроке математики тебе очень нужно в туалет, но ты не знаешь, как спросить. Вместо того чтобы терпеть или выбегать без спроса, ты поднимаешь руку и говоришь:<br><br>
-      <em>«Profe, ¿puedo ir al baño, por favor?»</em><br>
+      <em>«<span class="grammar-hint" data-hint="profe — короткое обращение к учителю, от profesor/profesora. Так дети называют учителей в Испании: «Profe, ¿puedo…?»">Profe</span>, ¿puedo ir al baño, por favor?»</em><br>
       <em>«Учитель, можно мне в туалет, пожалуйста?»</em> 🚽
     </div>
   </section>
@@ -338,32 +390,32 @@
         <th>🔊</th>
       </tr>
       <tr onclick="speak('¿Puedo ir al baño?')">
-        <td><strong>¿Puedo ir al baño?</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="al — слияние предлога a (к, в) и артикля el: a+el=al. Дословно: «Могу я идти К ТОМУ туалету?» Артикль перед baño обязателен!">¿Puedo ir al baño?</span></strong></td>
         <td>Можно мне в туалет?</td>
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('¿Puedo salir?')">
-        <td><strong>¿Puedo salir?</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="salir — «выходить». Дословно: «Могу я выйти?» После puedo всегда идёт инфинитив — глагол в начальной форме">¿Puedo salir?</span></strong></td>
         <td>Можно мне выйти?</td>
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('¿Puedo beber agua?')">
-        <td><strong>¿Puedo beber agua?</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="beber — «пить». Синоним: tomar agua. После puedo инфинитив: puedo BEBER, а не puedo bebo!">¿Puedo beber agua?</span></strong></td>
         <td>Можно мне попить?</td>
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('¿Puedo abrir la ventana?')">
-        <td><strong>¿Puedo abrir la ventana?</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="abrir — «открывать» (буква b!). Дословно: «Могу я открыть окно?» La ventana — окно, окно женского рода: la">¿Puedo abrir la ventana?</span></strong></td>
         <td>Можно открыть окно?</td>
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('¿Puedo ir a la enfermería?')">
-        <td><strong>¿Puedo ir a la enfermería?</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="enfermería — медпункт, от enfermera (медсестра). Запоминается так: enfermera + ía = комната медсестры">¿Puedo ir a la enfermería?</span></strong></td>
         <td>Можно в медпункт?</td>
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('¿Puedo descansar un momento?')">
-        <td><strong>¿Puedo descansar un momento?</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="un momento — дословно «один момент», то есть «минутку». descansar — «отдыхать»">¿Puedo descansar un momento?</span></strong></td>
         <td>Можно отдохнуть минутку?</td>
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
@@ -452,7 +504,7 @@
       <div class="scale-item level-4" onclick="speak('¿Podrías darme agua, por favor?')">
         <div class="scale-level">🔵 4</div>
         <div>
-          <div class="scale-phrase">¿Podrías darme agua, por favor?</div>
+          <div class="scale-phrase"><span class="grammar-hint" data-hint="podrías — вежливая форма глагола poder: «не мог бы ты». Чем длиннее слово, тем вежливее: puedes → podrías">¿Podrías darme agua, por favor?</span></div>
           <div class="scale-note">Не мог бы ты дать мне воды? (Очень вежливо)</div>
         </div>
       </div>
@@ -483,12 +535,12 @@
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('Tengo que hacer los deberes.')">
-        <td><strong>Tengo que hacer los deberes</strong></td>
+        <td><strong>Tengo que hacer <span class="grammar-hint" data-hint="los deberes — домашка. Дословно «обязанности/долги». Всегда во множественном числе и с артиклем los">los deberes</span></strong></td>
         <td>Я должен делать домашку</td>
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('Tengo que escuchar al profe.')">
-        <td><strong>Tengo que escuchar al profe</strong></td>
+        <td><strong>Tengo que escuchar <span class="grammar-hint" data-hint="al profe — снова слияние a+el=al! Дословно: «слушать К учителю» — по-русски странно, по-испански обязательно">al profe</span></strong></td>
         <td>Я должен слушать учителя</td>
         <td><button class="speak-btn" style="--c:#2E7D32;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
@@ -510,7 +562,7 @@
     </div>
 
     <div style="background:#E3F2FD;border-radius:14px;padding:16px;margin:14px 0;border-left:4px solid var(--blue)">
-      <strong>💡 Hay que (безличная обязанность):</strong><br>
+      <strong>💡 <span class="grammar-hint" data-hint="hay que — безличная конструкция: «надо» вообще, всем. Кто именно должен — не сказано. Сравни: tengo que = МНЕ надо">Hay que</span> (безличная обязанность):</strong><br>
       <em>Hay que respetar a los demás</em> — Нужно уважать других (общее правило)<br>
       <em>Hay que llegar a tiempo</em> — Нужно приходить вовремя
     </div>
@@ -565,7 +617,7 @@
       <strong>Итоговая ситуация урока:</strong><br>
       Ты поднимаешь руку и говоришь:<br>
       <em>«Profe, ¿puedo ir al baño, por favor?»</em><br>
-      Учитель: <em>«Sí, claro. Está allí.»</em><br>
+      Учитель: <em>«Sí, <span class="grammar-hint" data-hint="claro — «конечно, ясно». Очень частое слово-подтверждение в испанской речи">claro</span>. <span class="grammar-hint" data-hint="Está allí — «он (туалет) там». allí — там (далеко), а здесь — aquí. Глагол estar указывает место">Está allí</span>.»</em><br>
       Ты: <em>«¡Muchas gracias!»</em> 🎉
     </div>
   </section>
@@ -1267,6 +1319,13 @@ document.querySelectorAll('.tl-cell').forEach(function(c){
 document.getElementById('tlReset').onclick=function(){
   document.querySelectorAll('.tl-cell').forEach(function(c){c.classList.remove('active');});
 };
+
+/* ========== ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ (мобильный тап) ========== */
+document.addEventListener('click', function(e){
+  var hint=e.target.closest ? e.target.closest('.grammar-hint') : null;
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){ if(el!==hint) el.classList.remove('active'); });
+  if(hint){ hint.classList.toggle('active'); e.stopPropagation(); }
+});
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>

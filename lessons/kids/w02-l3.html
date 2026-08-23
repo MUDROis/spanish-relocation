@@ -233,8 +233,8 @@
     .match-columns{grid-template-columns:1fr}
   }
 
-  /* Grammar hint — всплывающая подсказка (используется в подсказках: .gh) */
-  .gh{
+  /* ---------- ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ ---------- */
+  .grammar-hint{
     border-bottom:1.5px dashed var(--nav);
     cursor:help;
     position:relative;
@@ -242,8 +242,8 @@
     font-weight:900;
     display:inline;
   }
-  .gh::after{
-    content:attr(data-tip);
+  .grammar-hint::after{
+    content:attr(data-hint);
     position:absolute;
     bottom:calc(100% + 8px);
     left:50%;
@@ -265,8 +265,7 @@
     box-shadow:0 8px 24px rgba(0,0,0,.25);
     text-align:left;
   }
-  .gh:hover::after,.gh.active::after{opacity:1;bottom:calc(100% + 12px)}
-  .gh::before{
+  .grammar-hint::before{
     content:'';
     position:absolute;
     bottom:calc(100% + 2px);
@@ -275,10 +274,16 @@
     border:6px solid transparent;
     border-top-color:#2B2118;
     opacity:0;
+    pointer-events:none;
     transition:.22s;
     z-index:31;
   }
-  .gh:hover::before,.gh.active::before{opacity:1;bottom:calc(100% + 6px)}
+  @media (hover:hover){
+    .grammar-hint:hover::after,
+    .grammar-hint:hover::before{opacity:1}
+  }
+  .grammar-hint.active::after,
+  .grammar-hint.active::before{opacity:1}
 
 </style>
 </head>
@@ -298,7 +303,7 @@
   <p class="sub">Научись находить нужные места в школе! Сегодня ты узнаешь 4 самых важных помещения и волшебный вопрос «¿Dónde está...?». Это твой компас выживания!</p>
   <div class="final-situation">
     <strong>Итоговая ситуация:</strong> первый день в школе, перемена, тебе очень нужно в туалет. Ты не паникуешь, а подходишь к старшекласснику и говоришь:<br>
-    <em>«Perdón, ¿dónde está el baño?»</em> — <em>«Está allí, al final del pasillo.»</em> — <em>«¡Muchas gracias!»</em> 🚽
+    <em>«<span class="grammar-hint" data-hint="Perdón — «извини(те)». Начинай любой вопрос к незнакомому человеку с этого слова">Perdón</span>, ¿dónde está el baño?»</em> — <em>«Está allí, al final del <span class="grammar-hint" data-hint="el pasillo — коридор. del = de+el: «конец КОРИДОРА» — по-испански предлог и артикль сливаются">pasillo</span>.»</em> — <em>«¡Muchas gracias!»</em> 🚽
   </div>
 </header>
 
@@ -379,7 +384,7 @@
 
     <div style="background:#E3F2FD;border-radius:14px;padding:16px;margin:14px 0">
       <h4 style="margin-bottom:10px">🏫 3 факта об испанских школах:</h4>
-      <div style="font-weight:700">🌳 В каждой школе есть <strong>patio</strong> (двор) — это сердце школы!</div>
+      <div style="font-weight:700">🌳 В каждой школе есть <strong><span class="grammar-hint" data-hint="el patio — школьный двор, главная площадка для игр на перемене. У дома patio — это внутренний дворик">patio</span></strong> (двор) — это сердце школы!</div>
       <div style="font-weight:700;margin-top:6px">🍽️ <strong>Comedor</strong> (столовая) — обычно в отдельном здании или на первом этаже</div>
       <div style="font-weight:700;margin-top:6px">🚽 <strong>Baños</strong> (туалеты) — на каждом этаже</div>
     </div>
@@ -447,7 +452,7 @@
 
     <!-- SIMON DICE -->
     <div class="simon-game">
-      <h4>🎲 Игра «Simón dice» (Саймон говорит)</h4>
+      <h4>🎲 Игра «<span class="grammar-hint" data-hint="Simón dice — «Саймон говорит». dice — «говорит» от глагола decir. Испанский аналог русской игры «Саймон говорит»">Simón dice</span>» (Саймон говорит)</h4>
       <p style="color:var(--ink-soft);font-weight:700;margin:8px 0">Если Симон сказал «Simón dice» — иди! Если не сказал — стой!</p>
       <div class="simon-display" id="simon-display">Нажми «▶ Начать»!</div>
       <div class="simon-options" id="simon-options" style="display:none"></div>
@@ -473,13 +478,13 @@
         <th>🔊</th>
       </tr>
       <tr onclick="speak('¿Dónde está el baño?')">
-        <td><strong>¿Dónde está...?</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="dónde — «где», с ударением на о! Без ударения donde = «где» в утверждениях. está — «находится», от глагола estar">¿Dónde está...?</span></strong></td>
         <td>Где находится...? (ед.ч.)</td>
         <td>Одно место</td>
         <td><button class="speak-btn" style="--c:#1565C0;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('¿Dónde están los baños?')">
-        <td><strong>¿Dónde están...?</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="están — «находятся» (мн.ч.). baños во множественном числе → están. Один предмет — está, несколько — están">¿Dónde están...?</span></strong></td>
         <td>Где находятся...? (мн.ч.)</td>
         <td>Несколько мест</td>
         <td><button class="speak-btn" style="--c:#1565C0;padding:4px 10px;font-size:.8rem">🔊</button></td>
@@ -511,7 +516,7 @@
         <td><button class="speak-btn" style="--c:#1565C0;padding:4px 10px;font-size:.8rem">🔊</button></td>
       </tr>
       <tr onclick="speak('Al final del pasillo')">
-        <td><strong>Al final del pasillo</strong></td>
+        <td><strong><span class="grammar-hint" data-hint="al final del pasillo — «в конце коридора». Два слияния: al=a+el, del=de+el. По-русски мы говорим просто «в конце», по-испански артикли обязательны">Al final del pasillo</span></strong></td>
         <td>В конце коридора</td>
         <td>Рука вперёд + точка</td>
         <td><button class="speak-btn" style="--c:#1565C0;padding:4px 10px;font-size:.8rem">🔊</button></td>
@@ -527,14 +532,14 @@
     <button class="speak-btn" style="--c:#1565C0;margin-top:10px" onclick="speak('Perdón, ¿dónde está el baño? Está allí, al final del pasillo. ¡Muchas gracias!')">🔊 Озвучить весь диалог</button>
 
     <!-- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ — всплывающие (синие слова с подсказками) -->
-    <div class="meta-chip" style="margin:12px 0">💡 Наведи или тапни на <span class="gh" data-tip="Подсказки всплывают при наведении или тапе на синие слова">синие слова</span>, чтобы увидеть краткие объяснения</div>
+    <div class="meta-chip" style="margin:12px 0">💡 Наведи или тапни на <span class="grammar-hint" data-hint="Подсказки всплывают при наведении или тапе на синие слова">синие слова</span>, чтобы увидеть краткие объяснения</div>
     <ul style="margin-left:18px;font-weight:800;line-height:1.6">
-      <li><strong>Начни вежливо:</strong> <span class="gh" data-tip="Perdón — вежливое 'извините'. Disculpa — менее формально.">Perdón / Disculpa</span></li>
-      <li><strong>¿Dónde está…? / ¿Dónde están…?</strong> — <span class="gh" data-tip="¿Dónde está — для одного предмета (el baño). ¿Dónde están — для множественного (los baños).">разница</span></li>
-      <li><strong>Короткие ответы:</strong> <span class="gh" data-tip="Aquí = здесь. Allí = там. Al final del pasillo = в конце коридора.">Aquí / Allí / Al final del pasillo</span></li>
-      <li><strong>Жест + слово:</strong> <span class="gh" data-tip="Указывайте рукой и говорите коротко — помогает запомнить">сочетай жест с фразой</span></li>
+      <li><strong>Начни вежливо:</strong> <span class="grammar-hint" data-hint="Perdón — вежливое «извините». Disculpa — менее формально. Оба слова ставятся ПЕРЕД вопросом">Perdón / Disculpa</span></li>
+      <li><strong>¿Dónde está…? / ¿Dónde están…?</strong> — <span class="grammar-hint" data-hint="¿Dónde está — для одного места (el baño). ¿Dónde están — для нескольких (los baños). Глагол согласуется с числом!">разница</span></li>
+      <li><strong>Короткие ответы:</strong> <span class="grammar-hint" data-hint="Aquí = здесь. Allí = там (далеко). Al final del pasillo = в конце коридора: al=a+el, del=de+el — два слияния сразу!">Aquí / Allí / Al final del pasillo</span></li>
+      <li><strong>Жест + слово:</strong> <span class="grammar-hint" data-hint="Указывайте рукой и говорите коротко — так вас поймут даже с ошибками">сочетай жест с фразой</span></li>
     </ul>
-    <div style="margin-top:10px;font-size:.95rem;color:#6b675f;font-weight:700">Пример: <span class="gh" data-tip="Пример: 'Perdón, ¿dónde está el comedor?' → 'Está allí, al final.'">«Perdón, ¿dónde está el comedor?» → «Está allí, al final.»</span></div>
+    <div style="margin-top:10px;font-size:.95rem;color:#6b675f;font-weight:700">Пример: <span class="grammar-hint" data-hint="el comedor — столовая, от comer (есть). Запомни: комора → comedor = место, где едят">«Perdón, ¿dónde está el comedor?» → «Está allí, al final.»</span></div>
 
     <!-- ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ (коротко и полезно для детей) -->
     <div style="display:none;background:#FFF8E1;border-left:4px solid #E9A13B;border-radius:12px;padding:12px 14px;margin:18px 0;font-weight:800;color:#333">
@@ -728,9 +733,9 @@
     <div style="background:#fff;border-radius:16px;padding:18px;margin:12px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)">
       <div style="font-weight:900;margin-bottom:8px">Нажми на карточку — послушай число по-испански:</div>
       <div class="cards-grid" id="ordinals-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px">
-        <div class="vcard" data-ord-index="1" data-ord-word="primero" onclick="cardClickOrdinal(this)"><div class="v-es">primero <small style="font-weight:700">(1º)</small></div><div class="v-ru">первый</div></div>
+        <div class="vcard" data-ord-index="1" data-ord-word="primero" onclick="cardClickOrdinal(this)"><div class="v-es"><span class="grammar-hint" data-hint="primero — первый. ПЕРЕД существительным мужского рода сокращается: primer piso (первый этаж), primer día (первый день)">primero</span> <small style="font-weight:700">(1º)</small></div><div class="v-ru">первый</div></div>
         <div class="vcard" data-ord-index="2" data-ord-word="segundo" onclick="cardClickOrdinal(this)"><div class="v-es">segundo <small style="font-weight:700">(2º)</small></div><div class="v-ru">второй</div></div>
-        <div class="vcard" data-ord-index="3" data-ord-word="tercero" onclick="cardClickOrdinal(this)"><div class="v-es">tercero <small style="font-weight:700">(3º)</small></div><div class="v-ru">третий</div></div>
+        <div class="vcard" data-ord-index="3" data-ord-word="tercero" onclick="cardClickOrdinal(this)"><div class="v-es"><span class="grammar-hint" data-hint="tercero — третий. Тоже сокращается перед существительным: tercero → tercer piso. Как primero, но про «три»">tercero</span> <small style="font-weight:700">(3º)</small></div><div class="v-ru">третий</div></div>
         <div class="vcard" data-ord-index="4" data-ord-word="cuarto" onclick="cardClickOrdinal(this)"><div class="v-es">cuarto <small style="font-weight:700">(4º)</small></div><div class="v-ru">четвёртый</div></div>
         <div class="vcard" data-ord-index="5" data-ord-word="quinto" onclick="cardClickOrdinal(this)"><div class="v-es">quinto <small style="font-weight:700">(5º)</small></div><div class="v-ru">пятый</div></div>
         <div class="vcard" data-ord-index="6" data-ord-word="sexto" onclick="cardClickOrdinal(this)"><div class="v-es">sexto <small style="font-weight:700">(6º)</small></div><div class="v-ru">шестой</div></div>
@@ -1585,6 +1590,18 @@ function confetti(emoji){
     setTimeout(()=>c.remove(),3000);
   }
 }
+
+/* ========== ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ (мобильный тап) ========== */
+document.addEventListener('click', function(e){
+  const hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(el => {
+    if(el !== hint) el.classList.remove('active');
+  });
+  if(hint){
+    hint.classList.toggle('active');
+    e.stopPropagation();
+  }
+});
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
