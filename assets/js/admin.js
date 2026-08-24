@@ -1,9 +1,16 @@
 (function () {
   const A = window.App;
   const L = window.AppLogic;
-  const state = { user: null, students: [] };
+  const state = { user: null, students: [], current: null };
+  /* Полный курс: 20 недель × 3 урока для каждого трека. */
+  const COURSE_TOTAL = 60;
 
   function el(id) { return document.getElementById(id); }
+
+  function trackOf(s) {
+    if (s.audience === 'kids' || s.audience === 'parents') return s.audience;
+    return null;
+  }
 
   function escapeHtml(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -72,13 +79,14 @@
 
   function renderStudents() {
     const rows = state.students.map(function (s) {
-      const sum = L.summarizeLessons(s.lessons);
+      const sum = L.summarizeLessons(s.lessons, trackOf(s));
+      const pct = Math.round(sum.completed / COURSE_TOTAL * 100);
       return '<tr>'
         + '<td>' + escapeHtml(s.name) + '</td>'
         + '<td>' + escapeHtml(s.email) + '</td>'
         + '<td>' + (s.audience === 'kids' ? 'Дети' : 'Родители') + '</td>'
         + '<td>' + (s.suspended ? '<span class="badge warn">Приостановлен</span>' : '<span class="badge ok">Активен</span>') + '</td>'
-        + '<td>' + sum.completed + ' / ' + sum.total + '</td>'
+        + '<td><strong>' + sum.completed + ' / ' + COURSE_TOTAL + '</strong> <span class="mini">(' + pct + '%)</span></td>'
         + '<td>' + lastActivity(s.lessons) + '</td>'
         + '<td class="row-actions">'
         + '<button data-act="view" data-uid="' + s.uid + '">Детали</button>'
@@ -113,19 +121,41 @@
     }
   });
 
+  function lessonSort(a, b) {
+    const pa = String(a).split('-'), pb = String(b).split('-');
+    if (pa[0] !== pb[0]) return pa[0] < pb[0] ? -1 : 1;
+    const wa = parseInt(pa[1].replace(/\D/g, ''), 10), wb = parseInt(pb[1].replace(/\D/g, ''), 10);
+    if (wa !== wb) return wa - wb;
+    return parseInt(pa[2].replace(/\D/g, ''), 10) - parseInt(pb[2].replace(/\D/g, ''), 10);
+  }
+
+  function prettyLesson(id) {
+    const m = String(id).match(/^(kids|parents)-w(\d+)-l(\d+)$/);
+    if (!m) return escapeHtml(id);
+    return (m[1] === 'kids' ? '👶 Дети' : '👪 Родители') + ' · неделя ' + m[2] + ' · урок ' + m[3]
+      + '<div class="mini">' + escapeHtml(id) + '</div>';
+  }
+
   async function openStudent(s) {
+    state.current = s;
     const lessons = s.lessons || {};
+    const track = trackOf(s);
+    const sum = L.summarizeLessons(lessons, track);
+    el('student-progress').textContent = 'Пройдено уроков: ' + sum.completed + ' из ' + COURSE_TOTAL
+      + ' (' + Math.round(sum.completed / COURSE_TOTAL * 100) + '%) · в работе: ' + sum.inProgress;
     const acts = await A.getActivity(s.uid, 30).catch(function () { return []; });
     const ACT_LABEL = { lessonOpened: 'открыл урок', lessonCompleted: 'завершил урок', selfCheck: 'прошёл самопроверку', sticker: 'получил наклейку' };
-    const rows = Object.keys(lessons).sort().map(function (id) {
+    const ids = Object.keys(lessons).sort(lessonSort);
+    const rows = ids.map(function (id) {
       const l = lessons[id];
       const colors = L.countColors(l.selfCheck);
       const emoji = Object.keys(colors).map(function (c) { return L.colorEmoji(c) + ' ' + colors[c]; }).join('  ') || '—';
-      return '<tr>'
-        + '<td>' + escapeHtml(id) + '</td>'
-        + '<td>' + (l.completedAt ? L.formatDateTime(timestampToDate(l.completedAt)) : '—') + '</td>'
+      return '<tr class="lesson-row" data-id="' + escapeHtml(id) + '">'
+        + '<td><span class="chev">▸</span>' + prettyLesson(id) + '</td>'
+        + '<td>' + (l.completedAt ? '<span class="badge ok">✅ Завершён</span>' : '<span class="badge warn">👀 Начат</span>') + '</td>'
         + '<td>' + (l.openedAt ? L.formatDateTime(timestampToDate(l.openedAt)) : '—') + '</td>'
-        + '<td>' + emoji + '</td></tr>';
+        + '<td>' + emoji + '</td></tr>'
+        + '<tr class="sc-detail hidden" data-for="' + escapeHtml(id) + '"><td colspan="4"></td></tr>';
     }).join('');
     const feed = acts.map(function (a) {
       return '<li>' + L.formatDateTime(timestampToDate(a.ts)) + ' · ' + (ACT_LABEL[a.type] || a.type) + (a.lessonId ? ' · ' + escapeHtml(a.lessonId) : '') + '</li>';
@@ -134,10 +164,10 @@
     el('student-email').textContent = s.email;
     el('student-lessons').innerHTML = rows || '<tr><td colspan="4" style="text-align:center;color:#7A6A5C">Уроков ещё не открывал</td></tr>';
     el('student-feed').innerHTML = feed;
-    renderSelfCheck(s, lessons);
     el('modal').classList.add('show');
   }
 
+  /* ===== Светофор: подписи строк тянем из HTML урока ===== */
   const SC_CACHE = {};
 
   function lessonUrl(id) {
@@ -145,54 +175,85 @@
     return m ? './lessons/' + m[1] + '/w' + m[2] + '-l' + m[3] + '.html' : null;
   }
 
-  async function selfCheckLabels(id) {
-    if (SC_CACHE[id]) return SC_CACHE[id];
-    const url = lessonUrl(id);
-    if (!url) return null;
-    try {
-      const res = await fetch(url);
-      if (!res.ok) return null;
-      const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
-      const table = doc.querySelector('.tl-table');
-      if (!table) return null;
-      const labels = [];
-      table.querySelectorAll('tr').forEach(function (tr) {
-        const td = tr.querySelector('td');
-        if (td) labels.push(td.textContent.trim());
-      });
-      SC_CACHE[id] = labels;
-      return labels;
-    } catch (e) {
-      return null;
+  function selfCheckLabels(id) {
+    if (!SC_CACHE[id]) {
+      SC_CACHE[id] = (async function () {
+        const url = lessonUrl(id);
+        if (!url) return null;
+        try {
+          const res = await fetch(url);
+          if (!res.ok) return null;
+          const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+          let table = null;
+          doc.querySelectorAll('.tl-table').forEach(function (t) {
+            if (!table && t.querySelector('.tl-cell')) table = t;
+          });
+          if (!table) return null;
+          const labels = [];
+          table.querySelectorAll('tr').forEach(function (tr) {
+            const td = tr.querySelector('td');
+            if (td && tr.querySelector('.tl-cell')) labels.push(td.textContent.trim());
+          });
+          return labels.length ? labels : null;
+        } catch (e) {
+          return null;
+        }
+      })();
     }
+    return SC_CACHE[id];
   }
 
-  async function renderSelfCheck(s, lessons) {
-    const box = el('student-selfcheck');
-    const rated = Object.keys(lessons).filter(function (id) {
-      return lessons[id] && lessons[id].selfCheck && Object.keys(lessons[id].selfCheck).length;
-    }).sort();
-    if (!rated.length) {
-      box.innerHTML = '<p style="color:var(--muted);font-weight:700;font-size:.9rem">Самопроверки пока нет</p>';
+  async function buildScDetail(id, sc) {
+    const labels = await selfCheckLabels(id);
+    const aud = String(id).split('-')[0];
+    const items = Object.keys(sc).map(function (k) {
+      const idx = parseInt(String(k).replace(/\D/g, ''), 10);
+      return {
+        label: labels && labels[idx] != null ? labels[idx] : 'Пункт ' + (idx + 1),
+        value: sc[k]
+      };
+    });
+    const groups = {};
+    items.forEach(function (it) { (groups[it.value] = groups[it.value] || []).push(it.label); });
+    const order = aud === 'kids' ? ['great', 'ok', 'hard'] : ['green', 'yellow', 'red'];
+    const head = aud === 'kids'
+      ? { great: '😄 Получилось легко', ok: '🙂 Получилось', hard: '😅 Не получилось / было трудно' }
+      : { green: '🟢 Получилось', yellow: '🟡 Частично получилось', red: '🔴 Не получилось' };
+    const html = order.filter(function (v) { return groups[v] && groups[v].length; }).map(function (v) {
+      return '<div class="sc-group"><div class="sc-head">' + head[v] + '</div>'
+        + groups[v].map(function (t) { return '<div class="sc-line">• ' + escapeHtml(t) + '</div>'; }).join('')
+        + '</div>';
+    }).join('');
+    return html || '<span style="color:#7A6A5C">Светофор не заполнялся</span>';
+  }
+
+  el('student-lessons').addEventListener('click', async function (e) {
+    const tr = e.target.closest('tr.lesson-row');
+    if (!tr) return;
+    const id = tr.dataset.id;
+    const detail = el('student-lessons').querySelector('tr.sc-detail[data-for="' + id + '"]');
+    if (!detail) return;
+    const chev = tr.querySelector('.chev');
+    const isOpen = !detail.classList.contains('hidden');
+    if (isOpen) {
+      detail.classList.add('hidden');
+      if (chev) chev.textContent = '▸';
       return;
     }
-    box.innerHTML = '<p style="color:var(--muted);font-weight:700;font-size:.9rem">Загружаем детали…</p>';
-    const blocks = [];
-    for (const id of rated) {
-      const labels = await selfCheckLabels(id);
-      const sc = lessons[id].selfCheck;
-      const items = Object.keys(sc).map(function (k) {
-        const idx = parseInt(String(k).replace(/\D/g, ''), 10);
-        const label = labels && labels[idx] != null ? labels[idx] : k;
-        return { label: label, value: sc[k] };
-      });
-      blocks.push('<div style="margin-bottom:10px;padding:10px 14px;background:#FBF7F1;border-radius:12px;font-size:.86rem">'
-        + '<div style="font-weight:900;margin-bottom:6px">' + escapeHtml(id) + '</div>'
-        + items.map(function (it) { return '<div style="padding:2px 0">' + L.colorEmoji(it.value) + ' <span style="font-weight:700">' + escapeHtml(it.label) + '</span></div>'; }).join('')
-        + '</div>');
+    detail.classList.remove('hidden');
+    if (chev) chev.textContent = '▾';
+    const box = detail.querySelector('td');
+    if (box.dataset.loaded) return;
+    box.dataset.loaded = '1';
+    const l = state.current && state.current.lessons ? state.current.lessons[id] : null;
+    const sc = l && l.selfCheck && Object.keys(l.selfCheck).length ? l.selfCheck : null;
+    if (!sc) {
+      box.innerHTML = '<span style="color:#7A6A5C">Светофор в этом уроке не заполнялся</span>';
+      return;
     }
-    box.innerHTML = blocks.join('');
-  }
+    box.innerHTML = '<span style="color:#7A6A5C">Загружаем…</span>';
+    box.innerHTML = await buildScDetail(id, sc);
+  });
 
   el('modal-close').onclick = function () { el('modal').classList.remove('show'); };
   el('add-btn').onclick = function () {
