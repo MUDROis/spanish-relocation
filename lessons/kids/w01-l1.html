@@ -93,6 +93,8 @@
   .passport-badge.earned{background:rgba(255,201,60,.3);border-color:#FFC93C;animation:popIn .5s}
 
   @keyframes popIn{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.1) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+  /* Скриншот: отключаем анимации, чтобы виза и бейджи не попали в PNG «на полпути» */
+  .passport.no-anim, .passport.no-anim *{animation:none !important;transition:none !important}
 
   /* ---------- BALL GAME ---------- */
   .ball-game{background:linear-gradient(135deg,#E5F4F1,#d4ebe6);border-radius:20px;padding:26px;margin:20px 0;text-align:center}
@@ -587,15 +589,15 @@
         <div class="passport-fields">
           <div class="passport-field">
             <label>Me llamo (Меня зовут)</label>
-            <input type="text" id="p-name" placeholder="Nombre...">
+            <input type="text" id="passport-name" placeholder="Nombre...">
           </div>
           <div class="passport-field">
             <label>Tengo (Мне лет)</label>
-            <input type="number" id="p-age" placeholder="___ años" min="1" max="99">
+            <input type="number" id="passport-age" placeholder="___ años" min="1" max="99">
           </div>
           <div class="passport-field">
             <label>Soy de (Я из)</label>
-            <input type="text" id="p-country" placeholder="País...">
+            <input type="text" id="passport-country" placeholder="País...">
           </div>
         </div>
       </div>
@@ -803,9 +805,9 @@ function loadPhoto(e){
 }
 
 function stampPassport(){
-  const name=document.getElementById('p-name').value || 'amigo';
-  const age=document.getElementById('p-age').value;
-  const country=document.getElementById('p-country').value;
+  const name=document.getElementById('passport-name').value.trim() || 'amigo';
+  const age=document.getElementById('passport-age').value;
+  const country=document.getElementById('passport-country').value;
   
   if(!name || !age){
     alert('Заполни имя и возраст, чтобы получить визу! 😉');
@@ -829,19 +831,24 @@ function printPassport(){
 function savePassportImage(){
   const passport=document.querySelector('.passport');
   if(!passport) return;
+  /* Фиксируем конечное состояние: анимации визы и бейджей выключаются
+     на время снимка и возвращаются после. */
+  passport.classList.add('no-anim');
+  const release=()=>passport.classList.remove('no-anim');
   const exportPng=(lib)=>{
     lib(passport,{backgroundColor:null,scale:2}).then(canvas=>{
+      release();
       const a=document.createElement('a');
       a.download='mi-pasaporte.png';
       a.href=canvas.toDataURL('image/png');
       a.click();
-    });
+    }).catch(()=>{ release(); printPassport(); });
   };
   if(window.html2canvas){ exportPng(window.html2canvas); return; }
   const s=document.createElement('script');
   s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
   s.onload=()=>exportPng(window.html2canvas);
-  s.onerror=()=>printPassport();
+  s.onerror=()=>{ release(); printPassport(); };
   document.head.appendChild(s);
 }
 
@@ -934,9 +941,9 @@ try{saved=localStorage.getItem('mudro_passport');}catch(e){};
 if(saved){
   try{
     const data=JSON.parse(saved);
-    if(data.name) document.getElementById('p-name').value=data.name;
-    if(data.age) document.getElementById('p-age').value=data.age;
-    if(data.country) document.getElementById('p-country').value=data.country;
+    if(data.name) document.getElementById('passport-name').value=data.name;
+    if(data.age) document.getElementById('passport-age').value=data.age;
+    if(data.country) document.getElementById('passport-country').value=data.country;
   }catch(e){}
 }
 renderPassportBadges();
