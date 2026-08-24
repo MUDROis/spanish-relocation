@@ -84,6 +84,13 @@
   .passport-btn.secondary{background:rgba(255,255,255,.2);color:#fff}
   .passport-stamp{display:none;text-align:center;margin-top:14px;padding:10px;background:rgba(255,255,255,.2);border-radius:12px;font-weight:800}
   .passport-stamp.show{display:block;animation:popIn .5s}
+  .passport-badges-title{margin-top:18px;text-align:center;font-weight:900;border-top:2px solid rgba(255,255,255,.3);padding-top:14px}
+  .passport-badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .passport-badge{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.35);border-radius:14px;padding:10px 6px;text-align:center}
+  .passport-badge .pb-icon{font-size:1.9rem;line-height:1}
+  .passport-badge .pb-name{font-size:.72rem;font-weight:800;margin-top:6px;line-height:1.25}
+  .passport-badge.locked{opacity:.45;filter:grayscale(1)}
+  .passport-badge.earned{background:rgba(255,201,60,.3);border-color:#FFC93C;animation:popIn .5s}
 
   @keyframes popIn{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.1) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
 
@@ -599,6 +606,8 @@
       <div class="passport-stamp" id="stamp">
         🎉 ¡VISA APROBADA! ¡Bienvenido a España, <span id="stamp-name">amigo</span>!
       </div>
+      <div class="passport-badges-title">🏅 Mis insignias — мои бейджи</div>
+      <div class="passport-badges" id="passport-badges"></div>
     </div>
   </section>
 
@@ -892,6 +901,33 @@ function checkAnswer(i, btn){
   }, 2500);
 }
 
+/* ========== БЕЙДЖИ В ПАСПОРТЕ ==========
+   Уроки 2-7 кладут флаги в localStorage — здесь они собираются в полку. */
+const PASSPORT_BADGES=[
+  {key:'mudro_badge_sos', icon:'🛡', name:'Щит Спасателя'},
+  {key:'mudro_badge_emociones', icon:'🎭', name:'Мастер эмоций'},
+  {key:'mudro_badge_doctor', icon:'🩺', name:'Доктор'},
+  {key:'mudro_badge_peticiones', icon:'🏅', name:'Мастер просьб'},
+  {key:'mudro_badge_navegador', icon:'🧭', name:'Навигатор'},
+  {key:'mudro_kids_w03l1_badge_survivor', icon:'🎖', name:'Пережил первый день'}
+];
+
+function renderPassportBadges(){
+  const box=document.getElementById('passport-badges');
+  if(!box) return;
+  box.innerHTML='';
+  PASSPORT_BADGES.forEach(b=>{
+    let got=false;
+    try{got=localStorage.getItem(b.key)==='true';}catch(e){}
+    const el=document.createElement('div');
+    el.className='passport-badge'+(got?' earned':' locked');
+    el.title=got ? b.name+' — earned!' : b.name+' — пройди урок, чтобы получить';
+    el.innerHTML='<div class="pb-icon">'+(got?b.icon:'🔒')+'</div><div class="pb-name">'+b.name+'</div>';
+    box.appendChild(el);
+  });
+}
+window.addEventListener('storage',renderPassportBadges);
+
 /* ========== ВОССТАНОВЛЕНИЕ ПАСПОРТА ========== */
 let saved=null;
 try{saved=localStorage.getItem('mudro_passport');}catch(e){};
@@ -903,6 +939,7 @@ if(saved){
     if(data.country) document.getElementById('p-country').value=data.country;
   }catch(e){}
 }
+renderPassportBadges();
 
 /* ========== ЦИФРЫ 1-12 ========== */
 const NUM_WORDS=['uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce'];

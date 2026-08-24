@@ -36,11 +36,15 @@
     return out;
   }
 
-  function summarizeLessons(lessons) {
+  /* track: 'kids' | 'parents' — считает только уроки нужной аудитории
+     (в progress/{uid}/lessons лежат документы обоих треков). */
+  function summarizeLessons(lessons, track) {
+    const prefix = track ? track + '-' : null;
     let total = 0, completed = 0, inProgress = 0;
     Object.keys(lessons || {}).forEach(function (id) {
       const l = lessons[id];
       if (!l) return;
+      if (prefix && String(id).indexOf(prefix) !== 0) return;
       total++;
       if (l.completedAt) completed++;
       else if (l.openedAt) inProgress++;

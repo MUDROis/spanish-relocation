@@ -42,6 +42,17 @@ test('summarizeLessons counts states', () => {
   assert.deepEqual(summarizeLessons(null), { total: 0, completed: 0, inProgress: 0 });
 });
 
+test('summarizeLessons filters by track', () => {
+  const lessons = {
+    'kids-w01-l1': { completedAt: 1 },
+    'kids-w01-l2': { completedAt: 1 },
+    'parents-w01-l1': { completedAt: 1 },
+    'parents-w01-l2': { openedAt: 1 }
+  };
+  assert.deepEqual(summarizeLessons(lessons, 'kids'), { total: 2, completed: 2, inProgress: 0 });
+  assert.deepEqual(summarizeLessons(lessons, 'parents'), { total: 2, completed: 1, inProgress: 1 });
+});
+
 test('formatDateTime formats timestamps', () => {
   assert.equal(formatDateTime(null), '—');
   assert.match(formatDateTime(new Date(2026, 0, 5, 9, 5)), /^\d{2}\.\d{2}\.2026 \d{2}:\d{2}$/);

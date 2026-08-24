@@ -21,7 +21,7 @@
     document.getElementById('logout-btn').onclick = function (e) { e.preventDefault(); A.signOut(); };
 
     const lessons = await A.getLessonsProgress(user.uid).catch(function () { return {}; });
-    const sum = L.summarizeLessons(lessons);
+    const sum = L.summarizeLessons(lessons, 'parents');
     if (sum.total > 0) {
       const bar = document.getElementById('hero-progress-bar');
       const txt = document.querySelector('.hero-progress .progress-text');

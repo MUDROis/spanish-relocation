@@ -30,7 +30,7 @@
     }
 
     const lessons = await A.getLessonsProgress(user.uid).catch(function () { return {}; });
-    const sum = L.summarizeLessons(lessons);
+    const sum = L.summarizeLessons(lessons, 'kids');
     const bar = document.getElementById('progress-bar');
     const txt = document.querySelector('.hero-progress .progress-text');
     if (sum.total > 0 && bar) bar.style.width = Math.max(Math.round(sum.completed / 60 * 100), 1) + '%';
