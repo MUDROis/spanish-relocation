@@ -136,6 +136,19 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 .note.red{background:#FBF0ED;border-left-color:var(--p1)}
 .note.green{background:#F3F6EA;border-left-color:var(--p2)}
 
+/* ---------- таблицы спряжения ---------- */
+.tbl-wrap{overflow-x:auto;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:8px;margin-top:16px}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbl th,.tbl td{padding:10px 14px;text-align:left;border-bottom:1px solid rgba(43,33,24,.08)}
+.tbl th{font-weight:900;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.3px}
+.tbl tbody tr{cursor:pointer;transition:.15s}
+.tbl tbody tr:hover{background:#FCF0DC}
+.tbl .t-es{font-weight:900;color:var(--p4)}
+.tbl .t-ru{color:var(--muted);font-weight:800;font-size:.85rem}
+.tbl .t-speak{opacity:.55;font-size:.9rem}
+.tbl tbody tr:hover .t-speak{opacity:1}
+.tbl td b{color:var(--p1)}
+
 /* ---------- викторины ---------- */
 .quiz-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-top:20px}
 .quiz-q{font-weight:900;font-size:1.02rem;margin:16px 0 10px;line-height:1.5}
@@ -387,6 +400,24 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 
   <div class="note">
     💡 <b>Простое правило:</b> если можно <b>починить / перекрасить / заменить</b> — <b>estar</b>. Если это <b>свойство, которое не изменится</b> — <b>ser</b>. А сам факт наличия проблемы называем через <b>hay</b>.
+  </div>
+
+  <div class="tbl-wrap">
+    <h2 style="font-size:1.2rem;padding:10px 14px 4px">⚡ Глагол ser (быть) · спряжение <span style="color:var(--p1)">⚠️ все формы неправильные</span></h2>
+    <p class="sub" style="padding:0 14px;margin-bottom:0">Нажмите на строку, чтобы услышать пример.</p>
+    <table class="tbl" id="serTable">
+      <thead><tr><th>Лицо</th><th>Presente</th><th>Пример</th><th>Перевод</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="tbl-wrap">
+    <h2 style="font-size:1.2rem;padding:10px 14px 4px">⚡ Глагол estar (быть · находиться) · спряжение <span style="color:var(--p3)">⚠️ está / están — с ударением</span></h2>
+    <p class="sub" style="padding:0 14px;margin-bottom:0">Нажмите на строку, чтобы услышать пример.</p>
+    <table class="tbl" id="estarTable">
+      <thead><tr><th>Лицо</th><th>Presente</th><th>Пример</th><th>Перевод</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
 </section>
 
@@ -911,6 +942,36 @@ const LEX_MATCH=[
 ];
 const rebuildLexMatch=initMatch('lex-match-es','lex-match-ru','lex-match-msg',LEX_MATCH);
 document.getElementById('lexMatchReset').onclick=rebuildLexMatch;
+
+/* ====== ШАГ 2: СПРЯЖЕНИЕ SER / ESTAR ====== */
+const SER_FORMS=[
+ {p:'yo',f:'soy',ex:'Soy una persona tranquila.',ru:'Я спокойный человек.'},
+ {p:'tú',f:'eres',ex:'¿Eres el propietario?',ru:'Ты владелец?'},
+ {p:'él / ella / usted',f:'es',ex:'La fianza es de un mes.',ru:'Депозит — один месяц.'},
+ {p:'nosotros/as',f:'somos',ex:'Somos una familia con dos niños.',ru:'Мы семья с двумя детьми.'},
+ {p:'vosotros/as',f:'sois',ex:'Sois muy amables.',ru:'Вы очень любезны.'},
+ {p:'ellos / ellas / ustedes',f:'son',ex:'Los electrodomésticos son nuevos.',ru:'Техника новая.'}
+];
+const ESTAR_FORMS=[
+ {p:'yo',f:'estoy',ex:'Estoy en el salón.',ru:'Я в гостиной.'},
+ {p:'tú',f:'estás',ex:'¿Estás seguro de que no hay humedades?',ru:'Ты уверен, что нет плесени?'},
+ {p:'él / ella / usted',f:'está',ex:'El grifo está roto.',ru:'Кран сломан.'},
+ {p:'nosotros/as',f:'estamos',ex:'Estamos contentos con la cocina.',ru:'Мы довольны кухней.'},
+ {p:'vosotros/as',f:'estáis',ex:'¿Estáis cansados?',ru:'Вы устали?'},
+ {p:'ellos / ellas / ustedes',f:'están',ex:'Las persianas están rotas.',ru:'Жалюзи сломаны.'}
+];
+function renderConjTable(tableId,forms){
+  const tb=document.querySelector('#'+tableId+' tbody');
+  tb.innerHTML=forms.map(r=>`
+    <tr><td class="t-es">${r.p}</td><td><b>${r.f}</b></td><td>${r.ex}</td><td class="t-ru">${r.ru}</td><td class="t-speak">🔊</td></tr>`).join('');
+  tb.addEventListener('click',e=>{
+    const tr=e.target.closest('tr');if(!tr)return;
+    const i=[...tb.children].indexOf(tr);
+    speak(forms[i].ex);
+  });
+}
+renderConjTable('serTable',SER_FORMS);
+renderConjTable('estarTable',ESTAR_FORMS);
 
 /* ====== ШАГ 2+: ЗАКРЕПЛЕНИЕ ГРАММАТИКИ (ser / estar / hay) ====== */
 const GRAM_QUIZ=[
