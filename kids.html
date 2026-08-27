@@ -59,11 +59,15 @@
   .node.left::before{right:-11px}
   .node.right::before{left:-11px}
   .pill{width:fit-content;margin:0 auto;background:var(--ink);color:#fff;border-radius:999px;padding:12px 26px;font-weight:800;font-size:1.05rem;box-shadow:0 8px 20px rgba(0,0,0,.18)}
-  .pill.finish{background:var(--teal);font-size:1.2rem}
-  .node.center{width:100%;padding:0;text-align:center}
-  .node.center::before{display:none}
+.pill.finish{background:var(--teal);font-size:1.2rem}
+.node.center{width:100%;padding:0;text-align:center}
+.node.center::before{display:none}
+.here-badge{position:absolute;top:-14px;right:16px;background:var(--terra,#E8604C);color:#fff;border-radius:999px;padding:5px 14px;font-size:.8rem;font-weight:900;box-shadow:0 4px 12px rgba(232,96,76,.45);z-index:5;line-height:1.2}
+.here-badge.pulse{animation:herePulse 1.8s infinite}
+.here-badge.center-badge{position:static;display:inline-block;margin-left:8px;vertical-align:middle;animation:herePulse 1.8s infinite}
+@keyframes herePulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
-  .card{background:#fff;border-radius:22px;padding:22px;border-top:8px solid var(--c);box-shadow:0 10px 26px rgba(0,0,0,.09);transition:transform .25s;cursor:pointer}
+  .card{position:relative;background:#fff;border-radius:22px;padding:22px;border-top:8px solid var(--c);box-shadow:0 10px 26px rgba(0,0,0,.09);transition:transform .25s;cursor:pointer}
   .card:hover{transform:translateY(-6px) rotate(-.5deg)}
   .card .top{display:flex;align-items:center;gap:14px;margin-bottom:10px}
   .card .emo{font-size:46px;line-height:1}
@@ -219,10 +223,11 @@ const STATIONS=[
 
 /* ============ РЕНДЕР КАРТЫ ============ */
 const path=document.getElementById('path');
-let html=`<div class="node center visible"><div class="pill">🚀 СТАРТ — ты здесь! Уровень: новичок-исследователь</div></div>`;
+let html=`<div class="node center visible"><div class="pill">🚀 СТАРТ</div></div>`;
 STATIONS.forEach((s,i)=>{
-  html+=`<div class="node ${i%2?'right':'left'}" style="--c:${s.color}">
+  html+=`<div class="node ${i%2?'right':'left'}" data-station="${s.id}" style="--c:${s.color}">
     <div class="card" onclick="openModal('${s.id}')">
+      <div class="here-badge pulse" style="display:none">📍 Ты здесь!</div>
       <div class="top"><span class="emo">${s.emoji}</span>
         <div><h3>${s.name}</h3><span class="weeks">${s.weeks} · ${s.lessons} уроков</span></div></div>
       <p class="tag-line">${s.tagline}</p>
@@ -230,7 +235,7 @@ STATIONS.forEach((s,i)=>{
       <button class="open-btn">Открыть станцию 🔍</button>
     </div></div>`;
 });
-html+=`<div class="node center visible"><div class="pill finish">🏫 ФИНИШ — Испанская школа! Уровень: уверенный ученик</div></div>`;
+html+=`<div class="node center visible"><div class="pill finish">🏫 ФИНИШ — Испанская школа! Уровень: уверенный ученик <span id="here-finish-badge" class="here-badge center-badge" style="display:none">📍 Ты здесь!</span></div></div>`;
 path.innerHTML=html;
 
 /* появление при скролле */
@@ -264,7 +269,7 @@ function got(id){return stickers.includes(id)}
 function collect(id){
   if(got(id))return;
   stickers.push(id);localStorage.setItem('spain_stickers',JSON.stringify(stickers));
-  renderAlbum();openModalRefresh(id);confetti(STATIONS.find(s=>s.id===id).emoji);
+  renderAlbum();openModalRefresh(id);confetti(STATIONS.find(s=>s.id===id).emoji);updateHereMarker();
   if(window.App && window.App.getCurrentUser()){
     const uid=window.App.getCurrentUser().uid;
     window.App.saveStickers(uid,{[id]:true});
@@ -276,7 +281,19 @@ function renderAlbum(){
   const a=document.getElementById('album');
   a.innerHTML='<span class="lbl">Мой альбом '+stickers.length+'/7:</span>'+STATIONS.map(s=>`<span class="slot ${got(s.id)?'got':''}">${s.emoji}</span>`).join('');
 }
+/* перемещение значка «ты здесь» к следующей непройденной станции */
+function updateHereMarker(){
+  let cur=null;
+  for(const s of STATIONS){ if(!stickers.includes(s.id)){cur=s.id;break;} }
+  document.querySelectorAll('.node[data-station]').forEach(n=>{
+    const b=n.querySelector('.here-badge');
+    if(b) b.style.display=(n.getAttribute('data-station')===cur)?'block':'none';
+  });
+  const fin=document.getElementById('here-finish-badge');
+  if(fin) fin.style.display=cur?'none':'inline-block';
+}
 renderAlbum();
+updateHereMarker();
 
 /* ============ КОНФЕТТИ ============ */
 function confetti(emoji){
