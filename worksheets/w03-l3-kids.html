@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Семья и дом · Урок 9 — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --gold:#B8860B; --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--gold);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(184,134,11,.4)}
+  .print-btn:hover{background:#96700a}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFE9B8,#FFF3DC,#FFE3D6);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--gold)}
+  .hero h1{font-size:21px;color:var(--gold);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--gold);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-terra{background:var(--terra)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-gold{background:var(--gold)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+
+  .vocab-ref{display:grid;grid-template-columns:1fr 1fr;gap:6px 30px;background:#F8F4EC;border:1.6px solid var(--gold);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px}
+  .vocab-ref .vr-s{font-family:Georgia,serif;font-weight:800;color:var(--gold)}
+  .vocab-ref .vr-r{color:#666;font-size:12px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .map-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+  .map-room{border:1.6px solid var(--gre);border-radius:10px;padding:10px 8px;text-align:center;font-size:13px;background:#fff}
+  .map-room .ico{font-size:20px;display:block;margin-bottom:4px}
+  .map-room .blank{display:inline-block;min-width:90px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .gap{display:inline-block;min-width:100px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+  .gap-item .emoji{font-size:17px}
+
+  .family-boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+  .fbox{border:1.6px solid var(--line);border-radius:10px;padding:10px;text-align:center;background:#fff}
+  .fbox .ico{font-size:22px;display:block;margin-bottom:3px}
+  .fbox .blank{display:inline-block;min-width:110px;border-bottom:1.6px dashed var(--line);height:18px}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--oliva);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--oliva)}
+  .build-line{border-bottom:1.6px dashed var(--oliva);height:24px}
+
+  .manifesto-box{background:linear-gradient(135deg,#FFF8DC,#FFE9B8);border:2px solid var(--gold);border-radius:10px;padding:12px 14px;font-size:13px;line-height:2;margin-bottom:8px}
+  .manifesto-box .line{border-bottom:1.4px dashed #caa;padding-bottom:2px}
+  .manifesto-box .mblank{display:inline-block;min-width:110px;border-bottom:1.6px dashed var(--gold);height:18px;vertical-align:bottom}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .quizlet-box{background:linear-gradient(135deg,#4255FF,#6B7BFF);border-radius:12px;padding:14px;text-align:center;color:#fff;margin:14px 0}
+  .quizlet-box a{display:inline-block;background:#fff;color:#4255FF;border-radius:999px;padding:9px 22px;font-weight:900;text-decoration:none;font-size:13px;margin-top:6px}
+
+  .footer{text-align:center;color:#999;font-size:10px;margin-top:18px;padding-top:8px;border-top:1px solid #eee}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>👨‍👩‍👧‍👦 Семья и дом · Урок 9</h1>
+    <div class="sub">Nuestra familia en España · новые слова для детей: семья, родственники и комнаты дома</div>
+    <div class="tag">Станция 1 · Supervivencia · LECCIÓN 9 — Nuestra Familia</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="vocab-ref">
+    <div><span class="vr-s">la familia</span> — семья</div>
+    <div><span class="vr-s">los padres</span> — родители</div>
+    <div><span class="vr-s">el hermano</span> — брат</div>
+    <div><span class="vr-s">la hermana</span> — сестра</div>
+    <div><span class="vr-s">el salón</span> — гостиная</div>
+    <div><span class="vr-s">la cocina</span> — кухня</div>
+    <div><span class="vr-s">el dormitorio</span> — спальня</div>
+    <div><span class="vr-s">el balcón</span> — балкон</div>
+  </div>
+
+  <div class="hint-box">✏️ Это рабочий лист по уроку 9 «Nuestra Familia en España». Он про <strong>новые слова для детей</strong> — семья и комнаты дома. Повтори слова наверху и выполняй по порядку!</div>
+
+  <!-- 1. ЛЕКСИКА: СОЕДИНИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">1</span>
+      <span class="ex-title">Соедини слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · 8 новых слов</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода в квадратик рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:52%">Испанский</th><th>Русский</th></tr>
+      <tr><td><span class="ans-box"></span>la familia</td><td>а) спальня</td></tr>
+      <tr><td><span class="ans-box"></span>el hermano</td><td>б) гостиная</td></tr>
+      <tr><td><span class="ans-box"></span>la cocina</td><td>в) семья</td></tr>
+      <tr><td><span class="ans-box"></span>el balcón</td><td>г) брат</td></tr>
+      <tr><td><span class="ans-box"></span>el salón</td><td>д) кухня</td></tr>
+      <tr><td><span class="ans-box"></span>la hermana</td><td>е) сестра</td></tr>
+      <tr><td><span class="ans-box"></span>el dormitorio</td><td>ж) родители</td></tr>
+      <tr><td><span class="ans-box"></span>los padres</td><td>з) балкон</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. СЕМЬЯ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">2</span>
+      <span class="ex-title">Подпиши членов семьи</span>
+      <span class="ex-skill">👨‍👩‍👧‍👦 Семья</span>
+    </div>
+    <div class="ex-instruction">Напиши по-испански, кто это: papá / mamá / el hijo / la hija / los padres / la hermana / el hermano.</div>
+    <div class="family-boxes">
+      <div class="fbox"><span class="ico">👨</span> padre → <span class="blank"></span></div>
+      <div class="fbox"><span class="ico">👩</span> madre → <span class="blank"></span></div>
+      <div class="fbox"><span class="ico">👦</span> сын → el <span class="blank"></span></div>
+      <div class="fbox"><span class="ico">👧</span> дочь → la <span class="blank"></span></div>
+      <div class="fbox"><span class="ico">👫</span> родители (мн.ч.) → <span class="blank"></span></div>
+      <div class="fbox"><span class="ico">👨‍👩‍👧‍👦</span> вся семья → la <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. КОМНАТЫ: КАРТА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">3</span>
+      <span class="ex-title">Подпиши комнаты на плане</span>
+      <span class="ex-skill">🏠 Дом</span>
+    </div>
+    <div class="ex-instruction">Напиши слово под картинкой: el salón / la cocina / el dormitorio / el balcón / el baño / el trastero.</div>
+    <div class="map-grid">
+      <div class="map-room"><span class="ico">🛋️</span><span class="blank"></span></div>
+      <div class="map-room"><span class="ico">🍳</span><span class="blank"></span></div>
+      <div class="map-room"><span class="ico">🛏️</span><span class="blank"></span></div>
+      <div class="map-room"><span class="ico">🌿</span><span class="blank"></span></div>
+      <div class="map-room"><span class="ico">🚽</span><span class="blank"></span></div>
+      <div class="map-room"><span class="ico">📦</span><span class="blank"></span></div>
+    </div>
+    <div class="hint-box">💡 <strong>Проверь себя:</strong> кухня — la cocina, гостиная — el salón, спальня — el dormitorio, балкон — el balcón, ванная — el baño, кладовка — el trastero.</div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: ФОРМЫ МЫ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">4</span>
+      <span class="ex-title">«Я» → «МЫ» (somos / tenemos / estamos)</span>
+      <span class="ex-skill">🧩 Грамматика · формы «мы»</span>
+    </div>
+    <div class="hint-box">💡 Поменяй форму на «мы»: <strong>soy → somos</strong> (мы есть), <strong>tengo → tenemos</strong> (у нас есть), <strong>estoy → estamos</strong> (мы находимся).</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span><span>Yo soy de Rusia → Nosotros <span class="gap"></span> de Rusia.</span><span class="emoji">🌍</span></div>
+      <div class="gap-item"><span class="num">2</span><span>Yo tengo un gato → Nosotros <span class="gap"></span> un gato.</span><span class="emoji">🐱</span></div>
+      <div class="gap-item"><span class="num">3</span><span>Yo estoy contento → Nosotros <span class="gap"></span> contentos.</span><span class="emoji">😄</span></div>
+      <div class="gap-item"><span class="num">4</span><span>La familia es grande → La familia <span class="gap"></span> de Rusia.</span><span class="emoji">👨‍👩‍👧‍👦</span></div>
+    </div>
+  </div>
+
+  <!-- 5. СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Собери фразу из слов</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">la</span><span class="build-word">familia</span><span class="build-word">Somos</span><span class="build-word">Ivanov</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">cocina</span><span class="build-word">la</span><span class="build-word">está</span><span class="build-word">salón</span><span class="build-word">al lado del</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">hermana</span><span class="build-word">tengo</span><span class="build-word">una</span><span class="build-word">Yo</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 6. МАНИФЕСТ: ЗАПОЛНИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-gold">6</span>
+      <span class="ex-title">Заполни свой Семейный манифест</span>
+      <span class="ex-skill">📜 Продукт урока</span>
+    </div>
+    <div class="ex-instruction">Впиши свою семью и квартиру. Потом прочитай вслух!</div>
+    <div class="manifesto-box">
+      <div class="line">Somos la familia <span class="mblank"></span>.</div>
+      <div class="line">Somos <span class="mblank" style="min-width:30px"></span> personas.</div>
+      <div class="line">Papá se llama <span class="mblank" style="min-width:90px"></span>, mamá se llama <span class="mblank" style="min-width:90px"></span>.</div>
+      <div class="line">Tengo <span class="mblank" style="min-width:30px"></span> hermano(s) y <span class="mblank" style="min-width:30px"></span> hermana(s).</div>
+      <div class="line">Viviremos en un piso con <span class="mblank" style="min-width:30px"></span> dormitorios, un salón, una cocina y un balcón.</div>
+    </div>
+  </div>
+
+  <!-- 7. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Представь свою семью.<br><span class="tpl">Somos la familia ___. Somos ___ personas.</span><span class="ru">Мы — семья ___. Нас ___ человек.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Скажи, что у тебя есть брат/сестра.<br><span class="tpl">Tengo un hermano. (Tengo dos hermanas.)</span><span class="ru">У меня есть брат. (У меня две сестры.)</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Опиши, где кухня.<br><span class="tpl">La cocina está al lado del salón.</span><span class="ru">Кухня рядом с гостиной.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Скажи, что мы рады.<br><span class="tpl">Estamos muy contentos.</span><span class="ru">Мы очень рады.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- QUIZLET -->
+  <div class="quizlet-box">
+    🃏 Повтори новые слова в Quizlet!
+    <br>
+    <a href="https://quizlet.com/ru/1202486260/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-1-%D1%83%D1%80%D0%BE%D0%BA-9-flash-cards/?i=2gqp1x&x=1qqt" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Назвать семью (la familia, los padres, el hermano, la hermana)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Назвать комнаты (el salón, la cocina, el dormitorio, el balcón)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сказать «мы» (somos / tenemos / estamos)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Описать, где комната (al lado del / debajo del)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Представить свою семью по-испански</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Станция 1 · Урок 9 «Nuestra Familia en España» · ¡Somos una gran familia! 💛</div>
+</div>
+
+</body>
+</html>
