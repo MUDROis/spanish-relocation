@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 3.3 · Чек-лист мечты — МУДРО (A4)</title>
+<style>
+  :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Nunito',Arial,sans-serif;color:var(--ink);font-size:11.5px;line-height:1.5;background:#E3DACB;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-btn{position:fixed;top:15px;right:15px;z-index:1000;background:var(--p1);color:#fff;border:none;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(226,114,91,.4);display:flex;align-items:center;gap:8px}
+  .print-btn:hover{background:#c05a45}
+  .sheet{width:210mm;min-height:297mm;margin:8mm auto;padding:10mm 11mm 14mm;background:var(--bg);box-shadow:0 8px 28px rgba(43,33,24,.25);position:relative}
+  .sheet-footer{position:absolute;bottom:5mm;left:11mm;right:11mm;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);font-weight:600;border-top:1px solid #E8DCCF;padding-top:2mm}
+  .hero{background:linear-gradient(135deg,var(--p1),var(--p3));color:#fff;border-radius:14px;padding:5mm 6mm;margin-bottom:5mm}
+  .hero .brand{font-size:9.5px;font-weight:700;letter-spacing:1px;opacity:.95}
+  .hero h1{font-size:18px;margin:2px 0}
+  .hero .meta{font-size:10px;opacity:.95}
+  .hero .name-row{display:flex;gap:5mm;margin-top:3mm}
+  .hero .name-row span{flex:1;border-bottom:2px solid rgba(255,255,255,.85);height:6mm;font-size:10px;padding:0 2px}
+  .ex{margin:0 0 4mm;break-inside:avoid;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:3mm;margin-bottom:2mm}
+  .ex-num{width:7.5mm;height:7.5mm;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0}
+  .ex-num.c2{background:var(--p2)}.ex-num.c3{background:var(--p3)}.ex-num.c4{background:var(--p4)}
+  .ex-head h2{font-size:12.5px;margin:0}
+  .ex-head .tag{font-size:9px;color:var(--muted);font-weight:600}
+  .card{background:var(--card);border-radius:10px;padding:3mm 4mm;box-shadow:0 2px 8px rgba(43,33,24,.06)}
+  .match{display:flex;gap:6mm}
+  .match .col{flex:1;display:flex;flex-direction:column;gap:2mm}
+  .match .item{border:1.5px solid #E8DCCF;border-radius:6px;padding:2px 6px;background:#fff;font-size:10px;min-height:22px;display:flex;align-items:center}
+  .wline{display:inline-block;min-width:28mm;border-bottom:1.5px dashed #C9B8A6;height:5mm;vertical-align:bottom}
+  .wline.short{min-width:15mm}.wline.long{min-width:50mm}.wline.xlong{min-width:80mm}
+  table{border-collapse:collapse;width:100%}
+  td,th{border:1px solid #E8DCCF;padding:2px 6px;font-size:10px;text-align:left;vertical-align:middle}
+  th{background:#FBF3EA;color:var(--p1);font-size:9.5px}
+  .formula{background:#F0F4FF;border-left:1.2mm solid var(--p4);border-radius:6px;padding:2mm 3mm;margin:0 0 2mm;font-size:10px}
+  .formula b{color:var(--p4)}
+  .note{background:#FFF7E0;border-left:1.2mm solid var(--p3);border-radius:6px;padding:2mm 3mm;margin:0 0 2mm;font-size:9.5px}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .checklist-box{background:#fff;border:2px solid var(--p4);border-radius:10px;padding:3mm;font-family:Consolas,Courier,sans-serif;font-size:9.5px;line-height:1.7}
+  .checklist-box .hdr{background:var(--p4);color:#fff;padding:2mm 3mm;font-weight:700;font-size:10px;margin:-3mm -3mm 2mm;border-radius:8px 8px 0 0}
+  .checklist-box .cat{font-weight:700;color:var(--p4);margin-top:2mm}
+  .ok-i{color:var(--p2)}.warn-i{color:var(--p3)}.bad-i{color:var(--p1)}
+  .apt-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm}
+  .apt-card{border:1.5px solid #E8DCCF;border-radius:8px;padding:2.5mm;background:#fff;font-size:9px;line-height:1.6}
+  .apt-card .name{font-weight:700;color:var(--p4);font-size:9.5px;margin-bottom:1mm}
+  .plan-box{background:#F0F4FF;border:1.5px solid var(--p4);border-radius:8px;padding:3mm;margin-bottom:2mm;font-size:10px}
+  .plan-box b{color:var(--p4)}
+  .tl-table{width:100%;border-collapse:collapse}
+  .tl-table th,.tl-table td{padding:2mm 4px;border:1px solid #E8DCCF;font-size:10px}
+  .tl-table th{background:#FBF3EA;color:var(--p1);font-size:9.5px}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table td:not(:first-child){text-align:center;width:12mm}
+  .tl-btn{display:inline-block;width:6mm;height:6mm;border-radius:50%;border:1px solid #E8DCCF}
+  .tl-btn.green{background:#C8E6C9}.tl-btn.yellow{background:#FFF9C4}.tl-btn.red{background:#FFCDD2}
+  .small{font-size:9.5px}
+  @page{size:A4;margin:12mm}
+  @media print{
+    body{background:#fff}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;page-break-after:always}
+    .sheet:last-child{page-break-after:auto}
+    .print-btn{display:none}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ═══════════ ЛИСТ 1 ═══════════ -->
+<div class="sheet">
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>📝 Рабочий лист · Урок 3.3 «Чек-лист мечты»</h1>
+    <div class="meta">Оценка квартиры по 4 категориям · система ✅⚠️❌ · связки pero и porque · персональный чек-лист</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>📋 Соедини слово оценки и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. perfecto</div>
+          <div class="item">2. en buen estado</div>
+          <div class="item">3. necesita reparación</div>
+          <div class="item">4. en mal estado</div>
+          <div class="item">5. barato</div>
+          <div class="item">6. demasiado caro</div>
+          <div class="item">7. bien situado</div>
+          <div class="item">8. tranquilo</div>
+          <div class="item">9. amplio</div>
+          <div class="item">10. cerca de</div>
+        </div>
+        <div class="col">
+          <div class="item">а) нуждается в ремонте</div>
+          <div class="item">б) идеально</div>
+          <div class="item">в) слишком дорого</div>
+          <div class="item">г) в хорошем состоянии</div>
+          <div class="item">д) хорошо расположен</div>
+          <div class="item">е) дешёвый</div>
+          <div class="item">ж) просторный</div>
+          <div class="item">з) в плохом состоянии</div>
+          <div class="item">и) спокойный</div>
+          <div class="item">к) рядом с</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🗂 Распредели слова по 4 категориям и оцени</h2><div class="tag">категория + ✅ отлично / ⚠️ приемлемо / ❌ плохо</div></div></div>
+    <div class="card">
+      <div class="formula">💡 Категории: <b>Estado</b> (состояние) · <b>Precio</b> (цена) · <b>Barrio</b> (район) · <b>Tamaño y comodidades</b> (размер и удобства)</div>
+      <table>
+        <tr><th>Слово / фраза</th><th>Категория</th><th>Оценка ✅⚠️❌</th></tr>
+        <tr><td>en mal estado</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>caro</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>tranquilo</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>pequeño</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>amueblado</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>hay humedades</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>lejos del metro</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>suficiente</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>incluido</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>ruidoso</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>roto</td><td class="wline short"></td><td class="wline short"></td></tr>
+        <tr><td>sin amueblar</td><td class="wline short"></td><td class="wline short"></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- УПР 3 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Вставь pero или porque</h2><div class="tag">pero = но (контраст) · porque = потому что (причина)</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>pero</b> = весы (позитив ↔ негатив) · <b>porque</b> = стрелка (решение ← причина). <b>Porque</b> пишется слитно!</div>
+      1. El piso es amplio, <span class="wline short"></span> es caro.<br>
+      2. Me gusta este piso <span class="wline short"></span> es barato.<br>
+      3. La cocina está bien, <span class="wline short"></span> necesita reparación.<br>
+      4. Prefiero el piso B <span class="wline short"></span> está cerca del colegio.<br>
+      5. El barrio es tranquilo, <span class="wline short"></span> está lejos del centro.<br>
+      6. No me gusta <span class="wline short"></span> hay ruido por la noche.
+    </div>
+  </div>
+
+  <!-- УПР 4 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>🔤 Собери фразу-аргумент из кусочков</h2><div class="tag">запиши готовую фразу</div></div></div>
+    <div class="card">
+      1. [El piso es caro] [pero] [me gusta] [porque] [está bien situado]<br>
+      → <span class="wline xlong"></span><br>
+      2. [La cocina necesita reparación] [pero] [acepto] [porque] [el precio es justo]<br>
+      → <span class="wline xlong"></span><br>
+      3. [Prefiero la vivienda C] [porque] [está cerca del colegio]<br>
+      → <span class="wline xlong"></span><br>
+      4. [No acepto] [si] [hay] [humedades]<br>
+      → <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 3.3 · стр. 1 / 2</span></div>
+</div>
+
+<!-- ═══════════ ЛИСТ 2 ═══════════ -->
+<div class="sheet">
+
+  <!-- УПР 5 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>📖 Прочитай заполненный чек-лист квартиры C и ответь</h2><div class="tag">анализ примера из урока</div></div></div>
+    <div class="card">
+      <div class="checklist-box">
+        <div class="hdr">CHECKLIST DE EVALUACIÓN — PISO C · CERCA DEL COLEGIO</div>
+        <div class="cat">CATEGORÍA 1: ESTADO</div>
+        <span class="ok-i">✅</span> Salón: bien<br>
+        <span class="ok-i">✅</span> Cocina: perfecta<br>
+        <span class="warn-i">⚠️</span> Baño: necesita reparación, hay humedades<br>
+        <div class="cat">CATEGORÍA 2: PRECIO</div>
+        <span class="ok-i">✅</span> Alquiler: 900 €, gastos incluidos<br>
+        <span class="ok-i">✅</span> Fianza: 1 mes, justa<br>
+        <div class="cat">CATEGORÍA 3: BARRIO</div>
+        <span class="ok-i">✅</span> Ubicación: cerca del colegio<br>
+        <span class="ok-i">✅</span> Tranquilo<br>
+        <div class="cat">CATEGORÍA 4: TAMAÑO Y COMODIDADES</div>
+        <span class="ok-i">✅</span> Amplio (85 m²)<br>
+        <span class="ok-i">✅</span> Amueblado<br>
+        <div class="cat">DECISIÓN FINAL:</div>
+        Me gusta este piso porque está cerca del colegio y el precio es justo.<br>
+        El baño necesita reparación, pero acepto porque el resto está en buen estado.<br>
+        No acepto si hay humedades y no las arreglan.
+      </div>
+      <br>
+      1. Сколько категорий в чек-листе? <span class="wline short"></span><br>
+      2. Какая категория имеет проблему? <span class="wline long"></span><br>
+      3. Сколько стоит аренда квартиры C? <span class="wline long"></span><br>
+      4. Почему автор принял это решение? <span class="wline xlong"></span><br>
+      5. При каком условии автор откажется от квартиры? <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>🗣 Оцени 3 квартиры и объясни выбор</h2><div class="tag">минимум 3 фразы с pero / porque</div></div></div>
+    <div class="card">
+      <div class="apt-grid">
+        <div class="apt-card">
+          <div class="name">Квартира A</div>
+          Est: salón perfecto · cocina necesita reparación · baño bien<br>
+          Precio: 950 €, gastos incluidos, fianza 2 meses<br>
+          Barrio: bien situado, pero ruidoso<br>
+          Tamaño: amplio (90 m²)
+        </div>
+        <div class="apt-card">
+          <div class="name">Квартира B</div>
+          Est: todo en buen estado<br>
+          Precio: 800 €, gastos no incluidos (70 €), fianza 1 mes<br>
+          Barrio: tranquilo y seguro, pero lejos del metro<br>
+          Tamaño: pequeño (60 m²), pero suficiente · sin amueblar
+        </div>
+        <div class="apt-card">
+          <div class="name">Квартира C</div>
+          Est: salón bien · cocina perfecta · baño necesita reparación (humedades)<br>
+          Precio: 900 €, gastos incluidos, fianza 1 mes<br>
+          Barrio: cerca del colegio, tranquilo<br>
+          Tamaño: amplio (85 m²) · amueblado
+        </div>
+      </div>
+      <br>
+      <b>Я выбираю квартиру</b> <span class="wline short"></span><br>
+      <b>Почему? (минимум 3 фразы с pero / porque):</b><br>
+      1. <span class="wline xlong"></span><br>
+      2. <span class="wline xlong"></span><br>
+      3. <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>✍️ Письмо: «Мой чек-лист мечты»</h2><div class="tag">минимум 5 фраз по плану — это задание 1 из домашки</div></div></div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План (DECISIÓN FINAL):</b><br>
+        1–2. Какие категории оценки для вас самые важные и почему?<br>
+        3–4. Что для вас <b>обязательно</b> (✅)?<br>
+        5–6. Что для вас <b>неприемлемо</b> (❌)?<br>
+        7–8. Итог: <i>«Acepto un piso si... pero no acepto si... porque...»</i>
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+      <div class="note green" style="margin-top:3mm">📸 Это задание 1 из домашки урока: заполненный чек-лист на этой странице — и пришлите фото преподавателю.</div>
+    </div>
+  </div>
+
+  <!-- СВЕТОФОР -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">8</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Оценивать квартиру по 4 категориям</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать систему оценок (✅ ⚠️ ❌)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить фразы с pero (контраст)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить фразы с porque (причина)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Принимать решение и аргументировать вслух</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="small" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист и отправь преподавателю.</p>
+    </div>
+  </div>
+
+  <div class="sheet-footer"><span>МУДРО · ¡Rumbo a España!</span><span>Урок 3.3 · стр. 2 / 2</span></div>
+</div>
+
+</body>
+</html>
