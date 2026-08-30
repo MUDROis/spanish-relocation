@@ -388,14 +388,18 @@
     <div class="read-box hidden" id="pablo-text">
       «En la mochila de Pablo <span class="grammar-hint" data-hint="hay — «есть, имеется». Просто говорим что есть в наличии: En mi mochila hay un lápiz = в моём рюкзаке есть карандаш">hay</span> un lápiz, una regla, unas tijeras, un estuche y un bolígrafo. <b>No <span class="grammar-hint" data-hint="no hay — «нет, не имеется». No hay goma = «гому топера нет»">hay</span> goma</b>.»
     </div>
-    <p style="font-weight:700">1. ¿Qué NO hay en la mochila de Pablo?</p>
-    <button class="quiz-opt" onclick="readQ(this,false)">un lápiz</button>
-    <button class="quiz-opt" onclick="readQ(this,true)">una goma</button>
-    <button class="quiz-opt" onclick="readQ(this,false)">unas tijeras</button>
-    <p style="font-weight:700;margin-top:10px">2. ¿Qué hay en la mochila? (выбери верное)</p>
-    <button class="quiz-opt" onclick="readQ(this,true)">una regla</button>
-    <button class="quiz-opt" onclick="readQ(this,false)">un cuaderno</button>
-    <button class="quiz-opt" onclick="readQ(this,false)">un libro</button>
+    <div class="quiz-group">
+      <p style="font-weight:700">1. ¿Qué NO hay en la mochila de Pablo?</p>
+      <button class="quiz-opt" onclick="readQ(this,false)">un lápiz</button>
+      <button class="quiz-opt" onclick="readQ(this,true)">una goma</button>
+      <button class="quiz-opt" onclick="readQ(this,false)">unas tijeras</button>
+    </div>
+    <div class="quiz-group">
+      <p style="font-weight:700;margin-top:10px">2. ¿Qué hay en la mochila? (выбери верное)</p>
+      <button class="quiz-opt" onclick="readQ(this,true)">una regla</button>
+      <button class="quiz-opt" onclick="readQ(this,false)">un cuaderno</button>
+      <button class="quiz-opt" onclick="readQ(this,false)">un libro</button>
+    </div>
 
     <p style="font-weight:800;margin-top:16px">🗣 Презентация «Mi mochila» — практика говорения!</p>
     <p style="font-size:.9rem;font-weight:700;color:var(--ink-soft);margin:6px 0 10px">Слушай фразу → повторяй вслух за диктором → скажи фразу сам(а) → заменяй слова на свои (имя, предметы, цену). Цель — рассказать о своём рюкзаке без подсказок!</p>
@@ -528,9 +532,9 @@
 <script>
 /* ========== ОЗВУЧКА ========== */
 var esVoice=null;
-function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
-if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
-function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;var best=null,bestScore=-1;for(var i=0;i<v.length;i++){var lang=(v[i].lang||'').toLowerCase(),score=-1;if(lang.indexOf('es')===0){score=1;if(lang.indexOf('es-es')===0)score+=2;else if(lang.indexOf('es-419')===0||lang.indexOf('es-mx')===0||lang.indexOf('es-us')===0)score+=1;if(v[i].default)score+=1;if(/natural|online|premium|neural/i.test(v[i].name||''))score+=1;if(score>bestScore){bestScore=score;best=v[i];}}}esVoice=best;}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();setTimeout(loadVoices,300);}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;loadVoices();var u=new SpeechSynthesisUtterance(t);u.lang=esVoice?esVoice.lang:'es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
 function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
 
 /* ========== БЛОК 3: СОРТИРОВКА РОДА ========== */
