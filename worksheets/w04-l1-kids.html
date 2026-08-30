@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 10 · ¿Qué hay en tu mochila? — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --blue:#2274A5; --pink:#E91E63; --gold:#B8860B;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  /* КНОПКА ПЕЧАТИ */
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  /* ЛИСТ */
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  /* ШАПКА */
+  .hero{background:linear-gradient(135deg,#E0F2F1,#B2DFDB,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px;flex-wrap:wrap}
+  .name-row .w{display:inline-block;min-width:140px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  /* УПРАЖНЕНИЕ */
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}
+  .c-gold{background:var(--gold)}.c-blue{background:var(--blue)}
+  .ex-title{font-weight:800;font-size:14.5px;flex:1}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+
+  /* СОПОСТАВЛЕНИЕ */
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+  .emo{font-size:17px;margin-right:6px;vertical-align:middle}
+
+  /* УГАДАЙ ПО ОПИСАНИЮ */
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .emoji{font-size:16px}
+  .desc-item .blank{display:inline-block;min-width:120px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+
+  /* EL/LA И UN/UNA */
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;font-size:13.5px}
+  .gap-item{display:flex;align-items:center;gap:6px;padding:4px 0;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:22px;height:22px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:19px;font-weight:800;color:var(--ocean);flex-shrink:0;font-size:.85rem}
+  .gap-item .gap{display:inline-block;width:46px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center;font-weight:700}
+  .gap-item .word{font-weight:700}
+  .gap-item .hint{color:#999;font-size:11px}
+
+  /* СОБЕРИ ФРАЗУ */
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--teal);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--teal)}
+  .build-line{border-bottom:1.6px dashed var(--teal);height:24px}
+
+  /* АЛФАВИТ: ПОДПИШИ */
+  .sign-task{background:#FFF8DC;border:2px dashed var(--gold);border-radius:12px;padding:14px;margin-bottom:10px;page-break-inside:avoid}
+  .sign-task .prompt{font-weight:800;color:var(--gold);margin-bottom:8px}
+  .sign-line{border-bottom:1.6px dashed var(--line);height:26px;margin:6px 0}
+
+  /* ЧТЕНИЕ */
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom;min-width:90px}
+
+  /* АУДИРОВАНИЕ */
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;flex:1;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  /* ГОВОРЕНИЕ */
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px;page-break-inside:avoid}
+  .speak-item .sit{font-weight:700;color:#5B21B6;margin-bottom:4px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  /* ПИСЬМО */
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:26px}
+
+  /* СВЕТОФОР */
+  .tl-table{width:100%;border-collapse:collapse;font-size:13px}
+  .tl-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .tl-table th:not(:first-child){text-align:center;width:80px}
+  .tl-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;display:inline-block;vertical-align:middle}
+
+  .footer{text-align:center;color:#999;font-size:10px;margin-top:18px;padding-top:8px;border-top:1px solid #eee}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+  @media(max-width:640px){
+    .gap-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🎒 ¿Qué hay en tu mochila?</h1>
+    <div class="sub">Рабочий лист к Уроку 1 · Станция 2: Mi Colegio · 11 предметов · Род el/la · Алфавит</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Возраст: <span class="w" style="min-width:50px"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Выполняй задания по порядку. Когда закончишь — <strong>проверь вместе с родителем</strong> и раскрась Светофор в конце. Вспоминай карточки урока 10 — там теперь 11 слов, включая <strong>el bolígrafo</strong>!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">1</span>
+      <span class="ex-title">Соедини предмет и его название</span>
+      <span class="ex-skill">📚 Лексика · 11 пар</span>
+    </div>
+    <div class="ex-instruction">Впиши букву испанского слова в квадратик рядом с эмодзи.</div>
+    <table class="match-table">
+      <tr><th style="width:48%">Предмет</th><th>Испанское слово</th></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">✏️</span> карандаш</td><td>a) el cuaderno</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">🖊️</span> ручка</td><td>b) el libro</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">🩹</span> ластик</td><td>c) la mochila</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">🔄</span> точилка</td><td>d) los colores</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">📓</span> тетрадь</td><td>e) el bolígrafo</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">👝</span> пенал</td><td>f) la regla</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">📖</span> книга</td><td>g) el sacapuntas</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">✂️</span> ножницы</td><td>h) las tijeras</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">📏</span> линейка</td><td>i) el estuche</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">🖍️</span> цветные карандаши</td><td>j) la goma</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">🎒</span> рюкзак</td><td>k) el lápiz</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">2</span>
+      <span class="ex-title">Угадай по описанию и напиши слово</span>
+      <span class="ex-skill">🗣 Лексика</span>
+    </div>
+    <div class="ex-instruction">Прочитай описание и напиши испанское слово с артиклем (el / la).</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">✏️</span> Этим ты пишешь. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🖊️</span> Ей пишут, но это не карандаш. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🩹</span> Этим ты стираешь ошибки. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">👝</span> Здесь живут карандаши и ручки. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">✂️</span> Этим ты режешь бумагу. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">📏</span> Этим ты чертишь ровные линии. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">7</span><span class="emoji">🎒</span> В этом ты несёшь всё в школу. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: EL/LA И UN/UNA -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Мальчик или девочка? Вставь EL / LA · UN / UNA</span>
+      <span class="ex-skill">🔵🔴 Грамматика · род</span>
+    </div>
+    <div class="hint-box">💡 <strong>Волшебное правило:</strong> 🔵 <b>el / un</b> — слова-«мальчики» (обычно на -o). 🔴 <b>la / una</b> — слова-«девочки» (обычно на -a). Исключения запоминай!</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span><span class="gap"></span><span class="word">lápiz</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">2</span><span class="gap"></span><span class="word">bolígrafo</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">3</span><span class="gap"></span><span class="word">goma</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">4</span><span class="gap"></span><span class="word">cuaderno</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">5</span><span class="gap"></span><span class="word">regla</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">6</span><span class="gap"></span><span class="word">estuche</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">7</span><span class="gap"></span><span class="word">mochila</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">8</span><span class="gap"></span><span class="word">libro</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">9</span><span class="gap"></span><span class="word">sacapuntas</span><span class="hint">(el / la)</span></div>
+      <div class="gap-item"><span class="num">10</span><span class="gap"></span><span class="word">tijeras</span><span class="hint">(el / la)</span></div>
+    </div>
+    <p style="font-weight:800;margin-top:10px">А теперь «один / одна» — UN / UNA:</p>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">11</span><span class="word">Tengo</span><span class="gap"></span><span class="word">lápiz.</span><span class="hint">(un / una)</span></div>
+      <div class="gap-item"><span class="num">12</span><span class="word">Tengo</span><span class="gap"></span><span class="word">bolígrafo.</span><span class="hint">(un / una)</span></div>
+      <div class="gap-item"><span class="num">13</span><span class="word">Necesito</span><span class="gap"></span><span class="word">goma.</span><span class="hint">(un / una)</span></div>
+      <div class="gap-item"><span class="num">14</span><span class="word">Necesito</span><span class="gap"></span><span class="word">regla.</span><span class="hint">(un / una)</span></div>
+    </div>
+  </div>
+
+  <!-- 4. ПОРЯДОК СЛОВ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">4</span>
+      <span class="ex-title">Собери фразу из слов</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова по-испански и запиши фразу на строке.</div>
+
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">un</span><span class="build-word">Tengo</span><span class="build-word">lápiz</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">mochila</span><span class="build-word">En</span><span class="build-word">mi</span><span class="build-word">hay</span><span class="build-word">un</span><span class="build-word">bolígrafo</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">¿Dónde</span><span class="build-word">el</span><span class="build-word">está</span><span class="build-word">bolígrafo</span><span class="build-word">?</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">cuaderno</span><span class="build-word">Este</span><span class="build-word">de</span><span class="build-word">es</span><span class="build-word">Anna</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. АЛФАВИТ: ПОДПИШИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-gold">5</span>
+      <span class="ex-title">Подпиши свои вещи по-испански</span>
+      <span class="ex-skill">🔤 Алфавит + письмо</span>
+    </div>
+    <div class="hint-box">💡 <strong>Помощь:</strong> H — невидимка 👻, LL = [й], Ñ 🐌 = [нь], J = [х], V = [б]. Если не знаешь букву — открой алфавит в уроке 10!</div>
+
+    <div class="sign-task">
+      <div class="prompt">✍️ Напиши своё имя по-испански:</div>
+      <div class="sign-line"></div>
+    </div>
+
+    <div class="sign-task">
+      <div class="prompt">📓 Подпиши тетрадь:</div>
+      <div style="font-weight:700;margin-bottom:4px">Este cuaderno es de ___________________________</div>
+    </div>
+
+    <div class="sign-task">
+      <div class="prompt">🖊️ Подпиши ручку:</div>
+      <div style="font-weight:700;margin-bottom:4px">Este bolígrafo es de ___________________________</div>
+    </div>
+
+    <div class="sign-task">
+      <div class="prompt">🎒 Подпиши рюкзак:</div>
+      <div style="font-weight:700;margin-bottom:4px">Esta mochila es de ___________________________</div>
+    </div>
+
+    <div class="sign-task">
+      <div class="prompt">👝 Подпиши пенал:</div>
+      <div style="font-weight:700;margin-bottom:4px">Este estuche es de ___________________________</div>
+    </div>
+
+    <div class="sign-task">
+      <div class="prompt">🔤 Продиктуй своё имя по буквам (как в уроке: «A de Antonio, N de Navarra...»):</div>
+      <div class="sign-line"></div>
+      <div class="sign-line"></div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай список Пабло и ответь на вопросы</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Pablo y tengo diez años.<br>
+      En mi mochila hay: <b>un lápiz, un bolígrafo, una goma, un sacapuntas, un cuaderno, un estuche y unas tijeras.</b><br>
+      También tengo una regla y los colores.<br>
+      <b>No hay</b> libro porque hoy no tenemos Lengua.<br>
+      ¡Mi mochila está lista!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Cómo se llama el niño? <span class="ru">(Как зовут мальчика?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Cuántos años tiene? <span class="ru">(Сколько ему лет?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Qué NO hay en la mochila? <span class="ru">(Чего НЕТ в рюкзаке?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Por qué no hay libro? <span class="ru">(Почему нет книги?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Qué hay en la mochila? (назови 4 предмета) → <span class="blank"></span>, <span class="blank"></span>, <span class="blank"></span>, <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">7</span>
+      <span class="ex-title">Слушай команды «Simón dice» и отвечай</span>
+      <span class="ex-skill">👂 Аудирование · TPR</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать команды вслух. <strong>Внимание:</strong> если родитель НЕ сказал «Simón dice» — пиши «🚫» (ничего не делаем)!</div>
+    <div class="listen-item"><span class="lnum">1.</span><span>→ <span class="blank"></span></span></div>
+    <div class="listen-item"><span class="lnum">2.</span><span>→ <span class="blank"></span></span></div>
+    <div class="listen-item"><span class="lnum">3.</span><span>→ <span class="blank"></span></span></div>
+    <div class="listen-item"><span class="lnum">4.</span><span>→ <span class="blank"></span></span></div>
+    <div class="listen-item"><span class="lnum">5.</span><span>→ <span class="blank"></span></span></div>
+    <div class="listen-item"><span class="lnum">6.</span><span>→ <span class="blank"></span></span></div>
+    <div class="listen-item"><span class="lnum">7.</span><span>→ <span class="blank"></span></span></div>
+    <div class="parent-box">
+      <b>👨👩 Для родителя — что читать вслух (с интонацией!):</b><br>
+      1. ¡Simón dice: coge el lápiz! &nbsp;
+      2. ¡Simón dice: coge el bolígrafo! &nbsp;
+      3. ¡Toca la goma! <i>(без Simón dice!)</i> &nbsp;
+      4. ¡Simón dice: abre el cuaderno! &nbsp;
+      5. ¡Simón dice: levanta el libro! &nbsp;
+      6. ¡Cierra el estuche! <i>(без Simón dice!)</i> &nbsp;
+      7. ¡Simón dice: toca algo rojo!
+    </div>
+  </div>
+
+  <!-- 8. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-blue">8</span>
+      <span class="ex-title">Скажи вслух по-испански и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение · 6 ситуаций</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и закрась кружок «сделано».</div>
+
+    <div class="speak-item">
+      <div class="sit">1. Учитель спрашивает: «¿Qué hay en tu mochila?»</div>
+      <div class="tpl">En mi mochila hay un lápiz, un bolígrafo y un cuaderno.</div>
+      <span class="ru">В моём рюкзаке есть карандаш, ручка и тетрадь.</span>
+      <span class="speak-check"></span>
+    </div>
+
+    <div class="speak-item">
+      <div class="sit">2. Тебе нужен карандаш у одноклассника.</div>
+      <div class="tpl">¿Me puedes dar un lápiz, por favor?</div>
+      <span class="ru">Можешь дать мне карандаш, пожалуйста?</span>
+      <span class="speak-check"></span>
+    </div>
+
+    <div class="speak-item">
+      <div class="sit">3. Ты потерял ластик. Спроси учителя, где он.</div>
+      <div class="tpl">Perdón, ¿dónde está mi goma?</div>
+      <span class="ru">Извините, где мой ластик?</span>
+      <span class="speak-check"></span>
+    </div>
+
+    <div class="speak-item">
+      <div class="sit">4. Учитель говорит быстро, ты не понимаешь.</div>
+      <div class="tpl">Perdón, no entiendo. ¿Puede repetir, por favor?</div>
+      <span class="ru">Извините, не понимаю. Можете повторить?</span>
+      <span class="speak-check"></span>
+    </div>
+
+    <div class="speak-item">
+      <div class="sit">5. Расскажи, что у тебя ЕСТЬ в рюкзаке (3 предмета — например, ручка!).</div>
+      <div class="tpl">Tengo un ___ , una ___ y unas ___.</div>
+      <span class="ru">У меня есть ___, ___ и ___.</span>
+      <span class="speak-check"></span>
+    </div>
+
+    <div class="speak-item">
+      <div class="sit">6. Ты готов к уроку! Скажи учителю.</div>
+      <div class="tpl">¡Estoy preparado para la clase!</div>
+      <span class="ru">Я готов к уроку!</span>
+      <span class="speak-check"></span>
+    </div>
+  </div>
+
+  <!-- 9. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">9</span>
+      <span class="ex-title">Сочинение «Mi mochila perfecta»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">
+      💡 <strong>План:</strong> 1) Как тебя зовут и сколько лет · 2) Что у тебя в рюкзаке (5–6 предметов — например, un lápiz y un bolígrafo) · 3) Чего нет и почему · 4) Что ты любишь больше всего · 5) Готов ли ты к уроку?
+    </div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 10. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">10</span>
+      <span class="ex-title">Самопроверка «Светофор» 🚦</span>
+      <span class="ex-skill">🟢🟡🔴 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Назвать 11 предметов рюкзака по-испански</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Различать EL (м.р.) и LA (ж.р.)</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Сказать un lápiz / una goma / un bolígrafo</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Написать своё имя по-испански</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Продиктовать имя по буквам</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Понимать команды «Coge el lápiz»</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Рассказать о своём рюкзаке вслух</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+    </table>
+    <p style="margin-top:10px;font-size:.85rem;color:#777;font-weight:700">📸 Покажи Светофор родителям — вместе разберём всё, что 🔴!</p>
+  </div>
+
+  <div class="footer">
+    Интерактивная школа МУДРО · Рабочий лист к Уроку 1 · Станция 2: Mi Colegio · 2026<br>
+    ¡Tú puedes! 💪
+  </div>
+
+</div>
+
+</body>
+</html>

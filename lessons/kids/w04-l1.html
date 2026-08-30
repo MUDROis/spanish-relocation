@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 10: ¿Qué hay en tu mochila? — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --pink:#E91E63;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink);transition:.2s}
+  .back-btn:hover{background:#f3ebc8}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E0F2F1 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--teal)}
+  .hero .sub{max-width:660px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+  .final-situation{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--teal);text-align:left}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--teal)}
+  .goals h2{font-size:1.3rem;margin-bottom:14px}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#E0F2F1;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:16px;text-align:center;cursor:pointer;border:3px solid #E0F2F1;transition:.25s;box-shadow:0 4px 14px rgba(0,0,0,.06);user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--teal)}
+  .word-card .emo{font-size:2.4rem;display:block;margin-bottom:6px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--teal)}
+  .word-card .ru{color:var(--ink-soft);font-size:.85rem;font-weight:700}
+  .word-card .gender{display:inline-block;margin-top:6px;font-size:.75rem;font-weight:800;padding:3px 10px;border-radius:999px}
+  .g-m{background:#E3F2FD;color:var(--blue)}
+  .g-f{background:#FCE4EC;color:var(--pink)}
+  .speak-btn{background:var(--teal);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  /* СОРТИРОВКА РОДА */
+  .sort-zone{background:linear-gradient(135deg,#E3F2FD,#FCE4EC);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .sort-word{font-family:'Baloo 2',cursive;font-size:2rem;color:var(--ink);margin:10px 0}
+  .sort-btns{display:flex;gap:14px;justify-content:center}
+  .sort-btn{border:none;border-radius:16px;padding:14px 30px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;transition:.15s}
+  .sort-btn.el{background:var(--blue);color:#fff;box-shadow:0 5px 0 #155a84}
+  .sort-btn.la{background:var(--pink);color:#fff;box-shadow:0 5px 0 #ad1457}
+  .sort-btn:active{transform:translateY(3px);box-shadow:none}
+  .sort-fb{font-weight:800;margin-top:12px;min-height:26px}
+
+  /* АЛФАВИТ */
+  .alpha-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px;margin:14px 0}
+  .alpha-cell{background:#fff;border:2px solid #e0d8cc;border-radius:12px;padding:10px 4px;text-align:center;cursor:pointer;transition:.2s}
+  .alpha-cell:hover{border-color:var(--teal);transform:scale(1.06)}
+  .alpha-cell .L{font-family:'Baloo 2',cursive;font-size:1.4rem;color:var(--teal);font-weight:800}
+  .alpha-cell .N{font-size:.68rem;font-weight:800;color:var(--ink);margin:2px 0 1px}
+  .alpha-cell .W{font-size:.62rem;font-weight:700;color:var(--ink-soft)}
+  .sign-zone{background:#FFF8DC;border:2px dashed var(--sun);border-radius:16px;padding:18px;margin:14px 0}
+  .sign-zone input{border:2px dashed var(--sun);border-radius:10px;padding:10px 14px;font-family:'Nunito';font-weight:800;font-size:1.1rem;width:220px;background:#fff}
+  .sign-result{margin-top:12px;font-family:'Baloo 2',cursive;font-size:1.15rem;color:#B8860B;min-height:30px}
+
+  /* SIMON */
+  .simon-zone{background:linear-gradient(135deg,#F3E8FF,#E9D5FF);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .simon-cmd{font-family:'Baloo 2',cursive;font-size:1.4rem;color:#5B21B6;margin:12px 0;min-height:40px}
+  .simon-opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .simon-opt{background:#fff;border:3px solid #e0d8cc;border-radius:14px;padding:10px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito'}
+  .simon-opt:hover{border-color:#8B5CF6}
+  .simon-opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .simon-opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+  /* PBL */
+  .pbl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:14px 0}
+  .pbl-item{background:#fff;border:3px solid #e0d8cc;border-radius:14px;padding:12px 6px;text-align:center;cursor:pointer;transition:.2s;font-weight:700;font-size:.85rem;position:relative}
+  .pbl-item .emo{font-size:1.8rem;display:block}
+  .pbl-item.in{border-color:var(--green);background:#E8F5E9}
+  .pbl-item.in::after{content:'✅';position:absolute;margin-left:6px}
+  .pbl-result{background:#E8F5E9;border-radius:14px;padding:16px;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--green);min-height:60px}
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;margin:12px 0;font-size:1rem;line-height:1.8}
+  .read-box.hidden{display:none}
+  .pres-zone{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:16px;margin:12px 0}
+  .pres-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .pres-tab{background:#fff;border:2px solid #d4d9c4;border-radius:999px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;transition:.15s}
+  .pres-tab.active{background:#7A8B4C;color:#fff;border-color:#7A8B4C}
+  .pres-frame{background:#fff;border-radius:12px;padding:12px 14px;margin:8px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .pres-es{font-family:'Baloo 2',cursive;font-weight:800;color:var(--ink);flex:1 1 220px;min-width:150px}
+  .pres-ru{color:var(--ink-soft);font-weight:700;flex:1 1 170px;min-width:130px}
+  .pres-tip{font-size:.82rem;font-weight:700;color:#7A8B4C;flex-basis:100%}
+  .quiz-opt{display:block;width:100%;background:#fff;border:2px solid #e0d8cc;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;margin:6px 0;font-family:'Nunito';text-align:left}
+  .quiz-opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .quiz-opt.wrong{background:#FFCDD2;border-color:var(--red)}
+
+  /* МЯЧ */
+  .ball-zone{text-align:center;margin:14px 0}
+  .ball{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd54f,var(--terra));border:none;cursor:pointer;font-size:2.6rem;box-shadow:0 8px 22px rgba(232,96,76,.4);transition:.2s}
+  .ball:hover{transform:scale(1.08) rotate(-8deg)}
+  .ball-q{font-weight:800;font-size:1.1rem;margin:12px 0;min-height:30px}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--teal);background:#E0F2F1}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .sb-target{background:#fff;border:2px dashed #ccc;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--teal)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--teal);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--teal);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--teal);font-weight:800}
+
+  /* СВЕТОФОР */
+  .selfcheck{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .selfcheck h4{margin-bottom:10px}
+  .tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem;min-width:480px}
+  .tl-table th,.tl-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+  .tl-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+  .tl-table th:not(:first-child){text-align:center}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:52px;padding:7px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1rem;font-weight:800;transition:.15s;text-align:center}
+  .tl-cell:hover{background:#E0F2F1}
+  .tl-cell.active{border-color:#2B2118;background:#FFF3DC}
+  .tl-reset{background:#fff;border:2px solid var(--teal);color:var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;margin-top:12px;font-family:'Nunito';font-size:.9rem;transition:.15s}
+  .tl-reset:hover{background:#E0F2F1}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(66,85,255,.3)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+
+  /* ---------- ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ ---------- */
+  .grammar-hint{
+    position:relative;
+    color:var(--blue);
+    border-bottom:2px dashed var(--blue);
+    cursor:help;
+    font-weight:700;
+    font-style:normal;
+    display:inline;
+  }
+  .grammar-hint::after{
+    content:attr(data-hint);
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:.85rem;
+    font-weight:700;
+    line-height:1.4;
+    white-space:normal;
+    width:max-content;
+    max-width:280px;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+    font-style:normal;
+  }
+  .grammar-hint::before{
+    content:'';
+    position:absolute;
+    bottom:calc(100% + 2px);
+    left:50%;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:var(--ink);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+  }
+  @media (hover:hover){
+    .grammar-hint:hover::after,
+    .grammar-hint:hover::before{opacity:1}
+  }
+  .grammar-hint.active::after,
+  .grammar-hint.active::before{opacity:1}
+
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 2 · Mi Colegio · Урок 1 из 12 · По курсу — Урок 10 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🎒 СТАНЦИЯ 2 · УРОК 1 · НЕДЕЛЯ 4</span>
+  <h1>¿Qué hay en <span>tu mochila</span>?</h1>
+  <p class="sub">Добро пожаловать в Станцию 2! Ты уже умеешь выживать — теперь пора УЧИТЬСЯ. Сегодня ты узнаешь, что лежит в рюкзаке испанского школьника, и подпишешь свои вещи своим именем!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты достаёшь из рюкзака карандаш, показываешь учителю и говоришь:<br>
+    <em>«Tengo un lápiz, una goma y un cuaderno. <span class="grammar-hint" data-hint="estoy preparado/preparada — «я готов/готова». Мальчик скажет preparado, девочка — preparada!">¡Estoy preparado para la clase!</span>»</em> — «У меня есть карандаш, ластик и тетрадь. Я готов к уроку!» 🎒
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ЦЕЛИ -->
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🎒</span> Называть 11 предметов рюкзака</div>
+      <div class="goal-item"><span class="emoji">🔵🔴</span> Различать el lápiz (м.р.) и la goma (ж.р.)</div>
+      <div class="goal-item"><span class="emoji">🔤</span> Знать полный испанский алфавит</div>
+      <div class="goal-item"><span class="emoji">✍️</span> Подписать свои вещи своим именем</div>
+      <div class="goal-item"><span class="emoji">🎯</span> Понимать команды «Coge el lápiz», «Toca algo rojo»</div>
+      <div class="goal-item"><span class="emoji">📋</span> Составить и презентовать свой рюкзак</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1: КУДА МЫ ЕДЕМ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🗺 Куда мы едем? Станция 2: Mi Colegio</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">
+      Ты прошёл Станцию 1 и научился ВЫЖИВАТЬ: здороваться, просить помощи, находить туалет. <span class="grammar-hint" data-hint="¡Felicidades! — «поздравляю!». Так говорят, когда у кого-то победа или праздник">¡Felicidades!</span> 🎉 Но теперь тебе нужно УЧИТЬСЯ. А для учёбы нужен рюкзак! Сегодня узнаем, что в нём лежит.
+    </div>
+    <p class="block-sub">🔥 3 факта о рюкзаке испанского школьника:</p>
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="word-card"><span class="emo">🎒</span><div class="ru">В Испании многие школы <b>без locker'ов</b> — всё носишь с собой!</div></div>
+      <div class="word-card"><span class="emo">✏️</span><div class="ru">Пишут <b>синей ручкой</b>, а карандаш живёт в <span class="grammar-hint" data-hint="estuche — «пенал». Слово мужского рода: el estuche">пенале (estuche)</span></div></div>
+      <div class="word-card"><span class="emo">🏷️</span><div class="ru">Все вещи <b>подписаны</b> — если потеряешь, найдут и вернут!</div></div>
+    </div>
+    <div class="script">
+      Мостик из Станции 1: «¿Qué necesitas para la escuela?» → «Necesito un lápiz.» А помнишь, как искать потерянное: «<strong>¿Dónde está mi goma?</strong>» и просить: «<strong>¿Puedo coger un lápiz?</strong>»? Сегодня этих слов станет больше!
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ЧТО В РЮКЗАКЕ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎒 Что в рюкзаке? 11 предметов</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Ядро урока! Нажимай на карточку — услышишь озвучку. Показывай жест и повторяй! Запомни род: 🔵 = el, 🔴 = la.</p>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('el lápiz')"><span class="emo">✏️</span><div class="es">el lápiz</div><div class="ru">карандаш · жест: пишем</div><span class="gender g-m">🔵 м.р.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el bolígrafo')"><span class="emo">🖊️</span><div class="es">el bolígrafo</div><div class="ru">ручка · жест: пишем ручкой</div><span class="gender g-m">🔵 м.р.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la goma')"><span class="emo">🩹</span><div class="es">la goma</div><div class="ru">ластик · жест: стираем</div><span class="gender g-f">🔴 ж.р.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el sacapuntas')"><span class="emo">🔄</span><div class="es">el sacapuntas</div><div class="ru">точилка · жест: крутим</div><span class="gender g-m">🔵 м.р.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el cuaderno')"><span class="emo">📓</span><div class="es">el cuaderno</div><div class="ru">тетрадь</div><span class="gender g-m">🔵 м.р.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el estuche')"><span class="emo">👝</span><div class="es">el estuche</div><div class="ru">пенал</div><span class="gender g-m">🔵 м.р.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el libro')"><span class="emo">📖</span><div class="es">el libro</div><div class="ru">книга / учебник</div><span class="gender g-m">🔵 м.р.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('las tijeras')"><span class="emo">✂️</span><div class="es">las tijeras</div><div class="ru">ножницы · жест: «ножницы»</div><span class="gender g-f">🔴 ж.р. мн.ч.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la regla')"><span class="emo">📏</span><div class="es">la regla</div><div class="ru">линейка</div><span class="gender g-f">🔴 ж.р.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('los colores')"><span class="emo">🖍️</span><div class="es">los colores</div><div class="ru">цветные карандаши</div><span class="gender g-m">🔵 м.р. мн.ч.</span><br><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la mochila')"><span class="emo">🎒</span><div class="es">la mochila</div><div class="ru">рюкзак</div><span class="gender g-f">🔴 ж.р.</span><br><button class="speak-btn">🔊</button></div>
+    </div>
+    <div class="script">
+      💻 <strong>Дополнительно — «mochila digital»:</strong> <span class="grammar-hint" data-hint="el portátil — «ноутбук» (м.р.). В испанских школах ESO часто используют планшеты и ноутбуки">el portátil</span> (ноутбук), <span class="grammar-hint" data-hint="el móvil — «телефон» (м.р.). Многие 12-летки носят его в рюкзаке выключенным">el móvil</span> (телефон), <span class="grammar-hint" data-hint="la contraseña — «пароль» (ж.р.)">la contraseña</span> (пароль), <span class="grammar-hint" data-hint="el correo (electrónico) — «электронная почта»">el correo</span> (почта). А <span class="grammar-hint" data-hint="ESO — Educación Secundaria Obligatoria, средняя школа в Испании (с 12 до 16 лет)">ESO</span> — это средняя школа!
+    </div>
+  </section>
+
+  <!-- БЛОК 3: РОД -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🔵🔴 Мальчик или девочка? Род</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <div class="script">
+      <strong>Волшебное правило:</strong> 🔵 <b>el</b> — слова на <b>-o</b> (мальчик). 🔴 <b>la</b> — слова на <b>-a</b> (девочка). А «un lápiz / una goma» — это «один / одна»!
+      <br><strong>Запоминалки:</strong> lápiz — мальчик с острым носом ✏️. Goma — девочка, которая всё стирает 🩹. Mochila — девочка, несущая всё на спине 🎒!
+    </div>
+    <div class="sort-zone">
+      <p style="font-weight:800">Игра «Сортировка»: мальчик 🔵 или девочка 🔴?</p>
+      <div class="sort-word" id="sort-word">Нажми «▶ Начать»!</div>
+      <div class="sort-btns">
+        <button class="sort-btn el" onclick="sortAnswer('el')">🔵 EL</button>
+        <button class="sort-btn la" onclick="sortAnswer('la')">🔴 LA</button>
+      </div>
+      <div class="sort-fb" id="sort-fb"></div>
+      <div style="margin-top:10px;font-weight:800">⭐ Звёзд рода: <span id="sort-stars">0</span> / 11</div>
+      <button class="speak-btn" style="margin-top:10px" onclick="sortStart()">▶ Начать</button>
+    </div>
+    <div class="script">
+      🏴‍☠️ <strong>Слова-бунтари (дополнительно):</strong> <span class="grammar-hint" data-hint="el agua — «вода». Женского рода, но с артиклем el (чтобы не было двух «а» подряд: «la-agua»). Говорим: el agua fría">el agua</span> — вода (ж.р. при el!), <span class="grammar-hint" data-hint="la mano — «рука». Женского рода, хотя оканчивается на -o!">la mano</span> — рука (ж.р., хотя -o), <span class="grammar-hint" data-hint="el problema — «проблема». Мужского рода, хотя оканчивается на -a!">el problema</span> — проблема (м.р., хотя -a). Запомни их как исключение-секрет!
+    </div>
+  </section>
+
+  <!-- БЛОК 4: АЛФАВИТ -->
+  <section class="block" style="--c:#B8860B">
+    <div class="block-head">
+      <h2 class="block-title">🔤 Алфавит: подпиши свои вещи</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Впервые — полный испанский алфавит! Нажимай на букву — услышишь её и слово-подсказку.</p>
+    <div class="alpha-grid" id="alpha-grid"></div>
+    <div class="sign-zone">
+      <p style="font-weight:800;margin-bottom:10px">✍️ Activity «Подпиши свои вещи»: впиши своё имя — и получи диктовку по буквам!</p>
+      <input id="sign-name" placeholder="Твоё имя (например: Анна)">
+      <button class="speak-btn" onclick="signName()">✍️ Подписать и озвучить</button>
+      <div class="sign-result" id="sign-result"></div>
+      <p id="sign-hint" style="font-size:.85rem;color:var(--ink-soft);margin-top:8px;font-weight:700">Теперь подпиши по-испански свои настоящие вещи: «Este cuaderno es de Anna»!</p>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: SIMON -->
+  <section class="block" style="--c:#8B5CF6">
+    <div class="block-head">
+      <h2 class="block-title">🎯 Simón dice: команды с рюкзаком</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="script">
+      Симон говорит команду — нажми нужный предмет! Если Симон НЕ сказал «Simón dice» — нажми «🚫 Стою спокойно»! Дополнительно: теперь ты — Симон, придумай свою команду!
+    </div>
+    <div class="simon-zone">
+      <div class="simon-cmd" id="simon-cmd">Нажми «▶ Начать»!</div>
+      <div class="simon-opts" id="simon-opts"></div>
+      <div class="sort-fb" id="simon-fb"></div>
+      <div style="margin-top:10px;font-weight:800">⭐ Звёзд Симона: <span id="simon-stars">0</span> / 8</div>
+      <button class="speak-btn" style="margin-top:10px" onclick="simonStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 6: PBL -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">📋 PBL: Mi mochila — собери и презентуй</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Выбери, что положишь в рюкзак, — и получи готовую фразу с озвучкой!</p>
+    <div class="pbl-grid" id="pbl-grid"></div>
+    <button class="speak-btn" onclick="buildMochila()">🎒 Показать мой рюкзак</button>
+    <div class="pbl-result" id="pbl-result">En mi mochila hay: …</div>
+
+    <p style="font-weight:800;margin-top:16px">📖 Аудирование: послушай список друга Пабло и ответь! 🔊</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin:8px 0">
+      <button class="speak-btn" onclick="listenPablo()">🔊 Слушать текст Пабло</button>
+      <button class="speak-btn" id="read-toggle" onclick="toggleRead()" style="background:var(--ink-soft)">👁 Показать текст</button>
+    </div>
+    <div class="read-box hidden" id="pablo-text">
+      «En la mochila de Pablo <span class="grammar-hint" data-hint="hay — «есть, имеется». Просто говорим что есть в наличии: En mi mochila hay un lápiz = в моём рюкзаке есть карандаш">hay</span> un lápiz, una regla, unas tijeras, un estuche y un bolígrafo. <b>No <span class="grammar-hint" data-hint="no hay — «нет, не имеется». No hay goma = «гому топера нет»">hay</span> goma</b>.»
+    </div>
+    <p style="font-weight:700">1. ¿Qué NO hay en la mochila de Pablo?</p>
+    <button class="quiz-opt" onclick="readQ(this,false)">un lápiz</button>
+    <button class="quiz-opt" onclick="readQ(this,true)">una goma</button>
+    <button class="quiz-opt" onclick="readQ(this,false)">unas tijeras</button>
+    <p style="font-weight:700;margin-top:10px">2. ¿Qué hay en la mochila? (выбери верное)</p>
+    <button class="quiz-opt" onclick="readQ(this,true)">una regla</button>
+    <button class="quiz-opt" onclick="readQ(this,false)">un cuaderno</button>
+    <button class="quiz-opt" onclick="readQ(this,false)">un libro</button>
+
+    <p style="font-weight:800;margin-top:16px">🗣 Презентация «Mi mochila» — практика говорения!</p>
+    <p style="font-size:.9rem;font-weight:700;color:var(--ink-soft);margin:6px 0 10px">Слушай фразу → повторяй вслух за диктором → скажи фразу сам(а) → заменяй слова на свои (имя, предметы, цену). Цель — рассказать о своём рюкзаке без подсказок!</p>
+    <div class="pres-zone">
+      <div class="pres-tabs">
+        <button class="pres-tab active" onclick="presTab(0)">🎒 8 лет · базовая</button>
+        <button class="pres-tab" onclick="presTab(1)">📚 12 лет · с бюджетом</button>
+      </div>
+      <div id="pres-frames"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 7: МЯЧ + БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🎾 La Pelota Preguntona + бейдж</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="ball-zone">
+      <button class="ball" onclick="pelota()">🎾</button>
+      <div class="ball-q" id="ball-q">Лови мяч и отвечай!</div>
+      <div id="ball-opts"></div>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎒</div>
+      <h3>Собиратель рюкзака</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты собрал свой испанский рюкзак и подписал все вещи!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 <span class="grammar-hint" data-hint="¡Enhorabuena! — «поздравляю!» (дословно «в добрый час!»). Самое тёплое слово-поздравление">¡Enhorabuena!</span> Бейдж «Собиратель рюкзака» 🎒 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">
+      <strong>Анонс следующего урока:</strong> На следующем уроке — МНОГО! Один lápiz, два — ¡dos lápices! Множественное число: uno, dos, tres... ¡Muchos!
+    </div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🗣 Слова урока</h2></div>
+    <p style="font-weight:800;color:var(--teal);margin-bottom:6px">Слова-предметы (11):</p>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('el lápiz')"><span class="emo">✏️</span><div class="es">el lápiz</div><div class="ru">карандаш</div></div>
+      <div class="word-card" onclick="speak('el bolígrafo')"><span class="emo">🖊️</span><div class="es">el bolígrafo</div><div class="ru">ручка</div></div>
+      <div class="word-card" onclick="speak('la goma')"><span class="emo">🩹</span><div class="es">la goma</div><div class="ru">ластик</div></div>
+      <div class="word-card" onclick="speak('el sacapuntas')"><span class="emo">🔄</span><div class="es">el sacapuntas</div><div class="ru">точилка</div></div>
+      <div class="word-card" onclick="speak('el cuaderno')"><span class="emo">📓</span><div class="es">el cuaderno</div><div class="ru">тетрадь</div></div>
+      <div class="word-card" onclick="speak('el estuche')"><span class="emo">👝</span><div class="es">el estuche</div><div class="ru">пенал</div></div>
+      <div class="word-card" onclick="speak('el libro')"><span class="emo">📖</span><div class="es">el libro</div><div class="ru">книга</div></div>
+      <div class="word-card" onclick="speak('las tijeras')"><span class="emo">✂️</span><div class="es">las tijeras</div><div class="ru">ножницы</div></div>
+      <div class="word-card" onclick="speak('la regla')"><span class="emo">📏</span><div class="es">la regla</div><div class="ru">линейка</div></div>
+      <div class="word-card" onclick="speak('los colores')"><span class="emo">🖍️</span><div class="es">los colores</div><div class="ru">цветные карандаши</div></div>
+      <div class="word-card" onclick="speak('la mochila')"><span class="emo">🎒</span><div class="es">la mochila</div><div class="ru">рюкзак</div></div>
+    </div>
+    <p style="font-weight:800;color:var(--teal);margin:12px 0 6px">Фразы-спасатели:</p>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('¿Qué hay en tu mochila?')"><div class="es">¿Qué hay en tu mochila?</div><div class="ru">Что в твоём рюкзаке?</div></div>
+      <div class="word-card" onclick="speak('En mi mochila hay...')"><div class="es">En mi mochila hay...</div><div class="ru">В моём рюкзаке есть...</div></div>
+      <div class="word-card" onclick="speak('Tengo un lápiz y una goma.')"><div class="es">Tengo un lápiz y una goma.</div><div class="ru">У меня есть карандаш и ластик</div></div>
+      <div class="word-card" onclick="speak('¿Dónde está mi goma?')"><div class="es">¿Dónde está mi goma?</div><div class="ru">Где мой ластик?</div></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёры для закрепления</h2></div>
+    <div class="match-game">
+      <h4>🧩 Сопоставление: «испанский ↔ русский» (11 пар)</h4>
+      <div class="match-columns">
+        <div id="match-left"></div>
+        <div id="match-right"></div>
+      </div>
+      <div class="sort-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+    <div class="match-game">
+      <h4>🎯 Конструктор фраз: собери предложение</h4>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="sort-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+    <div class="match-game">
+      <h4>📚 Онлайн-тренажёр: карточки Quizlet</h4>
+      <p style="font-weight:700;color:var(--ink-soft)">Повтори слова и фразы урока с озвучкой — режимы «Карточки» и «Заучивание».</p>
+      <a href="https://quizlet.com/de/1203030670/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-2-%D1%83%D1%80%D0%BE%D0%BA-10-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;background:#4255FF;color:#fff;border-radius:999px;padding:10px 22px;text-decoration:none;font-weight:800">📚 Открыть Quizlet · Урок 10 →</a>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей канцелярии</strong> · 5 мин<br>Покажи маме и папе 6 карточек: lápiz, bolígrafo, goma, cuaderno, estuche, mochila. Пусть каждый выберет любимый предмет и скажет по-испански.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>Подпиши свои настоящие вещи</strong> · 7 мин ⭐<br>Тетрадь → «Este cuaderno es de Anna». Рюкзак → «Esta mochila es de Anna». Пенал → «Este estuche es de Anna». Не знаешь, как пишется имя — используй алфавит из урока!</div></div>
+    <div class="task"><div class="task-num">3</div><div><strong>Собери рюкзак по-испански</strong> · 5 мин<br>Собирая настоящий рюкзак, называй каждый предмет: «Cojo un lápiz. Cojo un bolígrafo. Cojo una goma. ¡Mi mochila está lista!»</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br>🧩 Сопоставление (11 пар) · 🔵🔴 Сортировка рода · 🔤 Алфавит</div></div>
+    <div class="task"><div class="task-num">5</div><div><strong>Видео «La mochila»</strong> · 3 мин<br>Посмотри ролик про рюкзак испанского школьника. Обрати внимание, как он называет каждый предмет, и повтори вслух!</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Mi mochila»</strong> · 15 мин ⭐<br>Попроси родителей распечатать лист, выполни задания и раскрась светофор самооценки. Принеси на следующий урок!<br><a href="../../worksheets/w04-l1-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong><br>Честно оцени себя по 5 критериям — нажми на нужный цвет (таблица ниже).</div></div>
+  </section>
+
+  <!-- САМОПРОВЕРКА -->
+  <section class="selfcheck">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <p style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">Нажми на нужный цвет — честно! 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно</p>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Назвать 11 предметов рюкзака</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+      <tr><td>Различать EL и LA (род)</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+      <tr><td>Написать своё имя по-испански</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+      <tr><td>Продиктовать имя по буквам</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
+      <tr><td>Понять команду «Coge el lápiz»</td><td><button class="tl-cell" data-row="4" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="4" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="4" data-color="3">🔴</button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p style="margin-top:10px;font-size:.85rem;color:var(--ink-soft);font-weight:700">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <!-- QUIZLET -->
+  <a class="quizlet-link" href="https://quizlet.com/de/1203030670/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-2-%D1%83%D1%80%D0%BE%D0%BA-10-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">
+    <span>📚 Карточки Quizlet · Урок 10 · Станция 2</span><span>Открыть карточки →</span>
+  </a>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="lesson-nav">
+    <a href="./w03-l3.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 9: Семейный манифест 👨‍👩‍👧‍👦</div></a>
+    <a href="./w04-l2.html" class="nav-next"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 11: Uno, dos, tres... ¡Muchos!</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 2: Mi Colegio · 2026</div>
+</main>
+
+<script>
+/* ========== ОЗВУЧКА ========== */
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ========== БЛОК 3: СОРТИРОВКА РОДА ========== */
+var SORT_WORDS=[{w:'el lápiz',g:'el'},{w:'el bolígrafo',g:'el'},{w:'la goma',g:'la'},{w:'el cuaderno',g:'el'},{w:'la regla',g:'la'},{w:'el estuche',g:'el'},{w:'la mochila',g:'la'},{w:'el libro',g:'el'},{w:'las tijeras',g:'la'},{w:'el sacapuntas',g:'el'},{w:'los colores',g:'el'}];
+var sortIdx=0,sortStars=0,sortOrder=[];
+function sortStart(){sortIdx=0;sortStars=0;sortOrder=shuffle(SORT_WORDS.slice());document.getElementById('sort-stars').textContent='0';sortNext();}
+function sortNext(){if(sortIdx>=sortOrder.length){document.getElementById('sort-word').textContent='🎉 ¡Muy bien! Все слова отсортированы!';return;}
+  var item=sortOrder[sortIdx];document.getElementById('sort-word').textContent=item.w;speak(item.w);document.getElementById('sort-fb').textContent='';}
+function sortAnswer(g){if(sortIdx>=sortOrder.length)return;var item=sortOrder[sortIdx];var fb=document.getElementById('sort-fb');
+  if(g===item.g){sortStars++;document.getElementById('sort-stars').textContent=sortStars;fb.textContent='✅ ¡Correcto! '+item.w;sortIdx++;setTimeout(sortNext,900);}
+  else{fb.textContent='❌ Подумай ещё! '+item.w+' — это 🔵 или 🔴?';}}
+
+/* ========== БЛОК 4: АЛФАВИТ ========== */
+var ALPHA=[{l:'A',n:'a',w:'Antonio'},{l:'B',n:'be',w:'Barcelona'},{l:'C',n:'ce',w:'Carmen'},{l:'D',n:'de',w:'Diego'},{l:'E',n:'e',w:'España'},{l:'F',n:'efe',w:'Fútbol'},{l:'G',n:'ge',w:'Granada'},{l:'H',n:'hache',w:'Hache',p:'👻'},{l:'I',n:'i',w:'Italia'},{l:'J',n:'jota',w:'Jamón'},{l:'K',n:'ka',w:'Kiwi'},{l:'L',n:'ele',w:'Lunes'},{l:'LL',n:'elle',w:'Lluvia'},{l:'M',n:'eme',w:'Madrid'},{l:'N',n:'ene',w:'Navarra'},{l:'Ñ',n:'eñe',w:'Ñandú',p:'🐌'},{l:'O',n:'o',w:'Oso'},{l:'P',n:'pe',w:'Paella'},{l:'Q',n:'cu',w:'Queso'},{l:'R',n:'erre',w:'Rusia'},{l:'S',n:'ese',w:'Sol'},{l:'T',n:'te',w:'Tortilla'},{l:'U',n:'u',w:'Uno'},{l:'V',n:'uve',w:'Valencia'},{l:'W',n:'uve doble',w:'Waterpolo'},{l:'X',n:'equis',w:'Xilófono'},{l:'Y',n:'i griega',w:'Yogur'},{l:'Z',n:'zeta',w:'Zapato'}];
+var ALPHA_HINT={};ALPHA.forEach(function(a){ALPHA_HINT[a.l]=a.n+' de '+a.w;});
+var RU2ES={'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'E','Ж':'J','З':'Z','И':'I','Й':'Y','К':'K','Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'H','Ц':'C','Ч':'C','Ш':'S','Щ':'S','Ы':'I','Э':'E','Ю':'U','Я':'A'};
+(function(){var g=document.getElementById('alpha-grid');ALPHA.forEach(function(a){var d=document.createElement('div');d.className='alpha-cell';d.innerHTML='<div class="L">'+a.l+'</div><div class="N">'+a.n+'</div><div class="W">'+(a.p?('<span style="font-size:1.1rem">'+a.p+'</span> '):'')+a.w+'</div>';d.onclick=function(){speak(ALPHA_HINT[a.l]);};g.appendChild(d);});})();
+function signName(){var name=document.getElementById('sign-name').value.trim();var capName=name?cap(name.toLowerCase()):'Anna';var hint=document.getElementById('sign-hint');if(hint){hint.textContent='Теперь подпиши по-испански свои настоящие вещи, например: «Este cuaderno es de '+capName+'»!';}name=name.toUpperCase();if(!name){document.getElementById('sign-result').textContent='✍️ Впиши своё имя!';return;}
+  var parts=[];for(var i=0;i<name.length;i++){var ch=name[i];var es=RU2ES[ch]||(/[A-Z]/.test(ch)?ch:null);if(es&&ALPHA_HINT[es])parts.push(ALPHA_HINT[es]);}
+  var text='Mi nombre se escribe: '+name+'. '+parts.join(', ')+'. ¡Este cuaderno es de '+cap(name.toLowerCase())+'!';
+  document.getElementById('sign-result').textContent=text;speak(text);}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+
+/* ========== БЛОК 5: SIMON ========== */
+var SIMON=[{cmd:'¡Simón dice: coge el lápiz!',ru:'возьми карандаш',ans:'lápiz'},{cmd:'¡Simón dice: toca la goma!',ru:'дотронься до ластика',ans:'goma'},{cmd:'¡Simón dice: abre el cuaderno!',ru:'открой тетрадь',ans:'cuaderno'},{cmd:'¡Cierra el estuche!',ru:'закрой пенал (Симон не сказал!)',ans:'STOP'},{cmd:'¡Simón dice: levanta el libro!',ru:'подними книгу',ans:'libro'},{cmd:'¡Toca algo rojo!',ru:'дотронься до чего-то красного (Симон не сказал!)',ans:'STOP'},{cmd:'¡Simón dice: toca la mochila!',ru:'дотронься до рюкзака',ans:'mochila'},{cmd:'¡Simón dice: coge el bolígrafo!',ru:'возьми ручку',ans:'bolígrafo'}];
+var SIMON_OPTS=[['lápiz','✏️ el lápiz'],['bolígrafo','🖊️ el bolígrafo'],['goma','🩹 la goma'],['cuaderno','📓 el cuaderno'],['estuche','👝 el estuche'],['libro','📖 el libro'],['mochila','🎒 la mochila'],['STOP','🚫 Стою спокойно']];
+var simonIdx=0,simonStars=0,simonOrder=[];
+function simonStart(){simonIdx=0;simonStars=0;simonOrder=shuffle(SIMON.slice());document.getElementById('simon-stars').textContent='0';simonNext();}
+function simonNext(){if(simonIdx>=simonOrder.length){document.getElementById('simon-cmd').textContent='🎉 ¡Excelente!';return;}
+  var r=simonOrder[simonIdx];document.getElementById('simon-cmd').textContent=r.cmd+' 👉 '+r.ru;speak(r.cmd);
+  var box=document.getElementById('simon-opts');box.innerHTML='';
+  SIMON_OPTS.forEach(function(o){var b=document.createElement('button');b.className='simon-opt';b.textContent=o[1];b.onclick=function(){simonAns(o[0],b);};box.appendChild(b);});
+  document.getElementById('simon-fb').textContent='';}
+function simonAns(a,b){var r=simonOrder[simonIdx];var fb=document.getElementById('simon-fb');
+  if(a===r.ans){b.classList.add('correct');simonStars++;document.getElementById('simon-stars').textContent=simonStars;fb.textContent='✅ ¡Muy bien!';}
+  else{b.classList.add('wrong');fb.textContent='❌ Ой! '+(r.ans==='STOP'?'Симон НЕ сказал — стоим спокойно!':'Нужен другой предмет!');}
+  simonIdx++;setTimeout(simonNext,1000);}
+
+/* ========== БЛОК 6: PBL ========== */
+var PBL=[['lápiz','✏️','un lápiz','карандаш'],['bolígrafo','🖊️','un bolígrafo','ручка'],['goma','🩹','una goma','ластик'],['sacapuntas','🔄','un sacapuntas','точилка'],['cuaderno','📓','un cuaderno','тетрадь'],['estuche','👝','un estuche','пенал'],['libro','📖','un libro','книга'],['tijeras','✂️','unas tijeras','ножницы'],['regla','📏','una regla','линейка'],['colores','🖍️','los colores','цветные карандаши']];
+var pblIn={};
+(function(){var g=document.getElementById('pbl-grid');PBL.forEach(function(p){var d=document.createElement('div');d.className='pbl-item';d.innerHTML='<span class="emo">'+p[1]+'</span>'+p[0];d.onclick=function(){pblIn[p[0]]=!pblIn[p[0]];d.classList.toggle('in',pblIn[p[0]]);};g.appendChild(d);});})();
+function pluralRu(n){if(n%10===1&&n%100!==11)return 'вещь';if(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))return 'вещи';return 'вещей';}
+function buildMochila(){var items=[],ru=[];PBL.forEach(function(p){if(pblIn[p[0]]){items.push(p[2]);ru.push(p[3]);}});
+  if(items.length===0){document.getElementById('pbl-result').textContent='🎒 Рюкзак пустой! Выбери предметы.';return;}
+  var text='En mi mochila hay: '+items.join(', ')+'. ¡Tengo '+items.length+' cosas! ¡Estoy preparado!';
+  var textRu='🇷🇺 В моём рюкзаке есть: '+ru.join(', ')+'. У меня '+items.length+' '+pluralRu(items.length)+'! Я готов(а)!';
+  document.getElementById('pbl-result').textContent=text+' '+textRu;speak(text);}
+function listenPablo(){speak('En la mochila de Pablo hay un lápiz, una regla, unas tijeras, un estuche y un bolígrafo. No hay goma.');}
+function toggleRead(){var b=document.getElementById('pablo-text');var on=b.classList.toggle('hidden');document.getElementById('read-toggle').textContent=on?'👁 Показать текст':'🙈 Скрыть текст';}
+var PRES=[
+  [
+    {es:'¡Hola! Me llamo Anna.',ru:'Привет! Меня зовут Анна.',tip:'Подставь своё имя!'},
+    {es:'Tengo 8 años.',ru:'Мне 8 лет.',tip:'Подставь свой возраст!'},
+    {es:'En mi mochila hay un lápiz, un bolígrafo, una goma y un cuaderno.',ru:'В моём рюкзаке есть карандаш, ручка, ластик и тетрадь.',tip:'Подставь предметы из своей PBL!'},
+    {es:'¡Estoy preparado para la clase!',ru:'Я готов к уроку!',tip:'Девочка скажет: preparada!'},
+    {es:'¡Gracias! ¡Adiós!',ru:'Спасибо! Пока!',tip:'Поклонись — ты молодец!'}
+  ],
+  [
+    {es:'¡Buenos días! Me llamo Anna y tengo 12 años.',ru:'Добрый день! Меня зовут Анна, мне 12 лет.',tip:'Подставь своё имя и возраст!'},
+    {es:'En mi mochila hay un portátil, un móvil, un bolígrafo y mi estuche.',ru:'В моём рюкзаке есть ноутбук, телефон, ручка и мой пенал.',tip:'Подставь свои предметы!'},
+    {es:'Necesito el portátil para mis clases.',ru:'Мне нужен ноутбук для моих уроков.',tip:'Вариант: el móvil, la regla...'},
+    {es:'Mi mochila cuesta 45 euros.',ru:'Мой рюкзак стоит 45 евро.',tip:'Придумай свою цену!'},
+    {es:'¡Estoy preparado! ¡Gracias!',ru:'Я готов! Спасибо!',tip:'Девочка: preparada!'}
+  ]
+];
+function presTab(i){
+  var tabs=document.querySelectorAll('.pres-tab');tabs.forEach(function(t,j){t.classList.toggle('active',j===i);});
+  var box=document.getElementById('pres-frames');box.innerHTML='';
+  PRES[i].forEach(function(f){
+    var d=document.createElement('div');d.className='pres-frame';
+    d.innerHTML='<div class="pres-es">'+f.es+'</div><div class="pres-ru">'+f.ru+'</div><div class="pres-tip">💡 '+f.tip+'</div>';
+    var b=document.createElement('button');b.className='speak-btn';b.textContent='🔊 Послушать';
+    b.onclick=(function(es){return function(){speak(es);};})(f.es);
+    d.appendChild(b);box.appendChild(d);
+  });
+}
+presTab(0);
+function readQ(b,ok){var sibs=b.parentElement.querySelectorAll('.quiz-opt');sibs.forEach(function(x){x.disabled=true;});b.classList.add(ok?'correct':'wrong');if(ok)speak('¡Muy bien!');}
+
+/* ========== МЯЧ ========== */
+var PEL=[{q:'¿Cómo se dice «карандаш»?',a:'el lápiz',w:['la goma','el libro']},{q:'La goma — это 🔵 или 🔴?',a:'🔴 la (девочка)',w:['🔵 el (мальчик)','🔵 los (мальчики)']},{q:'¿Cómo se dice «рюкзак»?',a:'la mochila',w:['el estuche','la regla']},{q:'«un lápiz» — почему un?',a:'потому что мальчик 🔵',w:['потому что девочка 🔴','потому что много']},{q:'¿Cómo se dice «ножницы»?',a:'las tijeras',w:['el sacapuntas','la regla']},{q:'¿Cómo se dice «тетрадь»?',a:'el cuaderno',w:['la regla','el estuche']},{q:'¿Cómo se dice «пенал»?',a:'el estuche',w:['la mochila','las tijeras']},{q:'¿Cómo se dice «точилка»?',a:'el sacapuntas',w:['el libro','la goma']},{q:'¿Cómo se dice «линейка»?',a:'la regla',w:['el lápiz','los colores']},{q:'¿Cómo se dice «ручка»?',a:'el bolígrafo',w:['el lápiz','el sacapuntas']},{q:'«una goma» — почему una?',a:'потому что девочка 🔴',w:['потому что мальчик 🔵','потому что много']}];
+var pelOrder=[];
+function pelota(){if(pelOrder.length===0){pelOrder=shuffle(PEL.slice());}var r=pelOrder.pop();document.getElementById('ball-q').textContent='🎾 '+r.q;
+  var box=document.getElementById('ball-opts');box.innerHTML='';
+  shuffle([r.a].concat(r.w)).forEach(function(o){var b=document.createElement('button');b.className='quiz-opt';b.textContent=o;b.onclick=function(){var s=box.querySelectorAll('.quiz-opt');s.forEach(function(x){x.disabled=true;});b.classList.add(o===r.a?'correct':'wrong');if(o===r.a)speak('¡Muy bien!');};box.appendChild(b);});}
+
+/* ========== БЕЙДЖ ========== */
+function stampBadge(){document.getElementById('badge-stamped').classList.add('show');document.getElementById('badge-btn').style.display='none';speak('¡Enhorabuena! ¡Eres un coleccionista de mochilas!');confetti('🎒');try{localStorage.setItem('mudro_kids_w04l1_badge_mochila','true');}catch(e){}}
+if(localStorage.getItem('mudro_kids_w04l1_badge_mochila')==='true'){document.getElementById('badge-stamped').classList.add('show');document.getElementById('badge-btn').style.display='none';}
+function confetti(e){var c=['🎉','⭐',e];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};}(s),3200);}}
+
+/* ========== ТРЕНАЖЁР СОПОСТАВЛЕНИЕ ========== */
+var MATCH=[['el lápiz','карандаш'],['el bolígrafo','ручка'],['la goma','ластик'],['el sacapuntas','точилка'],['el cuaderno','тетрадь'],['el estuche','пенал'],['el libro','книга'],['las tijeras','ножницы'],['la regla','линейка'],['los colores','цветные карандаши'],['la mochila','рюкзак']];
+var mSel=null,mFound=0;
+function renderMatch(){mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});}
+function mClick(d){if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');mFound++;speak(d.textContent.indexOf('el ')===0||d.textContent.indexOf('la')===0?d.textContent:'');document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/11';if(mFound===11)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';}
+  else{d.classList.add('wrong');mSel.classList.add('wrong');var a=mSel;setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);}
+  mSel=null;}
+renderMatch();
+
+/* ========== ТРЕНАЖЁР КОНСТРУКТОР ========== */
+var SB=[{w:['Tengo','un','lápiz','.'],t:'У меня есть карандаш.'},{w:['Tengo','un','bolígrafo','.'],t:'У меня есть ручка.'},{w:['Tengo','una','goma','.'],t:'У меня есть ластик.'},{w:['En','mi','mochila','hay','un','cuaderno','.'],t:'В моём рюкзаке есть тетрадь.'},{w:['Necesito','un','estuche','.'],t:'Мне нужен пенал.'},{w:['Tengo','unas','tijeras','y','una','regla','.'],t:'У меня есть ножницы и линейка.'}];
+var sbIdx=0,sbPlaced=[];
+function renderSB(){sbPlaced=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbIdx].w.slice()).forEach(function(w){var b=document.createElement('div');b.className='sb-word';b.textContent=w;b.onclick=function(){if(b.classList.contains('placed'))return;b.classList.add('placed');sbPlaced.push(w);t.textContent=sbPlaced.join(' ');
+    if(sbPlaced.length===SB[sbIdx].w.length){var ok=sbPlaced.every(function(x,i){return x===SB[sbIdx].w[i];});document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbIdx].t:'❌ Правильно: '+SB[sbIdx].w.join(' ');if(ok)speak(SB[sbIdx].w.join(' '));}};pool.appendChild(b);});}
+function nextSB(){sbIdx=(sbIdx+1)%SB.length;renderSB();}
+renderSB();
+
+/* ========== СВЕТОФОР ========== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.onclick=function(){
+    var row=c.getAttribute('data-row');
+    document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});
+    c.classList.add('active');
+  };
+});
+document.getElementById('tlReset').addEventListener('click',function(){
+  document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});
+});
+
+/* ========== ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ (тап на мобильном) ========== */
+document.addEventListener('click', function(e){
+  var hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){
+    if(el !== hint) el.classList.remove('active');
+  });
+  if(hint){
+    hint.classList.toggle('active');
+    e.stopPropagation();
+  }
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>
