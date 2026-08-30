@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 4.1 · Юридический испанский — МУДРО (A4)</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  /* ОДИН непрерывный лист */
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm 12mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:5mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+  .wline.full{ display:block; width:100%; min-width:0;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+
+  .contract-box{ background:#fff; border:2px solid var(--p4); border-radius:10px; padding:3mm; font-family:'Courier New',monospace; font-size:9.5px; line-height:1.7;}
+  .contract-box .hdr{ background:var(--p4); color:#fff; padding:2mm 3mm; font-weight:700; font-size:10px; margin:-3mm -3mm 2mm; border-radius:8px 8px 0 0; text-align:center;}
+  .clause{ margin-bottom:2mm; padding-left:2mm; border-left:2px solid var(--p3);}
+  .clause .num{ font-weight:800; color:var(--p4);}
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;}
+  .sit-box b{ color:var(--p4);}
+
+  .plan-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px;}
+  .plan-box b{ color:var(--p4);}
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ОДИН НЕПРЕРЫВНЫЙ ЛИСТ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>📄 Рабочий лист · Урок 4.1 «Юридический испанский»</h1>
+    <div class="meta">Контракт аренды: стороны, деньги, сроки, подводные камни</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>📋 Соедини термин контракта и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el contrato de arrendamiento</div>
+          <div class="item">2. el arrendador</div>
+          <div class="item">3. el arrendatario</div>
+          <div class="item">4. la fianza</div>
+          <div class="item">5. el depósito de garantía</div>
+          <div class="item">6. la prórroga</div>
+          <div class="item">7. rescindir el contrato</div>
+          <div class="item">8. la penalización</div>
+        </div>
+        <div class="col">
+          <div class="item">а) залог</div>
+          <div class="item">б) штраф</div>
+          <div class="item">в) арендодатель</div>
+          <div class="item">г) расторгнуть договор</div>
+          <div class="item">д) продление</div>
+          <div class="item">е) договор аренды</div>
+          <div class="item">ж) арендатор</div>
+          <div class="item">з) гарантийный депозит</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:2mm">
+        💡 <b>Запоминалка:</b> <b>arrendador</b> = «дающий» (сдаёт), <b>arrendatario</b> = «получающий» (снимает). Окончание <i>-dor</i> = активная сторона, <i>-tario</i> = пассивная.
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🔍 Впиши слово по описанию</h2><div class="tag">из словаря урока</div></div></div>
+    <div class="card">
+      1. Ежемесячная аренда → <span class="wline"></span><br>
+      2. Сторона, которая сдаёт квартиру → <span class="wline"></span><br>
+      3. Минимальный срок аренды → <span class="wline"></span><br>
+      4. Предупреждение перед выездом (обычно 30 дней) → <span class="wline"></span><br>
+      5. Мелкий шрифт в контракте → <span class="wline"></span><br>
+      6. Коммунальные расходы дома → <span class="wline"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Вставь tengo que / hay que / tiene que / tenemos que</h2><div class="tag">обязанность</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>tengo que</b> = я должен · <b>hay que</b> = нужно (безлично) · <b>tiene que</b> = он/она должен · <b>tenemos que</b> = мы должны</div>
+      1. Yo <span class="wline short"></span> pagar la fianza antes de entrar.<br>
+      2. <span class="wline short"></span> leer el contrato antes de firmar.<br>
+      3. El inquilino <span class="wline short"></span> dar de alta los suministros.<br>
+      4. <span class="wline short"></span> dar un preaviso de 30 días.<br>
+      5. Nosotros <span class="wline short"></span> firmar el inventario.<br>
+      6. El propietario <span class="wline short"></span> hacer las reparaciones mayores.
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>📖 Прочитай фрагмент контракта и ответь</h2><div class="tag">анализ реального документа</div></div></div>
+    <div class="card">
+      <div class="contract-box">
+        <div class="hdr">CONTRATO DE ARRENDAMIENTO DE VIVIENDA (фрагмент)</div>
+        <div class="clause"><span class="num">SEGUNDA. DURACIÓN:</span> La duración del contrato es de UN (1) AÑO. Se prorrogará automáticamente hasta cinco años.</div>
+        <div class="clause"><span class="num">TERCERA. RENTA:</span> La renta mensual es de NOVECIENTOS EUROS (900€), pagaderos por adelantado los cinco primeros días de cada mes.</div>
+        <div class="clause"><span class="num">CUARTA. FIANZA Y DEPÓSITO:</span> Fianza legal: 900€ (un mes). Depósito de garantía: 1.800€ (dos meses). Total: 2.700€.</div>
+        <div class="clause"><span class="num">QUINTA. SUMINISTROS:</span> Los suministros (agua, luz, gas) estarán a nombre del arrendatario.</div>
+        <div class="clause"><span class="num">OCTAVA. RESCISIÓN:</span> En caso de rescisión anticipada, el arrendatario pagará una indemnización de UN MES de renta.</div>
+      </div>
+      <br>
+      1. ¿Cuál es la duración del contrato? <span class="ru-sub">(Какой срок контракта?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Cuánto es la renta mensual? <span class="ru-sub">(Сколько ежемесячная аренда?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Cuánto es la fianza y el depósito? <span class="ru-sub">(Сколько залог и депозит?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Quién paga los suministros? <span class="ru-sub">(Кто платит за коммунальные услуги?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Cuál es la penalización si rescindes antes? <span class="ru-sub">(Какой штраф за досрочное расторжение?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>🗣 Говорение: что спросить у хозяина?</h2><div class="tag">ситуации + шаблоны фраз</div></div></div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> В контракте штраф за досрочное расторжение — 3 месяца аренды. Вы хотите его изменить.<br>
+        <b>Напишите ваш вопрос:</b> <span class="wline xlong"></span><br>
+        <span class="ru-sub">Шаблон: «Perdone, tengo una duda sobre la cláusula de penalización. ¿Es posible modificarla?» (Извините, у меня вопрос по пункту о штрафе. Можно ли его изменить?)</span>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы хотите уточнить, включены ли коммунальные расходы в цену.<br>
+        <b>Напишите ваш вопрос:</b> <span class="wline xlong"></span><br>
+        <span class="ru-sub">Шаблон: «¿Están incluidos los gastos de comunidad?» (Включены ли коммунальные расходы дома?)</span>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы хотите взять контракт домой, чтобы прочитать его спокойно.<br>
+        <b>Напишите вашу фразу:</b> <span class="wline xlong"></span><br>
+        <span class="ru-sub">Шаблон: «Necesito tiempo para leer el contrato en casa.» (Мне нужно время, чтобы прочитать контракт дома.)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: РАБОТА С ТЕКСТОМ КОНТРАКТА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">6</div><div><h2>🕵️ Работа с текстом контракта</h2><div class="tag">найди 3 подводных камня в контракте из урока</div></div></div>
+    <div class="card">
+      <div class="formula">Прочитайте контракт из урока и найдите <b>3 подводных камня</b> (сроки, штрафы, запреты). В 4–6 предложениях напишите, что вам не нравится и что хотите изменить.</div>
+      <b>Образец:</b> <i>«En el contrato hay tres problemas. La cláusula séptima prohíbe los animales, pero yo tengo un gato. La cláusula octava pone una penalización de dos meses. Quiero negociar. También hay que revisar la cláusula novena.»</i><br>
+      <span class="ru-sub">(В контракте три проблемы. Седьмой пункт запрещает животных, а у меня кот. Восьмой пункт устанавливает штраф в два месяца. Я хочу договориться. Также нужно пересмотреть девятый пункт.)</span>
+      <br><br>
+      <span class="wline full"></span><br>
+      <span class="wline full"></span><br>
+      <span class="wline full"></span><br>
+      <span class="wline full"></span><br>
+      <span class="wline full"></span><br>
+      <span class="wline full"></span>
+    </div>
+  </div>
+
+  <!-- СВЕТОФОР -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть стороны контракта (arrendador / arrendatario)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать деньги контракта (fianza, depósito, gastos)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Читать сроки (duración, prórroga, preaviso)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить фразы с tengo que / hay que</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Находить ключевые пункты в контракте</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Распознавать подводные камни (ловушки)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист и отправь преподавателю. Проверим вместе!</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
