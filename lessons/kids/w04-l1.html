@@ -81,6 +81,33 @@
   .sign-zone input{border:2px dashed var(--sun);border-radius:10px;padding:10px 14px;font-family:'Nunito';font-weight:800;font-size:1.1rem;width:220px;background:#fff}
   .sign-result{margin-top:12px;font-family:'Baloo 2',cursive;font-size:1.15rem;color:#B8860B;min-height:30px}
 
+  /* THEMED WORDS */
+  .themed-letter{background:#fff;border-radius:16px;padding:16px;margin:12px 0;border:2px solid #E0F2F1;box-shadow:0 3px 10px rgba(0,0,0,.04)}
+  .themed-letter-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px dashed #E0F2F1}
+  .themed-letter-l{font-family:'Baloo 2',cursive;font-size:2rem;color:var(--teal);font-weight:800;line-height:1}
+  .themed-letter-name{font-size:.95rem;font-weight:800;color:var(--ink-soft)}
+  .themed-group{margin:8px 0}
+  .themed-group-title{font-size:.85rem;font-weight:800;color:var(--purple);margin-bottom:6px}
+  .themed-row{display:flex;flex-wrap:wrap;gap:8px}
+  .themed-card{background:var(--soft);border:2px solid #f0ede6;border-radius:12px;padding:8px 12px;text-align:center;cursor:pointer;transition:.2s;min-width:90px;flex:0 0 auto}
+  .themed-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .themed-card:active{transform:scale(.96)}
+  .themed-emo{font-size:1.5rem;display:block;margin-bottom:2px}
+  .themed-es{font-family:'Baloo 2',cursive;font-size:.9rem;color:var(--terra);display:block;font-weight:700}
+  .themed-ru{font-size:.75rem;color:var(--ink-soft);font-weight:700;display:block}
+
+  /* PRACTICE */
+  .practice-zone{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:18px;padding:22px;margin:14px 0;text-align:center}
+  .practice-cmd{font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--teal);min-height:50px;margin:10px 0}
+  .practice-opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+  .practice-opt{background:#fff;border:3px solid #e0d8cc;border-radius:14px;padding:10px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito'}
+  .practice-opt:hover{border-color:var(--teal)}
+  .practice-opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .practice-opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  .practice-opt:disabled{cursor:not-allowed;opacity:.85}
+  .practice-fb{font-weight:800;margin-top:10px;min-height:24px}
+  .practice-score{font-weight:800;margin-top:8px}
+
   /* SIMON */
   .simon-zone{background:linear-gradient(135deg,#F3E8FF,#E9D5FF);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
   .simon-cmd{font-family:'Baloo 2',cursive;font-size:1.4rem;color:#5B21B6;margin:12px 0;min-height:40px}
@@ -342,6 +369,7 @@
     </div>
     <p class="block-sub">Впервые — полный испанский алфавит! Нажимай на букву — услышишь её и слово-подсказку.</p>
     <div class="alpha-grid" id="alpha-grid"></div>
+
     <div class="sign-zone">
       <p style="font-weight:800;margin-bottom:10px">✍️ Activity «Подпиши свои вещи»: впиши своё имя — и получи диктовку по буквам!</p>
       <input id="sign-name" placeholder="Твоё имя (например: Анна)">
@@ -499,6 +527,38 @@
     <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong><br>Честно оцени себя по 5 критериям — нажми на нужный цвет (таблица ниже).</div></div>
   </section>
 
+  <!-- ДОПОЛНИТЕЛЬНАЯ ПРАКТИКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎯 Дополнительная практика</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Закрепи алфавит! Нажми на букву — услышишь её. Выбери правильное слово!</p>
+
+    <div class="practice-zone">
+      <h4>🎮 Игра «Угадай слово по букве»</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:6px 0">Слушай букву и выбери слово, которое начинается на эту букву!</p>
+      <div class="practice-cmd" id="prac-cmd">Нажми «▶ Начать»!</div>
+      <div class="practice-opts" id="prac-opts"></div>
+      <div class="practice-fb" id="prac-fb"></div>
+      <div class="practice-score">⭐ Звёзд: <span id="prac-stars">0</span> / 10</div>
+      <button class="speak-btn" style="margin-top:10px" onclick="pracStart()">▶ Начать</button>
+    </div>
+
+    <div class="practice-zone">
+      <h4>🎬 Видео для повторения</h4>
+      <p style="color:var(--ink-soft);font-weight:700;margin:6px 0">Посмотри видео и повтори буквы и слова с озвучкой!</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0">
+        <a href="https://www.youtube.com/watch?v=RanvA9uuqak" target="_blank" rel="noopener" style="display:inline-block;background:var(--terra);color:#fff;border-radius:999px;padding:10px 22px;text-decoration:none;font-weight:800;font-size:.9rem">🎬 Испанский алфавит (видео)</a>
+        <a href="https://www.youtube.com/watch?v=Btc21_llmE4" target="_blank" rel="noopener" style="display:inline-block;background:var(--blue);color:#fff;border-radius:999px;padding:10px 22px;text-decoration:none;font-weight:800;font-size:.9rem">📖 Aprende a Leer: Vocales + Sílabas</a>
+      </div>
+    </div>
+
+    <div class="script">
+      <strong>Итоговая ситуация:</strong> Ты знаешь весь испанский алфавит! Назови букву → скажи слово → подпиши свою вещь. ¡Eres genial! 🎉
+    </div>
+  </section>
+
   <!-- САМОПРОВЕРКА -->
   <section class="selfcheck">
     <h4>🚦 Самопроверка «Светофор»</h4>
@@ -535,7 +595,10 @@ var esVoice=null,ruVoice=null;
 function pickVoice(v,prefix,prefer){var best=null,bestScore=-1;for(var i=0;i<v.length;i++){var lang=(v[i].lang||'').toLowerCase(),score=-1;if(lang.indexOf(prefix)===0){score=1;if(lang.indexOf(prefer)===0)score+=2;else if(prefix==='es'&&(lang.indexOf('es-419')===0||lang.indexOf('es-mx')===0||lang.indexOf('es-us')===0))score+=1;if(v[i].default)score+=1;if(/natural|online|premium|neural/i.test(v[i].name||''))score+=1;if(score>bestScore){bestScore=score;best=v[i];}}}return best;}
 function loadVoices(){var v=speechSynthesis.getVoices();esVoice=pickVoice(v,'es','es-');ruVoice=pickVoice(v,'ru','ru-');}
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();setTimeout(loadVoices,300);}
-function speak(t){if(!t||typeof speechSynthesis==='undefined')return;loadVoices();var v=esVoice||ruVoice;var u=new SpeechSynthesisUtterance(t);u.lang=v?v.lang:(/[\u0400-\u04FF]/.test(t)?'ru-RU':'es-ES');u.rate=0.85;u.pitch=1.05;if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function speakParts(parts,i){if(i>=parts.length)return;var p=parts[i];var u=new SpeechSynthesisUtterance(p.t);u.lang=p.lang;u.rate=0.85;u.pitch=1.05;if(p.voice)u.voice=p.voice;u.onend=function(){speakParts(parts,i+1);};speechSynthesis.speak(u);}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;loadVoices();var es=esVoice||null;var ru=ruVoice||null;
+  if(/[\u0400-\u04FF]/.test(t)&&/[A-Za-z]/.test(t)){var parts=[];var cur='';var curRu=false;for(var i=0;i<t.length;i++){var c=t.charCodeAt(i);var isR=c>=0x400&&c<=0x4FF;if(isR!==curRu&&cur.length>0){parts.push({t:cur,lang:curRu?'ru-RU':'es-ES',voice:curRu?ru:es});cur='';}cur+=t[i];curRu=isR;}if(cur.length>0)parts.push({t:cur,lang:curRu?'ru-RU':'es-ES',voice:curRu?ru:es});speechSynthesis.cancel();speakParts(parts,0);return;}
+  var v=es||ru;var u=new SpeechSynthesisUtterance(t);u.lang=v?v.lang:(/[\u0400-\u04FF]/.test(t)?'ru-RU':'es-ES');u.rate=0.85;u.pitch=1.05;if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u);}
 function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
 
 /* ========== БЛОК 3: СОРТИРОВКА РОДА ========== */
@@ -549,9 +612,9 @@ function sortAnswer(g){if(sortIdx>=sortOrder.length)return;var item=sortOrder[so
   else{fb.textContent='❌ Подумай ещё! '+item.w+' — это 🔵 или 🔴?';}}
 
 /* ========== БЛОК 4: АЛФАВИТ ========== */
-var ALPHA=[{l:'A',n:'a',r:'а',w:'Antonio'},{l:'B',n:'be',r:'бэ',w:'Barcelona'},{l:'C',n:'ce',r:'сэ',w:'Carmen'},{l:'D',n:'de',r:'дэ',w:'Diego'},{l:'E',n:'e',r:'э',w:'España'},{l:'F',n:'efe',r:'эфе',w:'Fútbol'},{l:'G',n:'ge',r:'хе',w:'Granada'},{l:'H',n:'hache',r:'аче',w:'Hache',p:'👻'},{l:'I',n:'i',r:'и',w:'Italia'},{l:'J',n:'jota',r:'хота',w:'Jamón'},{l:'K',n:'ka',r:'ка',w:'Kiwi'},{l:'L',n:'ele',r:'эле',w:'Lunes'},{l:'LL',n:'elle',r:'элье',w:'Lluvia'},{l:'M',n:'eme',r:'эме',w:'Madrid'},{l:'N',n:'ene',r:'эне',w:'Navarra'},{l:'Ñ',n:'eñe',r:'энье',w:'Ñandú',p:'🐌'},{l:'O',n:'o',r:'о',w:'Oso'},{l:'P',n:'pe',r:'пэ',w:'Paella'},{l:'Q',n:'cu',r:'ку',w:'Queso'},{l:'R',n:'erre',r:'эрре',w:'Rusia'},{l:'S',n:'ese',r:'эсе',w:'Sol'},{l:'T',n:'te',r:'тэ',w:'Tortilla'},{l:'U',n:'u',r:'у',w:'Uno'},{l:'V',n:'uve',r:'уве',w:'Valencia'},{l:'W',n:'uve doble',r:'уве добле',w:'Waterpolo'},{l:'X',n:'equis',r:'экис',w:'Xilófono'},{l:'Y',n:'i griega',r:'и гриега',w:'Yogur'},{l:'Z',n:'zeta',r:'сета',w:'Zapato'}];
+var ALPHA=[{l:'A',n:'a',r:'а',w:'Antonio'},{l:'B',n:'be',r:'бэ',w:'Barcelona'},{l:'C',n:'ce',r:'сэ',w:'Carmen'},{l:'D',n:'de',r:'дэ',w:'Diego'},{l:'E',n:'e',r:'э',w:'España'},{l:'F',n:'efe',r:'эфе',w:'Fútbol'},{l:'G',n:'ge',r:'хе',w:'Granada'},{l:'H',n:'hache',r:'аче',w:'Hache',p:'👻'},{l:'I',n:'i',r:'и',w:'Italia'},{l:'J',n:'jota',r:'хота',w:'Jamón'},{l:'K',n:'ka',r:'ка',w:'Kiwi'},{l:'L',n:'ele',r:'эле',w:'Lunes'},{l:'LL',n:'elle',r:'эйе',w:'Lluvia'},{l:'M',n:'eme',r:'эме',w:'Madrid'},{l:'N',n:'ene',r:'эне',w:'Navarra'},{l:'Ñ',n:'eñe',r:'энье',w:'Ñandú',p:'🐌'},{l:'O',n:'o',r:'о',w:'Oso'},{l:'P',n:'pe',r:'пэ',w:'Paella'},{l:'Q',n:'cu',r:'ку',w:'Queso'},{l:'R',n:'erre',r:'эрре',w:'Rusia'},{l:'S',n:'ese',r:'эсе',w:'Sol'},{l:'T',n:'te',r:'тэ',w:'Tortilla'},{l:'U',n:'u',r:'у',w:'Uno'},{l:'V',n:'uve',r:'уве',w:'Valencia'},{l:'W',n:'uve doble',r:'уве добле',w:'Waterpolo'},{l:'X',n:'equis',r:'экис',w:'Xilófono'},{l:'Y',n:'i griega',r:'и гриега',w:'Yogur'},{l:'Z',n:'zeta',r:'сета',w:'Zapato'}];
 var ALPHA_BY={};ALPHA.forEach(function(a){ALPHA_BY[a.l]=a;});
-function letterSay(a){var n=esVoice?a.n:(ruVoice?(a.r||a.n):a.n);return n+' de '+a.w;}
+function letterSay(a){return (a.r||a.n)+' de '+a.w;}
 var RU2ES={'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'E','Ж':'J','З':'Z','И':'I','Й':'Y','К':'K','Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'H','Ц':'C','Ч':'C','Ш':'S','Щ':'S','Ы':'I','Э':'E','Ю':'U','Я':'A'};
 (function(){var g=document.getElementById('alpha-grid');ALPHA.forEach(function(a){var d=document.createElement('div');d.className='alpha-cell';d.innerHTML='<div class="L">'+a.l+'</div><div class="N">'+a.n+'</div><div class="W">'+(a.p?('<span style="font-size:1.1rem">'+a.p+'</span> '):'')+a.w+'</div>';d.onclick=function(){speak(letterSay(a));};g.appendChild(d);});})();
 function signName(){var name=document.getElementById('sign-name').value.trim();var capName=name?cap(name.toLowerCase()):'Anna';var hint=document.getElementById('sign-hint');if(hint){hint.textContent='Теперь подпиши по-испански свои настоящие вещи, например: «Este cuaderno es de '+capName+'»!';}name=name.toUpperCase();if(!name){document.getElementById('sign-result').textContent='✍️ Впиши своё имя!';return;}
@@ -559,6 +622,31 @@ function signName(){var name=document.getElementById('sign-name').value.trim();v
   var text='Mi nombre se escribe: '+name+'. '+parts.join(', ')+'. ¡Este cuaderno es de '+cap(name.toLowerCase())+'!';
   document.getElementById('sign-result').textContent=text;speak(text);}
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+
+/* ========== ДОПОЛНИТЕЛЬНАЯ ПРАКТИКА ========== */
+var PRAC_Q=[
+  {letter:'B',word:'el oso',ru:'медведь',wrong:['el gato','la vaca']},
+  {letter:'C',word:'el gato',ru:'кошка',wrong:['el perro','el pez']},
+  {letter:'E',word:'el elefante',ru:'слон',wrong:['la vaca','el león']},
+  {letter:'G',word:'las gafas',ru:'очки',wrong:['los zapatos','la bola']},
+  {letter:'H',word:'las hojas',ru:'листья',wrong:['las uvas','el queso']},
+  {letter:'L',word:'la llave',ru:'ключ',wrong:['el papel','la silla']},
+  {letter:'M',word:'la mesa',ru:'стол',wrong:['el sol','la vaca']},
+  {letter:'P',word:'el papel',ru:'бумага',wrong:['el queso','las uvas']},
+  {letter:'S',word:'el sol',ru:'солнце',wrong:['la luna','el coche']},
+  {letter:'Z',word:'los zapatos',ru:'туфли',wrong:['las botas','el sombrero']}
+];
+var pracIdx=0,pracStars=0,pracOrder=[];
+function pracStart(){pracIdx=0;pracStars=0;pracOrder=shuffle(PRAC_Q.slice());document.getElementById('prac-stars').textContent='0';pracNext();}
+function pracNext(){if(pracIdx>=pracOrder.length){document.getElementById('prac-cmd').textContent='🎉 ¡Muy bien! Все буквы угаданы!';document.getElementById('prac-opts').innerHTML='';return;}
+  var q=pracOrder[pracIdx];document.getElementById('prac-cmd').textContent='🔊 Буква: '+q.letter;speak(letterSay(ALPHA_BY[q.letter]));
+  var opts=shuffle([q.word].concat(q.wrong));var box=document.getElementById('prac-opts');box.innerHTML='';
+  opts.forEach(function(o){var b=document.createElement('button');b.className='practice-opt';b.textContent=o;
+    b.onclick=function(){var all=box.querySelectorAll('.practice-opt');all.forEach(function(x){x.disabled=true;});
+      if(o===q.word){b.classList.add('correct');pracStars++;document.getElementById('prac-stars').textContent=pracStars;document.getElementById('prac-fb').textContent='✅ ¡Correcto! '+q.word+' — '+q.ru;speak(q.word);}
+      else{b.classList.add('wrong');document.getElementById('prac-fb').textContent='❌ Правильно: '+q.word+' ('+q.ru+')';}
+      pracIdx++;setTimeout(pracNext,1200);};box.appendChild(b);});
+  document.getElementById('prac-fb').textContent='';}
 
 /* ========== БЛОК 5: SIMON ========== */
 var SIMON=[{cmd:'¡Simón dice: coge el lápiz!',ru:'возьми карандаш',ans:'lápiz'},{cmd:'¡Simón dice: toca la goma!',ru:'дотронься до ластика',ans:'goma'},{cmd:'¡Simón dice: abre el cuaderno!',ru:'открой тетрадь',ans:'cuaderno'},{cmd:'¡Cierra el estuche!',ru:'закрой пенал (Симон не сказал!)',ans:'STOP'},{cmd:'¡Simón dice: levanta el libro!',ru:'подними книгу',ans:'libro'},{cmd:'¡Toca algo rojo!',ru:'дотронься до чего-то красного (Симон не сказал!)',ans:'STOP'},{cmd:'¡Simón dice: toca la mochila!',ru:'дотронься до рюкзака',ans:'mochila'},{cmd:'¡Simón dice: coge el bolígrafo!',ru:'возьми ручку',ans:'bolígrafo'}];

@@ -86,12 +86,8 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
   font-weight:700;
   display:inline;
 }
-.grammar-hint::after{
-  content:attr(data-hint);
-  position:absolute;
-  bottom:calc(100% + 8px);
-  left:50%;
-  transform:translateX(-50%);
+#grammar-tooltip{
+  position:fixed;
   background:var(--ink);
   color:#fff;
   padding:10px 14px;
@@ -105,30 +101,28 @@ h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
   box-shadow:0 4px 16px rgba(0,0,0,.25);
   opacity:0;
   pointer-events:none;
-  transition:opacity .2s;
-  z-index:100;
+  transition:opacity .15s;
+  z-index:99999;
   font-style:normal;
   text-align:left;
+  font-family:'Nunito',system-ui,sans-serif;
 }
-.grammar-hint::before{
+#grammar-tooltip.show{opacity:1}
+#grammar-tooltip::after{
   content:'';
   position:absolute;
-  bottom:calc(100% + 2px);
+  bottom:-12px;
   left:50%;
   transform:translateX(-50%);
   border:6px solid transparent;
   border-top-color:var(--ink);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .2s;
-  z-index:100;
 }
-@media (hover:hover){
-  .grammar-hint:hover::after,
-  .grammar-hint:hover::before{opacity:1}
+#grammar-tooltip.above::after{
+  bottom:auto;
+  top:-12px;
+  border-top-color:transparent;
+  border-bottom-color:var(--ink);
 }
-.grammar-hint.active::after,
-.grammar-hint.active::before{opacity:1}
 .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:10px;padding:12px 16px;font-weight:700;font-size:.92rem;margin-top:18px;line-height:1.7}
 .note.red{background:#FBF0ED;border-left-color:var(--p1)}
 .note.green{background:#F3F6EA;border-left-color:var(--p2)}
@@ -832,6 +826,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;fo
 
 <footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España!</footer>
 <div id="toast" role="status"></div>
+<div id="grammar-tooltip"></div>
 
 <script>
 /* ====== СИНТЕЗ РЕЧИ (испанский голос) ====== */
@@ -853,16 +848,58 @@ document.addEventListener('click',e=>{
 });
 
 /* ====== ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ (мобильный тап) ====== */
+const _gtt=document.getElementById('grammar-tooltip');
+let _gttTarget=null;
+function showGrammarTooltip(el){
+  const hint=el.dataset.hint;
+  if(!hint)return;
+  _gttTarget=el;
+  _gtt.textContent=hint;
+  _gtt.classList.remove('above','show');
+  document.body.appendChild(_gtt);
+  const r=el.getBoundingClientRect();
+  let left=r.left+r.width/2;
+  let top=r.top-10;
+  _gtt.style.left=left+'px';
+  _gtt.style.top=top+'px';
+  _gtt.style.transform='translate(-50%,-100%)';
+  _gtt.classList.add('show');
+  const tr=_gtt.getBoundingClientRect();
+  if(tr.top<4){
+    _gtt.classList.add('above');
+    _gtt.style.top=(r.bottom+10)+'px';
+    _gtt.style.transform='translate(-50%,0)';
+  }
+  if(tr.left<4)_gtt.style.left=(tr.width/2+4)+'px';
+  if(tr.right>window.innerWidth-4)_gtt.style.left=(window.innerWidth-tr.width/2-4)+'px';
+}
+function hideGrammarTooltip(){
+  _gtt.classList.remove('show','above');
+  _gttTarget=null;
+}
 document.addEventListener('click',function(e){
   const hint=e.target.closest('.grammar-hint');
   if(hint){
     document.querySelectorAll('.grammar-hint.active').forEach(el=>{if(el!==hint)el.classList.remove('active');});
-    hint.classList.toggle('active');
+    if(_gttTarget===hint){
+      hideGrammarTooltip();
+      hint.classList.remove('active');
+    }else{
+      hint.classList.add('active');
+      showGrammarTooltip(hint);
+    }
     e.stopPropagation();
     return;
   }
   document.querySelectorAll('.grammar-hint.active').forEach(el=>el.classList.remove('active'));
+  hideGrammarTooltip();
 });
+if(window.matchMedia('(hover:hover)').matches){
+  document.querySelectorAll('.grammar-hint').forEach(el=>{
+    el.addEventListener('mouseenter',()=>showGrammarTooltip(el));
+    el.addEventListener('mouseleave',hideGrammarTooltip);
+  });
+}
 
 /* ====== КОНТРАКТ: ПОКАЗАТЬ/СКРЫТЬ ПЕРЕВОД АБЗАЦА ====== */
 document.querySelectorAll('.cl-toggle').forEach(btn=>{
