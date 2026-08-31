@@ -71,12 +71,20 @@
   .sort-fb{font-weight:800;margin-top:12px;min-height:26px}
 
   /* АЛФАВИТ */
-  .alpha-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px;margin:14px 0}
-  .alpha-cell{background:#fff;border:2px solid #e0d8cc;border-radius:12px;padding:10px 4px;text-align:center;cursor:pointer;transition:.2s}
-  .alpha-cell:hover{border-color:var(--teal);transform:scale(1.06)}
-  .alpha-cell .L{font-family:'Baloo 2',cursive;font-size:1.4rem;color:var(--teal);font-weight:800}
-  .alpha-cell .N{font-size:.68rem;font-weight:800;color:var(--ink);margin:2px 0 1px}
-  .alpha-cell .W{font-size:.62rem;font-weight:700;color:var(--ink-soft)}
+  .alpha-table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .alpha-table th{background:var(--teal);color:#fff;padding:10px 8px;font-size:.82rem;font-weight:800;text-align:left;white-space:nowrap}
+  .alpha-table td{padding:9px 8px;border-bottom:1px solid #f0ede6;font-size:.88rem;vertical-align:middle}
+  .alpha-table tr:last-child td{border-bottom:none}
+  .alpha-table tr{cursor:pointer;transition:background .15s}
+  .alpha-table tr:hover td{background:#FFF8EC}
+  .alpha-table .col-letter{font-family:'Baloo 2',cursive;font-size:1.5rem;color:var(--teal);font-weight:800;text-align:center;min-width:48px}
+  .alpha-table .col-name{font-weight:800;color:var(--ink)}
+  .alpha-table .col-trans{font-family:monospace;color:var(--blue);font-weight:700}
+  .alpha-table .col-sound{color:var(--terra);font-weight:700}
+  .alpha-table .col-example{font-weight:700;color:var(--ink)}
+  .alpha-table .col-example .emo{font-size:1.3rem;margin-right:4px}
+  .alpha-table .col-example .es{font-family:'Baloo 2',cursive;color:var(--terra)}
+  .alpha-table .silent{color:var(--ink-soft);font-style:italic}
   .sign-zone{background:#FFF8DC;border:2px dashed var(--sun);border-radius:16px;padding:18px;margin:14px 0}
   .sign-zone input{border:2px dashed var(--sun);border-radius:10px;padding:10px 14px;font-family:'Nunito';font-weight:800;font-size:1.1rem;width:220px;background:#fff}
   .sign-result{margin-top:12px;font-family:'Baloo 2',cursive;font-size:1.15rem;color:#B8860B;min-height:30px}
@@ -367,8 +375,16 @@
       <h2 class="block-title">🔤 Алфавит: подпиши свои вещи</h2>
       <span class="time-badge">⏱ 8 минут</span>
     </div>
-    <p class="block-sub">Впервые — полный испанский алфавит! Нажимай на букву — услышишь её и слово-подсказку.</p>
-    <div class="alpha-grid" id="alpha-grid"></div>
+    <p class="block-sub">Полный испанский алфавит! Нажми на строку — услышишь название буквы и пример-подсказку.</p>
+    <div style="overflow-x:auto"><table class="alpha-table" id="alpha-table"><thead><tr>
+      <th>Буква</th><th>Название</th><th>Транскрипция</th><th>Звук в слове</th><th>Пример</th>
+    </tr></thead><tbody id="alpha-tbody"></tbody></table></div>
+
+    <h4 style="margin:18px 0 8px">🔗 Диграфы (буквы-герои)</h4>
+    <div style="overflow-x:auto"><table class="alpha-table"><tbody>
+      <tr onclick="speak('elle de Lluvia')"><td class="col-letter">LL ll</td><td class="col-name">elle</td><td class="col-trans">[эйе]</td><td class="col-sound">[й]</td><td class="col-example"><span class="emo">🌧️</span> <span class="es">Lluvia</span> (дождь)</td></tr>
+      <tr onclick="speak('che de Chocolate')"><td class="col-letter">CH ch</td><td class="col-name">che</td><td class="col-trans">[чэ]</td><td class="col-sound">[ч]</td><td class="col-example"><span class="emo">🍫</span> <span class="es">Chocolate</span></td></tr>
+    </tbody></table></div>
 
     <div class="sign-zone">
       <p style="font-weight:800;margin-bottom:10px">✍️ Activity «Подпиши свои вещи»: впиши своё имя — и получи диктовку по буквам!</p>
@@ -612,11 +628,41 @@ function sortAnswer(g){if(sortIdx>=sortOrder.length)return;var item=sortOrder[so
   else{fb.textContent='❌ Подумай ещё! '+item.w+' — это 🔵 или 🔴?';}}
 
 /* ========== БЛОК 4: АЛФАВИТ ========== */
-var ALPHA=[{l:'A',n:'a',r:'а',w:'Antonio'},{l:'B',n:'be',r:'бэ',w:'Barcelona'},{l:'C',n:'ce',r:'сэ',w:'Carmen'},{l:'D',n:'de',r:'дэ',w:'Diego'},{l:'E',n:'e',r:'э',w:'España'},{l:'F',n:'efe',r:'эфе',w:'Fútbol'},{l:'G',n:'ge',r:'хе',w:'Granada'},{l:'H',n:'hache',r:'аче',w:'Hache',p:'👻'},{l:'I',n:'i',r:'и',w:'Italia'},{l:'J',n:'jota',r:'хота',w:'Jamón'},{l:'K',n:'ka',r:'ка',w:'Kiwi'},{l:'L',n:'ele',r:'эле',w:'Lunes'},{l:'LL',n:'elle',r:'эйе',w:'Lluvia'},{l:'M',n:'eme',r:'эме',w:'Madrid'},{l:'N',n:'ene',r:'эне',w:'Navarra'},{l:'Ñ',n:'eñe',r:'энье',w:'Ñandú',p:'🐌'},{l:'O',n:'o',r:'о',w:'Oso'},{l:'P',n:'pe',r:'пэ',w:'Paella'},{l:'Q',n:'cu',r:'ку',w:'Queso'},{l:'R',n:'erre',r:'эрре',w:'Rusia'},{l:'S',n:'ese',r:'эсе',w:'Sol'},{l:'T',n:'te',r:'тэ',w:'Tortilla'},{l:'U',n:'u',r:'у',w:'Uno'},{l:'V',n:'uve',r:'уве',w:'Valencia'},{l:'W',n:'uve doble',r:'уве добле',w:'Waterpolo'},{l:'X',n:'equis',r:'экис',w:'Xilófono'},{l:'Y',n:'i griega',r:'и гриега',w:'Yogur'},{l:'Z',n:'zeta',r:'сета',w:'Zapato'}];
-var ALPHA_BY={};ALPHA.forEach(function(a){ALPHA_BY[a.l]=a;});
+var ALPHA=[
+{l:'A a',n:'a',tr:'[а]',sound:'[а]',w:'Antonio',emo:'👦'},
+{l:'B b',n:'be',tr:'[бэ]',sound:'[б]',w:'Barcelona',emo:'🏙️'},
+{l:'C c',n:'ce',tr:'[сэ]',sound:'[к] перед a/o/u · [с]/[θ] перед e/i',w:'Carmen',emo:'👧'},
+{l:'D d',n:'de',tr:'[дэ]',sound:'[д]',w:'Diego',emo:'👦'},
+{l:'E e',n:'e',tr:'[э]',sound:'[э]',w:'España',emo:'🇪🇸'},
+{l:'F f',n:'efe',tr:'[эфэ]',sound:'[ф]',w:'Fútbol',emo:'⚽'},
+{l:'G g',n:'ge',tr:'[хэ]',sound:'[г] перед a/o/u · [х] перед e/i',w:'Granada',emo:'🏰'},
+{l:'H h',n:'hache',tr:'[ачэ]',sound:'не читается 👻',w:'Hache',emo:'👻',silent:true},
+{l:'I i',n:'i',tr:'[и]',sound:'[и]',w:'Italia',emo:'🇮🇹'},
+{l:'J j',n:'jota',tr:'[хота]',sound:'[х]',w:'Jamón',emo:'🍖'},
+{l:'K k',n:'ka',tr:'[ка]',sound:'[к]',w:'Kiwi',emo:'🥝'},
+{l:'L l',n:'ele',tr:'[элэ]',sound:'[л]',w:'Lunes',emo:'📅'},
+{l:'M m',n:'eme',tr:'[эмэ]',sound:'[м]',w:'Madrid',emo:'🏙️'},
+{l:'N n',n:'ene',tr:'[энэ]',sound:'[н]',w:'Número',emo:'🔢'},
+{l:'Ñ ñ',n:'eñe',tr:'[энье]',sound:'[нь]',w:'Ñandú',emo:'🦩'},
+{l:'O o',n:'o',tr:'[о]',sound:'[о]',w:'Oso',emo:'🐻'},
+{l:'P p',n:'pe',tr:'[пэ]',sound:'[п]',w:'Paella',emo:'🥘'},
+{l:'Q q',n:'cu',tr:'[ку]',sound:'[к] (только в que, qui)',w:'Queso',emo:'🧀'},
+{l:'R r',n:'erre',tr:'[эррэ]',sound:'[р] — раскатистое [рр]',w:'Rusia',emo:'🇷🇺'},
+{l:'S s',n:'ese',tr:'[эсэ]',sound:'[с]',w:'Sol',emo:'☀️'},
+{l:'T t',n:'te',tr:'[тэ]',sound:'[т]',w:'Tortilla',emo:'🫓'},
+{l:'U u',n:'u',tr:'[у]',sound:'[у]',w:'Uno',emo:'1️⃣'},
+{l:'V v',n:'uve',tr:'[убэ]',sound:'[б] (звучит как B!)',w:'Valencia',emo:'🍊'},
+{l:'W w',n:'uve doble',tr:'[убэ доблэ]',sound:'[у] или [б] (в заимствованиях)',w:'Wi-Fi',emo:'📶'},
+{l:'X x',n:'equis',tr:'[экис]',sound:'[кс]',w:'Taxi',emo:'🚕'},
+{l:'Y y',n:'i griega',tr:'[и гриэга]',sound:'[й] (в слове) · [и] (в конце)',w:'Yogur',emo:'🥛'},
+{l:'Z z',n:'zeta',tr:'[сэта]',sound:'[с]/[θ]',w:'Zapato',emo:'👟'}
+];
+var ALPHA_BY={};ALPHA.forEach(function(a){ALPHA_BY[a.l.split(' ')[0]]=a;ALPHA_BY[a.l]=a;});
 function letterSay(a){return a.n+' de '+a.w;}
-var RU2ES={'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'E','Ж':'J','З':'Z','И':'I','Й':'Y','К':'K','Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'H','Ц':'C','Ч':'C','Ш':'S','Щ':'S','Ы':'I','Э':'E','Ю':'U','Я':'A'};
-(function(){var g=document.getElementById('alpha-grid');ALPHA.forEach(function(a){var d=document.createElement('div');d.className='alpha-cell';d.innerHTML='<div class="L">'+a.l+'</div><div class="N">'+a.n+'</div><div class="W">'+(a.p?('<span style="font-size:1.1rem">'+a.p+'</span> '):'')+a.w+'</div>';d.onclick=function(){speak(letterSay(a));};g.appendChild(d);});})();
+(function(){var tb=document.getElementById('alpha-tbody');ALPHA.forEach(function(a){
+  var tr=document.createElement('tr');tr.onclick=function(){speak(letterSay(a));};
+  tr.innerHTML='<td class="col-letter">'+a.l+'</td><td class="col-name">'+a.n+'</td><td class="col-trans">'+a.tr+'</td><td class="col-sound'+(a.silent?' silent':'')+'">'+a.sound+'</td><td class="col-example"><span class="emo">'+a.emo+'</span> <span class="es">'+a.w+'</span></td>';
+  tb.appendChild(tr);});})();
 function signName(){var name=document.getElementById('sign-name').value.trim();var capName=name?cap(name.toLowerCase()):'Anna';var hint=document.getElementById('sign-hint');if(hint){hint.textContent='Теперь подпиши по-испански свои настоящие вещи, например: «Este cuaderno es de '+capName+'»!';}name=name.toUpperCase();if(!name){document.getElementById('sign-result').textContent='✍️ Впиши своё имя!';return;}
   var parts=[];for(var i=0;i<name.length;i++){var ch=name[i];var es=RU2ES[ch]||(/[A-Z]/.test(ch)?ch:null);if(es&&ALPHA_BY[es])parts.push(letterSay(ALPHA_BY[es]));}
   var text='Mi nombre se escribe: '+name+'. '+parts.join(', ')+'. ¡Este cuaderno es de '+cap(name.toLowerCase())+'!';
