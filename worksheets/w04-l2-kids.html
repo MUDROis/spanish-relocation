@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 11 · Uno, dos, tres... ¡Muchos! — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --blue:#2274A5; --pink:#E91E63; --gold:#B8860B;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E0F2F1,#B2DFDB,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px;flex-wrap:wrap}
+  .name-row .w{display:inline-block;min-width:140px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}
+  .c-gold{background:var(--gold)}.c-blue{background:var(--blue)}
+  .ex-title{font-weight:800;font-size:14.5px;flex:1}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+  .emo{font-size:17px;margin-right:6px;vertical-align:middle}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .emoji{font-size:16px}
+  .desc-item .blank{display:inline-block;min-width:120px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+  .desc-item .hint{color:#999;font-size:11px}
+
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px;font-size:13.5px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:22px;height:22px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:19px;font-weight:800;color:var(--ocean);flex-shrink:0;font-size:.85rem}
+  .gap-item .g{display:inline-block;width:46px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center;font-weight:700}
+  .gap-item .word{font-weight:700}
+  .gap-item .hint{color:#999;font-size:11px}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--oliva);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--oliva)}
+  .build-line{border-bottom:1.6px dashed var(--oliva);height:24px}
+
+  .math-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .math-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:14px;flex-wrap:wrap}
+  .math-item .num{display:inline-block;width:22px;height:22px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:19px;font-weight:800;color:var(--afran);flex-shrink:0;font-size:.85rem}
+  .math-item .word{font-weight:800;color:var(--ink)}
+  .math-item .eq{display:inline-block;width:52px;border-bottom:1.6px dashed var(--afran);height:22px;vertical-align:bottom;text-align:center;font-weight:800}
+  .math-word{font-weight:700}
+
+  .alpha-box{background:#FFF3E0;border:2px dashed var(--afran);border-radius:12px;padding:14px;margin-bottom:10px;page-break-inside:avoid}
+  .alpha-box .prompt{font-weight:800;color:var(--afran);margin-bottom:8px}
+  .alpha-word{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+  .alpha-letter{display:inline-block;width:26px;height:30px;border:1.6px solid var(--afran);border-radius:6px;text-align:center;line-height:27px;font-weight:800;font-size:15px;color:var(--afran);background:#fff}
+  .alpha-blank{display:inline-block;width:26px;height:30px;border-bottom:2px dashed var(--afran);vertical-align:bottom}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;flex:1;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .sit{font-weight:800;margin-bottom:3px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;font-size:13px}
+  .tl-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .tl-table th:not(:first-child){text-align:center;width:80px}
+  .tl-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+  .footer b{color:var(--teal)}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🔢 Uno, dos, tres... ¡Muchos!</h1>
+    <div class="sub">Рабочий лист к Уроку 11 · Станция 2: Mi Colegio · множественное число, HAY, артикли un/una/unos/unas, счёт и алфавит</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, а потом <strong>проверь вместе с родителем или учителем</strong>. Вспоминай карточки урока 11!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">1</span>
+      <span class="ex-title">Соедини: один ↔ много</span>
+      <span class="ex-skill">🗣 Лексика</span>
+    </div>
+    <div class="ex-instruction">Впиши букву множественного числа рядом с единственным.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Один (единственное)</th><th>Много (множественное)</th></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">✏️</span> el lápiz</td><td>а) los cuadernos</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">🩹</span> la goma</td><td>б) los bolígrafos</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">🖊️</span> el bolígrafo</td><td>в) los lápices</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">📓</span> el cuaderno</td><td>г) las gomas</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">📏</span> la regla</td><td>д) los estuches</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">👝</span> el estuche</td><td>е) las reglas</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">✂️</span> las tijeras</td><td>ж) los sacapuntas</td></tr>
+      <tr><td><span class="ans-box"></span><span class="emo">🪄</span> el sacapuntas</td><td>з) las tijeras</td></tr>
+    </table>
+    <div class="hint-box" style="margin-top:10px">💡 <strong>Хитрость:</strong> <b>sacapuntas</b> и <b>tijeras</b> — особенные слова. Вспомни «слова-секреты» из Блока 2 урока!</div>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: ПО КОНТЕКСТУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">2</span>
+      <span class="ex-title">Выбери правильное слово</span>
+      <span class="ex-skill">🗣 Лексика</span>
+    </div>
+    <div class="ex-instruction">Обведи правильный вариант: один или много?</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">✏️✏️</span> В пенале много карандашей: <span class="blank"></span> <span class="hint">(el lápiz / los lápices)</span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🩹🩹</span> У меня два ластика: <span class="blank"></span> <span class="hint">(una goma / dos gomas)</span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🖊️🖊️🖊️🖊️</span> У меня много ручек: <span class="blank"></span> <span class="hint">(un bolígrafo / muchos bolígrafos)</span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">📓</span> У меня одна тетрадь: <span class="blank"></span> <span class="hint">(un cuaderno / unos cuadernos)</span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">📏📏📏</span> В классе много линеек: <span class="blank"></span> <span class="hint">(la regla / las reglas)</span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: АРТИКЛИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Впиши: un / una / unos / unas</span>
+      <span class="ex-skill">🧩 Грамматика · артикли</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> один «мальчик» = <b>un</b>, одна «девочка» = <b>una</b>, несколько «мальчиков» = <b>unos</b>, несколько «девочек» = <b>unas</b>.</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span><span class="word">Hay</span> <span class="g"></span> <span class="word">lápiz.</span></div>
+      <div class="gap-item"><span class="num">2</span><span class="word">Hay</span> <span class="g"></span> <span class="word">gomas.</span></div>
+      <div class="gap-item"><span class="num">3</span><span class="word">Tengo</span> <span class="g"></span> <span class="word">bolígrafo.</span></div>
+      <div class="gap-item"><span class="num">4</span><span class="word">Tengo</span> <span class="g"></span> <span class="word">cuadernos.</span></div>
+      <div class="gap-item"><span class="num">5</span><span class="word">Hay</span> <span class="g"></span> <span class="word">regla.</span></div>
+      <div class="gap-item"><span class="num">6</span><span class="word">Hay</span> <span class="g"></span> <span class="word">tijeras.</span></div>
+      <div class="gap-item"><span class="num">7</span><span class="word">Tengo</span> <span class="g"></span> <span class="word">colores.</span></div>
+      <div class="gap-item"><span class="num">8</span><span class="word">Hay</span> <span class="g"></span> <span class="word">estuche.</span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу из слов</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу. Помни: <b>hay</b> не меняется!</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">bolígrafos</span><span class="build-word">dos</span><span class="build-word">Hay</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">mochila</span><span class="build-word">tres</span><span class="build-word">En</span><span class="build-word">cuadernos</span><span class="build-word">hay</span><span class="build-word">mi</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">colores</span><span class="build-word">unos</span><span class="build-word">Tengo</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">gomas</span><span class="build-word">Hay</span><span class="build-word">muchas</span><span class="build-word">.</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЧИСЛА И МАТЕМАТИКА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">5</span>
+      <span class="ex-title">Числа и математика по-испански</span>
+      <span class="ex-skill">🔢 Счёт + − =</span>
+    </div>
+    <div class="hint-box">💡 <strong>Знаки:</strong> <b>+</b> = más · <b>−</b> = menos · <b>=</b> = son / es igual a. Пример: <b>dos más tres son cinco</b> (2 + 3 = 5).</div>
+    <div class="ex-instruction">Реши примеры и запиши ответ СЛОВОМ по-испански: «dos más tres = cinco».</div>
+    <div class="math-grid">
+      <div class="math-item"><span class="num">1</span><span class="word">dos más tres =</span> <span class="eq"></span></div>
+      <div class="math-item"><span class="num">2</span><span class="word">cuatro más uno =</span> <span class="eq"></span></div>
+      <div class="math-item"><span class="num">3</span><span class="word">cinco más dos =</span> <span class="eq"></span></div>
+      <div class="math-item"><span class="num">4</span><span class="word">tres más tres =</span> <span class="eq"></span></div>
+      <div class="math-item"><span class="num">5</span><span class="word">siete menos dos =</span> <span class="eq"></span></div>
+      <div class="math-item"><span class="num">6</span><span class="word">seis menos tres =</span> <span class="eq"></span></div>
+      <div class="math-item"><span class="num">7</span><span class="word">ocho menos cuatro =</span> <span class="eq"></span></div>
+      <div class="math-item"><span class="num">8</span><span class="word">diez menos cinco =</span> <span class="eq"></span></div>
+    </div>
+    <div class="hint-box" style="margin-top:10px">🎯 <strong>Задача:</strong> В пенале <b>tres lápices</b>. Ты дал другу <b>dos</b>. Сколько осталось? Напиши ответ по-испански словом: <span class="blank" style="display:inline-block;min-width:120px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom"></span></div>
+  </div>
+
+  <!-- 6. АЛФАВИТ: ПРОГОВОРИ И СОБЕРИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-gold">6</span>
+      <span class="ex-title">Алфавит: проговори и собери слова</span>
+      <span class="ex-skill">🔤 Алфавит + письмо</span>
+    </div>
+    <div class="ex-instruction">Буквы перепутаны! Проговори слово по буквам ВСЛУХ, расставь их по порядку и впиши слово в клетки.</div>
+
+    <div class="alpha-box">
+      <div class="prompt">✏️ Карандаш</div>
+      <div class="alpha-word">
+        <span class="alpha-letter">Z</span><span class="alpha-letter">L</span><span class="alpha-letter">P</span><span class="alpha-letter">A</span><span class="alpha-letter">I</span>
+      </div>
+      <div class="alpha-word" style="margin-top:8px">
+        <span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span>
+      </div>
+    </div>
+
+    <div class="alpha-box">
+      <div class="prompt">🖊️ Ручка</div>
+      <div class="alpha-word">
+        <span class="alpha-letter">R</span><span class="alpha-letter">O</span><span class="alpha-letter">F</span><span class="alpha-letter">I</span><span class="alpha-letter">G</span><span class="alpha-letter">A</span><span class="alpha-letter">L</span><span class="alpha-letter">B</span><span class="alpha-letter">O</span>
+      </div>
+      <div class="alpha-word" style="margin-top:8px">
+        <span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span>
+      </div>
+    </div>
+
+    <div class="alpha-box">
+      <div class="prompt">🩹 Ластик</div>
+      <div class="alpha-word">
+        <span class="alpha-letter">A</span><span class="alpha-letter">M</span><span class="alpha-letter">O</span><span class="alpha-letter">G</span>
+      </div>
+      <div class="alpha-word" style="margin-top:8px">
+        <span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span>
+      </div>
+    </div>
+
+    <div class="alpha-box">
+      <div class="prompt">📓 Тетрадь</div>
+      <div class="alpha-word">
+        <span class="alpha-letter">R</span><span class="alpha-letter">O</span><span class="alpha-letter">N</span><span class="alpha-letter">U</span><span class="alpha-letter">A</span><span class="alpha-letter">E</span><span class="alpha-letter">D</span><span class="alpha-letter">C</span>
+      </div>
+      <div class="alpha-word" style="margin-top:8px">
+        <span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span><span class="alpha-blank"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">7</span>
+      <span class="ex-title">Прочитай и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Pablo. En mi mochila hay dos lápices, tres bolígrafos y unos cuadernos. En el estuche hay muchas gomas y una regla. No hay tijeras. ¡Hay muchos colores!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Cuántos lápices hay en la mochila? <span class="ru">(Сколько карандашей в рюкзаке?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué hay en el estuche? <span class="ru">(Что в пенале?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Hay tijeras? <span class="ru">(Есть ли ножницы?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Cuántos bolígrafos hay? <span class="ru">(Сколько ручек?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Hay muchos colores? <span class="ru">(Много ли цветных карандашей?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 8. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">8</span>
+      <span class="ex-title">Послушай и напиши</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши, что услышал(а)!</div>
+    <div class="listen-item"><span class="lnum">1.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span> → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨‍ Для родителя (что читать):</b> 1) dos lápices · 2) tres bolígrafos · 3) unas gomas · 4) muchos cuadernos · 5) una regla. Читайте спокойно, можно дважды.</div>
+  </div>
+
+  <!-- 9. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">9</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+
+    <div class="speak-item">
+      <div class="sit">1. Покажи, что у тебя в пенале (3 предмета).</div>
+      <div class="tpl">En mi estuche hay dos lápices y un bolígrafo.</div>
+      <span class="ru">В моём пенале два карандаша и ручка.</span>
+      <span class="speak-check"></span>
+    </div>
+    <div class="speak-item">
+      <div class="sit">2. Скажи, сколько у тебя тетрадей.</div>
+      <div class="tpl">Tengo tres cuadernos.</div>
+      <span class="ru">У меня три тетради.</span>
+      <span class="speak-check"></span>
+    </div>
+    <div class="speak-item">
+      <div class="sit">3. Скажи, что тебе нужны ножницы.</div>
+      <div class="tpl">Necesito unas tijeras.</div>
+      <span class="ru">Мне нужны ножницы.</span>
+      <span class="speak-check"></span>
+    </div>
+    <div class="speak-item">
+      <div class="sit">4. Продиктуй по буквам слово «lápiz».</div>
+      <div class="tpl">L — Á — P — I — Z (ele, a, pe, i, zeta).</div>
+      <span class="ru">Проговорил(а) буквы по-испански.</span>
+      <span class="speak-check"></span>
+    </div>
+    <div class="speak-item">
+      <div class="sit">5. Реши вслух: 5 − 2 = ?</div>
+      <div class="tpl">Cinco menos dos son tres.</div>
+      <span class="ru">Пять минус два — три.</span>
+      <span class="speak-check"></span>
+    </div>
+  </div>
+
+  <!-- 10. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">10</span>
+      <span class="ex-title">Самопроверка «Светофор» 🚦</span>
+      <span class="ex-skill">🟢🟡🔴 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Делать слова множественными (lápiz → lápices)</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Сказать «Hay...» (один / много)</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Выбирать un / una / unos / unas</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Считать предметы и решать примеры + − =</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Проговорить слово по буквам (алфавит)</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Рассказать, что в рюкзаке (En mi mochila hay...)</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+    </table>
+    <p style="margin-top:10px;font-size:.85rem;color:#777;font-weight:700">📸 Покажи Светофор родителям — вместе разберём всё, что 🔴!</p>
+  </div>
+
+  <div class="footer">
+    Интерактивная школа МУДРО · Рабочий лист к Уроку 2 · Станция 2: Mi Colegio · 2026<br>
+    ¡Tú puedes! 💪
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 11: Uno, dos, tres... ¡Muchos! — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --pink:#E91E63; --p4:#2C5E8A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink);transition:.2s}
+  .back-btn:hover{background:#f3ebc8}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E0F2F1 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--teal)}
+  .hero .sub{max-width:660px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+  .final-situation{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--teal);text-align:left}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--teal)}
+  .goals h2{font-size:1.3rem;margin-bottom:14px}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#E0F2F1;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:16px;text-align:center;cursor:pointer;border:3px solid #E0F2F1;transition:.25s;box-shadow:0 4px 14px rgba(0,0,0,.06);user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--teal)}
+  .word-card .emo{font-size:2.2rem;display:block;margin-bottom:6px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--teal)}
+  .word-card .ru{color:var(--ink-soft);font-size:.85rem;font-weight:700}
+.speak-btn{background:var(--teal);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+.speak-btn:active{transform:scale(.93)}
+.trainer-btn{background:var(--teal);color:#fff;border-radius:999px;padding:8px 16px;text-decoration:none;font-weight:800;font-size:.85rem;display:inline-block;transition:.15s}
+.trainer-btn:active{transform:scale(.94)}
+.trainer-btn.button-alt{background:#E9A13B}
+
+  .rule-card{background:#fff;border:3px solid var(--sun);border-radius:16px;padding:16px;text-align:center;margin:8px 0}
+  .rule-card .big{font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--terra)}
+
+  .game-zone{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-word{font-family:'Baloo 2',cursive;font-size:1.8rem;color:var(--teal);margin:10px 0;min-height:44px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #cfd8dc;border-radius:14px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.98rem}
+  .opt:hover:not(:disabled){border-color:var(--teal)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .count-emo{font-size:1.6rem;letter-spacing:4px;margin:10px 0;min-height:40px}
+
+  .pbl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:14px 0}
+  .pbl-item{background:#fff;border:3px solid #e0d8cc;border-radius:14px;padding:12px 6px;text-align:center;cursor:pointer;transition:.2s;font-weight:700;font-size:.85rem;position:relative}
+  .pbl-item .emo{font-size:1.8rem;display:block}
+  .pbl-item.in{border-color:var(--green);background:#E8F5E9}
+  .qty-row{display:flex;gap:6px;justify-content:center;margin-top:6px}
+  .qty{border:2px solid #cfd8dc;background:#fff;border-radius:8px;padding:2px 8px;font-weight:800;cursor:pointer;font-size:.8rem}
+  .qty.sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .pbl-result{background:#E8F5E9;border-radius:14px;padding:16px;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--green);min-height:60px}
+
+  .ball{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd54f,var(--terra));border:none;cursor:pointer;font-size:2.6rem;box-shadow:0 8px 22px rgba(232,96,76,.4);transition:.2s}
+  .ball:hover{transform:scale(1.08) rotate(-8deg)}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--teal);background:#E0F2F1}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .sb-target{background:#fff;border:2px dashed #ccc;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--teal)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--teal);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--teal);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--teal);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(66,85,255,.3)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+
+  /* ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ */
+  .grammar-hint{
+    position:relative;
+    color:var(--blue);
+    border-bottom:2px dashed var(--blue);
+    cursor:help;
+    font-weight:700;
+    font-style:normal;
+    display:inline;
+  }
+  .grammar-hint::after{
+    content:attr(data-hint);
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:.85rem;
+    font-weight:700;
+    line-height:1.4;
+    white-space:normal;
+    width:max-content;
+    max-width:280px;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+    font-style:normal;
+  }
+  .grammar-hint::before{
+    content:'';
+    position:absolute;
+    bottom:calc(100% + 2px);
+    left:50%;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-top-color:var(--ink);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:100;
+  }
+  @media (hover:hover){
+    .grammar-hint:hover::after,
+    .grammar-hint:hover::before{opacity:1}
+  }
+  .grammar-hint.active::after,
+  .grammar-hint.active::before{opacity:1}
+
+  /* СВЕТОФОР */
+  .selfcheck{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .selfcheck h4{margin-bottom:10px}
+  .tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem;min-width:480px}
+  .tl-table th,.tl-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+  .tl-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+  .tl-table th:not(:first-child){text-align:center}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:52px;padding:7px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1rem;font-weight:800;transition:.15s;text-align:center}
+  .tl-cell:hover{background:#E0F2F1}
+  .tl-cell.active{border-color:#2B2118;background:#FFF3DC}
+  .tl-reset{background:#fff;border:2px solid var(--teal);color:var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;margin-top:12px;font-family:'Nunito';font-size:.9rem;transition:.15s}
+  .tl-reset:hover{background:#E0F2F1}
+
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 2 · Mi Colegio · Урок 2 из 12 · По курсу — Урок 11 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🔢 УРОК 11 · НЕДЕЛЯ 4</span>
+  <h1>Uno, dos, tres... <span>¡Muchos!</span></h1>
+  <p class="sub">Один карандаш — <em>un lápiz</em>. А два? <em>¡Dos lápices!</em> Сегодня ты узнаешь магию множественного числа, волшебное слово <strong>HAY</strong> и артикли <strong>un/una/unos/unas</strong> — и соберёшь рюкзак мечты!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты показываешь свой рюкзак и говоришь:<br>
+    <em>«En mi mochila hay tres lápices, dos bolígrafos y unas gomas. <span class="grammar-hint" data-hint="¡Estoy preparado! — «Я готов!» (девочка скажет preparada)">¡Estoy preparado!</span>»</em> — «В моём рюкзаке три карандаша, две ручки и несколько ластиков. Я готов!» 🎒
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🔢</span> Делать слова множественными: -s / -es / -ces</div>
+      <div class="goal-item"><span class="emoji">🎒</span> Говорить о многих предметах урока 10</div>
+      <div class="goal-item"><span class="emoji">🎲</span> Использовать HAY (оно не меняется!)</div>
+      <div class="goal-item"><span class="emoji">📚</span> Выбирать артикли un / una / unos / unas</div>
+      <div class="goal-item"><span class="emoji">🔢</span> Считать предметы до 20 (12 лет — до 100)</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Мастер множеств» 🔢</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: один → много</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">
+      В уроке 10 ты называл ОДИН предмет: <span class="grammar-hint" data-hint="un lápiz — «один карандаш». un — артикль единственного числа мужского рода.">un lápiz</span>, <span class="grammar-hint" data-hint="una goma — «один ластик». una — артикль единственного числа женского рода.">una goma</span>, <span class="grammar-hint" data-hint="un bolígrafo — «одна ручка». un — артикль единственного числа мужского рода.">un bolígrafo</span>. Но в рюкзаке их МНОГО! Сегодня учимся говорить о многих.
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">Нажми на рюкзак — и посмотри, как один предмет становится многими! 🎒</p>
+      <button class="ball" style="font-size:2.2rem" onclick="openBag()">🎒</button>
+      <div class="count-emo" id="bag-demo">✏️</div>
+      <div class="game-word" id="bag-word">un lápiz</div>
+      <button class="speak-btn" onclick="speak(document.getElementById('bag-word').textContent)">🔊 Послушать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 2 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🔢 Магия множественного числа</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="rule-card"><div class="big">-a / -o → + s</div>goma → goma<b>s</b><br>cuaderno → cuaderno<b>s</b><br>bolígrafo → bolígrafo<b>s</b></div>
+      <div class="rule-card"><div class="big">-e / согласная → + es</div>estuche → estuche<b>s</b></div>
+      <div class="rule-card"><div class="big">-z → -ces ⚡</div>lápi<b>z</b> → lápi<b>ces</b></div>
+    </div>
+    <div class="script">
+      <strong>Слова-секреты:</strong> <span class="grammar-hint" data-hint="sacapuntas заканчивается на -s, поэтому во множественном числе НЕ меняется: los sacapuntas.">sacapuntas → sacapuntas</span> (не меняется!) и <span class="grammar-hint" data-hint="tijeras уже множественное число: «ножницы» — одни, а слово «многое». Las tijeras.">tijeras — уже множественное!</span>
+    </div>
+    <div class="game-zone" id="zone-sp">
+      <p style="font-weight:800">🎮 Игра «Один → много»: выбери правильное множественное!</p>
+      <div class="game-word" id="sp-word">Нажми «▶ Начать»!</div>
+      <div class="opts" id="sp-opts"></div>
+      <div class="game-fb" id="sp-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="sp-stars">0</span> / <span id="sp-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="spStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3 -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🎲 HAY + артикли un/una/unos/unas</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <div class="script">
+      <strong>Волшебное слово <span class="grammar-hint" data-hint="hay — «есть / находятся». НЕ меняется по числам: Hay un lápiz / Hay dos lápices — одинаково!">HAY</span>:</strong> оно НЕ меняется! <em>Hay un lápiz</em> (есть один) · <em>Hay dos lápices</em> (есть два) · <em>Hay muchos lápices</em> (есть много).
+    </div>
+    <table style="width:100%;border-collapse:collapse;margin:12px 0">
+      <tr style="background:var(--soft)"><th style="padding:8px;text-align:left">Единственное</th><th style="padding:8px;text-align:left">Множественное</th><th style="padding:8px;text-align:left">Значение</th></tr>
+      <tr><td style="padding:8px;border-bottom:1px solid #eee"><b>un</b> lápiz</td><td style="padding:8px;border-bottom:1px solid #eee"><b>unos</b> lápices</td><td style="padding:8px;border-bottom:1px solid #eee">один / несколько карандашей</td></tr>
+      <tr><td style="padding:8px;border-bottom:1px solid #eee"><b>una</b> goma</td><td style="padding:8px;border-bottom:1px solid #eee"><b>unas</b> gomas</td><td style="padding:8px;border-bottom:1px solid #eee">один / несколько ластиков</td></tr>
+      <tr><td style="padding:8px"><b>un</b> bolígrafo</td><td style="padding:8px"><b>unos</b> bolígrafos</td><td style="padding:8px">одна / несколько ручек</td></tr>
+    </table>
+    <div class="game-zone" id="zone-articles">
+      <p style="font-weight:800">🎮 Выбери правильный артикль!</p>
+      <div class="game-word" id="art-word">Нажми «▶ Начать»!</div>
+      <div class="opts" id="art-opts"></div>
+      <div class="game-fb" id="art-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="art-stars">0</span> / <span id="art-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="artStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4 -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">🔢 Игра «Поймай число!» — считаем предметы</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <div class="game-zone" id="zone-count">
+      <p style="font-weight:800">Посчитай предметы и выбери число по-испански!</p>
+      <div class="count-emo" id="cnt-emo">Нажми «▶ Начать»!</div>
+      <div class="opts" id="cnt-opts"></div>
+      <div class="game-fb" id="cnt-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="cnt-stars">0</span> / <span id="cnt-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="cntStart()">▶ Начать</button>
+    </div>
+    <div class="script">
+      <strong>Математические знаки:</strong> <span class="grammar-hint" data-hint="más — «плюс»">más (+)</span> · <span class="grammar-hint" data-hint="menos — «минус»">menos (−)</span> · <span class="grammar-hint" data-hint="igual — «равняется / это»">es igual a (=)</span> · <span class="grammar-hint" data-hint="son — «будет / всего». После «=» говорим son">son (=)</span>
+    </div>
+  </section>
+
+  <!-- БЛОК 4Б: МАТЕМАТИКА -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">🧮 Математика по-испански: + − =</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Решай примеры и задачи на сложение и вычитание — считаем по-испански!</p>
+    <div class="game-zone" id="zone-math">
+      <p style="font-weight:800">🎮 Реши пример: выбери ответ по-испански!</p>
+      <div class="game-word" id="math-expr" style="font-size:1.6rem">Нажми «▶ Начать»!</div>
+      <div class="opts" id="math-opts"></div>
+      <div class="game-fb" id="math-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="math-stars">0</span> / <span id="math-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="mathStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone" id="zone-problems">
+      <p style="font-weight:800">🧾 Задачи со словами урока: реши и посчитай!</p>
+      <div class="game-word" id="prob-expr" style="font-size:1.1rem">Нажми «▶ Начать»!</div>
+      <div class="opts" id="prob-opts"></div>
+      <div class="game-fb" id="prob-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="prob-stars">0</span> / <span id="prob-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="probStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 5 -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🎒 PBL: Рюкзак мечты</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Выбери все предметы уроков 10–11 и количество — получишь готовую фразу с озвучкой!</p>
+    <div class="pbl-grid" id="pbl-grid"></div>
+    <button class="speak-btn" onclick="buildBag()">🎒 Показать мой рюкзак</button>
+    <div class="pbl-result" id="pbl-result">En mi mochila hay: …</div>
+    <div class="script">
+      <strong>Для 12 лет:</strong> посчитай бюджет! <em>Un lápiz cuesta 1 euro. Tres lápices cuestan 3 euros.</em> Сколько стоит твой рюкзак мечты? 💶
+    </div>
+  </section>
+
+  <!-- БЛОК 6 -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🎾 La Pelota Preguntona</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="game-zone">
+      <button class="ball" onclick="pelota()">🎾</button>
+      <div class="game-word" id="pel-q" style="font-size:1.2rem">Лови мяч и отвечай!</div>
+      <div class="opts" id="pel-opts"></div>
+      <div class="game-fb" id="pel-fb"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 7 -->
+  <section class="block" style="--c:#FFC93C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж «Мастер множеств»</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🔢</div>
+      <h3>Мастер множеств</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты научился говорить о многих предметах по-испански!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 <span class="grammar-hint" data-hint="¡Enhorabuena! — «поздравляю!» (дословно «в добрый час!»). Самое тёплое слово-поздравление">¡Enhorabuena!</span> Бейдж «Мастер множеств» 🔢 добавлен в твой паспорт!</div>
+    </div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🗣 Слова урока</h2></div>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('los lápices')"><span class="emo">✏️</span><div class="es">los lápices</div><div class="ru">карандаши</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('los bolígrafos')"><span class="emo">🖊️</span><div class="es">los bolígrafos</div><div class="ru">ручки</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('las gomas')"><span class="emo">🩹</span><div class="es">las gomas</div><div class="ru">ластики</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('los cuadernos')"><span class="emo">📓</span><div class="es">los cuadernos</div><div class="ru">тетради</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('los estuches')"><span class="emo">👝</span><div class="es">los estuches</div><div class="ru">пеналы</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('los libros')"><span class="emo">📖</span><div class="es">los libros</div><div class="ru">книги</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('las reglas')"><span class="emo">📏</span><div class="es">las reglas</div><div class="ru">линейки</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('los colores')"><span class="emo">🖍️</span><div class="es">los colores</div><div class="ru">цветные карандаши</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('las mochilas')"><span class="emo">🎒</span><div class="es">las mochilas</div><div class="ru">рюкзаки</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('unos / unas')"><span class="emo">🔢</span><div class="es">unos / unas</div><div class="ru">несколько</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('muchos / muchas')"><span class="emo">✨</span><div class="es">muchos / muchas</div><div class="ru">много</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('hay')"><span class="emo">🎲</span><div class="es">hay</div><div class="ru">есть / находятся</div><button class="speak-btn">🔊</button></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёры для закрепления</h2></div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+      <a href="#zone-sp" class="trainer-btn">🔄 Один → много</a>
+      <a href="#zone-articles" class="trainer-btn">📚 Артикли un/una</a>
+      <a href="#zone-count" class="trainer-btn">🔢 Поймай число</a>
+      <a href="#zone-math" class="trainer-btn">🧮 Математика + − =</a>
+      <a href="#zone-problems" class="trainer-btn">🧾 Задачи со словами</a>
+      <a href="#zone-alphabet" class="trainer-btn button-alt">🔤 Алфавит</a>
+      <a href="#trainer-match" class="trainer-btn button-alt">🧩 Сопоставление</a>
+      <a href="#trainer-sentences" class="trainer-btn button-alt">🎯 Конструктор фраз</a>
+    </div>
+    <div class="match-game" id="zone-alphabet">
+      <h4>🔤 Алфавит: проговори и собери слова</h4>
+      <p style="color:var(--ink-soft);font-weight:700">Назови предмет по буквам и собери слово из букв алфавита.</p>
+      <div class="game-zone">
+        <p style="font-weight:800">🔤 Аудирование: послушай название букв и отгадай слово!</p>
+        <button class="ball" style="font-size:1.8rem;width:90px;height:90px" onclick="alphaStart()">🔤</button>
+        <div class="game-word" id="alpha-q" style="font-size:1.2rem">Нажми на букву, чтобы начать!</div>
+        <div class="opts" id="alpha-opts"></div>
+        <div class="game-fb" id="alpha-fb"></div>
+        <p style="font-weight:800">⬇️ Собери слово из букв (нажимай буквы по порядку):</p>
+        <div class="game-word" id="alpha-build" style="font-size:1.5rem">…</div>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:6px">
+          <button class="speak-btn" onclick="alphaDelete()" style="background:var(--red)">🗑 Удалить букву</button>
+          <button class="speak-btn" onclick="alphaNext()">🔤 Следующее слово →</button>
+        </div>
+      </div>
+    </div>
+    <div class="match-game" id="trainer-match">
+      <h4>🧩 Сопоставление: «один ↔ много» (10 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+    <div class="match-game" id="trainer-sentences">
+      <h4>🎯 Конструктор фраз: собери предложение</h4>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей множественному числу</strong> · 5 мин<br>Покажи 5 пар: <em>lápiz→lápices, bolígrafo→bolígrafos, goma→gomas...</em> Пусть каждый выберет любимую.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>Семейная игра «Один — много»</strong> · 7 мин ⭐<br>Родители называют предмет по-испански в единственном числе, ты — во множественном. Меняйтесь ролями!</div></div>
+    <div class="task"><div class="task-num">3</div><div><strong>Посчитай свою канцелярию</strong> · 5 мин<br><em>«Tengo tres lápices y dos bolígrafos»</em>. Не знаешь число — вспомни «Волшебный переводчик чисел» из урока 1!</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Повтори все новые слова</strong> · 2 мин<br>Нажимай на карточки раздела «Слова урока»: слушай и повторяй вслух.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br>🧮 Реши примеры · 🔤 Собери слова по буквам · 🧩 Сопоставление (10 пар) · 🎯 Конструктор фраз (5 фраз)</div></div>
+    <div class="task"><div class="task-num">6</div><div><strong>Рабочий лист «¡Muchos!»</strong> · 15 мин ⭐<br>Попроси родителей распечатать лист, выполни задания и раскрась светофор. Принеси на следующий урок!<br><a href="../../worksheets/w04-l2-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> — честно отметь, как у тебя получается (таблица ниже).</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="selfcheck">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <p style="font-weight:700;color:var(--ink-soft);margin-bottom:10px">Нажми на нужный цвет — честно! 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно</p>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Делать слова множественными (-s/-es/-ces)</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+      <tr><td>Говорить «Hay...» (один / много)</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+      <tr><td>Выбирать un / una / unos / unas</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+      <tr><td>Считать предметы по-испански</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
+      <tr><td>Рассказать, что в рюкзаке (En mi mochila hay...)</td><td><button class="tl-cell" data-row="4" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="4" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="4" data-color="3">🔴</button></td></tr>
+      <tr><td>Считать и решать примеры + − =</td><td><button class="tl-cell" data-row="5" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="5" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="5" data-color="3">🔴</button></td></tr>
+      <tr><td>Назвать слово по буквам (алфавит)</td><td><button class="tl-cell" data-row="6" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="6" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="6" data-color="3">🔴</button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p style="margin-top:10px;font-size:.85rem;color:var(--ink-soft);font-weight:700">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1203781103/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-2-%D1%83%D1%80%D0%BE%D0%BA-2-flash-cards/?i=2gqp1x&x=1jqt" target="_blank">
+    <span>📚 Карточки Quizlet · Слова урока 11</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w04-l1.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 10: ¿Qué hay en tu mochila? 🎒</div></a>
+    <a href="./w04-l3.html" class="nav-next"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 12: La Mochila Perfecta 🔒 скоро</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 2: Mi Colegio · 2026</div>
+</main>
+
+<script>
+/* ========== ОЗВУЧКА ========== */
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ========== БЛОК 1: рюкзак ========== */
+var bagOpen=false;
+function openBag(){
+  bagOpen=!bagOpen;
+  document.getElementById('bag-demo').textContent=bagOpen?'✏️✏️✏️':'✏️';
+  document.getElementById('bag-word').textContent=bagOpen?'tres lápices':'un lápiz';
+  speak(bagOpen?'tres lápices':'un lápiz');
+}
+
+/* ========== БЛОК 2: один→много ========== */
+var SP=[
+ {s:'el lápiz',ok:'los lápices',w:['los lápizes','las lápices']},
+ {s:'la goma',ok:'las gomas',w:['los gomas','las goma']},
+ {s:'el bolígrafo',ok:'los bolígrafos',w:['los bolígrafoes','las bolígrafos']},
+ {s:'el cuaderno',ok:'los cuadernos',w:['las cuadernos','los cuaderno']},
+ {s:'el estuche',ok:'los estuches',w:['los estuche','las estuches']},
+ {s:'la regla',ok:'las reglas',w:['los reglas','las regla']},
+ {s:'el sacapuntas',ok:'los sacapuntas',w:['los sacapuntases','las sacapuntas']},
+ {s:'el libro',ok:'los libros',w:['las libros','los libro']}
+];
+var spI=0,spS=0,spOrd=[];
+function spStart(){spI=0;spS=0;spOrd=shuffle(SP.slice());document.getElementById('sp-total').textContent=spOrd.length;spNext();}
+function spNext(){
+  if(spI>=spOrd.length){document.getElementById('sp-word').textContent='🎉 ¡Muy bien!';document.getElementById('sp-opts').innerHTML='';return;}
+  var r=spOrd[spI];
+  document.getElementById('sp-word').textContent=r.s+' → ?';
+  var box=document.getElementById('sp-opts');box.innerHTML='';document.getElementById('sp-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');spS++;speak(r.ok);document.getElementById('sp-fb').textContent='✅ ¡Correcto!';}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('sp-fb').textContent='❌ Правильно: '+r.ok;}
+      document.getElementById('sp-stars').textContent=spS;spI++;setTimeout(spNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ========== БЛОК 3: артикли ========== */
+var ART=[
+ {n:'lápiz',num:1,ok:'un'},{n:'goma',num:1,ok:'una'},{n:'lápiz',num:3,ok:'unos'},{n:'goma',num:3,ok:'unas'},
+ {n:'bolígrafo',num:1,ok:'un'},{n:'regla',num:1,ok:'una'},{n:'libro',num:2,ok:'unos'},{n:'mochila',num:2,ok:'unas'}
+];
+var artI=0,artS=0,artOrd=[];
+function artStart(){artI=0;artS=0;artOrd=shuffle(ART.slice());document.getElementById('art-total').textContent=artOrd.length;artNext();}
+function artNext(){
+  if(artI>=artOrd.length){document.getElementById('art-word').textContent='🎉 ¡Excelente!';document.getElementById('art-opts').innerHTML='';return;}
+  var r=artOrd[artI];
+  var plural=r.num>1;
+  var noun=plural?(r.n==='lápiz'?'lápices':r.n==='goma'?'gomas':r.n==='libro'?'libros':'mochilas'):r.n;
+  document.getElementById('art-word').textContent='___ '+noun+' ('+r.num+')';
+  var box=document.getElementById('art-opts');box.innerHTML='';document.getElementById('art-fb').textContent='';
+  ['un','una','unos','unas'].forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');artS++;speak(o+' '+noun);document.getElementById('art-fb').textContent='✅ ¡Correcto!';}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('art-fb').textContent='❌ Правильно: '+r.ok;}
+      document.getElementById('art-stars').textContent=artS;artI++;setTimeout(artNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ========== БЛОК 4: счёт ========== */
+var NUMW={2:'dos',3:'tres',5:'cinco',7:'siete',10:'diez',12:'doce',15:'quince',20:'veinte'};
+var CNT=[{n:2,e:'✏️'},{n:3,e:'🩹'},{n:5,e:'📓'},{n:7,e:'🖊️'},{n:10,e:'📏'},{n:12,e:'👝'},{n:15,e:'🖍️'},{n:20,e:'📖'}];
+var cntI=0,cntS=0,cntOrd=[];
+function cntStart(){cntI=0;cntS=0;cntOrd=shuffle(CNT.slice());document.getElementById('cnt-total').textContent=cntOrd.length;cntNext();}
+function cntNext(){
+  if(cntI>=cntOrd.length){document.getElementById('cnt-emo').textContent='🎉 ¡Perfecto!';document.getElementById('cnt-opts').innerHTML='';return;}
+  var r=cntOrd[cntI];
+  document.getElementById('cnt-emo').textContent=new Array(r.n+1).join(r.e);
+  var box=document.getElementById('cnt-opts');box.innerHTML='';document.getElementById('cnt-fb').textContent='';
+  var dummies=shuffle(Object.keys(NUMW).map(Number).filter(function(k){return k!==r.n;})).slice(0,2);
+  var opts=shuffle([r.n].concat(dummies));
+  opts.forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=NUMW[o];
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.n){b.classList.add('correct');cntS++;speak(NUMW[o]);document.getElementById('cnt-fb').textContent='✅ ¡Correcto! '+NUMW[o];}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===NUMW[r.n])x.classList.add('correct');});document.getElementById('cnt-fb').textContent='❌ Правильно: '+NUMW[r.n];}
+      document.getElementById('cnt-stars').textContent=cntS;cntI++;setTimeout(cntNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ========== БЛОК 4Б: МАТЕМАТИКА ========== */
+var NUMPLUS={1:'uno',2:'dos',3:'tres',4:'cuatro',5:'cinco',6:'seis',7:'siete',8:'ocho',9:'nueve',10:'diez',11:'once',12:'doce',13:'trece',14:'catorce',15:'quince',16:'dieciséis',17:'diecisiete',18:'dieciocho',19:'diecinueve',20:'veinte',30:'treinta'};
+var MATH_Q=[
+ {exp:'2 + 3',op:'+',a:2,b:3,ans:5,noun:'lápices'},
+ {exp:'5 − 2',op:'−',a:5,b:2,ans:3,noun:'gomas'},
+ {exp:'4 + 1',op:'+',a:4,b:1,ans:5,noun:'bolígrafos'},
+ {exp:'10 − 4',op:'−',a:10,b:4,ans:6,noun:'libros'},
+ {exp:'3 + 3',op:'+',a:3,b:3,ans:6,noun:'cuadernos'},
+ {exp:'8 − 5',op:'−',a:8,b:5,ans:3,noun:'reglas'},
+ {exp:'6 + 4',op:'+',a:6,b:4,ans:10,noun:'colores'},
+ {exp:'7 − 3',op:'−',a:7,b:3,ans:4,noun:'estuches'},
+ {exp:'5 + 5',op:'+',a:5,b:5,ans:10,noun:'mochilas'},
+ {exp:'9 − 2',op:'−',a:9,b:2,ans:7,noun:'sacapuntas'}
+];
+var mathI=0,mathS=0,mathOrd=[];
+function mathStart(){mathI=0;mathS=0;mathOrd=shuffle(MATH_Q.slice());document.getElementById('math-total').textContent=mathOrd.length;mathNext();}
+function mathNext(){
+  if(mathI>=mathOrd.length){document.getElementById('math-expr').textContent='🎉 ¡Matemático!';document.getElementById('math-opts').innerHTML='';return;}
+  var q=mathOrd[mathI];
+  var sign=(q.op==='+')?'+':'−';
+  var signWord=(q.op==='+')?'más':'menos';
+  document.getElementById('math-expr').textContent=NUMPLUS[q.a]+' '+signWord+' '+NUMPLUS[q.b]+' = ?';
+  var box=document.getElementById('math-opts');box.innerHTML='';document.getElementById('math-fb').textContent='';
+  var dummies=shuffle(Object.keys(NUMPLUS).map(Number).filter(function(k){return k!==q.ans;})).slice(0,3);
+  var opts=shuffle([q.ans].concat(dummies));
+  opts.forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=NUMPLUS[o]+' ('+o+')';
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===q.ans){b.classList.add('correct');mathS++;speak(q.ans.toString());document.getElementById('math-fb').textContent='✅ ¡Correcto! '+NUMPLUS[q.ans]+' '+q.noun+'. También: '+q.exp+' = '+NUMPLUS[q.ans];}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent.indexOf('('+q.ans+')')>=0)x.classList.add('correct');});document.getElementById('math-fb').textContent='❌ Правильно: '+NUMPLUS[q.ans];}
+      document.getElementById('math-stars').textContent=mathS;mathI++;setTimeout(mathNext,1500);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ========== БЛОК 4Б: ЗАДАЧИ + СЛОВА ========== */
+var PROBLEM_Q=[
+ {q:'En la mochila hay <b>3 lápices</b> y <b>2 bolígrafos</b>. ¿Cuántos hay?',one:3,two:2,op:'+',ans:5,noun:'cosas',ru:'В рюкзаке 3 карандаша и 2 ручки. Сколько всего?'},
+ {q:'Hay <b>5 gomas</b>. Pierdo <b>2 gomas</b>. ¿Cuántas quedan?',one:5,two:2,op:'−',ans:3,noun:'gomas',ru:'Было 5 ластиков, потерялись 2. Сколько осталось?'},
+ {q:'Pablo tiene <b>4 cuadernos</b> y <b>3 libros</b>. ¿Cuántos hay?',one:4,two:3,op:'+',ans:7,noun:'libros',ru:'У Пабло 4 тетради и 3 книги. Сколько всего?'},
+ {q:'Hay <b>6 reglas</b>. Regalo <b>3 reglas</b>. ¿Cuántas quedan?',one:6,two:3,op:'−',ans:3,noun:'reglas',ru:'Было 6 линеек, подарили 3. Сколько осталось?'},
+ {q:'En el estuche hay <b>2 bolígrafos</b> y <b>3 lápices</b>. ¿Cuántos hay?',one:2,two:3,op:'+',ans:5,noun:'lápices',ru:'В пенале 2 ручки и 3 карандаша. Сколько всего?'}
+];
+var probI=0,probS=0,probOrd=[];
+function probStart(){probI=0;probS=0;probOrd=shuffle(PROBLEM_Q.slice());document.getElementById('prob-total').textContent=probOrd.length;probNext();}
+function probNext(){
+  if(probI>=probOrd.length){document.getElementById('prob-expr').textContent='🎉 ¡Genial matemático!';document.getElementById('prob-opts').innerHTML='';return;}
+  var q=probOrd[probI];
+  document.getElementById('prob-expr').innerHTML=q.q;
+  var box=document.getElementById('prob-opts');box.innerHTML='';document.getElementById('prob-fb').textContent='';
+  var dummies=shuffle(Object.keys(NUMPLUS).map(Number).filter(function(k){return k!==q.ans;})).slice(0,3);
+  var opts=shuffle([q.ans].concat(dummies));
+  opts.forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=NUMPLUS[o]+' ('+o+')';
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===q.ans){b.classList.add('correct');probS++;speak(q.ans.toString());document.getElementById('prob-fb').textContent='✅ ¡Correcto! '+NUMPLUS[q.ans]+' '+q.noun+'!';}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent.indexOf('('+q.ans+')')>=0)x.classList.add('correct');});document.getElementById('prob-fb').textContent='❌ Правильно: '+NUMPLUS[q.ans];}
+      document.getElementById('prob-stars').textContent=probS;probI++;setTimeout(probNext,1500);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ========== ТРЕНАЖЁР: АЛФАВИТ ========== */
+var ALPHA_WORDS=[
+ {word:'LAPIZ',ru:'карандаш'},
+ {word:'GOMA',ru:'ластик'},
+ {word:'BOLIGRAFO',ru:'ручка'},
+ {word:'LIBRO',ru:'книга'},
+ {word:'REGLA',ru:'линейка'},
+ {word:'MOCHILA',ru:'рюкзак'},
+ {word:'ESTUCHE',ru:'пенал'},
+  {word:'TIJERAS',ru:'ножницы'}
+];
+var ALPHA_LETTERS={'A':'a','B':'be','C':'ce','D':'de','E':'e','F':'efe','G':'ge','H':'hache','I':'i','J':'jota','K':'ka','L':'ele','M':'eme','N':'ene','O':'o','P':'pe','Q':'cu','R':'erre','S':'ese','T':'te','U':'u','V':'uve','W':'uve doble','X':'equis','Y':'i griega','Z':'zeta'};
+var alphaI=0,alphaCur=null;
+function alphaStart(){
+  var words=shuffle(ALPHA_WORDS.slice());  /* eslint-disable no-undef */
+  alphaLoadWord(words[alphaI%words.length]);
+}
+function alphaLoadWord(w,noSay){
+  alphaCur=w;
+  document.getElementById('alpha-q').textContent='🔤 Слово: «'+w.ru+'». Назови буквы вслух, потом собери!';
+  document.getElementById('alpha-build').textContent='…';
+  document.getElementById('alpha-fb').textContent='';
+  renderAlphaBuild(w.word);
+  if(!noSay)alphaSayLetters(w.word);
+}
+function alphaNext(){
+  alphaI++;
+  alphaStart();
+}
+function alphaSayLetters(word){
+  var parts=[];
+  for(var i=0;i<word.length;i++){var l=ALPHA_LETTERS[word[i]]||word[i];parts.push(l);}
+  speak(parts.join(', '));
+}
+function renderAlphaBuild(word){
+  var box=document.getElementById('alpha-opts');box.innerHTML='';
+  var letters=word.split('');
+  shuffle(letters.slice()).forEach(function(l,i){
+    var b=document.createElement('button');b.className='opt';b.style.padding='6px 12px';
+    b.textContent=l;b.dataset.orig=i;b.dataset.placed='0';
+    b.onclick=function(){
+      if(b.dataset.placed==='1')return;
+      var cur=document.getElementById('alpha-build').textContent;
+      var before=(cur==='…')?'':cur;
+      document.getElementById('alpha-build').textContent=before+l;
+      b.dataset.placed='1';b.classList.add('placed');
+      if(before+l===alphaCur.word){document.getElementById('alpha-fb').textContent='✅ ¡Perfecto! «'+alphaCur.ru+'» = '+alphaCur.word+'!';speak(alphaCur.word);}
+    };
+    box.appendChild(b);
+  });
+}
+function alphaDelete(){
+  var cur=document.getElementById('alpha-build').textContent;
+  if(!cur||cur==='…')return;
+  var last=cur.charAt(cur.length-1);
+  document.getElementById('alpha-build').textContent=cur.slice(0,-1);
+  document.getElementById('alpha-fb').textContent='';
+  var placed=document.querySelectorAll('#alpha-opts .opt.placed');
+  for(var i=placed.length-1;i>=0;i--){
+    if(placed[i].textContent===last){placed[i].dataset.placed='0';placed[i].classList.remove('placed');break;}
+  }
+}
+// init: show first word
+(function(){var words=shuffle(ALPHA_WORDS.slice());alphaLoadWord(words[0],true);})();
+
+/* ========== БЛОК 5: PBL ========== */
+var PBL=[
+ {id:'lapiz',e:'✏️',s:'lápiz',p:'lápices',g:'m'},
+ {id:'boli',e:'🖊️',s:'bolígrafo',p:'bolígrafos',g:'m'},
+ {id:'goma',e:'🩹',s:'goma',p:'gomas',g:'f'},
+ {id:'sacap',e:'🔄',s:'sacapuntas',p:'sacapuntas',g:'m'},
+ {id:'cuad',e:'📓',s:'cuaderno',p:'cuadernos',g:'m'},
+ {id:'est',e:'👝',s:'estuche',p:'estuches',g:'m'},
+ {id:'libro',e:'📖',s:'libro',p:'libros',g:'m'},
+ {id:'regla',e:'📏',s:'regla',p:'reglas',g:'f'},
+ {id:'tijeras',e:'✂️',s:'tijeras',p:'tijeras',g:'f'},
+ {id:'colores',e:'🖍️',s:'color',p:'colores',g:'m'}
+];
+var pblSel={};
+(function(){
+  var g=document.getElementById('pbl-grid');
+  PBL.forEach(function(it){
+    pblSel[it.id]=0;
+    var d=document.createElement('div');d.className='pbl-item';d.id='pbl-'+it.id;
+    d.innerHTML='<span class="emo">'+it.e+'</span>'+it.s+
+      '<div class="qty-row">'+
+      ['1','2','3','✚'].map(function(q){var val=q==='✚'?'many':q;return '<span class="qty" data-v="'+val+'" onclick="setQty(\''+it.id+'\',\''+val+'\',this)">'+q+'</span>';}).join('')+
+      '</div>';
+    g.appendChild(d);
+  });
+})();
+function setQty(id,val,el){
+  pblSel[id]=val;
+  var box=document.getElementById('pbl-'+id);
+  box.querySelectorAll('.qty').forEach(function(x){x.classList.remove('sel');});
+  el.classList.add('sel');
+  box.classList.toggle('in',val!==0);
+}
+function buildBag(){
+  var parts=[];
+  PBL.forEach(function(it){
+    var q=pblSel[it.id];
+    if(!q)return;
+    var artS=it.g==='f'?'una':'un';
+    var many=it.g==='f'?'muchas':'muchos';
+    if(q==='1')parts.push(artS+' '+it.s);
+    else if(q==='2')parts.push('dos '+it.p);
+    else if(q==='3')parts.push('tres '+it.p);
+    else parts.push(many+' '+it.p);
+  });
+  var res=document.getElementById('pbl-result');
+  if(parts.length===0){res.textContent='🎒 Рюкзак пустой! Выбери предметы и количество.';return;}
+  var last=parts.pop();
+  var text='En mi mochila hay '+(parts.length?parts.join(', ')+' y ':'')+last+'.';
+  res.textContent=text;
+  speak(text);
+}
+
+/* ========== БЛОК 6: мяч ========== */
+var PEL=[
+ {q:'¿Cómo se dice «ручки»?',ok:'los bolígrafos',w:['los bolígrafoes','las bolígrafos']},
+ {q:'«Один ластик» — una goma. А два?',ok:'dos gomas',w:['dos goma','dos unas gomas']},
+ {q:'Множественное от lápiz?',ok:'lápices',w:['lápizes','lápizs']},
+ {q:'Артикль для «goma» (1)?',ok:'una',w:['un','unos']},
+ {q:'Артикль для «lápices» (несколько)?',ok:'unos',w:['unas','un']},
+ {q:'Множественное от sacapuntas?',ok:'los sacapuntas',w:['los sacapuntases','las sacapuntas']},
+ {q:'«Есть три тетради» — как сказать?',ok:'Hay tres cuadernos',w:['Hay tres cuaderno','Son tres cuadernos']}
+];
+function pelota(){
+  var r=PEL[Math.floor(Math.random()*PEL.length)];
+  document.getElementById('pel-q').textContent=r.q;
+  var box=document.getElementById('pel-opts');box.innerHTML='';document.getElementById('pel-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');speak(r.ok);document.getElementById('pel-fb').textContent='✅ ¡Muy bien!';}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('pel-fb').textContent='❌ Правильно: '+r.ok;}
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ========== БЕЙДЖ ========== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un maestro de los plurales!');
+  confetti('🔢');
+  try{localStorage.setItem('mudro_kids_w04l2_badge_plural','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w04l2_badge_plural')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(e){var c=['🎉','⭐',e];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};}(s),3200);}}
+
+/* ========== ТРЕНАЖЁР сопоставление ========== */
+var MATCH=[['el lápiz','los lápices'],['la goma','las gomas'],['el bolígrafo','los bolígrafos'],['el cuaderno','los cuadernos'],['el estuche','los estuches'],['la regla','las reglas'],['el libro','los libros'],['la mochila','las mochilas'],['el sacapuntas','los sacapuntas'],['el color','los colores']];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');mFound++;speak(d.textContent);document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/10';if(mFound===10)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';}
+  else{d.classList.add('wrong');mSel.classList.add('wrong');var a=mSel;setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);}
+  mSel=null;
+}
+renderMatch();
+
+/* ========== ТРЕНАЖЁР конструктор ========== */
+var SB=[
+ {w:['Hay','un','lápiz','.'],t:'Есть один карандаш.'},
+ {w:['Hay','dos','gomas','.'],t:'Есть два ластика.'},
+ {w:['En','mi','mochila','hay','tres','cuadernos','.'],t:'В моём рюкзаке три тетради.'},
+ {w:['Tengo','unos','bolígrafos','.'],t:'У меня несколько ручек.'},
+ {w:['Hay','muchas','reglas','.'],t:'Есть много линеек.'}
+];
+var sbI=0,sbPlaced=[];
+function renderSB(){
+  sbPlaced=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.onclick=function(){if(b.classList.contains('placed'))return;b.classList.add('placed');sbPlaced.push(w);t.textContent=sbPlaced.join(' ');
+      if(sbPlaced.length===SB[sbI].w.length){var ok=sbPlaced.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}};
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ========== СВЕТОФОР ========== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.onclick=function(){
+    var row=c.getAttribute('data-row');
+    document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});
+    c.classList.add('active');
+  };
+});
+document.getElementById('tlReset').addEventListener('click',function(){
+  document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});
+});
+
+/* ========== ГРАММ. ПОДСКАЗКИ ========== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>
