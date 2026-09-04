@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF7EF">
+<title>Урок 3.4 · Урок-повторение: От нуля до ключей — МУДРО</title>
+<meta name="description" content="Урок 3.4: повторение недель 1-3. Семья проходит путь от первого звонка до ключей от квартиры. 36 слов, квест-диалоги, числа и цены, тренажёр.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF7EF; --ink:#2B2118; --muted:#7A6A5C; --card:#fff;
+  --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --gold:#D4A017;
+  --radius:18px; --shadow:0 10px 30px rgba(43,33,24,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+button{font-family:inherit}
+.speak{cursor:pointer}
+
+/* ---------- шапка урока ---------- */
+.lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+.lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+.back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+.back-link:hover{color:var(--p1)}
+.lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+
+/* ---------- hero урока ---------- */
+.lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px}
+.phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+.phase-tag.compact{background:var(--gold);margin-left:8px}
+h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+h1 em{font-style:normal;color:var(--p1)}
+.lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+/* ---------- секции ---------- */
+.section{max-width:1100px;margin:0 auto;padding:34px 20px}
+.step-head{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.step-num{flex:0 0 46px;height:46px;border-radius:50%;background:var(--p1);color:#fff;font-weight:900;display:grid;place-items:center;font-size:1.2rem}
+.step-num.w1{background:var(--p4)}.step-num.w2{background:var(--p2)}.step-num.w3{background:var(--p3)}
+.step-time{font-weight:900;color:var(--muted);font-size:.82rem;letter-spacing:.3px;text-transform:uppercase}
+h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
+.section .sub{color:var(--muted);margin:8px 0 22px;max-width:700px}
+
+/* ---------- грамматические подсказки (всплывающие) ---------- */
+.grammar-hint{
+  position:relative;
+  color:var(--p4);
+  border-bottom:2px dashed var(--p4);
+  cursor:help;
+  font-weight:700;
+  display:inline;
+}
+.grammar-hint::after{
+  content:attr(data-hint);
+  position:absolute;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--ink);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:.85rem;
+  font-weight:700;
+  line-height:1.4;
+  white-space:normal;
+  width:max-content;
+  max-width:300px;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:100;
+  font-style:normal;
+  text-align:left;
+}
+.grammar-hint::before{
+  content:'';
+  position:absolute;
+  bottom:calc(100% + 2px);
+  left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--ink);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:100;
+}
+@media (hover:hover){
+  .grammar-hint:hover::after,
+  .grammar-hint:hover::before{opacity:1}
+}
+.grammar-hint.active::after,
+.grammar-hint.active::before{opacity:1}
+
+/* ---------- вкладки лексики ---------- */
+.layer-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.layer-tab{background:#fff;border:2px solid rgba(43,33,24,.15);border-radius:999px;padding:9px 16px;font-weight:900;cursor:pointer;font-size:.85rem;transition:.15s}
+.layer-tab:hover{border-color:var(--p3)}
+.layer-tab.active{background:var(--p1);color:#fff;border-color:var(--p1)}
+.layer-pane{display:none}
+.layer-pane.active{display:block}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:14px}
+.vocab-card{perspective:1000px;height:170px;cursor:pointer}
+.vocab-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+.vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent;}
+.vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
+.vocab-front .es{font-size:1.1rem;font-weight:800;margin-bottom:6px;line-height:1.3}
+.vocab-front .ru{font-size:.92rem;opacity:.9;font-weight:600}
+.vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.68rem;opacity:.7}
+.vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+.vocab-back .ex{font-size:.95rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3}
+.vocab-back .ex-ru{font-size:.85rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+/* ---------- числа ---------- */
+.num-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:8px}
+.num-card{background:#fff;border-radius:14px;padding:16px;box-shadow:var(--shadow);border-top:5px solid var(--p3)}
+.num-card h4{color:var(--p3);font-weight:900;margin-bottom:8px;font-size:1rem}
+.num-card .pairs{display:flex;flex-direction:column;gap:6px;font-size:.9rem}
+.num-card .pairs b{color:var(--p4)}
+.num-chip{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.num-chip span{background:var(--bg);border:1px dashed rgba(43,33,24,.25);border-radius:999px;padding:5px 10px;font-size:.82rem;font-weight:700}
+.speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
+.speak-btn:hover{background:#66743f}
+.mini-speak{background:none;border:none;cursor:pointer;font-size:1rem;opacity:.6}
+.mini-speak:hover{opacity:1}
+
+/* ---------- грамматика ---------- */
+.grammar-table{width:100%;border-collapse:collapse;margin:12px 0}
+.grammar-table th,.grammar-table td{padding:10px;border:1px solid #ddd;text-align:left;font-size:.9rem}
+.grammar-table th{background:var(--p4);color:#fff}
+.grammar-table td.es{font-weight:700;color:var(--p4)}
+.grammar-table td{vertical-align:top}
+
+/* ---------- викторины ---------- */
+.quiz-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-top:20px}
+.quiz-q{font-weight:900;font-size:1.02rem;margin:16px 0 10px;line-height:1.5}
+.quiz-opts{display:flex;flex-wrap:wrap;gap:10px}
+.quiz-opt{background:#fff;border:2px solid rgba(43,33,24,.18);border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer;transition:.15s;font-size:.92rem}
+.quiz-opt:hover{border-color:var(--p3);background:#FCF0DC}
+.quiz-opt.correct{background:#EFF2E4;border-color:var(--p2)}
+.quiz-opt.wrong{background:#FDE8E5;border-color:var(--p1)}
+.quiz-fb{font-weight:800;min-height:22px;margin-top:8px;font-size:.9rem}
+.qbadge{display:inline-block;background:var(--p2);color:#fff;border-radius:6px;padding:1px 8px;font-size:.75rem;font-weight:900;margin-right:8px;vertical-align:middle}
+
+/* ---------- квест ---------- */
+.quest-station{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;border:2px solid transparent}
+.quest-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;background:#F8F9FA;transition:.2s}
+.quest-head:hover{background:#F0F4FF}
+.quest-head .icon{font-size:1.5rem}
+.quest-head .info{flex:1}
+.quest-head .info h3{font-size:1.02rem;font-weight:900}
+.quest-head .info .sub{font-size:.85rem;color:var(--muted)}
+.quest-head .week-tag{font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.week-tag.w1{background:#E8F0FE;color:var(--p4)}
+.week-tag.w2{background:#F0F7E6;color:var(--p2)}
+.week-tag.w3{background:#FFF7E0;color:var(--p3)}
+.quest-body{display:none;padding:20px}
+.quest-station.open .quest-body{display:block}
+.quest-station.open .quest-head{background:var(--p4);color:#fff}
+.quest-station.open .quest-head .sub{color:rgba(255,255,255,.85)}
+.quest-station.done .quest-head{background:#F0F7E6;border-color:var(--p2)}
+.quest-station.done .quest-head h3::after{content:' ✅';font-size:.9rem}
+.dialog{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.dlg-line{display:flex;gap:10px;align-items:flex-start;background:#F8F9FA;border-radius:10px;padding:10px 12px;border-left:4px solid var(--p4)}
+.dlg-line.you{border-left-color:var(--p3);background:#FFF7E0}
+.dlg-line .role{flex:0 0 86px;font-size:.72rem;font-weight:900;color:var(--p4);text-transform:uppercase;letter-spacing:.3px;padding-top:2px}
+.dlg-line.you .role{color:var(--p3)}
+.dlg-line .txt{flex:1}
+.dlg-line .txt .es{font-weight:800;font-size:.95rem}
+.dlg-line .txt .ru{font-size:.83rem;color:var(--muted)}
+.dlg-line .tlk{flex:0 0 34px}
+.task-box{background:#FFF7E0;border-radius:10px;padding:14px;margin-top:14px}
+.task-box b{color:var(--p3)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:900;font-size:.95rem;cursor:pointer;border:none;text-decoration:none;transition:.2s}
+.btn-primary{background:var(--p1);color:#fff}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{background:#fff;border:2px solid rgba(43,33,24,.15);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--p1)}
+.btn-blue{background:var(--p4);color:#fff}
+.btn-blue:hover{background:#2C5E8A}
+
+/* ---------- продукт: список дел ---------- */
+.checklist-builder{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:20px}
+.checklist-builder input[type="text"],.checklist-builder textarea{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;margin-bottom:10px;font-size:.95rem;font-family:inherit}
+.checklist-builder textarea{min-height:80px;resize:vertical}
+.result-box{background:#F0F4FF;border-radius:10px;padding:16px;margin-top:16px;display:none}
+.result-box.show{display:block}
+.result-box pre{white-space:pre-wrap;font-family:inherit;font-size:.95rem;line-height:1.6;font-weight:700;color:var(--ink)}
+
+/* ---------- домашка ---------- */
+.homework{background:linear-gradient(160deg,#FFF3DC,#FFE7B8);border-radius:24px;padding:30px 26px;box-shadow:var(--shadow)}
+.homework h3{font-weight:900;margin-bottom:6px}
+.hw-meta{font-weight:800;font-size:.9rem;color:var(--muted);margin:4px 0 18px}
+.hw-block{background:rgba(255,255,255,.82);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:0 4px 14px rgba(43,33,24,.06)}
+.hw-block h4{font-weight:900;font-size:1rem;margin-bottom:4px}
+.hw-block p{margin:6px 0;font-weight:700;font-size:.93rem}
+.hw-block .goal{color:var(--muted);font-size:.85rem;font-weight:800;margin-bottom:4px}
+
+/* ---------- тренажёр ---------- */
+.tr-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tr-tab{background:#fff;border:2px solid rgba(43,33,24,.15);border-radius:999px;padding:9px 16px;font-weight:900;cursor:pointer;font-size:.85rem;transition:.15s}
+.tr-tab:hover{border-color:var(--p3)}
+.tr-tab.active{background:var(--p1);color:#fff;border-color:var(--p1)}
+.tr-pane{margin-top:6px}
+.tr-deck{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:14px}
+.tr-card{perspective:1000px;width:min(100%,420px);height:230px;cursor:pointer;touch-action:pan-y}
+.tr-card-inner{position:relative;width:100%;height:100%;transition:transform .35s;transform-style:preserve-3d}
+.tr-card.flipped .tr-card-inner{transform:rotateY(180deg)}
+.tr-card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;border:2px solid rgba(43,33,24,.1);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center}
+.tr-card-face .es{font-weight:900;font-size:1.3rem;color:var(--ink);line-height:1.35}
+.tr-card-face .ru{font-size:1.2rem;color:var(--p2);font-weight:900;line-height:1.35}
+.tr-card-face small{font-size:.76rem;color:var(--muted);font-weight:800}
+.tr-card-back{background:#F3F6EA;border-color:var(--p2);transform:rotateY(180deg)}
+.tr-deck-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+.tr-count{font-weight:900;color:var(--muted);min-width:70px;text-align:center}
+.tr-arrow{width:52px;height:52px;border-radius:50%;border:2px solid rgba(43,33,24,.15);background:#fff;font-size:1.3rem;font-weight:900;cursor:pointer;transition:.15s;display:grid;place-items:center}
+.tr-arrow:hover{border-color:var(--p1);background:#FDE8E5}
+.tr-match{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.tr-col{display:flex;flex-direction:column;gap:8px}
+.tr-chip{background:#fff;border:2px solid var(--p4);border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer;text-align:center;transition:.15s;font-size:.88rem}
+.tr-chip:hover{background:#EFF5FA}
+.tr-chip.selected{border-color:var(--p3);background:#FCF0DC}
+.tr-chip.done{background:#EFF2E4;border-color:var(--p2);cursor:default;opacity:.85}
+.tr-chip.wrong{animation:shake .4s;border-color:var(--p1)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.tr-msg{font-weight:800;margin-top:10px;min-height:24px;font-size:.9rem}
+.sb-answer{min-height:44px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin-bottom:10px}
+.sb-chip{background:#fff;border:2px solid var(--p4);border-radius:8px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s;font-size:.9rem}
+.sb-chip:hover{background:#EFF5FA}
+.sb-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sb-done{border-color:var(--p2);background:#EFF2E4}
+.sb-feedback{font-weight:800;min-height:22px;margin-top:6px;font-size:.9rem}
+
+/* ---------- светофор ---------- */
+.tl-wrap{overflow-x:auto}
+.tl-table{width:100%;border-collapse:collapse;font-size:.92rem;font-weight:700}
+.tl-table th,.tl-table td{padding:10px 12px;border-bottom:1px solid rgba(43,33,24,.08);text-align:left}
+.tl-table th{font-weight:900;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.3px}
+.tl-table td:not(:first-child){text-align:center;width:80px}
+.tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-grid;place-items:center;transition:.15s}
+.tl-cell:hover{transform:scale(1.15)}
+.tl-cell.active{border-color:var(--ink);transform:scale(1.15)}
+
+/* ---------- примечания ---------- */
+.note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:10px;padding:12px 16px;font-weight:700;font-size:.92rem;margin-top:18px;line-height:1.7}
+.note.green{background:#F3F6EA;border-left-color:var(--p2)}
+.note.blue{background:#EAF3FB;border-left-color:var(--p4)}
+
+/* ---------- quizlet ---------- */
+.quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+.quizlet-box h3{margin-bottom:8px}
+.quizlet-box p{font-weight:700;opacity:.92;margin-bottom:16px}
+.quizlet-box .ql-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:13px 30px;border-radius:999px;font-weight:900;text-decoration:none;transition:.2s}
+.quizlet-box a:hover{transform:translateY(-2px)}
+
+/* ---------- навигация ---------- */
+.lesson-nav{display:flex;justify-content:space-between;gap:14px;max-width:1100px;margin:0 auto;padding:10px 20px 60px;flex-wrap:wrap}
+.lesson-nav a{flex:1;min-width:220px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;text-decoration:none;color:var(--ink);font-weight:900;transition:.2s}
+.lesson-nav a:hover{transform:translateY(-3px)}
+.lesson-nav a small{display:block;color:var(--muted);font-weight:800;font-size:.78rem;margin-bottom:3px}
+.lesson-nav a.next{text-align:right}
+
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;font-size:.85rem}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:640px){
+  .hero h1{font-size:1.5rem}
+  .quest-head{flex-wrap:wrap}
+  .dlg-line{flex-direction:column}
+  .dlg-line .role{flex:0 0 auto}
+}
+</style>
+</head>
+<body>
+<script>document.body.insertAdjacentHTML('afterbegin','<div id="gate-overlay" style="position:fixed;inset:0;z-index:99999;background:#FFF7EF"></div>');</script>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 3 · Урок-повторение · Фаза 1 Misión Residencia</span>
+  <span id="auth-area"></span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🔍 Фаза 1 · Документы и жильё</span>
+  <span class="phase-tag compact">⏱ 50 минут · Урок-повторение</span>
+  <h1>Урок 3.4 · <em>От нуля до ключей</em><br>Вся неделя 1–3 за один день</h1>
+  <div class="lesson-meta">
+    <span class="meta-chip">🎯 Цель: пройти весь путь переезда без паники</span>
+    <span class="meta-chip">🗣 36 слов · 6 станций-диалогов</span>
+    <span class="meta-chip">🔢 Числа 0–100 · сотни · тысячи · порядковые</span>
+    <span class="meta-chip">📋 Продукт: список дел семьи</span>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 0: РАЗМИНКА ═══════════ -->
+<section class="section">
+  <div class="step-head"><span class="step-num">0</span><div><span class="step-time">00:00 – 06:00 · Разминка</span><h2>Разминка-эстафета: навыки трёх недель</h2></div></div>
+  <div class="quiz-box">
+    <p class="sub" style="margin-bottom:6px">Каждый вопрос тянет навык из разных уроков. Зелёные метки показывают неделю. Отвечайте быстро — не больше 40 секунд на вопрос!</p>
+    <div id="warmupWrap"></div>
+    <button class="btn btn-ghost" id="warmupReset" style="margin-top:14px">↺ Пройти ещё раз</button>
+  </div>
+  <div class="note green">
+    🔗 <b>Мост к теме:</b> на прошлых неделях вы научились записываться на приём, описывать квартиру и торговаться. Сегодня соединим всё в один рассказ — и добавим <b>числа и цены</b>, без которых не назвать этаж, м² или аренду. <button class="mini-speak speak" data-text="Hoy unimos todo en una historia de mudanza.">🔊</button>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 1: ЧИСЛА ═══════════ -->
+<section class="section">
+  <div class="step-head"><span class="step-num w1">1</span><div><span class="step-time">06:00 – 12:00 · Числа ⭐ НОВОЕ</span><h2>Числа и цены: 0–100, сотни, тысячи, порядковые</h2></div></div>
+  <p class="sub">Чтобы читать объявления и договариваться об аренде, нужны числа: этажи, метры, цены и порядковые. Проговорите вслух и проверьте себя в квизе ниже.</p>
+
+  <div class="num-grid">
+    <div class="num-card">
+      <h4>🔢 0–100 (база)</h4>
+      <div class="pairs">
+        <div>1 <b>uno</b> · 2 <b>dos</b> · 3 <b>tres</b> · 4 <b>cuatro</b> · 5 <b>cinco</b></div>
+        <div>6 <b>seis</b> · 7 <b>siete</b> · 8 <b>ocho</b> · 9 <b>nueve</b> · 10 <b>diez</b></div>
+        <div>20 <b>veinte</b> · 21 <b>veintiuno</b> · 30 <b>treinta</b> · 40 <b>cuarenta</b> · 50 <b>cincuenta</b></div>
+        <div>60 <b>sesenta</b> · 70 <b>setenta</b> · 80 <b>ochenta</b> · 90 <b>noventa</b> · 100 <b>cien</b> <button class="mini-speak speak" data-text="uno dos tres cuatro cinco seis siete ocho nueve diez veinte treinta cuarenta cincuenta cien">🔊</button></div>
+      </div>
+    </div>
+    <div class="num-card">
+      <h4>🏠 Сотни и тысячи (для цен и кварталов)</h4>
+      <div class="pairs">
+        <div>100 <b>cien</b> · 200 <b>doscientos</b> · 300 <b>trescientos</b></div>
+        <div>400 <b>cuatrocientos</b> · 500 <b>quinientos</b> · 600 <b>seiscientos</b></div>
+        <div>700 <b>setecientos</b> · 800 <b>ochocientos</b> · 900 <b>novecientos</b></div>
+        <div>1.000 <b>mil</b> · 2.000 <b>dos mil</b> · 100.000 <b>cien mil</b> <button class="mini-speak speak" data-text="cien doscientos trescientos novecientos mil dos mil">🔊</button></div>
+      </div>
+      <div class="note" style="margin-top:8px">Цены по-испански звучат так: <b>900 euros</b> → <i>novecientos euros</i>; <b>1.250 €</b> → <i>mil doscientos cincuenta euros</i>.</div>
+    </div>
+    <div class="num-card">
+      <h4>🔢 Порядковые до 10 (этажи)</h4>
+      <div class="pairs">
+        <div>1º <b>primero</b> · 2º <b>segundo</b> · 3º <b>tercero</b> · 4º <b>cuarto</b></div>
+        <div>5º <b>quinto</b> · 6º <b>sexto</b> · 7º <b>séptimo</b> · 8º <b>octavo</b></div>
+        <div>9º <b>noveno</b> · 10º <b>décimo</b> <button class="mini-speak speak" data-text="primero segundo tercero cuarto quinto sexto séptimo octavo noveno décimo">🔊</button></div>
+      </div>
+      <div class="note" style="margin-top:8px">Этаж в объявлении: <b>3ª planta</b> читается <i>«tercera planta»</i>. Для этажа «первый» говорят <i>«planta baja»</i> (первый этаж).</div>
+    </div>
+  </div>
+
+  <div class="quiz-box">
+    <h4 style="margin-bottom:6px">⚡ Практика: числа в жизни</h4>
+    <div id="numQuiz"></div>
+    <button class="btn btn-ghost" id="numQuizReset" style="margin-top:14px">↺ Пройти ещё раз</button>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 2: ЛЕКСИКА-ИНТЕГРАЦИЯ ═══════════ -->
+<section class="section">
+  <div class="step-head"><span class="step-num w2">2</span><div><span class="step-time">12:00 – 22:00 · Лексика</span><h2>Лексика-интеграция: 36 слов трёх недель</h2></div></div>
+  <div class="quiz-box">
+    <p class="sub" style="margin-bottom:6px">Лицевая сторона карточки — слово и перевод, оборот — пример из реального переезда. Переворачивайте карточку, чтобы увидеть пример и прослушать его.</p>
+    <div class="layer-tabs">
+      <button class="layer-tab active" onclick="showVocab('w1',this)">🗂 Неделя 1 (12)</button>
+      <button class="layer-tab" onclick="showVocab('w2',this)">🏠 Неделя 2 (12)</button>
+      <button class="layer-tab" onclick="showVocab('w3',this)">🔍 Неделя 3 (12)</button>
+    </div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+    <div class="note">
+      💡 <b>Принцип интеграции:</b> каждое слово из одной недели тянется в следующую. <span class="grammar-hint" data-hint="la fianza — залог, депозит: обычно один месяц аренды">la fianza</span> (неделя 2) появляется в контракте (неделя 4), <b>hay humedades</b> (неделя 3) становится аргументом в торге.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 3: ГРАММАТИКА-ИНТЕГРАЦИЯ ═══════════ -->
+<section class="section">
+  <div class="step-head"><span class="step-num w3">3</span><div><span class="step-time">22:00 – 30:00 · Грамматика</span><h2>Грамматика-интеграция: каркас для говорения</h2></div></div>
+  <div class="quiz-box">
+    <p class="sub" style="margin-bottom:6px">Каждая конструкция появилась в своём уроке. Наведите курсор (или нажмите) на подчёркнутое слово, чтобы увидеть <b>формы глагола</b> или таблицу <b>предлогов места</b>.</p>
+    <table class="grammar-table">
+      <thead><tr><th>Конструкция</th><th>Когда использовать</th><th>Пример (нажмите 🔊)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="es"><span class="grammar-hint" data-hint="ser: soy, eres, es, somos, sois, son — свойство/происхождение. estar: estoy, estás, está, estamos, estáis, están — состояние/место. hay — есть/имеется (без лица).">ser / estar / hay</span></td>
+          <td>Описание: свойство / состояние / наличие</td>
+          <td>El piso <b>es</b> luminoso. La cocina <b>está</b> reformada. <b>Hay</b> un parque cerca. <button class="speak-btn" onclick="speak('El piso es luminoso. La cocina está reformada. Hay un parque cerca.')">🔊</button></td>
+        </tr>
+        <tr>
+          <td class="es"><span class="grammar-hint" data-hint="cerca de — рядом с; lejos de — далеко от; al lado de — сбоку от; encima de — над; debajo de — под; enfrente de — напротив; entre — между; en — в/на">Предлоги места</span></td>
+          <td>Где что находится</td>
+          <td>La farmacia está <b>cerca del</b> colegio. <button class="speak-btn" onclick="speak('La farmacia está cerca del colegio.')">🔊</button></td>
+        </tr>
+        <tr>
+          <td class="es"><span class="grammar-hint" data-hint="cómo — как; cuánto — сколько; dónde — где; cuándo — когда; qué — что; quién — кто; por qué — почему (¿Cuánto cuesta? — Сколько стоит?)">Вопросительные слова</span></td>
+          <td>Задаём вопросы</td>
+          <td>¿<b>Cuánto</b> cuesta? ¿<b>Dónde</b> está? ¿<b>Cuándo</b> se puede visitar? <button class="speak-btn" onclick="speak('¿Cuánto cuesta? ¿Dónde está? ¿Cuándo se puede visitar?')">🔊</button></td>
+        </tr>
+        <tr>
+          <td class="es"><span class="grammar-hint" data-hint="Вежливые формы: quisiera — я хотел бы; podría — мог бы; me gustaría — мне бы хотелось (Quisiera hablar... — Я хотел бы поговорить...)">Вежливые формы</span></td>
+          <td>Звонки и просьбы</td>
+          <td><b>Quisiera</b> hablar con el propietario. ¿<b>Podría</b> repetir? <button class="speak-btn" onclick="speak('Quisiera hablar con el propietario. ¿Podría repetir?')">🔊</button></td>
+        </tr>
+        <tr>
+          <td class="es"><span class="grammar-hint" data-hint="me gusta/encanta — мне нравится/очень нравится; te gusta — тебе; le gusta — ему/ей; nos gusta — нам. Сравнение: más...que — более...чем; menos...que — менее...чем (Me encanta el barrio — Мне очень нравится район)">gustar / encantar + сравнения</span></td>
+          <td>Предпочтения и сравнение</td>
+          <td>Me <b>encanta</b> el barrio. Es <b>más tranquilo que</b> el centro. <button class="speak-btn" onclick="speak('Me encanta el barrio. Es más tranquilo que el centro.')">🔊</button></td>
+        </tr>
+        <tr>
+          <td class="es"><span class="grammar-hint" data-hint="pero — но (противопоставление); porque — потому что (причина): «Me gusta, pero es caro, porque está bien situado»">pero / porque</span></td>
+          <td>Аргументация решения</td>
+          <td>Me gusta, <b>pero</b> es caro, <b>porque</b> está bien situado. <button class="speak-btn" onclick="speak('Me gusta, pero es caro, porque está bien situado.')">🔊</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note green">
+      💡 <b>Главное правило курса:</b> грамматика — каркас, на который нанизываем лексические чанки. Не зубрим таблицы — используем готовые фразы в ролевых играх.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 4: КВЕСТ ═══════════ -->
+<section class="section">
+  <div class="step-head"><span class="step-num">4</span><div><span class="step-time">30:00 – 45:00 · Квест</span><h2>Квест «Один день семьи»</h2></div></div>
+  <p class="sub">Семья проходит весь путь переезда за один день. Откройте станцию, разыграйте диалог в паре: партнёр читает <span style="color:var(--p4);font-weight:900">синие</span> реплики, вы — <span style="color:var(--p3);font-weight:900">жёлтые</span>. Отметьте станцию, когда диалог отыгран!</p>
+  <div id="questContainer"></div>
+  <div class="note">
+    🎯 <b>Правило квеста:</b> на каждой станции произнесите вслух минимум 2 реплики. Не нужно идеально — нужно, чтобы вас поняли! Числа (этажи, цены, м²) уже спрятаны в диалогах — следите за ними.
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 5: ПРОДУКТ ═══════════ -->
+<section class="section">
+  <div class="step-head"><span class="step-num w3">5</span><div><span class="step-time">45:00 – 50:00 · Продукт (PBL)</span><h2>Продукт урока: список дел семьи</h2></div></div>
+  <div class="checklist-builder">
+    <h4 style="margin-bottom:12px">📋 Mi lista de tareas · Мой список дел</h4>
+    <label><b>1. Документы (неделя 1):</b> что уже сделано?</label>
+    <input type="text" id="task-docs" placeholder="Например: Ya tengo cita previa para el NIE">
+    <label><b>2. Жильё (неделя 2):</b> что ищете? Добавьте <span class="grammar-hint" data-hint="Опишите комнаты и место: «un piso con tres habitaciones cerca del colegio»">число комнат</span> и цену.</label>
+    <input type="text" id="task-flat" placeholder="Например: Busco un piso con tres habitaciones cerca del colegio por novecientos euros">
+    <label><b>3. Критерии (неделя 3):</b> что важно? Назовите этаж и цену, до которой готовы.</label>
+    <textarea id="task-criteria" placeholder="Например: Acepto un piso si está en la segunda planta y cuesta menos de mil euros. Pero no acepto si hay humedades."></textarea>
+    <button class="btn btn-blue" onclick="buildChecklist()">🔧 Собрать список дел</button>
+    <button class="btn btn-ghost" onclick="downloadChecklist()">💾 Скачать .txt</button>
+    <button class="btn btn-primary" onclick="speakChecklist()">🔊 Проговорить вслух</button>
+    <div class="result-box" id="checklistResult">
+      <h4 style="margin-bottom:10px">✅ Ваш список дел готов!</h4>
+      <pre id="checklistText"></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 6: ДОМАШКА + ТРЕНАЖЁР ═══════════ -->
+<section class="section">
+  <div class="homework">
+    <h3>🏠 Домашнее задание · Урок-повторение</h3>
+    <p class="hw-meta">⏱ ~20 минут · один тренажёр на все 36 слов</p>
+
+    <div class="hw-block">
+      <h4>🎮 Тренажёр «Интеграция недель 1–3 + числа» · 12 мин</h4>
+      <p class="goal">Цель: довести лексику и числа трёх недель до автоматизма перед неделей 4.</p>
+      <p>Пройдите тренажёр ниже в трёх режимах (все строятся на <b>36 словах урока</b>):</p>
+      <p style="margin-top:6px">
+        • 🃏 <b>Карточки</b> — называйте перевод ДО переворота<br>
+        • 🧩 <b>Сопоставление</b> — соедините испанское слово и перевод<br>
+        • 🔤 <b>Собери фразу</b> — сложите фразу, включая числа
+      </p>
+    </div>
+
+    <div class="hw-block">
+      <h4>📸 Отправьте результат</h4>
+      <p class="goal">Цель: преподаватель видит ваш «светофор» и готовит неделю 4.</p>
+      <p>Сделайте скриншот «Светофора» внизу урока и отправьте преподавателю. На неделе 4 разберём всё, что 🟡 и 🔴.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="step-head"><span class="step-num">🎮</span><div><span class="step-time">Тренажёр · ~10 минут</span><h2>Тренажёр: 36 слов + числа</h2></div></div>
+  <div class="quiz-box">
+    <p class="sub" style="margin-bottom:6px">🃏 Называйте перевод до переворота. 🧩 Соединяйте пары. 🔤 Собирайте фразы — в них спрятаны числа.</p>
+    <div class="tr-tabs">
+      <button class="tr-tab active" data-tab="cards">🃏 Карточки (36)</button>
+      <button class="tr-tab" data-tab="match">🧩 Сопоставление</button>
+      <button class="tr-tab" data-tab="build">🔤 Собери фразу</button>
+    </div>
+    <div class="tr-pane" id="trCards">
+      <div class="tr-deck">
+        <div class="tr-card" id="trCard">
+          <div class="tr-card-inner">
+            <div class="tr-card-face tr-card-front">
+              <div class="es" id="trCardEs"></div>
+              <button class="speak-btn speak" id="trCardSpeakBtn" data-text="">🔊</button>
+              <small>нажмите, чтобы увидеть перевод · листайте ← →</small>
+            </div>
+            <div class="tr-card-face tr-card-back">
+              <div class="ru" id="trCardRu"></div>
+              <small id="trCardBackEs"></small>
+            </div>
+          </div>
+        </div>
+        <div class="tr-deck-controls">
+          <button class="tr-arrow" id="trPrev" aria-label="Предыдущая карточка">←</button>
+          <span class="tr-count" id="trCount"></span>
+          <button class="tr-arrow" id="trNext" aria-label="Следующая карточка">→</button>
+        </div>
+        <button class="btn btn-ghost" id="trShuffle">↺ Перемешать</button>
+      </div>
+    </div>
+    <div class="tr-pane" id="trMatch" hidden>
+      <div class="tr-match">
+        <div class="tr-col" id="tr-match-es"></div>
+        <div class="tr-col" id="tr-match-ru"></div>
+      </div>
+      <div class="tr-msg" id="tr-match-msg"></div>
+      <button class="btn btn-ghost" id="trMatchReset" style="margin-top:10px">↺ Перемешать заново</button>
+    </div>
+    <div class="tr-pane" id="trBuild" hidden>
+      <div id="trBuildArea"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ СВЕТОФОР ═══════════ -->
+<section class="section">
+  <div class="step-head"><span class="step-num">✅</span><div><span class="step-time">Самопроверка</span><h2>Светофор</h2></div></div>
+  <div class="quiz-box">
+    <p class="sub" style="margin-bottom:14px">Отметьте честно — нажмите на нужный цвет. Отметки сохраняются в вашем профиле и восстанавливаются при повторном открытии.</p>
+    <div class="tl-wrap">
+    <table class="tl-table" id="tlTable">
+      <thead><tr><th>Умеем как семья</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr></thead>
+      <tbody>
+        <tr><td>Записаться на приём и заполнить бланки (неделя 1)</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+        <tr><td>Читать объявление и анализировать район (неделя 2)</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+        <tr><td>Звонить риелтору и задавать вопросы (неделя 2)</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+        <tr><td>Осматривать квартиру и замечать проблемы (неделя 3)</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
+        <tr><td>Торговаться и принимать решение (неделя 3)</td><td><button class="tl-cell" data-row="4" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="4" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="4" data-color="3">🔴</button></td></tr>
+        <tr><td>Называть числа и цены (этажи, м², €)</td><td><button class="tl-cell" data-row="5" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="5" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="5" data-color="3">🔴</button></td></tr>
+        <tr><td>Связать все навыки в один рассказ о переезде</td><td><button class="tl-cell" data-row="6" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="6" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="6" data-color="3">🔴</button></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <button class="btn btn-ghost" id="tlReset" style="margin-top:12px">↺ Сбросить отметки</button>
+  </div>
+</section>
+
+<!-- ═══════════ QUIZLET ═══════════ -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Все слова для родителей</h3>
+    <p>Повторите слова всех недель курса в единой папке Quizlet школы МУДРО: документы, жильё, осмотр и торг.</p>
+    <div class="ql-links">
+      <a href="https://quizlet.com/user/Interactive_school/folders/adultos" target="_blank" rel="noopener">Открыть папку «Adultos» →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+<div class="lesson-nav">
+  <a href="w03-l3.html"><small>← Предыдущий</small>Урок 3.3 · Чек-лист мечты</a>
+  <a href="../../index.html"><small>↺ Вернуться</small>Карта курса</a>
+  <a href="w04-l1.html" class="next"><small>Следующий →</small>Урок 4.1 · Юридический испанский</a>
+</div>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España!</footer>
+<div id="toast" role="status"></div>
+
+<script>
+/* ====== СИНТЕЗ РЕЧИ (испанский голос) ====== */
+function speak(text){
+  if(!('speechSynthesis' in window)){toast('Ваш браузер не поддерживает озвучку');return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-ES';
+  u.rate=.88;
+  const voices=speechSynthesis.getVoices();
+  const es=voices.find(v=>v.lang.startsWith('es'));
+  if(es)u.voice=es;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};speechSynthesis.getVoices();}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('.speak,.mini-speak');
+  if(s&&s.dataset.text&&!e.target.closest('.grammar-hint')){e.stopPropagation();speak(s.dataset.text);}
+});
+
+/* ====== ВСПЛЫВАЮЩИЕ ГРАММАТИЧЕСКИЕ ПОДСКАЗКИ (клик для тач-устройств) ====== */
+document.addEventListener('click',e=>{
+  const h=e.target.closest('.grammar-hint');
+  if(!h)return;
+  e.preventDefault();
+  const open=h.classList.contains('active');
+  document.querySelectorAll('.grammar-hint.active').forEach(x=>x.classList.remove('active'));
+  if(!open)h.classList.add('active');
+});
+
+/* ====== ТОСТ ====== */
+let tId;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tId);tId=setTimeout(()=>t.classList.remove('show'),3200);}
+
+/* ====== УНИВЕРСАЛЬНАЯ ВИКТОРИНА ====== */
+function renderQuiz(wrapId,list,prefix){
+  const wrap=document.getElementById(wrapId);
+  wrap.innerHTML=list.map((qq,i)=>`
+    <div class="quiz-q">${qq.tag?`<span class="qbadge">${qq.tag}</span>`:''}${i+1}. ${qq.q}</div>
+    <div class="quiz-opts" data-g="${prefix}-${i}">
+      ${qq.opts.map(o=>`<button class="quiz-opt" data-ok="${o.ok}">${o.t}</button>`).join('')}
+    </div>
+    <div class="quiz-fb" id="${prefix}fb-${i}"></div>`).join('');
+  wrap.querySelectorAll('.quiz-opts').forEach(box=>{
+    box.addEventListener('click',e=>{
+      const b=e.target.closest('.quiz-opt');
+      if(!b||b.disabled)return;
+      const i=box.dataset.g.split('-')[1];
+      const fb=document.getElementById(prefix+'fb-'+i);
+      box.querySelectorAll('.quiz-opt').forEach(x=>{x.disabled=true;x.classList.remove('correct','wrong');});
+      if(b.dataset.ok==='true'){
+        b.classList.add('correct');
+        fb.textContent='✅ ¡Correcto!';
+        fb.style.color='var(--p2)';
+      }else{
+        b.classList.add('wrong');
+        const right=box.querySelector('.quiz-opt[data-ok="true"]');
+        if(right)right.classList.add('correct');
+        fb.textContent='❌ Правильный ответ подсвечен зелёным.';
+        fb.style.color='var(--p1)';
+      }
+    });
+  });
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ====== ШАГ 0: РАЗМИНКА ====== */
+const WARMUP=[
+  {q:'Как записаться на приём в Испании?',tag:'Неделя 1',opts:[{t:'Pedir cita previa',ok:true},{t:'Ir a la oficina',ok:false},{t:'Llamar a la policía',ok:false}]},
+  {q:'Что означает «amueblado»?',tag:'Неделя 2',opts:[{t:'меблированный',ok:true},{t:'с террасой',ok:false},{t:'на последнем этаже',ok:false}]},
+  {q:'Как сказать «рядом со школой»?',tag:'Неделя 2',opts:[{t:'cerca del colegio',ok:true},{t:'lejos del centro',ok:false},{t:'al lado del parque',ok:false}]},
+  {q:'Что означает «hay humedades»?',tag:'Неделя 3',opts:[{t:'есть плесень',ok:true},{t:'есть лифт',ok:false},{t:'есть мебель',ok:false}]},
+  {q:'Как вежливо попросить скидку?',tag:'Неделя 3',opts:[{t:'¿Se puede bajar el precio?',ok:true},{t:'Dame descuento',ok:false},{t:'Baja el precio ya',ok:false}]},
+  {q:'Как аргументировать выбор квартиры?',tag:'Неделя 3',opts:[{t:'Me gusta porque está cerca del colegio',ok:true},{t:'Quiero este piso',ok:false},{t:'Este piso bueno',ok:false}]}
+];
+if(document.getElementById('warmupWrap'))renderQuiz('warmupWrap',WARMUP,'w');
+const warmReset=document.getElementById('warmupReset');
+if(warmReset)warmReset.onclick=()=>renderQuiz('warmupWrap',WARMUP,'w');
+
+/* ====== ШАГ 1: ЧИСЛА ====== */
+const NUMQA=[
+  {q:'Сколько будет «treinta y cinco»?',tag:'0–100',opts:[{t:'35',ok:true},{t:'53',ok:false},{t:'305',ok:false}]},
+  {q:'Как по-испански «900 евро»?',tag:'Сотни',opts:[{t:'novecientos euros',ok:true},{t:'nuevecientos euros',ok:false},{t:'noventa euros',ok:false}]},
+  {q:'Как сказать «третий этаж» (3ª planta)?',tag:'Порядковые',opts:[{t:'tercera planta',ok:true},{t:'tres planta',ok:false},{t:'tercero planta',ok:false}]},
+  {q:'«Cien mil» — это сколько?',tag:'Тысячи',opts:[{t:'100 000',ok:true},{t:'1 000',ok:false},{t:'100',ok:false}]},
+  {q:'Как по-испански «1500» (1.500 €)?',tag:'Тысячи',opts:[{t:'mil quinientos',ok:true},{t:'mil quinientas',ok:false},{t:'ciento cincuenta',ok:false}]},
+  {q:'«85» по-испански — это...',tag:'0–100',opts:[{t:'ochenta y cinco',ok:true},{t:'ochenta cinco',ok:false},{t:'cincuenta y ocho',ok:false}]}
+];
+if(document.getElementById('numQuiz'))renderQuiz('numQuiz',NUMQA,'n');
+const numReset=document.getElementById('numQuizReset');
+if(numReset)numReset.onclick=()=>renderQuiz('numQuiz',NUMQA,'n');
+
+/* ====== ШАГ 2: ЛЕКСИКА (36 слов) ====== */
+const VOCAB={
+  w1:[
+    {es:'la cita previa',ru:'предварительная запись',ex:'Quisiera pedir una cita previa.',exRu:'Я хотел бы записаться на приём.'},
+    {es:'la oficina de extranjería',ru:'офис по делам иностранцев',ex:'La oficina de extranjería está en el centro.',exRu:'Офис по делам иностранцев в центре.'},
+    {es:'el NIE',ru:'номер иностранца',ex:'Necesito el NIE para alquilar un piso.',exRu:'Мне нужен NIE, чтобы снять квартиру.'},
+    {es:'el formulario',ru:'бланк, форма',ex:'Hay que rellenar el formulario EX-15.',exRu:'Нужно заполнить бланк EX-15.'},
+    {es:'rellenar',ru:'заполнять',ex:'Rellene el formulario, por favor.',exRu:'Заполните бланк, пожалуйста.'},
+    {es:'firmar',ru:'подписывать',ex:'Firme aquí, por favor.',exRu:'Подпишите здесь, пожалуйста.'},
+    {es:'el justificante',ru:'квитанция, подтверждение',ex:'Tengo el justificante de pago.',exRu:'У меня есть квитанция об оплате.'},
+    {es:'el funcionario',ru:'чиновник',ex:'El funcionario habla rápido.',exRu:'Чиновник говорит быстро.'},
+    {es:'el resguardo',ru:'расписка о приёме',ex:'Aquí tiene su resguardo.',exRu:'Вот ваша расписка.'},
+    {es:'¿Puede repetir?',ru:'Можете повторить?',ex:'Perdone, ¿puede repetir, por favor?',exRu:'Извините, можете повторить?'},
+    {es:'el empadronamiento',ru:'регистрация по месту жительства',ex:'Necesito el empadronamiento para el colegio.',exRu:'Мне нужна регистрация для школы.'},
+    {es:'las tasas',ru:'пошлины, сборы',ex:'Las tasas son diez euros.',exRu:'Пошлины — десять евро.'}
+  ],
+  w2:[
+    {es:'el piso',ru:'квартира',ex:'Busco un piso en alquiler.',exRu:'Ищу квартиру в аренду.'},
+    {es:'el alquiler',ru:'аренда',ex:'El alquiler es de novecientos euros.',exRu:'Аренда — девятьсот евро.'},
+    {es:'la fianza',ru:'залог, депозит',ex:'La fianza es de un mes.',exRu:'Залог — один месяц.'},
+    {es:'los gastos de comunidad',ru:'коммунальные расходы дома',ex:'¿Están incluidos los gastos de comunidad?',exRu:'Включены ли коммунальные расходы?'},
+    {es:'amueblado',ru:'меблированный',ex:'El piso está amueblado.',exRu:'Квартира меблирована.'},
+    {es:'el ascensor',ru:'лифт',ex:'¿Hay ascensor en el edificio?',exRu:'В здании есть лифт?'},
+    {es:'el barrio',ru:'район',ex:'El barrio es tranquilo.',exRu:'Район спокойный.'},
+    {es:'cerca de',ru:'рядом с',ex:'El piso está cerca del colegio.',exRu:'Квартира рядом со школой.'},
+    {es:'al lado de',ru:'сбоку от',ex:'La farmacia está al lado del metro.',exRu:'Аптека сбоку от метро.'},
+    {es:'tranquilo',ru:'спокойный',ex:'Es una zona tranquila.',exRu:'Это спокойный район.'},
+    {es:'bien comunicado',ru:'хорошо связан транспортом',ex:'El barrio está bien comunicado.',exRu:'Район хорошо связан транспортом.'},
+    {es:'la planta',ru:'этаж',ex:'El piso está en la tercera planta.',exRu:'Квартира на третьем этаже.'}
+  ],
+  w3:[
+    {es:'las humedades',ru:'плесень',ex:'Hay humedades en el baño.',exRu:'В ванной плесень.'},
+    {es:'la caldera',ru:'бойлер, котёл',ex:'La caldera está rota.',exRu:'Бойлер сломан.'},
+    {es:'el trastero',ru:'кладовка',ex:'El piso tiene trastero.',exRu:'В квартире есть кладовка.'},
+    {es:'los electrodomésticos',ru:'бытовая техника',ex:'Los electrodomésticos son nuevos.',exRu:'Бытовая техника новая.'},
+    {es:'reformado',ru:'отремонтированный',ex:'La cocina está reformada.',exRu:'Кухня отремонтирована.'},
+    {es:'más ... que',ru:'более ... чем',ex:'Es más caro que el otro.',exRu:'Он дороже, чем другой.'},
+    {es:'me encanta',ru:'мне очень нравится',ex:'Me encanta el barrio.',exRu:'Мне очень нравится район.'},
+    {es:'¿Se puede bajar el precio?',ru:'Можно снизить цену?',ex:'¿Se puede bajar el precio a novecientos?',exRu:'Можно снизить цену до девятисот?'},
+    {es:'pero',ru:'но',ex:'Me gusta, pero es caro.',exRu:'Мне нравится, но дорого.'},
+    {es:'porque',ru:'потому что',ex:'Me gusta porque es tranquilo.',exRu:'Мне нравится, потому что спокойно.'},
+    {es:'trato hecho',ru:'по рукам, договорились',ex:'Vale, trato hecho.',exRu:'Хорошо, договорились.'},
+    {es:'el estado de la vivienda',ru:'состояние жилья',ex:'El estado de la vivienda es bueno.',exRu:'Состояние жилья хорошее.'}
+  ]
+};
+function showVocab(key,btn){
+  document.querySelectorAll('.layer-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const g=document.getElementById('vocabGrid');
+  g.innerHTML='';
+  VOCAB[key].forEach(w=>{
+    const c=document.createElement('div');
+    c.className='vocab-card';
+    c.innerHTML='<div class="vocab-inner">'+
+      '<div class="vocab-front"><div class="es">'+w.es+'</div><div class="ru">'+w.ru+'</div><div class="flip-hint">нажмите ↻</div></div>'+
+      '<div class="vocab-back"><div class="ex">'+w.ex+'</div><div class="ex-ru">'+w.exRu+'</div><button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '</div>';
+    c.onclick=()=>c.classList.toggle('flipped');
+    g.appendChild(c);
+  });
+}
+if(document.querySelector('.layer-tab'))showVocab('w1',document.querySelector('.layer-tab'));
+
+/* ====== ШАГ 4: КВЕСТ (диалоги) ====== */
+const QUEST=[
+  {
+    icon:'📞',week:'w1',
+    title:'Станция 1: Звонок в Oficina de Extranjería',
+    sub:'Неделя 1 · Урок 1.1 · Записываемся на приём',
+    dialog:[
+      {role:'partner',es:'Buenos días. Oficina de Extranjería. ¿En qué puedo ayudarle?',ru:'Добрый день. Офис по делам иностранцев. Чем могу помочь?'},
+      {role:'you',es:'Buenos días. Quisiera pedir una cita previa.',ru:'Добрый день. Я хотел бы записаться на приём.'},
+      {role:'partner',es:'¿Me puede decir su nombre y apellidos?',ru:'Можете назвать имя и фамилии?'},
+      {role:'you',es:'Me llamo Ana Petrova. P-E-T-R-O-V-A: Petrova.',ru:'Меня зовут Анна Петрова. По буквам: Petrova.'},
+      {role:'partner',es:'¿Para qué necesita la cita?',ru:'Для чего вам запись?'},
+      {role:'you',es:'Necesito una cita para el NIE.',ru:'Мне нужна запись для NIE.'},
+      {role:'partner',es:'La cita más próxima es el martes a las diez.',ru:'Ближайшая запись — вторник в десять.'},
+      {role:'you',es:'Perdone, ¿puede repetir? ¿Qué documentos necesito?',ru:'Извините, повторите. Какие документы нужны?'},
+      {role:'partner',es:'El pasaporte y el formulario EX-15.',ru:'Паспорт и бланк EX-15.'}
+    ],
+    task:'Позвоните в офис и запишитесь. Партнёр — оператор. Продиктуйте имя по буквам и уточните документы.'
+  },
+  {
+    icon:'📋',week:'w1',
+    title:'Станция 2: Заполнение бланков',
+    sub:'Неделя 1 · Урок 1.2 · EX-15 и Modelo 790',
+    dialog:[
+      {role:'partner',es:'Aquí tiene el formulario EX-15.',ru:'Вот вам бланк EX-15.'},
+      {role:'you',es:'Muchas gracias. ¿Qué datos hay que escribir?',ru:'Спасибо. Какие данные нужно вписать?'},
+      {role:'partner',es:'Nombre, apellidos, nacionalidad y fecha de nacimiento.',ru:'Имя, фамилии, гражданство и дата рождения.'},
+      {role:'you',es:'Vale. Aquí está mi pasaporte.',ru:'Хорошо. Вот мой паспорт.'},
+      {role:'partner',es:'Firme en la parte de abajo, por favor.',ru:'Подпишите внизу, por favor.'},
+      {role:'you',es:'Firmo aquí. Ya tengo el justificante de pago.',ru:'Подписываю здесь. У меня есть квитанция об оплате.'},
+      {role:'partner',es:'El código de la tasa es 012. Cincuenta y dos euros.',ru:'Код пошлины 012. Пятьдесят два евро.'}
+    ],
+    task:'Партнёр даёт инструкции — вы выполняете. Назовите свои данные и оплатите tasas (назовите сумму по-испански).'
+  },
+  {
+    icon:'🏢',week:'w1',
+    title:'Станция 3: Визит в офис',
+    sub:'Неделя 1 · Урок 1.3 · Получаем resguardo',
+    dialog:[
+      {role:'you',es:'Buenos días. Tengo una cita previa a las diez.',ru:'Добрый день. У меня предварительная запись на десять.'},
+      {role:'partner',es:'¿Tiene su pasaporte y el formulario?',ru:'У вас есть паспорт и бланк?'},
+      {role:'you',es:'Sí, aquí tiene el formulario.',ru:'Да, вот бланк.'},
+      {role:'partner',es:'Perfecto. Firme aquí, por favor.',ru:'Отлично. Подпишите здесь, пожалуйста.'},
+      {role:'you',es:'¿Cuándo voy a recibir el NIE?',ru:'Когда я получу NIE?'},
+      {role:'partner',es:'Aquí tiene su resguardo. Vuelva en treinta días.',ru:'Вот ваша расписка. Приходите через тридцать дней.'},
+      {role:'you',es:'Muchas gracias. Hasta luego.',ru:'Большое спасибо. До свидания.'}
+    ],
+    task:'Придите в офис, покажите документы, получите resguardo. Партнёр — чиновник (назовите число «30» по-испански).'
+  },
+  {
+    icon:'🏠',week:'w2',
+    title:'Станция 4: Чтение объявления и анализ района',
+    sub:'Неделя 2 · Уроки 2.1–2.2 · Ищем квартиру',
+    dialog:[
+      {role:'partner',es:'Mira este anuncio: tres habitaciones, ochenta y cinco metros cuadrados.',ru:'Посмотри: три комнаты, восемьдесят пять квадратных метров.'},
+      {role:'you',es:'Busco un piso en alquiler. ¿Cuánto cuesta?',ru:'Ищу квартиру в аренду. Сколько стоит?'},
+      {role:'partner',es:'Novecientos euros, tercera planta con ascensor, amueblado.',ru:'Девятьсот евро, третий этаж с лифтом, меблированная.'},
+      {role:'you',es:'¿Está cerca del colegio? ¿El barrio es tranquilo?',ru:'Рядом ли со школой? Район спокойный?'},
+      {role:'partner',es:'Sí, está cerca del colegio y bien comunicado.',ru:'Да, рядом со школой и хорошо связан транспортом.'},
+      {role:'you',es:'Me gusta, pero necesito verlo. ¿Se puede visitar?',ru:'Мне нравится, но надо посмотреть. Можно ли на просмотр?'}
+    ],
+    task:'Прочитайте объявление: 3 hab., 85 м², 3ª этаж, amueblado, 900 €/мес. Обсудите с партнёром, подходит ли семье. Назовите числа вслух.'
+  },
+  {
+    icon:'📱',week:'w2',
+    title:'Станция 5: Звонок риелтору',
+    sub:'Неделя 2 · Урок 2.3 · Задаём вопросы',
+    dialog:[
+      {role:'you',es:'Buenos días. Llamo por el anuncio de Idealista.',ru:'Добрый день. Звоню по объявлению на Idealista.'},
+      {role:'partner',es:'Inmobiliaria Valencia. Sí, el piso está disponible.',ru:'Агентство Валенсия. Да, квартира доступна.'},
+      {role:'you',es:'¿Están incluidos los gastos de comunidad?',ru:'Включены ли коммунальные расходы?'},
+      {role:'partner',es:'Sí, están incluidos.',ru:'Да, включены.'},
+      {role:'you',es:'¿Cuánto es la fianza?',ru:'Сколько залог?'},
+      {role:'partner',es:'La fianza es de un mes: novecientos euros.',ru:'Залог — один месяц: девятьсот евро.'},
+      {role:'you',es:'Quisiera visitar el piso mañana a las cinco.',ru:'Я хотел бы посмотреть квартиру завтра в пять.'},
+      {role:'partner',es:'Sí, puede visitarlo mañana a las cinco.',ru:'Да, можно завтра в пять.'}
+    ],
+    task:'Позвоните риелтору, задайте 3 вопроса и назначьте просмотр. Партнёр — риелтор. Назовите цену залога по-испански.'
+  },
+  {
+    icon:'🔍',week:'w3',
+    title:'Станция 6: Осмотр, торг и выбор',
+    sub:'Неделя 3 · Уроки 3.1–3.3 · Принимаем решение',
+    dialog:[
+      {role:'partner',es:'Pasen, pasen. Esta es la cocina, reformada.',ru:'Проходите. Это кухня, отремонтированная.'},
+      {role:'you',es:'Muy bien. ¿Y el baño? Perdone, hay humedades en el baño.',ru:'Отлично. А ванная? Извините, в ванной плесень.'},
+      {role:'partner',es:'Los electrodomésticos son nuevos. La caldera está bien.',ru:'Бытовая техника новая. Бойлер в порядке.'},
+      {role:'you',es:'Me encanta, pero es un poco caro. ¿Se puede bajar el precio?',ru:'Мне очень нравится, но немного дорого. Можно снизить цену?'},
+      {role:'partner',es:'Es difícil, pero puedo dejarlo en ochocientos ochenta euros.',ru:'Сложно, но могу оставить 880 евро.'},
+      {role:'you',es:'¿Lo alquila por un año? Entonces vale, trato hecho.',ru:'Сдаёте на год? Тогда хорошо, договорились.'},
+      {role:'partner',es:'¡Trato hecho! Muchas gracias.',ru:'Договорились! Большое спасибо.'}
+    ],
+    task:'Осмотрите квартиру, найдите 2 проблемы, поторгуйтесь и примите решение. Партнёр — хозяин. Используйте pero/porque и назовите новую цену.'
+  }
+];
+function renderQuest(){
+  const c=document.getElementById('questContainer');
+  c.innerHTML='';
+  QUEST.forEach((q,i)=>{
+    const st=document.createElement('div');
+    st.className='quest-station';
+    st.id='station-'+i;
+    const weekNum=q.week==='w1'?'1':q.week==='w2'?'2':'3';
+    const dialog=q.dialog.map(d=>`
+      <div class="dlg-line ${d.role==='you'?'you':''}">
+        <div class="role">${d.role==='you'?'Вы':'Партнёр'}</div>
+        <div class="txt"><div class="es">${d.es}</div><div class="ru">${d.ru}</div></div>
+        <div class="tlk"><button class="speak-btn" onclick="speak(\''+d.es.replace(/'/g,"\\'")+'\')">🔊</button></div>
+      </div>`).join('');
+    st.innerHTML='<div class="quest-head" onclick="toggleStation('+i+')">'+
+      '<div class="icon">'+q.icon+'</div>'+
+      '<div class="info"><h3>'+q.title+'</h3><div class="sub">'+q.sub+'</div></div>'+
+      '<span class="week-tag '+q.week+'">Неделя '+weekNum+'</span>'+
+      '</div>'+
+      '<div class="quest-body">'+
+        '<div class="dialog">'+dialog+'</div>'+
+        '<div class="task-box"><b>🎯 Задание:</b> '+q.task+'</div>'+
+        '<button class="btn btn-primary" style="margin-top:14px" onclick="completeStation('+i+')">✅ Станция пройдена</button>'+
+      '</div>';
+    c.appendChild(st);
+  });
+}
+function toggleStation(i){document.getElementById('station-'+i).classList.toggle('open');}
+function completeStation(i){
+  const st=document.getElementById('station-'+i);
+  st.classList.add('done');
+  st.classList.remove('open');
+  const allDone=QUEST.every((q,j)=>document.getElementById('station-'+j).classList.contains('done'));
+  if(allDone)toast('🎉 ¡Felicidades! Вы прошли все 6 станций — семья получила ключи от квартиры!');
+}
+if(document.getElementById('questContainer'))renderQuest();
+
+/* ====== ШАГ 5: СПИСОК ДЕЛ ====== */
+function buildChecklist(){
+  const docs=document.getElementById('task-docs').value||'...';
+  const flat=document.getElementById('task-flat').value||'...';
+  const criteria=document.getElementById('task-criteria').value||'...';
+  const text='═══════════════════════════════\n'+
+    '   MI LISTA DE TAREAS\n   Мой список дел переезда\n'+
+    '═══════════════════════════════\n\n'+
+    '📋 1. ДОКУМЕНТЫ (неделя 1):\n'+docs+'\n\n'+
+    '🏠 2. ЖИЛЬЁ (неделя 2):\n'+flat+'\n\n'+
+    '🔍 3. КРИТЕРИИ (неделя 3):\n'+criteria+'\n\n'+
+    '═══════════════════════════════\nМУДРО · ¡Rumbo a España!\n═══════════════════════════════';
+  document.getElementById('checklistText').textContent=text;
+  document.getElementById('checklistResult').classList.add('show');
+}
+function downloadChecklist(){
+  let text=document.getElementById('checklistText').textContent;
+  if(!text){buildChecklist();text=document.getElementById('checklistText').textContent;}
+  const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='mi-lista-de-tareas.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+function speakChecklist(){
+  const docs=document.getElementById('task-docs').value;
+  const flat=document.getElementById('task-flat').value;
+  const criteria=document.getElementById('task-criteria').value;
+  const text=[docs,flat,criteria].filter(Boolean).join(' ');
+  if(text.trim())speak(text);
+}
+
+/* ====== ТРЕНАЖЁР (36 слов + числа) ====== */
+const TRAIN_CARDS=(function(){const out=[];Object.keys(VOCAB).forEach(k=>VOCAB[k].forEach(w=>out.push({es:w.es,ru:w.ru})));return out;})();
+const TRAIN_MATCH=[
+  {id:1,es:'la cita previa',ru:'предварительная запись'},
+  {id:2,es:'la fianza',ru:'залог'},
+  {id:3,es:'las humedades',ru:'плесень'},
+  {id:4,es:'cerca de',ru:'рядом с'},
+  {id:5,es:'trato hecho',ru:'договорились'},
+  {id:6,es:'¿Puede repetir?',ru:'Можете повторить?'},
+  {id:7,es:'el resguardo',ru:'расписка'},
+  {id:8,es:'novecientos',ru:'девятьсот'},
+  {id:9,es:'la tercera planta',ru:'третий этаж'},
+  {id:10,es:'me encanta',ru:'мне очень нравится'}
+];
+const TRAIN_BUILD=[
+  'Quisiera pedir una cita previa',
+  'Vivo en la tercera planta',
+  'El alquiler es de novecientos euros',
+  'Buscamos un piso con tres habitaciones',
+  'Hay humedades en el baño'
+];
+let trainMode='cards',trainerIdx=0,trainSel=null,trainSelR=null,buildSel=[],buildIdx=0,
+    matchColL=[],matchColR=[],matchDone=0;
+function showTrain(mode,btn){
+  trainMode=mode;trainerIdx=0;buildIdx=0;
+  document.querySelectorAll('.tr-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderTrain();
+}
+function renderTrain(){
+  const box=document.getElementById('trCards');
+  const m=document.getElementById('trMatch');
+  const b=document.getElementById('trBuild');
+  box.hidden=trainMode!=='cards';
+  m.hidden=trainMode!=='match';
+  b.hidden=trainMode!=='build';
+  if(trainMode==='cards')renderTrainCards();
+  else if(trainMode==='match')renderTrainMatch();
+  else renderTrainBuild();
+}
+function renderTrainCards(){
+  const card=document.getElementById('trCard');
+  const es=document.getElementById('trCardEs');
+  const ru=document.getElementById('trCardRu');
+  const backEs=document.getElementById('trCardBackEs');
+  const btn=document.getElementById('trCardSpeakBtn');
+  const count=document.getElementById('trCount');
+  const update=()=>{
+    const c=TRAIN_CARDS[trainerIdx];
+    es.textContent=c.es;ru.textContent=c.ru;backEs.textContent=c.es;
+    btn.dataset.text=c.es;
+    card.classList.remove('flipped');
+    count.textContent=(trainerIdx+1)+' / '+TRAIN_CARDS.length;
+  };
+  card.onclick=()=>card.classList.toggle('flipped');
+  document.getElementById('trPrev').onclick=()=>{if(trainerIdx>0){trainerIdx--;update();}};
+  document.getElementById('trNext').onclick=()=>{if(trainerIdx<TRAIN_CARDS.length-1){trainerIdx++;update();}};
+  document.getElementById('trShuffle').onclick=()=>{TRAIN_CARDS.splice(0,TRAIN_CARDS.length,...shuffle(TRAIN_CARDS.slice()));trainerIdx=0;update();};
+  update();
+}
+function renderTrainMatch(){
+  trainSel=null;trainSelR=null;matchDone=0;
+  const l=document.getElementById('tr-match-es');
+  const r=document.getElementById('tr-match-ru');
+  const msg=document.getElementById('tr-match-msg');
+  l.innerHTML='';r.innerHTML='';msg.textContent='';
+  matchColL=TRAIN_MATCH.slice();
+  matchColR=TRAIN_MATCH.slice().sort(()=>0.5-Math.random());
+  matchColL.forEach(p=>{
+    const c=document.createElement('div');c.className='tr-chip';c.textContent=p.es;c.dataset.id=p.id;
+    c.onclick=()=>handleMatch('left',c,p.id);
+    l.appendChild(c);
+  });
+  matchColR.forEach(p=>{
+    const c=document.createElement('div');c.className='tr-chip';c.textContent=p.ru;c.dataset.id=p.id;
+    c.onclick=()=>handleMatch('right',c,p.id);
+    r.appendChild(c);
+  });
+  document.getElementById('trMatchReset').onclick=renderTrainMatch;
+}
+function handleMatch(side,chip,id){
+  if(chip.classList.contains('done'))return;
+  if(side==='left'){if(trainSel)trainSel.classList.remove('selected');chip.classList.add('selected');trainSel=chip;}
+  else{if(trainSelR)trainSelR.classList.remove('selected');chip.classList.add('selected');trainSelR=chip;}
+  if(trainSel&&trainSelR){
+    if(trainSel.dataset.id===trainSelR.dataset.id){
+      trainSel.classList.add('done');trainSel.classList.remove('selected');
+      trainSelR.classList.add('done');trainSelR.classList.remove('selected');
+      matchDone++;document.getElementById('tr-match-msg').textContent=matchDone+' / '+TRAIN_MATCH.length+' пар';
+      if(matchDone===TRAIN_MATCH.length)document.getElementById('tr-match-msg').textContent='🎉 ¡Perfecto! Все пары найдены!';
+    }else{
+      trainSel.classList.add('wrong');trainSelR.classList.add('wrong');
+      const a=trainSel,b2=trainSelR;
+      setTimeout(()=>{a.classList.remove('wrong','selected');b2.classList.remove('wrong','selected');},600);
+    }
+    trainSel=null;trainSelR=null;
+  }
+}
+function renderTrainBuild(){
+  buildSel=[];
+  const target=TRAIN_BUILD[buildIdx];
+  const box=document.getElementById('trBuildArea');
+  box.innerHTML='';
+  const words=target.split(' ').sort(()=>0.5-Math.random());
+  const wc=document.createElement('div');wc.className='sb-chips';
+  words.forEach(w=>{
+    const ch=document.createElement('div');ch.className='sb-chip';ch.textContent=w;
+    ch.onclick=()=>{
+      ch.classList.add('sb-done');
+      buildSel.push(w);
+      const lineItem=document.createElement('div');lineItem.className='sb-chip';lineItem.textContent=w;
+      lineItem.onclick=()=>{lineItem.remove();const idx=buildSel.indexOf(w);if(idx>-1)buildSel.splice(idx,1);ch.classList.remove('sb-done');};
+      lineEl.appendChild(lineItem);
+    };
+    wc.appendChild(ch);
+  });
+  const lineEl=document.createElement('div');lineEl.className='sb-answer';lineEl.id='train-build-line';
+  const fb=document.createElement('div');fb.className='sb-feedback';
+  box.appendChild(wc);box.appendChild(lineEl);box.appendChild(fb);
+  const chk=document.createElement('button');chk.className='btn btn-primary';chk.textContent='✓ Проверить';
+  const nxt=document.createElement('button');nxt.className='btn btn-ghost';nxt.style.marginLeft='8px';nxt.textContent='Следующая фраза →';
+  box.appendChild(chk);box.appendChild(nxt);
+  chk.onclick=()=>{
+    const got=buildSel.join(' ');
+    fb.style.color=got===target?'var(--p2)':'var(--p1)';
+    fb.textContent=got===target?'✅ ¡Muy bien!':'❌ Правильно: «'+target+'»';
+  };
+  nxt.onclick=()=>{buildIdx=(buildIdx+1)%TRAIN_BUILD.length;renderTrainBuild();};
+}
+document.querySelectorAll('.tr-tab').forEach(t=>{
+  t.addEventListener('click',()=>showTrain(t.dataset.tab,t));
+});
+renderTrain();
+
+/* ====== СВЕТОФОР (сохранение — через lesson-gate; здесь reset) ====== */
+const tlReset=document.getElementById('tlReset');
+if(tlReset)tlReset.onclick=()=>document.querySelectorAll('.tl-cell').forEach(b=>b.classList.remove('active'));
+</script>
+
+<!-- Скрипт-стек (обязательно перед </body>) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+</body>
+</html>

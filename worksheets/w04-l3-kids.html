@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 12 · La Mochila Perfecta — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --blue:#2274A5; --pink:#E91E63; --gold:#B8860B;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E0F2F1,#B2DFDB,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px;flex-wrap:wrap}
+  .name-row .w{display:inline-block;min-width:140px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}
+  .c-gold{background:var(--gold)}.c-blue{background:var(--blue)}
+  .ex-title{font-weight:800;font-size:14.5px;flex:1}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+  .emo{font-size:17px;margin-right:6px;vertical-align:middle}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .emoji{font-size:16px}
+  .desc-item .blank{display:inline-block;min-width:120px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+  .desc-item .hint{color:#999;font-size:11px}
+
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px;font-size:13.5px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:22px;height:22px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:19px;font-weight:800;color:var(--ocean);flex-shrink:0;font-size:.85rem}
+  .gap-item .g{display:inline-block;width:46px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center;font-weight:700}
+  .gap-item .word{font-weight:700}
+  .gap-item .hint{color:#999;font-size:11px}
+
+  .math-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .math-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:14px;flex-wrap:wrap}
+  .math-item .num{display:inline-block;width:22px;height:22px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:19px;font-weight:800;color:var(--afran);flex-shrink:0;font-size:.85rem}
+  .math-item .word{font-weight:800;color:var(--ink)}
+  .math-item .eq{display:inline-block;min-width:120px;border-bottom:1.6px dashed var(--afran);height:22px;vertical-align:bottom;text-align:center;font-weight:800}
+  .math-word{font-weight:700}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;flex:1;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .write-lines{display:grid;grid-template-columns:1fr;gap:9px}
+  .write-line{border-bottom:1.8px dashed var(--terra);height:30px;font-size:14px;font-family:'Comic Sans MS',cursive;padding-left:2px}
+
+  .dialog-table{width:100%;border-collapse:collapse;font-size:13px}
+  .dialog-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .dialog-table td{padding:8px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .who-name{font-weight:800;white-space:nowrap}
+  .who-name.seller{color:var(--terra)}.who-name.buyer{color:var(--teal)}
+  .who-bubble{background:#f4f4f4;border-radius:8px;padding:6px 10px;margin-top:2px;font-size:12.5px}
+  .who-bubble .ru{display:block;color:#999;font-size:11px;font-style:italic;margin-top:2px}
+  .blank-sm{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .price-table{width:100%;border-collapse:collapse;font-size:13px}
+  .price-table th{background:var(--soft);padding:6px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .price-table td{padding:6px 10px;border-bottom:1px solid #eee}
+  .price-table .price{font-weight:800;color:var(--afran)}
+  .total-row td{border-top:2px solid var(--line);font-weight:800;color:var(--teal)}
+  .calc-row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13.5px;flex-wrap:wrap}
+  .calc-row .blank{display:inline-block;min-width:100px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .sit{font-weight:800;margin-bottom:3px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;font-size:13px}
+  .tl-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .tl-table th:not(:first-child){text-align:center;width:80px}
+  .tl-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+  .footer b{color:var(--teal)}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🎒 La Mochila Perfecta</h1>
+    <div class="sub">Рабочий лист к Уроку 12 · Станция 2: Mi Colegio · финальный проект недели: рюкзак, бюджет и диалог с продавцом</div>
+    <div class="tag">Escuela MUDRO · ¡Tu primer proyecto!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Это твой первый большой проект! Выполняй задания по порядку: сначала собери рюкзак, потом посчитай бюджет и разыграй диалог. Работай с родителем — он твой «продавец»!</div>
+
+  <!-- 1. ЛЕКСИКА: ВОССТАНОВИ СЛОВА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">1</span>
+      <span class="ex-title">Вспомни слова недели: напиши по-испански</span>
+      <span class="ex-skill">🗣 Лексика</span>
+    </div>
+    <div class="ex-instruction">Вспомни предметы из уроков 10–12 и напиши их по-испански. Слово-подсказка «спрятано» в эмодзи!</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">✏️</span> карандаш → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🖊️</span> ручка → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🩹</span> ластик → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">📓</span> тетрадь → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">👝</span> пенал → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🖍️</span> цветные карандаши → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">7</span><span class="emoji">📖</span> книга → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">8</span><span class="emoji">✂️</span> ножницы → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">9</span><span class="emoji">📏</span> линейка → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+      <div class="desc-item"><span class="num">10</span><span class="emoji">🎒</span> рюкзак → <span class="blank" style="display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px"></span></div>
+    </div>
+  </div>
+
+  <!-- 2. АРТИКЛИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">2</span>
+      <span class="ex-title">Выбери артикль: un / una / unos / unas</span>
+      <span class="ex-skill">🧩 Грамматика · артикли</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> <b>un</b> — один «мальчик», <b>una</b> — одна «девочка», <b>unos</b> — несколько «мальчиков», <b>unas</b> — несколько «девочек».</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">📓</span> Hay <span class="blank"></span> <span>cuaderno. <span class="hint">(un/una/unos/unas)</span></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🖍️</span> Hay <span class="blank"></span> <span>colores. <span class="hint">(un/una/unos/unas)</span></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🩹</span> Necesito <span class="blank"></span> <span>goma. <span class="hint">(un/una/unos/unas)</span></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">✂️</span> Necesito <span class="blank"></span> <span>tijeras. <span class="hint">(un/una/unos/unas)</span></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">📏</span> Tengo <span class="blank"></span> <span>regla. <span class="hint">(un/una/unos/unas)</span></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">✏️</span> Tengo <span class="blank"></span> <span>lápices. <span class="hint">(un/una/unos/unas)</span></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ПРОЕКТ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">3</span>
+      <span class="ex-title">Проект «Mi mochila perfecta»</span>
+      <span class="ex-skill">🎨 Проект · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>Шаблон:</strong> «Esta es mi mochila perfecta. En mi mochila hay dos lápices y unos colores. Hay un cuaderno grande. No hay tijeras. Necesito un estuche nuevo. ¡Mi mochila es perfecta!»</div>
+    <div class="ex-instruction">Напиши свой рассказ о рюкзаке по-испански, как на уроке.</div>
+    <div class="write-lines">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 4. БЮДЖЕТ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">4</span>
+      <span class="ex-title">Бюджет: ¿Cuánto cuesta?</span>
+      <span class="ex-skill">💰 cuesta / cuestan / en total</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> один предмет — <b>cuesta</b>, несколько — <b>cuestan</b>. В конце говорим <b>En total...</b> (итого).</div>
+
+    <table class="price-table">
+      <tr><th>Товар</th><th>Цена</th><th>Сколько беру</th></tr>
+      <tr><td><span class="emo">✏️</span> lápiz</td><td class="price">1 €</td><td><span class="blank-sm"></span></td></tr>
+      <tr><td><span class="emo">🖊️</span> bolígrafo</td><td class="price">2 €</td><td><span class="blank-sm"></span></td></tr>
+      <tr><td><span class="emo">🩹</span> goma</td><td class="price">1 €</td><td><span class="blank-sm"></span></td></tr>
+      <tr><td><span class="emo">🖍️</span> colores (пачка)</td><td class="price">4 €</td><td><span class="blank-sm"></span></td></tr>
+      <tr><td><span class="emo">👝</span> estuche</td><td class="price">5 €</td><td><span class="blank-sm"></span></td></tr>
+      <tr><td><span class="emo">📓</span> cuaderno</td><td class="price">3 €</td><td><span class="blank-sm"></span></td></tr>
+      <tr class="total-row"><td colspan="2">💰 En total:</td><td><span class="blank-sm" style="min-width:150px"></span> euros</td></tr>
+    </table>
+
+    <div style="margin-top:12px"><strong>Напиши фразы о своих покупках:</strong></div>
+    <div class="calc-row"><span class="num" style="display:inline-block;width:22px;height:22px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:19px;font-weight:800;color:var(--afran);font-size:.85rem">1</span> <span class="blank" style="min-width:200px"></span> <span class="hint" style="color:#999;font-size:11px">(Un lápiz cuesta 1 euro.)</span></div>
+    <div class="calc-row"><span class="num" style="display:inline-block;width:22px;height:22px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:19px;font-weight:800;color:var(--afran);font-size:.85rem">2</span> <span class="blank" style="min-width:200px"></span> <span class="hint" style="color:#999;font-size:11px">(Dos cuadernos cuestan 6 euros.)</span></div>
+    <div class="calc-row"><span class="num" style="display:inline-block;width:22px;height:22px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:19px;font-weight:800;color:var(--afran);font-size:.85rem">3</span> <span class="blank" style="min-width:200px"></span> <span class="hint" style="color:#999;font-size:11px">(En total: ... euros.)</span></div>
+  </div>
+
+  <!-- 5. ДИАЛОГ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">5</span>
+      <span class="ex-title">Диалог с продавцом</span>
+      <span class="ex-skill">🤝 Игра «Магазин»</span>
+    </div>
+    <div class="ex-instruction">Ты покупатель, родитель — продавец. Дополни свои реплики по-испански.</div>
+    <table class="dialog-table">
+      <tr><th style="width:26%">Кто</th><th>Реплика</th></tr>
+      <tr>
+        <td class="who-name seller">🧑‍💼 Продавец</td>
+        <td><div class="who-bubble">¡Hola! ¿Qué <span class="blank-sm" style="min-width:90px"></span>? <span class="ru">Привет! Что тебе нужно?</span></div></td>
+      </tr>
+      <tr>
+        <td class="who-name buyer">🧒 Ты</td>
+        <td><div class="who-bubble">Hola. Necesito <span class="blank-sm" style="min-width:200px"></span>. <span class="ru">Мне нужно: (твои товары)</span></div></td>
+      </tr>
+      <tr>
+        <td class="who-name buyer">🧒 Ты</td>
+        <td><div class="who-bubble">¿Y cuánto <span class="blank-sm" style="min-width:90px"></span> todo? <span class="ru">А сколько всё это стоит? (cuesta / cuestan)</span></div></td>
+      </tr>
+      <tr>
+        <td class="who-name seller">🧑‍💼 Продавец</td>
+        <td><div class="who-bubble">En total: <span class="blank-sm" style="min-width:100px"></span> euros. <span class="ru">Итого: (сумма) евро.</span></div></td>
+      </tr>
+      <tr>
+        <td class="who-name buyer">🧒 Ты</td>
+        <td><div class="who-bubble">¡Vale! <span class="blank-sm" style="min-width:90px"></span>. ¡Perfecto! <span class="ru">Договорились! (de acuerdo / me lo llevo)</span></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Ana. Esta es mi mochila perfecta. En mi mochila hay tres lápices, dos bolígrafos y unos cuadernos. Hay un estuche azul y una regla. No hay tijeras. Necesito un sacapuntas nuevo.
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Cuántos lápices hay? <span class="ru">(Сколько карандашей?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¡Hay un estuche azul! ¿De qué color es? <span class="ru">(Какого цвета пенал?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Hay tijeras? <span class="ru">(Есть ли ножницы?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué necesita Ana? <span class="ru">(Что нужно Ане?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">7</span>
+      <span class="ex-title">Послушай и напиши</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать короткие предложения по-испански из твоей презентации. Напиши, что услышал(а)!</div>
+    <div class="listen-item"><span class="lnum">1.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span> → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨‍ Для родителя (что читать):</b> 1) En mi mochila hay dos lápices · 2) Necesito unos colores · 3) Un estuche cuesta cinco euros · 4) En total, siete euros · 5) Esta es mi mochila perfecta. Читайте спокойно, можно дважды.</div>
+  </div>
+
+  <!-- 8. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">8</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+
+    <div class="speak-item">
+      <div class="sit">1. Представь свой рюкзак.</div>
+      <div class="tpl">Esta es mi mochila perfecta.</div>
+      <span class="ru">Это мой идеальный рюкзак.</span>
+      <span class="speak-check"></span>
+    </div>
+    <div class="speak-item">
+      <div class="sit">2. Скажи, что в рюкзаке 3 предмета.</div>
+      <div class="tpl">En mi mochila hay tres lápices y dos gomas.</div>
+      <span class="ru">В моём рюкзаке три карандаша и два ластика.</span>
+      <span class="speak-check"></span>
+    </div>
+    <div class="speak-item">
+      <div class="sit">3. Скажи, что тебе нужна новая ручка.</div>
+      <div class="tpl">Necesito un bolígrafo nuevo.</div>
+      <span class="ru">Мне нужна новая ручка.</span>
+      <span class="speak-check"></span>
+    </div>
+    <div class="speak-item">
+      <div class="sit">4. Спроси, сколько стоит пенал.</div>
+      <div class="tpl">¿Cuánto cuesta el estuche?</div>
+      <span class="ru">Сколько стоит пенал?</span>
+      <span class="speak-check"></span>
+    </div>
+    <div class="speak-item">
+      <div class="sit">5. Скажи, что берёшь вещь, и согласись.</div>
+      <div class="tpl">¡Me lo llevo! De acuerdo. ¡Perfecto!</div>
+      <span class="ru">Беру! Согласен(на). Отлично!</span>
+      <span class="speak-check"></span>
+    </div>
+  </div>
+
+  <!-- 9. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">9</span>
+      <span class="ex-title">Самопроверка «Светофор» 🚦</span>
+      <span class="ex-skill">🟢🟡🔴 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Говорить «En mi mochila hay...»</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Выбирать un / una / unos / unas</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Считать cuesta / cuestan / en total</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Презентовать рюкзак вслух</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+      <tr><td>Вести диалог с продавцом</td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td><td><span class="tl-cell"></span></td></tr>
+    </table>
+    <p style="margin-top:10px;font-size:.85rem;color:#777;font-weight:700">📸 Покажи Светофор родителям — вместе разберём всё, что 🔴!</p>
+  </div>
+
+  <div class="footer">
+    Интерактивная школа МУДРО · Рабочий лист к Уроку 12 · Станция 2: Mi Colegio · 2026<br>
+    ¡Tu mochila es perfecta! 🎒💪
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -146,6 +146,22 @@
     }
   }
 
+  /* Восстанавливаем сохранённый «светофор»: подсвечиваем ячейки,
+     которые ученик отметил в прошлый раз (selfCheck в профиле). */
+  function restoreSelfCheck(prog) {
+    if (!prog || !prog.selfCheck) return;
+    Object.keys(prog.selfCheck).forEach(function (key) {
+      if (!/^row\d+$/.test(key)) return;
+      var row = key.slice(3);
+      selfCheck[key] = prog.selfCheck[key];
+      document.querySelectorAll('.tl-cell[data-row="' + row + '"]').forEach(function (cell) {
+        if (L.colorToValue(cell.dataset.color, audience) === prog.selfCheck[key]) {
+          cell.classList.add('active');
+        }
+      });
+    });
+  }
+
   function open(profile) {
     if (!overlay.parentNode) return;
     overlay.remove();
@@ -177,6 +193,7 @@
     if (!prog || !prog.openedAt) {
       window.App.saveLesson(lessonId, { openedAt: window.firebase.firestore.FieldValue.serverTimestamp() }).catch(function () {});
     }
+    restoreSelfCheck(prog);
     window.App.logActivity('lessonOpened', lessonId).catch(function () {});
   });
 })();

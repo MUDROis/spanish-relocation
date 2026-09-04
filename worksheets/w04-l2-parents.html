@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 4.2 · Банковский счёт — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic;}
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;}
+  .sit-box b{ color:var(--p4);}
+  .plan-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px;}
+  .plan-box b{ color:var(--p4);}
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ОДИН НЕПРЕРЫВНЫЙ ЛИСТ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏦 Рабочий лист · Урок 4.2 «Банковский счёт»</h1>
+    <div class="meta">Открываем счёт, получаем карту и настраиваем Bizum</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🏦 Соедини банковский термин и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la cuenta corriente</div>
+          <div class="item">2. la tarjeta de débito</div>
+          <div class="item">3. el cajero automático</div>
+          <div class="item">4. la comisión</div>
+          <div class="item">5. el saldo</div>
+          <div class="item">6. la transferencia</div>
+          <div class="item">7. el IBAN</div>
+          <div class="item">8. el gestor</div>
+        </div>
+        <div class="col">
+          <div class="item">а) банкомат</div>
+          <div class="item">б) текущий счёт</div>
+          <div class="item">в) персональный менеджер</div>
+          <div class="item">г) комиссия</div>
+          <div class="item">д) дебетовая карта</div>
+          <div class="item">е) баланс, остаток на счёте</div>
+          <div class="item">ж) перевод денег</div>
+          <div class="item">з) международный номер счёта</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🔍 Впиши слово по описанию</h2><div class="tag">из словаря урока</div></div></div>
+    <div class="card">
+      1. Отделение банка → <span class="wline"></span><br>
+      2. Деньги, которые есть на счёте → <span class="wline"></span><br>
+      3. Зарплата, которая приходит на счёт → <span class="wline"></span><br>
+      4. Испанская система мгновенных переводов по телефону → <span class="wline"></span><br>
+      5. Секретный код из 4 цифр для карты → <span class="wline"></span><br>
+      6. Код банка для международных переводов → <span class="wline"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА · ВСТАВЬ ФОРМУ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Вставь форму глагола ir</h2><div class="tag">ближайшее будущее: ir + a + инфинитив</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>yo voy · tú vas · él/ella va · nosotros vamos · vosotros vais · ellos van</b> + a + инфинитив</div>
+      1. Yo <span class="wline short"></span> a abrir una cuenta corriente.<br>
+      2. Nosotros <span class="wline short"></span> a pagar la fianza.<br>
+      3. El gestor <span class="wline short"></span> a explicarme las condiciones.<br>
+      4. Tú <span class="wline short"></span> a enviar un Bizum a tu amigo.<br>
+      5. Los inquilinos <span class="wline short"></span> a recibir la tarjeta.<br>
+      6. Usted <span class="wline short"></span> a firmar aquí, por favor.
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА · СОБЕРИ ФРАЗУ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>🔤 Собери фразу из кусочков</h2><div class="tag">запиши готовую фразу</div></div></div>
+    <div class="card">
+      1. [cuenta] [a abrir] [Voy] [corriente] [una]<br>
+      → <span class="wline xlong"></span><br>
+      2. [Vamos] [alquiler] [el] [a domiciliar]<br>
+      → <span class="wline xlong"></span><br>
+      3. [Bizum] [Voy] [un] [a enviar] [a Miguel]<br>
+      → <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>📖 Прочитай текст и ответь на вопросы</h2><div class="tag">к каждому вопросу — перевод мелким шрифтом</div></div></div>
+    <div class="card">
+      <div class="note">
+        La familia Ivanov va al banco BBVA para abrir una cuenta corriente. El gestor se llama Carlos. Carlos explica las condiciones: la cuenta no tiene comisión de mantenimiento. La tarjeta de débito es gratuita. La familia va a recibir la tarjeta en cinco días. También van a usar Bizum para pagar a sus amigos. El IBAN empieza por ES.
+      </div>
+      1. ¿A qué banco va la familia Ivanov?
+      <span class="ru-sub">(В какой банк идёт семья Ивановых?)</span>
+      <span class="wline xlong"></span><br>
+      2. ¿Cómo se llama el gestor?
+      <span class="ru-sub">(Как зовут менеджера?)</span>
+      <span class="wline xlong"></span><br>
+      3. ¿La cuenta tiene comisión de mantenimiento?
+      <span class="ru-sub">(Есть ли комиссия за обслуживание счёта?)</span>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuándo van a recibir la tarjeta?
+      <span class="ru-sub">(Когда они получат карту?)</span>
+      <span class="wline xlong"></span><br>
+      5. ¿Para qué van a usar Bizum?
+      <span class="ru-sub">(Для чего они будут использовать Bizum?)</span>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>👂 Аудирование: прослушай и напиши</h2><div class="tag">попроси партнёра прочитать диалог вслух</div></div></div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для партнёра: прочитать вслух 2 раза (медленно):</b><br>
+        «Buenos días. Quisiera abrir una cuenta corriente. Necesito su pasaporte y su NIE. ¿Tiene comisión? No, la cuenta es gratuita. Voy a recibir una tarjeta de débito. ¿Puedo usar Bizum? Sí, Bizum está incluido. Muchas gracias.»
+      </div>
+      1. ¿Qué quiere abrir el cliente? → <span class="wline long"></span><br>
+      2. ¿Qué documentos necesita? → <span class="wline long"></span><br>
+      3. ¿La cuenta tiene comisión? → <span class="wline short"></span><br>
+      4. ¿Qué va a recibir el cliente? → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>🗣 Говорение: что сказать в банке?</h2><div class="tag">ситуации + шаблоны фраз</div></div></div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы хотите открыть счёт. Что скажете менеджеру?<br>
+        <b>Напишите:</b> <span class="wline xlong"></span><br>
+        <span class="ru-sub">Шаблон: «Quisiera abrir una cuenta corriente.» (Я хотел бы открыть текущий счёт.)</span>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы хотите узнать про комиссию за перевод. Что спросите?<br>
+        <b>Напишите:</b> <span class="wline xlong"></span><br>
+        <span class="ru-sub">Шаблон: «¿Hay comisión por transferencia?» (Есть ли комиссия за перевод?)</span>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы хотите настроить Bizum. Что попросите?<br>
+        <b>Напишите:</b> <span class="wline xlong"></span><br>
+        <span class="ru-sub">Шаблон: «¿Puedo usar Bizum?» (Могу я пользоваться Bizum?)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">8</div><div><h2>✍️ Письмо: «Мой первый визит в банк»</h2><div class="tag">7–8 предложений по плану</div></div></div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. В какой банк вы идёте и зачем?<br>
+        3–4. Какие документы вы берёте?<br>
+        5–6. Что вы получите (карта, IBAN, Bizum)?<br>
+        7–8. Что вы будете делать со счётом?
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 9: САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть банковские продукты (cuenta, tarjeta, Bizum)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать операции (ingresar, transferir, domiciliar)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить фразы с ir + a + инфинитив</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Читать условия банка (comisión, saldo)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Провести ролевую игру открытия счёта</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Настроить и использовать Bizum</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю — проверим вместе!</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

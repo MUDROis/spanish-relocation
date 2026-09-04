@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 12: PBL La Mochila Perfecta — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#FFF8EC;--ink:#33322E;--sun:#FFC93C;--terra:#E8604C;--teal:#2A9D8F;--soft:#FFF3D6;--ink-soft:#6b675f;--green:#2E7D32;--red:#D62828;--p4:#2C5E8A}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+.top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+.back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+.brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}.brand span{color:var(--terra)}
+.nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+.hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E0F2F1 0%,var(--cream) 100%)}
+.lesson-tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem}
+.hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}.hero h1 span{color:var(--teal)}
+.hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+.final-situation{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--teal);text-align:left}
+.container{max-width:880px;margin:40px auto;padding:0 20px}
+.goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--teal)}
+.goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.goal-item{background:#E0F2F1;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}.goal-item .emoji{font-size:1.3rem;margin-right:6px}
+.block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+.block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+.time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+.block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+.script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+.script strong{font-style:normal;color:var(--terra)}
+.script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.word-card{background:#fff;border-radius:16px;padding:16px;text-align:center;cursor:pointer;border:3px solid #E0F2F1;transition:.25s;user-select:none}
+.word-card:hover{transform:translateY(-4px);border-color:var(--teal)}
+.word-card .emo{font-size:2.2rem;display:block;margin-bottom:6px}
+.word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--teal)}
+.word-card .ru{color:var(--ink-soft);font-size:.85rem;font-weight:700}
+.speak-btn{background:var(--teal);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;margin-top:8px}
+.reading-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:16px 18px;font-size:1.05rem;line-height:1.9;margin:12px 0}
+.rq{margin:0 0 18px;background:#fafaf5;border-radius:14px;padding:14px}.rq-q{font-weight:800;margin-bottom:8px}
+.opt{display:block;width:100%;background:#fff;border:2px solid #e0d8cc;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;margin:6px 0;font-family:'Nunito';text-align:left}
+.opt:disabled{cursor:not-allowed}.opt.correct{background:#C8E6C9;border-color:var(--green)}.opt.wrong{background:#FFCDD2;border-color:var(--red)}
+.rq-fb{font-weight:800;margin-top:8px;min-height:22px}
+.pbl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:14px 0}
+.pbl-item{background:#fff;border:3px solid #e0d8cc;border-radius:14px;padding:12px 6px;text-align:center;font-weight:700;font-size:.85rem}
+.pbl-item .emo{font-size:1.8rem;display:block}.pbl-item.in{border-color:var(--green);background:#E8F5E9}
+.qty-row{display:flex;gap:6px;justify-content:center;margin-top:6px}
+.qty{border:2px solid #cfd8dc;background:#fff;border-radius:8px;padding:2px 8px;font-weight:800;cursor:pointer;font-size:.8rem}
+.qty.sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+.pbl-result{background:#E8F5E9;border-radius:14px;padding:16px;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--green);min-height:60px}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:14px 0}
+.shop-item{background:#fff;border:3px solid #f0e6d0;border-radius:14px;padding:12px 6px;text-align:center;font-weight:700;font-size:.85rem;transition:.2s}
+.shop-item .emo{font-size:1.8rem;display:block}
+.shop-name{font-family:'Baloo 2',cursive;color:var(--teal);margin-top:4px}
+.shop-price{color:var(--terra);font-weight:800;margin-top:2px}
+.shop-item.in{border-color:var(--green);background:#E8F5E9}
+.budget-result{background:#FFF8DC;border-radius:14px;padding:16px;margin:12px 0;font-size:1rem;min-height:60px}
+.builder{background:var(--soft);border-radius:14px;padding:16px;margin:12px 0}
+.builder h4{color:var(--terra);margin-bottom:6px}
+.add-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.add-row input{border:2px solid #d0c8b8;border-radius:10px;padding:8px 10px;font-family:'Nunito';font-weight:700;width:150px}
+.add-row input.sm{width:90px}
+.pres-list{background:#fff;border-radius:12px;padding:12px;margin:8px 0}
+.pres-chip{display:inline-block;background:#E0F2F1;border-radius:999px;padding:6px 14px;margin:4px;font-weight:800;font-size:.9rem}
+.pres-dialog{background:#fff;border-radius:14px;padding:16px;margin:12px 0;display:none}
+.pres-dialog.show{display:block}
+.dl{display:flex;gap:10px;margin:8px 0;align-items:flex-start}
+.dl .who{font-weight:800;flex-shrink:0;min-width:66px}
+.dl .bubble{background:#f4f4f4;border-radius:12px;padding:8px 12px;flex:1}
+.dl.seller .who{color:var(--terra)}.dl.buyer .who{color:var(--teal)}
+.dl .bubble .ru{color:var(--ink-soft);font-size:.85rem;font-weight:700;margin-top:2px}
+.ball{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd54f,var(--terra));border:none;cursor:pointer;font-size:2.6rem;box-shadow:0 8px 22px rgba(232,96,76,.4)}
+.badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+.badge-icon{font-size:4rem;margin-bottom:10px}
+.badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+.badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}.badge-stamped.show{display:block}
+.grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+.grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:280px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+.grammar-hint:hover::after,.grammar-hint.active::after{opacity:1}
+.tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+.tl-table{width:100%;border-collapse:collapse;min-width:500px}
+.tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+.tl-table th:not(:first-child){text-align:center;width:90px}
+.tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+.tl-table td:first-child{font-weight:600}.tl-table td:not(:first-child){text-align:center}
+.tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+.tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}.tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}.tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+.tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+.tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+.homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+.homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+.task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.task-num{background:var(--teal);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+.task-num.star{background:var(--sun);color:var(--ink)}
+.task a{color:var(--teal);font-weight:800}
+.quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800}
+.lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+.lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center}
+.nav-prev{background:var(--soft);color:var(--ink)}.nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+.nav-small{font-size:.85rem;opacity:.8;font-weight:700}.nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+.footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+.confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+@media(max-width:600px){.pbl-grid{grid-template-columns:1fr 1fr}.shop-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 2 · Mi Colegio · Урок 3 из 12 · По курсу — Урок 12 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🛍️ УРОК 12 · НЕДЕЛЯ 4 · PBL</span>
+  <h1>La Mochila <span>Perfecta</span></h1>
+  <p class="sub">Финал недели 4! Ты соберёшь всё, что выучил, в один большой проект — создашь и презентуешь свой идеальный рюкзак по-испански. ¡Vamos!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты в магазине канцелярии. Показываешь свой проект и говоришь:<br>
+    <span class="grammar-hint" data-hint="Esta es mi mochila perfecta — «Это мой идеальный рюкзак». Mochila — девочка, поэтому perfecta (не perfecto)!">«Esta es mi mochila perfecta.</span> En mi mochila hay tres lápices, dos bolígrafos y unos colores. Necesito un estuche nuevo. ¿Cuánto cuesta? ¡Perfecto!»
+  </div>
+</header>
+
+<main class="container">
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🛍️</span> Создавать проект «идеальный рюкзак»</div>
+      <div class="goal-item"><span class="emoji">🗣</span> Презентовать: <em>En mi mochila hay...</em></div>
+      <div class="goal-item"><span class="emoji">🧩</span> Закрепить HAY + артикли un/una/unos/unas</div>
+      <div class="goal-item"><span class="emoji">💰</span> Считать цены: cuesta / cuestan / en total</div>
+      <div class="goal-item"><span class="emoji">🤝</span> Вести диалог с «продавцом»</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Идеальный рюкзак»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1: РАЗМИНКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🔁 Разминка: один → много → артикль</h2><span class="time-badge">⏱ 5 минут</span></div>
+    <div class="script">Быстрая цепочка: я говорю слово — ты отвечаешь в трёх формах! Нажимай карточку и повторяй вслух.</div>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('un lápiz, los lápices, muchos lápices')"><span class="emo">✏️</span><div class="es">un lápiz → los lápices → muchos lápices</div><div class="ru">карандаш</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('una goma, las gomas, muchas gomas')"><span class="emo">🧽</span><div class="es">una goma → las gomas → muchas gomas</div><div class="ru">ластик</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('un bolígrafo, los bolígrafos, muchos bolígrafos')"><span class="emo">🖊️</span><div class="es">un bolígrafo → los bolígrafos</div><div class="ru">ручка</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('un estuche, los estuches, muchos estuches')"><span class="emo">👝</span><div class="es">un estuche → los estuches</div><div class="ru">пенал</div><button class="speak-btn">🔊</button></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: МОДЕЛЬ -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head"><h2 class="block-title">🛍️ Модель: рюкзак Лусии</h2><span class="time-badge">⏱ 7 минут</span></div>
+    <p class="block-sub">Сначала послушай и прочитай образец — так ты сделаешь свой проект ещё лучше!</p>
+    <div class="reading-box">«¡Hola! Me llamo Lucía. Esta es mi mochila perfecta. En mi mochila hay dos lápices, tres bolígrafos y unos colores. Hay un cuaderno grande y una regla. No hay tijeras. Necesito un estuche nuevo. Mi mochila es perfecta.»</div>
+    <button class="speak-btn" onclick="speak('¡Hola! Me llamo Lucía. Esta es mi mochila perfecta. En mi mochila hay dos lápices, tres bolígrafos y unos colores. Hay un cuaderno grande y una regla. No hay tijeras. Necesito un estuche nuevo. Mi mochila es perfecta.')">🔊 Послушать</button>
+    <div style="margin-top:14px">
+      <div class="rq">
+        <div class="rq-q">1. ¿Cuántos lápices hay?</div>
+        <button class="opt" onclick="rq(this,false)">Uno</button>
+        <button class="opt" data-ok="1" onclick="rq(this,true)">Dos</button>
+        <button class="opt" onclick="rq(this,false)">Tres</button>
+        <div class="rq-fb"></div>
+      </div>
+      <div class="rq">
+        <div class="rq-q">2. ¿Qué NO hay en la mochila?</div>
+        <button class="opt" onclick="rq(this,false)">Los colores</button>
+        <button class="opt" onclick="rq(this,false)">La regla</button>
+        <button class="opt" data-ok="1" onclick="rq(this,true)">Las tijeras</button>
+        <div class="rq-fb"></div>
+      </div>
+      <div class="rq">
+        <div class="rq-q">3. ¿Qué necesita Lucía?</div>
+        <button class="opt" data-ok="1" onclick="rq(this,true)">Un estuche nuevo</button>
+        <button class="opt" onclick="rq(this,false)">Un lápiz</button>
+        <button class="opt" onclick="rq(this,false)">Una regla</button>
+        <div class="rq-fb"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ПРОЕКТ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🎨 Проект: создай свой рюкзак</h2><span class="time-badge">⏱ 15 минут</span></div>
+    <p class="block-sub">Выбери предметы из уроков 10–11 (все они тут!) и количество (1 / 2 / 3 / ✚ много) — получишь готовую фразу с озвучкой!</p>
+    <div class="pbl-grid" id="pbl-grid"></div>
+    <button class="speak-btn" onclick="buildBag()">🎒 Показать мой рюкзак</button>
+    <div class="pbl-result" id="pbl-result">En mi mochila hay: …</div>
+    <div class="script"><strong>Шаблон для записи (коротко):</strong><br>Esta es mi mochila perfecta. En mi mochila hay ___ lápices, ___ gomas y unos ___. Hay un ___ y una ___. No hay ___. Necesito ___.</div>
+  </section>
+
+  <!-- БЛОК 4: БЮДЖЕТ -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head"><h2 class="block-title">💰 Бюджет: ¿Cuánto cuesta?</h2><span class="time-badge">⏱ 7 минут</span></div>
+    <p class="block-sub">Магазин! Нажми карточку товара и выбери количество — потом нажми «💰 Посчитать», чтобы увидеть общую стоимость. Помни: <span class="grammar-hint" data-hint="cuesta — стоит (один предмет). Cuestan — стоят (несколько). Un lápiz cuesta 1 euro. Dos lápices cuestan 2 euros.">cuesta / cuestan</span> и <span class="grammar-hint" data-hint="En total — в итоге. En total: cinco euros.">en total</span>.</p>
+    <div class="shop-grid" id="shop-grid"></div>
+    <button class="speak-btn" onclick="computeBudget()">💰 Посчитать бюджет</button>
+    <div class="budget-result" id="budget-result">🛒 Выбери товары в магазине и нажми «Посчитать»!</div>
+  </section>
+
+  <!-- БЛОК 5: ДИАЛОГ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head"><h2 class="block-title">🤝 Диалог: с продавцом</h2><span class="time-badge">⏱ 10 минут</span></div>
+    <p class="block-sub">Ты в магазине! Добавь свои предметы и цены (или возьми те, что выбрал выше) — и разыграй диалог с продавцом.</p>
+    <div class="builder">
+      <h4>🧺 Из магазина выше (выбранные товары):</h4>
+      <div class="pres-list" id="pres-from-shop">Пока пусто — выбери товары в блоке «Бюджет».</div>
+      <h4>➕ Добавь свой предмет и цену:</h4>
+      <div class="add-row">
+        <input id="pres-item" placeholder="Название (испан.). Напр. pegamento">
+        <input id="pres-qty" class="sm" type="number" min="1" max="12" value="1" placeholder="Сколько?">
+        <input id="pres-price" class="sm" type="number" min="0" step="0.5" placeholder="Цена (€)">
+        <button class="speak-btn" onclick="addPresItem()">➕ Добавить</button>
+      </div>
+      <div class="pres-list" id="pres-list"></div>
+      <button class="speak-btn" style="background:var(--terra)" onclick="runDialogue()">🎭 Разыграть диалог</button>
+    </div>
+    <div class="pres-dialog" id="pres-dialog"></div>
+  </section>
+
+  <!-- БЛОК 6: МЯЧ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🎾 La Pelota Preguntona</h2><span class="time-badge">⏱ 3 минуты</span></div>
+    <div style="text-align:center">
+      <button class="ball" onclick="pelota()">🎾</button>
+      <div class="fb" id="pel-q" style="font-weight:800;font-size:1.1rem;min-height:28px;margin-top:10px">Нажми на мяч!</div>
+      <div id="pel-opts" style="max-width:420px;margin:0 auto"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 7: БЕЙДЖ -->
+  <section class="block" style="--c:#FFC93C">
+    <div class="block-head"><h2 class="block-title">🏅 Бейдж «Идеальный рюкзак»</h2><span class="time-badge">⏱ 3 минуты</span></div>
+    <div class="badge-zone">
+      <div class="badge-icon">🛍️</div><h3>Идеальный рюкзак</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты создал и презентовал свой проект по-испански!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Идеальный рюкзак» 🛍️ добавлен в твой паспорт!</div>
+    </div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Говорить «En mi mochila hay...»</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Выбирать un/una/unos/unas</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Считать cuesta / cuestan</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Презентовать рюкзак вслух</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Вести диалог с продавцом</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Презентуй рюкзак родителям</strong> · 5 мин<br>Скажи вслух: <em>«Esta es mi mochila perfecta. En mi mochila hay...»</em> Родители аплодируют! 👏</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>Семейная игра «Магазин»</strong> · 7 мин ⭐<br>Родители — продавцы, ты — покупатель. Диалог: <em>«¿Cuánto cuesta...?»</em></div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>Сочинение «Mi mochila perfecta»</strong> · 10 мин ⭐<br>Полное сочинение 7–8 предложений — в рабочем листе.</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Повтори все слова недели</strong> · 2 мин<br>Нажимай на карточки уроков 10–12: слушай и повторяй вслух.</div></div>
+    <div class="task"><div class="task-num">5</div><div><strong>Видео «La mochila»</strong> · 3 мин<br>Посмотри и повтори вслух все слова.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Mi mochila perfecta»</strong> · 15 мин ⭐<br>Попроси родителей распечатать лист, выполни задания и раскрась светофор. Принеси на следующий урок!<br><a href="../../worksheets/w04-l3-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> — честно отметь, как у тебя получается (таблица выше).</div></div>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1204593408/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-2-%D1%83%D1%80%D0%BE%D0%BA-3-flash-cards/?i=2gqp1x&x=1jqt" target="_blank"><span>📚 Карточки Quizlet · Слова урока 12</span><span>Открыть карточки →</span></a>
+
+  <div class="lesson-nav">
+    <a href="./w04-l2.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 11: Uno, dos, tres... ¡Muchos!</div></a>
+    <a href="./w05-l1.html" class="nav-next"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 13: Los días de la semana 🔒 скоро</div></a>
+  </div>
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 2: Mi Colegio · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+
+/* ===== БЛОК 2: чтение-вопросы (каждый вопрос независим) ===== */
+function rq(btn,ok){
+  var box=btn.closest('.rq');
+  box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+  btn.classList.add(ok?'correct':'wrong');
+  if(!ok){var c=box.querySelector('.opt[data-ok="1"]');if(c)c.classList.add('correct');}
+  var fb=box.querySelector('.rq-fb');
+  fb.textContent=ok?'✅ ¡Muy bien!':'❌ Если что, загляни в текст ещё раз!';
+  if(ok)speak('¡Muy bien!');
+}
+
+/* ===== БЛОК 3 + 4: предметы уроков 10-11 ===== */
+var ITEMS=[
+ {id:'lapiz',e:'✏️',s:'lápiz',p:'lápices',g:'m',price:1},
+ {id:'goma',e:'🧽',s:'goma',p:'gomas',g:'f',price:1},
+ {id:'boli',e:'🖊️',s:'bolígrafo',p:'bolígrafos',g:'m',price:2},
+ {id:'sac',e:'🔄',s:'sacapuntas',p:'sacapuntas',g:'m',price:1},
+ {id:'cuad',e:'📓',s:'cuaderno',p:'cuadernos',g:'m',price:3},
+ {id:'est',e:'👝',s:'estuche',p:'estuches',g:'m',price:5},
+ {id:'libro',e:'📖',s:'libro',p:'libros',g:'m',price:6},
+ {id:'col',e:'🖍️',s:'color',p:'colores',g:'m',price:4},
+ {id:'regla',e:'📏',s:'regla',p:'reglas',g:'f',price:2},
+ {id:'tij',e:'✂️',s:'tijera',p:'tijeras',g:'f',price:3},
+ {id:'moch',e:'🎒',s:'mochila',p:'mochilas',g:'f',price:10}
+];
+
+/* --- ПРОЕКТ (БЛОК 3): выбор рюкзака --- */
+var qty={};
+(function(){
+  var g=document.getElementById('pbl-grid');
+  ITEMS.forEach(function(it){
+    qty[it.id]=0;
+    var d=document.createElement('div');d.className='pbl-item';d.id='pbl-'+it.id;
+    d.innerHTML='<span class="emo">'+it.e+'</span>'+it.s+
+      '<div class="qty-row">'+['1','2','3','✚'].map(function(q){var v=q==='✚'?'many':q;
+        return '<span class="qty" onclick="setQty(\''+it.id+'\',\''+v+'\',this)">'+q+'</span>';}).join('')+'</div>';
+    g.appendChild(d);
+  });
+})();
+function setQty(id,val,el){
+  qty[id]=val;
+  var box=document.getElementById('pbl-'+id);
+  box.querySelectorAll('.qty').forEach(function(x){x.classList.remove('sel');});
+  el.classList.add('sel');box.classList.add('in');
+}
+function partFor(it,q){
+  if(q==='1')return (it.g==='m'?'un ':'una ')+it.s;
+  if(q==='2')return 'dos '+it.p;
+  if(q==='3')return 'tres '+it.p;
+  return (it.g==='m'?'muchos ':'muchas ')+it.p;
+}
+function qtyNum(it,q){return q==='1'?1:q==='2'?2:q==='3'?3:6;}
+function buildBag(){
+  var parts=[];
+  ITEMS.forEach(function(it){if(qty[it.id])parts.push(partFor(it,qty[it.id]));});
+  var res=document.getElementById('pbl-result');
+  if(!parts.length){res.textContent='🎒 Рюкзак пустой! Выбери предметы и количество.';return;}
+  var last=parts.pop();
+  var text='En mi mochila hay '+(parts.length?parts.join(', ')+' y ':'')+last+'.';
+  res.textContent=text;speak(text);
+}
+
+/* --- БЮДЖЕТ (БЛОК 4): магазин с ценами --- */
+var cart={};
+function shopItemTitle(it){
+  var n=qtyNum(it,cart[it.id]);
+  return (n===1?it.s:n+' '+it.p);
+}
+(function(){
+  var g=document.getElementById('shop-grid');
+  ITEMS.forEach(function(it){
+    cart[it.id]=0;
+    var d=document.createElement('div');d.className='shop-item';d.id='shop-'+it.id;
+    d.innerHTML='<span class="emo">'+it.e+'</span><div class="shop-name">'+it.s+'</div><div class="shop-price">'+it.price+' €</div>'+
+      '<div class="qty-row">'+['1','2','3','✚'].map(function(q){var v=q==='✚'?'many':q;
+        return '<span class="qty" onclick="setCart(\''+it.id+'\',\''+v+'\',this)">'+q+'</span>';}).join('')+'</div>';
+    g.appendChild(d);
+  });
+})();
+function setCart(id,val,el){
+  cart[id]=val;
+  var box=document.getElementById('shop-'+id);
+  box.querySelectorAll('.qty').forEach(function(x){x.classList.remove('sel');});
+  el.classList.add('sel');box.classList.add('in');
+  renderShopSummary();
+}
+function renderShopSummary(){
+  var names=[];
+  ITEMS.forEach(function(it){if(cart[it.id])names.push(shopItemTitle(it));});
+  var box=document.getElementById('pres-from-shop');
+  if(!names.length){box.innerHTML='Пока пусто — выбери товары в блоке «Бюджет».';return;}
+  box.innerHTML=names.map(function(n){return '<span class="pres-chip">'+n+'</span>';}).join('');
+}
+function computeBudget(){
+  var lines=[],total=0,any=false;
+  ITEMS.forEach(function(it){
+    var q=cart[it.id];if(!q)return;any=true;
+    var n=qtyNum(it,q);
+    var cost=n*it.price;total+=cost;
+    if(n===1)lines.push('Un <b>'+it.s+'</b> cuesta '+it.price+' euro.');
+    else lines.push(n+' <b>'+it.p+'</b> cuestan '+cost+' euros.');
+  });
+  var box=document.getElementById('budget-result');
+  if(!any){box.innerHTML='🛒 Корзина пуста! Выбери товары в магазине выше.';return;}
+  box.innerHTML=lines.join('<br>')+'<br><strong>💰 En total: '+total+' euros.</strong>';
+  speak('En total, '+total+' euros.');
+}
+
+/* ===== БЛОК 5: диалог с продавцом ===== */
+var customItems=[]; /* {s, n, price} */
+function addPresItem(){
+  var nE=document.getElementById('pres-item');
+  var nQ=document.getElementById('pres-qty');
+  var nP=document.getElementById('pres-price');
+  var s=(nE.value||'').trim();
+  if(!s){alert('Напиши название предмета!');return;}
+  var n=parseInt(nQ.value,10)||1;
+  var price=parseFloat(nP.value);
+  if(isNaN(price)||price<0){alert('Напиши цену (число) в евро!');return;}
+  customItems.push({s:s,n:Math.min(12,n),price:price});
+  nE.value='';nP.value='';
+  renderCustomList();
+}
+function priceDesc(price){return (price%1===0)?price+' euro':price+' euros';}
+function renderCustomList(){
+  var box=document.getElementById('pres-list');box.innerHTML='';
+  if(!customItems.length){box.innerHTML='Пока нет своих предметов.';return;}
+  customItems.forEach(function(it,i){
+    box.innerHTML+='<span class="pres-chip">'+it.s+' × '+it.n+' · '+priceDesc(it.price)+' <b style="cursor:pointer" onclick="removeCustom('+i+')" title="Убрать">✖</b></span>';
+  });
+}
+function removeCustom(i){customItems.splice(i,1);renderCustomList();}
+function itemLabel(it){
+  var n=qtyNum(it,cart[it.id]||0);
+  return (it.g==='m'&&n===1?'un ':(it.g==='f'&&n===1?'una ':'') )+ (n===1?it.s:n+' '+it.p);
+}
+function runDialogue(){
+  var purchases=[];
+  ITEMS.forEach(function(it){
+    var q=cart[it.id];
+    if(q){purchases.push({s:itemLabel(it),n:qtyNum(it,q),unit:it.price,es:true});}
+  });
+  customItems.forEach(function(c){purchases.push({s:c.s+' × '+c.n,label:c.s,n:c.n,unit:c.price,es:false});});
+
+  var box=document.getElementById('pres-dialog');
+  if(purchases.length===0){
+    box.innerHTML='Сначала добавь товары: выбери их в «Бюджете» или добавь свои выше!';
+    box.classList.add('show');return;
+  }
+
+  var total=0;purchases.forEach(function(p){total+=p.n*p.unit;});
+  var list=purchases.map(function(p){return p.s;}).join(', ');
+
+  var dialogs=[];
+  dialogs.push({who:'seller',es:'¡Hola! Bienvenido a mi tienda. ¿Qué necesitas?',ru:'Привет! Добро пожаловать в мой магазин. Что тебе нужно?'});
+  dialogs.push({who:'buyer',es:'Hola. Necesito '+list+'.',ru:'Привет. Мне нужно: '+list+'.'});
+  dialogs.push({who:'buyer',es:'¿Y cuánto cuesta todo?',ru:'А сколько всё это стоит?'});
+  dialogs.push({who:'seller',es:'En total, todo junto: '+total+' euros.',ru:'Вместе всё стоило бы: '+total+' евро.'});
+  dialogs.push({who:'buyer',es:'¡Vale! De acuerdo. ¡Me lo llevo! ¡Perfecto!',ru:'Договорились! Согласен(на)! Беру! Идеально!'});
+  dialogs.push({who:'seller',es:'¡Perfecto! Gracias. ¡Hasta luego!',ru:'Отлично! Спасибо. До свидания!'});
+
+  var html='';
+  dialogs.forEach(function(d){
+    html+='<div class="dl '+(d.who==='seller'?'seller':'buyer')+'"><div class="who">'+(d.who==='seller'?'🧑‍💼 Продавец':'🧒 Ты')+'</div><div class="bubble">'+d.es+'<div class="ru">'+d.ru+'</div></div></div>';
+  });
+  html+='<button class="speak-btn" style="margin-top:8px" onclick="speakDialogue()">🔊 Озвучить мой диалог</button>';
+  box.innerHTML=html;
+  box.classList.add('show');
+  lastDialogueSpanish=dialogs.map(function(d){return d.es;}).join(' ');
+}
+var lastDialogueSpanish='';
+function speakDialogue(){speak(lastDialogueSpanish);}
+
+/* ===== БЛОК 6: мяч ===== */
+var PEL=[
+ {q:'Один карандаш — un lápiz. А много?',ok:'muchos lápices',w:['mucho lápices','muchas lápices']},
+ {q:'¿Cuánto cuestan dos lápices (2×1€)?',ok:'Cuestan dos euros.',w:['Cuesta dos euros.','Hay dos euros.']},
+ {q:'«Есть три тетради» — как сказать?',ok:'Hay tres cuadernos.',w:['Hay tres cuaderno.','Son tres cuadernos.']},
+ {q:'Артикль для «goma» (1)?',ok:'una',w:['un','unos']},
+ {q:'Множественное от bolígrafo?',ok:'bolígrafos',w:['bolígrafoes','bolígrafas']}
+];
+function pelota(){
+  var r=PEL[Math.floor(Math.random()*PEL.length)];
+  document.getElementById('pel-q').textContent=r.q;
+  var box=document.getElementById('pel-opts');box.innerHTML='';
+  [r.ok].concat(r.w).sort(function(){return Math.random()-0.5;}).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      b.classList.add(o===r.ok?'correct':'wrong');
+      if(o===r.ok)speak(r.ok);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 7: бейдж ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Tu mochila es perfecta!');
+  confetti('🛍️');
+  try{localStorage.setItem('mudro_kids_w04l3_badge_perfecta','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w04l3_badge_perfecta')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(e){var c=['🎉','⭐',e];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};}(s),3200);}}
+
+/* ===== светофор ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){
+    var row=c.getAttribute('data-row');
+    document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});
+    c.classList.add('active');
+  });
+});
+document.getElementById('tlReset').addEventListener('click',function(){
+  document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});
+});
+
+/* ===== grammar-hint (тап на мобильных) ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>
