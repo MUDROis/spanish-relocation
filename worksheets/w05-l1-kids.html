@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 13 · Los días de la semana — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --blue:#2274A5;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E0F2F1,#B2DFDB,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-blue{background:var(--blue)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:140px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+  .desc-item .ru,.gap-item .ru{display:block;width:100%;color:#999;font-size:11.5px;font-style:italic;font-weight:600}
+
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .g{display:inline-block;min-width:56px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+  .gap-item .hint{color:#999;font-size:11px}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--oliva);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--oliva)}
+  .build-line{border-bottom:1.6px dashed var(--oliva);height:24px}
+
+  .ana-item{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13.5px;flex-wrap:wrap}
+  .ana-item .scram{font-family:'Baloo 2',cursive;font-weight:800;color:var(--pink);letter-spacing:2px;background:#FFF0F6;border-radius:8px;padding:3px 10px}
+  .ana-item .blank{display:inline-block;min-width:120px;border-bottom:1.6px dashed var(--pink);height:20px;vertical-align:bottom}
+
+  .sched-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+  .sched-table th{background:#E0F2F1;padding:6px 8px;text-align:center;font-weight:800;border:1px solid #b2dfdb;color:var(--teal)}
+  .sched-table td{padding:6px 8px;border:1px solid #d6cfc4;text-align:center;font-weight:600}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:110px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>📅 Los días de la semana</h1>
+    <div class="sub">Рабочий лист к Уроку 13 · Станция 2: Mi Colegio · дни недели, предметы, расписание, числа до 100</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, а потом <strong>проверь вместе с родителем или учителем</strong>. Вспоминай карточки и песню из урока 13!</div>
+
+  <!-- 1. СОПОСТАВЛЕНИЕ ДНИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">1</span>
+      <span class="ex-title">Соедини день и слово</span>
+      <span class="ex-skill">🗣 Лексика · дни недели</span>
+    </div>
+    <div class="ex-instruction">Впиши букву испанского слова рядом с днём. Неделя в Испании начинается с понедельника!</div>
+    <table class="match-table">
+      <tr><th style="width:55%">День</th><th>Испанский</th></tr>
+      <tr><td><span class="ans-box"></span>1️⃣ понедельник</td><td>а) viernes</td></tr>
+      <tr><td><span class="ans-box"></span>2️⃣ вторник</td><td>б) lunes</td></tr>
+      <tr><td><span class="ans-box"></span>3️⃣ среда</td><td>в) domingo</td></tr>
+      <tr><td><span class="ans-box"></span>4️⃣ четверг</td><td>г) miércoles</td></tr>
+      <tr><td><span class="ans-box"></span>5️⃣ пятница</td><td>д) martes</td></tr>
+      <tr><td><span class="ans-box"></span>6️⃣ суббота</td><td>е) sábado</td></tr>
+      <tr><td><span class="ans-box"></span>7️⃣ воскресенье</td><td>ж) jueves</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. АНАГРАММЫ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">2</span>
+      <span class="ex-title">Распутай буквы: какой это день?</span>
+      <span class="ex-skill">🗣 Лексика · анаграммы</span>
+    </div>
+    <div class="ex-instruction">Буквы перепутались! Запиши день недели правильно.</div>
+    <div class="ana-item"><span class="num" style="display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--pink);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--pink)">1</span><span class="scram">s e n u l</span> → <span class="blank"></span></div>
+    <div class="ana-item"><span class="num" style="display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--pink);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--pink)">2</span><span class="scram">t r a c e m</span> → <span class="blank"></span></div>
+    <div class="ana-item"><span class="num" style="display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--pink);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--pink)">3</span><span class="scram">n e v o i r s</span> → <span class="blank"></span></div>
+    <div class="ana-item"><span class="num" style="display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--pink);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--pink)">4</span><span class="scram">o g m i n d</span> → <span class="blank"></span></div>
+  </div>
+
+  <!-- 3. ПРЕДМЕТЫ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">3</span>
+      <span class="ex-title">Угадай предмет по описанию</span>
+      <span class="ex-skill">🗣 Лексика · предметы</span>
+    </div>
+    <div class="ex-instruction">Прочитай описание и напиши школьный предмет по-испански.</div>
+    <div class="hint-box">💡 Слова-помощники: <strong>Mates · Lengua · Plástica · Música · EF · Inglés</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">➗</span> Считаем и решаем примеры. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">📖</span> Читаем и пишем на языке школы. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🎨</span> Рисуем и мастерим. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">🎵</span> Поём и играем на инструментах. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">⚽</span> Бегаем и играем в футбол. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🇬🇧</span> Учим английский язык. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА EL/LOS -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">4</span>
+      <span class="ex-title">Впиши: el или los</span>
+      <span class="ex-skill">🧩 Грамматика · el lunes / los lunes</span>
+    </div>
+    <div class="hint-box">💡 <strong>El lunes</strong> = в понедельник (один день). <strong>Los lunes</strong> = по понедельникам (каждый раз).</div>
+    <div class="gap-grid">
+      <div class="gap-item">1. <span class="g"></span> lunes tengo Mates. <span class="hint">(в понедельник)</span></div>
+      <div class="gap-item">2. <span class="g"></span> viernes tengo EF y Música. <span class="hint">(по пятницам)</span></div>
+      <div class="gap-item">3. <span class="g"></span> martes tengo Plástica. <span class="hint">(во вторник)</span></div>
+      <div class="gap-item">4. <span class="g"></span> miércoles tengo EF. <span class="hint">(по средам)</span></div>
+      <div class="gap-item">5. <span class="g"></span> sábado no tengo clase. <span class="hint">(в субботу)</span></div>
+      <div class="gap-item">6. <span class="g"></span> jueves tengo Inglés. <span class="hint">(по четвергам)</span></div>
+    </div>
+  </div>
+
+  <!-- 5. СОБЕРИ ФРАЗУ (СЛОВА ВРАЗБРОС) -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Слова стоят НЕ по порядку. Расставь их и запиши фразу на строке.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">tengo</span><span class="build-word">Lengua.</span><span class="build-word">El</span><span class="build-word">y</span><span class="build-word">lunes</span><span class="build-word">Mates</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">es</span><span class="build-word">¿Qué</span><span class="build-word">hoy?</span><span class="build-word">día</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">tengo</span><span class="build-word">Los</span><span class="build-word">Música.</span><span class="build-word">viernes</span><span class="build-word">EF</span><span class="build-word">y</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">es</span><span class="build-word">Hoy</span><span class="build-word">miércoles.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">de</span><span class="build-word">no</span><span class="build-word">El</span><span class="build-word">clase.</span><span class="build-word">fin</span><span class="build-word">tengo</span><span class="build-word">semana</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 6. ЛОГИКА ДНЕЙ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-blue">6</span>
+      <span class="ex-title">Логика: какой день дальше?</span>
+      <span class="ex-skill">🧩 Логика · дни</span>
+    </div>
+    <div class="ex-instruction">Прочитай и напиши недостающий день недели по-испански.</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span> Hoy es lunes. Mañana es <span class="blank"></span>.<span class="ru">Сегодня понедельник. Завтра будет ___.</span></div>
+      <div class="desc-item"><span class="num">2</span> Hoy es jueves. Mañana es <span class="blank"></span>.<span class="ru">Сегодня четверг. Завтра будет ___.</span></div>
+      <div class="desc-item"><span class="num">3</span> Hoy es sábado. Mañana es <span class="blank"></span>.<span class="ru">Сегодня суббота. Завтра будет ___.</span></div>
+      <div class="desc-item"><span class="num">4</span> Hoy es martes. Mañana será <span class="blank"></span>.<span class="ru">Сегодня вторник. Завтра будет ___.</span></div>
+    </div>
+  </div>
+
+  <!-- 7. ЧИСЛА ДО 100 -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">7</span>
+      <span class="ex-title">Числа до 100: напиши словами</span>
+      <span class="ex-skill">🔢 Числа (до 100)</span>
+    </div>
+    <div class="ex-instruction">Ты уже считаешь до 100! Напиши числа словами по-испански.</div>
+    <div class="hint-box">💡 Помни: 21–29 слитно (<strong>veintiuno</strong>), 31–99 через «y» (<strong>treinta y uno</strong>), 100 = <strong>cien</strong>.</div>
+    <div class="gap-grid">
+      <div class="gap-item">1. La semana tiene <span class="g"></span> (7) días.<span class="ru">В неделе 7 дней.</span></div>
+      <div class="gap-item">2. Tengo <span class="g"></span> (15) clases esta semana.<span class="ru">На этой неделе у меня 15 занятий.</span></div>
+      <div class="gap-item">3. La clase dura <span class="g"></span> (30) minutos.<span class="ru">Урок длится 30 минут.</span></div>
+      <div class="gap-item">4. El recreo dura <span class="g"></span> (45) minutos.<span class="ru">Перемена длится 45 минут.</span></div>
+      <div class="gap-item">5. En el cole hay <span class="g"></span> (75) alumnos.<span class="ru">В школе 75 учеников.</span></div>
+      <div class="gap-item">6. El curso tiene <span class="g"></span> (100) días.<span class="ru">Учебный год длится 100 дней.</span></div>
+    </div>
+  </div>
+
+  <!-- 8. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">8</span>
+      <span class="ex-title">Прочитай расписание и текст</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <table class="sched-table">
+      <tr><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th></tr>
+      <tr><td>Mates<br>Lengua</td><td>Plástica<br>Música</td><td>EF</td><td>Inglés<br>Mates</td><td>Lengua<br>Plástica</td></tr>
+    </table>
+    <div class="reading-box">
+      Me llamo Lucía. Mi día favorito es el martes porque tengo Plástica y Música. Los miércoles tengo EF y estoy muy contenta. Los jueves tengo Inglés y Mates. Los sábados y domingos no tengo clase: ¡es el fin de semana!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Qué día tiene Plástica y Música? <span class="ru">(В какой день у неё изо и музыка?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué día tiene EF? <span class="ru">(В какой день у неё физкультура?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cuál es el día favorito de Lucía? <span class="ru">(Какой любимый день у Лусии?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué días no tiene clase? <span class="ru">(В какие дни у неё нет уроков?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 9. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">9</span>
+      <span class="ex-title">Послушай и напиши</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши <strong>день недели</strong> или <strong>число</strong>, которое услышал(а)!</div>
+    <div class="listen-item"><span class="lnum">1.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span> → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) Hoy es martes. · 2) Los jueves tengo Inglés. · 3) La clase dura cuarenta y cinco minutos. · 4) El fin de semana son dos días. · 5) Tengo treinta clases este curso.</div>
+  </div>
+
+  <!-- 10. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">10</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Сегодня понедельник, у тебя математика. Скажи:<br><span class="tpl">Hoy es lunes. Tengo Mates.</span><span class="ru">Сегодня понедельник. У меня математика.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Друг спрашивает, какой сегодня день. Ответь:<br><span class="tpl">Hoy es ___.</span><span class="ru">Сегодня ___ (день недели).</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Скажи, что у тебя по пятницам:<br><span class="tpl">Los viernes tengo ___.</span><span class="ru">По пятницам у меня ___ (предмет).</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Скажи, когда выходные:<br><span class="tpl">El fin de semana es el sábado y el domingo.</span><span class="ru">Выходные — суббота и воскресенье.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 11. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">11</span>
+      <span class="ex-title">Сочинение «Mi semana en la escuela»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! Me llamo... · 2) Hoy es... · 3) El lunes tengo... · 4) El martes tengo... · 5) Los viernes tengo... · 6) Mi día favorito es... porque... · 7) El fin de semana... · 8) ¡Me encanta la escuela!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 12. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">12</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Назвать 7 дней недели</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Назвать школьные предметы</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Спросить и ответить «¿Qué día es hoy?»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сказать «El lunes tengo...» / «Los lunes tengo...»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Писать числа до 100 словами</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать о своей неделе</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 2: Mi Colegio · Урок 13 · ¡Hasta el lunes! 💪</div>
+</div>
+
+</body>
+</html>
