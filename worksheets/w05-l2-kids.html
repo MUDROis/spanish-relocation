@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 14 · ¿Qué hora es? — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --blue:#2274A5;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  /* ОДИН НЕПРЕРЫВНЫЙ ЛИСТ */
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E0F2F1,#B2DFDB,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-blue{background:var(--blue)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#E0F2F1;border:1.5px dashed var(--teal);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .clock{font-family:'Baloo 2',cursive;font-weight:800;color:var(--blue);background:#E3F2FD;border-radius:6px;padding:2px 8px}
+  .desc-item .blank{display:inline-block;min-width:200px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .opt{display:inline-block;border:1.6px solid var(--ocean);border-radius:999px;padding:2px 12px;font-weight:700;font-size:12.5px;color:var(--ocean);margin:0 3px}
+  .gap-item .g{display:inline-block;min-width:56px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--oliva);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--oliva)}
+  .build-line{border-bottom:1.6px dashed var(--oliva);height:24px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:90px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>⏰ ¿Qué hora es?</h1>
+    <div class="sub">Рабочий лист к Уроку 14 · Станция 2: Mi Colegio · время, empezar / terminar, a las</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, а потом <strong>проверь вместе с родителем или учителем</strong>. Вспоминай часы-модель и фразы из урока 14!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">1</span>
+      <span class="ex-title">Соедини слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · время</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>⏰ la hora</td><td>а) полночь</td></tr>
+      <tr><td><span class="ans-box"></span>⌚ el reloj</td><td>б) половина</td></tr>
+      <tr><td><span class="ans-box"></span>🕐 en punto</td><td>в) час (время)</td></tr>
+      <tr><td><span class="ans-box"></span>🕧 y media</td><td>г) ровно</td></tr>
+      <tr><td><span class="ans-box"></span>🕒 y cuarto</td><td>д) часы (прибор)</td></tr>
+      <tr><td><span class="ans-box"></span>🕑 menos cuarto</td><td>е) четверть</td></tr>
+      <tr><td><span class="ans-box"></span>☀️ mediodía</td><td>ж) без четверти</td></tr>
+      <tr><td><span class="ans-box"></span>🌙 medianoche</td><td>з) полдень</td></tr>
+      <tr><td><span class="ans-box"></span>🌅 la mañana</td><td>и) ночь</td></tr>
+      <tr><td><span class="ans-box"></span>🌇 la tarde</td><td>к) утро</td></tr>
+      <tr><td><span class="ans-box"></span>✨ la noche</td><td>л) день / вечер</td></tr>
+      <tr><td><span class="ans-box"></span>▶️ empezar</td><td>м) заканчиваться</td></tr>
+      <tr><td><span class="ans-box"></span>⏹️ terminar</td><td>н) начинаться</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: ВРЕМЯ СЛОВАМИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">2</span>
+      <span class="ex-title">Напиши время словами</span>
+      <span class="ex-skill">🗣 Лексика · часы</span>
+    </div>
+    <div class="ex-instruction">Посмотри на цифровое время и напиши фразу по-испански. Помни: 1:00 = <b>Es la una</b>, остальное = <b>Son las...</b></div>
+    <div class="word-bank">💡 Слова-помощники: una · dos · tres · cinco · doce · en punto · y media · y cuarto · menos cuarto</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="clock">1:00</span> → Es la <span class="blank" style="min-width:60px"></span> <span class="blank" style="min-width:80px"></span>.</div>
+      <div class="desc-item"><span class="num">2</span><span class="clock">2:30</span> → Son las <span class="blank" style="min-width:60px"></span> <span class="blank" style="min-width:80px"></span>.</div>
+      <div class="desc-item"><span class="num">3</span><span class="clock">3:15</span> → Son las <span class="blank" style="min-width:60px"></span> <span class="blank" style="min-width:80px"></span>.</div>
+      <div class="desc-item"><span class="num">4</span><span class="clock">4:45</span> → Son las <span class="blank" style="min-width:60px"></span> <span class="blank" style="min-width:80px"></span>.</div>
+      <div class="desc-item"><span class="num">5</span><span class="clock">12:00</span> → Son las <span class="blank" style="min-width:60px"></span> <span class="blank" style="min-width:80px"></span>.</div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ES / SON + A LAS -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Обведи: Es / Son · впиши: a las / a la</span>
+      <span class="ex-skill">🧩 Грамматика</span>
+    </div>
+    <div class="hint-box">💡 <strong>Es la una</strong> (одна-единственная!), но <strong>Son las dos / tres...</strong> Время «начинается/заканчивается» через <strong>a las</strong> (для 1:00 — <strong>a la una</strong>).</div>
+    <div class="gap-grid">
+      <div class="gap-item">1. <span class="opt">Es</span> / <span class="opt">Son</span> la una.</div>
+      <div class="gap-item">2. <span class="opt">Es</span> / <span class="opt">Son</span> las dos y media.</div>
+      <div class="gap-item">3. <span class="opt">Es</span> / <span class="opt">Son</span> las tres y cuarto.</div>
+      <div class="gap-item">4. <span class="opt">Es</span> / <span class="opt">Son</span> las cinco menos cuarto.</div>
+      <div class="gap-item">5. <span class="opt">Es</span> / <span class="opt">Son</span> las doce en punto.</div>
+      <div class="gap-item">6. La clase empieza <span class="g"></span> las nueve. <span style="color:#999;font-size:11px">(a las / a la)</span></div>
+      <div class="gap-item">7. La clase termina <span class="g"></span> las dos. <span style="color:#999;font-size:11px">(a las / a la)</span></div>
+      <div class="gap-item">8. El comedor es <span class="g"></span> una. <span style="color:#999;font-size:11px">(a las / a la)</span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу на строке.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">y</span><span class="build-word">Son</span><span class="build-word">media.</span><span class="build-word">las</span><span class="build-word">dos</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">a</span><span class="build-word">La</span><span class="build-word">las</span><span class="build-word">empieza</span><span class="build-word">nueve.</span><span class="build-word">clase</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">hora</span><span class="build-word">¿Qué</span><span class="build-word">es?</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">termina</span><span class="build-word">a</span><span class="build-word">La</span><span class="build-word">dos.</span><span class="build-word">las</span><span class="build-word">clase</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Прочитай текст и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      Me llamo Lucía. Mi clase empieza a las nueve y termina a las dos. A las once tengo el patio. El comedor es a las dos. Por la tarde tengo Plástica a las cuatro y media. Mi día favorito es el viernes, porque por la tarde no tengo clase.
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿A qué hora empieza la clase? <span class="ru">(Во сколько начинается урок?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿A qué hora termina la clase? <span class="ru">(Во сколько заканчивается урок?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿A qué hora es el patio? <span class="ru">(Во сколько перемена во дворе?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿A qué hora es Plástica? <span class="ru">(Во сколько изо?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Cuál es el día favorito de Lucía? <span class="ru">(Какой любимый день у Лусии?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 6. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">6</span>
+      <span class="ex-title">Послушай и напиши цифровое время</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши цифровое время (например 2:30), которое услышал(а)!</div>
+    <div class="listen-item"><span class="lnum">1.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span> → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) Son las tres y cuarto. · 2) Es la una en punto. · 3) Son las dos y media. · 4) Son las cinco menos cuarto. · 5) La clase empieza a las nueve.</div>
+  </div>
+
+  <!-- 7. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">7</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Спроси, который час:<br><span class="tpl">¿Qué hora es?</span><span class="ru">Который час?</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Ответь, что сейчас 2:30:<br><span class="tpl">Son las dos y media.</span><span class="ru">Сейчас половина третьего.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Скажи, когда начинается урок:<br><span class="tpl">La clase empieza a las nueve.</span><span class="ru">Урок начинается в девять.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Скажи, когда урок заканчивается:<br><span class="tpl">La clase termina a las dos.</span><span class="ru">Урок заканчивается в два.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 8. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">8</span>
+      <span class="ex-title">Сочинение «Mi día en la escuela»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) Hoy es... · 2) Mi clase empieza a las... · 3) Termina a las... · 4) A las ... tengo el patio. · 5) El comedor es a las... · 6) Por la tarde tengo... · 7) Mi día favorito es... porque...</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 9. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">9</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть время (en punto, y media, y cuarto, menos cuarto)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Спросить и ответить «¿Qué hora es?»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Различать Es la una / Son las dos</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить empieza / termina a las...</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Писать время словами</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать о своём дне</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 2: Mi Colegio · Урок 14 · ¡Hasta luego! ⏰</div>
+</div>
+
+</body>
+</html>
