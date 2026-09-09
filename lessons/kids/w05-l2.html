@@ -363,7 +363,7 @@
     <div class="read-q"><span class="qnum">3.</span><span>¿A qué hora termina la clase? <span class="ru">(Во сколько заканчивается урок?)</span></span></div>
 
     <h4 style="margin-top:18px">🛠 Таймлайн «Мой день»: соедини событие и время</h4>
-    <p class="block-sub">Нажми событие, потом его время. Затем презентуй свой день!</p>
+    <p class="block-sub">Это твой день — выбери любое время для каждого события! Нажми событие, потом его время. Затем презентуй свой день!</p>
     <div id="tl-events"></div>
     <div class="clock-ctrl" id="tl-times"></div>
     <button class="speak-btn" style="margin-top:10px" onclick="presentDay()">🎤 Презентовать мой день</button>
@@ -490,10 +490,12 @@ function timePhrase(h,m){
 }
 function atTime(h,m){
   if(m===45){var nh=h%12+1;return (nh===1?'a la una':'a las '+NW[nh])+' menos cuarto';}
-  var base=(h===1)?'a la una':'a las '+NW[h];
+  var hw=h%12;if(hw===0)hw=12;
+  var base=(hw===1)?'a la una':'a las '+NW[hw];
   if(m===0)return base;
   if(m===15)return base+' y cuarto';
-  return base+' y media';
+  if(m===30)return base+' y media';
+  return base;
 }
 function clockHTML(h,m,small){
   var hd=(h%12)*30+m*0.5, md=m*6;
@@ -639,7 +641,8 @@ function catchNext(){
 function speakCatch(){if(catchCur)speak(timePhrase(catchCur.h,catchCur.m));}
 
 /* ===== ТАЙМЛАЙН PBL ===== */
-var EVENTS=[{id:'desp',emo:'⏰',es:'Me despierto',h:7,m:30},{id:'clase',emo:'▶️',es:'La clase empieza',h:9,m:0},{id:'patio',emo:'🌳',es:'El patio',h:11,m:0},{id:'comedor',emo:'🍽️',es:'El comedor',h:14,m:0},{id:'fin',emo:'⏹️',es:'Termino',h:17,m:0}];
+var EVENTS=[{id:'desp',emo:'⏰',es:'Me despierto'},{id:'clase',emo:'▶️',es:'La clase empieza'},{id:'patio',emo:'🌳',es:'El patio'},{id:'comedor',emo:'🍽️',es:'El comedor'},{id:'fin',emo:'⏹️',es:'Termino'}];
+var tlOpts=[[8,0],[9,30],[11,0],[12,0],[14,0],[16,30],[17,0]];
 var tlSel=null,tlDone=0;
 function renderTL(){
   tlSel=null;tlDone=0;
@@ -655,18 +658,13 @@ function renderTL(){
     ev.appendChild(d);
   });
   var tm=document.getElementById('tl-times');tm.innerHTML='';
-  shuffle(EVENTS.slice()).forEach(function(e){
-    var b=document.createElement('button');b.className='time-chip';b.textContent=atTime(e.h,e.m);b.dataset.id=e.id;
+  shuffle(tlOpts.slice()).forEach(function(t){
+    var b=document.createElement('button');b.className='time-chip';b.textContent=atTime(t[0],t[1]);b.dataset.id=t.join('-');
     b.onclick=function(){
       if(!tlSel||b.classList.contains('used'))return;
-      if(tlSel.id===b.dataset.id){
-        document.getElementById('tlans-'+tlSel.id).textContent=b.textContent;
-        b.classList.add('used');tlDone++;
-        if(tlDone===EVENTS.length)document.getElementById('tl-fb').textContent='🎉 ¡Perfecto! Теперь презентуй!';
-      }else{
-        document.getElementById('tl-fb').textContent='❌ Не то время. Попробуй ещё!';
-        setTimeout(function(){document.getElementById('tl-fb').textContent='';},1200);
-      }
+      document.getElementById('tlans-'+tlSel.id).textContent=b.textContent;
+      b.classList.add('used');tlDone++;
+      if(tlDone===EVENTS.length)document.getElementById('tl-fb').textContent='🎉 ¡Perfecto! Теперь презентуй!';
       tlSel=null;document.querySelectorAll('.tl-item').forEach(function(x){x.style.borderColor='#e0d8cc';});
     };
     tm.appendChild(b);
@@ -674,7 +672,7 @@ function renderTL(){
 }
 function presentDay(){
   if(tlDone<EVENTS.length){document.getElementById('tl-fb').textContent='Сначала соедини все события!';return;}
-  var lines=EVENTS.map(function(e){return e.es+' '+atTime(e.h,e.m)+'.';});
+  var lines=EVENTS.map(function(e){return e.es+' '+document.getElementById('tlans-'+e.id).textContent+'.';});
   var text=lines.join(' ');
   document.getElementById('tl-fb').textContent=text;
   speak(text);
