@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF7EF">
+<title>Урок 4.3 · Скрытые комиссии — МУДРО</title>
+<meta name="description" content="Урок 4.3: читаем контракт между строк — 35 слов «анатомии ловушек» (комиссии, штрафы, сроки), числа и даты, читаем реальный контракт, кейс-стади и список ловушек. Испанский для переезда.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF7EF; --ink:#2B2118; --muted:#7A6A5C; --card:#fff;
+  --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --gold:#D4A017;
+  --radius:18px; --shadow:0 10px 30px rgba(43,33,24,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+button{font-family:inherit}
+.speak{cursor:pointer}
+
+/* ---------- шапка урока ---------- */
+.lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+.lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+.back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+.back-link:hover{color:var(--p1)}
+.lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+
+/* ---------- hero урока ---------- */
+.lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px}
+.phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+h1 em{font-style:normal;color:var(--p1)}
+.lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+/* ---------- секции ---------- */
+.section{max-width:1100px;margin:0 auto;padding:34px 20px}
+.step-head{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.step-num{flex:0 0 46px;height:46px;border-radius:50%;background:var(--p1);color:#fff;font-weight:900;display:grid;place-items:center;font-size:1.2rem}
+.step-time{font-weight:900;color:var(--muted);font-size:.82rem;letter-spacing:.3px;text-transform:uppercase}
+h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
+.section .sub{color:var(--muted);margin:8px 0 22px;max-width:760px}
+
+/* ---------- обзор недели ---------- */
+.week-summary{background:linear-gradient(150deg,#F0F4FF,#E7F0F7);border:2px solid var(--p4);border-radius:16px;padding:20px 22px;margin-bottom:8px}
+.week-summary h3{color:var(--p4);margin-bottom:8px}
+.week-summary .wtag{display:inline-block;font-size:.75rem;font-weight:900;padding:3px 10px;border-radius:999px;margin-right:6px}
+.week-summary .wtag.w41{background:#E7F0F7;color:var(--p4)}
+.week-summary .wtag.w42{background:#EFF2E4;color:var(--p2)}
+.week-summary .wtag.w43{background:#FCF0DC;color:#B07D12}
+
+/* ---------- статичные карточки лексики ---------- */
+.flash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.flash-static{position:relative;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border-top:5px solid var(--p4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px 16px;text-align:center;min-height:150px;transition:transform .15s}
+.flash-static:hover{transform:translateY(-3px)}
+.flash-static .flash-word{font-weight:900;font-size:clamp(.98rem,2.2vw,1.12rem);line-height:1.3}
+.flash-static .flash-ru{font-weight:800;font-size:.92rem;color:var(--p2)}
+.flash-static .flash-example{font-size:.8rem;font-weight:700;color:var(--muted);font-style:italic;margin-top:4px;line-height:1.4}
+.flash-exru{font-size:.78rem;font-weight:700;color:var(--p2);margin-top:2px;line-height:1.4}
+.speak-btn{background:rgba(0,0,0,.06);border:none;border-radius:999px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;font-size:1.1rem;transition:.2s}
+.speak-btn:hover{transform:scale(1.12);background:var(--p2);color:#fff}
+
+/* ---------- вкладки лексики ---------- */
+.layer-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.layer-tab{background:#fff;border:2px solid rgba(43,33,24,.15);border-radius:999px;padding:9px 16px;font-weight:900;cursor:pointer;font-size:.85rem;transition:.15s}
+.layer-tab:hover{border-color:var(--p3)}
+.layer-tab.active{background:var(--p1);color:#fff;border-color:var(--p1)}
+.layer-pane{display:none}
+.layer-pane.active{display:block}
+
+/* ---------- блок грамматики ---------- */
+.gram-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.gram-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.gram-card .gc-formula{font-weight:900;font-size:1.15rem;color:var(--p1)}
+.gram-card .gc-ex{margin-top:10px;background:var(--bg);border-radius:12px;padding:12px;font-size:.95rem;line-height:1.7}
+.gram-card .gc-ex b{display:block;margin-bottom:3px}
+.mini-speak{background:none;border:none;cursor:pointer;font-size:1rem;opacity:.6}
+.mini-speak:hover{opacity:1}
+
+/* ---------- грамматические подсказки ---------- */
+.grammar-hint{position:relative;color:var(--p4);border-bottom:2px dashed var(--p4);cursor:help;font-weight:700;display:inline}
+#grammar-tooltip{position:fixed;background:var(--ink);color:#fff;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:700;line-height:1.4;white-space:normal;width:max-content;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .15s;z-index:99999;font-style:normal;text-align:left;font-family:'Nunito',system-ui,sans-serif}
+#grammar-tooltip.show{opacity:1}
+#grammar-tooltip::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink)}
+#grammar-tooltip.above::after{bottom:auto;top:-12px;border-top-color:transparent;border-bottom-color:var(--ink)}
+.note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:10px;padding:12px 16px;font-weight:700;font-size:.92rem;margin-top:18px;line-height:1.7}
+.note.red{background:#FBF0ED;border-left-color:var(--p1)}
+.note.green{background:#F3F6EA;border-left-color:var(--p2)}
+.note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+
+/* ---------- викторины ---------- */
+.quiz-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-top:20px}
+.quiz-q{font-weight:900;font-size:1.02rem;margin:16px 0 10px;line-height:1.5}
+.quiz-opts{display:flex;flex-wrap:wrap;gap:10px}
+.quiz-opt{background:#fff;border:2px solid rgba(43,33,24,.18);border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer;transition:.15s;font-size:.92rem}
+.quiz-opt:hover{border-color:var(--p3);background:#FCF0DC}
+.quiz-opt.correct{background:#EFF2E4;border-color:var(--p2)}
+.quiz-opt.wrong{background:#FDE8E5;border-color:var(--p1)}
+.quiz-fb{font-weight:800;min-height:22px;margin-top:8px;font-size:.9rem}
+.qbadge{display:inline-block;background:var(--p2);color:#fff;border-radius:6px;padding:1px 8px;font-size:.75rem;font-weight:900;margin-right:8px;vertical-align:middle}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:900;font-size:.95rem;cursor:pointer;border:none;text-decoration:none;transition:.2s}
+.btn-primary{background:var(--p1);color:#fff}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{background:#fff;border:2px solid rgba(43,33,24,.15);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--p1)}
+
+/* ---------- контракт ---------- */
+.doc-box{background:#fff;border:2px solid rgba(43,33,24,.12);border-radius:14px;padding:20px 22px;margin:6px 0;font-size:.94rem;line-height:1.8;box-shadow:var(--shadow)}
+.doc-box .doc-head{text-align:center;font-weight:900;letter-spacing:.4px;color:var(--p1);border-bottom:2px dashed rgba(43,33,24,.15);padding-bottom:8px;margin-bottom:12px}
+.doc-box .clause{font-weight:900;margin:12px 0 2px;color:var(--ink)}
+.doc-box .clause.bold{border:1.5px solid var(--p1);background:#FBF0ED;border-radius:8px;padding:6px 10px}
+.doc-box .doc-body{margin-left:4px}
+.trap-spot{display:inline-block;background:#FDE8E5;color:#7A3B2E;font-weight:900;font-size:.7rem;border-radius:999px;padding:2px 9px;border:1.5px solid var(--p1);vertical-align:middle;margin-left:6px}
+
+/* ---------- диалог ---------- */
+.dialog{border-radius:14px;border:1.5px solid rgba(43,33,24,.12);background:#fff;padding:6px 14px;margin:10px 0 14px}
+.dlg-line{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #EDE3D6}
+.dlg-line:last-child{border-bottom:none}
+.dlg-who{flex:0 0 86px;font-weight:900;font-size:.8rem;color:var(--p4);padding-top:2px}
+.dlg-who.bank{color:var(--p2)}
+.dlg-body{flex:1}
+.dlg-es{font-weight:900}
+.dlg-ru{font-size:.86rem;color:var(--muted);font-weight:700;margin-top:2px}
+
+/* ---------- ролевая игра ---------- */
+.roleplay-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.93rem}
+.roleplay-table th,.roleplay-table td{padding:10px;border:1px solid rgba(43,33,24,.12);text-align:left;vertical-align:top}
+.roleplay-table th{background:var(--p4);color:#fff;font-weight:900}
+.roleplay-table td:nth-child(2){font-weight:900}
+.roleplay-table td:nth-child(3){color:var(--muted);font-weight:700}
+.roleplay-table .role-ru{display:block;font-size:.78rem;color:var(--muted);font-weight:700;margin-top:3px;line-height:1.35}
+
+/* ---------- таблицы фраз ---------- */
+.rescue-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.95rem}
+.rescue-table th,.rescue-table td{padding:10px;border:1px solid rgba(43,33,24,.12);text-align:left;vertical-align:middle}
+.rescue-table th{background:var(--p4);color:#fff;font-weight:900}
+.rescue-table td .speak-btn{width:34px;height:34px;font-size:1rem}
+
+/* ---------- ловушки ---------- */
+.trap-box{background:#FBF0ED;border-left:4px solid var(--p1);border-radius:10px;padding:14px 16px;margin:14px 0}
+.trap-box h4{color:var(--p1);margin-bottom:6px}
+.trap-box .why{font-size:.9rem;color:var(--muted);margin-top:8px;font-weight:700;line-height:1.6}
+.trap-trans{font-size:.9rem;color:#7A3B2E;margin-top:8px;font-weight:700;line-height:1.6}
+details.ans-reveal{border:2px dashed rgba(43,33,24,.25);border-radius:12px;padding:10px 16px;margin-top:12px;font-weight:800}
+details.ans-reveal summary{cursor:pointer;font-weight:900;color:var(--p4)}
+details.ans-reveal .ans{padding-top:8px;font-weight:700;line-height:1.7}
+
+/* ---------- PBL ---------- */
+.pbl-input{width:100%;padding:10px 14px;border:2px solid rgba(43,33,24,.15);border-radius:10px;font-family:inherit;font-weight:700;font-size:.95rem;background:#fff}
+.pbl-input:focus{outline:none;border-color:var(--p4)}
+.pbl-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.pbl-row label{font-weight:900;min-width:210px;font-size:.9rem}
+.calc-input{width:100%;padding:12px 14px;border:2px solid rgba(43,33,24,.15);border-radius:10px;font-family:inherit;font-weight:800;font-size:1rem;background:#fff;margin-top:10px}
+.calc-fb{font-weight:800;margin-top:10px;font-size:.95rem}
+
+/* ---------- домашка ---------- */
+.homework{background:linear-gradient(160deg,#FFF3DC,#FFE7B8);border-radius:24px;padding:30px 26px;box-shadow:var(--shadow)}
+.homework h3{font-weight:900;margin-bottom:6px}
+.hw-meta{font-weight:800;font-size:.9rem;color:var(--muted);margin:4px 0 18px}
+.hw-block{background:rgba(255,255,255,.82);border-radius:16px;padding:16px 18px;margin:12px 0;box-shadow:0 4px 14px rgba(43,33,24,.06)}
+.hw-block h4{font-weight:900;font-size:1rem;margin-bottom:4px}
+.hw-block p{margin:6px 0;font-weight:700;font-size:.93rem}
+.hw-block .goal{color:var(--muted);font-size:.85rem;font-weight:800;margin-bottom:4px}
+.hw-phrase{background:#fff;border-left:4px solid var(--p3);border-radius:10px;padding:10px 14px;font-weight:900;font-size:.95rem;margin:8px 0;line-height:1.7}
+.hw-tip{background:#FFF7EF;border-radius:10px;padding:10px 12px;font-size:.88rem;font-weight:700;color:var(--muted);margin-top:6px}
+.hw-send{margin-top:16px;background:#2B2118;color:#FFD75E;border-radius:14px;padding:16px 20px;font-weight:800;font-size:.93rem}
+.hw-send p{color:#fff;margin-bottom:6px}
+.hw-send li{margin:4px 0;list-style:none;padding-left:26px;position:relative;color:#fff;font-weight:800}
+.hw-send li::before{content:'🎯';position:absolute;left:0}
+
+/* ---------- тренажёр ---------- */
+.tr-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tr-tab{background:#fff;border:2px solid rgba(43,33,24,.15);border-radius:999px;padding:9px 16px;font-weight:900;cursor:pointer;font-size:.85rem;transition:.15s}
+.tr-tab:hover{border-color:var(--p3)}
+.tr-tab.active{background:var(--p1);color:#fff;border-color:var(--p1)}
+.tr-pane{margin-top:6px}
+.tr-deck{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:14px}
+.tr-card{perspective:1000px;width:min(100%,420px);height:240px;cursor:pointer;touch-action:pan-y}
+.tr-card-inner{position:relative;width:100%;height:100%;transition:transform .35s;transform-style:preserve-3d}
+.tr-card.flipped .tr-card-inner{transform:rotateY(180deg)}
+.tr-card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;border:2px solid rgba(43,33,24,.1);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center}
+.tr-card-face .es{font-weight:900;font-size:1.35rem;color:var(--ink);line-height:1.35}
+.tr-card-face .ru{font-size:1.25rem;color:var(--p2);font-weight:900;line-height:1.35}
+.tr-card-face small{font-size:.76rem;color:var(--muted);font-weight:800}
+.tr-card-back{background:#F3F6EA;border-color:var(--p2);transform:rotateY(180deg)}
+.tr-card-back .ru{color:var(--ink)}
+.tr-deck-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+.tr-count{font-weight:900;color:var(--muted);min-width:70px;text-align:center}
+.tr-arrow{width:52px;height:52px;border-radius:50%;border:2px solid rgba(43,33,24,.15);background:#fff;font-size:1.3rem;font-weight:900;cursor:pointer;transition:.15s;display:grid;place-items:center}
+.tr-arrow:hover{border-color:var(--p1);background:#FDE8E5}
+.tr-match{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.tr-col{display:flex;flex-direction:column;gap:8px}
+.tr-chip{background:#fff;border:2px solid var(--p4);border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer;text-align:center;transition:.15s;font-size:.88rem}
+.tr-chip:hover{background:#EFF5FA}
+.tr-chip.selected{border-color:var(--p3);background:#FCF0DC}
+.tr-chip.done{background:#EFF2E4;border-color:var(--p2);cursor:default;opacity:.85}
+.tr-chip.wrong{animation:shake .4s;border-color:var(--p1)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.tr-msg{font-weight:800;margin-top:10px;min-height:24px;font-size:.9rem}
+.sb-answer{min-height:44px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin-bottom:10px}
+.sb-chip{background:#fff;border:2px solid var(--p4);border-radius:8px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s;font-size:.9rem}
+.sb-chip:hover{background:#EFF5FA}
+.sb-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sb-done{border-color:var(--p2);background:#EFF2E4}
+.sb-feedback{font-weight:800;min-height:22px;margin-top:6px;font-size:.9rem}
+
+/* ---------- светофор ---------- */
+.tl-wrap{overflow-x:auto}
+.tl-table{width:100%;border-collapse:collapse;font-size:.92rem;font-weight:700}
+.tl-table th,.tl-table td{padding:10px 12px;border-bottom:1px solid rgba(43,33,24,.08);text-align:left}
+.tl-table th{font-weight:900;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.3px}
+.tl-table td:not(:first-child){text-align:center;width:80px}
+.tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-grid;place-items:center;transition:.15s}
+.tl-cell:hover{transform:scale(1.15)}
+.tl-cell.active{border-color:var(--ink);transform:scale(1.15)}
+
+/* ---------- ресурсы ---------- */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.res-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+.res-card h4{font-weight:900;margin-bottom:4px}
+.res-card p{font-size:.85rem;color:var(--muted);font-weight:700;margin-bottom:10px;min-height:36px}
+.res-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:900;transition:.15s}
+.res-card a:hover{background:var(--p1)}
+
+/* ---------- quizlet ---------- */
+.quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+.quizlet-box h3{margin-bottom:8px}
+.quizlet-box p{font-weight:700;opacity:.92;margin-bottom:16px}
+.quizlet-box .ql-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:13px 30px;border-radius:999px;font-weight:900;text-decoration:none;transition:.2s}
+.quizlet-box a:hover{transform:translateY(-2px)}
+
+/* ---------- навигация ---------- */
+.lesson-nav{display:flex;justify-content:space-between;gap:14px;max-width:1100px;margin:0 auto;padding:10px 20px 60px;flex-wrap:wrap}
+.lesson-nav a{flex:1;min-width:220px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;text-decoration:none;color:var(--ink);font-weight:900;transition:.2s}
+.lesson-nav a:hover{transform:translateY(-3px)}
+.lesson-nav a small{display:block;color:var(--muted);font-weight:800;font-size:.78rem;margin-bottom:3px}
+.lesson-nav a.next{text-align:right}
+
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-weight:700;font-size:.85rem}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<script>document.body.insertAdjacentHTML('afterbegin','<div id="gate-overlay" style="position:fixed;inset:0;z-index:99999;background:#FFF7EF"></div>');</script>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 4 · Урок 3 из 3 · Фаза 1 Misión Residencia</span>
+  <span id="auth-area"></span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">📍 Фаза 1 · Документы и жильё</span>
+  <h1>Урок 4.3 · <em>Entre líneas</em><br>Скрытые комиссии: читаем контракт между строк</h1>
+  <div class="lesson-meta">
+    <span class="meta-chip">🎯 Цель: найти 3 ловушки в контракте</span>
+    <span class="meta-chip">🔍 35 слов: комиссии · штрафы · сроки</span>
+    <span class="meta-chip">💶 Числа, деньги и даты</span>
+    <span class="meta-chip">✍️ Продукт: список ловушек + вопросы</span>
+    <span class="meta-chip">⏱ 50 минут · A1→A2</span>
+  </div>
+</section>
+
+<!-- ===== ШАГ 0: РАЗМИНКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">0</span><div><span class="step-time">00:00 – 05:00 · Разминка</span><h2>Обобщение недели 4: контракт и банк</h2></div></div>
+  <p class="sub">Экономия 100–300€ в год начинается с умения читать документы «между строк». Сначала вспомним всё, что выучили на 4.1 и 4.2 — отвечайте быстро!</p>
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">⚡ Блиц-квиз: контракт, банк и деньги</h2>
+    <p class="sub" style="margin-bottom:0">6 вопросов из уроков 4.1 и 4.2 + 2 из сегодняшней темы. Нажимайте на ответ — сразу увидите, верно ли.</p>
+    <div id="warmup-wrap"></div>
+    <button class="btn btn-ghost" id="warmup-reset" style="margin-top:14px">↺ Пройти ещё раз</button>
+  </div>
+  <div class="note green">
+    🔗 <b>Мост к теме:</b> Отлично! Вы умеете читать контракты и открывать банковские счета. Но знаете ли вы, что в каждом контракте есть <b>скрытые комиссии</b>? Сегодня научимся находить ловушки в мелком шрифте (<b>letra pequeña</b>) и задавать правильные вопросы, чтобы сэкономить 100–300€ в год.
+  </div>
+</section>
+
+<!-- ===== ОБЗОР НЕДЕЛИ ===== -->
+<section class="section">
+  <div class="week-summary">
+    <h3>📅 Что дала неделя 4?</h3>
+    <div style="margin-bottom:10px">
+      <span class="wtag w41">Урок 4.1 · Контракт</span>
+      <b>contrato de arrendamiento</b> · <b>fianza</b> · <b>depósito</b> · <b>prórroga</b> · <b>tener que / hay que</b>
+    </div>
+    <div style="margin-bottom:10px">
+      <span class="wtag w42">Урок 4.2 · Банк</span>
+      <b>cuenta corriente</b> · <b>comisión</b> · <b>transferencia</b> · <b>Bizum</b> · <b>IBAN</b> · <b>ir + a + inf</b>
+    </div>
+    <div>
+      <span class="wtag w43">Урок 4.3 · Скрытые комиссии</span>
+      <b>letra pequeña</b> · <b>gastos de gestión</b> · <b>penalización</b> · <b>plazo</b> · <b>числа, деньги, даты</b> — сегодня соединяем всё воедино!
+    </div>
+  </div>
+</section>
+
+<!-- ===== ШАГ 1: ЛЕКСИКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">1</span><div><span class="step-time">05:00 – 15:00 · Лексика</span><h2>Анатомия ловушек: 35 слов в 5 категориях</h2></div></div>
+  <p class="sub">Скрытые комиссии — как айсберг: видно цену 900€, а под водой ещё 130€/мес. Эти слова помогут увидеть подводную часть. Каждая карточка — слово + перевод + пример + 🔊, повторяйте хором.</p>
+
+  <div class="layer-tabs">
+    <button class="layer-tab active" data-layer="traps">🪤 Комиссии и расходы (8)</button>
+    <button class="layer-tab" data-layer="fines">⚠️ Штрафы и пени (7)</button>
+    <button class="layer-tab" data-layer="dates">📅 Сроки и даты (7)</button>
+    <button class="layer-tab" data-layer="conditions">📄 Условия контракта (7)</button>
+    <button class="layer-tab" data-layer="verbs">🗣 Глаголы для контрактов (6)</button>
+  </div>
+  <div class="layer-pane active" id="layer-traps"><div class="flash-grid" id="flash-traps"></div></div>
+  <div class="layer-pane" id="layer-fines"><div class="flash-grid" id="flash-fines"></div></div>
+  <div class="layer-pane" id="layer-dates"><div class="flash-grid" id="flash-dates"></div></div>
+  <div class="layer-pane" id="layer-conditions"><div class="flash-grid" id="flash-conditions"></div></div>
+  <div class="layer-pane" id="layer-verbs"><div class="flash-grid" id="flash-verbs"></div></div>
+
+  <div class="note red">
+    ⚠️ <b>Ложные друзья переводчика:</b><br>
+    • <b>la letra pequeña</b> ≠ «маленькая буква». Это <b>«мелкий шрифт»</b> — мелкий текст в контракте!<br>
+    • <b>la derrama</b> ≠ «драма». Это <b>«дополнительный сбор на ремонт дома»</b>!<br>
+    • <b>el recargo</b> ≠ «рекарга». Это <b>«надбавка, доплата»</b>!<br>
+    • <b>cobrar</b> ≠ «кобра». Это <b>«взимать, получать деньги»</b>!
+  </div>
+  <div class="note green">
+    💡 <b>Культурный нюанс:</b> В Испании спрашивать о скрытых комиссиях — <b>нормально</b>. Фраза <span class="grammar-hint" data-hint="¿Qué es esta comisión de mantenimiento? — Что это за комиссия за обслуживание? Вежливый стандартный вопрос в банке и у риелтора.">«¿Qué es esta comisión?»</span> не звучит грубо. Наоборот, если вы не спросите, банк решит, что вам всё понятно.
+  </div>
+  <div class="note">
+    🎯 <b>Приоритеты вопросов:</b> не все комиссии одинаково важны. Выделите 3 главные ловушки и спросите про них:<br>
+    • <b>Аренда</b> → gastos de comunidad, derrama, penalización<br>
+    • <b>Банк</b> → comisión de mantenimiento, comisión de apertura, permanencia<br>
+    • <b>Телефон / интернет</b> → permanencia, penalización por cancelación
+  </div>
+</section>
+
+<!-- ===== ШАГ 1+: ЗАКРЕПЛЕНИЕ ЛЕКСИКИ ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">1+</span><div><span class="step-time">15:00 – 17:00 · Закрепление</span><h2>Сопоставь слово и перевод</h2></div></div>
+  <p class="sub">Слова всех категорий вперемешку. Нажмите испанское слово слева, затем его перевод справа.</p>
+  <div class="quiz-box">
+    <div class="tr-match">
+      <div class="tr-col" id="ex-match-es"></div>
+      <div class="tr-col" id="ex-match-ru"></div>
+    </div>
+    <div class="tr-msg" id="ex-match-msg"></div>
+    <button class="btn btn-ghost" id="ex-match-reset" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ===== ШАГ 2: ГРАММАТИКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">2</span><div><span class="step-time">17:00 – 25:00 · Грамматика</span><h2>Числа, деньги и даты в контракте</h2></div></div>
+  <p class="sub">Ловушки прячутся в цифрах. Две конструкции недели: <b>большие суммы и проценты</b> + <b>даты и сроки</b>. Проговариваем вслух сразу!</p>
+
+  <div class="gram-grid">
+    <div class="gram-card">
+      <div class="gc-formula">💶 Большие суммы и проценты <button class="mini-speak speak" data-text="La fianza es de mil quinientos euros. El IVA es del veintiuno por ciento.">🔊</button></div>
+      <div class="gc-ex">
+        <b>число + евро / por ciento</b>
+        <b>1.500 €</b> — <span class="grammar-hint" data-hint="mil quinientos — тысяча пятьсот. Точка разделяет тысячи!">mil quinientos</span> euros<br>
+        <b>21%</b> — veintiuno por ciento<br>
+        <b>0,5%</b> — <span class="grammar-hint" data-hint="cero coma cinco — ноль целых пять десятых. Запятая разделяет десятые!">cero coma cinco</span> por ciento<br>
+        <b>10,72 €</b> — diez euros con setenta y dos céntimos
+      </div>
+    </div>
+    <div class="gram-card">
+      <div class="gc-formula">📅 Даты и сроки <button class="mini-speak speak" data-text="Hay que pagar antes del día cinco. Hay que avisar con treinta días de antelación.">🔊</button></div>
+      <div class="gc-ex">
+        <b>el + число + de + месяц · con … de antelación</b>
+        <b>el 15 de enero</b> — 15 января<br>
+        <b>dentro de 30 días</b> — в течение 30 дней<br>
+        <b>con 30 días de antelación</b> — за 30 дней заранее<br>
+        <b>antes del día 5</b> — до 5-го числа
+      </div>
+    </div>
+    <div class="gram-card">
+      <div class="gc-formula">❓ Вопросы о комиссиях <button class="mini-speak speak" data-text="¿Qué es esta comisión de mantenimiento? ¿Está incluido el IVA? ¿Hay gastos de gestión?">🔊</button></div>
+      <div class="gc-ex">
+        <b>¿Qué es …? · ¿Cuánto es …? · ¿Está incluido …?</b>
+        <b>¿Qué es esta comisión de mantenimiento?</b> — Что это за комиссия за обслуживание?<br>
+        <b>¿Cuánto es la comisión de apertura?</b> — Сколько комиссия за открытие?<br>
+        <b>¿Está incluido el IVA?</b> — НДС включён?<br>
+        <b>¿Hay gastos de gestión?</b> — Есть расходы на управление?
+      </div>
+    </div>
+  </div>
+
+  <div class="note blue">
+    💡 <b>Простое правило:</b> в Испании числа пишутся с <b>точкой для тысяч</b> (1.500) и <b>запятой для десятых</b> (10,72). Это наоборот по сравнению с русским языком! Приём «Посчитайте за год»: 50€/мес × 12 = <b>600€/год</b> — всегда переводите месячные комиссии в годовые, чтобы понять реальную стоимость.
+  </div>
+</section>
+
+<!-- ===== ШАГ 2+: ЗАКРЕПЛЕНИЕ ГРАММАТИКИ ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">2+</span><div><span class="step-time">25:00 – 28:00 · Закрепление</span><h2>Упражнения: ловушки и подсчёты</h2></div></div>
+  <p class="sub">Читаем фразы из реальных контрактов и считаем скрытые расходы.</p>
+
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">🔍 Упражнение 1. Найдите ловушку</h2>
+    <p class="sub" style="margin-bottom:0">Где в каждой фразе спрятана скрытая комиссия? Сначала попробуйте сами, потом откройте ответы.</p>
+    <p style="font-weight:900;margin-top:14px">1. «La renta es de 800 euros al mes. Los gastos de comunidad no están incluidos.»</p>
+    <p style="font-weight:900">2. «La cuenta corriente es gratuita. La comisión de mantenimiento es de 10 euros al mes.»</p>
+    <p style="font-weight:900">3. «El contrato es de un año. La permanencia mínima es de 2 años.»</p>
+    <details class="ans-reveal">
+      <summary>✅ Показать ответы</summary>
+      <div class="ans">
+        1. ⚠️ Коммунальные расходы <b>не включены</b> в «дешёвую» аренду — уточните, сколько они стоят.<br>
+        2. ⚠️ Счёт «бесплатный», но комиссия за обслуживание 10€/мес = <b>120€/год</b>.<br>
+        3. ⚠️ Контракт на год, а минимальный срок — <b>2 года</b>: расторжение раньше будет со штрафом.
+      </div>
+    </details>
+  </div>
+
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">🧮 Упражнение 2. Посчитайте</h2>
+    <p class="sub" style="margin-bottom:0">Сколько всего нужно платить? Вводите число (десятые через запятую).</p>
+    <p style="font-weight:900;margin-top:12px">1. Аренда: рента 900€/мес + коммунальные 80€/мес + расходы на управление 50€/мес. Итого в месяц?</p>
+    <input type="text" id="calc-rent" class="calc-input" placeholder="Например: 1030">
+    <div class="calc-fb" id="calc-rent-fb"></div>
+    <p style="font-weight:900;margin-top:12px">2. Банковский счёт: комиссия за открытие 100€ (один раз) + обслуживание 10€/мес. Итого за год?</p>
+    <input type="text" id="calc-bank" class="calc-input" placeholder="Например: 220">
+    <div class="calc-fb" id="calc-bank-fb"></div>
+    <button class="btn btn-primary" id="calc-check" style="margin-top:16px">✓ Проверить</button>
+  </div>
+</section>
+
+<!-- ===== ШАГ 3: ЧТЕНИЕ ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">3</span><div><span class="step-time">28:00 – 33:00 · Чтение</span><h2>Читаем контракт с ловушками</h2></div></div>
+  <p class="sub">Перед вами «реальный» договор аренды. Найдите скрытые комиссии в мелком шрифте и посчитайте реальные расходы. Наводите курсор на синие слова — появится подсказка.</p>
+
+  <div class="doc-box">
+    <div class="doc-head">📄 CONTRATO DE ARRENDAMIENTO DE VIVIENDA</div>
+    <div class="clause">CLÁUSULA 1 · RENTA</div>
+    <div class="doc-body">La renta mensual es de 900 euros, más 80 euros de <span class="grammar-hint" data-hint="los gastos de comunidad — коммунальные расходы дома: лифт, освещение подъезда, уборка.">gastos de comunidad</span>. El pago se realizará antes del día 5 de cada mes.</div>
+    <div class="clause">CLÁUSULA 2 · FIANZA Y DEPÓSITO</div>
+    <div class="doc-body">La <span class="grammar-hint" data-hint="la fianza — залог, обычно один месяц аренды. Возвращается при выезде.">fianza</span> es de 900 euros (un mes). El depósito de garantía es de 1.800 euros (dos meses).</div>
+    <div class="clause">CLÁUSULA 3 · DURACIÓN</div>
+    <div class="doc-body">La duración del contrato es de un año, con <span class="grammar-hint" data-hint="la prórroga automática — автоматическое продление ещё на год, если не предупредили заранее.">prórroga automática</span>. La <span class="grammar-hint" data-hint="la permanencia mínima — минимальный срок пребывания. Если съедете раньше — штраф.">permanencia mínima</span> es de 6 meses.</div>
+    <div class="clause bold">CLÁUSULA 4 · GASTOS DE GESTIÓN <span class="trap-spot">letra pequeña</span></div>
+    <div class="doc-body">El arrendatario pagará 50 euros al mes de gastos de gestión. Esta comisión <b>no se incluye</b> en la renta.</div>
+    <div class="clause bold">CLÁUSULA 5 · RESCISIÓN ANTICIPADA <span class="trap-spot">letra pequeña</span></div>
+    <div class="doc-body">En caso de <span class="grammar-hint" data-hint="la rescisión anticipada — досрочное расторжение контракта.">rescisión anticipada</span>, el arrendatario pagará una <span class="grammar-hint" data-hint="la penalización — штраф по контракту. Здесь — два месяца аренды.">penalización</span> de dos meses de renta. La penalización es de 1.800 euros.</div>
+    <div class="clause bold">CLÁUSULA 6 · DERRAMA <span class="trap-spot">letra pequeña</span></div>
+    <div class="doc-body">En caso de <span class="grammar-hint" data-hint="la derrama — дополнительный сбор на ремонт здания (например, новый лифт). Обычно платят собственники, не арендаторы!">derrama</span> para reparaciones del edificio, el arrendatario pagará el 50% del coste.</div>
+  </div>
+
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">🎯 Вопросы по контракту</h2>
+    <div id="contract-wrap"></div>
+    <button class="btn btn-ghost" id="contract-reset" style="margin-top:14px">↺ Пройти ещё раз</button>
+  </div>
+  <div class="note green">
+    ✅ = всё понятно · ⚠️ = нужно уточнить · ❌ = ловушка, скрытая комиссия. Проверьте: все три ❌ — в клаузулах 4–6, в «мелком шрифте».
+  </div>
+</section>
+
+<!-- ===== ШАГ 4: АУДИРОВАНИЕ ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">4</span><div><span class="step-time">33:00 – 36:00 · Аудирование</span><h2>Диалог в банке о комиссиях</h2></div></div>
+  <p class="sub">Клиент использует слова урока 4.2 (банк) и сегодняшние (комиссии). Слушайте, потом ответьте на вопросы.</p>
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">🎧 Diálogo en el banco</h2>
+    <div class="dialog">
+      <div class="dlg-line"><div class="dlg-who">👤 Клиент</div><div class="dlg-body"><div class="dlg-es">Buenos días. Quisiera abrir una cuenta corriente. <button class="mini-speak speak" data-text="Buenos días. Quisiera abrir una cuenta corriente.">🔊</button></div><div class="dlg-ru">Добрый день. Я хотел бы открыть текущий счёт.</div></div></div>
+      <div class="dlg-line"><div class="dlg-who bank">🏦 Банк</div><div class="dlg-body"><div class="dlg-es">Muy bien. ¿Ha traído su pasaporte y su NIE? <button class="mini-speak speak" data-text="Muy bien. ¿Ha traído su pasaporte y su NIE?">🔊</button></div><div class="dlg-ru">Очень хорошо. Вы принесли паспорт и NIE?</div></div></div>
+      <div class="dlg-line"><div class="dlg-who">👤 Клиент</div><div class="dlg-body"><div class="dlg-es">Sí, aquí están. ¿Hay alguna comisión de mantenimiento? <button class="mini-speak speak" data-text="Sí, aquí están. ¿Hay alguna comisión de mantenimiento?">🔊</button></div><div class="dlg-ru">Да, вот они. Есть какая-нибудь комиссия за обслуживание?</div></div></div>
+      <div class="dlg-line"><div class="dlg-who bank">🏦 Банк</div><div class="dlg-body"><div class="dlg-es">La cuenta es gratuita el primer año. Después, hay una comisión de 10 euros al mes. <button class="mini-speak speak" data-text="La cuenta es gratuita el primer año. Después, hay una comisión de 10 euros al mes.">🔊</button></div><div class="dlg-ru">Счёт бесплатный первый год. Потом — комиссия 10 евро в месяц.</div></div></div>
+      <div class="dlg-line"><div class="dlg-who">👤 Клиент</div><div class="dlg-body"><div class="dlg-es">¿Y hay comisión por transferencia? <button class="mini-speak speak" data-text="¿Y hay comisión por transferencia?">🔊</button></div><div class="dlg-ru">А есть комиссия за перевод?</div></div></div>
+      <div class="dlg-line"><div class="dlg-who bank">🏦 Банк</div><div class="dlg-body"><div class="dlg-es">Las transferencias en euros son gratuitas. Para Bizum, también. <button class="mini-speak speak" data-text="Las transferencias en euros son gratuitas. Para Bizum, también.">🔊</button></div><div class="dlg-ru">Переводы в евро бесплатны. Для Bizum — тоже.</div></div></div>
+      <div class="dlg-line"><div class="dlg-who">👤 Клиент</div><div class="dlg-body"><div class="dlg-es">Perfecto. Gracias. Voy a hacer una transferencia mañana para pagar la fianza. <button class="mini-speak speak" data-text="Perfecto. Gracias. Voy a hacer una transferencia mañana para pagar la fianza.">🔊</button></div><div class="dlg-ru">Отлично. Спасибо. Завтра сделаю перевод, чтобы оплатить залог.</div></div></div>
+      <div class="dlg-line"><div class="dlg-who bank">🏦 Банк</div><div class="dlg-body"><div class="dlg-es">Muy bien. Hasta luego. <button class="mini-speak speak" data-text="Muy bien. Hasta luego.">🔊</button></div><div class="dlg-ru">Очень хорошо. До свидания.</div></div></div>
+    </div>
+    <button class="btn btn-ghost speak" data-text="Buenos días. Quisiera abrir una cuenta corriente. Muy bien. ¿Ha traído su pasaporte y su NIE? Sí, aquí están. ¿Hay alguna comisión de mantenimiento? La cuenta es gratuita el primer año. Después, hay una comisión de 10 euros al mes. ¿Y hay comisión por transferencia? Las transferencias en euros son gratuitas. Para Bizum, también. Perfecto. Gracias. Voy a hacer una transferencia mañana para pagar la fianza. Muy bien. Hasta luego.">🔊 Прослушать диалог целиком</button>
+    <h2 style="font-size:1.2rem;margin-top:20px">🎯 Проверьте понимание</h2>
+    <div id="listen-wrap"></div>
+    <button class="btn btn-ghost" id="listen-reset" style="margin-top:14px">↺ Пройти ещё раз</button>
+  </div>
+</section>
+
+<!-- ===== ШАГ 5: ПРАКТИКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">5</span><div><span class="step-time">36:00 – 42:00 · Практика</span><h2>Кейс-стади: 3 ситуации с ловушками</h2></div></div>
+  <p class="sub">В парах: один — клиент, другой — риелтор/банковский работник. Найдите 3 ловушки и задайте вопросы. Цель — не идеальный испанский, а <b>найти ловушки</b>. Шпаргалка с фразами разрешена!</p>
+
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">🏠 Сценарий 1. Контракт аренды</h2>
+    <p class="sub" style="margin-bottom:0">Ваш контракт аренды. Найдите 3 ловушки и задайте 3 вопроса риелтору.</p>
+    <div class="doc-box" style="margin-top:14px">
+      <div class="doc-head">🏠 CONTRATO DE ARRENDAMIENTO</div>
+      <div class="clause">CLÁUSULA 1 · RENTA</div>
+      <div class="doc-body">La renta mensual es de 1.000 euros. Los gastos de comunidad son 100 euros al mes.</div>
+      <div class="clause bold">CLÁUSULA 2 · GASTOS DE GESTIÓN <span class="trap-spot">letra pequeña</span></div>
+      <div class="doc-body">El arrendatario pagará 60 euros al mes de gastos de gestión.</div>
+      <div class="clause bold">CLÁUSULA 3 · RESCISIÓN ANTICIPADA <span class="trap-spot">letra pequeña</span></div>
+      <div class="doc-body">En caso de rescisión anticipada, el arrendatario pagará una penalización de tres meses de renta.</div>
+      <div class="clause bold">CLÁUSULA 4 · DERRAMA <span class="trap-spot">letra pequeña</span></div>
+      <div class="doc-body">En caso de derrama, el arrendatario pagará el 100% del coste.</div>
+    </div>
+    <p style="font-weight:900;margin-top:12px">🎭 Роли: <b>Клиент</b> — находит ловушки и задаёт вопросы. <b>Риелтор</b> — отвечает и пытается оправдать комиссии.</p>
+    <p style="font-weight:800;color:var(--p4);margin-top:8px">Вопросы для клиента:<br>¿Qué es esta comisión de gestión de 60 euros? 🔊 · ¿Cuánto es la penalización por rescisión? 🔊 · ¿Por qué el arrendatario paga el 100% de la derrama? 🔊</p>
+  </div>
+
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">🏦 Сценарий 2. Банковский счёт</h2>
+    <p class="sub" style="margin-bottom:0">Вы открываете счёт «sin comisiones». Найдите 3 ловушки и задайте вопросы работнику банка.</p>
+    <div class="doc-box" style="margin-top:14px">
+      <div class="doc-head">💳 CUENTA CORRIENTE SIN COMISIONES</div>
+      <div class="doc-body">
+        • Cuenta gratuita<br>
+        • Tarjeta de débito gratuita el primer año<br>
+        • Comisión de mantenimiento: 10 euros al mes (después del primer año)<br>
+        • Comisión por transferencia internacional: 5 euros<br>
+        • Permanencia mínima: 2 años<br>
+        • Penalización por cancelación: 50 euros
+      </div>
+    </div>
+    <p style="font-weight:900;margin-top:12px">🎭 Роли: <b>Клиент</b> — находит ловушки, <b>работник банка</b> — отвечает.</p>
+    <p style="font-weight:800;color:var(--p4);margin-top:8px">Вопросы для клиента:<br>¿Qué es la comisión de mantenimiento de 10 euros? 🔊 · ¿Por qué la permanencia mínima es de 2 años? 🔊 · ¿Se puede cancelar la cuenta sin penalización? 🔊</p>
+    <p class="sub" style="margin-bottom:0;margin-top:8px">⚡ <b>Усложнение:</b> работник говорит быстро → клиент просит повторить; работник не понимает → клиент перефразирует; работник предлагает другую услугу → клиент вежливо отказывает.</p>
+  </div>
+
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">📅 Сценарий 3. Сроки и расторжение</h2>
+    <p class="sub" style="margin-bottom:0">Вы хотите расторгнуть контракт досрочно. В контракте: <i>«La permanencia mínima es de 6 meses. En caso de rescisión anticipada, el arrendatario pagará una penalización de dos meses.»</i></p>
+    <p style="font-weight:900;margin-top:12px">Ваши вопросы риелтору:</p>
+    <p style="font-weight:800;color:var(--p4)">¿Se puede negociar la penalización? 🔊 · ¿Con cuántos días de antelación hay que avisar? 🔊<br>Компромисс: «Si pago un mes en lugar de dos, ¿puedo rescindir el contrato?» 🔊</p>
+  </div>
+
+  <div class="quiz-box">
+    <h2 style="font-size:1.2rem">🆘 Фразы-спасатели</h2>
+    <table class="rescue-table">
+      <thead><tr><th>Фраза-спасатель</th><th>Перевод</th><th>Кнопка</th></tr></thead>
+      <tbody>
+        <tr><td>¿Qué es esta comisión?</td><td>Что это за комиссия?</td><td><button class="speak-btn speak" data-text="¿Qué es esta comisión?">🔊</button></td></tr>
+        <tr><td>¿Está incluido en el precio?</td><td>Это включено в цену?</td><td><button class="speak-btn speak" data-text="¿Está incluido en el precio?">🔊</button></td></tr>
+        <tr><td>¿Se puede negociar?</td><td>Можно договориться?</td><td><button class="speak-btn speak" data-text="¿Se puede negociar?">🔊</button></td></tr>
+        <tr><td>No me parece bien.</td><td>Мне это не кажется правильным.</td><td><button class="speak-btn speak" data-text="No me parece bien.">🔊</button></td></tr>
+        <tr><td>Quiero reclamar.</td><td>Я хочу потребовать (вернуть деньги).</td><td><button class="speak-btn speak" data-text="Quiero reclamar.">🔊</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== ШАГ 6: PBL ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">6</span><div><span class="step-time">42:00 – 50:00 · Проект</span><h2>Продукт: список ловушек + вопросы</h2></div></div>
+  <div class="quiz-box">
+    <p class="sub" style="margin-bottom:0">Вы получили контракт. Создайте свой список из 3 ловушек и 3 вопросов — это ваш мини-сканер будущих документов (аренда, банк, телефон).</p>
+    <div class="trap-box" style="margin-top:16px">
+      <h4>🪤 Шаблон списка ловушек · Мой контракт</h4>
+      <p style="font-weight:900">📄 ДОКУМЕНТ: контракт аренды / банковский счёт / телефон / интернет</p>
+      <p style="font-weight:800;line-height:1.9">
+        🔍 <b>ЛОВУШКА 1</b><br>
+        Название: расходы на управление 50€/мес<br>
+        Где найдено: клаузула 4, мелкий шрифт<br>
+        Сколько стоит: 50€ × 12 мес = <b>600€/год</b><br>
+        Вопрос: ¿Qué es esta comisión de gestión?
+      </p>
+      <p style="font-weight:800;line-height:1.9">
+        🔍 <b>ЛОВУШКА 2</b><br>
+        Название: штраф за расторжение 1.800€<br>
+        Где найдено: клаузула 5, мелкий шрифт<br>
+        Сколько стоит: 1.800€ (один раз)<br>
+        Вопрос: ¿Se puede negociar la penalización?
+      </p>
+      <p style="font-weight:800;line-height:1.9">
+        🔍 <b>ЛОВУШКА 3</b><br>
+        Название: 50% от деррамы<br>
+        Где найдено: клаузула 6, мелкий шрифт<br>
+        Сколько стоит: зависит от ремонта<br>
+        Вопрос: ¿Por qué el arrendatario paga el 50% de la derrama?
+      </p>
+      <div class="trap-trans">📝 ИТОГО: 600€ + 1.800€ + деррама = <b>2.400€+</b> скрытых расходов, если подписать не глядя!</div>
+    </div>
+    <div class="note" style="margin-top:12px">
+      📸 <b>Формат сдачи:</b> заполните шаблон для реального (или учебного) контракта + запишите голосовое с 3 вопросами. Пришлите фото + голосовое преподавателю.
+    </div>
+    <div class="note green">
+      🔗 <b>Связь с неделей 5:</b> Отлично, ловушки найдены! На следующей неделе (<b>Переезд и Коммуналка</b>) вы будете подключать свет, воду и интернет — там тоже есть скрытые комиссии, но теперь вы готовы!
+    </div>
+  </div>
+</section>
+
+<!-- ===== ДОМАШНЕЕ ЗАДАНИЕ ===== -->
+<section class="section">
+  <div class="homework">
+    <h3>🏠 Домашнее задание · Урок 4.3 «Скрытые комиссии»</h3>
+    <p class="hw-meta">⏱ ~25–30 минут · Финал недели 4</p>
+
+    <div class="hw-block">
+      <h4>📄 Задание 1. «Мой список ловушек» · 7 мин ⭐</h4>
+      <p class="goal">Цель: перенести навык в реальную жизнь.</p>
+      <p>Откройте шаблон списка ловушек из шага 6. Заполните его для реального контракта аренды или банковского счёта. Пришлите фото заполненного списка.</p>
+    </div>
+
+    <div class="hw-block">
+      <h4>🎤 Задание 2. Голосовое «3 вопроса» · 6 мин</h4>
+      <p class="goal">Цель: задать вопросы о скрытых комиссиях.</p>
+      <p>Запишите голосовое, где вы задаёте 3 вопроса:</p>
+      <div class="hw-phrase">¿Qué es esta comisión de gestión? ¿Cuánto es la penalización por rescisión? ¿Se puede negociar la derrama?</div>
+      <button class="btn btn-ghost speak" data-text="¿Qué es esta comisión de gestión? ¿Cuánto es la penalización por rescisión? ¿Se puede negociar la derrama?" style="margin-top:10px">🔊 Прослушать образец</button>
+      <p style="margin-top:8px">🔁 Минимум 2 дубля.</p>
+    </div>
+
+    <div class="hw-block">
+      <h4>🔢 Задание 3. Посчитайте за год · 5 мин</h4>
+      <p class="goal">Цель: понять реальную стоимость комиссий.</p>
+      <p>Возьмите контракт аренды или банковский счёт и посчитайте все скрытые расходы за год:</p>
+      <div class="hw-phrase">Comisión de gestión: 50€ × 12 = 600€/año. Penalización: 1.800€. Total: 2.400€.</div>
+    </div>
+
+    <div class="hw-block">
+      <h4>🎮 Задание 4. Тренажёр «Скрытые комиссии» · 7 мин</h4>
+      <p class="goal">Цель: выучить все 35 слов урока.</p>
+      <p>Пройдите тренажёр ниже прямо здесь: карточки + сопоставление + собери фразу. Отправьте результат («всё собрано»).</p>
+      <div class="quiz-box" style="box-shadow:none;margin-top:14px">
+        <div class="tr-tabs">
+          <button class="tr-tab active" data-tab="cards">🃏 Карточки</button>
+          <button class="tr-tab" data-tab="match">🧩 Сопоставление</button>
+          <button class="tr-tab" data-tab="build">🔤 Собери фразу</button>
+        </div>
+        <div class="tr-pane" id="trCards" style="display:block">
+          <div class="tr-deck">
+            <div class="tr-card" id="trCard">
+              <div class="tr-card-inner">
+                <div class="tr-card-face tr-card-front">
+                  <div class="es" id="trCardEs"></div>
+                  <button class="speak-btn speak" id="trCardSpeakBtn" data-text="">🔊</button>
+                  <small>нажмите, чтобы увидеть перевод · листайте ← →</small>
+                </div>
+                <div class="tr-card-face tr-card-back">
+                  <div class="ru" id="trCardRu"></div>
+                  <small id="trCardBackEs"></small>
+                </div>
+              </div>
+            </div>
+            <div class="tr-deck-controls">
+              <button class="tr-arrow" id="trPrev" aria-label="Предыдущая карточка">←</button>
+              <span class="tr-count" id="trCount"></span>
+              <button class="tr-arrow" id="trNext" aria-label="Следующая карточка">→</button>
+            </div>
+            <button class="btn btn-ghost" id="trShuffle">↺ Перемешать</button>
+          </div>
+        </div>
+        <div class="tr-pane" id="trMatch" hidden>
+          <div class="tr-match">
+            <div class="tr-col" id="tr-match-es"></div>
+            <div class="tr-col" id="tr-match-ru"></div>
+          </div>
+          <div class="tr-msg" id="tr-match-msg"></div>
+          <button class="btn btn-ghost" id="trMatchReset" style="margin-top:10px">↺ Перемешать заново</button>
+        </div>
+        <div class="tr-pane" id="trBuild" hidden>
+          <div id="trBuildArea"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hw-block">
+      <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 5 мин</h4>
+      <p class="goal">Family Task недели 4: связь с детским курсом.</p>
+      <p>Покажите детям контракт (или его фото) и скажите: <i>«Mira, aquí hay que pagar 900 euros cada mes.»</i> Дети отвечают: <i>«¡Es mucho dinero!»</i> или <i>«¡Es poco dinero!»</i></p>
+      <div class="hw-tip">💡 Не страшно, если дети ещё не говорят по-испански — это погружение: они слышат настоящую семейную фразу про деньги и повторяют её за вами.</div>
+    </div>
+
+    <div class="hw-block">
+      <h4>🖨 Задание 6. Рабочий лист · 20–25 мин</h4>
+      <p class="goal">Цель: закрепить весь урок на бумаге.</p>
+      <p>Откройте рабочий лист урока 4.3, распечатайте и выполните. Пришлите фото заполненного листа.</p>
+      <a class="btn btn-primary" href="../../worksheets/w04-l3-parents.html" target="_blank" rel="noopener">📄 Открыть рабочий лист (A4, печать)</a>
+    </div>
+
+    <div class="hw-send">
+      <p>📤 Формат сдачи домашки:</p>
+      <ul>
+        <li>📄 Фото списка ловушек (задание 1)</li>
+        <li>🎤 Голосовое «3 вопроса» (задание 2)</li>
+        <li>🔢 Подсчёт расходов за год (задание 3)</li>
+        <li>🎮 Скриншот тренажёра (задание 4)</li>
+        <li>🎬 Видео/отметка семейной миссии (задание 5)</li>
+        <li>🖨 Фото рабочего листа (задание 6)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== СВЕТОФОР ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">✅</span><div><span class="step-time">Самопроверка</span><h2>Светофор</h2></div></div>
+  <div class="quiz-box">
+    <p class="sub" style="margin-bottom:14px">Отметьте честно — нажмите на нужный цвет. Преподаватель разберёт всё, что 🟡 и 🔴.</p>
+    <div class="tl-wrap">
+    <table class="tl-table" id="tlTable">
+      <thead><tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr></thead>
+      <tbody>
+        <tr><td>Замечать скрытые комиссии (letra pequeña, gastos de gestión)</td><td><button class="tl-cell" data-row="0" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="0" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="0" data-color="3">🔴</button></td></tr>
+        <tr><td>Читать большие суммы и проценты (1.500€, 21%, 0,5%)</td><td><button class="tl-cell" data-row="1" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="1" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="1" data-color="3">🔴</button></td></tr>
+        <tr><td>Читать даты и сроки (el 15 de enero, con antelación)</td><td><button class="tl-cell" data-row="2" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="2" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="2" data-color="3">🔴</button></td></tr>
+        <tr><td>Находить 3 ловушки в контракте</td><td><button class="tl-cell" data-row="3" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="3" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="3" data-color="3">🔴</button></td></tr>
+        <tr><td>Задавать вопросы о скрытых расходах (¿Qué es esta comisión?)</td><td><button class="tl-cell" data-row="4" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="4" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="4" data-color="3">🔴</button></td></tr>
+        <tr><td>Провести кейс-стади в паре</td><td><button class="tl-cell" data-row="5" data-color="1">🟢</button></td><td><button class="tl-cell" data-row="5" data-color="2">🟡</button></td><td><button class="tl-cell" data-row="5" data-color="3">🔴</button></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <button class="btn btn-ghost" id="tlReset" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p style="margin-top:10px;font-weight:700;color:var(--muted);font-size:.88rem">📸 Покажите «светофор» преподавателю — на неделе 5 разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ===== QUIZLET ===== -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова недели 4</h3>
+    <p>Повторите слова трёх уроков недели 4: контракт, банк и скрытые комиссии.</p>
+    <div class="ql-links">
+      <a href="https://quizlet.com/ru/1207053876/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-4-%D1%83%D1%80%D0%BE%D0%BA-3-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Урок 4.3 · комиссии →</a>
+      <a href="https://quizlet.com/ru/1203800941/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-4-%D1%83%D1%80%D0%BE%D0%BA-2-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Урок 4.2 · банк →</a>
+      <a href="https://quizlet.com/ru/1203083047/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-4-%D1%83%D1%80%D0%BE%D0%BA-1-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Урок 4.1 · контракт →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ВНЕШНЯЯ ПРАКТИКА ===== -->
+<section class="section">
+  <div class="step-head"><span class="step-num">🔗</span><div><span class="step-time">Ресурсы</span><h2>Внешняя практика</h2></div></div>
+  <div class="res-grid">
+    <div class="res-card"><h4>📺 Скрытые комиссии в Испании</h4><p>comisiones ocultas España</p><a href="https://www.youtube.com/results?search_query=comisiones+ocultas+Espa%C3%B1a" target="_blank" rel="noopener">Смотреть →</a></div>
+    <div class="res-card"><h4>📺 Как читать контракт аренды</h4><p>cómo leer contrato alquiler España</p><a href="https://www.youtube.com/results?search_query=como+leer+contrato+alquiler+Espa%C3%B1a" target="_blank" rel="noopener">Смотреть →</a></div>
+    <div class="res-card"><h4>📺 Банковские комиссии</h4><p>comisiones bancarias España</p><a href="https://www.youtube.com/results?search_query=comisiones+bancarias+Espa%C3%B1a" target="_blank" rel="noopener">Смотреть →</a></div>
+    <div class="res-card"><h4>🎮 Wordwall</h4><p>Комиссии и штрафы</p><a href="https://wordwall.net/" target="_blank" rel="noopener">Играть →</a></div>
+    <div class="res-card"><h4>🎮 Baamboozle</h4><p>Числа и деньги</p><a href="https://www.baamboozle.com/" target="_blank" rel="noopener">Играть →</a></div>
+    <div class="res-card"><h4>🃏 Quizlet</h4><p>Карточки: скрытые комиссии</p><a href="https://quizlet.com/" target="_blank" rel="noopener">Повторить →</a></div>
+    <div class="res-card"><h4>🌐 Idealista</h4><p>Реальные объявления с расходами</p><a href="https://www.idealista.com/" target="_blank" rel="noopener">Открыть →</a></div>
+    <div class="res-card"><h4>🌐 Fotocasa</h4><p>Второй портал для сравнения</p><a href="https://www.fotocasa.es/" target="_blank" rel="noopener">Открыть →</a></div>
+  </div>
+</section>
+
+<!-- ===== НАВИГАЦИЯ ===== -->
+<div class="lesson-nav">
+  <a href="w04-l2.html"><small>← Предыдущий</small>Урок 4.2 · Банковский счёт</a>
+  <a href="../../index.html"><small>↺ Вернуться</small>Карта курса</a>
+  <a href="w05-l1.html" class="next"><small>Следующий →</small>Урок 5.1 · Переезд и Коммуналка</a>
+</div>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España!</footer>
+<div id="toast" role="status"></div>
+<div id="grammar-tooltip"></div>
+
+<script>
+function speak(text){
+  if(!('speechSynthesis' in window)){toast('Ваш браузер не поддерживает озвучку 😔');return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-ES';
+  u.rate=.85;
+  const voices=speechSynthesis.getVoices();
+  const es=voices.find(v=>v.lang.startsWith('es'));
+  if(es)u.voice=es;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};speechSynthesis.getVoices();}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('.speak,.mini-speak');
+  if(s&&s.dataset.text&&!e.target.closest('.grammar-hint')){e.stopPropagation();speak(s.dataset.text);}
+});
+
+const _gtt=document.getElementById('grammar-tooltip');
+let _gttTarget=null;
+function showGrammarTooltip(el){
+  const hint=el.dataset.hint;
+  if(!hint)return;
+  _gttTarget=el;
+  _gtt.textContent=hint;
+  _gtt.classList.remove('above','show');
+  document.body.appendChild(_gtt);
+  const r=el.getBoundingClientRect();
+  let left=r.left+r.width/2;
+  let top=r.top-10;
+  _gtt.style.left=left+'px';
+  _gtt.style.top=top+'px';
+  _gtt.style.transform='translate(-50%,-100%)';
+  _gtt.classList.add('show');
+  const tr=_gtt.getBoundingClientRect();
+  if(tr.top<4){
+    _gtt.classList.add('above');
+    _gtt.style.top=(r.bottom+10)+'px';
+    _gtt.style.transform='translate(-50%,0)';
+  }
+  if(tr.left<4)_gtt.style.left=(tr.width/2+4)+'px';
+  if(tr.right>window.innerWidth-4)_gtt.style.left=(window.innerWidth-tr.width/2-4)+'px';
+}
+function hideGrammarTooltip(){
+  _gtt.classList.remove('show','above');
+  _gttTarget=null;
+}
+document.addEventListener('click',function(e){
+  const hint=e.target.closest('.grammar-hint');
+  if(hint){
+    document.querySelectorAll('.grammar-hint.active').forEach(el=>{if(el!==hint)el.classList.remove('active');});
+    if(_gttTarget===hint){
+      hideGrammarTooltip();
+      hint.classList.remove('active');
+    }else{
+      hint.classList.add('active');
+      showGrammarTooltip(hint);
+    }
+    e.stopPropagation();
+    return;
+  }
+  document.querySelectorAll('.grammar-hint.active').forEach(el=>el.classList.remove('active'));
+  hideGrammarTooltip();
+});
+if(window.matchMedia('(hover:hover)').matches){
+  document.querySelectorAll('.grammar-hint').forEach(el=>{
+    el.addEventListener('mouseenter',()=>showGrammarTooltip(el));
+    el.addEventListener('mouseleave',hideGrammarTooltip);
+  });
+}
+
+let tId;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tId);tId=setTimeout(()=>t.classList.remove('show'),3200);}
+
+function renderQuiz(wrapId,list,prefix){
+  const wrap=document.getElementById(wrapId);
+  if(!wrap)return;
+  wrap.innerHTML=list.map((qq,i)=>`
+    <div class="quiz-q">${qq.tag?`<span class="qbadge">${qq.tag}</span>`:''}${i+1}. ${qq.q}</div>
+    <div class="quiz-opts" data-g="${prefix}-${i}">
+      ${shuffle(qq.opts.slice()).map(o=>`<button class="quiz-opt" data-ok="${o.ok}">${o.t}</button>`).join('')}
+    </div>
+    <div class="quiz-fb" id="${prefix}fb-${i}"></div>`).join('');
+  wrap.querySelectorAll('.quiz-opts').forEach(box=>{
+    box.addEventListener('click',e=>{
+      const b=e.target.closest('.quiz-opt');
+      if(!b||b.disabled)return;
+      const i=box.dataset.g.split('-')[1];
+      const fb=document.getElementById(prefix+'fb-'+i);
+      box.querySelectorAll('.quiz-opt').forEach(x=>{x.disabled=true;x.classList.remove('correct','wrong');});
+      if(b.dataset.ok==='true'){
+        b.classList.add('correct');
+        fb.textContent='✅ ¡Correcto!';
+      }else{
+        b.classList.add('wrong');
+        box.querySelector('.quiz-opt[data-ok="true"]').classList.add('correct');
+        fb.textContent='❌ Правильный ответ подсвечен зелёным.';
+      }
+    });
+  });
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ===== РАЗМИНКА ===== */
+const WARMUP=[
+  {tag:'4.1',q:'Что означает «contrato de arrendamiento»?',opts:[{t:'Договор аренды',ok:true},{t:'Банковский счёт',ok:false},{t:'Коммунальные услуги',ok:false}]},
+  {tag:'4.1',q:'Как сказать «нужно заплатить залог»?',opts:[{t:'Hay que pagar la fianza',ok:true},{t:'Tengo que pagar la fianza',ok:false},{t:'Voy a pagar la fianza',ok:false}]},
+  {tag:'4.1',q:'Что означает «prórroga»?',opts:[{t:'Продление контракта',ok:true},{t:'Расторжение контракта',ok:false},{t:'Штраф',ok:false}]},
+  {tag:'4.2',q:'Что такое «cuenta corriente»?',opts:[{t:'Текущий счёт',ok:true},{t:'Кредитная карта',ok:false},{t:'Зарплата',ok:false}]},
+  {tag:'4.2',q:'Как сказать «банковский перевод денег»?',opts:[{t:'Transferencia',ok:true},{t:'Fianza',ok:false},{t:'Depósito',ok:false}]},
+  {tag:'4.2',q:'Что такое «Bizum»?',opts:[{t:'Испанская система мгновенных переводов',ok:true},{t:'Вид банковской карты',ok:false},{t:'Код банка',ok:false}]},
+  {tag:'4.3',q:'Что означает «letra pequeña»?',opts:[{t:'Мелкий шрифт в контракте',ok:true},{t:'Маленькая буква',ok:false},{t:'Тихий голос',ok:false}]},
+  {tag:'4.3',q:'Что такое «penalización»?',opts:[{t:'Штраф по контракту',ok:true},{t:'Продление',ok:false},{t:'Депозит',ok:false}]}
+];
+renderQuiz('warmup-wrap',WARMUP,'wu');
+document.getElementById('warmup-reset').onclick=()=>renderQuiz('warmup-wrap',WARMUP,'wu');
+
+/* ===== ЛЕКСИКА: 35 слов ===== */
+const VOCAB={
+  traps:[
+    {es:'la letra pequeña',ru:'мелкий шрифт',ex:'Hay que leer la letra pequeña.',exru:'Нужно читать мелкий шрифт.'},
+    {es:'los gastos de gestión',ru:'расходы на управление',ex:'Los gastos de gestión son 50€ al mes.',exru:'Расходы на управление — 50€ в месяц.'},
+    {es:'la comisión de apertura',ru:'комиссия за открытие',ex:'La comisión de apertura es de 100€.',exru:'Комиссия за открытие — 100€.'},
+    {es:'la comisión de mantenimiento',ru:'комиссия за обслуживание',ex:'La comisión de mantenimiento es de 10€ al mes.',exru:'Комиссия за обслуживание — 10€ в месяц.'},
+    {es:'los gastos de comunidad',ru:'коммунальные расходы дома',ex:'Los gastos de comunidad son 80€ al mes.',exru:'Коммунальные расходы дома — 80€ в месяц.'},
+    {es:'la derrama',ru:'доп. сбор на ремонт дома',ex:'Hay una derrama de 200€ para el ascensor.',exru:'Есть дополнительный сбор 200€ на лифт.'},
+    {es:'el IVA',ru:'НДС (21%)',ex:'El precio no incluye el IVA.',exru:'Цена не включает НДС.'},
+    {es:'las tasas',ru:'пошлины',ex:'Las tasas son 10,72€.',exru:'Пошлины — 10 евро 72 цента.'}
+  ],
+  fines:[
+    {es:'la penalización',ru:'штраф (по контракту)',ex:'La penalización es de dos meses.',exru:'Штраф — два месяца.'},
+    {es:'la multa',ru:'штраф (административный)',ex:'La multa por aparcar mal es de 200€.',exru:'Штраф за парковку — 200€.'},
+    {es:'el recargo por demora',ru:'пеня за просрочку',ex:'El recargo por demora es del 5%.',exru:'Пеня за просрочку — 5%.'},
+    {es:'los intereses de demora',ru:'проценты за просрочку',ex:'Los intereses de demora son del 8% al año.',exru:'Проценты за просрочку — 8% в год.'},
+    {es:'la cláusula penal',ru:'штрафная оговорка',ex:'La cláusula penal está en el artículo 8.',exru:'Штрафная оговорка — в статье 8.'},
+    {es:'el incumplimiento',ru:'нарушение контракта',ex:'El incumplimiento conlleva penalización.',exru:'Нарушение влечёт за собой штраф.'},
+    {es:'la rescisión',ru:'расторжение',ex:'La rescisión del contrato cuesta 1.800€.',exru:'Расторжение контракта стоит 1.800€.'}
+  ],
+  dates:[
+    {es:'el plazo',ru:'срок',ex:'El plazo es de 30 días.',exru:'Срок — 30 дней.'},
+    {es:'la fecha límite',ru:'крайний срок',ex:'La fecha límite es el 15 de enero.',exru:'Крайний срок — 15 января.'},
+    {es:'la prórroga',ru:'продление',ex:'La prórroga automática es de un año.',exru:'Автопродление — один год.'},
+    {es:'la permanencia',ru:'минимальный срок пребывания',ex:'La permanencia mínima es de 6 meses.',exru:'Минимальный срок — 6 месяцев.'},
+    {es:'el vencimiento',ru:'истечение срока',ex:'El vencimiento es el 31 de diciembre.',exru:'Истечение срока — 31 декабря.'},
+    {es:'la renovación',ru:'продление, обновление',ex:'La renovación es automática.',exru:'Продление автоматическое.'},
+    {es:'con antelación',ru:'заранее',ex:'Hay que avisar con 30 días de antelación.',exru:'Нужно предупредить за 30 дней.'}
+  ],
+  conditions:[
+    {es:'la cláusula',ru:'пункт, оговорка',ex:'La cláusula 5 habla de los gastos.',exru:'Пункт 5 — о расходах.'},
+    {es:'las condiciones',ru:'условия',ex:'Las condiciones están en el contrato.',exru:'Условия есть в контракте.'},
+    {es:'el compromiso',ru:'обязательство',ex:'El compromiso es de un año.',exru:'Обязательство — один год.'},
+    {es:'la obligación',ru:'обязанность',ex:'La obligación del inquilino es pagar.',exru:'Обязанность арендатора — платить.'},
+    {es:'el derecho',ru:'право',ex:'El inquilino tiene derecho a la fianza.',exru:'Арендатор имеет право на залог.'},
+    {es:'la garantía',ru:'гарантия',ex:'La garantía es de dos años.',exru:'Гарантия — два года.'},
+    {es:'la fianza',ru:'залог',ex:'La fianza es de un mes.',exru:'Залог — один месяц.'}
+  ],
+  verbs:[
+    {es:'firmar',ru:'подписывать',ex:'Hay que firmar el contrato.',exru:'Нужно подписать контракт.'},
+    {es:'rescindir',ru:'расторгать',ex:'Quiero rescindir el contrato.',exru:'Я хочу расторгнуть контракт.'},
+    {es:'renovar',ru:'продлевать',ex:'Quiero renovar el contrato.',exru:'Я хочу продлить контракт.'},
+    {es:'pagar',ru:'платить',ex:'Hay que pagar antes del día 5.',exru:'Нужно платить до 5-го числа.'},
+    {es:'cobrar',ru:'взимать, получать деньги',ex:'El banco cobra 10€ al mes.',exru:'Банк взимает 10€ в месяц.'},
+    {es:'reclamar',ru:'требовать, претендовать',ex:'Quiero reclamar la fianza.',exru:'Я хочу потребовать залог.'}
+  ]
+};
+function flashStatic(v){
+  return `<div class="flash-static">
+    <div class="flash-word">${v.es}</div>
+    <div class="flash-ru">${v.ru}</div>
+    ${v.ex?`<div class="flash-example">«${v.ex}»</div>`:''}
+    ${v.exru?`<div class="flash-exru">«${v.exru}»</div>`:''}
+    <button class="speak-btn speak" data-text="${v.es}">🔊</button>
+  </div>`;
+}
+document.getElementById('flash-traps').innerHTML=VOCAB.traps.map(flashStatic).join('');
+document.getElementById('flash-fines').innerHTML=VOCAB.fines.map(flashStatic).join('');
+document.getElementById('flash-dates').innerHTML=VOCAB.dates.map(flashStatic).join('');
+document.getElementById('flash-conditions').innerHTML=VOCAB.conditions.map(flashStatic).join('');
+document.getElementById('flash-verbs').innerHTML=VOCAB.verbs.map(flashStatic).join('');
+
+document.querySelectorAll('.layer-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.layer-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.layer-pane').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('layer-'+tab.dataset.layer).classList.add('active');
+  });
+});
+
+/* ===== ЗАКРЕПЛЕНИЕ ЛЕКСИКИ ===== */
+const EX_MATCH=[
+  ['contrato de arrendamiento','договор аренды'],
+  ['la fianza','залог'],
+  ['la derrama','доп. сбор на ремонт'],
+  ['la penalización','штраф по контракту'],
+  ['el plazo','срок'],
+  ['la permanencia','мин. срок пребывания'],
+  ['la rescisión','расторжение'],
+  ['la comisión de mantenimiento','комиссия за обслуживание']
+];
+function initMatch(esId,ruId,msgId,pairs){
+  let mEs=null,mRu=null,mDone=0;
+  const ec=document.getElementById(esId);
+  const rc=document.getElementById(ruId);
+  const msg=document.getElementById(msgId);
+  function build(){
+    mDone=0;mEs=null;mRu=null;
+    ec.innerHTML='';rc.innerHTML='';
+    msg.textContent='';
+    shuffle(pairs.map((p,i)=>({es:p[0],ru:p[1],id:i}))).forEach(p=>{
+      const b=document.createElement('button');
+      b.className='tr-chip';b.dataset.id=p.id;b.textContent=p.es;
+      b.onclick=()=>pick('es',b);
+      ec.appendChild(b);
+    });
+    shuffle(pairs.map((p,i)=>({es:p[0],ru:p[1],id:i}))).forEach(p=>{
+      const b=document.createElement('button');
+      b.className='tr-chip';b.dataset.id=p.id;b.textContent=p.ru;
+      b.onclick=()=>pick('ru',b);
+      rc.appendChild(b);
+    });
+    msg.textContent='Соедините слово с его переводом.';
+  }
+  function pick(side,btn){
+    if(btn.classList.contains('done'))return;
+    const box=side==='es'?ec:rc;
+    box.querySelectorAll('.selected').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    if(side==='es')mEs=btn;else mRu=btn;
+    if(mEs&&mRu){
+      if(mEs.dataset.id===mRu.dataset.id){
+        mEs.classList.remove('selected');mEs.classList.add('done');
+        mRu.classList.remove('selected');mRu.classList.add('done');
+        speak(mEs.textContent);
+        mDone++;
+        msg.textContent=mDone===pairs.length?'🎉 ¡Muy bien! Все пары собраны!':`✅ Верно! ${mDone} из ${pairs.length}`;
+        msg.style.color='var(--p2)';
+      }else{
+        msg.textContent='❌ Не пара! Попробуйте ещё раз';
+        msg.style.color='var(--p1)';
+        mEs.classList.add('wrong');mRu.classList.add('wrong');
+        const a=mEs,b2=mRu;
+        setTimeout(()=>{a.classList.remove('selected','wrong');b2.classList.remove('selected','wrong');},600);
+      }
+      mEs=null;mRu=null;
+    }
+  }
+  build();
+  return build;
+}
+const rebuildExMatch=initMatch('ex-match-es','ex-match-ru','ex-match-msg',EX_MATCH);
+document.getElementById('ex-match-reset').onclick=rebuildExMatch;
+
+/* ===== ПОДСЧЁТ ===== */
+function calcToNum(s){return parseFloat(s.replace(/[^\d.,]/g,'').replace(',','.'));}
+document.getElementById('calc-check').onclick=function(){
+  const rent=document.getElementById('calc-rent');
+  const rf=document.getElementById('calc-rent-fb');
+  const bank=document.getElementById('calc-bank');
+  const bf=document.getElementById('calc-bank-fb');
+  const a1=calcToNum(rent.value);
+  const a2=calcToNum(bank.value);
+  if(!isNaN(a1)&&Math.abs(a1-1030)<0.01){
+    rf.innerHTML='✅ ¡Correcto! 900 + 80 + 50 = <b>1.030€/mes</b>';
+    rf.style.color='var(--p2)';
+  }else{
+    rf.innerHTML='❌ Считаем: 900 + 80 + 50 = <b>1.030€/mes</b>';
+    rf.style.color='var(--p1)';
+  }
+  if(!isNaN(a2)&&Math.abs(a2-220)<0.01){
+    bf.innerHTML='✅ ¡Correcto! 100 + 10×12 = <b>220€/año</b>';
+    bf.style.color='var(--p2)';
+  }else{
+    bf.innerHTML='❌ Считаем: 100 + (10 × 12) = <b>220€/año</b>';
+    bf.style.color='var(--p1)';
+  }
+};
+
+/* ===== ЧТЕНИЕ КОНТРАКТА ===== */
+const CONTRACT_Q=[
+  {q:'Сколько всего нужно платить в месяц?',opts:[{t:'900 €',ok:false},{t:'930 €',ok:false},{t:'1.030 € (900 + 80 + 50)',ok:true}]},
+  {q:'Сколько стоит расторжение контракта?',opts:[{t:'900 €',ok:false},{t:'1.800 € (два месяца аренды)',ok:true},{t:'2.400 €',ok:false}]},
+  {q:'Что такое «derrama» и кто её платит?',opts:[{t:'Доп. сбор на ремонт, 50% платит арендатор',ok:true},{t:'Комиссия банка',ok:false},{t:'Налог государству',ok:false}]},
+  {q:'Каков минимальный срок permanencia?',opts:[{t:'3 месяца',ok:false},{t:'6 месяцев',ok:true},{t:'12 месяцев',ok:false}]},
+  {q:'До какого числа каждого месяца платят аренду?',opts:[{t:'До 1-го числа',ok:false},{t:'До 5-го числа',ok:true},{t:'До 15-го числа',ok:false}]},
+  {q:'Какие 3 ловушки вы нашли?',opts:[{t:'Управление 50€/мес, штраф 1.800€, 50% деррамы',ok:true},{t:'НДС 21%, штраф 900€, залог 2 мес',ok:false},{t:'Мелкий шрифт, проценты, пени',ok:false}]}
+];
+renderQuiz('contract-wrap',CONTRACT_Q,'cq');
+document.getElementById('contract-reset').onclick=()=>renderQuiz('contract-wrap',CONTRACT_Q,'cq');
+
+/* ===== АУДИРОВАНИЕ ===== */
+const LISTEN_Q=[
+  {q:'Что хочет открыть клиент?',opts:[{t:'Сберегательный счёт',ok:false},{t:'Текущий счёт',ok:true},{t:'Кредитную карту',ok:false}]},
+  {q:'Сколько стоит обслуживание после первого года?',opts:[{t:'5 €/мес',ok:false},{t:'10 €/мес',ok:true},{t:'21 €/мес',ok:false}]},
+  {q:'Есть ли комиссия за переводы в евро?',opts:[{t:'Да, 5 €',ok:false},{t:'Да, 10 €',ok:false},{t:'Нет, бесплатно',ok:true}]},
+  {q:'Что клиент сделает завтра?',opts:[{t:'Откроет счёт',ok:false},{t:'Сделает перевод для оплаты залога',ok:true},{t:'Закроет счёт',ok:false}]}
+];
+renderQuiz('listen-wrap',LISTEN_Q,'lq');
+document.getElementById('listen-reset').onclick=()=>renderQuiz('listen-wrap',LISTEN_Q,'lq');
+
+/* ===== ТРЕНАЖЁР ===== */
+const trTabs=document.querySelectorAll('.tr-tab');
+trTabs.forEach(t=>t.addEventListener('click',()=>{
+  trTabs.forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  const tab=t.dataset.tab;
+  ['cards','match','build'].forEach(k=>{
+    document.getElementById('tr'+k.charAt(0).toUpperCase()+k.slice(1)).hidden=k!==tab;
+  });
+}));
+
+const TR_CARDS=[].concat(
+  VOCAB.traps,VOCAB.fines,VOCAB.dates,VOCAB.conditions,VOCAB.verbs,
+  [{es:'Hay que leer la letra pequeña.',ru:'Нужно читать мелкий шрифт.'},
+   {es:'Tengo que pagar la fianza antes del día 5.',ru:'Я должен заплатить залог до 5-го числа.'},
+   {es:'Quiero rescindir el contrato con dos meses de antelación.',ru:'Я хочу расторгнуть контракт за два месяца.'},
+   {es:'¿Qué es esta comisión de gestión?',ru:'Что это за комиссия за управление?'},
+   {es:'El banco cobra 10€ al mes.',ru:'Банк взимает 10€ в месяц.'}]
+);
+let trIdx=0,trOrder=[...Array(TR_CARDS.length).keys()],trSwiped=false;
+const trCardEl=document.getElementById('trCard');
+function renderTrCard(){
+  const w=TR_CARDS[trOrder[trIdx]];
+  document.getElementById('trCardEs').textContent=w.es;
+  document.getElementById('trCardRu').textContent=w.ru;
+  document.getElementById('trCardBackEs').textContent=w.es;
+  document.getElementById('trCardSpeakBtn').dataset.text=w.es;
+  document.getElementById('trCount').textContent=(trIdx+1)+' / '+TR_CARDS.length;
+  trCardEl.classList.remove('flipped');
+}
+function trNext(){trIdx=(trIdx+1)%TR_CARDS.length;renderTrCard();}
+function trPrev(){trIdx=(trIdx-1+TR_CARDS.length)%TR_CARDS.length;renderTrCard();}
+trCardEl.addEventListener('click',(e)=>{
+  if(e.target.closest('.speak'))return;
+  if(trSwiped){trSwiped=false;return;}
+  trCardEl.classList.toggle('flipped');
+  if(trCardEl.classList.contains('flipped'))speak(TR_CARDS[trOrder[trIdx]].es);
+});
+let touchX=null,touchY=null;
+trCardEl.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY;},{passive:true});
+trCardEl.addEventListener('touchend',e=>{
+  if(touchX===null)return;
+  const dx=e.changedTouches[0].clientX-touchX;
+  const dy=e.changedTouches[0].clientY-touchY;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){trSwiped=true;if(dx<0)trNext();else trPrev();}
+  touchX=null;touchY=null;
+},{passive:true});
+document.getElementById('trNext').onclick=trNext;
+document.getElementById('trPrev').onclick=trPrev;
+document.getElementById('trShuffle').onclick=()=>{trOrder=shuffle([...Array(TR_CARDS.length).keys()]);trIdx=0;renderTrCard();};
+renderTrCard();
+
+const TR_MATCH=[
+  ['la letra pequeña','мелкий шрифт'],
+  ['la penalización','штраф по контракту'],
+  ['el plazo','срок'],
+  ['la permanencia','мин. срок пребывания'],
+  ['la derrama','доп. сбор на ремонт'],
+  ['la fianza','залог']
+];
+const rebuildTrMatch=initMatch('tr-match-es','tr-match-ru','tr-match-msg',TR_MATCH);
+document.getElementById('trMatchReset').onclick=rebuildTrMatch;
+
+const TR_SENT=[
+  {id:'p1',chips:['Hay','que','leer','la','letra','pequeña'],label:'Hay que leer la letra pequeña.',ru:'Нужно читать мелкий шрифт.'},
+  {id:'p2',chips:['Tengo','que','pagar','la','fianza'],label:'Tengo que pagar la fianza.',ru:'Я должен заплатить залог.'},
+  {id:'p3',chips:['Quiero','rescindir','el','contrato'],label:'Quiero rescindir el contrato.',ru:'Я хочу расторгнуть контракт.'},
+  {id:'p4',chips:['La','comisión','es','de','diez','euros'],label:'La comisión es de diez euros.',ru:'Комиссия — десять евро.'},
+  {id:'p5',chips:['¿Qué','es','esta','comisión','de','gestión?'],label:'¿Qué es esta comisión de gestión?',ru:'Что это за комиссия за управление?'}
+];
+document.getElementById('trBuildArea').innerHTML=TR_SENT.map((b,i)=>`
+  <div style="font-weight:900;margin-top:${i?18:4}px">💬 Соберите фразу: «${b.ru}»</div>
+  <div class="sb-answer" id="${b.id}-answer"></div>
+  <div class="sb-chips" id="${b.id}-chips"></div>
+  <div class="sb-feedback" id="${b.id}-feedback"></div>`).join('');
+TR_SENT.forEach(initTrSB);
+function initTrSB(b){
+  const answerBox=document.getElementById(b.id+'-answer');
+  const chipsBox=document.getElementById(b.id+'-chips');
+  const fb=document.getElementById(b.id+'-feedback');
+  let pool=shuffle(b.chips.slice());
+  let answer=[];
+  function render(){
+    answerBox.innerHTML='';chipsBox.innerHTML='';
+    answer.forEach((w,i)=>{
+      const s=document.createElement('span');
+      s.className='sb-chip';s.textContent=w;
+      s.onclick=()=>{pool.push(w);answer=answer.filter((_,j)=>j!==i);render();};
+      answerBox.appendChild(s);
+    });
+    pool.forEach(w=>{
+      const s=document.createElement('span');
+      s.className='sb-chip';s.textContent=w;
+      s.onclick=()=>{answer.push(w);pool=pool.filter(x=>x!==w);render();};
+      chipsBox.appendChild(s);
+    });
+    if(answer.length===b.chips.length){
+      if(b.chips.every((w,i)=>answer[i]===w)){
+        answerBox.classList.add('sb-done');
+        fb.textContent='🎉 ¡Perfecto! Слушайте:';
+        fb.style.color='var(--p2)';
+        speak(b.label);
+      }else{
+        answerBox.classList.remove('sb-done');
+        fb.textContent='🤔 Порядок слов не тот. Поменяйте местами!';
+        fb.style.color='var(--p1)';
+      }
+    }else{
+      answerBox.classList.remove('sb-done');
+      fb.textContent='';
+    }
+  }
+  render();
+}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(c=>{
+  c.addEventListener('click',()=>{
+    const row=c.dataset.row;
+    document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+  });
+});
+document.getElementById('tlReset').onclick=()=>document.querySelectorAll('.tl-cell').forEach(c=>c.classList.remove('active'));
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 4.3 · Скрытые комиссии — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  /* ОДИН непрерывный лист */
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .contract-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin:0 0 2mm; font-size:9.5px;}
+  .contract-box .hdr{ background:var(--p4); color:#fff; text-align:center; font-weight:700; font-size:10px; padding:2mm 3mm; margin:-3mm -3mm 2mm; border-radius:6px 6px 0 0;}
+  .contract-box .clause{ border-left:2px solid var(--p3); padding-left:2mm; margin-bottom:1.5mm;}
+  .contract-box .trap{ background:#FBF0ED; color:var(--p1); font-weight:700; border-radius:4px; padding:0 4px; font-size:9px;}
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:1.5mm 4px; border:1px solid #E8DCCF; font-size:9.5px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1);}
+  .tl-btn{ display:inline-block; width:6mm; height:6mm; border-radius:50%; }
+  .tl-btn.green{ background:#C8E6C9; } .tl-btn.yellow{ background:#FFF9C4; } .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ОДИН НЕПРЕРЫВНЫЙ ЛИСТ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🪤 Рабочий лист · Урок 4.3 «Скрытые комиссии»</h1>
+    <div class="meta">letra pequeña · gastos de gestión · penalización — находим ловушки и экономим</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>📚 Лексика: соедини термин и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la letra pequeña</div>
+          <div class="item">2. los gastos de gestión</div>
+          <div class="item">3. la penalización</div>
+          <div class="item">4. el plazo</div>
+          <div class="item">5. la derrama</div>
+          <div class="item">6. la rescisión</div>
+          <div class="item">7. el recargo por demora</div>
+          <div class="item">8. la permanencia</div>
+        </div>
+        <div class="col">
+          <div class="item">а) штраф</div>
+          <div class="item">б) мелкий шрифт</div>
+          <div class="item">в) пеня за просрочку</div>
+          <div class="item">г) расходы на управление</div>
+          <div class="item">д) срок</div>
+          <div class="item">е) минимальный срок пребывания</div>
+          <div class="item">ж) дополнительный сбор на ремонт</div>
+          <div class="item">з) расторжение</div>
+        </div>
+      </div>
+      <div class="hint" style="margin-top:2mm">⚠️ <b>Ложные друзья:</b> la letra pequeña ≠ «маленькая буква» = «мелкий шрифт»; la penalización ≠ «пенализация» = «штраф»; la derrama ≠ «драма» = «допсбор на ремонт».</div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ГРАММАТИКА · ЧИСЛА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>💶 Грамматика: числа, деньги, даты</h2><div class="tag">впиши по-испански</div></div></div>
+    <div class="card">
+      <div class="hint">💡 В Испании числа пишутся с точкой для тысяч (1.500) и запятой для десятых (10,72). Это наоборот по сравнению с русским!</div>
+      1. 1.500 € → <span class="wline long"></span><br>
+      <span class="ru-sub">(тысяча пятьсот евро)</span><br>
+      2. 21% → <span class="wline long"></span><br>
+      <span class="ru-sub">(двадцать один процент)</span><br>
+      3. 10,72 € → <span class="wline long"></span><br>
+      <span class="ru-sub">(десять евро семьдесят два цента)</span><br>
+      4. el 15 de enero → <span class="wline long"></span><br>
+      <span class="ru-sub">(15 января)</span><br>
+      5. dentro de 30 días → <span class="wline long"></span><br>
+      <span class="ru-sub">(в течение 30 дней)</span><br>
+      6. con 30 días de antelación → <span class="wline long"></span><br>
+      <span class="ru-sub">(за 30 дней заранее)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ЧТЕНИЕ · КОНТРАКТ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>📄 Чтение: контракт с ловушками</h2><div class="tag">найди скрытые комиссии</div></div></div>
+    <div class="card">
+      <div class="contract-box">
+        <div class="hdr">CONTRATO DE ARRENDAMIENTO DE VIVIENDA</div>
+        <div class="clause"><b>CLÁUSULA 1: RENTA</b><br>La renta mensual es de 900 euros, más 80 euros de gastos de comunidad. El pago se realizará antes del día 5 de cada mes.</div>
+        <div class="clause"><b>CLÁUSULA 2: FIANZA Y DEPÓSITO</b><br>La fianza es de 900 euros (un mes). El depósito de garantía es de 1.800 euros (dos meses).</div>
+        <div class="clause"><b>CLÁUSULA 3: DURACIÓN</b><br>La duración del contrato es de un año, con prórroga automática. La permanencia mínima es de 6 meses.</div>
+        <div class="clause"><b>CLÁUSULA 4: GASTOS DE GESTIÓN</b> <span class="trap">⚠️ letra pequeña</span><br>El arrendatario pagará <b>50 euros al mes de gastos de gestión</b>. Esta comisión no se incluye en la renta.</div>
+        <div class="clause"><b>CLÁUSULA 5: RESCISIÓN ANTICIPADA</b> <span class="trap">⚠️ letra pequeña</span><br>En caso de rescisión anticipada, el arrendatario pagará una <b>penalización de dos meses de renta (1.800 euros)</b>.</div>
+        <div class="clause"><b>CLÁUSULA 6: DERRAMA</b> <span class="trap">⚠️ letra pequeña</span><br>En caso de derrama para reparaciones del edificio, el arrendatario pagará <b>el 50% del coste</b>.</div>
+      </div>
+      <br>
+      1. ¿Cuánto hay que pagar en total cada mes?<br>
+      <span class="ru-sub">(Сколько всего нужно платить каждый месяц?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Cuánto cuesta la rescisión anticipada?<br>
+      <span class="ru-sub">(Сколько стоит досрочное расторжение?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Qué es la «derrama» y quién la paga?<br>
+      <span class="ru-sub">(Что такое «деррама» и кто её платит?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuáles son las 3 trampas del contrato?<br>
+      <span class="ru-sub">(Какие 3 ловушки в контракте?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>🎧 Аудирование: диалог в банке</h2><div class="tag">попроси партнёра прочитать вслух</div></div></div>
+    <div class="card">
+      <div class="hint">📢 Для партнёра: прочитать вслух 2 раза (медленно).<br>«Buenos días. Quisiera abrir una cuenta corriente. ¿Hay alguna comisión de mantenimiento? La cuenta es gratuita el primer año. Después, hay una comisión de 10 euros al mes. ¿Y hay comisión por transferencia? Las transferencias en euros son gratuitas. Para Bizum, también es gratuito. Perfecto. ¿Cuál es el IBAN para recibir la nómina? Su IBAN empieza por ES. Le vamos a dar una tarjeta de débito.»</div>
+      1. ¿Qué quiere abrir el cliente?<br>
+      <span class="ru-sub">(Что хочет открыть клиент?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Cuánto cuesta el mantenimiento después del primer año?<br>
+      <span class="ru-sub">(Сколько стоит обслуживание после первого года?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Hay comisión por transferencia en euros?<br>
+      <span class="ru-sub">(Есть ли комиссия за перевод в евро?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Qué va a hacer el cliente mañana?<br>
+      <span class="ru-sub">(Что клиент сделает завтра?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">5</div><div><h2>🗣 Говорение: что спросить о комиссиях?</h2><div class="tag">три ситуации</div></div></div>
+    <div class="card">
+      <div class="hint"><b>Ситуация 1: Контракт аренды.</b> В клаузуле написано: «El arrendatario pagará 50 euros al mes de gastos de gestión.»<br>Твой вопрос: <span class="wline xlong"></span></div>
+      <div class="hint"><b>Ситуация 2: Банковский счёт.</b> Банк говорит: «La cuenta es gratuita el primer año. Después, hay una comisión de 10 euros al mes.»<br>Твой вопрос: <span class="wline xlong"></span></div>
+      <div class="hint"><b>Ситуация 3: Досрочное расторжение.</b> В контракте: «En caso de rescisión anticipada, el arrendatario pagará una penalización de dos meses.»<br>Твой вопрос: <span class="wline xlong"></span></div>
+    </div>
+  </div>
+
+  <!-- УПР 6: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">6</div><div><h2>✍️ Письмо: найди ловушки и задай вопросы</h2><div class="tag">7–8 предложений по плану</div></div></div>
+    <div class="card">
+      <div class="hint"><b>План:</b> 1–2. Какой документ ты читаешь (контракт аренды / банковский счёт)? 3–4. Какие 2–3 ловушки ты нашёл (название + сколько стоит)? 5–6. Какие вопросы ты задашь риелтору / банку? 7–8. Твой вывод: принимаешь или нет? Почему?</div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- СВЕТОФОР -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Находить скрытые комиссии (letra pequeña, gastos de gestión)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать расходы и штрафы (penalización, derrama)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Считать большие суммы и проценты по-испански</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Задавать вопросы о комиссиях (¿Qué es esta comisión?)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Находить 3 ловушки в реальном контракте</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать сроки и даты (plazo, dentro de, con antelación)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <div class="hint" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист и отправь преподавателю — проверим вместе!</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
