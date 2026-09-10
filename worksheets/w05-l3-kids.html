@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 15 · El sistema educativo — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --blue:#2274A5;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  /* ОДИН НЕПРЕРЫВНЫЙ ЛИСТ */
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E0F2F1,#B2DFDB,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-blue{background:var(--blue)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#E0F2F1;border:1.5px dashed var(--teal);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .stage{font-family:'Baloo 2',cursive;font-weight:800;color:var(--teal);background:#E0F2F1;border-radius:6px;padding:2px 8px}
+  .desc-item .blank{display:inline-block;min-width:46px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom;text-align:center}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px 26px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .opt{display:inline-block;border:1.6px solid var(--ocean);border-radius:999px;padding:2px 12px;font-weight:700;font-size:12.5px;color:var(--ocean);margin:0 3px}
+  .gap-item .g{display:inline-block;min-width:56px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--oliva);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--oliva)}
+  .build-line{border-bottom:1.6px dashed var(--oliva);height:24px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .sched-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:10px}
+  .sched-table th{background:#E0F2F1;padding:6px 8px;text-align:center;font-weight:800;border:1px solid #b2dfdb;color:var(--teal)}
+  .sched-table td{padding:6px 8px;border:1px solid #ddd;text-align:center;font-weight:600}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:90px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🏫 El sistema educativo</h1>
+    <div class="sub">Рабочий лист к Уроку 15 · Станция 2: Mi Colegio · ступени, escuela/colegio/instituto, de...a..., hay</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, а потом <strong>проверь вместе с родителем или учителем</strong>. Вспоминай карточки ступеней и фразы из урока 15!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">1</span>
+      <span class="ex-title">Соедини слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · школа</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:58%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🏫 la escuela</td><td>а) разделённый день</td></tr>
+      <tr><td><span class="ans-box"></span>🎒 el colegio</td><td>б) школа 12–16 лет</td></tr>
+      <tr><td><span class="ans-box"></span>🔬 el instituto</td><td>в) перемена</td></tr>
+      <tr><td><span class="ans-box"></span>📚 la asignatura</td><td>г) школа вообще</td></tr>
+      <tr><td><span class="ans-box"></span>🌿 Ciencias</td><td>д) триместр</td></tr>
+      <tr><td><span class="ans-box"></span>🌍 Sociales</td><td>е) естествознание</td></tr>
+      <tr><td><span class="ans-box"></span>🍎 el recreo</td><td>ж) расписание</td></tr>
+      <tr><td><span class="ans-box"></span>📋 el horario</td><td>з) учебный год</td></tr>
+      <tr><td><span class="ans-box"></span>📅 el curso</td><td>и) школа 6–12 лет</td></tr>
+      <tr><td><span class="ans-box"></span>🧮 el trimestre</td><td>к) предмет</td></tr>
+      <tr><td><span class="ans-box"></span>☀️ la jornada continua</td><td>л) непрерывный день 9–14</td></tr>
+      <tr><td><span class="ans-box"></span>🌤 el horario partido</td><td>м) обществознание</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: СТУПЕНИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">2</span>
+      <span class="ex-title">Напиши возраст ступеней</span>
+      <span class="ex-skill">🗣 Лексика · ступени</span>
+    </div>
+    <div class="ex-instruction">Впиши возраст каждой ступени: от ... до ... (de ... a ...).</div>
+    <div class="word-bank">💡 Числа: tres · seis · doce · dieciséis · dieciocho</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="stage">🧸 Infantil</span> = de <span class="blank"></span> a <span class="blank"></span> años</div>
+      <div class="desc-item"><span class="num">2</span><span class="stage">🎒 Primaria</span> = de <span class="blank"></span> a <span class="blank"></span> años</div>
+      <div class="desc-item"><span class="num">3</span><span class="stage">🔬 ESO</span> = de <span class="blank"></span> a <span class="blank"></span> años</div>
+      <div class="desc-item"><span class="num">4</span><span class="stage">🎓 Bachillerato</span> = de <span class="blank"></span> a <span class="blank"></span> años</div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Обведи правильный вариант</span>
+      <span class="ex-skill">🧩 Грамматика · de...a...</span>
+    </div>
+    <div class="hint-box">💡 <strong>de ... a ...</strong> = «с ... до ...» (возраст И время). В Испании ЕСТЬ = <strong>hay</strong>. В ступени — <strong>Estoy en</strong>. Иду в школу — <strong>Voy al</strong> colegio/instituto.</div>
+    <div class="gap-grid">
+      <div class="gap-item">1. Primaria es <span class="opt">de / en</span> 6 <span class="opt">a / a las</span> 12 años.</div>
+      <div class="gap-item">2. <span class="opt">En España hay / En España tiene</span> tres trimestres.</div>
+      <div class="gap-item">3. Yo <span class="opt">estoy / soy</span> en Primaria.</div>
+      <div class="gap-item">4. (Мне 8 лет) Yo <span class="opt">voy al / soy al</span> colegio.</div>
+      <div class="gap-item">5. La jornada es <span class="opt">de / en</span> 9 <span class="opt">a / en</span> 14.</div>
+      <div class="gap-item">6. ¿Cuántos trimestres <span class="opt">hay / tiene</span> en España? — Tres.</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу на строке.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">hay</span><span class="build-word">tres</span><span class="build-word">En</span><span class="build-word">trimestres.</span><span class="build-word">España</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">es</span><span class="build-word">Primaria</span><span class="build-word">a</span><span class="build-word">de</span><span class="build-word">años.</span><span class="build-word">6</span><span class="build-word">12</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">estoy</span><span class="build-word">Primaria</span><span class="build-word">Yo</span><span class="build-word">en</span><span class="build-word">y</span><span class="build-word">voy</span><span class="build-word">al</span><span class="build-word">colegio.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Mates</span><span class="build-word">tengo</span><span class="build-word">El</span><span class="build-word">lunes</span><span class="build-word">nueve.</span><span class="build-word">las</span><span class="build-word">a</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Прочитай расписание и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <table class="sched-table">
+      <tr><th>Día</th><th>Hora</th><th>Asignatura</th></tr>
+      <tr><td>Lunes</td><td>9:00–10:00</td><td>Mates</td></tr>
+      <tr><td>Lunes</td><td>10:00–11:00</td><td>Lengua</td></tr>
+      <tr><td>Martes</td><td>9:00–10:00</td><td>Ciencias</td></tr>
+      <tr><td>Miércoles</td><td>11:00–11:30</td><td>Recreo</td></tr>
+      <tr><td>Jueves</td><td>9:00–10:00</td><td>Sociales</td></tr>
+      <tr><td>Viernes</td><td>12:00–14:00</td><td>Plástica</td></tr>
+    </table>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Qué día tiene Ciencias? <span class="ru">(В какой день у неё естествознание?)</span><span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿A qué hora empieza Lengua el lunes? <span class="ru">(Во сколько начинается испанский в понедельник?)</span><span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cuánto dura el recreo? <span class="ru">(Сколько длится перемена?)</span><span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué día termina la semana? <span class="ru">(В какой день заканчивается неделя?)</span><span class="blank"></span></span></div>
+  </div>
+
+  <!-- 6. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">6</span>
+      <span class="ex-title">Послушай и запиши день + время</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши ДЕНЬ и ВРЕМЯ, которые услышал(а) (например: martes · 9:00)!</div>
+    <div class="listen-item"><span class="lnum">1.</span> день: <span class="blank"></span> · время: <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span> день: <span class="blank"></span> · время: <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span> день: <span class="blank"></span> · время: <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span> день: <span class="blank"></span> · время: <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span> день: <span class="blank"></span> · время: <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) El lunes tengo Mates a las nueve. · 2) El martes tengo Ciencias a las nueve. · 3) El miércoles tengo el recreo a las once. · 4) El jueves tengo Sociales a las nueve. · 5) El viernes tengo Plástica a las doce.</div>
+  </div>
+
+  <!-- 7. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">7</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Скажи, что ты в начальной школе (6–12 лет):<br><span class="tpl">Estoy en Primaria, de 6 a 12 años.</span><span class="ru">Я в Примарии, с 6 до 12 лет.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Скажи, что в Испании 3 триместра:<br><span class="tpl">En España hay tres trimestres.</span><span class="ru">В Испании три триместра.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Скажи, в какую школу ты ходишь (8 лет → colegio):<br><span class="tpl">Voy al colegio.</span><span class="ru">Я хожу в начальную школу.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Скажи, когда у тебя математика (день + время):<br><span class="tpl">El lunes tengo Mates a las nueve.</span><span class="ru">В понедельник у меня математика в девять.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 8. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">8</span>
+      <span class="ex-title">Сочинение «Mi semana en el colegio»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) Yo estoy en... · 2) Voy al... · 3) En Rusia hay... trimestres. · 4) En España hay... trimestres. · 5) La jornada es de... a... · 6) El lunes tengo... a las... · 7) El recreo es a las... · 8) Mi asignatura favorita es... porque...</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 9. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">9</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть ступени (Infantil, Primaria, ESO)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Различать escuela / colegio / instituto</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить «de...a...», «hay», «estar en»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать jornada continua / horario partido</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Читать расписание (день + время + предмет)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сравнивать Rusia / España</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 2: Mi Colegio · Урок 15 · ¡Hasta luego! 🏫</div>
+</div>
+
+</body>
+</html>

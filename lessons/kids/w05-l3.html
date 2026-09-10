@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 15: CLIL El sistema educativo — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --gold:#B8860B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E0F2F1 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--teal)}
+  .hero .sub{max-width:700px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+  .final-situation{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--teal);text-align:left}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--teal)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#E0F2F1;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #E0F2F1;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--teal)}
+  .word-card .emo{font-size:2rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1rem;color:var(--teal)}
+  .word-card .ru{color:var(--ink-soft);font-size:.8rem;font-weight:700}
+  .word-card.age{border-color:#FFE0B2;background:#FFF8EC}
+  .speak-btn{background:var(--teal);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .game-zone{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--teal);margin:10px 0;min-height:34px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #cfd8dc;border-radius:14px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.98rem}
+  .opt:hover:not(:disabled){border-color:var(--teal)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--teal);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6;cursor:pointer}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .sched-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+  .sched-table th{background:#E0F2F1;padding:8px;text-align:center;font-weight:800;border:1px solid #b2dfdb;color:var(--teal)}
+  .sched-table td{padding:8px;border:1px solid #d6cfc4;text-align:center;font-weight:600}
+
+  .vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  .vs-col{border-radius:16px;padding:14px}
+  .vs-ru{background:#E0F2F1;border:2px solid var(--teal)}
+  .vs-es{background:#FFF8DC;border:2px solid var(--gold)}
+  .vs-col h4{text-align:center;margin-bottom:8px}
+  .vs-row{background:#fff;border-radius:10px;padding:8px 10px;margin:6px 0;font-weight:700;font-size:.88rem}
+  .vs-row .lbl{display:block;font-size:.72rem;color:var(--ink-soft);font-weight:800;margin-bottom:2px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+  .chip{background:#fff;border:2px solid var(--teal);color:var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;font-family:'Nunito';transition:.15s}
+  .chip.sel{background:var(--teal);color:#fff}
+  .chip.correct{background:#C8E6C9;border-color:var(--green);color:var(--green)}
+  .chip.wrong{background:#FFCDD2;border-color:var(--red);color:var(--red)}
+  .chip.ok{background:#C8E6C9;border-color:var(--green);color:var(--green)}
+  .chip:disabled{opacity:.4;cursor:default}
+
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:700;margin-bottom:4px}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:4px}
+
+  .sb-target{background:#fff;border:2px dashed #ccc;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--teal)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--teal);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .ball{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd54f,var(--terra));border:none;cursor:pointer;font-size:2.6rem;box-shadow:0 8px 22px rgba(232,96,76,.4);transition:.2s}
+  .ball:hover{transform:scale(1.08) rotate(-8deg)}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--teal);background:#E0F2F1}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  /* grammar-hint */
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:280px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  /* Светофор */
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--teal);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--teal);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:640px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}.vs-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 2 · Mi Colegio · Урок 15 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🏫 УРОК 15 · НЕДЕЛЯ 5 · CLIL</span>
+  <h1>El sistema <span>educativo</span></h1>
+  <p class="sub">Почему испанские дети обедают дома в 14:00? Что такое <em>trimestre</em>? И в какой школе учишься ты — <em>colegio</em> или <em>instituto</em>? Сегодня разгадаем всю систему и применим всё, что выучили за неделю: дни (13) + время (14) + школа (15)!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты показываешь свою инфографику и говоришь:<br>
+    <em>«En Rusia hay cuatro trimestres. En España hay tres trimestres. Yo estoy en Primaria, de 6 a 12 años. El lunes tengo Mates a las nueve.»</em><br>
+    <span style="font-size:.85rem;color:var(--ink-soft)">«В России четыре четверти. В Испании три триместра. Я в Примарии, с 6 до 12 лет. В понедельник у меня математика в девять.»</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🏫</span> Называть ступени: Infantil, Primaria, ESO (+Bachillerato)</div>
+      <div class="goal-item"><span class="emoji">🏫</span> Различать escuela / colegio / instituto</div>
+      <div class="goal-item"><span class="emoji">📚</span> Новые предметы: Ciencias, Sociales</div>
+      <div class="goal-item"><span class="emoji">⏱</span> Различать jornada continua / horario partido</div>
+      <div class="goal-item"><span class="emoji">🔗</span> Применить дни (13) + время (14) в расписании</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Эксперт школы»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🗺 Куда мы едем? 3 факта + мостик</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">
+      Ты знаешь дни недели (урок 13) и время (урок 14). Быстро: <strong>«¿Qué día es hoy?»</strong>, <strong>«¿Qué hora es?»</strong>. А теперь загадка: почему испанские дети в 14:00 уже дома и обедают с семьёй? Сегодня разгадаем!
+    </div>
+    <p class="block-sub">🔥 3 факта об испанской школе:</p>
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="word-card"><span class="emo">🕐</span><div class="ru"><span class="grammar-hint" data-hint="jornada continua — непрерывный школьный день: уроки с 9 до 14 без перерыва на обед. Дети едут обедать домой!">Jornada continua</span>: многие школы работают 9:00–14:00 без перерыва — дети едут домой на comida!</div></div>
+      <div class="word-card"><span class="emo">🍎</span><div class="ru"><span class="grammar-hint" data-hint="el recreo — перемена. Длится 15–30 минут. Дети едят bocadillo (бутерброд с начинкой) во дворе.">El recreo</span>: перемена 15–30 минут, дети едят <span class="grammar-hint" data-hint="bocadillo — бутерброд: багет с начинкой (хамон, сыр, тортилья). Классика испанского школьного перекуса.">bocadillo</span> во дворе.</div></div>
+      <div class="word-card"><span class="emo">📚</span><div class="ru"><span class="grammar-hint" data-hint="trimestre — триместр = 3 учебных месяца. В Испании год делится на 3 триместра, а в России — на 4 четверти. Не путай!">3 trimestres</span>: год = 3 триместра, а не 4 четверти!</div></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 2 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🏫 Ступени + три слова о школе</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">4 ступени испанской школы. Нажимай и повторяй! Показывай жест: 🧸 качаем, 🎒 надеваем, 🔬 исследуем, 🎓 кидаем шапку.</p>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('Infantil, de tres a seis años')"><span class="emo">🧸</span><div class="es">Infantil</div><div class="ru">3–6 лет · детсад</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Primaria, de seis a doce años, en el colegio')"><span class="emo">🎒</span><div class="es">Primaria</div><div class="ru">6–12 лет · el colegio</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('ESO, de doce a dieciséis años, en el instituto')"><span class="emo">🔬</span><div class="es"><span class="grammar-hint" data-hint="ESO = Educación Secundaria Obligatoria. Обязательная средняя школа для 12–16 лет.">ESO</span></div><div class="ru">12–16 лет · el instituto</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card age" onclick="speak('Bachillerato, de dieciséis a dieciocho años')"><span class="emo">🎓</span><div class="es">Bachillerato</div><div class="ru">16–18 лет · не обяз.</div><button class="speak-btn">🔊</button></div>
+    </div>
+
+    <h4 style="margin:14px 0 8px">🗣 Три слова о школе — без путаницы!</h4>
+    <table class="gram-table">
+      <tr><th>Слово</th><th>Что значит</th><th>Кто говорит</th><th>🔊</th></tr>
+      <tr onclick="speak('La escuela empieza en septiembre.')"><td><b>la escuela</b></td><td>школа вообще, слово в документах и разговорах</td><td>все</td><td>🔊</td></tr>
+      <tr onclick="speak('Voy al colegio.')"><td><b>el colegio</b></td><td>здание, где учатся дети Primaria (6–12)</td><td>ребёнок 8 лет</td><td>🔊</td></tr>
+      <tr onclick="speak('Voy al instituto.')"><td><b>el instituto</b></td><td>здание, где учатся ESO (12–16)</td><td>ребёнок 12 лет</td><td>🔊</td></tr>
+    </table>
+    <div class="read-q" style="background:var(--soft);padding:10px 14px;border-radius:12px">
+      <span>⚡ <b>Правило возраста:</b> 8 лет → <em>colegio</em>, 12 лет → <em>instituto</em> (в этом году ты входишь в ESO!).</span>
+    </div>
+
+    <div class="game-zone">
+      <p style="font-weight:800">🎮 Игра «Кто куда?»: учитель называет возраст → ты выбираешь школу!</p>
+      <div class="game-q" id="kolo-q">Нажми «▶ Начать»!</div>
+      <div class="opts" id="kolo-opts"></div>
+      <div class="game-fb" id="kolo-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="kolo-stars">0</span> / <span id="kolo-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="koloStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎤 Волшебные фразы: de...a... / hay / estar en</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на строки и слушай! Секрет: <strong>de ... a ...</strong> работает и для возраста, и для времени (урок 14)! Одна конструкция — два применения.</p>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Primaria es de seis a doce años.')"><td><b>de ... a ...</b></td><td>Primaria es de 6 a 12 años.</td><td>Примария с 6 до 12 лет</td><td>🔊</td></tr>
+      <tr onclick="speak('La clase es de nueve a dos.')"><td><b>de ... a ...</b> (время, ур. 14)</td><td>La clase es de 9 a 2.</td><td>Урок с 9 до 2</td><td>🔊</td></tr>
+      <tr onclick="speak('En España hay tres trimestres.')"><td><b>En España hay ...</b></td><td>En España hay 3 trimestres.</td><td>В Испании 3 триместра</td><td>🔊</td></tr>
+      <tr onclick="speak('Estoy en Primaria.')"><td><b>estar en + ступень</b></td><td>Estoy en Primaria.</td><td>Я в Примарии</td><td>🔊</td></tr>
+      <tr onclick="speak('Voy al colegio.')"><td><b>ir al colegio / instituto</b></td><td>Voy al colegio / al instituto.</td><td>Я хожу в школу</td><td>🔊</td></tr>
+    </table>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Конструктор: собери фразу из слов!</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4 -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🤝 Jornada continua vs horario partido + CLIL</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <div class="vs-grid">
+      <div class="vs-col vs-ru">
+        <h4 style="color:var(--teal)">☀️ Jornada continua</h4>
+        <div class="vs-row"><span class="lbl">График</span>9:00 – 14:00</div>
+        <div class="vs-row"><span class="lbl">Обед</span>Дома, после школы</div>
+        <div class="vs-row"><span class="lbl">День</span>Свободен</div>
+      </div>
+      <div class="vs-col vs-es">
+        <h4 style="color:var(--gold)">🌤 Horario partido</h4>
+        <div class="vs-row"><span class="lbl">График</span>9:00–12:00 + 15:00–17:00</div>
+        <div class="vs-row"><span class="lbl">Обед</span>Перерыв на comida/siesta</div>
+        <div class="vs-row"><span class="lbl">День</span>Возвращение после сиесты</div>
+      </div>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎮 Сортировка: утверждение → continua или partido?</p>
+      <div class="game-q" id="sort-q">Нажми «▶ Начать»!</div>
+      <div class="opts" id="sort-opts"></div>
+      <div class="game-fb" id="sort-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="sort-stars">0</span> / <span id="sort-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="sortStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🧠 CLIL-математика: считаем часы и годы по-испански!</p>
+      <div class="game-q" id="math-q">Нажми «▶ Начать»!</div>
+      <div class="opts" id="math-opts"></div>
+      <div class="game-fb" id="math-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="math-stars">0</span> / <span id="math-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="mathStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 5 -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">🔢 Практика: вся неделя в одном расписании</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">Кульминация недели! День (13) + час (14) + предмет (10/15) — в одной фразе. Если ты строишь такие фразы — неделя усвоена!</p>
+
+    <h4>📖 Чтение: horario de Lucía</h4>
+    <table class="sched-table">
+      <tr><th>Día</th><th>Hora</th><th>Asignatura</th></tr>
+      <tr><td>Lunes</td><td>9:00–10:00</td><td>Mates</td></tr>
+      <tr><td>Lunes</td><td>10:00–11:00</td><td>Lengua</td></tr>
+      <tr><td>Martes</td><td>9:00–10:00</td><td>Ciencias</td></tr>
+      <tr><td>Miércoles</td><td>11:00–11:30</td><td>Recreo</td></tr>
+      <tr><td>Jueves</td><td>9:00–10:00</td><td>Sociales</td></tr>
+      <tr><td>Viernes</td><td>12:00–14:00</td><td>Plástica</td></tr>
+    </table>
+    <div id="read-quiz"></div>
+
+    <h4 style="margin-top:18px">👂 Аудирование: «Поймай день и время!»</h4>
+    <p class="block-sub">Слушай фразу → кликни карточку дня И карточку времени. 4 раунда!</p>
+    <div class="game-zone">
+      <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakListen()">🔊 Послушать</button>
+      <div class="chips" id="listen-day-chips"></div>
+      <div class="chips" id="listen-time-chips"></div>
+      <button class="speak-btn" onclick="checkListen()">✔ Проверить</button>
+      <div class="game-fb" id="listen-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="listen-stars">0</span> / <span id="listen-total">0</span></div>
+      <button class="speak-btn" style="margin-top:8px" onclick="listenStart()">▶ Начать</button>
+    </div>
+
+    <h4 style="margin-top:18px">🗣 Говорение: моя неделя</h4>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="presentWeek()">🎤 Послушай пример и повтори вслух!</button>
+    <div class="game-fb" id="week-fb"></div>
+  </section>
+
+  <!-- БЛОК 6 -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">📘 PBL: Инфографика Rusia vs España</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Собери колонку Испании: выбери правильный вариант в каждой строке и свою ступень. Потом презентуй сравнение вслух!</p>
+    <table class="gram-table">
+      <tr><th></th><th>🇷🇺 Rusia</th><th>🇪🇸 España (выбери)</th></tr>
+      <tr><td><b>Год</b></td><td>4 четверти</td><td id="pbl-tri"><span class="chip" onclick="pblSel('tri',3,this)">3 trimestres</span><span class="chip" onclick="pblSel('tri',4,this)">4 trimestres</span></td></tr>
+      <tr><td><b>Школьный день</b></td><td>8:30–14:00</td><td id="pbl-jor"><span class="chip" onclick="pblSel('jor','continua',this)">continua 9–14</span><span class="chip" onclick="pblSel('jor','partido',this)">partido 9–12+15–17</span></td></tr>
+      <tr><td><b>Перемена</b></td><td>10–15 мин</td><td id="pbl-rec"><span class="chip" onclick="pblSel('rec','15-30',this)">recreo 15–30 мин</span><span class="chip" onclick="pblSel('rec','10-15',this)">recreo 10–15 мин</span></td></tr>
+      <tr><td><b>Моя ступень</b></td><td>—</td><td id="pbl-stage"><span class="chip" onclick="pblSel('stage','Primaria',this)">Primaria (6–12)</span><span class="chip" onclick="pblSel('stage','ESO',this)">ESO (12–16)</span></td></tr>
+      <tr><td><b>Моя школа</b></td><td>—</td><td id="pbl-school"><span class="chip" onclick="pblSel('school','colegio',this)">el colegio</span><span class="chip" onclick="pblSel('school','instituto',this)">el instituto</span></td></tr>
+    </table>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="presentPBL()">🎤 Презентовать сравнение</button>
+    <div class="game-fb" id="pbl-fb"></div>
+  </section>
+
+  <!-- БЛОК 7 -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🎾 Pelota Preguntona (вся неделя 13–14–15) + бейдж</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div style="text-align:center">
+      <button class="ball" onclick="pelotaNext()">🎾</button>
+      <div class="game-q" id="pel-q">Нажми на мяч! Вопросы по урокам 13, 14 и 15.</div>
+      <div class="opts" id="pel-opts"></div>
+      <div class="game-fb" id="pel-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="pel-stars">0</span> / <span id="pel-total">0</span></div>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🏫</div>
+      <h3>Эксперт школы</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты знаешь испанскую школьную систему и применил всю неделю 5!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Эксперт школы» 🏫 добавлен в твой паспорт! Неделя 5 завершена — дальше неделя 6: класс и мебель (hay vs estar)!</div>
+    </div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🗣 Слова урока</h2></div>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('la escuela')"><span class="emo">🏫</span><div class="es">la escuela</div><div class="ru">школа (вообще)</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el colegio')"><span class="emo">🎒</span><div class="es">el colegio</div><div class="ru">школа 6–12 лет</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el instituto')"><span class="emo">🔬</span><div class="es">el instituto</div><div class="ru">школа 12–16 лет</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la asignatura')"><span class="emo">📚</span><div class="es">la asignatura</div><div class="ru">предмет</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Ciencias')"><span class="emo">🔬</span><div class="es">Ciencias</div><div class="ru">естествознание</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Sociales')"><span class="emo">🌍</span><div class="es">Sociales</div><div class="ru">обществознание</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el recreo')"><span class="emo">🍎</span><div class="es">el recreo</div><div class="ru">перемена</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el horario')"><span class="emo">📋</span><div class="es">el horario</div><div class="ru">расписание</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el curso')"><span class="emo">📅</span><div class="es">el curso</div><div class="ru">учебный год</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el trimestre')"><span class="emo">📚</span><div class="es">el trimestre</div><div class="ru">триместр</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la jornada continua')"><span class="emo">☀️</span><div class="es">jornada continua</div><div class="ru">день 9–14</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el horario partido')"><span class="emo">🌤</span><div class="es">horario partido</div><div class="ru">день с перерывом</div><button class="speak-btn">🔊</button></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёры для закрепления</h2></div>
+    <div class="match-game">
+      <h4>🧩 Сопоставление: «испанский ↔ русский» (10 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей ступеням и трём словам</strong> · 5 мин<br>Покажи 4 карточки ступеней; объясни разницу <em>escuela / colegio / instituto</em>.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>Игра «Кто куда?» + повторение недели</strong> · 7 мин ⭐<br>Родители называют возраст → ты отвечаешь <em>colegio / instituto</em>; потом родители спрашивают: <em>«¿Qué día es hoy? ¿Qué hora es?»</em> — ты отвечаешь.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>Моё расписание на неделю</strong> · 10 мин ⭐<br>Нарисуй таблицу дни×время и впиши предметы: <em>«El lunes tengo Mates a las nueve.»</em> Это повторение уроков 13+14+15!</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br><a href="#match-left">🧩 Сопоставление (10 пар)</a> · 🎯 конструктор фраз · 👂 «Поймай день и время»</div></div>
+    <div class="task"><div class="task-num">5</div><div><strong>Видео «El sistema educativo español»</strong> · 3 мин<br>Посмотри и повтори вслух названия ступеней и режимов.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «El sistema educativo»</strong> · 15 мин ⭐<br>Попроси родителей распечатать лист, выполни задания и раскрась светофор.<br><a href="../../worksheets/w05-l3-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> — нажми нужный цвет в таблице ниже.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть ступени (Infantil, Primaria, ESO)</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Различать escuela / colegio / instituto</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Говорить «de ... a ...» и «hay»</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Понимать jornada continua / horario partido</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Читать расписание (день + время + предмет)</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Сравнивать Rusia и España</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴! Неделя 5 завершена: дальше — неделя 6!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1207026446/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-2-%D1%83%D1%80%D0%BE%D0%BA-6-flash-cards/?i=2gqp1x&x=1qqt" target="_blank">
+    <span>📚 Карточки Quizlet · Слова урока 15</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w05-l2.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 14: ¿Qué hora es? ⏰</div></a>
+    <a href="./w06-l1.html" class="nav-next"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 16: Mi clase 🪑</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 2: Mi Colegio · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== БЛОК 2: КТО КУДА ===== */
+var KOLO=[
+ {age:4,ok:'Infantil'},{age:7,ok:'el colegio'},{age:10,ok:'el colegio'},
+ {age:12,ok:'el instituto'},{age:14,ok:'el instituto'},{age:17,ok:'el instituto'}
+];
+var koloOrd=[],koloI=0,koloS=0;
+function koloStart(){koloOrd=shuffle(KOLO.slice());koloI=0;koloS=0;document.getElementById('kolo-total').textContent=koloOrd.length;document.getElementById('kolo-stars').textContent='0';koloNext();}
+function koloNext(){
+  var box=document.getElementById('kolo-opts');box.innerHTML='';
+  if(koloI>=koloOrd.length){document.getElementById('kolo-q').textContent='🎉 ¡Muy bien!';document.getElementById('kolo-fb').textContent='⭐ '+koloS+' из '+koloOrd.length;return;}
+  var r=koloOrd[koloI];
+  document.getElementById('kolo-q').textContent=r.age+' años → ¿dónde estudia?';
+  document.getElementById('kolo-fb').textContent='';
+  speak(r.age+' años');
+  shuffle(['Infantil','el colegio','el instituto']).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');koloS++;document.getElementById('kolo-stars').textContent=koloS;document.getElementById('kolo-fb').textContent='✅ ¡Correcto! '+r.age+' años → '+r.ok;speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('kolo-fb').textContent='❌ Правильно: '+r.ok;}
+      koloI++;setTimeout(koloNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 3: КОНСТРУКТОР ===== */
+var SB=[
+ {w:['Primaria','es','de','6','a','12','años.'],t:'Примария с 6 до 12 лет'},
+ {w:['En','España','hay','tres','trimestres.'],t:'В Испании 3 триместра'},
+ {w:['Estoy','en','Primaria','y','voy','al','colegio.'],t:'Я в Примарии и хожу в colegio'},
+ {w:['La','jornada','es','de','9','a','14.'],t:'День с 9 до 14'},
+ {w:['El','recreo','es','a','las','11.'],t:'Перемена в 11'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.onclick=function(){if(b.classList.contains('placed'))return;b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}};
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== БЛОК 4: СОРТИРОВКА РЕЖИМОВ ===== */
+var SORT=[
+ {s:'Los niños comen en casa a las dos.',ok:'continua'},
+ {s:'Los niños vuelven a casa a las doce y después a las tres.',ok:'partido'},
+ {s:'La escuela termina a las cuatro de la tarde.',ok:'partido'},
+ {s:'La escuela termina a las dos.',ok:'continua'},
+ {s:'No hay clases por la tarde.',ok:'continua'},
+ {s:'Hay clases por la mañana y por la tarde.',ok:'partido'}
+];
+var sortOrd=[],sortI=0,sortS=0;
+function sortStart(){sortOrd=shuffle(SORT.slice());sortI=0;sortS=0;document.getElementById('sort-total').textContent=sortOrd.length;document.getElementById('sort-stars').textContent='0';sortNext();}
+function sortNext(){
+  var box=document.getElementById('sort-opts');box.innerHTML='';
+  if(sortI>=sortOrd.length){document.getElementById('sort-q').textContent='🎉 ¡Muy bien!';document.getElementById('sort-fb').textContent='⭐ '+sortS+' из '+sortOrd.length;return;}
+  var r=sortOrd[sortI];
+  document.getElementById('sort-q').textContent=r.s;
+  document.getElementById('sort-fb').textContent='';
+  speak(r.s);
+  ['continua','partido'].forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');sortS++;document.getElementById('sort-stars').textContent=sortS;document.getElementById('sort-fb').textContent='✅ ¡Correcto!';}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('sort-fb').textContent='❌ Правильно: '+r.ok;}
+      sortI++;setTimeout(sortNext,1100);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 4: CLIL МАТЕМАТИКА ===== */
+var MATH=[
+ {q:'De 9 a 14 = ¿cuántas horas?',ok:'cinco',w:['cuatro','seis']},
+ {q:'De 9 a 12 = 3 h; de 3 a 5 = 2 h. ¿Total?',ok:'cinco',w:['cuatro','siete']},
+ {q:'El recreo = media hora. ¿Cuántos minutos?',ok:'treinta',w:['quince','cuarenta y cinco']},
+ {q:'Primaria: 12 − 6 = ¿cuántos años?',ok:'seis',w:['cinco','siete']},
+ {q:'ESO: 16 − 12 = ¿cuántos años?',ok:'cuatro',w:['tres','cinco']}
+];
+var mathOrd=[],mathI=0,mathS=0;
+function mathStart(){mathOrd=shuffle(MATH.slice());mathI=0;mathS=0;document.getElementById('math-total').textContent=mathOrd.length;document.getElementById('math-stars').textContent='0';mathNext();}
+function mathNext(){
+  var box=document.getElementById('math-opts');box.innerHTML='';
+  if(mathI>=mathOrd.length){document.getElementById('math-q').textContent='🧠 ¡Excelente!';document.getElementById('math-fb').textContent='⭐ '+mathS+' из '+mathOrd.length;return;}
+  var r=mathOrd[mathI];
+  document.getElementById('math-q').textContent=r.q;
+  document.getElementById('math-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');mathS++;document.getElementById('math-stars').textContent=mathS;document.getElementById('math-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('math-fb').textContent='❌ Правильно: '+r.ok;}
+      mathI++;setTimeout(mathNext,1100);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 5: ЧТЕНИЕ-ВИКТОРИНА (horario Lucía) ===== */
+var READ=[
+ {q:'¿Qué día tiene Ciencias?',ru:'В какой день у неё естествознание?',ok:'El martes',w:['El lunes','El viernes']},
+ {q:'¿A qué hora empieza Lengua el lunes?',ru:'Во сколько начинается испанский в понедельник?',ok:'A las diez',w:['A las nueve','A las once']},
+ {q:'¿Cuánto dura el recreo?',ru:'Сколько длится перемена?',ok:'Media hora',w:['Una hora','Dos horas']},
+ {q:'¿Qué día termina la semana?',ru:'В какой день заканчивается неделя?',ok:'El viernes',w:['El jueves','El sábado']}
+];
+(function(){
+  var wrap=document.getElementById('read-quiz');
+  READ.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-block';b.style.margin='3px';b.textContent=o;
+      b.onclick=function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      };
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 5: АУДИРОВАНИЕ «ПОЙМАЙ ДЕНЬ И ВРЕМЯ» ===== */
+var LISTEN=[
+ {es:'El martes a las nueve tengo Ciencias.',day:'martes',time:'9:00'},
+ {es:'El lunes a las diez tengo Lengua.',day:'lunes',time:'10:00'},
+ {es:'El jueves a las nueve tengo Sociales.',day:'jueves',time:'9:00'},
+ {es:'El viernes a las doce tengo Plástica.',day:'viernes',time:'12:00'}
+];
+var LDAYS=['lunes','martes','jueves','viernes'],LTIMES=['9:00','10:00','11:00','12:00'];
+var listenOrd=[],listenI=0,listenS=0,selDay=null,selTime=null;
+function listenStart(){listenOrd=shuffle(LISTEN.slice());listenI=0;listenS=0;selDay=null;selTime=null;document.getElementById('listen-total').textContent=listenOrd.length;document.getElementById('listen-stars').textContent='0';renderListenChips();}
+function renderListenChips(){
+  selDay=null;selTime=null;
+  var dc=document.getElementById('listen-day-chips');dc.innerHTML='';
+  LDAYS.forEach(function(d){var c=document.createElement('button');c.className='chip';c.textContent=d;c.onclick=function(){selDay=d;dc.querySelectorAll('.chip').forEach(function(x){x.classList.remove('sel');});c.classList.add('sel');};dc.appendChild(c);});
+  var tc=document.getElementById('listen-time-chips');tc.innerHTML='';
+  LTIMES.forEach(function(t){var c=document.createElement('button');c.className='chip';c.textContent=t;c.onclick=function(){selTime=t;tc.querySelectorAll('.chip').forEach(function(x){x.classList.remove('sel');});c.classList.add('sel');};tc.appendChild(c);});
+  document.getElementById('listen-fb').textContent='';
+}
+function speakListen(){if(listenI<listenOrd.length)speak(listenOrd[listenI].es);}
+function checkListen(){
+  if(listenI>=listenOrd.length)return;
+  var r=listenOrd[listenI];
+  var fb=document.getElementById('listen-fb');
+  if(!selDay||!selTime){fb.textContent='⚠️ Выбери день И время!';return;}
+  if(selDay===r.day&&selTime===r.time){
+    listenS++;document.getElementById('listen-stars').textContent=listenS;fb.textContent='✅ ¡Correcto! '+r.es;
+    var de=dcByText('listen-day-chips',r.day),te=dcByText('listen-time-chips',r.time);
+    if(de)de.classList.add('ok');if(te)te.classList.add('ok');
+    listenI++;
+    if(listenI<listenOrd.length){setTimeout(function(){renderListenChips();speakListen();},1300);}
+    else{fb.textContent='🎉 Готово! ⭐ '+listenS+' из '+listenOrd.length;}
+  }else{
+    fb.textContent='❌ Не совпало. Послушай ещё раз!';
+    setTimeout(function(){selDay=null;selTime=null;dcUnsel();fb.textContent='';speak(r.es);},900);
+  }
+}
+function dcByText(boxId,txt){
+  var el=document.getElementById(boxId);if(!el)return null;
+  for(var i=0;i<el.children.length;i++){if(el.children[i].textContent===txt)return el.children[i];}
+  return null;
+}
+function dcUnsel(){
+  document.querySelectorAll('#listen-day-chips .chip,#listen-time-chips .chip').forEach(function(x){x.classList.remove('sel');});
+}
+
+/* ===== БЛОК 5: ГОВОРЕНИЕ ===== */
+function presentWeek(){
+  var text='El lunes tengo Mates a las nueve. El martes tengo Lengua a las diez. El viernes tengo Plástica a las doce.';
+  document.getElementById('week-fb').textContent=text+' ← повтори вслух!';
+  speak(text);
+}
+
+/* ===== БЛОК 6: PBL ===== */
+var pbl={tri:null,jor:null,rec:null,stage:null,school:null};
+function pblSel(key,val,el){
+  pbl[key]=val;
+  el.parentElement.querySelectorAll('.chip').forEach(function(x){x.classList.remove('sel');});
+  el.classList.add('sel');
+}
+function presentPBL(){
+  var fb=document.getElementById('pbl-fb');
+  var correct=(pbl.tri===3&&pbl.jor==='continua'&&pbl.rec==='15-30'&&(pbl.stage==='Primaria'||pbl.stage==='ESO')&&(pbl.school==='colegio'||pbl.school==='instituto'));
+  ['tri','jor','rec'].forEach(function(k){
+    var box=document.getElementById('pbl-'+k);
+    box.querySelectorAll('.chip').forEach(function(c){c.classList.remove('correct','wrong');});
+  });
+  if(pbl.tri===3)document.querySelectorAll('#pbl-tri .chip')[0].classList.add('correct');else if(pbl.tri)document.querySelectorAll('#pbl-tri .chip')[1].classList.add('wrong');
+  if(pbl.jor==='continua')document.querySelectorAll('#pbl-jor .chip')[0].classList.add('correct');else if(pbl.jor)document.querySelectorAll('#pbl-jor .chip')[1].classList.add('wrong');
+  if(pbl.rec==='15-30')document.querySelectorAll('#pbl-rec .chip')[0].classList.add('correct');else if(pbl.rec)document.querySelectorAll('#pbl-rec .chip')[1].classList.add('wrong');
+  if(!correct){fb.textContent='⚠️ Проверь строки и заполни все поля (год, день, перемена, ступень, школа)!';return;}
+  var stageTxt=(pbl.stage==='Primaria')?'Yo estoy en Primaria, de 6 a 12 años.':'Yo estoy en ESO, de 12 a 16 años.';
+  var schoolTxt=(pbl.school==='colegio')?'Voy al colegio.':'Voy al instituto.';
+  var text='En Rusia hay cuatro trimestres. En España hay tres trimestres. En España la jornada es continua: de 9 a 14. El recreo dura de 15 a 30 minutos. '+stageTxt+' '+schoolTxt+' El lunes tengo Mates a las nueve.';
+  fb.textContent='🎤 '+text;
+  speak(text);
+}
+
+/* ===== БЛОК 7: PELOTA ===== */
+var PEL=[
+ {q:'¿Qué día es el día 3? [13]',ok:'miércoles',w:['martes','jueves']},
+ {q:'¿Cómo se dice 2:30? [14]',ok:'Son las dos y media.',w:['Son las dos y cuarto.','Es la dos y media.']},
+ {q:'¿Dónde estudian los niños de 6 a 12 años?',ok:'en el colegio',w:['en el instituto','en la universidad']},
+ {q:'¿Cuántos trimestres hay en España?',ok:'tres',w:['cuatro','dos']},
+ {q:'¿A qué hora empieza la escuela continua? [14+15]',ok:'a las nueve',w:['a las ocho','a las diez']},
+ {q:'¿Qué días son el fin de semana? [13]',ok:'sábado y domingo',w:['lunes y martes','viernes y lunes']},
+ {q:'Мне 12 лет: «Voy al ...»',ok:'instituto',w:['colegio','Infantil']},
+ {q:'La clase es de 9 a 14. ¿Cuántas horas?',ok:'cinco',w:['cuatro','seis']}
+];
+var pelOrd=[],pelI=0,pelS=0;
+function pelotaNext(){
+  if(pelI===0&&pelOrd.length===0){pelOrd=shuffle(PEL.slice());document.getElementById('pel-total').textContent=pelOrd.length;}
+  var box=document.getElementById('pel-opts');box.innerHTML='';
+  if(pelI>=pelOrd.length){document.getElementById('pel-q').textContent='🎉 ¡Perfecto! ⭐ '+pelS+' из '+pelOrd.length;document.getElementById('pel-fb').textContent='';pelOrd=[];pelI=0;pelS=0;document.getElementById('pel-stars').textContent='0';return;}
+  var r=pelOrd[pelI];
+  document.getElementById('pel-q').textContent=r.q;
+  document.getElementById('pel-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');pelS++;document.getElementById('pel-stars').textContent=pelS;document.getElementById('pel-fb').textContent='✅ ¡Muy bien!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('pel-fb').textContent='❌ Правильно: '+r.ok;}
+      pelI++;setTimeout(pelotaNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ===== ТРЕНАЖЁР СОПОСТАВЛЕНИЕ ===== */
+var MATCH=[['el colegio','школа 6–12 лет'],['el instituto','школа 12–16 лет'],['la escuela','школа вообще'],['el trimestre','триместр (3 месяца)'],['el recreo','перемена'],['el horario','расписание'],['la asignatura','предмет'],['Ciencias','естествознание'],['Sociales','обществознание'],['la jornada continua','день с 9 до 14']];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');mFound++;speak(d.textContent);document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/10';if(mFound===10)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';}
+  else{d.classList.add('wrong');mSel.classList.add('wrong');var a=mSel;setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);}
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un experto de la escuela española!');
+  confetti('🏫');
+  try{localStorage.setItem('mudro_kids_w05l3_badge_experto','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w05l3_badge_experto')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(e){var c=['🎉','⭐',e];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};}(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){
+    var row=c.getAttribute('data-row');
+    document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});
+    c.classList.add('active');
+  });
+});
+document.getElementById('tlReset').addEventListener('click',function(){
+  document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});
+});
+
+/* ===== grammar-hint ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>
