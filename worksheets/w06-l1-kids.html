@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 16 · Los muebles de la clase — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --blue:#2274A5;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E0F2F1,#B2DFDB,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-blue{background:var(--blue)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#E0F2F1;border:1.5px dashed var(--teal);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:10px}
+
+  /* SVG иконки */
+  .svg-icon{display:inline-block;width:28px;height:28px;vertical-align:middle;margin:0 4px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .blank{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+  .desc-item .emoji{font-size:17px}
+
+  .gender-table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+  .gender-table th{background:#E0F2F1;padding:7px 10px;text-align:center;font-weight:800;border:1px solid #b2dfdb;color:var(--teal)}
+  .gender-table td{padding:8px 10px;border:1px solid #d6cfc4;text-align:center;font-weight:600}
+
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:110px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--oliva);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--oliva)}
+  .build-line{border-bottom:1.6px dashed var(--oliva);height:24px}
+
+  .math-item{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13.5px;flex-wrap:wrap}
+  .math-item .emoji{font-size:17px}
+  .math-item .calc{font-family:'Baloo 2',cursive;font-weight:800;color:var(--afran);background:#FFF8E1;border-radius:8px;padding:3px 10px;font-size:14px}
+  .math-item .blank{display:inline-block;min-width:80px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🪑 Los muebles de la clase</h1>
+    <div class="sub">Рабочий лист к Уроку 16 · Станция 2: Mi Colegio · мебель класса, предлоги места, estar</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, а потом <strong>проверь вместе с родителем или учителем</strong>. Вспоминай карточки и карту класса из урока 16!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">1</span>
+      <span class="ex-title">Соедини слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · мебель</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg> la mesa</td><td>а) доска</td></tr>
+      <tr><td><span class="ans-box"></span>🪑 la silla</td><td>б) шкаф</td></tr>
+      <tr><td><span class="ans-box"></span><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="10" width="52" height="34" rx="3" fill="#2E7D32" stroke="#8B5A2B" stroke-width="4"/><path d="M14 22 h20 M14 30 h28" stroke="#fff" stroke-width="3" stroke-linecap="round"/><rect x="24" y="48" width="16" height="4" rx="2" fill="#8B5A2B"/></svg> la pizarra</td><td>в) стеллаж / полка</td></tr>
+      <tr><td><span class="ans-box"></span>🚪 la puerta</td><td>г) стул</td></tr>
+      <tr><td><span class="ans-box"></span>🪟 la ventana</td><td>д) корзина</td></tr>
+      <tr><td><span class="ans-box"></span>🗄️ el armario</td><td>е) компьютер</td></tr>
+      <tr><td><span class="ans-box"></span>💻 el ordenador</td><td>ж) окно</td></tr>
+      <tr><td><span class="ans-box"></span>🗑️ la papelera</td><td>з) карта 🔵</td></tr>
+      <tr><td><span class="ans-box"></span>🗺️ el mapa</td><td>и) стол / парта</td></tr>
+      <tr><td><span class="ans-box"></span>📚 la estantería</td><td>к) дверь</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">2</span>
+      <span class="ex-title">Угадай предмет по описанию</span>
+      <span class="ex-skill">🗣 Лексика · описание</span>
+    </div>
+    <div class="ex-instruction">Прочитай описание и напиши предмет по-испански (с артиклем el/la!).</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">✍️</span> На ней пишет учитель мелом. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🗑️</span> Сюда бросают бумагу. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🪟</span> Через неё видно улицу и солнце. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">🗄️</span> Здесь хранятся учебники и тетради. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">🗺️</span> На ней нарисованы страны и города. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">💻</span> На нём смотрят видео и делают задания. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: РОД EL/LA -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Впиши артикль: el или la</span>
+      <span class="ex-skill">🧩 Грамматика · род</span>
+    </div>
+    <div class="hint-box">💡 Помни: <strong>-o → el</strong> (мальчик), <strong>-a → la</strong> (девочка). Но <strong>el mapa</strong> 🔵 — слово-бунтарь! (мужской род, несмотря на -a)</div>
+    <table class="gender-table">
+      <tr><th>Слово</th><th>el / la</th><th>Слово</th><th>el / la</th></tr>
+      <tr><td>___ mesa</td><td></td><td>___ puerta</td><td></td></tr>
+      <tr><td>___ silla</td><td></td><td>___ ventana</td><td></td></tr>
+      <tr><td>___ pizarra</td><td></td><td>___ armario</td><td></td></tr>
+      <tr><td>___ papelera</td><td></td><td>___ ordenador</td><td></td></tr>
+      <tr><td>___ estantería</td><td></td><td>___ mapa 🔵</td><td></td></tr>
+    </table>
+  </div>
+
+  <!-- 4. ЛЕКСИКА: ПРЕДЛОГИ МЕСТА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-blue">4</span>
+      <span class="ex-title">Впиши предлог места</span>
+      <span class="ex-skill">🧭 Предлоги</span>
+    </div>
+    <div class="word-bank">💡 Банк предлогов: <strong>en · encima de · debajo de · al lado de · delante de · detrás de</strong></div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Ластики лежат НА столе: <span class="g"></span> la mesa.</div>
+      <div class="gap-item"><span class="num">2</span>Часы НАД доской: <span class="g"></span> la pizarra.</div>
+      <div class="gap-item"><span class="num">3</span>Рюкзак ПОД стулом: <span class="g"></span> la silla.</div>
+      <div class="gap-item"><span class="num">4</span>Корзина РЯДОМ С дверью: <span class="g"></span> la puerta.</div>
+      <div class="gap-item"><span class="num">5</span>Стол учителя ПЕРЕД доской: <span class="g"></span> la pizarra.</div>
+      <div class="gap-item"><span class="num">6</span>Шкаф ЗА дверью: <span class="g"></span> la puerta.</div>
+    </div>
+  </div>
+
+  <!-- 5. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу на строке.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">puerta.</span><span class="build-word">lado</span><span class="build-word">al</span><span class="build-word">está</span><span class="build-word">La</span><span class="build-word">papelera</span><span class="build-word">de</span><span class="build-word">la</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">pizarra.</span><span class="build-word">El</span><span class="build-word">encima</span><span class="build-word">de</span><span class="build-word">está</span><span class="build-word">reloj</span><span class="build-word">la</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">están</span><span class="build-word">Los</span><span class="build-word">estantería.</span><span class="build-word">la</span><span class="build-word">en</span><span class="build-word">libros</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">está</span><span class="build-word">detrás</span><span class="build-word">de</span><span class="build-word">armario</span><span class="build-word">puerta.</span><span class="build-word">El</span><span class="build-word">la</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 6. CLIL-МАТЕМАТИКА: ПОСЧИТАЙ МЕБЕЛЬ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">6</span>
+      <span class="ex-title">CLIL: посчитай мебель в классе</span>
+      <span class="ex-skill">🔢 Математика · hay</span>
+    </div>
+    <div class="ex-instruction">Прочитай и напиши ответ по-испански словами (una, dos, tres, cuatro...).</div>
+    <div class="desc-grid">
+      <div class="math-item"><span class="num" style="display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran)">1</span><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg> + <svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg><svg class="svg-icon" viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg> = <span class="calc">? mesas</span> <span class="blank"></span></div>
+      <div class="math-item"><span class="num" style="display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran)">2</span>🗑️ 1 papelera + 🗑️ 2 papeleras = <span class="calc">? papeleras</span> <span class="blank"></span></div>
+      <div class="math-item"><span class="num" style="display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran)">3</span>🗺️ 3 mapas − 🗺️ 1 mapa = <span class="calc">? mapas</span> <span class="blank"></span></div>
+      <div class="math-item"><span class="num" style="display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran)">4</span>💻 2 ordenadores + 💻 5 ordenadores = <span class="calc">? ordenadores</span> <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 7. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">7</span>
+      <span class="ex-title">Прочитай описание класса и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      Mi clase es grande y luminosa. Delante de la pizarra está la mesa del profe. El reloj está encima de la pizarra. La papelera está al lado de la puerta. El armario está detrás de la puerta. Los mapas están en la pared. Hay cuatro mesas y ocho sillas. ¡Me gusta mucho mi clase!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Dónde está la mesa del profe? <span class="ru">(Где стол учителя?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Dónde está el reloj? <span class="ru">(Где часы?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Dónde está la papelera? <span class="ru">(Где корзина?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Dónde está el armario? <span class="ru">(Где шкаф?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Cuántas mesas y sillas hay? <span class="ru">(Сколько столов и стульев?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 8. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">8</span>
+      <span class="ex-title">Послушай и напиши, где находится предмет</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши предлог + место, которое услышал(а)!</div>
+    <div class="listen-item"><span class="lnum">1.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span> → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) El reloj está encima de la pizarra. · 2) La papelera está al lado de la puerta. · 3) Los libros están en la estantería. · 4) El armario está detrás de la puerta. · 5) La silla está debajo de la mesa.</div>
+  </div>
+
+  <!-- 9. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">9</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Новенький спрашивает, где корзина. Ответь:<br><span class="tpl">La papelera está al lado de la puerta.</span><span class="ru">Корзина рядом с дверью.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Скажи, где доска и стол учителя:<br><span class="tpl">La pizarra está delante de la mesa del profe.</span><span class="ru">Доска перед столом учителя.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Скажи, где часы (используй encima de):<br><span class="tpl">El reloj está encima de la pizarra.</span><span class="ru">Часы над доской.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Скажи, сколько у тебя в классе столов и стульев:<br><span class="tpl">En mi clase hay ___ mesas y ___ sillas.</span><span class="ru">В моём классе ___ столов и ___ стульев.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 10. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">10</span>
+      <span class="ex-title">Сочинение «Mi clase»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) Mi clase es... (grande/luminosa/pequeña). · 2) Delante de la pizarra está... · 3) La papelera está... · 4) El armario está... · 5) Los mapas están... · 6) En mi clase hay ___ mesas y ___ sillas. · 7) El mapa es un ___ 🔵 (род!). · 8) Me gusta mi clase porque...</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 11. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">11</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть 10 предметов класса</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить 6 предлогов места</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Отвечать «Está al lado de...»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Различать delante / detrás</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Помнить род: el mapa 🔵</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Описать свой класс</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 2: Mi Colegio · Урок 16 · ¡Hasta luego! 🪑</div>
+</div>
+
+</body>
+</html>

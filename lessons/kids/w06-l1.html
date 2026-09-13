@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 16: Los muebles de la clase — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E0F2F1 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--teal)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+  .final-situation{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--teal);text-align:left}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--teal)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#E0F2F1;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #E0F2F1;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--teal)}
+  .word-card .emo{font-size:2rem;display:block;margin-bottom:4px;line-height:1.1}
+  .word-card .emo svg{width:42px;height:42px;display:inline-block;vertical-align:middle}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1rem;color:var(--teal)}
+  .word-card .ru{color:var(--ink-soft);font-size:.8rem;font-weight:700}
+  .word-card .ges{display:block;font-size:.72rem;font-weight:800;color:var(--terra);margin-top:4px}
+  .speak-btn{background:var(--teal);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--teal);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6;cursor:pointer}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--teal);margin:10px 0;min-height:34px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #cfd8dc;border-radius:14px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.98rem}
+  .opt:hover:not(:disabled){border-color:var(--teal)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .chip{background:#fff;border:2px solid var(--teal);color:var(--teal);border-radius:999px;padding:6px 14px;font-weight:800;cursor:pointer;font-family:'Nunito';margin:3px;transition:.15s}
+  .chip.sel{background:var(--teal);color:#fff}
+  .chip.used{opacity:.35;cursor:default}
+
+  .scene{position:relative;width:240px;height:190px;margin:10px auto;background:#fff;border-radius:14px;border:2px dashed #cfd8dc}
+  .scene .box{position:absolute;left:70px;top:85px;width:110px;height:52px;background:#FFE0B2;border:3px solid var(--sun);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;z-index:1}
+  .scene .eraser{position:absolute;width:40px;height:28px;background:#F8BBD0;border:2px solid var(--pink);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .eraser.pos-in{left:105px;top:97px;z-index:2}
+  .eraser.pos-up{left:105px;top:50px;z-index:2}
+  .eraser.pos-down{left:105px;top:145px;z-index:2}
+  .eraser.pos-side{left:190px;top:97px;z-index:2}
+  .eraser.pos-front{left:95px;top:112px;z-index:3;box-shadow:0 4px 8px rgba(0,0,0,.25)}
+  .eraser.pos-back{left:110px;top:68px;z-index:0}
+
+  .map-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+  .map-cell{background:#fff;border:2px solid #e0e0e0;border-radius:12px;min-height:86px;padding:8px 4px;text-align:center;font-weight:800;font-size:.8rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+  .map-cell .emo{font-size:1.7rem}
+  .map-cell.free{border-style:dashed;background:#FAFAFA;cursor:pointer;color:#bbb}
+  .map-cell.free:hover{border-color:var(--teal);background:#E0F2F1}
+  .map-cell.filled{border-color:var(--green);background:#E8F5E9;color:var(--green)}
+  .map-cell.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+
+  .sb-target{background:#fff;border:2px dashed #ccc;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.2rem;color:var(--teal)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--teal);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--teal);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.8;margin:10px 0}
+  .read-q{margin:8px 0}
+  .read-q .q{font-weight:700;margin-bottom:4px}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:4px}
+
+  .ball{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd54f,var(--terra));border:none;cursor:pointer;font-size:2.6rem;box-shadow:0 8px 22px rgba(232,96,76,.4);transition:.2s}
+  .ball:hover{transform:scale(1.08) rotate(-8deg)}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--teal);background:#E0F2F1}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:280px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+  .flash-back .grammar-hint{color:#fff;border-bottom-color:rgba(255,255,255,.75)}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--teal);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--teal);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 2 · Mi Colegio · Урок 16 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🪑 УРОК 16 · НЕДЕЛЯ 6</span>
+  <h1>Los muebles de <span>la clase</span></h1>
+  <p class="sub">Заходим ВНУТРЬ класса! Сегодня ты выучишь 10 предметов классной мебели и 6 предлогов места — и сможешь объяснить любому, где что стоит: «La papelera está al lado de la puerta».</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> в класс заходит новенький и спрашивает: <em>«Perdón, ¿dónde está la papelera?»</em> — ты показываешь и говоришь:<br>
+    <em>«¡Está al lado de la puerta! Y la pizarra está delante de la mesa del profe. ¡Bienvenido a la clase!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🪑</span> Называть 10 предметов класса</div>
+      <div class="goal-item"><span class="emoji">🧭</span> Говорить 6 предлогов: en, encima de, debajo de...</div>
+      <div class="goal-item"><span class="emoji">📍</span> Отвечать на ¿Dónde está...? точно</div>
+      <div class="goal-item"><span class="emoji">🔵🔴</span> Помнить род + слово-бунтарь el mapa</div>
+      <div class="goal-item"><span class="emoji">🗺</span> Составить карту класса</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Архитектор класса»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🗺 Куда мы едем? Внутри класса</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">
+      Ты знаешь школу снаружи: ступени, режимы, trimestres. Ты умеешь находить baño и comedor. А теперь открой дверь своего класса — что внутри? Сегодня опишем класс так точно, что любой новенький найдёт всё сам!
+    </div>
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="word-card"><span class="emo">🖥️</span><div class="ru"><strong>Pizarra digital:</strong> во многих классах обычная доска + цифровая панель!</div></div>
+      <div class="word-card"><span class="emo">♻️</span><div class="ru"><strong>Papelera de reciclaje:</strong> часто 2–3 корзины — бумага и пластик отдельно</div></div>
+      <div class="word-card"><span class="emo">🪑</span><div class="ru"><strong>Parejas:</strong> дети сидят по двое → <span class="grammar-hint" data-hint="mi compañera de mesa — моя соседка по парте. Дословно: «моя подруга стола».">compañera de mesa</span> — важное слово!</div></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 2 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🪑 Мебель класса (10 слов + TPR)</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на карточку — услышишь слово. Показывай жест и повторяй!</p>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('la mesa')">
+        <span class="emo"><svg viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg></span>
+        <div class="es">la mesa</div><div class="ru">стол / парта</div><span class="ges">ладони горизонтально</span><button class="speak-btn">🔊</button>
+      </div>
+      <div class="word-card" onclick="speak('la silla')"><span class="emo">🪑</span><div class="es">la silla</div><div class="ru">стул</div><span class="ges">садимся-встаём</span><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la pizarra')">
+        <span class="emo"><svg viewBox="0 0 64 64"><rect x="6" y="10" width="52" height="34" rx="3" fill="#2E7D32" stroke="#8B5A2B" stroke-width="4"/><path d="M14 22 h20 M14 30 h28" stroke="#fff" stroke-width="3" stroke-linecap="round"/><rect x="24" y="48" width="16" height="4" rx="2" fill="#8B5A2B"/></svg></span>
+        <div class="es">la pizarra</div><div class="ru">доска</div><span class="ges">пишем в воздухе</span><button class="speak-btn">🔊</button>
+      </div>
+      <div class="word-card" onclick="speak('la puerta')"><span class="emo">🚪</span><div class="es">la puerta</div><div class="ru">дверь</div><span class="ges">открываем дверь</span><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la ventana')"><span class="emo">🪟</span><div class="es">la ventana</div><div class="ru">окно</div><span class="ges">смотрим вдаль</span><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el armario')"><span class="emo">🗄️</span><div class="es">el armario</div><div class="ru">шкаф</div><span class="ges">распахиваем створки</span><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el ordenador')"><span class="emo">💻</span><div class="es">el ordenador</div><div class="ru">компьютер</div><span class="ges">печатаем пальцами</span><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la papelera')"><span class="emo">🗑️</span><div class="es">la papelera</div><div class="ru">корзина</div><span class="ges">бросаем мусор</span><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el mapa')"><span class="emo">🗺️</span><div class="es">el mapa</div><div class="ru">карта · 🔵 бунтарь!</div><span class="ges">указываем пальцем</span><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la estantería')">
+        <span class="emo"><svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="3" fill="none" stroke="#8B5A2B" stroke-width="4"/><line x1="8" y1="32" x2="56" y2="32" stroke="#8B5A2B" stroke-width="4"/><rect x="14" y="14" width="6" height="14" fill="#E2725B"/><rect x="22" y="14" width="6" height="14" fill="#3E7CB1"/><rect x="30" y="14" width="6" height="14" fill="#7A8B4C"/><rect x="14" y="38" width="6" height="14" fill="#E9A13B"/><rect x="22" y="38" width="6" height="14" fill="#8338EC"/><rect x="30" y="38" width="6" height="14" fill="#2A9D8F"/></svg></span>
+        <div class="es">la estantería</div><div class="ru">стеллаж / полка</div><span class="ges">ставим книги рядком</span><button class="speak-btn">🔊</button>
+      </div>
+    </div>
+    <div class="script">
+      ⚡ <strong>Слово-бунтарь:</strong> <span class="grammar-hint" data-hint="el mapa — заканчивается на -a, но мужского рода! Как el problema из урока 10. El mapa está en la pared.">el mapa</span> — на -a, но МУЖСКОГО рода!
+    </div>
+  </section>
+
+  <!-- БЛОК 3 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🧭 Предлоги места (6 штук)</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Предлог</th><th>Перевод</th><th>Жест</th><th>🔊</th></tr>
+      <tr onclick="speak('en')"><td><b>en</b></td><td>в / на</td><td>кулак ВНУТРИ ладони</td><td>🔊</td></tr>
+      <tr onclick="speak('encima de')"><td><b>encima de</b></td><td>над / сверху на</td><td>кулак НАД ладонью</td><td>🔊</td></tr>
+      <tr onclick="speak('debajo de')"><td><b>debajo de</b></td><td>под</td><td>кулак ПОД ладонью</td><td>🔊</td></tr>
+      <tr onclick="speak('al lado de')"><td><b>al lado de</b></td><td>рядом с</td><td>кулак СБОКУ ладони</td><td>🔊</td></tr>
+      <tr onclick="speak('delante de')"><td><b>delante de</b></td><td>перед</td><td>кулак ПЕРЕД ладонью</td><td>🔊</td></tr>
+      <tr onclick="speak('detrás de')"><td><b>detrás de</b></td><td>за</td><td>кулак ЗА ладонью</td><td>🔊</td></tr>
+    </table>
+    <div class="game-zone">
+      <p style="font-weight:800">🖱 Игра «Где ластик?»: посмотри на картинку и кликни предлог!</p>
+      <div class="scene"><div class="box">la mesa</div><div class="eraser pos-up" id="eraser">🧽</div></div>
+      <div class="opts" id="prep-opts"></div>
+      <div class="game-fb" id="prep-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="prep-stars">0</span> / <span id="prep-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="prepStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: estar + предлоги</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('¿Dónde está la papelera?')"><td><b>¿Dónde está...?</b></td><td>¿Dónde está la papelera?</td><td>Где корзина?</td><td>🔊</td></tr>
+      <tr onclick="speak('La papelera está al lado de la puerta.')"><td><b>estar + предлог</b></td><td>Está al lado de la puerta.</td><td>Рядом с дверью</td><td>🔊</td></tr>
+      <tr onclick="speak('El reloj está encima de la pizarra.')"><td><b>encima de</b> (урок 14!)</td><td>El reloj está encima de la pizarra.</td><td>Часы над доской</td><td>🔊</td></tr>
+      <tr onclick="speak('Los libros están en la estantería.')"><td><b>мн.ч.: están</b></td><td>Los libros están en la estantería.</td><td>Книги на стеллаже</td><td>🔊</td></tr>
+    </table>
+    <div class="script">
+      ⚠️ <strong>Анонс урока 17:</strong> для МЕСТА всегда <strong>ESTAR</strong>, никогда ES! Почему — разберём на следующем уроке.
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Конструктор: собери фразу из слов!</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 5 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">👂 Аудирование + чтение</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎧 «Поймай где?»: слушай фразу и кликни предлог! 10 раундов.</p>
+      <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakListen()">🔊 Послушать</button>
+      <div class="opts" id="listen-opts" style="margin-top:12px"></div>
+      <div class="game-fb" id="listen-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="listen-stars">0</span> / <span id="listen-total">0</span></div>
+      <button class="speak-btn" style="margin-top:8px" onclick="listenStart()">▶ Начать</button>
+    </div>
+    <h4 style="margin:16px 0 8px">📖 Чтение: класс Lucía</h4>
+    <div class="read-box">
+      En mi clase hay una pizarra grande. Delante de la pizarra está la mesa del profe. El reloj está encima de la pizarra. La papelera está al lado de la puerta. El armario está detrás de la puerta. Los mapas están en la pared.
+    </div>
+    <div id="read-quiz"></div>
+  </section>
+
+  <!-- БЛОК 6 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🗺 PBL: Карта класса для новенького</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Прочитай подсказки и расставь 4 предмета на карте: кликни предмет, потом клетку!</p>
+    <div style="text-align:center;margin:8px 0">
+      <span class="chip" id="item-papelera" onclick="selItem('papelera')">🗑️ la papelera</span>
+      <span class="chip" id="item-armario" onclick="selItem('armario')">🗄️ el armario</span>
+      <span class="chip" id="item-ordenador" onclick="selItem('ordenador')">💻 el ordenador</span>
+      <span class="chip" id="item-mapa" onclick="selItem('mapa')">🗺️ el mapa</span>
+    </div>
+    <div class="read-box" style="font-size:12.5px">
+      1. La papelera está <b>al lado de</b> la puerta. · 2. El armario está <b>detrás de</b> la puerta. · 3. El ordenador está <b>al lado de</b> la estantería. · 4. El mapa está <b>delante de</b> la estantería.
+    </div>
+    <div class="map-grid" id="map-grid"></div>
+    <div class="game-fb" id="map-fb"></div>
+    <div id="clil-box" style="display:none">
+      <div class="game-zone">
+        <p style="font-weight:800">🔢 CLIL: En mi clase hay cuatro mesas y ocho sillas. ¿Cuántas mesas y sillas hay en total?</p>
+        <div class="opts" id="clil-opts"></div>
+        <div class="game-fb" id="clil-fb"></div>
+      </div>
+      <div style="text-align:center"><button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="presentMap()">🎤 Презентовать карту</button></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 7 -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🎾 La Pelota Preguntona + бейдж</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div style="text-align:center">
+      <button class="ball" onclick="pelotaNext()">🎾</button>
+      <div class="game-q" id="pel-q">Нажми на мяч!</div>
+      <div class="opts" id="pel-opts"></div>
+      <div class="game-fb" id="pel-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="pel-stars">0</span> / <span id="pel-total">0</span></div>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">📐</div>
+      <h3>Архитектор класса</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты описал класс так точно, что новенький найдёт всё сам!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Архитектор класса» 📐 добавлен в твой паспорт!</div>
+    </div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🗣 Слова урока</h2></div>
+    <p class="block-sub">Мебель класса — 10 слов, 6 предлогов и главные фразы. Нажимай и повторяй!</p>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('la mesa')">
+        <span class="emo"><svg viewBox="0 0 64 64"><rect x="6" y="22" width="52" height="8" rx="2" fill="#A9713A"/><rect x="10" y="30" width="6" height="26" fill="#6E441F"/><rect x="48" y="30" width="6" height="26" fill="#6E441F"/></svg></span>
+        <div class="es">la mesa</div><div class="ru">стол / парта</div><button class="speak-btn">🔊</button>
+      </div>
+      <div class="word-card" onclick="speak('la silla')"><span class="emo">🪑</span><div class="es">la silla</div><div class="ru">стул</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la pizarra')">
+        <span class="emo"><svg viewBox="0 0 64 64"><rect x="6" y="10" width="52" height="34" rx="3" fill="#2E7D32" stroke="#8B5A2B" stroke-width="4"/><path d="M14 22 h20 M14 30 h28" stroke="#fff" stroke-width="3" stroke-linecap="round"/><rect x="24" y="48" width="16" height="4" rx="2" fill="#8B5A2B"/></svg></span>
+        <div class="es">la pizarra</div><div class="ru">доска</div><button class="speak-btn">🔊</button>
+      </div>
+      <div class="word-card" onclick="speak('la puerta')"><span class="emo">🚪</span><div class="es">la puerta</div><div class="ru">дверь</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la ventana')"><span class="emo">🪟</span><div class="es">la ventana</div><div class="ru">окно</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el armario')"><span class="emo">🗄️</span><div class="es">el armario</div><div class="ru">шкаф</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el ordenador')"><span class="emo">💻</span><div class="es">el ordenador</div><div class="ru">компьютер</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la papelera')"><span class="emo">🗑️</span><div class="es">la papelera</div><div class="ru">корзина</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el mapa')"><span class="emo">🗺️</span><div class="es">el mapa</div><div class="ru">карта · 🔵 бунтарь!</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la estantería')">
+        <span class="emo"><svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="3" fill="none" stroke="#8B5A2B" stroke-width="4"/><line x1="8" y1="32" x2="56" y2="32" stroke="#8B5A2B" stroke-width="4"/><rect x="14" y="14" width="6" height="14" fill="#E2725B"/><rect x="22" y="14" width="6" height="14" fill="#3E7CB1"/><rect x="30" y="14" width="6" height="14" fill="#7A8B4C"/><rect x="14" y="38" width="6" height="14" fill="#E9A13B"/><rect x="22" y="38" width="6" height="14" fill="#8338EC"/><rect x="30" y="38" width="6" height="14" fill="#2A9D8F"/></svg></span>
+        <div class="es">la estantería</div><div class="ru">стеллаж / полка</div><button class="speak-btn">🔊</button>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('en')"><div class="es">en</div><div class="ru">в / на</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('encima de')"><div class="es">encima de</div><div class="ru">над / сверху на</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('debajo de')"><div class="es">debajo de</div><div class="ru">под</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('al lado de')"><div class="es">al lado de</div><div class="ru">рядом с</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('delante de')"><div class="es">delante de</div><div class="ru">перед</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('detrás de')"><div class="es">detrás de</div><div class="ru">за</div><button class="speak-btn">🔊</button></div>
+    </div>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('¿Dónde está la papelera?')"><div class="es">¿Dónde está...?</div><div class="ru">Где находится...?</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('La mesa del profe')"><div class="es">la mesa <span class="grammar-hint" data-hint="del = de + el. Слияние предлога и артикля: mesa del profe = стол учителя.">del</span> profe</div><div class="ru">стол учителя</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('En la pared')"><div class="es">en la <span class="grammar-hint" data-hint="la pared — стена. El mapa está en la pared. Не входит в обязательные 10 слов — бонус!">pared</span></div><div class="ru">на стене</div><button class="speak-btn">🔊</button></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёры для закрепления</h2></div>
+    <div class="match-game">
+      <h4>🧩 Сопоставление: «испанский ↔ русский» (10 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей мебели</strong> · 5 мин<br>Покажи 8 карточек с жестами; пусть каждый назовёт 3 предмета в вашей комнате.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>Семейная игра «¿Dónde está?»</strong> · 7 мин ⭐<br>Родитель прячет предмет и говорит: <em>«Está debajo de...»</em> — ты ищешь. Меняйтесь ролями!</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>Опиши свой рабочий стол</strong> · 7 мин ⭐<br>Сфотографируй стол и подпиши 4 предмета: <em>«El ordenador está encima de la mesa»</em>.</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br><a href="#match-left">🧩 Сопоставление (10 пар)</a> · 🎯 конструктор фраз · 🖱 «Где ластик?»</div></div>
+    <div class="task"><div class="task-num">5</div><div><strong>Видео «El aula en español»</strong> · 3 мин<br>Посмотри и повтори вслух мебель и предлоги.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Los muebles de la clase»</strong> · 15 мин ⭐<br>Попроси родителей распечатать, выполни и раскрась светофор.<br><a href="../../worksheets/w06-l1-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> — нажми нужный цвет в таблице ниже.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть 10 предметов класса</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Говорить 6 предлогов места</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Отвечать «Está al lado de...»</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Различать delante / detrás</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Помнить род: el mapa</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Составить карту класса</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1207999149/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-2-%D1%83%D1%80%D0%BE%D0%BA-7-flash-cards/?i=2gqp1x&x=1jqt" target="_blank">
+    <span>📚 Карточки Quizlet · Станция 2 · Урок 7 (мебель)</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w05-l3.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 15: El sistema educativo 🏫</div></a>
+    <a href="./w06-l2.html" class="nav-next"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 17: HAY vs ESTÁ ⚖️</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 2: Mi Colegio · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* БЛОК 3: ГДЕ ЛАСТИК */
+var PREPS=['en','encima de','debajo de','al lado de','delante de','detrás de'];
+var EROrd=[],erI=0,erS=0;
+var ER=[{pos:'pos-up',prep:'encima de'},{pos:'pos-down',prep:'debajo de'},{pos:'pos-side',prep:'al lado de'},{pos:'pos-in',prep:'en'},{pos:'pos-front',prep:'delante de'},{pos:'pos-back',prep:'detrás de'},{pos:'pos-up',prep:'encima de'},{pos:'pos-side',prep:'al lado de'},{pos:'pos-down',prep:'debajo de'},{pos:'pos-front',prep:'delante de'}];
+function prepStart(){EROrd=shuffle(ER.slice());erI=0;erS=0;document.getElementById('prep-total').textContent=EROrd.length;document.getElementById('prep-stars').textContent='0';prepNext();}
+function prepNext(){
+  var box=document.getElementById('prep-opts');box.innerHTML='';
+  if(erI>=EROrd.length){document.getElementById('prep-fb').textContent='🎉 ¡Perfecto! ⭐ '+erS+' из '+EROrd.length;return;}
+  var r=EROrd[erI];
+  document.getElementById('eraser').className='eraser '+r.pos;
+  document.getElementById('prep-fb').textContent='';
+  shuffle(PREPS.slice()).forEach(function(p){
+    var b=document.createElement('button');b.className='opt';b.textContent=p;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(p===r.prep){b.classList.add('correct');erS++;document.getElementById('prep-stars').textContent=erS;document.getElementById('prep-fb').textContent='✅ ¡Correcto! La goma está '+p+' la mesa.';speak('La goma está '+p+' la mesa.');}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.prep)x.classList.add('correct');});document.getElementById('prep-fb').textContent='❌ Правильно: '+r.prep;}
+      erI++;setTimeout(prepNext,1300);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* БЛОК 4: КОНСТРУКТОР */
+var SB=[
+ {w:['La','papelera','está','al','lado','de','la','puerta.'],t:'Корзина рядом с дверью'},
+ {w:['El','mapa','está','delante','de','la','estantería.'],t:'Карта перед стеллажом'},
+ {w:['El','reloj','está','encima','de','la','pizarra.'],t:'Часы над доской'},
+ {w:['Los','libros','están','en','la','estantería.'],t:'Книги на стеллаже'},
+ {w:['La','mesa','del','profe','está','delante','de','la','pizarra.'],t:'Стол учителя перед доской'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.onclick=function(){if(b.classList.contains('placed'))return;b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}};
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* БЛОК 5: АУДИРОВАНИЕ */
+var LISTEN=[
+ {es:'El ordenador está encima de la mesa.',prep:'encima de'},
+ {es:'La papelera está al lado de la puerta.',prep:'al lado de'},
+ {es:'Los libros están en la estantería.',prep:'en'},
+ {es:'El mapa está delante de la estantería.',prep:'delante de'},
+ {es:'El armario está detrás de la puerta.',prep:'detrás de'},
+ {es:'La silla está debajo de la mesa.',prep:'debajo de'},
+ {es:'La pizarra está delante de la mesa.',prep:'delante de'},
+ {es:'El reloj está encima de la pizarra.',prep:'encima de'},
+ {es:'La ventana está al lado de la pizarra.',prep:'al lado de'},
+ {es:'El estuche está en la mesa.',prep:'en'}
+];
+var LO=[],lI=0,lS=0;
+function listenStart(){LO=shuffle(LISTEN.slice());lI=0;lS=0;document.getElementById('listen-total').textContent=LO.length;document.getElementById('listen-stars').textContent='0';listenNext();}
+function speakListen(){if(lI<LO.length)speak(LO[lI].es);}
+function listenNext(){
+  var box=document.getElementById('listen-opts');box.innerHTML='';
+  if(lI>=LO.length){document.getElementById('listen-fb').textContent='🎉 ¡Perfecto! ⭐ '+lS+' из '+LO.length;return;}
+  document.getElementById('listen-fb').textContent='';
+  shuffle(PREPS.slice()).forEach(function(p){
+    var b=document.createElement('button');b.className='opt';b.textContent=p;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(p===LO[lI].prep){b.classList.add('correct');lS++;document.getElementById('listen-stars').textContent=lS;document.getElementById('listen-fb').textContent='✅ ¡Correcto!';}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===LO[lI].prep)x.classList.add('correct');});document.getElementById('listen-fb').textContent='❌ Правильно: '+LO[lI].prep;}
+      lI++;setTimeout(listenNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* БЛОК 5: ЧТЕНИЕ */
+var READ=[
+ {q:'¿Dónde está la mesa del profe?',ru:'Где стол учителя?',ok:'Delante de la pizarra',w:['Detrás de la puerta','Al lado de la ventana']},
+ {q:'¿Dónde está la papelera?',ru:'Где корзина?',ok:'Al lado de la puerta',w:['Encima de la pizarra','Delante de la mesa']},
+ {q:'¿Dónde están los mapas?',ru:'Где карты?',ok:'En la pared',w:['En la estantería','Debajo de la mesa']},
+ {q:'¿Dónde está el armario?',ru:'Где шкаф?',ok:'Detrás de la puerta',w:['Delante de la pizarra','Al lado de la papelera']}
+];
+(function(){
+  var wrap=document.getElementById('read-quiz');
+  READ.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-block';b.style.margin='3px';b.textContent=o;
+      b.onclick=function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      };
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* БЛОК 6: КАРТА */
+var MAPFIX={'c11':{e:'🖍️',n:'la pizarra'},'c12':{e:'🪑',n:'la mesa del profe'},'c13':{e:'🪟',n:'la ventana'},'c21':{e:'🚪',n:'la puerta'},'c33':{e:'📚',n:'la estantería'}};
+var MAPANS={papelera:'c22',armario:'c31',ordenador:'c32',mapa:'c23'};
+var MAPEMO={papelera:'🗑️',armario:'🗄️',ordenador:'💻',mapa:'🗺️'};
+var selIt=null,placedN=0;
+function selItem(id){
+  if(document.getElementById('item-'+id).classList.contains('used'))return;
+  selIt=id;
+  ['papelera','armario','ordenador','mapa'].forEach(function(x){document.getElementById('item-'+x).classList.remove('sel');});
+  document.getElementById('item-'+id).classList.add('sel');
+}
+(function(){
+  var g=document.getElementById('map-grid');
+  ['c11','c12','c13','c21','c22','c23','c31','c32','c33'].forEach(function(cid){
+    var d=document.createElement('div');d.className='map-cell';d.id='cell-'+cid;
+    if(MAPFIX[cid]){d.innerHTML='<span class="emo">'+MAPFIX[cid].e+'</span>'+MAPFIX[cid].n;}
+    else{d.classList.add('free');d.textContent='?';d.onclick=function(){placeItem(cid,d);};}
+    g.appendChild(d);
+  });
+})();
+function placeItem(cid,cell){
+  if(!selIt){document.getElementById('map-fb').textContent='⚠️ Сначала выбери предмет!';return;}
+  if(MAPANS[selIt]===cid){
+    cell.classList.remove('free');cell.classList.add('filled');
+    cell.innerHTML='<span class="emo">'+MAPEMO[selIt]+'</span>el/la '+selIt;
+    document.getElementById('item-'+selIt).classList.add('used');
+    document.getElementById('item-'+selIt).classList.remove('sel');
+    placedN++;selIt=null;
+    document.getElementById('map-fb').textContent='✅ ¡Muy bien! Осталось: '+(4-placedN);
+    if(placedN===4){document.getElementById('map-fb').textContent='🎉 ¡Mapa completo!';document.getElementById('clil-box').style.display='block';renderClil();}
+  }else{
+    cell.classList.add('wrong');
+    document.getElementById('map-fb').textContent='❌ Не та клетка. Перечитай подсказку!';
+    setTimeout(function(){cell.classList.remove('wrong');},700);
+  }
+}
+function renderClil(){
+  var box=document.getElementById('clil-opts');box.innerHTML='';
+  shuffle(['doce','diez','catorce']).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o==='doce'){b.classList.add('correct');document.getElementById('clil-fb').textContent='✅ ¡Correcto! 4 + 8 = 12 = doce.';speak('Doce.');}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent==='doce')x.classList.add('correct');});document.getElementById('clil-fb').textContent='❌ Правильно: doce (12).';}
+    };
+    box.appendChild(b);
+  });
+}
+function presentMap(){
+  var t='La papelera está al lado de la puerta. El armario está detrás de la puerta. El ordenador está al lado de la estantería. El mapa está delante de la estantería. ¡Bienvenido a la clase!';
+  document.getElementById('map-fb').textContent='🎤 '+t;
+  speak(t);
+}
+
+/* БЛОК 7: PELOTA */
+var PEL=[
+ {q:'La papelera está al lado de la ...',ok:'puerta',w:['ventana','pizarra']},
+ {q:'el mapa — какого рода?',ok:'el (мужской)',w:['la (женский)','los (мн.ч.)']},
+ {q:'Множественное от la silla?',ok:'las sillas',w:['los sillas','las silla']},
+ {q:'El reloj está encima de la ...',ok:'pizarra',w:['papelera','puerta']},
+ {q:'¿Cómo se dice «стул»?',ok:'la silla',w:['la mesa','la puerta']},
+ {q:'detrás de = ...',ok:'за',w:['перед','рядом']},
+ {q:'Los libros están ___ la estantería.',ok:'en',w:['de','a']},
+ {q:'una pizarra + una puerta + una ventana = ...',ok:'tres',w:['dos','cuatro']}
+];
+var PO=[],pI=0,pS=0;
+function pelotaNext(){
+  if(pI===0&&PO.length===0){PO=shuffle(PEL.slice());document.getElementById('pel-total').textContent=PO.length;}
+  var box=document.getElementById('pel-opts');box.innerHTML='';
+  if(pI>=PO.length){document.getElementById('pel-q').textContent='🎉 ¡Perfecto! ⭐ '+pS+' из '+PO.length;document.getElementById('pel-fb').textContent='';PO=[];pI=0;pS=0;return;}
+  var r=PO[pI];
+  document.getElementById('pel-q').textContent=r.q;
+  document.getElementById('pel-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');pS++;document.getElementById('pel-stars').textContent=pS;document.getElementById('pel-fb').textContent='✅ ¡Muy bien!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('pel-fb').textContent='❌ Правильно: '+r.ok;}
+      pI++;setTimeout(pelotaNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ТРЕНАЖЁР */
+var MATCH=[['la mesa','стол / парта'],['la silla','стул'],['la pizarra','доска'],['la puerta','дверь'],['la ventana','окно'],['el armario','шкаф'],['el ordenador','компьютер'],['la papelera','корзина'],['el mapa','карта'],['la estantería','стеллаж']];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');mFound++;speak(d.textContent);document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/10';if(mFound===10)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';}
+  else{d.classList.add('wrong');mSel.classList.add('wrong');var a=mSel;setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);}
+  mSel=null;
+}
+renderMatch();
+
+/* БЕЙДЖ */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres el arquitecto de la clase!');
+  confetti('📐');
+  try{localStorage.setItem('mudro_kids_w06l1_badge_arquitecto','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w06l1_badge_arquitecto')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(e){var c=['🎉','⭐',e];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};}(s),3200);}}
+
+/* СВЕТОФОР */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){
+    var row=c.getAttribute('data-row');
+    document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});
+    c.classList.add('active');
+  });
+});
+document.getElementById('tlReset').addEventListener('click',function(){
+  document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});
+});
+
+/* grammar-hint */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>
