@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 5.1 · Alta de suministros — МУДРО</title>
+<style>
+  :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);--ok:#7A8B4C;--bad:#E2725B}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .topbar{background:var(--card);box-shadow:var(--shadow);padding:12px 0;position:sticky;top:0;z-index:100}
+  .topbar .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+  .topbar a{text-decoration:none;font-weight:700;color:var(--ink)}
+  .topbar a:hover{color:var(--p1)}
+  .lesson-badge{font-size:.85rem;color:var(--muted);font-weight:600}
+  .hero{background:linear-gradient(135deg,var(--p1),var(--p3));color:#fff;padding:44px 20px 38px;text-align:center}
+  .hero h1{font-size:2rem;margin-bottom:8px}
+  .hero p{font-size:1.1rem;opacity:.95;max-width:640px;margin:0 auto}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .hero-chip{background:rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:700}
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c2{background:var(--p2)}.step-num.c3{background:var(--p3)}.step-num.c4{background:var(--p4)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
+  .speak-btn:hover{background:#66743f}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
+  .vocab-front .es{font-size:1.15rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
+  .vocab-front .ru{font-size:.95rem;opacity:.9;font-weight:600;color:#fff}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.7;color:#fff}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:1rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3}
+  .vocab-back .ex-ru{font-size:.9rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  /* Контраст подсказок на синем фоне карточек */
+  .vocab-back .grammar-hint{color:var(--p4)}
+  .vocab-front .grammar-hint{color:#fff;border-bottom-color:rgba(255,255,255,.75)}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:6px}
+  .grammar-box .formula{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.5}
+
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+
+  /* Всплывающие подсказки .grammar-hint */
+  .grammar-hint{position:relative;border-bottom:1.5px dashed var(--p4);cursor:help;color:var(--p4);font-weight:600}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 12px;border-radius:8px;font-size:.82rem;font-weight:500;font-style:normal;line-height:1.4;width:280px;max-width:90vw;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;white-space:normal}
+  .grammar-hint::before{content:'';position:absolute;bottom:120%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink);opacity:0;pointer-events:none;transition:opacity .2s}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+  .quiz-week{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px}
+  .quiz-week.w43{background:#FFF7E0;color:var(--p3)}
+  .quiz-week.w42{background:#F0F7E6;color:var(--p2)}
+  .quiz-week.w41{background:#E8F0FE;color:var(--p4)}
+
+  .train-box{background:#fff;border:2px solid #eee;border-radius:14px;padding:18px;min-height:250px}
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:300px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.7}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.05rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  .res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .res-card{background:var(--card);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+  .res-card h4{margin-bottom:6px}
+  .res-card p{font-size:.85rem;color:var(--muted);margin-bottom:10px;min-height:36px}
+  .res-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700}
+  .res-card a:hover{background:var(--p1)}
+
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink)}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem}
+
+  /* Фактура */
+  .factura-box{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:20px;font-family:'Courier New',monospace;font-size:.9rem;line-height:1.8}
+  .factura-box .hdr{background:var(--p4);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .factura-box .line{display:flex;justify-content:space-between;border-bottom:1px dashed #E8DCCF;padding:4px 0}
+  .factura-box .total{font-weight:800;color:var(--p1);font-size:1.1rem;border-top:2px solid var(--p4);margin-top:8px;padding-top:8px}
+
+  /* Диалог */
+  .dialog-box{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px}
+  .dialog-box .hdr{background:var(--p2);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-line{margin-bottom:12px;padding:10px;border-radius:10px}
+  .dialog-line.client{background:#F0F7E6;border-left:4px solid var(--p2)}
+  .dialog-line.operator{background:#F0F4FF;border-left:4px solid var(--p4)}
+  .dialog-line .speaker{font-weight:800;font-size:.85rem;margin-bottom:4px}
+  .dialog-line.client .speaker{color:var(--p2)}
+  .dialog-line.operator .speaker{color:var(--p4)}
+
+  /* Ролевая игра */
+  .roleplay-step{background:#fff;border:2px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px}
+  .roleplay-step .step-label{font-weight:800;color:var(--p1);margin-bottom:8px}
+  .roleplay-step .phrase{font-style:italic;color:var(--p4);margin-bottom:4px}
+  .roleplay-step .translation{font-size:.85rem;color:var(--muted)}
+
+  /* Конструктор скрипта */
+  .script-builder{background:#fff;border:2px solid var(--p3);border-radius:14px;padding:20px}
+  .script-builder .hdr{background:var(--p3);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .script-field{margin-bottom:12px}
+  .script-field label{display:block;font-weight:700;margin-bottom:4px;color:var(--ink)}
+  .script-field input,.script-field select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem}
+  .script-result{background:#FFF7E0;border-radius:10px;padding:16px;margin-top:16px;display:none;font-style:italic;line-height:1.8}
+  .script-result.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a href="../../index.html">← К карте курса</a>
+  <span class="lesson-badge">Неделя 5 · Урок 1 из 3 · Фаза 1 Misión Residencia</span>
+</div></div>
+
+<section class="hero">
+  <h1>⚡ Урок 5.1 · Alta de suministros</h1>
+  <p>Подключаем свет, воду и газ: звоним в компании и понимаем фактуры</p>
+  <div class="hero-chips">
+    <span class="hero-chip">🎯 Цель: подключить свет за один звонок</span>
+    <span class="hero-chip">🗣 37 слов в 6 категориях</span>
+    <span class="hero-chip">🧩 Вежливые просьбы: quisiera, podría</span>
+    <span class="hero-chip">📋 Продукт: скрипт звонка</span>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 0: РАЗМИНКА ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">0</div><div class="step-title"><h2>Разминка: повторяем неделю 4</h2><span class="time">00:00 – 05:00 · Блиц-квиз</span></div></div>
+  <div class="card">
+    <p class="hint">Контракт подписан, счёт в банке открыт. Пора подключать свет! Но сначала проверим базу недели 4. Отвечайте быстро!</p>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:14px">↺ Пройти ещё раз</button>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 1: ЛЕКСИКА ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">1</div><div class="step-title"><h2>Лексика: анатомия коммунальных услуг</h2><span class="time">05:00 – 15:00 · 37 слов в 6 категориях</span></div></div>
+  <div class="card">
+    <p class="hint">Лицевая сторона — слово и перевод, оборот — пример из реального звонка. Переключайте вкладки по категориям.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showVocab('connect',this)">🔌 Подключение (7)</button>
+      <button class="tab" onclick="showVocab('docs',this)">📄 Документы (8)</button>
+      <button class="tab" onclick="showVocab('meters',this)">🔢 Счётчики (6)</button>
+      <button class="tab" onclick="showVocab('tariffs',this)">💶 Тарифы (6)</button>
+      <button class="tab" onclick="showVocab('services',this)">⚡ Услуги (5)</button>
+      <button class="tab" onclick="showVocab('comm',this)">📞 Коммуникация (5)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+    <div class="note red" style="margin-top:16px">
+      ⚠️ <b>Ложные друзья переводчика:</b><br>
+      • <b>la potencia</b> ≠ рус. «потенция». Это «мощность» (электричество)!<br>
+      • <b>el contador</b> ≠ рус. «контейнер». Это «счётчик»!<br>
+      • <b>la tarifa</b> ≠ рус. «тарификация». Это просто «тариф»!
+    </div>
+    <div class="note green" style="margin-top:10px">
+      💡 <b>Культурный нюанс:</b> В Испании подключение коммунальных услуг — это всегда звонок или онлайн-форма. Нельзя просто «прийти и подключить». Нужно: 1) позвонить в компанию, 2) назвать данные (NIE, IBAN, адрес, показания счётчика), 3) подождать 3–5 дней до подключения.
+    </div>
+    <div class="note blue" style="margin-top:10px">
+      💡 <b>Приоритеты подключения:</b><br>
+      1. <b>la luz</b> (свет) — без него невозможно жить.<br>
+      2. <b>el agua</b> (вода) — обычно через муниципальную компанию.<br>
+      3. <b>el gas</b> (газ) — если есть газовое отопление или плита.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 2: ГРАММАТИКА ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num c2">2</div><div class="step-title"><h2>Грамматика: вежливые просьбы</h2><span class="time">15:00 – 23:00 · quisiera, podría</span></div></div>
+  <div class="card">
+    <p class="hint">В Испании вежливость открывает все двери. Вместо прямого «Quiero…» используйте условное наклонение — и операторы пойдут навстречу.</p>
+
+    <div class="grammar-box">
+      <h4>🙏 Quisiera + инфинитив (Я хотел бы…)</h4>
+      <div class="example">
+        <b>Quisiera dar de alta la luz.</b> — Я хотел бы подключить свет. <button class="speak-btn" onclick="speak('Quisiera dar de alta la luz.')">🔊</button><br>
+        <b>Quisiera hablar con atención al cliente.</b> — Я хотел бы поговорить со службой поддержки. <button class="speak-btn" onclick="speak('Quisiera hablar con atención al cliente.')">🔊</button><br>
+        <b>Quisiera contratar una tarifa.</b> — Я хотел бы заключить договор на тариф. <button class="speak-btn" onclick="speak('Quisiera contratar una tarifa.')">🔊</button>
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>🙏 ¿Podría + инфинитив? (Не могли бы вы…?)</h4>
+      <div class="example">
+        <b>¿Podría enviarme la factura por email?</b> — Не могли бы вы отправить мне счёт по почте? <button class="speak-btn" onclick="speak('¿Podría enviarme la factura por email?')">🔊</button><br>
+        <b>¿Podría explicarme la tarifa?</b> — Не могли бы вы объяснить мне тариф? <button class="speak-btn" onclick="speak('¿Podría explicarme la tarifa?')">🔊</button><br>
+        <b>¿Podría darme el número de cliente?</b> — Не могли бы вы дать мне номер клиента? <button class="speak-btn" onclick="speak('¿Podría darme el número de cliente?')">🔊</button>
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📞 Комбинация: вежливая просьба + данные</h4>
+      <div class="formula">Quisiera [действие]. Mi número de cliente es [номер].</div>
+      <div class="example">
+        <b>Quisiera dar de alta la luz. Mi NIE es X-12345678-A.</b><br>
+        <b>¿Podría explicarme la factura? Mi número de referencia es 123456.</b>
+      </div>
+    </div>
+
+    <div class="note">
+      💡 <b>Бонус: косвенные местоимения</b> (рецептивно). В разговоре вы услышите фразы с местоимениями <span class="grammar-hint" data-hint="me / le / nos — косвенные местоимения. «Мне / ему / нам». Ставятся перед глаголом или прикрепляются к инфинитиву.">me / le / nos</span>. Достаточно понимать их, не обязательно использовать:<br>
+      • <b>¿Me puede mandar la factura?</b> — Можете прислать мне счёт?<br>
+      • <b>¿Le puedo llamar mañana?</b> — Могу я позвонить вам завтра?<br>
+      • <b>¿Nos puede explicar la tarifa?</b> — Можете объяснить нам тариф?
+    </div>
+
+    <div class="note red" style="margin-top:10px">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«Quiero dar de alta la luz»</i> → грамматически верно, но звучит грубо. Лучше: <i>«Quisiera dar de alta la luz»</i>.<br>
+      • <i>«¿Puede explicarme la tarifa?»</i> → правильно, но <i>«¿Podría explicarme la tarifa?»</i> вежливее.<br>
+      • <i>«Quisiera que me da la factura»</i> → неправильно! После <i>quisiera</i> — инфинитив: <i>«Quisiera recibir la factura»</i>.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 3: АУДИРОВАНИЕ ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num c3">3</div><div class="step-title"><h2>Аудирование: звонок в компанию</h2><span class="time">23:00 – 30:00 · Диалог с оператором</span></div></div>
+  <div class="card">
+    <p class="hint">Прослушайте реальный диалог. Сначала слушайте без текста, затем откройте транскрипт (кликните по нему — каждая реплика озвучивается). Ответьте на вопросы!</p>
+    <div class="dialog-box">
+      <div class="hdr">🎧 Llamada a la compañía eléctrica</div>
+      <button class="btn btn-blue" onclick="speakDialog()" style="margin-bottom:14px">▶ Прослушать диалог</button>
+      <button class="btn btn-ghost" onclick="toggleDialogText()" style="margin-bottom:14px">👆 Показать / скрыть текст</button>
+      <div id="dialog-text" style="display:none">
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>Buenos días, Endesa. Le atiende María. ¿En qué puedo ayudarle?</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>Buenos días. Quisiera dar de alta la luz en mi nuevo piso.</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>Muy bien. ¿Me puede decir su NIE, por favor?</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>Sí, mi NIE es X-12345678-A.</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>Perfecto. ¿Cuál es la dirección del piso?</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>Calle Mayor, número 15, tercero B.</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>Muy bien. ¿Tiene el número de contador?</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>Sí, es 123456. La lectura actual es 500 kWh.</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>Perfecto. ¿Qué tarifa prefiere? Tenemos la tarifa mensual y la bimestral.</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>¿Podría explicarme la diferencia?</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>La tarifa mensual cuesta 50 euros al mes. La bimestral cuesta 45 euros cada dos meses.</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>¿Hay permanencia?</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>No, no hay permanencia. Puede cancelar cuando quiera.</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>Perfecto. Quisiera contratar la tarifa mensual.</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>Muy bien. El alta tarda 3 días. ¿Puede pagar con domiciliación bancaria?</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>Sí, tengo una cuenta bancaria. Mi IBAN es ES12 3456 7890 1234 5678.</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>Perfecto. Le enviaremos la confirmación por email. ¿Algo más?</div>
+        <div class="dialog-line client"><div class="speaker">Вы:</div>No, muchas gracias. Hasta luego.</div>
+        <div class="dialog-line operator"><div class="speaker">Оператор:</div>Hasta luego. Que tenga un buen día.</div>
+      </div>
+    </div>
+    <div id="listening-quiz" style="margin-top:16px"></div>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 4: ЗАКРЕПЛЕНИЕ ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num c4">4</div><div class="step-title"><h2>Закрепление: сопоставление и фактура</h2><span class="time">30:00 – 37:00 · Упражнения</span></div></div>
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Сопоставь фразу и перевод</h4>
+    <p class="hint">Нажмите испанскую фразу слева, затем её перевод справа. Зелёный — пара собрана!</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMatchExercise()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+  <div class="card">
+    <h4 style="margin-bottom:10px">📄 Упражнение 2: Читаем фактуру</h4>
+    <p class="hint">Перед вами фактура за электричество. Найдите данные клиента, показания, тариф и итог. Ответьте на вопросы ниже!</p>
+    <div class="factura-box">
+      <div class="hdr">FACTURA DE LA LUZ — ENDESA</div>
+      <div class="line"><span>Número de cliente:</span><span>12345678</span></div>
+      <div class="line"><span>Período:</span><span>enero — febrero 2027</span></div>
+      <div class="line"><span>Lectura anterior:</span><span>300 kWh</span></div>
+      <div class="line"><span>Lectura actual:</span><span>500 kWh</span></div>
+      <div class="line"><span>Consumo:</span><span>200 kWh</span></div>
+      <div class="line"><span>Tarifa mensual:</span><span>50,00 €</span></div>
+      <div class="line"><span>Consumo (200 kWh):</span><span>30,00 €</span></div>
+      <div class="line"><span>IVA (21%):</span><span>16,80 €</span></div>
+      <div class="line total"><span>IMPORTE TOTAL:</span><span>96,80 €</span></div>
+      <div class="line"><span>Fecha de pago:</span><span>15 de febrero 2027</span></div>
+      <div class="line"><span>Pago:</span><span>domiciliación bancaria</span></div>
+    </div>
+    <div id="factura-quiz" style="margin-top:16px"></div>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 5: ПРАКТИКА ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">5</div><div class="step-title"><h2>Практика: ролевая игра «Звонок»</h2><span class="time">37:00 – 45:00 · Инспектор ↔ оператор</span></div></div>
+  <div class="card">
+    <p class="hint">Преподаватель играет оператора, вы — клиента. Отработайте все 5 этапов звонка. Произнесите каждый этап вслух!</p>
+
+    <div class="roleplay-step">
+      <div class="step-label">📞 Этап 1: Приветствие и цель звонка</div>
+      <div class="phrase">Buenos días. Quisiera dar de alta la luz en mi nuevo piso.</div>
+      <div class="translation">Добрый день. Я хотел бы подключить свет в моей новой квартире.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Quisiera dar de alta la luz en mi nuevo piso.')" style="margin-top:8px">🔊</button>
+    </div>
+
+    <div class="roleplay-step">
+      <div class="step-label">🪪 Этап 2: Данные (NIE, адрес, счётчик)</div>
+      <div class="phrase">Mi NIE es X-12345678-A. La dirección es Calle Mayor, 15, tercero B. El número de contador es 123456.</div>
+      <div class="translation">Мой NIE — X-12345678-A. Адрес — улица Майор, 15, третий Б. Номер счётчика — 123456.</div>
+      <button class="speak-btn" onclick="speak('Mi NIE es X de Italia, doce, treinta y cuatro, cincuenta y seis, setenta y ocho, A. La dirección es Calle Mayor, quince, tercero B. El número de contador es ciento veintitrés mil cuatrocientos cincuenta y seis.')" style="margin-top:8px">🔊</button>
+    </div>
+
+    <div class="roleplay-step">
+      <div class="step-label">💶 Этап 3: Вопросы о тарифе</div>
+      <div class="phrase">¿Podría explicarme la tarifa? ¿Hay permanencia? ¿Cuál es el precio por kWh?</div>
+      <div class="translation">Не могли бы вы объяснить мне тариф? Есть ли обязательный срок? Какова цена за кВт·ч?</div>
+      <button class="speak-btn" onclick="speak('¿Podría explicarme la tarifa? ¿Hay permanencia? ¿Cuál es el precio por kilovatio hora?')" style="margin-top:8px">🔊</button>
+    </div>
+
+    <div class="roleplay-step">
+      <div class="step-label">✅ Этап 4: Выбор тарифа и оплата</div>
+      <div class="phrase">Quisiera contratar la tarifa mensual. ¿Puedo pagar con domiciliación bancaria? Mi IBAN es ES12 3456 7890 1234 5678.</div>
+      <div class="translation">Я хотел бы заключить договор на ежемесячный тариф. Могу ли я платить прямым списанием? Мой IBAN — ES12 3456 7890 1234 5678.</div>
+      <button class="speak-btn" onclick="speak('Quisiera contratar la tarifa mensual. ¿Puedo pagar con domiciliación bancaria? Mi IBAN es E S doce, treinta y cuatro, cincuenta y seis, setenta y ocho, noventa, doce, treinta y cuatro, cincuenta y seis, setenta y ocho.')" style="margin-top:8px">🔊</button>
+    </div>
+
+    <div class="roleplay-step">
+      <div class="step-label">👋 Этап 5: Прощание</div>
+      <div class="phrase">Muchas gracias. Hasta luego.</div>
+      <div class="translation">Большое спасибо. До свидания.</div>
+      <button class="speak-btn" onclick="speak('Muchas gracias. Hasta luego.')" style="margin-top:8px">🔊</button>
+    </div>
+
+    <h4 style="margin-top:16px;margin-bottom:10px">🆘 Фразы-спасатели</h4>
+    <table style="width:100%;border-collapse:collapse">
+      <thead><tr><th style="text-align:left;padding:8px;background:#F0F4FF">Фраза по-испански</th><th style="text-align:left;padding:8px;background:#F0F4FF">Перевод</th><th style="padding:8px;background:#F0F4FF">🔊</th></tr></thead>
+      <tbody>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee">Perdone, no entiendo.</td><td style="padding:8px;border-bottom:1px solid #eee">Извините, не понимаю.</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:center"><button class="speak-btn" onclick="speak('Perdone, no entiendo.')">🔊</button></td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee">¿Puede repetir, por favor?</td><td style="padding:8px;border-bottom:1px solid #eee">Можете повторить?</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:center"><button class="speak-btn" onclick="speak('¿Puede repetir, por favor?')">🔊</button></td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee">¿Puede hablar más despacio?</td><td style="padding:8px;border-bottom:1px solid #eee">Можете медленнее?</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:center"><button class="speak-btn" onclick="speak('¿Puede hablar más despacio?')">🔊</button></td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee">¿Podría explicarme eso?</td><td style="padding:8px;border-bottom:1px solid #eee">Не могли бы вы это объяснить?</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:center"><button class="speak-btn" onclick="speak('¿Podría explicarme eso?')">🔊</button></td></tr>
+        <tr><td style="padding:8px">¿Puede escribirlo, por favor?</td><td style="padding:8px">Можете написать?</td><td style="padding:8px;text-align:center"><button class="speak-btn" onclick="speak('¿Puede escribirlo, por favor?')">🔊</button></td></tr>
+      </tbody>
+    </table>
+
+    <div class="note green" style="margin-top:16px">
+      🎭 <b>Ролевая игра:</b> пусть кто-то из семьи сыграет оператора («Sí, la tarifa mensual cuesta 50 euros al mes. No hay permanencia.»), а вы — клиента с фразами из шага 1.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ШАГ 6: ПРОДУКТ ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num c3">6</div><div class="step-title"><h2>Продукт урока: скрипт звонка</h2><span class="time">45:00 – 50:00 · PBL</span></div></div>
+  <div class="card">
+    <p class="hint">Составьте свой скрипт звонка в электрическую компанию. Заполните поля — получите готовую фразу, которую запишете голосовым.</p>
+    <div class="script-builder">
+      <div class="hdr">📞 СКРИПТ ЗВОНКА В КОМПАНИЮ</div>
+      <div class="script-field">
+        <label>🪪 Ваш NIE:</label>
+        <input type="text" id="script-nie" placeholder="X-12345678-A">
+      </div>
+      <div class="script-field">
+        <label>🏠 Адрес квартиры:</label>
+        <input type="text" id="script-address" placeholder="Calle Mayor, 15, tercero B">
+      </div>
+      <div class="script-field">
+        <label>🔢 Номер счётчика:</label>
+        <input type="text" id="script-meter" placeholder="123456">
+      </div>
+      <div class="script-field">
+        <label>💶 Тариф:</label>
+        <select id="script-tariff">
+          <option value="mensual">mensual (ежемесячный)</option>
+          <option value="bimestral">bimestral (раз в два месяца)</option>
+        </select>
+      </div>
+      <div class="script-field">
+        <label>🏦 IBAN:</label>
+        <input type="text" id="script-iban" placeholder="ES12 3456 7890 1234 5678">
+      </div>
+      <button class="btn btn-primary" onclick="buildScript()" style="margin-top:12px">🔧 Собрать скрипт</button>
+      <div class="script-result" id="script-result"></div>
+      <button class="speak-btn" id="speak-script" onclick="speakScript()" style="display:none;margin-top:12px">🔊 Прослушать скрипт</button>
+    </div>
+    <div class="note" style="margin-top:16px">
+      📸 <b>Формат сдачи:</b> запишите голосовое сообщение с этим скриптом (1–2 мин). Пришлите голосовое + скриншот заполненного скрипта преподавателю.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ДОМАШКА ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🏠</div><div class="step-title"><h2>Домашнее задание · Урок 5.1 «Alta de suministros»</h2><span class="time">⏱ ~25–30 минут · Формат: голосовое + PBL + письмо + тренажёр + рабочий лист</span></div></div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 1. «Мой первый звонок» (говорение) · 7 мин ⭐</h4>
+    <div class="hw-meta">Цель: преодолеть страх звонка и довести скрипт до автоматизма.</div>
+    <p>Запишите голосовое сообщение, где вы звоните в компанию и подключаете свет. Используйте скрипт из шага 6. Минимум 2 дубля — второй всегда увереннее!</p>
+    <div style="background:#F0F4FF;padding:10px;border-radius:8px;margin-top:8px;font-style:italic">
+      Buenos días. Quisiera dar de alta la luz en mi nuevo piso. Mi NIE es X-12345678-A. La dirección es Calle Mayor, 15, tercero B. ¿Podría explicarme la tarifa? Quisiera contratar la tarifa mensual. Muchas gracias. Hasta luego.
+    </div>
+    <button class="speak-btn" onclick="speak('Buenos días. Quisiera dar de alta la luz en mi nuevo piso. Mi NIE es X de Italia, doce, treinta y cuatro, cincuenta y seis, setenta y ocho, A. La dirección es Calle Mayor, quince, tercero B. ¿Podría explicarme la tarifa? Quisiera contratar la tarifa mensual. Muchas gracias. Hasta luego.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🌍 Задание 2. «Реальная разведка» (PBL) · 7 мин</h4>
+    <div class="hw-meta">Цель: перенести навык в настоящую жизнь.</div>
+    <p>Откройте сайт испанской энергокомпании (Endesa, Iberdrola или Naturgy). Найдите раздел «Dar de alta» или «Nuevos suministros». Сделайте скриншот страницы и пришлите преподавателю.</p>
+    <div class="note" style="margin-top:8px">
+      💡 <b>Подсказка для поиска:</b> «dar de alta luz Endesa» или «nuevos suministros Iberdrola»
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>📖 Задание 3. Чтение / лексика · 5 мин</h4>
+    <div class="hw-meta">Цель: запомнить ключевые фразы.</div>
+    <p>Перечитайте диалог из шага 3. Выпишите 5 фраз, которые вы хотите запомнить. Проверьте себя по карточкам урока.</p>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: «Скрипт звонка» · 5–10 мин</h4>
+    <div class="hw-meta">Цель: закрепить структуру звонка письменно.</div>
+    <p>Напишите полный скрипт своего звонка — 8–10 предложений: приветствие, данные, вопросы о тарифе, выбор тарифа, оплату, прощание. Отправьте текстом преподавателю.</p>
+    <div style="background:#F0F4FF;padding:10px;border-radius:8px;margin-top:8px;font-style:italic">
+      Buenos días. Quisiera dar de alta la luz. Mi NIE es... La dirección es... El número de contador es... ¿Podría explicarme la tarifa? ¿Hay permanencia? Quisiera contratar la tarifa mensual. ¿Puedo pagar con domiciliación bancaria? Mi IBAN es... Muchas gracias. Hasta luego.
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 5. Тренажёр · 10 мин</h4>
+    <div class="hw-meta">Цель: довести все слова и фразы урока до автоматизма.</div>
+    <p>🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соберите пары. 🔤 Соберите фразу из кусочков.</p>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 6. Семейная миссия (Неделя 5) · 5 мин</h4>
+    <div class="hw-meta">Цель: связать урок с детским курсом.</div>
+    <p><b>«Покупка в Mercadona»:</b> Пока родители подключают услуги, дети составляют список покупок для новоселья. Спросите детей: <i>«¿Qué necesitamos comprar para la casa nueva?»</i> Пусть они назовут 5 продуктов по-испански: <i>«Necesitamos leche, pan, huevos, fruta y agua.»</i></p>
+    <button class="speak-btn" onclick="speak('¿Qué necesitamos comprar para la casa nueva? Necesitamos leche, pan, huevos, fruta y agua.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 7. Рабочий лист · 20–25 мин</h4>
+    <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
+    <p>Распечатайте или заполните с экрана: лексика, вежливые просьбы, чтение фактуры, аудирование, письмо. Пришлите фото заполненного листа.</p>
+    <a href="../../worksheets/w05-l1-parents.html" class="btn btn-secondary" style="margin-top:10px">📄 Открыть рабочий лист (A4, печать)</a>
+  </div>
+</section>
+
+<!-- ═══════════ ТРЕНАЖЁР ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🎮</div><div class="step-title"><h2>Тренажёр «Коммунальные услуги» · 10 мин</h2><span class="time">Доведите лексику до автоматизма</span></div></div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО того, как перевернёте. 🧩 Сопоставление — соберите пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div class="train-box" id="train-box"></div>
+  </div>
+</section>
+
+<!-- ═══════════ СВЕТОФОР ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">✅</div><div class="step-title"><h2>Самопроверка «Светофор»</h2><span class="time">Отметьте честно — нажмите на нужный цвет. Преподаватель разберёт всё, что 🟡 и 🔴.</span></div></div>
+  <div class="card">
+    <div style="overflow-x:auto">
+    <table class="tl-table">
+      <thead><tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr></thead>
+      <tbody id="tl-body"></tbody>
+    </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ═══════════ QUIZLET ═══════════ -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 5.1</h3>
+    <p>Повторите слова урока в приложении Quizlet: подключение услуг, фактура, тарифы, вежливые просьбы.</p>
+    <a href="https://quizlet.com/user/Interactive_school/folders/adultos" target="_blank" rel="noopener">Открыть папку «Adultos» →</a>
+  </div>
+</section>
+
+<!-- ═══════════ РЕСУРСЫ ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🔗</div><div class="step-title"><h2>Внешняя практика</h2><span class="time">Реальные порталы для тренировки звонков</span></div></div>
+  <div class="res-grid">
+    <div class="res-card"><h4>🌐 Endesa</h4><p>Подключение света онлайн</p><a href="https://www.endesa.com/" target="_blank" rel="noopener">Открыть →</a></div>
+    <div class="res-card"><h4>🌐 Iberdrola</h4><p>Подключение света и газа</p><a href="https://www.iberdrola.es/" target="_blank" rel="noopener">Открыть →</a></div>
+    <div class="res-card"><h4>🌐 Naturgy</h4><p>Свет, газ, интернет</p><a href="https://www.naturgy.com/" target="_blank" rel="noopener">Открыть →</a></div>
+    <div class="res-card"><h4>📺 YouTube</h4><p>Поиск: dar de alta luz España</p><a href="https://www.youtube.com/results?search_query=dar+de+alta+luz+España" target="_blank" rel="noopener">Смотреть →</a></div>
+    <div class="res-card"><h4>📺 YouTube</h4><p>Поиск: factura luz España explicación</p><a href="https://www.youtube.com/results?search_query=factura+luz+España+explicación" target="_blank" rel="noopener">Смотреть →</a></div>
+    <div class="res-card"><h4>🎮 Wordwall</h4><p>Поиск: suministros español</p><a href="https://wordwall.net/" target="_blank" rel="noopener">Играть →</a></div>
+  </div>
+</section>
+
+<!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+<div class="lesson-nav">
+  <a href="w04-l3.html">← Предыдущий<br><small>Урок 4.3 · Скрытые комиссии</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="w05-l2.html">Следующий →<br><small>Урок 5.2 · Интернет и связь (скоро)</small></a>
+</div>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España!</footer>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Grammar hints (тап на мобильном) =====
+document.addEventListener('click', function(e){
+  var hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){ if(el!==hint) el.classList.remove('active'); });
+  if(hint){ hint.classList.toggle('active'); e.stopPropagation(); }
+});
+
+// ===== РАЗМИНКА =====
+var warmQ=[
+  {q:'1. Что означает «letra pequeña»?',week:'w43',o:['мелкий шрифт','маленькая буква','тихий голос'],c:0},
+  {q:'2. Что такое «gastos de gestión»?',week:'w43',o:['расходы на управление','налоги','штрафы'],c:0},
+  {q:'3. Что означает «penalización»?',week:'w43',o:['штраф','продление','скидка'],c:0},
+  {q:'4. Как сказать «нужно подписать контракт»?',week:'w41',o:['Hay que firmar el contrato','Quiero firmar el contrato','Firmo el contrato'],c:0},
+  {q:'5. Как сказать «я заплачу завтра»?',week:'w42',o:['Voy a pagar mañana','Pago mañana','Pagaré mañana'],c:0},
+  {q:'6. Что такое «Bizum»?',week:'w42',o:['испанская система мгновенных переводов','банк','тариф'],c:0}
+];
+
+function renderWarmup(){
+  var el = document.getElementById('warmup-quiz');
+  el.innerHTML = '';
+  warmQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    var weekLabel = item.week==='w43'?'урок 4.3':item.week==='w42'?'урок 4.2':'урок 4.1';
+    d.innerHTML = '<h4>'+item.q+' <span class="quiz-week '+item.week+'">'+weekLabel+'</span></h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="wf-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('wf-'+qi);
+      if(oi === warmQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[warmQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+warmQ[qi].o[warmQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderWarmup();
+
+// ===== ЛЕКСИКА =====
+var VOCAB = {
+  connect:[
+    {es:'dar de alta', ru:'подключить (услугу)', ex:'Quisiera dar de alta la luz.', exRu:'Я хотел бы подключить свет.'},
+    {es:'dar de baja', ru:'отключить (услугу)', ex:'Quisiera dar de baja el gas.', exRu:'Я хотел бы отключить газ.'},
+    {es:'el alta', ru:'подключение', ex:'El alta de la luz tarda 3 días.', exRu:'Подключение света занимает 3 дня.'},
+    {es:'la baja', ru:'отключение', ex:'La baja es gratuita.', exRu:'Отключение бесплатное.'},
+    {es:'el suministro', ru:'коммунальная услуга', ex:'El suministro de agua es bimestral.', exRu:'Снабжение водой — раз в два месяца.'},
+    {es:'contratar', ru:'заключить договор', ex:'Quisiera contratar una tarifa.', exRu:'Я хотел бы заключить договор на тариф.'},
+    {es:'cancelar', ru:'отменить', ex:'Quisiera cancelar el contrato.', exRu:'Я хотел бы отменить договор.'}
+  ],
+  docs:[
+    {es:'la factura', ru:'счёт, квитанция', ex:'¿Podría enviarme la factura por email?', exRu:'Не могли бы вы отправить мне счёт по почте?'},
+    {es:'el recibo', ru:'квитанция', ex:'Aquí está el recibo de pago.', exRu:'Вот квитанция об оплате.'},
+    {es:'el importe', ru:'сумма', ex:'El importe es de 50 euros.', exRu:'Сумма — 50 евро.'},
+    {es:'pagar', ru:'платить', ex:'¿Cómo puedo pagar?', exRu:'Как я могу заплатить?'},
+    {es:'el pago', ru:'оплата', ex:'El pago es mensual.', exRu:'Оплата ежемесячная.'},
+    {es:'domiciliación bancaria', ru:'прямое списание с банка', ex:'¿Puedo pagar con domiciliación bancaria?', exRu:'Могу ли я платить прямым списанием?'},
+    {es:'el IBAN', ru:'международный номер счёта', ex:'Necesito su IBAN.', exRu:'Мне нужен ваш IBAN.'},
+    {es:'la cuenta bancaria', ru:'банковский счёт', ex:'¿Puedo pagar con mi cuenta bancaria?', exRu:'Могу ли я платить с банковского счёта?'}
+  ],
+  meters:[
+    {es:'el contador', ru:'счётчик', ex:'¿Dónde está el contador?', exRu:'Где находится счётчик?'},
+    {es:'la lectura del contador', ru:'показания счётчика', ex:'¿Puede tomar la lectura del contador?', exRu:'Можете снять показания счётчика?'},
+    {es:'el consumo', ru:'потребление', ex:'El consumo es de 200 kWh al mes.', exRu:'Потребление — 200 кВт·ч в месяц.'},
+    {es:'la potencia', ru:'мощность (электричество)', ex:'¿Qué potencia necesito?', exRu:'Какая мощность мне нужна?'},
+    {es:'los kWh', ru:'киловатт-часы', ex:'El consumo es en kWh.', exRu:'Потребление измеряется в кВт·ч.'},
+    {es:'el metro cúbico', ru:'кубический метр (вода, газ)', ex:'El agua se mide en metros cúbicos.', exRu:'Вода измеряется в кубических метрах.'}
+  ],
+  tariffs:[
+    {es:'la tarifa', ru:'тариф', ex:'¿Qué tarifa me recomienda?', exRu:'Какой тариф вы мне рекомендуете?'},
+    {es:'el precio', ru:'цена', ex:'¿Cuál es el precio por kWh?', exRu:'Какова цена за кВт·ч?'},
+    {es:'el contrato', ru:'договор', ex:'¿Cuánto dura el contrato?', exRu:'Сколько длится договор?'},
+    {es:'la permanencia', ru:'обязательный срок', ex:'¿Hay permanencia?', exRu:'Есть ли обязательный срок?'},
+    {es:'mensual', ru:'ежемесячный', ex:'El pago es mensual.', exRu:'Оплата ежемесячная.'},
+    {es:'bimestral', ru:'раз в два месяца', ex:'La factura es bimestral.', exRu:'Счёт приходит раз в два месяца.'}
+  ],
+  services:[
+    {es:'la luz', ru:'свет (электричество)', ex:'Quisiera dar de alta la luz.', exRu:'Я хотел бы подключить свет.'},
+    {es:'el agua', ru:'вода', ex:'El agua es un suministro municipal.', exRu:'Вода — муниципальная услуга.'},
+    {es:'el gas', ru:'газ', ex:'El gas es para la calefacción.', exRu:'Газ — для отопления.'},
+    {es:'la electricidad', ru:'электричество', ex:'La electricidad se paga por kWh.', exRu:'Электричество оплачивается по кВт·ч.'},
+    {es:'la calefacción', ru:'отопление', ex:'La calefacción es de gas.', exRu:'Отопление газовое.'}
+  ],
+  comm:[
+    {es:'llamar', ru:'звонить', ex:'Voy a llamar a Endesa.', exRu:'Я позвоню в Endesa.'},
+    {es:'la compañía', ru:'компания', ex:'¿Cuál es la compañía de luz?', exRu:'Какая компания по свету?'},
+    {es:'el cliente', ru:'клиент', ex:'Mi número de cliente es 12345678.', exRu:'Мой номер клиента — 12345678.'},
+    {es:'el número de cliente', ru:'номер клиента', ex:'¿Cuál es mi número de cliente?', exRu:'Какой мой номер клиента?'},
+    {es:'la referencia', ru:'референс (номер договора)', ex:'¿Puede darme la referencia?', exRu:'Можете дать мне референс?'}
+  ]
+};
+
+function showVocab(key,btn){
+  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML = '<div class="vocab-inner">'+
+      '<div class="vocab-front">'+
+        '<div class="es">'+w.es+'</div>'+
+        '<div class="ru">'+w.ru+'</div>'+
+        '<div class="flip-hint">нажмите, чтобы перевернуть ↻</div>'+
+      '</div>'+
+      '<div class="vocab-back">'+
+        '<div class="ex">«'+w.ex+'»</div>'+
+        '<div class="ex-ru">'+w.exRu+'</div>'+
+        '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
+      '</div>'+
+      '</div>';
+    c.onclick = function(){ c.classList.toggle('flipped'); };
+    g.appendChild(c);
+  });
+}
+showVocab('connect',document.querySelector('.tabs .tab'));
+
+// ===== ДИАЛОГ =====
+var dialogLines = [
+  'Buenos días, Endesa. Le atiende María. ¿En qué puedo ayudarle?',
+  'Buenos días. Quisiera dar de alta la luz en mi nuevo piso.',
+  'Muy bien. ¿Me puede decir su NIE, por favor?',
+  'Sí, mi NIE es X de Italia, doce, treinta y cuatro, cincuenta y seis, setenta y ocho, A.',
+  'Perfecto. ¿Cuál es la dirección del piso?',
+  'Calle Mayor, número quince, tercero B.',
+  'Muy bien. ¿Tiene el número de contador?',
+  'Sí, es ciento veintitrés mil cuatrocientos cincuenta y seis. La lectura actual es quinientos kilovatios hora.',
+  'Perfecto. ¿Qué tarifa prefiere? Tenemos la tarifa mensual y la bimestral.',
+  '¿Podría explicarme la diferencia?',
+  'La tarifa mensual cuesta cincuenta euros al mes. La bimestral cuesta cuarenta y cinco euros cada dos meses.',
+  '¿Hay permanencia?',
+  'No, no hay permanencia. Puede cancelar cuando quiera.',
+  'Perfecto. Quisiera contratar la tarifa mensual.',
+  'Muy bien. El alta tarda tres días. ¿Puede pagar con domiciliación bancaria?',
+  'Sí, tengo una cuenta bancaria. Mi IBAN es E S doce, treinta y cuatro, cincuenta y seis, setenta y ocho, noventa, doce, treinta y cuatro, cincuenta y seis, setenta y ocho.',
+  'Perfecto. Le enviaremos la confirmación por email. ¿Algo más?',
+  'No, muchas gracias. Hasta luego.',
+  'Hasta luego. Que tenga un buen día.'
+];
+
+function speakDialog(){
+  var text = dialogLines.join(' ');
+  speak(text);
+}
+
+function toggleDialogText(){
+  var el = document.getElementById('dialog-text');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// ===== АУДИРОВАНИЕ: ВИКТОРИНА =====
+var listeningQ=[
+  {q:'1. Какую услугу подключает клиент?',o:['свет (la luz)','воду (el agua)','газ (el gas)'],c:0},
+  {q:'2. Какие данные называет клиент?',o:['NIE, адрес, счётчик, показания','только имя','номер телефона'],c:0},
+  {q:'3. Какой тариф выбирает клиент?',o:['bimestral (раз в два месяца)','mensual (ежемесячный)','anual (ежегодный)'],c:1},
+  {q:'4. Есть ли обязательный срок (permanencia)?',o:['Да, 12 месяцев','Нет','Да, 6 месяцев'],c:1},
+  {q:'5. Сколько дней занимает подключение?',o:['1 день','3 дня','7 дней'],c:1}
+];
+
+function renderListeningQuiz(){
+  var el = document.getElementById('listening-quiz');
+  el.innerHTML = '<h4 style="margin-bottom:10px">🎧 Проверьте понимание</h4>';
+  listeningQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+'</h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="lq-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('lq-'+qi);
+      if(oi === listeningQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[listeningQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+listeningQ[qi].o[listeningQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderListeningQuiz();
+
+// ===== ЗАКРЕПЛЕНИЕ: СОПОСТАВЛЕНИЕ =====
+var MATCH_PAIRS = [
+  {id:1, es:'dar de alta', ru:'подключить'},
+  {id:2, es:'la factura', ru:'счёт'},
+  {id:3, es:'el contador', ru:'счётчик'},
+  {id:4, es:'la tarifa', ru:'тариф'},
+  {id:5, es:'la permanencia', ru:'обязательный срок'},
+  {id:6, es:'domiciliación bancaria', ru:'прямое списание'}
+];
+
+function renderMatchExercise(){
+  var container = document.getElementById('match-exercise');
+  container.innerHTML = '<div class="match-container"></div>';
+  var mc = container.querySelector('.match-container');
+
+  var colLeft = document.createElement('div');
+  colLeft.className = 'match-col';
+  var colRight = document.createElement('div');
+  colRight.className = 'match-col';
+
+  var rightItems = MATCH_PAIRS.slice().sort(function(){ return 0.5 - Math.random(); });
+
+  var selL = null, selR = null;
+
+  MATCH_PAIRS.forEach(function(pair){
+    var el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = pair.es;
+    el.dataset.id = pair.id;
+    el.onclick = function(){
+      if(el.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      el.classList.add('sel');
+      selL = el;
+      check();
+    };
+    colLeft.appendChild(el);
+  });
+
+  rightItems.forEach(function(pair){
+    var el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = pair.ru;
+    el.dataset.id = pair.id;
+    el.onclick = function(){
+      if(el.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      el.classList.add('sel');
+      selR = el;
+      check();
+    };
+    colRight.appendChild(el);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null;
+      selR = null;
+    }
+  }
+
+  mc.appendChild(colLeft);
+  mc.appendChild(colRight);
+}
+renderMatchExercise();
+
+// ===== ЗАКРЕПЛЕНИЕ: ФАКТУРА =====
+var facturaQ=[
+  {q:'1. Какой период покрывает фактура?',o:['январь — февраль 2027','март — апрель 2027','только январь'],c:0},
+  {q:'2. Каково потребление (consumo)?',o:['100 кВт·ч','200 кВт·ч','500 кВт·ч'],c:1},
+  {q:'3. Какова общая сумма (importe total)?',o:['50,00 €','80,00 €','96,80 €'],c:2},
+  {q:'4. Какой способ оплаты?',o:['наличными','domiciliación bancaria','картой'],c:1}
+];
+
+function renderFacturaQuiz(){
+  var el = document.getElementById('factura-quiz');
+  el.innerHTML = '<h4 style="margin-bottom:10px">📄 Проверьте понимание фактуры</h4>';
+  facturaQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+'</h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="fq-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('fq-'+qi);
+      if(oi === facturaQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[facturaQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+facturaQ[qi].o[facturaQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderFacturaQuiz();
+
+// ===== ПРОДУКТ: КОНСТРУКТОР СКРИПТА =====
+function buildScript(){
+  var nie = document.getElementById('script-nie').value || 'X-12345678-A';
+  var address = document.getElementById('script-address').value || 'Calle Mayor, 15, tercero B';
+  var meter = document.getElementById('script-meter').value || '123456';
+  var tariff = document.getElementById('script-tariff').value;
+  var iban = document.getElementById('script-iban').value || 'ES12 3456 7890 1234 5678';
+
+  var script = 'Buenos días. Quisiera dar de alta la luz en mi nuevo piso. Mi NIE es ' + nie + '. La dirección es ' + address + '. El número de contador es ' + meter + '. ¿Podría explicarme la tarifa? ¿Hay permanencia? Quisiera contratar la tarifa ' + tariff + '. ¿Puedo pagar con domiciliación bancaria? Mi IBAN es ' + iban + '. Muchas gracias. Hasta luego.';
+
+  var result = document.getElementById('script-result');
+  result.textContent = script;
+  result.classList.add('show');
+  document.getElementById('speak-script').style.display = 'inline-flex';
+}
+
+function speakScript(){
+  var text = document.getElementById('script-result').textContent;
+  if(text) speak(text);
+}
+
+// ===== ТРЕНАЖЁР =====
+var TRAIN_CARDS = [].concat(VOCAB.connect, VOCAB.docs, VOCAB.meters, VOCAB.tariffs, VOCAB.services, VOCAB.comm);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode,btn){
+  trainMode = mode;
+  document.querySelectorAll('.section .tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    var updateCard = function(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML = '<div class="vocab-inner">'+
+        '<div class="vocab-front">'+
+          '<div class="es" style="font-size:1.2rem">'+c.es+'</div>'+
+          '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+c.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+          '<div class="flip-hint">нажмите, чтобы перевернуть</div>'+
+        '</div>'+
+        '<div class="vocab-back">'+
+          '<div class="ex" style="font-size:1.1rem">'+c.ru+'</div>'+
+        '</div>'+
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    };
+    updateCard();
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML = '<button class="btn btn-ghost" id="train-prev">← Назад</button>'+
+      '<span id="trainer-counter" style="font-weight:700">1 / '+TRAIN_CARDS.length+'</span>'+
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var container = document.createElement('div');
+    container.className = 'match-container';
+
+    var pairs = MATCH_PAIRS;
+    var colLeft = document.createElement('div');
+    colLeft.className = 'match-col';
+    var colRight = document.createElement('div');
+    colRight.className = 'match-col';
+
+    var rightItems = pairs.slice().sort(function(){ return 0.5 - Math.random(); });
+
+    var selL = null, selR = null;
+
+    pairs.forEach(function(pair){
+      var el = document.createElement('div');
+      el.className = 'match-item';
+      el.textContent = pair.es;
+      el.dataset.id = pair.id;
+      el.onclick = function(){
+        if(el.classList.contains('done')) return;
+        if(selL) selL.classList.remove('sel');
+        el.classList.add('sel');
+        selL = el;
+        check();
+      };
+      colLeft.appendChild(el);
+    });
+
+    rightItems.forEach(function(pair){
+      var el = document.createElement('div');
+      el.className = 'match-item';
+      el.textContent = pair.ru;
+      el.dataset.id = pair.id;
+      el.onclick = function(){
+        if(el.classList.contains('done')) return;
+        if(selR) selR.classList.remove('sel');
+        el.classList.add('sel');
+        selR = el;
+        check();
+      };
+      colRight.appendChild(el);
+    });
+
+    function check(){
+      if(selL && selR){
+        if(selL.dataset.id === selR.dataset.id){
+          selL.classList.add('done');
+          selL.classList.remove('sel');
+          selR.classList.add('done');
+          selR.classList.remove('sel');
+        } else {
+          selL.classList.add('error');
+          selR.classList.add('error');
+          var l = selL, r = selR;
+          setTimeout(function(){
+            l.classList.remove('sel','error');
+            r.classList.remove('sel','error');
+          }, 600);
+        }
+        selL = null;
+        selR = null;
+      }
+    }
+
+    container.appendChild(colLeft);
+    container.appendChild(colRight);
+    box.appendChild(container);
+  }
+
+  if(trainMode === 'build'){
+    var phrases = [
+      'Quisiera dar de alta la luz',
+      '¿Podría explicarme la tarifa?',
+      '¿Hay permanencia?',
+      'Quisiera contratar la tarifa mensual',
+      '¿Puedo pagar con domiciliación bancaria?'
+    ];
+
+    var idx = 0;
+
+    function renderBuild(){
+      var sel = [];
+      box.innerHTML = '';
+      var target = phrases[idx];
+      var words = target.split(' ').sort(function(){ return 0.5 - Math.random(); });
+
+      var wordsContainer = document.createElement('div');
+      wordsContainer.className = 'build-words';
+      words.forEach(function(w){
+        var b = document.createElement('span');
+        b.className = 'bw';
+        b.textContent = w;
+        b.onclick = function(){
+          if(b.classList.contains('used')) return;
+          b.classList.add('used');
+          sel.push(w);
+          var chip = document.createElement('span');
+          chip.className = 'bw-line-item';
+          chip.textContent = w;
+          chip.onclick = function(){
+            chip.remove();
+            var i = sel.indexOf(w);
+            if(i > -1) sel.splice(i, 1);
+            b.classList.remove('used');
+          };
+          document.getElementById('train-build-line').appendChild(chip);
+        };
+        wordsContainer.appendChild(b);
+      });
+
+      var line = document.createElement('div');
+      line.className = 'build-line';
+      line.id = 'train-build-line';
+
+      var fb = document.createElement('div');
+      fb.className = 'build-feedback';
+
+      var btns = document.createElement('div');
+      btns.style.textAlign = 'center';
+      btns.innerHTML = '<button class="btn btn-primary" id="train-build-check">✓ Проверить</button>'+
+        '<button class="btn btn-ghost" id="train-build-next" style="margin-left:8px">Следующая фраза →</button>';
+
+      box.appendChild(wordsContainer);
+      box.appendChild(line);
+      box.appendChild(fb);
+      box.appendChild(btns);
+
+      document.getElementById('train-build-check').onclick = function(){
+        var got = sel.join(' ');
+        var fbEl = fb;
+        if(got === target){
+          fbEl.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+          fbEl.className = 'build-feedback ok';
+        } else {
+          fbEl.innerHTML = '<span>❌</span><span>Правильно: «'+target+'»</span>';
+          fbEl.className = 'build-feedback bad';
+        }
+      };
+
+      document.getElementById('train-build-next').onclick = function(){
+        idx = (idx + 1) % phrases.length;
+        renderBuild();
+      };
+    }
+
+    renderBuild();
+  }
+}
+renderTrain();
+
+// ===== СВЕТОФОР =====
+var TL = [
+  'Использовать фразы подключения (dar de alta/baja)',
+  'Называть коммунальные услуги (luz, agua, gas)',
+  'Использовать вежливые просьбы (quisiera, podría)',
+  'Понимать фактуру (счёт за электричество)',
+  'Провести звонок в компанию по скрипту',
+  'Составить скрипт звонка с данными'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t,rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+t+'</td>'+
+      '<td><button class="tl-cell green" data-row="'+rowIdx+'" data-color="1">🟢</button></td>'+
+      '<td><button class="tl-cell yellow" data-row="'+rowIdx+'" data-color="2">🟡</button></td>'+
+      '<td><button class="tl-cell red" data-row="'+rowIdx+'" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+</script>
+
+<!-- Скрипт-стек (обязательно перед </body>) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+</body>
+</html>

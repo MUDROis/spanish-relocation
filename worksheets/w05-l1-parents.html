@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 5.1 · Alta de suministros — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  /* ОДИН непрерывный лист — браузер сам режет на A4 */
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p3));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+  .note.red{ background:#FBF0ED; border-left-color:var(--p1);}
+
+  .factura-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; font-family:'Courier New',monospace; font-size:9.5px; line-height:1.7; margin-bottom:2mm;}
+  .factura-box .hdr{ background:var(--p4); color:#fff; padding:2mm 3mm; font-weight:700; font-size:10px; margin:-3mm -3mm 2mm; border-radius:6px 6px 0 0; text-align:center;}
+  .factura-box .line{ display:flex; justify-content:space-between; border-bottom:1px dashed #E8DCCF; padding:1px 0;}
+  .factura-box .total{ font-weight:800; color:var(--p1); border-top:2px solid var(--p4); margin-top:4px; padding-top:4px;}
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic;}
+  .dialog-line{ border-bottom:1px dashed #E8DCCF; padding:1mm 0; margin-bottom:1mm;}
+  .dialog-line .who{ font-weight:700; color:var(--p2);}
+  .dialog-line.op .who{ color:var(--p4);}
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;}
+  .sit-box b{ color:var(--p4);}
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ОДИН НЕПРЕРЫВНЫЙ ЛИСТ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>⚡ Рабочий лист · Урок 5.1 «Alta de suministros»</h1>
+    <div class="meta">Подключаем свет: звоним в компанию и понимаем фактуру</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>📚 Лексика: соедини термин и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. dar de alta</div>
+          <div class="item">2. la factura</div>
+          <div class="item">3. el contador</div>
+          <div class="item">4. la tarifa</div>
+          <div class="item">5. el consumo</div>
+          <div class="item">6. la potencia</div>
+          <div class="item">7. dar de baja</div>
+          <div class="item">8. la domiciliación bancaria</div>
+        </div>
+        <div class="col">
+          <div class="item">а) счёт, квитанция</div>
+          <div class="item">б) подключить</div>
+          <div class="item">в) счётчик</div>
+          <div class="item">г) тариф</div>
+          <div class="item">д) отключить</div>
+          <div class="item">е) потребление</div>
+          <div class="item">ж) мощность</div>
+          <div class="item">з) прямое списание с банка</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ГРАММАТИКА · ВЕЖЛИВЫЕ ПРОСЬБЫ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🧩 Грамматика: вежливые просьбы</h2><div class="tag">вставь Quisiera / ¿Podría + инфинитив</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>Quisiera + инфинитив</b> = Я хотел бы… · <b>¿Podría + инфинитив?</b> = Не могли бы вы…?</div>
+      1. <span class="wline short"></span> dar de alta la luz.
+      <span class="ru-sub">(Я хотел бы подключить свет.)</span><br>
+      2. <span class="wline short"></span> explicarme la tarifa?
+      <span class="ru-sub">(Не могли бы вы объяснить мне тариф?)</span><br>
+      3. <span class="wline short"></span> contratar la tarifa mensual.
+      <span class="ru-sub">(Я хотел бы заключить договор на ежемесячный тариф.)</span><br>
+      4. <span class="wline short"></span> darme una cita?
+      <span class="ru-sub">(Не могли бы вы дать мне приём?)</span><br>
+      5. <span class="wline short"></span> hablar con atención al cliente.
+      <span class="ru-sub">(Я хотел бы поговорить со службой поддержки.)</span>
+      <div class="note red" style="margin-top:2mm">
+        ⚠️ <b>Не говори грубо:</b> вместо «Dame la factura» → <b>¿Podría darme la factura?</b> · вместо «Quiero hablar» → <b>Quisiera hablar</b>.
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 3: ЧТЕНИЕ · ФАКТУРА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>📖 Чтение: фактура за электричество</h2><div class="tag">прочитай документ и ответь на вопросы</div></div></div>
+    <div class="card">
+      <div class="factura-box">
+        <div class="hdr">FACTURA DE LA LUZ — ENDESA</div>
+        <div class="line"><span>Número de cliente:</span><span>12345678</span></div>
+        <div class="line"><span>Período:</span><span>enero — febrero 2027</span></div>
+        <div class="line"><span>Lectura anterior:</span><span>300 kWh</span></div>
+        <div class="line"><span>Lectura actual:</span><span>500 kWh</span></div>
+        <div class="line"><span>Consumo:</span><span>200 kWh</span></div>
+        <div class="line"><span>Tarifa mensual:</span><span>50,00 €</span></div>
+        <div class="line"><span>Consumo (200 kWh):</span><span>30,00 €</span></div>
+        <div class="line"><span>IVA (21%):</span><span>16,80 €</span></div>
+        <div class="line total"><span>IMPORTE TOTAL:</span><span>96,80 €</span></div>
+        <div class="line"><span>Fecha de pago:</span><span>15 de febrero 2027</span></div>
+        <div class="line"><span>Pago:</span><span>domiciliación bancaria</span></div>
+      </div>
+      1. ¿Cuál es el período de la factura?
+      <span class="ru-sub">(Какой период покрывает фактура?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Cuánto es el consumo?
+      <span class="ru-sub">(Каково потребление?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Cuál es el importe total?
+      <span class="ru-sub">(Какова общая сумма?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuál es el método de pago?
+      <span class="ru-sub">(Какой способ оплаты?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Cuándo es la fecha de pago?
+      <span class="ru-sub">(Когда дата оплаты?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>🎧 Аудирование: звонок в компанию</h2><div class="tag">попроси родителя прочитать диалог вслух</div></div></div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя: прочитать вслух 2 раза (медленно):</b>
+        <div class="dialog-line op"><span class="who">Оператор:</span> Buenos días, Endesa. Le atiende María. ¿En qué puedo ayudarle?</div>
+        <div class="dialog-line"><span class="who">Клиент:</span> Buenos días. Quisiera dar de alta la luz en mi nuevo piso.</div>
+        <div class="dialog-line op"><span class="who">Оператор:</span> Muy bien. ¿Me puede decir su NIE, por favor?</div>
+        <div class="dialog-line"><span class="who">Клиент:</span> Sí, mi NIE es X-12345678-A.</div>
+        <div class="dialog-line op"><span class="who">Оператор:</span> Perfecto. ¿Qué tarifa prefiere? Tenemos la mensual y la bimestral.</div>
+        <div class="dialog-line"><span class="who">Клиент:</span> ¿Podría explicarme la diferencia?</div>
+        <div class="dialog-line op"><span class="who">Оператор:</span> La mensual cuesta 50 euros al mes. La bimestral cuesta 45 euros cada dos meses.</div>
+        <div class="dialog-line"><span class="who">Клиент:</span> ¿Hay permanencia?</div>
+        <div class="dialog-line op"><span class="who">Оператор:</span> No, no hay permanencia. Puede cancelar cuando quiera.</div>
+        <div class="dialog-line"><span class="who">Клиент:</span> Perfecto. Quisiera contratar la tarifa mensual.</div>
+      </div>
+      1. ¿Qué quiere el cliente?
+      <span class="ru-sub">(Что хочет клиент?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Cuántas tarifas hay?
+      <span class="ru-sub">(Сколько тарифов есть?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Hay permanencia?
+      <span class="ru-sub">(Есть ли обязательный срок?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Qué tarifa elige el cliente?
+      <span class="ru-sub">(Какой тариф выбирает клиент?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>🗣 Говорение: ситуации с компанией</h2><div class="tag">запиши свой ответ по шаблону</div></div></div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы хотите подключить свет. Что скажете?<br>
+        <b>Шаблон:</b> <i>«Quisiera dar de alta la luz en mi nuevo piso.»</i>
+        <span class="ru-sub">(Я хотел бы подключить свет в моей новой квартире.)</span><br>
+        <b>Твой ответ:</b> <span class="wline xlong"></span>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы хотите узнать про тарифы. Что спросите?<br>
+        <b>Шаблон:</b> <i>«¿Podría explicarme la tarifa?»</i>
+        <span class="ru-sub">(Не могли бы вы объяснить мне тариф?)</span><br>
+        <b>Твой ответ:</b> <span class="wline xlong"></span>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы хотите узнать про обязательный срок. Что спросите?<br>
+        <b>Шаблон:</b> <i>«¿Hay permanencia?»</i>
+        <span class="ru-sub">(Есть ли обязательный срок?)</span><br>
+        <b>Твой ответ:</b> <span class="wline xlong"></span>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы хотите заключить договор. Что скажете?<br>
+        <b>Шаблон:</b> <i>«Quisiera contratar la tarifa mensual.»</i>
+        <span class="ru-sub">(Я хотел бы заключить договор на ежемесячный тариф.)</span><br>
+        <b>Твой ответ:</b> <span class="wline xlong"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>✍️ Письмо: скрипт звонка в компанию</h2><div class="tag">7–8 предложений по плану</div></div></div>
+    <div class="card">
+      <div class="formula">
+        <b>План скрипта:</b><br>
+        1. Приветствие и цель: «Buenos días. Quisiera dar de alta la luz.»<br>
+        2. Данные: NIE, адрес, номер счётчика.<br>
+        3. Вопросы о тарифе и обязательных сроках.<br>
+        4. Выбор тарифа.<br>
+        5. Оплата (domiciliación bancaria).<br>
+        6. Прощание.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+      <div class="note green" style="margin-top:2mm">
+        💡 <b>Совет:</b> после написания прочитай скрипт вслух и запиши голосовое. Это и есть продукт урока — «Звонок в электрическую компанию».
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Использовать фразы подключения (dar de alta / dar de baja)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать вежливые просьбы (quisiera, podría)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать фактуру (счёт за электричество)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Называть коммунальные услуги (luz, agua, gas)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Задавать вопросы о тарифе и обязательных сроках</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Составить скрипт звонка</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист и отправь преподавателю — проверим вместе!</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
