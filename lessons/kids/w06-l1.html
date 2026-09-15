@@ -200,6 +200,44 @@
     </div>
   </section>
 
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: из школы в класс</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">
+      В уроке 15 ты узнал, как устроена испанская школа: ступени и расписание. Проверим, как ты отвечаешь другу из Испании, — а потом откроем дверь класса!
+    </div>
+
+    <div class="game-zone">
+      <p style="font-weight:800">❓ Вопрос 1. Друг спрашивает: <em>«¿En qué etapa estás?»</em> — «В какой ступени ты учишься?»</p>
+      <div class="opts" id="warm-q1">
+        <button class="opt" data-ok="0" onclick="warmPick(this,'warm-q1','warm-f1',0)">Estoy en Infantil, de tres a seis años.</button>
+        <button class="opt" data-ok="1" onclick="warmPick(this,'warm-q1','warm-f1',0)">Estoy en Primaria, de seis a doce años.</button>
+        <button class="opt" data-ok="0" onclick="warmPick(this,'warm-q1','warm-f1',0)">Estoy en la universidad, tengo veinte años.</button>
+      </div>
+      <div class="game-fb" id="warm-f1"></div>
+    </div>
+
+    <div class="game-zone">
+      <p style="font-weight:800">❓ Вопрос 2. Друг про расписание: <em>«¿Qué tienes el lunes?»</em> — «Что у тебя в понедельник?»</p>
+      <div class="opts" id="warm-q2">
+        <button class="opt" data-ok="1" onclick="warmPick(this,'warm-q2','warm-f2',0)">El lunes tengo Mates a las nueve.</button>
+        <button class="opt" data-ok="0" onclick="warmPick(this,'warm-q2','warm-f2',0)">El lunes tengo la siesta a las nueve.</button>
+        <button class="opt" data-ok="0" onclick="warmPick(this,'warm-q2','warm-f2',0)">El lunes son las nueve en punto.</button>
+      </div>
+      <div class="game-fb" id="warm-f2"></div>
+    </div>
+
+    <p class="block-sub">🗣 Готовые шаблоны ответов — нажми 🔊, повтори вслух и замени слова на свои!</p>
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="word-card" onclick="speak('Estoy en Primaria, de seis a doce años, en el colegio.')"><span class="emo">🏫</span><div class="es">Estoy en Primaria, de seis a doce años</div><div class="ru">Я в Примарии, с 6 до 12 лет, в colegio</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('El lunes a las nueve tengo Mates.')"><span class="emo">📅</span><div class="es">El lunes a las nueve tengo Mates</div><div class="ru">В понедельник в 9 у меня математика</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('La jornada continua es de nueve a dos.')"><span class="emo">⏱</span><div class="es">La jornada continua es de nueve a dos</div><div class="ru">Уроки идут с 9 до 14 без перерыва</div><button class="speak-btn">🔊</button></div>
+    </div>
+  </section>
+
   <!-- БЛОК 1 -->
   <section class="block" style="--c:#2A9D8F">
     <div class="block-head">
@@ -466,6 +504,21 @@ function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
 function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
 function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* БЛОК 0: РАЗМИНКА */
+function warmPick(btn,boxId,fbId,correct){
+  var box=document.getElementById(boxId),fb=document.getElementById(fbId);
+  var bs=box.querySelectorAll('.opt');
+  bs.forEach(function(b){b.disabled=true;b.classList.remove('correct','wrong');});
+  if(btn.dataset.ok==='1'){
+    btn.classList.add('correct');
+    fb.textContent='✅ ¡Muy bien!';
+  }else{
+    btn.classList.add('wrong');
+    bs[correct].classList.add('correct');
+    fb.textContent='❌ Правильно: '+bs[correct].textContent;
+  }
+}
 
 /* БЛОК 3: ГДЕ ЛАСТИК */
 var PREPS=['en','encima de','debajo de','al lado de','delante de','detrás de'];

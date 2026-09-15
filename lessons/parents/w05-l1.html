@@ -1,33 +1,62 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFF7EF">
 <title>Урок 5.1 · Alta de suministros — МУДРО</title>
+<meta name="description" content="Урок 5.1: подключаем свет, воду и газ в Испании — 37 слов в 6 категориях (подключение, документы, счётчики, тарифы), вежливые просьбы quisiera / podría, звонок в энергокомпанию, чтение фактуры, ролевая игра и скрипт звонка.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);--ok:#7A8B4C;--bad:#E2725B}
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
   a{color:var(--p4)}
-  .topbar{background:var(--card);box-shadow:var(--shadow);padding:12px 0;position:sticky;top:0;z-index:100}
-  .topbar .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
-  .topbar a{text-decoration:none;font-weight:700;color:var(--ink)}
-  .topbar a:hover{color:var(--p1)}
-  .lesson-badge{font-size:.85rem;color:var(--muted);font-weight:600}
-  .hero{background:linear-gradient(135deg,var(--p1),var(--p3));color:#fff;padding:44px 20px 38px;text-align:center}
-  .hero h1{font-size:2rem;margin-bottom:8px}
-  .hero p{font-size:1.1rem;opacity:.95;max-width:640px;margin:0 auto}
-  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
-  .hero-chip{background:rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:700}
-  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
-  .section:nth-child(even){background:var(--card)}
-  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
-  .step-num.c2{background:var(--p2)}.step-num.c3{background:var(--p3)}.step-num.c4{background:var(--p4)}
-  .step-title h2{font-size:1.3rem}
-  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+  .section{max-width:1100px;margin:0 auto;padding:34px 20px}
+  .step-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+  .step-num{flex:0 0 46px;height:46px;border-radius:50%;background:var(--p1);color:#fff;font-weight:900;display:inline-grid;place-items:center;font-size:1.2rem}
+  .step-time{font-weight:900;color:var(--muted);font-size:.82rem;letter-spacing:.3px;text-transform:uppercase;display:block;margin-bottom:2px}
+  h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
+  .sub{color:var(--muted);font-style:normal;margin:8px 0 22px;max-width:760px;line-height:1.6}
   .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
   .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+
+  .warm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .warm-card{background:var(--card);border:2px solid #F0E4D5;border-radius:14px;padding:16px 16px 14px;box-shadow:none}
+  .warm-card h4{font-size:.95rem;font-weight:900;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .warm-card h4 .q-num{flex:0 0 28px;height:28px;border-radius:50%;background:var(--p1);color:#fff;font-size:.8rem;display:inline-grid;place-items:center}
+  .warm-line{background:#F7F0E6;border-radius:10px;padding:9px 12px;margin-bottom:8px;font-size:.92rem}
+  .warm-line b{color:var(--ink)}
+  .warm-line .who{display:block;font-size:.72rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  .warm-line.answer{background:#EAF2E0;border-left:3px solid var(--p2)}
+  .warm-line.answer .who{color:var(--p2)}
+  .inner-note{font-size:.82rem;color:var(--muted);font-weight:600;margin-top:6px}
+
+  .hw-send{margin-top:16px;background:#2B2118;color:#FFD75E;border-radius:14px;padding:16px 20px;font-weight:800;font-size:.93rem}
+  .hw-send p{color:#fff;margin-bottom:6px}
+  .hw-send li{margin:4px 0;list-style:none;padding-left:26px;position:relative;color:#fff;font-weight:800}
+  .hw-send li::before{content:'🎯';position:absolute;left:0}
+
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
   .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
   .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
@@ -36,25 +65,34 @@
   .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
   .speak-btn:hover{background:#66743f}
   .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
-  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+  .tab{background:#fff;border:2px solid rgba(43,33,24,.15);border-radius:999px;padding:9px 16px;font-weight:900;cursor:pointer;font-size:.85rem;transition:.15s}
+  .tab:hover{border-color:var(--p3)}
+  .tab.active{background:var(--p1);color:#fff;border-color:var(--p1)}
 
-  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  .flash-static{position:relative;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border-top:5px solid var(--p4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px 16px;text-align:center;min-height:150px;transition:transform .15s}
+  .flash-static:hover{transform:translateY(-3px)}
+  .flash-static .flash-word{font-weight:900;font-size:clamp(.98rem,2.2vw,1.12rem);line-height:1.3}
+  .flash-static .flash-ru{font-weight:800;font-size:.92rem;color:var(--p2)}
+  .flash-static .flash-example{font-size:.8rem;font-weight:700;color:var(--muted);font-style:italic;margin-top:4px;line-height:1.4}
+  .flash-exru{font-size:.78rem;font-weight:700;color:var(--p2);margin-top:2px;line-height:1.4}
+  .flash-static .speak-btn{background:rgba(0,0,0,.06);color:var(--ink)}
+  .flash-static .speak-btn:hover{background:var(--p2);color:#fff;transform:scale(1.12)}
+
+  /* Карточка тренажёра — как флеш-карточка уроков, но с переворотом */
+  .vocab-card{perspective:1000px;height:240px;cursor:pointer;max-width:480px}
   .vocab-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
   .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
-  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
-  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
-  .vocab-front .es{font-size:1.15rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
-  .vocab-front .ru{font-size:.95rem;opacity:.9;font-weight:600;color:#fff}
-  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.7;color:#fff}
-  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
-  .vocab-back .ex{font-size:1rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3}
-  .vocab-back .ex-ru{font-size:.9rem;color:var(--muted);font-style:italic;line-height:1.3}
-
-  /* Контраст подсказок на синем фоне карточек */
-  .vocab-back .grammar-hint{color:var(--p4)}
-  .vocab-front .grammar-hint{color:#fff;border-bottom-color:rgba(255,255,255,.75)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px;text-align:center;border:2px solid #E8DCCF;background:var(--card)}
+  .vocab-front{border-top:5px solid var(--p4)}
+  .vocab-front .es{font-size:1.35rem;font-weight:900;line-height:1.3}
+  .vocab-front .flip-hint{font-size:.72rem;color:var(--muted);font-weight:800}
+  .vocab-back{border-top:5px solid var(--p2);transform:rotateY(180deg)}
+  .vocab-back .ru{font-size:1.2rem;font-weight:900}
+  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--p4);line-height:1.4}
+  .vocab-back .ex-ru{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.4}
+  #train-box .speak-btn{background:rgba(0,0,0,.06);color:var(--p2)}
+  #train-box .speak-btn:hover{background:var(--p2);color:#fff}
 
   .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
   .grammar-box h4{color:var(--p4);margin-bottom:6px}
@@ -150,6 +188,7 @@
   .dialog-line .speaker{font-weight:800;font-size:.85rem;margin-bottom:4px}
   .dialog-line.client .speaker{color:var(--p2)}
   .dialog-line.operator .speaker{color:var(--p4)}
+  .dialog-line .ru{font-size:.82rem;color:var(--muted);margin-top:4px;line-height:1.4}
 
   /* Ролевая игра */
   .roleplay-step{background:#fff;border:2px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px}
@@ -168,39 +207,63 @@
 </style>
 </head>
 <body>
+<script>document.body.insertAdjacentHTML('afterbegin','<div id="gate-overlay" style="position:fixed;inset:0;z-index:99999;background:#FFF7EF"></div>');</script>
 
-<div class="topbar"><div class="inner">
-  <a href="../../index.html">← К карте курса</a>
-  <span class="lesson-badge">Неделя 5 · Урок 1 из 3 · Фаза 1 Misión Residencia</span>
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 5 · Урок 1 из 3 · Фаза 1 Misión Residencia</span>
+  <span id="auth-area"></span>
 </div></div>
 
-<section class="hero">
-  <h1>⚡ Урок 5.1 · Alta de suministros</h1>
-  <p>Подключаем свет, воду и газ: звоним в компании и понимаем фактуры</p>
-  <div class="hero-chips">
-    <span class="hero-chip">🎯 Цель: подключить свет за один звонок</span>
-    <span class="hero-chip">🗣 37 слов в 6 категориях</span>
-    <span class="hero-chip">🧩 Вежливые просьбы: quisiera, podría</span>
-    <span class="hero-chip">📋 Продукт: скрипт звонка</span>
+<section class="lesson-hero">
+  <span class="phase-tag">📍 Фаза 1 · Документы и жильё</span>
+  <h1>Урок 5.1 · <em>Alta de suministros</em> — подключаем свет, воду и газ</h1>
+  <div class="lesson-meta">
+    <span class="meta-chip">🎯 Цель: подключить свет за один звонок</span>
+    <span class="meta-chip">🗣 37 слов в 6 категориях</span>
+    <span class="meta-chip">🧩 Вежливые просьбы: quisiera, podría</span>
+    <span class="meta-chip">📋 Продукт: скрипт звонка</span>
+    <span class="meta-chip">⏱ 50 минут · A1→A2</span>
   </div>
 </section>
 
 <!-- ═══════════ ШАГ 0: РАЗМИНКА ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">0</div><div class="step-title"><h2>Разминка: повторяем неделю 4</h2><span class="time">00:00 – 05:00 · Блиц-квиз</span></div></div>
+  <div class="step-head"><span class="step-num">0</span><div><span class="step-time">00:00 – 05:00 · Разминка</span><h2>Повторяем слова недели и одну ситуацию из жизни</h2></div></div>
+  <p class="sub">Сначала — быстрый квиз по словам недели 4 (они вернутся сегодня в оплате по IBAN). Потом — одна живая ситуация: разговариваем в кафе. Отвечаем вслух по шаблону, нажимаем 🔊, чтобы услышать образец.</p>
+
   <div class="card">
-    <p class="hint">Контракт подписан, счёт в банке открыт. Пора подключать свет! Но сначала проверим базу недели 4. Отвечайте быстро!</p>
+    <h4>🔁 Слова с прошлых уроков (неделя 4)</h4>
+    <p class="sub">Нажмите на правильный ответ — проверка сразу.</p>
     <div id="warmup-quiz"></div>
-    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:14px">↺ Пройти ещё раз</button>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="card">
+    <h4>☕ Одна ситуация: в кафе</h4>
+    <div class="warm-grid">
+      <div class="warm-card">
+        <h4><span class="q-num">1</span>☕ В кафе</h4>
+        <div class="warm-line"><span class="who">Официант спрашивает</span><b>¿Qué desea?</b> — Что вам угодно? <button class="speak-btn" onclick="speak('¿Qué desea?')">🔊</button></div>
+        <div class="warm-line answer"><span class="who">Ваш ответ-шаблон</span><b>Un café con leche y una tostada, por favor.</b> — Кофе с молоком и тост, пожалуйста. <button class="speak-btn" onclick="speak('Un café con leche y una tostada, por favor.')">🔊</button></div>
+        <div class="warm-line"><span class="who">Официант спрашивает</span><b>¿Algo más?</b> — Что-нибудь ещё? <button class="speak-btn" onclick="speak('¿Algo más?')">🔊</button></div>
+        <div class="warm-line answer"><span class="who">Ваш ответ-шаблон</span><b>No, nada más, gracias.</b> — Нет, больше ничего, спасибо. <button class="speak-btn" onclick="speak('No, nada más, gracias.')">🔊</button></div>
+        <div class="inner-note">Подставьте своё: «Un agua, por favor», «Un zumo de naranja…»</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note green">
+    🧩 <b>Мост к теме:</b> сегодня мы звоним в энергокомпанию. Как в кафе вы спокойно отвечаете «Un café con leche, por favor», так и оператору отвечаем готовыми шаблонами — «Quisiera dar de alta la luz», «¿Podría explicarme la tarifa?». А слова недели 4 (cuenta, transferencia, Bizum) понадобятся, когда поговорим об оплате по domiciliación bancaria.
   </div>
 </section>
 
 <!-- ═══════════ ШАГ 1: ЛЕКСИКА ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">1</div><div class="step-title"><h2>Лексика: анатомия коммунальных услуг</h2><span class="time">05:00 – 15:00 · 37 слов в 6 категориях</span></div></div>
+  <div class="step-head"><span class="step-num">1</span><div><span class="step-time">05:00 – 15:00 · Лексика</span><h2>Анатомия коммунальных услуг: 37 слов в 6 категориях</h2></div></div>
   <div class="card">
-    <p class="hint">Лицевая сторона — слово и перевод, оборот — пример из реального звонка. Переключайте вкладки по категориям.</p>
-    <div class="tabs">
+    <p class="sub">Карточка показывает слово, перевод и пример из реального звонка. Нажмите 🔊, чтобы услышать пример вслух. Переключайте вкладки по категориям.</p>
+    <div class="tabs" id="vocab-tabs">
       <button class="tab active" onclick="showVocab('connect',this)">🔌 Подключение (7)</button>
       <button class="tab" onclick="showVocab('docs',this)">📄 Документы (8)</button>
       <button class="tab" onclick="showVocab('meters',this)">🔢 Счётчики (6)</button>
@@ -209,13 +272,7 @@
       <button class="tab" onclick="showVocab('comm',this)">📞 Коммуникация (5)</button>
     </div>
     <div class="vocab-grid" id="vocab-grid"></div>
-    <div class="note red" style="margin-top:16px">
-      ⚠️ <b>Ложные друзья переводчика:</b><br>
-      • <b>la potencia</b> ≠ рус. «потенция». Это «мощность» (электричество)!<br>
-      • <b>el contador</b> ≠ рус. «контейнер». Это «счётчик»!<br>
-      • <b>la tarifa</b> ≠ рус. «тарификация». Это просто «тариф»!
-    </div>
-    <div class="note green" style="margin-top:10px">
+    <div class="note green" style="margin-top:16px">
       💡 <b>Культурный нюанс:</b> В Испании подключение коммунальных услуг — это всегда звонок или онлайн-форма. Нельзя просто «прийти и подключить». Нужно: 1) позвонить в компанию, 2) назвать данные (NIE, IBAN, адрес, показания счётчика), 3) подождать 3–5 дней до подключения.
     </div>
     <div class="note blue" style="margin-top:10px">
@@ -229,9 +286,9 @@
 
 <!-- ═══════════ ШАГ 2: ГРАММАТИКА ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num c2">2</div><div class="step-title"><h2>Грамматика: вежливые просьбы</h2><span class="time">15:00 – 23:00 · quisiera, podría</span></div></div>
+  <div class="step-head"><span class="step-num">2</span><div><span class="step-time">15:00 – 23:00 · Грамматика</span><h2>Вежливые просьбы: quisiera, podría</h2></div></div>
   <div class="card">
-    <p class="hint">В Испании вежливость открывает все двери. Вместо прямого «Quiero…» используйте условное наклонение — и операторы пойдут навстречу.</p>
+    <p class="sub">В Испании вежливость открывает все двери. Вместо прямого «Quiero…» используйте условное наклонение — и операторы пойдут навстречу.</p>
 
     <div class="grammar-box">
       <h4>🙏 Quisiera + инфинитив (Я хотел бы…)</h4>
@@ -278,9 +335,9 @@
 
 <!-- ═══════════ ШАГ 3: АУДИРОВАНИЕ ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num c3">3</div><div class="step-title"><h2>Аудирование: звонок в компанию</h2><span class="time">23:00 – 30:00 · Диалог с оператором</span></div></div>
+  <div class="step-head"><span class="step-num">3</span><div><span class="step-time">23:00 – 30:00 · Аудирование</span><h2>Звонок в энергокомпанию</h2></div></div>
   <div class="card">
-    <p class="hint">Прослушайте реальный диалог. Сначала слушайте без текста, затем откройте транскрипт (кликните по нему — каждая реплика озвучивается). Ответьте на вопросы!</p>
+    <p class="sub">Прослушайте реальный диалог. Сначала слушайте без текста, затем откройте транскрипт (кликните по нему — каждая реплика озвучивается). Ответьте на вопросы!</p>
     <div class="dialog-box">
       <div class="hdr">🎧 Llamada a la compañía eléctrica</div>
       <button class="btn btn-blue" onclick="speakDialog()" style="margin-bottom:14px">▶ Прослушать диалог</button>
@@ -313,16 +370,16 @@
 
 <!-- ═══════════ ШАГ 4: ЗАКРЕПЛЕНИЕ ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num c4">4</div><div class="step-title"><h2>Закрепление: сопоставление и фактура</h2><span class="time">30:00 – 37:00 · Упражнения</span></div></div>
+  <div class="step-head"><span class="step-num">4</span><div><span class="step-time">30:00 – 37:00 · Закрепление</span><h2>Сопоставление и фактура</h2></div></div>
   <div class="card">
     <h4 style="margin-bottom:10px">🧩 Упражнение 1: Сопоставь фразу и перевод</h4>
-    <p class="hint">Нажмите испанскую фразу слева, затем её перевод справа. Зелёный — пара собрана!</p>
+    <p class="sub">Нажмите испанскую фразу слева, затем её перевод справа. Зелёный — пара собрана!</p>
     <div id="match-exercise"></div>
     <button class="btn btn-ghost" onclick="renderMatchExercise()" style="margin-top:10px">↺ Перемешать заново</button>
   </div>
   <div class="card">
     <h4 style="margin-bottom:10px">📄 Упражнение 2: Читаем фактуру</h4>
-    <p class="hint">Перед вами фактура за электричество. Найдите данные клиента, показания, тариф и итог. Ответьте на вопросы ниже!</p>
+    <p class="sub">Перед вами фактура за электричество. Найдите данные клиента, показания, тариф и итог. Ответьте на вопросы ниже!</p>
     <div class="factura-box">
       <div class="hdr">FACTURA DE LA LUZ — ENDESA</div>
       <div class="line"><span>Número de cliente:</span><span>12345678</span></div>
@@ -343,43 +400,35 @@
 
 <!-- ═══════════ ШАГ 5: ПРАКТИКА ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">5</div><div class="step-title"><h2>Практика: ролевая игра «Звонок»</h2><span class="time">37:00 – 45:00 · Инспектор ↔ оператор</span></div></div>
+  <div class="step-head"><span class="step-num">5</span><div><span class="step-time">37:00 – 45:00 · Практика</span><h2>Ролевая игра «Звонок»: инспектор ↔ оператор</h2></div></div>
   <div class="card">
-    <p class="hint">Преподаватель играет оператора, вы — клиента. Отработайте все 5 этапов звонка. Произнесите каждый этап вслух!</p>
+    <p class="sub">Полный диалог «Звонок в энергокомпанию»: оператор ↔ инспектор. Читайте по ролям вслух: один — оператор (синие реплики), второй — инспектор, подключающий свет (зелёные реплики). Затем поменяйтесь ролями. Нажимайте 🔊, чтобы услышать образец.</p>
 
-    <div class="roleplay-step">
-      <div class="step-label">📞 Этап 1: Приветствие и цель звонка</div>
-      <div class="phrase">Buenos días. Quisiera dar de alta la luz en mi nuevo piso.</div>
-      <div class="translation">Добрый день. Я хотел бы подключить свет в моей новой квартире.</div>
-      <button class="speak-btn" onclick="speak('Buenos días. Quisiera dar de alta la luz en mi nuevo piso.')" style="margin-top:8px">🔊</button>
-    </div>
+    <div class="dialog-box">
+      <div class="hdr">🎭 Llamada: inspector ↔ operador</div>
 
-    <div class="roleplay-step">
-      <div class="step-label">🪪 Этап 2: Данные (NIE, адрес, счётчик)</div>
-      <div class="phrase">Mi NIE es X-12345678-A. La dirección es Calle Mayor, 15, tercero B. El número de contador es 123456.</div>
-      <div class="translation">Мой NIE — X-12345678-A. Адрес — улица Майор, 15, третий Б. Номер счётчика — 123456.</div>
-      <button class="speak-btn" onclick="speak('Mi NIE es X de Italia, doce, treinta y cuatro, cincuenta y seis, setenta y ocho, A. La dirección es Calle Mayor, quince, tercero B. El número de contador es ciento veintitrés mil cuatrocientos cincuenta y seis.')" style="margin-top:8px">🔊</button>
-    </div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>Buenos días, Endesa. Le atiende María. ¿En qué puedo ayudarle? <button class="speak-btn" onclick="speak('Buenos días, Endesa. Le atiende María. ¿En qué puedo ayudarle?')">🔊</button><div class="ru">Добрый день, «Эндеса», вас слушает Мария. Чем могу помочь?</div></div>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>Buenos días. Quisiera dar de alta la luz en mi nuevo piso. <button class="speak-btn" onclick="speak('Buenos días. Quisiera dar de alta la luz en mi nuevo piso.')">🔊</button><div class="ru">Добрый день. Я хотел бы подключить свет в моей новой квартире.</div></div>
 
-    <div class="roleplay-step">
-      <div class="step-label">💶 Этап 3: Вопросы о тарифе</div>
-      <div class="phrase">¿Podría explicarme la tarifa? ¿Hay permanencia? ¿Cuál es el precio por kWh?</div>
-      <div class="translation">Не могли бы вы объяснить мне тариф? Есть ли обязательный срок? Какова цена за кВт·ч?</div>
-      <button class="speak-btn" onclick="speak('¿Podría explicarme la tarifa? ¿Hay permanencia? ¿Cuál es el precio por kilovatio hora?')" style="margin-top:8px">🔊</button>
-    </div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>Muy bien. ¿Me puede decir su NIE, por favor? <button class="speak-btn" onclick="speak('Muy bien. ¿Me puede decir su NIE, por favor?')">🔊</button><div class="ru">Отлично. Назовите, пожалуйста, ваш NIE.</div></div>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>Sí, mi NIE es X-12345678-A. <button class="speak-btn" onclick="speak('Sí, mi NIE es X trece cero ocho cuatro tres que cinco seis dos siete ocho guion A.')">🔊</button><div class="ru">Да, мой NIE — X-12345678-A.</div></div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>¿Cuál es la dirección del piso? <button class="speak-btn" onclick="speak('¿Cuál es la dirección del piso?')">🔊</button><div class="ru">Какой адрес у квартиры?</div></div>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>La dirección es Calle Mayor, 15, tercero B. <button class="speak-btn" onclick="speak('La dirección es Calle Mayor, quince, tercero B.')">🔊</button><div class="ru">Адрес: улица Майор, 15, третий Б.</div></div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>¿Tiene el número de contador? <button class="speak-btn" onclick="speak('¿Tiene el número de contador?')">🔊</button><div class="ru">У вас есть номер счётчика?</div></div>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>Sí, el número de contador es 123456. La lectura actual es 500 kWh. <button class="speak-btn" onclick="speak('Sí, el número de contador es ciento veintitrés mil cuatrocientos cincuenta y seis. La lectura actual es quinientos kilovatios hora.')">🔊</button><div class="ru">Да, номер счётчика — 123456. Текущие показания — 500 кВт·ч.</div></div>
 
-    <div class="roleplay-step">
-      <div class="step-label">✅ Этап 4: Выбор тарифа и оплата</div>
-      <div class="phrase">Quisiera contratar la tarifa mensual. ¿Puedo pagar con domiciliación bancaria? Mi IBAN es ES12 3456 7890 1234 5678.</div>
-      <div class="translation">Я хотел бы заключить договор на ежемесячный тариф. Могу ли я платить прямым списанием? Мой IBAN — ES12 3456 7890 1234 5678.</div>
-      <button class="speak-btn" onclick="speak('Quisiera contratar la tarifa mensual. ¿Puedo pagar con domiciliación bancaria? Mi IBAN es E S doce, treinta y cuatro, cincuenta y seis, setenta y ocho, noventa, doce, treinta y cuatro, cincuenta y seis, setenta y ocho.')" style="margin-top:8px">🔊</button>
-    </div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>¿Qué tarifa prefiere? Tenemos la tarifa mensual y la bimestral. <button class="speak-btn" onclick="speak('¿Qué tarifa prefiere? Tenemos la tarifa mensual y la bimestral.')">🔊</button><div class="ru">Какой тариф предпочитаете? У нас ежемесячный и раз в два месяца.</div></div>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>¿Podría explicarme la diferencia? <button class="speak-btn" onclick="speak('¿Podría explicarme la diferencia?')">🔊</button><div class="ru">Не могли бы вы объяснить разницу?</div></div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>La tarifa mensual cuesta 50 euros al mes. La bimestral cuesta 45 euros cada dos meses. <button class="speak-btn" onclick="speak('La tarifa mensual cuesta cincuenta euros al mes. La bimestral cuesta cuarenta y cinco euros cada dos meses.')">🔊</button><div class="ru">Ежемесячный тариф — 50 евро в месяц. Раз в два месяца — 45 евро за два месяца.</div></div>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>¿Hay permanencia? <button class="speak-btn" onclick="speak('¿Hay permanencia?')">🔊</button><div class="ru">Есть ли обязательный срок?</div></div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>No, no hay permanencia. Puede cancelar cuando quiera. <button class="speak-btn" onclick="speak('No, no hay permanencia. Puede cancelar cuando quiera.')">🔊</button><div class="ru">Нет, обязательного срока нет. Можете отменить в любой момент.</div></div>
 
-    <div class="roleplay-step">
-      <div class="step-label">👋 Этап 5: Прощание</div>
-      <div class="phrase">Muchas gracias. Hasta luego.</div>
-      <div class="translation">Большое спасибо. До свидания.</div>
-      <button class="speak-btn" onclick="speak('Muchas gracias. Hasta luego.')" style="margin-top:8px">🔊</button>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>Perfecto. Quisiera contratar la tarifa mensual. <button class="speak-btn" onclick="speak('Perfecto. Quisiera contratar la tarifa mensual.')">🔊</button><div class="ru">Отлично. Я хотел бы заключить договор на ежемесячный тариф.</div></div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>Muy bien. El alta tarda 3 días. ¿Puede pagar con domiciliación bancaria? <button class="speak-btn" onclick="speak('Muy bien. El alta tarda tres días. ¿Puede pagar con domiciliación bancaria?')">🔊</button><div class="ru">Отлично. Подключение занимает 3 дня. Сможете платить прямым списанием с банка?</div></div>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>Sí, tengo una cuenta bancaria. Mi IBAN es ES12 3456 7890 1234 5678. <button class="speak-btn" onclick="speak('Sí, tengo una cuenta bancaria. Mi IBAN es E S doce, treinta y cuatro, cincuenta y seis, setenta y ocho, noventa, doce, treinta y cuatro, cincuenta y seis, setenta y ocho.')">🔊</button><div class="ru">Да, у меня есть банковский счёт. Мой IBAN — ES12 3456 7890 1234 5678.</div></div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>Perfecto. Le enviaremos la confirmación por email. ¿Algo más? <button class="speak-btn" onclick="speak('Perfecto. Le enviaremos la confirmación por email. ¿Algo más?')">🔊</button><div class="ru">Отлично. Пришлём подтверждение на почту. Что-нибудь ещё?</div></div>
+      <div class="dialog-line client"><div class="speaker">Инспектор</div>No, muchas gracias. Hasta luego. <button class="speak-btn" onclick="speak('No, muchas gracias. Hasta luego.')">🔊</button><div class="ru">Нет, большое спасибо. До свидания.</div></div>
+      <div class="dialog-line operator"><div class="speaker">Оператор</div>Hasta luego. Que tenga un buen día. <button class="speak-btn" onclick="speak('Hasta luego. Que tenga un buen día.')">🔊</button><div class="ru">До свидания. Хорошего дня.</div></div>
     </div>
 
     <h4 style="margin-top:16px;margin-bottom:10px">🆘 Фразы-спасатели</h4>
@@ -395,16 +444,16 @@
     </table>
 
     <div class="note green" style="margin-top:16px">
-      🎭 <b>Ролевая игра:</b> пусть кто-то из семьи сыграет оператора («Sí, la tarifa mensual cuesta 50 euros al mes. No hay permanencia.»), а вы — клиента с фразами из шага 1.
+      🎭 <b>Как играть:</b> 1) прочитайте диалог по ролям с опорой на текст; 2) поменяйтесь ролями; 3) закройте текст и повторите свою партию по памяти. Застряли — используйте «фразы-спасатели» ниже. Оператор свободно отвечает: «Sí, la tarifa mensual cuesta 50 euros al mes. No hay permanencia.»
     </div>
   </div>
 </section>
 
 <!-- ═══════════ ШАГ 6: ПРОДУКТ ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num c3">6</div><div class="step-title"><h2>Продукт урока: скрипт звонка</h2><span class="time">45:00 – 50:00 · PBL</span></div></div>
+  <div class="step-head"><span class="step-num">6</span><div><span class="step-time">45:00 – 50:00 · Продукт урока</span><h2>PBL: скрипт звонка</h2></div></div>
   <div class="card">
-    <p class="hint">Составьте свой скрипт звонка в электрическую компанию. Заполните поля — получите готовую фразу, которую запишете голосовым.</p>
+    <p class="sub">Составьте свой скрипт звонка в электрическую компанию. Заполните поля — получите готовую фразу, которую запишете голосовым.</p>
     <div class="script-builder">
       <div class="hdr">📞 СКРИПТ ЗВОНКА В КОМПАНИЮ</div>
       <div class="script-field">
@@ -442,7 +491,7 @@
 
 <!-- ═══════════ ДОМАШКА ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">🏠</div><div class="step-title"><h2>Домашнее задание · Урок 5.1 «Alta de suministros»</h2><span class="time">⏱ ~25–30 минут · Формат: голосовое + PBL + письмо + тренажёр + рабочий лист</span></div></div>
+  <div class="step-head"><span class="step-num">🏠</span><div><span class="step-time">⏱ ~25–30 минут · Голосовое + PBL + письмо + тренажёр + рабочий лист</span><h2>Домашнее задание · Урок 5.1 «Alta de suministros»</h2></div></div>
 
   <div class="hw-item">
     <h4>🎤 Задание 1. «Мой первый звонок» (говорение) · 7 мин ⭐</h4>
@@ -497,14 +546,24 @@
     <p>Распечатайте или заполните с экрана: лексика, вежливые просьбы, чтение фактуры, аудирование, письмо. Пришлите фото заполненного листа.</p>
     <a href="../../worksheets/w05-l1-parents.html" class="btn btn-secondary" style="margin-top:10px">📄 Открыть рабочий лист (A4, печать)</a>
   </div>
+
+  <div class="hw-send">
+    <p>📤 Формат сдачи домашки:</p>
+    <ul>
+      <li>голосовое сообщение «Мой первый звонок» (задание 1)</li>
+      <li>скриншот «Реальной разведки» + письменный скрипт звонка (задания 2 и 4)</li>
+      <li>фото заполненного рабочего листа (задание 7)</li>
+      <li>«Светофор» самопроверки</li>
+    </ul>
+  </div>
 </section>
 
 <!-- ═══════════ ТРЕНАЖЁР ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">🎮</div><div class="step-title"><h2>Тренажёр «Коммунальные услуги» · 10 мин</h2><span class="time">Доведите лексику до автоматизма</span></div></div>
+  <div class="step-head"><span class="step-num">🎮</span><div><span class="step-time">10 минут · Доведите лексику до автоматизма</span><h2>Тренажёр «Коммунальные услуги»</h2></div></div>
   <div class="card">
-    <p class="hint">🃏 Карточки — называйте перевод ДО того, как перевернёте. 🧩 Сопоставление — соберите пары. 🔤 Соберите фразу из кусочков.</p>
-    <div class="tabs">
+    <p class="sub">🃏 Карточки — называйте перевод ДО того, как перевернёте. 🧩 Сопоставление — соберите пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
       <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
       <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
       <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
@@ -515,7 +574,7 @@
 
 <!-- ═══════════ СВЕТОФОР ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">✅</div><div class="step-title"><h2>Самопроверка «Светофор»</h2><span class="time">Отметьте честно — нажмите на нужный цвет. Преподаватель разберёт всё, что 🟡 и 🔴.</span></div></div>
+  <div class="step-head"><span class="step-num">✅</span><div><span class="step-time">Самопроверка</span><h2>Светофор</h2></div></div>
   <div class="card">
     <div style="overflow-x:auto">
     <table class="tl-table">
@@ -524,7 +583,7 @@
     </table>
     </div>
     <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
-    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+    <p class="sub" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
   </div>
 </section>
 
@@ -539,7 +598,7 @@
 
 <!-- ═══════════ РЕСУРСЫ ═══════════ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">🔗</div><div class="step-title"><h2>Внешняя практика</h2><span class="time">Реальные порталы для тренировки звонков</span></div></div>
+  <div class="step-head"><span class="step-num">🔗</span><div><span class="step-time">Ресурсы</span><h2>Внешняя практика</h2></div></div>
   <div class="res-grid">
     <div class="res-card"><h4>🌐 Endesa</h4><p>Подключение света онлайн</p><a href="https://www.endesa.com/" target="_blank" rel="noopener">Открыть →</a></div>
     <div class="res-card"><h4>🌐 Iberdrola</h4><p>Подключение света и газа</p><a href="https://www.iberdrola.es/" target="_blank" rel="noopener">Открыть →</a></div>
@@ -584,43 +643,40 @@ document.addEventListener('click', function(e){
   if(hint){ hint.classList.toggle('active'); e.stopPropagation(); }
 });
 
-// ===== РАЗМИНКА =====
-var warmQ=[
-  {q:'1. Что означает «letra pequeña»?',week:'w43',o:['мелкий шрифт','маленькая буква','тихий голос'],c:0},
-  {q:'2. Что такое «gastos de gestión»?',week:'w43',o:['расходы на управление','налоги','штрафы'],c:0},
-  {q:'3. Что означает «penalización»?',week:'w43',o:['штраф','продление','скидка'],c:0},
-  {q:'4. Как сказать «нужно подписать контракт»?',week:'w41',o:['Hay que firmar el contrato','Quiero firmar el contrato','Firmo el contrato'],c:0},
-  {q:'5. Как сказать «я заплачу завтра»?',week:'w42',o:['Voy a pagar mañana','Pago mañana','Pagaré mañana'],c:0},
-  {q:'6. Что такое «Bizum»?',week:'w42',o:['испанская система мгновенных переводов','банк','тариф'],c:0}
+// ===== РАЗМИНКА: повторение слов недели 4 =====
+var WARMUP_QUIZ = [
+  {q:'1. Что означает «contrato de arrendamiento»?',o:['Договор аренды','Банковский счёт','Коммунальные услуги'],c:0},
+  {q:'2. Как сказать «нужно заплатить залог»?',o:['Hay que pagar la fianza','Tengo que pagar la fianza','Voy a pagar la fianza'],c:0},
+  {q:'3. Что такое «cuenta corriente»?',o:['Текущий счёт','Кредитная карта','Зарплата'],c:0},
+  {q:'4. Как сказать «банковский перевод денег»?',o:['Transferencia','Fianza','Depósito'],c:0},
+  {q:'5. Что такое «Bizum»?',o:['Испанская система мгновенных переводов','Вид банковской карты','Код банка'],c:0},
+  {q:'6. Что означает «letra pequeña»?',o:['Мелкий шрифт в контракте','Маленькая буква','Тихий голос'],c:0}
 ];
 
 function renderWarmup(){
-  var el = document.getElementById('warmup-quiz');
-  el.innerHTML = '';
-  warmQ.forEach(function(item,qi){
-    var d = document.createElement('div');
-    d.className = 'quiz-q';
-    var weekLabel = item.week==='w43'?'урок 4.3':item.week==='w42'?'урок 4.2':'урок 4.1';
-    d.innerHTML = '<h4>'+item.q+' <span class="quiz-week '+item.week+'">'+weekLabel+'</span></h4><div class="quiz-opts">'+item.o.map(function(o,oi){
-      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
-    }).join('')+'</div><div class="quiz-feedback" id="wf-'+qi+'"></div>';
-    el.appendChild(d);
-  });
-  el.querySelectorAll('.quiz-opt').forEach(function(b){
+  var wrap = document.getElementById('warmup-quiz');
+  if(!wrap) return;
+  wrap.innerHTML = WARMUP_QUIZ.map(function(item,qi){
+    return '<div class="quiz-q"><h4>'+item.q+'</h4><div class="quiz-opts">'+
+      item.o.map(function(o,oi){
+        return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+      }).join('')+
+      '</div><div class="quiz-feedback" id="wu-'+qi+'"></div></div>';
+  }).join('');
+  wrap.querySelectorAll('.quiz-opt').forEach(function(b){
     b.onclick = function(){
-      var qi = +b.dataset.q;
-      var oi = +b.dataset.o;
+      var qi = +b.dataset.q, oi = +b.dataset.o;
       var sibs = b.parentElement.querySelectorAll('.quiz-opt');
       sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
-      var fb = document.getElementById('wf-'+qi);
-      if(oi === warmQ[qi].c){
+      var fb = document.getElementById('wu-'+qi);
+      if(oi === WARMUP_QUIZ[qi].c){
         b.classList.add('correct');
         fb.textContent = '✅ ¡Correcto!';
         fb.style.color = 'var(--ok)';
       } else {
         b.classList.add('wrong');
-        sibs[warmQ[qi].c].classList.add('correct');
-        fb.textContent = '❌ Правильно: '+warmQ[qi].o[warmQ[qi].c];
+        sibs[WARMUP_QUIZ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+WARMUP_QUIZ[qi].o[WARMUP_QUIZ[qi].c];
         fb.style.color = 'var(--bad)';
       }
       fb.classList.add('show');
@@ -683,30 +739,21 @@ var VOCAB = {
 };
 
 function showVocab(key,btn){
-  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('#vocab-tabs .tab').forEach(function(t){ t.classList.remove('active'); });
   btn.classList.add('active');
   var g = document.getElementById('vocab-grid');
-  g.innerHTML = '';
-  VOCAB[key].forEach(function(w){
-    var c = document.createElement('div');
-    c.className = 'vocab-card';
-    c.innerHTML = '<div class="vocab-inner">'+
-      '<div class="vocab-front">'+
-        '<div class="es">'+w.es+'</div>'+
-        '<div class="ru">'+w.ru+'</div>'+
-        '<div class="flip-hint">нажмите, чтобы перевернуть ↻</div>'+
-      '</div>'+
-      '<div class="vocab-back">'+
-        '<div class="ex">«'+w.ex+'»</div>'+
-        '<div class="ex-ru">'+w.exRu+'</div>'+
-        '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
-      '</div>'+
+  g.innerHTML = VOCAB[key].map(function(w){
+    return ''+
+      '<div class="flash-static">'+
+        '<div class="flash-word">'+w.es+'</div>'+
+        '<div class="flash-ru">'+w.ru+'</div>'+
+        '<div class="flash-example">«'+w.ex+'»</div>'+
+        '<div class="flash-exru">«'+w.exRu+'»</div>'+
+        '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
       '</div>';
-    c.onclick = function(){ c.classList.toggle('flipped'); };
-    g.appendChild(c);
-  });
+  }).join('');
 }
-showVocab('connect',document.querySelector('.tabs .tab'));
+showVocab('connect',document.querySelector('#vocab-tabs .tab'));
 
 // ===== ДИАЛОГ =====
 var dialogLines = [
@@ -934,7 +981,7 @@ var trainerIdx = 0;
 
 function showTrain(mode,btn){
   trainMode = mode;
-  document.querySelectorAll('.section .tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('#train-tabs .tab').forEach(function(t){ t.classList.remove('active'); });
   btn.classList.add('active');
   trainerIdx = 0;
   renderTrain();
@@ -958,18 +1005,20 @@ function renderTrain(){
       var c = TRAIN_CARDS[trainerIdx];
       card.innerHTML = '<div class="vocab-inner">'+
         '<div class="vocab-front">'+
-          '<div class="es" style="font-size:1.2rem">'+c.es+'</div>'+
+          '<div class="es">'+c.es+'</div>'+
           '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+c.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
           '<div class="flip-hint">нажмите, чтобы перевернуть</div>'+
         '</div>'+
         '<div class="vocab-back">'+
-          '<div class="ex" style="font-size:1.1rem">'+c.ru+'</div>'+
+          '<div class="ru">'+c.ru+'</div>'+
+          '<div class="ex">«'+c.ex+'»</div>'+
+          '<div class="ex-ru">«'+c.exRu+'»</div>'+
+          '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+c.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
         '</div>'+
         '</div>';
       card.classList.remove('flipped');
       document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
     };
-    updateCard();
 
     var controls = document.createElement('div');
     controls.style.marginTop = '16px';
@@ -984,6 +1033,7 @@ function renderTrain(){
     cardContainer.appendChild(card);
     cardContainer.appendChild(controls);
     box.appendChild(cardContainer);
+    updateCard();
 
     document.getElementById('train-prev').onclick = function(){
       if(trainerIdx > 0){ trainerIdx--; updateCard(); }
@@ -1177,7 +1227,18 @@ renderTL();
 function resetTL(){
   document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
 }
+
+var tId;
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(tId);
+  tId = setTimeout(function(){ t.classList.remove('show'); }, 3200);
+}
 </script>
+
+<div id="toast" role="status"></div>
 
 <!-- Скрипт-стек (обязательно перед </body>) -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>

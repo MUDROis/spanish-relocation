@@ -198,6 +198,44 @@
     </div>
   </section>
 
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: время на часах</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">
+      В уроке 14 ты научился читать испанское время: <strong>Son las…</strong>, <strong>Es la una</strong>. Проверим стрелки — и поедем с расписанием в испанскую школу!
+    </div>
+
+    <div class="game-zone">
+      <p style="font-weight:800">❓ Вопрос 1. Часы показывают ровно девять. Друг спрашивает: <em>«¿Qué hora es?»</em></p>
+      <div class="opts" id="warm-q1">
+        <button class="opt" data-ok="1" onclick="warmPick(this,'warm-q1','warm-f1',0)">Son las nueve en punto.</button>
+        <button class="opt" data-ok="0" onclick="warmPick(this,'warm-q1','warm-f1',0)">Son las nueve y media.</button>
+        <button class="opt" data-ok="0" onclick="warmPick(this,'warm-q1','warm-f1',0)">Es las nueve en punto.</button>
+      </div>
+      <div class="game-fb" id="warm-f1"></div>
+    </div>
+
+    <div class="game-zone">
+      <p style="font-weight:800">❓ Вопрос 2. Учитель спрашивает: <em>«¿A qué hora empieza la clase?»</em> — «Во сколько начинается урок?»</p>
+      <div class="opts" id="warm-q2">
+        <button class="opt" data-ok="1" onclick="warmPick(this,'warm-q2','warm-f2',0)">La clase empieza a las diez.</button>
+        <button class="opt" data-ok="0" onclick="warmPick(this,'warm-q2','warm-f2',0)">La clase empieza de las diez.</button>
+        <button class="opt" data-ok="0" onclick="warmPick(this,'warm-q2','warm-f2',0)">La clase son las diez.</button>
+      </div>
+      <div class="game-fb" id="warm-f2"></div>
+    </div>
+
+    <p class="block-sub">🗣 Готовые шаблоны ответов — нажми 🔊, повтори вслух и замени время на своё!</p>
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="word-card" onclick="speak('Son las nueve en punto.')"><span class="emo">🕘</span><div class="es">Son las nueve en punto</div><div class="ru">Ровно девять</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('La clase empieza a las diez.')"><span class="emo">🏫</span><div class="es">La clase empieza a las diez</div><div class="ru">Урок начинается в 10</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Voy a la escuela a las ocho.')"><span class="emo">🚶</span><div class="es">Voy a la escuela a las ocho</div><div class="ru">Я иду в школу в 8</div><button class="speak-btn">🔊</button></div>
+    </div>
+  </section>
+
   <!-- БЛОК 1 -->
   <section class="block" style="--c:#2A9D8F">
     <div class="block-head">
@@ -466,6 +504,21 @@ function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
 function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
 function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* БЛОК 0: РАЗМИНКА */
+function warmPick(btn,boxId,fbId,correct){
+  var box=document.getElementById(boxId),fb=document.getElementById(fbId);
+  var bs=box.querySelectorAll('.opt');
+  bs.forEach(function(b){b.disabled=true;b.classList.remove('correct','wrong');});
+  if(btn.dataset.ok==='1'){
+    btn.classList.add('correct');
+    fb.textContent='✅ ¡Muy bien!';
+  }else{
+    btn.classList.add('wrong');
+    bs[correct].classList.add('correct');
+    fb.textContent='❌ Правильно: '+bs[correct].textContent;
+  }
+}
 
 /* ===== БЛОК 2: КТО КУДА ===== */
 var KOLO=[
