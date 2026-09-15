@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бонусный урок B1 · Autoescuela y Psicotécnico — МУДРО</title>
+<style>
+  :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);--ok:#7A8B4C;--bad:#E2725B}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+  .tl-table{width:100%;border-collapse:collapse;margin-top:10px;font-weight:800;font-size:.88rem}
+  .tl-table th,.tl-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+  .tl-table th{background:#2B2118;color:#fff;border-color:rgba(255,255,255,.25)}
+  .tl-cell{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:52px;padding:7px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:1rem;font-weight:800;transition:.15s;text-align:center}
+  .tl-cell:hover{background:#FFF7EF}
+  .tl-cell.active{border-color:#2B2118;background:#FFF3DC}
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-meta{font-weight:800;font-size:.9rem;color:var(--muted);margin:4px 0 18px}
+  .hw-send{margin-top:16px;background:#2B2118;color:#FFD75E;border-radius:14px;padding:16px 20px;font-weight:800;font-size:.93rem}
+  .hw-send p{color:#fff;margin-bottom:6px}
+  .hw-send li{margin:4px 0;list-style:none;padding-left:26px;position:relative;color:#fff}
+  .hw-send li::before{content:'🎯';position:absolute;left:0}
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box p{font-weight:700;opacity:.92;margin-bottom:16px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:13px 30px;border-radius:999px;font-weight:900;text-decoration:none;transition:.2s}
+  .quizlet-box a:hover{transform:translateY(-2px)}
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .topbar{background:var(--card);box-shadow:var(--shadow);padding:12px 0;position:sticky;top:0;z-index:100}
+  .topbar .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .topbar a{text-decoration:none;font-weight:700;color:var(--ink)}
+  .topbar a:hover{color:var(--p1)}
+  .lesson-badge{font-size:.85rem;color:var(--muted);font-weight:600;background:#FFF7E0;padding:2px 10px;border-radius:999px}
+  .hero{background:linear-gradient(135deg,var(--p1),var(--p4));color:#fff;padding:44px 20px 38px;text-align:center}
+  .hero h1{font-size:2rem;margin-bottom:8px}
+  .hero p{font-size:1.1rem;opacity:.95;max-width:640px;margin:0 auto}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .hero-chip{background:rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:700}
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+  
+  /* ===== FLIP КАРТОЧКИ ЛЕКСИКИ (ИСПРАВЛЕНО) ===== */
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
+  .vocab-front .es{font-size:1.15rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
+  .vocab-front .ru{font-size:.95rem;opacity:.95;font-weight:600;color:#fff}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.95rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.85rem;color:var(--muted);font-style:italic;line-height:1.3}
+  
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:6px}
+  .grammar-box .formula{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.5}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .grammar-hint{position:relative;border-bottom:1.5px dashed var(--p4);cursor:help;color:var(--p4);font-weight:600}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 12px;border-radius:8px;font-size:.82rem;font-weight:500;font-style:normal;line-height:1.4;width:280px;max-width:90vw;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;white-space:normal}
+  .grammar-hint::before{content:'';position:absolute;bottom:120%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink);opacity:0;pointer-events:none;transition:opacity .2s}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+  .video-container{position:relative;padding-bottom:125%;height:0;overflow:hidden;border-radius:14px;margin-bottom:16px;max-width:500px;margin-left:auto;margin-right:auto;background:#000}
+  .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+  .video-link{display:block;background:linear-gradient(135deg,#E1306C,#F56040);color:#fff;text-decoration:none;padding:20px;border-radius:14px;text-align:center;font-weight:700;font-size:1.1rem;margin-top:12px;transition:.2s}
+  .video-link:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(225,48,108,.3)}
+  
+  /* ===== SPEAKING CARDS ===== */
+  .speaking-card{background:#fff;border:3px solid var(--p4);border-radius:14px;padding:20px;margin-bottom:16px;cursor:pointer;transition:.3s;position:relative}
+  .speaking-card:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(62,124,179,.15)}
+  .speaking-card.active{border-color:var(--p1);background:#FFF7EF;animation:pulse 1s ease-in-out}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+  .speaking-card .question{font-size:1.05rem;font-weight:700;color:var(--p4);margin-bottom:10px}
+  .speaking-card .hint-text{font-size:.9rem;color:var(--muted);margin-top:8px;line-height:1.5}
+  .speaking-card .template-box{background:#F0F7E6;border-radius:10px;padding:12px;margin-top:12px;border-left:3px solid var(--p2)}
+  .speaking-card .template-box .tmpl-title{font-size:.8rem;font-weight:800;color:var(--p2);text-transform:uppercase;margin-bottom:6px;letter-spacing:.5px}
+  .speaking-card .template-box .tmpl-item{font-size:.9rem;margin-bottom:6px;line-height:1.4}
+  .speaking-card .template-box .tmpl-es{font-weight:700;color:var(--ink);font-style:italic}
+  .speaking-card .template-box .tmpl-ru{color:var(--muted);font-size:.85rem}
+  .speaking-card .timer{display:inline-block;background:var(--p3);color:#fff;padding:4px 14px;border-radius:999px;font-size:.85rem;font-weight:700;margin-bottom:8px}
+  .speaking-card .timer.running{background:var(--p1);animation:blink 1s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.6}}
+  .speaking-card .start-hint{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:8px}
+  
+  /* ===== ROLEPLAY BOXES ===== */
+  .roleplay-box{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;margin-bottom:16px}
+  .roleplay-box .role{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .roleplay-box .role-icon{font-size:2rem}
+  .roleplay-box .role-name{font-size:1.1rem;font-weight:700;color:var(--p2)}
+  .roleplay-box .phrase{background:#F0F7E6;padding:12px;border-radius:8px;margin-bottom:8px;border-left:4px solid var(--p2)}
+  .roleplay-box .phrase .es{font-weight:700;color:var(--p2);margin-bottom:4px;font-style:italic}
+  .roleplay-box .phrase .ru{font-size:.85rem;color:var(--muted)}
+  
+  /* ===== SPEED DATING ===== */
+  .speed-dating{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:16px}
+  .speed-dating .scenario{background:#fff;border:2px solid var(--p3);border-radius:12px;padding:16px}
+  .speed-dating .scenario h4{color:var(--p3);margin-bottom:8px}
+  .speed-dating .scenario p{font-size:.9rem;color:var(--muted);margin-bottom:10px}
+  .speed-dating .scenario .tmpl{background:#FFF7E0;border-radius:8px;padding:10px;margin-top:10px;font-size:.85rem;line-height:1.5}
+  .speed-dating .scenario .tmpl .es{font-weight:700;font-style:italic;color:var(--p4)}
+  .speed-dating .scenario .tmpl .ru{color:var(--muted);font-size:.8rem;display:block}
+  
+  /* ===== CARD GAME ===== */
+  .card-game{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+  .game-card{background:linear-gradient(135deg,var(--p4),#2C5E8A);border:2px solid var(--p4);border-radius:12px;padding:16px;cursor:pointer;transition:.3s;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .game-card:hover{transform:scale(1.05);box-shadow:0 8px 20px rgba(62,124,179,.3)}
+  .game-card.flipped{background:linear-gradient(135deg,var(--p3),var(--p1))}
+  .game-card .front{font-size:2.5rem;margin-bottom:8px}
+  .game-card .front-label{font-size:.75rem;opacity:.8;font-weight:600}
+  .game-card .back{font-size:.85rem;font-weight:600;line-height:1.4;display:none}
+  .game-card .back-template{margin-top:10px;font-size:.8rem;font-style:italic;opacity:.9;background:rgba(255,255,255,.15);padding:8px;border-radius:6px}
+  .game-card.flipped .front{display:none}
+  .game-card.flipped .front-label{display:none}
+  .game-card.flipped .back{display:block}
+  
+  /* ===== RESOURCES ===== */
+  .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .resource-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.2s;border-top:4px solid var(--p4)}
+  .resource-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(43,33,24,.12)}
+  .resource-card h4{font-size:1rem;margin-bottom:6px;color:var(--ink)}
+  .resource-card p{font-size:.85rem;color:var(--muted);margin-bottom:12px;min-height:40px}
+  .resource-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem}
+  .resource-card a:hover{background:var(--p1)}
+  .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
+  
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">🎁 Бонусный модуль · Урок B1 из B5 · Misión Autoescuela</span>
+  <span id="auth-area"></span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🎁 Бонусный модуль · Misión Autoescuela</span>
+  <h1>Урок B1 · <em>Autoescuela y Psicotécnico</em> — записываемся и проходим медосмотр</h1>
+  <p class="sub">40+ минут разговорной практики: запись в автошколу, psicotécnico, решение проблем с документами и статусом заявки в DGT.</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🎯 Цель: записаться в автошколу и пройти психотехнический тест</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 es necesario / hace falta / hay que; ¿Podría…? / Quisiera…</span>
+    <span class="meta-chip">📋 Продукт: заявка на экзамен + чек-лист документов</span>
+    <span class="meta-chip">⏱ 50 минут · A2</span>
+  </div>
+</section>
+
+<!-- ШАГ 1: HOOK -->
+<section class="section">
+  <div class="step-head"><div class="step-num">1</div><div class="step-title"><h2>Hook: Реальный psicotécnico в Испании</h2><span class="time">00:00 – 03:00 · Видео + реакция</span></div></div>
+  <div class="card">
+    <p class="hint">Посмотрите, как проходит медосмотр для водительских прав в Испании. Обратите внимание: это не страшно, это просто!</p>
+    <div class="video-container">
+      <iframe src="https://www.instagram.com/reel/DQ4fLruDeiS/embed" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <a href="https://www.instagram.com/reel/DQ4fLruDeiS/" target="_blank" rel="noopener" class="video-link">📱 Открыть в Instagram (если не загрузилось)</a>
+    <div class="note green" style="margin-top:16px">
+      💬 <b>Speaking Task (2 мин):</b> Расскажите партнёру или вслух:<br>
+      • Что вас удивило в видео?<br>
+      • Что кажется сложным?<br>
+      • Что кажется лёгким?
+    </div>
+    <div class="template-box" style="background:#F0F4FF;border-radius:10px;padding:12px;margin-top:12px;border-left:3px solid var(--p4)">
+      <div style="font-size:.8rem;font-weight:800;color:var(--p4);text-transform:uppercase;margin-bottom:6px;letter-spacing:.5px">💡 Фразы-шаблоны</div>
+      <div style="font-size:.9rem;margin-bottom:6px;line-height:1.4"><span style="font-weight:700;font-style:italic">Me ha sorprendido que...</span> <span style="color:var(--muted);font-size:.85rem">(Меня удивило, что...)</span></div>
+      <div style="font-size:.9rem;margin-bottom:6px;line-height:1.4"><span style="font-weight:700;font-style:italic">Me parece difícil porque...</span> <span style="color:var(--muted);font-size:.85rem">(Мне кажется сложным, потому что...)</span></div>
+      <div style="font-size:.9rem;line-height:1.4"><span style="font-weight:700;font-style:italic">Me parece fácil porque...</span> <span style="color:var(--muted);font-size:.85rem">(Мне кажется лёгким, потому что...)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: SPEAKING WARM-UP -->
+<section class="section">
+  <div class="step-head"><div class="step-num">2</div><div class="step-title"><h2>Speaking Warm-up: Блиц о вождении</h2><span class="time">03:00 – 08:00 · 5 вопросов по 1 минуте</span></div></div>
+  <div class="card">
+    <p class="hint">👆 <b>Нажмите на карточку</b> — запустится таймер на 1 минуту. Говорите спонтанно, используя фразы-шаблоны внизу каждой карточки!</p>
+    <div id="speaking-warmup"></div>
+  </div>
+</section>
+
+<!-- ШАГ 3: LEXIS DISCOVERY -->
+<section class="section">
+  <div class="step-head"><div class="step-num">3</div><div class="step-title"><h2>Lexis Discovery: Собираем словарь</h2><span class="time">08:00 – 16:00 · 35 слов через контекст</span></div></div>
+  <div class="card">
+    <p class="hint">Вместо зубрёжки — учим слова в контексте реальных ситуаций. Нажмите на карточку — она перевернётся, и вы увидите пример использования. 🔊 — послушать.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showVocab('bureaucracy',this)">🏢 Бюрократия (7)</button>
+      <button class="tab" onclick="showVocab('medical',this)">🩺 Медцентр (7)</button>
+      <button class="tab" onclick="showVocab('docs',this)">📄 Документы (7)</button>
+      <button class="tab" onclick="showVocab('verbs',this)">🔄 Глаголы (7)</button>
+      <button class="tab" onclick="showVocab('terms',this)">⏱ Сроки (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+    <div class="note" style="margin-top:16px">
+      💬 <b>Speaking Task:</b> Выберите 3 слова, которые вам понравились. Составьте с ними 3 фразы вслух.
+    </div>
+    <div class="template-box" style="background:#F0F7E6;border-radius:10px;padding:12px;margin-top:12px;border-left:3px solid var(--p2)">
+      <div style="font-size:.8rem;font-weight:800;color:var(--p2);text-transform:uppercase;margin-bottom:6px;letter-spacing:.5px">💡 Шаблон для составления фраз</div>
+      <div style="font-size:.9rem;margin-bottom:6px"><span style="font-weight:700;font-style:italic">Quisiera [действие] + [слово из карточки].</span> <span style="color:var(--muted);font-size:.85rem">(Я хотел бы...)</span></div>
+      <div style="font-size:.9rem;margin-bottom:6px"><span style="font-weight:700;font-style:italic">Necesito [слово] para [цель].</span> <span style="color:var(--muted);font-size:.85rem">(Мне нужно... для...)</span></div>
+      <div style="font-size:.9rem"><span style="font-weight:700;font-style:italic">¿Dónde está [слово]?</span> <span style="color:var(--muted);font-size:.85rem">(Где находится...?)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 4: GRAMMAR IN ACTION -->
+<section class="section">
+  <div class="step-head"><div class="step-num">4</div><div class="step-title"><h2>Grammar in Action: Вежливые просьбы</h2><span class="time">16:00 – 21:00 · Грамматика через диалоги</span></div></div>
+  <div class="card">
+    <div class="grammar-box">
+      <h4>📐 Конструкция 1: Безличные конструкции необходимости</h4>
+      <div class="formula">es necesario / hace falta / hay que + инфинитив</div>
+      <div class="example">
+        <b>Es necesario</b> tener 18 años. — Нужно быть старше 18 лет.<br>
+        <b>Hace falta</b> una cita previa. — Нужна предварительная запись.<br>
+        <b>Hay que</b> pasar el psicotécnico. — Нужно пройти медосмотр.
+      </div>
+    </div>
+    <div class="grammar-box">
+      <h4>📐 Конструкция 2: Вежливые просьбы</h4>
+      <div class="formula">¿Podría...? / Quisiera... + инфинитив</div>
+      <div class="example">
+        <b>¿Podría</b> darme una cita? — Не могли бы вы записать меня?<br>
+        <b>Quisiera</b> matricularme. — Я хотел бы записаться.
+      </div>
+    </div>
+    <div class="note green">
+      💬 <b>Speaking Drill (3 мин):</b> Превратите эти фразы в вежливые просьбы и произнесите вслух:
+      <div style="margin-top:8px;line-height:2">
+        • «Necesito una cita» → <b>«¿Podría darme una cita?»</b><br>
+        • «Quiero matricularme» → <b>«Quisiera matricularme.»</b><br>
+        • «Hay que pagar la tasa» → <b>«¿Podría decirme cómo pagar la tasa?»</b>
+      </div>
+      Повторяйте каждую фразу 3 раза.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 5: SPEAKING DRILL -->
+<section class="section">
+  <div class="step-head"><div class="step-num">5</div><div class="step-title"><h2>Speaking Drill: Контролируемое говорение</h2><span class="time">21:00 – 28:00 · 5 ситуаций по 1.5 минуты</span></div></div>
+  <div class="card">
+    <p class="hint">Нажмите «▶ Начать» — появится ситуация с таймером. Используйте фразы-шаблоны внизу каждой карточки. Говорите 1.5 минуты!</p>
+    <div id="speaking-drill"></div>
+    <button class="btn btn-primary" onclick="startSpeakingDrill()" style="margin-top:16px">▶ Начать Speaking Drill</button>
+  </div>
+</section>
+
+<!-- ШАГ 6: ROLE-PLAY CHALLENGE -->
+<section class="section">
+  <div class="step-head"><div class="step-num">6</div><div class="step-title"><h2>Role-play Challenge: 4 сценария</h2><span class="time">28:00 – 38:00 · Ролевые игры с усложнением</span></div></div>
+  <div class="card">
+    <p class="hint">4 ролевые игры с нарастающей сложностью. Если работаете в паре — меняйтесь ролями. Если одни — играйте обе роли вслух.</p>
+    
+    <div class="roleplay-box">
+      <div class="role"><div class="role-icon">🏢</div><div class="role-name">Сценарий 1: Запись в автошколу (Easy)</div></div>
+      <p style="margin-bottom:12px"><b>Ситуация:</b> Вы пришли в автошколу, чтобы записаться на права категории B.</p>
+      <div class="phrase"><div class="es">Buenos días. Quisiera matricularme para el permiso B.</div><div class="ru">Добрый день. Я хотел бы записаться на права категории B.</div><button class="speak-btn" onclick="speak('Buenos días. Quisiera matricularme para el permiso B.')">🔊</button></div>
+      <div class="phrase"><div class="es">¿Qué documentos necesito? ¿Cuánto cuesta? ¿Hay permanencia?</div><div class="ru">Какие документы мне нужны? Сколько это стоит? Есть ли обязательный срок?</div><button class="speak-btn" onclick="speak('¿Qué documentos necesito? ¿Cuánto cuesta? ¿Hay permanencia?')">🔊</button></div>
+      <div class="note">💬 <b>Усложнение:</b> Сотрудник говорит быстро. Используйте: <i>«¿Puede repetir, por favor?»</i></div>
+    </div>
+
+    <div class="roleplay-box">
+      <div class="role"><div class="role-icon">🩺</div><div class="role-name">Сценарий 2: Визит в медцентр (Medium)</div></div>
+      <p style="margin-bottom:12px"><b>Ситуация:</b> Вы пришли в медцентр на psicotécnico. Сотрудник задаёт вопросы о здоровье.</p>
+      <div class="phrase"><div class="es">Buenos días. Tengo una cita para el psicotécnico.</div><div class="ru">Добрый день. У меня запись на медосмотр.</div><button class="speak-btn" onclick="speak('Buenos días. Tengo una cita para el psicotécnico.')">🔊</button></div>
+      <div class="phrase"><div class="es">¿Qué pruebas hay? ¿Cuánto tarda? ¿Cuánto cuesta el certificado?</div><div class="ru">Какие тесты есть? Сколько времени займёт? Сколько стоит справка?</div><button class="speak-btn" onclick="speak('¿Qué pruebas hay? ¿Cuánto tarda? ¿Cuánto cuesta el certificado?')">🔊</button></div>
+      <div class="note">💬 <b>Усложнение:</b> Сотрудник спрашивает: <i>«¿Tiene algún problema de visión?»</i> Отвечайте: <i>«No, tengo buena visión»</i> или <i>«Sí, llevo gafas»</i>.</div>
+    </div>
+
+    <div class="roleplay-box">
+      <div class="role"><div class="role-icon">📞</div><div class="role-name">Сценарий 3: Звонок в DGT (Hard)</div></div>
+      <p style="margin-bottom:12px"><b>Ситуация:</b> Вы звоните в DGT, чтобы узнать статус вашей заявки.</p>
+      <div class="phrase"><div class="es">Buenos días. Llamo para preguntar sobre mi expediente.</div><div class="ru">Добрый день. Я звоню, чтобы узнать о моём деле.</div><button class="speak-btn" onclick="speak('Buenos días. Llamo para preguntar sobre mi expediente.')">🔊</button></div>
+      <div class="phrase"><div class="es">Mi NIE es X-12345678-A. ¿Cuándo recibiré la convocatoria?</div><div class="ru">Мой NIE — X-12345678-A. Когда я получу вызов на экзамен?</div><button class="speak-btn" onclick="speak('Mi NIE es X-12345678-A. ¿Cuándo recibiré la convocatoria?')">🔊</button></div>
+      <div class="note">💬 <b>Усложнение:</b> Оператор говорит: <i>«Su expediente está en proceso»</i>. Спросите: <i>«¿Cuánto tiempo tengo que esperar?»</i></div>
+    </div>
+
+    <div class="roleplay-box">
+      <div class="role"><div class="role-icon">😰</div><div class="role-name">Сценарий 4: Проблема с документами (Expert)</div></div>
+      <p style="margin-bottom:12px"><b>Ситуация:</b> Вы пришли в автошколу, но забыли один документ. Нужно решить проблему.</p>
+      <div class="phrase"><div class="es">He olvidado el empadronamiento. ¿Puedo traerlo mañana?</div><div class="ru">Я забыл регистрацию. Могу принести завтра?</div><button class="speak-btn" onclick="speak('He olvidado el empadronamiento. ¿Puedo traerlo mañana?')">🔊</button></div>
+      <div class="phrase"><div class="es">¿Hay alguna solución? ¿Puedo enviarlo por email?</div><div class="ru">Есть ли какое-то решение? Могу отправить по email?</div><button class="speak-btn" onclick="speak('¿Hay alguna solución? ¿Puedo enviarlo por email?')">🔊</button></div>
+      <div class="note">💬 <b>Усложнение:</b> Сотрудник отказывает. Используйте: <i>«¿Podría hacer una excepción?»</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 7: SPEED DATING -->
+<section class="section">
+  <div class="step-head"><div class="step-num">7</div><div class="step-title"><h2>Speed Dating: 6 мини-диалогов</h2><span class="time">38:00 – 44:00 · Быстрые ролевые игры по 1 минуте</span></div></div>
+  <div class="card">
+    <p class="hint">6 сценариев, каждый по 1 минуте. Используйте готовые фразы-шаблоны — они даны в каждой карточке.</p>
+    <div class="speed-dating">
+      <div class="scenario">
+        <h4>1️⃣ Запись на медосмотр</h4>
+        <p>Вы звоните в медцентр. Запишитесь на psicotécnico.</p>
+        <div class="tmpl">
+          <div class="es">¿Podría darme una cita para el psicotécnico?</div>
+          <span class="ru">Не могли бы вы записать меня на медосмотр?</span>
+          <div class="es" style="margin-top:6px">¿Para qué día tiene hueco?</div>
+          <span class="ru">На какой день есть свободное время?</span>
+        </div>
+        <button class="btn btn-ghost" onclick="speak('¿Podría darme una cita para el psicotécnico?')" style="margin-top:10px">🔊 Послушать</button>
+      </div>
+      <div class="scenario">
+        <h4>2️⃣ Вопрос о цене</h4>
+        <p>Вы в автошколе. Спросите, сколько стоит курс.</p>
+        <div class="tmpl">
+          <div class="es">¿Cuánto cuesta el curso completo?</div>
+          <span class="ru">Сколько стоит полный курс?</span>
+          <div class="es" style="margin-top:6px">¿Qué incluye el precio?</div>
+          <span class="ru">Что включено в цену?</span>
+        </div>
+        <button class="btn btn-ghost" onclick="speak('¿Cuánto cuesta el curso completo?')" style="margin-top:10px">🔊 Послушать</button>
+      </div>
+      <div class="scenario">
+        <h4>3️⃣ Вопрос о сроках</h4>
+        <p>Вы в DGT. Спросите, когда будет экзамен.</p>
+        <div class="tmpl">
+          <div class="es">¿Cuándo será el examen teórico?</div>
+          <span class="ru">Когда будет теоретический экзамен?</span>
+          <div class="es" style="margin-top:6px">¿Cuánto tiempo tengo que esperar?</div>
+          <span class="ru">Сколько времени мне нужно ждать?</span>
+        </div>
+        <button class="btn btn-ghost" onclick="speak('¿Cuándo será el examen teórico?')" style="margin-top:10px">🔊 Послушать</button>
+      </div>
+      <div class="scenario">
+        <h4>4️⃣ Проблема со зрением</h4>
+        <p>В медцентре. Объясните, что носите очки.</p>
+        <div class="tmpl">
+          <div class="es">Llevo gafas para conducir.</div>
+          <span class="ru">Я ношу очки для вождения.</span>
+          <div class="es" style="margin-top:6px">Tengo buena visión con las gafas.</div>
+          <span class="ru">У меня хорошее зрение в очках.</span>
+        </div>
+        <button class="btn btn-ghost" onclick="speak('Llevo gafas para conducir.')" style="margin-top:10px">🔊 Послушать</button>
+      </div>
+      <div class="scenario">
+        <h4>5️⃣ Оплата пошлины</h4>
+        <p>В банке. Спросите, как оплатить tasa 2.1.</p>
+        <div class="tmpl">
+          <div class="es">¿Cómo puedo pagar la tasa 2.1?</div>
+          <span class="ru">Как я могу оплатить пошлину 2.1?</span>
+          <div class="es" style="margin-top:6px">¿Puedo pagar con tarjeta?</div>
+          <span class="ru">Могу я заплатить картой?</span>
+        </div>
+        <button class="btn btn-ghost" onclick="speak('¿Cómo puedo pagar la tasa 2.1?')" style="margin-top:10px">🔊 Послушать</button>
+      </div>
+      <div class="scenario">
+        <h4>6️⃣ Забыл документ</h4>
+        <p>В автошколе. Объясните, что забыли NIE.</p>
+        <div class="tmpl">
+          <div class="es">He olvidado mi NIE. ¿Puedo traerlo mañana?</div>
+          <span class="ru">Я забыл свой NIE. Могу принести завтра?</span>
+          <div class="es" style="margin-top:6px">¿Puedo enviarlo por email?</div>
+          <span class="ru">Могу отправить по email?</span>
+        </div>
+        <button class="btn btn-ghost" onclick="speak('He olvidado mi NIE. ¿Puedo traerlo mañana?')" style="margin-top:10px">🔊 Послушать</button>
+      </div>
+    </div>
+    <div class="note green">💬 <b>Совет:</b> Не думайте долго! Говорите спонтанно. Ошибки — это нормально. Главное — коммуникация.</div>
+  </div>
+</section>
+
+<!-- ШАГ 8: CARD GAME -->
+<section class="section">
+  <div class="step-head"><div class="step-num">8</div><div class="step-title"><h2>Card Game: Спонтанное говорение</h2><span class="time">44:00 – 48:00 · Карточная игра</span></div></div>
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она откроется с ситуацией и фразой-подсказкой. Говорите 1 минуту без подготовки!</p>
+    <div class="card-game" id="card-game"></div>
+    <button class="btn btn-primary" onclick="shuffleCards()" style="margin-top:16px">🔀 Перемешать карточки</button>
+  </div>
+</section>
+
+<!-- ШАГ 9: REFLECTION -->
+<section class="section">
+  <div class="step-head"><div class="step-num">9</div><div class="step-title"><h2>Reflection & Action Plan</h2><span class="time">48:00 – 50:00 · Рефлексия</span></div></div>
+  <div class="card">
+    <p class="hint">Ответьте вслух на 3 вопроса. Запишите голосовое (2-3 минуты) и пришлите преподавателю.</p>
+    <div class="note green">
+      💬 <b>Вопросы для рефлексии:</b><br><br>
+      1️⃣ <b>Что было самым сложным?</b> (Какая ролевая игра? Какая ситуация?)<br><br>
+      2️⃣ <b>Что было самым лёгким?</b> (Какая фраза? Какая конструкция?)<br><br>
+      3️⃣ <b>Что вы будете делать дальше?</b> (Запишетесь в автошколу? Пройдёте psicotécnico? Что первое?)
+    </div>
+    <div class="template-box" style="background:#F0F7E6;border-radius:10px;padding:12px;margin-top:12px;border-left:3px solid var(--p2)">
+      <div style="font-size:.8rem;font-weight:800;color:var(--p2);text-transform:uppercase;margin-bottom:6px;letter-spacing:.5px">💡 Пример ответа (прослушайте)</div>
+      <button class="btn btn-secondary" onclick="speak('Lo más difícil fue el escenario 3, porque el operador hablaba muy rápido. Lo más fácil fue preguntar el precio. Mi próximo paso es llamar a una autoescuela y pedir una cita.')" style="margin-top:8px">🔊 Прослушать пример</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ДОМАШКА ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🏠</div><div class="step-title"><h2>Домашнее задание · Урок B1 «Autoescuela y Psicotécnico»</h2><span class="time">⏱ ~25–30 минут</span></div></div>
+
+  <div class="card">
+    <div class="hw-item">
+      <h4>🎤 Задание 1. «Мой первый звонок в автошколу» (говорение) · 7 мин ⭐</h4>
+      <div class="hw-meta">Цель: преодолеть страх звонка и довести вежливые просьбы до автоматизма.</div>
+      <p>Запишите голосовое сообщение (2–3 минуты): вы звоните в автошколу, представляетесь, говорите, что хотите записаться на категорию B, спрашиваете про документы и стоимость. Минимум 2 дубля!</p>
+      <div style="background:#F0F4FF;padding:10px;border-radius:8px;margin-top:8px;font-style:italic">
+        Buenos días. Quisiera matricularme para el permiso B. Mi NIE es X-12345678-A. ¿Qué documentos necesito? ¿Cuánto cuesta el curso? ¿Hay permanencia? Muchas gracias.
+      </div>
+      <button class="speak-btn" onclick="speak('Buenos días. Quisiera matricularme para el permiso B. Mi NIE es X, uno, dos, tres... ¿Qué documentos necesito? ¿Cuánto cuesta el curso? ¿Hay permanencia? Muchas gracias.')" style="margin-top:8px">🔊 Прослушать образец</button>
+    </div>
+
+    <div class="hw-item">
+      <h4>✍️ Задание 2. PBL: «Заявка на экзамен» · 7 мин</h4>
+      <div class="hw-meta">Цель: перенести навык в настоящую жизнь.</div>
+      <p>Напишите черновик заявки (solicitud) на экзамен: ваши данные, тип прав (permiso B), выбранная автошкола и удобные даты. Используйте конструкции урока: <b>Hay que presentar…</b>, <b>Es necesario…</b>, <b>Quisiera…</b>. Пришлите текстом преподавателю.</p>
+      <div style="background:#F0F4FF;padding:10px;border-radius:8px;margin-top:8px;font-style:italic">
+        Quisiera presentarme al examen del permiso B. Hay que presentar el NIE, el empadronamiento y el certificado médico. Es necesario pagar la tasa. Quisiera recibir la convocatoria lo antes posible.
+      </div>
+      <button class="speak-btn" onclick="speak('Quisiera presentarme al examen del permiso B. Hay que presentar el NIE, el empadronamiento y el certificado médico. Es necesario pagar la tasa. Quisiera recibir la convocatoria lo antes posible.')" style="margin-top:8px">🔊 Прослушать образец</button>
+    </div>
+
+    <div class="hw-item">
+      <h4>📋 Задание 3. Чек-лист документов · 5 мин</h4>
+      <div class="hw-meta">Цель: собрать реальный список документов для автошколы.</div>
+      <p>Составьте чек-лист из 5–6 документов для записи в автошколу (используйте слова урока): pasaporte, NIE, empadronamiento, fotografías, certificado médico, justificante de pago. Отметьте, что уже есть, а чего не хватает. Пришлите фото списка.</p>
+    </div>
+
+    <div class="hw-item">
+      <h4>🎮 Задание 4. Тренажёр · 10 мин</h4>
+      <div class="hw-meta">Цель: довести слова урока до автоматизма.</div>
+      <p style="margin-bottom:12px">Откройте карточки Quizlet урока B1 и пройдите режимы «Карточки» и «Заучивание»: называйте перевод ДО переворота карточки.</p>
+      <div class="quizlet-box" style="margin-top:10px">
+        <h3>🃏 Карточки Quizlet · Урок B1</h3>
+        <p>Слова урока: бюрократия, медцентр, документы, глаголы, сроки.</p>
+        <a href="https://quizlet.com/fi/1209173757/mision-autoescuela-%D1%83%D1%80%D0%BE%D0%BA-b1-autoescuela-%D0%B8-psicotecnico-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
+      </div>
+    </div>
+
+    <div class="hw-item">
+      <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 10 мин</h4>
+      <div class="hw-meta">Цель: связать урок с детским курсом (мост к детскому B2 «Анатомия машины»).</div>
+      <p><b>«Машина мечты»:</b> Попросите детей нарисовать машину мечты и подписать 5 деталей по-испански: <i>la rueda</i> (колесо), <i>la puerta</i> (дверь), <i>el volante</i> (руль), <i>el espejo</i> (зеркало), <i>el faro</i> (фара). Фото рисунка — в домашнее задание.</p>
+      <button class="speak-btn" onclick="speak('Vamos a dibujar el coche de nuestros sueños. La rueda, la puerta, el volante, el espejo y el faro.')" style="margin-top:8px">🔊 Прослушать образец</button>
+    </div>
+
+    <div class="hw-item">
+      <h4>📄 Задание 6. Рабочий лист · 20–25 мин</h4>
+      <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
+      <p>Распечатайте или заполните с экрана: лексика, конструкции необходимости, ролевые сценарии, заявка на экзамен. Пришлите фото заполненного листа.</p>
+      <a href="../../worksheets/bonus-auto-b1-parents.html" class="btn btn-secondary" style="margin-top:10px">📄 Открыть рабочий лист (A4, печать)</a>
+    </div>
+
+    <div class="hw-send">
+      <p>📤 Формат сдачи домашки:</p>
+      <ul>
+        <li>голосовое сообщение «Мой первый звонок» (задание 1)</li>
+        <li>заявка на экзамен + чек-лист документов (задания 2 и 3)</li>
+        <li>фото рисунка «Машина мечты» + фото рабочего листа (задания 5 и 6)</li>
+        <li>«Светофор» самопроверки</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ СВЕТОФОР ═══════════ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">✅</div><div class="step-title"><h2>Светофор</h2><span class="time">Самопроверка</span></div></div>
+  <div class="card">
+    <p class="hint">Честно отметьте, как получается у вас сейчас. Сохранённые отметки видны преподавателю.</p>
+    <div style="overflow-x:auto">
+    <table class="tl-table">
+      <thead><tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr></thead>
+      <tbody id="tl-body"></tbody>
+    </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ═══════════ QUIZLET ═══════════ -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Урок B1 «Misión Autoescuela»</h3>
+    <p>35 слов по теме вождения: автошкола, медосмотр, документы, глаголы, сроки. Повторяйте перед B2.</p>
+    <a href="https://quizlet.com/fi/1209173757/mision-autoescuela-%D1%83%D1%80%D0%BE%D0%BA-b1-autoescuela-%D0%B8-psicotecnico-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- ===== БЛОК ВНЕШНИХ РЕСУРСОВ ===== -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🔗</div><div class="step-title"><h2>Внешние ресурсы для практики</h2><span class="time">Реальные материалы по теме вождения в Испании</span></div></div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">📹 Instagram Reel</span>
+      <h4>Как проходит практический экзамен</h4>
+      <p>Реальное видео с практического экзамена в Испании: команды экзаменатора, манёвры, типичные ошибки.</p>
+      <a href="https://www.instagram.com/reel/DRmyrZ9DF6Z/" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📰 Статья</span>
+      <h4>Как получить права в Испании: полный гайд</h4>
+      <p>Подробная статья на Хабре о процессе получения прав для иностранцев: от теории до практики, цены и советы.</p>
+      <a href="https://habr.com/ru/articles/813601/" target="_blank" rel="noopener">Читать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🚗 Блог</span>
+      <h4>Водительские права в Испании: требования и нюансы</h4>
+      <p>Разбор требований DGT для иностранцев: документы, обмен прав, стоимость автошколы, подводные камни.</p>
+      <a href="https://alegria-service.com/ru/blog/driver-license-in-spain-demands/" target="_blank" rel="noopener">Читать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Полный процесс получения прав</h4>
+      <p>Видео-разбор: как записаться в автошколу, пройти psicotécnico, сдать теорию и практику в Испании.</p>
+      <a href="https://www.youtube.com/watch?v=3B-vt1U8lr0" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏛 Официально</span>
+      <h4>DGT — Dirección General de Tráfico</h4>
+      <p>Официальный сайт: требования, tasas, convocatorias, запись на экзамен по разрешению B.</p>
+      <a href="https://www.dgt.es/" target="_blank" rel="noopener">Открыть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📰 Журнал</span>
+      <h4>Revista DGT</h4>
+      <p>Материалы о вождении и психотехнических тестах от самой DGT.</p>
+      <a href="https://revista.dgt.es/" target="_blank" rel="noopener">Читать →</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · 🎁 Бонусный модуль «Misión Autoescuela» · Разговорный формат</footer>
+
+<div class="lesson-nav">
+  <a href="../../index.html">🎁 Бонусный модуль<br><small>Карта курса</small></a>
+  <a href="bonus-auto-b2.html">Следующий →<br><small>Урок B2 · Анатомия машины (скоро)</small></a>
+</div>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Grammar hints =====
+document.addEventListener('click', function(e){
+  var hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){ if(el!==hint) el.classList.remove('active'); });
+  if(hint){ hint.classList.toggle('active'); e.stopPropagation(); }
+});
+
+// ===== SPEAKING WARM-UP (ИСПРАВЛЕНО: таймер по клику) =====
+var warmupQuestions = [
+  {
+    q: '¿Tienes carnet de conducir en tu país?',
+    templates: [
+      {es: 'Sí, tengo carnet desde hace ___ años.', ru: 'Да, у меня есть права уже ___ лет.'},
+      {es: 'No, todavía no tengo carnet.', ru: 'Нет, у меня ещё нет прав.'},
+      {es: 'Sí, pero no conduzco mucho.', ru: 'Да, но я мало езжу.'}
+    ]
+  },
+  {
+    q: '¿Por qué quieres sacar el carnet en España?',
+    templates: [
+      {es: 'Porque necesito conducir para trabajar.', ru: 'Потому что мне нужно ездить на работу.'},
+      {es: 'Porque quiero viajar por España.', ru: 'Потому что я хочу путешествовать по Испании.'},
+      {es: 'Porque mi familia necesita un coche.', ru: 'Потому что моей семье нужна машина.'}
+    ]
+  },
+  {
+    q: '¿Qué te da más miedo: el examen teórico o el práctico?',
+    templates: [
+      {es: 'Me da más miedo el teórico porque hay muchas preguntas.', ru: 'Больше боюсь теорию, потому что много вопросов.'},
+      {es: 'Me da más miedo el práctico porque estoy nervioso.', ru: 'Больше боюсь практику, потому что я нервничаю.'},
+      {es: 'No me da miedo ninguno.', ru: 'Мне не страшно ни то, ни другое.'}
+    ]
+  },
+  {
+    q: '¿Conoces a alguien que ya tenga el carnet español?',
+    templates: [
+      {es: 'Sí, mi amigo/a ya lo tiene.', ru: 'Да, у моего друга/подруги уже есть.'},
+      {es: 'No, no conozco a nadie.', ru: 'Нет, никого не знаю.'},
+      {es: 'Sí, varios compañeros ya lo sacaron.', ru: 'Да, несколько знакомых уже получили.'}
+    ]
+  },
+  {
+    q: '¿Cuánto tiempo crees que necesitarás para prepararte?',
+    templates: [
+      {es: 'Creo que necesitaré unos tres meses.', ru: 'Думаю, мне понадобится около трёх месяцев.'},
+      {es: 'Creo que será rápido, unas pocas semanas.', ru: 'Думаю, будет быстро, несколько недель.'},
+      {es: 'No lo sé, depende de las clases.', ru: 'Не знаю, зависит от уроков.'}
+    ]
+  }
+];
+
+var warmupTimers = {};
+
+function renderWarmup(){
+  var el = document.getElementById('speaking-warmup');
+  el.innerHTML = '';
+  warmupQuestions.forEach(function(q, i){
+    var card = document.createElement('div');
+    card.className = 'speaking-card';
+    card.dataset.idx = i;
+    
+    var templatesHtml = q.templates.map(function(t){
+      return '<div class="tmpl-item"><div class="tmpl-es">«' + t.es + '»</div><div class="tmpl-ru">' + t.ru + '</div></div>';
+    }).join('');
+    
+    card.innerHTML = 
+      '<div class="timer" id="timer-' + i + '">⏱ 1:00</div>' +
+      '<div class="question">' + (i+1) + '. ' + q.q + '</div>' +
+      '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + q.q.replace(/'/g, "\\'") + '\')">🔊 Послушать вопрос</button>' +
+      '<div class="template-box"><div class="tmpl-title">💡 Фразы-шаблоны (выберите подходящую)</div>' + templatesHtml + '</div>' +
+      '<div class="start-hint">👆 Нажмите на карточку, чтобы запустить таймер</div>';
+    
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.speak-btn')) return;
+      toggleWarmupTimer(i);
+    });
+    
+    el.appendChild(card);
+  });
+}
+
+function toggleWarmupTimer(idx){
+  var timerEl = document.getElementById('timer-' + idx);
+  var card = timerEl.closest('.speaking-card');
+  
+  if(warmupTimers[idx]){
+    // Остановить
+    clearInterval(warmupTimers[idx]);
+    warmupTimers[idx] = null;
+    timerEl.classList.remove('running');
+    card.classList.remove('active');
+    return;
+  }
+  
+  // Запустить
+  card.classList.add('active');
+  timerEl.classList.add('running');
+  var timeLeft = 60;
+  timerEl.textContent = '⏱ 1:00';
+  
+  warmupTimers[idx] = setInterval(function(){
+    timeLeft--;
+    var mins = Math.floor(timeLeft / 60);
+    var secs = timeLeft % 60;
+    timerEl.textContent = '⏱ ' + mins + ':' + (secs < 10 ? '0' : '') + secs;
+    if(timeLeft <= 0){
+      clearInterval(warmupTimers[idx]);
+      warmupTimers[idx] = null;
+      timerEl.textContent = '✅ Готово!';
+      timerEl.classList.remove('running');
+      card.classList.remove('active');
+    }
+  }, 1000);
+}
+
+renderWarmup();
+
+// ===== VOCAB (ИСПРАВЛЕНО: добавлен CSS для flip) =====
+var VOCAB = {
+  bureaucracy:[
+    {es:'la autoescuela', ru:'автошкола', ex:'Quiero matricularme en una autoescuela.', exRu:'Я хочу записаться в автошколу.'},
+    {es:'la DGT', ru:'Главное управление дорожного движения', ex:'El examen es en la DGT.', exRu:'Экзамен проходит в DGT.'},
+    {es:'el permiso de conducir B', ru:'права категории B', ex:'Necesito el permiso B.', exRu:'Мне нужны права категории B.'},
+    {es:'el expediente', ru:'дело, документы', ex:'Mi expediente está en proceso.', exRu:'Моё дело в процессе.'},
+    {es:'la solicitud', ru:'заявление', ex:'Hay que presentar una solicitud.', exRu:'Нужно подать заявление.'},
+    {es:'la cita previa', ru:'предварительная запись', ex:'Necesito una cita previa.', exRu:'Мне нужна предварительная запись.'},
+    {es:'la tasa', ru:'пошлина', ex:'La tasa cuesta 94 euros.', exRu:'Пошлина стоит 94 евро.'}
+  ],
+  medical:[
+    {es:'el psicotécnico', ru:'психофизический тест', ex:'Hay que pasar el psicotécnico.', exRu:'Нужно пройти психофизический тест.'},
+    {es:'el centro de reconocimiento', ru:'медцентр', ex:'Voy al centro de reconocimiento.', exRu:'Я иду в медцентр.'},
+    {es:'el certificado médico', ru:'медсправка', ex:'Necesito el certificado médico.', exRu:'Мне нужна медсправка.'},
+    {es:'la prueba de coordinación', ru:'тест на координацию', ex:'La prueba de coordinación es fácil.', exRu:'Тест на координацию лёгкий.'},
+    {es:'la agudeza visual', ru:'острота зрения', ex:'Comprueban la agudeza visual.', exRu:'Проверяют остроту зрения.'},
+    {es:'el examen auditivo', ru:'проверка слуха', ex:'El examen auditivo es rápido.', exRu:'Проверка слуха быстрая.'},
+    {es:'el informe de aptitud', ru:'заключение о годности', ex:'El informe dice que soy apto.', exRu:'Заключение гласит, что я годен.'}
+  ],
+  docs:[
+    {es:'el pasaporte', ru:'паспорт', ex:'Necesito mi pasaporte.', exRu:'Мне нужен мой паспорт.'},
+    {es:'el NIE', ru:'номер иностранца', ex:'Sin NIE no puedo matricularme.', exRu:'Без NIE я не могу записаться.'},
+    {es:'el empadronamiento', ru:'регистрация по месту жительства', ex:'Hay que presentar el empadronamiento.', exRu:'Нужно предоставить регистрацию.'},
+    {es:'el justificante de pago', ru:'квитанция об оплате', ex:'Tengo el justificante de pago.', exRu:'У меня есть квитанция об оплате.'},
+    {es:'la fotografía', ru:'фотография', ex:'Necesito dos fotografías.', exRu:'Мне нужны две фотографии.'},
+    {es:'el formulario', ru:'бланк', ex:'Hay que rellenar el formulario.', exRu:'Нужно заполнить бланк.'},
+    {es:'la fotocopia', ru:'копия', ex:'Necesito una fotocopia del NIE.', exRu:'Мне нужна копия NIE.'}
+  ],
+  verbs:[
+    {es:'matricularse', ru:'записаться (в автошколу)', ex:'Quisiera matricularme para el permiso B.', exRu:'Я хотел бы записаться на права категории B.'},
+    {es:'presentarse por libre', ru:'сдавать самостоятельно', ex:'Prefiero presentarme por libre.', exRu:'Я предпочитаю сдавать самостоятельно.'},
+    {es:'renovar', ru:'продлевать, обновлять', ex:'Hay que renovar el permiso cada 10 años.', exRu:'Нужно продлевать права каждые 10 лет.'},
+    {es:'canjear', ru:'обменивать (права)', ex:'¿Puedo canjear mi permiso extranjero?', exRu:'Могу ли я обменять иностранные права?'},
+    {es:'aprobar', ru:'сдать (экзамен)', ex:'¡He aprobado el examen!', exRu:'Я сдал экзамен!'},
+    {es:'suspender', ru:'провалить', ex:'He suspendido el teórico.', exRu:'Я провалил теорию.'},
+    {es:'caducar', ru:'истекать (о сроке)', ex:'La solicitud caduca en 90 días.', exRu:'Заявление истекает через 90 дней.'}
+  ],
+  terms:[
+    {es:'la vigencia', ru:'срок действия', ex:'La vigencia del certificado es 90 días.', exRu:'Срок действия справки — 90 дней.'},
+    {es:'el plazo', ru:'срок', ex:'El plazo de espera es de 2 semanas.', exRu:'Срок ожидания — 2 недели.'},
+    {es:'la convocatoria', ru:'вызов на экзамен', ex:'He recibido la convocatoria.', exRu:'Я получил вызов на экзамен.'},
+    {es:'el intento', ru:'попытка', ex:'Tengo dos intentos.', exRu:'У меня две попытки.'},
+    {es:'válido', ru:'действительный', ex:'El certificado es válido.', exRu:'Справка действительна.'},
+    {es:'caducado', ru:'просроченный', ex:'Mi solicitud está caducada.', exRu:'Моё заявление просрочено.'},
+    {es:'la permanencia', ru:'обязательный срок (в автошколе)', ex:'La autoescuela tiene permanencia de 3 meses.', exRu:'В автошколе обязательный срок — 3 месяца.'}
+  ]
+};
+
+function showVocab(key,btn){
+  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML = '<div class="vocab-inner">'+
+      '<div class="vocab-front">'+
+        '<div class="es">'+w.es+'</div>'+
+        '<div class="ru">'+w.ru+'</div>'+
+        '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\''+w.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+        '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>'+
+      '</div>'+
+      '<div class="vocab-back">'+
+        '<div class="ex">«'+w.ex+'»</div>'+
+        '<div class="ex-ru">'+w.exRu+'</div>'+
+        '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
+      '</div>'+
+      '</div>';
+    c.onclick = function(e){ 
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped'); 
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('bureaucracy',document.querySelector('.tabs .tab'));
+
+// ===== SPEAKING DRILL (ИСПРАВЛЕНО) =====
+var drillSituations = [
+  {
+    q: 'Вы в автошколе. Объясните, почему хотите получить права категории B.',
+    templates: [
+      {es: 'Quisiera el permiso B porque necesito conducir para trabajar.', ru: 'Я хотел бы права B, потому что мне нужно ездить на работу.'},
+      {es: 'Necesito el coche para llevar a mis hijos al colegio.', ru: 'Мне нужна машина, чтобы возить детей в школу.'},
+      {es: 'Quiero tener el carnet para viajar por España.', ru: 'Я хочу получить права, чтобы путешествовать по Испании.'}
+    ]
+  },
+  {
+    q: 'Сотрудник медцентра спрашивает, есть ли у вас проблемы со зрением. Что вы ответите?',
+    templates: [
+      {es: 'No, tengo buena visión. No llevo gafas.', ru: 'Нет, у меня хорошее зрение. Я не ношу очки.'},
+      {es: 'Sí, llevo gafas para conducir, pero veo bien.', ru: 'Да, я ношу очки для вождения, но вижу хорошо.'},
+      {es: 'Tengo miopía, pero con las gafas veo perfectamente.', ru: 'У меня близорукость, но в очках я вижу отлично.'}
+    ]
+  },
+  {
+    q: 'Вы звоните в DGT. Спросите, какие документы нужны для записи на экзамен.',
+    templates: [
+      {es: '¿Qué documentos necesito para el examen?', ru: 'Какие документы мне нужны для экзамена?'},
+      {es: '¿Necesito el pasaporte y el NIE?', ru: 'Мне нужны паспорт и NIE?'},
+      {es: '¿Hace falta el certificado médico también?', ru: 'Нужна ли также медицинская справка?'}
+    ]
+  },
+  {
+    q: 'В автошколе вам говорят, что курс стоит 1200 евро. Это дорого. Что вы скажете?',
+    templates: [
+      {es: 'Es un poco caro. ¿Hay alguna oferta?', ru: 'Немного дорого. Есть ли какие-то скидки?'},
+      {es: '¿Hay algún descuento si pago todo junto?', ru: 'Есть ли скидка, если я оплачу всё сразу?'},
+      {es: 'Mi presupuesto es más bajo. ¿Hay opciones más baratas?', ru: 'Мой бюджет меньше. Есть варианты дешевле?'}
+    ]
+  },
+  {
+    q: 'Вы забыли принести фотографию. Объясните ситуацию и попросите принести завтра.',
+    templates: [
+      {es: 'He olvidado las fotos. ¿Puedo traerlas mañana?', ru: 'Я забыл фотографии. Могу принести завтра?'},
+      {es: 'Lo siento, no tengo las fotos. ¿Puedo enviarlas por email?', ru: 'Извините, у меня нет фото. Могу отправить по email?'},
+      {es: '¿Hay alguna solución? Vivo lejos y no puedo volver hoy.', ru: 'Есть ли какое-то решение? Я живу далеко и не могу вернуться сегодня.'}
+    ]
+  }
+];
+
+var currentDrill = 0;
+var drillTimer = null;
+
+function startSpeakingDrill(){
+  var el = document.getElementById('speaking-drill');
+  el.innerHTML = '';
+  currentDrill = 0;
+  showDrillCard();
+}
+
+function showDrillCard(){
+  if(currentDrill >= drillSituations.length){
+    document.getElementById('speaking-drill').innerHTML = '<div class="note green"><b>✅ Отлично!</b> Вы прошли все 5 ситуаций. Переходите к следующему шагу.</div>';
+    return;
+  }
+  var s = drillSituations[currentDrill];
+  var el = document.getElementById('speaking-drill');
+  
+  var templatesHtml = s.templates.map(function(t){
+    return '<div class="tmpl-item"><div class="tmpl-es">«' + t.es + '»</div><div class="tmpl-ru">' + t.ru + '</div></div>';
+  }).join('');
+  
+  el.innerHTML = '<div class="speaking-card active">' +
+    '<div class="timer" id="drill-timer">⏱ 1:30</div>' +
+    '<div class="question">Ситуация ' + (currentDrill + 1) + ' из 5</div>' +
+    '<div style="font-size:1.05rem;margin:12px 0;font-weight:600">' + s.q + '</div>' +
+    '<div class="template-box"><div class="tmpl-title">💡 Фразы-шаблоны (используйте как опору)</div>' + templatesHtml + '</div>' +
+    '<div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-primary" onclick="nextDrill()">Следующая ситуация →</button>' +
+    '</div>' +
+    '</div>';
+  
+  var timeLeft = 90;
+  if(drillTimer) clearInterval(drillTimer);
+  var timerEl = document.getElementById('drill-timer');
+  timerEl.classList.add('running');
+  
+  drillTimer = setInterval(function(){
+    timeLeft--;
+    var mins = Math.floor(timeLeft / 60);
+    var secs = timeLeft % 60;
+    if(timerEl) timerEl.textContent = '⏱ ' + mins + ':' + (secs < 10 ? '0' : '') + secs;
+    if(timeLeft <= 0){
+      clearInterval(drillTimer);
+      if(timerEl){
+        timerEl.textContent = '✅ Готово!';
+        timerEl.classList.remove('running');
+      }
+    }
+  }, 1000);
+}
+
+function nextDrill(){
+  if(drillTimer) clearInterval(drillTimer);
+  currentDrill++;
+  showDrillCard();
+}
+
+// ===== CARD GAME (ИСПРАВЛЕНО) =====
+var gameCards = [
+  {front: '🏢', label: 'В автошколе', back: 'Вы в автошколе. Запишитесь на курс.', template: '«Buenos días. Quisiera matricularme para el permiso B.»'},
+  {front: '🩺', label: 'В медцентре', back: 'Вы в медцентре. Спросите про psicotécnico.', template: '«Buenos días. Tengo una cita para el psicotécnico.»'},
+  {front: '📞', label: 'Звонок в DGT', back: 'Вы звоните в DGT. Узнайте статус заявки.', template: '«Llamo para preguntar sobre mi expediente.»'},
+  {front: '💰', label: 'Вопрос о цене', back: 'В автошколе. Спросите про оплату.', template: '«¿Cuánto cuesta el curso completo?»'},
+  {front: '📄', label: 'Забыл документ', back: 'Вы забыли документ. Решите проблему.', template: '«He olvidado el empadronamiento. ¿Puedo traerlo mañana?»'},
+  {front: '😰', label: 'Нервничаю', back: 'Вы нервничаете перед экзаменом.', template: '«Estoy nervioso porque es mi primer examen.»'},
+  {front: '🎉', label: 'Сдал!', back: 'Вы сдали экзамен! Расскажите другу.', template: '«¡He aprobado el examen! ¡Estoy muy contento!»'},
+  {front: '❌', label: 'Провалил', back: 'Вы провалили экзамен. Что будете делать?', template: '«He suspendido el teórico. Tengo que repetir.»'},
+  {front: '🔄', label: 'Продление прав', back: 'Нужно продлить права. Объясните.', template: '«Quisiera renovar mi permiso de conducir.»'},
+  {front: '🌍', label: 'Обмен прав', back: 'У вас иностранные права. Спросите про обмен.', template: '«¿Puedo canjear mi permiso extranjero?»'},
+  {front: '⏰', label: 'Срок истекает', back: 'Сертификат истекает через неделю. Что делать?', template: '«Mi certificado caduca en una semana. ¿Qué puedo hacer?»'},
+  {front: '🤔', label: 'Выбор пути', back: 'Автошкола или por libre? Аргументируйте.', template: '«¿Es mejor una autoescuela o presentarse por libre?»'}
+];
+
+function renderCards(){
+  var el = document.getElementById('card-game');
+  el.innerHTML = '';
+  gameCards.forEach(function(c, i){
+    var card = document.createElement('div');
+    card.className = 'game-card';
+    card.dataset.index = i;
+    card.innerHTML = '<div class="front">' + c.front + '</div>' +
+      '<div class="front-label">' + c.label + '</div>' +
+      '<div class="back">' + c.back + 
+      '<div class="back-template">💬 ' + c.template + '</div></div>';
+    card.onclick = function(){
+      card.classList.toggle('flipped');
+    };
+    el.appendChild(card);
+  });
+}
+
+function shuffleCards(){
+  for(var i = gameCards.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = gameCards[i];
+    gameCards[i] = gameCards[j];
+    gameCards[j] = temp;
+  }
+  renderCards();
+}
+
+renderCards();
+
+// ===== СВЕТОФОР =====
+var TL = [
+  'Записаться в автошколу (Quisiera matricularme para el permiso B…)',
+  'Задать вопросы о документах и цене (¿Qué documentos necesito? ¿Cuánto cuesta?)',
+  'Записаться на psicotécnico и пройти медосмотр',
+  'Объяснить, что нужно сделать: es necesario / hace falta / hay que',
+  'Спросить о статусе заявки в DGT (¿Cuándo recibiré la convocatoria?)',
+  'Составить заявку на экзамен и чек-лист документов'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  if(!tb) return;
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + rowIdx + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + rowIdx + '" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+</script>
+
+<div id="toast" role="status"></div>
+
+<!-- Скрипт-стек (обязательно перед </body>) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
