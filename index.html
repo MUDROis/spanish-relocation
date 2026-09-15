@@ -170,6 +170,15 @@ h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:900;text-align:center}
 .lesson-link.locked{opacity:.55;cursor:not-allowed;background:#fff;border-style:dashed;border-color:rgba(43,33,24,.2);color:#b3aa9d}
 .week.live{border-color:var(--pc);box-shadow:0 0 0 3px var(--pc-soft),var(--shadow)}
 
+/* ---------- бонусный модуль ---------- */
+.bonus{max-width:1100px;margin:46px auto 0}
+.bonus .phase-head{background:linear-gradient(135deg,#B5651D,#E9A13B)}
+.bonus .phase-head .icon{font-size:2.1rem}
+.bonus .lesson-link{background:var(--p3);color:#fff;border-color:var(--p3)}
+.bonus .lesson-link:hover{filter:brightness(.92);color:#fff}
+.bonus .lesson-link.locked{background:#fff;border-style:dashed;border-color:rgba(43,33,24,.2);color:#b3aa9d}
+.bonus .badge-gift{display:inline-block;background:#FFD75E;color:#2B2118;font-size:.72rem;font-weight:900;padding:4px 12px;border-radius:999px;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase}
+
 /* ---------- результаты ---------- */
 .results-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;margin-top:30px}
 .check-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
@@ -268,6 +277,7 @@ footer b{color:var(--ink)}
       <button class="ctrl" id="collapseAll">Свернуть</button>
     </div>
     <div id="weeks-container"></div>
+    <div class="bonus" id="bonus-container"></div>
   </section>
 
   <section class="section" id="results">
@@ -433,6 +443,53 @@ container.addEventListener('click', async e=>{
   setTimeout(()=>{ window.open(MAX_URL,'_blank','noopener'); },1400);
 });
 
+/* ====== Бонусный модуль «Misión Autoescuela» ====== */
+const BONUS_PHASE = {
+  icon: '🎁', title: 'Бонусный модуль · Misión Autoescuela',
+  sub: 'Права в Испании с нуля: автошкола, psicotécnico, теория и практика — 5 уроков-репетиций после Блока 1.',
+  lessons: [
+    { id: 'bonus-auto-b1', title: 'Урок B1 · Autoescuela y Psicotécnico' },
+    { id: 'bonus-auto-b2', title: 'Урок B2 · Анатомия машины (скоро)' },
+    { id: 'bonus-auto-b3', title: 'Урок B3 · Практика вождения (скоро)' },
+    { id: 'bonus-auto-b4', title: 'Урок B4 · Теория и экзамен (скоро)' },
+    { id: 'bonus-auto-b5', title: 'Урок B5 · День экзамена (скоро)' }
+  ]
+};
+
+function renderBonus() {
+  const el = document.getElementById('bonus-container');
+  if (!el) return;
+  el.innerHTML =
+    '<div class="phase reveal" style="--pc:#B5651D;--pc-soft:#FBEFE0">' +
+      '<div class="phase-head"><span class="icon" aria-hidden="true">' + BONUS_PHASE.icon + '</span>' +
+        '<div><h3>' + BONUS_PHASE.title + '</h3><p>' + BONUS_PHASE.sub + '</p></div></div>' +
+      '<div class="weeks"><article class="week">' +
+        '<div class="week-head"><span class="week-num" aria-hidden="true">B</span>' +
+          '<span class="week-titles"><span class="wtitle">Бонус после Блока 1</span>' +
+          '<span class="week-teaser">Autoescuela · psicotécnico · DGT · теория · практика</span></span>' +
+          '<span class="badge-gift">🎁 БОНУС</span></div>' +
+        '<div class="week-body"><div class="week-body-inner"><div class="week-content">' +
+          '<div class="lessons">' + BONUS_PHASE.lessons.map(function (l) {
+            return '<a class="lesson-link" data-href="./lessons/parents/' + l.id + '.html" href="./lessons/parents/' + l.id + '.html">' + l.title + '</a>';
+          }).join('') + '</div>' +
+        '</div></div></div></article></div></div>';
+
+  document.getElementById('bonus-container').addEventListener('click', async function (e) {
+    const a = e.target.closest('.lesson-link');
+    if (!a) return;
+    const href = a.dataset.href || a.getAttribute('href');
+    if (!href) return;
+    try {
+      const res = await fetch(href, { method: 'HEAD' });
+      if (res.ok) { a.classList.add('live'); return; }
+    } catch (_) {}
+    e.preventDefault();
+    toast('📚 Урок ещё в работе. Оставьте заявку в Max — пришлём, как только будет готов!');
+    setTimeout(function () { window.open(MAX_URL, '_blank', 'noopener'); }, 1400);
+  });
+}
+renderBonus();
+
 /* ====== Переключатель аудиторий вынесен в шапку (навигация между index.html и kids.html) ====== */
 
 /* ====== Тост ====== */
@@ -456,7 +513,7 @@ addEventListener('scroll',()=>{
    (localStorage: mudro_done_parents → ['w01-l1', ...]). */
 function getParentsDone(){try{return JSON.parse(localStorage.getItem('mudro_done_parents'))||[]}catch(e){return[]}}
 function updateHeroProgress(){
-  const links=[...document.querySelectorAll('.lesson-link')];
+  const links=[...document.querySelectorAll('#weeks-container .lesson-link')];
   const total=links.length;
   const doneIds=new Set(getParentsDone());
   let done=0;
