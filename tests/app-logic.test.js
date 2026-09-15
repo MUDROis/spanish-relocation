@@ -16,6 +16,12 @@ test('parseLessonId extracts audience and lesson', () => {
   assert.equal(parseLessonId('/index.html'), null);
 });
 
+test('parseLessonId extracts bonus lesson ids', () => {
+  assert.equal(parseLessonId('/lessons/parents/bonus-auto-b1.html'), 'parents-bonus-auto-b1');
+  assert.equal(parseLessonId('/spanish-relocation/lessons/kids/bonus-auto-b2.html'), 'kids-bonus-auto-b2');
+  assert.equal(parseLessonId('/lessons/parents/w06-l1.html'), 'parents-w06-l1');
+});
+
 test('colorToValue maps color codes per audience', () => {
   assert.equal(colorToValue('1', 'parents'), 'green');
   assert.equal(colorToValue('3', 'parents'), 'red');

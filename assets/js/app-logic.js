@@ -2,9 +2,10 @@
   function pad2(n) { return String(n).padStart(2, '0'); }
 
   function parseLessonId(path) {
-    const m = String(path).match(/\/lessons\/(parents|kids)\/w(\d{2})-l(\d+)\.html/);
+    const m = String(path).match(/\/lessons\/(parents|kids)\/(w(\d{2})-l(\d+)|bonus-auto-b(\d+))\.html/);
     if (!m) return null;
-    return m[1] + '-w' + m[2] + '-l' + m[3];
+    if (m[2].indexOf('bonus') === 0) return m[1] + '-bonus-auto-b' + m[5];
+    return m[1] + '-w' + m[3] + '-l' + m[4];
   }
 
   const COLOR_MAP = { parents: { '1': 'green', '2': 'yellow', '3': 'red' }, kids: { '1': 'great', '2': 'ok', '3': 'hard' } };
