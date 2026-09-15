@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок B1 · Autoescuela y Psicotécnico — Школа МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  /* ОДИН непрерывный лист — браузер сам режет на A4 при печати */
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; font-size:10px; line-height:1.7;}
+  .dialog-box .who{ font-weight:700; color:var(--p2);}
+  .dialog-box .who.you{ color:var(--p4);}
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic;}
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;}
+  .sit-box b{ color:var(--p4);}
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4);}
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic;}
+
+  .plan-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px;}
+  .plan-box b{ color:var(--p4);}
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .footer-note{background:#2B2118;color:#E9A13B;border-radius:12px;padding:3mm 4mm;text-align:center;font-size:9.5px;font-weight:800}
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ОДИН НЕПРЕРЫВНЫЙ ЛИСТ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸 · БОНУСНЫЙ МОДУЛЬ</div>
+    <h1>🚗 Рабочий лист · Урок B1 «Misión Autoescuela»</h1>
+    <div class="meta">Автошкола и медосмотр: записываемся на права категории B</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>📚 Лексика: соедини термин и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la autoescuela</div>
+          <div class="item">2. el psicotécnico</div>
+          <div class="item">3. la tasa</div>
+          <div class="item">4. el permiso de conducir B</div>
+          <div class="item">5. la solicitud</div>
+          <div class="item">6. el certificado médico</div>
+          <div class="item">7. la convocatoria</div>
+          <div class="item">8. matricularse</div>
+        </div>
+        <div class="col">
+          <div class="item">а) пошлина, сбор</div>
+          <div class="item">б) права категории B</div>
+          <div class="item">в) заявление</div>
+          <div class="item">г) медсправка</div>
+          <div class="item">д) автошкола</div>
+          <div class="item">е) психофизический тест</div>
+          <div class="item">ж) вызов на экзамен</div>
+          <div class="item">з) записаться (в автошколу)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🔤 Впиши слово по описанию</h2><div class="tag">из словаря урока</div></div></div>
+    <div class="card">
+      1. Документ, подтверждающий оплату пошлины → <span class="wline long"></span>
+      <span class="ru-sub">(квитанция об оплате)</span><br>
+      2. Срок действия документа → <span class="wline long"></span>
+      <span class="ru-sub">(la vigencia / el plazo)</span><br>
+      3. Одна попытка сдать экзамен → <span class="wline long"></span>
+      <span class="ru-sub">(el intento)</span><br>
+      4. Регистрация по месту жительства → <span class="wline long"></span>
+      <span class="ru-sub">(el empadronamiento)</span><br>
+      5. Сдать экзамен успешно → <span class="wline long"></span>
+      <span class="ru-sub">(aprobar)</span><br>
+      6. Провалить экзамен → <span class="wline long"></span>
+      <span class="ru-sub">(suspender)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА · ВСТАВЬ КОНСТРУКЦИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Грамматика: вставь конструкцию</h2><div class="tag">hay que / hace falta / es necesario / quisiera / ¿podría…?</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>Hay que / Hace falta / Es necesario</b> + инфинитив = нужно (всем, общее правило).<br>
+      <b>Quisiera</b> + инфинитив = я хотел бы… · <b>¿Podría…?</b> = не могли бы вы…?</div>
+      1. <span class="wline short"></span> tener 18 años para el permiso B.
+      <span class="ru-sub">(Нужно быть старше 18 лет для прав B.)</span><br>
+      2. <span class="wline short"></span> una cita previa para el psicotécnico.
+      <span class="ru-sub">(Нужна предварительная запись на медосмотр.)</span><br>
+      3. <span class="wline short"></span> pasar el examen médico antes del teórico.
+      <span class="ru-sub">(Необходимо пройти медосмотр перед теорией.)</span><br>
+      4. <span class="wline short"></span> matricularme para el permiso B.
+      <span class="ru-sub">(Я хотел бы записаться на права категории B.)</span><br>
+      5. ¿<span class="wline short"></span> darme una cita para mañana?
+      <span class="ru-sub">(Не могли бы вы записать меня на завтра?)</span><br>
+      6. ¿<span class="wline short"></span> explicarme qué documentos necesito?
+      <span class="ru-sub">(Не могли бы вы объяснить, какие документы нужны?)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>📖 Чтение: диалог записи в автошколу</h2><div class="tag">прочитай и ответь на вопросы</div></div></div>
+    <div class="card">
+      <div class="dialog-box">
+        <span class="who you">Вы:</span> Buenos días. Quisiera matricularme para el permiso de conducir B.<br>
+        <span class="who">Автошкола:</span> Muy bien. ¿Tiene el NIE y el empadronamiento?<br>
+        <span class="who you">Вы:</span> Sí, aquí están. ¿Qué más necesito?<br>
+        <span class="who">Автошкола:</span> Necesita pasar el psicotécnico en un centro de reconocimiento. El certificado médico es válido 90 días.<br>
+        <span class="who you">Вы:</span> ¿Cuánto cuesta la tasa?<br>
+        <span class="who">Автошкола:</span> La tasa cuesta 94 euros. Le damos dos intentos para el examen teórico.<br>
+        <span class="who you">Вы:</span> Perfecto. ¿Podría darme una cita para el psicotécnico?<br>
+        <span class="who">Автошкола:</span> Sí, hay una cita disponible el martes a las diez. ¿Le viene bien?<br>
+        <span class="who you">Вы:</span> Sí, perfecto. Muchas gracias. Hasta luego.
+      </div>
+      <br>
+      1. ¿Qué quiere hacer la persona?
+      <span class="ru-sub">(Что хочет сделать человек?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué documentos necesita?
+      <span class="ru-sub">(Какие документы нужны?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Cuánto cuesta la tasa?
+      <span class="ru-sub">(Сколько стоит пошлина?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuántos intentos tiene para el examen teórico?
+      <span class="ru-sub">(Сколько попыток на теоретический экзамен?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Cuándo es la cita para el psicotécnico?
+      <span class="ru-sub">(Когда запись на медосмотр?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>🎧 Аудирование: визит в медцентр</h2><div class="tag">попроси родителя/преподавателя прочитать вслух</div></div></div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя: прочитать вслух 2 раза (медленно):</b><br>
+        «Buenos días. Tengo una cita para el psicotécnico. Aquí está mi NIE. Primero hacen la prueba de coordinación. Después comprueban la agudeza visual. También hay un examen auditivo. Al final me dan el informe de aptitud. El certificado cuesta 40 euros y es válido 90 días.»
+      </div>
+      1. ¿Para qué tiene la cita la persona?
+      <span class="ru-sub">(На что записан человек?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué pruebas hay en el psicotécnico? (назови 3)
+      <span class="ru-sub">(Какие тесты есть в медосмотре?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Cuánto cuesta el certificado?
+      <span class="ru-sub">(Сколько стоит справка?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuánto tiempo es válido el certificado?
+      <span class="ru-sub">(Сколько времени действительна справка?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>🗣 Говорение: ситуации в автошколе и медцентре</h2><div class="tag">используй шаблоны, произнеси вслух</div></div></div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы пришли в автошколу записаться на права. Что скажете?
+        <div class="tmpl">«Buenos días. Quisiera matricularme para el permiso de conducir B.»</div>
+        <div class="tmpl-ru">(Добрый день. Я хотел бы записаться на права категории B.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы хотите узнать, какие документы нужны. Что спросите?
+        <div class="tmpl">«¿Qué documentos necesito? ¿Podría explicarme, por favor?»</div>
+        <div class="tmpl-ru">(Какие документы нужны? Не могли бы вы объяснить?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы в медцентре. Хотите узнать, сколько стоит справка. Что спросите?
+        <div class="tmpl">«¿Cuánto cuesta el certificado médico? ¿Cuánto tiempo es válido?»</div>
+        <div class="tmpl-ru">(Сколько стоит медсправка? Сколько времени она действительна?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы хотите записаться на медосмотр на конкретный день. Что скажете?
+        <div class="tmpl">«¿Podría darme una cita para el martes a las diez, por favor?»</div>
+        <div class="tmpl-ru">(Не могли бы вы записать меня на вторник в десять?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>✍️ Письмо: «Мой путь к правам»</h2><div class="tag">7–8 предложений по плану</div></div></div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Зачем вам права в Испании? (Voy a… / Necesito…)<br>
+        3–4. Что нужно сделать сначала? (Hay que… / Necesito…)<br>
+        5–6. Какие документы подготовите? (Tengo que…)<br>
+        7–8. Когда пойдёте в автошколу и медцентр? (Voy a ir… el martes…)
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть термины автошколы и медцентра</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать вежливые просьбы (quisiera, ¿podría…?)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить о необходимости (hay que, hace falta)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понять диалог записи в автошколу</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понять описание визита в медцентр на слух</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Рассказать о своём пути к правам письменно</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист и отправь преподавателю — проверим вместе!</p>
+    </div>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Бонусный модуль «Misión Autoescuela» · Урок B1 · ¡Buena suerte con tu permiso! 🚗</div>
+</div>
+
+</body>
+</html>
