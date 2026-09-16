@@ -463,8 +463,8 @@ function renderBonus() {
     '<div class="phase reveal" style="--pc:#B5651D;--pc-soft:#FBEFE0">' +
       '<div class="phase-head"><span class="icon" aria-hidden="true">' + BONUS_PHASE.icon + '</span>' +
         '<div><h3>' + BONUS_PHASE.title + '</h3><p>' + BONUS_PHASE.sub + '</p></div></div>' +
-      '<div class="weeks"><article class="week">' +
-        '<div class="week-head"><span class="week-num" aria-hidden="true">B</span>' +
+      '<div class="weeks"><article class="week open">' +
+        '<div class="week-head" aria-expanded="true"><span class="week-num" aria-hidden="true">B</span>' +
           '<span class="week-titles"><span class="wtitle">Бонус после Блока 1</span>' +
           '<span class="week-teaser">Autoescuela · psicotécnico · DGT · теория · практика</span></span>' +
           '<span class="badge-gift">🎁 БОНУС</span></div>' +
@@ -479,11 +479,19 @@ function renderBonus() {
 
   document.getElementById('bonus-container').addEventListener('click', function (e) {
     const a = e.target.closest('.lesson-link');
-    if (!a) return;
-    if (a.getAttribute('href')) return;
-    e.preventDefault();
-    toast('📚 Урок ещё в работе. Оставьте заявку в Max — пришлём, как только будет готов!');
-    setTimeout(function () { window.open(MAX_URL, '_blank', 'noopener'); }, 1400);
+    if (a) {
+      if (a.getAttribute('href')) return;
+      e.preventDefault();
+      toast('📚 Урок ещё в работе. Оставьте заявку в Max — пришлём, как только будет готов!');
+      setTimeout(function () { window.open(MAX_URL, '_blank', 'noopener'); }, 1400);
+      return;
+    }
+    const head = e.target.closest('.week-head');
+    if (head) {
+      const w = head.closest('.week');
+      const open = w.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+    }
   });
 }
 renderBonus();
