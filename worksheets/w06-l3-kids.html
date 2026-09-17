@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 18 · El aula de mis sueños — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --blue:#2274A5;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--pink);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,30,99,.4)}
+  .print-btn:hover{background:#AD1457}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FCE4EC,#F8BBD0,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--pink)}
+  .hero h1{font-size:21px;color:var(--pink);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--pink);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-blue{background:var(--blue)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FCE4EC;border:1.5px dashed var(--pink);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--pink);margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .blank{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:110px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--pink);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--pink)}
+  .build-line{border-bottom:1.6px dashed var(--pink);height:24px}
+
+  .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .choice-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .choice-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .choice-item .opt{display:inline-block;border:1.6px solid var(--afran);border-radius:999px;padding:2px 12px;font-weight:700;font-size:12.5px;color:var(--afran);margin:0 3px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🎨 El aula de mis sueños</h1>
+    <div class="sub">Рабочий лист к Уроку 18 · Станция 2: Mi Colegio · прилагательные, согласование, STEAM-дизайн</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, а потом <strong>проверь вместе с родителем или учителем</strong>. Вспоминай SVG-карточки и STEAM-дизайн из урока 18!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">1</span>
+      <span class="ex-title">Соедини прилагательное и перевод</span>
+      <span class="ex-skill">🗣 Лексика · прилагательные</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>grande</td><td>а) тёмный</td></tr>
+      <tr><td><span class="ans-box"></span>pequeño</td><td>б) современный</td></tr>
+      <tr><td><span class="ans-box"></span>luminoso</td><td>в) большой</td></tr>
+      <tr><td><span class="ans-box"></span>oscuro</td><td>г) маленький</td></tr>
+      <tr><td><span class="ans-box"></span>bonito</td><td>д) некрасивый</td></tr>
+      <tr><td><span class="ans-box"></span>feo</td><td>е) удобный</td></tr>
+      <tr><td><span class="ans-box"></span>moderno</td><td>ж) светлый</td></tr>
+      <tr><td><span class="ans-box"></span>cómodo</td><td>з) красивый</td></tr>
+      <tr><td><span class="ans-box"></span>el aula de mis sueños</td><td>и) мне нравится, потому что</td></tr>
+      <tr><td><span class="ans-box"></span>me gusta porque</td><td>к) класс моей мечты</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">2</span>
+      <span class="ex-title">Угадай прилагательное по описанию</span>
+      <span class="ex-skill">🗣 Лексика · описание</span>
+    </div>
+    <div class="ex-instruction">Прочитай описание и напиши прилагательное по-испански.</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span>☀️ Tiene mucha luz del sol, muchas ventanas. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span>🌑 No tiene luz, es casi negro. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span>📏 Es muy grande, no es pequeño. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span>💖 Es muy agradable a la vista, muy lindo. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span>🤖 Es nuevo, con mucha tecnología. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span>🛋️ Es confortable, te sientes bien allí. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: СОГЛАСОВАНИЕ (вставь форму) -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь правильную форму прилагательного</span>
+      <span class="ex-skill">🧩 Грамматика · согласование</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> прилагательное согласуется с существительным в роде и числе: <em>-o / -a / -os / -as</em>. Но <strong>grande</strong> не меняется по роду (clase grande, ordenador grande), только по числу (grandes)! <strong>el aula</strong> — женский род, прилагательное женское!</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>La clase es <span class="g"></span> (luminoso).</div>
+      <div class="gap-item"><span class="num">2</span>El ordenador es <span class="g"></span> (moderno).</div>
+      <div class="gap-item"><span class="num">3</span>Las ventanas son <span class="g"></span> (grande).</div>
+      <div class="gap-item"><span class="num">4</span>Los ordenadores son <span class="g"></span> (moderno).</div>
+      <div class="gap-item"><span class="num">5</span>El aula es <span class="g"></span> (cómodo).</div>
+      <div class="gap-item"><span class="num">6</span>Las mesas son <span class="g"></span> (pequeño).</div>
+      <div class="gap-item"><span class="num">7</span>La estantería es <span class="g"></span> (bonito).</div>
+      <div class="gap-item"><span class="num">8</span>El suelo es <span class="g"></span> (oscuro).</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">luminosa.</span><span class="build-word">La</span><span class="build-word">es</span><span class="build-word">clase</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">modernos.</span><span class="build-word">Los</span><span class="build-word">son</span><span class="build-word">ordenadores</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">y</span><span class="build-word">grande</span><span class="build-word">es</span><span class="build-word">bonita.</span><span class="build-word">Mi</span><span class="build-word">clase</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">pequeñas.</span><span class="build-word">son</span><span class="build-word">Las</span><span class="build-word">mesas</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">moderna</span><span class="build-word">El</span><span class="build-word">es</span><span class="build-word">y</span><span class="build-word">cómoda.</span><span class="build-word">aula</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ВЫБОР ПРАВИЛЬНОЙ ФОРМЫ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">5</span>
+      <span class="ex-title">Обведи правильную форму прилагательного</span>
+      <span class="ex-skill">🧩 Согласование · выбор</span>
+    </div>
+    <div class="choice-grid">
+      <div class="choice-item"><span class="num">1</span>La clase es <span class="opt">luminoso</span> / <span class="opt">luminosa</span>.</div>
+      <div class="choice-item"><span class="num">2</span>Los ordenadores son <span class="opt">moderno</span> / <span class="opt">modernos</span>.</div>
+      <div class="choice-item"><span class="num">3</span>El aula es <span class="opt">moderno</span> / <span class="opt">moderna</span>.</div>
+      <div class="choice-item"><span class="num">4</span>Las ventanas son <span class="opt">grandes</span> / <span class="opt">grandas</span>.</div>
+      <div class="choice-item"><span class="num">5</span>La estantería es <span class="opt">bonito</span> / <span class="opt">bonita</span>.</div>
+      <div class="choice-item"><span class="num">6</span>El suelo es <span class="opt">oscuro</span> / <span class="opt">oscura</span>.</div>
+      <div class="choice-item"><span class="num">7</span>Las sillas son <span class="opt">cómodos</span> / <span class="opt">cómodas</span>.</div>
+      <div class="choice-item"><span class="num">8</span>El mapa es <span class="opt">grande</span> / <span class="opt">grando</span>.</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай описание класса Pablo и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      Me llamo Pablo y tengo once años. Mi aula de mis sueños es grande y luminosa. Hay cuatro ventanas grandes y dos puertas. La pizarra es digital y moderna. Los ordenadores son nuevos y cómodos. Hay una estantería bonita en la esquina. Las mesas son pequeñas pero modernas. Las sillas son cómodas y azules. El suelo es oscuro y el techo es blanco. Me gusta mucho mi aula porque es bonita y cómoda. ¡Es el aula perfecta!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Cómo es el aula de Pablo? <span class="ru">(Какой класс у Пабло?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Cómo es la pizarra? <span class="ru">(Какая доска?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cómo son los ordenadores? <span class="ru">(Какие компьютеры?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Cómo son las mesas? <span class="ru">(Какие столы?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿De qué color son las sillas? <span class="ru">(Какого цвета стулья?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">6.</span><span>¿Por qué le gusta el aula? <span class="ru">(Почему ему нравится класс?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">7</span>
+      <span class="ex-title">Послушай и напиши, какое описание</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши полную фразу, которую услышал(а)!</div>
+    <div class="listen-item"><span class="lnum">1.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span> → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span> → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) «Mi clase es grande y luminosa.» · 2) «Los ordenadores son modernos.» · 3) «La estantería es bonita y pequeña.» · 4) «Las ventanas son grandes.» · 5) «El aula es cómoda porque hay mucha luz.»</div>
+  </div>
+
+  <!-- 8. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">8</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение · описание</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Скажи, какой твой класс мечты (используй 2 прилагательных):<br><span class="tpl">Mi aula de mis sueños es ___ y ___.</span><span class="ru">Мой класс мечты ___ и ___.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Скажи, какая доска в твоём классе мечты:<br><span class="tpl">La pizarra es ___ y ___.</span><span class="ru">Доска ___ и ___.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Скажи, какие столы (используй мн.ч.):<br><span class="tpl">Las mesas son ___ y ___.</span><span class="ru">Столы ___ и ___.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Скажи, что тебе нравится и почему:<br><span class="tpl">Me gusta mi aula porque es ___.</span><span class="ru">Мне нравится мой класс, потому что он ___.</span><span class="speak-check"></span></div>
+    <div class="speak-item">5. Опиши СВОЮ реальную комнату 2 прилагательными:<br><span class="tpl">Mi habitación es ___ y ___.</span><span class="ru">Моя комната ___ и ___.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 9. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">9</span>
+      <span class="ex-title">Сочинение «Mi aula ideal»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) Mi aula ideal es... (grande/pequeña y luminosa/oscura). · 2) Hay una pizarra... (digital/moderna). · 3) Los ordenadores son... (modernos/nuevos). · 4) Hay una estantería... (bonita/pequeña). · 5) Las mesas son... (cómodas/pequeñas). · 6) Las sillas son... (cómodas/bonitas). · 7) El suelo es... / el techo es... · 8) Me gusta porque es... (usa «porque»!)</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 10. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">10</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть 8 прилагательных класса</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Согласовывать прилагательное (-o/-a/-os/-as)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Помнить: grande не меняется по роду</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Помнить ловушку: el aula + ж.р. прилагательное</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Описывать класс (ser + прилагательное)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Проектировать и презентовать класс мечты</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 2: Mi Colegio · Урок 18 · ¡Hasta luego! 🎨</div>
+</div>
+
+</body>
+</html>
