@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 5.2 · Интернет и связь — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  /* ОДИН непрерывный лист */
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+  .note.red{ background:#FBF0ED; border-left-color:var(--p1);}
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7;}
+  .dialog-box .who{ font-weight:700; color:var(--p2);}
+  .dialog-box .who.you{ color:var(--p4);}
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic;}
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;}
+  .sit-box b{ color:var(--p4);}
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4);}
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic;}
+
+  .plan-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px;}
+  .plan-box b{ color:var(--p4);}
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<!-- ОДИН НЕПРЕРЫВНЫЙ ЛИСТ -->
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>📶 Рабочий лист · Урок 5.2 «Интернет и связь»</h1>
+    <div class="meta">Подключаем интернет: тарифы, permanencia, косвенные местоимения</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>📶 Лексика: соедини термин и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la fibra óptica</div>
+          <div class="item">2. la permanencia</div>
+          <div class="item">3. el router</div>
+          <div class="item">4. la cobertura</div>
+          <div class="item">5. darse de baja</div>
+          <div class="item">6. la tarifa</div>
+          <div class="item">7. la contraseña</div>
+          <div class="item">8. el técnico</div>
+        </div>
+        <div class="col">
+          <div class="item">а) роутер</div>
+          <div class="item">б) оптоволокно</div>
+          <div class="item">в) пароль</div>
+          <div class="item">г) обязательный срок</div>
+          <div class="item">д) покрытие сети</div>
+          <div class="item">е) отключиться</div>
+          <div class="item">ж) тариф</div>
+          <div class="item">з) техник</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🔤 Впиши слово по описанию</h2><div class="tag">из словаря урока</div></div></div>
+    <div class="card">
+      1. Сигнал очень слабый в моей комнате → <span class="wline long"></span><br>
+      2. Интернет не работает со вчера → <span class="wline long"></span><br>
+      3. Соединение упало три раза сегодня → <span class="wline long"></span><br>
+      4. Хочу подключить свет и интернет → <span class="wline long"></span><br>
+      5. Хочу отменить контракт → <span class="wline long"></span><br>
+      6. Хочу перезагрузить роутер → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА · ВСТАВЬ МЕСТОИМЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Грамматика: вставь местоимение (me / te / le)</h2><div class="tag">косвенные местоимения в просьбах</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>¿Me puede + инфинитив?</b> = Можете мне…? · <b>¿Le puedo + инфинитив?</b> = Могу я ему/Вам…? · <b>¿Te puede + инфинитив?</b> = Может тебе…?</div>
+      1. ¿<span class="wline short"></span> puede mandar la factura por email?
+      <span class="ru-sub">(Можете прислать мне счёт по почте?)</span><br>
+      2. ¿<span class="wline short"></span> puedo llamar mañana?
+      <span class="ru-sub">(Могу я позвонить Вам завтра?)</span><br>
+      3. ¿<span class="wline short"></span> puede ayudar con el router, por favor?
+      <span class="ru-sub">(Можете помочь мне с роутером?)</span><br>
+      4. ¿<span class="wline short"></span> puede dar la contraseña del wifi?
+      <span class="ru-sub">(Можете дать мне пароль от вай-фая?)</span><br>
+      5. ¿<span class="wline short"></span> puede enviar el contrato por email?
+      <span class="ru-sub">(Можете отправить мне контракт по почте?)</span><br>
+      6. ¿<span class="wline short"></span> puede explicar la tarifa?
+      <span class="ru-sub">(Можете объяснить мне тариф?)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ · ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>📖 Чтение: диалог с оператором</h2><div class="tag">прочитай и ответь на вопросы</div></div></div>
+    <div class="card">
+      <div class="dialog-box">
+        <span class="who">Оператор:</span> Buenos días, Movistar. Le atiende Carlos. ¿En qué puedo ayudarle?<br>
+        <span class="who you">Вы:</span> Buenos días. Quisiera contratar la fibra óptica para mi nuevo piso.<br>
+        <span class="who">Оператор:</span> Muy bien. ¿Cuál es su dirección?<br>
+        <span class="who you">Вы:</span> Calle Mayor, 15, tercero B.<br>
+        <span class="who">Оператор:</span> Hay cobertura de fibra en su zona. ¿Qué tarifa prefiere?<br>
+        <span class="who you">Вы:</span> ¿Me puede explicar las opciones? ¿Hay permanencia?<br>
+        <span class="who">Оператор:</span> Tenemos 300 megas por 30 euros con permanencia de 12 meses. O sin permanencia por 35 euros.<br>
+        <span class="who you">Вы:</span> Prefiero sin permanencia. ¿Cuándo puede venir el técnico?<br>
+        <span class="who">Оператор:</span> Mañana por la mañana. ¿Le viene bien?<br>
+        <span class="who you">Вы:</span> Sí, perfecto. ¿Me puede enviar la confirmación por email?<br>
+        <span class="who">Оператор:</span> Por supuesto. Hasta luego.
+      </div>
+      <br>
+      1. ¿Qué quiere contratar el cliente?
+      <span class="ru-sub">(Что хочет подключить клиент?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Hay cobertura de fibra en su zona?
+      <span class="ru-sub">(Есть ли покрытие оптоволокна в его зоне?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Cuánto cuesta la tarifa sin permanencia?
+      <span class="ru-sub">(Сколько стоит тариф без обязательного срока?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuándo puede venir el técnico?
+      <span class="ru-sub">(Когда может прийти техник?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Qué pide el cliente al final?
+      <span class="ru-sub">(Что просит клиент в конце?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>🎧 Аудирование: звонок в техподдержку</h2><div class="tag">попроси родителя прочитать вслух</div></div></div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя: прочитать вслух 2 раза (медленно):</b><br>
+        «Buenos días. No me funciona el internet desde ayer. El router no enciende. Ya he reiniciado el router tres veces, pero no funciona. ¿Puede mandarme un técnico, por favor? ¿Puede venir esta tarde? Mi dirección es Calle Mayor, 15. Muchas gracias.»
+      </div>
+      1. ¿Qué problema tiene el cliente?
+      <span class="ru-sub">(Какая проблема у клиента?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué ha hecho el cliente ya?
+      <span class="ru-sub">(Что уже сделал клиент?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pide el cliente?
+      <span class="ru-sub">(Что просит клиент?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuándo quiere que venga el técnico?
+      <span class="ru-sub">(Когда хочет, чтобы пришёл техник?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>🗣 Говорение: ситуации с оператором</h2><div class="tag">используй шаблоны</div></div></div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Хочешь подключить интернет в новой квартире.<br>
+        <div class="tmpl">«Buenos días. Quisiera contratar la fibra óptica para mi nuevo piso.»</div>
+        <div class="tmpl-ru">(Добрый день. Я хотел бы подключить оптоволокно для моей новой квартиры.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Хочешь узнать про обязательный срок.<br>
+        <div class="tmpl">«¿Hay permanencia? ¿Cuánto tiempo?»</div>
+        <div class="tmpl-ru">(Есть ли обязательный срок? Сколько времени?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Интернет не работает. Звонишь в техподдержку.<br>
+        <div class="tmpl">«No me funciona el internet desde ayer. ¿Puede mandarme un técnico, por favor?»</div>
+        <div class="tmpl-ru">(У меня не работает интернет со вчера. Можете прислать мне техника, пожалуйста?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Хочешь отменить контракт.<br>
+        <div class="tmpl">«Quisiera darme de baja. ¿Hay penalización?»</div>
+        <div class="tmpl-ru">(Я хотел бы отключиться. Есть ли штраф?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ПИСЬМО · СКРИПТ ЗВОНКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>✍️ Письмо: твой скрипт звонка</h2><div class="tag">7–8 предложений по плану</div></div></div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и цель звонка (подключить / отключить / проблема).<br>
+        3–4. Твои данные (адрес, номер клиента).<br>
+        5–6. Вопросы (тариф, permanencia, техник).<br>
+        7–8. Прощание и просьба (подтверждение по почте).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть типы связи (fibra, ADSL, wifi)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать косвенные местоимения (me, te, le)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать термины тарифов (permanencia, penalización)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Сообщать о проблемах (no me funciona, se ha caído)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понять диалог с оператором на слух</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Написать скрипт звонка</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист и отправь преподавателю — проверим вместе!</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
