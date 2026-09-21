@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 19: Se puede / No se puede — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --blue:#2274A5; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E8F5E9 0%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--green);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--green)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+  .final-situation{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--green);text-align:left}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--green)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#E8F5E9;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #E8F5E9;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--green)}
+  .word-card .emo{display:block;margin:0 auto 4px;width:52px;height:52px}
+  .word-card .emo svg{width:52px;height:52px;display:block}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:.95rem;color:var(--green)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .word-card .ges{display:block;font-size:.7rem;font-weight:800;color:var(--terra);margin-top:4px}
+  .speak-btn{background:var(--green);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--green);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6;cursor:pointer}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.3rem;color:var(--green);margin:10px 0;min-height:36px}
+  .game-svg{margin:6px auto;min-height:70px;display:flex;justify-content:center;align-items:center}
+  .game-svg svg{width:70px;height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #cfd8cf;border-radius:14px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.98rem}
+  .opt:hover:not(:disabled){border-color:var(--green)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #cfd8cf;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--green)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .sb-target{background:#fff;border:2px dashed #cfd8cf;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.2rem;color:var(--green)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--green);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--green);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.8;margin:10px 0}
+  .read-q{margin:8px 0}
+  .read-q .q{font-weight:700;margin-bottom:4px}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:4px}
+
+  .pbl-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+  .pbl-chip{background:#fff;border:2px solid var(--green);color:var(--green);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;font-family:'Nunito';transition:.15s}
+  .pbl-chip.sel{background:var(--green);color:#fff}
+  .pbl-chip.red{border-color:var(--red);color:var(--red)}
+  .pbl-chip.red.sel{background:var(--red);color:#fff}
+  .design-result{background:#E8F5E9;border-radius:14px;padding:16px;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--green);min-height:60px}
+
+  .ball{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd54f,var(--terra));border:none;cursor:pointer;font-size:2.6rem;box-shadow:0 8px 22px rgba(232,96,76,.4);transition:.2s}
+  .ball:hover{transform:scale(1.08) rotate(-8deg)}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--green);background:#E8F5E9}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  /* grammar-hint */
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:280px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+  .flash-back .grammar-hint{color:#fff;border-bottom-color:rgba(255,255,255,.75)}
+
+  /* Светофор */
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--green);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--green);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--green),#1B5E20);color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 2 · Mi Colegio · Урок 19 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🚦 УРОК 19 · НЕДЕЛЯ 7</span>
+  <h1>Se puede / <span>No se puede</span></h1>
+  <p class="sub">Ты уже умеешь просить для СЕБЯ: «¿Puedo ir al baño?» (урок 5). Сегодня — общие ПРАВИЛА класса для ВСЕХ: что можно и что нельзя. Создай свой постер правил!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> учитель спрашивает: <em>«¿Se puede comer en clase?»</em> — ты отвечаешь и показываешь постер:<br>
+    <em>«No, no se puede. Pero se puede beber agua. En mi clase se puede trabajar en equipo y pedir ayuda. No se puede usar el móvil ni correr en el pasillo.»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🚦</span> Говорить se puede / no se puede + инфинитив</div>
+      <div class="goal-item"><span class="emoji">❓</span> Спрашивать ¿Se puede...? и отвечать Sí/No</div>
+      <div class="goal-item"><span class="emoji">🏃</span> Называть 10 школьных действий</div>
+      <div class="goal-item"><span class="emoji">🆚</span> Различать ¿Puedo...? (ур. 5) и se puede</div>
+      <div class="goal-item"><span class="emoji">🎨</span> Создать постер правил класса</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Guardián de las normas»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: поговорим о прошлом уроке</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">Вспомним урок 18 (прилагательные)! Ответь ВСЛУХ, нажми «Показать ответ» и сверься. Мостик: «Твой класс мечты готов. А какие в нём ПРАВИЛА?»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 2: НОВЫЕ СЛОВА -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🏃 Новые слова: 10 действий</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на карточку — услышишь действие. Показывай жест и повторяй!</p>
+    <div class="cards-grid" id="act-cards"></div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎮 Мини-викторина «Какое действие?»: посмотри на картинку и выбери фразу!</p>
+      <div class="game-svg" id="aq-svg"></div>
+      <div class="opts" id="aq-opts"></div>
+      <div class="game-fb" id="aq-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="aq-stars">0</span> / <span id="aq-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="aqStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ГРАММАТИКА -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head">
+      <h2 class="block-title">🚦 Грамматика: se puede / no se puede</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Se puede beber agua.')"><td><b>SE PUEDE + инф.</b></td><td>Se puede beber agua.</td><td>Можно пить воду</td><td>🔊</td></tr>
+      <tr onclick="speak('No se puede comer en clase.')"><td><b>NO SE PUEDE + инф.</b></td><td>No se puede comer en clase.</td><td>Нельзя есть в классе</td><td>🔊</td></tr>
+      <tr onclick="speak('¿Se puede usar el móvil?')"><td><b>¿SE PUEDE + инф.?</b></td><td>¿Se puede usar el móvil?</td><td>Можно пользоваться телефоном?</td><td>🔊</td></tr>
+      <tr onclick="speak('Sí, se puede. No, no se puede.')"><td><b>Ответы</b></td><td>Sí, se puede. / No, no se puede.</td><td>Да, можно. / Нет, нельзя</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Секрет:</strong> после <em>se puede</em> глагол ВСЕГДА в инфинитиве. И <em>se puede</em> НЕ меняется: даже с двумя действиями — <em>Se puede hablar y trabajar en equipo.</em><br>🆚 <strong>Личное vs общее:</strong> <em>¿Puedo ir al baño?</em> (урок 5, про СЕБЯ) vs <em>No se puede correr</em> (правило для ВСЕХ).</div>
+    <div class="game-zone">
+      <p style="font-weight:800">⚖️ Сортировка: можно или нельзя? 8 ситуаций!</p>
+      <div class="game-q" id="sort-q"></div>
+      <div class="opts">
+        <button class="opt" onclick="sortAns('puede')">✅ SE PUEDE</button>
+        <button class="opt" onclick="sortAns('no')">🚫 NO SE PUEDE</button>
+      </div>
+      <div class="game-fb" id="sort-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="sort-stars">0</span> / <span id="sort-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="sortStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Конструктор: собери фразу-правило!</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: АУДИРОВАНИЕ + VERDAD/FALSO -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">🎧 Аудирование ✅/❌ + Verdad o Falso</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎧 Слушай правило и кликай: ✅ (можно) или ❌ (нельзя)! 10 раундов.</p>
+      <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakListen()">🔊 Послушать</button>
+      <div class="opts" style="margin-top:12px">
+        <button class="opt" onclick="listenAns('si')">✅ Se puede</button>
+        <button class="opt" onclick="listenAns('no')">❌ No se puede</button>
+      </div>
+      <div class="game-fb" id="listen-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="listen-stars">0</span> / <span id="listen-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="listenStart()">▶ Начать</button>
+    </div>
+    <h4 style="margin:16px 0 8px">🕵️ Verdad o Falso про испанскую школу:</h4>
+    <div id="vf-box"></div>
+  </section>
+
+  <!-- БЛОК 5: ЧТЕНИЕ + РЕЧЕВОЙ МАРАФОН -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head">
+      <h2 class="block-title">📖 Чтение cartel + речевой марафон</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakCartel()">🔊 Послушать постер</button>
+    <div class="read-box">
+      <strong>NORMAS DE LA CLASE</strong><br>
+      ✅ Se puede: pedir ayuda, trabajar en equipo, beber agua, escuchar música en el trabajo individual.<br>
+      🚫 No se puede: comer en clase, usar el móvil, correr en el pasillo, gritar.
+    </div>
+    <div id="read-quiz"></div>
+    <h4 style="margin:16px 0 8px">🗣🔥 Речевой марафон: ответь ВСЛУХ!</h4>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: PBL ПОСТЕР -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🎨 PBL: Постер правил класса</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Выбери 4 правила «можно» (зелёные) и 4 «нельзя» (красные) → получи готовый постер с озвучкой!</p>
+    <p style="font-weight:800;color:var(--green)">✅ SE PUEDE (выбери 4):</p>
+    <div class="pbl-pool" id="puede-pool"></div>
+    <p style="font-weight:800;color:var(--red)">🚫 NO SE PUEDE (выбери 4):</p>
+    <div class="pbl-pool" id="nopuede-pool"></div>
+    <div style="text-align:center"><button class="speak-btn" style="font-size:1.05rem;padding:10px 22px;background:var(--pink)" onclick="genPoster()">🎨 Создать постер</button></div>
+    <div class="design-result" id="poster-result">CARTEL DE NORMAS: ...</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🔢 CLIL: ¿Cuántas normas hay en total en tu cartel?</p>
+      <div class="opts" id="clil-opts"></div>
+      <div class="game-fb" id="clil-fb"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 7: PELOTA + БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🎾 La Pelota Preguntona + бейдж</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div style="text-align:center">
+      <button class="ball" onclick="pelotaNext()">🎾</button>
+      <div class="game-q" id="pel-q">Нажми на мяч!</div>
+      <div class="opts" id="pel-opts"></div>
+      <div class="game-fb" id="pel-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="pel-stars">0</span> / <span id="pel-total">0</span></div>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🚦</div>
+      <h3>Guardián de las normas</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты знаешь все правила класса и создал свой постер!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Guardián de las normas» 🚦 добавлен в твой паспорт!</div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#2E7D32">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (10 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей se puede / no se puede</strong> · 5 мин<br>Объясни формулу и приведи по 2 примера про ваш дом.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>Семейная игра «Правила дома»</strong> · 7 мин ⭐<br>Составьте 4 домашних правила по-испански: <em>«Se puede ver la tele después de cenar»</em>, <em>«No se puede comer en el dormitorio»</em>.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>Скажи 4 правила своего класса ВСЛУХ</strong> · 7 мин ⭐<br>2 «можно» + 2 «нельзя»; запиши голосовую заметку.</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br><a href="#match-left">🧩 Сопоставление (10 пар)</a> · ⚖️ сортировка · 🎧 ✅/❌</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>Найди 3 знака правил</strong> · 7 мин ⭐<br>Сфотографируй или нарисуй 3 знака (можно/нельзя) и подпиши: <em>«No se puede fumar»</em>, <em>«Se puede aparcar»</em>.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Se puede / No se puede»</strong> · 15 мин ⭐<br>Попроси родителей распечатать, выполни и раскрась светофор.<br><a href="../../worksheets/w07-l1-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> — нажми нужный цвет в таблице ниже.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Говорить se puede / no se puede + инфинитив</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Спрашивать ¿Se puede...? и отвечать</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Называть 10 школьных действий</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Различать ¿Puedo...? и se puede</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Создать постер правил класса</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1211218151/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-2-%D1%83%D1%80%D0%BE%D0%BA-10-flash-cards/?i=2gqp1x&x=1jqt" target="_blank">
+    <span>📚 Карточки Quizlet · Станция 2 · Урок 10 (Se puede / No se puede)</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w06-l3.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 18: STEAM El aula de mis sueños 🎨</div></a>
+    <a href="./w07-l2.html" class="nav-next"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 20: Tengo que... 📋</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 2: Mi Colegio · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+function joinEs(arr){if(arr.length===1)return arr[0];return arr.slice(0,-1).join(', ')+' y '+arr[arr.length-1];}
+
+/* ===== SVG-ИКОНКИ ДЕЙСТВИЙ ===== */
+var SVG={
+ comer:'<svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="18" fill="#E2725B"/><path d="M32 18 q4 -8 10 -8" stroke="#7A8B4C" stroke-width="4" fill="none"/><ellipse cx="38" cy="26" rx="4" ry="6" fill="#fff" opacity=".5"/></svg>',
+ beber:'<svg viewBox="0 0 64 64"><path d="M20 12 h24 l-4 40 h-16 z" fill="#B3E5FC" stroke="#3E7CB1" stroke-width="3"/><path d="M22 30 h20 l-2 22 h-16 z" fill="#3E7CB1"/></svg>',
+ movil:'<svg viewBox="0 0 64 64"><rect x="20" y="8" width="24" height="48" rx="4" fill="#33322E"/><rect x="23" y="14" width="18" height="34" rx="2" fill="#4FC3F7"/><circle cx="32" cy="52" r="2.5" fill="#fff"/></svg>',
+ hablar:'<svg viewBox="0 0 64 64"><path d="M8 14 h26 v18 h-14 l-8 8 v-8 h-4 z" fill="#E9A13B"/><path d="M34 30 h22 v14 h-4 v7 l-7 -7 h-11 z" fill="#2A9D8F"/></svg>',
+ musica:'<svg viewBox="0 0 64 64"><path d="M14 34 v-6 a18 18 0 0 1 36 0 v6" fill="none" stroke="#33322E" stroke-width="5"/><rect x="10" y="32" width="10" height="16" rx="4" fill="#E91E63"/><rect x="44" y="32" width="10" height="16" rx="4" fill="#E91E63"/></svg>',
+ correr:'<svg viewBox="0 0 64 64"><circle cx="36" cy="12" r="6" fill="#E2725B"/><path d="M34 20 l-8 12 l10 6 l-4 16" stroke="#E2725B" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M26 32 l-12 4" stroke="#E2725B" stroke-width="5" stroke-linecap="round"/><path d="M36 38 l12 2 l4 10" stroke="#E2725B" stroke-width="5" fill="none" stroke-linecap="round"/></svg>',
+ ayuda:'<svg viewBox="0 0 64 64"><rect x="18" y="30" width="28" height="24" rx="8" fill="#FFCC80"/><rect x="20" y="12" width="5" height="22" rx="2.5" fill="#FFCC80"/><rect x="27" y="8" width="5" height="26" rx="2.5" fill="#FFCC80"/><rect x="34" y="10" width="5" height="24" rx="2.5" fill="#FFCC80"/><rect x="41" y="14" width="5" height="20" rx="2.5" fill="#FFCC80"/></svg>',
+ bano:'<svg viewBox="0 0 64 64"><rect x="14" y="8" width="36" height="48" rx="3" fill="#8D6E63"/><circle cx="44" cy="32" r="2.5" fill="#FFC93C"/><rect x="22" y="16" width="10" height="14" rx="2" fill="#4FC3F7"/><rect x="34" y="16" width="10" height="14" rx="2" fill="#F48FB1"/></svg>',
+ equipo:'<svg viewBox="0 0 64 64"><circle cx="20" cy="20" r="8" fill="#2A9D8F"/><circle cx="44" cy="20" r="8" fill="#E9A13B"/><circle cx="32" cy="40" r="8" fill="#E91E63"/><path d="M20 30 q0 6 12 6 q12 0 12 -6" stroke="#33322E" stroke-width="3" fill="none"/></svg>',
+ profe:'<svg viewBox="0 0 64 64"><circle cx="24" cy="32" r="12" fill="#FFCC80"/><path d="M42 20 q8 12 0 24" stroke="#3E7CB1" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M48 14 q12 18 0 36" stroke="#3E7CB1" stroke-width="4" fill="none" stroke-linecap="round"/></svg>'
+};
+var ACT=[
+ {id:'comer',es:'comer en clase',ru:'есть в классе',ges:'жуём'},
+ {id:'beber',es:'beber agua',ru:'пить воду',ges:'пьём из стакана'},
+ {id:'movil',es:'usar el móvil',ru:'пользоваться телефоном',ges:'печатаем пальцем'},
+ {id:'hablar',es:'hablar con compañeros',ru:'говорить с одноклассниками',ges:'болтаем рукой'},
+ {id:'musica',es:'escuchar música',ru:'слушать музыку',ges:'наушники руками'},
+ {id:'correr',es:'correr en el pasillo',ru:'бегать по коридору',ges:'бег на месте'},
+ {id:'ayuda',es:'pedir ayuda',ru:'просить помощь',ges:'поднятая рука'},
+ {id:'bano',es:'ir al baño',ru:'идти в туалет',ges:'шаг на месте'},
+ {id:'equipo',es:'trabajar en equipo',ru:'работать в команде',ges:'руки в замок'},
+ {id:'profe',es:'escuchar al profe',ru:'слушать учителя',ges:'ладонь у уха'}
+];
+(function(){
+  var box=document.getElementById('act-cards');
+  ACT.forEach(function(a){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<span class="emo">'+SVG[a.id]+'</span><div class="es">'+a.es+'</div><div class="ru">'+a.ru+'</div><span class="ges">'+a.ges+'</span><button class="speak-btn">🔊</button>';
+    d.onclick=function(){speak(a.es);};
+    box.appendChild(d);
+  });
+})();
+/* мини-викторина действий */
+var aqOrd=[],aqI=0,aqS=0;
+function aqStart(){aqOrd=shuffle(ACT.slice());aqI=0;aqS=0;document.getElementById('aq-total').textContent=aqOrd.length;document.getElementById('aq-stars').textContent='0';aqNext();}
+function aqNext(){
+  var box=document.getElementById('aq-opts');box.innerHTML='';
+  if(aqI>=aqOrd.length){document.getElementById('aq-fb').textContent='🎉 ¡Perfecto! ⭐ '+aqS+' из '+aqOrd.length;document.getElementById('aq-svg').innerHTML='';return;}
+  var r=aqOrd[aqI];
+  document.getElementById('aq-svg').innerHTML=SVG[r.id];
+  document.getElementById('aq-fb').textContent='';
+  var wrong=shuffle(ACT.filter(function(x){return x.id!==r.id;})).slice(0,2);
+  shuffle([r].concat(wrong)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o.es;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o.id===r.id){b.classList.add('correct');aqS++;document.getElementById('aq-stars').textContent=aqS;document.getElementById('aq-fb').textContent='✅ ¡Correcto!';speak(r.es);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.es)x.classList.add('correct');});document.getElementById('aq-fb').textContent='❌ Правильно: '+r.es;}
+      aqI++;setTimeout(aqNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 1: РАЗМИНКА ===== */
+var WARM=[
+ {q:'¿Cómo es tu aula de mis sueños?',model:'Es grande y luminosa.',ru:'Какой твой класс мечты?'},
+ {q:'¿Qué hay en tu aula?',model:'Hay una pizarra digital y ordenadores modernos.',ru:'Что есть в твоём классе?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 3: СОРТИРОВКА ===== */
+var SORTG=[
+ {s:'Beber agua en clase.',ok:'puede'},
+ {s:'Comer un <span class="grammar-hint" data-hint="bocadillo — бутерброд: багет с начинкой (хамон, сыр). Его едят испанские дети на перемене.">bocadillo</span> en la clase.',ok:'no'},
+ {s:'Usar el móvil en el recreo.',ok:'puede'},
+ {s:'Correr en el pasillo.',ok:'no'},
+ {s:'Pedir ayuda al profe.',ok:'puede'},
+ {s:'Gritar en la clase.',ok:'no'},
+ {s:'Trabajar en equipo.',ok:'puede'},
+ {s:'Escuchar música con <span class="grammar-hint" data-hint="auriculares — наушники. Слово-бонус: не входит в обязательный список урока.">auriculares</span> en el examen.',ok:'no'}
+];
+var sortOrd=[],sortI=0,sortS=0;
+function sortStart(){sortOrd=shuffle(SORTG.slice());sortI=0;sortS=0;document.getElementById('sort-total').textContent=sortOrd.length;document.getElementById('sort-stars').textContent='0';sortNext();}
+function sortNext(){
+  if(sortI>=sortOrd.length){document.getElementById('sort-q').textContent='🎉 ¡Muy bien!';document.getElementById('sort-fb').textContent='⭐ '+sortS+' из '+sortOrd.length;return;}
+  document.getElementById('sort-q').innerHTML=sortOrd[sortI].s;
+  document.getElementById('sort-fb').textContent='';
+}
+function sortAns(v){
+  if(sortI>=sortOrd.length)return;
+  var r=sortOrd[sortI];
+  var fb=document.getElementById('sort-fb');
+  if(v===r.ok){sortS++;document.getElementById('sort-stars').textContent=sortS;fb.textContent='✅ ¡Correcto!';speak(r.ok==='puede'?'Se puede.':'No se puede.');}
+  else{fb.textContent='❌ Правильно: '+(r.ok==='puede'?'SE PUEDE':'NO SE PUEDE');}
+  sortI++;setTimeout(sortNext,1100);
+}
+
+/* ===== БЛОК 3: КОНСТРУКТОР ===== */
+var SB=[
+ {w:['No','se','puede','comer','en','clase.'],t:'Нельзя есть в классе'},
+ {w:['Se','puede','beber','agua.'],t:'Можно пить воду'},
+ {w:['¿Se','puede','usar','el','móvil?'],t:'Можно пользоваться телефоном?'},
+ {w:['No','se','puede','correr','en','el','pasillo.'],t:'Нельзя бегать по коридору'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.onclick=function(){if(b.classList.contains('placed'))return;b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}};
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== БЛОК 4: АУДИРОВАНИЕ ===== */
+var LIST=[
+ {es:'Se puede beber agua.',ok:'si'},
+ {es:'No se puede comer en clase.',ok:'no'},
+ {es:'Se puede pedir ayuda.',ok:'si'},
+ {es:'No se puede usar el móvil.',ok:'no'},
+ {es:'Se puede trabajar en equipo.',ok:'si'},
+ {es:'No se puede correr en el pasillo.',ok:'no'},
+ {es:'Se puede ir al baño.',ok:'si'},
+ {es:'No se puede gritar en la clase.',ok:'no'},
+ {es:'Se puede escuchar música en el trabajo individual.',ok:'si'},
+ {es:'No se puede hablar con compañeros en el examen.',ok:'no'}
+];
+var lOrd=[],lI=0,lS=0;
+function listenStart(){lOrd=shuffle(LIST.slice());lI=0;lS=0;document.getElementById('listen-total').textContent=lOrd.length;document.getElementById('listen-stars').textContent='0';document.getElementById('listen-fb').textContent='Нажми «🔊 Послушать»!';}
+function speakListen(){if(lI<lOrd.length)speak(lOrd[lI].es);}
+function listenAns(v){
+  if(lI>=lOrd.length)return;
+  var r=lOrd[lI];
+  var fb=document.getElementById('listen-fb');
+  if(v===r.ok){lS++;document.getElementById('listen-stars').textContent=lS;fb.textContent='✅ ¡Correcto!';}
+  else{fb.textContent='❌ Правильно: '+(r.ok==='si'?'✅ Se puede':'❌ No se puede');}
+  lI++;
+  if(lI>=lOrd.length){fb.textContent+=' 🎉 ⭐ '+lS+' из '+lOrd.length;}
+}
+/* Verdad o Falso */
+var VF=[
+ {s:'En España se puede comer un bocadillo en el recreo.',ok:'v'},
+ {s:'Se puede usar el móvil en clase.',ok:'f'},
+ {s:'Se puede pedir ayuda al profe.',ok:'v'},
+ {s:'No se puede correr en el pasillo.',ok:'v'}
+];
+(function(){
+  var box=document.getElementById('vf-box');
+  VF.forEach(function(r,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+r.s+'</div>'+
+      '<div style="margin-top:6px"><button class="opt" onclick="vfAns(this,'+i+',\'v\')">✅ Verdad</button> <button class="opt" onclick="vfAns(this,'+i+',\'f\')">❌ Falso</button></div>';
+    box.appendChild(d);
+  });
+})();
+function vfAns(btn,i,v){
+  var d=btn.parentElement.parentElement;
+  d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+  if(v===VF[i].ok){btn.classList.add('correct');speak('¡Correcto!');}
+  else{btn.classList.add('wrong');}
+}
+
+/* ===== БЛОК 5: ЧТЕНИЕ + МАРАФОН ===== */
+function speakCartel(){speak('Normas de la clase. Se puede: pedir ayuda, trabajar en equipo, beber agua, escuchar música en el trabajo individual. No se puede: comer en clase, usar el móvil, correr en el pasillo, gritar.');}
+var READQ=[
+ {q:'¿Se puede comer en clase?',ru:'Можно есть в классе?',ok:'No, no se puede.',w:['Sí, se puede.','Se puede comer.']},
+ {q:'¿Qué se puede hacer en equipo?',ru:'Что можно делать в команде?',ok:'Trabajar en equipo.',w:['Correr en el pasillo.','Usar el móvil.']},
+ {q:'¿Dónde no se puede correr?',ru:'Где нельзя бегать?',ok:'En el pasillo.',w:['En el patio.','En la clase.']},
+ {q:'¿Se puede pedir ayuda al profe?',ru:'Можно попросить помощь у учителя?',ok:'Sí, se puede.',w:['No, no se puede.','No se puede.']}
+];
+(function(){
+  var wrap=document.getElementById('read-quiz');
+  READQ.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-block';b.style.margin='3px';b.textContent=o;
+      b.onclick=function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      };
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+var PRES=[
+ {q:'Новенький хочет поесть на уроке. Скажи правило:',model:'No se puede comer en clase.'},
+ {q:'Друг спрашивает про телефон. Ответь:',model:'No se puede usar el móvil.'},
+ {q:'Ты хочешь воды. Спроси:',model:'¿Se puede beber agua, por favor?'},
+ {q:'Новенький не понимает задание. Скажи:',model:'Se puede pedir ayuda.'},
+ {q:'Дети бегают в коридоре. Скажи:',model:'No se puede correr en el pasillo.'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">Ответь ВСЛУХ полным предложением!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я сказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 6: PBL ПОСТЕР ===== */
+var PUEDE=['pedir ayuda','trabajar en equipo','beber agua','escuchar música en el trabajo','ir al baño','levantar la mano'];
+var NOPUEDE=['comer en clase','usar el móvil','correr en el pasillo','gritar','hablar en el examen','escuchar música en el examen'];
+var selP=[],selN=[];
+(function(){
+  var p1=document.getElementById('puede-pool');
+  PUEDE.forEach(function(f){
+    var c=document.createElement('button');c.className='pbl-chip';c.textContent=f;
+    c.onclick=function(){var i=selP.indexOf(f);if(i>=0){selP.splice(i,1);c.classList.remove('sel');}else{if(selP.length>=4)return;selP.push(f);c.classList.add('sel');}};
+    p1.appendChild(c);
+  });
+  var p2=document.getElementById('nopuede-pool');
+  NOPUEDE.forEach(function(f){
+    var c=document.createElement('button');c.className='pbl-chip red';c.textContent=f;
+    c.onclick=function(){var i=selN.indexOf(f);if(i>=0){selN.splice(i,1);c.classList.remove('sel');}else{if(selN.length>=4)return;selN.push(f);c.classList.add('sel');}};
+    p2.appendChild(c);
+  });
+})();
+function genPoster(){
+  var res=document.getElementById('poster-result');
+  if(selP.length<4||selN.length<4){res.textContent='⚠️ Выбери 4 «можно» и 4 «нельзя»!';return;}
+  var text='CARTEL DE NORMAS: Se puede '+joinEs(selP)+'. No se puede '+joinEs(selN)+'.';
+  res.textContent=text;
+  speak(text);
+  renderClil();
+}
+function renderClil(){
+  var box=document.getElementById('clil-opts');box.innerHTML='';
+  shuffle(['ocho','seis','diez']).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o==='ocho'){b.classList.add('correct');document.getElementById('clil-fb').textContent='✅ ¡Correcto! 4 + 4 = 8 = ocho.';speak('Ocho.');}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent==='ocho')x.classList.add('correct');});document.getElementById('clil-fb').textContent='❌ Правильно: ocho (8).';}
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 7: PELOTA ===== */
+var PEL=[
+ {q:'¿Se puede comer en clase?',ok:'No, no se puede.',w:['Sí, se puede.','Se puede comer.']},
+ {q:'Después de "se puede" el verbo va en...',ok:'infinitivo',w:['pasado','plural']},
+ {q:'¿Cómo se dice «пить воду»?',ok:'beber agua',w:['comer agua','beber el agua']},
+ {q:'¿Se puede usar el móvil en clase?',ok:'No, no se puede.',w:['Sí, se puede.','Se puede.']},
+ {q:'¿Puedo...? (урок 5) — это про...',ok:'меня (личная просьба)',w:['всех (правило)','учителя']},
+ {q:'Se puede... — это про...',ok:'всех (общее правило)',w:['меня лично','одного ученика']},
+ {q:'¿Cómo se dice «бегать по коридору»?',ok:'correr en el pasillo',w:['correr en la clase','andar en el pasillo']},
+ {q:'¿Se puede pedir ayuda al profe?',ok:'Sí, se puede.',w:['No, no se puede.','No se puede.']},
+ {q:'La norma es...',ok:'la regla de la clase',w:['el desayuno','la canción']}
+];
+var PO=[],pI=0,pS=0;
+function pelotaNext(){
+  if(pI===0&&PO.length===0){PO=shuffle(PEL.slice());document.getElementById('pel-total').textContent=PO.length;}
+  var box=document.getElementById('pel-opts');box.innerHTML='';
+  if(pI>=PO.length){document.getElementById('pel-q').textContent='🎉 ¡Perfecto! ⭐ '+pS+' из '+PO.length;document.getElementById('pel-fb').textContent='';PO=[];pI=0;pS=0;return;}
+  var r=PO[pI];
+  document.getElementById('pel-q').textContent=r.q;
+  document.getElementById('pel-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');pS++;document.getElementById('pel-stars').textContent=pS;document.getElementById('pel-fb').textContent='✅ ¡Muy bien!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('pel-fb').textContent='❌ Правильно: '+r.ok;}
+      pI++;setTimeout(pelotaNext,1200);
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[['comer en clase','есть в классе'],['beber agua','пить воду'],['usar el móvil','пользоваться телефоном'],['hablar con compañeros','говорить с одноклассниками'],['escuchar música','слушать музыку'],['correr en el pasillo','бегать по коридору'],['pedir ayuda','просить помощь'],['ir al baño','идти в туалет'],['trabajar en equipo','работать в команде'],['escuchar al profe','слушать учителя']];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');mFound++;speak(d.textContent);document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/10';if(mFound===10)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';}
+  else{d.classList.add('wrong');mSel.classList.add('wrong');var a=mSel;setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);}
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres el guardián de las normas!');
+  confetti('🚦');
+  try{localStorage.setItem('mudro_kids_w07l1_badge_normas','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w07l1_badge_normas')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(e){var c=['🎉','⭐',e];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};}(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){
+    var row=c.getAttribute('data-row');
+    document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});
+    c.classList.add('active');
+  });
+});
+document.getElementById('tlReset').addEventListener('click',function(){
+  document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});
+});
+
+/* ===== grammar-hint ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

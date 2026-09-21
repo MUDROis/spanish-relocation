@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 5.3 · Empadronamiento + CHECKPOINT 1 — МУДРО</title>
+<style>
+  :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);--ok:#7A8B4C;--bad:#E2725B}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .topbar{background:var(--card);box-shadow:var(--shadow);padding:12px 0;position:sticky;top:0;z-index:100}
+  .topbar .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .topbar a{text-decoration:none;font-weight:700;color:var(--ink)}
+  .topbar a:hover{color:var(--p1)}
+  .lesson-badge{font-size:.85rem;color:var(--muted);font-weight:600;background:#FFF7E0;padding:2px 10px;border-radius:999px}
+  #auth-area{display:inline-flex}
+  .hero{background:linear-gradient(135deg,var(--p1),var(--p4));color:#fff;padding:44px 20px 38px;text-align:center;position:relative;overflow:hidden}
+  .hero::after{content:'🏆';position:absolute;right:20px;top:20px;font-size:3rem;opacity:.3}
+  .hero h1{font-size:2rem;margin-bottom:8px}
+  .hero p{font-size:1.1rem;opacity:.95;max-width:640px;margin:0 auto}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .hero-chip{background:rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:700}
+  .hero-chip.checkpoint{background:#FFD700;color:#2B2118}
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c2{background:var(--p2)}.step-num.c3{background:var(--p3)}.step-num.c4{background:var(--p4)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  /* Разминка-квиз */
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+  .quiz-week{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px}
+  .quiz-week.w1{background:#E8F0FE;color:var(--p4)}
+  .quiz-week.w2{background:#FFF7E0;color:var(--p3)}
+  .quiz-week.w3{background:#F0F7E6;color:var(--p2)}
+  .quiz-week.w4{background:#FBF0ED;color:var(--p1)}
+  .quiz-week.w5{background:#E0F4FF;color:#2C5E8A}
+
+  /* Ситуация из жизни */
+  .situation-box{background:#fff;border:3px solid var(--p3);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p3)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#FFF7E0;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p3)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  /* Табы и карточки лексики */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
+  .vocab-front .es{font-size:1.1rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
+  .vocab-front .ru{font-size:.9rem;opacity:.95;font-weight:600;color:#fff}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  /* Грамматика */
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:6px}
+  .grammar-box .formula{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.5}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .grammar-hint{position:relative;border-bottom:1.5px dashed var(--p4);cursor:help;color:var(--p4);font-weight:600}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 12px;border-radius:8px;font-size:.82rem;font-weight:500;font-style:normal;line-height:1.4;width:280px;max-width:90vw;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;white-space:normal}
+  .grammar-hint::before{content:'';position:absolute;bottom:120%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink);opacity:0;pointer-events:none;transition:opacity .2s}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  /* Упражнения */
+  .exercise-box{background:#fff;border:2px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:14px}
+  .exercise-box h4{color:var(--p4);margin-bottom:10px}
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:80px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:340px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.7}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.05rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  /* Аудирование */
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p1)}
+  .dialog-box .who.you{color:var(--p4)}
+
+  /* Конструктор диалога */
+  .dialog-builder{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p2);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .dialog-builder input[type="text"]:focus,.dialog-builder select:focus{outline:none;border-color:var(--p4)}
+  .dialog-result{background:#FFF7E0;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p3)}
+  .dialog-result .role{font-weight:800;color:var(--p1);display:block;margin-top:6px}
+  .dialog-result .role.you{color:var(--p4)}
+
+  /* Семейный паспорт */
+  .passport{background:linear-gradient(135deg,#2C5E8A,var(--p4));color:#fff;border-radius:18px;padding:24px;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(44,94,138,.4)}
+  .passport::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:rgba(255,255,255,.1);border-radius:50%}
+  .passport .hdr{text-align:center;border-bottom:2px solid rgba(255,255,255,.3);padding-bottom:12px;margin-bottom:14px;position:relative}
+  .passport .hdr h3{font-size:1.4rem;letter-spacing:2px}
+  .passport .hdr .sub{font-size:.8rem;opacity:.85;letter-spacing:1px}
+  .passport .field-row{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .passport .field{flex:1;min-width:120px}
+  .passport .field label{display:block;font-size:.7rem;opacity:.8;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
+  .passport .field input,.passport .field select{width:100%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:8px 10px;border-radius:6px;font-family:inherit;font-size:.9rem}
+  .passport .field input::placeholder{color:rgba(255,255,255,.6)}
+  .passport .skills{background:rgba(255,255,255,.1);border-radius:10px;padding:12px;margin-top:14px;position:relative}
+  .passport .skills h4{font-size:.9rem;margin-bottom:8px;letter-spacing:.5px}
+  .passport .skill{display:flex;align-items:center;gap:8px;font-size:.85rem;margin-bottom:4px}
+  .passport .skill::before{content:'✓';background:#7A8B4C;color:#fff;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0}
+  .passport .signature{border-top:2px dashed rgba(255,255,255,.4);margin-top:16px;padding-top:12px;display:flex;justify-content:space-between;font-size:.85rem;position:relative}
+  .passport .stamp{position:absolute;top:40%;right:10%;font-size:4rem;opacity:.15;transform:rotate(-15deg)}
+
+  /* Домашка */
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  /* Светофор */
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  /* Quizlet */
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  /* Ресурсы */
+  .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .resource-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.2s;border-top:4px solid var(--p4)}
+  .resource-card:hover{transform:translateY(-3px)}
+  .resource-card h4{font-size:1rem;margin-bottom:6px}
+  .resource-card p{font-size:.85rem;color:var(--muted);margin-bottom:12px;min-height:40px}
+  .resource-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem}
+  .resource-card a:hover{background:var(--p1)}
+  .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
+
+  /* Чекпоинт-баннер */
+  .checkpoint-banner{background:linear-gradient(135deg,#FFD700,#FFA500);color:#2B2118;border-radius:18px;padding:24px;text-align:center;margin-bottom:20px;box-shadow:0 10px 30px rgba(255,165,0,.3)}
+  .checkpoint-banner h3{font-size:1.6rem;margin-bottom:8px}
+  .checkpoint-banner p{font-size:1rem;opacity:.9}
+  .checkpoint-banner .trophy{font-size:4rem;margin-bottom:12px}
+
+  /* Переход к блоку 2 */
+  .block2-preview{background:linear-gradient(135deg,var(--p2),#5d6e3a);color:#fff;border-radius:18px;padding:24px;margin-top:20px}
+  .block2-preview h3{margin-bottom:12px}
+  .block2-preview ul{list-style:none;padding-left:0}
+  .block2-preview li{padding:6px 0;padding-left:28px;position:relative}
+  .block2-preview li::before{content:'🏫';position:absolute;left:0;top:6px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a href="../../index.html">← К карте курса</a>
+  <span class="lesson-badge">Неделя 5 · Урок 3 из 3 · 🏆 CHECKPOINT 1</span>
+  <span id="auth-area"></span>
+</div></div>
+
+<section class="hero">
+  <h1>🏛️ Урок 5.3 · Empadronamiento + CHECKPOINT 1</h1>
+  <p>Регистрируемся в мэрии и проходим итоговую симуляцию всего Блока 1</p>
+  <div class="hero-chips">
+    <span class="hero-chip">🎯 Цель: зарегистрироваться в ayuntamiento</span>
+    <span class="hero-chip">🗣 15 слов: мэрия и регистрация</span>
+    <span class="hero-chip">🧩 Повторение недель 1–5</span>
+    <span class="hero-chip checkpoint">🏆 CHECKPOINT 1 — финал блока</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">0</div><div class="step-title"><h2>Разминка + вопрос из жизни</h2><span class="time">00:00 – 06:00 · Финальная проверка Блока 1</span></div></div>
+  <div class="card">
+    <p class="hint">Перед регистрацией в мэрии проверим базу всех пяти недель! Вопросы из NIE, жилья, контракта, коммуналки и интернета.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: всё, что прошли</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🏛️</div>
+      <div class="sit-title">Одна ситуация: в очереди в мэрии</div>
+    </div>
+    <div class="sit-intro">
+      Вы пришли в <b>ayuntamiento</b> (мэрию) с документами. Чиновник в окошке задаёт вам первые вопросы. Отвечайте вслух по шаблону, нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Чиновник:</div>
+      <div class="es">Buenos días. ¿Tiene cita previa?</div>
+      <div class="ru">Добрый день. У вас есть предварительная запись?</div>
+      <button class="speak-btn" onclick="speak('Buenos días. ¿Tiene cita previa?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ-шаблон:</div>
+      <div class="es">Sí, tengo cita a las diez. Quisiera empadronarme.</div>
+      <div class="ru">Да, у меня запись на десять. Я хотел бы зарегистрироваться.</div>
+      <button class="speak-btn" onclick="speak('Sí, tengo cita a las diez. Quisiera empadronarme.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Чиновник:</div>
+      <div class="es">Perfecto. ¿Me puede dar su pasaporte y el contrato de alquiler?</div>
+      <div class="ru">Отлично. Можете дать мне ваш паспорт и договор аренды?</div>
+      <button class="speak-btn" onclick="speak('Perfecto. ¿Me puede dar su pasaporte y el contrato de alquiler?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ-шаблон:</div>
+      <div class="es">Aquí tiene. ¿Necesita algo más?</div>
+      <div class="ru">Вот, пожалуйста. Нужно что-нибудь ещё?</div>
+      <button class="speak-btn" onclick="speak('Aquí tiene. ¿Necesita algo más?')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Чиновник просит заполнить бланк. Что вы скажете, если не понимаете поле?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">No sé. Adiós.</div>
+        <div class="q-opt" data-o="1">Perdone, ¿puede explicar este campo?</div>
+        <div class="q-opt" data-o="2">No hablo español.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">2</span>Чиновник говорит: «Vuelva en 10 días a recoger el certificado». Что это значит?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Приходите через 10 дней забрать справку.</div>
+        <div class="q-opt" data-o="1">Вам отказали в регистрации.</div>
+        <div class="q-opt" data-o="2">Нужно оплатить пошлину через 10 дней.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня финал Блока 1! Вы научитесь регистрироваться в мэрии (empadronamiento), получите сертификат — и пройдёте <b>CHECKPOINT 1</b>: итоговую симуляцию всех пяти недель. Это ваш «пропуск» в Блок 2 — школу и здоровье!
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">1</div><div class="step-title"><h2>Карточки со словами: 15 слов мэрии</h2><span class="time">06:00 – 14:00</span></div></div>
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся, и вы увидите пример использования. 🔊 — послушать вслух.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showVocab('places',this)">🏛️ Мэрия (5)</button>
+      <button class="tab" onclick="showVocab('registration',this)">📝 Регистрация (5)</button>
+      <button class="tab" onclick="showVocab('docs',this)">📄 Документы (5)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+    <div class="note" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> <b>empadronamiento обязательно</b> для всех, кто живёт в Испании более 3 месяцев. Без него нельзя записать детей в школу, получить медкарту, голосовать на выборах.
+    </div>
+    <div class="note" style="margin-top:10px">
+      ⚠️ <b>Ложные друзья переводчика:</b><br>
+      • <span class="grammar-hint" data-hint="el ayuntamiento — это не «айятунмьенто», а «мэрия»">el ayuntamiento</span> — мэрия<br>
+      • <span class="grammar-hint" data-hint="el resguardo — это не «ресгуардо», а «расписка, квитанция о приёме документов»">el resguardo</span> — расписка<br>
+      • <span class="grammar-hint" data-hint="el volante — это не «руль», а «упрощённая справка о регистрации»">el volante</span> — упрощённая справка
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num c2">2</div><div class="step-title"><h2>Грамматика: повторение недель 1–5</h2><span class="time">14:00 – 20:00 · Все ключевые конструкции</span></div></div>
+  <div class="card">
+    <p class="hint">В мэрии пригодится всё, что вы прошли. Это ваш грамматический «арсенал выживания».</p>
+
+    <div class="grammar-box">
+      <h4>📐 Неделя 1–2: ser / tener / estar / hay</h4>
+      <div class="formula">ser (являться) · tener (иметь) · estar (находиться) · hay (есть)</div>
+      <div class="example">
+        <b>Soy</b> ruso. — Я русский.<br>
+        <b>Tengo</b> un NIE. — У меня есть NIE.<br>
+        El ayuntamiento <b>está</b> en el centro. — Мэрия в центре.<br>
+        <b>Hay</b> una ventanilla. — Есть окошко.
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Неделя 3–4: tener que / hay que / ir a</h4>
+      <div class="formula">tengo que / hay que / voy a + инфинитив</div>
+      <div class="example">
+        <b>Tengo que</b> rellenar la hoja padronal. — Я должен заполнить лист регистрации.<br>
+        <b>Hay que</b> adjuntar el pasaporte. — Нужно приложить паспорт.<br>
+        <b>Voy a</b> recoger el certificado. — Я заберу справку.
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Неделя 5: вежливые просьбы + местоимения</h4>
+      <div class="formula">¿Podría...? · Quisiera... · me / le</div>
+      <div class="example">
+        <b>Quisiera</b> empadronarme. — Я хотел бы зарегистрироваться.<br>
+        ¿<b>Podría</b> darme una cita? — Не могли бы вы записать меня?<br>
+        ¿<b>Me</b> puede mandar el certificado? — Можете прислать <b>мне</b> справку?<br>
+        ¿<b>Le</b> puedo llamar mañana? — Могу я позвонить <b>Вам</b> завтра?
+      </div>
+    </div>
+
+    <div class="note green">
+      💡 <b>Главное правило мэрии:</b> начинайте с вежливой просьбы (<i>Quisiera...</i>), потом — данные (NIE, адрес), потом — вопросы (<i>¿Cuándo puedo...?</i>). Так чиновники идут навстречу.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num c3">3</div><div class="step-title"><h2>Практика: применим все навыки</h2><span class="time">20:00 – 28:00</span></div></div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь конструкцию</h4>
+    <p class="hint">Выберите правильную конструкцию: <b>tengo que / hay que / quisiera / ¿podría...?</b></p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь фразу и перевод</h4>
+    <p class="hint">Нажмите испанскую фразу слева, затем её перевод справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head"><div class="step-num c4">4</div><div class="step-title"><h2>Аудирование: диалог в мэрии</h2><span class="time">28:00 – 34:00</span></div></div>
+  <div class="card">
+    <p class="hint">Прослушайте реальный диалог регистрации. Сначала без текста, затем откройте транскрипт. Ответьте на вопросы!</p>
+
+    <button class="btn btn-secondary" onclick="speak('Buenos días. Ventanilla número 3. Buenos días. Quisiera empadronarme. Muy bien. ¿Tiene cita previa? Sí, tengo cita a las diez. Perfecto. ¿Me puede dar su pasaporte y el contrato de alquiler? Aquí tiene. ¿Necesita algo más? Sí, rellene la hoja padronal, por favor. Aquí tiene su NIE y el empadronamiento. ¿Dónde tengo que firmar? Aquí, al final. Muy bien. ¿Cuándo puedo recoger el certificado? En 10 días. ¿Me puede enviar el certificado por email? Sí, por supuesto. ¿Cuál es su email? ivanov@email.com. Perfecto. Aquí tiene su resguardo. Recoja el certificado el día 25. Muchas gracias. Hasta luego. De nada. Hasta luego.')" style="margin-bottom:14px">🔊 Прослушать весь диалог</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')" style="cursor:pointer">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text" style="display:none">
+        <span class="who op">Чиновник:</span> Buenos días. Ventanilla número 3.<br>
+        <span class="who you">Вы:</span> Buenos días. Quisiera empadronarme.<br>
+        <span class="who op">Чиновник:</span> Muy bien. ¿Tiene cita previa?<br>
+        <span class="who you">Вы:</span> Sí, tengo cita a las diez.<br>
+        <span class="who op">Чиновник:</span> Perfecto. ¿Me puede dar su pasaporte y el contrato de alquiler?<br>
+        <span class="who you">Вы:</span> Aquí tiene. ¿Necesita algo más?<br>
+        <span class="who op">Чиновник:</span> Sí, rellene la hoja padronal, por favor. Aquí tiene su NIE.<br>
+        <span class="who you">Вы:</span> ¿Dónde tengo que firmar?<br>
+        <span class="who op">Чиновник:</span> Aquí, al final. Muy bien. ¿Cuándo puedo recoger el certificado?<br>
+        <span class="who you">Вы:</span> ¿Me puede enviar el certificado por email?<br>
+        <span class="who op">Чиновник:</span> Sí, por supuesto. ¿Cuál es su email?<br>
+        <span class="who you">Вы:</span> ivanov@email.com.<br>
+        <span class="who op">Чиновник:</span> Perfecto. Aquí tiene su resguardo. Recoja el certificado el día 25.<br>
+        <span class="who you">Вы:</span> Muchas gracias. Hasta luego.<br>
+        <span class="who op">Чиновник:</span> De nada. Hasta luego.
+      </div>
+    </div>
+
+    <style>.dialog-box.open .dialog-text{display:block;margin-top:10px}</style>
+
+    <h4 style="margin-top:16px;margin-bottom:10px">🎧 Проверьте понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: ЧТЕНИЕ + ПИСЬМО (PBL) — КОНСТРУКТОР ДИАЛОГА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">5</div><div class="step-title"><h2>Чтение + Письмо: соберите свой диалог регистрации</h2><span class="time">34:00 – 42:00</span></div></div>
+  <div class="card">
+    <p class="hint">Заполните поля своими данными — получите готовый диалог регистрации в мэрии. Меняйте поля — диалог перестраивается автоматически. Запишите голосовое с результатом!</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">🏛️ КОНСТРУКТОР ДИАЛОГА: Empadronamiento</div>
+
+      <div class="field">
+        <label>🏛️ Город:</label>
+        <select id="b-city">
+          <option>Valencia</option><option>Madrid</option><option>Barcelona</option><option>Sevilla</option><option>Málaga</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>🪪 Ваш NIE:</label>
+        <input type="text" id="b-nie" placeholder="X-12345678-A">
+      </div>
+      <div class="field">
+        <label>🏠 Адрес квартиры:</label>
+        <input type="text" id="b-address" placeholder="Calle Mayor, 15, tercero B">
+      </div>
+      <div class="field">
+        <label>⏰ Время записи:</label>
+        <select id="b-time">
+          <option>a las diez (в 10:00)</option>
+          <option>a las once (в 11:00)</option>
+          <option>a las doce (в 12:00)</option>
+          <option>a la una (в 13:00)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>📅 День получения сертификата:</label>
+        <select id="b-day">
+          <option>el día 25 (25-го числа)</option>
+          <option>el lunes (в понедельник)</option>
+          <option>el martes (во вторник)</option>
+          <option>en 10 días (через 10 дней)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>📧 Email для сертификата:</label>
+        <input type="text" id="b-email" placeholder="ivanov@email.com">
+      </div>
+
+      <button class="btn btn-primary" onclick="buildDialog()" style="margin-top:12px">🔧 Собрать диалог</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с этим диалогом (1–2 мин, минимум 2 дубля) и пришлите преподавателю вместе со скриншотом.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 6: СЕМЕЙНЫЙ ПАСПОРТ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🏆</div><div class="step-title"><h2>Семейный паспорт — ваш пропуск в Блок 2</h2><span class="time">42:00 – 47:00 · Главный продукт Блока 1</span></div></div>
+  <div class="card">
+    <p class="hint">Вы прошли весь Блок 1! Заполните семейный паспорт данными семьи. Это ваш документ, который «пропускает» вас в Блок 2 (школа и здоровье). Сохраните как реликвию!</p>
+
+    <div class="passport">
+      <div class="hdr">
+        <div class="sub">ESCUELA INTERACTIVA MUDRO · 2026</div>
+        <h3>📘 PASAPORTE FAMILIAR</h3>
+        <div class="sub">БЛОК 1 · MISIÓN RESIDENCIA · ¡COMPLETADO!</div>
+      </div>
+
+      <div class="field-row">
+        <div class="field"><label>Фамилия семьи</label><input type="text" id="p-family" placeholder="Ivanov"></div>
+        <div class="field"><label>Количество человек</label><input type="text" id="p-count" placeholder="4"></div>
+      </div>
+
+      <div class="field-row">
+        <div class="field"><label>Город в Испании</label><input type="text" id="p-city" placeholder="Valencia"></div>
+        <div class="field"><label>Дата регистрации</label><input type="text" id="p-date" placeholder="25/09/2026"></div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Адрес</label>
+          <input type="text" id="p-address" placeholder="Calle Mayor, 15, 3ºB">
+        </div>
+      </div>
+
+      <div class="skills">
+        <h4>🎯 НАВЫКИ БЛОКА 1:</h4>
+        <div class="skill">Записаться на приём (cita previa)</div>
+        <div class="skill">Заполнить EX-15 и Modelo 790</div>
+        <div class="skill">Пройти приём в Oficina de Extranjería</div>
+        <div class="skill">Найти жильё на Idealista</div>
+        <div class="skill">Осмотреть квартиру и торговаться</div>
+        <div class="skill">Прочитать контракт и найти подводные камни</div>
+        <div class="skill">Открыть банковский счёт и настроить Bizum</div>
+        <div class="skill">Подключить свет, воду и газ</div>
+        <div class="skill">Подключить интернет и мобильную связь</div>
+        <div class="skill">Зарегистрироваться в мэрии (empadronamiento)</div>
+      </div>
+
+      <div class="signature">
+        <span>📍 <b id="p-city-sig">Valencia</b>, <span id="p-date-sig">25/09/2026</span></span>
+        <span>✅ MISIÓN CUMPLIDA</span>
+      </div>
+      <div class="stamp">🏆</div>
+    </div>
+
+    <button class="btn btn-primary" onclick="savePassport()" style="margin-top:16px">💾 Сохранить паспорт</button>
+    <button class="btn btn-ghost" onclick="speakPassport()" style="margin-top:16px">🔊 Прослушать паспорт</button>
+
+    <div class="note green" style="margin-top:16px">
+      🎉 <b>Сохраните как картинку!</b> Это ваша семейная реликвия — доказательство, что вы прошли весь путь: от NIE до мэрии. Покажите паспорт детям и скажите: <i>«¡Somos una familia residente en España!»</i>
+    </div>
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">✅</div><div class="step-title"><h2>Самопроверка «Светофор»</h2><span class="time">Отметьте честно — нажмите на нужный цвет</span></div></div>
+  <div class="card">
+    <div style="overflow-x:auto">
+    <table class="tl-table">
+      <thead><tr><th>Умею за весь Блок 1</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr></thead>
+      <tbody id="tl-body"></tbody>
+    </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ЧЕКПОИНТ-БАННЕР -->
+<section class="section">
+  <div class="checkpoint-banner">
+    <div class="trophy">🏆</div>
+    <h3>CHECKPOINT 1 — ПРОЙДЕН!</h3>
+    <p>Вы завершили Блок 1 «Misión Residencia». Теперь вы умеете: получать NIE, снимать жильё, подписывать контракты, подключать услуги и регистрироваться в мэрии — <b>всё на испанском</b>.</p>
+  </div>
+
+  <div class="block2-preview">
+    <h3>🏫 Впереди — Блок 2: El Cole y la Salud</h3>
+    <p>Со следующей недели начинаются темы, ради которых вы и переехали:</p>
+    <ul>
+      <li><b>Неделя 6:</b> Школьная система — público, concertado, privado</li>
+      <li><b>Неделя 7:</b> Встреча с классным руководителем (tutor)</li>
+      <li><b>Неделя 8:</b> Centro de Salud — получение медкарты SIP</li>
+      <li><b>Неделя 9:</b> Испанская аптека и симптомы детей</li>
+      <li><b>Неделя 10:</b> CHECKPOINT 2 — звонок в 112</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ДОМАШКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🏠</div><div class="step-title"><h2>Домашнее задание · Урок 5.3 + CHECKPOINT 1</h2><span class="time">⏱ ~30–35 минут · Недельный чекпоинт</span></div></div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 1. Голосовое «Визит в мэрию» · 7 мин ⭐</h4>
+    <div class="hw-meta">Цель: пройти весь диалог регистрации одним дублем.</div>
+    <p>Запишите голосовое с диалогом из шага 5 (конструктор). Минимум 2 дубля — второй всегда увереннее! Прочитайте свою роль выразительно, как будто реально в мэрии.</p>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Quisiera empadronarme. Tengo cita a las diez. Aquí tiene mi pasaporte y el contrato de alquiler. ¿Dónde tengo que firmar? ¿Cuándo puedo recoger el certificado? ¿Me puede enviar el certificado por email? Muchas gracias. Hasta luego.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Итоговое голосовое «Один день в Испании» · 10 мин ⭐⭐</h4>
+    <div class="hw-meta">Цель: финальная проверка всего Блока 1.</div>
+    <p>Запишите <b>ОДНО</b> голосовое, где вы проходите цепочку из 5 этапов:<br>
+    1) Записаться на приём: <i>«Quisiera pedir una cita previa…»</i><br>
+    2) Звонок риелтору: <i>«Llamo por el anuncio de Idealista…»</i><br>
+    3) Звонок в энергокомпанию: <i>«Quisiera dar de alta la luz…»</i><br>
+    4) Звонок в интернет-компанию: <i>«Quisiera contratar la fibra óptica…»</i><br>
+    5) Визит в мэрию: <i>«Quisiera empadronarme…»</i></p>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Quisiera pedir una cita previa. Llamo por el anuncio de Idealista. ¿Está disponible el piso? Quisiera dar de alta la luz. Mi NIE es X-12345678-A. Quisiera contratar la fibra óptica. ¿Hay permanencia? Quisiera empadronarme. Aquí tiene mi pasaporte. Muchas gracias. Hasta luego.')" style="margin-top:8px">🔊 Прослушать образец всей цепочки</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🏆 Задание 3. Семейный паспорт · 5 мин</h4>
+    <div class="hw-meta">Цель: сохранить артефакт Блока 1.</div>
+    <p>Заполните семейный паспорт из шага 6, сохраните как картинку и пришлите преподавателю. Покажите детям — это ваша общая победа!</p>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 4. Тренажёр недель 1–5 · 10 мин</h4>
+    <div class="hw-meta">Цель: освежить весь словарь Блока 1.</div>
+    <p>Пройдите тренажёр урока: карточки + сопоставление + собери фразу. Особое внимание словам с 🔴 в светофоре.</p>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 5 мин</h4>
+    <div class="hw-meta">Цель: связать финал Блока 1 с детьми.</div>
+    <p>Покажите детям семейный паспорт и скажите: <i>«¡Somos residentes en España!»</i>. Спросите: <i>«¿Estás contento de vivir en España?»</i> Пусть они ответят за всю семью формой «мы»: <i>«¡Sí, estamos muy contentos!»</i></p>
+    <button class="btn btn-ghost" onclick="speak('¿Estás contento de vivir en España? ¡Sí, estamos muy contentos!')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 6. Рабочий лист · 20–25 мин</h4>
+    <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
+    <p>Распечатайте или заполните с экрана: лексика мэрии, конструкция для повторения недель 1–5, чтение диалога, аудирование, CHECKPOINT 1. Пришлите фото заполненного листа.</p>
+    <a href="../../worksheets/w05-l3-parents.html" class="btn btn-secondary" style="margin-top:10px">📄 Открыть рабочий лист (A4, печать)</a>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки за всю НЕДЕЛЮ 5:</b><br>
+    • 🎤 Голосовое «Визит в мэрию» (задание 1)<br>
+    • 🎤 Итоговое голосовое «Один день в Испании» (задание 2)<br>
+    • 🏆 Семейный паспорт — картинкой (задание 3)<br>
+    • 📄 Фото рабочего листа (задание 6)<br>
+    • ✅ «Светофор» самопроверки<br><br>
+    <b>После сдачи домашки преподаватель откроет вам доступ к Блоку 2: Школа и здоровье!</b>
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head"><div class="step-num">🎮</div><div class="step-title"><h2>Тренажёр: повторение Блока 1</h2><span class="time">~10 мин</span></div></div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 5.3</h3>
+    <p>Повторите слова урока в приложении Quizlet: мэрия, empadronamiento, документы, регистрация.</p>
+    <a href="https://quizlet.com/ru/1211220525/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-5-%D1%83%D1%80%D0%BE%D0%BA-3-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- РЕСУРСЫ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🔗</div><div class="step-title"><h2>Внешние ресурсы</h2><span class="time">Реальные сайты мэрий и видео про empadronamiento</span></div></div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">🌐 Мэрия</span>
+      <h4>Ayuntamiento de Valencia</h4>
+      <p>Официальный сайт мэрии Валенсии: раздел empadronamiento, бланки, запись на приём.</p>
+      <a href="https://www.valencia.es" target="_blank" rel="noopener">Открыть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🌐 Мэрия</span>
+      <h4>Ayuntamiento de Madrid</h4>
+      <p>Мэрия Мадрида: как зарегистрироваться по месту жительства.</p>
+      <a href="https://www.madrid.es" target="_blank" rel="noopener">Открыть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🌐 Мэрия</span>
+      <h4>Ajuntament de Barcelona</h4>
+      <p>Мэрия Барселоны: раздел регистрации (каталанский/испанский).</p>
+      <a href="https://www.barcelona.cat" target="_blank" rel="noopener">Открыть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Empadronamiento в Испании</h4>
+      <p>Видео-разбор: какие документы нужны, как записаться, что говорить чиновнику.</p>
+      <a href="https://www.youtube.com/results?search_query=empadronamiento+España" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📰 Статья</span>
+      <h4>Гайд: empadronamiento для иностранцев</h4>
+      <p>Пошаговая инструкция: документы, сроки, стоимость (обычно бесплатно).</p>
+      <a href="https://www.google.com/search?q=empadronamiento+extranjeros+España" target="_blank" rel="noopener">Искать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏆 Блок 2</span>
+      <h4>Предвкушение: El Cole y la Salud</h4>
+      <p>Следующая неделя — школьная система, поликлиника, педиатр. Готовьтесь!</p>
+      <a href="../../index.html" target="_blank" rel="noopener">Карта курса →</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · 🏆 Блок 1 завершён!</footer>
+
+<div class="lesson-nav">
+  <a href="w05-l2.html">← Предыдущий<br><small>Урок 5.2 · Интернет и связь</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="../kids/w05-l3.html">Следующий →<br><small>Урок 15 (дети) · EL sistema educativo 🏫</small></a>
+</div>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Grammar hints =====
+document.addEventListener('click', function(e){
+  var hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){ if(el!==hint) el.classList.remove('active'); });
+  if(hint){ hint.classList.toggle('active'); e.stopPropagation(); }
+});
+
+// ===== РАЗМИНКА-КВИЗ (недели 1–5) =====
+var warmQ=[
+  {q:'1. Как сказать «предварительная запись»?', week:'w1', o:['la cita previa','el resguardo','el NIE'], c:0},
+  {q:'2. Как продиктовать фамилию по буквам?', week:'w1', o:['I de Italia, V de Valencia…','I de Ivanov, V de Victor…','I como Ivan'], c:0},
+  {q:'3. Что означает «ático» в объявлении?', week:'w2', o:['Пентхаус','Подвал','Первый этаж'], c:0},
+  {q:'4. Как сказать «рядом со школой»?', week:'w2', o:['cerca del colegio','al lado de','enfrente del'], c:0},
+  {q:'5. Как сказать «есть плесень»?', week:'w3', o:['Hay humedades','Está mojado','Es sucio'], c:0},
+  {q:'6. Как вежливо попросить скидку?', week:'w3', o:['¿Se puede bajar el precio?','¡Baja el precio!','Quiero descuento'], c:0},
+  {q:'7. Что означает «fianza» в контракте?', week:'w4', o:['Залог, депозит','Штраф','Аренда'], c:0},
+  {q:'8. Как сказать «я должен подписать контракт»?', week:'w4', o:['Tengo que firmar el contrato','Firmo el contrato','Quiero firmar'], c:0},
+  {q:'9. Как сказать «подключить свет»?', week:'w5', o:['Dar de alta la luz','Pagar la luz','Abrir la luz'], c:0},
+  {q:'10. Как сказать «не могли бы вы прислать мне счёт?»', week:'w5', o:['¿Podría mandarme la factura?','Dame la factura','Quiero la factura'], c:0}
+];
+
+function renderWarmup(){
+  var el = document.getElementById('warmup-quiz');
+  el.innerHTML = '';
+  warmQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    var weekNum = item.week.replace('w','неделя ');
+    d.innerHTML = '<h4>'+item.q+' <span class="quiz-week '+item.week+'">'+weekNum+'</span></h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="wf-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('wf-'+qi);
+      if(oi === warmQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[warmQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+warmQ[qi].o[warmQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderWarmup();
+
+// ===== СИТУАЦИЯ ИЗ ЖИЗНИ =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== ЛЕКСИКА =====
+var VOCAB = {
+  places:[
+    {es:'el ayuntamiento', ru:'мэрия', ex:'Voy al ayuntamiento mañana.', exRu:'Я иду в мэрию завтра.'},
+    {es:'la ventanilla', ru:'окошко', ex:'Espere en la ventanilla número 3.', exRu:'Подождите в окошке номер 3.'},
+    {es:'el funcionario', ru:'чиновник', ex:'El funcionario me pidió el pasaporte.', exRu:'Чиновник попросил у меня паспорт.'},
+    {es:'la cita previa', ru:'предварительная запись', ex:'Tengo cita previa a las diez.', exRu:'У меня запись на десять.'},
+    {es:'el resguardo', ru:'расписка', ex:'Aquí tiene su resguardo.', exRu:'Вот ваша расписка.'}
+  ],
+  registration:[
+    {es:'empadronarse', ru:'зарегистрироваться по месту жительства', ex:'Quiero empadronarme en Valencia.', exRu:'Я хочу зарегистрироваться в Валенсии.'},
+    {es:'el padrón municipal', ru:'муниципальный реестр', ex:'Estoy en el padrón municipal.', exRu:'Я в муниципальном реестре.'},
+    {es:'la hoja padronal', ru:'лист регистрации', ex:'Rellene la hoja padronal.', exRu:'Заполните лист регистрации.'},
+    {es:'el domicilio', ru:'адрес проживания', ex:'Mi domicilio es Calle Mayor, 15.', exRu:'Мой адрес — Калле Майор, 15.'},
+    {es:'la residencia', ru:'проживание, вид на жительство', ex:'Tengo residencia en España.', exRu:'У меня вид на жительство в Испании.'}
+  ],
+  docs:[
+    {es:'el certificado de empadronamiento', ru:'справка о регистрации', ex:'Necesito el certificado de empadronamiento.', exRu:'Мне нужна справка о регистрации.'},
+    {es:'el volante de empadronamiento', ru:'упрощённая справка', ex:'El volante es más rápido.', exRu:'Упрощённая справка быстрее.'},
+    {es:'adjuntar', ru:'приложить', ex:'Adjunte su pasaporte.', exRu:'Приложите ваш паспорт.'},
+    {es:'recoger', ru:'забрать', ex:'Recoja su certificado en 10 días.', exRu:'Заберите справку через 10 дней.'},
+    {es:'el contrato de alquiler', ru:'договор аренды', ex:'Necesito el contrato de alquiler.', exRu:'Мне нужен договор аренды.'}
+  ]
+};
+
+function showVocab(key,btn){
+  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML = '<div class="vocab-inner">'+
+      '<div class="vocab-front">'+
+        '<div class="es">'+w.es+'</div>'+
+        '<div class="ru">'+w.ru+'</div>'+
+        '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\''+w.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+        '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>'+
+      '</div>'+
+      '<div class="vocab-back">'+
+        '<div class="ex">«'+w.ex+'»</div>'+
+        '<div class="ex-ru">'+w.exRu+'</div>'+
+        '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
+      '</div>'+
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('places',document.querySelector('.tabs .tab'));
+
+// ===== УПР 1: ВСТАВЬ КОНСТРУКЦИЮ =====
+var fillQ = [
+  {text:'___ rellenar la hoja padronal.', ans:'tengo que', hint:'(Я должен заполнить лист регистрации)'},
+  {text:'___ adjuntar el pasaporte.', ans:'hay que', hint:'(Нужно приложить паспорт)'},
+  {text:'___ empadronarme en Valencia.', ans:'quisiera', hint:'(Я хотел бы зарегистрироваться в Валенсии)'},
+  {text:'¿___ darme una cita?', ans:'podría', hint:'(Не могли бы вы записать меня?)'},
+  {text:'___ recoger el certificado el día 25.', ans:'voy a', hint:'(Я заберу справку 25-го числа)'},
+  {text:'¿___ mandarme el certificado por email?', ans:'podría', hint:'(Не могли бы вы прислать мне справку?)'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item,i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.05rem';
+    d.innerHTML = '<span style="font-weight:700;color:var(--p4);margin-right:6px">'+(i+1)+'.</span>'+
+      item.text.replace('___','<input type="text" class="fill-input" data-ans="'+item.ans+'" autocomplete="off">')+
+      ' <span style="color:var(--muted);font-size:.85rem;font-style:italic">'+item.hint+'</span>';
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+
+renderFill();
+
+// ===== УПР 2: СОБЕРИ ФРАЗУ =====
+var buildPhrases = [
+  {words:['Quisiera','empadronarme','en','Valencia','.'], translation:'Я хотел бы зарегистрироваться в Валенсии.'},
+  {words:['Tengo','que','rellenar','la','hoja','padronal','.'], translation:'Я должен заполнить лист регистрации.'},
+  {words:['¿','Podría','mandarme','el','certificado','?'], translation:'Не могли бы вы прислать мне справку?'},
+  {words:['Voy','a','recoger','el','resguardo','mañana','.'], translation:'Я заберу расписку завтра.'}
+];
+var buildIdx = 0;
+var buildSel = [];
+
+function renderBuild(){
+  buildSel = [];
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var shuffled = p.words.slice().sort(function(){ return Math.random()-0.5; });
+  el.innerHTML = '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза '+(buildIdx+1)+' из '+buildPhrases.length+': <span style="color:var(--muted);font-style:italic">'+p.translation+'</span></div>'+
+    '<div class="build-words" id="bw-words"></div>'+
+    '<div class="build-line" id="bw-line"></div>'+
+    '<div class="build-feedback" id="bw-fb"></div>'+
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+  var wEl = document.getElementById('bw-words');
+  shuffled.forEach(function(w){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = w;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(w);
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = w;
+      chip.onclick = function(){
+        chip.remove();
+        var i = buildSel.indexOf(w);
+        if(i > -1) buildSel.splice(i,1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.join(' ');
+  var target = buildPhrases[buildIdx].words.join(' ');
+  var fb = document.getElementById('bw-fb');
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — '+buildPhrases[buildIdx].translation+'</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «'+target+'»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+
+renderBuild();
+
+// ===== УПР 3: СОПОСТАВЛЕНИЕ =====
+var matchPairs = [
+  {id:1, es:'Quisiera empadronarme.', ru:'Я хотел бы зарегистрироваться.'},
+  {id:2, es:'Tengo cita previa.', ru:'У меня предварительная запись.'},
+  {id:3, es:'Aquí tiene mi pasaporte.', ru:'Вот мой паспорт.'},
+  {id:4, es:'¿Dónde tengo que firmar?', ru:'Где я должен подписать?'},
+  {id:5, es:'Voy a recoger el certificado.', ru:'Я заберу справку.'},
+  {id:6, es:'¿Me puede enviar el resguardo?', ru:'Можете прислать мне расписку?'}
+];
+
+function renderMatch(){
+  var el = document.getElementById('match-exercise');
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="match-left"></div><div class="match-col" id="match-right"></div></div>';
+  var left = document.getElementById('match-left');
+  var right = document.getElementById('match-right');
+  var rightShuffled = matchPairs.slice().sort(function(){ return Math.random()-0.5; });
+  var selL = null, selR = null;
+  matchPairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+renderMatch();
+
+// ===== АУДИРОВАНИЕ-КВИЗ =====
+var listenQ=[
+  {q:'1. Куда пришёл клиент?',o:['В мэрию (ayuntamiento)','В банк','В школу'],c:0},
+  {q:'2. Во сколько у него запись?',o:['В 10:00','В 11:00','В 12:00'],c:0},
+  {q:'3. Какие документы он принёс?',o:['Паспорт и договор аренды','Только паспорт','NIE и фото'],c:0},
+  {q:'4. Что он заполняет?',o:['Hoja padronal (лист регистрации)','Заявление на NIE','Договор аренды'],c:0},
+  {q:'5. Когда можно забрать сертификат?',o:['Через 10 дней','Сразу','Через месяц'],c:0}
+];
+
+function renderListening(){
+  var el = document.getElementById('listening-quiz');
+  el.innerHTML = '';
+  listenQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+'</h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="lf-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('lf-'+qi);
+      if(oi === listenQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[listenQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+listenQ[qi].o[listenQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderListening();
+
+// ===== КОНСТРУКТОР ДИАЛОГА =====
+function buildDialog(){
+  var city = document.getElementById('b-city').value;
+  var nie = document.getElementById('b-nie').value || 'X-12345678-A';
+  var address = document.getElementById('b-address').value || 'Calle Mayor, 15, tercero B';
+  var time = document.getElementById('b-time').value;
+  var day = document.getElementById('b-day').value;
+  var email = document.getElementById('b-email').value || 'ivanov@email.com';
+
+  var dialog =
+    '<span class="role op">Чиновник:</span> Buenos días. Ventanilla número 3. ¿En qué puedo ayudarle?\n\n'+
+    '<span class="role you">Вы:</span> Buenos días. Quisiera empadronarme en '+city+'.\n\n'+
+    '<span class="role op">Чиновник:</span> Muy bien. ¿Tiene cita previa?\n\n'+
+    '<span class="role you">Вы:</span> Sí, tengo cita '+time+'.\n\n'+
+    '<span class="role op">Чиновник:</span> Perfecto. ¿Me puede dar su pasaporte y el contrato de alquiler?\n\n'+
+    '<span class="role you">Вы:</span> Aquí tiene. Mi NIE es '+nie+'. La dirección es '+address+'.\n\n'+
+    '<span class="role op">Чиновник:</span> Muy bien. Rellene la hoja padronal, por favor.\n\n'+
+    '<span class="role you">Вы:</span> ¿Dónde tengo que firmar?\n\n'+
+    '<span class="role op">Чиновник:</span> Aquí, al final. Perfecto. ¿Cuándo quiere recoger el certificado?\n\n'+
+    '<span class="role you">Вы:</span> ¿Me puede enviar el certificado por email?\n\n'+
+    '<span class="role op">Чиновник:</span> Sí, por supuesto. ¿Cuál es su email?\n\n'+
+    '<span class="role you">Вы:</span> '+email+'. Muchas gracias.\n\n'+
+    '<span class="role op">Чиновник:</span> Perfecto. Aquí tiene su resguardo. Recoja el certificado '+day+'. Hasta luego.\n\n'+
+    '<span class="role you">Вы:</span> ¡Muchas gracias! Hasta luego.';
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML = '<div class="dialog-result">'+dialog+'</div>'+
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">'+
+    '<button class="btn btn-secondary" onclick="speak(\''+dialog.replace(/<[^>]+>/g,' ').replace(/\n/g,' ').replace(/'/g,"\\'")+'\')">🔊 Прослушать диалог</button>'+
+    '</div>';
+  result.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ===== СЕМЕЙНЫЙ ПАСПОРТ =====
+function savePassport(){
+  var family = document.getElementById('p-family').value || '___';
+  var count = document.getElementById('p-count').value || '___';
+  var city = document.getElementById('p-city').value || 'Valencia';
+  var date = document.getElementById('p-date').value || '___';
+  var address = document.getElementById('p-address').value || '___';
+  alert('🏆 Паспорт заполнен!\n\nСохраните скриншот паспорта и отправьте преподавателю.\n\nСемья: '+family+'\nГород: '+city+'\nАдрес: '+address+'\nДата: '+date);
+}
+
+function speakPassport(){
+  var family = document.getElementById('p-family').value || 'Ivanov';
+  var city = document.getElementById('p-city').value || 'Valencia';
+  var text = 'Somos la familia '+family+'. Somos residentes en '+city+'. Hemos completado el Bloque 1 de Misión Residencia. ¡Misión cumplida!';
+  speak(text);
+}
+
+// Обновление подписи паспорта при вводе
+['p-city','p-date'].forEach(function(id){
+  var el = document.getElementById(id);
+  if(el){
+    el.addEventListener('input', function(){
+      var sig = document.getElementById(id+'-sig');
+      if(sig) sig.textContent = el.value || '___';
+    });
+  }
+});
+
+// ===== СВЕТОФОР =====
+var TL = [
+  'Записаться на приём (cita previa) — неделя 1',
+  'Заполнить бланки EX-15 и Modelo 790 — неделя 1',
+  'Пройти приём в Oficina de Extranjería — неделя 1',
+  'Найти жильё на Idealista — неделя 2',
+  'Осмотреть квартиру и торговаться — неделя 3',
+  'Прочитать контракт и найти подводные камни — неделя 4',
+  'Открыть счёт и настроить Bizum — неделя 4',
+  'Подключить свет, воду и газ — неделя 5',
+  'Подключить интернет и мобильную связь — неделя 5',
+  'Зарегистрироваться в мэрии (empadronamiento) — неделя 5'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t,rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+t+'</td>'+
+      '<td><button class="tl-cell green" data-row="'+rowIdx+'" data-color="1">🟢</button></td>'+
+      '<td><button class="tl-cell yellow" data-row="'+rowIdx+'" data-color="2">🟡</button></td>'+
+      '<td><button class="tl-cell red" data-row="'+rowIdx+'" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== ТРЕНАЖЁР =====
+var TRAIN_CARDS = [].concat(VOCAB.places, VOCAB.registration, VOCAB.docs);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode,btn){
+  trainMode = mode;
+  document.querySelectorAll('#train-section .tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+    var updateCard = function(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML = '<div class="vocab-inner">'+
+        '<div class="vocab-front">'+
+          '<div class="es" style="font-size:1.2rem">'+c.es+'</div>'+
+          '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+c.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+          '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>'+
+        '</div>'+
+        '<div class="vocab-back">'+
+          '<div class="ex" style="font-size:1.1rem">'+c.ru+'</div>'+
+        '</div>'+
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    };
+    updateCard();
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML = '<button class="btn btn-ghost" id="train-prev">← Назад</button>'+
+      '<span id="trainer-counter" style="font-weight:700">1 / '+TRAIN_CARDS.length+'</span>'+
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderTrainMatch(c);
+  }
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainMatch(container){
+  var pairs = [
+    {id:1, es:'el ayuntamiento', ru:'мэрия'},
+    {id:2, es:'empadronarse', ru:'зарегистрироваться'},
+    {id:3, es:'el resguardo', ru:'расписка'},
+    {id:4, es:'el certificado', ru:'справка'},
+    {id:5, es:'la ventanilla', ru:'окошко'},
+    {id:6, es:'recoger', ru:'забрать'}
+  ];
+  container.innerHTML = '<div class="match-container"><div class="match-col" id="tm-left"></div><div class="match-col" id="tm-right"></div></div>';
+  var left = document.getElementById('tm-left');
+  var right = document.getElementById('tm-right');
+  var rightSh = pairs.slice().sort(function(){ return Math.random()-0.5; });
+  var selL = null, selR = null;
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+  rightSh.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Quisiera empadronarme en Valencia', hint:'Я хотел бы зарегистрироваться в Валенсии'},
+    {target:'Tengo que rellenar la hoja padronal', hint:'Я должен заполнить лист регистрации'},
+    {target:'Aquí tiene mi pasaporte y el contrato', hint:'Вот мой паспорт и договор'},
+    {target:'Voy a recoger el certificado mañana', hint:'Я заберу справку завтра'}
+  ];
+  var idx = 0;
+  var sel = [];
+  function render(){
+    sel = [];
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var words = p.target.split(' ').sort(function(){ return Math.random()-0.5; });
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: '+p.hint;
+    container.appendChild(h);
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+    words.forEach(function(w){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = w;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(w);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = w;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(w);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+        };
+        document.getElementById('tb-line').appendChild(chip);
+      };
+      wC.appendChild(b);
+    });
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML = '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>'+
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+    document.getElementById('tb-check').onclick = function(){
+      var got = sel.join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else {
+        fb.innerHTML = '<span>❌</span><span>Правильно: «'+p.target+'»</span>';
+        fb.className = 'build-feedback bad';
+      }
+    };
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 5.3 · Empadronamiento + CHECKPOINT 1 — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🏆'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .checkpoint{
+    display:inline-block; background:#FFD700; color:#2B2118;
+    padding:2px 10px; border-radius:999px; font-size:9px; font-weight:800;
+    letter-spacing:.5px; margin-top:4px;
+  }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-num.gold{ background:#FFD700; color:#2B2118;}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+  .note.gold{ background:#FFF9E0; border-left-color:#FFD700;}
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7;}
+  .dialog-box .who{ font-weight:700; color:var(--p2);}
+  .dialog-box .who.you{ color:var(--p4);}
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic;}
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;}
+  .sit-box b{ color:var(--p4);}
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4);}
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic;}
+
+  .checkpoint-box{
+    background:linear-gradient(135deg,#FFF9E0,#FFE8A3);
+    border:2px solid #FFD700; border-radius:10px;
+    padding:3mm; margin-bottom:2mm;
+  }
+  .checkpoint-box h4{ color:#A67C00; margin-bottom:2mm; }
+  .checkpoint-step{
+    background:#fff; border:1.5px solid #FFD700; border-radius:8px;
+    padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;
+    display:flex; gap:3mm; align-items:flex-start;
+  }
+  .checkpoint-step .step-num{
+    background:#FFD700; color:#2B2118; width:6mm; height:6mm;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:11px; flex-shrink:0;
+  }
+  .checkpoint-step .week-tag{
+    display:inline-block; font-size:7.5px; font-weight:700;
+    padding:1px 6px; border-radius:999px; margin-left:4px;
+  }
+  .checkpoint-step .w1{background:#E8F0FE;color:var(--p4)}
+  .checkpoint-step .w2{background:#FFF7E0;color:var(--p3)}
+  .checkpoint-step .w3{background:#F0F7E6;color:var(--p2)}
+  .checkpoint-step .w4{background:#FBF0ED;color:var(--p1)}
+  .checkpoint-step .w5{background:#E0F4FF;color:#2C5E8A}
+
+  .passport-mini{
+    background:linear-gradient(135deg,#2C5E8A,var(--p4));
+    color:#fff; border-radius:10px; padding:3mm 4mm;
+    font-size:10px; position:relative; overflow:hidden;
+  }
+  .passport-mini::before{
+    content:''; position:absolute; top:-15px; right:-15px;
+    width:60px; height:60px; background:rgba(255,255,255,.1); border-radius:50%;
+  }
+  .passport-mini h4{ font-size:11px; text-align:center; margin-bottom:2mm; letter-spacing:1px;}
+  .passport-mini .field-row{ display:flex; gap:3mm; margin-bottom:1.5mm;}
+  .passport-mini .field{ flex:1;}
+  .passport-mini label{ display:block; font-size:7.5px; opacity:.8; letter-spacing:.5px; text-transform:uppercase; margin-bottom:1px;}
+  .passport-mini input{ width:100%; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.4); color:#fff; padding:2mm; border-radius:4px; font-family:inherit; font-size:9.5px;}
+  .passport-mini input::placeholder{ color:rgba(255,255,255,.6);}
+  .passport-mini .stamp{
+    position:absolute; bottom:3mm; right:3mm;
+    font-size:24px; opacity:.3; transform:rotate(-15deg);
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏛️ Рабочий лист · Урок 5.3 «Empadronamiento»</h1>
+    <div class="meta">Регистрация в мэрии + CHECKPOINT 1 — финал Блока 1</div>
+    <span class="checkpoint">🏆 CHECKPOINT 1 — MISIÓN RESIDENCIA COMPLETADA</span>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🏛️ Лексика мэрии: соедини термин и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el ayuntamiento</div>
+          <div class="item">2. la ventanilla</div>
+          <div class="item">3. empadronarse</div>
+          <div class="item">4. la hoja padronal</div>
+          <div class="item">5. el certificado</div>
+          <div class="item">6. el resguardo</div>
+          <div class="item">7. el domicilio</div>
+          <div class="item">8. adjuntar</div>
+        </div>
+        <div class="col">
+          <div class="item">а) лист регистрации</div>
+          <div class="item">б) расписка</div>
+          <div class="item">в) мэрия</div>
+          <div class="item">г) зарегистрироваться</div>
+          <div class="item">д) справка</div>
+          <div class="item">е) адрес проживания</div>
+          <div class="item">ж) окошко</div>
+          <div class="item">з) приложить</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🔤 Впиши слово по описанию</h2><div class="tag">из словаря урока</div></div></div>
+    <div class="card">
+      1. Очередь в мэрии, ваш номерок → <span class="wline long"></span>
+      <span class="ru-sub">(turno / cola)</span><br>
+      2. Муниципальный реестр жителей → <span class="wline long"></span>
+      <span class="ru-sub">(padrón municipal)</span><br>
+      3. Упрощённая справка (быстрее, чем сертификат) → <span class="wline long"></span>
+      <span class="ru-sub">(volante)</span><br>
+      4. Забрать документ через 10 дней → <span class="wline long"></span>
+      <span class="ru-sub">(recoger)</span><br>
+      5. Чиновник в окошке → <span class="wline long"></span>
+      <span class="ru-sub">(funcionario)</span><br>
+      6. Предварительная запись → <span class="wline long"></span>
+      <span class="ru-sub">(cita previa)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА · ВЫБЕРИ КОНСТРУКЦИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Грамматика: выбери конструкцию</h2><div class="tag">повторение недель 1–5</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>tengo que</b> (я должен) · <b>hay que</b> (нужно) · <b>quisiera</b> (я хотел бы) · <b>¿podría...?</b> (не могли бы вы?) · <b>me/le</b> (мне/Вам)</div>
+      1. <span class="wline short"></span> rellenar la hoja padronal.
+      <span class="ru-sub">(Я должен заполнить лист регистрации.)</span><br>
+      2. <span class="wline short"></span> adjuntar el pasaporte y el contrato.
+      <span class="ru-sub">(Нужно приложить паспорт и договор.)</span><br>
+      3. <span class="wline short"></span> empadronarme en Valencia.
+      <span class="ru-sub">(Я хотел бы зарегистрироваться в Валенсии.)</span><br>
+      4. ¿<span class="wline short"></span> darme una cita previa?
+      <span class="ru-sub">(Не могли бы вы записать меня?)</span><br>
+      5. ¿<span class="wline short"></span> puede mandar el certificado por email?
+      <span class="ru-sub">(Можете прислать мне справку?)</span><br>
+      6. <span class="wline short"></span> recoger el certificado en 10 días.
+      <span class="ru-sub">(Я заберу справку через 10 дней — voy a)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ · ДИАЛОГ В МЭРИИ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>📖 Чтение: диалог в мэрии</h2><div class="tag">прочитай и ответь на вопросы</div></div></div>
+    <div class="card">
+      <div class="dialog-box">
+        <span class="who">Чиновник:</span> Buenos días. Ventanilla número 3. ¿Tiene cita previa?<br>
+        <span class="who you">Вы:</span> Sí, tengo cita a las diez. Quisiera empadronarme.<br>
+        <span class="who">Чиновник:</span> Perfecto. ¿Me puede dar su pasaporte y el contrato de alquiler?<br>
+        <span class="who you">Вы:</span> Aquí tiene. Mi NIE es X-12345678-A. La dirección es Calle Mayor, 15.<br>
+        <span class="who">Чиновник:</span> Muy bien. Rellene la hoja padronal, por favor.<br>
+        <span class="who you">Вы:</span> ¿Dónde tengo que firmar?<br>
+        <span class="who">Чиновник:</span> Aquí, al final. ¿Cuándo quiere recoger el certificado?<br>
+        <span class="who you">Вы:</span> ¿Me puede enviar el certificado por email?<br>
+        <span class="who">Чиновник:</span> Sí, por supuesto. Recoja el resguardo. El certificado estará listo en 10 días.<br>
+        <span class="who you">Вы:</span> Muchas gracias. Hasta luego.
+      </div>
+      <br>
+      1. ¿Qué quiere hacer el cliente?
+      <span class="ru-sub">(Что хочет сделать клиент?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué documentos entrega?
+      <span class="ru-sub">(Какие документы передаёт?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Qué rellena en la ventanilla?
+      <span class="ru-sub">(Что заполняет в окошке?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuándo estará listo el certificado?
+      <span class="ru-sub">(Когда будет готова справка?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Cómo quiere recibir el certificado?
+      <span class="ru-sub">(Как хочет получить справку?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>🎧 Аудирование: звонок в мэрию</h2><div class="tag">попроси родителя прочитать вслух</div></div></div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя: прочитать вслух 2 раза (медленно):</b><br>
+        «Buenos días, Ayuntamiento de Valencia. ¿En qué puedo ayudarle? — Quisiera pedir una cita previa para empadronarme. — Muy bien. ¿Tiene su NIE? — Sí, X-12345678-A. — Perfecto. ¿Cuál es su dirección? — Calle Mayor, 15, tercero B. — Hay cita disponible el martes a las diez. ¿Le viene bien? — Sí, perfecto. ¿Qué documentos tengo que llevar? — Pasaporte, NIE, contrato de alquiler y el último recibo del agua. — Muchas gracias. Hasta luego.»
+      </div>
+      1. ¿A dónde llama el cliente?
+      <span class="ru-sub">(Куда звонит клиент?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué quiere pedir?
+      <span class="ru-sub">(Что хочет запросить?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Cuándo hay cita disponible?
+      <span class="ru-sub">(Когда есть свободная запись?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Cuántos documentos tiene que llevar? (перечисли)
+      <span class="ru-sub">(Сколько документов нужно принести?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>🗣 Говорение: ситуации в мэрии</h2><div class="tag">используй шаблоны</div></div></div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Звонишь в мэрию, чтобы записаться на приём.<br>
+        <div class="tmpl">«Buenos días. Quisiera pedir una cita previa para empadronarme.»</div>
+        <div class="tmpl-ru">(Добрый день. Я хотел бы записаться на приём для регистрации.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Чиновник дал вам бланк. Спросите, где подписать.<br>
+        <div class="tmpl">«¿Dónde tengo que firmar? ¿Necesita algo más?»</div>
+        <div class="tmpl-ru">(Где я должен подписать? Нужно что-нибудь ещё?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Уточняете, когда забрать сертификат.<br>
+        <div class="tmpl">«¿Cuándo puedo recoger el certificado? ¿Me puede enviarlo por email?»</div>
+        <div class="tmpl-ru">(Когда я могу забрать справку? Можете прислать её по почте?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Забыли один документ. Объясните ситуацию.<br>
+        <div class="tmpl">«He olvidado el contrato de alquiler. ¿Puedo traerlo mañana?»</div>
+        <div class="tmpl-ru">(Я забыл договор аренды. Могу принести завтра?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ПИСЬМО · СКРИПТ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>✍️ Письмо: твой скрипт визита в мэрию</h2><div class="tag">7–8 предложений по плану</div></div></div>
+    <div class="card">
+      <div class="note">
+        <b>План:</b><br>
+        1–2. Приветствие и цель визита (Quisiera empadronarme).<br>
+        3–4. Твои данные (NIE, адрес, договор).<br>
+        5–6. Вопросы чиновнику (¿Dónde firmo? ¿Cuándo recojo?).<br>
+        7–8. Прощание и просьба (¿Me puede enviar por email?).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 8: CHECKPOINT 1 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num gold">🏆</div><div><h2>CHECKPOINT 1: Один день в Испании</h2><div class="tag">итоговая симуляция всех 5 недель</div></div></div>
+    <div class="checkpoint-box">
+      <h4>🎯 Запиши голосовое: 5 этапов одной цепочкой</h4>
+      <div class="note gold">
+        <b>Задача:</b> пройти все 5 этапов вслух, не прерываясь. Это финальная проверка Блока 1. Запишите голосовое на телефон и пришлите преподавателю.
+      </div>
+      <div class="checkpoint-step">
+        <div class="step-num">1</div>
+        <div>
+          <b>Записаться на приём</b><span class="week-tag w1">неделя 1</span><br>
+          Шаблон: <i>«Buenos días. Quisiera pedir una cita previa para el NIE.»</i><br>
+          Твоя версия: <span class="wline long"></span>
+        </div>
+      </div>
+      <div class="checkpoint-step">
+        <div class="step-num">2</div>
+        <div>
+          <b>Звонок риелтору</b><span class="week-tag w2">неделя 2</span><br>
+          Шаблон: <i>«Llamo por el anuncio de Idealista. ¿Está disponible el piso?»</i><br>
+          Твоя версия: <span class="wline long"></span>
+        </div>
+      </div>
+      <div class="checkpoint-step">
+        <div class="step-num">3</div>
+        <div>
+          <b>Торг за квартиру</b><span class="week-tag w3">неделя 3</span><br>
+          Шаблон: <i>«Me encanta el piso, pero está un poco caro. ¿Se puede bajar el precio?»</i><br>
+          Твоя версия: <span class="wline long"></span>
+        </div>
+      </div>
+      <div class="checkpoint-step">
+        <div class="step-num">4</div>
+        <div>
+          <b>Звонок в энергокомпанию</b><span class="week-tag w5">неделя 5</span><br>
+          Шаблон: <i>«Quisiera dar de alta la luz. Mi NIE es X-12345678-A.»</i><br>
+          Твоя версия: <span class="wline long"></span>
+        </div>
+      </div>
+      <div class="checkpoint-step">
+        <div class="step-num">5</div>
+        <div>
+          <b>Визит в мэрию</b><span class="week-tag w5">неделя 5</span><br>
+          Шаблон: <i>«Quisiera empadronarme. Aquí tiene mi pasaporte.»</i><br>
+          Твоя версия: <span class="wline long"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 9: СЕМЕЙНЫЙ ПАСПОРТ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">📘</div><div><h2>Семейный паспорт · твой пропуск в Блок 2</h2><div class="tag">заполни и сохрани как реликвию</div></div></div>
+    <div class="card">
+      <p class="hint">Вы прошли весь Блок 1 — от NIE до мэрии. Заполните паспорт: это ваш официальный «документ» выпускника Блока 1. Покажите детям!</p>
+      <div class="passport-mini">
+        <h4>📘 PASAPORTE FAMILIAR · BLOQUE 1</h4>
+        <div class="field-row">
+          <div class="field"><label>Familia</label><input type="text" placeholder="Ivanov"></div>
+          <div class="field"><label>Personas</label><input type="text" placeholder="4"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Ciudad</label><input type="text" placeholder="Valencia"></div>
+          <div class="field"><label>Fecha</label><input type="text" placeholder="25/09/2026"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Dirección</label><input type="text" placeholder="Calle Mayor, 15, 3ºB"></div>
+        </div>
+        <div style="margin-top:2mm;font-size:8.5px;opacity:.9;text-align:center">
+          ✅ MISIÓN RESIDENCIA · ¡COMPLETADA!
+        </div>
+        <div class="stamp">🏆</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">✓</div><div><h2>🚦 Самопроверка «Светофор Блока 1»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею за весь Блок 1</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Записаться на приём (cita previa) — нед. 1</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Заполнить EX-15 и Modelo 790 — нед. 1</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Читать объявления на Idealista — нед. 2</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Осмотреть квартиру по чек-листу — нед. 3</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Торговаться и просить скидку — нед. 3</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать контракт аренды — нед. 4</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Подключить свет, воду и газ — нед. 5</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Подключить интернет (fibra óptica) — нед. 5</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Зарегистрироваться в мэрии — нед. 5</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Пройти CHECKPOINT 1 (5 этапов) — нед. 5</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист и отправь преподавателю — проверим вместе! Все 🟢 = открытие Блока 2 «Школа и здоровье».</p>
+    </div>
+  </div>
+
+  <!-- АНОНС БЛОКА 2 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">🏫</div><div><h2>Впереди — Блок 2: El Cole y la Salud</h2><div class="tag">школа и здоровье</div></div></div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Поздравляем!</b> Вы завершили Блок 1 «Misión Residencia». Теперь вы умеете: получать NIE, снимать жильё, подписывать контракты, подключать услуги и регистрироваться в мэрии — <b>всё на испанском</b>.<br><br>
+        <b>На следующей неделе (Блок 2):</b><br>
+        🏫 Público vs Concertado vs Privado — выбираем школу<br>
+        👨‍🏫 Встреча с tutor — знакомство с классным руководителем<br>
+        🏥 Centro de Salud — получаем карточку SIP<br>
+        💊 Испанская аптека и симптомы детей<br>
+        🆘 CHECKPOINT 2 — звонок в 112
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
