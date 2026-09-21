@@ -12,29 +12,26 @@
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
   a{color:var(--p4)}
-  .topbar{background:var(--card);box-shadow:var(--shadow);padding:12px 0;position:sticky;top:0;z-index:100}
-  .topbar .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-  .topbar a{text-decoration:none;font-weight:700;color:var(--ink)}
-  .topbar a:hover{color:var(--p1)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
   .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
   .back-link:hover{color:var(--p1)}
   .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
   #auth-area{display:inline-flex}
-  .hero{background:linear-gradient(135deg,var(--p1),var(--p4));color:#fff;padding:44px 20px 38px;text-align:center;position:relative;overflow:hidden}
-  .hero::after{content:'🏆';position:absolute;right:20px;top:20px;font-size:3rem;opacity:.3}
-  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:6px 14px;border-radius:999px;margin-bottom:10px}
-  .hero h1{font-size:2rem;margin-bottom:8px}
-  .hero p{font-size:1.1rem;opacity:.95;max-width:640px;margin:0 auto}
-  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
-  .hero-chip{background:rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:700}
-  .hero-chip.checkpoint{background:#FFD700;color:#2B2118}
-  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
-  .section:nth-child(even){background:var(--card)}
-  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
-  .step-num.c2{background:var(--p2)}.step-num.c3{background:var(--p3)}.step-num.c4{background:var(--p4)}
-  .step-title h2{font-size:1.3rem}
-  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+  .meta-chip.checkpoint{background:linear-gradient(135deg,#FFD700,#FFA500);color:#2B2118}
+  .section{max-width:1100px;margin:0 auto;padding:34px 20px}
+  .step-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+  .step-num{flex:0 0 46px;height:46px;border-radius:50%;background:var(--p1);color:#fff;font-weight:900;display:inline-grid;place-items:center;font-size:1.2rem}
+  .step-time{font-weight:900;color:var(--muted);font-size:.82rem;letter-spacing:.3px;text-transform:uppercase;display:block;margin-bottom:2px}
+  h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
+  .sub{color:var(--muted);font-style:normal;margin:8px 0 22px;max-width:760px;line-height:1.6}
   .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
   .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
   .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
@@ -225,27 +222,27 @@
 <body>
 <script>document.body.insertAdjacentHTML('afterbegin','<div id="gate-overlay" style="position:fixed;inset:0;z-index:99999;background:#FFF7EF"></div>');</script>
 
-<div class="topbar"><div class="inner">
+<div class="lesson-topbar"><div class="inner">
   <a href="../../index.html" class="back-link">← К карте курса</a>
   <span class="lesson-id">Неделя 5 · Урок 3 из 3 · Фаза 1 Misión Residencia</span>
   <span id="auth-area"></span>
 </div></div>
 
-<section class="hero">
+<section class="lesson-hero">
   <span class="phase-tag">📍 Фаза 1 · Документы и жильё</span>
-  <h1>🏛️ Урок 5.3 · Empadronamiento + CHECKPOINT 1</h1>
-  <p>Регистрируемся в мэрии и проходим итоговую симуляцию всего Блока 1</p>
-  <div class="hero-chips">
-    <span class="hero-chip">🎯 Цель: зарегистрироваться в ayuntamiento</span>
-    <span class="hero-chip">🗣 15 слов: мэрия и регистрация</span>
-    <span class="hero-chip">🧩 Повторение недель 1–5</span>
-    <span class="hero-chip checkpoint">🏆 CHECKPOINT 1 — финал блока</span>
+  <h1>Урок 5.3 · <em>Empadronamiento</em> + CHECKPOINT 1</h1>
+  <p class="sub">Регистрируемся в мэрии и проходим итоговую симуляцию всего Блока 1</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🎯 Цель: зарегистрироваться в ayuntamiento</span>
+    <span class="meta-chip">🗣 15 слов: мэрия и регистрация</span>
+    <span class="meta-chip">🧩 Повторение недель 1–5</span>
+    <span class="meta-chip checkpoint">🏆 CHECKPOINT 1 — финал блока</span>
   </div>
 </section>
 
 <!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">0</div><div class="step-title"><h2>Разминка + вопрос из жизни</h2><span class="time">00:00 – 06:00 · Финальная проверка Блока 1</span></div></div>
+  <div class="step-head"><span class="step-num">0</span><div><span class="step-time">00:00 – 06:00 · Финальная проверка Блока 1</span><h2>Разминка + вопрос из жизни</h2></div></div>
   <div class="card">
     <p class="hint">Перед регистрацией в мэрии проверим базу всех пяти недель! Вопросы из NIE, жилья, контракта, коммуналки и интернета.</p>
     <h4 style="margin-bottom:10px">⚡ Блиц-квиз: всё, что прошли</h4>
@@ -318,7 +315,7 @@
 
 <!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">1</div><div class="step-title"><h2>Карточки со словами: 15 слов мэрии</h2><span class="time">06:00 – 14:00</span></div></div>
+  <div class="step-head"><span class="step-num">1</span><div><span class="step-time">06:00 – 14:00</span><h2>Карточки со словами: 15 слов мэрии</h2></div></div>
   <div class="card">
     <p class="hint">Нажмите на карточку — она перевернётся, и вы увидите пример использования. 🔊 — послушать вслух.</p>
     <div class="tabs">
@@ -331,17 +328,14 @@
       💡 <b>Культурный нюанс:</b> <b>empadronamiento обязательно</b> для всех, кто живёт в Испании более 3 месяцев. Без него нельзя записать детей в школу, получить медкарту, голосовать на выборах.
     </div>
     <div class="note" style="margin-top:10px">
-      ⚠️ <b>Ложные друзья переводчика:</b><br>
-      • <span class="grammar-hint" data-hint="el ayuntamiento — это не «айятунмьенто», а «мэрия»">el ayuntamiento</span> — мэрия<br>
-      • <span class="grammar-hint" data-hint="el resguardo — это не «ресгуардо», а «расписка, квитанция о приёме документов»">el resguardo</span> — расписка<br>
-      • <span class="grammar-hint" data-hint="el volante — это не «руль», а «упрощённая справка о регистрации»">el volante</span> — упрощённая справка
+      💡 <b>Запомните:</b> el ayuntamiento — мэрия, el resguardo — расписка, el volante — упрощённая справка.
     </div>
   </div>
 </section>
 
 <!-- ШАГ 2: ГРАММАТИКА -->
 <section class="section">
-  <div class="step-head"><div class="step-num c2">2</div><div class="step-title"><h2>Грамматика: повторение недель 1–5</h2><span class="time">14:00 – 20:00 · Все ключевые конструкции</span></div></div>
+  <div class="step-head"><span class="step-num">2</span><div><span class="step-time">14:00 – 20:00 · Все ключевые конструкции</span><h2>Грамматика: повторение недель 1–5</h2></div></div>
   <div class="card">
     <p class="hint">В мэрии пригодится всё, что вы прошли. Это ваш грамматический «арсенал выживания».</p>
 
@@ -385,7 +379,7 @@
 
 <!-- ШАГ 3: ПРАКТИКА -->
 <section class="section">
-  <div class="step-head"><div class="step-num c3">3</div><div class="step-title"><h2>Практика: применим все навыки</h2><span class="time">20:00 – 28:00</span></div></div>
+  <div class="step-head"><span class="step-num">3</span><div><span class="step-time">20:00 – 28:00</span><h2>Практика: применим все навыки</h2></div></div>
 
   <div class="card">
     <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь конструкцию</h4>
@@ -411,7 +405,7 @@
 
 <!-- ШАГ 4: АУДИРОВАНИЕ -->
 <section class="section">
-  <div class="step-head"><div class="step-num c4">4</div><div class="step-title"><h2>Аудирование: диалог в мэрии</h2><span class="time">28:00 – 34:00</span></div></div>
+  <div class="step-head"><span class="step-num">4</span><div><span class="step-time">28:00 – 34:00</span><h2>Аудирование: диалог в мэрии</h2></div></div>
   <div class="card">
     <p class="hint">Прослушайте реальный диалог регистрации. Сначала без текста, затем откройте транскрипт. Ответьте на вопросы!</p>
 
@@ -447,7 +441,7 @@
 
 <!-- ШАГ 5: ЧТЕНИЕ + ПИСЬМО (PBL) — КОНСТРУКТОР ДИАЛОГА -->
 <section class="section">
-  <div class="step-head"><div class="step-num">5</div><div class="step-title"><h2>Чтение + Письмо: соберите свой диалог регистрации</h2><span class="time">34:00 – 42:00</span></div></div>
+  <div class="step-head"><span class="step-num">5</span><div><span class="step-time">34:00 – 42:00</span><h2>Чтение + Письмо: соберите свой диалог регистрации</h2></div></div>
   <div class="card">
     <p class="hint">Заполните поля своими данными — получите готовый диалог регистрации в мэрии. Меняйте поля — диалог перестраивается автоматически. Запишите голосовое с результатом!</p>
 
@@ -503,7 +497,7 @@
 
 <!-- ШАГ 6: СЕМЕЙНЫЙ ПАСПОРТ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">🏆</div><div class="step-title"><h2>Семейный паспорт — ваш пропуск в Блок 2</h2><span class="time">42:00 – 47:00 · Главный продукт Блока 1</span></div></div>
+  <div class="step-head"><span class="step-num">🏆</span><div><span class="step-time">42:00 – 47:00 · Главный продукт Блока 1</span><h2>Семейный паспорт — ваш пропуск в Блок 2</h2></div></div>
   <div class="card">
     <p class="hint">Вы прошли весь Блок 1! Заполните семейный паспорт данными семьи. Это ваш документ, который «пропускает» вас в Блок 2 (школа и здоровье). Сохраните как реликвию!</p>
 
@@ -563,7 +557,7 @@
 
 <!-- САМОПРОВЕРКА -->
 <section class="section">
-  <div class="step-head"><div class="step-num">✅</div><div class="step-title"><h2>Самопроверка «Светофор»</h2><span class="time">Отметьте честно — нажмите на нужный цвет</span></div></div>
+  <div class="step-head"><span class="step-num">✅</span><div><span class="step-time">Отметьте честно — нажмите на нужный цвет</span><h2>Самопроверка «Светофор»</h2></div></div>
   <div class="card">
     <div style="overflow-x:auto">
     <table class="tl-table">
@@ -599,7 +593,7 @@
 
 <!-- ДОМАШКА -->
 <section class="section">
-  <div class="step-head"><div class="step-num">🏠</div><div class="step-title"><h2>Домашнее задание · Урок 5.3 + CHECKPOINT 1</h2><span class="time">⏱ ~30–35 минут · Недельный чекпоинт</span></div></div>
+  <div class="step-head"><span class="step-num">🏠</span><div><span class="step-time">⏱ ~30–35 минут · Недельный чекпоинт</span><h2>Домашнее задание · Урок 5.3 + CHECKPOINT 1</h2></div></div>
 
   <div class="hw-item">
     <h4>🎤 Задание 1. Голосовое «Визит в мэрию» · 7 мин ⭐</h4>
@@ -659,7 +653,7 @@
 
 <!-- ТРЕНАЖЁР -->
 <section class="section" id="train-section">
-  <div class="step-head"><div class="step-num">🎮</div><div class="step-title"><h2>Тренажёр: повторение Блока 1</h2><span class="time">~10 мин</span></div></div>
+  <div class="step-head"><span class="step-num">🎮</span><div><span class="step-time">~10 мин</span><h2>Тренажёр: повторение Блока 1</h2></div></div>
   <div class="card">
     <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
     <div class="tabs">
@@ -682,7 +676,7 @@
 
 <!-- РЕСУРСЫ -->
 <section class="section">
-  <div class="step-head"><div class="step-num">🔗</div><div class="step-title"><h2>Внешние ресурсы</h2><span class="time">Реальные сайты мэрий и видео про empadronamiento</span></div></div>
+  <div class="step-head"><span class="step-num">🔗</span><div><span class="step-time">Реальные сайты мэрий и видео про empadronamiento</span><h2>Внешние ресурсы</h2></div></div>
   <div class="resources-grid">
     <div class="resource-card">
       <span class="tag">🌐 Мэрия</span>
@@ -1240,9 +1234,9 @@ function renderTrain(){
         '</div>'+
         '</div>';
       card.classList.remove('flipped');
-      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+      var counter = document.getElementById('trainer-counter');
+      if(counter) counter.textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
     };
-    updateCard();
     var controls = document.createElement('div');
     controls.style.marginTop = '16px';
     controls.style.display = 'flex';
@@ -1261,6 +1255,7 @@ function renderTrain(){
     document.getElementById('train-next').onclick = function(){
       if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
     };
+    updateCard();
   }
   if(trainMode === 'match'){
     var c = document.createElement('div');
