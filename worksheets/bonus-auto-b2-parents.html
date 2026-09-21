@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок B2 · Анатомия машины — Школа МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🚗'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .bonus{
+    display:inline-block; background:#FFD700; color:#2B2118;
+    padding:2px 10px; border-radius:999px; font-size:9px; font-weight:800;
+    letter-spacing:.5px; margin-top:4px;
+  }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7;}
+  .dialog-box .who{ font-weight:700; color:var(--p2);}
+  .dialog-box .who.you{ color:var(--p4);}
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic;}
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;}
+  .sit-box b{ color:var(--p4);}
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4);}
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic;}
+
+  .plan-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px;}
+  .plan-box b{ color:var(--p4);}
+
+  .suncard{
+    background:linear-gradient(135deg,#2C5E8A,var(--p4));
+    color:#fff; border-radius:10px; padding:3mm 4mm;
+    font-size:10px; position:relative; overflow:hidden;
+    margin-bottom:2mm;
+  }
+  .suncard::before{
+    content:''; position:absolute; top:-15px; right:-15px;
+    width:60px; height:60px; background:rgba(255,255,255,.1); border-radius:50%;
+  }
+  .suncard h4{ font-size:11px; text-align:center; margin-bottom:2mm; letter-spacing:1px;}
+  .suncard .grid{ display:grid; grid-template-columns:1fr 1fr; gap:2mm;}
+  .suncard .field{ background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.4); padding:2mm; border-radius:4px; font-size:9px;}
+  .suncard .field label{ display:block; font-size:7px; opacity:.8; letter-spacing:.5px; text-transform:uppercase; margin-bottom:1px;}
+  .suncard .field input{ width:100%; background:transparent; border:none; border-bottom:1px dashed rgba(255,255,255,.6); color:#fff; font-family:inherit; font-size:9px; padding:1px 0;}
+  .suncard .field input::placeholder{ color:rgba(255,255,255,.5);}
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  .footer-note{background:#2B2118;color:#E9A13B;border-radius:12px;padding:3mm 4mm;text-align:center;font-size:9.5px;font-weight:800}
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸 · БОНУСНЫЙ МОДУЛЬ</div>
+    <h1>🚗 Рабочий лист · Урок B2 «Анатомия машины»</h1>
+    <div class="meta">Команды инструктора и Imperativo (usted) · Бонусный модуль «Misión Autoescuela»</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🚗 Лексика салона: соедини деталь и перевод</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el volante</div>
+          <div class="item">2. el embrague</div>
+          <div class="item">3. el freno</div>
+          <div class="item">4. el acelerador</div>
+          <div class="item">5. la palanca de cambios</div>
+          <div class="item">6. el freno de mano</div>
+          <div class="item">7. el intermitente</div>
+          <div class="item">8. el retrovisor</div>
+        </div>
+        <div class="col">
+          <div class="item">а) тормоз</div>
+          <div class="item">б) педаль газа</div>
+          <div class="item">в) руль</div>
+          <div class="item">г) рычаг переключения передач</div>
+          <div class="item">д) поворотник</div>
+          <div class="item">е) ручной тормоз</div>
+          <div class="item">ж) зеркало заднего вида</div>
+          <div class="item">з) сцепление</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🔤 Впиши деталь или фразу по описанию</h2><div class="tag">из словаря урока</div></div></div>
+    <div class="card">
+      1. Деталь, которую опускают от солнца → <span class="wline long"></span>
+      <span class="ru-sub">(parasol / солнцезащитный козырёк)</span><br>
+      2. Деталь, которая очищает лобовое стекло → <span class="wline long"></span>
+      <span class="ru-sub">(limpiaparabrisas / дворники)</span><br>
+      3. Зона, которую не видно в зеркала → <span class="wline long"></span>
+      <span class="ru-sub">(ángulo muerto / слепая зона)</span><br>
+      4. Задняя часть машины для багажа → <span class="wline long"></span>
+      <span class="ru-sub">(maletero / багажник)</span><br>
+      5. Часть машины, которая открывается для проверки двигателя → <span class="wline long"></span>
+      <span class="ru-sub">(capó / капот)</span><br>
+      6. Фраза, когда машина глохнет → <span class="wline long"></span>
+      <span class="ru-sub">(Se ha calado / Заглох)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА · ИМПЕРАТИВ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Грамматика: вставь форму императива</h2><div class="tag">imperativo (usted) — команды инструктора</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>Глаголы на -ar → окончание -e:</b> girar → <b>gire</b>, frenar → <b>frene</b><br>
+      <b>Глаголы на -er/-ir → окончание -a:</b> seguir → <b>siga</b>, cambiar → <b>cambie</b></div>
+      1. <span class="wline short"></span> a la derecha. (girar)
+      <span class="ru-sub">(Поверните направо.)</span><br>
+      2. <span class="wline short"></span> el embrague. (pisar)
+      <span class="ru-sub">(Нажмите сцепление.)</span><br>
+      3. <span class="wline short"></span> el retrovisor. (mirar)
+      <span class="ru-sub">(Посмотрите в зеркало.)</span><br>
+      4. <span class="wline short"></span> suavemente. (frenar)
+      <span class="ru-sub">(Тормозите плавно.)</span><br>
+      5. <span class="wline short"></span> a segunda marcha. (cambiar)
+      <span class="ru-sub">(Переключитесь на вторую передачу.)</span><br>
+      6. <span class="wline short"></span> de frente. (seguir)
+      <span class="ru-sub">(Езжайте прямо.)</span><br>
+      7. <span class="wline short"></span> el freno de mano. (soltar)
+      <span class="ru-sub">(Отпустите ручной тормоз.)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ · ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>📖 Чтение: первый урок вождения</h2><div class="tag">прочитай диалог и ответь на вопросы</div></div></div>
+    <div class="card">
+      <div class="dialog-box">
+        <span class="who">Инструктор:</span> Buenos días. Soy Carlos, su instructor. ¿Listo?<br>
+        <span class="who you">Вы:</span> Sí, pero estoy un poco nervioso.<br>
+        <span class="who">Инструктор:</span> Tranquilo. Primero, ajuste el asiento y los retrovisores.<br>
+        <span class="who you">Вы:</span> ¿Así está bien?<br>
+        <span class="who">Инструктор:</span> Perfecto. Ahora, pise el embrague y ponga primera marcha.<br>
+        <span class="who you">Вы:</span> Vale. ¿Y ahora?<br>
+        <span class="who">Инструктор:</span> Suelte el embrague despacio y pise el acelerador suavemente.<br>
+        <span class="who you">Вы:</span> ¡Ah! Se ha calado.<br>
+        <span class="who">Инструктор:</span> No pasa nada. Otra vez. Pise el embrague, ponga primera...<br>
+        <span class="who you">Вы:</span> Vale, ya vamos.<br>
+        <span class="who">Инструктор:</span> Muy bien. Ahora mire el retrovisor y gire el volante a la derecha.<br>
+        <span class="who you">Вы:</span> ¿Puede repetir, por favor?<br>
+        <span class="who">Инструктор:</span> Mire el retrovisor. Gire a la derecha.
+      </div>
+      <br>
+      1. ¿Cómo se llama el instructor?
+      <span class="ru-sub">(Как зовут инструктора?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué hace el alumno primero?
+      <span class="ru-sub">(Что ученик делает первым?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pasa cuando el alumno empieza a moverse?
+      <span class="ru-sub">(Что происходит, когда ученик начинает движение?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Qué dice el instructor cuando el alumno se equivoca?
+      <span class="ru-sub">(Что говорит инструктор, когда ученик ошибается?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Qué frase usa el alumno para pedir repetición?
+      <span class="ru-sub">(Какую фразу использует ученик, чтобы попросить повторить?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>🎧 Аудирование: команды инструктора</h2><div class="tag">попроси родителя прочитать вслух</div></div></div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя: прочитать вслух 2 раза (медленно, с паузами):</b><br>
+        «Buenos días. Soy María, su instructora. Primero, póngase el cinturón. Ajuste los retrovisores. Muy bien. Ahora, pise el embrague y ponga primera marcha. Suelte el embrague despacio. Acelere suavemente. Muy bien. Ahora mire el retrovisor y gire a la derecha. Ponga el intermitente. Frene en el paso de peatones. Pare. Ponga el freno de mano. ¡Perfecto!»
+      </div>
+      1. ¿Cómo se llama la instructora?
+      <span class="ru-sub">(Как зовут инструктора?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué hay que ponerse primero?
+      <span class="ru-sub">(Что нужно надеть первым?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Qué hay que hacer antes de girar?
+      <span class="ru-sub">(Что нужно сделать перед поворотом?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Qué hay que hacer en el paso de peatones?
+      <span class="ru-sub">(Что нужно сделать на пешеходном переходе?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Qué hay que poner al final?
+      <span class="ru-sub">(Что нужно поставить в конце?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>🗣 Говорение: ситуации с инструктором</h2><div class="tag">используй шаблоны</div></div></div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Инструктор даёт команду, но вы не поняли.<br>
+        <div class="tmpl">«Perdone, ¿puede repetir más despacio, por favor?»</div>
+        <div class="tmpl-ru">(Извините, можете повторить медленнее, пожалуйста?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Машина заглохла на светофоре. Что скажете?<br>
+        <div class="tmpl">«Se ha calado. Lo siento, voy a arrancar otra vez.»</div>
+        <div class="tmpl-ru">(Заглохла. Извините, заведу ещё раз.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Инструктор просит повернуть, но вы не видите знак.<br>
+        <div class="tmpl">«¿Giro a la derecha o a la izquierda?»</div>
+        <div class="tmpl-ru">(Повернуть направо или налево?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Загорелась красная лампочка на приборной панели.<br>
+        <div class="tmpl">«Se ha encendido una luz roja en el salpicadero. ¿Qué significa?»</div>
+        <div class="tmpl-ru">(Загорелась красная лампочка на панели. Что это значит?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ПИСЬМО · СКРИПТ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>✍️ Письмо: скрипт первого урока вождения</h2><div class="tag">7–8 предложений по плану</div></div></div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие инструктора и ваше состояние (estoy nervioso / tranquilo).<br>
+        3–4. Первые действия в машине (ajustar el asiento, ponerse el cinturón).<br>
+        5–6. Первые команды инструктора и ваши действия (pisar el embrague, cambiar de marcha).<br>
+        7–8. Первая проблема и реакция (se ha calado / ¿puede repetir?).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 8: SUNCARD · ШПАРГАЛКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">🃏</div><div><h2>Suncard · Шпаргалка на солнцезащитный козырёк</h2><div class="tag">заполни и прикрепи в машину</div></div></div>
+    <div class="card">
+      <p class="hint">Заполните свою шпаргалку: 5 команд инструктора + 5 деталей салона. Вырежьте и прикрепите к солнцезащитному козырьку — на первом уроке вождения она будет перед глазами!</p>
+      <div class="suncard">
+        <h4>🃏 MI SUNCARD · MISIÓN AUTOSCUELA</h4>
+        <div class="grid">
+          <div class="field"><label>Comando 1</label><input type="text" placeholder="Gire a la derecha"></div>
+          <div class="field"><label>Parte 1</label><input type="text" placeholder="el volante"></div>
+          <div class="field"><label>Comando 2</label><input type="text" placeholder="Pise el embrague"></div>
+          <div class="field"><label>Parte 2</label><input type="text" placeholder="el freno"></div>
+          <div class="field"><label>Comando 3</label><input type="text" placeholder="Mire el retrovisor"></div>
+          <div class="field"><label>Parte 3</label><input type="text" placeholder="el retrovisor"></div>
+          <div class="field"><label>Comando 4</label><input type="text" placeholder="Frene suavemente"></div>
+          <div class="field"><label>Parte 4</label><input type="text" placeholder="el acelerador"></div>
+          <div class="field"><label>Comando 5</label><input type="text" placeholder="Cambie de marcha"></div>
+          <div class="field"><label>Parte 5</label><input type="text" placeholder="la palanca"></div>
+        </div>
+        <div style="margin-top:2mm;font-size:8px;text-align:center;opacity:.9">
+          Фраза-спасатель: <i>«Perdone, ¿puede repetir más despacio?»</i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть 10 деталей салона на испанском</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать команды инструктора (imperativo usted)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Сам использовать императив (gire, pise, mire)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Сообщить о проблеме (se ha calado, no arranca)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Вежливо переспросить (¿Puede repetir?)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понять диалог первого урока на слух</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист (включая Suncard) и отправь преподавателю — проверим вместе!</p>
+    </div>
+  </div>
+
+  <!-- АНОНС B3 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">🔄</div><div><h2>Впереди — Урок B3: Дорожные знаки</h2><div class="tag">rotondas и знаки приоритета</div></div></div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы знаете анатомию машины и понимаете команды инструктора. На следующем уроке (B3) выйдете на дорогу: научитесь читать испанские дорожные знаки и проезжать ро́тонды — главный стресс экспатов.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Бонусный модуль «Misión Autoescuela» · Урок B2 · ¡Que no se te cale el coche! 🚗</div>
+
+</div>
+
+</body>
+</html>

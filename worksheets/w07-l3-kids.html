@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Чекпоинт Станции 2 · Mi Colegio — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --green:#2E7D32;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--sun,#FFC93C);background:#FFC93C;color:var(--ink);border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(255,201,60,.4)}
+  .print-btn:hover{background:#e6b52e}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid #FFC93C}
+  .hero h1{font-size:21px;color:#B8860B;margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:#FFC93C;color:var(--ink);border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-gold{background:#B8860B}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed #B8860B;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#B8860B;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:90px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--oliva);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--oliva)}
+  .build-line{border-bottom:1.6px dashed var(--oliva);height:24px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🏆 Чекпоинт Станции 2: Mi Colegio</h1>
+    <div class="sub">Экзамен по всей Станции 2 (уроки 10–20): рюкзак, неделя, система, класс, правила · все навыки</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Это <strong>экзамен Станции 2</strong>! Работай самостоятельно, а потом проверь вместе с родителем или учителем. Вспоминай всё: рюкзак, дни недели, класс, правила!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-gold">1</span>
+      <span class="ex-title">Соедини слово и перевод (вся станция!)</span>
+      <span class="ex-skill">🗣 Лексика · микс</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>✏️ el lápiz</td><td>а) стеллаж</td></tr>
+      <tr><td><span class="ans-box"></span>📅 el miércoles</td><td>б) карандаш</td></tr>
+      <tr><td><span class="ans-box"></span>🖍️ la pizarra</td><td>в) можно</td></tr>
+      <tr><td><span class="ans-box"></span>🌳 el recreo</td><td>г) понедельник</td></tr>
+      <tr><td><span class="ans-box"></span>☀️ luminoso</td><td>д) рюкзак</td></tr>
+      <tr><td><span class="ans-box"></span>🌟 tengo que</td><td>е) доска</td></tr>
+      <tr><td><span class="ans-box"></span>📚 la estantería</td><td>ж) светлый</td></tr>
+      <tr><td><span class="ans-box"></span>✅ se puede</td><td>з) перемена</td></tr>
+      <tr><td><span class="ans-box"></span>🏫 el instituto</td><td>и) я должен</td></tr>
+      <tr><td><span class="ans-box"></span>🎒 la mochila</td><td>к) старшая школа</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">2</span>
+      <span class="ex-title">Угадай по описанию</span>
+      <span class="ex-skill">🗣 Лексика · описание</span>
+    </div>
+    <div class="ex-instruction">Прочитай описание и напиши слово по-испански.</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">✏️</span> Лежит в рюкзаке, им пишешь. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">📅</span> Первый день школьной недели. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🖍️</span> На неё смотрит класс, на ней пишет учитель. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">🌳</span> Перемена между уроками, можно играть. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">✅</span> Правило «можно» = ... → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🌟</span> Обязанность «я должен» = ... → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ВСТАВЬ СЛОВО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь пропущенное слово</span>
+      <span class="ex-skill">🧩 Грамматика · микс</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>El · hay · tengo · está · no se puede · Tengo · son · trimestres</strong></div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span><span class="g"></span> lápiz es azul.</div>
+      <div class="gap-item"><span class="num">2</span>En mi mochila <span class="g"></span> dos gomas.</div>
+      <div class="gap-item"><span class="num">3</span>Los lunes <span class="g"></span> Mates a las nueve.</div>
+      <div class="gap-item"><span class="num">4</span>La pizarra <span class="g"></span> delante de la mesa.</div>
+      <div class="gap-item"><span class="num">5</span>En clase <span class="g"></span> comer.</div>
+      <div class="gap-item"><span class="num">6</span><span class="g"></span> que hacer los deberes cada día.</div>
+      <div class="gap-item"><span class="num">7</span>Las ventanas <span class="g"></span> grandes.</div>
+      <div class="gap-item"><span class="num">8</span>En España hay tres <span class="g"></span>.</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">mochila</span><span class="build-word">la</span><span class="build-word">En</span><span class="build-word">hay</span><span class="build-word">un</span><span class="build-word">lápiz</span><span class="build-word">mi</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">lunes</span><span class="build-word">El</span><span class="build-word">tengo</span><span class="build-word">Mates</span><span class="build-word">a</span><span class="build-word">nueve</span><span class="build-word">las</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">pizarra</span><span class="build-word">La</span><span class="build-word">está</span><span class="build-word">de</span><span class="build-word">delante</span><span class="build-word">mesa</span><span class="build-word">la</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">puede</span><span class="build-word">No</span><span class="build-word">en</span><span class="build-word">comer</span><span class="build-word">se</span><span class="build-word">clase</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Прочитай текст и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      <strong>Mi semana en el cole</strong><br>
+      Me llamo Lucía y tengo nueve años. Estoy en Primaria, en el colegio San José. El lunes tengo Mates a las nueve y Lengua a las diez. El martes tengo Plástica y Música. Mi clase es grande y luminosa: hay dos ventanas y una pizarra digital. La pizarra está delante de la mesa del profe y la estantería está en la esquina. En clase se puede beber agua y trabajar en equipo, pero no se puede usar el móvil. Tengo que hacer los deberes cada día y llegar a tiempo. Mi día favorito es el viernes, porque tengo EF y después es el fin de semana.
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Dónde está Lucía: en Primaria o en el instituto? <span class="ru">(Где учится Лусия: в примарии или в институте?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué tiene el lunes a las nueve? <span class="ru">(Что у неё в понедельник в девять?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cómo es su clase? <span class="ru">(Какой её класс?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Dónde está la estantería? <span class="ru">(Где стоит стеллаж?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Qué no se puede hacer en clase? <span class="ru">(Что нельзя делать в классе?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">6.</span><span>¿Por qué le gusta el viernes? <span class="ru">(Почему ей нравится пятница?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 6. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">6</span>
+      <span class="ex-title">Послушай и напиши ответ</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши короткий ответ (день, время, число, место, да/нет)!</div>
+    <div class="listen-item"><span class="lnum">1.</span>¿Qué día es hoy? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span>¿A qué hora tienes Mates? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span>¿Cuántos lápices hay en la mochila? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span>¿Dónde está la pizarra? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span>¿Se puede correr en el pasillo? → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) «Hoy es miércoles.» · 2) «Tengo Mates a las diez.» · 3) «En mi mochila hay un estuche y dos lápices.» · 4) «La pizarra está delante de la mesa.» · 5) «No, no se puede correr en el pasillo.»</div>
+  </div>
+
+  <!-- 7. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">7</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение · вся станция</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Представься как ученик:<br><span class="tpl">Me llamo ___. Estoy en Primaria / en el instituto.</span><span class="ru">Меня зовут ___. Я в примарии / в институте.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Скажи, что у тебя в понедельник:<br><span class="tpl">El lunes tengo ___ a las ___.</span><span class="ru">В понедельник у меня ___ в ___.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Опиши свой класс:<br><span class="tpl">Mi clase es ___ y ___. Hay ___.</span><span class="ru">Мой класс ___ и ___. Есть ___.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Скажи, что можно и нельзя в классе:<br><span class="tpl">Se puede ___. No se puede ___.</span><span class="ru">Можно ___. Нельзя ___.</span><span class="speak-check"></span></div>
+    <div class="speak-item">5. Скажи свои обязанности:<br><span class="tpl">Tengo que ___ y ___.</span><span class="ru">Я должен ___ и ___.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 8. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">8</span>
+      <span class="ex-title">Сочинение «Mi semana en el cole»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) Me llamo... y estoy en... · 2) El lunes tengo... · 3) El martes tengo... · 4) Mi clase es... Hay... · 5) La pizarra está... · 6) Se puede... No se puede... · 7) Tengo que... · 8) Mi día favorito es... porque...</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 9. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">9</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть канцелярию и мебель класса</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить дни недели и время</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Различать HAY / ESTÁ / SER</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Описывать класс прилагательными</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить правила: se puede / no se puede / tengo que</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Читать и понимать текст о школе</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 2: Mi Colegio · Чекпоинт · ¡Felicidades, campeón! 🏆</div>
+</div>
+
+</body>
+</html>

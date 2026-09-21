@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бонусный урок B2 · Анатомия машины — МУДРО</title>
+<style>
+  :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);--ok:#7A8B4C;--bad:#E2725B}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .topbar{background:var(--card);box-shadow:var(--shadow);padding:12px 0;position:sticky;top:0;z-index:100}
+  .topbar .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .topbar a{text-decoration:none;font-weight:700;color:var(--ink)}
+  .topbar a:hover{color:var(--p1)}
+  .lesson-badge{font-size:.85rem;color:var(--muted);font-weight:600;background:#FFF7E0;padding:2px 10px;border-radius:999px}
+  .hero{background:linear-gradient(135deg,var(--p1),var(--p4));color:#fff;padding:44px 20px 38px;text-align:center;position:relative;overflow:hidden}
+  .hero::after{content:'🚗';position:absolute;right:20px;top:20px;font-size:3rem;opacity:.25}
+  .hero h1{font-size:2rem;margin-bottom:8px}
+  .hero p{font-size:1.1rem;opacity:.95;max-width:640px;margin:0 auto}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .hero-chip{background:rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:700}
+  .hero-chip.bonus{background:#FFD700;color:#2B2118}
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  /* Разминка-квиз */
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+  .quiz-week{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px}
+  .quiz-week.b1{background:#FFF7E0;color:var(--p3)}
+
+  /* Ситуация из жизни */
+  .situation-box{background:#fff;border:3px solid var(--p3);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p3)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#FFF7E0;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p3)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  /* Табы и карточки лексики */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
+  .vocab-front .es{font-size:1.1rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
+  .vocab-front .ru{font-size:.9rem;opacity:.95;font-weight:600;color:#fff}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  /* Грамматика */
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:6px}
+  .grammar-box .formula{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.5}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .grammar-hint{position:relative;border-bottom:1.5px dashed var(--p4);cursor:help;color:var(--p4);font-weight:600}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 12px;border-radius:8px;font-size:.82rem;font-weight:500;font-style:normal;line-height:1.4;width:280px;max-width:90vw;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;white-space:normal}
+  .grammar-hint::before{content:'';position:absolute;bottom:120%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink);opacity:0;pointer-events:none;transition:opacity .2s}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  /* Упражнения */
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:80px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:340px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.7}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.05rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  /* Аудирование */
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.inst{color:var(--p1)}
+  .dialog-box .who.you{color:var(--p4)}
+
+  /* Конструктор диалога */
+  .dialog-builder{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p2);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .dialog-result{background:#FFF7E0;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p3)}
+  .dialog-result .role{font-weight:800;color:var(--p1);display:block;margin-top:6px}
+  .dialog-result .role.you{color:var(--p4)}
+
+  /* Suncard */
+  .suncard{background:linear-gradient(135deg,#2C5E8A,var(--p4));color:#fff;border-radius:18px;padding:24px;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(44,94,138,.4)}
+  .suncard::before{content:'☀️';position:absolute;top:20px;right:20px;font-size:3rem;opacity:.25}
+  .suncard h3{margin-bottom:16px;text-align:center;letter-spacing:2px}
+  .suncard .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .suncard .field{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);padding:10px;border-radius:8px}
+  .suncard .field label{display:block;font-size:.7rem;opacity:.85;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+  .suncard .field input{width:100%;background:transparent;border:none;border-bottom:1px dashed rgba(255,255,255,.6);color:#fff;font-family:inherit;font-size:.95rem;padding:4px 0}
+  .suncard .field input::placeholder{color:rgba(255,255,255,.5)}
+  .suncard .rescue{margin-top:14px;padding:12px;background:rgba(255,215,0,.2);border:2px dashed #FFD700;border-radius:10px;text-align:center;font-size:.9rem}
+
+  /* Домашка */
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  /* Светофор */
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  /* Quizlet */
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  /* Ресурсы */
+  .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .resource-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.2s;border-top:4px solid var(--p4)}
+  .resource-card:hover{transform:translateY(-3px)}
+  .resource-card h4{font-size:1rem;margin-bottom:6px}
+  .resource-card p{font-size:.85rem;color:var(--muted);margin-bottom:12px;min-height:40px}
+  .resource-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem}
+  .resource-card a:hover{background:var(--p1)}
+  .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">🎁 Бонусный модуль · Урок B2 из B5 · Misión Autoescuela</span>
+  <span id="auth-area"></span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🎁 Бонусный модуль · Misión Autoescuela</span>
+  <h1>Урок B2 · <em>Анатомия машины</em> — команды инструктора и детали салона</h1>
+  <p class="sub">Первые 50 минут за рулём в испанской автошколе: 35 слов салона, императив команд (usted) и конструктор диалога первого урока.</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🎯 Цель: понять команды инструктора</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 Imperativo (usted)</span>
+    <span class="meta-chip">🃏 Продукт: Suncard</span>
+    <span class="meta-chip">⏱ 50 минут · A2</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">0</div><div class="step-title"><h2>Разминка + вопрос из жизни</h2><span class="time">00:00 – 06:00</span></div></div>
+  <div class="card">
+    <p class="hint">Проверим материал урока B1 (запись в автошколу, медосмотр) — он понадобится на первом уроке вождения.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок B1</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🚗</div>
+      <div class="sit-title">Одна ситуация: первый урок вождения</div>
+    </div>
+    <div class="sit-intro">
+      Вы сели в машину автошколы. Инструктор говорит быстро — вы не понимаете. Что делать? Отвечайте вслух, нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Инструктор:</div>
+      <div class="es">Buenos días. Póngase el cinturón. Pise el embrague y cambie a primera.</div>
+      <div class="ru">Добрый день. Пристегнитесь. Нажмите сцепление и включите первую.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Póngase el cinturón. Pise el embrague y cambie a primera.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ-шаблон (если не поняли):</div>
+      <div class="es">Perdone, ¿puede repetir más despacio, por favor?</div>
+      <div class="ru">Извините, можете повторить медленнее, пожалуйста?</div>
+      <button class="speak-btn" onclick="speak('Perdone, ¿puede repetir más despacio, por favor?')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Инструктор говорит «Pise el freno». Что нужно сделать?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Повернуть руль.</div>
+        <div class="q-opt" data-o="1">Нажать на тормоз.</div>
+        <div class="q-opt" data-o="2">Включить поворотник.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">2</span>Машина заглохла на светофоре. Что скажете инструктору?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">El coche está bien.</div>
+        <div class="q-opt" data-o="1">El motor es bueno.</div>
+        <div class="q-opt" data-o="2">Se ha calado. Lo siento.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня вы выучите <b>35 деталей салона</b> и <b>команды инструктора</b> на испанском. Инструкторы в Испании говорят в императиве (повелительном наклонении): <i>gire</i>, <i>frene</i>, <i>mire</i>. К концу урока вы будете понимать каждое слово на первом уроке вождения.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: ЛЕКСИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">1</div><div class="step-title"><h2>Карточки: 35 слов — анатомия машины</h2><span class="time">06:00 – 16:00</span></div></div>
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся. 🔊 — послушать произношение. Пройдите все 5 категорий.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showVocab('controls',this)">🎮 Органы управления (7)</button>
+      <button class="tab" onclick="showVocab('mirrors',this)">🪞 Зеркала и обзор (7)</button>
+      <button class="tab" onclick="showVocab('exterior',this)">🚙 Внешние элементы (7)</button>
+      <button class="tab" onclick="showVocab('verbs',this)">⚡ Глаголы (7)</button>
+      <button class="tab" onclick="showVocab('problems',this)">⚠️ Проблемы (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+    <div class="note" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> в испанских автошколах инструкторы <b>всегда говорят в императиве на usted</b> (вежливая форма «вы»). Это не грубость, а стандарт. Команды короткие и чёткие: <i>¡Pare!</i>, <i>¡Gire!</i>, <i>¡Frene!</i>
+    </div>
+    <div class="note" style="margin-top:10px">
+      💡 <b>Запомните:</b> четыре слова, которые легко перепутать с русскими:<br>
+      • <span class="grammar-hint" data-hint="el volante — это не «волант», а «руль». По-английски — steering wheel">el volante</span> — руль<br>
+      • <span class="grammar-hint" data-hint="el embrague — это не «эмбраж», а «сцепление» (педаль под левой ногой в МКПП)">el embrague</span> — сцепление<br>
+      • <span class="grammar-hint" data-hint="el capó — это не «капо» (мафия!), а «капот» автомобиля">el capó</span> — капот<br>
+      • <span class="grammar-hint" data-hint="la marcha — это не «марш», а «передача» в коробке (primera marcha = первая передача)">la marcha</span> — передача
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">2</div><div class="step-title"><h2>Грамматика: Imperativo (usted)</h2><span class="time">16:00 – 23:00 · Команды инструктора</span></div></div>
+  <div class="card">
+    <p class="hint">Все команды инструктора — это императив на <b>usted</b> (вежливая форма). Простое правило:</p>
+
+    <div class="grammar-box">
+      <h4>📐 Правило образования императива (usted)</h4>
+      <div class="formula">-AR глаголы → окончание -e · -ER/-IR глаголы → окончание -a</div>
+      <div class="example">
+        <b>girar</b> (поворачивать) → <b>gire</b> (поверните!)<br>
+        <b>frenar</b> (тормозить) → <b>frene</b> (тормозите!)<br>
+        <b>mirar</b> (смотреть) → <b>mire</b> (посмотрите!)<br>
+        <b>pisar</b> (нажимать) → <b>pise</b> (нажмите!)<br>
+        <b>soltar</b> (отпускать) → <b>suelte</b> (отпустите!)<br>
+        <b>cambiar</b> (менять) → <b>cambie</b> (переключите!)<br>
+        <b>seguir</b> (следовать) → <b>siga</b> (едьте!)
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Топ-7 команд, которые вы услышите на первом уроке</h4>
+      <div class="example">
+        <b>¡Pise el embrague!</b> — Нажмите сцепление!<br>
+        <b>¡Cambie a segunda!</b> — Переключитесь на вторую!<br>
+        <b>¡Suelte el embrague despacio!</b> — Отпустите сцепление медленно!<br>
+        <b>¡Mire el retrovisor!</b> — Посмотрите в зеркало!<br>
+        <b>¡Gire a la derecha!</b> — Поверните направо!<br>
+        <b>¡Frene suavemente!</b> — Тормозите плавно!<br>
+        <b>¡Siga de frente!</b> — Езжайте прямо!
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Ваши вежливые просьбы к инструктору</h4>
+      <div class="formula">¿Puede + инфинитив? · ¿Podría + инфинитив?</div>
+      <div class="example">
+        ¿<b>Puede</b> repetir, por favor? — Можете повторить?<br>
+        ¿<b>Podría</b> hablar más despacio? — Не могли бы вы говорить медленнее?<br>
+        ¿<b>Puede</b> escribirlo, por favor? — Можете написать?<br>
+        ¿<b>Me</b> da un momento? — Дайте мне секунду.
+      </div>
+    </div>
+
+    <div class="note green">
+      💡 <b>Совет:</b> когда инструктор даёт команду, не паникуйте. Сфокусируйтесь на <b>первом слове-глаголе</b>: <i>pise</i>, <i>gire</i>, <i>frene</i>, <i>mire</i>. Это 80% понимания команды!
+    </div>
+
+    <div class="note">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«Gira a la derecha»</i> — это обращение на «ты». С инструктором используйте <b>usted</b>: <i>«Gire a la derecha»</i>.<br>
+      • <i>«Puedo repetir?»</i> — это «могу ли я повторить?». А нам нужно: <i>«¿Puede repetir?»</i> — «можете <b>вы</b> повторить?»
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">3</div><div class="step-title"><h2>Практика: применим слова и грамматику</h2><span class="time">23:00 – 31:00</span></div></div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь форму императива</h4>
+    <p class="hint">Выберите правильную форму глагола в императиве (usted). Подсказка в скобках подскажет смысл.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери команду</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь команду и действие</h4>
+    <p class="hint">Нажмите испанскую команду слева, затем её перевод справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">4</div><div class="step-title"><h2>Аудирование: первый урок вождения</h2><span class="time">31:00 – 38:00</span></div></div>
+  <div class="card">
+    <p class="hint">Прослушайте реальный диалог первого урока. Сначала без текста, затем откройте транскрипт. Ответьте на вопросы!</p>
+
+    <button class="btn btn-secondary" onclick="speak('Buenos días. Soy Carlos, su instructor. ¿Listo? Buenos días, Carlos. Sí, pero estoy un poco nervioso. Tranquilo. Primero, póngase el cinturón y ajuste los retrovisores. ¿Así está bien? Perfecto. Ahora, pise el embrague y ponga primera marcha. Vale. ¿Y ahora? Suelte el embrague despacio y pise el acelerador suavemente. ¡Ah! Se ha calado. No pasa nada. Otra vez. Pise el embrague, ponga primera... Vale, ya vamos. Muy bien. Ahora mire el retrovisor y gire el volante a la derecha. ¿Puede repetir, por favor? Mire el retrovisor. Gire a la derecha. Vale, gracias.')" style="margin-bottom:14px">🔊 Прослушать весь диалог</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text" style="display:none">
+        <span class="who inst">Инструктор:</span> Buenos días. Soy Carlos, su instructor. ¿Listo?<br>
+        <span class="who you">Вы:</span> Buenos días, Carlos. Sí, pero estoy un poco nervioso.<br>
+        <span class="who inst">Инструктор:</span> Tranquilo. Primero, póngase el cinturón y ajuste los retrovisores.<br>
+        <span class="who you">Вы:</span> ¿Así está bien?<br>
+        <span class="who inst">Инструктор:</span> Perfecto. Ahora, pise el embrague y ponga primera marcha.<br>
+        <span class="who you">Вы:</span> Vale. ¿Y ahora?<br>
+        <span class="who inst">Инструктор:</span> Suelte el embrague despacio y pise el acelerador suavemente.<br>
+        <span class="who you">Вы:</span> ¡Ah! Se ha calado.<br>
+        <span class="who inst">Инструктор:</span> No pasa nada. Otra vez. Pise el embrague, ponga primera...<br>
+        <span class="who you">Вы:</span> Vale, ya vamos.<br>
+        <span class="who inst">Инструктор:</span> Muy bien. Ahora mire el retrovisor y gire el volante a la derecha.<br>
+        <span class="who you">Вы:</span> ¿Puede repetir, por favor?<br>
+        <span class="who inst">Инструктор:</span> Mire el retrovisor. Gire a la derecha.<br>
+        <span class="who you">Вы:</span> Vale, gracias.
+      </div>
+    </div>
+
+    <style>.dialog-box.open .dialog-text{display:block;margin-top:10px}</style>
+
+    <h4 style="margin-top:16px;margin-bottom:10px">🎧 Проверьте понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: ЧТЕНИЕ + ПИСЬМО -->
+<section class="section">
+  <div class="step-head"><div class="step-num">5</div><div class="step-title"><h2>Чтение + Письмо: конструктор диалога</h2><span class="time">38:00 – 45:00</span></div></div>
+  <div class="card">
+    <p class="hint">Заполните поля своими данными — получите готовый диалог первого урока вождения. Меняйте поля — диалог перестраивается. Запишите голосовое с результатом!</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">🚗 КОНСТРУКТОР: Первый урок вождения</div>
+
+      <div class="field">
+        <label>👨‍🏫 Имя инструктора:</label>
+        <select id="b-inst">
+          <option>Carlos</option><option>María</option><option>Pablo</option><option>Ana</option><option>Javier</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>😰 Ваше состояние:</label>
+        <select id="b-mood">
+          <option value="un poco nervioso">un poco nervioso (немного нервничаю)</option>
+          <option value="tranquilo">tranquilo (спокоен)</option>
+          <option value="emocionado">emocionado (возбуждён)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>🔄 Первая команда инструктора:</label>
+        <select id="b-cmd1">
+          <option value="póngase el cinturón">póngase el cinturón (пристегнитесь)</option>
+          <option value="ajuste los retrovisores">ajuste los retrovisores (отрегулируйте зеркала)</option>
+          <option value="ajuste el asiento">ajuste el asiento (отрегулируйте сиденье)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>🚗 Манёвр:</label>
+        <select id="b-maneuver">
+          <option value="gire a la derecha">gire a la derecha (поверните направо)</option>
+          <option value="gire a la izquierda">gire a la izquierda (поверните налево)</option>
+          <option value="siga de frente">siga de frente (едьте прямо)</option>
+          <option value="cambie de carril">cambie de carril (перестройтесь)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>⚠️ Проблема:</label>
+        <select id="b-problem">
+          <option value="se ha calado">se ha calado (заглох)</option>
+          <option value="se ha encendido una luz">se ha encendido una luz (загорелась лампа)</option>
+          <option value="no arranca">no arranca (не заводится)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildDialog()" style="margin-top:12px">🔧 Собрать диалог</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с этим диалогом (1–2 мин, минимум 2 дубля) и пришлите преподавателю вместе со скриншотом.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 6: SUNCARD -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🃏</div><div class="step-title"><h2>Продукт урока: Suncard</h2><span class="time">45:00 – 48:00 · Шпаргалка на солнцезащитный козырёк</span></div></div>
+  <div class="card">
+    <p class="hint">Заполните свою шпаргалку: 5 команд инструктора + 5 деталей салона. Вырежьте и прикрепите к солнцезащитному козырьку — на первом уроке вождения она будет перед глазами!</p>
+
+    <div class="suncard">
+      <h3>🃏 MI SUNCARD · AUTOSCUELA</h3>
+      <div class="grid">
+        <div class="field"><label>Comando 1</label><input type="text" id="s-cmd1" placeholder="Gire a la derecha"></div>
+        <div class="field"><label>Parte 1</label><input type="text" id="s-p1" placeholder="el volante"></div>
+        <div class="field"><label>Comando 2</label><input type="text" id="s-cmd2" placeholder="Pise el embrague"></div>
+        <div class="field"><label>Parte 2</label><input type="text" id="s-p2" placeholder="el freno"></div>
+        <div class="field"><label>Comando 3</label><input type="text" id="s-cmd3" placeholder="Mire el retrovisor"></div>
+        <div class="field"><label>Parte 3</label><input type="text" id="s-p3" placeholder="el retrovisor"></div>
+        <div class="field"><label>Comando 4</label><input type="text" id="s-cmd4" placeholder="Frene suavemente"></div>
+        <div class="field"><label>Parte 4</label><input type="text" id="s-p4" placeholder="el acelerador"></div>
+        <div class="field"><label>Comando 5</label><input type="text" id="s-cmd5" placeholder="Cambie de marcha"></div>
+        <div class="field"><label>Parte 5</label><input type="text" id="s-p5" placeholder="la palanca"></div>
+      </div>
+      <div class="rescue">
+        💬 <b>Фраза-спасатель:</b> <i>«Perdone, ¿puede repetir más despacio?»</i>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="saveSuncard()" style="margin-top:16px">💾 Сохранить Suncard</button>
+    <button class="btn btn-ghost" onclick="speakSuncard()" style="margin-top:16px">🔊 Прослушать Suncard</button>
+
+    <div class="note green" style="margin-top:16px">
+      📸 <b>Сохраните как картинку!</b> Это ваша шпаргалка на первый урок вождения. Прикрепите к солнцезащитному козырьку машины автошколы — и вы будете понимать каждое слово инструктора.
+    </div>
+  </div>
+</section>
+
+<!-- ДОМАШКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🏠</div><div class="step-title"><h2>Домашнее задание · Урок B2</h2><span class="time">⏱ ~30–35 минут</span></div></div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 10 мин</h4>
+    <div class="hw-meta">Цель: довести словарь и императив до автоматизма.</div>
+    <p>Пройдите тренажёр урока: 🃏 Карточки (называйте перевод ДО переворота) + 🧩 Сопоставление + 🔤 Собери фразу. Все 35 слов + команды инструктора.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Мой первый урок» · 7 мин ⭐</h4>
+    <div class="hw-meta">Цель: преодолеть страх первого урока вождения.</div>
+    <p>Запишите голосовое с диалогом из шага 5 (конструктор). Минимум 2 дубля — второй всегда увереннее! Прочитайте свою роль выразительно, как будто реально в машине.</p>
+    <button class="btn btn-ghost" onclick="speak('Buenos días, Carlos. Soy Ivanova. Estoy un poco nerviosa. Vale, me pongo el cinturón. Pise el embrague... vale. Suelte el embrague despacio... se ha calado. Lo siento. Otra vez. Vale, ya vamos. Mire el retrovisor... gire a la derecha. ¿Puede repetir, por favor? Vale, gracias.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🃏 Задание 3. Проект: Suncard · 10 мин</h4>
+    <div class="hw-meta">Цель: создать шпаргалку на первый урок вождения.</div>
+    <p>Заполните Suncard из шага 6. Сохраните как картинку и распечатайте. Прикрепите к солнцезащитному козырьку перед первым уроком. Пришлите фото шпаргалки в машине.</p>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 4. Рабочий лист · 20–25 мин</h4>
+    <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
+    <p>Распечатайте или заполните с экрана: лексика, императив, чтение диалога, аудирование, письмо. Пришлите фото заполненного листа.</p>
+    <a href="../../worksheets/bonus-auto-b2-parents.html" class="btn btn-ghost" style="margin-top:8px">📄 Открыть рабочий лист (A4, печать)</a>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 5 мин</h4>
+    <div class="hw-meta">Цель: связать урок с детьми через TPR-игру.</div>
+    <p>Покажите детям педали (embrague, freno, acelerador) и руль. Поиграйте в «Simon dice» на испанском: <i>«Simon dice: ¡Gire el volante!»</i> (Саймон говорит: поверните руль!). Дети выполняют команду — учат вместе с вами!</p>
+    <button class="btn btn-ghost" onclick="speak('Simon dice: gire el volante. Simon dice: pise el freno. Simon dice: mire el retrovisor.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Мой первый урок» (задание 2)<br>
+    • 🃏 Фото Suncard в машине (задание 3)<br>
+    • 📄 Фото рабочего листа (задание 4)<br>
+    • ✅ «Светофор» самопроверки
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">✅</div><div class="step-title"><h2>Самопроверка «Светофор»</h2><span class="time">Отметьте честно — нажмите на нужный цвет</span></div></div>
+  <div class="card">
+    <div style="overflow-x:auto">
+    <table class="tl-table">
+      <thead><tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr></thead>
+      <tbody id="tl-body"></tbody>
+    </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head"><div class="step-num">🎮</div><div class="step-title"><h2>Тренажёр: доведите слова и команды до автоматизма</h2><span class="time">~10 мин</span></div></div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока B2</h3>
+    <p>Повторите слова урока в приложении Quizlet: анатомия машины, команды инструктора, проблемы.</p>
+    <a href="https://quizlet.com/ru/1211530231/%D1%83%D1%80%D0%BE%D0%BA-b2-el-examen-teorico-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- РЕСУРСЫ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🔗</div><div class="step-title"><h2>Внешние ресурсы</h2><span class="time">Видео и сайты автошкол</span></div></div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Primera clase de conducir</h4>
+      <p>Видео первого урока вождения в испанской автошколе: реальные команды инструктора с субтитрами.</p>
+      <a href="https://www.youtube.com/results?search_query=primera+clase+de+conducir+españa" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Partes del coche en español</h4>
+      <p>Визуальный гид по деталям автомобиля на испанском с озвучкой.</p>
+      <a href="https://www.youtube.com/results?search_query=partes+del+coche+español" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Imperativo en español</h4>
+      <p>Грамматика императива с примерами из повседневной жизни и команд в машине.</p>
+      <a href="https://www.youtube.com/results?search_query=imperativo+usted+español" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🎮 Wordwall</span>
+      <h4>Partes del coche</h4>
+      <p>Интерактивная игра: сопоставь деталь и перевод.</p>
+      <a href="https://wordwall.net/" target="_blank" rel="noopener">Искать на Wordwall →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🌐 Автошкола</span>
+      <h4>Autoescuelas en España</h4>
+      <p>Сайт ассоциации автошкол: стандарты обучения, команды инструктора.</p>
+      <a href="https://www.autoescuelas.es/" target="_blank" rel="noopener">Открыть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏁 Следующий</span>
+      <h4>Урок B3: Дорожные знаки</h4>
+      <p>После салона машины — дорога. Знаки приоритета, ро́тонды, указатели.</p>
+      <a href="bonus-auto-b3.html" target="_blank" rel="noopener">Скоро →</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · 🎁 Бонусный модуль «Misión Autoescuela» · Разговорный формат</footer>
+
+<div class="lesson-nav">
+  <a href="bonus-auto-b1.html">← Предыдущий<br><small>Урок B1 · Autoescuela</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="bonus-auto-b3.html">Следующий →<br><small>Урок B3 · Дорожные знаки (скоро)</small></a>
+</div>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Grammar hints =====
+document.addEventListener('click', function(e){
+  var hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){ if(el!==hint) el.classList.remove('active'); });
+  if(hint){ hint.classList.toggle('active'); e.stopPropagation(); }
+});
+
+// ===== РАЗМИНКА-КВИЗ (B1) =====
+var warmQ=[
+  {q:'1. Что такое «psicotécnico»?',o:['Психофизический тест','Психолог','Тест на IQ'],c:0},
+  {q:'2. Как сказать «записаться в автошколу»?',o:['matricularse en la autoescuela','entrar en la autoescuela','ir a la autoescuela'],c:0},
+  {q:'3. Что такое «el expediente»?',o:['Пакет документов','Экспедиция','Экспонат'],c:0},
+  {q:'4. Как сказать «сдать экзамен»?',o:['aprobar el examen','pasar el examen','ganar el examen'],c:0},
+  {q:'5. Что такое «la tasa 2.1»?',o:['Госпошлина за экзамен','Налог 2.1%','Тариф 2.1'],c:0},
+  {q:'6. Что такое «el informe de aptitud»?',o:['Медсправка о годности','Отчёт об адаптации','Информационный лист'],c:0}
+];
+
+function renderWarmup(){
+  var el = document.getElementById('warmup-quiz');
+  el.innerHTML = '';
+  warmQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+' <span class="quiz-week b1">урок B1</span></h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="wf-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('wf-'+qi);
+      if(oi === warmQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[warmQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+warmQ[qi].o[warmQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderWarmup();
+
+// ===== СИТУАЦИЯ ИЗ ЖИЗНИ =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== ЛЕКСИКА =====
+var VOCAB = {
+  controls:[
+    {es:'el volante', ru:'руль', ex:'Gire el volante a la derecha.', exRu:'Поверните руль направо.'},
+    {es:'el embrague', ru:'сцепление', ex:'Pise el embrague.', exRu:'Нажмите сцепление.'},
+    {es:'el freno', ru:'тормоз', ex:'Frene suavemente.', exRu:'Тормозите плавно.'},
+    {es:'el acelerador', ru:'педаль газа', ex:'No pise el acelerador tan fuerte.', exRu:'Не нажимайте педаль газа так сильно.'},
+    {es:'la palanca de cambios', ru:'рычаг переключения', ex:'Mueva la palanca de cambios.', exRu:'Передвиньте рычаг переключения.'},
+    {es:'el freno de mano', ru:'ручной тормоз', ex:'Ponga el freno de mano.', exRu:'Поставьте ручной тормоз.'},
+    {es:'el intermitente', ru:'поворотник', ex:'Ponga el intermitente derecho.', exRu:'Включите правый поворотник.'}
+  ],
+  mirrors:[
+    {es:'el retrovisor interior', ru:'салонное зеркало', ex:'Mire el retrovisor interior.', exRu:'Посмотрите в салонное зеркало.'},
+    {es:'el retrovisor exterior', ru:'боковое зеркало', ex:'Ajuste el retrovisor exterior.', exRu:'Отрегулируйте боковое зеркало.'},
+    {es:'el ángulo muerto', ru:'слепая зона', ex:'Cuidado con el ángulo muerto.', exRu:'Осторожно со слепой зоной.'},
+    {es:'el parabrisas', ru:'лобовое стекло', ex:'El parabrisas está sucio.', exRu:'Лобовое стекло грязное.'},
+    {es:'el limpiaparabrisas', ru:'дворники', ex:'Encienda el limpiaparabrisas.', exRu:'Включите дворники.'},
+    {es:'el parasol', ru:'солнцезащитный козырёк', ex:'Baje el parasol.', exRu:'Опустите козырёк.'},
+    {es:'el salpicadero', ru:'приборная панель', ex:'En el salpicadero hay una luz roja.', exRu:'На панели загорелась красная лампа.'}
+  ],
+  exterior:[
+    {es:'el maletero', ru:'багажник', ex:'Abra el maletero.', exRu:'Откройте багажник.'},
+    {es:'el capó', ru:'капот', ex:'Levante el capó.', exRu:'Поднимите капот.'},
+    {es:'el parachoques', ru:'бампер', ex:'El parachoques está rayado.', exRu:'Бампер поцарапан.'},
+    {es:'la matrícula', ru:'номерной знак', ex:'La matrícula es 1234 ABC.', exRu:'Номер — 1234 ABC.'},
+    {es:'la rueda', ru:'колесо', ex:'La rueda está desinflada.', exRu:'Колесо спущено.'},
+    {es:'el neumático', ru:'шина', ex:'Cambie el neumático.', exRu:'Поменяйте шину.'},
+    {es:'el tapacubos', ru:'колпак', ex:'Falta un tapacubos.', exRu:'Не хватает одного колпака.'}
+  ],
+  verbs:[
+    {es:'pisar', ru:'нажимать', ex:'Pise el embrague.', exRu:'Нажмите сцепление.'},
+    {es:'soltar', ru:'отпускать', ex:'Suelte el embrague despacio.', exRu:'Отпустите сцепление медленно.'},
+    {es:'girar', ru:'поворачивать', ex:'Gire el volante.', exRu:'Поверните руль.'},
+    {es:'frenar', ru:'тормозить', ex:'Frene en el semáforo.', exRu:'Тормозите на светофоре.'},
+    {es:'acelerar', ru:'ускоряться', ex:'Acelere un poco.', exRu:'Немного ускорьтесь.'},
+    {es:'cambiar de marcha', ru:'переключать передачу', ex:'Cambie a tercera marcha.', exRu:'Переключитесь на третью.'},
+    {es:'calarse', ru:'заглохнуть', ex:'El coche se ha calado.', exRu:'Машина заглохла.'}
+  ],
+  problems:[
+    {es:'Se ha calado.', ru:'Заглох.', ex:'Se ha calado en el semáforo.', exRu:'Заглох на светофоре.'},
+    {es:'Se ha encendido una luz.', ru:'Загорелась лампа.', ex:'Se ha encendido una luz en el salpicadero.', exRu:'Загорелась лампа на панели.'},
+    {es:'He pinchado una rueda.', ru:'Я проколол колесо.', ex:'He pinchado una rueda en la autopista.', exRu:'Я проколол колесо на трассе.'},
+    {es:'Me he quedado sin gasolina.', ru:'Кончился бензин.', ex:'Me he quedado sin gasolina.', exRu:'У меня кончился бензин.'},
+    {es:'La batería está muerta.', ru:'Сел аккумулятор.', ex:'La batería está muerta.', exRu:'Аккумулятор сел.'},
+    {es:'Hace un ruido raro.', ru:'Странный шум.', ex:'El motor hace un ruido raro.', exRu:'Мотор издаёт странный шум.'},
+    {es:'No arranca.', ru:'Не заводится.', ex:'El coche no arranca.', exRu:'Машина не заводится.'}
+  ]
+};
+
+function showVocab(key,btn){
+  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML = '<div class="vocab-inner">'+
+      '<div class="vocab-front">'+
+        '<div class="es">'+w.es+'</div>'+
+        '<div class="ru">'+w.ru+'</div>'+
+        '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\''+w.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+        '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>'+
+      '</div>'+
+      '<div class="vocab-back">'+
+        '<div class="ex">«'+w.ex+'»</div>'+
+        '<div class="ex-ru">'+w.exRu+'</div>'+
+        '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
+      '</div>'+
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('controls',document.querySelector('.tabs .tab'));
+
+// ===== УПР 1: ВСТАВЬ ИМПЕРАТИВ =====
+var fillQ = [
+  {text:'___ a la derecha. (girar)', ans:'gire', hint:'(Поверните направо.)'},
+  {text:'___ el embrague. (pisar)', ans:'pise', hint:'(Нажмите сцепление.)'},
+  {text:'___ el retrovisor. (mirar)', ans:'mire', hint:'(Посмотрите в зеркало.)'},
+  {text:'___ suavemente. (frenar)', ans:'frene', hint:'(Тормозите плавно.)'},
+  {text:'___ a segunda marcha. (cambiar)', ans:'cambie', hint:'(Переключитесь на вторую.)'},
+  {text:'___ de frente. (seguir)', ans:'siga', hint:'(Езжайте прямо.)'},
+  {text:'___ el freno de mano. (soltar)', ans:'suelte', hint:'(Отпустите ручной тормоз.)'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item,i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.05rem';
+    d.innerHTML = '<span style="font-weight:700;color:var(--p4);margin-right:6px">'+(i+1)+'.</span>'+
+      item.text.replace('___','<input type="text" class="fill-input" data-ans="'+item.ans+'" maxlength="10" autocomplete="off">')+
+      ' <span style="color:var(--muted);font-size:.85rem;font-style:italic">'+item.hint+'</span>';
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+
+renderFill();
+
+// ===== УПР 2: СОБЕРИ КОМАНДУ =====
+var buildPhrases = [
+  {words:['¡','Pise','el','embrague','!'], translation:'Нажмите сцепление!'},
+  {words:['¡','Gire','el','volante','a','la','derecha','!'], translation:'Поверните руль направо!'},
+  {words:['¡','Mire','el','retrovisor','!'], translation:'Посмотрите в зеркало!'},
+  {words:['¡','Frene','suavemente','!'], translation:'Тормозите плавно!'}
+];
+var buildIdx = 0;
+var buildSel = [];
+
+function renderBuild(){
+  buildSel = [];
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var shuffled = p.words.slice().sort(function(){ return Math.random()-0.5; });
+  el.innerHTML = '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Команда '+(buildIdx+1)+' из '+buildPhrases.length+': <span style="color:var(--muted);font-style:italic">'+p.translation+'</span></div>'+
+    '<div class="build-words" id="bw-words"></div>'+
+    '<div class="build-line" id="bw-line"></div>'+
+    '<div class="build-feedback" id="bw-fb"></div>'+
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая команда →</button>';
+  var wEl = document.getElementById('bw-words');
+  shuffled.forEach(function(w){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = w;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(w);
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = w;
+      chip.onclick = function(){
+        chip.remove();
+        var i = buildSel.indexOf(w);
+        if(i > -1) buildSel.splice(i,1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.join(' ');
+  var target = buildPhrases[buildIdx].words.join(' ');
+  var fb = document.getElementById('bw-fb');
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «'+target+'»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+
+renderBuild();
+
+// ===== УПР 3: СОПОСТАВЛЕНИЕ =====
+var matchPairs = [
+  {id:1, es:'¡Pise el embrague!', ru:'Нажмите сцепление!'},
+  {id:2, es:'¡Gire a la derecha!', ru:'Поверните направо!'},
+  {id:3, es:'¡Frene suavemente!', ru:'Тормозите плавно!'},
+  {id:4, es:'¡Mire el retrovisor!', ru:'Посмотрите в зеркало!'},
+  {id:5, es:'¡Cambie a segunda!', ru:'Переключитесь на вторую!'},
+  {id:6, es:'¡Suelte el embrague!', ru:'Отпустите сцепление!'}
+];
+
+function renderMatch(){
+  var el = document.getElementById('match-exercise');
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="match-left"></div><div class="match-col" id="match-right"></div></div>';
+  var left = document.getElementById('match-left');
+  var right = document.getElementById('match-right');
+  var rightShuffled = matchPairs.slice().sort(function(){ return Math.random()-0.5; });
+  var selL = null, selR = null;
+  matchPairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+renderMatch();
+
+// ===== АУДИРОВАНИЕ-КВИЗ =====
+var listenQ=[
+  {q:'1. Как зовут инструктора?',o:['Carlos','Pablo','Javier'],c:0},
+  {q:'2. Что ученик делает первым?',o:['Пристегивается и регулирует зеркала','Включает двигатель','Заводит машину'],c:0},
+  {q:'3. Что случилось, когда ученик начал движение?',o:['Машина заглохла (se ha calado)','Машина поехала быстро','Загорелась лампа'],c:0},
+  {q:'4. Что говорит инструктор, когда ученик ошибается?',o:['No pasa nada (Ничего страшного)','¡Muy mal! (Очень плохо)','Adiós (До свидания)'],c:0},
+  {q:'5. Какую фразу использует ученик, чтобы попросить повторить?',o:['¿Puede repetir, por favor?','No entiendo nada','Hable más rápido'],c:0}
+];
+
+function renderListening(){
+  var el = document.getElementById('listening-quiz');
+  el.innerHTML = '';
+  listenQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+'</h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="lf-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('lf-'+qi);
+      if(oi === listenQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[listenQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+listenQ[qi].o[listenQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderListening();
+
+// ===== КОНСТРУКТОР ДИАЛОГА =====
+function buildDialog(){
+  var inst = document.getElementById('b-inst').value;
+  var mood = document.getElementById('b-mood').value;
+  var cmd1 = document.getElementById('b-cmd1').value;
+  var maneuver = document.getElementById('b-maneuver').value;
+  var problem = document.getElementById('b-problem').value;
+
+  var dialog =
+    '<span class="role inst">Инструктор:</span> Buenos días. Soy '+inst+', su instructor. ¿Listo?\n\n'+
+    '<span class="role you">Вы:</span> Buenos días, '+inst+'. Sí, pero estoy '+mood+'.\n\n'+
+    '<span class="role inst">Инструктор:</span> Tranquilo. Primero, '+cmd1+'.\n\n'+
+    '<span class="role you">Вы:</span> ¿Así está bien?\n\n'+
+    '<span class="role inst">Инструктор:</span> Perfecto. Ahora, pise el embrague y ponga primera marcha.\n\n'+
+    '<span class="role you">Вы:</span> Vale. ¿Y ahora?\n\n'+
+    '<span class="role inst">Инструктор:</span> Suelte el embrague despacio y pise el acelerador suavemente.\n\n'+
+    '<span class="role you">Вы:</span> ¡Ah! '+problem+'.\n\n'+
+    '<span class="role inst">Инструктор:</span> No pasa nada. Otra vez. Pise el embrague, ponga primera...\n\n'+
+    '<span class="role you">Вы:</span> Vale, ya vamos.\n\n'+
+    '<span class="role inst">Инструктор:</span> Muy bien. Ahora mire el retrovisor y '+maneuver+'.\n\n'+
+    '<span class="role you">Вы:</span> ¿Puede repetir, por favor?\n\n'+
+    '<span class="role inst">Инструктор:</span> Mire el retrovisor. '+maneuver.charAt(0).toUpperCase()+maneuver.slice(1)+'.\n\n'+
+    '<span class="role you">Вы:</span> Vale, gracias.';
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML = '<div class="dialog-result">'+dialog+'</div>'+
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">'+
+    '<button class="btn btn-secondary" onclick="speak(\''+dialog.replace(/<[^>]+>/g,' ').replace(/\n/g,' ').replace(/'/g,"\\'")+'\')">🔊 Прослушать диалог</button>'+
+    '</div>';
+  result.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ===== SUNCARD =====
+function saveSuncard(){
+  var cmd1 = document.getElementById('s-cmd1').value || 'Gire a la derecha';
+  var p1 = document.getElementById('s-p1').value || 'el volante';
+  alert('🃏 Suncard заполнен!\n\nСохраните скриншот Suncard, распечатайте и прикрепите к солнцезащитному козырьку машины автошколы.\n\nПример: '+cmd1+' → '+p1);
+}
+
+function speakSuncard(){
+  var cmds = ['s-cmd1','s-cmd2','s-cmd3','s-cmd4','s-cmd5'];
+  var parts = ['s-p1','s-p2','s-p3','s-p4','s-p5'];
+  var text = 'Mi Suncard. ';
+  cmds.forEach(function(id,i){
+    var cmd = document.getElementById(id).value || '...';
+    var part = document.getElementById(parts[i]).value || '...';
+    text += 'Comando '+(i+1)+': '+cmd+'. Parte '+(i+1)+': '+part+'. ';
+  });
+  text += 'Frase de rescate: Perdone, ¿puede repetir más despacio?';
+  speak(text);
+}
+
+// ===== СВЕТОФОР =====
+var TL = [
+  'Называть 10 деталей салона (volante, freno, embrague...)',
+  'Понимать команды инструктора (pise, gire, frene, mire...)',
+  'Сам использовать императив usted',
+  'Сообщить о проблеме (se ha calado, no arranca)',
+  'Вежливо переспросить (¿Puede repetir?)',
+  'Понять диалог первого урока на слух'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t,rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+t+'</td>'+
+      '<td><button class="tl-cell green" data-row="'+rowIdx+'" data-color="1">🟢</button></td>'+
+      '<td><button class="tl-cell yellow" data-row="'+rowIdx+'" data-color="2">🟡</button></td>'+
+      '<td><button class="tl-cell red" data-row="'+rowIdx+'" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== ТРЕНАЖЁР =====
+var TRAIN_CARDS = [].concat(VOCAB.controls, VOCAB.mirrors, VOCAB.exterior, VOCAB.verbs, VOCAB.problems);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode,btn){
+  trainMode = mode;
+  document.querySelectorAll('#train-section .tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+    var updateCard = function(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML = '<div class="vocab-inner">'+
+        '<div class="vocab-front">'+
+          '<div class="es" style="font-size:1.2rem">'+c.es+'</div>'+
+          '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+c.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+          '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>'+
+        '</div>'+
+        '<div class="vocab-back">'+
+          '<div class="ex" style="font-size:1.1rem">'+c.ru+'</div>'+
+        '</div>'+
+        '</div>';
+      card.classList.remove('flipped');
+      var counter = document.getElementById('trainer-counter');
+      if(counter) counter.textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    };
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML = '<button class="btn btn-ghost" id="train-prev">← Назад</button>'+
+      '<span id="trainer-counter" style="font-weight:700">1 / '+TRAIN_CARDS.length+'</span>'+
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+    updateCard();
+  }
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderTrainMatch(c);
+  }
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainMatch(container){
+  var pairs = [
+    {id:1, es:'el volante', ru:'руль'},
+    {id:2, es:'el freno', ru:'тормоз'},
+    {id:3, es:'el embrague', ru:'сцепление'},
+    {id:4, es:'el retrovisor', ru:'зеркало'},
+    {id:5, es:'el acelerador', ru:'педаль газа'},
+    {id:6, es:'la palanca', ru:'рычаг'}
+  ];
+  container.innerHTML = '<div class="match-container"><div class="match-col" id="tm-left"></div><div class="match-col" id="tm-right"></div></div>';
+  var left = document.getElementById('tm-left');
+  var right = document.getElementById('tm-right');
+  var rightSh = pairs.slice().sort(function(){ return Math.random()-0.5; });
+  var selL = null, selR = null;
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+  rightSh.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Pise el embrague', hint:'Нажмите сцепление'},
+    {target:'Gire a la derecha', hint:'Поверните направо'},
+    {target:'Mire el retrovisor', hint:'Посмотрите в зеркало'},
+    {target:'Frene suavemente', hint:'Тормозите плавно'}
+  ];
+  var idx = 0;
+  var sel = [];
+  function render(){
+    sel = [];
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var words = p.target.split(' ').sort(function(){ return Math.random()-0.5; });
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: '+p.hint;
+    container.appendChild(h);
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+    words.forEach(function(w){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = w;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(w);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = w;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(w);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+        };
+        document.getElementById('tb-line').appendChild(chip);
+      };
+      wC.appendChild(b);
+    });
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML = '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>'+
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+    document.getElementById('tb-check').onclick = function(){
+      var got = sel.join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else {
+        fb.innerHTML = '<span>❌</span><span>Правильно: «'+p.target+'»</span>';
+        fb.className = 'build-feedback bad';
+      }
+    };
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+  render();
+}
+
+renderTrain();
+</script>
+
+<div id="toast" role="status"></div>
+
+<!-- Скрипт-стек (обязательно перед </body>) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+</body>
+</html>
