@@ -1077,14 +1077,17 @@ var repQ=[
   {q:'¿Qué significa «me puede mandar el certificado»?',o:['Можете прислать мне справку','Можете прислать Вам справку','Я пришлю Вам справку'],c:0}
 ];
 
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
 function renderRepetition(){
   var el = document.getElementById('repetition-quiz');
   el.innerHTML = '';
   repQ.forEach(function(item,qi){
     var d = document.createElement('div');
     d.className = 'quiz-q';
-    d.innerHTML = '<h4>'+item.q+'</h4><div class="quiz-opts">'+item.o.map(function(o,oi){
-      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    var order = shuffle(item.o.map(function(_,oi){ return oi; }));
+    d.innerHTML = '<h4>'+item.q+'</h4><div class="quiz-opts">'+order.map(function(oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+item.o[oi]+'</div>';
     }).join('')+'</div><div class="quiz-feedback" id="rrf-'+qi+'"></div>';
     el.appendChild(d);
   });
@@ -1100,7 +1103,7 @@ function renderRepetition(){
         fb.style.color = 'var(--ok)';
       } else {
         b.classList.add('wrong');
-        sibs[repQ[qi].c].classList.add('correct');
+        Array.prototype.slice.call(sibs).find(function(s){ return +s.dataset.o === repQ[qi].c; }).classList.add('correct');
         fb.textContent = '❌ Правильно: '+repQ[qi].o[repQ[qi].c];
         fb.style.color = 'var(--bad)';
       }
