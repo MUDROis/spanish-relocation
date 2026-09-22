@@ -153,24 +153,6 @@
   .dialog-result .role{font-weight:800;color:var(--p1);display:block;margin-top:6px}
   .dialog-result .role.you{color:var(--p4)}
 
-  /* Семейный паспорт */
-  .passport{background:linear-gradient(135deg,#2C5E8A,var(--p4));color:#fff;border-radius:18px;padding:24px;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(44,94,138,.4)}
-  .passport::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:rgba(255,255,255,.1);border-radius:50%}
-  .passport .hdr{text-align:center;border-bottom:2px solid rgba(255,255,255,.3);padding-bottom:12px;margin-bottom:14px;position:relative}
-  .passport .hdr h3{font-size:1.4rem;letter-spacing:2px}
-  .passport .hdr .sub{font-size:.8rem;opacity:.85;letter-spacing:1px}
-  .passport .field-row{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
-  .passport .field{flex:1;min-width:120px}
-  .passport .field label{display:block;font-size:.7rem;opacity:.8;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
-  .passport .field input,.passport .field select{width:100%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:#fff;padding:8px 10px;border-radius:6px;font-family:inherit;font-size:.9rem}
-  .passport .field input::placeholder{color:rgba(255,255,255,.6)}
-  .passport .skills{background:rgba(255,255,255,.1);border-radius:10px;padding:12px;margin-top:14px;position:relative}
-  .passport .skills h4{font-size:.9rem;margin-bottom:8px;letter-spacing:.5px}
-  .passport .skill{display:flex;align-items:center;gap:8px;font-size:.85rem;margin-bottom:4px}
-  .passport .skill::before{content:'✓';background:#7A8B4C;color:#fff;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0}
-  .passport .signature{border-top:2px dashed rgba(255,255,255,.4);margin-top:16px;padding-top:12px;display:flex;justify-content:space-between;font-size:.85rem;position:relative}
-  .passport .stamp{position:absolute;top:40%;right:10%;font-size:4rem;opacity:.15;transform:rotate(-15deg)}
-
   /* Домашка */
   .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
   .hw-item h4{color:var(--p1);margin-bottom:4px}
@@ -184,6 +166,13 @@
   .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
   .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
   .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  /* Таблица повторения недель 1–5 */
+  .rep-table{width:100%;border-collapse:collapse;font-size:.92rem}
+  .rep-table th,.rep-table td{padding:9px 12px;border-bottom:1px solid #eee;text-align:left;vertical-align:middle}
+  .rep-table th{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.4px}
+  .rep-table .week{font-weight:800;color:var(--p3);white-space:nowrap}
+  .rep-table .formula b{color:var(--p4)}
 
   /* Quizlet */
   .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
@@ -298,7 +287,7 @@
       </div>
     </div>
 
-    <div class="sit-question" data-correct="2">
+    <div class="sit-question" data-correct="0">
       <div class="q-text"><span class="q-num">2</span>Чиновник говорит: «Vuelva en 10 días a recoger el certificado». Что это значит?</div>
       <div class="q-opts">
         <div class="q-opt" data-o="0">Приходите через 10 дней забрать справку.</div>
@@ -383,7 +372,7 @@
 
   <div class="card">
     <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь конструкцию</h4>
-    <p class="hint">Выберите правильную конструкцию: <b>tengo que / hay que / quisiera / ¿podría...?</b></p>
+    <p class="hint">Выберите правильную конструкцию: <b>tengo que / hay que / quisiera / voy a / ¿podría...?</b></p>
     <div id="fill-exercise"></div>
     <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
     <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
@@ -409,7 +398,7 @@
   <div class="card">
     <p class="hint">Прослушайте реальный диалог регистрации. Сначала без текста, затем откройте транскрипт. Ответьте на вопросы!</p>
 
-    <button class="btn btn-secondary" onclick="speak('Buenos días. Ventanilla número 3. Buenos días. Quisiera empadronarme. Muy bien. ¿Tiene cita previa? Sí, tengo cita a las diez. Perfecto. ¿Me puede dar su pasaporte y el contrato de alquiler? Aquí tiene. ¿Necesita algo más? Sí, rellene la hoja padronal, por favor. Aquí tiene su NIE y el empadronamiento. ¿Dónde tengo que firmar? Aquí, al final. Muy bien. ¿Cuándo puedo recoger el certificado? En 10 días. ¿Me puede enviar el certificado por email? Sí, por supuesto. ¿Cuál es su email? ivanov@email.com. Perfecto. Aquí tiene su resguardo. Recoja el certificado el día 25. Muchas gracias. Hasta luego. De nada. Hasta luego.')" style="margin-bottom:14px">🔊 Прослушать весь диалог</button>
+    <button class="btn btn-secondary" onclick="speak('Buenos días. Ventanilla número 3. Buenos días. Quisiera empadronarme. Muy bien. ¿Tiene cita previa? Sí, tengo cita a las once. Perfecto. ¿Cuál es su dirección? Calle del Sol, veintidós, segundo A. Muy bien. ¿Me puede dar su pasaporte y el contrato de alquiler? Aquí tiene. Perfecto. Rellene la hoja padronal, por favor. ¿Dónde tengo que firmar? Aquí, al final. Muy bien. ¿Cuándo puedo recoger el certificado? En 10 días. ¿Me puede enviar el certificado por email? Sí, por supuesto. ¿Cuál es su email? petrov@email.com. Perfecto. Aquí tiene su resguardo. Podrá recoger el certificado en 10 días, el martes. Muchas gracias. Hasta luego. De nada. Hasta luego.')" style="margin-bottom:14px">🔊 Прослушать весь диалог</button>
 
     <div class="dialog-box" onclick="this.classList.toggle('open')" style="cursor:pointer">
       <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
@@ -417,22 +406,24 @@
         <span class="who op">Чиновник:</span> Buenos días. Ventanilla número 3.<br>
         <span class="who you">Вы:</span> Buenos días. Quisiera empadronarme.<br>
         <span class="who op">Чиновник:</span> Muy bien. ¿Tiene cita previa?<br>
-        <span class="who you">Вы:</span> Sí, tengo cita a las diez.<br>
-        <span class="who op">Чиновник:</span> Perfecto. ¿Me puede dar su pasaporte y el contrato de alquiler?<br>
-        <span class="who you">Вы:</span> Aquí tiene. ¿Necesita algo más?<br>
-        <span class="who op">Чиновник:</span> Sí, rellene la hoja padronal, por favor. Aquí tiene su NIE.<br>
+        <span class="who you">Вы:</span> Sí, tengo cita a las once.<br>
+        <span class="who op">Чиновник:</span> Perfecto. ¿Cuál es su dirección?<br>
+        <span class="who you">Вы:</span> Calle del Sol, 22, segundo A.<br>
+        <span class="who op">Чиновник:</span> Muy bien. ¿Me puede dar su pasaporte y el contrato de alquiler?<br>
+        <span class="who you">Вы:</span> Aquí tiene.<br>
+        <span class="who op">Чиновник:</span> Perfecto. Rellene la hoja padronal, por favor.<br>
         <span class="who you">Вы:</span> ¿Dónde tengo que firmar?<br>
         <span class="who op">Чиновник:</span> Aquí, al final. Muy bien. ¿Cuándo puedo recoger el certificado?<br>
         <span class="who you">Вы:</span> ¿Me puede enviar el certificado por email?<br>
         <span class="who op">Чиновник:</span> Sí, por supuesto. ¿Cuál es su email?<br>
-        <span class="who you">Вы:</span> ivanov@email.com.<br>
-        <span class="who op">Чиновник:</span> Perfecto. Aquí tiene su resguardo. Recoja el certificado el día 25.<br>
+        <span class="who you">Вы:</span> petrov@email.com.<br>
+        <span class="who op">Чиновник:</span> Perfecto. Aquí tiene su resguardo. Podrá recoger el certificado en 10 días, el martes.<br>
         <span class="who you">Вы:</span> Muchas gracias. Hasta luego.<br>
         <span class="who op">Чиновник:</span> De nada. Hasta luego.
       </div>
     </div>
 
-    <style>.dialog-box.open .dialog-text{display:block;margin-top:10px}</style>
+    <style>.dialog-box.open .dialog-text{display:block !important;margin-top:10px}</style>
 
     <h4 style="margin-top:16px;margin-bottom:10px">🎧 Проверьте понимание</h4>
     <div id="listening-quiz"></div>
@@ -456,17 +447,17 @@
       </div>
       <div class="field">
         <label>🪪 Ваш NIE:</label>
-        <input type="text" id="b-nie" placeholder="X-12345678-A">
+        <input type="text" id="b-nie" placeholder="Y-24680135-B">
       </div>
       <div class="field">
         <label>🏠 Адрес квартиры:</label>
-        <input type="text" id="b-address" placeholder="Calle Mayor, 15, tercero B">
+        <input type="text" id="b-address" placeholder="Calle del Sol, 22, segundo A">
       </div>
       <div class="field">
         <label>⏰ Время записи:</label>
         <select id="b-time">
-          <option>a las diez (в 10:00)</option>
           <option>a las once (в 11:00)</option>
+          <option>a las diez (в 10:00)</option>
           <option>a las doce (в 12:00)</option>
           <option>a la una (в 13:00)</option>
         </select>
@@ -474,15 +465,15 @@
       <div class="field">
         <label>📅 День получения сертификата:</label>
         <select id="b-day">
-          <option>el día 25 (25-го числа)</option>
-          <option>el lunes (в понедельник)</option>
           <option>el martes (во вторник)</option>
+          <option>el lunes (в понедельник)</option>
+          <option>el día 25 (25-го числа)</option>
           <option>en 10 días (через 10 дней)</option>
         </select>
       </div>
       <div class="field">
         <label>📧 Email для сертификата:</label>
-        <input type="text" id="b-email" placeholder="ivanov@email.com">
+        <input type="text" id="b-email" placeholder="petrov@email.com">
       </div>
 
       <button class="btn btn-primary" onclick="buildDialog()" style="margin-top:12px">🔧 Собрать диалог</button>
@@ -495,63 +486,34 @@
   </div>
 </section>
 
-<!-- ШАГ 6: СЕМЕЙНЫЙ ПАСПОРТ -->
+<!-- ШАГ 6: ПОВТОРЕНИЕ НЕДЕЛЬ 1–5 -->
 <section class="section">
-  <div class="step-head"><span class="step-num">🏆</span><div><span class="step-time">42:00 – 47:00 · Главный продукт Блока 1</span><h2>Семейный паспорт — ваш пропуск в Блок 2</h2></div></div>
+  <div class="step-head"><span class="step-num">🔁</span><div><span class="step-time">42:00 – 47:00 · Весь арсенал Блока 1 в одной таблице</span><h2>Повторение недель 1–5: конструкции и перевод</h2></div></div>
   <div class="card">
-    <p class="hint">Вы прошли весь Блок 1! Заполните семейный паспорт данными семьи. Это ваш документ, который «пропускает» вас в Блок 2 (школа и здоровье). Сохраните как реликвию!</p>
+    <p class="hint">Все ключевые конструкции Блока 1 в одном месте: формула + пример + 🔊. Затем проверьте себя мини-дриллом — это ваш «арсенал» перед Блоком 2.</p>
 
-    <div class="passport">
-      <div class="hdr">
-        <div class="sub">ESCUELA INTERACTIVA MUDRO · 2026</div>
-        <h3>📘 PASAPORTE FAMILIAR</h3>
-        <div class="sub">БЛОК 1 · MISIÓN RESIDENCIA · ¡COMPLETADO!</div>
-      </div>
-
-      <div class="field-row">
-        <div class="field"><label>Фамилия семьи</label><input type="text" id="p-family" placeholder="Ivanov"></div>
-        <div class="field"><label>Количество человек</label><input type="text" id="p-count" placeholder="4"></div>
-      </div>
-
-      <div class="field-row">
-        <div class="field"><label>Город в Испании</label><input type="text" id="p-city" placeholder="Valencia"></div>
-        <div class="field"><label>Дата регистрации</label><input type="text" id="p-date" placeholder="25/09/2026"></div>
-      </div>
-
-      <div class="field-row">
-        <div class="field">
-          <label>Адрес</label>
-          <input type="text" id="p-address" placeholder="Calle Mayor, 15, 3ºB">
-        </div>
-      </div>
-
-      <div class="skills">
-        <h4>🎯 НАВЫКИ БЛОКА 1:</h4>
-        <div class="skill">Записаться на приём (cita previa)</div>
-        <div class="skill">Заполнить EX-15 и Modelo 790</div>
-        <div class="skill">Пройти приём в Oficina de Extranjería</div>
-        <div class="skill">Найти жильё на Idealista</div>
-        <div class="skill">Осмотреть квартиру и торговаться</div>
-        <div class="skill">Прочитать контракт и найти подводные камни</div>
-        <div class="skill">Открыть банковский счёт и настроить Bizum</div>
-        <div class="skill">Подключить свет, воду и газ</div>
-        <div class="skill">Подключить интернет и мобильную связь</div>
-        <div class="skill">Зарегистрироваться в мэрии (empadronamiento)</div>
-      </div>
-
-      <div class="signature">
-        <span>📍 <b id="p-city-sig">Valencia</b>, <span id="p-date-sig">25/09/2026</span></span>
-        <span>✅ MISIÓN CUMPLIDA</span>
-      </div>
-      <div class="stamp">🏆</div>
+    <div style="overflow-x:auto">
+    <table class="rep-table">
+      <thead><tr><th>Неделя</th><th>Конструкция</th><th>Пример</th><th>🔊</th></tr></thead>
+      <tbody>
+        <tr><td class="week">1–2</td><td class="formula"><b>ser</b> — быть (суть)</td><td>Soy ruso.</td><td><button class="speak-btn speak" data-text="Soy ruso.">🔊</button></td></tr>
+        <tr><td class="week">1–2</td><td class="formula"><b>tener</b> — иметь</td><td>Tengo un NIE.</td><td><button class="speak-btn speak" data-text="Tengo un NIE.">🔊</button></td></tr>
+        <tr><td class="week">1–2</td><td class="formula"><b>estar</b> — находиться</td><td>El ayuntamiento está en el centro.</td><td><button class="speak-btn speak" data-text="El ayuntamiento está en el centro.">🔊</button></td></tr>
+        <tr><td class="week">1–2</td><td class="formula"><b>hay</b> — есть</td><td>Hay una ventanilla.</td><td><button class="speak-btn speak" data-text="Hay una ventanilla.">🔊</button></td></tr>
+        <tr><td class="week">3–4</td><td class="formula"><b>tengo que</b> + инфинитив — я должен</td><td>Tengo que rellenar la hoja.</td><td><button class="speak-btn speak" data-text="Tengo que rellenar la hoja.">🔊</button></td></tr>
+        <tr><td class="week">3–4</td><td class="formula"><b>hay que</b> + инфинитив — нужно</td><td>Hay que adjuntar el pasaporte.</td><td><button class="speak-btn speak" data-text="Hay que adjuntar el pasaporte.">🔊</button></td></tr>
+        <tr><td class="week">3–4</td><td class="formula"><b>voy a</b> + инфинитив — я собираюсь</td><td>Voy a recoger el certificado.</td><td><button class="speak-btn speak" data-text="Voy a recoger el certificado.">🔊</button></td></tr>
+        <tr><td class="week">5</td><td class="formula"><b>quisiera</b> — я хотел бы</td><td>Quisiera empadronarme.</td><td><button class="speak-btn speak" data-text="Quisiera empadronarme.">🔊</button></td></tr>
+        <tr><td class="week">5</td><td class="formula"><b>¿podría...?</b> — не могли бы вы?</td><td>¿Podría darme una cita?</td><td><button class="speak-btn speak" data-text="¿Podría darme una cita?">🔊</button></td></tr>
+        <tr><td class="week">5</td><td class="formula"><b>me / le</b> — мне / Вам</td><td>¿Me puede mandar el certificado?</td><td><button class="speak-btn speak" data-text="¿Me puede mandar el certificado?">🔊</button></td></tr>
+      </tbody>
+    </table>
     </div>
 
-    <button class="btn btn-primary" onclick="savePassport()" style="margin-top:16px">💾 Сохранить паспорт</button>
-    <button class="btn btn-ghost" onclick="speakPassport()" style="margin-top:16px">🔊 Прослушать паспорт</button>
-
-    <div class="note green" style="margin-top:16px">
-      🎉 <b>Сохраните как картинку!</b> Это ваша семейная реликвия — доказательство, что вы прошли весь путь: от NIE до мэрии. Покажите паспорт детям и скажите: <i>«¡Somos una familia residente en España!»</i>
-    </div>
+    <h4 style="margin:18px 0 10px">🎯 Мини-дрилл: выберите правильный перевод</h4>
+    <p class="hint">Конструкции со всех недель Блока 1. Нажмите на вариант — увидите, правильно ли.</p>
+    <div id="repetition-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderRepetition()" style="margin-top:10px">↺ Пройти ещё раз</button>
   </div>
 </section>
 
@@ -611,30 +573,24 @@
     3) Звонок в энергокомпанию: <i>«Quisiera dar de alta la luz…»</i><br>
     4) Звонок в интернет-компанию: <i>«Quisiera contratar la fibra óptica…»</i><br>
     5) Визит в мэрию: <i>«Quisiera empadronarme…»</i></p>
-    <button class="btn btn-ghost" onclick="speak('Buenos días. Quisiera pedir una cita previa. Llamo por el anuncio de Idealista. ¿Está disponible el piso? Quisiera dar de alta la luz. Mi NIE es X-12345678-A. Quisiera contratar la fibra óptica. ¿Hay permanencia? Quisiera empadronarme. Aquí tiene mi pasaporte. Muchas gracias. Hasta luego.')" style="margin-top:8px">🔊 Прослушать образец всей цепочки</button>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Quisiera pedir una cita previa. Llamo por el anuncio de Idealista. ¿Está disponible el piso? Quisiera dar de alta la luz. Mi NIE es Y-24680135-B. Quisiera contratar la fibra óptica. ¿Hay permanencia? Quisiera empadronarme. Aquí tiene mi pasaporte. Muchas gracias. Hasta luego.')" style="margin-top:8px">🔊 Прослушать образец всей цепочки</button>
   </div>
 
   <div class="hw-item">
-    <h4>🏆 Задание 3. Семейный паспорт · 5 мин</h4>
-    <div class="hw-meta">Цель: сохранить артефакт Блока 1.</div>
-    <p>Заполните семейный паспорт из шага 6, сохраните как картинку и пришлите преподавателю. Покажите детям — это ваша общая победа!</p>
+    <h4>🎮 Задание 3. Тренажёр + повторение недель 1–5 · 10 мин</h4>
+    <div class="hw-meta">Цель: освежить весь словарь и конструкции Блока 1.</div>
+    <p>Пройдите тренажёр урока (карточки + сопоставление + собери фразу) и блок «Повторение недель 1–5» в шаге 6. Особое внимание словам и конструкциям с 🔴 в светофоре.</p>
   </div>
 
   <div class="hw-item">
-    <h4>🎮 Задание 4. Тренажёр недель 1–5 · 10 мин</h4>
-    <div class="hw-meta">Цель: освежить весь словарь Блока 1.</div>
-    <p>Пройдите тренажёр урока: карточки + сопоставление + собери фразу. Особое внимание словам с 🔴 в светофоре.</p>
-  </div>
-
-  <div class="hw-item">
-    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 5 мин</h4>
+    <h4>👨‍👩‍👧 Задание 4. Семейная миссия · 5 мин</h4>
     <div class="hw-meta">Цель: связать финал Блока 1 с детьми.</div>
-    <p>Покажите детям семейный паспорт и скажите: <i>«¡Somos residentes en España!»</i>. Спросите: <i>«¿Estás contento de vivir en España?»</i> Пусть они ответят за всю семью формой «мы»: <i>«¡Sí, estamos muy contentos!»</i></p>
+    <p>Покажите детям готовый диалог регистрации из шага 5 и скажите: <i>«¡Somos residentes en España!»</i>. Спросите: <i>«¿Estás contento de vivir en España?»</i> Пусть они ответят за всю семью формой «мы»: <i>«¡Sí, estamos muy contentos!»</i></p>
     <button class="btn btn-ghost" onclick="speak('¿Estás contento de vivir en España? ¡Sí, estamos muy contentos!')" style="margin-top:8px">🔊 Прослушать образец</button>
   </div>
 
   <div class="hw-item">
-    <h4>📄 Задание 6. Рабочий лист · 20–25 мин</h4>
+    <h4>📄 Задание 5. Рабочий лист · 20–25 мин</h4>
     <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
     <p>Распечатайте или заполните с экрана: лексика мэрии, конструкция для повторения недель 1–5, чтение диалога, аудирование, CHECKPOINT 1. Пришлите фото заполненного листа.</p>
     <a href="../../worksheets/w05-l3-parents.html" class="btn btn-secondary" style="margin-top:10px">📄 Открыть рабочий лист (A4, печать)</a>
@@ -644,8 +600,7 @@
     📤 <b>Формат сдачи домашки за всю НЕДЕЛЮ 5:</b><br>
     • 🎤 Голосовое «Визит в мэрию» (задание 1)<br>
     • 🎤 Итоговое голосовое «Один день в Испании» (задание 2)<br>
-    • 🏆 Семейный паспорт — картинкой (задание 3)<br>
-    • 📄 Фото рабочего листа (задание 6)<br>
+    • 📄 Фото рабочего листа (задание 5)<br>
     • ✅ «Светофор» самопроверки<br><br>
     <b>После сдачи домашки преподаватель откроет вам доступ к Блоку 2: Школа и здоровье!</b>
   </div>
@@ -722,7 +677,7 @@
 <div class="lesson-nav">
   <a href="w05-l2.html">← Предыдущий<br><small>Урок 5.2 · Интернет и связь</small></a>
   <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
-  <a href="../kids/w05-l3.html">Следующий →<br><small>Урок 15 (дети) · EL sistema educativo 🏫</small></a>
+  <a href="w06-l1.html">Следующий →<br><small>Урок 6.1 · Público vs Concertado vs Privado</small></a>
 </div>
 
 <!-- Скрипт-стек lesson-gate -->
@@ -751,6 +706,14 @@ if('speechSynthesis' in window){
   speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
   speechSynthesis.getVoices();
 }
+document.addEventListener('click', function(e){
+  var s = e.target.closest('.speak');
+  if(s && s.dataset.text && !e.target.closest('.grammar-hint')){
+    e.stopPropagation();
+    speak(s.dataset.text);
+  }
+});
+function escAttr(t){ return String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
 // ===== Grammar hints =====
 document.addEventListener('click', function(e){
@@ -838,7 +801,7 @@ var VOCAB = {
     {es:'empadronarse', ru:'зарегистрироваться по месту жительства', ex:'Quiero empadronarme en Valencia.', exRu:'Я хочу зарегистрироваться в Валенсии.'},
     {es:'el padrón municipal', ru:'муниципальный реестр', ex:'Estoy en el padrón municipal.', exRu:'Я в муниципальном реестре.'},
     {es:'la hoja padronal', ru:'лист регистрации', ex:'Rellene la hoja padronal.', exRu:'Заполните лист регистрации.'},
-    {es:'el domicilio', ru:'адрес проживания', ex:'Mi domicilio es Calle Mayor, 15.', exRu:'Мой адрес — Калле Майор, 15.'},
+    {es:'el domicilio', ru:'адрес проживания', ex:'Mi domicilio es Calle del Sol, 22.', exRu:'Мой адрес — Калле дель Соль, 22.'},
     {es:'la residencia', ru:'проживание, вид на жительство', ex:'Tengo residencia en España.', exRu:'У меня вид на жительство в Испании.'}
   ],
   docs:[
@@ -862,13 +825,13 @@ function showVocab(key,btn){
       '<div class="vocab-front">'+
         '<div class="es">'+w.es+'</div>'+
         '<div class="ru">'+w.ru+'</div>'+
-        '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\''+w.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+        '<button class="speak-btn speak" style="margin-top:8px" data-text="'+escAttr(w.es)+'">🔊</button>'+
         '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>'+
       '</div>'+
       '<div class="vocab-back">'+
         '<div class="ex">«'+w.ex+'»</div>'+
         '<div class="ex-ru">'+w.exRu+'</div>'+
-        '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
+        '<button class="speak-btn speak" style="margin-top:10px" data-text="'+escAttr(w.ex)+'">🔊</button>'+
       '</div>'+
       '</div>';
     c.onclick = function(e){
@@ -886,14 +849,15 @@ var fillQ = [
   {text:'___ adjuntar el pasaporte.', ans:'hay que', hint:'(Нужно приложить паспорт)'},
   {text:'___ empadronarme en Valencia.', ans:'quisiera', hint:'(Я хотел бы зарегистрироваться в Валенсии)'},
   {text:'¿___ darme una cita?', ans:'podría', hint:'(Не могли бы вы записать меня?)'},
-  {text:'___ recoger el certificado el día 25.', ans:'voy a', hint:'(Я заберу справку 25-го числа)'},
+  {text:'___ recoger el certificado el martes.', ans:'voy a', hint:'(Я заберу справку во вторник)'},
   {text:'¿___ mandarme el certificado por email?', ans:'podría', hint:'(Не могли бы вы прислать мне справку?)'}
 ];
 
 function renderFill(){
   var el = document.getElementById('fill-exercise');
   el.innerHTML = '';
-  fillQ.forEach(function(item,i){
+  var shuffled = fillQ.slice().sort(function(){ return Math.random()-0.5; });
+  shuffled.forEach(function(item,i){
     var d = document.createElement('div');
     d.style.marginBottom = '10px';
     d.style.fontSize = '1.05rem';
@@ -1058,10 +1022,10 @@ renderMatch();
 
 // ===== АУДИРОВАНИЕ-КВИЗ =====
 var listenQ=[
-  {q:'1. Куда пришёл клиент?',o:['В мэрию (ayuntamiento)','В банк','В школу'],c:0},
-  {q:'2. Во сколько у него запись?',o:['В 10:00','В 11:00','В 12:00'],c:0},
+  {q:'1. Куда пришёл клиент?',o:['В мэрию','В банк','В школу'],c:0},
+  {q:'2. Во сколько у него запись?',o:['В 10:00','В 11:00','В 12:00'],c:1},
   {q:'3. Какие документы он принёс?',o:['Паспорт и договор аренды','Только паспорт','NIE и фото'],c:0},
-  {q:'4. Что он заполняет?',o:['Hoja padronal (лист регистрации)','Заявление на NIE','Договор аренды'],c:0},
+  {q:'4. Что он заполняет?',o:['Hoja padronal','Заявление на NIE','Договор аренды'],c:0},
   {q:'5. Когда можно забрать сертификат?',o:['Через 10 дней','Сразу','Через месяц'],c:0}
 ];
 
@@ -1098,14 +1062,59 @@ function renderListening(){
 }
 renderListening();
 
+// ===== ПОВТОРЕНИЕ НЕДЕЛЬ 1–5: МИНИ-ДРИЛЛ =====
+var repQ=[
+  {q:'¿Qué significa «tengo que recoger el certificado»?',o:['Я должен забрать справку','Я хотел бы забрать справку','Я собираюсь забрать справку'],c:0},
+  {q:'¿Qué significa «hay que adjuntar el pasaporte»?',o:['Нужно приложить паспорт','Я должен приложить паспорт','Можно приложить паспорт?'],c:0},
+  {q:'¿Qué significa «voy a pedir una cita»?',o:['Я собираюсь записаться на приём','Я записан на приём','Я хотел бы записаться'],c:0},
+  {q:'¿Qué significa «quisiera empadronarme»?',o:['Я хотел бы зарегистрироваться','Я должен зарегистрироваться','Я зарегистрирован'],c:0},
+  {q:'¿Qué significa «¿podría darme una cita?»?',o:['Не могли бы вы записать меня?','Я могу записаться?','Дайте мне запись'],c:0},
+  {q:'¿Qué significa «está en el centro»?',o:['Находится в центре','Есть в центре','Является центром'],c:0},
+  {q:'¿Qué significa «hay una ventanilla»?',o:['Есть окошко','Окошко находится здесь','Окошко здесь'],c:0},
+  {q:'¿Qué significa «me puede mandar el certificado»?',o:['Можете прислать мне справку','Можете прислать Вам справку','Я пришлю Вам справку'],c:0}
+];
+
+function renderRepetition(){
+  var el = document.getElementById('repetition-quiz');
+  el.innerHTML = '';
+  repQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+'</h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="rrf-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('rrf-'+qi);
+      if(oi === repQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[repQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+repQ[qi].o[repQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderRepetition();
+
 // ===== КОНСТРУКТОР ДИАЛОГА =====
 function buildDialog(){
   var city = document.getElementById('b-city').value;
-  var nie = document.getElementById('b-nie').value || 'X-12345678-A';
-  var address = document.getElementById('b-address').value || 'Calle Mayor, 15, tercero B';
+  var nie = document.getElementById('b-nie').value || 'Y-24680135-B';
+  var address = document.getElementById('b-address').value || 'Calle del Sol, 22, segundo A';
   var time = document.getElementById('b-time').value;
   var day = document.getElementById('b-day').value;
-  var email = document.getElementById('b-email').value || 'ivanov@email.com';
+  var email = document.getElementById('b-email').value || 'petrov@email.com';
 
   var dialog =
     '<span class="role op">Чиновник:</span> Buenos días. Ventanilla número 3. ¿En qué puedo ayudarle?\n\n'+
@@ -1130,34 +1139,6 @@ function buildDialog(){
     '</div>';
   result.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-
-// ===== СЕМЕЙНЫЙ ПАСПОРТ =====
-function savePassport(){
-  var family = document.getElementById('p-family').value || '___';
-  var count = document.getElementById('p-count').value || '___';
-  var city = document.getElementById('p-city').value || 'Valencia';
-  var date = document.getElementById('p-date').value || '___';
-  var address = document.getElementById('p-address').value || '___';
-  alert('🏆 Паспорт заполнен!\n\nСохраните скриншот паспорта и отправьте преподавателю.\n\nСемья: '+family+'\nГород: '+city+'\nАдрес: '+address+'\nДата: '+date);
-}
-
-function speakPassport(){
-  var family = document.getElementById('p-family').value || 'Ivanov';
-  var city = document.getElementById('p-city').value || 'Valencia';
-  var text = 'Somos la familia '+family+'. Somos residentes en '+city+'. Hemos completado el Bloque 1 de Misión Residencia. ¡Misión cumplida!';
-  speak(text);
-}
-
-// Обновление подписи паспорта при вводе
-['p-city','p-date'].forEach(function(id){
-  var el = document.getElementById(id);
-  if(el){
-    el.addEventListener('input', function(){
-      var sig = document.getElementById(id+'-sig');
-      if(sig) sig.textContent = el.value || '___';
-    });
-  }
-});
 
 // ===== СВЕТОФОР =====
 var TL = [
@@ -1226,7 +1207,7 @@ function renderTrain(){
       card.innerHTML = '<div class="vocab-inner">'+
         '<div class="vocab-front">'+
           '<div class="es" style="font-size:1.2rem">'+c.es+'</div>'+
-          '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+c.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+          '<button class="speak-btn speak" data-text="'+escAttr(c.es)+'">🔊</button>'+
           '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>'+
         '</div>'+
         '<div class="vocab-back">'+
