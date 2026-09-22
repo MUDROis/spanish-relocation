@@ -230,7 +230,7 @@
     <table class="gram-table">
       <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
       <tr onclick="speak('Tengo que estudiar.')"><td><b>TENGO QUE + инф.</b></td><td>Tengo que estudiar.</td><td>Я должен учиться</td><td>🔊</td></tr>
-      <tr onclick="speak('Tengo que hacer los deberes.')"><td><b>TENGO QUE + инф.</b></td><td>Tengo que hacer los deberes.</td><td>Я должен делать домашку</td><td>🔊</td></tr>
+      <tr onclick="speak('Tú tienes que hacer los deberes.')"><td><b>TIENES QUE + инф.</b></td><td>Tú tienes que hacer los deberes.</td><td>Ты должен делать домашку</td><td>🔊</td></tr>
       <tr onclick="speak('¿Qué tienes que hacer?')"><td><b>Вопрос</b></td><td>¿Qué tienes que hacer?</td><td>Что ты должен делать?</td><td>🔊</td></tr>
     </table>
     <div class="script">⚡ <strong>Секрет:</strong> после <em>tengo que</em> глагол ВСЕГДА в инфинитиве (как после <em>se puede</em> в уроке 19!).<br>🆚 <strong>Три модальности:</strong> <em>¿Puedo...?</em> (ур. 5, просьба) · <em>Se puede...</em> (ур. 19, разрешение всем) · <em>Tengo que...</em> (ур. 20, моя обязанность).</div>
@@ -258,11 +258,11 @@
   <!-- БЛОК 4: АУДИРОВАНИЕ -->
   <section class="block" style="--c:#3E7CB1">
     <div class="block-head">
-      <h2 class="block-title">🎧 Аудирование-корзины + Verdad o Falso</h2>
+      <h2 class="block-title">🎧 Аудирование + Verdad o Falso</h2>
       <span class="time-badge">⏱ 8 минут</span>
     </div>
     <div class="game-zone">
-      <p style="font-weight:800">🎧 Слушай фразу и кликай корзину: TENGO QUE / SE PUEDE / NO SE PUEDE! 10 раундов.</p>
+      <p style="font-weight:800">🎧 Слушай фразу и нажми: TENGO QUE / SE PUEDE / NO SE PUEDE! 10 раундов.</p>
       <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakListen()">🔊 Послушать</button>
       <div class="opts" style="margin-top:12px">
         <button class="opt" onclick="listenAns('tengoque')">🌟 TENGO QUE</button>
@@ -386,7 +386,8 @@
 var esVoice=null;
 function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
-function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;speechSynthesis.cancel();var parts=speakChunks(t);var i=0;function next(){if(i>=parts.length)return;var u=new SpeechSynthesisUtterance(parts[i++]);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;u.onend=next;speechSynthesis.speak(u);}next();}
+function speakChunks(t){if(t.length<=180)return[t];return t.split(/(?<=[.!?])\s+/).filter(function(s){return s;}).map(function(s){return s.trim();}).filter(function(s){return s;});}
 function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
 function joinEs(arr){if(arr.length===1)return arr[0];return arr.slice(0,-1).join(', ')+' y '+arr[arr.length-1];}
 
@@ -515,7 +516,7 @@ function renderSB(){
 function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
 renderSB();
 
-/* ===== БЛОК 4: АУДИРОВАНИЕ-КОРЗИНЫ ===== */
+/* ===== БЛОК 4: АУДИРОВАНИЕ ===== */
 var LIST=[
  {es:'Tengo que hacer los deberes.',ok:'tengoque'},
  {es:'Se puede beber agua.',ok:'sepuede'},
@@ -530,7 +531,7 @@ var LIST=[
 ];
 var lOrd=[],lI=0,lS=0,lLock=false;
 function listenStart(){lOrd=shuffle(LIST.slice());lI=0;lS=0;lLock=false;document.getElementById('listen-total').textContent=lOrd.length;document.getElementById('listen-stars').textContent='0';document.getElementById('listen-fb').textContent='Нажми «🔊 Послушать»!';}
-function speakListen(){if(lI<lOrd.length)speak(lOrd[lI].es);}
+function speakListen(){if(!lOrd.length||lI>=lOrd.length)listenStart();if(lI<lOrd.length)speak(lOrd[lI].es);}
 function listenAns(v){
   if(lLock||lI>=lOrd.length)return;
   lLock=true;
@@ -553,7 +554,7 @@ var VF=[
   var box=document.getElementById('vf-box');
   VF.forEach(function(r,i){
     var d=document.createElement('div');d.className='warm-item';
-    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+r.s+'</div>'+
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+r.s+' <button class="speak-btn" onclick="speak(\''+r.s.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
       '<div style="margin-top:6px"><button class="opt" onclick="vfAns(this,'+i+',\'v\')">✅ Verdad</button> <button class="opt" onclick="vfAns(this,'+i+',\'f\')">❌ Falso</button></div>';
     box.appendChild(d);
   });
@@ -591,18 +592,18 @@ var READQ=[
   });
 })();
 var PRES=[
- {q:'Учитель спрашивает, что ты должен делать до урока.',model:'Tengo que llegar a tiempo.'},
- {q:'Мама спрашивает про домашку.',model:'Tengo que hacer los deberes.'},
- {q:'Друг зовёт играть во время урока. Скажи, что должен.',model:'Tengo que escuchar al profe.'},
- {q:'Что ты должен принести в класс?',model:'Tengo que traer el material.'},
- {q:'Новенький спрашивает, что можно на перемене.',model:'Se puede jugar con los compañeros.'}
+ {q:'Учитель спрашивает, что ты должен делать до урока.',model:'Tengo que llegar a tiempo.',ru:'Я должен приходить вовремя.'},
+ {q:'Мама спрашивает про домашку.',model:'Tengo que hacer los deberes.',ru:'Я должен делать домашку.'},
+ {q:'Друг зовёт играть во время урока. Скажи, что должен.',model:'Tengo que escuchar al profe.',ru:'Я должен слушать учителя.'},
+ {q:'Что ты должен принести в класс?',model:'Tengo que traer el material.',ru:'Я должен приносить материалы.'},
+ {q:'Новенький спрашивает, что можно на перемене.',model:'Se puede jugar con los compañeros.',ru:'Можно играть с одноклассниками.'}
 ];
 (function(){
   var box=document.getElementById('pres-box');
   PRES.forEach(function(p,i){
     var d=document.createElement('div');d.className='warm-item';
     d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
-      '<div class="warm-ru">Ответь ВСЛУХ полным предложением!</div>'+
+      '<div class="warm-ru">Скажи ВСЛУХ по-испански: «'+p.ru+'»</div>'+
       '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я сказал вслух</button>'+
       '<div class="warm-model">💬 '+p.model+'</div>';
     box.appendChild(d);
