@@ -262,7 +262,8 @@ git commit -m "w07-l3: тренажёр супер-сопоставление (3
 // ---- super constructor ----
 check('SUPERC: 10 phrases', typeof SUPERC === 'object' && SUPERC.length === 10,
   SUPERC ? String(SUPERC.length) : 'undefined');
-check('constructor boot shows 10 chips', registry['sc-pool'] && registry['sc-pool'].children.length === 10,
+check('constructor boot renders chip pool (phrase words count)', registry['sc-pool'] && typeof SUPERC !== 'undefined' &&
+  registry['sc-pool'].children.length === SUPERC[0].w.length,
   registry['sc-pool'] ? String(registry['sc-pool'].children.length) : '-');
 (function () {
   const pool = registry['sc-pool'];

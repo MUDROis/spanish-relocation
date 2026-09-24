@@ -441,6 +441,51 @@ $('sm-next').onclick=smNext;
 $('sm-reset').onclick=function(){SM.s=0;SM.stars=0;$('sm-stars').textContent='0';renderSM();};
 renderSM();
 
+/* ===== ТРЕНАЖЁР 2: СУПЕР-КОНСТРУКТОР (10 фраз) ===== */
+var SUPERC=[
+ {w:['El','lunes','tengo','Mates','a','las','nueve.'],t:'У меня математика в понедельник в девять'},
+ {w:['Son','las','dos','y','media.'],t:'Сейчас половина третьего'},
+ {w:['La','pizarra','está','delante','de','la','mesa.'],t:'Доска перед партой'},
+ {w:['Los','libros','están','en','la','estantería.'],t:'Книги на полке'},
+ {w:['En','mi','mochila','hay','un','lápiz','y','un','cuaderno.'],t:'В рюкзаке карандаш и тетрадь'},
+ {w:['Yo','estoy','en','Primaria','y','tengo','ocho','años.'],t:'Я в начальной школе, мне восемь лет'},
+ {w:['Mi','clase','es','luminosa','y','moderna.'],t:'Мой класс светлый и современный'},
+ {w:['En','mi','clase','se','puede','trabajar','en','equipo.'],t:'В классе можно работать в команде'},
+ {w:['En','clase','no','se','puede','usar','el','móvil.'],t:'В классе нельзя пользоваться телефоном'},
+ {w:['Tengo','que','escuchar','al','profe.'],t:'Я должен слушать учителя'}
+];
+var SCO={i:0,built:[],stars:0};
+function renderSC(){
+  SCO.built=[];
+  var ph=SUPERC[SCO.i];
+  $('sc-count').textContent=String(SCO.i+1);
+  $('sc-target').textContent='…';
+  $('sc-fb').textContent='';
+  $('sc-retry').style.display='none';
+  $('sc-next').style.display='none';
+  var pool=$('sc-pool');pool.innerHTML='';
+  shuf(ph.w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.onclick=function(){
+      if(b.className.indexOf('placed')>=0)return;
+      b.className='sb-word placed';
+      SCO.built.push(w);
+      $('sc-target').textContent=SCO.built.join(' ');
+      if(SCO.built.length===SUPERC[SCO.i].w.length){
+        var ok=SCO.built.every(function(x,i){return x===SUPERC[SCO.i].w[i];});
+        if(ok){SCO.stars++;$('sc-stars').textContent=SCO.stars;$('sc-fb').textContent='✅ ¡Perfecto! '+SUPERC[SCO.i].t;$('sc-next').style.display='';audTTS(SUPERC[SCO.i].w.join(' '));}
+        else{$('sc-fb').textContent='❌ Правильно: '+SUPERC[SCO.i].w.join(' ');$('sc-retry').style.display='';}
+      }
+    };
+    pool.appendChild(b);
+  });
+}
+function scRetry(){renderSC();}
+function scNext(){SCO.i=(SCO.i+1)%SUPERC.length;if(SCO.i===0){$('sc-fb').textContent='🎉 Конструктор пройден! '+SCO.stars+' из 10 звёзд. ¡Bien hecho!';return;}renderSC();}
+$('sc-retry').onclick=scRetry;
+$('sc-next').onclick=scNext;
+renderSC();
+
 document.querySelectorAll('.tl-cell').forEach(function(c){c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});});
 $('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
 </script>
