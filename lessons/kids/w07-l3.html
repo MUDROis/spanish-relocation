@@ -142,15 +142,13 @@
   <section class="homework">
     <h3>🏡 Домашнее задание</h3>
     <div class="task"><div class="task-num">1</div><div><strong>Покажи родителям диплом</strong> · 5 мин — расскажи, какие 7 станций прошёл.</div></div>
-    <div class="task"><div class="task-num star">2</div><div><strong>Семейная игра «Экзаменатор»</strong> · 10 мин ⭐ — родители задают вопросы из ВСЕЙ Станции 2.</div></div>
-    <div class="task"><div class="task-num star">3</div><div><strong>Видео-отчёт «Моя неделя в школе»</strong> · 5 мин ⭐ — расписание, класс, правила по-испански.</div></div>
-    <div class="task"><div class="task-num">4</div><div><strong>Повтори слабые станции</strong> · 10 мин — вернись к урокам 10–20 по штампу.</div></div>
-    <div class="task"><div class="task-num star">5</div><div><strong>Тренажёры Станции 2</strong> · 15 мин ⭐ — супер-сопоставление (30 пар) + супер-конструктор.</div></div>
-    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Чекпоинт Станции 2»</strong> · 15 мин ⭐<br><a href="../../worksheets/w07-l3-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
-    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> — нажми нужный цвет.</div></div>
+    <div class="task"><div class="task-num">2</div><div><strong>Повтори слабые станции</strong> · 10 мин — вернись к урокам 10–20 по штампу.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>Тренажёры Станции 2</strong> · 15 мин ⭐ — супер-сопоставление (30 пар) + супер-конструктор.</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>Рабочий лист «Чекпоинт Станции 2»</strong> · 15 мин ⭐<br><a href="../../worksheets/w07-l3-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">5</div><div><strong>Самопроверка «Светофор»</strong> — нажми нужный цвет.</div></div>
   </section>
 
-  <a class="quizlet-link" href="https://quizlet.com/ru/search?query=estacion+2+mi+colegio+espa%C3%B1ol" target="_blank"><span>📚 Quizlet · Станция 2</span><span>Открыть →</span></a>
+  <a class="quizlet-link" href="https://quizlet.com/user/Interactive_school/folders/ninos" target="_blank"><span>📚 Quizlet · Станция 2</span><span>Открыть →</span></a>
   <div class="lesson-nav">
     <a href="./w07-l2.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 20: Tengo que... 🌟</div></a>
     <a href="./w08-l1.html" class="nav-next"><div class="nav-small">Следующая станция →</div><div class="nav-title">Урок 22: Станция 3 Mi Mundo 🌍</div></a>
@@ -164,10 +162,10 @@ function shuf(a){return a.map(function(v){return[Math.random(),v];}).sort(functi
 var esVoice=null;
 function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
-function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;loadVoices();var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;if(esVoice)u.voice=esVoice;speechSynthesis.resume();speechSynthesis.cancel();speechSynthesis.speak(u);}
 
 var stars=0, stamps=[false,false,false,false,false,false,false];
-var SNAMES=['🎒','📅','🏫','','🎨','','🎬'];
+var SNAMES=['🎒','📅','🏫','🪑','🎨','🚦','🎬'];
 function updStars(){$('stars').textContent=stars;}
 function buildPassport(){var p=$('passport');p.innerHTML='';for(var i=0;i<7;i++){var d=document.createElement('div');d.className='stamp';d.id='st'+(i+1);d.textContent=SNAMES[i];p.appendChild(d);}}
 function stamp(si){if(stamps[si-1])return;stamps[si-1]=true;var e=$('st'+si);e.classList.add('done');e.textContent=SNAMES[si-1]+' ✅';speak('¡Estación superada!');confetti(4);updDip();}
