@@ -85,6 +85,19 @@
   .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
   .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:280px;opacity:0;pointer-events:none;transition:.2s;z-index:100}
   .grammar-hint:hover::after,.grammar-hint.active::after{opacity:1}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--teal);background:#E0F2F1}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--teal);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--teal);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+  .sb-target{border:3px dashed var(--teal);border-radius:16px;padding:14px 18px;font-weight:800;font-size:1.05rem;margin:12px 0;min-height:64px;text-align:center}
+  .sm-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;font-weight:800}
+  @media(max-width:600px){.match-columns{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -127,6 +140,28 @@
     <div class="badge-stamped" id="dip-stamped"></div>
   </section>
 
+  <!-- ТРЕНАЖЁР 1: СУПЕР-СОПОСТАВЛЕНИЕ -->
+  <section class="block" style="--c:#3E7CB1" id="super-match">
+    <div class="block-head"><h2 class="block-title">🧩 Супер-сопоставление</h2><span class="time-badge">этап <span id="sm-name">1</span></span></div>
+    <div class="script">Соедини пары: испанское слово ↔ русский перевод. 3 этапа по 10 пар!</div>
+    <div class="sm-meta"><span>⭐ Звёзд: <span id="sm-stars">0</span></span><span>Найдено: <span id="sm-progress">0/10</span></span></div>
+    <div class="match-columns"><div id="sm-left"></div><div id="sm-right"></div></div>
+    <div class="game-fb" id="sm-fb"></div>
+    <button class="speak-btn" id="sm-next" style="display:none">Следующий этап →</button>
+    <button class="speak-btn" style="background:#E9A13B" id="sm-reset">🔄 Начать заново</button>
+  </section>
+
+  <!-- ТРЕНАЖЁР 2: СУПЕР-КОНСТРУКТОР -->
+  <section class="block" style="--c:#E91E63" id="super-constructor">
+    <div class="block-head"><h2 class="block-title">🎯 Супер-конструктор</h2><span class="time-badge"><span id="sc-count">1</span> из 10</span></div>
+    <div class="sm-meta"><span>⭐ Звёзд: <span id="sc-stars">0</span></span></div>
+    <div class="sb-target" id="sc-target">…</div>
+    <div class="sb-pool" id="sc-pool"></div>
+    <div class="game-fb" id="sc-fb"></div>
+    <button class="speak-btn" id="sc-retry" style="display:none">↺ Собрать снова</button>
+    <button class="speak-btn gold" id="sc-next" style="display:none">Следующая фраза →</button>
+  </section>
+
   <section class="tl-wrap">
     <h4>🚦 Самопроверка «Светофор»</h4>
     <table class="tl-table">
@@ -144,7 +179,7 @@
     <h3>🏡 Домашнее задание</h3>
     <div class="task"><div class="task-num">1</div><div><strong>Покажи родителям диплом</strong> · 5 мин — расскажи, какие 7 станций прошёл.</div></div>
     <div class="task"><div class="task-num">2</div><div><strong>Повтори слабые станции</strong> · 10 мин — вернись к урокам 10–20 по штампу.</div></div>
-    <div class="task"><div class="task-num star">3</div><div><strong>Тренажёры Станции 2</strong> · 15 мин ⭐ — супер-сопоставление (30 пар) + супер-конструктор.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>Тренажёры Станции 2</strong> · 15 мин ⭐<br><a href="#super-match">🧩 Супер-сопоставление (30 пар)</a> · <a href="#super-constructor">🎯 Супер-конструктор</a></div></div>
     <div class="task"><div class="task-num star">4</div><div><strong>Рабочий лист «Чекпоинт Станции 2»</strong> · 15 мин ⭐<br><a href="../../worksheets/w07-l3-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
     <div class="task"><div class="task-num">5</div><div><strong>Самопроверка «Светофор»</strong> — нажми нужный цвет.</div></div>
   </section>
