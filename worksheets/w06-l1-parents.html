@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#FFF7EF">
+<title>Рабочий лист 6.1 · Público vs Concertado vs Privado — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🏫'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.22;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#F0F4FF; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #E8DCCF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#FBF3EA; color:var(--p1); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7; }
+  .dialog-box .who{ font-weight:700; color:var(--p2); }
+  .dialog-box .who.you{ color:var(--p4); }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p2); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .compare-table{ width:100%; border-collapse:collapse; font-size:9.5px; margin-top:2mm; }
+  .compare-table th,.compare-table td{ border:1px solid #E8DCCF; padding:2mm 4px; vertical-align:top; }
+  .compare-table th{ background:#FBF3EA; color:var(--p1); }
+  .compare-table td.empty{ height:9mm; }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏫 Рабочий лист · Урок 6.1 «Público vs Concertado vs Privado»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Школьная система Испании · poder / querer / venir</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🏫 Лексика школы: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el colegio público</div>
+          <div class="item">2. el colegio concertado</div>
+          <div class="item">3. la plaza escolar</div>
+          <div class="item">4. el baremo</div>
+          <div class="item">5. la matrícula</div>
+          <div class="item">6. la mensualidad</div>
+          <div class="item">7. el comedor escolar</div>
+          <div class="item">8. el AMPA</div>
+        </div>
+        <div class="col">
+          <div class="item">а) ежемесячная плата</div>
+          <div class="item">б) место в школе</div>
+          <div class="item">в) государственная школа</div>
+          <div class="item">г) родительская ассоциация</div>
+          <div class="item">д) школа с государственным финансированием</div>
+          <div class="item">е) система баллов при зачислении</div>
+          <div class="item">ж) запись / оформление в школу</div>
+          <div class="item">з) школьная столовая / обед</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔤 Впиши слово или выражение по описанию</h2>
+        <div class="tag">из словаря урока</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Это место для ребёнка в школе. → <span class="wline long"></span><br>
+      2. Это система баллов, которая помогает при зачислении. → <span class="wline long"></span><br>
+      3. Это запись или оформление ребёнка в школу. → <span class="wline long"></span><br>
+      4. Это плата, которую семья вносит каждый месяц. → <span class="wline long"></span><br>
+      5. Это обед в школе, если ребёнок остаётся после уроков. → <span class="wline long"></span><br>
+      6. Это ассоциация родителей при школе. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: poder / querer / venir</h2>
+        <div class="tag">практика: yo · nosotros · usted</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> в упражнениях используем формы <b>yo</b>, <b>nosotros</b> и <b>usted</b>.  
+        Остальные формы даны в таблице для справки и распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Лицо</th>
+          <th>poder</th>
+          <th>querer</th>
+          <th>venir</th>
+        </tr>
+        <tr>
+          <td class="practice">yo</td>
+          <td class="practice">puedo</td>
+          <td class="practice">quiero</td>
+          <td class="practice">vengo</td>
+        </tr>
+        <tr>
+          <td class="reference">tú</td>
+          <td class="reference">puedes</td>
+          <td class="reference">quieres</td>
+          <td class="reference">vienes</td>
+        </tr>
+        <tr>
+          <td class="practice">usted</td>
+          <td class="practice">puede</td>
+          <td class="practice">quiere</td>
+          <td class="practice">viene</td>
+        </tr>
+        <tr>
+          <td class="practice">nosotros</td>
+          <td class="practice">podemos</td>
+          <td class="practice">queremos</td>
+          <td class="practice">venimos</td>
+        </tr>
+        <tr>
+          <td class="reference">vosotros</td>
+          <td class="reference">podéis</td>
+          <td class="reference">queréis</td>
+          <td class="reference">venís</td>
+        </tr>
+        <tr>
+          <td class="reference">ellos / ustedes</td>
+          <td class="reference">pueden</td>
+          <td class="reference">quieren</td>
+          <td class="reference">vienen</td>
+        </tr>
+      </table>
+
+      <div class="formula">
+        💡 После <b>poder</b> и <b>querer</b> — инфинитив: <i>puedo ver, quiere venir, queremos comparar</i>.<br>
+        После <b>venir</b> — направление с предлогом <b>a</b>: <i>vengo al colegio, viene a la reunión, venimos a ver el centro</i>.
+      </div>
+
+      1. ¿<span class="wline short"></span> ver el colegio mañana? <span class="ru-sub">(yo / poder)</span><br>
+      2. <span class="wline short"></span> una plaza cerca de casa. <span class="ru-sub">(nosotros / querer)</span><br>
+      3. ¿<span class="wline short"></span> enviarme el baremo, por favor? <span class="ru-sub">(usted / poder)</span><br>
+      4. Yo <span class="wline short"></span> a la jornada de puertas abiertas el sábado. <span class="ru-sub">(yo / venir)</span><br>
+      5. No <span class="wline short"></span> pagar la mensualidad del privado. <span class="ru-sub">(nosotros / poder)</span><br>
+      6. ¿<span class="wline short"></span> usted explicarme el precio del comedor? <span class="ru-sub">(usted / poder)</span><br>
+      7. <span class="wline short"></span> comparar dos colegios antes de decidir. <span class="ru-sub">(nosotros / querer)</span><br>
+      8. ¿<span class="wline short"></span> venir el lunes a ver el centro? <span class="ru-sub">(usted / venir)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>📖 Чтение + CLIL: три типа школ</h2>
+        <div class="tag">прочитай текст и заполни таблицу</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>1. Colegio público</h4>
+        <p>Es un centro gestionado por la comunidad autónoma. Normalmente, la enseñanza es gratuita. Las familias pagan servicios extra: comedor, transporte, material o actividades. La admisión usa un baremo.</p>
+
+        <h4>2. Colegio concertado</h4>
+        <p>Es un centro privado con financiación pública. La familia paga una mensualidad, normalmente más baja que en un colegio privado. También usa baremo. Algunos centros piden uniforme y tienen más actividades extraescolares.</p>
+
+        <h4>3. Colegio privado</h4>
+        <p>Es un centro totalmente pagado por las familias. Suele ser más caro. Puede ofrecer más servicios: idiomas, comedor incluido, transporte, actividades y atención personalizada.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы полными фразами или короткими ответами.</div>
+
+      1. ¿Qué tipo de colegio suele ser gratuito?  
+      <span class="wline xlong"></span><br>
+
+      2. ¿Qué paga normalmente la familia en un colegio concertado?  
+      <span class="wline xlong"></span><br>
+
+      3. ¿Qué sistema se usa para la admisión en público y concertado?  
+      <span class="wline xlong"></span><br>
+
+      4. ¿Por qué algunas familias eligen un colegio privado?  
+      <span class="wline xlong"></span>
+
+      <div class="hint" style="margin-top:3mm">Заполните таблицу по тексту и добавьте свой вывод.</div>
+      <table class="compare-table">
+        <tr>
+          <th>Критерий</th>
+          <th>Público</th>
+          <th>Concertado</th>
+          <th>Privado</th>
+        </tr>
+        <tr>
+          <td>Кто финансирует</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td>Цена обучения</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td>Baremo</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td>Comedor</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td>Uniforme</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td><b>Мой вывод</b></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">5</div>
+      <div>
+        <h2>🎧 Аудирование: звонок в школу</h2>
+        <div class="tag">прослушайте в уроке или попросите прочитать вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Текст для чтения вслух:</b><br>
+        «Buenos días, Colegio Concertado Santa María. ¿En qué puedo ayudarle? Buenos días. Somos la familia García. Quisiera información para una plaza de primaria. ¿Está empadronado en esta zona? Sí, tenemos el certificado de empadronamiento. Perfecto. La mensualidad son doscientos euros. El comedor cuesta ciento cincuenta. ¿Puedo venir el sábado a ver el colegio? Sí, puede venir a las diez. ¿Qué documentos necesito? El NIE, el empadronamiento y el libro de familia. Muchas gracias.»
+      </div>
+
+      1. ¿Qué tipo de colegio es?  
+      <span class="wline xlong"></span><br>
+
+      2. ¿Para qué curso quiere información la familia?  
+      <span class="wline xlong"></span><br>
+
+      3. ¿Cuánto cuesta el comedor?  
+      <span class="wline xlong"></span><br>
+
+      4. ¿Cuándo puede ir la familia a ver el colegio?  
+      <span class="wline xlong"></span><br>
+
+      5. ¿Qué documentos necesita la familia?  
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">6</div>
+      <div>
+        <h2>🗣 Говорение: ситуации в школе</h2>
+        <div class="tag">прочитайте вслух, подставьте свои данные</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы звоните в секретариат и хотите узнать про место в начальной школе.<br>
+        <div class="tmpl">«Buenos días. Quisiera información para una plaza de primaria.»</div>
+        <div class="tmpl-ru">(Добрый день. Я хотел бы получить информацию о месте в начальной школе.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы не понимаете, как работает система баллов. Спросите вежливо.<br>
+        <div class="tmpl">«¿Puede explicarme el baremo, por favor?»</div>
+        <div class="tmpl-ru">(Можете объяснить мне систему баллов, пожалуйста?)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы хотите узнать про ежемесячную плату и обед.<br>
+        <div class="tmpl">«¿Cuánto cuesta la mensualidad? ¿Y el comedor?»</div>
+        <div class="tmpl-ru">(Сколько стоит ежемесячная плата? А обед?)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы хотите прийти посмотреть школу в субботу.<br>
+        <div class="tmpl">«¿Puedo venir el sábado a ver el colegio?»</div>
+        <div class="tmpl-ru">(Могу я прийти в субботу посмотреть школу?)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы обсуждаете выбор с семьёй.<br>
+        <div class="tmpl">«Queremos un colegio con comedor y cerca de casa.»</div>
+        <div class="tmpl-ru">(Мы хотим школу с обедом и рядом с домом.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">7</div>
+      <div>
+        <h2>✍️ Письмо: скрипт звонка в школу</h2>
+        <div class="tag">7–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и цель звонка: <i>Quisiera información...</i><br>
+        3–4. Данные семьи: <i>Somos la familia... Tenemos el certificado de empadronamiento.</i><br>
+        5–6. Вопросы о школе: <i>¿Puede explicarme el baremo? ¿Cuánto cuesta...?</i><br>
+        7–8. Визит и документы: <i>¿Puedo venir...? ¿Qué documentos necesito?</i>
+      </div>
+
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr>
+          <th>Умею</th>
+          <th>🟢</th>
+          <th>🟡</th>
+          <th>🔴</th>
+        </tr>
+        <tr>
+          <td>Различать público, concertado, privado</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Понимать слова plaza, baremo, matrícula, mensualidad</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Использовать poder: puedo / puede / podemos</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Использовать querer: quiero / quiere / queremos</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Использовать venir: vengo / viene / venimos</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Собрать скрипт звонка в школу</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">
+        📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

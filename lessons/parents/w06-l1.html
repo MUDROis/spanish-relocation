@@ -1,16 +1,24 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#FFF7EF">
-<meta name="description" content="Урок 6.1: школьная система Испании — públicas, concertadas, privadas. Скоро.">
+<meta name="description" content="Урок 6.1: школьная система Испании — colegio público, concertado, privado; лексика зачисления (matrícula, plaza escolar, baremo) и глаголы poder, querer, venir.">
 <link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <title>Урок 6.1 · Público vs Concertado vs Privado — МУДРО</title>
 <style>
-  :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);--ok:#7A8B4C;--bad:#E2725B}
+  :root{
+    --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;
+    --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
+    --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
+    --ok:#7A8B4C;--bad:#E2725B;
+  }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  body{
+    font-family:'Nunito','Segoe UI',Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;
+  }
   a{color:var(--p4)}
   .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
   .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
@@ -22,19 +30,200 @@
   .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
   .lesson-hero h1 em{font-style:normal;color:var(--p1)}
   .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
-  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p4);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
   .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
   .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
-  .meta-chip.locked{background:linear-gradient(135deg,#E0E0E0,#BDBDBD);color:#5a5a5a}
+
   .section{max-width:1100px;margin:0 auto;padding:34px 20px}
-  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;margin-bottom:18px;text-align:center}
-  .card .big{font-size:3rem}
-  .card h2{font-size:clamp(1.2rem,3vw,1.6rem);font-weight:900;margin:10px 0}
-  .card p{color:var(--muted);max-width:560px;margin:0 auto;font-weight:700}
-  .lock-badge{display:inline-block;margin-top:16px;background:var(--p3);color:#2B2118;font-weight:900;font-size:.85rem;padding:8px 20px;border-radius:999px}
-  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem}
-  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
-  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .step-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+  .step-num{
+    flex:0 0 46px;height:46px;border-radius:50%;background:var(--p1);color:#fff;
+    font-weight:900;display:inline-grid;place-items:center;font-size:1.2rem;flex-shrink:0;
+  }
+  .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)}
+  .step-time{font-weight:900;color:var(--muted);font-size:.82rem;letter-spacing:.3px;text-transform:uppercase;display:block;margin-bottom:2px}
+  h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{
+    display:inline-block;padding:11px 22px;border-radius:10px;border:none;
+    font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s;
+  }
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{
+    background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;
+    cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;
+    vertical-align:middle;margin:0 4px;
+  }
+  .speak-btn:hover{background:#66743f}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+
+  .situation-box{background:#fff;border:3px solid var(--p3);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p3)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#FFF7E0;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p3)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{
+    position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent;
+  }
+  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
+  .vocab-front .es{font-size:1.08rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
+  .vocab-front .ru{font-size:.9rem;opacity:.95;font-weight:600;color:#fff}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:8px}
+  .grammar-box .formula{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.55}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+  .grammar-table th,.grammar-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .grammar-table th{background:#FBF3EA;color:var(--p1);font-size:.86rem}
+  .grammar-table tr:nth-child(even) td{background:#FFFDF9}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+
+  .fill-input{
+    border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;
+    font-size:1rem;font-weight:700;color:var(--p4);min-width:90px;text-align:center;font-family:inherit;
+  }
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:360px}
+  .match-item{
+    padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;
+    text-align:center;font-weight:600;transition:.2s;user-select:none;
+  }
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.75}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{
+    min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;
+  }
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.02rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p1)}
+  .dialog-box .who.you{color:var(--p4)}
+  .dialog-box .dialog-text{display:none}
+  .dialog-box.open .dialog-text{display:block;margin-top:10px}
+
+  .clil-text{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:18px;margin-bottom:16px}
+  .clil-text h4{color:var(--p2);margin-bottom:8px}
+  .clil-text p{font-size:.95rem;margin-bottom:10px}
+  .compare-table{width:100%;border-collapse:collapse;font-size:.9rem;margin-bottom:14px}
+  .compare-table th,.compare-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .compare-table th{background:#FBF3EA;color:var(--p1)}
+  .compare-table input{width:100%;border:none;border-bottom:1.5px dashed var(--p4);background:transparent;padding:4px;font-family:inherit;font-size:.9rem}
+
+  .dialog-builder{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p2);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{
+    width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit;
+  }
+  .dialog-builder input[type="text"]:focus,.dialog-builder select:focus{outline:none;border-color:var(--p4)}
+  .dialog-result{
+    background:#FFF7E0;border-radius:12px;padding:18px;font-family:'Courier New',monospace;
+    font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p3);
+  }
+  .dialog-result .role{font-weight:800;color:var(--p1);display:block;margin-top:6px}
+  .dialog-result .role.you{color:var(--p4)}
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{
+    width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;
+    background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center;
+  }
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  /* Quizlet */
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .resource-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.2s;border-top:4px solid var(--p4)}
+  .resource-card:hover{transform:translateY(-3px)}
+  .resource-card h4{font-size:1rem;margin-bottom:6px}
+  .resource-card p{font-size:.85rem;color:var(--muted);margin-bottom:12px;min-height:40px}
+  .resource-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem}
+  .resource-card a:hover{background:var(--p1)}
+  .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1100px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{
+    text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);
+    font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center;
+  }
   .lesson-nav a:hover{background:var(--p1);color:#fff}
 </style>
 </head>
@@ -43,34 +232,594 @@
 
 <div class="lesson-topbar"><div class="inner">
   <a href="../../index.html" class="back-link">← К карте курса</a>
-  <span class="lesson-id">Неделя 6 · Урок 1 из 3 · Фаза 2 Школа и здоровье</span>
+  <span class="lesson-id">Неделя 6 · Урок 1 из 3 · Фаза 2 El Cole y la Salud</span>
   <span id="auth-area"></span>
 </div></div>
 
 <section class="lesson-hero">
-  <span class="phase-tag">🔒 Фаза 2 · Школа и здоровье</span>
+  <span class="phase-tag">📍 Фаза 2 · El Cole y la Salud</span>
   <h1>Урок 6.1 · <em>Público vs Concertado vs Privado</em></h1>
-  <p class="sub">Разбираемся в типах школ Испании: pública, concertada, privada.</p>
+  <p class="sub">Разбираемся в испанской школьной системе и учимся спрашивать про места, документы, цену и запись</p>
   <div class="lesson-meta">
-    <span class="meta-chip locked">🔒 Скоро</span>
+    <span class="meta-chip">🧠 CLIL: школьная система Испании</span>
+    <span class="meta-chip">🎯 Цель: позвонить в школу и задать главные вопросы</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 poder / querer / venir · yo / nosotros / usted</span>
+    <span class="meta-chip">📋 Продукт: диалог звонка в школу</span>
   </div>
 </section>
 
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
 <section class="section">
+  <div class="step-head"><span class="step-num">0</span><div><span class="step-time">00:00 – 05:00 · Повторение недели 5 и первый звонок в школу</span><h2>Разминка + вопрос из жизни</h2></div></div>
+
   <div class="card">
-    <div class="big">🔒</div>
-    <h2>Урок 6.1 откроется совсем скоро</h2>
-    <p>Сдайте домашнее задание недели 5, чтобы преподаватель открыл вам Фазу 2 «Школа и здоровье».</p>
-    <span class="lock-badge">🎯 Темы: pública, concertada, privada</span>
+    <p class="hint">Перед школьной темой вспомним финал Блока 1: документы, мэрию и вежливые просьбы.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: неделя 5</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">📞</div>
+      <div class="sit-title">Одна ситуация: первый звонок в школу</div>
+    </div>
+    <div class="sit-intro">
+      Вы нашли школу рядом с домом. Теперь нужно позвонить в секретариат и узнать, есть ли место для ребёнка. Отвечайте вслух, нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Секретариат:</div>
+      <div class="es">Buenos días, Colegio San Vicente. ¿En qué puedo ayudarle?</div>
+      <div class="ru">Добрый день, школа Сан-Висенте. Чем могу помочь?</div>
+      <button class="speak-btn" onclick="speak('Buenos días, Colegio San Vicente. ¿En qué puedo ayudarle?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ-шаблон:</div>
+      <div class="es">Buenos días. Quisiera información para una plaza de primaria.</div>
+      <div class="ru">Добрый день. Я хотел бы получить информацию о месте в начальной школе.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Quisiera información para una plaza de primaria.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Секретариат:</div>
+      <div class="es">Claro. ¿El niño está empadronado en esta zona?</div>
+      <div class="ru">Конечно. Ребёнок зарегистрирован в этом районе?</div>
+      <button class="speak-btn" onclick="speak('Claro. ¿El niño está empadronado en esta zona?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ-шаблон:</div>
+      <div class="es">Sí, tenemos el certificado de empadronamiento.</div>
+      <div class="ru">Да, у нас есть справка о регистрации.</div>
+      <button class="speak-btn" onclick="speak('Sí, tenemos el certificado de empadronamiento.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Вы не понимаете слово <b>plaza</b>. Что лучше сказать?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">No sé nada.</div>
+        <div class="q-opt" data-o="1">¿Puede explicarme qué es una plaza, por favor?</div>
+        <div class="q-opt" data-o="2">Quero plaza.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">2</span>Секретариат спрашивает: <b>¿Quiere venir a la reunión?</b> Что ответить вежливо, если вам удобно?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Sí, voy a querer.</div>
+        <div class="q-opt" data-o="1">Sí, puedo venirme.</div>
+        <div class="q-opt" data-o="2">Sí, me viene bien. Puedo venir.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня мы разберём три типа школ в Испании: <b>público</b>, <b>concertado</b> и <b>privado</b>. Вы научитесь спрашивать про <i>plaza</i>, <i>baremo</i>, <i>matrícula</i>, <i>comedor</i> и <i>transporte escolar</i>. А ещё освоите глаголы <b>poder, querer, venir</b> в формах <b>yo, nosotros, usted</b>.
+    </div>
   </div>
 </section>
 
-<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · 🔒 Фаза 2 — скоро</footer>
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head"><span class="step-num">1</span><div><span class="step-time">05:00 – 15:00 · 5 категорий</span><h2>Карточки со словами: 35 слов о школе</h2></div></div>
+
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('types',this)">🏫 Типы школ (7)</button>
+      <button class="tab" onclick="showVocab('docs',this)">📝 Зачисление (7)</button>
+      <button class="tab" onclick="showVocab('money',this)">💶 Деньги (7)</button>
+      <button class="tab" onclick="showVocab('life',this)">🏫 Жизнь школы (7)</button>
+      <button class="tab" onclick="showVocab('verbs',this)">🔤 Глаголы (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note green" style="margin-top:16px">
+      💡 <b>CLIL-минимум:</b> <b>público</b> — государственная школа, обычно бесплатное обучение; <b>concertado</b> — частная школа с государственным финансированием, часто есть ежемесячная плата; <b>privado</b> — полностью частная школа, обычно дороже и с большим количеством сервисов.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      🗣 <b>Приём «Три пальца»:</b> поднимите три пальца и назовите: <i>público, concertado, privado</i>. Затем задайте один вопрос к каждому типу: <i>¿Es gratuito? ¿Hay mensualidad? ¿Puedo ver el baremo?</i>
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head"><span class="step-num c2">2</span><div><span class="step-time">15:00 – 23:00 · Фокус: yo / nosotros / usted</span><h2>Грамматика: poder / querer / venir</h2></div></div>
+
+  <div class="card">
+    <p class="hint">Эти три глагола — ваш школьный минимум: спросить, захотеть, прийти.</p>
+
+    <div class="note blue">
+      📌 <b>Фокус практики:</b> в упражнениях и диалоге используем <b>yo, nosotros, usted</b>. Формы <b>tú / vosotros / ellos</b> оставлены в таблицах для справки и распознавания.
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Poder — мочь / иметь возможность</h4>
+      <table class="grammar-table">
+        <tr><th>Лицо</th><th>Форма</th><th>Пример</th></tr>
+        <tr><td>yo</td><td><b>puedo</b></td><td>¿Puedo ver el colegio?</td></tr>
+        <tr><td>tú</td><td>puedes</td><td>¿Puedes venir mañana?</td></tr>
+        <tr><td>él / ella / usted</td><td><b>puede</b></td><td>¿Puede enviarme la información?</td></tr>
+        <tr><td>nosotros / nosotras</td><td><b>podemos</b></td><td>¿Podemos hacer una visita?</td></tr>
+        <tr><td>vosotros / vosotras</td><td>podéis</td><td>¿Podéis venir el sábado?</td></tr>
+        <tr><td>ellos / ellas / ustedes</td><td>pueden</td><td>¿Pueden atenderme mañana?</td></tr>
+      </table>
+      <div class="example">
+        ¿Puedo solicitar una plaza? — Могу я подать заявление на место?<br>
+        ¿Puede explicarme el baremo? — Можете объяснить систему баллов?<br>
+        No puedo pagar la mensualidad. — Я не могу платить ежемесячный взнос.<br>
+        ¿Podemos ver el comedor? — Можем мы посмотреть столовую?
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Querer — хотеть</h4>
+      <table class="grammar-table">
+        <tr><th>Лицо</th><th>Форма</th><th>Пример</th></tr>
+        <tr><td>yo</td><td><b>quiero</b></td><td>Quiero información.</td></tr>
+        <tr><td>tú</td><td>quieres</td><td>¿Quieres comedor?</td></tr>
+        <tr><td>él / ella / usted</td><td><b>quiere</b></td><td>¿Quiere venir el sábado?</td></tr>
+        <tr><td>nosotros / nosotras</td><td><b>queremos</b></td><td>Queremos una plaza cerca de casa.</td></tr>
+        <tr><td>vosotros / vosotras</td><td>queréis</td><td>¿Queréis ver el colegio?</td></tr>
+        <tr><td>ellos / ellas / ustedes</td><td>quieren</td><td>Los niños quieren extraescolares.</td></tr>
+      </table>
+      <div class="example">
+        Quiero inscribir a mi hijo. — Я хочу записать ребёнка.<br>
+        ¿Quiere más información? — Хотите больше информации?<br>
+        No quiero un colegio muy lejos. — Я не хочу школу очень далеко.<br>
+        Queremos comparar tres centros. — Мы хотим сравнить три заведения.
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Venir — приходить</h4>
+      <table class="grammar-table">
+        <tr><th>Лицо</th><th>Форма</th><th>Пример</th></tr>
+        <tr><td>yo</td><td><b>vengo</b></td><td>Vengo con mi hijo.</td></tr>
+        <tr><td>tú</td><td>vienes</td><td>¿Vienes a la reunión?</td></tr>
+        <tr><td>él / ella / usted</td><td><b>viene</b></td><td>¿Viene usted el sábado?</td></tr>
+        <tr><td>nosotros / nosotras</td><td><b>venimos</b></td><td>Venimos a ver el colegio.</td></tr>
+        <tr><td>vosotros / vosotras</td><td>venís</td><td>¿Venís a la tutoría?</td></tr>
+        <tr><td>ellos / ellas / ustedes</td><td>vienen</td><td>¿A qué hora vienen?</td></tr>
+      </table>
+      <div class="example">
+        ¿Puedo venir mañana? — Могу я прийти завтра?<br>
+        Vengo a la jornada de puertas abiertas. — Я приду на день открытых дверей.<br>
+        No puedo venir el lunes. — Я не смогу прийти в понедельник.<br>
+        Venimos con los documentos. — Мы придём с документами.
+      </div>
+    </div>
+
+    <div class="note green">
+      📌 <b>Главное правило:</b> после <b>poder</b> и <b>querer</b> — инфинитив: <i>Puedo ver. Quiero saber.</i><br>
+      После <b>venir</b> — направление/событие с предлогом <b>a</b>: <i>Vengo a la reunión. Vengo al colegio.</i>
+    </div>
+
+    <div class="note">
+      💡 <b>Вежливость-термометр:</b><br>
+      🔴 Сухо: <i>Dame información.</i><br>
+      🟡 Нейтрально: <i>¿Puedes darme información?</i><br>
+      🟢 Вежливо: <i>¿Puede darme información?</i><br>
+      ⭐ Очень вежливо: <i>¿Podría enviarme la información?</i><br><br>
+      Для секретариата используйте <b>usted / podría</b>. Формы <b>vosotros</b> оставлены в таблице для распознавания.
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>Quero información.</i> ❌ → <i>Quiero información.</i> ✅<br>
+      • <i>Vengo el colegio.</i> ❌ → <i>Vengo al colegio.</i> ✅<br>
+      • <i>¿Puede venirme?</i> ❌ → <i>¿Puede venir?</i> ✅<br>
+      • <i>Quiero que plaza.</i> ❌ → <i>Quiero una plaza.</i> ✅
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head"><span class="step-num c3">3</span><div><span class="step-time">23:00 – 30:00 · 3 упражнения</span><h2>Практика: применим слова и грамматику</h2></div></div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь правильную форму глагола</h4>
+    <p class="hint">Впишите форму глагола. Подсказка в скобках указывает лицо: yo, nosotros или usted.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери школьную фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь термин и значение</h4>
+    <p class="hint">Нажмите испанский термин слева, затем его значение справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head"><span class="step-num c4">4</span><div><span class="step-time">30:00 – 37:00 · понимание школьных фраз</span><h2>Аудирование: секретариат и голосовое сообщение</h2></div></div>
+
+  <div class="card">
+    <h4 style="margin-bottom:8px">🎧 Аудирование 1: звонок в секретариат</h4>
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speak('Buenas tardes, Colegio Público San Vicente. ¿En qué puedo ayudarle? Buenas tardes. Quisiera información para una plaza de primaria. Claro. ¿El niño tiene seis años? Sí, cumple seis en septiembre. Muy bien. ¿Está empadronado en esta zona? Sí, tenemos el certificado de empadronamiento. Perfecto. En el colegio público la matrícula es gratuita, pero hay una aportación voluntaria para el AMPA. ¿Puede explicarme el baremo? Sí. El baremo da puntos por proximidad, hermanos en el centro, renta y otras circunstancias. ¿Hay comedor y transporte escolar? Sí. El comedor cuesta ciento veinte euros al mes. El transporte depende de la ruta. ¿Cuándo es el plazo de inscripción? Del uno al diez de marzo. ¿Puede venir a la jornada de puertas abiertas el sábado? Sí, vengo con mi hijo. ¿Qué documentos necesito? Necesita el NIE, el certificado de empadronamiento y el libro de familia. Muchas gracias. ¿Puedo solicitar la plaza online? Sí, puede hacerlo en la sede electrónica. Perfecto. Hasta luego. Hasta luego.')" style="margin-bottom:12px">🔊 Прослушать диалог</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who op">Секретариат:</span> Buenas tardes, Colegio Público San Vicente. ¿En qué puedo ayudarle?<br>
+        <span class="who you">Родитель:</span> Buenas tardes. Quisiera información para una plaza de primaria.<br>
+        <span class="who op">Секретариат:</span> Claro. ¿El niño tiene seis años?<br>
+        <span class="who you">Родитель:</span> Sí, cumple seis en septiembre.<br>
+        <span class="who op">Секретариат:</span> Muy bien. ¿Está empadronado en esta zona?<br>
+        <span class="who you">Родитель:</span> Sí, tenemos el certificado de empadronamiento.<br>
+        <span class="who op">Секретариат:</span> Perfecto. En el colegio público la matrícula es gratuita, pero hay una aportación voluntaria para el AMPA.<br>
+        <span class="who you">Родитель:</span> ¿Puede explicarme el baremo?<br>
+        <span class="who op">Секретариат:</span> Sí. El baremo da puntos por proximidad, hermanos en el centro, renta y otras circunstancias.<br>
+        <span class="who you">Родитель:</span> ¿Hay comedor y transporte escolar?<br>
+        <span class="who op">Секретариат:</span> Sí. El comedor cuesta ciento veinte euros al mes. El transporte depende de la ruta.<br>
+        <span class="who you">Родитель:</span> ¿Cuándo es el plazo de inscripción?<br>
+        <span class="who op">Секретариат:</span> Del uno al diez de marzo. ¿Puede venir a la jornada de puertas abiertas el sábado?<br>
+        <span class="who you">Родитель:</span> Sí, vengo con mi hijo. ¿Qué documentos necesito?<br>
+        <span class="who op">Секретариат:</span> Necesita el NIE, el certificado de empadronamiento y el libro de familia.<br>
+        <span class="who you">Родитель:</span> Muchas gracias. ¿Puedo solicitar la plaza online?<br>
+        <span class="who op">Секретариат:</span> Sí, puede hacerlo en la sede electrónica.<br>
+        <span class="who you">Родитель:</span> Perfecto. Hasta luego.<br>
+        <span class="who op">Секретариат:</span> Hasta luego.
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz-1"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:8px">🎧 Аудирование 2: голосовое сообщение о школе</h4>
+    <p class="hint">Послушайте короткое сообщение и ответьте на вопросы по содержанию.</p>
+
+    <button class="btn btn-secondary" onclick="speak('Hola, somos la familia García. Queremos ver el colegio concertado Santa María. Podemos ir el sábado a las diez. El centro tiene comedor y transporte escolar. ¿Puede confirmarnos la hora? Gracias.')" style="margin-bottom:12px">🔊 Прослушать голосовое</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст</div>
+      <div class="dialog-text">
+        <span class="who you">Родитель:</span> Hola, somos la familia García. Queremos ver el colegio concertado Santa María. Podemos ir el sábado a las diez. El centro tiene comedor y transporte escolar. ¿Puede confirmarnos la hora? Gracias.
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz-2"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: ЧТЕНИЕ + CLIL + ПРОДУКТ -->
+<section class="section">
+  <div class="step-head"><span class="step-num">5</span><div><span class="step-time">37:00 – 47:00 · Таблица сравнения + конструктор диалога</span><h2>Чтение + CLIL + продукт: сравните школы и соберите диалог</h2></div></div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 CLIL-текст: три типа школ в Испании</h4>
+
+    <div class="clil-text">
+      <h4>1. Colegio público</h4>
+      <p>Es un centro gestionado por la comunidad autónoma. Normalmente, la enseñanza es gratuita. Las familias pagan servicios extra: comedor, transporte, material o actividades. La admisión usa un baremo. Los puntos dependen de la zona, hermanos en el centro, renta y otras circunstancias.</p>
+
+      <h4>2. Colegio concertado</h4>
+      <p>Es un centro privado con financiación pública. La familia paga una mensualidad, normalmente más baja que en un colegio privado. También usa baremo. Algunos centros piden uniforme y tienen más actividades extraescolares.</p>
+
+      <h4>3. Colegio privado</h4>
+      <p>Es un centro totalmente pagado por las familias. Suele ser más caro. Puede ofrecer más servicios: idiomas, comedor incluido, transporte, actividades, atención personalizada. La admisión puede ser más flexible, pero algunas escuelas hacen entrevista.</p>
+    </div>
+
+    <h4 style="margin-bottom:10px">📊 Таблица сравнения: заполните вывод</h4>
+    <table class="compare-table">
+      <tr>
+        <th>Критерий</th>
+        <th>Público</th>
+        <th>Concertado</th>
+        <th>Privado</th>
+      </tr>
+      <tr>
+        <td>Кто финансирует</td>
+        <td>государство</td>
+        <td>государство + семьи</td>
+        <td>семьи</td>
+      </tr>
+      <tr>
+        <td>Цена обучения</td>
+        <td>обычно бесплатно</td>
+        <td>есть mensualidad</td>
+        <td>дорого</td>
+      </tr>
+      <tr>
+        <td>Baremo</td>
+        <td>да</td>
+        <td>часто да</td>
+        <td>не всегда</td>
+      </tr>
+      <tr>
+        <td>Comedor</td>
+        <td>платно</td>
+        <td>платно / включён</td>
+        <td>часто включён</td>
+      </tr>
+      <tr>
+        <td>Transporte</td>
+        <td>зависит от маршрута</td>
+        <td>зависит</td>
+        <td>часто есть</td>
+      </tr>
+      <tr>
+        <td>Uniforme</td>
+        <td>обычно нет</td>
+        <td>иногда да</td>
+        <td>часто да</td>
+      </tr>
+      <tr>
+        <td><b>Мой вывод</b></td>
+        <td><input type="text" placeholder="Me interesa porque..."></td>
+        <td><input type="text" placeholder="Me interesa porque..."></td>
+        <td><input type="text" placeholder="Me interesa porque..."></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🔧 Конструктор диалога: звонок в школу</h4>
+    <p class="hint">Заполните данные — получите готовый диалог с секретариатом. Используем вежливое <b>usted</b> и семейные формы <b>yo / nosotros</b>.</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">📞 КОНСТРУКТОР: Звонок в школу</div>
+
+      <div class="field">
+        <label>🏫 Тип школы:</label>
+        <select id="b-type">
+          <option value="público">colegio público</option>
+          <option value="concertado" selected>colegio concertado</option>
+          <option value="privado">colegio privado</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🏷 Название школы:</label>
+        <input type="text" id="b-name" placeholder="Santa María" value="Santa María">
+      </div>
+
+      <div class="field">
+        <label>👪 Фамилия семьи:</label>
+        <input type="text" id="b-family" placeholder="García" value="García">
+      </div>
+
+      <div class="field">
+        <label>👶 Курс ребёнка:</label>
+        <select id="b-course">
+          <option value="escuela infantil">escuela infantil</option>
+          <option value="primaria" selected>primaria</option>
+          <option value="ESO">ESO</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🍽 Интересующая услуга:</label>
+        <select id="b-service">
+          <option value="comedor" selected>comedor</option>
+          <option value="transporte escolar">transporte escolar</option>
+          <option value="extraescolares">extraescolares</option>
+          <option value="uniforme">uniforme</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>💶 Вопрос о цене:</label>
+        <select id="b-price">
+          <option value="¿Cuánto cuesta la mensualidad?" selected>¿Cuánto cuesta la mensualidad?</option>
+          <option value="¿Hay gastos extra?">¿Hay gastos extra?</option>
+          <option value="¿Podemos pedir una beca?">¿Podemos pedir una beca?</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>📅 Когда хотите прийти:</label>
+        <select id="b-visit">
+          <option value="mañana por la mañana">mañana por la mañana</option>
+          <option value="el sábado" selected>el sábado</option>
+          <option value="la próxima semana">la próxima semana</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildDialog()" style="margin-top:12px">🔧 Собрать диалог</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с собранным диалогом. Говорите вежливо, используя <b>usted</b> для секретариата и <b>yo / nosotros</b> для семьи.
+    </div>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head"><span class="step-num">🏠</span><div><span class="step-time">⏱ ~30–35 минут · 5 заданий</span><h2>Домашнее задание · Урок 6.1</h2></div></div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и глаголы poder / querer / venir в формах yo, nosotros, usted.</div>
+    <p>Пройдите тренажёр ниже: карточки, сопоставление и «собери фразу». Особое внимание формам <b>puedo / puede / podemos</b>, <b>quiero / quiere / queremos</b>, <b>vengo / viene / venimos</b>.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Устное сообщение «Мой выбор школы» · 5 мин ⭐</h4>
+    <div class="hw-meta">Цель: сказать, какой тип школы вы предпочитаете, и задать вопросы.</div>
+    <p>Запишите голосовое на 5–7 предложений. Используйте шаблон:</p>
+    <div class="note blue">
+      Prefiero un colegio <b>[público / concertado / privado]</b> porque...<br>
+      Quiero...<br>
+      Puedo...<br>
+      No puedo...<br>
+      Queremos...<br>
+      Quisiera información sobre...<br>
+      ¿Puede enviarme...?<br>
+      ¿Podemos ver...?
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Prefiero un colegio concertado porque quiero comedor y puedo pagar la mensualidad. No quiero un colegio muy lejos. Queremos comparar dos centros. Quisiera información sobre el baremo y el plazo de inscripción. ¿Puede enviarme el formulario? ¿Podemos ver el comedor?')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 3. Рабочий лист · 10–12 мин</h4>
+    <div class="hw-meta">Цель: закрепить лексику, грамматику и CLIL-содержание на бумаге.</div>
+    <p>Распечатайте или заполните с экрана: типы школ, документы, деньги, глаголы, диалог, таблица сравнения.</p>
+    <a href="../../worksheets/w06-l1-parents.html" class="btn btn-ghost" style="margin-top:8px">📄 Открыть рабочий лист (A4, печать)</a>
+  </div>
+
+  <div class="hw-item">
+    <h4>🌍 Задание 4. Проект: сравнить 2 реальные школы · 8 мин</h4>
+    <div class="hw-meta">Цель: применить язык к реальной жизни семьи.</div>
+    <p>Найдите 2 школы рядом с домом через Google Maps или сайт местной администрации. Определите тип: público / concertado / privado. Заполните мини-таблицу:</p>
+    <div class="note">
+      Школа | Тип | Цена | Comedor | Transporte | Baremo | Мне подходит?<br>
+      Затем выберите одну школу и напишите причину: <i>Elijo [nombre] porque [razón].</i>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 3 мин</h4>
+    <div class="hw-meta">Цель: связать родительский урок с детским курсом.</div>
+    <p>Спросите ребёнка:</p>
+    <div class="note green">
+      ¿Qué quieres en tu colegio?<br>
+      ¿Quieres comedor? ¿Quieres autobús? ¿Quieres extraescolares?
+    </div>
+    <p>Ребёнок отвечает:</p>
+    <div class="note blue">
+      Quiero comedor. No quiero uniforme. Quiero fútbol.
+    </div>
+    <p>Родитель резюмирует:</p>
+    <div class="note">
+      Vale. Queremos un colegio con comedor y sin uniforme.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('¿Qué quieres en tu colegio? ¿Quieres comedor? ¿Quieres autobús? Vale. Queremos un colegio con comedor y sin uniforme.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Мой выбор школы»<br>
+    • 📄 Фото рабочего листа<br>
+    • 🌍 Таблица двух школ + выбор<br>
+    • ✅ «Светофор» самопроверки
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head"><span class="step-num">✅</span><div><span class="step-time">Отметьте честно — нажмите на нужный цвет</span><h2>Самопроверка «Светофор»</h2></div></div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head"><span class="step-num">🎮</span><div><span class="step-time">~7–10 мин</span><h2>Тренажёр: слова и грамматика</h2></div></div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 6.1</h3>
+    <p>Повторите слова урока в приложении Quizlet: типы школ, зачисление, деньги, жизнь школы, глаголы.</p>
+    <a href="https://quizlet.com/ru/1213402101/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-6-%D1%83%D1%80%D0%BE%D0%BA-1-flash-cards/?i=2gqp1x&x=1qqt" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- РЕСУРСЫ -->
+<section class="section">
+  <div class="step-head"><span class="step-num">🔗</span><div><span class="step-time">Для проекта и самостоятельной практики</span><h2>Внешние ресурсы</h2></div></div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">🌐 Google Maps</span>
+      <h4>Пример школы в Валенсии</h4>
+      <p>Посмотрите реальную школу на карте и потренируйтесь называть тип, адрес и услуги.</p>
+      <a href="https://www.google.com/maps/place/Colegio+Educare+Valdefuentes/@40.4933301,-3.665325,358a,35y,153.12h,44.93t/data=!3m1!1e3!4m6!3m5!1s0xd42295468ed9277:0xff19f5f5730ebca8!8m2!3d40.4906886!4d-3.6653173!16s%2Fg%2F1wg5z9_c?entry=ttu&amp;g_ep=EgoyMDI2MDkyMi4wIKXMDSoASAFQAw%3D%3D">Открыть карту →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Типы школ в Испании</h4>
+      <p>Видео-объяснение: público, concertado, privado.</p>
+      <a href="https://www.youtube.com/results?search_query=colegio+p%C3%BAblico+concertado+privado+Espa%C3%B1a" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Звонок в школу</h4>
+      <p>Аудирование реальных фраз для обращения в секретариат.</p>
+      <a href="https://www.youtube.com/results?search_query=llamada+al+colegio+espa%C3%B1ol+comprensi%C3%B3n" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏛️ Администрация</span>
+      <h4>Приём в школы</h4>
+      <p>Проверьте сроки и baremo в вашем регионе: <i>admisión escolar + провинция</i>.</p>
+      <a href="https://www.google.com/search?q=admisi%C3%B3n+escolar+Espa%C3%B1a" target="_blank" rel="noopener">Искать →</a>
+    </div>
+  </div>
+</section>
 
 <div class="lesson-nav">
   <a href="w05-l3.html">← Предыдущий<br><small>Урок 5.3 · Empadronamiento + CHECKPOINT 1</small></a>
   <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="w06-l2.html">Следующий →<br><small>Урок 6.2 · Primaria y ESO</small></a>
 </div>
+
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · 🏫 Фаза 2 El Cole y la Salud
+</footer>
 
 <!-- Скрипт-стек lesson-gate -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -80,6 +829,679 @@
 <script src="../../assets/js/app-logic.js"></script>
 <script src="../../assets/js/app.js"></script>
 <script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      item.o.map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === questions[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[questions[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ =====
+var warmQ = [
+  {q:'1. Как сказать «зарегистрироваться в мэрии»?', o:['empadronarse','matricularse','inscribirse'], c:0},
+  {q:'2. Что такое certificado de empadronamiento?', o:['Справка о регистрации','Договор аренды','Медкарта'], c:0},
+  {q:'3. Как вежливо сказать «я хотел бы получить информацию»?', o:['Quisiera información.','Dame info.','Info, por favor.'], c:0},
+  {q:'4. Что означает cita previa?', o:['Предварительная запись','Постоянная запись','Личный визит без записи'], c:0},
+  {q:'5. Как сказать «Можете прислать мне документ по email?»', o:['¿Me puede enviar el documento por email?','Envíame documento.','Documento email, please.'], c:0},
+  {q:'6. Зачем empadronamiento помогает со школой?', o:['Подтверждает адрес и влияет на баллы','Даёт бесплатный comedor','Отменяет baremo'], c:0}
+];
+
+function renderWarmup(){
+  renderQuiz('warmup-quiz', warmQ, 'wf');
+}
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  types:[
+    {es:'el colegio público', ru:'государственная школа', ex:'El colegio público es gratuito.', exRu:'Государственная школа бесплатна.'},
+    {es:'el colegio concertado', ru:'школа с государственным финансированием', ex:'El concertado tiene mensualidad.', exRu:'У concertado есть ежемесячная плата.'},
+    {es:'el colegio privado', ru:'частная школа', ex:'El privado es más caro.', exRu:'Частная школа дороже.'},
+    {es:'la escuela infantil', ru:'детский сад / дошкольное отделение', ex:'La escuela infantil es para niños pequeños.', exRu:'Детский сад для маленьких детей.'},
+    {es:'el colegio de primaria', ru:'начальная школа', ex:'Mi hijo está en primaria.', exRu:'Мой сын в начальной школе.'},
+    {es:'el instituto', ru:'средняя школа для подростков', ex:'Mi hija va al instituto.', exRu:'Моя дочь ходит в среднюю школу.'},
+    {es:'el centro educativo', ru:'учебное заведение', ex:'Buscamos un centro educativo cerca de casa.', exRu:'Мы ищем учебное заведение рядом с домом.'}
+  ],
+  docs:[
+    {es:'la matrícula', ru:'запись / оформление в школу', ex:'La matrícula es en marzo.', exRu:'Запись в марте.'},
+    {es:'la plaza escolar', ru:'место в школе', ex:'¿Hay plaza para primaria?', exRu:'Есть ли место в начальной школе?'},
+    {es:'el baremo', ru:'система баллов при зачислении', ex:'El baremo depende de la zona.', exRu:'Система баллов зависит от района.'},
+    {es:'la solicitud de admisión', ru:'заявление на зачисление', ex:'Hay que presentar la solicitud.', exRu:'Нужно подать заявление.'},
+    {es:'el distrito escolar', ru:'школьный округ', ex:'Estamos en este distrito escolar.', exRu:'Мы в этом школьном округе.'},
+    {es:'la zona educativa', ru:'образовательная зона', ex:'La zona educativa afecta al baremo.', exRu:'Образовательная зона влияет на баллы.'},
+    {es:'el plazo de inscripción', ru:'срок подачи заявления', ex:'El plazo es del 1 al 10 de marzo.', exRu:'Срок с 1 по 10 марта.'}
+  ],
+  money:[
+    {es:'la mensualidad', ru:'ежемесячная плата', ex:'La mensualidad cuesta 200 euros.', exRu:'Ежемесячная плата стоит 200 евро.'},
+    {es:'el comedor escolar', ru:'школьная столовая / обед', ex:'¿Hay comedor escolar?', exRu:'Есть ли школьный обед?'},
+    {es:'el transporte escolar', ru:'школьный автобус', ex:'El transporte escolar sale a las ocho.', exRu:'Школьный автобус отправляется в восемь.'},
+    {es:'el material escolar', ru:'учебные материалы', ex:'El material cuesta 150 euros.', exRu:'Учебные материалы стоят 150 евро.'},
+    {es:'la beca', ru:'стипендия / льгота', ex:'Podemos pedir una beca.', exRu:'Мы можем подать на стипендию.'},
+    {es:'la bonificación', ru:'скидка / льгота', ex:'Hay bonificación para hermanos.', exRu:'Есть льгота для братьев и сестёр.'},
+    {es:'el gasto extra', ru:'дополнительные расходы', ex:'Las excursiones son un gasto extra.', exRu:'Экскурсии — дополнительные расходы.'}
+  ],
+  life:[
+    {es:'el horario', ru:'расписание', ex:'El horario es de nueve a cinco.', exRu:'Расписание с девяти до пяти.'},
+    {es:'la jornada continua', ru:'сплошной учебный день', ex:'La jornada continua termina a las tres.', exRu:'Сплошной день заканчивается в три.'},
+    {es:'el horario partido', ru:'дробное расписание с перерывом', ex:'El horario partido vuelve por la tarde.', exRu:'Дробное расписание возвращается после обеда.'},
+    {es:'la tutoría', ru:'встреча с классным руководителем', ex:'Tengo tutoría el jueves.', exRu:'У меня встреча с tutor в четверг.'},
+    {es:'el AMPA', ru:'родительская ассоциация', ex:'El AMPA organiza actividades.', exRu:'AMPA организует мероприятия.'},
+    {es:'la extraescolar', ru:'кружок / внеклассное занятие', ex:'Quiero una extraescolar de fútbol.', exRu:'Я хочу кружок футбола.'},
+    {es:'el uniforme', ru:'школьная форма', ex:'Algunos centros piden uniforme.', exRu:'Некоторые школы требуют форму.'}
+  ],
+  verbs:[
+    {es:'poder', ru:'мочь', ex:'¿Puedo ver el colegio?', exRu:'Могу я посмотреть школу?'},
+    {es:'querer', ru:'хотеть', ex:'Quiero una plaza.', exRu:'Я хочу место.'},
+    {es:'venir', ru:'приходить', ex:'¿Viene a la reunión?', exRu:'Вы придёте на встречу?'},
+    {es:'elegir', ru:'выбирать', ex:'Vamos a elegir el centro.', exRu:'Мы будем выбирать заведение.'},
+    {es:'comparar', ru:'сравнивать', ex:'Comparo público y concertado.', exRu:'Я сравниваю государственную и concertado.'},
+    {es:'inscribirse', ru:'записываться', ex:'Hay que inscribirse en marzo.', exRu:'Нужно записаться в марте.'},
+    {es:'informarse', ru:'получать информацию', ex:'Quiero informarme sobre el baremo.', exRu:'Я хочу узнать про систему баллов.'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('types', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'¿___ ver el colegio mañana? (poder / yo)', ans:'puedo'},
+  {text:'¿___ enviarme el baremo? (poder / usted)', ans:'puede'},
+  {text:'___ una plaza cerca de casa. (querer / nosotros)', ans:'queremos'},
+  {text:'___ a la reunión el jueves. (venir / yo)', ans:'vengo'},
+  {text:'¿___ usted a la jornada de puertas abiertas? (venir / usted)', ans:'viene'},
+  {text:'No ___ pagar la mensualidad. (poder / yo)', ans:'puedo'},
+  {text:'___ comedor y transporte escolar. (querer / nosotros)', ans:'queremos'},
+  {text:'¿___ venir mañana al colegio? (venir / usted)', ans:'viene'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'Quiero información sobre el baremo.', translation:'Я хочу информацию о системе баллов.'},
+  {target:'¿Puedo solicitar una plaza?', translation:'Могу я подать заявление на место?'},
+  {target:'Venimos a ver el colegio.', translation:'Мы приходим посмотреть школу.'},
+  {target:'No puedo pagar el privado.', translation:'Я не могу оплатить частную школу.'},
+  {target:'¿Puede enviarme el formulario?', translation:'Можете прислать мне формуляр?'},
+  {target:'¿Quiere venir a la reunión?', translation:'Хотите прийти на встречу?'},
+  {target:'¿Viene mañana al colegio?', translation:'Вы придёте завтра в школу?'},
+  {target:'Queremos comparar tres centros.', translation:'Мы хотим сравнить три заведения.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'colegio público', ru:'обычно бесплатное обучение'},
+  {id:2, es:'colegio concertado', ru:'государственное финансирование + mensualidad'},
+  {id:3, es:'colegio privado', ru:'полностью платный, больше сервисов'},
+  {id:4, es:'baremo', ru:'система баллов для зачисления'},
+  {id:5, es:'plaza escolar', ru:'место в школе'},
+  {id:6, es:'AMPA', ru:'родительская ассоциация'},
+  {id:7, es:'¿Puede enviarme...?', ru:'Можете прислать мне...?'},
+  {id:8, es:'Queremos comparar...', ru:'Мы хотим сравнить...'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZZES =====
+var listenQ1 = [
+  {q:'1. ¿Qué tipo de colegio es?', o:['colegio público','colegio concertado','colegio privado'], c:0},
+  {q:'2. ¿Es gratuita la matrícula en el colegio público?', o:['Sí','No','Depende del AMPA'], c:0},
+  {q:'3. ¿Qué es el AMPA?', o:['Родительская ассоциация','Школьный автобус','Система баллов'], c:0},
+  {q:'4. ¿Cuánto cuesta el comedor?', o:['100 euros','120 euros','150 euros'], c:1},
+  {q:'5. ¿Cuándo es el plazo de inscripción?', o:['Del 1 al 10 de marzo','En septiembre','El sábado'], c:0},
+  {q:'6. ¿Qué documentos necesita el padre?', o:['NIE, empadronamiento y libro de familia','Solo pasaporte','Contrato y factura'], c:0}
+];
+
+var listenQ2 = [
+  {q:'1. ¿Qué quiere la familia?', o:['Ver el colegio','Pagar la matrícula','Hablar con el tutor'], c:0},
+  {q:'2. ¿Qué tipo de colegio mencionan?', o:['concertado','público','privado'], c:0},
+  {q:'3. ¿Cuándo pueden ir?', o:['el sábado a las diez','mañana por la mañana','la próxima semana'], c:0},
+  {q:'4. ¿Qué servicios tiene el centro?', o:['comedor y transporte escolar','beca y uniforme','extraescolares y beca'], c:0}
+];
+
+renderQuiz('listening-quiz-1', listenQ1, 'lq1');
+renderQuiz('listening-quiz-2', listenQ2, 'lq2');
+
+// ===== DIALOG BUILDER =====
+var lastDialogPlain = '';
+
+function buildDialog(){
+  var type = document.getElementById('b-type').value;
+  var name = document.getElementById('b-name').value || 'Santa María';
+  var family = document.getElementById('b-family').value || 'García';
+  var course = document.getElementById('b-course').value;
+  var service = document.getElementById('b-service').value;
+  var price = document.getElementById('b-price').value;
+  var visit = document.getElementById('b-visit').value;
+
+  var dialogHtml =
+    '<span class="role">Секретариат:</span> Buenos días, Colegio ' + type + ' ' + name + '. ¿En qué puedo ayudarle?\n\n' +
+    '<span class="role you">Вы:</span> Buenos días. Somos la familia ' + family + '. Quisiera información para una plaza de ' + course + '.\n\n' +
+    '<span class="role">Секретариат:</span> Muy bien. ¿Está empadronado en esta zona?\n\n' +
+    '<span class="role you">Вы:</span> Sí, tenemos el certificado de empadronamiento.\n\n' +
+    '<span class="role">Секретариат:</span> Perfecto. ¿Quiere información sobre el ' + service + '?\n\n' +
+    '<span class="role you">Вы:</span> Sí. ' + price + '\n\n' +
+    '<span class="role">Секретариат:</span> Depende del centro y del servicio. ¿Quiere venir a ver el colegio?\n\n' +
+    '<span class="role you">Вы:</span> Sí. ¿Puedo venir ' + visit + '?\n\n' +
+    '<span class="role">Секретариат:</span> Sí, puede venir. Muchas gracias.\n\n' +
+    '<span class="role you">Вы:</span> Gracias a usted. Hasta luego.';
+
+  lastDialogPlain = dialogHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML =
+    '<div class="dialog-result">' + dialogHtml + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary" id="speak-dialog-btn">🔊 Прослушать диалог</button>' +
+    '</div>';
+
+  document.getElementById('speak-dialog-btn').onclick = function(){
+    speak(lastDialogPlain);
+  };
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ===== TRAFFIC LIGHT =====
+var TL = [
+  'Различать público, concertado, privado',
+  'Понимать слова plaza, baremo, matrícula',
+  'Использовать poder: puedo / puede / podemos',
+  'Использовать querer: quiero / quiere / queremos',
+  'Использовать venir: vengo / viene / venimos',
+  'Использовать usted для обращения в школу',
+  'Заполнить таблицу сравнения 3 школ'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + rowIdx + '">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + rowIdx + '">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.types, VOCAB.docs, VOCAB.money, VOCAB.life, VOCAB.verbs);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    updateCard();
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Quiero información sobre el baremo', hint:'Я хочу информацию о системе баллов'},
+    {target:'¿Puede enviarme el formulario?', hint:'Можете прислать мне формуляр?'},
+    {target:'¿Podemos ver el comedor?', hint:'Можем мы посмотреть столовую?'},
+    {target:'Venimos a elegir colegio', hint:'Мы приходим выбирать школу'},
+    {target:'No puedo pagar el privado', hint:'Я не могу оплатить частную школу'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
 
 </body>
 </html>
