@@ -161,9 +161,40 @@
 function $(id){return document.getElementById(id);}
 function shuf(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
 var esVoice=null;
+var AUD={
+'El lunes tengo Mates a las nueve.':'s2-lunes',
+'El martes tengo Plástica a las diez.':'s2-martes',
+'Son las dos y media.':'s2-dos-media',
+'Es la una.':'s2-una',
+'Un lápiz, una goma, un cuaderno.':'s1-objetos',
+'En mi mochila hay un lápiz, una goma y un cuaderno.':'s1-mochila',
+'Yo estoy en Primaria. Tengo ocho años.':'s3-primaria',
+'La pizarra está delante de la mesa. Los libros están en la estantería. La papelera está al lado de la puerta.':'s4-pizarra',
+'Mi clase es luminosa y moderna porque hay muchas ventanas y ordenadores.':'s5-clase',
+'En mi clase se puede trabajar en equipo.':'s6-equipo',
+'Buenos días. Me llamo Anna. El lunes tengo Mates a las nueve.':'s7-saludos',
+'Profe, ¿puedo ir al baño, por favor?':'s7-bano',
+'Mi clase es grande y luminosa. Se puede trabajar en equipo. No se puede usar el móvil.':'s7-clase',
+'Puedo presentarme. Puedo pedir ayuda. Puedo describir mi clase.':'s7-habilidades',
+'¡Estación superada!':'estacion',
+'¡Felicidades! ¡Has superado la Estación dos!':'diploma'
+};
 function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;var fb=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){if(!fb)fb=v[i];if(v[i].localService===true){esVoice=v[i];break;}}}if(!esVoice)esVoice=fb;if(!esVoice&&window.console&&console.warn)console.warn('[mudro] NO Spanish voice; all voices:',v.map(function(x){return x.name+'|'+x.lang+'|local='+x.localService;}).join(' ; '));}
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
-function speak(t){if(!t||typeof speechSynthesis==='undefined')return;loadVoices();if(!esVoice&&window.console&&console.warn)console.warn('[mudro] speaking WITHOUT Spanish voice');var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;if(esVoice)u.voice=esVoice;u.onerror=function(e){if(window.console&&console.warn)console.warn('speak error:',e&&e.error,'voice:',esVoice?(esVoice.name+' local='+esVoice.localService):'null');};speechSynthesis.cancel();speechSynthesis.speak(u);}
+function audTTS(t){loadVoices();if(!esVoice&&window.console&&console.warn)console.warn('[mudro] speaking WITHOUT Spanish voice');var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;if(esVoice)u.voice=esVoice;u.onerror=function(e){if(window.console&&console.warn)console.warn('speak error:',e&&e.error,'voice:',esVoice?(esVoice.name+' local='+esVoice.localService):'null');};speechSynthesis.cancel();speechSynthesis.speak(u);}
+function speak(t){
+  if(!t||typeof speechSynthesis==='undefined')return;
+  var k=AUD[t];
+  if(k){
+    var a=new Audio('audio/'+k+'.mp3'),done=false;
+    function fb(){if(done)return;done=true;audTTS(t);}
+    a.onerror=fb;
+    var p=a.play();
+    if(p&&p.catch)p.catch(fb);
+    return;
+  }
+  audTTS(t);
+}
 
 var stars=0, stamps=[false,false,false,false,false,false,false];
 var SNAMES=['🎒','📅','🏫','🪑','🎨','🚦','🎬'];
