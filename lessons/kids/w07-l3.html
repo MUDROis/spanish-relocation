@@ -389,6 +389,58 @@ buildPassport();
 for(var s=1;s<=7;s++)renderRound(s);
 updDip();
 
+/* ===== ТРЕНАЖЁР 1: СУПЕР-СОПОСТАВЛЕНИЕ (30 пар) ===== */
+var SUPERM=[
+ {pairs:[['el lápiz','карандаш'],['la goma','ластик'],['el cuaderno','тетрадь'],['el estuche','пенал'],['la regla','линейка'],['la mochila','рюкзак'],['los lápices','карандаши'],['las nueve','девять часов'],['la hora','час (время)'],['Mates','математика']]},
+ {pairs:[['el lunes','понедельник'],['el martes','вторник'],['el miércoles','среда'],['el jueves','четверг'],['el viernes','пятница'],['el sábado','суббота'],['el domingo','воскресенье'],['el colegio','школа (6–12)'],['el instituto','средняя школа (12–16)'],['la ESO','старшие классы']]},
+ {pairs:[['Infantil','дошкольное звено'],['Primaria','начальная школа'],['el trimestre','триместр'],['la pizarra','доска'],['la mesa','парта'],['la silla','стул'],['la papelera','корзина'],['la puerta','дверь'],['la ventana','окно'],['el reloj','часы (настенные)']]}
+];
+var SM={s:0,sel:null,done:0,stars:0};
+function renderSM(){
+  var st=SUPERM[SM.s];
+  SM.sel=null;SM.done=0;
+  $('sm-name').textContent=st.name||String(SM.s+1);
+  $('sm-progress').textContent='0/10';
+  $('sm-fb').textContent='';
+  $('sm-next').style.display='none';
+  var L=$('sm-left'),R=$('sm-right');
+  L.innerHTML='';R.innerHTML='';
+  shuf(st.pairs.slice()).forEach(function(p){
+    var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];
+    d.onclick=function(){smClick(d);};L.appendChild(d);
+  });
+  shuf(st.pairs.slice()).forEach(function(p){
+    var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];
+    d.onclick=function(){smClick(d);};R.appendChild(d);
+  });
+}
+function smClick(d){
+  if(d.className.indexOf('matched')>=0)return;
+  if(!SM.sel){SM.sel=d;d.className='match-item selected';return;}
+  if(SM.sel===d){d.className='match-item';SM.sel=null;return;}
+  if(SM.sel.dataset.v===d.dataset.v){
+    SM.sel.className='match-item matched';d.className='match-item matched';SM.sel=null;
+    SM.done++;$('sm-progress').textContent=SM.done+'/10';
+    audTTS(SUPERM[SM.s].pairs.filter(function(p){return p[0]===d.dataset.v;})[0][0]);
+    $('sm-fb').textContent='✅ Найдено '+SM.done+'/10';
+    if(SM.done===10){
+      SM.stars++;$('sm-stars').textContent=SM.stars;
+      $('sm-fb').textContent='🏆 Этап пройден! ⭐ +1';
+      $('sm-next').style.display='';
+    }
+  }else{
+    var a=SM.sel;d.className='match-item wrong';a.className='match-item wrong';SM.sel=null;
+    var ok=SUPERM[SM.s].pairs.filter(function(p){return p[0]===d.dataset.v;})[0];
+    var fb=ok?ok[0]+' — '+ok[1]:'?';
+    $('sm-fb').textContent='❌ Правильно: '+fb;
+    setTimeout(function(){a.className='match-item';d.className='match-item';},600);
+  }
+}
+function smNext(){SM.s++;if(SM.s>=SUPERM.length){$('sm-fb').textContent='🎉 Супер-сопоставление пройдено! '+SM.stars+' из 3 звёзд. ¡Enhorabuena!';$('sm-next').style.display='none';return;}renderSM();}
+$('sm-next').onclick=smNext;
+$('sm-reset').onclick=function(){SM.s=0;SM.stars=0;$('sm-stars').textContent='0';renderSM();};
+renderSM();
+
 document.querySelectorAll('.tl-cell').forEach(function(c){c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});});
 $('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
 </script>

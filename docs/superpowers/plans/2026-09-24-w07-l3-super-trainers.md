@@ -191,7 +191,7 @@ var SM={s:0,sel:null,done:0,stars:0};
 function renderSM(){
   var st=SUPERM[SM.s];
   SM.sel=null;SM.done=0;
-  $('sm-name').textContent=st.name||(SM.s+1);
+  $('sm-name').textContent=String(SM.s+1);
   $('sm-progress').textContent='0/10';
   $('sm-fb').textContent='';
   $('sm-next').style.display='none';
