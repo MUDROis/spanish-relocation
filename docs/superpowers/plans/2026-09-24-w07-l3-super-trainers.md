@@ -371,3 +371,18 @@ git commit -m "w07-l3: тренажёр супер-конструктор (10 ф
 git add lessons/kids/w07-l3.html
 git commit -m "w07-l3: финальная регрессия супер-тренажёров"
 ```
+
+### Task 5: Персистентность итога сопоставления (localStorage)
+
+Доводка по спеке (§72, ключ `mudro_kids_w07l3_supermatch`) — добавлена в ходе исполнения.
+
+**Files:**
+- Modify: `lessons/kids/w07-l3.html` (`smNext`, новая `saveSM()`/`loadSM()`, вызов `loadSM()` после `renderSM()`)
+- Test: `C:\Users\Lenovo\AppData\Local\Temp\opencode\w07-l3-harness.js` (стаб `localStorage` теперь записывает в `storage`; тест «all 3 stages done»)
+
+**Изменения урока:**
+- `saveSM()`: `localStorage.setItem('mudro_kids_w07l3_supermatch', String(SM.stars))` (в `try/catch`), вызывается в `smNext` при завершении 3-го этапа.
+- `loadSM()`: при старте показывает лучший результат «⭐ Лучший результат: N из 3 звёзд», если фб пуст.
+
+- [ ] **Step 1: Прогнать харнесс** — `ALL PASS` включая новый тест.
+- [ ] **Step 2: Commit**

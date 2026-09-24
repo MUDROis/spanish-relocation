@@ -436,10 +436,13 @@ function smClick(d){
     setTimeout(function(){a.className='match-item';d.className='match-item';},600);
   }
 }
-function smNext(){SM.s++;if(SM.s>=SUPERM.length){$('sm-fb').textContent='🎉 Супер-сопоставление пройдено! '+SM.stars+' из 3 звёзд. ¡Enhorabuena!';$('sm-next').style.display='none';return;}renderSM();}
+function smNext(){SM.s++;if(SM.s>=SUPERM.length){$('sm-fb').textContent='🎉 Супер-сопоставление пройдено! '+SM.stars+' из 3 звёзд. ¡Enhorabuena!';$('sm-next').style.display='none';saveSM();return;}renderSM();}
+function saveSM(){try{if(window.localStorage)localStorage.setItem('mudro_kids_w07l3_supermatch',String(SM.stars));}catch(e){}}
+function loadSM(){var p=$('sm-fb');if(window.localStorage){var s=localStorage.getItem('mudro_kids_w07l3_supermatch');if(s&&p.textContent==='')p.textContent='⭐ Лучший результат: '+s+' из 3 звёзд';}}
 $('sm-next').onclick=smNext;
 $('sm-reset').onclick=function(){SM.s=0;SM.stars=0;$('sm-stars').textContent='0';renderSM();};
 renderSM();
+loadSM();
 
 /* ===== ТРЕНАЖЁР 2: СУПЕР-КОНСТРУКТОР (10 фраз) ===== */
 var SUPERC=[
