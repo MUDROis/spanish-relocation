@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 23 · ¿Cómo es tu familia? — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --blue:#2274A5; --rose:#E5989B;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E8F5F2,#FFE5EC,#FFF3DC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-green{background:#2E7D32}.c-rose{background:var(--rose)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#E8F5F2;border:1.5px dashed var(--teal);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:90px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--teal);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--teal)}
+  .build-line{border-bottom:1.6px dashed var(--teal);height:24px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🎭 ¿Cómo es tu familia?</h1>
+    <div class="sub">Рабочий лист к Уроку 23 · Станция 3: Mi Mundo · характер, профессии, внешность, сравнение</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Это <strong>экзамен по уроку 23</strong>! Работай самостоятельно, а потом проверь вместе с родителем или учителем. Вспоминай характер, профессии, внешность и сравнение!</div>
+
+  <!-- 1. ХАРАКТЕР: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">1</span>
+      <span class="ex-title">Соедини характер и перевод</span>
+      <span class="ex-skill">🗣 Лексика · характер</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>😊 simpático / simpática</td><td>а) умный</td></tr>
+      <tr><td><span class="ans-box"></span>😄 divertido / divertida</td><td>б) стеснительный</td></tr>
+      <tr><td><span class="ans-box"></span>🤗 cariñoso / cariñosa</td><td>в) весёлый</td></tr>
+      <tr><td><span class="ans-box"></span>💼 trabajador / trabajadora</td><td>г) трудолюбивый</td></tr>
+      <tr><td><span class="ans-box"></span>🧠 inteligente</td><td>д) ласковый</td></tr>
+      <tr><td><span class="ans-box"></span>😳 tímido / tímida</td><td>е) добрый, приятный</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ПРОФЕССИИ: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">2</span>
+      <span class="ex-title">Соедини профессию и перевод</span>
+      <span class="ex-skill">🗣 Лексика · профессии</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>👨‍⚕️ médico / médica</td><td>а) повар</td></tr>
+      <tr><td><span class="ans-box"></span>👨‍🏫 profesor / profesora</td><td>б) полицейский</td></tr>
+      <tr><td><span class="ans-box"></span>👨‍🍳 cocinero / cocinera</td><td>в) врач</td></tr>
+      <tr><td><span class="ans-box"></span>👮 policía</td><td>г) учитель</td></tr>
+      <tr><td><span class="ans-box"></span>👨‍🚒 bombero / bombera</td><td>д) программист</td></tr>
+      <tr><td><span class="ans-box"></span>👨‍💻 informático / informática</td><td>е) пожарный</td></tr>
+    </table>
+  </div>
+
+  <!-- 3. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-rose">3</span>
+      <span class="ex-title">Угадай по описанию: характер или профессия</span>
+      <span class="ex-skill">🗣 Лексика · описание</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>simpático · divertido · cariñoso · trabajador · médico · profesor · bombero · tímido</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">😊</span> Siempre ayuda a todos. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">😄</span> Siempre dice cosas graciosas. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">👨‍⚕️</span> Trabaja en un hospital. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">👨‍🏫</span> Trabaja en un colegio. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">👨‍🚒</span> Apaga los fuegos. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">😳</span> No le gusta hablar con gente nueva. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: ВСТАВЬ ПРОПУЩЕННОЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">4</span>
+      <span class="ex-title">Вставь пропущенное слово</span>
+      <span class="ex-skill">🧩 Грамматика · ser / tener</span>
+    </div>
+    <div class="hint-box">💡 <strong>ser</strong> = характер/профессия (постоянное), <strong>tiene</strong> = внешность/возраст (что имеет).</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Mi abuelo <span class="g"></span> médico. <span style="color:#999;font-size:11px">(es / tiene)</span></div>
+      <div class="gap-item"><span class="num">2</span>Mi madre <span class="g"></span> el pelo rubio. <span style="color:#999;font-size:11px">(es / tiene)</span></div>
+      <div class="gap-item"><span class="num">3</span>Mi tía <span class="g"></span> cariñosa. <span style="color:#999;font-size:11px">(es / tiene)</span></div>
+      <div class="gap-item"><span class="num">4</span>Mi primo <span class="g"></span> los ojos verdes. <span style="color:#999;font-size:11px">(es / tiene)</span></div>
+      <div class="gap-item"><span class="num">5</span>Mi abuela <span class="g"></span> 70 años. <span style="color:#999;font-size:11px">(es / tiene)</span></div>
+      <div class="gap-item"><span class="num">6</span>Mi padre <span class="g"></span> trabajador. <span style="color:#999;font-size:11px">(es / tiene)</span></div>
+    </div>
+  </div>
+
+  <!-- 5. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Mi</span><span class="build-word">madre</span><span class="build-word">tiene</span><span class="build-word">el</span><span class="build-word">pelo</span><span class="build-word">castaño.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Mi</span><span class="build-word">abuelo</span><span class="build-word">es</span><span class="build-word">calvo.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Mi</span><span class="build-word">padre</span><span class="build-word">es</span><span class="build-word">médico.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Mi</span><span class="build-word">hermana</span><span class="build-word">tiene</span><span class="build-word">los</span><span class="build-word">ojos</span><span class="build-word">verdes.</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 6. ГРАММАТИКА: СРАВНЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">6</span>
+      <span class="ex-title">Сравни: más ... que</span>
+      <span class="ex-skill">🧩 Грамматика · сравнение</span>
+    </div>
+    <div class="hint-box">💡 <strong>Формула:</strong> <b>más + прилагательное + que</b>. Пример: Mi padre es más alto que mi madre.</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Mi padre es <span class="g"></span> alto <span class="g"></span> mi madre. <span style="color:#999;font-size:11px">(más / que)</span></div>
+      <div class="gap-item"><span class="num">2</span>Mi abuela es más <span class="g"></span> que mi abuelo. <span style="color:#999;font-size:11px">(cariñosa)</span></div>
+      <div class="gap-item"><span class="num">3</span>Yo soy <span class="g"></span> joven <span class="g"></span> mi prima. <span style="color:#999;font-size:11px">(más / que)</span></div>
+      <div class="gap-item"><span class="num">4</span>Mi madre es más <span class="g"></span> que mi padre. <span style="color:#999;font-size:11px">(baja)</span></div>
+      <div class="gap-item"><span class="num">5</span>Mi tía es <span class="g"></span> divertida <span class="g"></span> mi tío. <span style="color:#999;font-size:11px">(más / que)</span></div>
+      <div class="gap-item"><span class="num">6</span>Mi abuelo es <span class="g"></span> que yo. <span style="color:#999;font-size:11px">(más viejo)</span></div>
+    </div>
+  </div>
+
+  <!-- 7. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">7</span>
+      <span class="ex-title">Прочитай текст и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Sofía. Tengo 10 años. Mi familia es grande. Mi padre se llama Carlos. Es médico. Es trabajador e inteligente. Tiene el pelo negro y los ojos marrones. Es alto. Mi madre se llama Elena. Es profesora. Es cariñosa y divertida. Tiene el pelo rubio y los ojos verdes. Es más baja que mi padre. Mi hermano se llama Diego. Tiene 7 años. Es tímido pero muy simpático. Tiene el pelo castaño. Es más joven que yo. ¡Me gusta mi familia!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Cómo es el padre de Sofía? <span class="ru">(Какой папа Софии?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿De qué color tiene el pelo la madre? <span class="ru">(Какого цвета волосы у мамы?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Quién es más alto, el padre o la madre? <span class="ru">(Кто выше, папа или мама?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Cómo es el hermano Diego? <span class="ru">(Какой брат Диего?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Quién es más joven, Sofía o Diego? <span class="ru">(Кто моложе, София или Диего?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 8. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">8</span>
+      <span class="ex-title">Послушай и напиши ответ</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши короткий ответ (профессия, характер или цвет)!</div>
+    <div class="listen-item"><span class="lnum">1.</span>¿Qué es tu madre? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span>¿Cómo es tu abuelo? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span>¿De qué color tiene el pelo tu padre? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span>¿Cómo es tu tía? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span>¿Quién es más alto, tu padre o tu madre? → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) «Mi madre es profesora.» · 2) «Mi abuelo es cariñoso y divertido.» · 3) «Mi padre tiene el pelo negro.» · 4) «Mi tía es simpática y trabajadora.» · 5) «Mi padre es más alto que mi madre.»</div>
+  </div>
+
+  <!-- 9. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">9</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Расскажи о профессии мамы:<br><span class="tpl">Mi madre es profesora. Es cariñosa.</span><span class="ru">Моя мама — учительница. Она ласковая.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Опиши волосы папы:<br><span class="tpl">Mi padre tiene el pelo castaño y los ojos marrones.</span><span class="ru">У моего папы каштановые волосы и карие глаза.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Сравни маму и папу:<br><span class="tpl">Mi padre es más alto que mi madre.</span><span class="ru">Мой папа выше моей мамы.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Расскажи о бабушке:<br><span class="tpl">Mi abuela es cariñosa y divertida. Tiene el pelo blanco.</span><span class="ru">Моя бабушка ласковая и весёлая. У неё белые волосы.</span><span class="speak-check"></span></div>
+    <div class="speak-item">5. Опиши брата/сестру или друга:<br><span class="tpl">Mi hermano es tímido pero simpático. Es más joven que yo.</span><span class="ru">Мой брат стеснительный, но добрый. Он моложе меня.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 10. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">10</span>
+      <span class="ex-title">Сочинение «Mi familia»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) Me llamo... y tengo... años. · 2) Mi padre se llama... Es... (профессия). · 3) Es... (характер). Tiene el pelo... · 4) Mi madre se llama... Es... · 5) Tiene el pelo... y los ojos... · 6) Mi padre es más... que mi madre. · 7) Mi hermano/hermana es... · 8) ¡Me gusta mi familia!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 11. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">11</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Описывать характер 6 прилагательными</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Называть 6 профессий</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить о волосах и глазах (tiene el pelo...)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сравнивать: más ... que</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать текст о семье</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Описать члена семьи по формуле 6 пунктов</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 23 · ¡Me gusta mi familia! 👨‍👩‍👧</div>
+</div>
+
+</body>
+</html>
