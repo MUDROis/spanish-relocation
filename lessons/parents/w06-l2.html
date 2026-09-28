@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 6.2 · Primaria и ESO — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;
+    --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
+    --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
+    --ok:#7A8B4C;--bad:#E2725B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Nunito','Segoe UI',Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;
+  }
+  a{color:var(--p4)}
+  .topbar{background:var(--card);box-shadow:var(--shadow);padding:12px 0;position:sticky;top:0;z-index:100}
+  .topbar .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .topbar a{text-decoration:none;font-weight:700;color:var(--ink)}
+  .topbar a:hover{color:var(--p1)}
+  .lesson-badge{font-size:.85rem;color:var(--muted);font-weight:600;background:#FFF7E0;padding:2px 10px;border-radius:999px}
+
+  .hero{
+    background:linear-gradient(135deg,var(--p2),var(--p4));
+    color:#fff;padding:44px 20px 38px;text-align:center;position:relative;overflow:hidden;
+  }
+  .hero::after{content:'🗓️';position:absolute;right:20px;top:20px;font-size:3rem;opacity:.22}
+  .hero h1{font-size:2rem;margin-bottom:8px}
+  .hero p{font-size:1.1rem;opacity:.95;max-width:680px;margin:0 auto}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .hero-chip{background:rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:700}
+  .hero-chip.clil{background:#FFD700;color:#2B2118}
+
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{
+    width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0;
+  }
+  .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{
+    display:inline-block;padding:11px 22px;border-radius:10px;border:none;
+    font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s;
+  }
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{
+    background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;
+    cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;
+    vertical-align:middle;margin:0 4px;
+  }
+  .speak-btn:hover{background:#66743f}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+
+  .situation-box{background:#fff;border:3px solid var(--p3);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p3)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#FFF7E0;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p3)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{
+    position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent;
+  }
+  .vocab-front{background:var(--p2);color:#fff;border-color:var(--p2)}
+  .vocab-front .es{font-size:1.08rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
+  .vocab-front .ru{font-size:.9rem;opacity:.95;font-weight:600;color:#fff}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p2);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--p2);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:8px}
+  .grammar-box .formula{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.55}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+  .grammar-table th,.grammar-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .grammar-table th{background:#FBF3EA;color:var(--p1);font-size:.86rem}
+  .grammar-table tr:nth-child(even) td{background:#FFFDF9}
+  .grammar-table .practice{background:#F0F7E6;color:var(--p2);font-weight:700}
+  .grammar-table .reference{color:var(--muted);font-style:italic}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+
+  .freq-scale{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+  .freq-chip{padding:6px 12px;border-radius:999px;font-weight:700;font-size:.85rem;color:#fff}
+  .freq-chip.f100{background:#7A8B4C}
+  .freq-chip.f75{background:#9EB066}
+  .freq-chip.f50{background:#E9A13B}
+  .freq-chip.f10{background:#E2725B}
+  .freq-chip.f0{background:#7A6A5C}
+
+  .fill-input{
+    border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;
+    font-size:1rem;font-weight:700;color:var(--p4);min-width:110px;text-align:center;font-family:inherit;
+  }
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:360px}
+  .match-item{
+    padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;
+    text-align:center;font-weight:600;transition:.2s;user-select:none;
+  }
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.75}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{
+    min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;
+  }
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.02rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p1)}
+  .dialog-box .who.you{color:var(--p4)}
+  .dialog-box .dialog-text{display:none}
+  .dialog-box.open .dialog-text{display:block;margin-top:10px}
+
+  .clil-text{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:18px;margin-bottom:16px}
+  .clil-text h4{color:var(--p2);margin-bottom:8px}
+  .clil-text p{font-size:.95rem;margin-bottom:10px}
+
+  .schedule-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:10px 0}
+  .schedule-table th,.schedule-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .schedule-table th{background:#FBF3EA;color:var(--p1)}
+  .schedule-table input,.schedule-table select{
+    width:100%;border:none;border-bottom:1.5px dashed var(--p4);background:transparent;
+    padding:4px;font-family:inherit;font-size:.9rem;
+  }
+  .schedule-table select{border-bottom:1.5px dashed var(--p2)}
+
+  .dialog-builder{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p2);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{
+    width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit;
+  }
+  .dialog-builder input[type="text"]:focus,.dialog-builder select:focus{outline:none;border-color:var(--p4)}
+  .dialog-result{
+    background:#FFF7E0;border-radius:12px;padding:18px;font-family:'Courier New',monospace;
+    font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p3);
+  }
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{
+    width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;
+    background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center;
+  }
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-top:14px}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .resource-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.2s;border-top:4px solid var(--p4)}
+  .resource-card:hover{transform:translateY(-3px)}
+  .resource-card h4{font-size:1rem;margin-bottom:6px}
+  .resource-card p{font-size:.85rem;color:var(--muted);margin-bottom:12px;min-height:40px}
+  .resource-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem}
+  .resource-card a:hover{background:var(--p1)}
+  .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{
+    text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);
+    font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center;
+  }
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  .lesson-nav span.soon{
+    background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);
+    font-weight:700;color:var(--ink-soft);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a href="../../index.html">← К карте курса</a>
+  <span class="lesson-badge">Неделя 6 · Урок 2 из 3 · Блок 2 El Cole y la Salud</span>
+</div></div>
+
+<section class="hero">
+  <h1>🏫 Урок 6.2 · Primaria и ESO</h1>
+  <p>Школьный день ребёнка: расписание, предметы, оценки и рутина семьи</p>
+  <div class="hero-chips">
+    <span class="hero-chip clil">🧠 CLIL: школьный день в Испании</span>
+    <span class="hero-chip">🎯 Цель: понять расписание и рассказать о рутине семьи</span>
+    <span class="hero-chip">🗣 35 слов в 5 категориях</span>
+    <span class="hero-chip">🧩 наречия частотности + 5 глаголов</span>
+    <span class="hero-chip">🗓 Продукт: расписание для 8 и 12 лет</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">0</div>
+    <div class="step-title">
+      <h2>Разминка + вопрос из жизни</h2>
+      <span class="time">00:00 – 05:00 · Повторение урока 6.1 и письмо из школы</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Вы уже выбрали школу по типу (público / concertado / privado). Теперь пора понять, как устроен школьный день. Но сначала — блиц по прошлому уроку.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 6.1</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">📧</div>
+      <div class="sit-title">Одна ситуация: письмо из школы</div>
+    </div>
+    <div class="sit-intro">
+      Вы открыли сайт школы. Там расписание для <b>primaria</b> и <b>ESO</b>. Отвечайте вслух, нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Сайт школы:</div>
+      <div class="es">Primaria: jornada continua. Entrada: 9:00. Salida: 13:30. Recreo: 11:00–11:30.</div>
+      <div class="ru">Начальная школа: сплошной день. Приход: 9:00. Уход: 13:30. Перемена: 11:00–11:30.</div>
+      <button class="speak-btn" onclick="speak('Primaria: jornada continua. Entrada: 9:00. Salida: 13:30. Recreo: 11:00–11:30.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Сайт школы:</div>
+      <div class="es">ESO: horario partido los martes y jueves. Salida: 17:00. Actividades extraescolares: 16:00–17:30.</div>
+      <div class="ru">ESO: дробное расписание по вторникам и четвергам. Уход: 17:00. Кружки: 16:00–17:30.</div>
+      <button class="speak-btn" onclick="speak('ESO: horario partido los martes y jueves. Salida: 17:00. Actividades extraescolares: 16:00–17:30.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ-шаблон (если звоните в школу):</div>
+      <div class="es">Buenos días. Quisiera entender el horario de primaria y ESO.</div>
+      <div class="ru">Добрый день. Я хотел бы понять расписание начальной школы и ESO.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Quisiera entender el horario de primaria y ESO.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">1</span>Что означает <b>jornada continua</b>?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Ребёнок учится только утром и обедает дома.</div>
+        <div class="q-opt" data-o="1">Ребёнок учится утром и вечером.</div>
+        <div class="q-opt" data-o="2">Ребёнок не ходит в школу по вторникам.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">2</span>Что означает <b>horario partido</b>?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Школа работает только по понедельникам.</div>
+        <div class="q-opt" data-o="1">Утром занятия, потом длинный перерыв, потом снова занятия.</div>
+        <div class="q-opt" data-o="2">Ребёнок гуляет весь день.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня разбираем <b>школьный день</b>: <i>primaria</i> для ребёнка 8 лет и <i>ESO</i> для подростка 12 лет. Вы научитесь читать расписание, понимать предметы, оценки и говорить о рутине с помощью наречий: <b>siempre, normalmente, a veces, casi nunca, nunca</b>.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">1</div>
+    <div class="step-title">
+      <h2>Карточки со словами: 35 слов о школе</h2>
+      <span class="time">05:00 – 15:00 · 5 категорий</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('levels',this)">🎒 Уровни (7)</button>
+      <button class="tab" onclick="showVocab('time',this)">🕒 Расписание (7)</button>
+      <button class="tab" onclick="showVocab('subjects',this)">📚 Предметы (7)</button>
+      <button class="tab" onclick="showVocab('grades',this)">📝 Оценка (7)</button>
+      <button class="tab" onclick="showVocab('freq',this)">🔁 Частотность (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note green" style="margin-top:16px">
+      💡 <b>CLIL-минимум:</b> <b>primaria</b> = начальная школа (6–12 лет), обычно один главный <i>tutor</i>, чаще <i>jornada continua</i>. <b>ESO</b> = средняя школа (12–16 лет), разные учителя, чаще <i>horario partido</i>.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      🗣 <b>Приём «Два ребёнка»:</b> представьте детей: 8 лет → <i>primaria</i>; 12 лет → <i>ESO</i>. Скажите по одной фразе на каждого: <i>«Mi hijo siempre entra a las nueve.»</i> / <i>«Mi hija a veces sale a las cinco.»</i>
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c2">2</div>
+    <div class="step-title">
+      <h2>Грамматика: наречия частотности + глаголы</h2>
+      <span class="time">15:00 – 23:00 · Фокус: yo / nosotros / usted</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Чтобы рассказать о школьной рутине, нужны наречия частотности и 5 ключевых глаголов.</p>
+
+    <div class="grammar-box">
+      <h4>📐 Шкала частотности</h4>
+      <div class="freq-scale">
+        <span class="freq-chip f100">siempre · 100%</span>
+        <span class="freq-chip f75">normalmente · 75%</span>
+        <span class="freq-chip f50">a veces · 50%</span>
+        <span class="freq-chip f10">casi nunca · 10%</span>
+        <span class="freq-chip f0">nunca · 0%</span>
+      </div>
+      <div class="example">
+        <b>Yo siempre hago los deberes por la tarde.</b> — Я всегда делаю домашние задания после обеда.<br>
+        <b>Nosotros normalmente salimos a las tres.</b> — Мы обычно уходим в три.<br>
+        <b>Usted a veces tiene reunión con el tutor.</b> — Вы иногда встречаетесь с классным руководителем.<br>
+        <b>Yo casi nunca llego tarde.</b> — Я почти никогда не опаздываю.<br>
+        <b>Nosotros nunca tenemos clase los domingos.</b> — У нас никогда нет занятий по воскресеньям.
+      </div>
+    </div>
+
+    <div class="note blue">
+      📌 <b>Фокус практики:</b> в упражнениях используем <b>yo, nosotros, usted</b>. Формы <b>tú / vosotros / ellos</b> оставлены в справочных таблицах для распознавания.
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Пять глаголов школьной рутины</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Лицо</th>
+          <th>estudiar</th>
+          <th>tener</th>
+          <th>hacer</th>
+          <th>salir</th>
+          <th>empezar</th>
+        </tr>
+        <tr>
+          <td class="practice">yo</td>
+          <td class="practice">estudio</td>
+          <td class="practice">tengo</td>
+          <td class="practice">hago</td>
+          <td class="practice">salgo</td>
+          <td class="practice">empiezo</td>
+        </tr>
+        <tr>
+          <td class="reference">tú</td>
+          <td class="reference">estudias</td>
+          <td class="reference">tienes</td>
+          <td class="reference">haces</td>
+          <td class="reference">sales</td>
+          <td class="reference">empiezas</td>
+        </tr>
+        <tr>
+          <td class="practice">usted</td>
+          <td class="practice">estudia</td>
+          <td class="practice">tiene</td>
+          <td class="practice">hace</td>
+          <td class="practice">sale</td>
+          <td class="practice">empieza</td>
+        </tr>
+        <tr>
+          <td class="practice">nosotros</td>
+          <td class="practice">estudiamos</td>
+          <td class="practice">tenemos</td>
+          <td class="practice">hacemos</td>
+          <td class="practice">salimos</td>
+          <td class="practice">empezamos</td>
+        </tr>
+        <tr>
+          <td class="reference">vosotros</td>
+          <td class="reference">estudiáis</td>
+          <td class="reference">tenéis</td>
+          <td class="reference">hacéis</td>
+          <td class="reference">salís</td>
+          <td class="reference">empezáis</td>
+        </tr>
+        <tr>
+          <td class="reference">ellos / ustedes</td>
+          <td class="reference">estudian</td>
+          <td class="reference">tienen</td>
+          <td class="reference">hacen</td>
+          <td class="reference">salen</td>
+          <td class="reference">empiezan</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Наречие + глагол: формула</h4>
+      <div class="formula">[субъект] + [наречие] + [глагол] + [дополнение]</div>
+      <div class="example">
+        <b>Mi hijo siempre hace los deberes.</b> — Мой сын всегда делает уроки.<br>
+        <b>Mi hija normalmente sale a las cinco.</b> — Моя дочь обычно уходит в пять.<br>
+        <b>Nosotros casi nunca llegamos tarde.</b> — Мы почти никогда не опаздываем.<br>
+        <b>El niño nunca estudia los domingos.</b> — Ребёнок никогда не учится по воскресеньям.
+      </div>
+    </div>
+
+    <div class="note green">
+      📌 <b>Главное правило:</b> наречие ставим <b>перед глаголом</b>.<br>
+      <i>Yo siempre hago…</i> · <i>Nosotros normalmente salimos…</i> · <i>Usted a veces tiene…</i>
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«Yo tengo siempre clase.»</i> ❌ → <i>«Yo siempre tengo clase.»</i> ✅<br>
+      • <i>«Nosotros nunca no tenemos clase.»</i> ❌ → <i>«Nosotros nunca tenemos clase.»</i> ✅<br>
+      • <i>«Usted a veces tienen reunión.»</i> ❌ → <i>«Usted a veces tiene reunión.»</i> ✅<br>
+      • <i>«Mi hijo siempre entrá a las nueve.»</i> ❌ → <i>«Mi hijo siempre entra a las nueve.»</i> ✅
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c3">3</div>
+    <div class="step-title">
+      <h2>Практика: применим слова и грамматику</h2>
+      <span class="time">23:00 – 30:00 · 3 упражнения</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь наречие частотности</h4>
+    <p class="hint">Используйте: <b>siempre / normalmente / a veces / casi nunca / nunca</b>. Подсказка в скобках — ориентир по смыслу.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери школьную фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь термин и значение</h4>
+    <p class="hint">Нажмите испанский термин слева, затем его значение справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c4">4</div>
+    <div class="step-title">
+      <h2>Аудирование: расписание для двоих детей</h2>
+      <span class="time">30:00 – 37:00 · primaria и ESO в одном диалоге</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speak('Buenos días, Colegio Santa María. ¿En qué puedo ayudarle? Buenos días. Quisiera entender el horario de primaria y ESO. Claro. ¿Tiene un niño en primaria? Sí, tiene ocho años. Y mi hija tiene doce años. Ella empieza la ESO. Muy bien. En primaria, la jornada es continua. La entrada es a las nueve y la salida a las tres y media. ¿Y en ESO? En ESO hay horario partido los martes y jueves. Salen a las cinco. A veces tienen actividades por la tarde. Nosotros normalmente recogemos a los niños a las tres. ¿Pueden comer en el comedor? Sí. El comedor es de tres a cuatro. Después, los niños pueden hacer los deberes guiados. Perfecto. ¿Cuándo es la primera tutoría? La primera tutoría es el próximo lunes a las cinco. Muchas gracias. ¿Puede enviarme el horario por email? Sí, claro.')" style="margin-bottom:12px">🔊 Прослушать диалог</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who op">Секретариат:</span> Buenos días, Colegio Santa María. ¿En qué puedo ayudarle?<br>
+        <span class="who you">Родитель:</span> Buenos días. Quisiera entender el horario de primaria y ESO.<br>
+        <span class="who op">Секретариат:</span> Claro. ¿Tiene un niño en primaria?<br>
+        <span class="who you">Родитель:</span> Sí, tiene ocho años. Y mi hija tiene doce años. Ella empieza la ESO.<br>
+        <span class="who op">Секретариат:</span> Muy bien. En primaria, la jornada es continua. La entrada es a las nueve y la salida a las tres y media.<br>
+        <span class="who you">Родитель:</span> ¿Y en ESO?<br>
+        <span class="who op">Секретариат:</span> En ESO hay horario partido los martes y jueves. Salen a las cinco. A veces tienen actividades por la tarde.<br>
+        <span class="who you">Родитель:</span> Nosotros normalmente recogemos a los niños a las tres. ¿Pueden comer en el comedor?<br>
+        <span class="who op">Секретариат:</span> Sí. El comedor es de tres a cuatro. Después, los niños pueden hacer los deberes guiados.<br>
+        <span class="who you">Родитель:</span> Perfecto. ¿Cuándo es la primera tutoría?<br>
+        <span class="who op">Секретариат:</span> La primera tutoría es el próximo lunes a las cinco.<br>
+        <span class="who you">Родитель:</span> Muchas gracias. ¿Puede enviarme el horario por email?<br>
+        <span class="who op">Секретариат:</span> Sí, claro.
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: ЧТЕНИЕ + CLIL + ПРОДУКТ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      <h2>Чтение + CLIL + продукт: расписание для 8 и 12 лет</h2>
+      <span class="time">37:00 – 47:00 · Сравнение primaria/ESO + конструктор расписания</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 CLIL-текст: школьный день в Испании</h4>
+
+    <div class="clil-text">
+      <h4>Primaria</h4>
+      <p>En primaria, los niños suelen tener un tutor principal. La jornada continua es muy común: entrada por la mañana, recreo a media mañana y salida antes de la comida. Las asignaturas incluyen lengua, matemáticas, ciencias, sociales, inglés, educación física y plástica o música. La evaluación es continua y el boletín de notas informa a las familias varias veces al año.</p>
+
+      <h4>ESO</h4>
+      <p>En ESO, los adolescentes tienen varios profesores. Es común el horario partido: mañana y tarde, con una pausa larga para comer. Las asignaturas son más específicas: lengua, matemáticas, ciencias, sociales, inglés, tecnología, educación física y optativas. Las notas suelen ser numéricas, de uno a diez. Si un alumno suspende, puede haber recuperación.</p>
+    </div>
+
+    <h4 style="margin-bottom:10px">🗓 Расписание семьи: заполните для 8 и 12 лет</h4>
+    <table class="schedule-table">
+      <tr>
+        <th>День</th>
+        <th>🎒 8 лет · Primaria</th>
+        <th>📚 12 лет · ESO</th>
+        <th>👨‍👩‍👧 Наша рутина</th>
+      </tr>
+      <tr>
+        <td>Lunes</td>
+        <td><input type="text" placeholder="entrada 9:00, salida 13:30"></td>
+        <td><input type="text" placeholder="entrada 9:00, salida 17:00"></td>
+        <td><input type="text" placeholder="normalmente recogemos a las 15:30"></td>
+      </tr>
+      <tr>
+        <td>Martes</td>
+        <td><input type="text" placeholder="recreo 11:00"></td>
+        <td><input type="text" placeholder="horario partido"></td>
+        <td><input type="text" placeholder="a veces actividades por la tarde"></td>
+      </tr>
+      <tr>
+        <td>Miércoles</td>
+        <td><input type="text" placeholder="inglés y mates"></td>
+        <td><input type="text" placeholder="ciencias sociales"></td>
+        <td><input type="text" placeholder="siempre hacemos los deberes"></td>
+      </tr>
+      <tr>
+        <td>Jueves</td>
+        <td><input type="text" placeholder="plástica"></td>
+        <td><input type="text" placeholder="tecnología"></td>
+        <td><input type="text" placeholder="casi nunca llegamos tarde"></td>
+      </tr>
+      <tr>
+        <td>Viernes</td>
+        <td><input type="text" placeholder="música"></td>
+        <td><input type="text" placeholder="tutoría"></td>
+        <td><input type="text" placeholder="nunca estudiamos el fin de semana"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🔧 Конструктор: устное описание недели</h4>
+    <p class="hint">Заполните данные — получите готовое устное описание недели вашей семьи. Используем формы <b>yo / nosotros / usted</b>.</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">🗓 КОНСТРУКТОР: Nuestra semana escolar</div>
+
+      <div class="field">
+        <label>👦 Имя младшего ребёнка (primaria):</label>
+        <input type="text" id="b-junior" placeholder="Leo" value="Leo">
+      </div>
+
+      <div class="field">
+        <label>🔢 Возраст младшего:</label>
+        <select id="b-age-junior">
+          <option value="siete">7</option>
+          <option value="ocho" selected>8</option>
+          <option value="nueve">9</option>
+          <option value="diez">10</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>⏰ Время выхода младшего:</label>
+        <select id="b-out-junior">
+          <option value="a las tres">a las tres</option>
+          <option value="a las tres y media" selected>a las tres y media</option>
+          <option value="a las cuatro">a las cuatro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>👧 Имя старшего ребёнка (ESO):</label>
+        <input type="text" id="b-senior" placeholder="Vega" value="Vega">
+      </div>
+
+      <div class="field">
+        <label>🔢 Возраст старшего:</label>
+        <select id="b-age-senior">
+          <option value="doce" selected>12</option>
+          <option value="trece">13</option>
+          <option value="catorce">14</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>⏰ Время выхода старшего:</label>
+        <select id="b-out-senior">
+          <option value="a las cinco" selected>a las cinco</option>
+          <option value="a las seis">a las seis</option>
+          <option value="a las cinco y media">a las cinco y media</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🔁 Частотность рутины семьи:</label>
+        <select id="b-freq">
+          <option value="siempre">siempre (всегда)</option>
+          <option value="normalmente" selected>normalmente (обычно)</option>
+          <option value="a veces">a veces (иногда)</option>
+          <option value="casi nunca">casi nunca (почти никогда)</option>
+          <option value="nunca">nunca (никогда)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🎯 Предмет, который любит младший:</label>
+        <select id="b-fav-junior">
+          <option value="matemáticas" selected>matemáticas</option>
+          <option value="plástica">plástica</option>
+          <option value="educación física">educación física</option>
+          <option value="inglés">inglés</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🎯 Предмет, который любит старший:</label>
+        <select id="b-fav-senior">
+          <option value="tecnología">tecnología</option>
+          <option value="ciencias sociales" selected>ciencias sociales</option>
+          <option value="inglés">inglés</option>
+          <option value="matemáticas">matemáticas</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildSchedule()" style="margin-top:12px">🔧 Собрать описание</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с собранным описанием (5–7 предложений). Это ваш личный артефакт недели 6.
+    </div>
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">✅</div>
+    <div class="step-title">
+      <h2>Самопроверка «Светофор»</h2>
+      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🏠</div>
+    <div class="step-title">
+      <h2>Домашнее задание · Урок 6.2</h2>
+      <span class="time">⏱ ~30–35 минут · 5 заданий</span>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и наречия частотности.</div>
+    <p>Карточки, сопоставление, «собери фразу» — фокус на формах <b>yo / nosotros / usted</b> и наречиях <b>siempre, normalmente, a veces, casi nunca, nunca</b>.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Nuestra semana escolar» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: рассказать о расписании семьи.</div>
+    <p>Запишите голосовое на 5–7 предложений. Используйте шаблон:</p>
+    <div class="note blue">
+      Mi hijo/a está en <b>[primaria / ESO]</b>.<br>
+      Normalmente entra a las <b>[hora]</b>.<br>
+      Sale a las <b>[hora]</b>.<br>
+      Siempre / A veces / Nunca <b>[действие]</b>.<br>
+      Nosotros <b>[рутина семьи]</b>.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Mi hijo Leo está en primaria. Normalmente entra a las nueve y sale a las tres y media. Siempre hace los deberes por la tarde. Mi hija Vega está en ESO. A veces sale a las cinco. Nosotros normalmente recogemos a los niños a las tres. Nunca estudiamos los domingos.')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📖 Задание 3. Реальное расписание (PBL) · 5 мин</h4>
+    <div class="hw-meta">Цель: применить язык к реальной школе.</div>
+    <p>Найдите сайт любой школы рядом с домом. Откройте раздел <i>horario</i>, <i>primaria</i> или <i>ESO</i>. Выпишите 5 временных точек:</p>
+    <div class="note">
+      Entrada: ___ · Recreo: ___ · Salida: ___ · Comedor: ___ · Tutoría: ___
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: мини-расписание · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить лексику и грамматику на бумаге.</div>
+    <p>Напишите 6–8 предложений о неделе двух детей. Используйте <i>primaria / ESO</i>, <i>jornada continua / horario partido</i>, наречия частотности.</p>
+    <button class="btn btn-ghost" onclick="speak('El lunes, mi hijo siempre entra a las nueve. Mi hija normalmente sale a las cinco. Los martes, a veces tenemos actividades por la tarde. Nosotros casi nunca llegamos tarde. Nunca estudiamos los domingos.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 3 мин</h4>
+    <div class="hw-meta">Цель: связать родительский урок с детским курсом.</div>
+    <p>Спросите ребёнка:</p>
+    <div class="note green">
+      ¿A qué hora sales hoy?<br>
+      ¿Siempre tienes deberes?<br>
+      ¿Qué asignatura te gusta más?
+    </div>
+    <p>Ребёнок отвечает:</p>
+    <div class="note blue">
+      Salgo a las tres. Sí, siempre tengo deberes. Me gustan las mates.
+    </div>
+    <p>Родитель резюмирует:</p>
+    <div class="note">
+      Vale. Normalmente sales a las tres y siempre haces los deberes.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('¿A qué hora sales hoy? ¿Siempre tienes deberes? ¿Qué asignatura te gusta más? Vale. Normalmente sales a las tres y siempre haces los deberes.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 6. Рабочий лист · 10–12 мин</h4>
+    <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
+    <p>Распечатайте или заполните с экрана: лексика, наречия частотности, глаголы, диалог, расписание.</p>
+    <a href="../../worksheets/w06-l2-parents.html" class="btn btn-ghost" style="margin-top:8px">📄 Открыть рабочий лист (A4, печать)</a>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Nuestra semana escolar»<br>
+    • 📖 5 временных точек из реальной школы<br>
+    • ✍️ Мини-расписание (6–8 предложений)<br>
+    • 📄 Фото рабочего листа<br>
+    • ✅ Светофор самопроверки
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head">
+    <div class="step-num">🎮</div>
+    <div class="step-title">
+      <h2>Тренажёр: слова и грамматика</h2>
+      <span class="time">~7–10 мин</span>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 6.2</h3>
+    <p>Повторите слова урока в приложении Quizlet: уровни, расписание, предметы, оценка, частотность.</p>
+    <a href="https://quizlet.com/ru/1214284754/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-6-%D1%83%D1%80%D0%BE%D0%BA-2-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- РЕСУРСЫ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🔗</div>
+    <div class="step-title">
+      <h2>Внешние ресурсы</h2>
+      <span class="time">Для проекта и самостоятельной практики</span>
+    </div>
+  </div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">🌐 Поиск школ</span>
+      <h4>Google Maps</h4>
+      <p>Найдите школы рядом с домом и посмотрите реальные расписания на сайтах.</p>
+      <a href="https://www.google.com/maps/search/colegio+cerca+de+m%C3%AD" target="_blank" rel="noopener">Открыть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Jornada continua vs horario partido</h4>
+      <p>Видео-объяснение двух типов расписания в испанских школах.</p>
+      <a href="https://www.youtube.com/results?search_query=jornada+continua+horario+partido+Espa%C3%B1a" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Asignaturas de primaria y ESO</h4>
+      <p>Видео о предметах в начальной и средней школе Испании.</p>
+      <a href="https://www.youtube.com/results?search_query=asignaturas+primaria+ESO+espa%C3%B1ol" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏛️ Администрация</span>
+      <h4>Образование региона</h4>
+      <p>Проверьте расписания и нормативы в вашей автономии: <i>horario escolar + провинция</i>.</p>
+      <a href="https://www.google.com/search?q=horario+escolar+primaria+ESO+Espa%C3%B1a" target="_blank" rel="noopener">Искать →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · 🏫 Фаза 2 El Cole y la Salud
+</footer>
+
+<div class="lesson-nav">
+  <a href="w06-l1.html">← Предыдущий<br><small>Урок 6.1 · Público vs Concertado vs Privado</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <span class="soon">Следующий →<br><small>Урок 6.3 · Comedor и Transporte — скоро</small></span>
+</div>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  // Перемешиваем варианты: правильный ответ не должен всегда быть первым.
+  // Исходный массив o и правильный индекс c не трогаем — работаем с копиями.
+  var opts = [], correct = [];
+  questions.forEach(function(item, qi){
+    var right = item.o[item.c];
+    var mixed = item.o.slice().sort(function(){ return Math.random() - 0.5; });
+    opts[qi] = mixed;
+    correct[qi] = mixed.indexOf(right);
+  });
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      opts[qi].map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === correct[qi]){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[correct[qi]].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + opts[qi][correct[qi]];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ (6.1) =====
+var warmQ = [
+  {q:'1. Как сказать «государственная школа»?', o:['el colegio público','el colegio concertado','el colegio privado'], c:0},
+  {q:'2. Что такое baremo?', o:['Система баллов при зачислении','Ежемесячная плата','Школьный автобус'], c:0},
+  {q:'3. Как вежливо сказать «Можете объяснить мне систему баллов?»', o:['¿Puede explicarme el baremo?','Explica el baremo.','Baremo, por favor.'], c:0},
+  {q:'4. Как сказать «Мы хотим сравнить три школы»?', o:['Queremos comparar tres colegios.','Comparar tres colegios.','Tres colegios, comparar.'], c:0},
+  {q:'5. Что означает plaza escolar?', o:['Место в школе','Школьная площадь','Школьный двор'], c:0},
+  {q:'6. Как сказать «Я могу прийти в субботу»?', o:['Puedo venir el sábado.','Vengo el sábado poder.','Yo venir sábado.'], c:0}
+];
+
+function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  levels:[
+    {es:'la educación infantil', ru:'дошкольное образование', ex:'La educación infantil es para niños pequeños.', exRu:'Дошкольное образование — для маленьких детей.'},
+    {es:'la primaria', ru:'начальная школа', ex:'Mi hijo está en primaria.', exRu:'Мой сын в начальной школе.'},
+    {es:'la ESO', ru:'средняя школа для подростков', ex:'Mi hija empieza la ESO este año.', exRu:'Моя дочь начинает ESO в этом году.'},
+    {es:'el curso', ru:'учебный год / курс', ex:'Este curso cambia de clase.', exRu:'В этом учебном году меняет класс.'},
+    {es:'el nivel', ru:'уровень', ex:'El nivel es alto para su edad.', exRu:'Уровень высокий для его возраста.'},
+    {es:'el alumno / la alumna', ru:'ученик / ученица', ex:'La alumna tiene doce años.', exRu:'Ученице двенадцать лет.'},
+    {es:'el grupo / la clase', ru:'класс, группа', ex:'El grupo es pequeño.', exRu:'Класс маленький.'}
+  ],
+  time:[
+    {es:'el horario', ru:'расписание', ex:'El horario está en la web del colegio.', exRu:'Расписание есть на сайте школы.'},
+    {es:'la jornada continua', ru:'сплошной учебный день', ex:'La jornada continua termina a las tres y media.', exRu:'Сплошной день заканчивается в три тридцать.'},
+    {es:'el horario partido', ru:'дробное расписание', ex:'El horario partido vuelve por la tarde.', exRu:'Дробное расписание возвращается после обеда.'},
+    {es:'la entrada', ru:'приход / начало занятий', ex:'La entrada es a las nueve.', exRu:'Приход в девять.'},
+    {es:'la salida', ru:'уход / окончание занятий', ex:'La salida es a las cinco.', exRu:'Уход в пять.'},
+    {es:'el recreo', ru:'перемена', ex:'El recreo es de once a once y media.', exRu:'Перемена с одиннадцати до половины двенадцатого.'},
+    {es:'la hora de comida', ru:'время обеда', ex:'La hora de comida es a las dos.', exRu:'Время обеда в два.'}
+  ],
+  subjects:[
+    {es:'lengua castellana', ru:'испанский язык / литература', ex:'Lengua castellana es importante.', exRu:'Испанский язык важен.'},
+    {es:'matemáticas', ru:'математика', ex:'Matemáticas suele ser difícil.', exRu:'Математика обычно сложная.'},
+    {es:'ciencias naturales', ru:'естественные науки', ex:'Ciencias naturales tiene experimentos.', exRu:'В естественных науках есть эксперименты.'},
+    {es:'ciencias sociales', ru:'общественные науки', ex:'Ciencias sociales incluye geografía e historia.', exRu:'Общественные науки включают географию и историю.'},
+    {es:'inglés', ru:'английский язык', ex:'Inglés es asignatura obligatoria.', exRu:'Английский — обязательный предмет.'},
+    {es:'educación física', ru:'физкультура', ex:'Educación física es los lunes y miércoles.', exRu:'Физкультура по понедельникам и средам.'},
+    {es:'plástica / música', ru:'рисование / музыка', ex:'Plástica y música son creativas.', exRu:'Рисование и музыка творческие.'}
+  ],
+  grades:[
+    {es:'la nota', ru:'оценка', ex:'La nota es un siete.', exRu:'Оценка — семь.'},
+    {es:'el boletín de notas', ru:'школьный отчёт / табель', ex:'El boletín llega en diciembre.', exRu:'Табель приходит в декабре.'},
+    {es:'la evaluación', ru:'оценка, оценивание', ex:'La primera evaluación termina en enero.', exRu:'Первая оценка заканчивается в январе.'},
+    {es:'el informe', ru:'отчёт', ex:'El informe describe el progreso.', exRu:'Отчёт описывает прогресс.'},
+    {es:'la recuperación', ru:'пересдача', ex:'Hay recuperación en junio.', exRu:'Пересдача в июне.'},
+    {es:'la tutoría', ru:'встреча с классным руководителем', ex:'Tengo tutoría el jueves.', exRu:'У меня встреча с tutor в четверг.'},
+    {es:'el orientador / la orientadora', ru:'школьный психолог / консультант', ex:'El orientador ayuda con la adaptación.', exRu:'Консультант помогает с адаптацией.'}
+  ],
+  freq:[
+    {es:'siempre', ru:'всегда', ex:'Siempre hago los deberes por la tarde.', exRu:'Я всегда делаю уроки после обеда.'},
+    {es:'normalmente', ru:'обычно', ex:'Normalmente salimos a las tres.', exRu:'Мы обычно уходим в три.'},
+    {es:'a veces', ru:'иногда', ex:'A veces tiene actividades por la tarde.', exRu:'Иногда у него занятия после обеда.'},
+    {es:'casi nunca', ru:'почти никогда', ex:'Casi nunca llegamos tarde.', exRu:'Мы почти никогда не опаздываем.'},
+    {es:'nunca', ru:'никогда', ex:'Nunca tenemos clase los domingos.', exRu:'У нас никогда нет занятий по воскресеньям.'},
+    {es:'todos los días', ru:'каждый день', ex:'Todos los días entra a las nueve.', exRu:'Каждый день приходит в девять.'},
+    {es:'una vez a la semana', ru:'раз в неделю', ex:'Una vez a la semana tiene música.', exRu:'Раз в неделю у него музыка.'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('levels', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'Yo ___ hago los deberes por la tarde. (100%)', ans:'siempre'},
+  {text:'Nosotros ___ salimos a las tres y media. (75%)', ans:'normalmente'},
+  {text:'Usted ___ tiene reunión con el tutor. (50%)', ans:'a veces'},
+  {text:'Yo ___ llego tarde a la tutoría. (10%)', ans:'casi nunca'},
+  {text:'Nosotros ___ tenemos clase los domingos. (0%)', ans:'nunca'},
+  {text:'Mi hijo ___ entra a las nueve. (100%)', ans:'siempre'},
+  {text:'Mi hija ___ sale a las cinco. (50%)', ans:'a veces'},
+  {text:'Nosotros ___ recogemos a los niños a las tres. (75%)', ans:'normalmente'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'Yo siempre hago los deberes.', translation:'Я всегда делаю уроки.'},
+  {target:'Nosotros normalmente salimos a las tres.', translation:'Мы обычно уходим в три.'},
+  {target:'Usted a veces tiene tutoría.', translation:'Вы иногда встречаетесь с классным руководителем.'},
+  {target:'Yo casi nunca llego tarde.', translation:'Я почти никогда не опаздываю.'},
+  {target:'Nosotros nunca estudiamos los domingos.', translation:'Мы никогда не учимся по воскресеньям.'},
+  {target:'Mi hija normalmente sale a las cinco.', translation:'Моя дочь обычно уходит в пять.'},
+  {target:'Mi hijo siempre entra a las nueve.', translation:'Мой сын всегда приходит в девять.'},
+  {target:'Nosotros casi nunca llegamos tarde.', translation:'Мы почти никогда не опаздываем.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'primaria', ru:'начальная школа'},
+  {id:2, es:'ESO', ru:'средняя школа для подростков'},
+  {id:3, es:'jornada continua', ru:'сплошной учебный день'},
+  {id:4, es:'horario partido', ru:'дробное расписание'},
+  {id:5, es:'recreo', ru:'перемена'},
+  {id:6, es:'boletín de notas', ru:'школьный отчёт'},
+  {id:7, es:'tutoría', ru:'встреча с классным руководителем'},
+  {id:8, es:'siempre', ru:'всегда'},
+  {id:9, es:'a veces', ru:'иногда'},
+  {id:10, es:'nunca', ru:'никогда'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZ =====
+var listenQ = [
+  {q:'1. ¿Qué curso tiene el niño?', o:['primaria','ESO','educación infantil'], c:0},
+  {q:'2. ¿Qué curso empieza la hija?', o:['ESO','primaria','bachillerato'], c:0},
+  {q:'3. ¿Qué tipo de jornada tiene primaria?', o:['jornada continua','horario partido','no tiene jornada'], c:0},
+  {q:'4. ¿Cuándo sale la hija en martes y jueves?', o:['a las cinco','a las tres','a las seis'], c:0},
+  {q:'5. ¿De qué hora a qué hora es el comedor?', o:['de tres a cuatro','de dos a tres','de cuatro a cinco'], c:0},
+  {q:'6. ¿Cuándo es la primera tutoría?', o:['el próximo lunes a las cinco','el martes a las tres','el viernes a las cuatro'], c:0}
+];
+
+renderQuiz('listening-quiz', listenQ, 'lq');
+
+// ===== SCHEDULE BUILDER =====
+var lastSchedulePlain = '';
+
+function buildSchedule(){
+  var junior = document.getElementById('b-junior').value || 'Leo';
+  var ageJunior = document.getElementById('b-age-junior').value;
+  var outJunior = document.getElementById('b-out-junior').value;
+  var senior = document.getElementById('b-senior').value || 'Vega';
+  var ageSenior = document.getElementById('b-age-senior').value;
+  var outSenior = document.getElementById('b-out-senior').value;
+  var freq = document.getElementById('b-freq').value;
+  var favJunior = document.getElementById('b-fav-junior').value;
+  var favSenior = document.getElementById('b-fav-senior').value;
+
+  var text =
+    'Mi hijo ' + junior + ' tiene ' + ageJunior + ' años y está en primaria. ' +
+    'Normalmente entra a las nueve y sale ' + outJunior + '. ' +
+    'Siempre hace los deberes por la tarde. Le gustan las ' + favJunior + '.\n\n' +
+    'Mi hija ' + senior + ' tiene ' + ageSenior + ' años y empieza la ESO. ' +
+    'A veces sale ' + outSenior + ' porque tiene horario partido los martes y jueves. ' +
+    'Le gustan las ' + favSenior + '.\n\n' +
+    'Nosotros ' + freq + ' recogemos a los niños a las tres. ' +
+    'Nunca estudiamos los domingos.';
+
+  lastSchedulePlain = text;
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML =
+    '<div class="dialog-result">' + text + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary" id="speak-schedule-btn">🔊 Прослушать описание</button>' +
+    '</div>';
+
+  document.getElementById('speak-schedule-btn').onclick = function(){
+    speak(lastSchedulePlain);
+  };
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ===== TRAFFIC LIGHT =====
+var TL = [
+  'Различать primaria и ESO',
+  'Понимать jornada continua и horario partido',
+  'Называть 5 школьных предметов',
+  'Использовать siempre / normalmente / a veces / nunca',
+  'Сказать время входа и выхода',
+  'Использовать глаголы estudiar, tener, hacer, salir, empezar',
+  'Составить расписание для семьи'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + rowIdx + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + rowIdx + '" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.levels, VOCAB.time, VOCAB.subjects, VOCAB.grades, VOCAB.freq);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    updateCard();
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Yo siempre hago los deberes', hint:'Я всегда делаю уроки'},
+    {target:'Mi hijo normalmente entra a las nueve', hint:'Мой сын обычно приходит в девять'},
+    {target:'Mi hija a veces sale a las cinco', hint:'Моя дочь иногда уходит в пять'},
+    {target:'Nosotros nunca estudiamos los domingos', hint:'Мы никогда не учимся по воскресеньям'},
+    {target:'Yo casi nunca llego tarde', hint:'Я почти никогда не опаздываю'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>

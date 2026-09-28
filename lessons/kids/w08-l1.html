@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 22: Mi Familia — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --peach:#FFB4A2; --rose:#E5989B; --wine:#9D4EDD;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FFE5EC 0%,#FFF3D6 60%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,180,162,.3),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(157,78,221,.15),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--rose);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--wine)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-illust{width:min(360px,78vw);height:auto;margin:10px auto 16px;position:relative;z-index:2;display:block}
+  .final-situation{background:linear-gradient(135deg,#FFE5EC,#FFB4A2);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--rose);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--rose)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FFE5EC;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #FFE5EC;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--rose)}
+  .word-card .emo{display:block;margin:0 auto 4px;width:56px;height:56px}
+  .word-card .emo svg{width:56px;height:56px;display:block}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1rem;color:var(--wine)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .word-card .ges{display:block;font-size:.7rem;font-weight:800;color:var(--terra);margin-top:4px}
+  .speak-btn{background:var(--rose);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--rose);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6;cursor:pointer}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#FFE5EC,#FFB4A2);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--wine);margin:10px 0;min-height:36px}
+  .game-svg{margin:6px auto;min-height:90px;display:flex;justify-content:center;align-items:center}
+  .game-svg svg{width:90px;height:90px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #e0cfd6;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:112px}
+  .opt svg{width:44px;height:44px;display:block;margin-bottom:4px}
+  .opt span{display:block;line-height:1.2}
+  .opt:hover:not(:disabled){border-color:var(--rose);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  /* УПРАЖНЕНИЕ НА ЗАПОЛНЕНИЕ ПРОПУСКОВ */
+  .fill-ex{background:#fff;border:2px solid #FFE5EC;border-radius:14px;padding:14px 18px;margin:10px 0}
+  .fill-ex .ex-num{display:inline-block;background:var(--wine);color:#fff;border-radius:50%;width:26px;height:26px;text-align:center;line-height:26px;font-weight:800;font-size:.9rem;margin-right:8px;flex-shrink:0}
+  .fill-ex .sentence{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--ink);margin:8px 0}
+  .fill-ex .gap{display:inline-block;min-width:80px;border-bottom:2px dashed var(--wine);height:24px;vertical-align:bottom;text-align:center;padding:0 4px;cursor:pointer;transition:.15s}
+  .fill-ex input.gap{border:2px dashed var(--wine);border-radius:6px;padding:2px 8px;font-family:'Baloo 2',cursive;font-size:1rem;background:#FFF8EC;color:var(--wine);text-align:center;outline:none;transition:.15s;min-width:100px}
+  .fill-ex input.gap:focus{border-color:var(--pink);background:#fff}
+  .fill-ex input.gap.correct{background:#C8E6C9;border-color:var(--green);color:var(--green)}
+  .fill-ex input.gap.wrong{background:#FFCDD2;border-color:var(--red);color:var(--red);animation:shake .4s}
+  .fill-fb{font-weight:800;margin-top:6px;min-height:20px;font-size:.9rem}
+  .fill-submit{background:var(--wine);color:#fff;border:none;border-radius:10px;padding:8px 18px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:10px}
+  .fill-submit:active{transform:scale(.95)}
+
+  .warm-item{background:#fff;border:2px solid #f0e0e6;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--wine)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .shadow-card{background:linear-gradient(135deg,#FFF3D6,#FFE5EC);border-radius:16px;padding:18px;margin:10px 0;text-align:center}
+  .shadow-phrase{font-family:'Baloo 2',cursive;font-size:1.35rem;color:var(--wine);margin:10px 0}
+  .shadow-ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--wine)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #e0cfd6;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--wine)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--rose);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--rose);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--rose);background:#FFE5EC}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+  .flash-back .grammar-hint{color:#fff;border-bottom-color:rgba(255,255,255,.75)}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--rose);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--rose);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--rose),var(--wine));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 3 · Mi Mundo · Урок 22 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">👨‍👩‍👧 УРОК 22 · НЕДЕЛЯ 8</span>
+  <svg class="hero-illust" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" aria-label="Иллюстрация семьи">
+    <path d="M210 165 C 105 112, 62 62, 124 40 C 165 25, 195 52, 210 78 C 225 52, 255 25, 296 40 C 358 62, 315 112, 210 165 Z" fill="#FFE5EC" opacity=".65"/>
+    <g transform="translate(38,70)"><circle cx="25" cy="20" r="18" fill="#FFD6BA"/><path d="M7 20 Q7 5 25 5 Q43 5 43 20 L43 15 Q43 3 25 3 Q7 3 7 15 Z" fill="#D3D3D3"/><circle cx="18" cy="20" r="2" fill="#333"/><circle cx="32" cy="20" r="2" fill="#333"/><path d="M18 28 Q25 32 32 28" stroke="#333" stroke-width="1.5" fill="none"/><rect x="12" y="40" width="26" height="40" rx="4" fill="#9D4EDD"/><rect x="12" y="80" width="10" height="20" fill="#333"/><rect x="28" y="80" width="10" height="20" fill="#333"/></g>
+    <g transform="translate(108,55)"><circle cx="25" cy="20" r="20" fill="#FFD6BA"/><path d="M5 18 Q5 0 25 0 Q45 0 45 18 L45 12 Q45 -2 25 -2 Q5 -2 5 12 Z" fill="#5C3A21"/><circle cx="18" cy="20" r="2" fill="#333"/><circle cx="32" cy="20" r="2" fill="#333"/><path d="M18 28 Q25 33 32 28" stroke="#333" stroke-width="1.5" fill="none"/><rect x="10" y="42" width="30" height="50" rx="4" fill="#2A9D8F"/><rect x="10" y="92" width="12" height="22" fill="#333"/><rect x="28" y="92" width="12" height="22" fill="#333"/></g>
+    <g transform="translate(178,55)"><circle cx="25" cy="20" r="20" fill="#FFD6BA"/><path d="M5 20 Q5 0 25 0 Q45 0 45 20 L45 35 Q40 25 35 30 L35 22 Q35 5 25 5 Q15 5 15 22 L15 30 Q10 25 5 35 Z" fill="#8B4513"/><circle cx="18" cy="20" r="2" fill="#333"/><circle cx="32" cy="20" r="2" fill="#333"/><path d="M18 28 Q25 33 32 28" stroke="#E91E63" stroke-width="1.5" fill="none"/><path d="M10 42 L40 42 L45 92 L5 92 Z" fill="#E91E63"/><rect x="10" y="92" width="12" height="22" fill="#333"/><rect x="28" y="92" width="12" height="22" fill="#333"/></g>
+    <g transform="translate(248,70)"><circle cx="25" cy="20" r="18" fill="#FFD6BA"/><path d="M7 20 Q7 5 25 5 Q43 5 43 20 L43 15 Q43 3 25 3 Q7 3 7 15 Z" fill="#D3D3D3"/><circle cx="18" cy="20" r="2" fill="#333"/><circle cx="32" cy="20" r="2" fill="#333"/><path d="M18 28 Q25 32 32 28" stroke="#333" stroke-width="1.5" fill="none"/><rect x="12" y="40" width="26" height="40" rx="4" fill="#E9A13B"/><rect x="12" y="80" width="10" height="20" fill="#333"/><rect x="28" y="80" width="10" height="20" fill="#333"/></g>
+    <g transform="translate(318,86)"><circle cx="20" cy="16" r="15" fill="#FFD6BA"/><path d="M5 14 Q5 0 20 0 Q35 0 35 14 L35 8 Q35 -2 20 -2 Q5 -2 5 8 Z" fill="#5C3A21"/><circle cx="14" cy="16" r="1.5" fill="#333"/><circle cx="26" cy="16" r="1.5" fill="#333"/><path d="M14 22 Q20 26 26 22" stroke="#333" stroke-width="1.5" fill="none"/><rect x="8" y="32" width="24" height="32" rx="4" fill="#FFC93C"/><rect x="8" y="64" width="10" height="18" fill="#333"/><rect x="22" y="64" width="10" height="18" fill="#333"/></g>
+    <g transform="translate(360,138)"><ellipse cx="18" cy="18" rx="15" ry="10" fill="#FFA500"/><circle cx="8" cy="12" r="6" fill="#FFA500"/><circle cx="5" cy="10" r="1.5" fill="#333"/><path d="M2 8 L0 4 L4 6 Z" fill="#FFA500"/><path d="M33 18 Q40 15 38 22" stroke="#FFA500" stroke-width="3" fill="none"/></g>
+  </svg>
+  <h1>Mi <span>Familia</span></h1>
+  <p class="sub">Мы вышли из школы и попали ДОМА! Сегодня ты узнаешь, как по-испански называются члены семьи, питомцы и научишься описывать, какие они — высокие, весёлые, молодые или старые.</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты показываешь фото или рисунок и говоришь:<br>
+    <em>«Esta es mi familia. Estos son mis abuelos. Se llaman Pedro y María. Tienen 70 años. Son simpáticos y tienen un gato.»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">👨‍👩‍👧</span> Называть 8 членов семьи + 3 питомца</div>
+      <div class="goal-item"><span class="emoji">🎨</span> Описывать людей 6 прилагательными</div>
+      <div class="goal-item"><span class="emoji">🧩</span> Говорить <em>mi / tu / su</em> (чей?)</div>
+      <div class="goal-item"><span class="emoji">🔢</span> Использовать <em>es/son</em> и <em>tiene/tienen</em></div>
+      <div class="goal-item"><span class="emoji">📖</span> Понимать текст о чужой семье</div>
+      <div class="goal-item"><span class="emoji">🗣</span> Представить члена семьи вслух</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: из школы — домой</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Felicidades! Ты прошёл Станцию 2 и знаешь всё о школе. Но школа заканчивается, и мы идём ДОМОЙ. А дома нас ждёт... кто? ¡La familia!</div>
+    <p class="block-sub">🔁 Быстрое повторение Станции 2 — ответь ВСЛУХ!</p>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ЛЕКСИКА - ЧЛЕНЫ СЕМЬИ + ПИТОМЦЫ -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">👨‍👩‍👧 Члены семьи + питомцы</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на карточку — услышишь слово. Показывай жест и повторяй!</p>
+    <div class="cards-grid" id="fam-cards"></div>
+    <div class="script">⚡ <strong>Секрет рода:</strong> все слова на <strong>-o</strong> — 🔵 мужской род (<em>el abuelo, el tío, el primo, el perro, el gato</em>). Все слова на <strong>-a</strong> — 🔴 женский род (<em>la abuela, la tía, la prima</em>).</div>
+    <div class="game-zone">
+      <p style="font-weight:800">👾 Мини-викторина «Семья монстров»: посмотри на монстра и выбери, кто это!</p>
+      <div class="game-svg" id="mq-svg"></div>
+      <div class="game-q" id="mq-q"></div>
+      <div class="opts" id="mq-opts"></div>
+      <div class="game-fb" id="mq-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="mq-stars">0</span> / <span id="mq-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="mqStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 1B: ЛЕКСИКА - ПРИЛАГАТЕЛЬНЫЕ -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🎨 Слова для описания (прилагательные)</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">Теперь ты умеешь называть членов семьи. А какие они? Учим прилагательные!</p>
+    <div class="cards-grid" id="adj-cards"></div>
+    <div class="script">⚡ <strong>Секрет согласования:</strong> прилагательное должно «дружить» с существительным! <em>El abuelo es <b>alto</b></em> (м.р.), но <em>la abuela es <b>alta</b></em> (ж.р.). Во множественном числе: <em>Los abuelos son <b>altos</b></em>.</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎭 Мини-викторина «Кто это?»: выбери правильное прилагательное!</p>
+      <div class="game-svg" id="adjq-svg"></div>
+      <div class="game-q" id="adjq-q"></div>
+      <div class="opts" id="adjq-opts"></div>
+      <div class="game-fb" id="adjq-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="adjq-stars">0</span> / <span id="adjq-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="adjqStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: mi/tu/su + ser/tener</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <h4 style="margin-bottom:8px">📌 Таблица 1: Чей? (притяжательные местоимения)</h4>
+    <table class="gram-table">
+      <tr><th>Местоимение</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr><td><b>MI</b> (мой)</td><td>Mi abuela</td><td>Моя бабушка</td><td><button class="speak-btn" onclick="speak('Mi abuela')">🔊</button></td></tr>
+      <tr><td><b>TU</b> (твой)</td><td>Tu tío</td><td>Твой дядя</td><td><button class="speak-btn" onclick="speak('Tu tío')">🔊</button></td></tr>
+      <tr><td><b>SU</b> <span class="grammar-hint" data-hint="su — его/её/их/Ваш. Универсальное местоимение: su abuelo может означать «его дедушка», «её дедушка» или «их дедушка». Контекст подсказывает!">(его/её/их)</span></td><td>Su primo</td><td>Его/её двоюродный брат</td><td><button class="speak-btn" onclick="speak('Su primo')">🔊</button></td></tr>
+      <tr><td><b>NUESTRO/A</b> (наш)</td><td>Nuestro gato</td><td>Наш кот</td><td><button class="speak-btn" onclick="speak('Nuestro gato')">🔊</button></td></tr>
+    </table>
+
+    <h4 style="margin:18px 0 8px">📌 Таблица 2: Единственное vs множественное число</h4>
+    <table class="gram-table">
+      <tr><th>Ед. число (1 человек)</th><th>Мн. число (2+ человек)</th><th>Пример</th><th>🔊</th></tr>
+      <tr><td><b>ES</b> (он/она есть)</td><td><b>SON</b> (они есть)</td><td><span class="grammar-hint" data-hint="Mi abuelo es simpático (один дедушка) → Mis abuelos son simpáticos (бабушка и дедушка вместе). Глагол ser меняется!">Mi abuelo es / Mis abuelos son</span></td><td><button class="speak-btn" onclick="speak('Mis abuelos son simpáticos')">🔊</button></td></tr>
+      <tr><td><b>TIENE</b> (у него/неё есть)</td><td><b>TIENEN</b> (у них есть)</td><td>Mi tía tiene / Mis tíos tienen</td><td><button class="speak-btn" onclick="speak('Mis tíos tienen un gato')">🔊</button></td></tr>
+      <tr><td><b>SE LLAMA</b> (его/её зовут)</td><td><b>SE LLAMAN</b> (их зовут)</td><td>Se llama Ana / <span class="grammar-hint" data-hint="Когда говорим о двух и более людях — se llaman. Например: Mis padres se llaman Pedro y María (моих родителей зовут Педро и Мария).">Se llaman Ana y Luis</span></td><td><button class="speak-btn" onclick="speak('Mis padres se llaman Pedro y María')">🔊</button></td></tr>
+    </table>
+
+    <h4 style="margin:18px 0 8px">📌 Таблица 3: SER (какой?) vs TENER (что имеет?)</h4>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr><td><b>SER + характер/профессия</b></td><td>Es simpático / Es médico.</td><td>Он добрый / Он врач.</td><td><button class="speak-btn" onclick="speak('Es simpático. Es médico.')">🔊</button></td></tr>
+      <tr><td><b>TENER + возраст</b></td><td><span class="grammar-hint" data-hint="В испанском возраст ИМЕЮТ (tener), а не ЯВЛЯЮТСЯ (ser). Дословно: «У меня есть 8 лет». Не «soy 8 años», а «tengo 8 años».">Tiene 70 años.</span></td><td>Ему 70 лет.</td><td><button class="speak-btn" onclick="speak('Tiene 70 años.')">🔊</button></td></tr>
+      <tr><td><b>TENER + внешность</b></td><td>Tiene el pelo blanco.</td><td>У него белые волосы.</td><td><button class="speak-btn" onclick="speak('Tiene el pelo blanco.')">🔊</button></td></tr>
+      <tr><td><b>TENER + питомец</b></td><td>Tiene un gato.</td><td>У него есть кот.</td><td><button class="speak-btn" onclick="speak('Tiene un gato.')">🔊</button></td></tr>
+    </table>
+
+    <div class="script">⚡ <strong>Ловушка:</strong> в испанском мы НЕ «являемся» 70 лет — мы их ИМЕЕМ! <em>Tengo 8 años</em>, а не <em>Soy 8 años</em>.</div>
+
+    <!-- УПРАЖНЕНИЕ: ЗАПОЛНЕНИЕ ПРОПУСКОВ -->
+    <h4 style="margin:18px 0 10px">✏️ Упражнение: заполни пропуски!</h4>
+    <p class="block-sub">Впиши правильную форму глагола, артикль или прилагательное. Нажми «Проверить»!</p>
+    <div id="fill-box"></div>
+    <div style="text-align:center;margin-top:14px">
+      <button class="fill-submit" onclick="checkFill()">✔ Проверить всё</button>
+      <button class="speak-btn" style="margin-left:8px" onclick="resetFill()">↺ Начать заново</button>
+    </div>
+    <div class="stars-line" style="text-align:center;margin-top:10px">⭐ Правильно: <span id="fill-stars">0</span> из <span id="fill-total">8</span></div>
+
+    <div class="game-zone" style="margin-top:20px">
+      <p style="font-weight:800">🕵️ Детектив: прочитай описание и кликни, о ком речь!</p>
+      <div class="game-q" id="det-q"></div>
+      <div class="opts" id="det-opts"></div>
+      <div class="game-fb" id="det-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="det-stars">0</span> / <span id="det-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="detStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Конструктор: собери фразу!</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ЧТЕНИЕ -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head">
+      <h2 class="block-title">📖 Чтение: Семья Пабло</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakPablo()">🔊 Послушать текст</button>
+    <div class="read-box">
+      ¡Hola! Me llamo Pablo. Tengo 8 años. Esta es mi familia. <span class="grammar-hint" data-hint="Mis abuelos — множественное число: mi abuelo → mis abuelos (мои бабушка и дедушка вместе).">Mis abuelos</span> se llaman Luis y María. Tienen 70 años. Son muy simpáticos. Mi abuela es divertida y tiene el pelo blanco. Tengo una tía. Se llama Ana. Es joven y es médica. También tengo un primo. Se llama Carlos. Es alto y tiene 10 años. También tenemos un gato. Se llama Luna. Es naranja y pequeño. ¡Me gusta mi familia!
+    </div>
+    <div id="pablo-quiz"></div>
+  </section>
+
+  <!-- БЛОК 4: ТРЕНАЖЁР -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">🎧 Тренажёр: тень + аудирование</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <h4>🗣 Шаг 1: Теневое повторение (shadowing)</h4>
+    <p class="block-sub">Слушай фразу и повторяй ВСЛУХ сразу за диктором, копируя интонацию!</p>
+    <div id="shadow-box"></div>
+
+    <h4 style="margin-top:18px">👂 Шаг 2: Аудирование — выбери картинку</h4>
+    <p class="block-sub">Слушай фразу БЕЗ текста и кликай правильную SVG-картинку!</p>
+    <div class="game-zone">
+      <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakAud()">🔊 Послушать</button>
+      <div class="opts" id="aud-opts" style="margin-top:12px"></div>
+      <div class="game-fb" id="aud-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="aud-stars">0</span> / <span id="aud-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="audStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Презентация: мой член семьи</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <div class="script">Покажи фото или рисунок члена своей семьи (или любимого героя: Шрека, Гарри Поттера, Эльзы) и расскажи о нём по формуле!</div>
+    <div class="read-box" style="background:#FFE5EC;border-color:var(--rose)">
+      <strong>📋 Формула речи (используй все 6 пунктов!):</strong><br>
+      1. <em>Este es <b>mi</b> [abuelo / tío / gato].</em><br>
+      2. <em>Se llama [Имя].</em><br>
+      3. <em>Tiene [возраст] años.</em><br>
+      4. <em>Es [характер: simpático / divertida / joven].</em><br>
+      5. <em>Es [внешность: alto / bajo].</em><br>
+      6. <em>Tiene [деталь: el pelo blanco / un gato naranja].</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🕵️</div>
+      <h3>Семейный детектив</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты знаешь всех членов семьи, умеешь их описывать и использовать множественное число!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Семейный детектив» 🕵️ добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 23:</strong> «На следующем уроке мы сравним всех членов семьи: кто выше, кто веселее, кто старше! ¡Vamos a comparar!»</div>
+  </section>
+
+  <!-- ПОЛНЫЙ БЛОК "СЛОВА УРОКА" -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">👨‍👩‍👧 Члены семьи</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('el abuelo')"><div class="es">el abuelo</div><div class="ru">дедушка</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la abuela')"><div class="es">la abuela</div><div class="ru">бабушка</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el tío')"><div class="es">el tío</div><div class="ru">дядя</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la tía')"><div class="es">la tía</div><div class="ru">тётя</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el primo')"><div class="es">el primo</div><div class="ru">двоюр. брат</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('la prima')"><div class="es">la prima</div><div class="ru">двоюр. сестра</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('los padres')"><div class="es">los padres</div><div class="ru">родители</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('los hermanos')"><div class="es">los hermanos</div><div class="ru">братья/сёстры</div><button class="speak-btn">🔊</button></div>
+    </div>
+    <h4 style="margin:14px 0 8px">🐾 Питомцы</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('el perro')"><div class="es">el perro</div><div class="ru">собака</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el gato')"><div class="es">el gato</div><div class="ru">кот</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('el hámster')"><div class="es">el hámster</div><div class="ru">хомяк</div><button class="speak-btn">🔊</button></div>
+    </div>
+    <h4 style="margin:14px 0 8px">🎨 Прилагательные для описания</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('alto, alta')"><div class="es">alto / alta</div><div class="ru">высокий / высокая</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('bajo, baja')"><div class="es">bajo / baja</div><div class="ru">низкий / низкая</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('simpático, simpática')"><div class="es">simpático / simpática</div><div class="ru">добрый / добрая</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('divertido, divertida')"><div class="es">divertido / divertida</div><div class="ru">весёлый / весёлая</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('joven')"><div class="es">joven</div><div class="ru">молодой</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('viejo, vieja')"><div class="es">viejo / vieja</div><div class="ru">старый / старая</div><button class="speak-btn">🔊</button></div>
+    </div>
+    <h4 style="margin:14px 0 8px">🧩 Конструкции</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('Mi abuelo es simpático.')"><div class="es">Mi abuelo es simpático.</div><div class="ru">Мой дедушка добрый.</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Mis abuelos son simpáticos.')"><div class="es">Mis abuelos son simpáticos.</div><div class="ru">Мои бабушка и дедушка добрые.</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Tiene 70 años.')"><div class="es">Tiene 70 años.</div><div class="ru">Ему 70 лет.</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Tienen 140 años en total.')"><div class="es">Tienen 140 años.</div><div class="ru">Им 140 лет (вместе).</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Se llama Luna.')"><div class="es">Se llama Luna.</div><div class="ru">Её зовут Луна.</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Mis padres se llaman Pedro y María.')"><div class="es">Se llaman...</div><div class="ru">Их зовут...</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('Tiene un gato naranja.')"><div class="es">Tiene un gato.</div><div class="ru">У него есть кот.</div><button class="speak-btn">🔊</button></div>
+      <div class="word-card" onclick="speak('¡Me gusta mi familia!')"><div class="es">¡Me gusta mi familia!</div><div class="ru">Мне нравится моя семья!</div><button class="speak-btn">🔊</button></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА БЕЗ QUIZLET -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей членам семьи и прилагательным</strong> · 7 мин<br>Покажи карточки <em>abuelo, abuela, alto, simpático, joven</em>. Пусть они повторят за тобой с жестами.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎨 Мини-проект «Mi mini-árbol»</strong> · 10 мин ⭐<br>Нарисуй 3–4 членов своей семьи (или семьи любимого героя) на листе А4. Подпиши каждого с прилагательными: <em>Este es mi abuelo. Es simpático y alto. Tiene 70 años.</em></div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>Теневое повторение</strong> · 5 мин ⭐<br>Открой тренажёр в уроке и повтори все 5 фраз за диктором, стараясь копировать интонацию.</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Тренажёр аудирования</strong> · 10 мин ⭐<br>Пройди интерактив «Тень + Аудирование» и упражнение на заполнение пропусков в уроке ещё раз.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>Семейное интервью</strong> · 7 мин ⭐<br>Возьми «микрофон» и задай родителям 3 вопроса на испанском: <em>¿Cómo te llamas? ¿Cuántos años tienes? ¿Tienes un gato o un perro?</em></div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Mi Familia»</strong> · 15 мин ⭐<br>Попроси родителей распечатать, выполни и раскрась светофор.<br><a href="../../worksheets/w08-l1-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин<br>Нажми нужный цвет в таблице ниже и покажи результат родителям.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть 8 членов семьи + 3 питомца</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Использовать 6 прилагательных для описания</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Говорить mi / tu / su / nuestro (чей?)</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Использовать es/son и tiene/tienen (ед. и мн. ч.)</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Согласовывать прилагательное (-o/-a/-os/-as)</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Представить члена семьи по формуле</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1214219356/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-3-%D1%83%D1%80%D0%BE%D0%BA-1-flash-cards/?i=2gqp1x&x=1qqt" target="_blank">
+    <span>📚 Карточки Quizlet · Станция 3 · Урок 1 (Mi Familia)</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w07-l3.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 21: Чекпоинт Станции 2 🏆</div></a>
+    <span class="nav-soon"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 23: ¿Cómo es tu familia? — скоро</div></span>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 3: Mi Mundo · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== SVG-ИКОНКИ ЧЛЕНОВ СЕМЬИ И ПИТОМЦЕВ ===== */
+var SVG={
+ abuelo:'<svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="16" fill="#FFD6BA"/><path d="M16 24 Q16 10 32 10 Q48 10 48 24 L48 18 Q48 6 32 6 Q16 6 16 18 Z" fill="#D3D3D3"/><circle cx="26" cy="24" r="2" fill="#333"/><circle cx="38" cy="24" r="2" fill="#333"/><path d="M26 32 Q32 36 38 32" stroke="#333" stroke-width="1.5" fill="none"/><rect x="20" y="42" width="24" height="18" rx="3" fill="#9D4EDD"/></svg>',
+ abuela:'<svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="16" fill="#FFD6BA"/><path d="M16 24 Q16 10 32 10 Q48 10 48 24 L48 18 Q48 6 32 6 Q16 6 16 18 Z" fill="#D3D3D3"/><circle cx="26" cy="24" r="2" fill="#333"/><circle cx="38" cy="24" r="2" fill="#333"/><path d="M26 32 Q32 36 38 32" stroke="#E91E63" stroke-width="1.5" fill="none"/><rect x="20" y="42" width="24" height="18" rx="3" fill="#E9A13B"/></svg>',
+ tio:'<svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="16" fill="#FFD6BA"/><path d="M16 20 Q16 6 32 6 Q48 6 48 20 L48 14 Q48 2 32 2 Q16 2 16 14 Z" fill="#5C3A21"/><circle cx="26" cy="24" r="2" fill="#333"/><circle cx="38" cy="24" r="2" fill="#333"/><path d="M26 32 Q32 36 38 32" stroke="#333" stroke-width="1.5" fill="none"/><rect x="20" y="42" width="24" height="18" rx="3" fill="#2A9D8F"/></svg>',
+ tia:'<svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="16" fill="#FFD6BA"/><path d="M16 24 Q16 6 32 6 Q48 6 48 24 L48 34 Q44 28 40 32 L40 24 Q40 10 32 10 Q24 10 24 24 L24 32 Q20 28 16 34 Z" fill="#8B4513"/><circle cx="26" cy="24" r="2" fill="#333"/><circle cx="38" cy="24" r="2" fill="#333"/><path d="M26 32 Q32 36 38 32" stroke="#E91E63" stroke-width="1.5" fill="none"/><rect x="20" y="42" width="24" height="18" rx="3" fill="#E91E63"/></svg>',
+ primo:'<svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="14" fill="#FFD6BA"/><path d="M18 20 Q18 8 32 8 Q46 8 46 20 L46 14 Q46 4 32 4 Q18 4 18 14 Z" fill="#5C3A21"/><circle cx="26" cy="24" r="2" fill="#333"/><circle cx="38" cy="24" r="2" fill="#333"/><path d="M26 32 Q32 36 38 32" stroke="#333" stroke-width="1.5" fill="none"/><rect x="22" y="42" width="20" height="16" rx="3" fill="#FFC93C"/></svg>',
+ prima:'<svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="14" fill="#FFD6BA"/><path d="M18 24 Q18 8 32 8 Q46 8 46 24 L46 32 Q42 26 38 30 L38 24 Q38 12 32 12 Q26 12 26 24 L26 30 Q22 26 18 32 Z" fill="#8B4513"/><circle cx="26" cy="24" r="2" fill="#333"/><circle cx="38" cy="24" r="2" fill="#333"/><path d="M26 32 Q32 36 38 32" stroke="#E91E63" stroke-width="1.5" fill="none"/><rect x="22" y="42" width="20" height="16" rx="3" fill="#E91E63"/></svg>',
+ perro:'<svg viewBox="0 0 64 64"><ellipse cx="32" cy="38" rx="20" ry="14" fill="#8B4513"/><circle cx="20" cy="28" r="10" fill="#8B4513"/><circle cx="16" cy="26" r="2" fill="#333"/><path d="M12 20 L8 14 L16 18 Z" fill="#8B4513"/><path d="M28 20 L32 14 L24 18 Z" fill="#8B4513"/><path d="M52 38 Q58 34 56 42" stroke="#8B4513" stroke-width="4" fill="none"/></svg>',
+ gato:'<svg viewBox="0 0 64 64"><ellipse cx="32" cy="40" rx="18" ry="12" fill="#FFA500"/><circle cx="32" cy="26" r="12" fill="#FFA500"/><path d="M22 18 L18 8 L26 14 Z" fill="#FFA500"/><path d="M42 18 L46 8 L38 14 Z" fill="#FFA500"/><circle cx="28" cy="24" r="2" fill="#333"/><circle cx="36" cy="24" r="2" fill="#333"/><path d="M30 30 Q32 32 34 30" stroke="#333" stroke-width="1.5" fill="none"/><path d="M50 40 Q58 36 56 46" stroke="#FFA500" stroke-width="4" fill="none"/></svg>',
+ hamster:'<svg viewBox="0 0 64 64"><ellipse cx="32" cy="38" rx="22" ry="16" fill="#F5DEB3"/><circle cx="22" cy="34" r="6" fill="#FFD6BA"/><circle cx="42" cy="34" r="6" fill="#FFD6BA"/><circle cx="26" cy="30" r="2" fill="#333"/><circle cx="38" cy="30" r="2" fill="#333"/><ellipse cx="32" cy="36" rx="2" ry="1.5" fill="#E91E63"/><path d="M14 24 Q10 18 16 20" stroke="#F5DEB3" stroke-width="3" fill="none"/><path d="M50 24 Q54 18 48 20" stroke="#F5DEB3" stroke-width="3" fill="none"/></svg>',
+ /* ПРИЛАГАТЕЛЬНЫЕ */
+ alto:'<svg viewBox="0 0 64 64"><line x1="32" y1="8" x2="32" y2="56" stroke="#2A9D8F" stroke-width="3"/><path d="M32 8 L24 16 M32 8 L40 16" stroke="#2A9D8F" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="32" cy="24" r="8" fill="#FFD6BA"/><rect x="26" y="32" width="12" height="24" rx="3" fill="#E91E63"/><circle cx="29" cy="22" r="1" fill="#333"/><circle cx="35" cy="22" r="1" fill="#333"/></svg>',
+ bajo:'<svg viewBox="0 0 64 64"><line x1="32" y1="28" x2="32" y2="56" stroke="#E9A13B" stroke-width="3"/><path d="M32 28 L24 36 M32 28 L40 36" stroke="#E9A13B" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="32" cy="40" r="8" fill="#FFD6BA"/><rect x="26" y="48" width="12" height="10" rx="3" fill="#2A9D8F"/><circle cx="29" cy="38" r="1" fill="#333"/><circle cx="35" cy="38" r="1" fill="#333"/></svg>',
+ simpatico:'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#FFC93C"/><circle cx="24" cy="28" r="3" fill="#333"/><circle cx="40" cy="28" r="3" fill="#333"/><path d="M20 38 Q32 48 44 38" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M48 14 C52 8 58 14 52 18 C46 22 44 18 48 14" fill="#E91E63"/></svg>',
+ divertido:'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#E9A13B"/><path d="M20 26 Q24 20 28 26" stroke="#333" stroke-width="3" fill="none"/><path d="M36 26 Q40 20 44 26" stroke="#333" stroke-width="3" fill="none"/><path d="M18 36 Q32 50 46 36" stroke="#333" stroke-width="3" fill="#E91E63"/><circle cx="18" cy="36" r="2" fill="#E91E63"/><circle cx="46" cy="36" r="2" fill="#E91E63"/></svg>',
+ joven:'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#FFD6BA"/><path d="M10 22 Q10 8 32 8 Q54 8 54 22 L54 18 Q54 6 32 6 Q10 6 10 18 Z" fill="#5C3A21"/><circle cx="24" cy="30" r="2.5" fill="#333"/><circle cx="40" cy="30" r="2.5" fill="#333"/><path d="M24 40 Q32 46 40 40" stroke="#E91E63" stroke-width="2" fill="none"/><circle cx="18" cy="34" r="3" fill="#FFB4A2" opacity=".7"/><circle cx="46" cy="34" r="3" fill="#FFB4A2" opacity=".7"/></svg>',
+ viejo:'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#FFD6BA"/><path d="M10 24 Q10 10 32 10 Q54 10 54 24 L54 20 Q54 8 32 8 Q10 8 10 20 Z" fill="#D3D3D3"/><circle cx="24" cy="30" r="2" fill="#333"/><circle cx="40" cy="30" r="2" fill="#333"/><path d="M24 40 Q32 44 40 40" stroke="#333" stroke-width="2" fill="none"/><path d="M16 28 L22 28" stroke="#8B4513" stroke-width="1.5"/><path d="M42 28 L48 28" stroke="#8B4513" stroke-width="1.5"/><path d="M20 38 Q26 36 28 40" stroke="#8B4513" stroke-width="1" fill="none"/><path d="M36 40 Q38 36 44 38" stroke="#8B4513" stroke-width="1" fill="none"/></svg>'
+};
+
+var FAM=[
+ {id:'abuelo',es:'el abuelo',ru:'дедушка',ges:'🧓 трясём бороду'},
+ {id:'abuela',es:'la abuela',ru:'бабушка',ges:'👵 делаем очки'},
+ {id:'tio',es:'el tío',ru:'дядя',ges:'💪 показываем бицепс'},
+ {id:'tia',es:'la tía',ru:'тётя',ges:'💇 крутим локон'},
+ {id:'primo',es:'el primo',ru:'двоюр. брат',ges:'🤝 даём пять'},
+ {id:'prima',es:'la prima',ru:'двоюр. сестра',ges:'👗 делаем реверанс'},
+ {id:'perro',es:'el perro',ru:'собака',ges:'🐕 лаем руками'},
+ {id:'gato',es:'el gato',ru:'кот',ges:'🐈 умываемся'},
+ {id:'hamster',es:'el hámster',ru:'хомяк',ges:'🐹 надуваем щёки'}
+];
+
+var ADJ=[
+ {id:'alto',es:'alto / alta',ru:'высокий / высокая',ges:'📏 рука вверх'},
+ {id:'bajo',es:'bajo / baja',ru:'низкий / низкая',ges:'⬇️ рука вниз'},
+ {id:'simpatico',es:'simpático / simpática',ru:'добрый / добрая',ges:'💖 сердце руками'},
+ {id:'divertido',es:'divertido / divertida',ru:'весёлый / весёлая',ges:'😄 смеемся'},
+ {id:'joven',es:'joven',ru:'молодой',ges:'✨ руки-звёзды'},
+ {id:'viejo',es:'viejo / vieja',ru:'старый / старая',ges:'👴 сгорбились'}
+];
+
+function getFamById(id){for(var i=0;i<FAM.length;i++){if(FAM[i].id===id)return FAM[i];}return FAM[0];}
+
+/* ===== БЛОК 0: РАЗМИНКА ===== */
+var WARM=[
+ {q:'¿Qué hay en tu mochila?',model:'En mi mochila hay un lápiz, una goma y un cuaderno.',ru:'Что в твоём рюкзаке?'},
+ {q:'¿Se puede comer en clase?',model:'No, no se puede.',ru:'Можно есть в классе?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: КАРТОЧКИ СЕМЬИ ===== */
+(function(){
+  var box=document.getElementById('fam-cards');
+  FAM.forEach(function(f){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<span class="emo">'+SVG[f.id]+'</span><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div><span class="ges">'+f.ges+'</span><button class="speak-btn">🔊</button>';
+    d.addEventListener('click',function(){speak(f.es);});
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1B: КАРТОЧКИ ПРИЛАГАТЕЛЬНЫХ ===== */
+(function(){
+  var box=document.getElementById('adj-cards');
+  ADJ.forEach(function(a){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<span class="emo">'+SVG[a.id]+'</span><div class="es">'+a.es+'</div><div class="ru">'+a.ru+'</div><span class="ges">'+a.ges+'</span><button class="speak-btn">🔊</button>';
+    d.addEventListener('click',function(){speak(a.es);});
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: СЕМЬЯ МОНСТРОВ ===== */
+var MONST=[
+ {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="45" r="30" fill="#9D4EDD"/><circle cx="35" cy="40" r="4" fill="#fff"/><circle cx="55" cy="40" r="4" fill="#fff"/><circle cx="35" cy="40" r="2" fill="#333"/><circle cx="55" cy="40" r="2" fill="#333"/><circle cx="45" cy="30" r="3" fill="#333"/><path d="M30 60 Q45 70 60 60" stroke="#fff" stroke-width="3" fill="none"/><rect x="20" y="75" width="50" height="6" fill="#9D4EDD"/></svg>',
+  q:'Este es el abuelo del monstruo. ¿Cómo es?',ok:'Es viejo y simpático.',w:['Es joven y divertido.','Es pequeño y feo.']},
+ {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="45" r="28" fill="#E91E63"/><circle cx="38" cy="42" r="3" fill="#fff"/><circle cx="52" cy="42" r="3" fill="#fff"/><path d="M35 55 Q45 62 55 55" stroke="#fff" stroke-width="3" fill="none"/><path d="M20 20 L30 30 M70 20 L60 30" stroke="#E91E63" stroke-width="4"/></svg>',
+  q:'Esta es la abuela del monstruo. ¿Cómo es?',ok:'Es vieja y divertida.',w:['Es joven y seria.','Es pequeña y triste.']},
+ {svg:'<svg viewBox="0 0 90 90"><ellipse cx="45" cy="50" rx="25" ry="20" fill="#2A9D8F"/><circle cx="35" cy="45" r="5" fill="#fff"/><circle cx="55" cy="45" r="5" fill="#fff"/><circle cx="35" cy="45" r="2" fill="#333"/><circle cx="55" cy="45" r="2" fill="#333"/><path d="M35 62 Q45 68 55 62" stroke="#fff" stroke-width="3" fill="none"/><rect x="30" y="25" width="30" height="6" fill="#FFC93C"/></svg>',
+  q:'Este es el tío del monstruo. ¿Cómo es?',ok:'Es alto y fuerte.',w:['Es bajo y tímido.','Es viejo y simpático.']},
+ {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="45" r="22" fill="#FFC93C"/><circle cx="38" cy="42" r="3" fill="#333"/><circle cx="52" cy="42" r="3" fill="#333"/><path d="M38 55 Q45 60 52 55" stroke="#E91E63" stroke-width="2" fill="none"/><path d="M25 30 Q30 20 35 30 M55 30 Q60 20 65 30" stroke="#FFC93C" stroke-width="3" fill="none"/></svg>',
+  q:'Esta es la prima del monstruo. ¿Cómo es?',ok:'Es joven y divertida.',w:['Es vieja y seria.','Es alta y tímida.']}
+];
+var mqOrd=[],mqI=0,mqS=0;
+function mqStart(){mqOrd=shuffle(MONST.slice());mqI=0;mqS=0;document.getElementById('mq-total').textContent=mqOrd.length;document.getElementById('mq-stars').textContent='0';mqNext();}
+function mqNext(){
+  var box=document.getElementById('mq-opts');box.innerHTML='';
+  if(mqI>=mqOrd.length){document.getElementById('mq-fb').textContent='🎉 ¡Perfecto! ⭐ '+mqS+' из '+mqOrd.length;document.getElementById('mq-svg').innerHTML='';document.getElementById('mq-q').textContent='';return;}
+  var r=mqOrd[mqI];
+  document.getElementById('mq-svg').innerHTML=r.svg;
+  document.getElementById('mq-q').textContent=r.q;
+  document.getElementById('mq-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');mqS++;document.getElementById('mq-stars').textContent=mqS;document.getElementById('mq-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('mq-fb').textContent='❌ Правильно: '+r.ok;}
+      mqI++;setTimeout(mqNext,1200);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 1B: ВИКТОРИНА ПРИЛАГАТЕЛЬНЫХ ===== */
+var ADJQ=[
+ {svg:SVG.alto,q:'El abuelo es muy... (1.90 m)',ok:'alto',w:['bajo','joven']},
+ {svg:SVG.divertido,q:'La tía siempre ríe y baila. Es muy...',ok:'divertida',w:['vieja','baja']},
+ {svg:SVG.simpatico,q:'El primo ayuda a todos. Es muy...',ok:'simpático',w:['viejo','alto']},
+ {svg:SVG.viejo,q:'La abuela tiene 80 años. Es...',ok:'vieja',w:['joven','alta']},
+ {svg:SVG.joven,q:'La prima tiene 8 años. Es muy...',ok:'joven',w:['vieja','baja']},
+ {svg:SVG.bajo,q:'El hámster es pequeño y...',ok:'bajo',w:['alto','viejo']}
+];
+var adjqOrd=[],adjqI=0,adjqS=0;
+function adjqStart(){adjqOrd=shuffle(ADJQ.slice());adjqI=0;adjqS=0;document.getElementById('adjq-total').textContent=adjqOrd.length;document.getElementById('adjq-stars').textContent='0';adjqNext();}
+function adjqNext(){
+  var box=document.getElementById('adjq-opts');box.innerHTML='';
+  if(adjqI>=adjqOrd.length){document.getElementById('adjq-fb').textContent='🎉 ¡Perfecto! ⭐ '+adjqS+' из '+adjqOrd.length;document.getElementById('adjq-svg').innerHTML='';document.getElementById('adjq-q').textContent='';return;}
+  var r=adjqOrd[adjqI];
+  document.getElementById('adjq-svg').innerHTML=r.svg;
+  document.getElementById('adjq-q').textContent=r.q;
+  document.getElementById('adjq-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');adjqS++;document.getElementById('adjq-stars').textContent=adjqS;document.getElementById('adjq-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('adjq-fb').textContent='❌ Правильно: '+r.ok;}
+      adjqI++;setTimeout(adjqNext,1200);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 2: УПРАЖНЕНИЕ НА ЗАПОЛНЕНИЕ ПРОПУСКОВ ===== */
+var FILL=[
+ {before:'Mi abuelo ',after:' simpático.',answer:'es',hint:'один дедушка → es'},
+ {before:'Mis abuelos ',after:' simpáticos.',answer:'son',hint:'бабушка и дедушка вместе → son'},
+ {before:'Mi tía ',after:' 45 años.',answer:'tiene',hint:'одна тётя → tiene'},
+ {before:'Mis tíos ',after:' un gato naranja.',answer:'tienen',hint:'дядя и тётя вместе → tienen'},
+ {before:'',after:' abuela es vieja.',answer:'La',hint:'артикль ж.р. ед.ч. → La'},
+ {before:'',after:' primos son altos.',answer:'Los',hint:'артикль м.р. мн.ч. → Los'},
+ {before:'Mi gato es ',after:'.',answer:'naranja',hint:'цвет кота'},
+ {before:'Mis primas son ',after:'.',answer:'divertidas',hint:'мн.ч. ж.р. от divertido → divertidas'}
+];
+(function(){
+  var box=document.getElementById('fill-box');
+  document.getElementById('fill-total').textContent=FILL.length;
+  FILL.forEach(function(f,i){
+    var d=document.createElement('div');d.className='fill-ex';d.id='fill-'+i;
+    d.innerHTML='<div><span class="ex-num">'+(i+1)+'</span><span class="sentence">'+f.before+'<input class="gap" id="inp-'+i+'" type="text" autocomplete="off" placeholder="...">'+f.after+'</span></div>'+
+      '<div class="fill-fb" id="fb-'+i+'"></div>';
+    box.appendChild(d);
+  });
+})();
+function checkFill(){
+  var stars=0;
+  FILL.forEach(function(f,i){
+    var inp=document.getElementById('inp-'+i);
+    var fb=document.getElementById('fb-'+i);
+    var v=inp.value.trim().toLowerCase();
+    var ans=f.answer.toLowerCase();
+    inp.classList.remove('correct','wrong');
+    if(v===ans){inp.classList.add('correct');fb.textContent='✅ ¡Correcto! '+f.hint;fb.style.color='var(--green)';stars++;speak(f.before+f.answer+f.after);}
+    else{inp.classList.add('wrong');fb.textContent='❌ Правильно: '+f.answer+'. '+f.hint;fb.style.color='var(--red)';}
+  });
+  document.getElementById('fill-stars').textContent=stars;
+  if(stars===FILL.length){speak('¡Perfecto!');confetti('🎉');}
+}
+function resetFill(){
+  FILL.forEach(function(f,i){
+    var inp=document.getElementById('inp-'+i);
+    var fb=document.getElementById('fb-'+i);
+    inp.value='';inp.classList.remove('correct','wrong');fb.textContent='';
+  });
+  document.getElementById('fill-stars').textContent='0';
+}
+
+/* ===== БЛОК 2: ДЕТЕКТИВ С SVG (ЗАМЕНА СОБАКИ НА КОТА) ===== */
+var DET=[
+ {desc:'Tiene 70 años, es simpático y tiene un gato naranja.',okId:'abuelo',ids:['tio','primo']},
+ {desc:'Es joven, tiene el pelo largo y es estudiante.',okId:'prima',ids:['abuela','tia']},
+ {desc:'Es médico, tiene 45 años y es alto.',okId:'tio',ids:['abuelo','gato']},
+ {desc:'Es vieja, lleva gafas y es muy divertida.',okId:'abuela',ids:['tia','prima']},
+ {desc:'Es joven, tiene 10 años y juega al fútbol.',okId:'primo',ids:['tio','gato']},
+ {desc:'Tiene 4 patas, es naranja y se llama Luna.',okId:'gato',ids:['perro','hamster']}
+];
+var detOrd=[],detI=0,detS=0;
+function detStart(){detOrd=shuffle(DET.slice());detI=0;detS=0;document.getElementById('det-total').textContent=detOrd.length;document.getElementById('det-stars').textContent='0';detNext();}
+function detNext(){
+  var box=document.getElementById('det-opts');box.innerHTML='';
+  if(detI>=detOrd.length){document.getElementById('det-q').textContent='🎉 ¡Muy bien!';document.getElementById('det-fb').textContent='⭐ '+detS+' из '+detOrd.length;return;}
+  var r=detOrd[detI];
+  document.getElementById('det-q').textContent=r.desc;
+  document.getElementById('det-fb').textContent='';
+  shuffle([r.okId].concat(r.ids)).forEach(function(id){
+    var f=getFamById(id);
+    var b=document.createElement('button');b.className='opt';b.dataset.id=id;
+    b.innerHTML=SVG[id]+'<span>'+f.es+'</span>';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(id===r.okId){b.classList.add('correct');detS++;document.getElementById('det-stars').textContent=detS;document.getElementById('det-fb').textContent='✅ ¡Correcto!';speak(f.es);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.dataset.id===r.okId)x.classList.add('correct');});document.getElementById('det-fb').textContent='❌ Правильно: '+getFamById(r.okId).es;}
+      detI++;setTimeout(detNext,1200);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 2: КОНСТРУКТОР (С ПРИЛАГАТЕЛЬНЫМИ) ===== */
+var SB=[
+ {w:['Mi','abuelo','es','simpático.'],t:'Мой дедушка добрый'},
+ {w:['Mis','abuelos','son','simpáticos.'],t:'Мои бабушка и дедушка добрые'},
+ {w:['Tiene','70','años.'],t:'Ему 70 лет'},
+ {w:['Mi','gato','se','llama','Luna.'],t:'Моего кота зовут Луна'},
+ {w:['Tu','tía','es','divertida.'],t:'Твоя тётя весёлая'},
+ {w:['Tiene','el','pelo','blanco.'],t:'У неё белые волосы'},
+ {w:['Mis','primos','son','altos.'],t:'Мои двоюродные братья высокие'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== БЛОК 3: ЧТЕНИЕ (С КОТОМ И ПРИЛАГАТЕЛЬНЫМИ) ===== */
+function speakPablo(){speak('¡Hola! Me llamo Pablo. Tengo 8 años. Esta es mi familia. Mis abuelos se llaman Luis y María. Tienen 70 años. Son muy simpáticos. Mi abuela es divertida y tiene el pelo blanco. Tengo una tía. Se llama Ana. Es joven y es médica. También tengo un primo. Se llama Carlos. Es alto y tiene 10 años. También tenemos un gato. Se llama Luna. Es naranja y pequeño. ¡Me gusta mi familia!');}
+var PABLO=[
+ {q:'¿Cómo se llaman los abuelos?',ru:'Как зовут бабушку и дедушку?',ok:'Luis y María.',w:['Carlos y Ana.','Pablo y Luna.']},
+ {q:'¿Cuántos años tienen los abuelos?',ru:'Сколько лет бабушке и дедушке?',ok:'70 años.',w:['8 años.','45 años.']},
+ {q:'¿Qué es la tía Ana?',ru:'Кто тётя Ана по профессии?',ok:'Médica.',w:['Profesora.','Estudiante.']},
+ {q:'¿Cómo es el primo Carlos?',ru:'Какой двоюродный брат Карлос?',ok:'Alto y tiene 10 años.',w:['Bajo y viejo.','Divertido y médico.']},
+ {q:'¿Cómo se llama el gato?',ru:'Как зовут кота?',ok:'Luna.',w:['Max.','Luis.']}
+];
+(function(){
+  var wrap=document.getElementById('pablo-quiz');
+  PABLO.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 4: ТЕНЕВОЕ ПОВТОРЕНИЕ ===== */
+var SHAD=[
+ {es:'Mi abuela es divertida.',ru:'Моя бабушка весёлая.'},
+ {es:'Mis tíos tienen un gato.',ru:'У моих дяди и тёти есть кот.'},
+ {es:'Los abuelos son simpáticos.',ru:'Бабушка и дедушка добрые.'},
+ {es:'Mi gato se llama Luna.',ru:'Моего кота зовут Луна.'},
+ {es:'¡Me gusta mi familia!',ru:'Мне нравится моя семья!'}
+];
+(function(){
+  var box=document.getElementById('shadow-box');
+  SHAD.forEach(function(s,i){
+    var d=document.createElement('div');d.className='shadow-card';
+    d.innerHTML='<div style="font-size:.85rem;color:#999">'+(i+1)+'. '+s.ru+'</div><div class="shadow-phrase">'+s.es+'</div>';
+    var ctrl=document.createElement('div');ctrl.className='shadow-ctrl';
+    var btnL=document.createElement('button');btnL.className='speak-btn';btnL.textContent='🔊 Слушать';
+    btnL.addEventListener('click',function(){speak(s.es);});
+    var btnR=document.createElement('button');btnR.className='speak-btn';btnR.style.background='var(--wine)';btnR.textContent='🎤 Повтори вслух';
+    btnR.addEventListener('click',function(){btnR.textContent='✅ Повторил!';btnR.style.background='var(--green)';});
+    ctrl.appendChild(btnL);ctrl.appendChild(btnR);d.appendChild(ctrl);box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 4: АУДИРОВАНИЕ С КОТОМ ===== */
+var AUD=[
+ {es:'Mi abuelo es simpático.',okId:'abuelo'},
+ {es:'Mi tía es divertida.',okId:'tia'},
+ {es:'Mi primo tiene un gato.',okId:'primo'},
+ {es:'Mi gato se llama Luna.',okId:'gato'},
+ {es:'Mi abuela tiene el pelo blanco.',okId:'abuela'},
+ {es:'Mi tío es alto.',okId:'tio'},
+ {es:'Mi prima es joven.',okId:'prima'},
+ {es:'Mis abuelos son simpáticos.',okId:'abuelo'}
+];
+var audOrd=[],audI=0,audS=0;
+function audStart(){audOrd=shuffle(AUD.slice());audI=0;audS=0;document.getElementById('aud-total').textContent=audOrd.length;document.getElementById('aud-stars').textContent='0';audNext();}
+function speakAud(){if(audI<audOrd.length)speak(audOrd[audI].es);}
+function audNext(){
+  var box=document.getElementById('aud-opts');box.innerHTML='';
+  if(audI>=audOrd.length){document.getElementById('aud-fb').textContent='🎉 ¡Perfecto! ⭐ '+audS+' из '+audOrd.length;return;}
+  document.getElementById('aud-fb').textContent='Нажми 🔊 Послушать и выбери картинку!';
+  var r=audOrd[audI];var ids=[r.okId];
+  var pool=FAM.filter(function(f){return f.id!==r.okId;});
+  shuffle(pool).slice(0,2).forEach(function(f){ids.push(f.id);});
+  shuffle(ids).forEach(function(id){
+    var f=getFamById(id);
+    var b=document.createElement('button');b.className='opt';b.dataset.id=id;
+    b.innerHTML=SVG[id]+'<span>'+f.es+'</span>';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(id===r.okId){b.classList.add('correct');audS++;document.getElementById('aud-stars').textContent=audS;document.getElementById('aud-fb').textContent='✅ ¡Correcto!';speak(r.es);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.dataset.id===r.okId)x.classList.add('correct');});document.getElementById('aud-fb').textContent='❌ Правильно: '+getFamById(r.okId).es;}
+      audI++;setTimeout(audNext,1200);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 5: ПРЕЗЕНТАЦИЯ (С ПРИЛАГАТЕЛЬНЫМИ) ===== */
+var PRES=[
+ {q:'Представь дедушку или выдуманного героя.',model:'Este es mi abuelo. Se llama Pedro. Tiene 70 años. Es simpático y alto. Tiene el pelo blanco.'},
+ {q:'Расскажи о своей тёте.',model:'Esta es mi tía. Se llama Ana. Tiene 40 años. Es divertida y joven. Es médica.'},
+ {q:'Расскажи о своём коте.',model:'Este es mi gato. Se llama Luna. Tiene 3 años. Es naranja y pequeño. Es muy simpático.'},
+ {q:'Расскажи о двоюродных братьях.',model:'Estos son mis primos. Se llaman Carlos y Luis. Tienen 10 años. Son altos y divertidos.'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Покажи фото/рисунок и расскажи ВСЛУХ по формуле!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я сказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР СО ВСЕМИ СЛОВАМИ ===== */
+var MATCH=[
+ ['el abuelo','дедушка'],['la abuela','бабушка'],['el tío','дядя'],['la tía','тётя'],
+ ['el primo','двоюр. брат'],['la prima','двоюр. сестра'],['el perro','собака'],['el gato','кот'],
+ ['alto','высокий'],['simpático','добрый'],['divertido','весёлый'],['joven','молодой']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');mFound++;speak(mSel.dataset.v);document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';}
+  else{d.classList.add('wrong');mSel.classList.add('wrong');var a=mSel;setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);}
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres el detective de la familia!');
+  confetti('🕵️');
+  try{localStorage.setItem('mudro_kids_w08l1_badge_familia','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w08l1_badge_familia')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'❤️'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 6.2 · Primaria и ESO — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p2),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🗓️'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.22;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#F0F4FF; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #E8DCCF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#FBF3EA; color:var(--p1); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .freq-scale{ display:flex; flex-wrap:wrap; gap:4px; margin:2mm 0; }
+  .freq-chip{ padding:3px 8px; border-radius:999px; font-weight:700; font-size:8.5px; color:#fff; }
+  .freq-chip.f100{ background:#7A8B4C; }
+  .freq-chip.f75{ background:#9EB066; }
+  .freq-chip.f50{ background:#E9A13B; }
+  .freq-chip.f10{ background:#E2725B; }
+  .freq-chip.f0{ background:#7A6A5C; }
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7; }
+  .dialog-box .who{ font-weight:700; color:var(--p2); }
+  .dialog-box .who.you{ color:var(--p4); }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p2); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .schedule-table{ width:100%; border-collapse:collapse; font-size:9.5px; margin-top:2mm; }
+  .schedule-table th,.schedule-table td{ border:1px solid #E8DCCF; padding:2mm 4px; vertical-align:top; }
+  .schedule-table th{ background:#FBF3EA; color:var(--p1); }
+  .schedule-table td.empty{ height:9mm; }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏫 Рабочий лист · Урок 6.2 «Primaria и ESO»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Школьный день и рутина семьи · наречия частотности</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🎒 Лексика школы: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la primaria</div>
+          <div class="item">2. la ESO</div>
+          <div class="item">3. la jornada continua</div>
+          <div class="item">4. el horario partido</div>
+          <div class="item">5. el recreo</div>
+          <div class="item">6. el boletín de notas</div>
+          <div class="item">7. la tutoría</div>
+          <div class="item">8. el orientador</div>
+        </div>
+        <div class="col">
+          <div class="item">а) школьный психолог / консультант</div>
+          <div class="item">б) перемена</div>
+          <div class="item">в) начальная школа</div>
+          <div class="item">г) сплошной учебный день</div>
+          <div class="item">д) средняя школа для подростков</div>
+          <div class="item">е) школьный отчёт с оценками</div>
+          <div class="item">ж) дробное расписание</div>
+          <div class="item">з) встреча с классным руководителем</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔤 Впиши слово по описанию</h2>
+        <div class="tag">из словаря урока</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Школьный предмет: математика. → <span class="wline long"></span><br>
+      2. Время начала занятий в школе. → <span class="wline long"></span><br>
+      3. Время окончания занятий. → <span class="wline long"></span><br>
+      4. Предмет: английский язык. → <span class="wline long"></span><br>
+      5. Оценка в табеле. → <span class="wline long"></span><br>
+      6. Время для обеда в школе. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: наречия частотности + 5 глаголов</h2>
+        <div class="tag">практика: yo · nosotros · usted</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> в упражнениях используем формы <b>yo</b>, <b>nosotros</b> и <b>usted</b>.<br>
+        Остальные формы даны в таблице для справки и распознавания.
+      </div>
+
+      <div class="freq-scale">
+        <span class="freq-chip f100">siempre · 100%</span>
+        <span class="freq-chip f75">normalmente · 75%</span>
+        <span class="freq-chip f50">a veces · 50%</span>
+        <span class="freq-chip f10">casi nunca · 10%</span>
+        <span class="freq-chip f0">nunca · 0%</span>
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Лицо</th>
+          <th>estudiar</th>
+          <th>tener</th>
+          <th>hacer</th>
+          <th>salir</th>
+          <th>empezar</th>
+        </tr>
+        <tr>
+          <td class="practice">yo</td>
+          <td class="practice">estudio</td>
+          <td class="practice">tengo</td>
+          <td class="practice">hago</td>
+          <td class="practice">salgo</td>
+          <td class="practice">empiezo</td>
+        </tr>
+        <tr>
+          <td class="reference">tú</td>
+          <td class="reference">estudias</td>
+          <td class="reference">tienes</td>
+          <td class="reference">haces</td>
+          <td class="reference">sales</td>
+          <td class="reference">empiezas</td>
+        </tr>
+        <tr>
+          <td class="practice">usted</td>
+          <td class="practice">estudia</td>
+          <td class="practice">tiene</td>
+          <td class="practice">hace</td>
+          <td class="practice">sale</td>
+          <td class="practice">empieza</td>
+        </tr>
+        <tr>
+          <td class="practice">nosotros</td>
+          <td class="practice">estudiamos</td>
+          <td class="practice">tenemos</td>
+          <td class="practice">hacemos</td>
+          <td class="practice">salimos</td>
+          <td class="practice">empezamos</td>
+        </tr>
+        <tr>
+          <td class="reference">vosotros</td>
+          <td class="reference">estudiáis</td>
+          <td class="reference">tenéis</td>
+          <td class="reference">hacéis</td>
+          <td class="reference">salís</td>
+          <td class="reference">empezáis</td>
+        </tr>
+        <tr>
+          <td class="reference">ellos / ustedes</td>
+          <td class="reference">estudian</td>
+          <td class="reference">tienen</td>
+          <td class="reference">hacen</td>
+          <td class="reference">salen</td>
+          <td class="reference">empiezan</td>
+        </tr>
+      </table>
+
+      <div class="formula">
+        💡 Наречие ставим <b>перед глаголом</b>: <i>Yo siempre hago los deberes.</i> · <i>Nosotros normalmente salimos a las tres.</i>
+      </div>
+
+      1. Yo <span class="wline short"></span> hago los deberes por la tarde. <span class="ru-sub">(100%)</span><br>
+      2. Nosotros <span class="wline short"></span> salimos a las tres. <span class="ru-sub">(75%)</span><br>
+      3. Usted <span class="wline short"></span> tiene reunión con el tutor. <span class="ru-sub">(50%)</span><br>
+      4. Yo <span class="wline short"></span> llego tarde a la tutoría. <span class="ru-sub">(10%)</span><br>
+      5. Nosotros <span class="wline short"></span> tenemos clase los domingos. <span class="ru-sub">(0%)</span><br>
+      6. Mi hijo <span class="wline short"></span> entra a las nueve. <span class="ru-sub">(100%)</span><br>
+      7. Mi hija <span class="wline short"></span> sale a las cinco. <span class="ru-sub">(50%)</span><br>
+      8. Nosotros <span class="wline short"></span> recogemos a los niños a las tres. <span class="ru-sub">(75%)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>📖 Чтение + CLIL: школьный день в Испании</h2>
+        <div class="tag">прочитай текст и заполни таблицу</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Primaria</h4>
+        <p>En primaria, los niños suelen tener un tutor principal. La jornada continua es muy común: entrada por la mañana, recreo a media mañana y salida antes de la comida. Las asignaturas incluyen lengua, matemáticas, ciencias, sociales, inglés, educación física y plástica o música.</p>
+
+        <h4>ESO</h4>
+        <p>En ESO, los adolescentes tienen varios profesores. Es común el horario partido: mañana y tarde, con una pausa larga para comer. Las asignaturas son más específicas: lengua, matemáticas, ciencias, sociales, inglés, tecnología, educación física y optativas. Las notas suelen ser numéricas, de uno a diez.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы полными фразами или короткими ответами.</div>
+
+      1. ¿Quién es el tutor principal en primaria?  
+      <span class="wline xlong"></span><br>
+
+      2. ¿Qué tipo de jornada es común en primaria?  
+      <span class="wline xlong"></span><br>
+
+      3. ¿Cuántos profesores tienen los adolescentes en ESO?  
+      <span class="wline xlong"></span><br>
+
+      4. ¿Qué tipo de horario es común en ESO?  
+      <span class="wline xlong"></span><br>
+
+      5. ¿Cómo son las notas en ESO?  
+      <span class="wline xlong"></span>
+
+      <div class="hint" style="margin-top:3mm">Заполните таблицу сравнения двух уровней.</div>
+      <table class="schedule-table">
+        <tr>
+          <th>Критерий</th>
+          <th>Primaria (6–12 лет)</th>
+          <th>ESO (12–16 лет)</th>
+        </tr>
+        <tr>
+          <td>Классный руководитель</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td>Расписание</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td>Предметы</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td>Оценки</td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+        <tr>
+          <td><b>Мой вывод</b></td>
+          <td class="empty"></td>
+          <td class="empty"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">5</div>
+      <div>
+        <h2>🎧 Аудирование: расписание для двоих детей</h2>
+        <div class="tag">прослушайте в уроке или попросите прочитать вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Текст для чтения вслух:</b><br>
+        «Buenos días, Colegio Santa María. Quisiera entender el horario de primaria y ESO. Claro. ¿Tiene un niño en primaria? Sí, tiene ocho años. Y mi hija tiene doce años. Ella empieza la ESO. Muy bien. En primaria, la jornada es continua. La entrada es a las nueve y la salida a las tres y media. ¿Y en ESO? En ESO hay horario partido los martes y jueves. Salen a las cinco. A veces tienen actividades por la tarde. Nosotros normalmente recogemos a los niños a las tres. ¿Pueden comer en el comedor? Sí. El comedor es de tres a cuatro. ¿Cuándo es la primera tutoría? La primera tutoría es el próximo lunes a las cinco.»
+      </div>
+
+      1. ¿Qué curso tiene el niño?  
+      <span class="wline xlong"></span><br>
+
+      2. ¿Qué curso empieza la hija?  
+      <span class="wline xlong"></span><br>
+
+      3. ¿Qué tipo de jornada tiene primaria?  
+      <span class="wline xlong"></span><br>
+
+      4. ¿A qué hora sale la hija en martes y jueves?  
+      <span class="wline xlong"></span><br>
+
+      5. ¿De qué hora a qué hora es el comedor?  
+      <span class="wline xlong"></span><br>
+
+      6. ¿Cuándo es la primera tutoría?  
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">6</div>
+      <div>
+        <h2>🗣 Говорение: ситуации про школу</h2>
+        <div class="tag">прочитайте вслух, подставьте свои данные</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы рассказываете о младшем ребёнке.<br>
+        <div class="tmpl">«Mi hijo está en primaria. Siempre entra a las nueve.»</div>
+        <div class="tmpl-ru">(Мой сын в начальной школе. Всегда приходит в девять.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы рассказываете о старшем подростке.<br>
+        <div class="tmpl">«Mi hija está en ESO. A veces sale a las cinco.»</div>
+        <div class="tmpl-ru">(Моя дочь в ESO. Иногда уходит в пять.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Расскажите о типичном дне семьи.<br>
+        <div class="tmpl">«Nosotros normalmente recogemos a los niños a las tres.»</div>
+        <div class="tmpl-ru">(Мы обычно забираем детей в три.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Скажите, что вы никогда не учитесь по воскресеньям.<br>
+        <div class="tmpl">«Nosotros nunca estudiamos los domingos.»</div>
+        <div class="tmpl-ru">(Мы никогда не учимся по воскресеньям.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Спросите у секретариата, когда первая tutoría.<br>
+        <div class="tmpl">«¿Cuándo es la primera tutoría?»</div>
+        <div class="tmpl-ru">(Когда первая встреча с классным руководителем?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">7</div>
+      <div>
+        <h2>✍️ Письмо: мини-расписание на неделю</h2>
+        <div class="tag">6–8 предложений о неделе двух детей</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Младший ребёнок: курс, время входа/выхода, любимый предмет.<br>
+        3–4. Старший ребёнок: курс, время выхода, расписание.<br>
+        5–6. Рутина семьи с наречиями частотности.<br>
+        7–8. Что вы <b>nunca</b> делаете по выходным.
+      </div>
+
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr>
+          <th>Умею</th>
+          <th>🟢</th>
+          <th>🟡</th>
+          <th>🔴</th>
+        </tr>
+        <tr>
+          <td>Различать primaria и ESO</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Понимать jornada continua и horario partido</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Называть 5 школьных предметов</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Использовать siempre / normalmente / a veces / nunca</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Сказать время входа и выхода</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Использовать глаголы estudiar / tener / hacer / salir / empezar</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Составить расписание для семьи</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">
+        📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.
+      </p>
+    </div>
+  </div>
+
+  <!-- АНОНС СЛЕДУЮЩЕГО УРОКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">➡️</div>
+      <div>
+        <h2>Впереди — Урок 6.3: Comedor и Transporte</h2>
+        <div class="tag">столовая, меню, автобус, маршруты</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы понимаете расписание и рутину семьи. На следующем уроке (6.3) мы разберём две большие темы: <b>comedor escolar</b> (столовая и обед) и <b>transporte escolar</b> (школьный автобус). Научимся заполнять заявки, спрашивать про аллергию и маршрут.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -852,11 +852,20 @@ if('speechSynthesis' in window){
 function renderQuiz(containerId, questions, feedbackPrefix){
   var el = document.getElementById(containerId);
   el.innerHTML = '';
+  // Перемешиваем варианты: правильный ответ не должен всегда быть первым.
+  // Исходный массив o и правильный индекс c не трогаем — работаем с копиями.
+  var opts = [], correct = [];
+  questions.forEach(function(item, qi){
+    var right = item.o[item.c];
+    var mixed = item.o.slice().sort(function(){ return Math.random() - 0.5; });
+    opts[qi] = mixed;
+    correct[qi] = mixed.indexOf(right);
+  });
   questions.forEach(function(item, qi){
     var d = document.createElement('div');
     d.className = 'quiz-q';
     d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
-      item.o.map(function(o, oi){
+      opts[qi].map(function(o, oi){
         return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
       }).join('') +
       '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
@@ -870,14 +879,14 @@ function renderQuiz(containerId, questions, feedbackPrefix){
       var sibs = b.parentElement.querySelectorAll('.quiz-opt');
       sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
       var fb = document.getElementById(feedbackPrefix + '-' + qi);
-      if(oi === questions[qi].c){
+      if(oi === correct[qi]){
         b.classList.add('correct');
         fb.textContent = '✅ ¡Correcto!';
         fb.style.color = 'var(--ok)';
       } else {
         b.classList.add('wrong');
-        sibs[questions[qi].c].classList.add('correct');
-        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        sibs[correct[qi]].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + opts[qi][correct[qi]];
         fb.style.color = 'var(--bad)';
       }
       fb.classList.add('show');
@@ -1294,9 +1303,9 @@ function renderTL(){
     var tr = document.createElement('tr');
     tr.innerHTML =
       '<td>' + t + '</td>' +
-      '<td><button class="tl-cell green" data-row="' + rowIdx + '">🟢</button></td>' +
-      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '">🟡</button></td>' +
-      '<td><button class="tl-cell red" data-row="' + rowIdx + '">🔴</button></td>';
+      '<td><button class="tl-cell green" data-row="' + rowIdx + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + rowIdx + '" data-color="3">🔴</button></td>';
     tr.querySelectorAll('.tl-cell').forEach(function(b){
       b.onclick = function(){
         tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
