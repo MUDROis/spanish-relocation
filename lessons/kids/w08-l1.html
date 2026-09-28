@@ -55,6 +55,7 @@
   .word-card:hover{transform:translateY(-4px);border-color:var(--rose)}
   .word-card .emo{display:block;margin:0 auto 4px;width:56px;height:56px}
   .word-card .emo svg{width:56px;height:56px;display:block}
+  .word-card .emo img{width:56px;height:56px;display:block;object-fit:contain;margin:0 auto}
   .word-card .es{font-family:'Baloo 2',cursive;font-size:1rem;color:var(--wine)}
   .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
   .word-card .ges{display:block;font-size:.7rem;font-weight:800;color:var(--terra);margin-top:4px}
@@ -68,6 +69,7 @@
 
   .game-zone{background:linear-gradient(135deg,#FFE5EC,#FFB4A2);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
   .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--wine);margin:10px 0;min-height:36px}
+  .game-q .ru{display:block;font-size:.85rem;font-style:italic;color:var(--ink-soft);font-family:'Nunito';font-weight:700;margin-top:4px}
   .game-svg{margin:6px auto;min-height:90px;display:flex;justify-content:center;align-items:center}
   .game-svg svg{width:90px;height:90px}
   .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
@@ -86,11 +88,11 @@
   .fill-ex{background:#fff;border:2px solid #FFE5EC;border-radius:14px;padding:14px 18px;margin:10px 0}
   .fill-ex .ex-num{display:inline-block;background:var(--wine);color:#fff;border-radius:50%;width:26px;height:26px;text-align:center;line-height:26px;font-weight:800;font-size:.9rem;margin-right:8px;flex-shrink:0}
   .fill-ex .sentence{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--ink);margin:8px 0}
-  .fill-ex .gap{display:inline-block;min-width:80px;border-bottom:2px dashed var(--wine);height:24px;vertical-align:bottom;text-align:center;padding:0 4px;cursor:pointer;transition:.15s}
-  .fill-ex input.gap{border:2px dashed var(--wine);border-radius:6px;padding:2px 8px;font-family:'Baloo 2',cursive;font-size:1rem;background:#FFF8EC;color:var(--wine);text-align:center;outline:none;transition:.15s;min-width:100px}
-  .fill-ex input.gap:focus{border-color:var(--pink);background:#fff}
-  .fill-ex input.gap.correct{background:#C8E6C9;border-color:var(--green);color:var(--green)}
-  .fill-ex input.gap.wrong{background:#FFCDD2;border-color:var(--red);color:var(--red);animation:shake .4s}
+  .gap-slot{display:inline-block;min-width:78px;border-bottom:2px dashed var(--wine);color:var(--wine);font-weight:800;text-align:center;padding:0 6px}
+  .gap-chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+  .gap-opt{background:#FFF8EC;border:2px solid #e0cfd6;border-radius:999px;padding:6px 16px;font-weight:800;font-family:'Baloo 2',cursive;font-size:1rem;color:var(--wine);cursor:pointer;transition:.15s}
+  .gap-opt:hover{border-color:var(--rose);transform:translateY(-2px)}
+  .gap-opt.sel{background:var(--wine);border-color:var(--wine);color:#fff}
   .fill-fb{font-weight:800;margin-top:6px;min-height:20px;font-size:.9rem}
   .fill-submit{background:var(--wine);color:#fff;border:none;border-radius:10px;padding:8px 18px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:10px}
   .fill-submit:active{transform:scale(.95)}
@@ -195,7 +197,7 @@
     <g transform="translate(360,138)"><ellipse cx="18" cy="18" rx="15" ry="10" fill="#FFA500"/><circle cx="8" cy="12" r="6" fill="#FFA500"/><circle cx="5" cy="10" r="1.5" fill="#333"/><path d="M2 8 L0 4 L4 6 Z" fill="#FFA500"/><path d="M33 18 Q40 15 38 22" stroke="#FFA500" stroke-width="3" fill="none"/></g>
   </svg>
   <h1>Mi <span>Familia</span></h1>
-  <p class="sub">Мы вышли из школы и попали ДОМА! Сегодня ты узнаешь, как по-испански называются члены семьи, питомцы и научишься описывать, какие они — высокие, весёлые, молодые или старые.</p>
+  <p class="sub">Мы вышли из школы и попали ДОМА! Сегодня ты узнаешь, как по-испански называются члены семьи и питомцы, и научишься описывать их: какие они — высокие, весёлые, молодые или старые.</p>
   <div class="final-situation">
     <strong>Итоговая ситуация:</strong> ты показываешь фото или рисунок и говоришь:<br>
     <em>«Esta es mi familia. Estos son mis abuelos. Se llaman Pedro y María. Tienen 70 años. Son simpáticos y tienen un gato.»</em>
@@ -273,24 +275,9 @@
       <h2 class="block-title">🧩 Грамматика: mi/tu/su + ser/tener</h2>
       <span class="time-badge">⏱ 12 минут</span>
     </div>
-    <h4 style="margin-bottom:8px">📌 Таблица 1: Чей? (притяжательные местоимения)</h4>
-    <table class="gram-table">
-      <tr><th>Местоимение</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
-      <tr><td><b>MI</b> (мой)</td><td>Mi abuela</td><td>Моя бабушка</td><td><button class="speak-btn" onclick="speak('Mi abuela')">🔊</button></td></tr>
-      <tr><td><b>TU</b> (твой)</td><td>Tu tío</td><td>Твой дядя</td><td><button class="speak-btn" onclick="speak('Tu tío')">🔊</button></td></tr>
-      <tr><td><b>SU</b> <span class="grammar-hint" data-hint="su — его/её/их/Ваш. Универсальное местоимение: su abuelo может означать «его дедушка», «её дедушка» или «их дедушка». Контекст подсказывает!">(его/её/их)</span></td><td>Su primo</td><td>Его/её двоюродный брат</td><td><button class="speak-btn" onclick="speak('Su primo')">🔊</button></td></tr>
-      <tr><td><b>NUESTRO/A</b> (наш)</td><td>Nuestro gato</td><td>Наш кот</td><td><button class="speak-btn" onclick="speak('Nuestro gato')">🔊</button></td></tr>
-    </table>
+    <div class="script">⚡ <strong>Логика:</strong> чтобы описать человека, мы спрашиваем: <em>какой он?</em> — это <b>SER</b>, и <em>что у него есть?</em> — это <b>TENER</b>. Сначала выучим смысл, потом форму для «один/много», потом скажем, чей он: <em>mi/tu/su</em>.</div>
 
-    <h4 style="margin:18px 0 8px">📌 Таблица 2: Единственное vs множественное число</h4>
-    <table class="gram-table">
-      <tr><th>Ед. число (1 человек)</th><th>Мн. число (2+ человек)</th><th>Пример</th><th>🔊</th></tr>
-      <tr><td><b>ES</b> (он/она есть)</td><td><b>SON</b> (они есть)</td><td><span class="grammar-hint" data-hint="Mi abuelo es simpático (один дедушка) → Mis abuelos son simpáticos (бабушка и дедушка вместе). Глагол ser меняется!">Mi abuelo es / Mis abuelos son</span></td><td><button class="speak-btn" onclick="speak('Mis abuelos son simpáticos')">🔊</button></td></tr>
-      <tr><td><b>TIENE</b> (у него/неё есть)</td><td><b>TIENEN</b> (у них есть)</td><td>Mi tía tiene / Mis tíos tienen</td><td><button class="speak-btn" onclick="speak('Mis tíos tienen un gato')">🔊</button></td></tr>
-      <tr><td><b>SE LLAMA</b> (его/её зовут)</td><td><b>SE LLAMAN</b> (их зовут)</td><td>Se llama Ana / <span class="grammar-hint" data-hint="Когда говорим о двух и более людях — se llaman. Например: Mis padres se llaman Pedro y María (моих родителей зовут Педро и Мария).">Se llaman Ana y Luis</span></td><td><button class="speak-btn" onclick="speak('Mis padres se llaman Pedro y María')">🔊</button></td></tr>
-    </table>
-
-    <h4 style="margin:18px 0 8px">📌 Таблица 3: SER (какой?) vs TENER (что имеет?)</h4>
+    <h4 style="margin-bottom:8px">📌 Таблица 1: SER — какой? кто? vs TENER — что у него есть?</h4>
     <table class="gram-table">
       <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
       <tr><td><b>SER + характер/профессия</b></td><td>Es simpático / Es médico.</td><td>Он добрый / Он врач.</td><td><button class="speak-btn" onclick="speak('Es simpático. Es médico.')">🔊</button></td></tr>
@@ -299,11 +286,28 @@
       <tr><td><b>TENER + питомец</b></td><td>Tiene un gato.</td><td>У него есть кот.</td><td><button class="speak-btn" onclick="speak('Tiene un gato.')">🔊</button></td></tr>
     </table>
 
+    <h4 style="margin:18px 0 8px">📌 Таблица 2: Один или много — число глагола</h4>
+    <table class="gram-table">
+      <tr><th>Ед. число (1 человек)</th><th>Мн. число (2+ человек)</th><th>Пример</th><th>🔊</th></tr>
+      <tr><td><b>ES</b> (он/она есть)</td><td><b>SON</b> (они есть)</td><td><span class="grammar-hint" data-hint="Mi abuelo es simpático (один дедушка) → Mis abuelos son simpáticos (бабушка и дедушка вместе). Глагол ser меняется!">Mi abuelo es / Mis abuelos son</span></td><td><button class="speak-btn" onclick="speak('Mis abuelos son simpáticos')">🔊</button></td></tr>
+      <tr><td><b>TIENE</b> (у него/неё есть)</td><td><b>TIENEN</b> (у них есть)</td><td>Mi tía tiene / Mis tíos tienen</td><td><button class="speak-btn" onclick="speak('Mis tíos tienen un gato')">🔊</button></td></tr>
+      <tr><td><b>SE LLAMA</b> (его/её зовут)</td><td><b>SE LLAMAN</b> (их зовут)</td><td>Se llama Ana / <span class="grammar-hint" data-hint="Когда говорим о двух и более людях — se llaman. Например: Mis padres se llaman Pedro y María (моих родителей зовут Педро и Мария).">Se llaman Ana y Luis</span></td><td><button class="speak-btn" onclick="speak('Mis padres se llaman Pedro y María')">🔊</button></td></tr>
+    </table>
+
+    <h4 style="margin:18px 0 8px">📌 Таблица 3: Чей? (mi / tu / su / nuestro)</h4>
+    <table class="gram-table">
+      <tr><th>Местоимение</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr><td><b>MI</b> (мой)</td><td>Mi abuela</td><td>Моя бабушка</td><td><button class="speak-btn" onclick="speak('Mi abuela')">🔊</button></td></tr>
+      <tr><td><b>TU</b> (твой)</td><td>Tu tío</td><td>Твой дядя</td><td><button class="speak-btn" onclick="speak('Tu tío')">🔊</button></td></tr>
+      <tr><td><b>SU</b> <span class="grammar-hint" data-hint="su — его/её/их/Ваш. Универсальное местоимение: su abuelo может означать «его дедушка», «её дедушка» или «их дедушка». Контекст подсказывает!">(его/её/их)</span></td><td>Su primo</td><td>Его/её двоюродный брат</td><td><button class="speak-btn" onclick="speak('Su primo')">🔊</button></td></tr>
+      <tr><td><b>NUESTRO/A</b> (наш)</td><td>Nuestro gato</td><td>Наш кот</td><td><button class="speak-btn" onclick="speak('Nuestro gato')">🔊</button></td></tr>
+    </table>
+
     <div class="script">⚡ <strong>Ловушка:</strong> в испанском мы НЕ «являемся» 70 лет — мы их ИМЕЕМ! <em>Tengo 8 años</em>, а не <em>Soy 8 años</em>.</div>
 
     <!-- УПРАЖНЕНИЕ: ЗАПОЛНЕНИЕ ПРОПУСКОВ -->
     <h4 style="margin:18px 0 10px">✏️ Упражнение: заполни пропуски!</h4>
-    <p class="block-sub">Впиши правильную форму глагола, артикль или прилагательное. Нажми «Проверить»!</p>
+    <p class="block-sub">Выбери правильное слово в каждом пропуске. Нажми «Проверить»!</p>
     <div id="fill-box"></div>
     <div style="text-align:center;margin-top:14px">
       <button class="fill-submit" onclick="checkFill()">✔ Проверить всё</button>
@@ -517,6 +521,18 @@ var SVG={
  viejo:'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#FFD6BA"/><path d="M10 24 Q10 10 32 10 Q54 10 54 24 L54 20 Q54 8 32 8 Q10 8 10 20 Z" fill="#D3D3D3"/><circle cx="24" cy="30" r="2" fill="#333"/><circle cx="40" cy="30" r="2" fill="#333"/><path d="M24 40 Q32 44 40 40" stroke="#333" stroke-width="2" fill="none"/><path d="M16 28 L22 28" stroke="#8B4513" stroke-width="1.5"/><path d="M42 28 L48 28" stroke="#8B4513" stroke-width="1.5"/><path d="M20 38 Q26 36 28 40" stroke="#8B4513" stroke-width="1" fill="none"/><path d="M36 40 Q38 36 44 38" stroke="#8B4513" stroke-width="1" fill="none"/></svg>'
 };
 
+/* ===== СТОКОВЫЕ КАРТИНКИ (OpenMoji через jsDelivr CDN) ДЛЯ КАРТОЧЕК СЛОВ ===== */
+var IMG_BASE='https://cdn.jsdelivr.net/gh/hfg-gmuend/openmoji@17.0.0/color/svg/';
+var IMG={
+ abuelo:IMG_BASE+'1F474.svg', abuela:IMG_BASE+'1F475.svg',
+ tio:IMG_BASE+'1F468.svg', tia:IMG_BASE+'1F469.svg',
+ primo:IMG_BASE+'1F466.svg', prima:IMG_BASE+'1F467.svg',
+ perro:IMG_BASE+'1F415.svg', gato:IMG_BASE+'1F408.svg', hamster:IMG_BASE+'1F439.svg',
+ alto:IMG_BASE+'1F4CF.svg', bajo:IMG_BASE+'2B07.svg',
+ simpatico:IMG_BASE+'1F60A.svg', divertido:IMG_BASE+'1F606.svg',
+ joven:IMG_BASE+'1F476.svg', viejo:IMG_BASE+'1F9D3.svg'
+};
+
 var FAM=[
  {id:'abuelo',es:'el abuelo',ru:'дедушка',ges:'🧓 трясём бороду'},
  {id:'abuela',es:'la abuela',ru:'бабушка',ges:'👵 делаем очки'},
@@ -562,7 +578,7 @@ var WARM=[
   var box=document.getElementById('fam-cards');
   FAM.forEach(function(f){
     var d=document.createElement('div');d.className='word-card';
-    d.innerHTML='<span class="emo">'+SVG[f.id]+'</span><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div><span class="ges">'+f.ges+'</span><button class="speak-btn">🔊</button>';
+    d.innerHTML='<span class="emo"><img src="'+IMG[f.id]+'" alt="'+f.es+'"></span><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div><span class="ges">'+f.ges+'</span><button class="speak-btn">🔊</button>';
     d.addEventListener('click',function(){speak(f.es);});
     box.appendChild(d);
   });
@@ -573,7 +589,7 @@ var WARM=[
   var box=document.getElementById('adj-cards');
   ADJ.forEach(function(a){
     var d=document.createElement('div');d.className='word-card';
-    d.innerHTML='<span class="emo">'+SVG[a.id]+'</span><div class="es">'+a.es+'</div><div class="ru">'+a.ru+'</div><span class="ges">'+a.ges+'</span><button class="speak-btn">🔊</button>';
+    d.innerHTML='<span class="emo"><img src="'+IMG[a.id]+'" alt="'+a.es+'"></span><div class="es">'+a.es+'</div><div class="ru">'+a.ru+'</div><span class="ges">'+a.ges+'</span><button class="speak-btn">🔊</button>';
     d.addEventListener('click',function(){speak(a.es);});
     box.appendChild(d);
   });
@@ -581,23 +597,25 @@ var WARM=[
 
 /* ===== БЛОК 1: СЕМЬЯ МОНСТРОВ ===== */
 var MONST=[
- {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="45" r="30" fill="#9D4EDD"/><circle cx="35" cy="40" r="4" fill="#fff"/><circle cx="55" cy="40" r="4" fill="#fff"/><circle cx="35" cy="40" r="2" fill="#333"/><circle cx="55" cy="40" r="2" fill="#333"/><circle cx="45" cy="30" r="3" fill="#333"/><path d="M30 60 Q45 70 60 60" stroke="#fff" stroke-width="3" fill="none"/><rect x="20" y="75" width="50" height="6" fill="#9D4EDD"/></svg>',
-  q:'Este es el abuelo del monstruo. ¿Cómo es?',ok:'Es viejo y simpático.',w:['Es joven y divertido.','Es pequeño y feo.']},
- {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="45" r="28" fill="#E91E63"/><circle cx="38" cy="42" r="3" fill="#fff"/><circle cx="52" cy="42" r="3" fill="#fff"/><path d="M35 55 Q45 62 55 55" stroke="#fff" stroke-width="3" fill="none"/><path d="M20 20 L30 30 M70 20 L60 30" stroke="#E91E63" stroke-width="4"/></svg>',
-  q:'Esta es la abuela del monstruo. ¿Cómo es?',ok:'Es vieja y divertida.',w:['Es joven y seria.','Es pequeña y triste.']},
- {svg:'<svg viewBox="0 0 90 90"><ellipse cx="45" cy="50" rx="25" ry="20" fill="#2A9D8F"/><circle cx="35" cy="45" r="5" fill="#fff"/><circle cx="55" cy="45" r="5" fill="#fff"/><circle cx="35" cy="45" r="2" fill="#333"/><circle cx="55" cy="45" r="2" fill="#333"/><path d="M35 62 Q45 68 55 62" stroke="#fff" stroke-width="3" fill="none"/><rect x="30" y="25" width="30" height="6" fill="#FFC93C"/></svg>',
-  q:'Este es el tío del monstruo. ¿Cómo es?',ok:'Es alto y fuerte.',w:['Es bajo y tímido.','Es viejo y simpático.']},
- {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="45" r="22" fill="#FFC93C"/><circle cx="38" cy="42" r="3" fill="#333"/><circle cx="52" cy="42" r="3" fill="#333"/><path d="M38 55 Q45 60 52 55" stroke="#E91E63" stroke-width="2" fill="none"/><path d="M25 30 Q30 20 35 30 M55 30 Q60 20 65 30" stroke="#FFC93C" stroke-width="3" fill="none"/></svg>',
-  q:'Esta es la prima del monstruo. ¿Cómo es?',ok:'Es joven y divertida.',w:['Es vieja y seria.','Es alta y tímida.']}
+ {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="42" r="30" fill="#9D4EDD"/><circle cx="35" cy="38" r="3.5" fill="#fff"/><circle cx="55" cy="38" r="3.5" fill="#fff"/><circle cx="35" cy="38" r="2" fill="#333"/><circle cx="55" cy="38" r="2" fill="#333"/><rect x="12" y="40" width="13" height="5" rx="2" fill="#333"/><rect x="65" y="40" width="13" height="5" rx="2" fill="#333"/><path d="M36 31 Q40 26 45 31" stroke="#fff" stroke-width="2" fill="none"/><path d="M54 31 Q50 26 45 31" stroke="#fff" stroke-width="2" fill="none"/><path d="M28 54 Q45 66 62 54" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="24" y="72" width="42" height="7" rx="3" fill="#9D4EDD"/></svg>',
+  q:'¿Quién es?',ru:'Кто это? У него седые усы и очки.',ok:'el abuelo',w:['el tío','la abuela']},
+ {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="44" r="28" fill="#E91E63"/><rect x="33" y="10" width="24" height="12" rx="6" fill="#D3D3D3"/><circle cx="34" cy="40" r="6" fill="#fff" opacity=".5"/><circle cx="56" cy="40" r="6" fill="#fff" opacity=".5"/><circle cx="34" cy="40" r="2.5" fill="#333"/><circle cx="56" cy="40" r="2.5" fill="#333"/><path d="M35 54 Q45 60 55 54" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="24" y="72" width="42" height="7" rx="3" fill="#E91E63"/></svg>',
+  q:'¿Quién es?',ru:'Кто это? У неё седой узел на голове и очки.',ok:'la abuela',w:['la prima','la tía']},
+ {svg:'<svg viewBox="0 0 90 90"><ellipse cx="45" cy="50" rx="25" ry="21" fill="#2A9D8F"/><rect x="27" y="14" width="36" height="12" rx="4" fill="#FFC93C"/><circle cx="35" cy="44" r="3" fill="#fff"/><circle cx="55" cy="44" r="3" fill="#fff"/><circle cx="35" cy="44" r="1.8" fill="#333"/><circle cx="55" cy="44" r="1.8" fill="#333"/><path d="M32 60 Q36 70 40 60" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M50 60 Q54 70 58 60" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M34 72 Q45 78 56 72" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>',
+  q:'¿Quién es?',ru:'Кто это? У него кепка и бородка.',ok:'el tío',w:['el abuelo','el primo']},
+ {svg:'<svg viewBox="0 0 90 90"><circle cx="45" cy="46" r="24" fill="#FFC93C"/><path d="M28 28 L45 12 L62 28 Z" fill="#E91E63"/><circle cx="36" cy="44" r="2.5" fill="#2C5E8A"/><circle cx="54" cy="44" r="2.5" fill="#2C5E8A"/><path d="M38 52 Q45 57 52 52" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="38" cy="54" r="1" fill="#E8604C"/><circle cx="45" cy="56" r="1" fill="#E8604C"/><circle cx="52" cy="54" r="1" fill="#E8604C"/><rect x="22" y="70" width="46" height="7" rx="3" fill="#FFC93C"/></svg>',
+  q:'¿Quién es?',ru:'Кто это? Маленький, в красной кепке и с веснушками.',ok:'el primo',w:['el perro','la prima']},
+ {svg:'<svg viewBox="0 0 90 90"><path d="M23 44 L39 16 L52 16 L68 44 Z" fill="#FFA500" stroke="#E08B00" stroke-width="2"/><circle cx="45" cy="56" r="24" fill="#FFA500"/><circle cx="36" cy="52" r="3" fill="#333"/><circle cx="54" cy="52" r="3" fill="#333"/><path d="M36 66 Q45 74 54 66" stroke="#E08B00" stroke-width="2.5" fill="none"/><path d="M20 50 L30 47 M20 56 L30 53 M70 50 L60 47 M70 56 L60 53" stroke="#E08B00" stroke-width="2" stroke-linecap="round"/><rect x="26" y="74" width="38" height="7" rx="3" fill="#FFA500"/></svg>',
+  q:'¿Quién es?',ru:'Кто это? У него уши-треугольники и усы.',ok:'el gato',w:['el perro','el hámster']}
 ];
 var mqOrd=[],mqI=0,mqS=0;
 function mqStart(){mqOrd=shuffle(MONST.slice());mqI=0;mqS=0;document.getElementById('mq-total').textContent=mqOrd.length;document.getElementById('mq-stars').textContent='0';mqNext();}
 function mqNext(){
   var box=document.getElementById('mq-opts');box.innerHTML='';
-  if(mqI>=mqOrd.length){document.getElementById('mq-fb').textContent='🎉 ¡Perfecto! ⭐ '+mqS+' из '+mqOrd.length;document.getElementById('mq-svg').innerHTML='';document.getElementById('mq-q').textContent='';return;}
+  if(mqI>=mqOrd.length){document.getElementById('mq-fb').textContent='🎉 ¡Perfecto! ⭐ '+mqS+' из '+mqOrd.length;document.getElementById('mq-svg').innerHTML='';document.getElementById('mq-q').innerHTML='';return;}
   var r=mqOrd[mqI];
   document.getElementById('mq-svg').innerHTML=r.svg;
-  document.getElementById('mq-q').textContent=r.q;
+  document.getElementById('mq-q').innerHTML=r.q+'<span class="ru">'+r.ru+'</span>';
   document.getElementById('mq-fb').textContent='';
   shuffle([r.ok].concat(r.w)).forEach(function(o){
     var b=document.createElement('button');b.className='opt';b.textContent=o;
@@ -613,21 +631,21 @@ function mqNext(){
 
 /* ===== БЛОК 1B: ВИКТОРИНА ПРИЛАГАТЕЛЬНЫХ ===== */
 var ADJQ=[
- {svg:SVG.alto,q:'El abuelo es muy... (1.90 m)',ok:'alto',w:['bajo','joven']},
- {svg:SVG.divertido,q:'La tía siempre ríe y baila. Es muy...',ok:'divertida',w:['vieja','baja']},
- {svg:SVG.simpatico,q:'El primo ayuda a todos. Es muy...',ok:'simpático',w:['viejo','alto']},
- {svg:SVG.viejo,q:'La abuela tiene 80 años. Es...',ok:'vieja',w:['joven','alta']},
- {svg:SVG.joven,q:'La prima tiene 8 años. Es muy...',ok:'joven',w:['vieja','baja']},
- {svg:SVG.bajo,q:'El hámster es pequeño y...',ok:'bajo',w:['alto','viejo']}
+ {svg:SVG.alto,q:'El abuelo es muy... (1.90 m)',ru:'Дедушка очень… (рост 1,90 м)',ok:'alto',w:['bajo','joven']},
+ {svg:SVG.divertido,q:'La tía siempre ríe y baila. Es muy...',ru:'Тётя всегда смеётся и танцует. Она очень…',ok:'divertida',w:['vieja','baja']},
+ {svg:SVG.simpatico,q:'El primo ayuda a todos. Es muy...',ru:'Двоюродный брат помогает всем. Он очень…',ok:'simpático',w:['viejo','alto']},
+ {svg:SVG.viejo,q:'La abuela tiene 80 años. Es...',ru:'Бабушке 80 лет. Она…',ok:'vieja',w:['joven','alta']},
+ {svg:SVG.joven,q:'La prima tiene 8 años. Es muy...',ru:'Двоюродной сестре 8 лет. Она очень…',ok:'joven',w:['vieja','baja']},
+ {svg:SVG.bajo,q:'El hámster es pequeño y...',ru:'Хомячок маленький и…',ok:'bajo',w:['alto','viejo']}
 ];
 var adjqOrd=[],adjqI=0,adjqS=0;
 function adjqStart(){adjqOrd=shuffle(ADJQ.slice());adjqI=0;adjqS=0;document.getElementById('adjq-total').textContent=adjqOrd.length;document.getElementById('adjq-stars').textContent='0';adjqNext();}
 function adjqNext(){
   var box=document.getElementById('adjq-opts');box.innerHTML='';
-  if(adjqI>=adjqOrd.length){document.getElementById('adjq-fb').textContent='🎉 ¡Perfecto! ⭐ '+adjqS+' из '+adjqOrd.length;document.getElementById('adjq-svg').innerHTML='';document.getElementById('adjq-q').textContent='';return;}
+  if(adjqI>=adjqOrd.length){document.getElementById('adjq-fb').textContent='🎉 ¡Perfecto! ⭐ '+adjqS+' из '+adjqOrd.length;document.getElementById('adjq-svg').innerHTML='';document.getElementById('adjq-q').innerHTML='';return;}
   var r=adjqOrd[adjqI];
   document.getElementById('adjq-svg').innerHTML=r.svg;
-  document.getElementById('adjq-q').textContent=r.q;
+  document.getElementById('adjq-q').innerHTML=r.q+'<span class="ru">'+r.ru+'</span>';
   document.getElementById('adjq-fb').textContent='';
   shuffle([r.ok].concat(r.w)).forEach(function(o){
     var b=document.createElement('button');b.className='opt';b.textContent=o;
@@ -643,64 +661,76 @@ function adjqNext(){
 
 /* ===== БЛОК 2: УПРАЖНЕНИЕ НА ЗАПОЛНЕНИЕ ПРОПУСКОВ ===== */
 var FILL=[
- {before:'Mi abuelo ',after:' simpático.',answer:'es',hint:'один дедушка → es'},
- {before:'Mis abuelos ',after:' simpáticos.',answer:'son',hint:'бабушка и дедушка вместе → son'},
- {before:'Mi tía ',after:' 45 años.',answer:'tiene',hint:'одна тётя → tiene'},
- {before:'Mis tíos ',after:' un gato naranja.',answer:'tienen',hint:'дядя и тётя вместе → tienen'},
- {before:'',after:' abuela es vieja.',answer:'La',hint:'артикль ж.р. ед.ч. → La'},
- {before:'',after:' primos son altos.',answer:'Los',hint:'артикль м.р. мн.ч. → Los'},
- {before:'Mi gato es ',after:'.',answer:'naranja',hint:'цвет кота'},
- {before:'Mis primas son ',after:'.',answer:'divertidas',hint:'мн.ч. ж.р. от divertido → divertidas'}
+ {before:'Mi abuelo ',after:' simpático.',answer:'es',hint:'один дедушка → es',opts:['es','son','tengo']},
+ {before:'Mis abuelos ',after:' simpáticos.',answer:'son',hint:'бабушка и дедушка вместе → son',opts:['son','es','tienen']},
+ {before:'Mi tía ',after:' 45 años.',answer:'tiene',hint:'одна тётя → tiene',opts:['tiene','tengo','tienen']},
+ {before:'Mis tíos ',after:' un gato naranja.',answer:'tienen',hint:'дядя и тётя вместе → tienen',opts:['tienen','tiene','es']},
+ {before:'',after:' abuela es vieja.',answer:'La',hint:'артикль ж.р. ед.ч. → La',opts:['La','El','Los']},
+ {before:'',after:' primos son altos.',answer:'Los',hint:'артикль м.р. мн.ч. → Los',opts:['Los','Las','La']},
+ {before:'Mi gato es ',after:'.',answer:'naranja',hint:'цвет кота',opts:['naranja','naranjas','divertidos']},
+ {before:'Mis primas son ',after:'.',answer:'divertidas',hint:'мн.ч. ж.р. от divertido → divertidas',opts:['divertidas','divertido','divertida']}
 ];
+var fillSel=[];
 (function(){
   var box=document.getElementById('fill-box');
   document.getElementById('fill-total').textContent=FILL.length;
   FILL.forEach(function(f,i){
+    fillSel.push(null);
     var d=document.createElement('div');d.className='fill-ex';d.id='fill-'+i;
-    d.innerHTML='<div><span class="ex-num">'+(i+1)+'</span><span class="sentence">'+f.before+'<input class="gap" id="inp-'+i+'" type="text" autocomplete="off" placeholder="...">'+f.after+'</span></div>'+
+    d.innerHTML='<div><span class="ex-num">'+(i+1)+'</span><span class="sentence">'+f.before+'<span class="gap-slot" id="slot-'+i+'">…</span>'+f.after+'</span></div>'+
+      '<div class="gap-chips" id="gap-'+i+'"></div>'+
       '<div class="fill-fb" id="fb-'+i+'"></div>';
+    var gc=d.querySelector('#gap-'+i);
+    shuffle(f.opts.slice()).forEach(function(o){
+      var b=document.createElement('button');b.className='gap-opt';b.textContent=o;
+      b.addEventListener('click',function(){
+        gc.querySelectorAll('.gap-opt').forEach(function(x){x.classList.remove('sel');});
+        b.classList.add('sel');
+        document.getElementById('slot-'+i).textContent=o;
+        fillSel[i]=o;
+      });
+      gc.appendChild(b);
+    });
     box.appendChild(d);
   });
 })();
 function checkFill(){
   var stars=0;
   FILL.forEach(function(f,i){
-    var inp=document.getElementById('inp-'+i);
     var fb=document.getElementById('fb-'+i);
-    var v=inp.value.trim().toLowerCase();
-    var ans=f.answer.toLowerCase();
-    inp.classList.remove('correct','wrong');
-    if(v===ans){inp.classList.add('correct');fb.textContent='✅ ¡Correcto! '+f.hint;fb.style.color='var(--green)';stars++;speak(f.before+f.answer+f.after);}
-    else{inp.classList.add('wrong');fb.textContent='❌ Правильно: '+f.answer+'. '+f.hint;fb.style.color='var(--red)';}
+    fb.textContent='';
+    if(fillSel[i]===f.answer){fb.textContent='✅ ¡Correcto! '+f.hint;fb.style.color='var(--green)';stars++;speak(f.before+f.answer+f.after);}
+    else{fb.textContent='❌ Куда ты поставил слово «'+f.answer+'»? '+f.hint;fb.style.color='var(--red)';}
   });
   document.getElementById('fill-stars').textContent=stars;
   if(stars===FILL.length){speak('¡Perfecto!');confetti('🎉');}
 }
 function resetFill(){
+  fillSel=fillSel.map(function(){return null;});
   FILL.forEach(function(f,i){
-    var inp=document.getElementById('inp-'+i);
-    var fb=document.getElementById('fb-'+i);
-    inp.value='';inp.classList.remove('correct','wrong');fb.textContent='';
+    document.getElementById('slot-'+i).textContent='…';
+    document.querySelectorAll('#gap-'+i+' .gap-opt').forEach(function(x){x.classList.remove('sel');});
+    document.getElementById('fb-'+i).textContent='';
   });
   document.getElementById('fill-stars').textContent='0';
 }
 
 /* ===== БЛОК 2: ДЕТЕКТИВ С SVG (ЗАМЕНА СОБАКИ НА КОТА) ===== */
 var DET=[
- {desc:'Tiene 70 años, es simpático y tiene un gato naranja.',okId:'abuelo',ids:['tio','primo']},
- {desc:'Es joven, tiene el pelo largo y es estudiante.',okId:'prima',ids:['abuela','tia']},
- {desc:'Es médico, tiene 45 años y es alto.',okId:'tio',ids:['abuelo','gato']},
- {desc:'Es vieja, lleva gafas y es muy divertida.',okId:'abuela',ids:['tia','prima']},
- {desc:'Es joven, tiene 10 años y juega al fútbol.',okId:'primo',ids:['tio','gato']},
- {desc:'Tiene 4 patas, es naranja y se llama Luna.',okId:'gato',ids:['perro','hamster']}
+ {desc:'Tiene 70 años, es simpático y tiene un gato naranja.',ru:'Ему 70 лет, он добрый, и у него есть рыжий кот.',okId:'abuelo',ids:['tio','primo']},
+ {desc:'Es joven, tiene el pelo largo y es estudiante.',ru:'Она молодая, с длинными волосами, и она студентка.',okId:'prima',ids:['abuela','tia']},
+ {desc:'Es médico, tiene 45 años y es alto.',ru:'Он врач, ему 45 лет, и он высокий.',okId:'tio',ids:['abuelo','gato']},
+ {desc:'Es vieja, lleva gafas y es muy divertida.',ru:'Она пожилая, носит очки и очень весёлая.',okId:'abuela',ids:['tia','prima']},
+ {desc:'Es joven, tiene 10 años y juega al fútbol.',ru:'Он молодой, ему 10 лет, и он играет в футбол.',okId:'primo',ids:['tio','gato']},
+ {desc:'Tiene 4 patas, es naranja y se llama Luna.',ru:'У него четыре лапы, он рыжий, и его зовут Луна.',okId:'gato',ids:['perro','hamster']}
 ];
 var detOrd=[],detI=0,detS=0;
 function detStart(){detOrd=shuffle(DET.slice());detI=0;detS=0;document.getElementById('det-total').textContent=detOrd.length;document.getElementById('det-stars').textContent='0';detNext();}
 function detNext(){
   var box=document.getElementById('det-opts');box.innerHTML='';
-  if(detI>=detOrd.length){document.getElementById('det-q').textContent='🎉 ¡Muy bien!';document.getElementById('det-fb').textContent='⭐ '+detS+' из '+detOrd.length;return;}
+  if(detI>=detOrd.length){document.getElementById('det-q').innerHTML='🎉 ¡Muy bien!';document.getElementById('det-fb').textContent='⭐ '+detS+' из '+detOrd.length;return;}
   var r=detOrd[detI];
-  document.getElementById('det-q').textContent=r.desc;
+  document.getElementById('det-q').innerHTML=r.desc+'<span class="ru">'+r.ru+'</span>';
   document.getElementById('det-fb').textContent='';
   shuffle([r.okId].concat(r.ids)).forEach(function(id){
     var f=getFamById(id);
