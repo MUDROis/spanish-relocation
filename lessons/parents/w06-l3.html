@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Урок 6.2 · Primaria и ESO — МУДРО</title>
+<meta name="theme-color" content="#FFF7EF">
+<meta name="description" content="Урок 6.3: школьная столовая и автобус — лексика comedor, menú, autobús escolar, ruta, parada; грамматика también / tampoco с глаголами записи; продукт — заявка на столовую и транспорт.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<title>Урок 6.3 · Comedor y Transporte — МУДРО</title>
 <style>
   :root{
     --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;
@@ -17,6 +20,12 @@
     background:var(--bg);color:var(--ink);line-height:1.6;
   }
   a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
   .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px}
   .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
   .lesson-hero h1 em{font-style:normal;color:var(--p1)}
@@ -25,16 +34,15 @@
   .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
   .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
 
-  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
-  .section:nth-child(even){background:var(--card)}
-  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .section{max-width:1100px;margin:0 auto;padding:34px 20px}
+  .step-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
   .step-num{
-    width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;
-    display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0;
+    flex:0 0 46px;height:46px;border-radius:50%;background:var(--p1);color:#fff;
+    font-weight:900;display:inline-grid;place-items:center;font-size:1.2rem;flex-shrink:0;
   }
   .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)}
-  .step-title h2{font-size:1.3rem}
-  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .step-time{font-weight:900;color:var(--muted);font-size:.82rem;letter-spacing:.3px;text-transform:uppercase;display:block;margin-bottom:2px}
+  h2{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:900}
 
   .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
   .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
@@ -96,12 +104,12 @@
     position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent;
   }
-  .vocab-front{background:var(--p2);color:#fff;border-color:var(--p2)}
+  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
   .vocab-front .es{font-size:1.08rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
   .vocab-front .ru{font-size:.9rem;opacity:.95;font-weight:600;color:#fff}
   .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
-  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p2);transform:rotateY(180deg)}
-  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--p2);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3;font-style:italic}
   .vocab-back .ex-ru{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.3}
 
   .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
@@ -120,17 +128,9 @@
   .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
   .note.red{background:#FBF0ED;border-left-color:var(--p1)}
 
-  .freq-scale{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-  .freq-chip{padding:6px 12px;border-radius:999px;font-weight:700;font-size:.85rem;color:#fff}
-  .freq-chip.f100{background:#7A8B4C}
-  .freq-chip.f75{background:#9EB066}
-  .freq-chip.f50{background:#E9A13B}
-  .freq-chip.f10{background:#E2725B}
-  .freq-chip.f0{background:#7A6A5C}
-
   .fill-input{
     border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;
-    font-size:1rem;font-weight:700;color:var(--p4);min-width:110px;text-align:center;font-family:inherit;
+    font-size:1rem;font-weight:700;color:var(--p4);min-width:90px;text-align:center;font-family:inherit;
   }
   .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
   .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
@@ -171,15 +171,10 @@
   .clil-text{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:18px;margin-bottom:16px}
   .clil-text h4{color:var(--p2);margin-bottom:8px}
   .clil-text p{font-size:.95rem;margin-bottom:10px}
-
-  .schedule-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:10px 0}
-  .schedule-table th,.schedule-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
-  .schedule-table th{background:#FBF3EA;color:var(--p1)}
-  .schedule-table input,.schedule-table select{
-    width:100%;border:none;border-bottom:1.5px dashed var(--p4);background:transparent;
-    padding:4px;font-family:inherit;font-size:.9rem;
-  }
-  .schedule-table select{border-bottom:1.5px dashed var(--p2)}
+  .compare-table{width:100%;border-collapse:collapse;font-size:.9rem;margin-bottom:14px}
+  .compare-table th,.compare-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .compare-table th{background:#FBF3EA;color:var(--p1)}
+  .compare-table input{width:100%;border:none;border-bottom:1.5px dashed var(--p4);background:transparent;padding:4px;font-family:inherit;font-size:.9rem}
 
   .dialog-builder{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;margin-bottom:16px}
   .dialog-builder .hdr{background:var(--p2);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
@@ -193,6 +188,8 @@
     background:#FFF7E0;border-radius:12px;padding:18px;font-family:'Courier New',monospace;
     font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p3);
   }
+  .dialog-result .role{font-weight:800;color:var(--p1);display:block;margin-top:6px}
+  .dialog-result .role.you{color:var(--p4)}
 
   .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
   .hw-item h4{color:var(--p1);margin-bottom:4px}
@@ -209,7 +206,8 @@
   .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
   .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
 
-  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-top:14px}
+  /* Quizlet */
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
   .quizlet-box h3{margin-bottom:8px}
   .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
 
@@ -223,7 +221,7 @@
   .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
 
   footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
-  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1100px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
   .lesson-nav a{
     text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);
     font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center;
@@ -233,12 +231,6 @@
     background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);
     font-weight:700;color:var(--muted);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65;
   }
-  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
-  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
-  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
-  .back-link:hover{color:var(--p1)}
-  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
-  #auth-area{display:inline-flex}
 </style>
 </head>
 <body>
@@ -246,37 +238,30 @@
 
 <div class="lesson-topbar"><div class="inner">
   <a href="../../index.html" class="back-link">← К карте курса</a>
-  <span class="lesson-id">Неделя 6 · Урок 2 из 3 · Фаза 2 El Cole y la Salud</span>
+  <span class="lesson-id">Неделя 6 · Урок 3 из 3 · Фаза 2 El Cole y la Salud</span>
   <span id="auth-area"></span>
 </div></div>
 
 <section class="lesson-hero">
   <span class="phase-tag">📍 Фаза 2 · El Cole y la Salud</span>
-  <h1>Урок 6.2 · <em>Primaria y ESO</em></h1>
-  <p class="sub">Школьный день ребёнка: расписание, предметы, оценки и рутина семьи</p>
+  <h1>Урок 6.3 · <em>Comedor y Transporte</em></h1>
+  <p class="sub">Школьная столовая и автобус: меню, аллергии, маршруты и запись</p>
   <div class="lesson-meta">
-    <span class="meta-chip">🧠 CLIL: школьный день в Испании</span>
-    <span class="meta-chip">🎯 Цель: понять расписание и рассказать о рутине семьи</span>
+    <span class="meta-chip">🧠 CLIL: школьное питание и транспорт</span>
+    <span class="meta-chip">🎯 Цель: записать ребёнка в столовую и на автобус</span>
     <span class="meta-chip">🗣 35 слов в 5 категориях</span>
-    <span class="meta-chip">🧩 наречия частотности + 5 глаголов</span>
-    <span class="meta-chip">📋 Продукт: расписание для 8 и 12 лет</span>
+    <span class="meta-chip">🧩 también / tampoco · yo / nosotros / usted</span>
+    <span class="meta-chip">📋 Продукт: заявка на comedor y autobús</span>
   </div>
 </section>
 
-
 <!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num">0</div>
-    <div class="step-title">
-      <h2>Разминка + вопрос из жизни</h2>
-      <span class="time">00:00 – 05:00 · Повторение урока 6.1 и письмо из школы</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num">0</span><div><span class="step-time">00:00 – 05:00 · Повторение урока 6.2 и меню с автобусом</span><h2>Разминка + вопрос из жизни</h2></div></div>
 
   <div class="card">
-    <p class="hint">Вы уже выбрали школу по типу (público / concertado / privado). Теперь пора понять, как устроен школьный день. Но сначала — блиц по прошлому уроку.</p>
-    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 6.1</h4>
+    <p class="hint">Вы уже знаете уровни школы, расписание и наречия частотности. Теперь пора решить два практических вопроса: обед и транспорт. Но сначала — блиц по прошлому уроку.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 6.2</h4>
     <div id="warmup-quiz"></div>
     <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
   </div>
@@ -284,118 +269,104 @@
   <div class="situation-box">
     <div class="sit-head">
       <div class="sit-icon">📧</div>
-      <div class="sit-title">Одна ситуация: письмо из школы</div>
+      <div class="sit-title">Одна ситуация: меню и автобус</div>
     </div>
     <div class="sit-intro">
-      Вы открыли сайт школы. Там расписание для <b>primaria</b> и <b>ESO</b>. Отвечайте вслух, нажимайте 🔊.
+      Вы открыли сайт школы. Там меню на неделю и карта маршрутов автобуса. Отвечайте вслух, нажимайте 🔊.
     </div>
 
     <div class="sit-dialog">
       <div class="who">Сайт школы:</div>
-      <div class="es">Primaria: jornada continua. Entrada: 9:00. Salida: 13:30. Recreo: 11:00–11:30.</div>
-      <div class="ru">Начальная школа: сплошной день. Приход: 9:00. Уход: 13:30. Перемена: 11:00–11:30.</div>
-      <button class="speak-btn" onclick="speak('Primaria: jornada continua. Entrada: 9:00. Salida: 13:30. Recreo: 11:00–11:30.')">🔊</button>
+      <div class="es">Menú del día: Primer plato: sopa de verduras. Segundo plato: pollo con arroz. Postre: fruta o yogur.</div>
+      <div class="ru">Меню дня: Первое блюдо: овощной суп. Второе блюдо: курица с рисом. Десерт: фрукты или йогурт.</div>
+      <button class="speak-btn" onclick="speak('Menú del día: Primer plato: sopa de verduras. Segundo plato: pollo con arroz. Postre: fruta o yogur.')">🔊</button>
     </div>
 
     <div class="sit-dialog">
       <div class="who">Сайт школы:</div>
-      <div class="es">ESO: horario partido los martes y jueves. Salida: 17:00. Actividades extraescolares: 16:00–17:30.</div>
-      <div class="ru">ESO: дробное расписание по вторникам и четвергам. Уход: 17:00. Кружки: 16:00–17:30.</div>
-      <button class="speak-btn" onclick="speak('ESO: horario partido los martes y jueves. Salida: 17:00. Actividades extraescolares: 16:00–17:30.')">🔊</button>
+      <div class="es">Ruta del autobús escolar: Salida: 8:30. Parada: Plaza del Carmen. Llegada: 9:00. Monitor: Señora García.</div>
+      <div class="ru">Маршрут школьного автобуса: Отправление: 8:30. Остановка: Площадь Кармен. Прибытие: 9:00. Сопровождающая: сеньора Гарсия.</div>
+      <button class="speak-btn" onclick="speak('Ruta del autobús escolar: Salida: 8:30. Parada: Plaza del Carmen. Llegada: 9:00. Monitor: Señora García.')">🔊</button>
     </div>
 
     <div class="sit-dialog">
       <div class="who you">Ваш ответ-шаблон (если звоните в школу):</div>
-      <div class="es">Buenos días. Quisiera entender el horario de primaria y ESO.</div>
-      <div class="ru">Добрый день. Я хотел бы понять расписание начальной школы и ESO.</div>
-      <button class="speak-btn" onclick="speak('Buenos días. Quisiera entender el horario de primaria y ESO.')">🔊</button>
+      <div class="es">Buenos días. Quisiera inscribir a mi hijo en el comedor escolar.</div>
+      <div class="ru">Добрый день. Я хотел бы записать сына в школьную столовую.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Quisiera inscribir a mi hijo en el comedor escolar.')">🔊</button>
     </div>
 
     <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
 
-    <div class="sit-question" data-correct="0">
-      <div class="q-text"><span class="q-num">1</span>Что означает <b>jornada continua</b>?</div>
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Что означает <b>comedor escolar</b>?</div>
       <div class="q-opts">
-        <div class="q-opt" data-o="0">Ребёнок учится только утром и обедает дома.</div>
-        <div class="q-opt" data-o="1">Ребёнок учится утром и вечером.</div>
-        <div class="q-opt" data-o="2">Ребёнок не ходит в школу по вторникам.</div>
+        <div class="q-opt" data-o="0">Кафетерий для учителей.</div>
+        <div class="q-opt" data-o="1">Школьная столовая, где ребёнок обедает.</div>
+        <div class="q-opt" data-o="2">Магазин школьных принадлежностей.</div>
       </div>
     </div>
 
-    <div class="sit-question" data-correct="1">
-      <div class="q-text"><span class="q-num">2</span>Что означает <b>horario partido</b>?</div>
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">2</span>Что означает <b>ruta del autobús</b>?</div>
       <div class="q-opts">
-        <div class="q-opt" data-o="0">Школа работает только по понедельникам.</div>
-        <div class="q-opt" data-o="1">Утром занятия, потом длинный перерыв, потом снова занятия.</div>
-        <div class="q-opt" data-o="2">Ребёнок гуляет весь день.</div>
+        <div class="q-opt" data-o="0">Расписание уроков.</div>
+        <div class="q-opt" data-o="1">Список учеников класса.</div>
+        <div class="q-opt" data-o="2">Маршрут школьного автобуса.</div>
       </div>
     </div>
 
     <div class="sit-bridge">
-      🧩 <b>Мост к теме урока:</b> сегодня разбираем <b>школьный день</b>: <i>primaria</i> для ребёнка 8 лет и <i>ESO</i> для подростка 12 лет. Вы научитесь читать расписание, понимать предметы, оценки и говорить о рутине с помощью наречий: <b>siempre, normalmente, a veces, casi nunca, nunca</b>.
+      🧩 <b>Мост к теме урока:</b> сегодня разберём два практических вопроса: <b>comedor</b> (столовая и обед) и <b>transporte escolar</b> (школьный автобус). Вы научитесь спрашивать про меню, аллергии, маршрут и время. А главное — освоите <b>también</b> и <b>tampoco</b> для согласия и несогласия.
     </div>
   </div>
 </section>
 
 <!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num">1</div>
-    <div class="step-title">
-      <h2>Карточки со словами: 35 слов о школе</h2>
-      <span class="time">05:00 – 15:00 · 5 категорий</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num">1</span><div><span class="step-time">05:00 – 15:00 · 5 категорий</span><h2>Карточки со словами: 35 слов о столовой и транспорте</h2></div></div>
 
   <div class="card">
     <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
     <div class="tabs" id="vocab-tabs">
-      <button class="tab active" onclick="showVocab('levels',this)">🎒 Уровни (7)</button>
-      <button class="tab" onclick="showVocab('time',this)">🕒 Расписание (7)</button>
-      <button class="tab" onclick="showVocab('subjects',this)">📚 Предметы (7)</button>
-      <button class="tab" onclick="showVocab('grades',this)">📝 Оценка (7)</button>
-      <button class="tab" onclick="showVocab('freq',this)">🔁 Частотность (7)</button>
+      <button class="tab active" onclick="showVocab('comedor',this)">🍽 Столовая (7)</button>
+      <button class="tab" onclick="showVocab('menu',this)">🥗 Меню (7)</button>
+      <button class="tab" onclick="showVocab('bus',this)">🚌 Автобус (7)</button>
+      <button class="tab" onclick="showVocab('docs',this)">📝 Запись (7)</button>
+      <button class="tab" onclick="showVocab('verbs',this)">🏃 Действия (7)</button>
     </div>
     <div class="vocab-grid" id="vocab-grid"></div>
 
     <div class="note green" style="margin-top:16px">
-      💡 <b>CLIL-минимум:</b> <b>primaria</b> = начальная школа (6–12 лет), обычно один главный <i>tutor</i>, чаще <i>jornada continua</i>. <b>ESO</b> = средняя школа (12–16 лет), разные учителя, чаще <i>horario partido</i>.
+      💡 <b>CLIL-минимум:</b> <b>comedor escolar</b> = полноценный обед из двух блюд и десерта. Для аллергий есть <b>menú especial</b> (sin gluten, sin lactosa, vegetariano). <b>Autobús escolar</b> = маршрут с остановками и сопровождающим.
     </div>
 
     <div class="note blue" style="margin-top:10px">
-      🗣 <b>Приём «Два ребёнка»:</b> представьте детей: 8 лет → <i>primaria</i>; 12 лет → <i>ESO</i>. Скажите по одной фразе на каждого: <i>«Mi hijo siempre entra a las nueve.»</i> / <i>«Mi hija a veces sale a las cinco.»</i>
+      🗣 <b>Приём «Два ребёнка»:</b> представьте детей: 8 лет → <i>primaria</i> → <i>comedor</i> + <i>autobús</i>; 12 лет → <i>ESO</i> → может не нужен. Скажите по одной фразе на каждого: <i>«Mi hijo come en el comedor.»</i> / <i>«Mi hija no va en autobús.»</i>
     </div>
   </div>
 </section>
 
 <!-- ШАГ 2: ГРАММАТИКА -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num c2">2</div>
-    <div class="step-title">
-      <h2>Грамматика: наречия частотности + глаголы</h2>
-      <span class="time">15:00 – 23:00 · Фокус: yo / nosotros / usted</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num c2">2</span><div><span class="step-time">15:00 – 23:00 · Фокус: yo / nosotros / usted</span><h2>Грамматика: también / tampoco + глаголы записи</h2></div></div>
 
   <div class="card">
-    <p class="hint">Чтобы рассказать о школьной рутине, нужны наречия частотности и 5 ключевых глаголов.</p>
+    <p class="hint">Чтобы записать ребёнка в столовую и на автобус, нужны глаголы записи и слова для согласия.</p>
 
     <div class="grammar-box">
-      <h4>📐 Шкала частотности</h4>
-      <div class="freq-scale">
-        <span class="freq-chip f100">siempre · 100%</span>
-        <span class="freq-chip f75">normalmente · 75%</span>
-        <span class="freq-chip f50">a veces · 50%</span>
-        <span class="freq-chip f10">casi nunca · 10%</span>
-        <span class="freq-chip f0">nunca · 0%</span>
-      </div>
+      <h4>📐 También / Tampoco: тоже да / тоже нет</h4>
+      <div class="formula">[утверждение] + <b>también</b> = тоже да</div>
       <div class="example">
-        <b>Yo siempre hago los deberes por la tarde.</b> — Я всегда делаю домашние задания после обеда.<br>
-        <b>Nosotros normalmente salimos a las tres.</b> — Мы обычно уходим в три.<br>
-        <b>Usted a veces tiene reunión con el tutor.</b> — Вы иногда встречаетесь с классным руководителем.<br>
-        <b>Yo casi nunca llego tarde.</b> — Я почти никогда не опаздываю.<br>
-        <b>Nosotros nunca tenemos clase los domingos.</b> — У нас никогда нет занятий по воскресеньям.
+        <b>Mi hijo come en el comedor. Yo también como en el trabajo.</b> — Сын ест в столовой. Я тоже ем на работе.<br>
+        <b>Mi hija quiere ir en autobús. Yo también quiero ir con ella.</b> — Дочь хочет ехать на автобусе. Я тоже хочу поехать с ней.<br>
+        <b>Nosotros también queremos inscribir al niño.</b> — Мы тоже хотим записать ребёнка.
+      </div>
+      <div class="formula" style="margin-top:12px">[отрицание] + <b>tampoco</b> = тоже нет</div>
+      <div class="example">
+        <b>Mi hija no come en el comedor. Yo tampoco como en el colegio.</b> — Дочь не ест в столовой. Я тоже не ем в школе.<br>
+        <b>Mi hijo no va en autobús. Yo tampoco voy en coche.</b> — Сын не едет на автобусе. Я тоже не еду на машине.<br>
+        <b>Nosotros tampoco podemos pagar el comedor privado.</b> — Мы тоже не можем оплатить частную столовую.
       </div>
     </div>
 
@@ -404,113 +375,106 @@
     </div>
 
     <div class="grammar-box">
-      <h4>📐 Пять глаголов школьной рутины</h4>
+      <h4>📐 Пять глаголов записи и действий</h4>
       <table class="grammar-table">
         <tr>
           <th>Лицо</th>
-          <th>estudiar</th>
-          <th>tener</th>
-          <th>hacer</th>
-          <th>salir</th>
-          <th>empezar</th>
+          <th>solicitar</th>
+          <th>inscribirse</th>
+          <th>recoger</th>
+          <th>llevar</th>
+          <th>avisar</th>
         </tr>
         <tr>
           <td class="practice">yo</td>
-          <td class="practice">estudio</td>
-          <td class="practice">tengo</td>
-          <td class="practice">hago</td>
-          <td class="practice">salgo</td>
-          <td class="practice">empiezo</td>
+          <td class="practice">solicito</td>
+          <td class="practice">me inscribo</td>
+          <td class="practice">recojo</td>
+          <td class="practice">llevo</td>
+          <td class="practice">aviso</td>
         </tr>
         <tr>
           <td class="reference">tú</td>
-          <td class="reference">estudias</td>
-          <td class="reference">tienes</td>
-          <td class="reference">haces</td>
-          <td class="reference">sales</td>
-          <td class="reference">empiezas</td>
+          <td class="reference">solicitas</td>
+          <td class="reference">te inscribes</td>
+          <td class="reference">recoges</td>
+          <td class="reference">llevas</td>
+          <td class="reference">avisas</td>
         </tr>
         <tr>
           <td class="practice">usted</td>
-          <td class="practice">estudia</td>
-          <td class="practice">tiene</td>
-          <td class="practice">hace</td>
-          <td class="practice">sale</td>
-          <td class="practice">empieza</td>
+          <td class="practice">solicita</td>
+          <td class="practice">se inscribe</td>
+          <td class="practice">recoge</td>
+          <td class="practice">lleva</td>
+          <td class="practice">avisa</td>
         </tr>
         <tr>
           <td class="practice">nosotros</td>
-          <td class="practice">estudiamos</td>
-          <td class="practice">tenemos</td>
-          <td class="practice">hacemos</td>
-          <td class="practice">salimos</td>
-          <td class="practice">empezamos</td>
+          <td class="practice">solicitamos</td>
+          <td class="practice">nos inscribimos</td>
+          <td class="practice">recogemos</td>
+          <td class="practice">llevamos</td>
+          <td class="practice">avisamos</td>
         </tr>
         <tr>
           <td class="reference">vosotros</td>
-          <td class="reference">estudiáis</td>
-          <td class="reference">tenéis</td>
-          <td class="reference">hacéis</td>
-          <td class="reference">salís</td>
-          <td class="reference">empezáis</td>
+          <td class="reference">solicitáis</td>
+          <td class="reference">os inscribís</td>
+          <td class="reference">recogéis</td>
+          <td class="reference">lleváis</td>
+          <td class="reference">avisáis</td>
         </tr>
         <tr>
           <td class="reference">ellos / ustedes</td>
-          <td class="reference">estudian</td>
-          <td class="reference">tienen</td>
-          <td class="reference">hacen</td>
-          <td class="reference">salen</td>
-          <td class="reference">empiezan</td>
+          <td class="reference">solicitan</td>
+          <td class="reference">se inscriben</td>
+          <td class="reference">recogen</td>
+          <td class="reference">llevan</td>
+          <td class="reference">avisan</td>
         </tr>
       </table>
     </div>
 
     <div class="grammar-box">
-      <h4>📐 Наречие + глагол: формула</h4>
-      <div class="formula">[субъект] + [наречие] + [глагол] + [дополнение]</div>
+      <h4>📐 Формула: también / tampoco + yo / nosotros / usted</h4>
       <div class="example">
-        <b>Mi hijo siempre hace los deberes.</b> — Мой сын всегда делает уроки.<br>
-        <b>Mi hija normalmente sale a las cinco.</b> — Моя дочь обычно уходит в пять.<br>
-        <b>Nosotros casi nunca llegamos tarde.</b> — Мы почти никогда не опаздываем.<br>
-        <b>El niño nunca estudia los domingos.</b> — Ребёнок никогда не учится по воскресеньям.
+        <b>Yo también quiero inscribir a mi hijo.</b> — Я тоже хочу записать сына.<br>
+        <b>Nosotros también necesitamos el menú sin gluten.</b> — Нам тоже нужно меню без глютена.<br>
+        <b>Usted también puede solicitar una beca.</b> — Вы тоже можете подать на льготу.<br>
+        <b>Yo tampoco quiero el menú con carne.</b> — Я тоже не хочу меню с мясом.<br>
+        <b>Nosotros tampoco podemos recoger al niño a las tres.</b> — Мы тоже не можем забрать ребёнка в три.
       </div>
     </div>
 
     <div class="note green">
-      📌 <b>Главное правило:</b> наречие ставим <b>перед глаголом</b>.<br>
-      <i>Yo siempre hago…</i> · <i>Nosotros normalmente salimos…</i> · <i>Usted a veces tiene…</i>
+      📌 <b>Главное правило:</b> <b>también</b> ставим после утверждения, <b>tampoco</b> — после отрицания. Нельзя использовать <b>no</b> и <b>tampoco</b> вместе.
     </div>
 
     <div class="note red">
       ⚠️ <b>Частые ошибки:</b><br>
-      • <i>«Yo tengo siempre clase.»</i> ❌ → <i>«Yo siempre tengo clase.»</i> ✅<br>
-      • <i>«Nosotros nunca no tenemos clase.»</i> ❌ → <i>«Nosotros nunca tenemos clase.»</i> ✅<br>
-      • <i>«Usted a veces tienen reunión.»</i> ❌ → <i>«Usted a veces tiene reunión.»</i> ✅<br>
-      • <i>«Mi hijo siempre entrá a las nueve.»</i> ❌ → <i>«Mi hijo siempre entra a las nueve.»</i> ✅
+      • <i>«Yo no tampoco como.»</i> ❌ → <i>«Yo tampoco como.»</i> ✅<br>
+      • <i>«Mi hijo come. Yo tampoco.»</i> ❌ → <i>«Mi hijo come. Yo también.»</i> ✅<br>
+      • <i>«Mi hijo no come. Yo también.»</i> ❌ → <i>«Mi hijo no come. Yo tampoco.»</i> ✅<br>
+      • <i>«Yo también quiero también inscribir.»</i> ❌ → <i>«Yo también quiero inscribir.»</i> ✅
     </div>
   </div>
 </section>
 
 <!-- ШАГ 3: ПРАКТИКА -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num c3">3</div>
-    <div class="step-title">
-      <h2>Практика: применим слова и грамматику</h2>
-      <span class="time">23:00 – 30:00 · 3 упражнения</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num c3">3</span><div><span class="step-time">23:00 – 30:00 · 3 упражнения</span><h2>Практика: применим слова и грамматику</h2></div></div>
 
   <div class="card">
-    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь наречие частотности</h4>
-    <p class="hint">Используйте: <b>siempre / normalmente / a veces / casi nunca / nunca</b>. Подсказка в скобках — ориентир по смыслу.</p>
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь también или tampoco</h4>
+    <p class="hint">Выберите <b>también</b> (тоже да) или <b>tampoco</b> (тоже нет) в зависимости от контекста.</p>
     <div id="fill-exercise"></div>
     <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
     <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
   </div>
 
   <div class="card">
-    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери школьную фразу</h4>
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
     <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
     <div id="build-exercise"></div>
   </div>
@@ -525,35 +489,31 @@
 
 <!-- ШАГ 4: АУДИРОВАНИЕ -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num c4">4</div>
-    <div class="step-title">
-      <h2>Аудирование: расписание для двоих детей</h2>
-      <span class="time">30:00 – 37:00 · primaria и ESO в одном диалоге</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num c4">4</span><div><span class="step-time">30:00 – 37:00 · диалог с секретариатом</span><h2>Аудирование: запись в столовую и на автобус</h2></div></div>
 
   <div class="card">
     <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
 
-    <button class="btn btn-secondary" onclick="speak('Buenos días, Colegio Santa María. ¿En qué puedo ayudarle? Buenos días. Quisiera entender el horario de primaria y ESO. Claro. ¿Tiene un niño en primaria? Sí, tiene ocho años. Y mi hija tiene doce años. Ella empieza la ESO. Muy bien. En primaria, la jornada es continua. La entrada es a las nueve y la salida a las tres y media. ¿Y en ESO? En ESO hay horario partido los martes y jueves. Salen a las cinco. A veces tienen actividades por la tarde. Nosotros normalmente recogemos a los niños a las tres. ¿Pueden comer en el comedor? Sí. El comedor es de tres a cuatro. Después, los niños pueden hacer los deberes guiados. Perfecto. ¿Cuándo es la primera tutoría? La primera tutoría es el próximo lunes a las cinco. Muchas gracias. ¿Puede enviarme el horario por email? Sí, claro.')" style="margin-bottom:12px">🔊 Прослушать диалог</button>
+    <button class="btn btn-secondary" onclick="speak('Buenos días, Colegio Santa María. ¿En qué puedo ayudarle? Buenos días. Quisiera inscribir a mi hijo en el comedor escolar. Muy bien. ¿Tiene alguna alergia alimentaria? Sí, tiene alergia a los frutos secos. Necesita un menú especial. Perfecto. Necesitamos el certificado médico. ¿Puede adjuntarlo a la solicitud? Sí, lo adjunto. ¿Cuánto cuesta el comedor? La cuota es de ciento veinte euros al mes. También puede solicitar una beca. Perfecto. También quiero apuntarlo al autobús escolar. Muy bien. La ruta pasa por su zona. La parada está en la Plaza del Carmen. La hora de salida es a las ocho y media. ¿Quién acompaña a los niños? La monitora, la señora García. Ella acompaña a los niños todos los días. Perfecto. ¿Puedo confirmar la plaza hoy? Sí, claro. Rellene la solicitud y confirme la plaza. Muchas gracias. Hasta luego. Hasta luego.')" style="margin-bottom:12px">🔊 Прослушать диалог</button>
 
     <div class="dialog-box" onclick="this.classList.toggle('open')">
       <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
       <div class="dialog-text">
         <span class="who op">Секретариат:</span> Buenos días, Colegio Santa María. ¿En qué puedo ayudarle?<br>
-        <span class="who you">Родитель:</span> Buenos días. Quisiera entender el horario de primaria y ESO.<br>
-        <span class="who op">Секретариат:</span> Claro. ¿Tiene un niño en primaria?<br>
-        <span class="who you">Родитель:</span> Sí, tiene ocho años. Y mi hija tiene doce años. Ella empieza la ESO.<br>
-        <span class="who op">Секретариат:</span> Muy bien. En primaria, la jornada es continua. La entrada es a las nueve y la salida a las tres y media.<br>
-        <span class="who you">Родитель:</span> ¿Y en ESO?<br>
-        <span class="who op">Секретариат:</span> En ESO hay horario partido los martes y jueves. Salen a las cinco. A veces tienen actividades por la tarde.<br>
-        <span class="who you">Родитель:</span> Nosotros normalmente recogemos a los niños a las tres. ¿Pueden comer en el comedor?<br>
-        <span class="who op">Секретариат:</span> Sí. El comedor es de tres a cuatro. Después, los niños pueden hacer los deberes guiados.<br>
-        <span class="who you">Родитель:</span> Perfecto. ¿Cuándo es la primera tutoría?<br>
-        <span class="who op">Секретариат:</span> La primera tutoría es el próximo lunes a las cinco.<br>
-        <span class="who you">Родитель:</span> Muchas gracias. ¿Puede enviarme el horario por email?<br>
-        <span class="who op">Секретариат:</span> Sí, claro.
+        <span class="who you">Родитель:</span> Buenos días. Quisiera inscribir a mi hijo en el comedor escolar.<br>
+        <span class="who op">Секретариат:</span> Muy bien. ¿Tiene alguna alergia alimentaria?<br>
+        <span class="who you">Родитель:</span> Sí, tiene alergia a los frutos secos. Necesita un menú especial.<br>
+        <span class="who op">Секретариат:</span> Perfecto. Necesitamos el certificado médico. ¿Puede adjuntarlo a la solicitud?<br>
+        <span class="who you">Родитель:</span> Sí, lo adjunto. ¿Cuánto cuesta el comedor?<br>
+        <span class="who op">Секретариат:</span> La cuota es de ciento veinte euros al mes. También puede solicitar una beca.<br>
+        <span class="who you">Родитель:</span> Perfecto. También quiero apuntarlo al autobús escolar.<br>
+        <span class="who op">Секретариат:</span> Muy bien. La ruta pasa por su zona. La parada está en la Plaza del Carmen. La hora de salida es a las ocho y media.<br>
+        <span class="who you">Родитель:</span> ¿Quién acompaña a los niños?<br>
+        <span class="who op">Секретариат:</span> La monitora, la señora García. Ella acompaña a los niños todos los días.<br>
+        <span class="who you">Родитель:</span> Perfecto. ¿Puedo confirmar la plaza hoy?<br>
+        <span class="who op">Секретариат:</span> Sí, claro. Rellene la solicitud y confirme la plaza.<br>
+        <span class="who you">Родитель:</span> Muchas gracias. Hasta luego.<br>
+        <span class="who op">Секретариат:</span> Hasta luego.
       </div>
     </div>
 
@@ -564,170 +524,152 @@
 
 <!-- ШАГ 5: ЧТЕНИЕ + CLIL + ПРОДУКТ -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num">5</div>
-    <div class="step-title">
-      <h2>Чтение + CLIL + продукт: расписание для 8 и 12 лет</h2>
-      <span class="time">37:00 – 47:00 · Сравнение primaria/ESO + конструктор расписания</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num">5</span><div><span class="step-time">37:00 – 47:00 · Школьное питание + конструктор заявки</span><h2>Чтение + CLIL + продукт: заявка на столовую и автобус</h2></div></div>
 
   <div class="card">
-    <h4 style="margin-bottom:10px">📖 CLIL-текст: школьный день в Испании</h4>
+    <h4 style="margin-bottom:10px">📖 CLIL-текст: школьное питание и транспорт в Испании</h4>
 
     <div class="clil-text">
-      <h4>Primaria</h4>
-      <p>En primaria, los niños suelen tener un tutor principal. La jornada continua es muy común: entrada por la mañana, recreo a media mañana y salida antes de la comida. Las asignaturas incluyen lengua, matemáticas, ciencias, sociales, inglés, educación física y plástica o música. La evaluación es continua y el boletín de notas informa a las familias varias veces al año.</p>
+      <h4>Comedor escolar</h4>
+      <p>En la mayoría de los colegios españoles hay servicio de comedor. Una empresa de catering prepara el menú, que suele tener primer plato, segundo plato, postre y bebida. Las familias pueden elegir comedor completo, menú especial (sin gluten, sin lactosa, vegetariano) o recoger al niño a mediodía. Para alergias o dietas especiales, se solicita un menú adaptado con certificado médico. La cuota suele ser de 100–150 euros al mes.</p>
 
-      <h4>ESO</h4>
-      <p>En ESO, los adolescentes tienen varios profesores. Es común el horario partido: mañana y tarde, con una pausa larga para comer. Las asignaturas son más específicas: lengua, matemáticas, ciencias, sociales, inglés, tecnología, educación física y optativas. Las notas suelen ser numéricas, de uno a diez. Si un alumno suspende, puede haber recuperación.</p>
+      <h4>Transporte escolar</h4>
+      <p>Muchos colegios ofrecen autobús escolar con rutas fijas y paradas cercanas a los domicilios. Un monitor acompaña a los niños. Las familias reciben la ruta, la parada y los horarios al inscribirse. El precio depende de la distancia y de la comunidad autónoma. La cuota suele ser de 60–100 euros al mes.</p>
     </div>
 
-    <h4 style="margin-bottom:10px">🗓 Расписание семьи: заполните для 8 и 12 лет</h4>
-    <table class="schedule-table">
+    <h4 style="margin-bottom:10px">📊 Таблица сравнения: заполните вывод</h4>
+    <table class="compare-table">
       <tr>
-        <th>День</th>
-        <th>🎒 8 лет · Primaria</th>
-        <th>📚 12 лет · ESO</th>
-        <th>👨‍👩‍👧 Наша рутина</th>
+        <th>Критерий</th>
+        <th>🍽 Comedor</th>
+        <th>🚌 Autobús</th>
       </tr>
       <tr>
-        <td>Lunes</td>
-        <td><input type="text" placeholder="entrada 9:00, salida 13:30"></td>
-        <td><input type="text" placeholder="entrada 9:00, salida 17:00"></td>
-        <td><input type="text" placeholder="normalmente recogemos a las 15:30"></td>
+        <td>Что входит</td>
+        <td>primer plato, segundo plato, postre, bebida</td>
+        <td>ruta, paradas, horarios</td>
       </tr>
       <tr>
-        <td>Martes</td>
-        <td><input type="text" placeholder="recreo 11:00"></td>
-        <td><input type="text" placeholder="horario partido"></td>
-        <td><input type="text" placeholder="a veces actividades por la tarde"></td>
+        <td>Спецдиета</td>
+        <td>menu adaptado con certificado médico</td>
+        <td>no aplica</td>
       </tr>
       <tr>
-        <td>Miércoles</td>
-        <td><input type="text" placeholder="inglés y mates"></td>
-        <td><input type="text" placeholder="ciencias sociales"></td>
-        <td><input type="text" placeholder="siempre hacemos los deberes"></td>
+        <td>Кто помогает</td>
+        <td>la empresa de catering</td>
+        <td>un monitor</td>
       </tr>
       <tr>
-        <td>Jueves</td>
-        <td><input type="text" placeholder="plástica"></td>
-        <td><input type="text" placeholder="tecnología"></td>
-        <td><input type="text" placeholder="casi nunca llegamos tarde"></td>
+        <td>Цена в месяц</td>
+        <td>100–150 euros</td>
+        <td>60–100 euros</td>
       </tr>
       <tr>
-        <td>Viernes</td>
-        <td><input type="text" placeholder="música"></td>
-        <td><input type="text" placeholder="tutoría"></td>
-        <td><input type="text" placeholder="nunca estudiamos el fin de semana"></td>
+        <td><b>Мой вывод</b></td>
+        <td><input type="text" placeholder="Nos interesa porque..."></td>
+        <td><input type="text" placeholder="Nos interesa porque..."></td>
       </tr>
     </table>
   </div>
 
   <div class="card">
-    <h4 style="margin-bottom:10px">🔧 Конструктор: устное описание недели</h4>
-    <p class="hint">Заполните данные — получите готовое устное описание недели вашей семьи. Используем формы <b>yo / nosotros / usted</b>.</p>
+    <h4 style="margin-bottom:10px">🔧 Конструктор: заявка на столовую и автобус</h4>
+    <p class="hint">Заполните данные — получите готовую заявку, которую запишете голосовым. Используем формы <b>yo / nosotros / usted</b> и <b>también / tampoco</b>.</p>
 
     <div class="dialog-builder">
-      <div class="hdr">🗓 КОНСТРУКТОР: Nuestra semana escolar</div>
+      <div class="hdr">📝 КОНСТРУКТОР: Inscripción en comedor y autobús</div>
 
       <div class="field">
-        <label>👦 Имя младшего ребёнка (primaria):</label>
-        <input type="text" id="b-junior" placeholder="Leo" value="Leo">
+        <label>👦 Имя ребёнка:</label>
+        <input type="text" id="b-name" placeholder="Leo" value="Leo">
       </div>
 
       <div class="field">
-        <label>🔢 Возраст младшего:</label>
-        <select id="b-age-junior">
+        <label>🔢 Возраст:</label>
+        <select id="b-age">
           <option value="siete">7</option>
           <option value="ocho" selected>8</option>
           <option value="nueve">9</option>
-          <option value="diez">10</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>⏰ Время выхода младшего:</label>
-        <select id="b-out-junior">
-          <option value="a las tres">a las tres</option>
-          <option value="a las tres y media" selected>a las tres y media</option>
-          <option value="a las cuatro">a las cuatro</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>👧 Имя старшего ребёнка (ESO):</label>
-        <input type="text" id="b-senior" placeholder="Vega" value="Vega">
-      </div>
-
-      <div class="field">
-        <label>🔢 Возраст старшего:</label>
-        <select id="b-age-senior">
-          <option value="doce" selected>12</option>
+          <option value="doce">12</option>
           <option value="trece">13</option>
-          <option value="catorce">14</option>
         </select>
       </div>
 
       <div class="field">
-        <label>⏰ Время выхода старшего:</label>
-        <select id="b-out-senior">
-          <option value="a las cinco" selected>a las cinco</option>
-          <option value="a las seis">a las seis</option>
-          <option value="a las cinco y media">a las cinco y media</option>
+        <label>🍽 Comedor:</label>
+        <select id="b-comedor">
+          <option value="sí" selected>sí (да)</option>
+          <option value="no">no (нет)</option>
         </select>
       </div>
 
       <div class="field">
-        <label>🔁 Частотность рутины семьи:</label>
-        <select id="b-freq">
-          <option value="siempre">siempre (всегда)</option>
-          <option value="normalmente" selected>normalmente (обычно)</option>
-          <option value="a veces">a veces (иногда)</option>
-          <option value="casi nunca">casi nunca (почти никогда)</option>
-          <option value="nunca">nunca (никогда)</option>
+        <label>🥗 Меню спецдиета:</label>
+        <select id="b-menu">
+          <option value="ninguno" selected>ninguno (обычное)</option>
+          <option value="sin gluten">sin gluten (без глютена)</option>
+          <option value="sin lactosa">sin lactosa (без лактозы)</option>
+          <option value="vegetariano">vegetariano (вегетарианское)</option>
         </select>
       </div>
 
       <div class="field">
-        <label>🎯 Предмет, который любит младший:</label>
-        <select id="b-fav-junior">
-          <option value="matemáticas" selected>matemáticas</option>
-          <option value="plástica">plástica</option>
-          <option value="educación física">educación física</option>
-          <option value="inglés">inglés</option>
+        <label>🚌 Autobús:</label>
+        <select id="b-bus">
+          <option value="sí" selected>sí (да)</option>
+          <option value="no">no (нет)</option>
         </select>
       </div>
 
       <div class="field">
-        <label>🎯 Предмет, который любит старший:</label>
-        <select id="b-fav-senior">
-          <option value="tecnología">tecnología</option>
-          <option value="ciencias sociales" selected>ciencias sociales</option>
-          <option value="inglés">inglés</option>
-          <option value="matemáticas">matemáticas</option>
+        <label>🗺 Остановка:</label>
+        <select id="b-parada">
+          <option value="Plaza del Carmen" selected>Plaza del Carmen</option>
+          <option value="Calle Mayor">Calle Mayor</option>
+          <option value="Avenida de la Constitución">Avenida de la Constitución</option>
         </select>
       </div>
 
-      <button class="btn btn-primary" onclick="buildSchedule()" style="margin-top:12px">🔧 Собрать описание</button>
+      <div class="field">
+        <label>⏰ Время отправления:</label>
+        <select id="b-hora">
+          <option value="a las ocho">a las ocho (в 8:00)</option>
+          <option value="a las ocho y media" selected>a las ocho y media (в 8:30)</option>
+          <option value="a las nueve">a las nueve (в 9:00)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>💶 Плата за comedor:</label>
+        <select id="b-precio-comedor">
+          <option value="100">100 euros</option>
+          <option value="120" selected>120 euros</option>
+          <option value="150">150 euros</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>💶 Плата за autobús:</label>
+        <select id="b-precio-bus">
+          <option value="60">60 euros</option>
+          <option value="80" selected>80 euros</option>
+          <option value="100">100 euros</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildApplication()" style="margin-top:12px">🔧 Собрать заявку</button>
       <div id="dialog-result"></div>
     </div>
 
     <div class="note green">
-      📸 <b>Продукт урока:</b> запишите голосовое с собранным описанием (5–7 предложений). Это ваш личный артефакт недели 6.
+      📸 <b>Продукт урока:</b> запишите голосовое с собранной заявкой (6–8 предложений). Это ваш личный артефакт недели 6.
     </div>
   </div>
 </section>
 
 <!-- САМОПРОВЕРКА -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num">✅</div>
-    <div class="step-title">
-      <h2>Самопроверка «Светофор»</h2>
-      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num">✅</span><div><span class="step-time">Отметьте честно — нажмите на нужный цвет</span><h2>Самопроверка «Светофор»</h2></div></div>
   <div class="card">
     <div style="overflow-x:auto">
       <table class="tl-table">
@@ -744,49 +686,45 @@
 
 <!-- ДОМАШНЕЕ ЗАДАНИЕ -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num">🏠</div>
-    <div class="step-title">
-      <h2>Домашнее задание · Урок 6.2</h2>
-      <span class="time">⏱ ~30–35 минут · 5 заданий</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num">🏠</span><div><span class="step-time">⏱ ~30–35 минут · 6 заданий</span><h2>Домашнее задание · Урок 6.3</h2></div></div>
 
   <div class="hw-item">
     <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
-    <div class="hw-meta">Цель: довести до автоматизма 35 слов и наречия частотности.</div>
-    <p>Карточки, сопоставление, «собери фразу» — фокус на формах <b>yo / nosotros / usted</b> и наречиях <b>siempre, normalmente, a veces, casi nunca, nunca</b>.</p>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и también / tampoco.</div>
+    <p>Карточки, сопоставление, «собери фразу» — фокус на формах <b>yo / nosotros / usted</b> и <b>también / tampoco</b>.</p>
     <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
   </div>
 
   <div class="hw-item">
-    <h4>🎤 Задание 2. Голосовое «Nuestra semana escolar» · 6 мин ⭐</h4>
-    <div class="hw-meta">Цель: рассказать о расписании семьи.</div>
-    <p>Запишите голосовое на 5–7 предложений. Используйте шаблон:</p>
+    <h4>🎤 Задание 2. Голосовое «Inscripción en el comedor» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: записать ребёнка в столовую голосом.</div>
+    <p>Запишите голосовое на 6–8 предложений. Используйте шаблон:</p>
     <div class="note blue">
-      Mi hijo/a está en <b>[primaria / ESO]</b>.<br>
-      Normalmente entra a las <b>[hora]</b>.<br>
-      Sale a las <b>[hora]</b>.<br>
-      Siempre / A veces / Nunca <b>[действие]</b>.<br>
-      Nosotros <b>[рутина семьи]</b>.
+      Buenos días. Quisiera inscribir a mi hijo/a <b>[имя]</b> en el comedor escolar.<br>
+      Tiene <b>[edad]</b> años.<br>
+      Necesita menú <b>[especial / sin gluten / sin lactosa / ninguno]</b>.<br>
+      También quiero apuntarlo/a al autobús escolar.<br>
+      La parada está en <b>[parada]</b>. La hora de salida es <b>[hora]</b>.<br>
+      La cuota es de <b>[precio]</b> euros al mes.<br>
+      Muchas gracias.
     </div>
-    <button class="btn btn-ghost" onclick="speak('Mi hijo Leo está en primaria. Normalmente entra a las nueve y sale a las tres y media. Siempre hace los deberes por la tarde. Mi hija Vega está en ESO. A veces sale a las cinco. Nosotros normalmente recogemos a los niños a las tres. Nunca estudiamos los domingos.')" style="margin-top:10px">🔊 Прослушать образец</button>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Quisiera inscribir a mi hijo Leo en el comedor escolar. Tiene ocho años. Necesita menú sin gluten. También quiero apuntarlo al autobús escolar. La parada está en la Plaza del Carmen. La hora de salida es a las ocho y media. La cuota es de ciento veinte euros al mes. Muchas gracias.')" style="margin-top:10px">🔊 Прослушать образец</button>
   </div>
 
   <div class="hw-item">
-    <h4>📖 Задание 3. Реальное расписание (PBL) · 5 мин</h4>
+    <h4>📖 Задание 3. Реальное меню (PBL) · 5 мин</h4>
     <div class="hw-meta">Цель: применить язык к реальной школе.</div>
-    <p>Найдите сайт любой школы рядом с домом. Откройте раздел <i>horario</i>, <i>primaria</i> или <i>ESO</i>. Выпишите 5 временных точек:</p>
+    <p>Найдите сайт любой школы рядом с домом. Откройте раздел <i>comedor</i> или <i>menú</i>. Выпишите 5 пунктов:</p>
     <div class="note">
-      Entrada: ___ · Recreo: ___ · Salida: ___ · Comedor: ___ · Tutoría: ___
+      Primer plato: ___ · Segundo plato: ___ · Postre: ___ · Bebida: ___ · Menú especial: ___
     </div>
   </div>
 
   <div class="hw-item">
-    <h4>✍️ Задание 4. Письмо: мини-расписание · 7 мин</h4>
+    <h4>✍️ Задание 4. Письмо: заявка на столовую и автобус · 7 мин</h4>
     <div class="hw-meta">Цель: закрепить лексику и грамматику на бумаге.</div>
-    <p>Напишите 6–8 предложений о неделе двух детей. Используйте <i>primaria / ESO</i>, <i>jornada continua / horario partido</i>, наречия частотности.</p>
-    <button class="btn btn-ghost" onclick="speak('El lunes, mi hijo siempre entra a las nueve. Mi hija normalmente sale a las cinco. Los martes, a veces tenemos actividades por la tarde. Nosotros casi nunca llegamos tarde. Nunca estudiamos los domingos.')" style="margin-top:8px">🔊 Прослушать образец</button>
+    <p>Напишите 6–8 предложений: заявка на столовую и автобус для вашего ребёнка. Используйте <i>también / tampoco</i>, <i>comedor, menú, autobús, ruta, parada, cuota</i>.</p>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Quisiera inscribir a mi hijo Leo en el comedor escolar. Tiene ocho años. Necesita menú sin gluten. También quiero apuntarlo al autobús escolar. La parada está en la Plaza del Carmen. La hora de salida es a las ocho y media. La cuota es de ciento veinte euros al mes. Nosotros también queremos solicitar una beca. Muchas gracias.')" style="margin-top:8px">🔊 Прослушать образец</button>
   </div>
 
   <div class="hw-item">
@@ -794,33 +732,33 @@
     <div class="hw-meta">Цель: связать родительский урок с детским курсом.</div>
     <p>Спросите ребёнка:</p>
     <div class="note green">
-      ¿A qué hora sales hoy?<br>
-      ¿Siempre tienes deberes?<br>
-      ¿Qué asignatura te gusta más?
+      ¿Qué quieres comer en el comedor?<br>
+      ¿Prefieres ir en autobús o andando?<br>
+      ¿Qué parada está cerca de casa?
     </div>
     <p>Ребёнок отвечает:</p>
     <div class="note blue">
-      Salgo a las tres. Sí, siempre tengo deberes. Me gustan las mates.
+      Quiero pasta y fruta. Prefiero ir en autobús con mis amigos. La parada está en la Plaza del Carmen.
     </div>
     <p>Родитель резюмирует:</p>
     <div class="note">
-      Vale. Normalmente sales a las tres y siempre haces los deberes.
+      Vale. Queremos que comas en el comedor y vayas en autobús.
     </div>
-    <button class="btn btn-ghost" onclick="speak('¿A qué hora sales hoy? ¿Siempre tienes deberes? ¿Qué asignatura te gusta más? Vale. Normalmente sales a las tres y siempre haces los deberes.')" style="margin-top:8px">🔊 Прослушать образец</button>
+    <button class="btn btn-ghost" onclick="speak('¿Qué quieres comer en el comedor? ¿Prefieres ir en autobús o andando? ¿Qué parada está cerca de casa? Vale. Queremos que comas en el comedor y vayas en autobús.')" style="margin-top:8px">🔊 Прослушать образец</button>
   </div>
 
   <div class="hw-item">
     <h4>📄 Задание 6. Рабочий лист · 10–12 мин</h4>
     <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
-    <p>Распечатайте или заполните с экрана: лексика, наречия частотности, глаголы, диалог, расписание.</p>
-    <a href="../../worksheets/w06-l2-parents.html" class="btn btn-ghost" style="margin-top:8px">📄 Открыть рабочий лист (A4, печать)</a>
+    <p>Распечатайте или заполните с экрана: лексика, <i>también / tampoco</i>, диалог, конструктор заявки.</p>
+    <a href="../../worksheets/w06-l3-parents.html" class="btn btn-ghost" style="margin-top:8px">📄 Открыть рабочий лист (A4, печать)</a>
   </div>
 
   <div class="note" style="margin-top:16px">
     📤 <b>Формат сдачи домашки:</b><br>
-    • 🎤 Голосовое «Nuestra semana escolar»<br>
-    • 📖 5 временных точек из реальной школы<br>
-    • ✍️ Мини-расписание (6–8 предложений)<br>
+    • 🎤 Голосовое «Inscripción en el comedor»<br>
+    • 📖 5 пунктов реального меню<br>
+    • ✍️ Заявка на столовую и автобус (6–8 предложений)<br>
     • 📄 Фото рабочего листа<br>
     • ✅ Светофор самопроверки
   </div>
@@ -828,13 +766,7 @@
 
 <!-- ТРЕНАЖЁР -->
 <section class="section" id="train-section">
-  <div class="step-head">
-    <div class="step-num">🎮</div>
-    <div class="step-title">
-      <h2>Тренажёр: слова и грамматика</h2>
-      <span class="time">~7–10 мин</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num">🎮</span><div><span class="step-time">~7–10 мин</span><h2>Тренажёр: слова и грамматика</h2></div></div>
   <div class="card">
     <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
     <div class="tabs" id="train-tabs">
@@ -849,47 +781,47 @@
 <!-- QUIZLET -->
 <section class="section">
   <div class="quizlet-box">
-    <h3>🃏 Карточки Quizlet · Слова урока 6.2</h3>
-    <p>Повторите слова урока в приложении Quizlet: уровни, расписание, предметы, оценка, частотность.</p>
-    <a href="https://quizlet.com/ru/1214284754/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-6-%D1%83%D1%80%D0%BE%D0%BA-2-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
+    <h3>🃏 Карточки Quizlet · Слова урока 6.3</h3>
+    <p>Повторите слова урока в приложении Quizlet: столовая, меню, автобус, запись, действия.</p>
+    <a href="https://quizlet.com/ru/1214794162/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-6-%D1%83%D1%80%D0%BE%D0%BA-3-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
   </div>
 </section>
 
 <!-- РЕСУРСЫ -->
 <section class="section">
-  <div class="step-head">
-    <div class="step-num">🔗</div>
-    <div class="step-title">
-      <h2>Внешние ресурсы</h2>
-      <span class="time">Для проекта и самостоятельной практики</span>
-    </div>
-  </div>
+  <div class="step-head"><span class="step-num">🔗</span><div><span class="step-time">Для проекта и самостоятельной практики</span><h2>Внешние ресурсы</h2></div></div>
   <div class="resources-grid">
     <div class="resource-card">
-      <span class="tag">📺 YouTube</span>
-      <h4>Jornada continua vs horario partido</h4>
-      <p>Видео-объяснение двух типов расписания в испанских школах.</p>
-      <a href="https://www.youtube.com/results?search_query=jornada+continua+horario+partido+Espa%C3%B1a" target="_blank" rel="noopener">Смотреть →</a>
+      <span class="tag">🌐 Меню школ</span>
+      <h4>Поиск реальных меню</h4>
+      <p>Найдите сайты школ рядом с домом и посмотрите реальные меню на неделю.</p>
+      <a href="https://www.google.com/search?q=men%C3%BA+escolar+Espa%C3%B1a+colegio" target="_blank" rel="noopener">Искать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🌐 Маршруты автобусов</span>
+      <h4>Маршруты школьных автобусов</h4>
+      <p>Поищите информацию о маршрутах и остановках в вашем регионе.</p>
+      <a href="https://www.google.com/search?q=ruta+autob%C3%BAs+escolar+Espa%C3%B1a" target="_blank" rel="noopener">Искать →</a>
     </div>
     <div class="resource-card">
       <span class="tag">📺 YouTube</span>
-      <h4>Asignaturas de primaria y ESO</h4>
-      <p>Видео о предметах в начальной и средней школе Испании.</p>
-      <a href="https://www.youtube.com/results?search_query=asignaturas+primaria+ESO+espa%C3%B1ol" target="_blank" rel="noopener">Смотреть →</a>
+      <h4>Comedor escolar España</h4>
+      <p>Видео о том, как устроена школьная столовая в Испании.</p>
+      <a href="https://www.youtube.com/results?search_query=comedor+escolar+Espa%C3%B1a" target="_blank" rel="noopener">Смотреть →</a>
     </div>
     <div class="resource-card">
       <span class="tag">🏛️ Администрация</span>
-      <h4>Образование региона</h4>
-      <p>Проверьте расписания и нормативы в вашей автономии: <i>horario escolar + провинция</i>.</p>
-      <a href="https://www.google.com/search?q=horario+escolar+primaria+ESO+Espa%C3%B1a" target="_blank" rel="noopener">Искать →</a>
+      <h4>Запись в столовую</h4>
+      <p>Проверьте процедуру записи в вашей автономии: <i>inscripción comedor escolar + провинция</i>.</p>
+      <a href="https://www.google.com/search?q=inscripci%C3%B3n+comedor+escolar+Espa%C3%B1a" target="_blank" rel="noopener">Искать →</a>
     </div>
   </div>
 </section>
 
 <div class="lesson-nav">
-  <a href="w06-l1.html">← Предыдущий<br><small>Урок 6.1 · Público vs Concertado vs Privado</small></a>
+  <a href="w06-l2.html">← Предыдущий<br><small>Урок 6.2 · Primaria y ESO</small></a>
   <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
-  <a href="w06-l3.html">Следующий →<br><small>Урок 6.3 · Comedor y Transporte</small></a>
+  <span class="soon">Следующий →<br><small>Урок 7.1 · Встреча с директором — скоро</small></span>
 </div>
 
 <footer>
@@ -969,14 +901,14 @@ function renderQuiz(containerId, questions, feedbackPrefix){
   });
 }
 
-// ===== WARMUP QUIZ (6.1) =====
+// ===== WARMUP QUIZ (повторение 6.2) =====
 var warmQ = [
-  {q:'1. Как сказать «государственная школа»?', o:['el colegio público','el colegio concertado','el colegio privado'], c:0},
-  {q:'2. Что такое baremo?', o:['Система баллов при зачислении','Ежемесячная плата','Школьный автобус'], c:0},
-  {q:'3. Как вежливо сказать «Можете объяснить мне систему баллов?»', o:['¿Puede explicarme el baremo?','Explica el baremo.','Baremo, por favor.'], c:0},
-  {q:'4. Как сказать «Мы хотим сравнить три школы»?', o:['Queremos comparar tres colegios.','Comparar tres colegios.','Tres colegios, comparar.'], c:0},
-  {q:'5. Что означает plaza escolar?', o:['Место в школе','Школьная площадь','Школьный двор'], c:0},
-  {q:'6. Как сказать «Я могу прийти в субботу»?', o:['Puedo venir el sábado.','Vengo el sábado poder.','Yo venir sábado.'], c:0}
+  {q:'1. Как сказать «Мы обычно выходим в три»?', o:['Nosotros normalmente salimos a las tres','Nosotros nunca salimos a las tres','Nosotros a veces tenemos clase'], c:0},
+  {q:'2. Какое наречие означает «почти никогда»?', o:['nunca','casi nunca','a veces'], c:1},
+  {q:'3. Какой возраст у ESO (средняя школа)?', o:['6–12 лет','12–16 лет','16–18 лет'], c:1},
+  {q:'4. Выберите верный порядок: наречие + глагол', o:['Yo tengo siempre clase.','Yo siempre tengo clase.','Yo siempre clase tengo.'], c:1},
+  {q:'5. Как спросить «Во сколько начинаются занятия?»', o:['¿A qué hora empiezan las clases?','¿Qué es la clase?','¿Dónde está el tutor?'], c:0},
+  {q:'6. Что такое el tutor?', o:['Школьный автобус','Классный руководитель','Школьная столовая'], c:1}
 ];
 
 function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
@@ -1002,50 +934,50 @@ document.querySelectorAll('.sit-question').forEach(function(q){
 
 // ===== VOCAB =====
 var VOCAB = {
-  levels:[
-    {es:'la educación infantil', ru:'дошкольное образование', ex:'La educación infantil es para niños pequeños.', exRu:'Дошкольное образование — для маленьких детей.'},
-    {es:'la primaria', ru:'начальная школа', ex:'Mi hijo está en primaria.', exRu:'Мой сын в начальной школе.'},
-    {es:'la ESO', ru:'средняя школа для подростков', ex:'Mi hija empieza la ESO este año.', exRu:'Моя дочь начинает ESO в этом году.'},
-    {es:'el curso', ru:'учебный год / курс', ex:'Este curso cambia de clase.', exRu:'В этом учебном году меняет класс.'},
-    {es:'el nivel', ru:'уровень', ex:'El nivel es alto para su edad.', exRu:'Уровень высокий для его возраста.'},
-    {es:'el alumno / la alumna', ru:'ученик / ученица', ex:'La alumna tiene doce años.', exRu:'Ученице двенадцать лет.'},
-    {es:'el grupo / la clase', ru:'класс, группа', ex:'El grupo es pequeño.', exRu:'Класс маленький.'}
+  comedor:[
+    {es:'el comedor escolar', ru:'школьная столовая', ex:'Mi hijo come en el comedor escolar.', exRu:'Мой сын ест в школьной столовой.'},
+    {es:'el menú', ru:'меню', ex:'El menú cambia cada semana.', exRu:'Меню меняется каждую неделю.'},
+    {es:'el primer plato', ru:'первое блюдо', ex:'El primer plato es sopa.', exRu:'Первое блюдо — суп.'},
+    {es:'el segundo plato', ru:'второе блюдо', ex:'El segundo plato es pollo con arroz.', exRu:'Второе блюдо — курица с рисом.'},
+    {es:'el postre', ru:'десерт', ex:'El postre es fruta o yogur.', exRu:'Десерт — фрукты или йогурт.'},
+    {es:'la dieta especial', ru:'специальная диета', ex:'Mi hija necesita una dieta especial.', exRu:'Моей дочери нужна специальная диета.'},
+    {es:'la alergia alimentaria', ru:'пищевая аллергия', ex:'Tiene alergia alimentaria a los frutos secos.', exRu:'У него пищевая аллергия на орехи.'}
   ],
-  time:[
-    {es:'el horario', ru:'расписание', ex:'El horario está en la web del colegio.', exRu:'Расписание есть на сайте школы.'},
-    {es:'la jornada continua', ru:'сплошной учебный день', ex:'La jornada continua termina a las tres y media.', exRu:'Сплошной день заканчивается в три тридцать.'},
-    {es:'el horario partido', ru:'дробное расписание', ex:'El horario partido vuelve por la tarde.', exRu:'Дробное расписание возвращается после обеда.'},
-    {es:'la entrada', ru:'приход / начало занятий', ex:'La entrada es a las nueve.', exRu:'Приход в девять.'},
-    {es:'la salida', ru:'уход / окончание занятий', ex:'La salida es a las cinco.', exRu:'Уход в пять.'},
-    {es:'el recreo', ru:'перемена', ex:'El recreo es de once a once y media.', exRu:'Перемена с одиннадцати до половины двенадцатого.'},
-    {es:'la hora de comida', ru:'время обеда', ex:'La hora de comida es a las dos.', exRu:'Время обеда в два.'}
+  menu:[
+    {es:'sin gluten', ru:'без глютена', ex:'Necesita menú sin gluten.', exRu:'Нужно меню без глютена.'},
+    {es:'sin lactosa', ru:'без лактозы', ex:'Mi hijo necesita menú sin lactosa.', exRu:'Моему сыну нужно меню без лактозы.'},
+    {es:'vegetariano', ru:'вегетарианский', ex:'Hay menú vegetariano.', exRu:'Есть вегетарианское меню.'},
+    {es:'el plato del día', ru:'блюдо дня', ex:'El plato del día es paella.', exRu:'Блюдо дня — паэлья.'},
+    {es:'la bebida', ru:'напиток', ex:'La bebida es agua.', exRu:'Напиток — вода.'},
+    {es:'el desayuno', ru:'завтрак', ex:'El desayuno es a las ocho.', exRu:'Завтрак в восемь.'},
+    {es:'la merienda', ru:'полдник', ex:'La merienda es a las cinco.', exRu:'Полдник в пять.'}
   ],
-  subjects:[
-    {es:'lengua castellana', ru:'испанский язык / литература', ex:'Lengua castellana es importante.', exRu:'Испанский язык важен.'},
-    {es:'matemáticas', ru:'математика', ex:'Matemáticas suele ser difícil.', exRu:'Математика обычно сложная.'},
-    {es:'ciencias naturales', ru:'естественные науки', ex:'Ciencias naturales tiene experimentos.', exRu:'В естественных науках есть эксперименты.'},
-    {es:'ciencias sociales', ru:'общественные науки', ex:'Ciencias sociales incluye geografía e historia.', exRu:'Общественные науки включают географию и историю.'},
-    {es:'inglés', ru:'английский язык', ex:'Inglés es asignatura obligatoria.', exRu:'Английский — обязательный предмет.'},
-    {es:'educación física', ru:'физкультура', ex:'Educación física es los lunes y miércoles.', exRu:'Физкультура по понедельникам и средам.'},
-    {es:'plástica / música', ru:'рисование / музыка', ex:'Plástica y música son creativas.', exRu:'Рисование и музыка творческие.'}
+  bus:[
+    {es:'el autobús escolar', ru:'школьный автобус', ex:'Mi hija va en autobús escolar.', exRu:'Моя дочь ездит на школьном автобусе.'},
+    {es:'la ruta', ru:'маршрут', ex:'La ruta pasa por nuestra calle.', exRu:'Маршрут проходит по нашей улице.'},
+    {es:'la parada', ru:'остановка', ex:'La parada está cerca de casa.', exRu:'Остановка рядом с домом.'},
+    {es:'el monitor / la monitora', ru:'сопровождающий', ex:'La monitora acompaña a los niños.', exRu:'Сопровождающая сопровождает детей.'},
+    {es:'la hora de salida', ru:'время отправления', ex:'La hora de salida es a las ocho y media.', exRu:'Время отправления в восемь тридцать.'},
+    {es:'la hora de llegada', ru:'время прибытия', ex:'La hora de llegada es a las nueve.', exRu:'Время прибытия в девять.'},
+    {es:'el trayecto', ru:'поездка / маршрут', ex:'El trayecto dura treinta minutos.', exRu:'Поездка длится тридцать минут.'}
   ],
-  grades:[
-    {es:'la nota', ru:'оценка', ex:'La nota es un siete.', exRu:'Оценка — семь.'},
-    {es:'el boletín de notas', ru:'школьный отчёт / табель', ex:'El boletín llega en diciembre.', exRu:'Табель приходит в декабре.'},
-    {es:'la evaluación', ru:'оценка, оценивание', ex:'La primera evaluación termina en enero.', exRu:'Первая оценка заканчивается в январе.'},
-    {es:'el informe', ru:'отчёт', ex:'El informe describe el progreso.', exRu:'Отчёт описывает прогресс.'},
-    {es:'la recuperación', ru:'пересдача', ex:'Hay recuperación en junio.', exRu:'Пересдача в июне.'},
-    {es:'la tutoría', ru:'встреча с классным руководителем', ex:'Tengo tutoría el jueves.', exRu:'У меня встреча с tutor в четверг.'},
-    {es:'el orientador / la orientadora', ru:'школьный психолог / консультант', ex:'El orientador ayuda con la adaptación.', exRu:'Консультант помогает с адаптацией.'}
+  docs:[
+    {es:'la solicitud', ru:'заявка', ex:'Hay que rellenar la solicitud.', exRu:'Нужно заполнить заявку.'},
+    {es:'inscribirse', ru:'записаться', ex:'Quiero inscribir a mi hijo.', exRu:'Я хочу записать сына.'},
+    {es:'el formulario', ru:'форма', ex:'Rellene el formulario, por favor.', exRu:'Заполните форму, пожалуйста.'},
+    {es:'la cuota', ru:'плата / взнос', ex:'La cuota del comedor es de 120 euros.', exRu:'Плата за столовую — 120 евро.'},
+    {es:'la beca', ru:'стипендия / льгота', ex:'Podemos pedir una beca.', exRu:'Мы можем подать на льготу.'},
+    {es:'la plaza', ru:'место', ex:'¿Hay plaza en el comedor?', exRu:'Есть ли место в столовой?'},
+    {es:'el plazo', ru:'срок', ex:'El plazo termina el viernes.', exRu:'Срок заканчивается в пятницу.'}
   ],
-  freq:[
-    {es:'siempre', ru:'всегда', ex:'Siempre hago los deberes por la tarde.', exRu:'Я всегда делаю уроки после обеда.'},
-    {es:'normalmente', ru:'обычно', ex:'Normalmente salimos a las tres.', exRu:'Мы обычно уходим в три.'},
-    {es:'a veces', ru:'иногда', ex:'A veces tiene actividades por la tarde.', exRu:'Иногда у него занятия после обеда.'},
-    {es:'casi nunca', ru:'почти никогда', ex:'Casi nunca llegamos tarde.', exRu:'Мы почти никогда не опаздываем.'},
-    {es:'nunca', ru:'никогда', ex:'Nunca tenemos clase los domingos.', exRu:'У нас никогда нет занятий по воскресеньям.'},
-    {es:'todos los días', ru:'каждый день', ex:'Todos los días entra a las nueve.', exRu:'Каждый день приходит в девять.'},
-    {es:'una vez a la semana', ru:'раз в неделю', ex:'Una vez a la semana tiene música.', exRu:'Раз в неделю у него музыка.'}
+  verbs:[
+    {es:'solicitar', ru:'подать заявку', ex:'Quisiera solicitar una plaza.', exRu:'Я хотел бы подать заявку на место.'},
+    {es:'apuntarse', ru:'записаться (на кружок / автобус)', ex:'Quiero apuntar a mi hijo al autobús.', exRu:'Я хочу записать сына на автобус.'},
+    {es:'recoger', ru:'забирать', ex:'¿A qué hora puedo recoger a mi hijo?', exRu:'Во сколько я могу забрать сына?'},
+    {es:'llevar', ru:'отвозить', ex:'Yo llevo a mi hijo al colegio.', exRu:'Я вожу сына в школу.'},
+    {es:'acompañar', ru:'сопровождать', ex:'La monitora acompaña a los niños.', exRu:'Сопровождающая сопровождает детей.'},
+    {es:'avisar', ru:'предупреждать', ex:'Hay que avisar si el niño no viene.', exRu:'Нужно предупредить, если ребёнок не приходит.'},
+    {es:'confirmar', ru:'подтверждать', ex:'¿Puede confirmar la plaza?', exRu:'Можете подтвердить место?'}
   ]
 };
 
@@ -1080,18 +1012,16 @@ function showVocab(key, btn){
     g.appendChild(c);
   });
 }
-showVocab('levels', document.querySelector('#vocab-tabs .tab'));
+showVocab('comedor', document.querySelector('#vocab-tabs .tab'));
 
 // ===== FILL EXERCISE =====
 var fillQ = [
-  {text:'Yo ___ hago los deberes por la tarde. (100%)', ans:'siempre'},
-  {text:'Nosotros ___ salimos a las tres y media. (75%)', ans:'normalmente'},
-  {text:'Usted ___ tiene reunión con el tutor. (50%)', ans:'a veces'},
-  {text:'Yo ___ llego tarde a la tutoría. (10%)', ans:'casi nunca'},
-  {text:'Nosotros ___ tenemos clase los domingos. (0%)', ans:'nunca'},
-  {text:'Mi hijo ___ entra a las nueve. (100%)', ans:'siempre'},
-  {text:'Mi hija ___ sale a las cinco. (50%)', ans:'a veces'},
-  {text:'Nosotros ___ recogemos a los niños a las tres. (75%)', ans:'normalmente'}
+  {text:'Mi hijo come en el comedor. Yo ___ como en el trabajo. (тоже да)', ans:'también'},
+  {text:'Mi hija no va en autobús. Yo ___ voy en coche. (тоже нет)', ans:'tampoco'},
+  {text:'Nosotros ___ queremos inscribir al niño. (тоже да)', ans:'también'},
+  {text:'Mi hijo no come carne. Yo ___ como carne. (тоже нет)', ans:'tampoco'},
+  {text:'Usted ___ puede solicitar una beca. (тоже да)', ans:'también'},
+  {text:'Nosotros ___ podemos recoger al niño a las tres. (тоже нет)', ans:'tampoco'}
 ];
 
 function renderFill(){
@@ -1125,14 +1055,12 @@ renderFill();
 
 // ===== BUILD EXERCISE =====
 var buildPhrases = [
-  {target:'Yo siempre hago los deberes.', translation:'Я всегда делаю уроки.'},
-  {target:'Nosotros normalmente salimos a las tres.', translation:'Мы обычно уходим в три.'},
-  {target:'Usted a veces tiene tutoría.', translation:'Вы иногда встречаетесь с классным руководителем.'},
-  {target:'Yo casi nunca llego tarde.', translation:'Я почти никогда не опаздываю.'},
-  {target:'Nosotros nunca estudiamos los domingos.', translation:'Мы никогда не учимся по воскресеньям.'},
-  {target:'Mi hija normalmente sale a las cinco.', translation:'Моя дочь обычно уходит в пять.'},
-  {target:'Mi hijo siempre entra a las nueve.', translation:'Мой сын всегда приходит в девять.'},
-  {target:'Nosotros casi nunca llegamos tarde.', translation:'Мы почти никогда не опаздываем.'}
+  {target:'Yo también quiero inscribir a mi hijo.', translation:'Я тоже хочу записать сына.'},
+  {target:'Nosotros tampoco podemos pagar el comedor privado.', translation:'Мы тоже не можем оплатить частную столовую.'},
+  {target:'Mi hijo come en el comedor escolar.', translation:'Мой сын ест в школьной столовой.'},
+  {target:'Mi hija no va en autobús.', translation:'Моя дочь не ездит на автобусе.'},
+  {target:'Yo también necesito el menú sin gluten.', translation:'Мне тоже нужно меню без глютена.'},
+  {target:'Nosotros también queremos apuntar al niño al autobús.', translation:'Мы тоже хотим записать ребёнка на автобус.'}
 ];
 
 var buildIdx = 0;
@@ -1226,16 +1154,15 @@ renderBuild();
 
 // ===== MATCH EXERCISE =====
 var mainMatchPairs = [
-  {id:1, es:'primaria', ru:'начальная школа'},
-  {id:2, es:'ESO', ru:'средняя школа для подростков'},
-  {id:3, es:'jornada continua', ru:'сплошной учебный день'},
-  {id:4, es:'horario partido', ru:'дробное расписание'},
-  {id:5, es:'recreo', ru:'перемена'},
-  {id:6, es:'boletín de notas', ru:'школьный отчёт'},
-  {id:7, es:'tutoría', ru:'встреча с классным руководителем'},
-  {id:8, es:'siempre', ru:'всегда'},
-  {id:9, es:'a veces', ru:'иногда'},
-  {id:10, es:'nunca', ru:'никогда'}
+  {id:1, es:'comedor escolar', ru:'школьная столовая'},
+  {id:2, es:'menú sin gluten', ru:'меню без глютена'},
+  {id:3, es:'autobús escolar', ru:'школьный автобус'},
+  {id:4, es:'ruta', ru:'маршрут'},
+  {id:5, es:'parada', ru:'остановка'},
+  {id:6, es:'monitora', ru:'сопровождающая'},
+  {id:7, es:'solicitud', ru:'заявка'},
+  {id:8, es:'también', ru:'тоже да'},
+  {id:9, es:'tampoco', ru:'тоже нет'}
 ];
 
 function renderMatch(containerId, pairs){
@@ -1304,51 +1231,61 @@ renderMainMatch();
 
 // ===== LISTENING QUIZ =====
 var listenQ = [
-  {q:'1. ¿Qué curso tiene el niño?', o:['primaria','ESO','educación infantil'], c:0},
-  {q:'2. ¿Qué curso empieza la hija?', o:['ESO','primaria','bachillerato'], c:0},
-  {q:'3. ¿Qué tipo de jornada tiene primaria?', o:['jornada continua','horario partido','no tiene jornada'], c:0},
-  {q:'4. ¿Cuándo sale la hija en martes y jueves?', o:['a las cinco','a las tres','a las seis'], c:0},
-  {q:'5. ¿De qué hora a qué hora es el comedor?', o:['de tres a cuatro','de dos a tres','de cuatro a cinco'], c:0},
-  {q:'6. ¿Cuándo es la primera tutoría?', o:['el próximo lunes a las cinco','el martes a las tres','el viernes a las cuatro'], c:0}
+  {q:'1. ¿Qué quiere el padre?', o:['inscribir a su hijo en el comedor y en el autobús','solo en el comedor','solo en el autobús'], c:0},
+  {q:'2. ¿Qué alergia tiene el niño?', o:['a los frutos secos','al gluten','a la lactosa'], c:0},
+  {q:'3. ¿Cuánto cuesta el comedor?', o:['120 euros al mes','100 euros al mes','150 euros al mes'], c:0},
+  {q:'4. ¿Dónde está la parada del autobús?', o:['en la Plaza del Carmen','en la Calle Mayor','en la Avenida de la Constitución'], c:0},
+  {q:'5. ¿A qué hora sale el autobús?', o:['a las ocho y media','a las ocho','a las nueve'], c:0},
+  {q:'6. ¿Quién acompaña a los niños?', o:['la monitora, la señora García','el conductor','el tutor'], c:0}
 ];
 
 renderQuiz('listening-quiz', listenQ, 'lq');
 
-// ===== SCHEDULE BUILDER =====
-var lastSchedulePlain = '';
+// ===== APPLICATION BUILDER =====
+var lastApplicationPlain = '';
 
-function buildSchedule(){
-  var junior = document.getElementById('b-junior').value || 'Leo';
-  var ageJunior = document.getElementById('b-age-junior').value;
-  var outJunior = document.getElementById('b-out-junior').value;
-  var senior = document.getElementById('b-senior').value || 'Vega';
-  var ageSenior = document.getElementById('b-age-senior').value;
-  var outSenior = document.getElementById('b-out-senior').value;
-  var freq = document.getElementById('b-freq').value;
-  var favJunior = document.getElementById('b-fav-junior').value;
-  var favSenior = document.getElementById('b-fav-senior').value;
+function buildApplication(){
+  var name = document.getElementById('b-name').value || 'Leo';
+  var age = document.getElementById('b-age').value;
+  var comedor = document.getElementById('b-comedor').value;
+  var menu = document.getElementById('b-menu').value;
+  var bus = document.getElementById('b-bus').value;
+  var parada = document.getElementById('b-parada').value;
+  var hora = document.getElementById('b-hora').value;
+  var precioComedor = document.getElementById('b-precio-comedor').value;
+  var precioBus = document.getElementById('b-precio-bus').value;
 
-  var text =
-    'Mi hijo ' + junior + ' tiene ' + ageJunior + ' años y está en primaria. ' +
-    'Normalmente entra a las nueve y sale ' + outJunior + '. ' +
-    'Siempre hace los deberes por la tarde. Le gustan las ' + favJunior + '.\n\n' +
-    'Mi hija ' + senior + ' tiene ' + ageSenior + ' años y empieza la ESO. ' +
-    'A veces sale ' + outSenior + ' porque tiene horario partido los martes y jueves. ' +
-    'Le gustan las ' + favSenior + '.\n\n' +
-    'Nosotros ' + freq + ' recogemos a los niños a las tres. ' +
-    'Nunca estudiamos los domingos.';
+  var text = 'Buenos días. Quisiera inscribir a mi hijo ' + name + ' en el comedor escolar. ' +
+    'Tiene ' + age + ' años. ';
 
-  lastSchedulePlain = text;
+  if(menu !== 'ninguno'){
+    text += 'Necesita menú ' + menu + '. ';
+  }
+
+  if(comedor === 'sí'){
+    text += 'La cuota del comedor es de ' + precioComedor + ' euros al mes. ';
+  }
+
+  if(bus === 'sí'){
+    text += 'También quiero apuntarlo al autobús escolar. ' +
+      'La parada está en ' + parada + '. ' +
+      'La hora de salida es ' + hora + '. ' +
+      'La cuota del autobús es de ' + precioBus + ' euros al mes. ';
+  }
+
+  text += 'Muchas gracias.';
+
+  lastApplicationPlain = text;
 
   var result = document.getElementById('dialog-result');
   result.innerHTML =
     '<div class="dialog-result">' + text + '</div>' +
     '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
-      '<button class="btn btn-secondary" id="speak-schedule-btn">🔊 Прослушать описание</button>' +
+      '<button class="btn btn-secondary" id="speak-application-btn">🔊 Прослушать заявку</button>' +
     '</div>';
 
-  document.getElementById('speak-schedule-btn').onclick = function(){
-    speak(lastSchedulePlain);
+  document.getElementById('speak-application-btn').onclick = function(){
+    speak(lastApplicationPlain);
   };
 
   result.scrollIntoView({behavior:'smooth', block:'nearest'});
@@ -1356,13 +1293,12 @@ function buildSchedule(){
 
 // ===== TRAFFIC LIGHT =====
 var TL = [
-  'Различать primaria и ESO',
-  'Понимать jornada continua и horario partido',
-  'Называть 5 школьных предметов',
-  'Использовать siempre / normalmente / a veces / nunca',
-  'Сказать время входа и выхода',
-  'Использовать глаголы estudiar, tener, hacer, salir, empezar',
-  'Составить расписание для семьи'
+  'Понимать структуру меню (primer plato, segundo plato, postre)',
+  'Спрашивать про аллергии и спецдиеты',
+  'Понимать маршрут автобуса (ruta, parada, hora)',
+  'Использовать también / tampoco',
+  'Записать ребёнка в столовую голосом',
+  'Заполнить заявку на comedor y autobús'
 ];
 
 function renderTL(){
@@ -1391,7 +1327,7 @@ function resetTL(){
 }
 
 // ===== TRAINER =====
-var TRAIN_CARDS = [].concat(VOCAB.levels, VOCAB.time, VOCAB.subjects, VOCAB.grades, VOCAB.freq);
+var TRAIN_CARDS = [].concat(VOCAB.comedor, VOCAB.menu, VOCAB.bus, VOCAB.docs, VOCAB.verbs);
 var trainMode = 'cards';
 var trainerIdx = 0;
 
@@ -1478,11 +1414,11 @@ function renderTrain(){
 
 function renderTrainBuild(container){
   var phrases = [
-    {target:'Yo siempre hago los deberes', hint:'Я всегда делаю уроки'},
-    {target:'Mi hijo normalmente entra a las nueve', hint:'Мой сын обычно приходит в девять'},
-    {target:'Mi hija a veces sale a las cinco', hint:'Моя дочь иногда уходит в пять'},
-    {target:'Nosotros nunca estudiamos los domingos', hint:'Мы никогда не учимся по воскресеньям'},
-    {target:'Yo casi nunca llego tarde', hint:'Я почти никогда не опаздываю'}
+    {target:'Yo también quiero inscribir a mi hijo', hint:'Я тоже хочу записать сына'},
+    {target:'Mi hijo come en el comedor escolar', hint:'Мой сын ест в школьной столовой'},
+    {target:'Necesita menú sin gluten', hint:'Нужно меню без глютена'},
+    {target:'También quiero apuntarlo al autobús', hint:'Тоже хочу записать его на автобус'},
+    {target:'La parada está en la Plaza del Carmen', hint:'Остановка на площади Кармен'}
   ];
   var idx = 0;
   var sel = [];
