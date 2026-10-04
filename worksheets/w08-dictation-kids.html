@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Словарный диктант  · Mi Familia ·  Неделя 8  ·  Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --peach:#FFB4A2; --wine:#9D4EDD;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+  
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+  
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E8F5F2 0%,#FFE5EC 50%,var(--cream) 100%)}
+  .lesson-tag{display:inline-block;background:var(--wine);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px}
+  .hero h1 span{color:var(--wine)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft)}
+  
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  
+  .info-card{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:16px;padding:20px;margin-bottom:20px;border-left:5px solid var(--sun)}
+  .info-card h3{color:var(--terra);margin-bottom:10px}
+  .info-card ul{margin-left:20px}
+  .info-card li{margin:6px 0}
+  
+  .part-block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .part-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .part-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .part-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem}
+  .part-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+  
+  .word-input{display:flex;align-items:center;gap:12px;padding:12px;margin:8px 0;background:#f9f9f7;border-radius:12px;flex-wrap:wrap}
+  .word-num{background:var(--wine);color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0}
+  .word-label{font-weight:800;min-width:200px}
+  .word-input input{flex:1;min-width:150px;padding:8px 12px;border:2px solid #d8e0dc;border-radius:8px;font-family:'Nunito';font-size:1rem;font-weight:700}
+  .word-input input:focus{outline:none;border-color:var(--wine)}
+  .word-input input.correct{background:#C8E6C9;border-color:var(--green);color:var(--green)}
+  .word-input input.wrong{background:#FFCDD2;border-color:var(--red);color:var(--red)}
+  .speak-btn-small{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-family:'Nunito';font-weight:800;cursor:pointer;font-size:.85rem}
+  .speak-btn-small:hover{background:#1f7a72}
+  
+  .sentence-input{display:flex;align-items:center;gap:12px;padding:12px;margin:8px 0;background:#f9f9f7;border-radius:12px;flex-wrap:wrap}
+  .sentence-input input{width:100px;padding:8px;border:2px solid #d8e0dc;border-radius:8px;font-family:'Nunito';font-size:1rem;font-weight:700;text-align:center}
+  .sentence-input input:focus{outline:none;border-color:var(--wine)}
+  .sentence-input input.correct{background:#C8E6C9;border-color:var(--green)}
+  .sentence-input input.wrong{background:#FFCDD2;border-color:var(--red)}
+  
+  .textarea-block{margin:10px 0}
+  .textarea-block textarea{width:100%;min-height:80px;padding:12px;border:2px solid #d8e0dc;border-radius:12px;font-family:'Nunito';font-size:1rem;resize:vertical}
+  
+  .check-btn{background:linear-gradient(135deg,var(--teal),#1a6e63);color:#fff;border:none;border-radius:16px;padding:16px 32px;font-family:'Nunito';font-weight:800;font-size:1.2rem;cursor:pointer;display:block;margin:30px auto;box-shadow:0 6px 0 #0d4d44}
+  .check-btn:hover{transform:translateY(-2px)}
+  .check-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #0d4d44}
+  
+  .result-card{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:22px;padding:30px;margin:20px 0;text-align:center;display:none;border:3px solid var(--green)}
+  .result-card.show{display:block}
+  .result-card h2{color:var(--green);font-size:2rem;margin-bottom:10px}
+  .result-score{font-family:'Baloo 2',cursive;font-size:3.5rem;color:var(--green);margin:10px 0}
+  .result-msg{font-size:1.2rem;font-weight:700;margin:10px 0}
+  .result-details{background:#fff;border-radius:16px;padding:20px;margin-top:20px;text-align:left}
+  .result-details h4{margin-bottom:10px;color:var(--terra)}
+  .result-details ul{margin-left:20px}
+  .result-details li{margin:6px 0}
+  
+  .traffic-light{display:flex;gap:20px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+  .tl-option{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;padding:16px;border-radius:16px;border:3px solid transparent;transition:.2s;background:#f9f9f7}
+  .tl-option:hover{transform:translateY(-4px)}
+  .tl-option.selected{border-color:currentColor;background:#fff}
+  .tl-circle{width:50px;height:50px;border-radius:50%;border:3px solid #999}
+  .tl-option.green .tl-circle{background:#4CAF50;border-color:#2E7D32}
+  .tl-option.yellow .tl-circle{background:#FFC107;border-color:#F57F17}
+  .tl-option.red .tl-circle{background:#F44336;border-color:#C62828}
+  .tl-label{font-weight:800;font-size:.9rem;text-align:center}
+  
+  .print-btn{background:var(--sun);color:var(--ink);border:none;border-radius:12px;padding:12px 24px;font-family:'Nunito';font-weight:800;cursor:pointer;margin:10px}
+  .print-btn:hover{background:#e6b52e}
+  
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  
+  @media print{
+    .top-nav,.check-btn,.speak-btn-small,.print-btn{display:none}
+    .part-block{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid}
+    .result-card{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 3 · Неделя 8 · Диктант</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">📝 ДИКТАНТ · НЕДЕЛЯ 8</span>
+  <h1>Mi <span>Familia</span></h1>
+  <p class="sub">Проверь знание слов из уроков 22–24: семья, характер, профессии, внешность, сравнение, родство</p>
+</header>
+
+<main class="container">
+
+  <div class="info-card">
+    <h3>📋 Инструкция</h3>
+    <ul>
+      <li>⏱ <strong>Время:</strong> 25–30 минут</li>
+      <li>👧 <strong>Для 8 лет:</strong> Части 1–3 (33 слова)</li>
+      <li>👦 <strong>Для 12 лет:</strong> Части 1–4 (42 слова)</li>
+      <li>🎧 В Части 1 нажми 🔊 чтобы услышать слово, потом напиши его</li>
+      <li>✍️ В Части 2 переведи с русского на испанский</li>
+      <li>🧩 В Части 3 заполни пропуски</li>
+      <li>✅ Нажми «Проверить ответы» когда закончишь</li>
+    </ul>
+  </div>
+
+  <!-- ЧАСТЬ 1: АУДИОДИКТАНТ -->
+  <section class="part-block" style="--c:#9D4EDD">
+    <div class="part-head">
+      <h2 class="part-title">🎧 Часть 1: Аудиодиктант</h2>
+      <span class="part-badge">15 слов</span>
+    </div>
+    <p class="part-sub">Нажми 🔊 чтобы услышать слово, потом напиши его по-испански.</p>
+    <div id="part1"></div>
+  </section>
+
+  <!-- ЧАСТЬ 2: ПЕРЕВОД -->
+  <section class="part-block" style="--c:#2A9D8F">
+    <div class="part-head">
+      <h2 class="part-title">✍️ Часть 2: Перевод</h2>
+      <span class="part-badge">10 слов</span>
+    </div>
+    <p class="part-sub">Переведи слова с русского на испанский.</p>
+    <div id="part2"></div>
+  </section>
+
+  <!-- ЧАСТЬ 3: ПРОПУСКИ -->
+  <section class="part-block" style="--c:#E91E63">
+    <div class="part-head">
+      <h2 class="part-title">🧩 Часть 3: Заполни пропуски</h2>
+      <span class="part-badge">8 предложений</span>
+    </div>
+    <p class="part-sub">Впиши пропущенное слово в предложение.</p>
+    <div id="part3"></div>
+  </section>
+
+  <!-- ЧАСТЬ 4: БОНУС 12 ЛЕТ -->
+  <section class="part-block" style="--c:#FFB4A2">
+    <div class="part-head">
+      <h2 class="part-title">🎁 Часть 4: Бонус для 12 лет</h2>
+      <span class="part-badge">9 слов</span>
+    </div>
+    <p class="part-sub">Дополнительные слова для тех, кому 12 лет.</p>
+    <div id="part4"></div>
+  </section>
+
+  <!-- ЧАСТЬ 5: СУПЕР-БОНУС -->
+  <section class="part-block" style="--c:#FFC93C">
+    <div class="part-head">
+      <h2 class="part-title">🏆 Часть 5: Супер-бонус</h2>
+      <span class="part-badge">Для самых быстрых</span>
+    </div>
+    <p class="part-sub">Составь 3 предложения о своей семье, используя слова из диктанта.</p>
+    <div class="textarea-block">
+      <textarea id="bonus-text" placeholder="Например: Mi madre se llama Ana. Es profesora. Es cariñosa y trabajadora."></textarea>
+    </div>
+  </section>
+
+  <!-- КНОПКА ПРОВЕРКИ -->
+  <button class="check-btn" onclick="checkAnswers()">✅ Проверить ответы</button>
+
+  <!-- РЕЗУЛЬТАТ -->
+  <div class="result-card" id="result-card">
+    <h2>📊 Твой результат</h2>
+    <div class="result-score" id="result-score">0 / 42</div>
+    <div class="result-msg" id="result-msg"></div>
+    
+    <h3 style="margin:20px 0 10px;color:var(--green)">🚦 Оцени себя сам:</h3>
+    <div class="traffic-light">
+      <div class="tl-option green" onclick="selectTL(this)">
+        <div class="tl-circle"></div>
+        <div class="tl-label">🟢 Отлично!<br>30-42 правильных</div>
+      </div>
+      <div class="tl-option yellow" onclick="selectTL(this)">
+        <div class="tl-circle"></div>
+        <div class="tl-label">🟡 Хорошо!<br>20-29 правильных</div>
+      </div>
+      <div class="tl-option red" onclick="selectTL(this)">
+        <div class="tl-circle"></div>
+        <div class="tl-label">🔴 Нужно повторить<br>Менее 20</div>
+      </div>
+    </div>
+    
+    <div class="result-details" id="result-details"></div>
+  </div>
+
+  <div style="text-align:center;margin:20px 0">
+    <button class="print-btn" onclick="window.print()">🖨 Распечатать диктант</button>
+    <button class="print-btn" onclick="location.reload()">🔄 Начать заново</button>
+  </div>
+
+</main>
+
+<div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Неделя 8 · Диктант</div>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.8;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function normalize(s){return s.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.,!?¿¡]/g,'');}
+
+var PART1=[
+ {word:'el abuelo',id:'p1_1'},
+ {word:'la abuela',id:'p1_2'},
+ {word:'el tío',id:'p1_3'},
+ {word:'la tía',id:'p1_4'},
+ {word:'el primo',id:'p1_5'},
+ {word:'la prima',id:'p1_6'},
+ {word:'el perro',id:'p1_7'},
+ {word:'el gato',id:'p1_8'},
+ {word:'simpático',id:'p1_9'},
+ {word:'divertido',id:'p1_10'},
+ {word:'cariñoso',id:'p1_11'},
+ {word:'trabajador',id:'p1_12'},
+ {word:'inteligente',id:'p1_13'},
+ {word:'tímido',id:'p1_14'},
+ {word:'médico',id:'p1_15'}
+];
+
+var PART2=[
+ {ru:'профессор / учитель',ans:['profesor','profesora'],id:'p2_1'},
+ {ru:'повар',ans:['cocinero','cocinera'],id:'p2_2'},
+ {ru:'полицейский',ans:['policía'],id:'p2_3'},
+ {ru:'пожарный',ans:['bombero','bombera'],id:'p2_4'},
+ {ru:'программист',ans:['informático','informática'],id:'p2_5'},
+ {ru:'светлые волосы',ans:['el pelo rubio','pelo rubio'],id:'p2_6'},
+ {ru:'каштановые волосы',ans:['el pelo castaño','pelo castaño'],id:'p2_7'},
+ {ru:'чёрные волосы',ans:['el pelo negro','pelo negro'],id:'p2_8'},
+ {ru:'белые волосы',ans:['el pelo blanco','pelo blanco'],id:'p2_9'},
+ {ru:'голубые глаза',ans:['los ojos azules','ojos azules'],id:'p2_10'}
+];
+
+var PART3=[
+ {sentence:'Mi abuelo ___ simpático.',ans:['es'],id:'p3_1'},
+ {sentence:'Mis abuelos ___ simpáticos.',ans:['son'],id:'p3_2'},
+ {sentence:'Mi tía ___ 45 años.',ans:['tiene'],id:'p3_3'},
+ {sentence:'Mi madre tiene ___ pelo castaño.',ans:['el'],id:'p3_4'},
+ {sentence:'Mi padre es más alto ___ mi madre.',ans:['que'],id:'p3_5'},
+ {sentence:'El padre ___ Bart es Homer.',ans:['de'],id:'p3_6'},
+ {sentence:'___ hermana de Lisa es Maggie.',ans:['La'],id:'p3_7'},
+ {sentence:'Mi gato se ___ Luna.',ans:['llama'],id:'p3_8'}
+];
+
+var PART4=[
+ {ru:'зелёные глаза',ans:['los ojos verdes','ojos verdes'],id:'p4_1'},
+ {ru:'карие глаза',ans:['los ojos marrones','ojos marrones'],id:'p4_2'},
+ {ru:'лысый',ans:['calvo'],id:'p4_3'},
+ {ru:'молодой',ans:['joven'],id:'p4_4'},
+ {ru:'старый',ans:['viejo','vieja'],id:'p4_5'},
+ {ru:'высокий',ans:['alto','alta'],id:'p4_6'},
+ {ru:'низкий',ans:['bajo','baja'],id:'p4_7'},
+ {ru:'генеалогическое дерево',ans:['el árbol genealógico','árbol genealógico'],id:'p4_8'},
+ {ru:'знаменитый',ans:['famoso','famosa'],id:'p4_9'}
+];
+
+(function(){
+  var box1=document.getElementById('part1');
+  PART1.forEach(function(item,i){
+    var d=document.createElement('div');d.className='word-input';
+    d.innerHTML='<span class="word-num">'+(i+1)+'</span>'+
+      '<button class="speak-btn-small" onclick="speak(\''+item.word+'\')">🔊 Слушать</button>'+
+      '<input type="text" id="'+item.id+'" placeholder="Напиши слово...">';
+    box1.appendChild(d);
+  });
+  
+  var box2=document.getElementById('part2');
+  PART2.forEach(function(item,i){
+    var d=document.createElement('div');d.className='word-input';
+    d.innerHTML='<span class="word-num">'+(16+i)+'</span>'+
+      '<span class="word-label">'+item.ru+'</span>'+
+      '<input type="text" id="'+item.id+'" placeholder="Перевод...">';
+    box2.appendChild(d);
+  });
+  
+  var box3=document.getElementById('part3');
+  PART3.forEach(function(item,i){
+    var d=document.createElement('div');d.className='sentence-input';
+    var parts=item.sentence.split('___');
+    d.innerHTML='<span class="word-num">'+(26+i)+'</span>'+
+      '<span>'+parts[0]+'</span>'+
+      '<input type="text" id="'+item.id+'" style="width:80px">'+
+      '<span>'+(parts[1]||'')+'</span>';
+    box3.appendChild(d);
+  });
+  
+  var box4=document.getElementById('part4');
+  PART4.forEach(function(item,i){
+    var d=document.createElement('div');d.className='word-input';
+    d.innerHTML='<span class="word-num">'+(34+i)+'</span>'+
+      '<span class="word-label">'+item.ru+'</span>'+
+      '<input type="text" id="'+item.id+'" placeholder="Перевод...">';
+    box4.appendChild(d);
+  });
+})();
+
+function checkAnswers(){
+  var correct=0,total=0,errors=[];
+  
+  PART1.forEach(function(item){
+    total++;
+    var input=document.getElementById(item.id);
+    var val=normalize(input.value);
+    var ans=normalize(item.word);
+    if(val===ans){input.classList.add('correct');input.classList.remove('wrong');correct++;}
+    else{input.classList.add('wrong');input.classList.remove('correct');errors.push('Часть 1: '+item.word);}
+  });
+  
+  PART2.forEach(function(item){
+    total++;
+    var input=document.getElementById(item.id);
+    var val=normalize(input.value);
+    var isCorrect=item.ans.some(function(a){return normalize(a)===val;});
+    if(isCorrect){input.classList.add('correct');input.classList.remove('wrong');correct++;}
+    else{input.classList.add('wrong');input.classList.remove('correct');errors.push('Часть 2: '+item.ru);}
+  });
+  
+  PART3.forEach(function(item){
+    total++;
+    var input=document.getElementById(item.id);
+    var val=normalize(input.value);
+    var isCorrect=item.ans.some(function(a){return normalize(a)===val;});
+    if(isCorrect){input.classList.add('correct');input.classList.remove('wrong');correct++;}
+    else{input.classList.add('wrong');input.classList.remove('correct');errors.push('Часть 3: '+item.sentence.replace('___','['+item.ans[0]+']'));}
+  });
+  
+  PART4.forEach(function(item){
+    total++;
+    var input=document.getElementById(item.id);
+    var val=normalize(input.value);
+    var isCorrect=item.ans.some(function(a){return normalize(a)===val;});
+    if(isCorrect){input.classList.add('correct');input.classList.remove('wrong');correct++;}
+    else{input.classList.add('wrong');input.classList.remove('correct');errors.push('Часть 4: '+item.ru);}
+  });
+  
+  var resultCard=document.getElementById('result-card');
+  resultCard.classList.add('show');
+  document.getElementById('result-score').textContent=correct+' / '+total;
+  
+  var msg='',color='';
+  if(correct>=30){msg='🟢 Отлично! Ты знаешь все слова!';color='var(--green)';}
+  else if(correct>=20){msg='🟡 Хорошо! Но нужно повторить некоторые слова.';color='#F57F17';}
+  else{msg='🔴 Нужно повторить всю неделю 8.';color='var(--red)';}
+  
+  var msgEl=document.getElementById('result-msg');
+  msgEl.textContent=msg;
+  msgEl.style.color=color;
+  
+  var details=document.getElementById('result-details');
+  if(errors.length>0){
+    details.innerHTML='<h4>❌ Слова с ошибками (повтори их):</h4><ul>'+
+      errors.map(function(e){return '<li>'+e+'</li>';}).join('')+
+      '</ul><p style="margin-top:10px"><strong>💡 Совет:</strong> Вернись к урокам 22–23 и пройди тренажёры ещё раз.</p>';
+  }else{
+    details.innerHTML='<h4>🎉 Поздравляем! Ни одной ошибки!</h4><p>Ты отлично знаешь лексику недели 8. Попробуй составить рассказ о своей семье без подсказок!</p>';
+  }
+  
+  resultCard.scrollIntoView({behavior:'smooth'});
+  
+  speak(correct>=30?'¡Excelente! ¡Muy bien!':correct>=20?'¡Bien! Pero necesitas repasar un poco.':'Necesitas repasar la semana ocho.');
+}
+
+function selectTL(el){
+  document.querySelectorAll('.tl-option').forEach(function(x){x.classList.remove('selected');});
+  el.classList.add('selected');
+}
+</script>
+</body>
+</html>
