@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 25 · Mi Casa — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --blue:#2274A5; --rose:#E5989B;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3DC,#E8F5F2,#FFE5EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--terra);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-green{background:#2E7D32}.c-rose{background:var(--rose)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#E8F5F2;border:1.5px dashed var(--teal);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:10px}
+  .rule-box{background:#E8F5F2;border-left:4px solid var(--teal);border-radius:8px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .rule-box b{color:var(--teal)}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pick-item{display:flex;align-items:center;gap:8px;border:2px solid var(--terra);border-radius:10px;padding:9px 10px;font-size:13px;font-weight:700;background:#fff}
+  .pick-item .pe{font-size:20px}
+  .pick-item .check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;margin-left:auto;vertical-align:middle}
+
+  .one-col{display:grid;grid-template-columns:1fr;gap:7px}
+  .one-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .one-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .one-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom}
+
+  .hay-table{width:100%;border-collapse:collapse;font-size:13px}
+  .hay-table td{padding:7px 8px;border-bottom:1px solid #eee}
+  .hay-table .g{display:inline-block;min-width:74px;border-bottom:1.6px dashed var(--pink);height:19px;vertical-align:bottom;text-align:center;font-weight:800;color:var(--pink)}
+  .circle-o{display:inline-block;width:5.5mm;height:5.5mm;border:1.6px solid var(--pink);border-radius:50%;vertical-align:middle}
+  .circle-o.lbl{border:none;width:auto;height:auto;font-weight:800;color:var(--pink);font-size:12px;margin-right:3px}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--teal);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--teal)}
+  .build-line{border-bottom:1.6px dashed var(--teal);height:24px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .num-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .num-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .num-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:#B87A0A;flex-shrink:0}
+  .num-item .g{display:inline-block;min-width:96px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .plan-draw{border:2.5px dashed var(--oliva);border-radius:12px;padding:14px;min-height:210px;text-align:center;background:#FAFBF7}
+  .plan-draw .hint-in{color:#999;font-size:12px;font-style:italic}
+  .plan-slots{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .plan-slot{border:2px solid var(--terra);border-radius:999px;padding:6px 14px;font-weight:700;font-size:12.5px;color:var(--terra);background:#fff}
+  .plan-slot .blank{display:inline-block;min-width:74px;border-bottom:1.4px dashed var(--terra);height:17px;vertical-align:bottom}
+
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .formula-box{background:#FFF3F3;border:1.6px solid var(--terra);border-radius:10px;padding:12px 16px;font-size:12.5px;line-height:1.9;margin-bottom:10px}
+  .formula-box b{color:var(--terra)}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🏠 Mi Casa: Habitaciones</h1>
+    <div class="sub">Рабочий лист к Уроку 25 · Станция 3: Mi Mundo · комнаты, мебель, HAY / ESTÁ, план квартиры</div>
+    <div class="tag">Escuela MUDRO · ¡Proyecto: plano de mi casa!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, потом проверь с родителем или учителем. Все задания — по теме <strong>«мой дом»</strong>: комнаты, мебель и план квартиры.</div>
+
+  <!-- 1. КОМНАТЫ: СОЕДИНИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">1</span>
+      <span class="ex-title">Соедини комнату и перевод</span>
+      <span class="ex-skill">🗣 Лексика · 8 комнат</span>
+    </div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🏠 la casa</td><td>а) ванная</td></tr>
+      <tr><td><span class="ans-box"></span>🛏️ el dormitorio</td><td>б) балкон</td></tr>
+      <tr><td><span class="ans-box"></span>🍳 la cocina</td><td>в) кухня</td></tr>
+      <tr><td><span class="ans-box"></span>🍽️ el comedor</td><td>г) коридор</td></tr>
+      <tr><td><span class="ans-box"></span>🚿 el baño</td><td>д) столовая</td></tr>
+      <tr><td><span class="ans-box"></span>🛋️ el salón</td><td>е) дом</td></tr>
+      <tr><td><span class="ans-box"></span>🚪 el pasillo</td><td>ж) спальня</td></tr>
+      <tr><td><span class="ans-box"></span>🌅 el balcón</td><td>з) гостиная</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ВЫБЕРИ КОМНАТУ ПО КАРТИНКЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">2</span>
+      <span class="ex-title">Выбери комнату по картинке</span>
+      <span class="ex-skill">👂 Аудирование · лексика</span>
+    </div>
+    <div class="ex-instruction">Обведи кружком ту комнату, которая подходит. Затем скажи её вслух.</div>
+    <div class="word-bank">💡 Банк слов: <strong>el dormitorio · la cocina · el comedor · el baño · el salón · el balcón · el pasillo</strong></div>
+    <div class="pick-grid">
+      <div class="pick-item"><span class="pe">🍳</span>Здесь готовят еду.<span class="check"></span></div>
+      <div class="pick-item"><span class="pe">🛏️</span>Здесь спят.<span class="check"></span></div>
+      <div class="pick-item"><span class="pe">🍽️</span>Здесь едят за столом.<span class="check"></span></div>
+      <div class="pick-item"><span class="pe">🚿</span>Здесь моются.<span class="check"></span></div>
+      <div class="pick-item"><span class="pe">🛋️</span>Здесь сидят на диване.<span class="check"></span></div>
+      <div class="pick-item"><span class="pe">🌅</span>Здесь видно небо.<span class="check"></span></div>
+      <div class="pick-item"><span class="pe">🚪</span>Здесь проходишь между комнатами.<span class="check"></span></div>
+      <div class="pick-item"><span class="pe">🧊</span>Здесь стоит холодильник.<span class="check"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. МЕБЕЛЬ: ГДЕ ЖИВЁТ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">3</span>
+      <span class="ex-title">Расставь мебель по комнатам</span>
+      <span class="ex-skill">✍️ Лексика · 7 предметов</span>
+    </div>
+    <div class="ex-instruction">Впиши, в какой комнате живёт предмет.</div>
+    <div class="word-bank">💡 Банк слов: <strong>el dormitorio · la cocina · el comedor · el baño · el salón</strong></div>
+    <div class="one-col">
+      <div class="one-item"><span class="num">1</span>🛏️ la cama → <span class="blank"></span></div>
+      <div class="one-item"><span class="num">2</span>🧊 la nevera → <span class="blank"></span></div>
+      <div class="one-item"><span class="num">3</span>💺 la silla → <span class="blank"></span></div>
+      <div class="one-item"><span class="num">4</span>📺 la televisión → <span class="blank"></span></div>
+      <div class="one-item"><span class="num">5</span>🚿 la ducha → <span class="blank"></span></div>
+      <div class="one-item"><span class="num">6</span>🛋️ el sofá → <span class="blank"></span></div>
+      <div class="one-item"><span class="num">7</span>🍽️ la mesa → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 4. HAY ИЛИ ESTÁ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">4</span>
+      <span class="ex-title">HAY или ESTÁ? Впиши нужное слово</span>
+      <span class="ex-skill">🧩 Грамматика</span>
+    </div>
+    <div class="rule-box">💡 <strong>Правило:</strong> <b>hay</b> = «есть» · <b>está</b> = «находится». Спрашиваешь <em>¿dónde?</em> → значит <b>está</b>!</div>
+    <table class="hay-table">
+      <tr><td><span class="num">1</span> En la cocina <span class="g"></span> una nevera.</td><td><span class="circle-o lbl">hay</span><span class="circle-o"></span><span class="circle-o lbl">está</span><span class="circle-o"></span></td></tr>
+      <tr><td><span class="num">2</span> La mesa <span class="g"></span> en el comedor.</td><td><span class="circle-o lbl">hay</span><span class="circle-o"></span><span class="circle-o lbl">está</span><span class="circle-o"></span></td></tr>
+      <tr><td><span class="num">3</span> En el salón <span class="g"></span> un sofá y una televisión.</td><td><span class="circle-o lbl">hay</span><span class="circle-o"></span><span class="circle-o lbl">está</span><span class="circle-o"></span></td></tr>
+      <tr><td><span class="num">4</span> En mi casa <span class="g"></span> cuatro habitaciones.</td><td><span class="circle-o lbl">hay</span><span class="circle-o"></span><span class="circle-o lbl">está</span><span class="circle-o"></span></td></tr>
+      <tr><td><span class="num">5</span> La cama <span class="g"></span> en el dormitorio.</td><td><span class="circle-o lbl">hay</span><span class="circle-o"></span><span class="circle-o lbl">está</span><span class="circle-o"></span></td></tr>
+      <tr><td><span class="num">6</span> En el baño <span class="g"></span> una ducha.</td><td><span class="circle-o lbl">hay</span><span class="circle-o"></span><span class="circle-o lbl">está</span><span class="circle-o"></span></td></tr>
+      <tr><td><span class="num">7</span> ¿Dónde <span class="g"></span> la mesa?</td><td><span class="circle-o lbl">hay</span><span class="circle-o"></span><span class="circle-o lbl">está</span><span class="circle-o"></span></td></tr>
+      <tr><td><span class="num">8</span> En el comedor <span class="g"></span> seis sillas.</td><td><span class="circle-o lbl">hay</span><span class="circle-o"></span><span class="circle-o lbl">está</span><span class="circle-o"></span></td></tr>
+    </table>
+  </div>
+
+  <!-- 5. СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">hay</span><span class="build-word">cocina</span><span class="build-word">una</span><span class="build-word">En</span><span class="build-word">la</span><span class="build-word">nevera.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">en</span><span class="build-word">está</span><span class="build-word">mesa</span><span class="build-word">el</span><span class="build-word">La</span><span class="build-word">comedor.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">habitaciones</span><span class="build-word">mi</span><span class="build-word">hay</span><span class="build-word">cuatro</span><span class="build-word">casa</span><span class="build-word">En</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">dormitorio</span><span class="build-word">una</span><span class="build-word">En</span><span class="build-word">cama</span><span class="build-word">el</span><span class="build-word">hay</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-rose">6</span>
+      <span class="ex-title">Прочитай текст и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo María. Vivo con mi familia en una casa grande. En mi casa hay seis habitaciones: un dormitorio para mis padres, un dormitorio para mí, una cocina, un comedor, un baño y un salón. En la cocina hay una nevera y una mesa. En el comedor hay una mesa grande y seis sillas. En el baño hay una ducha. En el salón hay un sofá y una televisión. En mi dormitorio hay una cama y una mesa pequeña. ¡Me gusta mucho mi casa!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Cuántas habitaciones hay en la casa? <span class="ru">(Сколько комнат в доме?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Dónde está la nevera? <span class="ru">(Где холодильник?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cuántas sillas hay en el comedor? <span class="ru">(Сколько стульев в столовой?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Dónde está la ducha? <span class="ru">(Где душ?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Qué hay en el dormitorio de María? <span class="ru">(Что есть в спальне Марии?)</span> → <span class="blank"></span></span></div>
+    <div class="parent-box"><b>👨 Для родителя:</b> прочитайте текст вслух вместе с ребёнком, потом задайте 5 вопросов выше. Ответы ребёнок пишет сам.</div>
+  </div>
+
+  <!-- 7. СЧЁТ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">7</span>
+      <span class="ex-title">Сосчитай: сколько в комнате?</span>
+      <span class="ex-skill">🔢 Счёт · числа до 10</span>
+    </div>
+    <div class="ex-instruction">Посчитай предметы и впиши ответ по-испански: <em>Hay …</em></div>
+    <div class="num-grid">
+      <div class="num-item"><span class="num">1</span>🍽️🪑🪑🪑 en el comedor → <span class="g"></span></div>
+      <div class="num-item"><span class="num">2</span>🚿 en el baño → <span class="g"></span></div>
+      <div class="num-item"><span class="num">3</span>🛏️🛏️ en el dormitorio → <span class="g"></span></div>
+      <div class="num-item"><span class="num">4</span>🛋️📺 en el salón → <span class="g"></span></div>
+      <div class="num-item"><span class="num">5</span>🧊🍳🍽️ en la cocina → <span class="g"></span></div>
+      <div class="num-item"><span class="num">6</span>🛏️🍳🍽️🚿🛋️ en mi casa → <span class="g"></span></div>
+    </div>
+  </div>
+
+  <!-- 8. ПЛАН -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">8</span>
+      <span class="ex-title">Нарисуй и подпиши план своей квартиры</span>
+      <span class="ex-skill">🎨 Мини-проект</span>
+    </div>
+    <div class="ex-instruction">Нарисуй план в рамке и подпиши каждую комнату по-испански. Ниже — подписи, которые нужно вписать.</div>
+    <div class="plan-draw">
+      <div class="hint-in">Здесь нарисуй комнаты своей квартиры и подпиши их:<br>(или обведи на отдельном листе бумаги — так больше места)</div>
+      <div class="plan-slots">
+        <div class="plan-slot">🛏️ <span class="blank"></span></div>
+        <div class="plan-slot">🍳 <span class="blank"></span></div>
+        <div class="plan-slot">🍽️ <span class="blank"></span></div>
+        <div class="plan-slot">🚿 <span class="blank"></span></div>
+        <div class="plan-slot">🛋️ <span class="blank"></span></div>
+        <div class="plan-slot">🌅 <span class="blank"></span></div>
+      </div>
+    </div>
+    <div class="hint-box" style="margin-top:10px">✏️ <strong>Заполни предложение:</strong> <em>Mi casa hay ______ habitaciones.</em> &nbsp; В моём доме <span class="blank" style="display:inline-block;min-width:110px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom"></span> комнат.</div>
+    <div class="hint-box">📏 <strong>Норма:</strong> 8 лет — 4 комнаты + 3 предмета мебели · 12 лет — 6–8 комнат + 5–7 предметов + балкон/коридор.</div>
+  </div>
+
+  <!-- 9. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">9</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение · OUTPUT</span>
+    </div>
+    <div class="formula-box">
+      <strong>📋 Формула экскурсии (7 пунктов):</strong><br>
+      1. <b>¡Hola!</b> Me llamo ______.<br>
+      2. <b>Mi casa es</b> [grande / pequeña].<br>
+      3. <b>En mi casa hay</b> [número] <b>habitaciones</b>: ______.<br>
+      4. <b>En el dormitorio hay</b> ______.<br>
+      5. <b>En la cocina hay</b> ______.<br>
+      6. <b>En el salón hay</b> ______.<br>
+      7. <b>¡Me gusta mi casa!</b>
+    </div>
+    <div class="speak-item">1. Ответь на вопросы учителя (спросит он — ответь вслух!):<br>
+      <span class="tpl">¿Cómo es tu casa? — Mi casa es ______. · ¿Cuántas habitaciones hay? — Hay ______. · ¿Dónde está la cama? — En el ______. · ¿Qué hay en la cocina? — Hay ______.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Проведи экскурсию по своему плану по формуле выше.<br>
+      <span class="tpl">¡Hola! Me llamo ______. Mi casa es ______. En mi casa hay ______ habitaciones. En el dormitorio hay ______. En la cocina hay ______. En el salón hay ______. ¡Me gusta mi casa!</span><span class="speak-check"></span></div>
+    <div class="parent-box"><b>👨 Для родителя:</b> выслушайте экскурсию и отметьте, сколько пунктов формулы ребёнок сказал сам: <span class="sc-circle"></span> / 7 · Похвалите за каждый пункт! 🏠</div>
+  </div>
+
+  <!-- 10. СОЧИНЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">10</span>
+      <span class="ex-title">Сочинение «Mi casa»</span>
+      <span class="ex-skill">✍️ Письмо · 8–10 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) Me llamo… · 2) Mi casa es… · 3) En mi casa hay… habitaciones · 4) Hay un dormitorio… · 5) Hay una cocina… · 6) En el dormitorio hay… · 7) En la cocina hay… · 8) En el salón hay… · 9) ¿Dónde está…? · 10) ¡Me gusta mi casa!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 11. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">11</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Знать 8 комнат по-испански</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Знать 7 предметов мебели</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сказать: En la cocina hay una nevera</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Отличить hay и está</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Ответить: ¿Dónde está la cama?</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Подписать 4+ комнаты на плане</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Прочитать и понять дом Марии</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Провести экскурсию по формуле</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 25 · ¡Propietario de casas! 🏠🗺️</div>
+</div>
+
+</body>
+</html>
