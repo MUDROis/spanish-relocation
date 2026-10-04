@@ -243,3 +243,1298 @@
     <span class="hero-chip">📝 Продукт: 10 вопросов + скрипт встречи</span>
   </div>
 </section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">0</div>
+    <div class="step-title">
+      <h2>Разминка + вопрос из жизни</h2>
+      <span class="time">00:00 – 05:00 · Повторение урока 6.3 и письмо из школы</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Вы записали ребёнка в столовую и на автобус. Теперь все формальные вопросы решены — пора познакомиться лично с людьми, которые будут работать с вашим ребёнком. Но сначала — блиц по прошлому уроку.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 6.3</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">📧</div>
+      <div class="sit-title">Одна ситуация: письмо из школы</div>
+    </div>
+    <div class="sit-intro">
+      Вам пришло письмо из школы с приглашением на первую встречу с директором. Отвечайте вслух, нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Письмо из школы:</div>
+      <div class="es">Estimada familia García: Les invitamos a una reunión con la directora y la tutora de su hijo Leo el próximo jueves a las 17:00. El objetivo es hablar sobre la adaptación de Leo al colegio. Un cordial saludo, Colegio Santa María.</div>
+      <div class="ru">Уважаемая семья Гарсия: Приглашаем вас на встречу с директором и классным руководителем вашего сына Лео в следующий четверг в 17:00. Цель — обсудить адаптацию Лео к школе. С уважением, школа Санта-Мария.</div>
+      <button class="speak-btn" onclick="speak('Estimada familia García: Les invitamos a una reunión con la directora y la tutora de su hijo Leo el próximo jueves a las 17:00. El objetivo es hablar sobre la adaptación de Leo al colegio. Un cordial saludo, Colegio Santa María.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ-шаблон (подтверждаете встречу):</div>
+      <div class="es">Buenos días. Confirmo mi asistencia a la reunión del jueves. Muchas gracias.</div>
+      <div class="ru">Добрый день. Подтверждаю своё участие во встрече в четверг. Большое спасибо.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Confirmo mi asistencia a la reunión del jueves. Muchas gracias.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">1</span>Что означает <b>reunión con la directora</b>?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Встреча с директором школы.</div>
+        <div class="q-opt" data-o="1">Встреча с врачом.</div>
+        <div class="q-opt" data-o="2">Встреча с соседями.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">2</span>Что означает <b>hablar sobre la adaptación</b>?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Говорить о питании.</div>
+        <div class="q-opt" data-o="1">Говорить об адаптации ребёнка.</div>
+        <div class="q-opt" data-o="2">Говорить о расписании.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня разберём, как проходит первая встреча с директором школы. Вы научитесь представляться вежливо, спрашивать про адаптацию и использовать глаголы коммуникации: <b>preguntar, explicar, responder, pedir, decir</b>. А также освоите вежливые формы: <b>me gustaría, podría, quisiera</b>.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">1</div>
+    <div class="step-title">
+      <h2>Карточки со словами: 35 слов о встрече со школой</h2>
+      <span class="time">05:00 – 15:00 · 5 категорий</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('people',this)">👥 Люди (7)</button>
+      <button class="tab" onclick="showVocab('meeting',this)">🤝 Встреча (7)</button>
+      <button class="tab" onclick="showVocab('topics',this)">🎯 Темы (7)</button>
+      <button class="tab" onclick="showVocab('polite',this)">🎩 Вежливые (7)</button>
+      <button class="tab" onclick="showVocab('verbs',this)">🗣 Глаголы (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note purple" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> в испанской школе ключевые люди для родителя — <b>tutor</b> (классный руководитель) и <b>orientador</b> (школьный психолог). Именно с ними вы будете говорить чаще всего. <b>Director</b> решает стратегические вопросы, <b>AMPA</b> — родительская ассоциация.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      🎩 <b>Вежливость в Испании:</b> в первой встрече используйте <b>usted</b> (а не <i>tú</i>), <b>me gustaría</b> вместо <i>quiero</i>, <b>podría</b> вместо <i>puede</i>, <b>quisiera</b> вместо <i>quiero</i>. Это создаёт правильное впечатление и открывает двери.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c2">2</div>
+    <div class="step-title">
+      <h2>Грамматика: глаголы коммуникации + вежливые формы</h2>
+      <span class="time">15:00 – 23:00 · Фокус: yo / nosotros / usted</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Чтобы подготовиться к встрече с директором, нужны глаголы коммуникации и вежливые формы.</p>
+
+    <div class="grammar-box">
+      <h4>📐 Пять глаголов коммуникации</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Лицо</th>
+          <th>preguntar</th>
+          <th>explicar</th>
+          <th>responder</th>
+          <th>pedir</th>
+          <th>decir</th>
+        </tr>
+        <tr>
+          <td class="practice">yo</td>
+          <td class="practice">pregunto</td>
+          <td class="practice">explico</td>
+          <td class="practice">respondo</td>
+          <td class="practice">pido</td>
+          <td class="practice">digo</td>
+        </tr>
+        <tr>
+          <td class="reference">tú</td>
+          <td class="reference">preguntas</td>
+          <td class="reference">explicas</td>
+          <td class="reference">respondes</td>
+          <td class="reference">pides</td>
+          <td class="reference">dices</td>
+        </tr>
+        <tr>
+          <td class="practice">usted</td>
+          <td class="practice">pregunta</td>
+          <td class="practice">explica</td>
+          <td class="practice">responde</td>
+          <td class="practice">pide</td>
+          <td class="practice">dice</td>
+        </tr>
+        <tr>
+          <td class="practice">nosotros</td>
+          <td class="practice">preguntamos</td>
+          <td class="practice">explicamos</td>
+          <td class="practice">respondemos</td>
+          <td class="practice">pedimos</td>
+          <td class="practice">decimos</td>
+        </tr>
+        <tr>
+          <td class="reference">vosotros</td>
+          <td class="reference">preguntáis</td>
+          <td class="reference">explicáis</td>
+          <td class="reference">respondéis</td>
+          <td class="reference">pedís</td>
+          <td class="reference">decís</td>
+        </tr>
+        <tr>
+          <td class="reference">ellos / ustedes</td>
+          <td class="reference">preguntan</td>
+          <td class="reference">explican</td>
+          <td class="reference">responden</td>
+          <td class="reference">piden</td>
+          <td class="reference">dicen</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="note blue">
+      📌 <b>Фокус практики:</b> в упражнениях используем <b>yo, nosotros, usted</b>. Формы <b>tú / vosotros / ellos</b> оставлены в справочных таблицах для распознавания.
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Глаголы коммуникации в контексте встречи</h4>
+      <div class="example">
+        <b>quisiera preguntar sobre la adaptación.</b> — Я хотел бы спросить об адаптации.<br>
+        <b>¿podría explicarme el proceso?</b> — Не могли бы вы объяснить мне процесс?<br>
+        <b>la directora responde con calma.</b> — Директор отвечает спокойно.<br>
+        <b>Quisiera pedir una reunión.</b> — Я хотел бы попросить встречу.<br>
+        <b>le digo que mi hijo tiene dificultades.</b> — Я говорю ему, что у ребёнка трудности.<br>
+        <b>nos gustaría conocer al orientador.</b> — Нам бы хотелось познакомиться с психологом.<br>
+        <b>acordamos la próxima reunión.</b> — Мы договорились о следующей встрече.
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Вежливые формы: me gustaría / podría / quisiera</h4>
+      <div class="formula">[утверждение] + <b>me gustaría</b> + inf = мне бы хотелось</div>
+      <div class="example">
+        <b>Me gustaría hablar con usted.</b> — Мне бы хотелось поговорить с вами.<br>
+        <b>Nos gustaría conocer al tutor.</b> — Нам бы хотелось познакомиться с tutor.
+      </div>
+      <div class="formula" style="margin-top:12px">[вопрос] + <b>¿Podría</b> + inf? = не могли бы вы?</div>
+      <div class="example">
+        <b>¿podría explicarme el proceso?</b> — Не могли бы вы объяснить мне процесс?<br>
+        <b>¿Podría enviarme la información?</b> — Не могли бы вы прислать мне информацию?
+      </div>
+      <div class="formula" style="margin-top:12px">[утверждение] + <b>quisiera</b> + inf/sust = я хотел бы (вежливо)</div>
+      <div class="example">
+        <b>Quisiera información sobre la adaptación.</b> — Я хотел бы информацию об адаптации.<br>
+        <b>Quisiera hablar con el tutor.</b> — Я хотел бы поговорить с tutor.
+      </div>
+    </div>
+
+    <div class="note green">
+      📌 <b>Главное правило:</b> <b>me gustaría</b> и <b>quisiera</b> — вежливее, чем <b>quiero</b>. <b>¿Podría?</b> — вежливее, чем <b>¿Puede?</b>. Для первой встречи с директором используем вежливые формы.
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«Quiero hablar con tú.»</i> ❌ → <i>«Quisiera hablar con usted.»</i> ✅ (с директором — <b>usted</b>)<br>
+      • <i>«¿Puede explicarme a mí?»</i> ❌ → <i>«¿Podría explicarme?»</i> ✅ (<b>me</b> после глагола)<br>
+      • <i>«Le digo a usted que...»</i> ❌ → <i>«Le digo que...»</i> ✅ (<b>le</b> уже означает «вам»)<br>
+      • <i>«Quiero conocer al director.»</i> ❌ → <i>«Quisiera conocer al director.»</i> ✅ (<b>quisiera</b> вежливее)
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c3">3</div>
+    <div class="step-title">
+      <h2>Практика: применим слова и грамматику</h2>
+      <span class="time">23:00 – 30:00 · 3 упражнения</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь глагол коммуникации</h4>
+    <p class="hint">Выберите правильный глагол: <b>preguntar, explicar, responder, pedir, decir, conocer</b>.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь термин и значение</h4>
+    <p class="hint">Нажмите испанский термин слева, затем его значение справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c4">4</div>
+    <div class="step-title">
+      <h2>Аудирование: первая встреча с директором</h2>
+      <span class="time">30:00 – 37:00 · диалог с директором</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speak('Buenos días. Soy Carmen, la directora del colegio. Bienvenidos. Buenos días. Me llamo Ana García. Somos nuevos en España. Me gustaría hablar sobre la adaptación de mi hijo Leo. Por supuesto. Leo tiene ocho años, ¿verdad? Está en tercero de primaria. Su tutora es María. Sí, exactamente. ¿Podría explicarme cómo funciona el apoyo lingüístico? Claro. Los primeros meses son de observación. La tutora evalúa el nivel de español y el progreso académico. Si hay dificultades, el orientador ofrece apoyo extra. Quisiera saber sobre el apoyo de idiomas. Leo entiende español, pero todavía le cuesta hablar. Tenemos un programa de refuerzo lingüístico. Es gratuito. Dos veces por semana. Me gustaría inscribirlo. ¿Podría enviarme la información por email? Por supuesto. También le presentaré al orientador la próxima semana. Le agradezco mucho su tiempo. Disculpe la molestia, una pregunta más: ¿cuándo es la próxima tutoría? La próxima tutoría es en diciembre. Pero puede contactarme cuando quiera. Muchas gracias por su tiempo hoy. Hasta luego. Hasta luego.')" style="margin-bottom:12px">🔊 Прослушать диалог</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who op">Директор:</span> Buenos días. Soy Carmen, la directora del colegio. Bienvenidos.<br>
+        <span class="who you">Родитель:</span> Buenos días. Me llamo Ana García. Somos nuevos en España. Me gustaría hablar sobre la adaptación de mi hijo Leo.<br>
+        <span class="who op">Директор:</span> Por supuesto. Leo tiene ocho años, ¿verdad? Está en tercero de primaria. Su tutora es María.<br>
+        <span class="who you">Родитель:</span> Sí, exactamente. ¿Podría explicarme cómo funciona el apoyo lingüístico?<br>
+        <span class="who op">Директор:</span> Claro. Los primeros meses son de observación. La tutora evalúa el nivel de español y el progreso académico. Si hay dificultades, el orientador ofrece apoyo extra.<br>
+        <span class="who you">Родитель:</span> Quisiera saber sobre el apoyo de idiomas. Leo entiende español, pero todavía le cuesta hablar.<br>
+        <span class="who op">Директор:</span> Tenemos un programa de refuerzo lingüístico. Es gratuito. Dos veces por semana.<br>
+        <span class="who you">Родитель:</span> Me gustaría inscribirlo. ¿Podría enviarme la información por email?<br>
+        <span class="who op">Директор:</span> Por supuesto. También le presentaré al orientador la próxima semana.<br>
+        <span class="who you">Родитель:</span> Le agradezco mucho su tiempo. Disculpe la molestia, una pregunta más: ¿cuándo es la próxima tutoría?<br>
+        <span class="who op">Директор:</span> La próxima tutoría es en diciembre. Pero puede contactarme cuando quiera.<br>
+        <span class="who you">Родитель:</span> Muchas gracias por su tiempo hoy. Hasta luego.<br>
+        <span class="who op">Директор:</span> Hasta luego.
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: ЧТЕНИЕ + CLIL + ПРОДУКТ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      <h2>Чтение + CLIL + продукт: 10 вопросов директору</h2>
+      <span class="time">37:00 – 47:00 · Структура встречи + конструктор скрипта</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 CLIL-текст: структура первой встречи</h4>
+
+    <div class="clil-text">
+      <h4>1. Presentación (5 min)</h4>
+      <p>Вы представляете себя и семью. Директор представляет себя и школу. Используйте: <i>Me llamo... Somos nuevos en España. Me gustaría hablar sobre...</i></p>
+
+      <h4>2. Adaptación del niño (15 min)</h4>
+      <p>Обсуждаете адаптацию ребёнка: уровень испанского, трудности, прогресс, интеграция с одноклассниками. Вопросы: <i>¿Cómo es el proceso de adaptación? ¿Hay apoyo lingüístico?</i></p>
+
+      <h4>3. Preguntas de la familia (10 min)</h4>
+      <p>Вы задаёте свои вопросы. Используйте вежливые формы: <i>¿Podría...? Quisiera saber...</i></p>
+
+      <h4>4. Seguimiento (5 min)</h4>
+      <p>Договариваетесь о следующих встречах. Фразы: <i>¿Cuándo es la próxima tutoría? Nos gustaría una reunión en...</i></p>
+
+      <h4>5. Despedida (5 min)</h4>
+      <p>Благодарите и прощаетесь. <i>Le agradezco su tiempo. Muchas gracias.</i></p>
+    </div>
+
+    <div class="note green">
+      📋 <b>Чек-лист подготовки к встрече:</b><br>
+      ☐ Имя директора и tutor<br>
+      ☐ Время и место встречи<br>
+      ☐ Документы ребёнка (NIE, empadronamiento)<br>
+      ☐ Список вопросов об адаптации<br>
+      ☐ Блокнот для записей<br>
+      ☐ Вежливые фразы в голове
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🔧 Конструктор: 10 вопросов директору</h4>
+    <p class="hint">Заполните данные — получите готовый список вопросов и скрипт встречи, который запишете голосовым. Используем формы <b>yo / nosotros / usted</b> и вежливые формы.</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">📝 КОНСТРУКТОР: Primera reunión con la directora</div>
+
+      <div class="field">
+        <label>👤 Ваше имя:</label>
+        <input type="text" id="b-name" placeholder="Ana" value="Ana">
+      </div>
+
+      <div class="field">
+        <label>🌍 Страна происхождения:</label>
+        <select id="b-country">
+          <option value="Rusia" selected>Rusia</option>
+          <option value="Ucrania">Ucrania</option>
+          <option value="Kazajistán">Kazajistán</option>
+          <option value="Bielorrusia">Bielorrusia</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>👦 Имя ребёнка:</label>
+        <input type="text" id="b-child" placeholder="Leo" value="Leo">
+      </div>
+
+      <div class="field">
+        <label>🔢 Возраст ребёнка:</label>
+        <select id="b-age">
+          <option value="siete">7</option>
+          <option value="ocho" selected>8</option>
+          <option value="nueve">9</option>
+          <option value="doce">12</option>
+          <option value="trece">13</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>📚 Курс ребёнка:</label>
+        <select id="b-course">
+          <option value="primaria" selected>primaria</option>
+          <option value="ESO">ESO</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🗣 Уровень испанского:</label>
+        <select id="b-level">
+          <option value="principiante" selected>principiante (начинающий)</option>
+          <option value="intermedio">intermedio (средний)</option>
+          <option value="avanzado">avanzado (продвинутый)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🎯 Главная тема встречи:</label>
+        <select id="b-topic">
+          <option value="adaptación" selected>adaptación (адаптация)</option>
+          <option value="idioma">idioma (язык)</option>
+          <option value="integración">integración (интеграция)</option>
+          <option value="comportamiento">comportamiento (поведение)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>❓ Главный вопрос:</label>
+        <select id="b-question">
+          <option value="apoyo lingüístico" selected>apoyo lingüístico (языковая поддержка)</option>
+          <option value="reuniones">reuniones (встречи)</option>
+          <option value="orientador">orientador (психолог)</option>
+          <option value="extraescolares">extraescolares (кружки)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>📅 Следующая встреча:</label>
+        <select id="b-next">
+          <option value="en diciembre" selected>en diciembre</option>
+          <option value="en enero">en enero</option>
+          <option value="en febrero">en febrero</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildScript()" style="margin-top:12px">🔧 Собрать скрипт</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с собранным скриптом (6–8 предложений). Это ваш личный артефакт недели 7.
+    </div>
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">✅</div>
+    <div class="step-title">
+      <h2>Самопроверка «Светофор»</h2>
+      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🏠</div>
+    <div class="step-title">
+      <h2>Домашнее задание · Урок 7.1</h2>
+      <span class="time">⏱ ~30–35 минут · 6 заданий</span>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и глаголы коммуникации.</div>
+    <p>Карточки, сопоставление, «собери фразу» — фокус на формах <b>yo / nosotros / usted</b> и глаголах <b>preguntar, explicar, responder, pedir, decir</b>.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Mi primera reunión» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: проговорить скрипт первой встречи.</div>
+    <p>Запишите голосовое на 6–8 предложений по шаблону:</p>
+    <div class="note blue">
+      Buenos días. Me llamo <b>[имя]</b>. Somos nuevos en España, de <b>[страна]</b>.<br>
+      Me gustaría hablar sobre la adaptación de mi hijo/a <b>[имя]</b>.<br>
+      Tiene <b>[edad]</b> años y está en <b>[curso]</b>.<br>
+      ¿Podría explicarme <b>[вопрос]</b>?<br>
+      Quisiera saber sobre <b>[тема]</b>.<br>
+      Le agradezco su tiempo.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Me llamo Ana García. Somos nuevos en España, de Rusia. Me gustaría hablar sobre la adaptación de mi hijo Leo. Tiene ocho años y está en tercero de primaria. ¿Podría explicarme el proceso de adaptación? Quisiera saber sobre el apoyo lingüístico. Le agradezco su tiempo.')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📝 Задание 3. Список вопросов директору · 5 мин</h4>
+    <div class="hw-meta">Цель: подготовиться к реальной или воображаемой встрече.</div>
+    <p>Напишите 10 вопросов, которые вы задали бы директору:</p>
+    <div class="note">
+      1. Вопрос об адаптации<br>
+      2. Вопрос об уровне испанского<br>
+      3. Вопрос о поддержке (apoyo)<br>
+      4. Вопрос о встречах (tutorías)<br>
+      5. Вопрос об интеграции с одноклассниками<br>
+      6. Вопрос о домашних заданиях<br>
+      7. Вопрос об оценках<br>
+      8. Вопрос о поведении<br>
+      9. Вопрос о кружках (extraescolares)<br>
+      10. Вопрос о следующей встрече
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: скрипт встречи · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить лексику и грамматику на бумаге.</div>
+    <p>Напишите 8–10 предложений: полный скрипт первой встречи с директором. Используйте глаголы коммуникации и вежливые формы.</p>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Me llamo Ana García. Somos nuevos en España, de Rusia. Me gustaría hablar sobre la adaptación de mi hijo Leo. Tiene ocho años y está en tercero de primaria. Su nivel de español es principiante. ¿Podría explicarme el proceso de adaptación? Quisiera saber sobre el apoyo lingüístico. Nos gustaría una reunión con el orientador. Le agradezco su tiempo. ¿Cuándo es la próxima tutoría?')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 3 мин</h4>
+    <div class="hw-meta">Цель: связать родительский урок с детским курсом.</div>
+    <p>Спросите ребёнка:</p>
+    <div class="note green">
+      ¿Cómo se llama tu tutor/a?<br>
+      ¿Tienes amigos nuevos?<br>
+      ¿Te gusta el colegio?
+    </div>
+    <p>Ребёнок отвечает:</p>
+    <div class="note blue">
+      Mi tutora se llama María. Tengo un amigo nuevo, se llama Pablo. Sí, me gusta.
+    </div>
+    <p>Родитель резюмирует:</p>
+    <div class="note">
+      Vale. Vamos a hablar con la directora sobre tu adaptación.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('¿Cómo se llama tu tutor/a? ¿Tienes amigos nuevos? ¿Te gusta el colegio? Vale. Vamos a hablar con la directora sobre tu adaptación.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 6. Рабочий лист · 10–12 мин</h4>
+    <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
+    <p>Распечатайте или заполните с экрана: лексика, глаголы коммуникации, диалог, список вопросов.</p>
+    <a href="../../worksheets/w07-l1-parents.html" class="btn btn-ghost" style="margin-top:8px">📄 Открыть рабочий лист (A4, печать)</a>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Mi primera reunión»<br>
+    • 📝 Список 10 вопросов директору<br>
+    • ✍️ Скрипт встречи (8–10 предложений)<br>
+    • 📄 Фото рабочего листа<br>
+    • ✅ Светофор самопроверки
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head">
+    <div class="step-num">🎮</div>
+    <div class="step-title">
+      <h2>Тренажёр: слова и грамматика</h2>
+      <span class="time">~7–10 мин</span>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 7.1</h3>
+    <p>Повторите слова урока в приложении Quizlet: люди в школе, встреча, вопросы, вежливые фразы, глаголы коммуникации.</p>
+    <a href="https://quizlet.com/ru/1217429707/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-7-%D1%83%D1%80%D0%BE%D0%BA-1-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- РЕСУРСЫ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🔗</div>
+    <div class="step-title">
+      <h2>Внешние ресурсы</h2>
+      <span class="time">Для проекта и самостоятельной практики</span>
+    </div>
+  </div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">🌐 Школы</span>
+      <h4>Поиск контактов школ</h4>
+      <p>Найдите сайты школ рядом с домом и контакты директора.</p>
+      <a href="https://www.google.com/search?q=colegio+Espa%C3%B1a+contacto+director" target="_blank" rel="noopener">Искать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Первая встреча со школой</h4>
+      <p>Видео о том, как проходит первая встреча с директором в Испании.</p>
+      <a href="https://www.youtube.com/results?search_query=primera+reuni%C3%B3n+colegio+Espa%C3%B1a" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏛️ AMPA</span>
+      <h4>Родительская ассоциация</h4>
+      <p>Узнайте про AMPA в вашей школе: мероприятия, помощь семьям.</p>
+      <a href="https://www.google.com/search?q=AMPA+colegio+Espa%C3%B1a" target="_blank" rel="noopener">Искать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📋 Министерство</span>
+      <h4>Адаптация экспатов</h4>
+      <p>Проверьте программы адаптации для иностранных учеников в вашей автономии.</p>
+      <a href="https://www.google.com/search?q=adaptaci%C3%B3n+alumnos+extranjeros+Espa%C3%B1a" target="_blank" rel="noopener">Искать →</a>
+    </div>
+  </div>
+</section>
+
+<!-- КНОПКИ НАВИГАЦИИ -->
+<div class="lesson-nav">
+  <a href="w06-l3.html">← Предыдущий<br><small>Урок 6.3 · Comedor и Transporte</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="w07-l2.html">Следующий →<br><small>Урок 7.2 · Встреча с tutor</small></a>
+</div>
+
+<!-- ФУТЕР -->
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · Блок 2 El Cole y la Salud<br>
+  7.2 · Встреча с tutor
+</footer>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      item.o.map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === questions[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[questions[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ (6.3) =====
+var warmQ = [
+  {q:'1. Как сказать «школьная столовая»?', o:['el comedor escolar','el menú','la parada'], c:0},
+  {q:'2. Что означает menú sin gluten?', o:['Меню без глютена','Меню без лактозы','Вегетарианское меню'], c:0},
+  {q:'3. Как сказать «маршрут автобуса»?', o:['la ruta del autobús','la parada','el monitor'], c:0},
+  {q:'4. Что такое la parada?', o:['Остановка','Маршрут','Автобус'], c:0},
+  {q:'5. Как сказать «тоже хочу записать ребёнка»?', o:['También quiero inscribir a mi hijo','Tampoco quiero inscribir','Quiero inscribir también'], c:0},
+  {q:'6. Как сказать «пищевая аллергия»?', o:['la alergia alimentaria','el menú especial','la dieta'], c:0}
+];
+
+function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  people:[
+    {es:'el director / la directora', ru:'директор', ex:'La directora se llama Carmen.', exRu:'Директора зовут Кармен.'},
+    {es:'el tutor / la tutora', ru:'классный руководитель', ex:'Mi tutora es muy amable.', exRu:'Моя классная руководительница очень добра.'},
+    {es:'el orientador / la orientadora', ru:'школьный психолог', ex:'El orientador ayuda con la adaptación.', exRu:'Психолог помогает с адаптацией.'},
+    {es:'el AMPA', ru:'родительская ассоциация', ex:'El AMPA organiza actividades.', exRu:'AMPA организует мероприятия.'},
+    {es:'el jefe de estudios', ru:'завуч', ex:'El jefe de estudios coordina los cursos.', exRu:'Завуч координирует курсы.'},
+    {es:'el profesor / la profesora', ru:'учитель', ex:'La profesora de inglés es española.', exRu:'Учительница английского — испанка.'},
+    {es:'el secretario / la secretaria', ru:'секретарь', ex:'La secretaria me dio el formulario.', exRu:'Секретарь дала мне формуляр.'}
+  ],
+  meeting:[
+    {es:'la reunión', ru:'встреча', ex:'Tengo una reunión el jueves.', exRu:'У меня встреча в четверг.'},
+    {es:'la entrevista', ru:'собеседование', ex:'La entrevista es a las cinco.', exRu:'Собеседование в пять.'},
+    {es:'la primera tutoría', ru:'первая встреча с tutor', ex:'La primera tutoría es importante.', exRu:'Первая встреча с tutor важна.'},
+    {es:'la cita', ru:'запись / встреча', ex:'Tengo una cita con la directora.', exRu:'У меня встреча с директором.'},
+    {es:'la presentación', ru:'знакомство / презентация', ex:'La presentación dura diez minutos.', exRu:'Знакомство длится десять минут.'},
+    {es:'la adaptación', ru:'адаптация', ex:'La adaptación es gradual.', exRu:'Адаптация постепенная.'},
+    {es:'el seguimiento', ru:'сопровождение / мониторинг', ex:'El seguimiento es mensual.', exRu:'Сопровождение ежемесячное.'}
+  ],
+  topics:[
+    {es:'la adaptación del niño', ru:'адаптация ребёнка', ex:'Hablamos de la adaptación del niño.', exRu:'Мы говорим об адаптации ребёнка.'},
+    {es:'el progreso', ru:'прогресс', ex:'El progreso es bueno.', exRu:'Прогресс хороший.'},
+    {es:'las dificultades', ru:'трудности', ex:'Tiene algunas dificultades con el idioma.', exRu:'У него некоторые трудности с языком.'},
+    {es:'el comportamiento', ru:'поведение', ex:'El comportamiento es excelente.', exRu:'Поведение отличное.'},
+    {es:'el rendimiento académico', ru:'успеваемость', ex:'El rendimiento académico mejora.', exRu:'Успеваемость улучшается.'},
+    {es:'la integración', ru:'интеграция', ex:'La integración con los compañeros va bien.', exRu:'Интеграция с одноклассниками идёт хорошо.'},
+    {es:'el apoyo', ru:'поддержка', ex:'El colegio ofrece apoyo extra.', exRu:'Школа предлагает дополнительную поддержку.'}
+  ],
+  polite:[
+    {es:'Me gustaría...', ru:'Мне бы хотелось...', ex:'Me gustaría hablar con usted.', exRu:'Мне бы хотелось поговорить с вами.'},
+    {es:'¿Podría...?', ru:'Не могли бы вы...?', ex:'¿podría explicarme el proceso?', exRu:'Не могли бы вы объяснить мне процесс?'},
+    {es:'Quisiera saber...', ru:'Я хотел бы узнать...', ex:'Quisiera saber sobre la adaptación.', exRu:'Я хотел бы узнать об адаптации.'},
+    {es:'¿Le importa si...?', ru:'Вы не против, если...?', ex:'¿Le importa si tomo notas?', exRu:'Вы не против, если я буду делать заметки?'},
+    {es:'Le agradezco...', ru:'Благодарю вас...', ex:'Le agradezco su tiempo.', exRu:'Благодарю вас за ваше время.'},
+    {es:'Disculpe la molestia', ru:'Извините за беспокойство', ex:'Disculpe la molestia, una pregunta más.', exRu:'Извините за беспокойство, ещё один вопрос.'},
+    {es:'Muchas gracias por su tiempo', ru:'Большое спасибо за ваше время', ex:'Muchas gracias por su tiempo hoy.', exRu:'Большое спасибо за ваше время сегодня.'}
+  ],
+  verbs:[
+    {es:'conocer', ru:'познакомиться / узнать', ex:'Quiero conocer al tutor.', exRu:'Я хочу познакомиться с tutor.'},
+    {es:'presentar', ru:'представить', ex:'Le presento a mi familia.', exRu:'Я представляю ему мою семью.'},
+    {es:'explicar', ru:'объяснить', ex:'¿Puede explicar el proceso?', exRu:'Можете объяснить процесс?'},
+    {es:'preguntar', ru:'спросить', ex:'Quisiera preguntar una cosa.', exRu:'Я хотел бы спросить одну вещь.'},
+    {es:'responder', ru:'ответить', ex:'la directora responde con calma.', exRu:'Директор отвечает спокойно.'},
+    {es:'acordar', ru:'договориться', ex:'acordamos la próxima reunión.', exRu:'Мы договорились о следующей встрече.'},
+    {es:'comentar', ru:'обсудить', ex:'Podemos comentar la situación.', exRu:'Мы можем обсудить ситуацию.'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('people', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'Quisiera ___ sobre la adaptación de mi hijo. (спросить)', ans:'preguntar'},
+  {text:'¿Podría ___ el proceso de adaptación? (объяснить)', ans:'explicar'},
+  {text:'La directora ___ con calma. (отвечает)', ans:'responde'},
+  {text:'Quisiera ___ una reunión con el orientador. (попросить)', ans:'pedir'},
+  {text:'Le ___ que mi hijo tiene dificultades. (говорю)', ans:'digo'},
+  {text:'Nos gustaría ___ al tutor. (познакомиться)', ans:'conocer'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'quisiera preguntar sobre la adaptación.', translation:'Я хотел бы спросить об адаптации.'},
+  {target:'¿podría explicarme el proceso?', translation:'Не могли бы вы объяснить мне процесс?'},
+  {target:'nos gustaría conocer al orientador.', translation:'Нам бы хотелось познакомиться с психологом.'},
+  {target:'la directora responde con calma.', translation:'Директор отвечает спокойно.'},
+  {target:'le digo que mi hijo tiene dificultades.', translation:'Я говорю ему, что у ребёнка трудности.'},
+  {target:'acordamos la próxima reunión.', translation:'Мы договорились о следующей встрече.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'director / directora', ru:'директор'},
+  {id:2, es:'tutor / tutora', ru:'классный руководитель'},
+  {id:3, es:'orientador / orientadora', ru:'школьный психолог'},
+  {id:4, es:'AMPA', ru:'родительская ассоциация'},
+  {id:5, es:'adaptación', ru:'адаптация'},
+  {id:6, es:'apoyo', ru:'поддержка'},
+  {id:7, es:'preguntar', ru:'спросить'},
+  {id:8, es:'explicar', ru:'объяснить'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZ =====
+var listenQ = [
+  {q:'1. ¿Quién es Carmen?', o:['la directora','la tutora','la orientadora'], c:0},
+  {q:'2. ¿Quién es la tutora de Leo?', o:['María','Carmen','Ana'], c:0},
+  {q:'3. ¿Qué ofrece el colegio para niños extranjeros?', o:['refuerzo lingüístico gratuito','clases privadas','nada'], c:0},
+  {q:'4. ¿Cuántas veces por semana es el refuerzo?', o:['dos veces','una vez','tres veces'], c:0},
+  {q:'5. ¿Cuándo es la próxima tutoría?', o:['en diciembre','en enero','en febrero'], c:0},
+  {q:'6. ¿Qué frase usa Ana для вежливой просьбы?', o:['¿Podría enviarme la información?','Quiero la información','Dame la información'], c:0}
+];
+
+renderQuiz('listening-quiz', listenQ, 'lq');
+
+// ===== SCRIPT BUILDER =====
+var lastScriptPlain = '';
+
+function buildScript(){
+  var name = document.getElementById('b-name').value || 'Ana';
+  var country = document.getElementById('b-country').value;
+  var child = document.getElementById('b-child').value || 'Leo';
+  var age = document.getElementById('b-age').value;
+  var course = document.getElementById('b-course').value;
+  var level = document.getElementById('b-level').value;
+  var topic = document.getElementById('b-topic').value;
+  var question = document.getElementById('b-question').value;
+  var next = document.getElementById('b-next').value;
+
+  var text = 'Buenos días. Me llamo ' + name + ' García. ' +
+    'Somos nuevos en España, de ' + country + '. ' +
+    'Me gustaría hablar sobre la adaptación de mi hijo ' + child + '. ' +
+    'Tiene ' + age + ' años y está en ' + course + '. ' +
+    'Su nivel de español es ' + level + '. ' +
+    '¿Podría explicarme el proceso de adaptación? ' +
+    'Quisiera saber sobre ' + question + '. ' +
+    'Nos gustaría una reunión con el orientador. ' +
+    'Le agradezco su tiempo. ' +
+    '¿Cuándo es la próxima tutoría?';
+
+  lastScriptPlain = text;
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML =
+    '<div class="dialog-result">' + text + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary" id="speak-script-btn">🔊 Прослушать скрипт</button>' +
+    '</div>';
+
+  document.getElementById('speak-script-btn').onclick = function(){
+    speak(lastScriptPlain);
+  };
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ===== TRAFFIC LIGHT =====
+var TL = [
+  'Различать director, tutor, orientador, AMPA',
+  'Использовать глаголы preguntar, explicar, responder',
+  'Использовать вежливые формы me gustaría, podría',
+  'Построить скрипт первой встречи',
+  'Задать 10 вопросов об адаптации ребёнка',
+  'Понять структуру встречи (presentación, adaptación, seguimiento)'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + rowIdx + '">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + rowIdx + '">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.people, VOCAB.meeting, VOCAB.topics, VOCAB.polite, VOCAB.verbs);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    updateCard();
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'quisiera preguntar sobre la adaptación', hint:'Я хотел бы спросить об адаптации'},
+    {target:'¿podría explicarme el proceso?', hint:'Не могли бы вы объяснить мне процесс?'},
+    {target:'nos gustaría conocer al orientador', hint:'Нам бы хотелось познакомиться с психологом'},
+    {target:'le digo que mi hijo tiene dificultades', hint:'Я говорю ему, что у ребёнка трудности'},
+    {target:'acordamos la próxima reunión', hint:'Мы договорились о следующей встрече'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>
