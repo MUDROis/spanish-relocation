@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 7.1 · Встреча с директором — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#8B5FBF;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+  .hero{
+    background:linear-gradient(135deg,var(--p5),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'👥'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.22;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:40mm; } .wline.xlong{ min-width:80mm; }
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note.purple{ background:#F4EFF8; border-left-color:var(--p5); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#F0F4FF; border-left-color:var(--p4); }
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #E8DCCF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#FBF3EA; color:var(--p1); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+  .dialog-box{ background:#fff; border:1.5px solid var(--p5); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7; }
+  .audio-box{ background:#F4EFF8; border:1.5px solid var(--p5); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+  .plan-box{ background:#F4EFF8; border:1.5px solid var(--p5); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p5); }
+  .clil-box{ background:#fff; border:1.5px solid var(--p5); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p5); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+<div class="sheet">
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>👥 Рабочий лист · Урок 7.1 «Встреча с директором»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Первая встреча со школой · вежливые формы</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div><h2>👥 Лексика школы: соедини термин и перевод</h2><div class="tag">впиши букву</div></div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el director / la directora</div>
+          <div class="item">2. el tutor / la tutora</div>
+          <div class="item">3. el orientador / la orientadora</div>
+          <div class="item">4. el AMPA</div>
+          <div class="item">5. la adaptación</div>
+          <div class="item">6. el apoyo</div>
+          <div class="item">7. preguntar</div>
+          <div class="item">8. explicar</div>
+        </div>
+        <div class="col">
+          <div class="item">а) школьный психолог</div>
+          <div class="item">б) адаптация</div>
+          <div class="item">в) директор</div>
+          <div class="item">г) родительская ассоциация</div>
+          <div class="item">д) классный руководитель</div>
+          <div class="item">е) спросить</div>
+          <div class="item">ж) поддержка</div>
+          <div class="item">з) объяснить</div>
+        </div>
+      </div>
+      <div style="margin-top:3mm">Ответы: 1. __  2. __  3. __  4. __  5. __  6. __  7. __  8. __</div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div><h2>🔤 Впиши вежливую форму по описанию</h2><div class="tag">из словаря урока</div></div>
+    </div>
+    <div class="card">
+      1. «Мне бы хотелось...» → <span class="wline long"></span><br>
+      2. «Не могли бы вы...?» → <span class="wline long"></span><br>
+      3. «Я хотел бы узнать...» → <span class="wline long"></span><br>
+      4. «Вы не против, если...?» → <span class="wline long"></span><br>
+      5. «Благодарю вас...» → <span class="wline long"></span><br>
+      6. «Извините за беспокойство» → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div><h2>🧩 Глаголы коммуникации + вежливые формы</h2><div class="tag">yo · nosotros · usted</div></div>
+    </div>
+    <div class="card">
+      <div class="note purple"><b>Фокус урока:</b> yo, nosotros, usted</div>
+      <table class="grammar-ref">
+        <tr><th>Лицо</th><th>preguntar</th><th>explicar</th><th>responder</th><th>pedir</th><th>decir</th></tr>
+        <tr><td class="practice">yo</td><td class="practice">pregunto</td><td class="practice">explico</td><td class="practice">respondo</td><td class="practice">pido</td><td class="practice">digo</td></tr>
+        <tr><td class="practice">usted</td><td class="practice">pregunta</td><td class="practice">explica</td><td class="practice">responde</td><td class="practice">pide</td><td class="practice">dice</td></tr>
+        <tr><td class="practice">nosotros</td><td class="practice">preguntamos</td><td class="practice">explicamos</td><td class="practice">respondemos</td><td class="practice">pedimos</td><td class="practice">decimos</td></tr>
+      </table>
+      1. Quisiera <span class="wline short"></span> sobre la adaptación. <span class="ru-sub">(preguntar / yo)</span><br>
+      2. ¿Podría <span class="wline short"></span> el proceso? <span class="ru-sub">(explicar / usted)</span><br>
+      3. La directora <span class="wline short"></span> con calma. <span class="ru-sub">(responder / ella)</span><br>
+      4. Quisiera <span class="wline short"></span> una reunión. <span class="ru-sub">(pedir / yo)</span><br>
+      5. Le <span class="wline short"></span> que mi hijo tiene dificultades. <span class="ru-sub">(decir / yo)</span><br>
+      6. Nos gustaría <span class="wline short"></span> al orientador. <span class="ru-sub">(conocer / nosotros)</span>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div><h2>📖 Чтение + структура встречи</h2><div class="tag">ответь на вопросы</div></div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>1. Presentación (5 min)</h4><p>Me llamo... Somos nuevos en España. Me gustaría hablar sobre...</p>
+        <h4>2. Adaptación del niño (15 min)</h4><p>¿Cómo es el proceso de adaptación? ¿Hay apoyo lingüístico?</p>
+        <h4>3. Preguntas de la familia (10 min)</h4><p>¿Podría...? Quisiera saber...</p>
+        <h4>4. Seguimiento (5 min)</h4><p>¿Cuándo es la próxima tutoría? Nos gustaría una reunión...</p>
+        <h4>5. Despedida (5 min)</h4><p>Le agradezco su tiempo. Muchas gracias.</p>
+      </div>
+      1. ¿Qué haces en la etapa de presentación?<br><span class="wline xlong"></span><br>
+      2. ¿Qué preguntas haces sobre la adaptación?<br><span class="wline xlong"></span><br>
+      3. ¿Qué formas corteses usas para preguntar?<br><span class="wline xlong"></span><br>
+      4. ¿Qué acuerdas en la etapa de seguimiento?<br><span class="wline xlong"></span><br>
+      5. ¿Cómo te despides al final?<br><span class="wline xlong"></span>
+      <div class="hint" style="margin-top:3mm">Чек-лист подготовки к встрече</div>
+      <table class="grammar-ref">
+        <tr><th>Пункт</th><th>✓ Готово</th><th>Заметки</th></tr>
+        <tr><td>Имя директора и tutor</td><td style="height:8mm"></td><td style="height:8mm"></td></tr>
+        <tr><td>Время и место встречи</td><td style="height:8mm"></td><td style="height:8mm"></td></tr>
+        <tr><td>Документы ребёнка</td><td style="height:8mm"></td><td style="height:8mm"></td></tr>
+        <tr><td>Список вопросов</td><td style="height:8mm"></td><td style="height:8mm"></td></tr>
+        <tr><td>Блокнот для записей</td><td style="height:8mm"></td><td style="height:8mm"></td></tr>
+        <tr><td>Вежливые фразы</td><td style="height:8mm"></td><td style="height:8mm"></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">5</div>
+      <div><h2>🎧 Аудирование</h2><div class="tag">ответь на вопросы по диалогу</div></div>
+    </div>
+    <div class="card">
+      1. ¿Quién es Carmen?<br><span class="wline xlong"></span><br>
+      2. ¿Quién es la tutora de Leo?<br><span class="wline xlong"></span><br>
+      3. ¿Qué ofrece el colegio para niños extranjeros?<br><span class="wline xlong"></span><br>
+      4. ¿Cuántas veces por semana es el refuerzo?<br><span class="wline xlong"></span><br>
+      5. ¿Cuándo es la próxima tutoría?<br><span class="wline xlong"></span><br>
+      6. ¿Qué frase usa Ana para una petición cortés?<br><span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">6</div>
+      <div><h2>🗣 Говорение: ситуации</h2><div class="tag">проговори вслух</div></div>
+    </div>
+    <div class="card">
+      <div class="sit-box"><b>Ситуация 1. Представление</b><div class="tmpl">«Buenos días. Me llamo __________. Somos nuevos en España.»</div></div>
+      <div class="sit-box"><b>Ситуация 2. Цель встречи</b><div class="tmpl">«Me gustaría hablar sobre la adaptación de mi hijo __________.»</div></div>
+      <div class="sit-box"><b>Ситуация 3. Вежливая просьба</b><div class="tmpl">«¿Podría explicarme el proceso de adaptación?»</div></div>
+      <div class="sit-box"><b>Ситуация 4. Трудности с языком</b><div class="tmpl">«Quisiera saber sobre el apoyo lingüístico. Mi hijo tiene dificultades con el español.»</div></div>
+      <div class="sit-box"><b>Ситуация 5. Благодарность</b><div class="tmpl">«Le agradezco mucho su tiempo. Muchas gracias.»</div></div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">7</div>
+      <div><h2>✍️ Письмо: скрипт первой встречи</h2><div class="tag">8–10 предложений</div></div>
+    </div>
+    <div class="card">
+      <div class="plan-box"><b>План:</b> 1–2. Приветствие и представление. 3–4. Цель разговора. 5–6. Вежливые вопросы. 7–8. Просьба о поддержке. 9–10. Благодарность и прощание.</div>
+      <span class="wline xlong"></span><br><span class="wline xlong"></span><br><span class="wline xlong"></span><br><span class="wline xlong"></span><br><span class="wline xlong"></span><br><span class="wline xlong"></span><br><span class="wline xlong"></span><br><span class="wline xlong"></span><br><span class="wline xlong"></span><br><span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась кружок</div></div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Различать director, tutor, orientador, AMPA</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать глаголы preguntar, explicar, responder</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать вежливые формы me gustaría, podría</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Построить скрипт первой встречи</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Задать 10 вопросов об адаптации ребёнка</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понять структуру встречи (presentación, adaptación, seguimiento)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
