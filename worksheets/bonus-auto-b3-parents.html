@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<title>Рабочий лист · Урок B3 · Дорожные знаки и ро́тонды — Школа МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p1),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🔄'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .bonus{
+    display:inline-block; background:#FFD700; color:#2B2118;
+    padding:2px 10px; border-radius:999px; font-size:9px; font-weight:800;
+    letter-spacing:.5px; margin-top:4px;
+  }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{ border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff; font-size:10px; min-height:22px; display:flex; align-items:center;}
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom;}
+  .wline.short{ min-width:15mm;} .wline.long{ min-width:50mm;} .wline.xlong{ min-width:80mm;}
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle;}
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4);}
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink);}
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2);}
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7;}
+  .dialog-box .who{ font-weight:700; color:var(--p2);}
+  .dialog-box .who.you{ color:var(--p4);}
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic;}
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px;}
+  .sit-box b{ color:var(--p4);}
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4);}
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic;}
+
+  .plan-box{ background:#F0F4FF; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px;}
+  .plan-box b{ color:var(--p4);}
+
+  /* Схема ро́тонды */
+  .ra-diagram{
+    background:#F0F4FF; border:1.5px solid var(--p4);
+    border-radius:10px; padding:3mm; margin-bottom:2mm;
+    display:flex; justify-content:center; align-items:center;
+  }
+  .ra-svg{ width:100%; max-width:480px; height:auto; }
+  .ra-svg .road{ fill:#E8DCCF; stroke:#C9B8A6; stroke-width:1;}
+  .ra-svg .circle-main{ fill:none; stroke:var(--p4); stroke-width:2;}
+  .ra-svg .circle-inner{ fill:#F0F7E6; stroke:var(--p2); stroke-width:1.5;}
+  .ra-svg .label{ font-size:10px; font-weight:700; fill:var(--ink);}
+  .ra-svg .label-small{ font-size:8px; fill:var(--muted); font-style:italic;}
+  .ra-svg .entry-arrow{ fill:var(--p1);}
+  .ra-svg .exit-arrow{ fill:var(--p2);}
+  .ra-svg .sign{ font-size:14px;}
+
+  .ra-task{
+    background:#FFF7E0; border:1.5px dashed var(--p3);
+    border-radius:8px; padding:2.5mm 3mm; margin-top:2mm; font-size:9.5px;
+  }
+  .ra-task b{ color:var(--p3);}
+
+  /* Мини-карта района */
+  .map-mini{
+    background:#fff; border:1.5px solid var(--p2);
+    border-radius:10px; padding:3mm;
+  }
+  .map-mini h4{ font-size:11px; color:var(--p2); margin-bottom:2mm;}
+  .map-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3mm;}
+  .map-field{ background:#F0F7E6; border:1px solid #CDE3C4; border-radius:6px; padding:2mm;}
+  .map-field label{ display:block; font-size:8px; color:var(--p2); font-weight:700; letter-spacing:.5px; text-transform:uppercase; margin-bottom:1px;}
+  .map-field input{ width:100%; border:none; border-bottom:1px dashed var(--p2); background:transparent; font-family:inherit; font-size:9.5px; padding:1px 0; color:var(--ink);}
+  .map-field.full{ grid-column:1 / -1;}
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px;}
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🔄 Рабочий лист · Урок B3 «Дорожные знаки и ро́тонды»</h1>
+    <div class="meta">Знаки ПДД, проезд ро́тонды, безличные конструкции · Бонусный модуль «Misión Autoescuela»</div>
+    <span class="bonus">🎁 БОНУСНЫЙ МОДУЛЬ · УРОК B3</span>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ ЗНАКОВ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">1</div><div><h2>🚦 Соедини знак и его значение</h2><div class="tag">впиши букву</div></div></div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. 🔻 ceda el paso</div>
+          <div class="item">2. 🛑 stop</div>
+          <div class="item">3. 🔶 prioridad</div>
+          <div class="item">4. 🚫 prohibido adelantar</div>
+          <div class="item">5. 🔵 zona azul</div>
+          <div class="item">6. 🅿️❌ prohibido aparcar</div>
+          <div class="item">7. 🚶 paso de peatones</div>
+          <div class="item">8. 🔄 rotonda</div>
+        </div>
+        <div class="col">
+          <div class="item">а) полная остановка обязательна</div>
+          <div class="item">б) пешеходный переход</div>
+          <div class="item">в) круговое движение</div>
+          <div class="item">г) главная дорога (приоритет)</div>
+          <div class="item">д) платная парковка</div>
+          <div class="item">е) обгон запрещён</div>
+          <div class="item">ж) уступи дорогу</div>
+          <div class="item">з) парковка запрещена</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">2</div><div><h2>🔤 Впиши слово по описанию</h2><div class="tag">термины ро́тонды и манёвров</div></div></div>
+    <div class="card">
+      1. Внутренняя полоса ро́тонды → <span class="wline long"></span><br>
+      2. Внешняя полоса (для съезда) → <span class="wline long"></span><br>
+      3. Съезд с ро́тонды (первый, второй, третий) → <span class="wline long"></span><br>
+      4. Снизить скорость перед знаком → <span class="wline long"></span><br>
+      5. Включить поворотник перед манёвром → <span class="wline long"></span><br>
+      6. Уступить дорогу тем, кто в круге → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА · БЕЗЛИЧНЫЕ КОНСТРУКЦИИ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">3</div><div><h2>🧩 Выбери безличную конструкцию</h2><div class="tag">se debe / hay que / está prohibido / se puede</div></div></div>
+    <div class="card">
+      <div class="formula">💡 <b>está prohibido</b> 🔴 нельзя · <b>se debe / hay que</b> 🟡 обязательно · <b>se puede</b> 🟢 разрешено</div>
+      1. <span class="wline short"></span> adelantar en esta zona. (adelantar)<br>
+      2. <span class="wline short"></span> ceder el paso en la rotonda. (ceder)<br>
+      3. <span class="wline short"></span> pagar en la zona azul. (pagar)<br>
+      4. <span class="wline short"></span> aparcar aquí (es gratis). (aparcar)<br>
+      5. <span class="wline short"></span> señalizar antes de girar. (señalizar)<br>
+      6. <span class="wline short"></span> girar a la izquierda aquí. (girar)
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ · ДИАЛОГ ПРОЕЗДА РО́ТОНДЫ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">4</div><div><h2>📖 Чтение: проезд ро́тонды с инструктором</h2><div class="tag">прочитай и ответь на вопросы</div></div></div>
+    <div class="card">
+      <div class="dialog-box">
+        <span class="who">Инструктор:</span> Atención, hay una rotonda delante. Reduzca la velocidad.<br>
+        <span class="who you">Вы:</span> Vale. ¿Tengo que parar?<br>
+        <span class="who">Инструктор:</span> No, solo ceda el paso a los vehículos que ya circulan.<br>
+        <span class="who you">Вы:</span> ¿Pongo el intermitente al entrar?<br>
+        <span class="who">Инструктор:</span> No. Al entrar no se pone. Solo al salir, a la derecha.<br>
+        <span class="who you">Вы:</span> ¿Qué carril tomo? Quiero tomar la segunda salida.<br>
+        <span class="who">Инструктор:</span> Póngase en el carril interior. Circule. Señalice a la derecha. Cambie al carril exterior. Salga.<br>
+        <span class="who you">Вы:</span> Vale, ya salgo. ¿He hecho bien?<br>
+        <span class="who">Инструктор:</span> ¡Muy bien! Ha cruzado la rotonda con éxito.
+      </div>
+      <br>
+      1. ¿Qué hay delante del coche?
+      <span class="ru-sub">(Что впереди машины?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Hay que parar completamente?
+      <span class="ru-sub">(Нужно ли полностью останавливаться?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Cuándo hay que poner el intermitente?
+      <span class="ru-sub">(Когда надо включать поворотник?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Qué carril toma el alumno?
+      <span class="ru-sub">(Какую полосу берёт ученик?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Cómo termina la maniobra?
+      <span class="ru-sub">(Как заканчивается манёвр?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">5</div><div><h2>🎧 Аудирование: 5 дорожных ситуаций</h2><div class="tag">попроси родителя прочитать вслух</div></div></div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя: прочитать вслух 2 раза (медленно, с паузами между ситуациями):</b><br>
+        «Situación 1: Hay un paso de peatones y una persona quiere cruzar. Se debe ceder el paso.»<br>
+        «Situación 2: Hay una señal de zona azul. Hay que pagar en el parquímetro.»<br>
+        «Situación 3: Hay una señal de prohibido adelantar. Está prohibido adelantar en esta zona.»<br>
+        «Situación 4: Se acerca a una rotonda. Se debe reducir la velocidad y ceder el paso.»<br>
+        «Situación 5: Hay una señal de stop. Hay que parar completamente.»
+      </div>
+      1. ¿Qué se debe hacer en el paso de peatones?
+      <span class="ru-sub">(Что нужно сделать на пешеходном переходе?)</span><br>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué hay que hacer en la zona azul?
+      <span class="ru-sub">(Что надо делать в синей зоне?)</span><br>
+      <span class="wline xlong"></span><br>
+      3. ¿Qué está prohibido en la situación 3?
+      <span class="ru-sub">(Что запрещено в ситуации 3?)</span><br>
+      <span class="wline xlong"></span><br>
+      4. ¿Qué se debe hacer al acercarse a la rotonda? (2 действия)
+      <span class="ru-sub">(Что нужно сделать перед ро́тондой?)</span><br>
+      <span class="wline xlong"></span><br>
+      5. ¿Qué diferencia hay entre stop y ceda el paso?
+      <span class="ru-sub">(В чём разница между стопом и «уступи дорогу»?)</span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">6</div><div><h2>🗣 Говорение: объясни ситуацию</h2><div class="tag">используй шаблоны</div></div></div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Видишь знак «Ceda el paso». Объясни ребёнку, что делать.<br>
+        <div class="tmpl">«Mira, este es un ceda el paso. Se debe ceder el paso a los vehículos que vienen.»</div>
+        <div class="tmpl-ru">(Смотри, это «уступи дорогу». Нужно уступить машинам, которые едут.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Видишь знак «Prohibido aparcar». Объясни, почему нельзя парковаться.<br>
+        <div class="tmpl">«Aquí está prohibido aparcar. Hay que buscar una zona azul cerca.»</div>
+        <div class="tmpl-ru">(Здесь парковка запрещена. Надо найти синюю зону рядом.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Подъезжаешь к ро́тонде. Объясни свои действия.<br>
+        <div class="tmpl">«Reduzco la velocidad, cedo el paso, me pongo en el carril interior, señalizo y salgo.»</div>
+        <div class="tmpl-ru">(Снижаю скорость, уступаю, встаю на внутреннюю полосу, подаю сигнал и съезжаю.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Не уверен, какую полосу выбрать на ро́тонде. Спроси инструктора.<br>
+        <div class="tmpl">«Perdone, ¿qué carril tomo para la segunda salida?»</div>
+        <div class="tmpl-ru">(Извините, какую полосу брать для второго съезда?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: СХЕМА РО́ТОНДЫ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">7</div><div><h2>🔄 Заполни схему ро́тонды</h2><div class="tag">твоя шпаргалка перед выездом</div></div></div>
+    <div class="card">
+      <p class="hint">Изучи схему: где въезд, где три съезда, где внутренняя и внешняя полосы. Затем заполни правила проезда в блоке ниже. Вырежи и возьми с собой на первый урок вождения.</p>
+      <div class="ra-diagram">
+        <svg class="ra-svg" viewBox="0 0 480 320">
+          <!-- Дороги въезда и съездов -->
+          <rect class="road" x="220" y="260" width="40" height="60" />
+          <rect class="road" x="220" y="0" width="40" height="60" />
+          <rect class="road" x="0" y="140" width="60" height="40" />
+          <rect class="road" x="420" y="140" width="60" height="40" />
+
+          <!-- Основная ро́тонда -->
+          <circle class="circle-main" cx="240" cy="160" r="100"/>
+          <circle class="circle-inner" cx="240" cy="160" r="40"/>
+          <text x="240" y="165" text-anchor="middle" font-size="20">🌳</text>
+
+          <!-- Стрелка движения -->
+          <path d="M 340 160 A 100 100 0 1 1 240 60" fill="none" stroke="var(--p1)" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+          <defs>
+            <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="var(--p1)"/>
+            </marker>
+          </defs>
+
+          <!-- Подписи съездов -->
+          <text class="label" x="440" y="135" fill="var(--p1)">1ª salida</text>
+          <text class="label-small" x="440" y="150">(направо)</text>
+
+          <text class="label" x="235" y="20" text-anchor="middle" fill="var(--p3)">2ª salida</text>
+          <text class="label-small" x="235" y="33" text-anchor="middle">(прямо)</text>
+
+          <text class="label" x="15" y="135" fill="var(--p2)">3ª salida</text>
+          <text class="label-small" x="15" y="150">(налево/разворот)</text>
+
+          <!-- Знак -->
+          <text class="sign" x="200" y="258">🔻</text>
+          <text class="label-small" x="195" y="280">ceda el paso</text>
+
+          <!-- Полосы -->
+          <text class="label-small" x="355" y="175" fill="var(--p4)">carril interior</text>
+          <text class="label-small" x="355" y="200" fill="var(--p2)">carril exterior</text>
+        </svg>
+      </div>
+
+      <div class="ra-task">
+        <b>📝 Заполни пропуски (правила проезда):</b><br><br>
+        1. При въезде в ро́тонду приоритет у: <span class="wline long"></span><br>
+        2. При въезде поворотник: <span class="wline long"></span><br>
+        3. При съезде поворотник: <span class="wline long"></span><br>
+        4. Для 1ª salida (направо) выбираю полосу: <span class="wline long"></span><br>
+        5. Для 3ª salida (разворот) выбираю полосу: <span class="wline long"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО · СКРИПТ -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c4">8</div><div><h2>✍️ Письмо: скрипт проезда ро́тонды</h2><div class="tag">5 шагов манёвра</div></div></div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План (опиши по-испански свои действия):</b><br>
+        1. Приближение (reducir la velocidad).<br>
+        2. Уступка (ceder el paso a los de dentro).<br>
+        3. Выбор полосы (carril interior / exterior).<br>
+        4. Поворотник при съезде (señalizar a la derecha).<br>
+        5. Съезд (tomar la segunda salida / etc.).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 9: КАРТА РАЙОНА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c2">🗺</div><div><h2>Карта твоего района с манёврами</h2><div class="tag">PBL-продукт урока</div></div></div>
+    <div class="map-mini">
+      <h4>🗺 MI BARRIO EN ESPAÑA</h4>
+      <div class="map-grid">
+        <div class="map-field"><label>Ciudad</label><input type="text" placeholder="Valencia"></div>
+        <div class="map-field"><label>Barrio</label><input type="text" placeholder="Benimaclet"></div>
+        <div class="map-field full"><label>Dirección de casa</label><input type="text" placeholder="Calle del Mar, 15"></div>
+        <div class="map-field full"><label>🔄 Rotonda cerca (dirección)</label><input type="text" placeholder="Glorieta de la Puerta del Mar"></div>
+        <div class="map-field full"><label>🚶 Paso de peatones cerca</label><input type="text" placeholder="Cerca del colegio"></div>
+        <div class="map-field full"><label>🅿 Aparcamiento (zona azul / verde / blanca)</label><input type="text" placeholder="Zona azul en la calle Mayor"></div>
+      </div>
+      <p class="hint" style="margin-top:2.5mm">
+        📌 <b>Задание:</b> открой Google Maps, найди эти 3 точки в твоём районе и сделай скриншот. Подпиши каждую по-испански:<br>
+        <i>«Aquí hay una rotonda. Se debe ceder el paso.»</i><br>
+        <i>«Aquí hay un paso de peatones. Hay que reducir la velocidad.»</i><br>
+        <i>«Aquí es zona azul. Hay que pagar.»</i>
+      </p>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num">✓</div><div><h2>🚦 Самопроверка «Светофор»</h2><div class="tag">закрась нужный кружок</div></div></div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Читать 8 знаков приоритета</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Читать знаки ограничений (prohibido, zona azul)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Проезжать ро́тонду по правилам Испании</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать безличные конструкции</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Объяснить манёвр по-испански</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Составить карту района с 3 манёврами</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируй заполненный лист (особенно схему ро́тонды и карту) и отправь преподавателю — проверим вместе!</p>
+    </div>
+  </div>
+
+  <!-- АНОНС B4 -->
+  <div class="ex">
+    <div class="ex-head"><div class="ex-num c3">📝</div><div><h2>Впереди — Урок B4: Теория DGT</h2><div class="tag">тесты, слова-ловушки, пробный экзамен</div></div></div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Теперь вы читаете знаки и проезжаете ро́тонды. На следующем уроке (B4) научитесь решать тестовые вопросы DGT, распознавать слова-ловушки (<i>salvo</i>, <i>excepto</i>, <i>únicamente</i>) и пройдёте пробный экзамен из 30 вопросов.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

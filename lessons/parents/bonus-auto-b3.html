@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бонусный урок B3 · Дорожные знаки и ро́тонды — МУДРО</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<style>
+  :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);--ok:#7A8B4C;--bad:#E2725B}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center;position:relative}
+  .lesson-hero::after{content:'🔄';position:absolute;right:24px;top:28px;font-size:3rem;opacity:.2;pointer-events:none}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c2{background:var(--p2)}.step-num.c3{background:var(--p3)}.step-num.c4{background:var(--p4)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  /* Разминка-квиз */
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+  .quiz-week{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px}
+  .quiz-week.b2{background:#FFF7E0;color:var(--p3)}
+
+  /* Ситуация из жизни */
+  .situation-box{background:#fff;border:3px solid var(--p3);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p3)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#FFF7E0;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p3)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  /* Табы и карточки лексики */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
+  .vocab-front .icon{font-size:2rem;margin-bottom:6px}
+  .vocab-front .es{font-size:1rem;font-weight:800;margin-bottom:4px;line-height:1.3;color:#fff}
+  .vocab-front .ru{font-size:.85rem;opacity:.95;font-weight:600;color:#fff}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.9rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  /* Грамматика */
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:6px}
+  .grammar-box .formula{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.5}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .grammar-hint{position:relative;border-bottom:1.5px dashed var(--p4);cursor:help;color:var(--p4);font-weight:600}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 12px;border-radius:8px;font-size:.82rem;font-weight:500;font-style:normal;line-height:1.4;width:280px;max-width:90vw;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;white-space:normal}
+  .grammar-hint::before{content:'';position:absolute;bottom:120%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink);opacity:0;pointer-events:none;transition:opacity .2s}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  /* Светофор ПДД */
+  .traffic-light{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .traffic-light .tl-item{flex:1;min-width:200px;padding:14px;border-radius:12px;display:flex;align-items:center;gap:12px}
+  .traffic-light .tl-item.red{background:#FBF0ED;border:2px solid var(--p1)}
+  .traffic-light .tl-item.yellow{background:#FFF7E0;border:2px solid var(--p3)}
+  .traffic-light .tl-item.green{background:#F0F7E6;border:2px solid var(--p2)}
+  .traffic-light .tl-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;font-weight:800;flex-shrink:0}
+  .traffic-light .red .tl-circle{background:var(--p1)}
+  .traffic-light .yellow .tl-circle{background:var(--p3)}
+  .traffic-light .green .tl-circle{background:var(--p2)}
+  .traffic-light .tl-text{font-weight:700;font-size:.9rem}
+  .traffic-light .tl-text small{display:block;font-weight:500;opacity:.8;margin-top:2px;font-style:italic}
+
+  /* Упражнения */
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:80px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:340px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.7}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.05rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  /* Симулятор ро́тонды */
+  .roundabout-sim{background:linear-gradient(135deg,#F0F4FF,#E8F0FE);border-radius:18px;padding:24px;margin-bottom:20px;border:2px solid var(--p4)}
+  .roundabout-sim h3{color:var(--p4);margin-bottom:12px;text-align:center}
+  .ra-visual{display:flex;justify-content:center;margin-bottom:20px;position:relative;height:280px}
+  .ra-svg{width:100%;max-width:400px;height:280px}
+  .ra-controls{display:flex;flex-direction:column;gap:12px;align-items:center}
+  .ra-btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .ra-btn{padding:12px 20px;border:2px solid var(--p4);background:#fff;color:var(--p4);border-radius:10px;font-weight:700;cursor:pointer;transition:.2s;font-size:.95rem}
+  .ra-btn:hover{background:var(--p4);color:#fff}
+  .ra-btn.active{background:var(--p4);color:#fff}
+  .ra-output{background:#fff;border:2px solid var(--p2);border-radius:12px;padding:16px;margin-top:16px;min-height:120px}
+  .ra-step{background:#F0F7E6;border-left:4px solid var(--p2);border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:.95rem;animation:fadeIn .4s}
+  .ra-step .step-num{display:inline-block;background:var(--p2);color:#fff;width:24px;height:24px;border-radius:50%;text-align:center;line-height:24px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .ra-step b{color:var(--p2)}
+  .ra-step i{color:var(--muted);font-size:.85rem;display:block;margin-top:4px}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+
+  /* Конструктор карты */
+  .map-builder{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;margin-bottom:16px}
+  .map-builder .hdr{background:var(--p2);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .map-builder .field{margin-bottom:12px}
+  .map-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .map-builder input[type="text"],.map-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .map-result{background:#FFF7E0;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p3)}
+
+  /* Галерея знаков */
+  .sign-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:16px}
+  .sign-card{background:#fff;border:2px solid #E8DCCF;border-radius:12px;padding:14px;text-align:center;cursor:pointer;transition:.2s}
+  .sign-card:hover{transform:translateY(-3px);border-color:var(--p4);box-shadow:var(--shadow)}
+  .sign-card .sign-icon{font-size:3rem;margin-bottom:8px}
+  .sign-card .sign-name{font-weight:800;font-size:.95rem;color:var(--p4);margin-bottom:4px}
+  .sign-card .sign-desc{font-size:.8rem;color:var(--muted);font-style:italic}
+  .sign-card.open{border-color:var(--p2);background:#F0F7E6}
+
+  /* Домашка */
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  /* Светофор */
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  /* Quizlet */
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  /* Ресурсы */
+  .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .resource-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.2s;border-top:4px solid var(--p4)}
+  .resource-card:hover{transform:translateY(-3px)}
+  .resource-card h4{font-size:1rem;margin-bottom:6px}
+  .resource-card p{font-size:.85rem;color:var(--muted);margin-bottom:12px;min-height:40px}
+  .resource-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem}
+  .resource-card a:hover{background:var(--p1)}
+  .resource-card .soon-inline{display:inline-block;background:#EDE4D8;color:var(--muted);padding:8px 16px;border-radius:8px;font-weight:700;font-size:.85rem}
+  .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  .lesson-nav span.soon{background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--muted);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65}
+</style>
+</head>
+<body>
+
+<script>document.body.insertAdjacentHTML('afterbegin','<div id="gate-overlay" style="position:fixed;inset:0;z-index:99999;background:#FFF7EF"></div>');</script>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">🎁 Бонусный модуль · Урок B3 из B5 · Misión Autoescuela</span>
+  <span id="auth-area"></span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🎁 Бонусный модуль · Misión Autoescuela</span>
+  <h1>Урок B3 · <em>Дорожные знаки и ро́тонды</em></h1>
+  <p class="sub">Проезжаем ро́тонды как местные и читаем дорожные знаки Испании — главный стресс экспатов за рулём.</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🎯 Цель: проехать ро́тонду без стресса</span>
+    <span class="meta-chip">🗣 32 слова в 4 категориях</span>
+    <span class="meta-chip">🧩 se debe / hay que / está prohibido</span>
+    <span class="meta-chip">🗺 Продукт: карта района</span>
+    <span class="meta-chip">⏱ 50 минут · A2</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">0</div><div class="step-title"><h2>Разминка + вопрос из жизни</h2><span class="time">00:00 – 06:00</span></div></div>
+  <div class="card">
+    <p class="hint">Перед ро́тондами проверим команды инструктора из урока B2 — они понадобятся на дороге.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок B2</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🔄</div>
+      <div class="sit-title">Одна ситуация: первая ро́тонда в Валенсии</div>
+    </div>
+    <div class="sit-intro">
+      Вы едете с инструктором. Впереди круговая развязка со знаком <b>ceda el paso</b>. Вы не знаете, что делать. Инструктор говорит быстро.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Инструктор:</div>
+      <div class="es">Reduzca la velocidad. Ceda el paso a los vehículos que circulan por la rotonda.</div>
+      <div class="ru">Снизьте скорость. Уступите дорогу машинам в ро́тонде.</div>
+      <button class="speak-btn" onclick="speak('Reduzca la velocidad. Ceda el paso a los vehículos que circulan por la rotonda.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ-шаблон (если не поняли):</div>
+      <div class="es">Perdone, ¿puede repetir? ¿Qué carril tomo?</div>
+      <div class="ru">Извините, можете повторить? Какую полосу брать?</div>
+      <button class="speak-btn" onclick="speak('Perdone, ¿puede repetir? ¿Qué carril tomo?')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Кто имеет приоритет на ро́тонде в Испании?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Тот, кто въезжает.</div>
+        <div class="q-opt" data-o="1">Тот, кто уже в круге.</div>
+        <div class="q-opt" data-o="2">Тот, кто сигналит громче.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">2</span>Когда нужно включать поворотник в ро́тонде?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Только при съезде (включить правый).</div>
+        <div class="q-opt" data-o="1">При въезде и при съезде.</div>
+        <div class="q-opt" data-o="2">Вообще не включать.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> ро́тонда — главный стресс экспатов. Сегодня вы научитесь проезжать её как местный житель, понимать все знаки и объяснять манёвры на испанском. Главное правило: <b>«Ceda el paso a los de dentro»</b> (уступите тем, кто внутри).
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: ЛЕКСИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">1</div><div class="step-title"><h2>Карточки: 32 слова — знаки, ро́тонды, манёвры</h2><span class="time">06:00 – 16:00</span></div></div>
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся. 🔊 — послушать произношение. Пройдите все 4 категории.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showVocab('priority',this)">🚦 Знаки приоритета (8)</button>
+      <button class="tab" onclick="showVocab('restriction',this)">🚫 Ограничения (7)</button>
+      <button class="tab" onclick="showVocab('roundabout',this)">🔄 Ро́тонда (8)</button>
+      <button class="tab" onclick="showVocab('verbs',this)">🚙 Глаголы (9)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+    <div class="note" style="margin-top:16px">
+      💡 <b>Главное правило ро́тонды:</b> приоритет ВСЕГДА у тех, кто УЖЕ в круге. При въезде — <b>ceda el paso</b>. При съезде — обязательно включите правый поворотник.
+    </div>
+    <div class="note" style="margin-top:10px">
+      ⚠️ <b>Ложные друзья переводчика:</b><br>
+      • <span class="grammar-hint" data-hint="la glorieta — это не «беседка» в саду, а «ро́тонда» (круговая развязка)">la glorieta</span> — ро́тонда (не беседка!)<br>
+      • <span class="grammar-hint" data-hint="la salida — это не «выход» из здания, а «съезд» с ро́тонды или трассы">la salida</span> — съезд (не выход)<br>
+      • <span class="grammar-hint" data-hint="esquivar — это НЕ «сортировать» (sortear = тянуть жребий), а «объехать, обойти»">esquivar</span> — объезжать (sortear = тянуть жребий!)<br>
+      • <span class="grammar-hint" data-hint="la parada — это не «парад», а «остановка» или «остановить машину»">la parada</span> — остановка
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num c2">2</div><div class="step-title"><h2>Грамматика: безличные конструкции</h2><span class="time">16:00 – 23:00 · ПДД Испании</span></div></div>
+  <div class="card">
+    <p class="hint">Все правила дорожного движения описываются через безличные конструкции — они одинаковы для всех водителей, без «ты» или «я».</p>
+
+    <div class="traffic-light">
+      <div class="tl-item red">
+        <div class="tl-circle">🔴</div>
+        <div class="tl-text">está prohibido + inf <small>нельзя</small></div>
+      </div>
+      <div class="tl-item yellow">
+        <div class="tl-circle">🟡</div>
+        <div class="tl-text">se debe / hay que + inf <small>обязательно</small></div>
+      </div>
+      <div class="tl-item green">
+        <div class="tl-circle">🟢</div>
+        <div class="tl-text">se puede + inf <small>разрешено</small></div>
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Конструкция 1. Se debe + инфинитив (должно)</h4>
+      <div class="formula">Se debe + инфинитив</div>
+      <div class="example">
+        <b>Se debe</b> ceder el paso. — Нужно уступить дорогу.<br>
+        <b>Se debe</b> respetar el límite de velocidad. — Нужно соблюдать ограничение скорости.<br>
+        <b>Se debe</b> señalizar antes de girar. — Нужно включить поворотник перед поворотом.
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Конструкция 2. Hay que + инфинитив (надо)</h4>
+      <div class="formula">Hay que + инфинитив</div>
+      <div class="example">
+        <b>Hay que</b> poner el intermitente. — Надо включить поворотник.<br>
+        <b>Hay que</b> reducir la velocidad. — Надо снизить скорость.<br>
+        <b>Hay que</b> pagar en la zona azul. — Надо платить в синей зоне.
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Конструкция 3. Está prohibido + инфинитив (запрещено)</h4>
+      <div class="formula">Está prohibido + инфинитив</div>
+      <div class="example">
+        <b>Está prohibido</b> adelantar. — Обгон запрещён.<br>
+        <b>Está prohibido</b> aparcar aquí. — Здесь парковка запрещена.<br>
+        <b>Está prohibido</b> girar a la izquierda. — Поворот налево запрещён.
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Конструкция 4. Se puede + инфинитив (можно)</h4>
+      <div class="formula">Se puede + инфинитив</div>
+      <div class="example">
+        <b>Se puede</b> aparcar aquí. — Здесь можно парковаться.<br>
+        <b>Se puede</b> girar a la derecha. — Можно повернуть направо.
+      </div>
+    </div>
+
+    <div class="note green">
+      💡 <b>Сравните с императивом B2:</b><br>
+      • Императив (инструктор лично вам): <i>¡Pise el freno! ¡Gire a la derecha!</i><br>
+      • Безличные конструкции (ПДД для всех): <i>Hay que frenar. Se debe girar.</i><br>
+      В правилах ДП — безличные формы. В командах инструктора — императив.
+    </div>
+
+    <div class="note">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«Hay que para»</i> ❌ → правильно <i>«Hay que <b>parar</b>»</i> (после hay que — инфинитив)<br>
+      • <i>«Está prohibido giras»</i> ❌ → правильно <i>«Está prohibido <b>girar</b>»</i><br>
+      • <i>«Se debe a ceder el paso»</i> ❌ → правильно <i>«Se debe <b>ceder</b> el paso»</i> (без предлога a)
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ЧТЕНИЕ + АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head"><div class="step-num c3">3</div><div class="step-title"><h2>Знаки в жизни: 5 ситуаций</h2><span class="time">23:00 – 30:00</span></div></div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🚦 Галерея знаков — нажмите, чтобы увидеть правило</h4>
+    <p class="hint">Кликните по знаку — откроется объяснение на испанском с переводом.</p>
+    <div class="sign-gallery" id="sign-gallery"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 5 ситуаций: выберите правильное действие</h4>
+    <p class="hint">Прочитайте ситуацию, выберите правильный ответ.</p>
+    <div id="situations-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 4: СИМУЛЯТОР РО́ТОНДЫ -->
+<section class="section">
+  <div class="step-head"><div class="step-num c4">4</div><div class="step-title"><h2>Симулятор ро́тонды: проехать 3 сценария</h2><span class="time">30:00 – 42:00 · Главный тренажёр урока</span></div></div>
+  <div class="card">
+    <p class="hint">Выберите съезд и проедьте ро́тонду шаг за шагом. На каждом шаге вы услышите команду инструктора на испанском и увидите объяснение. Это снимет 90% стресса при первом выезде в город!</p>
+
+    <div class="roundabout-sim">
+      <h3>🔄 Симулятор проезда ро́тонды</h3>
+
+      <div class="ra-visual">
+        <svg class="ra-svg" viewBox="0 0 400 280">
+          <!-- Ро́тонда (круг) -->
+          <circle cx="200" cy="140" r="90" fill="none" stroke="#3E7CB1" stroke-width="18" opacity="0.15"/>
+          <circle cx="200" cy="140" r="90" fill="none" stroke="#3E7CB1" stroke-width="3"/>
+          <circle cx="200" cy="140" r="40" fill="#F0F7E6" stroke="#7A8B4C" stroke-width="2"/>
+          <text x="200" y="145" text-anchor="middle" font-size="14" font-weight="bold" fill="#7A8B4C">🌳</text>
+
+          <!-- Въезд (снизу) -->
+          <rect x="185" y="230" width="30" height="50" fill="#E8DCCF"/>
+          <text x="200" y="270" text-anchor="middle" font-size="11" fill="#2B2118" font-weight="bold">ВЪЕЗД</text>
+
+          <!-- Съезды -->
+          <!-- 1ª salida (направо, 3 часа) -->
+          <rect x="290" y="135" width="50" height="20" fill="#E2725B" opacity="0.2"/>
+          <text x="345" y="150" font-size="12" fill="#E2725B" font-weight="bold">1ª salida →</text>
+
+          <!-- 2ª salida (прямо, 12 часов) -->
+          <rect x="185" y="0" width="30" height="50" fill="#E9A13B" opacity="0.2"/>
+          <text x="200" y="20" text-anchor="middle" font-size="12" fill="#E9A13B" font-weight="bold">↑ 2ª salida</text>
+
+          <!-- 3ª salida (налево, 9 часов) -->
+          <rect x="60" y="135" width="50" height="20" fill="#3E7CB1" opacity="0.2"/>
+          <text x="55" y="150" text-anchor="end" font-size="12" fill="#3E7CB1" font-weight="bold">← 3ª salida</text>
+
+          <!-- Машина -->
+          <g id="car-marker" transform="translate(200, 260)">
+            <rect x="-10" y="-7" width="20" height="14" fill="#E2725B" rx="3"/>
+            <text x="0" y="3" text-anchor="middle" font-size="8" fill="white" font-weight="bold">🚗</text>
+          </g>
+
+          <!-- Знак ceda el paso -->
+          <text x="170" y="225" font-size="22">🔻</text>
+        </svg>
+      </div>
+
+      <div class="ra-controls">
+        <div style="font-weight:700;color:var(--p4);margin-bottom:8px">Куда вы хотите съехать?</div>
+        <div class="ra-btn-group">
+          <button class="ra-btn" data-exit="1" onclick="selectExit(1)">1ª salida · направо</button>
+          <button class="ra-btn" data-exit="2" onclick="selectExit(2)">2ª salida · прямо</button>
+          <button class="ra-btn" data-exit="3" onclick="selectExit(3)">3ª salida · налево / разворот</button>
+        </div>
+        <button class="btn btn-primary" onclick="startRoundabout()" style="margin-top:12px">🚗 Проехать ро́тонду</button>
+      </div>
+
+      <div class="ra-output" id="ra-output">
+        <div style="color:var(--muted);font-style:italic;text-align:center;padding:20px 0">
+          Выберите съезд и нажмите «Проехать ро́тонду» 👆
+        </div>
+      </div>
+    </div>
+
+    <div class="note green">
+      💡 <b>Культурный нюанс:</b> В Испании <b>при въезде в ро́тонду поворотник обычно не включают</b>. Его включают <b>только при съезде — правый поворотник</b>, и это главный сигнал окружающим. На экзамене вход без поворотника — норма.
+    </div>
+
+    <div class="note">
+      🎯 <b>Совет для практики:</b> Откройте Google Street View в Валенсии или Мадриде, найдите любую ро́тонду и «проедьте» её виртуально, комментируя шаги по-испански.
+      <a href="https://www.google.com/maps" target="_blank" rel="noopener">🗺 Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 5: PBL — КАРТА РАЙОНА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">5</div><div class="step-title"><h2>PBL: карта вашего района с манёврами</h2><span class="time">42:00 – 50:00 · Продукт урока</span></div></div>
+  <div class="card">
+    <p class="hint">Создайте карту вашего (или будущего) района с разметкой 3 ключевых манёвров. Заполните поля — получите готовое описание на испанском, которое запишете голосовым.</p>
+
+    <div class="map-builder">
+      <div class="hdr">🗺 КОНСТРУКТОР: Карта района с манёврами</div>
+
+      <div class="field">
+        <label>🏙 Город:</label>
+        <select id="m-city">
+          <option>Valencia</option><option>Madrid</option><option>Barcelona</option><option>Sevilla</option><option>Málaga</option><option>Alicante</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>🏘 Район:</label>
+        <input type="text" id="m-barrio" placeholder="Benimaclet, Salamanca, Eixample...">
+      </div>
+      <div class="field">
+        <label>🔄 Ро́тонда рядом с домом (адрес):</label>
+        <input type="text" id="m-roundabout" placeholder="Glorieta de la Puerta del Mar">
+      </div>
+      <div class="field">
+        <label>🚶 Пешеходный переход (где дети переходят дорогу):</label>
+        <input type="text" id="m-crosswalk" placeholder="Calle Mayor, cerca del colegio">
+      </div>
+      <div class="field">
+        <label>🅿️ Парковка (zona azul / verde / бесплатная):</label>
+        <select id="m-parking">
+          <option value="zona azul">zona azul (платная)</option>
+          <option value="zona verde">zona verde (для резидентов)</option>
+          <option value="zona blanca">zona blanca (бесплатная)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>📍 Адрес дома:</label>
+        <input type="text" id="m-address" placeholder="Calle del Mar, 15">
+      </div>
+
+      <button class="btn btn-primary" onclick="buildMap()" style="margin-top:12px">🔧 Собрать карту</button>
+      <div id="map-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> сделайте скриншот Google Maps вашего района с отмеченными 3 точками + запишите голосовое с описанием (1 мин). Пришлите скриншот + голосовое преподавателю.
+    </div>
+  </div>
+</section>
+
+<!-- ДОМАШКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🏠</div><div class="step-title"><h2>Домашнее задание · Урок B3</h2><span class="time">⏱ ~30–35 минут</span></div></div>
+
+  <div class="hw-item">
+    <h4>🗺 Задание 1. «Моя карта района» (PBL) · 10 мин ⭐</h4>
+    <div class="hw-meta">Цель: применить навыки в реальной жизни.</div>
+    <p>Откройте Google Maps, найдите ваш (или будущий) район. Отметьте 3 точки: ро́тонда, пешеходный переход, парковка. Сделайте скриншот и подпишите каждую точку по-испански из конструктора.</p>
+    <button class="btn btn-ghost" onclick="speak('Aquí hay una rotonda. Se debe ceder el paso. Aquí hay un paso de peatones. Hay que reducir la velocidad. Aquí es zona azul. Hay que pagar.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Проезд ро́тонды» · 7 мин</h4>
+    <div class="hw-meta">Цель: описать манёвр вслух, как на экзамене.</div>
+    <p>Запишите голосовое, где вы описываете проезд ро́тонды по 5 шагам: приближение → уступка → выбор полосы → движение → съезд. Минимум 2 дубля.</p>
+    <button class="btn btn-ghost" onclick="speak('Me acerco a la rotonda. Reduzco la velocidad. Cedo el paso a los vehículos que ya circulan. Me pongo en el carril interior. Señalizo a la derecha. Salgo por la segunda salida.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 3. Рабочий лист · 20–25 мин</h4>
+    <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
+    <p>Распечатайте или заполните с экрана: лексика знаков, безличные конструкции, анализ 5 ситуаций, симуляция ро́тонды. Пришлите фото заполненного листа.</p>
+    <a href="../../worksheets/bonus-auto-b3-parents.html" class="btn btn-ghost" style="margin-top:8px">📄 Открыть рабочий лист (A4, печать)</a>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 4. Тренажёр · 10 мин</h4>
+    <div class="hw-meta">Цель: довести 32 слова до автоматизма.</div>
+    <p>Пройдите тренажёр урока: 🃏 Карточки (называйте перевод ДО переворота) + 🧩 Сопоставление + 🔤 Собери фразу. Все знаки + глаголы движения.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия «Карта нашего района» · 5 мин</h4>
+    <div class="hw-meta">Цель: связать урок с детьми.</div>
+    <p>Выйдите на прогулку с детьми. Найдите вместе 5 дорожных знаков. Пусть дети отметят их на карте района (нарисованной или Google Maps), а вы объясните правила по-испански: <i>«Mira, este es un paso de peatones. Se debe ceder el paso.»</i></p>
+    <button class="btn btn-ghost" onclick="speak('Mira, este es un paso de peatones. Se debe ceder el paso a los peatones. Mira, esta es una rotonda. Hay que ceder el paso a los vehículos.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🌍 Задание 6. Реальное действие (PBL) · 7 мин</h4>
+    <div class="hw-meta">Цель: применить урок в реальной жизни.</div>
+    <p>Найдите 3 дорожных знака в вашем районе (реальном или будущем). Сфотографируйте и подпишите по-испански: <i>«Prohibido aparcar», «Ceda el paso», «Zona azul»</i>. Пришлите фото с подписями.</p>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🗺 Скриншот карты района + голосовое описание (задание 1)<br>
+    • 🎤 Голосовое «Проезд ро́тонды» (задание 2)<br>
+    • 📄 Фото рабочего листа (задание 3)<br>
+    • 🌍 Фото 3 знаков с подписями (задание 6)<br>
+    • ✅ «Светофор» самопроверки
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">✅</div><div class="step-title"><h2>Самопроверка «Светофор»</h2><span class="time">Отметьте честно — нажмите на нужный цвет</span></div></div>
+  <div class="card">
+    <div style="overflow-x:auto">
+    <table class="tl-table">
+      <thead><tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr></thead>
+      <tbody id="tl-body"></tbody>
+    </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head"><div class="step-num">🎮</div><div class="step-title"><h2>Тренажёр: знаки, ро́тонды, безличные конструкции</h2><span class="time">~10 мин</span></div></div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока B3</h3>
+    <p>Повторите 32 слова урока в приложении Quizlet: дорожные знаки, ро́тонды, безличные конструкции.</p>
+    <span class="soon-inline">Набор карточек готовится — ссылка появится здесь</span>
+  </div>
+</section>
+
+<!-- РЕСУРСЫ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🔗</div><div class="step-title"><h2>Внешние ресурсы</h2><span class="time">Видео, тесты DGT, симуляторы</span></div></div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Cómo circular en rotondas — поиск видео</h4>
+      <p>Подборка видео о проезде ро́тонд в Испании. Смотрите авторов из Испании — они объясняют правила точнее переводов.</p>
+      <a href="https://www.youtube.com/results?search_query=como+circular+en+rotondas+Espa%C3%B1a" target="_blank" rel="noopener">Искать на YouTube →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Señales de tráfico — поиск видео</h4>
+      <p>Видеоразборы дорожных знаков Испании от разных авторов. Это не официальные материалы DGT.</p>
+      <a href="https://www.youtube.com/results?search_query=se%C3%B1ales+de+tr%C3%A1fico+DGT" target="_blank" rel="noopener">Искать на YouTube →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🌐 DGT</span>
+      <h4>Официальный сайт DGT</h4>
+      <p>Главное управление дорожного движения: правила, тесты, знаки.</p>
+      <a href="https://www.dgt.es/" target="_blank" rel="noopener">Открыть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🎮 Тесты</span>
+      <h4>TodoTest — тесты DGT</h4>
+      <p>Реальные тесты теоретического экзамена на испанском. Бесплатно.</p>
+      <a href="https://www.todotest.com/" target="_blank" rel="noopener">Тренироваться →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🗺 Street View</span>
+      <h4>Google Street View</h4>
+      <p>Виртуальный проезд ро́тонд в любом городе Испании.</p>
+      <a href="https://www.google.com/maps" target="_blank" rel="noopener">Проехать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏁 Следующий</span>
+      <h4>Урок B4: Теория DGT</h4>
+      <p>Следующий урок: слова-ловушки тестов, исключения и пробный экзамен. Урок в разработке.</p>
+      <span class="soon-inline">Скоро →</span>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · 🎁 Бонусный модуль «Misión Autoescuela»</footer>
+
+<div class="lesson-nav">
+  <a href="bonus-auto-b2.html">← Предыдущий<br><small>Урок B2 · Анатомия машины</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <span class="soon">Следующий →<br><small>Урок B4 · Теория DGT (скоро)</small></span>
+</div>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Grammar hints =====
+document.addEventListener('click', function(e){
+  var hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){ if(el!==hint) el.classList.remove('active'); });
+  if(hint){ hint.classList.toggle('active'); e.stopPropagation(); }
+});
+
+// ===== РАЗМИНКА-КВИЗ (B2) =====
+var warmQ=[
+  {q:'1. Как сказать «нажмите сцепление»?',o:['Pise el embrague','Toque el embrague','Apriete el embrague'],c:0},
+  {q:'2. Как сказать «посмотрите в зеркало»?',o:['Vea el retrovisor','Mire el retrovisor','Busque el retrovisor'],c:1},
+  {q:'3. Как сказать «машина заглохла»?',o:['El coche está roto','El coche se ha calado','El coche ha parado'],c:1},
+  {q:'4. Как сказать «поверните направо»?',o:['Gire a la derecha','Tuerza a la derecha','Doble a la derecha'],c:0},
+  {q:'5. Как сказать «тормозите плавно»?',o:['Frene suavemente','Pare despacio','Frene lento'],c:0},
+  {q:'6. Как вежливо переспросить инструктора?',o:['¿Qué?','¿Puede repetir, por favor?','No entiendo nada'],c:1}
+];
+
+function renderWarmup(){
+  var el = document.getElementById('warmup-quiz');
+  el.innerHTML = '';
+  warmQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+' <span class="quiz-week b2">урок B2</span></h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="wf-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('wf-'+qi);
+      if(oi === warmQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[warmQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+warmQ[qi].o[warmQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderWarmup();
+
+// ===== СИТУАЦИЯ ИЗ ЖИЗНИ =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== ЛЕКСИКА =====
+var VOCAB = {
+  priority:[
+    {icon:'🔻', es:'ceda el paso', ru:'уступите дорогу', ex:'Ceda el paso en la rotonda.', exRu:'Уступите дорогу на ро́тонде.'},
+    {icon:'🛑', es:'stop', ru:'стоп (полная остановка)', ex:'Pare en el stop.', exRu:'Остановитесь на стопе.'},
+    {icon:'🔶', es:'prioridad', ru:'приоритет (главная дорога)', ex:'Tiene prioridad.', exRu:'У вас приоритет.'},
+    {icon:'🔹', es:'prioridad a la derecha', ru:'помеха справа', ex:'Prioridad a la derecha.', exRu:'Приоритет у того, кто справа.'},
+    {icon:'🚫', es:'entrada prohibida', ru:'въезд запрещён', ex:'Entrada prohibida a esta calle.', exRu:'Въезд на эту улицу запрещён.'},
+    {icon:'⬆️', es:'sentido obligatorio', ru:'обязательное направление', ex:'Sentido obligatorio a la izquierda.', exRu:'Обязательное направление налево.'},
+    {icon:'⛔', es:'dirección prohibida', ru:'движение запрещено', ex:'Dirección prohibida.', exRu:'Движение запрещено.'},
+    {icon:'🚶', es:'paso de peatones', ru:'пешеходный переход', ex:'Ceda el paso en el paso de peatones.', exRu:'Уступите дорогу на пешеходном переходе.'}
+  ],
+  restriction:[
+    {icon:'⭕', es:'límite de velocidad', ru:'ограничение скорости', ex:'Límite de velocidad: 50 km/h.', exRu:'Ограничение скорости: 50 км/ч.'},
+    {icon:'🅿️', es:'prohibido aparcar', ru:'парковка запрещена', ex:'Prohibido aparcar en esta zona.', exRu:'В этой зоне парковка запрещена.'},
+    {icon:'🚫', es:'prohibido adelantar', ru:'обгон запрещён', ex:'Prohibido adelantar aquí.', exRu:'Здесь обгон запрещён.'},
+    {icon:'↩️', es:'prohibido girar', ru:'поворот запрещён', ex:'Prohibido girar a la izquierda.', exRu:'Поворот налево запрещён.'},
+    {icon:'🚷', es:'zona peatonal', ru:'пешеходная зона', ex:'No entre en la zona peatonal.', exRu:'Не заезжайте в пешеходную зону.'},
+    {icon:'📦', es:'zona de carga y descarga', ru:'зона погрузки-разгрузки', ex:'Solo carga y descarga de 8 a 10.', exRu:'Только погрузка с 8 до 10.'},
+    {icon:'🔵', es:'zona azul', ru:'платная парковка', ex:'Hay que pagar en la zona azul.', exRu:'В синей зоне надо платить.'}
+  ],
+  roundabout:[
+    {icon:'🔄', es:'la rotonda / la glorieta', ru:'круговое движение', ex:'Hay una rotonda delante.', exRu:'Впереди ро́тонда.'},
+    {icon:'⬇️', es:'la entrada', ru:'въезд', ex:'Reduzca en la entrada.', exRu:'Снизьте скорость при въезде.'},
+    {icon:'⬆️', es:'la salida', ru:'съезд', ex:'Tome la segunda salida.', exRu:'Сверните на второй съезд.'},
+    {icon:'1️⃣', es:'la primera salida', ru:'первый съезд (направо)', ex:'Primera salida a la derecha.', exRu:'Первый съезд направо.'},
+    {icon:'2️⃣', es:'la segunda salida', ru:'второй съезд (прямо)', ex:'Segunda salida de frente.', exRu:'Второй съезд прямо.'},
+    {icon:'◀️', es:'el carril interior', ru:'внутренняя полоса', ex:'Póngase en el carril interior.', exRu:'Встаньте на внутреннюю полосу.'},
+    {icon:'▶️', es:'el carril exterior', ru:'внешняя полоса', ex:'Carril exterior para salir.', exRu:'Внешняя полоса для съезда.'},
+    {icon:'💡', es:'el intermitente', ru:'поворотник', ex:'Ponga el intermitente derecho.', exRu:'Включите правый поворотник.'}
+  ],
+  verbs:[
+    {icon:'🏎️', es:'adelantar', ru:'обгонять', ex:'Está prohibido adelantar.', exRu:'Обгон запрещён.'},
+    {icon:'➡️', es:'incorporarse', ru:'вливаться в поток', ex:'Incorpórese a la vía.', exRu:'Вливайтесь в поток.'},
+    {icon:'🔦', es:'señalizar', ru:'подавать сигнал', ex:'Señalice antes de girar.', exRu:'Подайте сигнал перед поворотом.'},
+    {icon:'🐢', es:'reducir', ru:'снижать скорость', ex:'Reduzca la velocidad.', exRu:'Снизьте скорость.'},
+    {icon:'🅿️', es:'aparcar', ru:'парковаться (ненадолго)', ex:'Aparque en la zona azul.', exRu:'Паркуйтесь в синей зоне.'},
+    {icon:'🏠', es:'estacionar', ru:'оставлять на стоянке', ex:'Estacione en el garaje.', exRu:'Оставьте машину в гараже.'},
+    {icon:'🚶', es:'cruzar', ru:'пересекать', ex:'Cruce con cuidado.', exRu:'Пересекайте осторожно.'},
+    {icon:'🔀', es:'esquivar', ru:'объезжать (обходить)', ex:'Esquive el obstáculo.', exRu:'Объедьте препятствие.'},
+    {icon:'🛑', es:'detenerse', ru:'останавливаться', ex:'Deténgase en el semáforo.', exRu:'Остановитесь на светофоре.'}
+  ]
+};
+
+function showVocab(key,btn){
+  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML = '<div class="vocab-inner">'+
+      '<div class="vocab-front">'+
+        '<div class="icon">'+w.icon+'</div>'+
+        '<div class="es">'+w.es+'</div>'+
+        '<div class="ru">'+w.ru+'</div>'+
+        '<button class="speak-btn" style="margin-top:6px" onclick="event.stopPropagation();speak(\''+w.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+        '<div class="flip-hint">нажмите для примера ↻</div>'+
+      '</div>'+
+      '<div class="vocab-back">'+
+        '<div class="ex">«'+w.ex+'»</div>'+
+        '<div class="ex-ru">'+w.exRu+'</div>'+
+        '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
+      '</div>'+
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('priority',document.querySelector('.tabs .tab'));
+
+// ===== ГАЛЕРЕЯ ЗНАКОВ =====
+var SIGNS = [
+  {icon:'🔻', name:'Ceda el paso', rule:'Se debe ceder el paso a los vehículos.', ruleRu:'Нужно уступить дорогу машинам.'},
+  {icon:'🛑', name:'Stop', rule:'Hay que parar completamente.', ruleRu:'Надо полностью остановиться.'},
+  {icon:'🚫', name:'Prohibido adelantar', rule:'Está prohibido adelantar en esta zona.', ruleRu:'В этой зоне обгон запрещён.'},
+  {icon:'🔵', name:'Zona azul', rule:'Hay que pagar en el parquímetro.', ruleRu:'Надо платить в паркомате.'},
+  {icon:'🚶', name:'Paso de peatones', rule:'Se debe ceder el paso a los peatones.', ruleRu:'Нужно уступить пешеходам.'},
+  {icon:'🅿️', name:'Prohibido aparcar', rule:'Está prohibido aparcar aquí.', ruleRu:'Здесь парковка запрещена.'},
+  {icon:'🔄', name:'Rotonda', rule:'Tienen prioridad los vehículos de dentro.', ruleRu:'Приоритет у машин внутри круга.'},
+  {icon:'🔶', name:'Prioridad', rule:'Esta vía tiene prioridad.', ruleRu:'У этой дороги приоритет.'},
+  {icon:'⭕', name:'Límite 50', rule:'Se debe respetar el límite de velocidad.', ruleRu:'Нужно соблюдать ограничение.'}
+];
+
+function renderSigns(){
+  var g = document.getElementById('sign-gallery');
+  g.innerHTML = '';
+  SIGNS.forEach(function(s){
+    var c = document.createElement('div');
+    c.className = 'sign-card';
+    c.innerHTML = '<div class="sign-icon">'+s.icon+'</div>'+
+      '<div class="sign-name">'+s.name+'</div>'+
+      '<div class="sign-desc">нажмите 👆</div>';
+    c.onclick = function(){
+      var isOpen = c.classList.contains('open');
+      g.querySelectorAll('.sign-card').forEach(function(x){
+        x.classList.remove('open');
+        x.querySelector('.sign-desc').textContent = 'нажмите 👆';
+      });
+      if(!isOpen){
+        c.classList.add('open');
+        c.querySelector('.sign-desc').innerHTML = '<b style="color:var(--p4)">'+s.rule+'</b><br><i style="font-size:.75rem">'+s.ruleRu+'</i>';
+        speak(s.rule);
+      }
+    };
+    g.appendChild(c);
+  });
+}
+renderSigns();
+
+// ===== 5 СИТУАЦИЙ =====
+var SITUATIONS = [
+  {
+    q:'1. Перед вами знак ceda el paso. Что нужно сделать?',
+    opts:[
+      'Полностью остановиться',
+      'Уступить дорогу тем, кто на главной',
+      'Проехать первым'
+    ],
+    c:1,
+    explain:'Ceda el paso = уступить дорогу. Не обязательно останавливаться, если дорога свободна. Stop — вот там обязательная остановка.'
+  },
+  {
+    q:'2. Вы подъезжаете к ро́тонде. Что нужно сделать?',
+    opts:[
+      'Включить левый поворотник и въехать',
+      'Снизить скорость и уступить тем, кто в круге',
+      'Быстро въехать, чтобы занять внутреннюю полосу'
+    ],
+    c:1,
+    explain:'Приоритет ВСЕГДА у тех, кто уже в круге. При въезде поворотник НЕ включают.'
+  },
+  {
+    q:'3. Вы хотите съехать на вторую улицу (прямо). Какую полосу выбрать?',
+    opts:[
+      'Carril exterior (внешнюю)',
+      'Carril interior (внутреннюю) или exterior',
+      'Любую — не важно'
+    ],
+    c:1,
+    explain:'Для segunda salida можно использовать обе полосы. Но перед съездом надо перестроиться на внешнюю и включить правый поворотник.'
+  },
+  {
+    q:'4. Вы видите знак «Prohibido aparcar». Что можно сделать?',
+    opts:[
+      'Парковаться на 5 минут',
+      'Парковаться нельзя',
+      'Парковаться только ночью'
+    ],
+    c:1,
+    explain:'Está prohibido aparcar = парковка запрещена. Ищите zona azul или zona blanca рядом.'
+  },
+  {
+    q:'5. На пешеходном переходе стоит человек. Что вы должны сделать?',
+    opts:[
+      'Сигналить, чтобы он быстрее переходил',
+      'Ceder el paso — уступить дорогу',
+      'Проехать, если он далеко'
+    ],
+    c:1,
+    explain:'Se debe ceder el paso a los peatones en el paso de peatones. Это закон в Испании — пешеход всегда прав на переходе.'
+  }
+];
+
+function renderSituations(){
+  var el = document.getElementById('situations-quiz');
+  el.innerHTML = '';
+  SITUATIONS.forEach(function(s,i){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+s.q+'</h4><div class="quiz-opts">'+s.opts.map(function(o,oi){
+      return '<div class="quiz-opt" data-s="'+i+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="sf-'+i+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var si = +b.dataset.s, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(x){ x.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('sf-'+si);
+      if(oi === SITUATIONS[si].c){
+        b.classList.add('correct');
+        fb.innerHTML = '✅ ¡Correcto! <span style="font-weight:400;display:block;margin-top:4px;font-size:.85rem;color:var(--muted)">'+SITUATIONS[si].explain+'</span>';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[SITUATIONS[si].c].classList.add('correct');
+        fb.innerHTML = '❌ Правильно: '+SITUATIONS[si].opts[SITUATIONS[si].c]+' <span style="font-weight:400;display:block;margin-top:4px;font-size:.85rem;color:var(--muted)">'+SITUATIONS[si].explain+'</span>';
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderSituations();
+
+// ===== СИМУЛЯТОР РО́ТОНДЫ =====
+var selectedExit = null;
+function selectExit(n){
+  selectedExit = n;
+  document.querySelectorAll('.ra-btn').forEach(function(b){
+    b.classList.toggle('active', +b.dataset.exit === n);
+  });
+}
+
+function startRoundabout(){
+  if(!selectedExit){
+    alert('Сначала выберите съезд (1ª, 2ª или 3ª salida)');
+    return;
+  }
+  var output = document.getElementById('ra-output');
+  output.innerHTML = '';
+
+  var steps = [
+    {es:'Reduzca la velocidad al acercarse a la rotonda.', ru:'Снизьте скорость при приближении к ро́тонде.'},
+    {es:'Mire los retrovisores y ceda el paso a los vehículos que ya circulan.', ru:'Посмотрите в зеркала и уступите дорогу машинам в круге.'},
+    {es:'No ponga el intermitente al entrar.', ru:'При въезде НЕ включайте поворотник.'}
+  ];
+
+  var carril = '';
+  var exitName = '';
+  if(selectedExit === 1){
+    carril = 'Póngase en el carril exterior (derecho).';
+    exitName = 'Tome la primera salida a la derecha.';
+  } else if(selectedExit === 2){
+    carril = 'Póngase en el carril interior o exterior.';
+    exitName = 'Tome la segunda salida de frente.';
+  } else {
+    carril = 'Póngase en el carril interior (izquierdo).';
+    exitName = 'Tome la tercera salida a la izquierda / cambio de sentido.';
+  }
+  steps.push({es:carril, ru: selectedExit===1 ? 'Встаньте на внешнюю (правую) полосу.' : (selectedExit===2 ? 'Встаньте на внутреннюю или внешнюю полосу.' : 'Встаньте на внутреннюю (левую) полосу.')});
+
+  if(selectedExit === 3){
+    steps.push({es:'Circule por el carril interior hasta acercarse a la salida.', ru:'Двигайтесь по внутренней полосе, приближаясь к съезду.'});
+    steps.push({es:'Señalice a la derecha y cambie al carril exterior con precaución.', ru:'Включите правый поворотник и осторожно перестройтесь на внешнюю полосу.'});
+  } else {
+    steps.push({es:'Mantenga su carril dentro de la rotonda.', ru:'Держите свою полосу внутри круга.'});
+    steps.push({es:'Ponga el intermitente derecho para indicar que va a salir.', ru:'Включите правый поворотник — это сигнал съезда.'});
+  }
+
+  steps.push({es:exitName, ru: selectedExit===1?'Сверните на первый съезд (направо).' : (selectedExit===2?'Сверните на второй съезд (прямо).':'Сверните на третий съезд (налево или разворот).')});
+  steps.push({es:'¡Perfecto! Ha cruzado la rotonda con éxito.', ru:'Отлично! Вы успешно проехали ро́тонду.'});
+
+  var i = 0;
+  var addStep = function(){
+    if(i >= steps.length){
+      var congrat = document.createElement('div');
+      congrat.className = 'ra-step';
+      congrat.style.background = '#F0F7E6';
+      congrat.style.borderLeftColor = 'var(--p2)';
+      congrat.innerHTML = '<span class="step-num">✓</span><b style="color:var(--p2)">¡Felicidades!</b> Вы прошли симуляцию.<i>Запишите голосовое, где вы проговариваете эти шаги — это ваш тренажёр перед первым выездом в город.</i>';
+      output.appendChild(congrat);
+      output.scrollTop = output.scrollHeight;
+      speak('¡Felicidades! Ha cruzado la rotonda con éxito.');
+      return;
+    }
+    var s = steps[i];
+    var div = document.createElement('div');
+    div.className = 'ra-step';
+    div.innerHTML = '<span class="step-num">'+(i+1)+'</span><b>'+s.es+'</b><i>'+s.ru+'</i>';
+    output.appendChild(div);
+    output.scrollTop = output.scrollHeight;
+    speak(s.es);
+    i++;
+    setTimeout(addStep, 2400);
+  };
+  addStep();
+}
+
+// ===== КОНСТРУКТОР КАРТЫ РАЙОНА =====
+function buildMap(){
+  var city = document.getElementById('m-city').value;
+  var barrio = document.getElementById('m-barrio').value || 'el centro';
+  var roundabout = document.getElementById('m-roundabout').value || 'la glorieta principal';
+  var crosswalk = document.getElementById('m-crosswalk').value || 'cerca del colegio';
+  var parking = document.getElementById('m-parking').value;
+  var address = document.getElementById('m-address').value || 'Calle Mayor, 15';
+
+  var parkingRule = parking === 'zona azul' ? 'Hay que pagar en el parquímetro.' : (parking === 'zona verde' ? 'Es solo para residentes del barrio.' : 'Se puede aparcar gratis.');
+
+  var text =
+    '🗺 MI BARRIO EN '+city.toUpperCase()+'\n\n'+
+    'Mi dirección: '+address+', barrio '+barrio+'.\n\n'+
+    '🔄 ROTONDA CERCA DE CASA:\n'+
+    'Hay una rotonda en '+roundabout+'.\n'+
+    'Se debe ceder el paso a los vehículos que ya circulan.\n'+
+    'Al salir, hay que poner el intermitente derecho.\n\n'+
+    '🚶 PASO DE PEATONES:\n'+
+    'Hay un paso de peatones '+crosswalk+'.\n'+
+    'Se debe reducir la velocidad y ceder el paso a los peatones.\n\n'+
+    '🅿️ APARCAMIENTO:\n'+
+    'Cerca de mi casa hay '+parking+'.\n'+
+    parkingRule+'\n\n'+
+    '🚗 MI RUTA HABITUAL:\n'+
+    'Salgo de casa, reduzco la velocidad en la rotonda,\n'+
+    'cedo el paso en el paso de peatones,\n'+
+    'y aparco en '+parking+'.';
+
+  var result = document.getElementById('map-result');
+  result.innerHTML = '<div class="map-result">'+text+'</div>'+
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">'+
+    '<button class="btn btn-secondary" onclick="speak(\''+text.replace(/\n/g,'. ').replace(/'/g,"\\'")+'\')">🔊 Прослушать</button>'+
+    '<button class="btn btn-ghost" onclick="copyMapText(this)">📋 Скопировать</button>'+
+    '</div>';
+  result.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function copyMapText(btn){
+  var text = btn.parentElement.previousElementSibling.textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent = '✓ Скопировано!';
+    setTimeout(function(){ btn.textContent = '📋 Скопировать'; }, 2000);
+  });
+}
+
+// ===== СВЕТОФОР =====
+var TL = [
+  'Читать 8 знаков приоритета (ceda el paso, stop, prioridad...)',
+  'Читать знаки ограничений (prohibido aparcar, zona azul...)',
+  'Проезжать ро́тонду по правилам Испании',
+  'Использовать безличные конструкции (se debe / hay que / está prohibido)',
+  'Объяснить манёвр инструктору или попутчику',
+  'Составить карту района с 3 манёврами'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t,rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+t+'</td>'+
+      '<td><button class="tl-cell green" data-row="'+rowIdx+'" data-color="1">🟢</button></td>'+
+      '<td><button class="tl-cell yellow" data-row="'+rowIdx+'" data-color="2">🟡</button></td>'+
+      '<td><button class="tl-cell red" data-row="'+rowIdx+'" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== ТРЕНАЖЁР =====
+var TRAIN_CARDS = [].concat(VOCAB.priority, VOCAB.restriction, VOCAB.roundabout, VOCAB.verbs);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode,btn){
+  trainMode = mode;
+  document.querySelectorAll('#train-section .tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+    var updateCard = function(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML = '<div class="vocab-inner">'+
+        '<div class="vocab-front">'+
+          '<div class="icon" style="font-size:2.5rem">'+c.icon+'</div>'+
+          '<div class="es" style="font-size:1.2rem">'+c.es+'</div>'+
+          '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+c.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+          '<div class="flip-hint">нажмите для перевода ↻</div>'+
+        '</div>'+
+        '<div class="vocab-back">'+
+          '<div class="ex" style="font-size:1.1rem">'+c.ru+'</div>'+
+        '</div>'+
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    };
+    updateCard();
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML = '<button class="btn btn-ghost" id="train-prev">← Назад</button>'+
+      '<span id="trainer-counter" style="font-weight:700">1 / '+TRAIN_CARDS.length+'</span>'+
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderTrainMatch(c);
+  }
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainMatch(container){
+  var pairs = [
+    {id:1, es:'ceda el paso', ru:'уступите дорогу'},
+    {id:2, es:'está prohibido adelantar', ru:'обгон запрещён'},
+    {id:3, es:'la rotonda', ru:'круговое движение'},
+    {id:4, es:'paso de peatones', ru:'пешеходный переход'},
+    {id:5, es:'zona azul', ru:'платная парковка'},
+    {id:6, es:'carril interior', ru:'внутренняя полоса'}
+  ];
+  container.innerHTML = '<div class="match-container"><div class="match-col" id="tm-left"></div><div class="match-col" id="tm-right"></div></div>';
+  var left = document.getElementById('tm-left');
+  var right = document.getElementById('tm-right');
+  var rightSh = pairs.slice().sort(function(){ return Math.random()-0.5; });
+  var selL = null, selR = null;
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+  rightSh.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Se debe ceder el paso en la rotonda', hint:'Нужно уступить дорогу на ро́тонде'},
+    {target:'Está prohibido aparcar en esta zona', hint:'В этой зоне парковка запрещена'},
+    {target:'Hay que pagar en la zona azul', hint:'Надо платить в синей зоне'},
+    {target:'Tome la segunda salida de frente', hint:'Сверните на второй съезд прямо'}
+  ];
+  var idx = 0;
+  var sel = [];
+  function render(){
+    sel = [];
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var words = p.target.split(' ').sort(function(){ return Math.random()-0.5; });
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: '+p.hint;
+    container.appendChild(h);
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+    words.forEach(function(w){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = w;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(w);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = w;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(w);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+        };
+        document.getElementById('tb-line').appendChild(chip);
+      };
+      wC.appendChild(b);
+    });
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML = '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>'+
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+    document.getElementById('tb-check').onclick = function(){
+      var got = sel.join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+        speak(p.target);
+      } else {
+        fb.innerHTML = '<span>❌</span><span>Правильно: «'+p.target+'»</span>';
+        fb.className = 'build-feedback bad';
+      }
+    };
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>
