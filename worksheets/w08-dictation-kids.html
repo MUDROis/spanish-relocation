@@ -94,6 +94,7 @@
     .top-nav,.check-btn,.speak-btn-small,.print-btn{display:none}
     .part-block{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid}
     .result-card{display:none}
+    @page{size:A4;margin:12mm}
   }
 </style>
 </head>
@@ -101,7 +102,7 @@
 
 <nav class="top-nav">
   <div class="nav-left">
-    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <a href="../kids.html" class="back-btn">← К карте</a>
     <div class="brand">Школа <span>МУДРО</span></div>
   </div>
   <div class="nav-right">Станция 3 · Неделя 8 · Диктант</div>
@@ -222,7 +223,12 @@ var esVoice=null;
 function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
 function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.8;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
-function normalize(s){return s.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.,!?¿¡]/g,'');}
+function normalize(s){
+  /* без диакритики и знаков: policia == policía, "el gato." == "El Gato" */
+  return String(s==null?'':s).trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ').replace(/[.,!?¿¡]/g,'').trim();
+}
 
 var PART1=[
  {word:'el abuelo',id:'p1_1'},
@@ -248,11 +254,11 @@ var PART2=[
  {ru:'полицейский',ans:['policía'],id:'p2_3'},
  {ru:'пожарный',ans:['bombero','bombera'],id:'p2_4'},
  {ru:'программист',ans:['informático','informática'],id:'p2_5'},
- {ru:'светлые волосы',ans:['el pelo rubio','pelo rubio'],id:'p2_6'},
- {ru:'каштановые волосы',ans:['el pelo castaño','pelo castaño'],id:'p2_7'},
- {ru:'чёрные волосы',ans:['el pelo negro','pelo negro'],id:'p2_8'},
- {ru:'белые волосы',ans:['el pelo blanco','pelo blanco'],id:'p2_9'},
- {ru:'голубые глаза',ans:['los ojos azules','ojos azules'],id:'p2_10'}
+ {ru:'светлые волосы',ans:['el pelo rubio','pelo rubio','rubio','rubia'],id:'p2_6'},
+ {ru:'каштановые волосы',ans:['el pelo castaño','pelo castaño','castaño','castaña'],id:'p2_7'},
+ {ru:'чёрные волосы',ans:['el pelo negro','pelo negro','negro','negra'],id:'p2_8'},
+ {ru:'белые волосы',ans:['el pelo blanco','pelo blanco','blanco','blanca'],id:'p2_9'},
+ {ru:'голубые глаза',ans:['los ojos azules','ojos azules','azules','azul'],id:'p2_10'}
 ];
 
 var PART3=[
@@ -267,8 +273,8 @@ var PART3=[
 ];
 
 var PART4=[
- {ru:'зелёные глаза',ans:['los ojos verdes','ojos verdes'],id:'p4_1'},
- {ru:'карие глаза',ans:['los ojos marrones','ojos marrones'],id:'p4_2'},
+ {ru:'зелёные глаза',ans:['los ojos verdes','ojos verdes','verdes','verde'],id:'p4_1'},
+ {ru:'карие глаза',ans:['los ojos marrones','ojos marrones','marrones'],id:'p4_2'},
  {ru:'лысый',ans:['calvo'],id:'p4_3'},
  {ru:'молодой',ans:['joven'],id:'p4_4'},
  {ru:'старый',ans:['viejo','vieja'],id:'p4_5'},
