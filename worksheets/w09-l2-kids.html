@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 26 · ¿Dónde está? — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --blue:#2274A5; --rose:#E5989B;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(42,157,143,.4)}
+  .print-btn:hover{background:#1f7a72}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E8F5F2,#FFF3D6,#FFE5EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--teal)}
+  .hero h1{font-size:21px;color:var(--teal);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--teal);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-green{background:#2E7D32}.c-rose{background:var(--rose)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#E8F5F2;border:1.5px dashed var(--teal);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--teal);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 26px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:90px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--teal);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--teal)}
+  .build-line{border-bottom:1.6px dashed var(--teal);height:24px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🙈 ¿Dónde está?</h1>
+    <div class="sub">Рабочий лист к Уроку 26 · Станция 3: Mi Mundo · предлоги места, ESTAR, игра в прятки</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, потом проверь с родителем или учителем. Вспоминай <strong>6 предлогов места</strong> и грамматику <strong>ESTAR</strong>: ¿Dónde está...?</div>
+
+  <!-- 1. ПРЕДЛОГИ: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">1</span>
+      <span class="ex-title">Соедини предлог и перевод</span>
+      <span class="ex-skill">🗣 Лексика · предлоги</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским предлогом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>📦 en</td><td>а) наверху, над</td></tr>
+      <tr><td><span class="ans-box"></span>⬆️ encima de</td><td>б) под, внизу</td></tr>
+      <tr><td><span class="ans-box"></span>⬇️ debajo de</td><td>в) в / на</td></tr>
+      <tr><td><span class="ans-box"></span>➡️ al lado de</td><td>г) за, позади</td></tr>
+      <tr><td><span class="ans-box"></span>⬅️ detrás de</td><td>д) рядом с</td></tr>
+      <tr><td><span class="ans-box"></span>👉 delante de</td><td>е) перед, впереди</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. УГАДАЙ ПРЕДЛОГ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-rose">2</span>
+      <span class="ex-title">Угадай предлог по описанию</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>en · encima de · debajo de · al lado de · detrás de · delante de</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">⬆️</span> Книга наверху стола, сверху. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">⬇️</span> Кот спрятался внизу, под кроватью. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">➡️</span> Стул стоит сбоку, рядом со столом. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">⬅️</span> Мяч спрятался за дверью, сзади. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">👉</span> Диван стоит перед телевизором. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">📦</span> Картина висит на стене (общее «на»). → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ВСТАВЬ ПРЕДЛОГ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь правильный предлог</span>
+      <span class="ex-skill">🧩 Грамматика · ESTAR + предлог</span>
+    </div>
+    <div class="hint-box">💡 <strong>Помни:</strong> После <b>encima / debajo / lado / detrás / delante</b> всегда стоит <b>de</b>. Например: <em>encima <b>de</b> la mesa</em>.</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>El gato está <span class="g"></span> la cama. <span style="color:#999;font-size:11px">(под)</span></div>
+      <div class="gap-item"><span class="num">2</span>Las llaves están <span class="g"></span> la mesa. <span style="color:#999;font-size:11px">(наверху)</span></div>
+      <div class="gap-item"><span class="num">3</span>La silla está <span class="g"></span> la mesa. <span style="color:#999;font-size:11px">(рядом с)</span></div>
+      <div class="gap-item"><span class="num">4</span>La pelota está <span class="g"></span> la puerta. <span style="color:#999;font-size:11px">(за)</span></div>
+      <div class="gap-item"><span class="num">5</span>El sofá está <span class="g"></span> la televisión. <span style="color:#999;font-size:11px">(перед)</span></div>
+      <div class="gap-item"><span class="num">6</span>El cuadro está <span class="g"></span> la pared. <span style="color:#999;font-size:11px">(на)</span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ (слова вразброс) -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">gato</span><span class="build-word">está</span><span class="build-word">debajo</span><span class="build-word">de</span><span class="build-word">El</span><span class="build-word">la</span><span class="build-word">mesa.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">encima</span><span class="build-word">de</span><span class="build-word">Las</span><span class="build-word">están</span><span class="build-word">la</span><span class="build-word">llaves</span><span class="build-word">televisión.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">detrás</span><span class="build-word">de</span><span class="build-word">La</span><span class="build-word">pelota</span><span class="build-word">está</span><span class="build-word">la</span><span class="build-word">puerta.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">está</span><span class="build-word">¿Dónde</span><span class="build-word">gato?</span><span class="build-word">el</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">5</span>
+      <span class="ex-title">Прочитай текст «Где кот Luna?» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo María. Tengo un gato. Se llama Luna. Luna es muy traviesa. A veces está en la cocina, <b>al lado de</b> la nevera. A veces está en el salón, <b>encima del</b> sofá. A veces está en el dormitorio, <b>debajo de</b> la cama. Hoy no encuentro a Luna. ¿Dónde está Luna? ¡Mira! Luna está <b>detrás de</b> la puerta, <b>al lado de</b> la mochila. ¡Luna, ven aquí!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Cómo se llama el gato? <span class="ru">(Как зовут кота?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Dónde está Luna en la cocina? <span class="ru">(Где Луна на кухне?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Dónde está Luna en el dormitorio? <span class="ru">(Где Луна в спальне?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Dónde está Luna hoy? <span class="ru">(Где Луна сегодня?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 6. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">6</span>
+      <span class="ex-title">Послушай и напиши ответ</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши, где находится предмет (используй предлог)!</div>
+    <div class="listen-item"><span class="lnum">1.</span>¿Dónde está el gato? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span>¿Dónde están las llaves? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span>¿Dónde está la pelota? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span>¿Dónde está el libro? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span>¿Dónde está la planta? → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) «El gato está debajo de la cama.» · 2) «Las llaves están encima de la mesa.» · 3) «La pelota está detrás de la puerta.» · 4) «El libro está al lado de la silla.» · 5) «La planta está delante de la ventana.»</div>
+  </div>
+
+  <!-- 7. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">7</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Скажи, где кот:<br><span class="tpl">El gato está debajo de la cama.</span><span class="ru">Кот под кроватью.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Скажи, где ключи:<br><span class="tpl">Las llaves están encima de la mesa.</span><span class="ru">Ключи на столе.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Скажи, где мяч:<br><span class="tpl">La pelota está detrás de la puerta.</span><span class="ru">Мяч за дверью.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Спроси, где книга:<br><span class="tpl">¿Dónde está el libro?</span><span class="ru">Где книга?</span><span class="speak-check"></span></div>
+    <div class="speak-item">5. Опиши свою комнату (3 предмета):<br><span class="tpl">La cama está en el dormitorio. La mesa está al lado de la ventana. El libro está encima de la mesa.</span><span class="ru">Кровать в спальне. Стол рядом с окном. Книга на столе.</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 8. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">8</span>
+      <span class="ex-title">Сочинение «Mi habitación»</span>
+      <span class="ex-skill">✍️ Письмо · 6–7 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! Me llamo... · 2) Esta es mi habitación. · 3) La cama está... · 4) La mesa está... · 5) El libro está... · 6) La pelota está... · 7) ¡Me gusta mi habitación!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 9. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">9</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Выучить 6 предлогов места</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Использовать ESTAR + предлог</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Задавать вопрос ¿Dónde está...?</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Играть в «Прятки с предметами»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать текст «Где кот?»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Описать, где предметы в комнате</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 26 · ¡Soy un detective! 🕵️</div>
+</div>
+
+</body>
+</html>
