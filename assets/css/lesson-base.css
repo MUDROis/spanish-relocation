@@ -1,0 +1,60 @@
+﻿/* lesson-base.css — канонический фундамент уроков МУДРО (¡Rumbo a España!)
+ * Собран из доминантных кластеров существующих уроков. Подключать в НОВЫХ
+ * уроках ДО собственного <style>:
+ *   <link rel="stylesheet" href="../../assets/css/lesson-base.css">
+ * Локальные правила <style> переопределяют базовые — темные/авторские
+ * вариации (цвета навигации, шапки таблиц) остаются в самом уроке.
+ * Существующие уроки намеренно не тронуты: их варианты правил не совпадают
+ * с базой побайтово, миграция без визуальной проверки небезопасна.
+ */
+
+/* ===== Навигация урока ===== */
+.nav-left{display:flex;align-items:center;gap:14px}
+
+.nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+/* ===== Светофор (самопроверка) ===== */
+.tl-table{width:100%;border-collapse:collapse;min-width:500px}
+
+.tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+
+.tl-table th:not(:first-child){text-align:center;width:90px}
+
+.tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+
+.tl-table td:first-child{font-weight:600}
+
+.tl-table td:not(:first-child){text-align:center}
+
+.tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+
+.tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+
+.tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+
+.tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+
+.tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+
+.tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+/* ===== Навигация урока ===== */
+.lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+
+.lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+
+.nav-prev{background:var(--soft);color:var(--ink)}
+
+.nav-next{background:linear-gradient(135deg,var(--teal),#1f7a72);color:#fff}
+
+.nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+
+.nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+
+/* ===== Конфетти ===== */
+.confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+
+@keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+
+/* ===== Подсказки грамматики ===== */
+.grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}

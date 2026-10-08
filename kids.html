@@ -3,7 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFF8EC">
 <title>Миссия: Испанская школа 🇪🇸 — Интерактивная школа МУДРО</title>
+<meta name="description" content="20 недель испанского для детей: 60 уроков, 7 станций приключений, наклейки и проекты. Курс ¡Rumbo a España! школы МУДРО.">
+
+<!-- ====== SEO: Open Graph ====== -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Интерактивная школа МУДРО">
+<meta property="og:title" content="Миссия: Испанская школа — испанский для детей">
+<meta property="og:description" content="20 недель испанского для детей: 60 уроков, 7 станций приключений, наклейки и проекты.">
+<meta property="og:image" content="https://интерактивнаяшкола.рф/spanish-relocation/og-image-kids.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://интерактивнаяшкола.рф/spanish-relocation/kids.html">
+<meta property="og:locale" content="ru_RU">
+
+<!-- ====== SEO: Twitter ====== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Миссия: Испанская школа — испанский для детей">
+<meta name="twitter:description" content="20 недель испанского для детей: 60 уроков, 7 станций приключений.">
+<meta name="twitter:image" content="https://интерактивнаяшкола.рф/spanish-relocation/og-image-kids.png">
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -370,10 +391,11 @@ attachLessonLink('s3', 5, './lessons/kids/w09-l2.html');
    (localStorage: mudro_done_kids → ['w01-l1', ...]). */
 function getDoneLessons(){try{return JSON.parse(localStorage.getItem('mudro_done_kids'))||[]}catch(e){return[]}}
 function lessonIdFromUrl(url){return (url||'').split('/').pop().replace(/\.html$/,'')}
-function updateHeroProgress(){
+function updateHeroProgress(cloudDone){
   const total=STATIONS.reduce((a,s)=>a+s.lessons,0);
   const doneIds=new Set(getDoneLessons());
-  const done=lessonLinks.filter(l=>doneIds.has(lessonIdFromUrl(l.url))).length;
+  const local=lessonLinks.filter(l=>doneIds.has(lessonIdFromUrl(l.url))).length;
+  const done=typeof cloudDone==='number'?cloudDone:local;
   const pct=total?Math.round(done/total*100):0;
   const pb=document.getElementById('progress-bar');
   const pt=document.querySelector('.hero-progress .progress-text');
