@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 7.2 · Встреча с tutor — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#8B5FBF;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p2),var(--p4));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🎓'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.22;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+
+  .formula{ background:#F0F4FF; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#F0F4FF; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #E8DCCF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#FBF3EA; color:var(--p1); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7; }
+  .dialog-box .who{ font-weight:700; color:var(--p2); }
+  .dialog-box .who.you{ color:var(--p4); }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#F0F4FF; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p2); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p2); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🎓 Рабочий лист · Урок 7.2 «Встреча с tutor»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Регулярная встреча с классным руководителем · выражение мнения</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🎓 Лексика школы: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la tutoría</div>
+          <div class="item">2. el boletín de notas</div>
+          <div class="item">3. los deberes</div>
+          <div class="item">4. el comportamiento</div>
+          <div class="item">5. el progreso</div>
+          <div class="item">6. cada trimestre</div>
+          <div class="item">7. creer que</div>
+          <div class="item">8. apoyar</div>
+        </div>
+        <div class="col">
+          <div class="item">а) табель</div>
+          <div class="item">б) встреча с классным руководителем</div>
+          <div class="item">в) поведение</div>
+          <div class="item">г) прогресс</div>
+          <div class="item">д) домашние задания</div>
+          <div class="item">е) каждый триместр</div>
+          <div class="item">ж) думать, что</div>
+          <div class="item">з) поддерживать</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>💬 Впиши выражение мнения по описанию</h2>
+        <div class="tag">из словаря урока</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Вежливая форма: «Я думаю, что...» → <span class="wline long"></span><br>
+      2. Вежливая форма: «Мне кажется, что...» → <span class="wline long"></span><br>
+      3. Вежливая форма: «По моему мнению...» → <span class="wline long"></span><br>
+      4. Вежливая форма: «Я согласен» → <span class="wline long"></span><br>
+      5. Вежливая форма: «Я не согласен» → <span class="wline long"></span><br>
+      6. Вежливая форма: «С моей точки зрения...» → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: выражение мнения + регулярные встречи</h2>
+        <div class="tag">практика: yo · nosotros · usted</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        <b>Фокус урока:</b> в упражнениях используем формы <b>yo</b>, <b>nosotros</b> и <b>usted</b>.<br>
+        Остальные формы даны в таблице для справки и распознавания.
+      </div>
+
+      <div class="formula">
+        💡 <b>Creo que</b> и <b>Me parece que</b> — мягче, чем прямое утверждение. <b>Estoy de acuerdo</b> / <b>No estoy de acuerdo</b> — для согласия/несогласия. Для встречи с <i>tutor</i> используем вежливые формы.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Лицо</th>
+          <th>asistir</th>
+          <th>participar</th>
+          <th>colaborar</th>
+          <th>informar</th>
+          <th>apoyar</th>
+        </tr>
+        <tr>
+          <td class="practice">yo</td>
+          <td class="practice">asisto</td>
+          <td class="practice">participo</td>
+          <td class="practice">colaboro</td>
+          <td class="practice">informo</td>
+          <td class="practice">apoyo</td>
+        </tr>
+        <tr>
+          <td class="reference">tú</td>
+          <td class="reference">asistes</td>
+          <td class="reference">participas</td>
+          <td class="reference">colaboras</td>
+          <td class="reference">informas</td>
+          <td class="reference">apoyas</td>
+        </tr>
+        <tr>
+          <td class="practice">usted</td>
+          <td class="practice">asiste</td>
+          <td class="practice">participa</td>
+          <td class="practice">colabora</td>
+          <td class="practice">informa</td>
+          <td class="practice">apoya</td>
+        </tr>
+        <tr>
+          <td class="practice">nosotros</td>
+          <td class="practice">asistimos</td>
+          <td class="practice">participamos</td>
+          <td class="practice">colaboramos</td>
+          <td class="practice">informamos</td>
+          <td class="practice">apoyamos</td>
+        </tr>
+        <tr>
+          <td class="reference">vosotros</td>
+          <td class="reference">asistís</td>
+          <td class="reference">participáis</td>
+          <td class="reference">colaboráis</td>
+          <td class="reference">informáis</td>
+          <td class="reference">apoyáis</td>
+        </tr>
+        <tr>
+          <td class="reference">ellos / ustedes</td>
+          <td class="reference">asisten</td>
+          <td class="reference">participan</td>
+          <td class="reference">colaboran</td>
+          <td class="reference">informan</td>
+          <td class="reference">apoyan</td>
+        </tr>
+      </table>
+
+      <div class="formula">
+        💡 Регулярные встречи: <b>cada trimestre</b> (каждый триместр), <b>una vez al mes</b> (раз в месяц), <b>los lunes</b> (по понедельникам), <b>todos los días</b> (каждый день), <b>dos veces por semana</b> (два раза в неделю).
+      </div>
+
+      1. ___ que se está adaptando bien. (creer / yo)
+      <span class="ru-sub">(Я думаю, что он хорошо адаптируется.)</span><br>
+      2. ___ que tiene dificultades con el idioma. (parecer / a mí)
+      <span class="ru-sub">(Мне кажется, что у него трудности с языком.)</span><br>
+      3. ___ que está mejorando mucho. (pensar / yo)
+      <span class="ru-sub">(Я считаю, что он очень улучшается.)</span><br>
+      4. ___ , necesita más apoyo lingüístico. (en mi opinión)
+      <span class="ru-sub">(По моему мнению, ему нужна языковая поддержка.)</span><br>
+      5. ___ con usted sobre la importancia del esfuerzo. (estar de acuerdo / yo)
+      <span class="ru-sub">(Я согласен с вами о важности усилий.)</span><br>
+      6. ___ a todas las tutorías. (asistir / nosotros)
+      <span class="ru-sub">(Мы посещаем все встречи с классным руководителем.)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>📖 Чтение + CLIL: структура встречи с tutor</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>1. Saludo y presentación (2 min)</h4>
+        <p>Вы здороваетесь с <i>tutor</i>. Используйте: <i>Buenos días, María. Gracias por invitarnos.</i></p>
+
+        <h4>2. Progreso académico (10 min)</h4>
+        <p>Обсуждаете оценки и прогресс: <i>notas, boletín, rendimiento académico</i>. Вопросы: <i>¿Cómo son las notas? ¿Hay dificultades?</i></p>
+
+        <h4>3. Comportamiento y participación (5 min)</h4>
+        <p>Говорите о поведении и участии: <i>comportamiento, participación, respeto</i>. Вопросы: <i>¿Cómo se comporta en clase? ¿Participa?</i></p>
+
+        <h4>4. Deberes y apoyo en casa (5 min)</h4>
+        <p>Обсуждаете домашние задания и поддержку дома: <i>deberes, esfuerzo, apoyar</i>. Фразы: <i>Apoyamos a nuestro hijo en casa. ¿Qué podemos hacer?</i></p>
+
+        <h4>5. Opinión de los padres (5 min)</h4>
+        <p>Выражаете своё мнение вежливо: <i>Creo que... Me parece que... Estoy de acuerdo...</i></p>
+
+        <h4>6. Próximos pasos y despedida (3 min)</h4>
+        <p>Договариваетесь о следующих шагах и прощаетесь: <i>¿Cuándo es la próxima tutoría? Muchas gracias por su tiempo.</i></p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы полными фразами или короткими ответами.</div>
+
+      1. ¿Qué haces en la etapa de saludo?
+      <span class="wline xlong"></span><br>
+
+      2. ¿Qué preguntas haces sobre el progreso académico?
+      <span class="wline xlong"></span><br>
+
+      3. ¿Qué expresas en la etapa de opinión de los padres?
+      <span class="wline xlong"></span><br>
+
+      4. ¿Qué acuerdas en la etapa de próximos pasos?
+      <span class="wline xlong"></span><br>
+
+      5. ¿Cómo te despides al final?
+      <span class="wline xlong"></span>
+
+      <div class="hint" style="margin-top:3mm">Заполните чек-лист вопросов для встречи с tutor.</div>
+      <table class="grammar-ref">
+        <tr>
+          <th>Вопрос</th>
+          <th>✓ Готово</th>
+          <th>Заметки</th>
+        </tr>
+        <tr>
+          <td>Оценки по основным предметам</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Прогресс с языком</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Поведение в классе</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Участие и внимание</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Домашние задания</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Рекомендации для дома</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Дата следующей встречи</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Контакты для связи</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">5</div>
+      <div>
+        <h2>🎧 Аудирование: встреча с Марией</h2>
+        <div class="tag">прослушайте в уроке или попросите прочитать вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Текст для чтения вслух:</b><br>
+        «Buenos días. Soy María, la tutora de Leo. Gracias por venir a la tutoría. Buenos días, María. Gracias por invitarnos. Me gustaría hablar sobre el progreso de mi hijo. Por supuesto. Leo se está adaptando bien. Sus notas son buenas: tiene un ocho en matemáticas y un siete en ciencias. Creo que se está adaptando bien, pero me parece que tiene dificultades con el idioma. ¿Podría explicarme sus notas en lengua? Claro. En lengua tiene un seis. Está mejorando, pero todavía le cuesta escribir. En mi opinión, necesita más práctica en casa. Estoy de acuerdo con usted. Apoyamos a Leo en casa. ¿Podría recomendarnos actividades? Sí. Les recomiendo leer cuentos en español y ver películas con subtítulos. También puede participar en el club de lectura del colegio. Perfecto. ¿Cómo es su comportamiento en clase? Su comportamiento es excelente. Participa mucho y respeta a sus compañeros. El esfuerzo es notable. Me alegra mucho. ¿Cuándo es la próxima tutoría? La próxima tutoría es en enero, después del primer trimestre. Pero pueden contactarme cuando quieran. Muchas gracias por su tiempo, María. Hasta luego.»
+      </div>
+
+      1. ¿Quién es María?
+      <span class="wline xlong"></span><br>
+
+      2. ¿Qué notas tiene Leo en matemáticas y ciencias?
+      <span class="wline xlong"></span><br>
+
+      3. ¿Qué dificultad tiene Leo?
+      <span class="wline xlong"></span><br>
+
+      4. ¿Qué recomienda la tutora?
+      <span class="wline xlong"></span><br>
+
+      5. ¿Cómo es el comportamiento de Leo?
+      <span class="wline xlong"></span><br>
+
+      6. ¿Cuándo es la próxima tutoría?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">6</div>
+      <div>
+        <h2>🗣 Говорение: ситуации на встрече</h2>
+        <div class="tag">прочитайте вслух, подставьте свои данные</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы здороваетесь с tutor и благодарите за приглашение.<br>
+        <div class="tmpl">«Buenos días, María. Gracias por invitarnos a la tutoría.»</div>
+        <div class="tmpl-ru">(Добрый день, Мария. Спасибо за приглашение на встречу.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы вежливо говорите, о чём хотите поговорить.<br>
+        <div class="tmpl">«Me gustaría hablar sobre el progreso de mi hijo.»</div>
+        <div class="tmpl-ru">(Мне бы хотелось поговорить о прогрессе моего сына.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы выражаете своё мнение вежливо.<br>
+        <div class="tmpl">«Creo que se está adaptando bien, pero me parece que tiene dificultades con el idioma.»</div>
+        <div class="tmpl-ru">(Я думаю, что он хорошо адаптируется, но мне кажется, что у него трудности с языком.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы соглашаетесь с рекомендациями tutor.<br>
+        <div class="tmpl">«Estoy de acuerdo con usted. Apoyamos a Leo en casa.»</div>
+        <div class="tmpl-ru">(Я согласен с вами. Мы поддерживаем Лео дома.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы спрашиваете о следующей встрече.<br>
+        <div class="tmpl">«¿Cuándo es la próxima tutoría? Muchas gracias por su tiempo.»</div>
+        <div class="tmpl-ru">(Когда следующая встреча? Большое спасибо за ваше время.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">7</div>
+      <div>
+        <h2>✍️ Письмо: скрипт встречи с tutor</h2>
+        <div class="tag">8–10 предложений о встрече с классным руководителем</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и благодарность: <i>Buenos días, María. Gracias por invitarnos...</i><br>
+        3–4. О чём хотите говорить: <i>Me gustaría hablar sobre el progreso...</i><br>
+        5–6. Выражение мнения: <i>Creo que... Me parece que...</i><br>
+        7–8. Вопросы и просьбы: <i>¿Podría explicarme...? Apoyamos a...</i><br>
+        9–10. Следующие шаги и прощание: <i>¿Cuándo es la próxima tutoría? Muchas gracias.</i>
+      </div>
+
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr>
+          <th>Умею</th>
+          <th>🟢</th>
+          <th>🟡</th>
+          <th>🔴</th>
+        </tr>
+        <tr>
+          <td>Различать tutoría, reunión de padres, cita</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Обсуждать notas, progreso, comportamiento</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Использовать creo que, me parece que, pienso que</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Говорить о регулярных встречах (cada trimestre)</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Построить скрипт встречи с tutor</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Задать 8 вопросов об оценках и поведении</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">
+        📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.
+      </p>
+    </div>
+  </div>
+
+  <!-- АНОНС СЛЕДУЮЩЕГО УРОКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">➡️</div>
+      <div>
+        <h2>Впереди — Урок 7.3: Адаптация и прогресс ребёнка</h2>
+        <div class="tag">детальное обсуждение адаптации, язык, оценки, orientador</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы подготовились к встрече с <i>tutor</i>. На следующем уроке (7.3) мы разберём детальное обсуждение адаптации и прогресса: как помочь ребёнку с языком, как следить за оценками, когда обращаться к <i>orientador</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

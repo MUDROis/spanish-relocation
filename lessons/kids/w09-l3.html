@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 27: Mi habitación de ensueño — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --peach:#FFB4A2; --wine:#9D4EDD;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{overflow-x:clip}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px;overflow-x:clip}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FFE5EC 0%,#FFF3D6 50%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(233,30,99,.15),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,201,60,.2),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--pink);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--pink)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3.5rem;margin:12px 0;position:relative;z-index:2}
+  .final-situation{background:linear-gradient(135deg,#FFE5EC,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--pink);text-align:left;position:relative;z-index:2}
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--pink)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FFE5EC;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩\u200d🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #FFE5EC;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--pink)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--pink)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .word-card .ges{display:block;font-size:.7rem;font-weight:800;color:var(--terra);margin-top:4px}
+  .speak-btn{background:var(--pink);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--pink);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+  .table-scroll .gram-table{min-width:560px}
+  .table-scroll .tl-table{min-width:400px}
+  .game-zone{background:linear-gradient(135deg,#FFE5EC,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--pink);margin:10px 0;min-height:36px}
+  .game-emo{font-size:5rem;margin:10px 0;min-height:80px;position:relative}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #f0d0d8;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:140px}
+  .opt:hover:not(:disabled){border-color:var(--pink);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #f5d0d8;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--pink)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--pink)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+  .sb-target{background:#fff;border:2px dashed #f0d0d8;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--pink)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--pink);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--pink);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--pink);background:#FFE5EC}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--pink);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--pink);font-weight:800}
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(66,85,255,.3)}
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-prev:hover{background:#f3ebc8}
+  .nav-next{background:linear-gradient(135deg,var(--pink),#AD1457);color:#fff}
+  .nav-next:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(233,30,99,.3)}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 3 · Mi Mundo · Урок 27 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🎨 УРОК 27 · НЕДЕЛЯ 9 · MI CASA</span>
+  <div class="hero-emojis">🛏️ 💡 🪞 🖼️ 🪴</div>
+  <h1>Mi habitación <span>de ensueño</span></h1>
+  <p class="sub">Ты уже знаешь комнаты и предлоги. Сегодня ты становишься <strong>дизайнером</strong>: выучишь новые предметы, научишься сравнивать комнаты и создашь <strong>комнату своей мечты</strong>!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> друг спрашивает: <em>«¿Cómo es tu habitación?»</em>, а ты отвечаешь:<br>
+    <em>«Mi habitación es pequeña pero muy acogedora. Hay una cama, una lámpara y un espejo. La alfombra está al lado de la cama. Mi habitación es más bonita que el salón. ¡Me encanta!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🛋️</span> Выучить 10 новых слов для комнаты</div>
+      <div class="goal-item"><span class="emoji">🧩</span> Сравнивать: más/menos...que</div>
+      <div class="goal-item"><span class="emoji">📖</span> Понимать текст «Комната Пабло»</div>
+      <div class="goal-item"><span class="emoji">🗣</span> Описать комнату по формуле 7 пунктов</div>
+      <div class="goal-item"><span class="emoji">🎨</span> Нарисовать и презентовать комнату мечты</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Архитектор мечты»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение уроков 25–26</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola otra vez! Вспомним комнаты и предлоги — ответь ВСЛУХ. Мостик: «Теперь ты — дизайнер! Создаём комнату мечты!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ЛЕКСИКА -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🛋️ 10 новых слов для комнаты</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на карточку — услышишь слово. Показывай жест и повторяй!</p>
+    <div class="cards-grid" id="room-cards"></div>
+    <div class="script">⚡ <strong>Правило рода:</strong> 🔴 Женский род (la): habitación, lámpara, alfombra, cortina, planta, almohada, manta. 🔵 Мужской род (el): espejo, cuadro.</div>
+  </section>
+
+  <!-- БЛОК 2: УГАДАЙ ПРЕДМЕТ -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🔍 Игра: «Угадай предмет»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Послушай описание и выбери правильный предмет!</p>
+    <div class="game-zone">
+      <div class="game-emo" id="guess-emo">❓</div>
+      <div class="game-q" id="guess-q">Нажми «Начать»!</div>
+      <div class="opts" id="guess-opts"></div>
+      <div class="game-fb" id="guess-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="guess-stars">0</span> / <span id="guess-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="guessStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ГРАММАТИКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: сравнение más/menos...que</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <div class="table-scroll">
+      <table class="gram-table">
+        <tr><th>Конструкция</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+        <tr><td><b>MÁS + прил. + QUE</b></td><td>Mi habitación es <b>más grande que</b> el baño.</td><td>Моя комната больше ванной.</td><td><button class="speak-btn" onclick="speak('Mi habitación es más grande que el baño.')">🔊</button></td></tr>
+        <tr><td><b>MENOS + прил. + QUE</b></td><td>El baño es <b>menos grande que</b> el dormitorio.</td><td>Ванная меньше спальни.</td><td><button class="speak-btn" onclick="speak('El baño es menos grande que el dormitorio.')">🔊</button></td></tr>
+        <tr><td><b>TAN + прил. + COMO</b></td><td>Mi habitación es <b>tan bonita como</b> el salón.</td><td>Моя комната такая же красивая, как гостиная.</td><td><button class="speak-btn" onclick="speak('Mi habitación es tan bonita como el salón.')">🔊</button></td></tr>
+      </table>
+    </div>
+    <div class="script">⚡ <strong>Ловушка:</strong> После <b>más/menos</b> всегда <span class="grammar-hint" data-hint="После más и menos всегда стоит QUE, а не de. Пример: más grande QUE el salón.">QUE</span>. После <b>tan</b> всегда <span class="grammar-hint" data-hint="После tan всегда стоит COMO, а не que. Пример: tan bonita COMO el salón.">COMO</span>.</div>
+    <div class="game-zone">
+      <p style="font-weight:800">⚖️ Игра: сравни две комнаты!</p>
+      <div id="compare-box"></div>
+      <div class="game-fb" id="cmp-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="cmp-stars">0</span> / <span id="cmp-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="cmpStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: КОНСТРУКТОР -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">📐 Конструктор: собери фразу!</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="game-zone">
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: ЧТЕНИЕ -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head">
+      <h2 class="block-title">📖 Чтение: «Комната Пабло»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakPablo()">🔊 Послушать текст</button>
+    <div class="read-box">
+      ¡Hola! Me llamo Pablo. Mi habitación es pequeña pero muy <b>acogedora</b>. En mi habitación hay una cama, una <b>lámpara</b> y un <b>espejo</b>. La <b>alfombra</b> está al lado de la cama. El <b>cuadro</b> está encima de la cama. La <b>cortina</b> está al lado de la ventana. Hay una <b>planta</b> pequeña al lado del espejo. Mi habitación es más pequeña que el salón, pero es más acogedora. ¡Me encanta mi habitación!
+    </div>
+    <div id="pablo-quiz"></div>
+  </section>
+
+  <!-- БЛОК 6: ПРОЕКТ -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🎨 Проект: Комната мечты</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <div class="script">Ты — дизайнер! Нарисуй комнату мечты и презентуй её по формуле!</div>
+    <div class="read-box" style="background:#FFE5EC;border-color:var(--pink)">
+      <strong>📋 Формула речи (7 пунктов):</strong><br>
+      1. <em>¡Hola! Me llamo [имя].</em><br>
+      2. <em>Esta es mi habitación de ensueño.</em><br>
+      3. <em>Es [grande / pequeña] pero [acogedora / luminosa].</em><br>
+      4. <em>Hay [una cama / una lámpara / un espejo / una alfombra].</em><br>
+      5. <em>La lámpara está [encima de / al lado de] la mesa.</em><br>
+      6. <em>Mi habitación es más [bonita / grande] que [el salón / el baño].</em><br>
+      7. <em>¡Me encanta mi habitación de ensueño!</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 7: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс недели 10</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎨</div>
+      <h3>Архитектор мечты</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты создал и презентовал комнату мечты!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Архитектор мечты» 🎨 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс недели 10:</strong> «Впереди неделя 10: еда и продукты. Ты узнаешь, что едят в Испании, и научишься заказывать в кафе! 🍽️»</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">🛋️ Новые слова (10)</h4>
+    <div class="cards-grid" id="words-new"></div>
+    <h4 style="margin:14px 0 8px">🧩 Конструкции</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('más grande que')"><div class="emo">📏</div><div class="es">más grande que</div><div class="ru">больше чем</div></div>
+      <div class="word-card" onclick="speak('menos grande que')"><div class="emo">📐</div><div class="es">menos grande que</div><div class="ru">меньше чем</div></div>
+      <div class="word-card" onclick="speak('tan bonita como')"><div class="emo">⚖️</div><div class="es">tan bonita como</div><div class="ru">такая же красивая как</div></div>
+      <div class="word-card" onclick="speak('Mi habitación es acogedora.')"><div class="emo">🤗</div><div class="es">Es acogedora</div><div class="ru">Уютная</div></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Покажи родителям комнату мечты</strong> · 5 мин<br>Расскажи о ней по-испански по формуле.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎨 Проект «Комната мечты в большом формате»</strong> · 15 мин ⭐<br>Сделай красивую версию на большом листе, добавь цвета и детали.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>Научи родителей новым словам</strong> · 7 мин ⭐<br>Покажи карточки lámpara, espejo, alfombra, cortina.</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Тренажёр «Сравни комнаты»</strong> · 10 мин ⭐<br>Пройди в уроке ещё раз, постарайся набрать 5/5 звёзд.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>Видео-презентация комнаты мечты</strong> · 3 мин ⭐<br>Запиши видео, где показываешь рисунок. Отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Mi habitación de ensueño»</strong> · 15 мин ⭐<br>🖨 <a href="../../worksheets/w09-l3-kids.html" target="_blank">Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин<br>Нажми нужный цвет в таблице ниже.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Выучить 10 новых слов для комнаты</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Сравнивать: más/menos...que</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Использовать tan...como</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Понимать текст «Комната Пабло»</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Описать комнату по формуле 7 пунктов</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Презентовать комнату мечты</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1219888358/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-3-%D1%83%D1%80%D0%BE%D0%BA-6-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">
+    <span>📚 Карточки Quizlet · Станция 3 · Урок 27</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w09-l2.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 26: ¿Dónde está? 🙈</div></a>
+    <span class="nav-soon"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 28: La comida 🍽️ — скоро</div></span>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 3: Mi Mundo · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+var ROOM=[
+  {id:'habitacion',emo:'🛏️',es:'la habitación',ru:'комната',ges:'🛏️ рисуем квадрат'},
+  {id:'lampara',emo:'💡',es:'la lámpara',ru:'лампа',ges:'💡 включаем свет'},
+  {id:'espejo',emo:'🪞',es:'el espejo',ru:'зеркало',ges:'🪞 смотримся'},
+  {id:'alfombra',emo:'🟫',es:'la alfombra',ru:'ковёр',ges:'🟫 гладим пол'},
+  {id:'cortina',emo:'🪟',es:'la cortina',ru:'штора',ges:'🪟 открываем шторы'},
+  {id:'cuadro',emo:'🖼️',es:'el cuadro',ru:'картина',ges:'🖼️ вешаем картину'},
+  {id:'planta',emo:'🪴',es:'la planta',ru:'растение',ges:'🪴 поливаем цветок'},
+  {id:'almohada',emo:'🛌',es:'la almohada',ru:'подушка',ges:'🛌 кладём голову'},
+  {id:'manta',emo:'🧣',es:'la manta',ru:'одеяло',ges:'🧣 укрываемся'},
+  {id:'acogedor',emo:'🤗',es:'acogedor / acogedora',ru:'уютный',ges:'🤗 обнимаем себя'}
+];
+
+/* ===== РАЗМИНКА ===== */
+var WARM=[
+  {q:'¿Cuántas habitaciones hay en tu casa?',model:'En mi casa hay cuatro habitaciones.',ru:'Сколько комнат в твоём доме?'},
+  {q:'¿Dónde está la cama?',model:'La cama está en el dormitorio.',ru:'Где кровать?'},
+  {q:'¿Dónde está el gato?',model:'El gato está debajo de la mesa.',ru:'Где кот?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== КАРТОЧКИ ПРЕДМЕТОВ КОМНАТЫ ===== */
+(function(){
+  var box=document.getElementById('room-cards');
+  ROOM.forEach(function(r){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+r.emo+'</div><div class="es">'+r.es+'</div><div class="ru">'+r.ru+'</div><span class="ges">'+r.ges+'</span>';
+    d.addEventListener('click',function(){speak(r.es);});
+    box.appendChild(d);
+  });
+  var wb=document.getElementById('words-new');
+  ROOM.forEach(function(r){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+r.emo+'</div><div class="es">'+r.es+'</div><div class="ru">'+r.ru+'</div>';
+    d.addEventListener('click',function(){speak(r.es);});
+    wb.appendChild(d);
+  });
+})();
+
+/* ===== УГАДАЙ ПРЕДМЕТ ===== */
+var GUESS=[
+  {emo:'💡',q:'Es redonda, da luz por la noche.',ok:'la lámpara',w:['el espejo','la almohada']},
+  {emo:'🪞',q:'Te miras en él por la mañana.',ok:'el espejo',w:['la lámpara','el cuadro']},
+  {emo:'🟫',q:'Está en el suelo, es suave.',ok:'la alfombra',w:['la cortina','la manta']},
+  {emo:'🪟',q:'La abres por la mañana para ver el sol.',ok:'la cortina',w:['la puerta','la almohada']},
+  {emo:'🖼️',q:'Está en la pared, es una imagen.',ok:'el cuadro',w:['el espejo','la cortina']},
+  {emo:'🛌',q:'La pones en la cama para dormir.',ok:'la almohada',w:['la manta','la alfombra']}
+];
+var guessOrd=[],guessI=0,guessS=0;
+function guessStart(){
+  guessOrd=shuffle(GUESS.slice());guessI=0;guessS=0;
+  document.getElementById('guess-total').textContent=guessOrd.length;
+  document.getElementById('guess-stars').textContent='0';
+  guessNext();
+}
+function guessNext(){
+  var box=document.getElementById('guess-opts');box.innerHTML='';
+  if(guessI>=guessOrd.length){
+    document.getElementById('guess-fb').textContent='🎉 ¡Perfecto! Ты угадал все предметы! ⭐ '+guessS+' из '+guessOrd.length;
+    document.getElementById('guess-emo').textContent='🏆';
+    document.getElementById('guess-q').textContent='¡Eres un detective!';
+    return;
+  }
+  var r=guessOrd[guessI];
+  document.getElementById('guess-emo').textContent='❓';
+  document.getElementById('guess-q').textContent=r.q;
+  document.getElementById('guess-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var item=ROOM.filter(function(x){return x.es===o;})[0];
+    var b=document.createElement('button');b.className='opt';
+    b.innerHTML='<span style="font-size:2rem;display:block;margin-bottom:4px">'+(item?item.emo:'❓')+'</span><span>'+o+'</span>';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){
+        b.classList.add('correct');guessS++;
+        document.getElementById('guess-stars').textContent=guessS;
+        document.getElementById('guess-fb').textContent='✅ ¡Correcto!';
+        document.getElementById('guess-emo').textContent=r.emo;
+        speak(r.ok);
+      }else{
+        b.classList.add('wrong');
+        box.querySelectorAll('.opt').forEach(function(x){if(x.textContent.indexOf(r.ok)>=0)x.classList.add('correct');});
+        document.getElementById('guess-fb').textContent='❌ Правильно: '+r.ok;
+        speak(r.ok);
+      }
+      guessI++;setTimeout(guessNext,1800);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== СРАВНЕНИЕ КОМНАТ ===== */
+var CMP=[
+  {r1:{emo:'🛏️',name:'el dormitorio',size:'grande'},r2:{emo:'🚿',name:'el baño',size:'pequeño'},
+   ok:'El dormitorio es más grande que el baño.',w:['El baño es más grande que el dormitorio.','El dormitorio es menos grande que el baño.']},
+  {r1:{emo:'🛋️',name:'el salón',size:'luminoso'},r2:{emo:'🍳',name:'la cocina',size:'oscuro'},
+   ok:'El salón es más luminoso que la cocina.',w:['La cocina es más luminosa que el salón.','El salón es menos luminoso que la cocina.']},
+  {r1:{emo:'🍳',name:'la cocina',size:'pequeño'},r2:{emo:'🛋️',name:'el salón',size:'grande'},
+   ok:'La cocina es menos grande que el salón.',w:['El salón es menos grande que la cocina.','La cocina es más grande que el salón.']},
+  {r1:{emo:'🛏️',name:'mi habitación',size:'acogedor'},r2:{emo:'🛋️',name:'el salón',size:'acogedor'},
+   ok:'Mi habitación es tan acogedora como el salón.',w:['Mi habitación es más acogedora que el salón.','Mi habitación es menos acogedora que el salón.']}
+];
+var cmpOrd=[],cmpI=0,cmpS=0;
+function cmpStart(){
+  cmpOrd=shuffle(CMP.slice());cmpI=0;cmpS=0;
+  document.getElementById('cmp-total').textContent=cmpOrd.length;
+  document.getElementById('cmp-stars').textContent='0';
+  cmpNext();
+}
+function cmpNext(){
+  var box=document.getElementById('compare-box');box.innerHTML='';
+  if(cmpI>=cmpOrd.length){
+    document.getElementById('cmp-fb').textContent='🎉 ¡Perfecto! Ты настоящий дизайнер! ⭐ '+cmpS+' из '+cmpOrd.length;
+    return;
+  }
+  var r=cmpOrd[cmpI];
+  box.innerHTML='<div style="background:#fff;border:3px solid var(--peach);border-radius:18px;padding:16px;margin:10px 0;text-align:center">'+
+    '<div style="font-weight:800;color:var(--pink);margin-bottom:6px">'+(cmpI+1)+'. Compara las habitaciones</div>'+
+    '<div style="display:flex;justify-content:space-around;align-items:center;margin:10px 0;flex-wrap:wrap;gap:10px">'+
+    '<div style="text-align:center"><span style="font-size:3.5rem;display:block">'+r.r1.emo+'</span><div style="font-weight:800;color:var(--pink);font-family:\'Baloo 2\',cursive;font-size:1.1rem">'+r.r1.size+'</div><div style="font-size:.9rem;color:var(--ink-soft);font-weight:700">'+r.r1.name+'</div></div>'+
+    '<div style="background:var(--sun);color:var(--ink);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem">VS</div>'+
+    '<div style="text-align:center"><span style="font-size:3.5rem;display:block">'+r.r2.emo+'</span><div style="font-weight:800;color:var(--pink);font-family:\'Baloo 2\',cursive;font-size:1.1rem">'+r.r2.size+'</div><div style="font-size:.9rem;color:var(--ink-soft);font-weight:700">'+r.r2.name+'</div></div>'+
+    '</div><div class="opts" id="cmp-opts-'+cmpI+'"></div></div>';
+  var opts=document.getElementById('cmp-opts-'+cmpI);
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='auto';b.style.padding='10px 16px';
+    b.addEventListener('click',function(){
+      opts.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      var fb=document.getElementById('cmp-fb');
+      if(o===r.ok){b.classList.add('correct');cmpS++;document.getElementById('cmp-stars').textContent=cmpS;fb.textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');opts.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});fb.textContent='❌ Правильно: '+r.ok;speak(r.ok);}
+      cmpI++;setTimeout(cmpNext,2200);
+    });
+    opts.appendChild(b);
+  });
+}
+
+/* ===== КОНСТРУКТОР ===== */
+var SB=[
+  {w:['Mi','habitación','es','más','grande','que','el','baño.'],t:'Моя комната больше ванной'},
+  {w:['El','salón','es','más','luminoso','que','la','cocina.'],t:'Гостиная светлее кухни'},
+  {w:['El','dormitorio','es','menos','grande','que','el','salón.'],t:'Спальня меньше гостиной'},
+  {w:['La','lámpara','está','encima','de','la','mesa.'],t:'Лампа на столе'},
+  {w:['El','espejo','está','al','lado','de','la','ventana.'],t:'Зеркало рядом с окном'},
+  {w:['Mi','habitación','es','muy','acogedora.'],t:'Моя комната очень уютная'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== ЧТЕНИЕ ===== */
+function speakPablo(){speak('¡Hola! Me llamo Pablo. Mi habitación es pequeña pero muy acogedora. En mi habitación hay una cama, una lámpara y un espejo. La alfombra está al lado de la cama. El cuadro está encima de la cama. La cortina está al lado de la ventana. Hay una planta pequeña al lado del espejo. Mi habitación es más pequeña que el salón, pero es más acogedora. ¡Me encanta mi habitación!');}
+var PABLO=[
+  {q:'¿Cómo es la habitación de Pablo?',ru:'Какая комната у Пабло?',ok:'Pequeña pero muy acogedora.',w:['Grande y luminosa.','Pequeña y oscura.']},
+  {q:'¿Qué hay en la habitación?',ru:'Что есть в комнате?',ok:'Una cama, una lámpara y un espejo.',w:['Un sofá y una televisión.','Una mesa y una silla.']},
+  {q:'¿Dónde está la alfombra?',ru:'Где ковёр?',ok:'Al lado de la cama.',w:['Encima de la cama.','Debajo de la cama.']},
+  {q:'¿Dónde está el cuadro?',ru:'Где картина?',ok:'Encima de la cama.',w:['Al lado de la ventana.','Detrás de la puerta.']},
+  {q:'¿Es más grande o más pequeña que el salón?',ru:'Она больше или меньше гостиной?',ok:'Más pequeña que el salón.',w:['Más grande que el salón.','Tan grande como el salón.']}
+];
+(function(){
+  var wrap=document.getElementById('pablo-quiz');
+  PABLO.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ПРЕЗЕНТАЦИЯ ===== */
+var PRES=[
+  {q:'Опиши свою реальную комнату.',model:'¡Hola! Me llamo Sofía. Esta es mi habitación. Es pequeña pero muy acogedora. Hay una cama, una lámpara y un espejo. La alfombra está al lado de la cama. El cuadro está encima de la cama. Mi habitación es más pequeña que el salón, pero es más acogedora. ¡Me encanta mi habitación!'},
+  {q:'Опиши свою комнату мечты.',model:'Esta es mi habitación de ensueño. Es grande y muy luminosa. Hay una cama grande, una lámpara bonita y un espejo. La alfombra está al lado de la cama. La planta está al lado del espejo. Mi habitación es más bonita que el salón. ¡Me encanta mi habitación de ensueño!'},
+  {q:'Сравни свою комнату с гостиной.',model:'Mi habitación es más pequeña que el salón, pero es más acogedora. El salón es más luminoso que mi habitación. Mi habitación es tan bonita como el salón.'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Покажи рисунок и расскажи ВСЛУХ по формуле!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я сказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+  ['la habitación','комната'],['la lámpara','лампа'],['el espejo','зеркало'],
+  ['la alfombra','ковёр'],['la cortina','штора'],['el cuadro','картина'],
+  ['la planta','растение'],['la almohada','подушка'],['la manta','одеяло'],
+  ['acogedor','уютный'],['más grande que','больше чем'],['menos grande que','меньше чем']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');mFound++;speak(mSel.dataset.v);document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/'+MATCH.length;if(mFound===MATCH.length)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';}
+  else{d.classList.add('wrong');mSel.classList.add('wrong');var a=mSel;setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);}
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres el arquitecto de ensueño!');
+  confetti('🎨');
+  try{localStorage.setItem('mudro_kids_w09l3_badge_arquitecto','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w09l3_badge_arquitecto')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🎨','🛏️'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>
