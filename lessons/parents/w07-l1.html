@@ -867,7 +867,7 @@
 <div class="lesson-nav">
   <a href="w06-l3.html">← Предыдущий<br><small>Урок 6.3 · Comedor и Transporte</small></a>
   <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
-  <span class="soon">Следующий →<br><small>Урок 7.2 · Встреча с tutor — скоро</small></span>
+  <a href="w07-l2.html">Следующий →<br><small>Урок 7.2 · Встреча с tutor</small></a>
 </div>
 
 <!-- ФУТЕР -->
@@ -942,12 +942,12 @@ function renderQuiz(containerId, questions, feedbackPrefix){
 
 // ===== WARMUP QUIZ (6.3) =====
 var warmQ = [
-  {q:'1. Как сказать «школьная столовая»?', o:['el comedor escolar','el menú','la parada'], c:0},
-  {q:'2. Что означает menú sin gluten?', o:['Меню без глютена','Меню без лактозы','Вегетарианское меню'], c:0},
+  {q:'1. Как сказать «школьная столовая»?', o:['el menú','el comedor escolar','la parada'], c:1},
+  {q:'2. Что означает menú sin gluten?', o:['Меню без лактозы','Вегетарианское меню','Меню без глютена'], c:2},
   {q:'3. Как сказать «маршрут автобуса»?', o:['la ruta del autobús','la parada','el monitor'], c:0},
-  {q:'4. Что такое la parada?', o:['Остановка','Маршрут','Автобус'], c:0},
-  {q:'5. Как сказать «тоже хочу записать ребёнка»?', o:['También quiero inscribir a mi hijo','Tampoco quiero inscribir','Quiero inscribir también'], c:0},
-  {q:'6. Как сказать «пищевая аллергия»?', o:['la alergia alimentaria','el menú especial','la dieta'], c:0}
+  {q:'4. Что такое la parada?', o:['Маршрут','Остановка','Автобус'], c:1},
+  {q:'5. Как сказать «тоже хочу записать ребёнка»?', o:['Tampoco quiero inscribir','Quiero inscribir también','También quiero inscribir a mi hijo'], c:2},
+  {q:'6. Как сказать «пищевая аллергия»?', o:['el menú especial','la alergia alimentaria','la dieta'], c:1}
 ];
 
 function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
@@ -1335,9 +1335,9 @@ function renderTL(){
     var tr = document.createElement('tr');
     tr.innerHTML =
       '<td>' + t + '</td>' +
-      '<td><button class="tl-cell green" data-row="' + rowIdx + '">🟢</button></td>' +
-      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '">🟡</button></td>' +
-      '<td><button class="tl-cell red" data-row="' + rowIdx + '">🔴</button></td>';
+      '<td><button class="tl-cell green" data-row="' + rowIdx + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + rowIdx + '" data-color="3">🔴</button></td>';
     tr.querySelectorAll('.tl-cell').forEach(function(b){
       b.onclick = function(){
         tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
