@@ -1171,7 +1171,6 @@ function renderTrain(){
       card.classList.remove('flipped');
       document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
     };
-    updateCard();
     var controls = document.createElement('div');
     controls.style.marginTop = '16px';
     controls.style.display = 'flex';
@@ -1184,6 +1183,7 @@ function renderTrain(){
     cardContainer.appendChild(card);
     cardContainer.appendChild(controls);
     box.appendChild(cardContainer);
+    updateCard();
     document.getElementById('train-prev').onclick = function(){
       if(trainerIdx > 0){ trainerIdx--; updateCard(); }
     };
