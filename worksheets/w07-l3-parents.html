@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Рабочий лист 7.3 · Extraescolares и AMPA — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#8B5FBF;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p3),var(--p1));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'⚽'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.22;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+
+  .formula{ background:#FFF4E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p3); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#F0F4FF; border-left-color:var(--p4); }
+  .note.orange{ background:#FFF4E0; border-left-color:var(--p3); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #E8DCCF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#FBF3EA; color:var(--p1); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .dialog-box{ background:#fff; border:1.5px solid var(--p3); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.7; }
+  .dialog-box .who{ font-weight:700; color:var(--p3); }
+  .dialog-box .who.you{ color:var(--p4); }
+
+  .audio-box{ background:#FFF4E0; border:1.5px solid var(--p3); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#FFF4E0; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p3); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#FFF4E0; border:1.5px solid var(--p3); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p3); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p3); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p3); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#FBF3EA; color:var(--p1); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>⚽ Рабочий лист · Урок 7.3 «Extraescolares и AMPA»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Кружки и родительская ассоциация · время и регулярность</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>⚽ Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. las actividades extraescolares</div>
+          <div class="item">2. el AMPA</div>
+          <div class="item">3. la cuota</div>
+          <div class="item">4. el voluntario</div>
+          <div class="item">5. apuntarse</div>
+          <div class="item">6. a las cuatro</div>
+          <div class="item">7. por la tarde</div>
+          <div class="item">8. dos veces por semana</div>
+        </div>
+        <div class="col">
+          <div class="item">а) родительская ассоциация</div>
+          <div class="item">б) волонтёр</div>
+          <div class="item">в) внеклассные занятия / кружки</div>
+          <div class="item">г) записаться (на кружок)</div>
+          <div class="item">д) взнос / плата</div>
+          <div class="item">е) в четыре часа</div>
+          <div class="item">ж) после обеда / днём</div>
+          <div class="item">з) два раза в неделю</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🕐 Впиши слово по описанию</h2>
+        <div class="tag">из словаря урока</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Кружок: футбол → <span class="wline long"></span><br>
+      2. Кружок: плавание → <span class="wline long"></span><br>
+      3. Кружок: робототехника → <span class="wline long"></span><br>
+      4. Бесплатный кружок → <span class="wline long"></span><br>
+      5. Время: по понедельникам → <span class="wline long"></span><br>
+      6. Регулярность: раз в месяц → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: время и регулярность</h2>
+        <div class="tag">практика: a las, por la, los, una vez</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note orange">
+        <b>Фокус урока:</b> используйте конструкции <b>a las + hora</b> (в ... часов), <b>por la mañana/tarde/noche</b> (утром/днём/вечером), <b>los + день недели</b> (по ...), <b>una vez/dos veces + por semana/mes</b> (раз в неделю/месяц).
+      </div>
+
+      <div class="formula">
+        💡 <b>Время:</b> <i>a las cuatro</i> (в четыре), <i>a las cuatro y media</i> (в половине пятого), <i>de cuatro a cinco</i> (с четырёх до пяти).<br>
+        <b>Части дня:</b> <i>por la mañana</i> (утром), <i>por la tarde</i> (после обеда), <i>por la noche</i> (вечером).<br>
+        <b>Дни недели:</b> <i>los lunes</i> (по понедельникам), <i>todos los martes</i> (каждый вторник).<br>
+        <b>Регулярность:</b> <i>una vez a la semana</i> (раз в неделю), <i>dos veces por semana</i> (два раза в неделю), <i>una vez al mes</i> (раз в месяц).
+      </div>
+
+      1. El club de lectura es ___ a las cuatro. (por la tarde)
+      <span class="ru-sub">(Клуб чтения после обеда в четыре.)</span><br>
+      2. La natación es ___ , dos veces por semana. (los martes y jueves)
+      <span class="ru-sub">(Плавание по вторникам и четвергам, два раза в неделю.)</span><br>
+      3. La reunión del AMPA es ___ a las siete. (por la noche)
+      <span class="ru-sub">(Собрание AMPA вечером в семь.)</span><br>
+      4. El fútbol empieza ___ . (a las cuatro)
+      <span class="ru-sub">(Футбол начинается в четыре.)</span><br>
+      5. El ballet es ___ . (una vez a la semana)
+      <span class="ru-sub">(Балет раз в неделю.)</span><br>
+      6. La robótica es ___ , a las cinco. (por la tarde)
+      <span class="ru-sub">(Робототехника после обеда, в пять.)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>📖 Чтение + CLIL: кружки и AMPA в Испании</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Extraescolares</h4>
+        <p>Las actividades extraescolares son una parte importante de la vida escolar en España. Se realizan después de las clases, normalmente de 16:00 a 18:00. Hay actividades deportivas (fútbol, baloncesto, natación), artísticas (ballet, música, pintura) y educativas (robótica, ajedrez, club de lectura). Algunas son gratuitas y otras de pago. La inscripción suele hacerse en secretaría o a través del AMPA.</p>
+
+        <h4>AMPA</h4>
+        <p>El AMPA (Asociación de Madres y Padres de Alumnos) es la asociación que representa a las familias en el colegio. Organiza eventos, recauda fondos y ofrece servicios como las extraescolares. Para ser socio, se paga una cuota anual (normalmente entre 10 y 30 euros). Los socios pueden participar como voluntarios en las actividades y tienen voz en las decisiones del colegio. El AMPA celebra reuniones periódicas, normalmente una vez al mes.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы полными фразами или короткими ответами.</div>
+
+      1. ¿Cuándo se realizan las actividades extraescolares?
+      <span class="wline xlong"></span><br>
+
+      2. ¿Qué tipos de actividades hay?
+      <span class="wline xlong"></span><br>
+
+      3. ¿Dónde se hace la inscripción?
+      <span class="wline xlong"></span><br>
+
+      4. ¿Qué es el AMPA?
+      <span class="wline xlong"></span><br>
+
+      5. ¿Cuánto cuesta la cuota anual del AMPA?
+      <span class="wline xlong"></span>
+
+      <div class="hint" style="margin-top:3mm">Заполните чек-лист выбора кружков для вашего ребёнка.</div>
+      <table class="grammar-ref">
+        <tr>
+          <th>Вопрос</th>
+          <th>✓ Готово</th>
+          <th>Заметки</th>
+        </tr>
+        <tr>
+          <td>Какие кружки нравятся ребёнку?</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Сколько стоит каждый кружок?</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>В какие дни и время проходят занятия?</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Сколько раз в неделю?</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Есть ли скидки для членов AMPA?</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Можно ли попробовать одно занятие бесплатно?</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Как записаться: через секретариат или AMPA?</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+        <tr>
+          <td>Какой срок записи?</td>
+          <td style="height:8mm"></td>
+          <td style="height:8mm"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- УПР 5: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">5</div>
+      <div>
+        <h2>🎧 Аудирование: запись на кружок</h2>
+        <div class="tag">прослушайте в уроке или попросите прочитать вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Текст для чтения вслух:</b><br>
+        «Buenos días, Colegio Santa María. ¿En qué puedo ayudarle? Buenos días. Quisiera apuntar a mi hijo Leo al club de lectura. Muy bien. El club de lectura es gratuito. Es los lunes por la tarde, de cuatro a cinco. Perfecto. ¿Hay plaza disponible? Sí, hay plaza. ¿Su hijo tiene ocho años? Sí, exactamente. También quisiera apuntarlo a la robótica. La robótica es de pago. La cuota es de cuarenta euros al mes. Es los jueves por la tarde, de cuatro y media a seis. Me parece bien. ¿Podría enviarme el formulario de inscripción por email? Por supuesto. También puede inscribirse a través del AMPA. Ellos organizan todas las extraescolares. ¿Qué es el AMPA exactamente? Es la asociación de madres y padres. La cuota anual es de veinte euros. Los socios tienen descuento en las actividades y pueden participar como voluntarios en los eventos. Nos gustaría ser socios. ¿Cómo nos inscribimos? Puede rellenar el formulario en secretaría o participar en la próxima reunión. Es el primer martes de cada mes, a las siete por la noche. Perfecto. Asistiremos a la reunión. Muchas gracias por su tiempo. De nada. Hasta luego.»
+      </div>
+
+      1. ¿Qué actividad quiere el padre para su hijo?
+      <span class="wline xlong"></span><br>
+
+      2. ¿Cuándo es el club de lectura?
+      <span class="wline xlong"></span><br>
+
+      3. ¿Cuánto cuesta la robótica?
+      <span class="wline xlong"></span><br>
+
+      4. ¿Qué es el AMPA?
+      <span class="wline xlong"></span><br>
+
+      5. ¿Cuánto cuesta la cuota anual del AMPA?
+      <span class="wline xlong"></span><br>
+
+      6. ¿Cuándo es la próxima reunión del AMPA?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">6</div>
+      <div>
+        <h2>🗣 Говорение: ситуации записи на кружок</h2>
+        <div class="tag">прочитайте вслух, подставьте свои данные</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы звоните в школу и хотите записать ребёнка на кружок.<br>
+        <div class="tmpl">«Buenos días. Quisiera apuntar a mi hijo al fútbol.»</div>
+        <div class="tmpl-ru">(Добрый день. Я хотел бы записать сына на футбол.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы спрашиваете о расписании и времени.<br>
+        <div class="tmpl">«¿Es los lunes por la tarde? ¿A qué hora empieza?»</div>
+        <div class="tmpl-ru">(Это по понедельникам после обеда? Во сколько начинается?)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы спрашиваете о стоимости.<br>
+        <div class="tmpl">«¿Cuál es la cuota? ¿Es gratuito o de pago?»</div>
+        <div class="tmpl-ru">(Какая плата? Это бесплатно или платно?)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы выражаете желание вступить в AMPA.<br>
+        <div class="tmpl">«También nos gustaría ser socios del AMPA.»</div>
+        <div class="tmpl-ru">(Нам также хотелось бы стать членами AMPA.)</div>
+      </div>
+
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы спрашиваете о следующей встрече.<br>
+        <div class="tmpl">«¿Cuándo es la próxima reunión? Asistiremos.»</div>
+        <div class="tmpl-ru">(Когда следующая встреча? Мы придём.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">7</div>
+      <div>
+        <h2>✍️ Письмо: скрипт записи на кружок</h2>
+        <div class="tag">6–8 предложений о записи ребёнка на кружки</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и цель: <i>Buenos días. Quisiera apuntar a mi hijo/a a...</i><br>
+        3–4. Вопрос о расписании: <i>¿Es los lunes por la tarde? ¿A qué hora?</i><br>
+        5–6. Вопрос о стоимости: <i>¿Cuál es la cuota? ¿Es gratuito?</i><br>
+        7. Желание вступить в AMPA: <i>También nos gustaría ser socios del AMPA.</i><br>
+        8. Просьба о форме и прощание: <i>¿Podría enviarme el formulario? Muchas gracias.</i>
+      </div>
+
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr>
+          <th>Умею</th>
+          <th>🟢</th>
+          <th>🟡</th>
+          <th>🔴</th>
+        </tr>
+        <tr>
+          <td>Называть 7 видов кружков</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Использовать время: a las, por la tarde, los lunes</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Говорить о регулярности: dos veces por semana</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Понимать роль AMPA и cuota</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Записать ребёнка на кружок</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+        <tr>
+          <td>Составить расписание активностей семьи</td>
+          <td><span class="tl-btn green"></span></td>
+          <td><span class="tl-btn yellow"></span></td>
+          <td><span class="tl-btn red"></span></td>
+        </tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">
+        📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.
+      </p>
+    </div>
+  </div>
+
+  <!-- АНОНС СЛЕДУЮЩЕГО УРОКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">➡️</div>
+      <div>
+        <h2>Впереди — Урок 8.1: Система здравоохранения</h2>
+        <div class="tag">неделя 8 · Centro de Salud, карточка SIP, запись к педиатру</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note orange">
+        🎉 <b>Отлично!</b> Вы записали ребёнка на кружки и вступили в AMPA — неделя 7 завершена! На следующей неделе (8.1) мы начинаем блок «Здоровье»: получим карточку SIP, запишемся к педиатру и разберёмся, как устроена система здравоохранения в Испании.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
