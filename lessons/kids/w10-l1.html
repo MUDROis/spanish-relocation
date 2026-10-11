@@ -58,6 +58,7 @@
   .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--afran)}
   .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
   .word-card .ges{display:block;font-size:.7rem;font-weight:800;color:var(--terra);margin-top:4px}
+  .word-card .yo{display:block;font-size:.78rem;font-weight:800;color:var(--teal);margin-top:6px;background:#E8F5F2;border-radius:8px;padding:3px 6px}
   .speak-btn{background:var(--afran);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
   .speak-btn:active{transform:scale(.93)}
 
@@ -110,6 +111,9 @@
   .sb-word{background:#fff;border:2px solid var(--afran);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
   .sb-word:hover{background:var(--afran);color:#fff}
   .sb-word.placed{opacity:.3;cursor:default}
+  .sb-ph{color:var(--ink-soft);opacity:.6}
+  .sb-placed{background:var(--afran);color:#fff;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-placed:hover{background:var(--terra)}
 
   .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
   .badge-icon{font-size:4rem;margin-bottom:10px}
@@ -254,7 +258,7 @@
         <tr><td><b>Я</b></td><td><b>me</b></td><td>Me despierto a las siete.</td><td>Я просыпаюсь в семь.</td><td><button class="speak-btn" onclick="speak('Me despierto a las siete.')">🔊</button></td></tr>
         <tr><td><b>Ты</b></td><td><b>te</b></td><td>Te levantas.</td><td>Ты встаёшь.</td><td><button class="speak-btn" onclick="speak('Te levantas.')">🔊</button></td></tr>
         <tr><td><b>Он / она</b></td><td><b>se</b></td><td>Mamá se ducha.</td><td>Мама принимает душ.</td><td><button class="speak-btn" onclick="speak('Mamá se ducha.')">🔊</button></td></tr>
-        <tr><td><b>Мы</b> <span class="grammar-hint" data-hint="Форма «мы» (nos) — бонус для 12 лет. Восьмилетние используют только me: Me visto.">12 лет</span></td><td><b>nos</b></td><td>Nos vestimos.</td><td>Мы одеваемся.</td><td><button class="speak-btn" onclick="speak('Nos vestimos.')">🔊</button></td></tr>
+        <tr><td><b>Мы</b></td><td><b>nos</b></td><td>Nos vestimos.</td><td>Мы одеваемся.</td><td><button class="speak-btn" onclick="speak('Nos vestimos.')">🔊</button></td></tr>
         <tr><td><b>Я</b> (руки)</td><td><b>me</b></td><td>Me lavo las manos.</td><td>Я мою руки.</td><td><button class="speak-btn" onclick="speak('Me lavo las manos.')">🔊</button></td></tr>
       </table>
     </div>
@@ -412,6 +416,7 @@ function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
 function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
 function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+var TOOTHBRUSH='<svg width="44" height="44" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="6" y="22" width="28" height="6" rx="3" fill="#5AA9E6"/><rect x="33" y="17" width="12" height="16" rx="4" fill="#2C5E8A"/><rect x="35" y="12" width="2.5" height="6" rx="1" fill="#ffffff"/><rect x="39" y="12" width="2.5" height="6" rx="1" fill="#ffffff"/><rect x="43" y="12" width="2.5" height="6" rx="1" fill="#ffffff"/></svg>';
 
 var ROUTINE=[
  {id:'despertarse',emo:'🛎️',es:'despertarse',ru:'просыпаться',ges:'потягиваемся в кровати',ph:'Me despierto.'},
@@ -419,7 +424,7 @@ var ROUTINE=[
  {id:'ducharse',emo:'🚿',es:'ducharse',ru:'принимать душ',ges:'«моемся» руками',ph:'Me ducho.'},
  {id:'lavarse',emo:'🧼',es:'lavarse',ru:'умываться',ges:'умываем лицо',ph:'Me lavo.'},
  {id:'vestirse',emo:'👕',es:'vestirse',ru:'одеваться',ges:'«надеваем» футболку',ph:'Me visto.'},
- {id:'cepillarse',emo:'🪥',es:'cepillarse los dientes',ru:'чистить зубы',ges:'чистим зубы пальцем',ph:'Me cepillo los dientes.'},
+ {id:'cepillarse',emo:TOOTHBRUSH,es:'cepillarse los dientes',ru:'чистить зубы',ges:'чистим зубы пальцем',ph:'Me cepillo los dientes.'},
  {id:'peinarse',emo:'💇',es:'peinarse',ru:'причёсываться',ges:'причёсываемся',ph:'Me peino.'},
  {id:'desayunar',emo:'🥐',es:'desayunar',ru:'завтракать',ges:'едим круассан',ph:'Desayuno.'},
  {id:'colegio',emo:'🎒',es:'ir al colegio',ru:'идти в школу',ges:'шагаем на месте',ph:'Voy al colegio.'},
@@ -447,7 +452,7 @@ var WARM=[
   var box=document.getElementById('routine-cards');
   ROUTINE.forEach(function(r){
     var d=document.createElement('div');d.className='word-card';
-    d.innerHTML='<div class="emo">'+r.emo+'</div><div class="es">'+r.es+'</div><div class="ru">'+r.ru+'</div><span class="ges">'+r.ges+'</span>';
+    d.innerHTML='<div class="emo">'+r.emo+'</div><div class="es">'+r.es+'</div><div class="ru">'+r.ru+'</div><span class="ges">'+r.ges+'</span><div class="yo">Я: '+r.ph+'</div>';
     d.addEventListener('click',function(){speak(r.ph);});
     box.appendChild(d);
   });
@@ -467,7 +472,7 @@ var MIME=[
  {emo:'🚿',hint:'«Моемся» под водой руками',ok:'ducharse',w:['lavarse','vestirse']},
  {emo:'🧼',hint:'Умываем лицо руками',ok:'lavarse',w:['ducharse','peinarse']},
  {emo:'👕',hint:'«Надеваем» футболку через голову',ok:'vestirse',w:['desayunar','lavarse']},
- {emo:'🪥',hint:'Чистим зубы пальцем',ok:'cepillarse los dientes',w:['desayunar','peinarse']},
+ {emo:TOOTHBRUSH,hint:'Чистим зубы пальцем',ok:'cepillarse los dientes',w:['desayunar','peinarse']},
  {emo:'💇',hint:'Причёсываемся расчёской',ok:'peinarse',w:['vestirse','lavarse']},
  {emo:'🥐',hint:'Едим круассан и пьём сок',ok:'desayunar',w:['ir al colegio','ducharse']},
  {emo:'🎒',hint:'Шагаем на месте с рюкзаком',ok:'ir al colegio',w:['desayunar','levantarse']},
@@ -489,7 +494,7 @@ function mimeNext(){
     return;
   }
   var r=mimeOrd[mimeI];
-  document.getElementById('mime-emo').textContent=r.emo;
+  document.getElementById('mime-emo').innerHTML=r.emo;
   document.getElementById('mime-q').textContent=r.hint;
   document.getElementById('mime-fb').textContent='';
   shuffle([r.ok].concat(r.w)).forEach(function(o){
@@ -521,7 +526,7 @@ var PRON=[
  {q:'Mi hermano ___ viste en su habitación. (Мой брат одевается в своей комнате.)',ok:'se',w:['me','te']},
  {q:'___ cepillo los dientes dos veces al día. (Я чищу зубы два раза в день.)',ok:'Me',w:['Te','Se']},
  {q:'¿A qué hora ___ peinas tú? (Во сколько ты причёсываешься?)',ok:'te',w:['me','se']},
- {q:'Nosotros ___ vestimos juntos. (Мы одеваемся вместе. — 12 лет)',ok:'nos',w:['me','se']}
+ {q:'Nosotros ___ vestimos juntos. (Мы одеваемся вместе.)',ok:'nos',w:['me','se']}
 ];
 var pronOrd=[],pronI=0,pronS=0;
 function pronStart(){
@@ -571,18 +576,46 @@ var SB=[
 ];
 var sbI=0,sbP=[];
 function renderSB(){
-  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  sbP=[];
+  var t=document.getElementById('sb-target');
+  var fb=document.getElementById('sb-fb');
+  fb.textContent='';
   var pool=document.getElementById('sb-pool');pool.innerHTML='';
-  shuffle(SB[sbI].w.slice()).forEach(function(w){
+  var words=SB[sbI].w;
+  function drawTarget(){
+    t.innerHTML='';
+    if(!sbP.length){t.innerHTML='<span class="sb-ph">…</span>';return;}
+    sbP.forEach(function(item){
+      var c=document.createElement('span');c.className='sb-placed';c.textContent=item.w;c.title='Нажми, чтобы вернуть слово';
+      c.addEventListener('click',function(){
+        item.el.classList.remove('placed');
+        var i=sbP.indexOf(item);if(i>-1)sbP.splice(i,1);
+        fb.textContent='';
+        drawTarget();
+      });
+      t.appendChild(c);
+    });
+  }
+  function check(){
+    if(sbP.length!==words.length)return;
+    var got=sbP.map(function(x){return x.w;});
+    var ok=got.every(function(x,i){return x===words[i];});
+    fb.textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+words.join(' ');
+    if(ok)speak(words.join(' '));
+  }
+  shuffle(words.slice()).forEach(function(w){
     var b=document.createElement('div');b.className='sb-word';b.textContent=w;
     b.addEventListener('click',function(){
       if(b.classList.contains('placed'))return;
-      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
-      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
-        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
-        if(ok)speak(SB[sbI].w.join(' '));}});
+      b.classList.add('placed');
+      sbP.push({w:w,el:b});
+      fb.textContent='';
+      drawTarget();
+      check();
+    });
     pool.appendChild(b);
   });
+  drawTarget();
 }
 function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
 renderSB();
@@ -637,7 +670,7 @@ function orderClick(btn,idx){
 orderStart();
 
 /* ЧТЕНИЕ */
-function speakLucia(){speak('¡Hola! Me llamo Lucía. Tengo 9 años. Por la mañana, me despierto a las siete. Me levanto y voy al baño. Me ducho y me lavo la cara. Después me visto y me cepillo los dientes en mi habitación. Desayuno en la cocina con mi familia: como tostadas y bebo zumo de naranja. A las ocho y media, cojo mi mochila y voy al colegio con mi hermano. ¡Así es mi mañana!');}
+function speakLucia(){if(!('speechSynthesis' in window))return;var u=new SpeechSynthesisUtterance('¡Hola! Me llamo Lucía. Tengo 9 años. Por la mañana, me despierto a las siete. Me levanto y voy al baño. Me ducho y me lavo la cara. Después me visto y me cepillo los dientes en mi habitación. Desayuno en la cocina con mi familia: como tostadas y bebo zumo de naranja. A las ocho y media, cojo mi mochila y voy al colegio con mi hermano. ¡Así es mi mañana!');u.lang='es-ES';u.rate=0.95;u.pitch=1.6;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
 var LUCIA=[
  {q:'¿A qué hora se despierta Lucía?',ru:'Во сколько просыпается Люсия?',ok:'A las siete.',w:['A las ocho.','A las seis.']},
  {q:'¿Dónde se ducha Lucía?',ru:'Где Люсия принимает душ?',ok:'En el baño.',w:['En la cocina.','En su habitación.']},
