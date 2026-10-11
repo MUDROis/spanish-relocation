@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFF7EF">
+<meta name="description" content="Урок 7.3: внеклассные занятия и AMPA (родительская ассоциация) — лексика extraescolares, кружки и секции; выражение времени и регулярности (a las, por la tarde, los lunes); продукт — запись ребёнка на кружки.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <title>Урок 7.3 · Extraescolares и AMPA — МУДРО</title>
 <link rel="stylesheet" href="../../assets/css/lesson-base.css">
 <style>
@@ -10,6 +13,7 @@
     --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--p5:#8B5FBF;
     --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
     --soft:#FBF3EA;--ink-soft:#7A6A5C;--teal:#2C5E8A;
+    --vocab:#BE8A55;
     --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
     --ok:#7A8B4C;--bad:#E2725B;
   }
@@ -17,22 +21,19 @@
   body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
   a{color:var(--p4)}
   .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
-  .lesson-topbar .inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
   .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
   .back-link:hover{color:var(--p1)}
   .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
   #auth-area{display:inline-flex}
 
-  .hero{
-    background:linear-gradient(135deg,var(--p3),var(--p1));
-    color:#fff;padding:44px 20px 38px;text-align:center;position:relative;overflow:hidden;
-  }
-  .hero::after{content:'⚽';position:absolute;right:20px;top:20px;font-size:3rem;opacity:.22}
-  .hero h1{font-size:2rem;margin-bottom:8px}
-  .hero p{font-size:1.1rem;opacity:.95;max-width:680px;margin:0 auto}
-  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
-  .hero-chip{background:rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:700}
-  .hero-chip.clil{background:#FFD700;color:#2B2118}
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
 
   .section{max-width:1000px;margin:0 auto;padding:36px 20px}
   .section:nth-child(even){background:var(--card)}
@@ -93,12 +94,12 @@
   .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
   .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
   .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
-  .vocab-front{background:var(--p3);color:#fff;border-color:var(--p3)}
+  .vocab-front{background:var(--vocab);color:#fff;border-color:var(--vocab)}
   .vocab-front .es{font-size:1.08rem;font-weight:800;margin-bottom:6px;line-height:1.3;color:#fff}
   .vocab-front .ru{font-size:.9rem;opacity:.95;font-weight:600;color:#fff}
   .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
-  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p3);transform:rotateY(180deg)}
-  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--p3);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--vocab);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.92rem;font-weight:700;color:var(--vocab);margin-bottom:6px;line-height:1.3;font-style:italic}
   .vocab-back .ex-ru{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.3}
 
   .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
@@ -201,15 +202,16 @@
   <span id="auth-area"></span>
 </div></div>
 
-<section class="hero">
-  <h1>⚽ Урок 7.3 · Extraescolares и AMPA</h1>
-  <p>Кружки, секции и родительская ассоциация: записываем ребёнка и вливаемся в школьное сообщество</p>
-  <div class="hero-chips">
-    <span class="hero-chip clil">🧠 CLIL: кружки и AMPA в Испании</span>
-    <span class="hero-chip">🎯 Цель: записать ребёнка на кружок</span>
-    <span class="hero-chip">🗣 35 слов в 5 категориях</span>
-    <span class="hero-chip">🧩 время: a las, por la tarde, los lunes</span>
-    <span class="hero-chip">📋 Продукт: запись на кружки</span>
+<section class="lesson-hero">
+  <span class="phase-tag">📍 Фаза 2 · El Cole y la Salud</span>
+  <h1>Урок 7.3 · <em>Extraescolares и AMPA</em></h1>
+  <p class="sub">Кружки, секции и родительская ассоциация: записываем ребёнка и вливаемся в школьное сообщество</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🧠 CLIL: кружки и AMPA в Испании</span>
+    <span class="meta-chip">🎯 Цель: записать ребёнка на кружок</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 время: a las, por la tarde, los lunes</span>
+    <span class="meta-chip">📋 Продукт: запись на кружки</span>
   </div>
 </section>
 
@@ -470,9 +472,9 @@
   </div>
 
   <div class="card">
-    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы. В диалоге говорят два человека: <b>секретариат</b> (низкий голос) и <b>родитель</b> (высокий голос) — так их легче различить.</p>
 
-    <button class="btn btn-secondary" onclick="speak('Buenos días, Colegio Santa María. ¿En qué puedo ayudarle? Buenos días. Quisiera apuntar a mi hijo Leo al club de lectura. Muy bien. El club de lectura es gratuito. Es los lunes por la tarde, de cuatro a cinco. Perfecto. ¿Hay plaza disponible? Sí, hay plaza. ¿Su hijo tiene ocho años? Sí, exactamente. También quisiera apuntarlo a la robótica. La robótica es de pago. La cuota es de cuarenta euros al mes. Es los jueves por la tarde, de cuatro y media a seis. Me parece bien. ¿Podría enviarme el formulario de inscripción por email? Por supuesto. También puede inscribirse a través del AMPA. Ellos organizan todas las extraescolares. ¿Qué es el AMPA exactamente? Es la asociación de madres y padres. La cuota anual es de veinte euros. Los socios tienen descuento en las actividades y pueden participar como voluntarios en los eventos. Nos gustaría ser socios. ¿Cómo nos inscribimos? Puede rellenar el formulario en secretaría o participar en la próxima reunión. Es el primer martes de cada mes, a las siete por la noche. Perfecto. Asistiremos a la reunión. Muchas gracias por su tiempo. De nada. Hasta luego.')" style="margin-bottom:12px">🔊 Прослушать диалог</button>
+    <button class="btn btn-secondary" onclick="speakDialog()" style="margin-bottom:12px">🔊 Прослушать диалог</button>
 
     <div class="dialog-box" onclick="this.classList.toggle('open')">
       <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
@@ -836,6 +838,54 @@ function speak(t){
   if(v) u.voice = v;
   speechSynthesis.speak(u);
 }
+function pickEsVoice(){
+  var voices = speechSynthesis.getVoices();
+  return voices.find(function(x){ return x.lang && x.lang.toLowerCase().startsWith('es'); }) || null;
+}
+
+// ===== Диалог в два голоса (секретариат / родитель) =====
+// op = секретариат (низкий голос), you = родитель (высокий голос)
+var DIALOG_LINES = [
+  {who:'op',  q:'Buenos días, Colegio Santa María. ¿En qué puedo ayudarle?'},
+  {who:'you', q:'Buenos días. Quisiera apuntar a mi hijo Leo al club de lectura.'},
+  {who:'op',  q:'Muy bien. El club de lectura es gratuito. Es los lunes por la tarde, de cuatro a cinco.'},
+  {who:'you', q:'Perfecto. ¿Hay plaza disponible?'},
+  {who:'op',  q:'Sí, hay plaza. ¿Su hijo tiene ocho años?'},
+  {who:'you', q:'Sí, exactamente. También quisiera apuntarlo a la robótica.'},
+  {who:'op',  q:'La robótica es de pago. La cuota es de cuarenta euros al mes. Es los jueves por la tarde, de cuatro y media a seis.'},
+  {who:'you', q:'Me parece bien. ¿Podría enviarme el formulario de inscripción por email?'},
+  {who:'op',  q:'Por supuesto. También puede inscribirse a través del AMPA. Ellos organizan todas las extraescolares.'},
+  {who:'you', q:'¿Qué es el AMPA exactamente?'},
+  {who:'op',  q:'Es la asociación de madres y padres. La cuota anual es de veinte euros. Los socios tienen descuento en las actividades y pueden participar como voluntarios en los eventos.'},
+  {who:'you', q:'Nos gustaría ser socios. ¿Cómo nos inscribimos?'},
+  {who:'op',  q:'Puede rellenar el formulario en secretaría o participar en la próxima reunión. Es el primer martes de cada mes, a las siete por la noche.'},
+  {who:'you', q:'Perfecto. Asistiremos a la reunión. Muchas gracias por su tiempo.'},
+  {who:'op',  q:'De nada. Hasta luego.'}
+];
+
+function speakDialog(){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var i = 0;
+  (function next(){
+    if(i >= DIALOG_LINES.length) return;
+    var line = DIALOG_LINES[i++];
+    var u = new SpeechSynthesisUtterance(line.q);
+    u.lang = 'es-ES';
+    if(line.who === 'you'){
+      u.rate = 1.0;   // родитель: чуть быстрее
+      u.pitch = 1.35; // и заметно выше
+    } else {
+      u.rate = 0.85;  // секретариат: чуть медленнее
+      u.pitch = 0.75; // и заметно ниже
+    }
+    var v = pickEsVoice();
+    if(v) u.voice = v;
+    u.onend = next;
+    speechSynthesis.speak(u);
+  })();
+}
+
 if('speechSynthesis' in window){
   speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
   speechSynthesis.getVoices();
@@ -1126,6 +1176,7 @@ function checkBuild(){
   var target = buildPhrases[buildIdx].target;
   var fb = document.getElementById('bw-fb');
 
+  fb.style.display = '';
   if(got === target){
     fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
     fb.className = 'build-feedback ok';
@@ -1134,7 +1185,6 @@ function checkBuild(){
     fb.className = 'build-feedback bad';
   } else {
     fb.className = 'build-feedback';
-    fb.style.display = 'none';
   }
 }
 
@@ -1369,8 +1419,6 @@ function renderTrain(){
       document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
     }
 
-    updateCard();
-
     var controls = document.createElement('div');
     controls.style.marginTop = '16px';
     controls.style.display = 'flex';
@@ -1385,6 +1433,7 @@ function renderTrain(){
     cardContainer.appendChild(card);
     cardContainer.appendChild(controls);
     box.appendChild(cardContainer);
+    updateCard();
 
     document.getElementById('train-prev').onclick = function(){
       if(trainerIdx > 0){ trainerIdx--; updateCard(); }
@@ -1489,6 +1538,7 @@ function renderTrainBuild(container){
 
     function check(){
       var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      fb.style.display = '';
       if(got === p.target){
         fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
         fb.className = 'build-feedback ok';
@@ -1497,7 +1547,6 @@ function renderTrainBuild(container){
         fb.className = 'build-feedback bad';
       } else {
         fb.className = 'build-feedback';
-        fb.style.display = 'none';
       }
     }
 
