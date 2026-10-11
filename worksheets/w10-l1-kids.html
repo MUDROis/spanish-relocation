@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 28 · ¡Por la mañana! — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>⏰ ¡Por la mañana!</h1>
+    <div class="sub">Рабочий лист к Уроку 28 · Станция 3: Mi Mundo · утренняя рутина, возвратные глаголы (me/te/se)</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Работай самостоятельно, а потом проверь вместе с родителем или учителем. Вспоминай действия утра и волшебный «хвостик» -SE!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини действие рутины и перевод</span>
+      <span class="ex-skill">🗣 Лексика · рутина</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским действием.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🛎️ despertarse</td><td>а) завтракать</td></tr>
+      <tr><td><span class="ans-box"></span>🧍 levantarse</td><td>б) причёсываться</td></tr>
+      <tr><td><span class="ans-box"></span>🚿 ducharse</td><td>в) просыпаться</td></tr>
+      <tr><td><span class="ans-box"></span>🧼 lavarse</td><td>г) чистить зубы</td></tr>
+      <tr><td><span class="ans-box"></span>👕 vestirse</td><td>д) вставать</td></tr>
+      <tr><td><span class="ans-box"></span>🪥 cepillarse los dientes</td><td>е) принимать душ</td></tr>
+      <tr><td><span class="ans-box"></span>💇 peinarse</td><td>ж) идти в школу</td></tr>
+      <tr><td><span class="ans-box"></span>🥐 desayunar</td><td>з) умываться</td></tr>
+      <tr><td><span class="ans-box"></span>🎒 ir al colegio</td><td>и) одеваться</td></tr>
+      <tr><td><span class="ans-box"></span>🌅 por la mañana</td><td>к) утром</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Угадай действие по описанию</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>despertarse · ducharse · vestirse · cepillarse los dientes · desayunar · ir al colegio</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🛎️</span> Suena el despertador. Abres los ojos. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🚿</span> Estás en el baño, bajo el agua. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">👕</span> Te pones la camiseta y los pantalones. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">🪥</span> Limpias tus dientes con el cepillo. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">🥐</span> Comes tostadas y bebes zumo en la cocina. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🎒</span> Coges la mochila y caminas a la escuela. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ВСТАВЬ ХВОСТИК -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь правильный «хвостик»: me / te / se</span>
+      <span class="ex-skill">🧩 Грамматика · возвратные</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> <b>me</b> = я, <b>te</b> = ты, <b>se</b> = он/она. Хвостик всегда ПЕРЕД глаголом!</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Yo <span class="g"></span> despierto a las siete.</div>
+      <div class="gap-item"><span class="num">2</span>Tú <span class="g"></span> levantas muy rápido.</div>
+      <div class="gap-item"><span class="num">3</span>Mamá <span class="g"></span> ducha por la mañana.</div>
+      <div class="gap-item"><span class="num">4</span>Yo <span class="g"></span> lavo las manos antes de comer.</div>
+      <div class="gap-item"><span class="num">5</span>Mi hermano <span class="g"></span> viste en su habitación.</div>
+      <div class="gap-item"><span class="num">6</span>Yo <span class="g"></span> cepillo los dientes dos veces al día.</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Слова перепутаны. Расставь их в правильном порядке и запиши готовую фразу на линии.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">las</span><span class="build-word">Me</span><span class="build-word">siete.</span><span class="build-word">a</span><span class="build-word">despierto</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">manos.</span><span class="build-word">Me</span><span class="build-word">las</span><span class="build-word">lavo</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">cocina.</span><span class="build-word">en</span><span class="build-word">Desayuno</span><span class="build-word">la</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">hermano.</span><span class="build-word">Voy</span><span class="build-word">con</span><span class="build-word">colegio</span><span class="build-word">al</span><span class="build-word">mi</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ПОРЯДОК РУТИНЫ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Расставь утро по порядку</span>
+      <span class="ex-skill">🔢 Логика · рутина</span>
+    </div>
+    <div class="ex-instruction">Пронумеруй действия от 1 до 6 в правильном порядке настоящей рутины (впиши цифру в квадратик перед действием).</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🥐</span> Desayuno</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🛎️</span> Me despierto</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🎒</span> Voy al colegio</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🚿</span> Me ducho</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🧍</span> Me levanto</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">👕</span> Me visto</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Утро Люсии» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Lucía. Tengo 9 años. Por la mañana, me despierto a las siete. Me levanto y voy al baño. Me ducho y me lavo la cara. Después me visto y me cepillo los dientes en mi habitación. Desayuno en la cocina con mi familia: como tostadas y bebo zumo de naranja. A las ocho y media, cojo mi mochila y voy al colegio con mi hermano. ¡Así es mi mañana!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿A qué hora se despierta Lucía? <span class="ru">(Во сколько просыпается Люсия?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Dónde se ducha Lucía? <span class="ru">(Где Люсия принимает душ?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Dónde se viste Lucía? <span class="ru">(Где Люсия одевается?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué desayuna Lucía? <span class="ru">(Что Люсия ест на завтрак?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Con quién va al colegio? <span class="ru">(С кем она идёт в школу?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Сочинение «Mi mañana»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! Me llamo... y tengo... años. · 2) Por la mañana me despierto a las... · 3) Me levanto y me ducho en... · 4) Me visto en... · 5) Me cepillo los dientes y me peino. · 6) Desayuno... en la cocina. · 7) Voy al colegio a las... · 8) ¡Así es mi mañana!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть 10 действий утренней рутины</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Использовать хвостик me/te/se</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Расставлять рутину по порядку</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать текст «Утро Люсии»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить о времени: a las siete</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать о своём утре по формуле 6 шагов</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 28 · ¡Buenos días y buen día! 🌅</div>
+</div>
+
+</body>
+</html>
