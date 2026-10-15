@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 8.1 · Sanidad Pública — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#8B5FBF;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,#3E7CB1,#5FA8D3);
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🏥'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:#5FA8D3;}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #E8DCCF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #C9B8A6; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #E8DCCF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#EAF3FA; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#EAF3FA; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#EAF3FA; border-left-color:var(--p4); }
+
+  .days-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:2mm; margin:2mm 0; }
+  .day-cell{
+    border:1.5px solid var(--p4); border-radius:6px; padding:2mm;
+    text-align:center; font-size:9.5px; background:#fff;
+  }
+  .day-cell .es{ display:block; font-weight:700; color:var(--p4); font-style:italic; }
+  .day-cell input{
+    width:100%; border:none; border-bottom:1px dashed #C9B8A6;
+    background:transparent; font-size:8.5px; text-align:center; padding:1px;
+    font-family:inherit;
+  }
+
+  .months-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:2mm; margin:2mm 0; }
+  .month-cell{
+    border:1.5px solid var(--p4); border-radius:6px; padding:2mm;
+    text-align:center; font-size:9px; background:#fff;
+  }
+  .month-cell .num{ display:block; font-weight:800; color:var(--p3); }
+  .month-cell input{
+    width:100%; border:none; border-bottom:1px dashed #C9B8A6;
+    background:transparent; font-size:8.5px; text-align:center; padding:1px;
+    font-family:inherit;
+  }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #E8DCCF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#EAF3FA; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#EAF3FA; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #E8DCCF; font-size:10px; }
+  .tl-table th{ background:#EAF3FA; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #E8DCCF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏥 Рабочий лист · Урок 8.1 «Sanidad Pública»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Карточка SIP, центр здоровья, дни и месяцы</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА · СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🏥 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el centro de salud</div>
+          <div class="item">2. la tarjeta sanitaria</div>
+          <div class="item">3. el pediatra</div>
+          <div class="item">4. el médico de cabecera</div>
+          <div class="item">5. el especialista</div>
+          <div class="item">6. las urgencias</div>
+          <div class="item">7. el volante</div>
+          <div class="item">8. la receta</div>
+        </div>
+        <div class="col">
+          <div class="item">а) педиатр (детский врач)</div>
+          <div class="item">б) медицинская карточка</div>
+          <div class="item">в) семейный врач (терапевт)</div>
+          <div class="item">г) скорая помощь / приёмное отделение</div>
+          <div class="item">д) поликлиника / центр здоровья</div>
+          <div class="item">е) направление к специалисту</div>
+          <div class="item">ж) узкий специалист</div>
+          <div class="item">з) рецепт</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА · ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔤 Впиши слово по описанию</h2>
+        <div class="tag">из словаря урока</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Номер на карточке в Валенсии (в Каталонии — CIP). → <span class="wline long"></span><br>
+      2. Документ, который вы получаете в центре здоровья на всю семью. → <span class="wline long"></span><br>
+      3. Врач для детей от 0 до 14 лет. → <span class="wline long"></span><br>
+      4. Врач для взрослых, первый, к кому вы идёте. → <span class="wline long"></span><br>
+      5. Отделение, куда обращаются ночью и в выходные. → <span class="wline long"></span><br>
+      6. Бумага от врача, по которой в аптеке выдают лекарство. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА · ДНИ НЕДЕЛИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: дни недели</h2>
+        <div class="tag">напиши день недели по-испански</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> дни недели пишутся с <b>маленькой буквы</b>. «В понедельник» = <b>el lunes</b>. «По понедельникам» = <b>los lunes</b>.
+      </div>
+      <div class="days-grid">
+        <div class="day-cell"><span class="es">Пн</span><input type="text" placeholder="el ..."></div>
+        <div class="day-cell"><span class="es">Вт</span><input type="text" placeholder="el ..."></div>
+        <div class="day-cell"><span class="es">Ср</span><input type="text" placeholder="el ..."></div>
+        <div class="day-cell"><span class="es">Чт</span><input type="text" placeholder="el ..."></div>
+        <div class="day-cell"><span class="es">Пт</span><input type="text" placeholder="el ..."></div>
+        <div class="day-cell"><span class="es">Сб</span><input type="text" placeholder="el ..."></div>
+        <div class="day-cell"><span class="es">Вс</span><input type="text" placeholder="el ..."></div>
+      </div>
+      <div class="hint" style="margin-top:2mm">Подпишите части дня:</div>
+      1. por la mañana → <span class="wline short"></span> <span class="ru-sub">(когда? 6:00–14:00)</span><br>
+      2. por la tarde → <span class="wline short"></span> <span class="ru-sub">(когда? 14:00–20:00)</span><br>
+      3. por la noche → <span class="wline short"></span> <span class="ru-sub">(когда? 20:00–6:00)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА · МЕСЯЦЫ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>📅 Грамматика: месяцы</h2>
+        <div class="tag">напиши месяц по-испански</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> месяцы пишутся с <b>маленькой буквы</b> и без артикля. «В январе» = <b>en enero</b> (не «en el enero»).
+      </div>
+      <div class="months-grid">
+        <div class="month-cell"><span class="num">1</span><input type="text"></div>
+        <div class="month-cell"><span class="num">2</span><input type="text"></div>
+        <div class="month-cell"><span class="num">3</span><input type="text"></div>
+        <div class="month-cell"><span class="num">4</span><input type="text"></div>
+        <div class="month-cell"><span class="num">5</span><input type="text"></div>
+        <div class="month-cell"><span class="num">6</span><input type="text"></div>
+        <div class="month-cell"><span class="num">7</span><input type="text"></div>
+        <div class="month-cell"><span class="num">8</span><input type="text"></div>
+        <div class="month-cell"><span class="num">9</span><input type="text"></div>
+        <div class="month-cell"><span class="num">10</span><input type="text"></div>
+        <div class="month-cell"><span class="num">11</span><input type="text"></div>
+        <div class="month-cell"><span class="num">12</span><input type="text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 5: ГРАММАТИКА · КОМБИНАЦИИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>🕐 Грамматика: день + часть дня + месяц</h2>
+        <div class="tag">переведи на испанский</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="formula">💡 Формула: <b>el + день + por la + часть дня</b> · <b>en + месяц</b> · <b>el día + число + de + месяц</b></div>
+      1. Приём в понедельник утром. → <span class="wline xlong"></span><br>
+      2. Педиатр принимает по вторникам днём. → <span class="wline xlong"></span><br>
+      3. Приём в январе, 15-го числа. → <span class="wline xlong"></span><br>
+      4. Скорая помощь работает ночью. → <span class="wline xlong"></span><br>
+      5. Мы пойдём в центр здоровья в четверг днём. → <span class="wline xlong"></span><br>
+      6. Карточка будет готова в марте. → <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 6: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>📖 Чтение + CLIL: как устроена Sanidad Pública</h2>
+        <div class="tag">прочитай текст и ответь на вопросы</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Sanidad Pública en España</h4>
+        <p>España tiene un sistema de sanidad pública universal y gratuito para todos los residentes. Para acceder a él, es imprescindible tener la <b>tarjeta sanitaria</b> (también llamada <b>SIP</b> en Valencia, <b>CIP</b> en Cataluña, <b>TSI</b> en Madrid). Esta tarjeta se solicita en el Centro de Salud más cercano al domicilio.</p>
+        <h4>Estructura del sistema</h4>
+        <p><b>Centro de Salud:</b> atención primaria. Aquí trabaja el médico de cabecera (adultos) y el pediatra (niños de 0 a 14 años).</p>
+        <p><b>Urgencias:</b> atención inmediata, 24 horas.</p>
+        <p><b>Especialistas:</b> cardiología, alergología, traumatología. Solo se accede con volante del médico de cabecera.</p>
+        <p><b>Farmacias:</b> se dispensan medicamentos con receta electrónica.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Quién puede usar la sanidad pública en España?
+      <span class="wline xlong"></span><br>
+      2. ¿Cómo se llama la tarjeta sanitaria en Valencia y en Cataluña?
+      <span class="wline xlong"></span><br>
+      3. ¿Dónde trabaja el pediatra?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué necesitas para ver a un especialista?
+      <span class="wline xlong"></span><br>
+      5. ¿Cuántas horas están abiertas las urgencias?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист документов для карточки SIP</h4>
+        <div class="item"><div class="box"></div><div>🪪 NIE (оригинал + 2 копии)</div></div>
+        <div class="item"><div class="box"></div><div>📋 Certificado de empadronamiento (не старше 3 месяцев)</div></div>
+        <div class="item"><div class="box"></div><div>🛂 Паспорта всех членов семьи (оригиналы + копии)</div></div>
+        <div class="item"><div class="box"></div><div>💼 Contrato de trabajo или справка о доходах</div></div>
+        <div class="item"><div class="box"></div><div>👨‍👩‍👧 Libro de familia или свидетельства о рождении детей</div></div>
+        <div class="item"><div class="box"></div><div>🏦 Número de la Seguridad Social (если работаете)</div></div>
+        <div class="item"><div class="box"></div><div>✍️ Ручка для заполнения форм</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 7: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🎧 Аудирование: визит в Centro de Salud</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Buenos días, Centro de Salud San Fernando. ¿En qué puedo ayudarle? — Buenos días. Quisiera solicitar la tarjeta sanitaria para mi familia. Somos nuevos en España. — Muy bien. ¿Trae los documentos necesarios? — Sí, tengo el NIE, el certificado de empadronamiento, los pasaportes y el contrato de trabajo. — Perfecto. ¿Cuántas personas son? — Somos cuatro: mi esposo, yo, mi hijo Leo de ocho años y mi hija Vega de doce años. — Muy bien. Rellene este formulario. Después le asignaremos un médico de cabecera y un pediatra. — ¿Cuándo podemos venir a recoger las tarjetas? — Las tarjetas estarán listas en dos semanas. Puede recogerlas un martes o un jueves por la mañana, de nueve a una. — Perfecto. Vendré el jueves por la mañana. Muchas gracias.»
+      </div>
+      1. ¿Qué quiere solicitar la madre?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuántas personas son en семье?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué documentos trae?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuándo estarán listas las tarjetas?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué día и в какое время она придёт забрать их?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 8: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>🗣 Говорение: ситуации в регистратуре</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы пришли в центр здоровья и хотите получить карточку на семью.<br>
+        <div class="tmpl">«Buenos días. Quisiera solicitar la tarjeta sanitaria para mi familia.»</div>
+        <div class="tmpl-ru">(Добрый день. Я хотел бы оформить медицинскую карточку на семью.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы говорите, что вы новые в Испании.<br>
+        <div class="tmpl">«Somos nuevos en España. Tenemos el NIE y el empadronamiento.»</div>
+        <div class="tmpl-ru">(Мы недавно в Испании. У нас есть NIE и прописка.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы спрашиваете, когда можно забрать карточки.<br>
+        <div class="tmpl">«¿Cuándo podemos venir a recoger las tarjetas?»</div>
+        <div class="tmpl-ru">(Когда мы можем прийти забрать карточки?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы хотите записать ребёнка к педиатру.<br>
+        <div class="tmpl">«Quisiera pedir una cita con el pediatra para mi hijo.»</div>
+        <div class="tmpl-ru">(Я хотел бы записаться с сыном к педиатру.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 9: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">9</div>
+      <div>
+        <h2>✍️ Письмо: скрипт визита в Centro de Salud</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и цель визита (Quisiera solicitar la tarjeta sanitaria…).<br>
+        3–4. Состав семьи и документы (Somos cuatro… Tengo el NIE…).<br>
+        5–6. Вопросы (¿Cuándo podemos recoger las tarjetas? ¿Qué día…?).<br>
+        7–8. Подтверждение и прощание (Vendré el jueves… Muchas gracias).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть части системы (centro de salud, urgencias, pediatra)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать, что такое tarjeta sanitaria / SIP</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Называть 7 дней недели и части дня</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Называть 12 месяцев</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Составлять фразы «день + часть дня + месяц»</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Составить скрипт визита за карточкой</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 8.2: Запись к врачу</h2>
+        <div class="tag">pedir cita, consulta, urgencias, especialista</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы получили карточку SIP и познакомились с центром здоровья. На следующем уроке (8.2) научимся записываться к педиатру и врачу по телефону, понимать предлоги времени <i>(de lunes a viernes)</i> и различать <i>consulta</i> и <i>urgencias</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
