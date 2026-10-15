@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 29: Antes y después — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --peach:#FFB4A2; --wine:#9D4EDD; --afran:#E9A13B; --sky:#3E7CB1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{overflow-x:clip}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px;overflow-x:clip}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E3F2FD 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(62,124,177,.2),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(233,161,59,.2),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--sky);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--sky)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:2.8rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#E3F2FD,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--sky);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--sky)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#E3F2FD;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #E3F2FD;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--sky)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--sky)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .word-card .ges{display:block;font-size:.7rem;font-weight:800;color:var(--terra);margin-top:4px}
+  .speak-btn{background:var(--sky);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--sky);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+  .table-scroll .gram-table{min-width:560px}
+  .table-scroll .tl-table{min-width:420px}
+
+  .game-zone{background:linear-gradient(135deg,#E3F2FD,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--sky);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #d0dbe6;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--sky);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  /* ХРОНОЛОГИЯ */
+  .order-zone{background:#fff;border:3px solid var(--peach);border-radius:18px;padding:16px;margin:12px 0}
+  .order-answer{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:50px;padding:10px;background:#FFF8EC;border-radius:12px;margin-bottom:12px}
+  .order-placed{font-size:.9rem;font-weight:800;color:var(--sky);background:#fff;border:2px solid var(--sky);border-radius:999px;padding:6px 12px}
+  .order-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .order-item{background:#fff;border:2.5px solid #d0dbe6;border-radius:14px;padding:10px 14px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem}
+  .order-item .oi-emo{font-size:1.5rem;display:block;text-align:center}
+  .order-item:hover{border-color:var(--sky);transform:translateY(-2px)}
+  .order-item.done{opacity:.3;cursor:default}
+  .order-item.wrongflash{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+
+  /* ЗАПОЛНИ ПРОПУСКИ */
+  .fill-ex{background:#fff;border:2px solid #E3F2FD;border-radius:14px;padding:14px 18px;margin:10px 0}
+  .fill-ex .ex-num{display:inline-block;background:var(--sky);color:#fff;border-radius:50%;width:26px;height:26px;text-align:center;line-height:26px;font-weight:800;font-size:.9rem;margin-right:8px;flex-shrink:0}
+  .fill-ex .sentence{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--ink);margin:8px 0}
+  .fill-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .fill-opt{background:#fff;border:2px solid #d0dbe6;border-radius:999px;padding:6px 14px;font-weight:800;cursor:pointer;font-family:'Nunito';font-size:.9rem;transition:.15s}
+  .fill-opt:hover:not(:disabled){border-color:var(--sky)}
+  .fill-opt.sel{background:var(--sky);color:#fff;border-color:var(--sky)}
+  .fill-opt.correct{background:#C8E6C9;border-color:var(--green);color:var(--green)}
+  .fill-opt.wrong{background:#FFCDD2;border-color:var(--red);color:var(--red)}
+  .fill-opt:disabled{cursor:not-allowed}
+
+  /* CLIL РАСПИСАНИЕ */
+  .horario-table{width:100%;border-collapse:collapse;margin:12px 0;background:#fff;border-radius:14px;overflow:hidden}
+  .horario-table th{background:var(--sky);color:#fff;padding:10px 8px;font-size:.85rem}
+  .horario-table td{padding:10px 8px;border-bottom:1px solid #e8eef4;font-size:.85rem;text-align:center;cursor:pointer;font-weight:700;transition:.15s}
+  .horario-table tr:hover td{background:#E3F2FD}
+  .horario-table td:first-child{background:#FFF3D6;color:var(--afran);font-weight:800}
+
+  .warm-item{background:#fff;border:2px solid #e0e8f0;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--sky)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .shadow-card{background:linear-gradient(135deg,#FFF3D6,#E3F2FD);border-radius:16px;padding:16px;margin:10px 0;text-align:center}
+  .shadow-phrase{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--sky);margin:8px 0}
+  .shadow-ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--sky)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #d0dbe6;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--sky)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--sky);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--sky);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--sky);background:#E3F2FD}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--sky);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--sky);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--sky),#2a5a80);color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 3 · Mi Mundo · Урок 29 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🎬 СТАНЦИЯ 3 · УРОК 29 · НЕДЕЛЯ 10</span>
+  <div class="hero-emojis">⏮️ 🥇 ➡️ ⏭️ 🏁</div>
+  <h1>Antes y <span>después</span></h1>
+  <p class="sub">Вчера ты снял кадры своего утра. Сегодня <strong>монтируем весь день в фильм</strong>! Ты выучишь слова-«режиссёры» — <em>сначала, потом, после, в конце</em> — узнаешь, как живёт испанский школьник, и соберёшь свой идеальный день кадр за кадром.</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> испанский друг спрашивает: <em>«¿Qué haces los lunes?»</em> (Что ты делаешь по понедельникам?), а ты отвечаешь как режиссёр:<br>
+    <em>«Los lunes me despierto a las siete. Primero me ducho, luego desayuno. Después de desayunar, voy al colegio. Por la tarde hago los deberes y luego juego al fútbol. Antes de dormir, leo. Al final, me acuesto a las diez.»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">⏳</span> Использовать 5 маркеров порядка</div>
+      <div class="goal-item"><span class="emoji">📅</span> Называть 5 дней недели + «Los lunes...»</div>
+      <div class="goal-item"><span class="emoji">🇪🇸</span> Читать настоящее расписание испанского школьника</div>
+      <div class="goal-item"><span class="emoji">🔢</span> 12 лет: считать интервалы времени</div>
+      <div class="goal-item"><span class="emoji">🗣</span> Рассказать о своём дне по 8 кадрам</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Режиссёр дня»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 28</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola otra vez! Вспомним утреннюю рутину — ответь ВСЛУХ. Мостик: «Ты рассказал про утро. А что было ПОТОМ? Что ты делал ПЕРЕД сном? Сегодня научимся монтировать день!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ЛЕКСИКА -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">⏳ Слова-«режиссёры»: маркеры + дни недели</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на карточку — услышишь слово. Жестом рисуй линию времени слева направо!</p>
+    <div class="cards-grid" id="marker-cards"></div>
+    <div class="script">⚡ <strong>Секрет:</strong> маркеры — «дорожные знаки» рассказа: <b>primero → luego → después → al final</b>. А <b>antes de</b> — стрелка НАЗАД ⏮️. Дни недели в испанском пишутся с <b>маленькой буквы</b>!</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра «Хронология»: расставь по порядку!</p>
+      <div id="chrono-box"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: маркеры в действии</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <div class="table-scroll">
+      <table class="gram-table">
+        <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+        <tr onclick="speak('Primero me despierto a las siete.')"><td><b>PRIMERO + фраза</b></td><td>Primero me despierto a las siete.</td><td>Сначала я просыпаюсь в семь.</td><td><button class="speak-btn" onclick="speak('Primero me despierto a las siete.')">🔊</button></td></tr>
+        <tr onclick="speak('Luego me ducho y me visto.')"><td><b>LUEGO + фраза</b></td><td>Luego me ducho y me visto.</td><td>Потом принимаю душ и одеваюсь.</td><td><button class="speak-btn" onclick="speak('Luego me ducho y me visto.')">🔊</button></td></tr>
+        <tr onclick="speak('Después de desayunar, voy al colegio.')"><td><b>DESPUÉS DE + инфинитив</b></td><td>Después de desayunar, voy al colegio.</td><td>После завтрака иду в школу.</td><td><button class="speak-btn" onclick="speak('Después de desayunar, voy al colegio.')">🔊</button></td></tr>
+        <tr onclick="speak('Antes de dormir, me cepillo los dientes.')"><td><b>ANTES DE + инфинитив</b></td><td>Antes de dormir, me cepillo los dientes.</td><td>Перед сном чищу зубы.</td><td><button class="speak-btn" onclick="speak('Antes de dormir, me cepillo los dientes.')">🔊</button></td></tr>
+        <tr onclick="speak('Al final, me acuesto a las diez.')"><td><b>AL FINAL + фраза</b></td><td>Al final, me acuesto a las diez.</td><td>В конце ложусь спать в десять.</td><td><button class="speak-btn" onclick="speak('Al final, me acuesto a las diez.')">🔊</button></td></tr>
+        <tr onclick="speak('Los lunes juego al fútbol.')"><td><b>LOS + день (привычка)</b></td><td>Los lunes juego al fútbol.</td><td>По понедельникам играю в футбол.</td><td><button class="speak-btn" onclick="speak('Los lunes juego al fútbol.')">🔊</button></td></tr>
+      </table>
+    </div>
+    <div class="script">⚡ <strong>Ловушка:</strong> после <span class="grammar-hint" data-hint="después de и antes de дружат с ИНФИНИТИВОМ — действием без изменений: después de desayunar, antes de dormir. НЕ «después desayuno» и НЕ «antes de duermo» внутри такой связки!">después de / antes de</span> идёт действие БЕЗ изменений (инфинитив): <em>después de <b>desayunar</b></em>, <em>antes de <b>dormir</b></em>.</div>
+    <div class="game-zone">
+      <p style="font-weight:800">✏️ Заполни пропуски: выбери правильный маркер!</p>
+      <div id="fill-box" style="text-align:left"></div>
+      <div style="text-align:center;margin-top:14px">
+        <button class="speak-btn" onclick="checkFill()">✔ Проверить всё</button>
+        <button class="speak-btn" style="background:var(--afran);margin-left:8px" onclick="resetFill()">↺ Начать заново</button>
+      </div>
+      <div class="stars-line" style="text-align:center">⭐ Правильно: <span id="fill-stars">0</span> из <span id="fill-total">8</span></div>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Конструктор: собери фразу!</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: CLIL -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head">
+      <h2 class="block-title">🇪🇸 CLIL: «El día de Pablo» — расписание испанского школьника</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на строки, чтобы услышать их. Узнай, как живёт школьник в Испании!</p>
+    <table class="horario-table">
+      <tr><th>Hora</th><th>Lunes</th><th>Martes</th><th>Miércoles</th></tr>
+      <tr onclick="speak('A las siete y media me despierto y desayuno.')"><td>7:30</td><td colspan="3">🛎️ Me despierto y desayuno</td></tr>
+      <tr onclick="speak('A las nueve voy al colegio.')"><td>9:00</td><td colspan="3">🎒 Voy al colegio</td></tr>
+      <tr onclick="speak('A las dos como en el comedor.')"><td>14:00</td><td colspan="3">🍽️ Como en el comedor</td></tr>
+      <tr onclick="speak('A las cuatro tengo extraescolares: el lunes fútbol, el martes inglés, el miércoles natación.')"><td>16:00</td><td>⚽ fútbol</td><td>🗣️ inglés</td><td>🏊 natación</td></tr>
+      <tr onclick="speak('A las seis hago los deberes.')"><td>18:00</td><td colspan="3">✍️ Hago los deberes</td></tr>
+      <tr onclick="speak('A las nueve ceno con mi familia.')"><td>21:00</td><td colspan="3">🥗 Ceno con mi familia</td></tr>
+      <tr onclick="speak('A las diez me acuesto.')"><td>22:00</td><td colspan="3">🛌 Me acuesto</td></tr>
+    </table>
+    <div class="script">🌍 <strong>Культурные факты:</strong> испанские дети обедают в <b>14:00</b>, уроки часто идут до 16–17 ч, а ужин — в <b>21:00</b> всей семьёй! Кружки после школы называются <span class="grammar-hint" data-hint="extraescolares — дополнительные занятия после уроков прямо в школе: спорт, языки, музыка. Почти все испанские дети на них ходят!">extraescolares</span>.</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🔍 Вопросы к расписанию:</p>
+      <div id="clil-quiz" style="text-align:left"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: ЧТЕНИЕ -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head">
+      <h2 class="block-title">📖 Чтение: «El horario de Diego»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakDiego()">🔊 Послушать текст</button>
+    <div class="read-box">
+      ¡Hola! Me llamo Diego. Los lunes me despierto a las siete. <b>Primero</b> me ducho, <b>luego</b> me visto y <b>después</b> desayuno. <b>Antes de</b> ir al colegio, me cepillo los dientes. A las dos como en el comedor. Por la tarde hago los deberes y <b>luego</b> juego con mis amigos. Los martes y los jueves voy a natación. <b>Al final</b>, por la noche, ceno con mi familia y me acuesto a las diez. ¡Así es mi día!
+    </div>
+    <div id="diego-quiz"></div>
+  </section>
+
+  <!-- БЛОК 5: ТЕНЬ + АУДИРОВАНИЕ -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🎧 Тренажёр: тень + «Что было раньше?»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <h4>🗣 Шаг 1: Теневое повторение</h4>
+    <p class="block-sub">Слушай фразу и повторяй ВСЛУХ за диктором, копируя интонацию!</p>
+    <div id="shadow-box"></div>
+    <h4 style="margin-top:16px">👂 Шаг 2: Что было раньше?</h4>
+    <p class="block-sub">Послушай два действия и кликни, что было ПЕРВЫМ (или ПОСЛЕДНИМ)!</p>
+    <div class="game-zone">
+      <div class="game-q" id="seq-q">Нажми «▶ Начать»!</div>
+      <div class="opts" id="seq-opts"></div>
+      <div class="game-fb" id="seq-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="seq-stars">0</span> / <span id="seq-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="seqStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 6: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Говорение: «Мой идеальный день»</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <div class="script">ВЫВОД В РЕЧЬ! Ты — режиссёр своего дня. Расскажи о нём по формуле, кадр за кадром. Это генеральная репетиция перед уроком 30, где ты снимешь настоящий влог! 🎬</div>
+    <div class="read-box" style="background:#E3F2FD;border-color:var(--sky)">
+      <strong>📋 Формула речи (8 кадров):</strong><br>
+      1. <em>¡Hola! Voy a contar mi día perfecto.</em><br>
+      2. <em>Por la mañana me despierto a las [время].</em><br>
+      3. <em><b>Primero</b> me ducho y me visto.</em><br>
+      4. <em><b>Después de</b> desayunar, voy al colegio.</em><br>
+      5. <em>Por la tarde hago los deberes.</em><br>
+      6. <em><b>Luego</b> juego con mis amigos / al fútbol.</em><br>
+      7. <em><b>Antes de</b> dormir, me cepillo los dientes.</em><br>
+      8. <em><b>Al final</b>, me acuesto a las [время].</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 7: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎬</div>
+      <h3>Режиссёр дня</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты умеешь рассказывать о своём дне по порядку, кадр за кадром!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Режиссёр дня» 🎬 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 9 станции 3 (урок 30 · PBL):</strong> «Завтра — финал блока "Mi rutina"! 8 лет делают комикс «Моё утро», а 12 лет — сценарий видео-влога на испанском. Твоя лента времени из домашки пригодится! ¡Luces, cámara, acción!» 🎥</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">⏳ Маркеры порядка (5)</h4>
+    <div class="cards-grid" id="words-markers"></div>
+    <h4 style="margin:14px 0 8px">📅 Дни недели (5)</h4>
+    <div class="cards-grid" id="words-days"></div>
+    <h4 style="margin:14px 0 8px">🧩 Конструкции</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('Primero me despierto.')"><div class="emo">🥇</div><div class="es">Primero me despierto.</div><div class="ru">Сначала я просыпаюсь.</div></div>
+      <div class="word-card" onclick="speak('Después de desayunar, voy al colegio.')"><div class="emo">⏭️</div><div class="es">Después de desayunar...</div><div class="ru">После завтрака...</div></div>
+      <div class="word-card" onclick="speak('Antes de dormir, me cepillo los dientes.')"><div class="emo">⏮️</div><div class="es">Antes de dormir...</div><div class="ru">Перед сном...</div></div>
+      <div class="word-card" onclick="speak('Los lunes juego al fútbol.')"><div class="emo">⚽</div><div class="es">Los lunes juego al fútbol.</div><div class="ru">По понедельникам играю в футбол.</div></div>
+      <div class="word-card" onclick="speak('Por la tarde hago los deberes.')"><div class="emo">🌇</div><div class="es">Por la tarde hago los deberes.</div><div class="ru">Днём делаю домашку.</div></div>
+      <div class="word-card" onclick="speak('Al final, me acuesto a las diez.')"><div class="emo">🏁</div><div class="es">Al final, me acuesto.</div><div class="ru">В конце ложусь спать.</div></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей словам-«режиссёрам»</strong> · 5 мин<br>Покажи жесты <em>primero, luego, después, antes, al final</em>. Пусть угадают перевод.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🃏 Игра «Мой день вразнобой»</strong> · 7 мин ⭐<br>Родители называют действия вразнобой, а ты расставляй их по порядку: <em>«Primero..., luego..., después..., al final...»</em></div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎨 Лента времени «Мой идеальный день»</strong> · 10 мин ⭐<br>Нарисуй 6–8 кадров на длинном листе и подпиши каждый. Это черновик раскадровки для влога на уроке 30!</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br>«Хронология» + «Заполни пропуски» + конструктор + сопоставление.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎤 Голосовой дневник «Mi horario»</strong> · 5 мин ⭐<br>Запиши рассказ о своём дне по формуле 8 кадров. Отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Antes y después»</strong> · 15 мин ⭐<br>🖨 <a href="../../worksheets/w10-l2-kids.html" target="_blank">Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин<br>Нажми нужный цвет в таблице ниже и покажи результат родителям.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть 5 маркеров порядка</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Называть 5 дней недели</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Использовать después de / antes de + инфинитив</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Понимать расписание испанского школьника</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Определять на слух, что было раньше</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Рассказать о своём дне по 8 кадрам</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com" target="_blank">
+    <span>📚 Карточки Quizlet · Станция 3 · Урок 29</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w10-l1.html" class="nav-prev"><div class="nav-small">← Предыдущий урок</div><div class="nav-title">Урок 28: ¡Por la mañana! ⏰</div></a>
+    <span class="nav-soon"><div class="nav-small">Следующий урок →</div><div class="nav-title">Урок 30: Mi Morning Vlog 🎥 — скоро</span></span>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 3: Mi Mundo · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+var MARKERS=[
+  {id:'primero',emo:'🥇',es:'primero',ru:'сначала',ges:'палец №1'},
+  {id:'luego',emo:'➡️',es:'luego',ru:'потом',ges:'рука вперёд'},
+  {id:'despues',emo:'⏭️',es:'después (de)',ru:'после',ges:'два шага вперёд'},
+  {id:'antes',emo:'⏮️',es:'antes (de)',ru:'перед, до',ges:'шаг назад'},
+  {id:'final',emo:'🏁',es:'al final',ru:'в конце',ges:'финишный флаг'},
+  {id:'tarde',emo:'🌇',es:'por la tarde',ru:'днём',ges:'солнце высоко'},
+  {id:'noche',emo:'🌙',es:'por la noche',ru:'вечером',ges:'месяц'},
+  {id:'horario',emo:'📅',es:'el horario',ru:'расписание',ges:'лист календаря'}
+];
+var DAYS=[
+  {id:'lunes',emo:'1️⃣',es:'lunes',ru:'понедельник',ges:'палец №1'},
+  {id:'martes',emo:'2️⃣',es:'martes',ru:'вторник',ges:'пальца №2'},
+  {id:'miercoles',emo:'3️⃣',es:'miércoles',ru:'среда',ges:'пальца №3'},
+  {id:'jueves',emo:'4️⃣',es:'jueves',ru:'четверг',ges:'пальца №4'},
+  {id:'viernes',emo:'5️⃣',es:'viernes',ru:'пятница',ges:'🖐️ вся ладонь'}
+];
+
+var WARM=[
+  {q:'¿Qué haces por la mañana?',model:'Me despierto, me ducho, me visto y desayuno.',ru:'Что ты делаешь утром?'},
+  {q:'¿A qué hora te despiertas?',model:'Me despierto a las siete.',ru:'Во сколько ты просыпаешься?'},
+  {q:'¿Dónde desayunas?',model:'Desayuno en la cocina.',ru:'Где ты завтракаешь?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+(function(){
+  var box=document.getElementById('marker-cards');
+  MARKERS.concat(DAYS).forEach(function(m){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+m.emo+'</div><div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div><span class="ges">'+m.ges+'</span>';
+    d.addEventListener('click',function(){speak(m.es);});
+    box.appendChild(d);
+  });
+  var wm=document.getElementById('words-markers');
+  MARKERS.forEach(function(m){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+m.emo+'</div><div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+    d.addEventListener('click',function(){speak(m.es);});
+    wm.appendChild(d);
+  });
+  var wd=document.getElementById('words-days');
+  DAYS.forEach(function(m){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+m.emo+'</div><div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+    d.addEventListener('click',function(){speak(m.es);});
+    wd.appendChild(d);
+  });
+})();
+
+/* ===== ХРОНОЛОГИЯ (2 раунда) ===== */
+var CHRONO=[
+  {title:'Раунд 1: маркеры по порядку',items:[
+    {emo:'🥇',es:'primero'},{emo:'➡️',es:'luego'},{emo:'⏭️',es:'después'},{emo:'🏁',es:'al final'}]},
+  {title:'Раунд 2: дни недели по порядку',items:[
+    {emo:'1️⃣',es:'lunes'},{emo:'2️⃣',es:'martes'},{emo:'3️⃣',es:'miércoles'},{emo:'4️⃣',es:'jueves'},{emo:'5️⃣',es:'viernes'}]}
+];
+(function(){
+  var box=document.getElementById('chrono-box');
+  CHRONO.forEach(function(round,ri){
+    var zone=document.createElement('div');zone.className='order-zone';
+    zone.innerHTML='<p style="font-weight:800;color:var(--sky)">'+round.title+'</p>'+
+      '<div class="order-answer" id="chr-ans-'+ri+'"></div>'+
+      '<div class="order-pool" id="chr-pool-'+ri+'"></div>'+
+      '<div class="game-fb" id="chr-fb-'+ri+'"></div>';
+    box.appendChild(zone);
+    var pool=document.getElementById('chr-pool-'+ri);
+    var step=0;
+    var shuffled=shuffle(round.items.map(function(it,i){return {emo:it.emo,es:it.es,idx:i};}));
+    shuffled.forEach(function(o){
+      var b=document.createElement('button');b.className='order-item';
+      b.innerHTML='<span class="oi-emo">'+o.emo+'</span>'+o.es;
+      b.addEventListener('click',function(){
+        if(b.classList.contains('done'))return;
+        var fb=document.getElementById('chr-fb-'+ri);
+        if(o.idx===step){
+          b.classList.add('done');
+          var placed=document.createElement('span');placed.className='order-placed';
+          placed.textContent=(step+1)+'. '+o.emo+' '+o.es;
+          document.getElementById('chr-ans-'+ri).appendChild(placed);
+          step++;speak(o.es+'.');
+          if(step===round.items.length){fb.textContent='🎉 ¡Perfecto! Хронология собрана!';fb.style.color='var(--green)';confetti('⏳');}
+          else{fb.textContent='✅ ¡Bien! Дальше!';fb.style.color='var(--green)';}
+        }else{
+          b.classList.add('wrongflash');
+          setTimeout(function(){b.classList.remove('wrongflash');},700);
+          fb.textContent='❌ Не сейчас. Что идёт следующим по порядку?';fb.style.color='var(--red)';
+        }
+      });
+      pool.appendChild(b);
+    });
+  });
+})();
+
+/* ===== ЗАПОЛНИ ПРОПУСКИ ===== */
+var FILL=[
+  {s:'___ me despierto a las siete.',ok:'Primero',opts:['Primero','Al final','Antes de']},
+  {s:'Me ducho. ___ me visto.',ok:'Luego',opts:['Luego','Primero','Al final']},
+  {s:'___ desayunar, voy al colegio.',ok:'Después de',opts:['Después de','Antes de','Luego']},
+  {s:'___ dormir, me cepillo los dientes.',ok:'Antes de',opts:['Antes de','Después de','Luego']},
+  {s:'___, me acuesto a las diez.',ok:'Al final',opts:['Al final','Primero','Luego']},
+  {s:'Los ___, juego al fútbol con mis amigos.',ok:'lunes',opts:['lunes','después','final']},
+  {s:'___ hago los deberes, luego juego.',ok:'Primero',opts:['Primero','Al final','Antes de']},
+  {s:'Por la ___ ceno con mi familia.',ok:'noche',opts:['noche','lunes','colegio']}
+];
+(function(){
+  var box=document.getElementById('fill-box');
+  document.getElementById('fill-total').textContent=FILL.length;
+  FILL.forEach(function(f,i){
+    var d=document.createElement('div');d.className='fill-ex';
+    var parts=f.s.split('___');
+    d.innerHTML='<span class="ex-num">'+(i+1)+'</span><span class="sentence">'+parts[0]+'<b style="color:var(--sky)">______</b>'+(parts[1]||'')+'</span>'+
+      '<div class="fill-opts" id="fopts-'+i+'"></div>';
+    box.appendChild(d);
+    var opts=document.getElementById('fopts-'+i);
+    shuffle(f.opts.slice()).forEach(function(o){
+      var b=document.createElement('button');b.className='fill-opt';b.textContent=o;
+      b.addEventListener('click',function(){
+        opts.querySelectorAll('.fill-opt').forEach(function(x){x.classList.remove('sel');});
+        b.classList.add('sel');
+      });
+      opts.appendChild(b);
+    });
+  });
+})();
+function checkFill(){
+  var stars=0;
+  FILL.forEach(function(f,i){
+    var opts=document.getElementById('fopts-'+i).querySelectorAll('.fill-opt');
+    opts.forEach(function(b){
+      b.disabled=true;
+      b.classList.remove('correct','wrong');
+      if(b.classList.contains('sel')){
+        if(b.textContent===f.ok){b.classList.add('correct');stars++;}
+        else{b.classList.add('wrong');}
+      }
+      if(b.textContent===f.ok)b.classList.add('correct');
+    });
+  });
+  document.getElementById('fill-stars').textContent=stars;
+  if(stars===FILL.length){speak('¡Excelente!');confetti('⏳');}
+}
+function resetFill(){
+  document.getElementById('fill-stars').textContent='0';
+  FILL.forEach(function(f,i){
+    var opts=document.getElementById('fopts-'+i).querySelectorAll('.fill-opt');
+    opts.forEach(function(b){b.disabled=false;b.classList.remove('sel','correct','wrong');});
+  });
+}
+
+/* ===== КОНСТРУКТОР ===== */
+var SB=[
+  {w:['Primero','me','despierto','a','las','siete.'],t:'Сначала я просыпаюсь в семь.'},
+  {w:['Después','de','desayunar,','voy','al','colegio.'],t:'После завтрака я иду в школу.'},
+  {w:['Los','lunes','juego','al','fútbol.'],t:'По понедельникам я играю в футбол.'},
+  {w:['Antes','de','dormir,','me','cepillo','los','dientes.'],t:'Перед сном я чищу зубы.'},
+  {w:['Por','la','tarde','hago','los','deberes.'],t:'Днём я делаю домашку.'},
+  {w:['Al','final,','me','acuesto','a','las','diez.'],t:'В конце я ложусь спать в десять.'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== CLIL-ВОПРОСЫ К РАСПИСАНИЮ ===== */
+var CLIL=[
+  {q:'¿A qué hora come Pablo?',ru:'Во сколько Пабло обедает?',ok:'A las dos.',w:['A las nueve.','A las cuatro.']},
+  {q:'¿Qué hace los lunes a las cuatro?',ru:'Что он делает в понедельник в четыре?',ok:'Fútbol.',w:['Natación.','Inglés.']},
+  {q:'¿Cuándo cena con su familia?',ru:'Когда он ужинает с семьёй?',ok:'A las nueve de la noche.',w:['A las dos.','A las seis.']},
+  {q:'12 лет · Математика: ¿Cuántas horas hay entre el colegio (9:00) y la cena (21:00)?',ru:'Сколько часов между школой и ужином?',ok:'Doce horas.',w:['Diez horas.','Catorce horas.']}
+];
+(function(){
+  var wrap=document.getElementById('clil-quiz');
+  CLIL.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ЧТЕНИЕ ===== */
+function speakDiego(){speak('¡Hola! Me llamo Diego. Los lunes me despierto a las siete. Primero me ducho, luego me visto y después desayuno. Antes de ir al colegio, me cepillo los dientes. A las dos como en el comedor. Por la tarde hago los deberes y luego juego con mis amigos. Los martes y los jueves voy a natación. Al final, por la noche, ceno con mi familia y me acuesto a las diez. ¡Así es mi día!');}
+var DIEGO=[
+  {q:'¿A qué hora se despierta Diego los lunes?',ru:'Во сколько Диего просыпается по понедельникам?',ok:'A las siete.',w:['A las ocho.','A las dos.']},
+  {q:'¿Qué hace después de desayunar?',ru:'Что он делает после завтрака?',ok:'Se cepilla los dientes y va al colegio.',w:['Juega con sus amigos.','Se acuesta.']},
+  {q:'¿Cuándo va a natación?',ru:'Когда он ходит на плавание?',ok:'Los martes y los jueves.',w:['Los lunes.','Los viernes.']},
+  {q:'¿Qué hace antes de acostarse?',ru:'Что он делает перед тем, как лечь спать?',ok:'Cena con su familia.',w:['Va al colegio.','Desayuna.']},
+  {q:'¿A qué hora se acuesta?',ru:'Во сколько он ложится спать?',ok:'A las diez.',w:['A las siete.','A las nueve.']}
+];
+(function(){
+  var wrap=document.getElementById('diego-quiz');
+  DIEGO.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ТЕНЬ + ПОСЛЕДОВАТЕЛЬНОСТЬ ===== */
+var SHADOW=[
+  {ph:'Primero me despierto a las siete.',ru:'Сначала я просыпаюсь в семь.'},
+  {ph:'Luego me ducho y me visto.',ru:'Потом принимаю душ и одеваюсь.'},
+  {ph:'Después de desayunar, voy al colegio.',ru:'После завтрака иду в школу.'},
+  {ph:'Antes de dormir, me cepillo los dientes.',ru:'Перед сном чищу зубы.'},
+  {ph:'Al final, me acuesto a las diez.',ru:'В конце ложусь спать в десять.'},
+  {ph:'Los lunes juego al fútbol.',ru:'По понедельникам играю в футбол.'}
+];
+(function(){
+  var box=document.getElementById('shadow-box');
+  SHADOW.forEach(function(s,i){
+    var d=document.createElement('div');d.className='shadow-card';
+    d.innerHTML='<div class="shadow-phrase">'+s.ph+'</div>'+
+      '<button class="speak-btn" onclick="speak(\''+s.ph.replace(/'/g,"\\'")+'\')">🔊 Прослушать</button>';
+    box.appendChild(d);
+  });
+})();
+
+var SEQ=[
+  {a:'Me despierto',b:'Me acuesto',first:'Me despierto'},
+  {a:'Desayuno',b:'Ceno',first:'Desayuno'},
+  {a:'Voy al colegio',b:'Vuelvo a casa',first:'Voy al colegio'},
+  {a:'Hago los deberes',b:'Juego al fútbol',first:'Hago los deberes'},
+  {a:'Me ducho',b:'Me acuesto',first:'Me ducho'}
+];
+var seqOrd=[],seqI=0,seqS=0;
+function seqStart(){
+  seqOrd=shuffle(SEQ.slice());seqI=0;seqS=0;
+  document.getElementById('seq-total').textContent=seqOrd.length;
+  document.getElementById('seq-stars').textContent='0';
+  seqNext();
+}
+function seqNext(){
+  var box=document.getElementById('seq-opts');box.innerHTML='';
+  if(seqI>=seqOrd.length){
+    document.getElementById('seq-q').textContent='🎉 ¡Perfecto! Ты знаешь порядок дня!';
+    document.getElementById('seq-fb').textContent='⭐ '+seqS+' из '+seqOrd.length;
+    return;
+  }
+  var r=seqOrd[seqI];
+  document.getElementById('seq-q').textContent='Что было ПЕРВЫМ: «'+r.a+'» или «'+r.b+'»?';
+  document.getElementById('seq-fb').textContent='';
+  shuffle([r.a,r.b]).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.first){b.classList.add('correct');seqS++;document.getElementById('seq-stars').textContent=seqS;document.getElementById('seq-fb').textContent='✅ ¡Correcto!';}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.first)x.classList.add('correct');});document.getElementById('seq-fb').textContent='❌ Правильно: '+r.first;}
+      seqI++;setTimeout(seqNext,1500);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+  {q:'Расскажи, что ты делаешь сначала утром.',model:'¡Hola! Por la mañana me despierto a las siete. Primero me ducho y me visto.'},
+  {q:'Расскажи, что ты делаешь после школы.',model:'Después de desayunar, voy al colegio. Por la tarde hago los deberes y luego juego al fútbol.'},
+  {q:'Расскажи, что ты делаешь по понедельникам.',model:'Los lunes voy al colegio, luego hago los deberes y juego al fútbol.'},
+  {q:'Расскажи о своём дне полностью по формуле 8 кадров.',model:'¡Hola! Voy a contar mi día perfecto. Por la mañana me despierto a las siete. Primero me ducho y me visto. Después de desayunar, voy al colegio. Por la tarde hago los deberes. Luego juego con mis amigos. Antes de dormir, me cepillo los dientes. Al final, me acuesto a las diez.'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом расскажи о СЕБЕ вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+  ['primero','сначала'],['luego','потом'],['después (de)','после'],['antes (de)','перед, до'],['al final','в конце'],
+  ['lunes','понедельник'],['martes','вторник'],['miércoles','среда'],['jueves','четверг'],['viernes','пятница'],
+  ['por la tarde','днём'],['por la noche','вечером']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');mFound++;speak(mSel.dataset.v);document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/'+MATCH.length;if(mFound===MATCH.length)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';}
+  else{d.classList.add('wrong');mSel.classList.add('wrong');var a=mSel;setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);}
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres el director del día!');
+  confetti('🎬');
+  try{localStorage.setItem('mudro_kids_w10l2_badge_director','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w10l2_badge_director')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🎬','✨'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+</body>
+</html>

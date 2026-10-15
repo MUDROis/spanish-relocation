@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 29 · Antes y después — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--sky);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(62,124,177,.4)}
+  .print-btn:hover{background:#2a5a80}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E3F2FD,#FFF3D6,#E3F2FD);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--sky)}
+  .hero h1{font-size:21px;color:var(--sky);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--sky);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#E3F2FD;border:1.5px dashed var(--sky);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--sky);margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--sky);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--sky);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--sky);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:80px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--sky);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--sky)}
+  .build-line{border-bottom:1.6px dashed var(--sky);height:24px}
+
+  .order-boxes{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  .order-box{width:44px;height:34px;border:2px solid var(--sky);border-radius:8px;text-align:center;line-height:30px;font-weight:800;color:var(--sky);background:#fff}
+  .order-words{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .order-word{background:#fff;border:1.6px solid var(--terra);border-radius:10px;padding:6px 12px;font-weight:700;font-size:12.5px;color:var(--terra)}
+  .order-word .ow-emo{font-size:15px;margin-right:4px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>⏳ Antes y después</h1>
+    <div class="sub">Рабочий лист к Уроку 29 · Станция 3: Mi Mundo · маркеры порядка, дни недели, расписание</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Это <strong>экзамен по уроку 29</strong>! Работай самостоятельно, а потом проверь вместе с родителем или учителем. Вспоминай слова-«режиссёры»: сначала, потом, после, перед, в конце!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">1</span>
+      <span class="ex-title">Соедини маркер или день недели с переводом</span>
+      <span class="ex-skill">🗣 Лексика · порядок и дни</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🥇 primero</td><td>а) потом</td></tr>
+      <tr><td><span class="ans-box"></span>➡️ luego</td><td>б) четверг</td></tr>
+      <tr><td><span class="ans-box"></span>⏭️ después de</td><td>в) сначала</td></tr>
+      <tr><td><span class="ans-box"></span>⏮️ antes de</td><td>г) пятница</td></tr>
+      <tr><td><span class="ans-box"></span>🏁 al final</td><td>д) после</td></tr>
+      <tr><td><span class="ans-box"></span>🌇 por la tarde</td><td>е) в конце</td></tr>
+      <tr><td><span class="ans-box"></span>🌙 por la noche</td><td>ж) вечером</td></tr>
+      <tr><td><span class="ans-box"></span>1️⃣ lunes</td><td>з) днём</td></tr>
+      <tr><td><span class="ans-box"></span>4️⃣ jueves</td><td>и) понедельник</td></tr>
+      <tr><td><span class="ans-box"></span>5️⃣ viernes</td><td>к) перед, до</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Угадай слово по описанию</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>primero · luego · al final · antes de · miércoles · horario</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🥇</span> Lo haces al principio de todo. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">➡️</span> Viene después de «primero». → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🏁</span> Es lo último del día. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">⏮️</span> Primero te cepillas los dientes y... te acuestas. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">3️⃣</span> El día entre martes y jueves. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">📅</span> La tabla con tus actividades y horas. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ВСТАВЬ СЛОВО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь правильное слово</span>
+      <span class="ex-skill">🧩 Грамматика · маркеры</span>
+    </div>
+    <div class="hint-box">💡 <strong>Помни:</strong> после <b>después de / antes de</b> идёт действие БЕЗ изменений (инфинитив): <em>después de <b>desayunar</b></em>. «По понедельникам» = <b>los lunes</b>.</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span><span class="g"></span> me despierto a las siete.</div>
+      <div class="gap-item"><span class="num">2</span>Me ducho. <span class="g"></span> me visto.</div>
+      <div class="gap-item"><span class="num">3</span><span class="g"></span> desayunar, voy al colegio.</div>
+      <div class="gap-item"><span class="num">4</span><span class="g"></span> dormir, me cepillo los dientes.</div>
+      <div class="gap-item"><span class="num">5</span><span class="g"></span>, me acuesto a las diez.</div>
+      <div class="gap-item"><span class="num">6</span>Los <span class="g"></span> juego al fútbol.</div>
+      <div class="gap-item"><span class="num">7</span>Por la <span class="g"></span> hago los deberes.</div>
+      <div class="gap-item"><span class="num">8</span>Los martes voy a <span class="g"></span> (плавание).</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Primero</span><span class="build-word">me</span><span class="build-word">despierto</span><span class="build-word">a</span><span class="build-word">las</span><span class="build-word">siete.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Después</span><span class="build-word">de</span><span class="build-word">desayunar,</span><span class="build-word">voy</span><span class="build-word">al</span><span class="build-word">colegio.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Los</span><span class="build-word">lunes</span><span class="build-word">juego</span><span class="build-word">al</span><span class="build-word">fútbol.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Antes</span><span class="build-word">de</span><span class="build-word">dormir,</span><span class="build-word">me</span><span class="build-word">cepillo</span><span class="build-word">los</span><span class="build-word">dientes.</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЛОГИКА: РАССТАВЬ ПО ПОРЯДКУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Расставь действия Диего по порядку</span>
+      <span class="ex-skill">🔢 Логика · рутина</span>
+    </div>
+    <div class="ex-instruction">Пронумеруй действия от 1 до 6 в том порядке, в котором они происходят в течение дня.</div>
+    <div class="order-boxes">
+      <div class="order-box"></div><div class="order-box"></div><div class="order-box"></div>
+      <div class="order-box"></div><div class="order-box"></div><div class="order-box"></div>
+    </div>
+    <div class="order-words">
+      <span class="order-word"><span class="ow-emo">🍽️</span>Ceno con mi familia</span>
+      <span class="order-word"><span class="ow-emo">🛎️</span>Me despierto a las siete</span>
+      <span class="order-word"><span class="ow-emo">🛌</span>Me acuesto a las diez</span>
+      <span class="order-word"><span class="ow-emo">🎒</span>Voy al colegio</span>
+      <span class="order-word"><span class="ow-emo">🥐</span>Desayuno</span>
+      <span class="order-word"><span class="ow-emo">✍️</span>Hago los deberes</span>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «El horario de Diego» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Diego. Los lunes me despierto a las siete. Primero me ducho, luego me visto y después desayuno. Antes de ir al colegio, me cepillo los dientes. A las dos como en el comedor. Por la tarde hago los deberes y luego juego con mis amigos. Los martes y los jueves voy a natación. Al final, por la noche, ceno con mi familia y me acuesto a las diez. ¡Así es mi día!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿A qué hora se despierta Diego los lunes? <span class="ru">(Во сколько Диего просыпается по понедельникам?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué hace antes de ir al colegio? <span class="ru">(Что он делает перед школой?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cuándo va a natación? <span class="ru">(Когда он ходит на плавание?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué hace por la tarde? <span class="ru">(Что он делает днём?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿A qué hora se acuesta? <span class="ru">(Во сколько он ложится спать?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">7</span>
+      <span class="ex-title">Послушай и напиши ответ</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши короткий ответ (маркер, действие или время)!</div>
+    <div class="listen-item"><span class="lnum">1.</span>¿Qué haces primero por la mañana? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span>¿Qué haces después de desayunar? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span>¿Cuándo juegas al fútbol? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span>¿Qué haces antes de dormir? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span>¿A qué hora te acuestas? → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) «Primero me despierto y me ducho.» · 2) «Después de desayunar, voy al colegio.» · 3) «Los lunes juego al fútbol.» · 4) «Antes de dormir, me cepillo los dientes.» · 5) «Al final, me acuesto a las diez.»</div>
+  </div>
+
+  <!-- 8. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">8</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Расскажи, что ты делаешь сначала утром:<br><span class="tpl">Primero me despierto a las siete y me ducho.</span><span class="ru">Сначала я просыпаюсь в семь и принимаю душ.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Расскажи, что ты делаешь после школы:<br><span class="tpl">Después del colegio hago los deberes y luego juego.</span><span class="ru">После школы я делаю домашку, а потом играю.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Расскажи, что ты делаешь по понедельникам:<br><span class="tpl">Los lunes voy al colegio y juego al fútbol.</span><span class="ru">По понедельникам я хожу в школу и играю в футбол.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Расскажи, что ты делаешь перед сном:<br><span class="tpl">Antes de dormir me cepillo los dientes.</span><span class="ru">Перед сном я чищу зубы.</span><span class="speak-check"></span></div>
+    <div class="speak-item">5. Расскажи о своём дне по 8 кадрам (формула урока):<br><span class="tpl">¡Hola! Por la mañana me despierto a las... Primero... Luego... Después de... Por la tarde... Al final, me acuesto a las...</span><span class="ru">Привет! Утром я просыпаюсь в... Сначала... Потом... После... Днём... В конце я ложусь в...</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 9. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">9</span>
+      <span class="ex-title">Сочинение «Mi día perfecto»</span>
+      <span class="ex-skill">✍️ Письмо · 8 кадров</span>
+    </div>
+    <div class="hint-box">💡 <strong>План (8 кадров — как в фильме!):</strong> 1) ¡Hola! Voy a contar mi día perfecto. · 2) Por la mañana me despierto a las... · 3) Primero... · 4) Después de desayunar... · 5) Por la tarde... · 6) Luego... · 7) Antes de dormir... · 8) Al final, me acuesto a las... ⭐ Это черновик для твоего влога на уроке 30!</div>
+    <div class="write-lines">
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 10. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">10</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть 5 маркеров порядка</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Называть 5 дней недели</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Использовать después de / antes de + инфинитив</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить «по понедельникам» = los lunes</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать текст «El horario de Diego»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать о своём дне по 8 кадрам</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 29 · ¡Así es mi día! 🎬</div>
+</div>
+
+</body>
+</html>
