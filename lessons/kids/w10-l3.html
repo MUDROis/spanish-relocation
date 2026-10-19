@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 30: Mi Morning Vlog — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --cine:#1A3A6B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:55px 20px 45px;background:linear-gradient(180deg,var(--cine) 0%,#3b5f9a 60%,var(--cream) 100%);position:relative;overflow:hidden;color:#fff}
+  .hero::before{content:'';position:absolute;top:-80px;left:20%;width:260px;height:260px;background:radial-gradient(circle,rgba(255,201,60,.35),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;top:-60px;right:15%;width:220px;height:220px;background:radial-gradient(circle,rgba(232,96,76,.3),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--gold);color:var(--ink);border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2;color:#fff}
+  .hero h1 span{color:var(--gold)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:#e8ecf6;position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:rgba(255,255,255,.96);color:var(--ink);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--gold);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--gold)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FFF9E6;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #FFF9E6;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--gold)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--terra)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+
+  /* БЛИЦ 60 СЕКУНД */
+  .blitz-wrap{background:linear-gradient(135deg,#FFF9E6,#FFE9D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .blitz-timer{font-family:'Baloo 2',cursive;font-size:3rem;color:var(--terra);margin:8px 0}
+  .blitz-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
+  .blitz-chip{background:#fff;border:2.5px solid #e0d5c5;border-radius:14px;padding:10px 14px;font-weight:800;cursor:pointer;font-family:'Nunito';font-size:.95rem;transition:.15s;display:flex;flex-direction:column;align-items:center;min-width:110px}
+  .blitz-chip .bc-emo{font-size:1.6rem}
+  .blitz-chip:hover{transform:translateY(-2px);border-color:var(--terra)}
+  .blitz-chip.done{background:#C8E6C9;border-color:var(--green);color:var(--green)}
+  .blitz-chip:disabled{cursor:default}
+  .blitz-score{font-weight:800;margin-top:12px}
+
+  /* РЕЖИССЁРСКИЙ СТОЛ */
+  .dir-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+  .dir-chip{background:#fff;border:2px solid var(--terra);color:var(--terra);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;font-family:'Nunito';transition:.15s;display:flex;align-items:center;gap:6px}
+  .dir-chip:hover{background:#FFF3ED}
+  .dir-chip.used{opacity:.3;cursor:default}
+  .dir-slots{display:grid;gap:8px;margin:14px 0}
+  .dir-slot{background:#fff;border:2px dashed #d8cbb8;border-radius:14px;padding:10px 14px;min-height:52px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.15s}
+  .dir-slot:hover{border-color:var(--terra)}
+  .dir-slot .slot-label{font-weight:800;color:var(--terra);min-width:150px;font-size:.9rem}
+  .dir-slot .slot-val{font-weight:700;color:var(--ink);flex:1}
+  .dir-slot.filled{border-style:solid;border-color:var(--teal);background:#F2FAF9}
+  .dir-slot.locked{border-style:solid;border-color:var(--gold);background:#FFF9E6;cursor:default}
+  .script-output{background:#F4F7EE;border-left:4px solid var(--oliva,#7A8B4C);border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.8;margin-top:12px;display:none}
+  .script-output.show{display:block}
+
+  /* ЧЕК-ЛИСТ */
+  .check-list{list-style:none;margin:10px 0}
+  .check-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border:2px solid #f0e8dc;border-radius:12px;margin:8px 0;cursor:pointer;font-weight:700;transition:.15s}
+  .check-item:hover{border-color:var(--gold)}
+  .check-box{width:22px;height:22px;border:2px solid #bbb;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .check-item.checked{background:#E8F5E9;border-color:var(--green)}
+  .check-item.checked .check-box{background:var(--green);border-color:var(--green);color:#fff}
+
+  .warm-item{background:#fff;border:2px solid #f0e6d8;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--terra)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .speak-btn{background:var(--terra);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+  .speak-btn.gold{background:var(--gold);color:var(--ink)}
+
+  .track-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0}
+  .track-card{background:#fff;border-radius:18px;padding:18px;border:3px solid #f0e8dc}
+  .track-card h4{margin-bottom:8px;font-size:1.15rem}
+  .track-card.age8{border-color:var(--teal)}
+  .track-card.age12{border-color:var(--wine)}
+  .track-card .age-badge{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:800;font-size:.8rem;color:#fff;margin-bottom:8px}
+  .track-card.age8 .age-badge{background:var(--teal)}
+  .track-card.age12 .age-badge{background:var(--wine)}
+  .track-card ol{margin-left:18px;margin-top:6px}
+  .track-card li{margin:5px 0;font-size:.95rem}
+
+  .vlog-parts{display:grid;gap:8px;margin:12px 0}
+  .vlog-part{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid #f0e8dc;border-radius:14px;padding:12px 14px}
+  .vlog-part .vp-num{font-size:1.4rem}
+  .vlog-part .vp-name{font-weight:800;color:var(--terra)}
+  .vlog-part .vp-ex{font-size:.9rem;color:var(--ink-soft);font-style:italic}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--terra);background:#FFE9D6}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--terra);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--terra);font-weight:800}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--terra),#c2452f);color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}.dir-slot .slot-label{min-width:110px}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 3 · Mi Mundo · Урок 30 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🎥 СТАНЦИЯ 3 · УРОК 9 · НЕДЕЛЯ 10 · PBL</span>
+  <div class="hero-emojis">🎬 📹 ✨ 🍿</div>
+  <h1>Mi <span>Morning Vlog</span></h1>
+  <p class="sub">Финал блока «Моя рутина»! За 3 дня ты собрал кирпичики и склеил их маркерами. Сегодня — <strong>премьера</strong>: ты станешь настоящим испаноязычным блогером и выпустишь свой первый влог или комикс. ¡Luces, cámara, acción!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты выходишь «в эфир» и говоришь:<br>
+    <em>«¡Hola a todos! Me llamo Sofía y hoy os enseño mi mañana. Primero me despierto a las siete. Luego me ducho y me visto. Después de desayunar, voy al colegio. ¡Y eso es todo, amigos! ¡Hasta la próxima.»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🎬</span> Говорить медиа-лексику: vídeo, cómic, guion...</div>
+      <div class="goal-item"><span class="emoji">🗣</span> Использовать чанки влогера</div>
+      <div class="goal-item"><span class="emoji">✍️</span> 8 лет: комикс «Моё утро» из 6 кадров</div>
+      <div class="goal-item"><span class="emoji">🎥</span> 12 лет: сценарий + запись влога</div>
+      <div class="goal-item"><span class="emoji">📤</span> Защитить проект перед «камерой»</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Утренний влогер»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#FFC93C">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: «Блиц рутины» за 60 секунд</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">Перед эфиром — разминка! Нажми «Старт» и успей за 60 секунд произнести ВСЛУХ все действия рутины. Кликай на чип, когда сказал его!</div>
+    <div class="blitz-wrap">
+      <div class="blitz-timer" id="blitz-timer">⏱ 60</div>
+      <div class="blitz-score">Названо: <span id="blitz-count">0</span> из <span id="blitz-total">12</span></div>
+      <div class="blitz-grid" id="blitz-grid"></div>
+      <button class="speak-btn gold" style="margin-top:14px" onclick="startBlitz()">▶ Старт!</button>
+      <div class="game-fb" id="blitz-fb"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1: ВВОД -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🎬 Что такое morning vlog? Анатомия влога</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на карточки, чтобы услышать слова. Запомни 4 части настоящего влога!</p>
+    <div class="cards-grid" id="media-cards"></div>
+    <h4 style="margin:16px 0 8px">📐 Из чего состоит влог (4 части):</h4>
+    <div class="vlog-parts">
+      <div class="vlog-part"><span class="vp-num">👋</span><div><div class="vp-name">1. Приветствие</div><div class="vp-ex">«¡Hola a todos! Me llamo...»</div></div></div>
+      <div class="vlog-part"><span class="vp-num">📢</span><div><div class="vp-name">2. Анонс</div><div class="vp-ex">«Hoy os enseño mi mañana.»</div></div></div>
+      <div class="vlog-part"><span class="vp-num">🎞️</span><div><div class="vp-name">3. Кадры рутины с маркерами</div><div class="vp-ex">«Primero me despierto. Luego me ducho...»</div></div></div>
+      <div class="vlog-part"><span class="vp-num">👋</span><div><div class="vp-name">4. Прощание</div><div class="vp-ex">«¡Y eso es todo! ¡Hasta la próxima!»</div></div></div>
+    </div>
+    <button class="speak-btn" onclick="speakVlogSample()">🔊 Послушать полный пример влога</button>
+  </section>
+
+  <!-- БЛОК 2: РЕЖИССЁРСКИЙ СТОЛ -->
+  <section class="block" style="--c:#1A3A6B">
+    <div class="block-head">
+      <h2 class="block-title">📝 Режиссёрский стол: собери свой влог</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Кликни на действие из пула — оно встанет в следующий кадр. Кликни на заполненный кадр, чтобы убрать его. Заполни 4 кадра рутины и сгенерируй сценарий!</p>
+
+    <div class="dir-pool" id="dir-pool"></div>
+    <div class="dir-slots" id="dir-slots"></div>
+
+    <div style="text-align:center;margin-top:12px">
+      <button class="speak-btn" onclick="genScript()">🎬 Сгенерировать сценарий</button>
+      <button class="speak-btn gold" onclick="resetScript()" style="margin-left:8px">↺ Сбросить</button>
+    </div>
+    <div class="script-output" id="script-output"></div>
+  </section>
+
+  <!-- БЛОК 3: ПРОДАКШН -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎨 Продакшн: создаём продукт</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <div class="track-cards">
+      <div class="track-card age8">
+        <span class="age-badge">8 лет</span>
+        <h4>📖 Комикс «¡Mi mañana!»</h4>
+        <ol>
+          <li>Возьми лист из рабочей тетради (6 кадров).</li>
+          <li>Нарисуй действие в каждом кадре.</li>
+          <li>Впиши подпись-чанк под кадром.</li>
+          <li>Придумай <b>título</b> наверху.</li>
+          <li>Раскрась и обведи контуры.</li>
+        </ol>
+      </div>
+      <div class="track-card age12">
+        <span class="age-badge">12 лет</span>
+        <h4>🎥 Влог «Mi Morning Vlog»</h4>
+        <ol>
+          <li>Допиши сценарий из Режиссёрского стола.</li>
+          <li>Добавь реплику «за кадром» и вопрос «¿Qué hora es?».</li>
+          <li>Отрепетируй вслух 2 раза.</li>
+          <li>Запиши видео (на уроке или дома).</li>
+          <li>Закончи чанком «¡Hasta la próxima!».</li>
+        </ol>
+      </div>
+    </div>
+    <div class="script">🎤 <strong>Совет:</strong> пока один рисуется/записывается — второй репетирует вслух по сценарию. Ротация каждые 6 минут!</div>
+  </section>
+
+  <!-- БЛОК 4: ПРЕМЬЕРА -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">📤 Премьера: защита проектов</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <div class="script">Учитель — «камера». Ты показываешь комикс или видео, проходишь по кадрам и заканчиваешь чанком. Зрители дают отзыв на испанском!</div>
+    <h4>✅ Чек-лист защиты (отметь, что выполнил):</h4>
+    <ul class="check-list" id="premiere-check">
+      <li class="check-item" onclick="toggleCheck(this)"><span class="check-box"></span>Есть приветствие «¡Hola a todos!»</li>
+      <li class="check-item" onclick="toggleCheck(this)"><span class="check-box"></span>Минимум 3 маркера (primero, luego, después...)</li>
+      <li class="check-item" onclick="toggleCheck(this)"><span class="check-box"></span>Минимум 3 возвратных глагола (me despierto, me ducho...)</li>
+      <li class="check-item" onclick="toggleCheck(this)"><span class="check-box"></span>Есть прощание «¡Hasta la próxima!»</li>
+      <li class="check-item" onclick="toggleCheck(this)"><span class="check-box"></span>Есть название (título)</li>
+    </ul>
+    <div style="text-align:center;margin-top:8px"><b>Выполнено: <span id="check-count">0</span>/5</b> <button class="speak-btn" onclick="resetChecks()" style="margin-left:8px">↺ Сброс</button></div>
+    <h4 style="margin-top:16px">👏 Фразы-отзывы для зрителей:</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <button class="speak-btn" onclick="speak('¡Muy buen trabajo!')">🔊 ¡Muy buen trabajo!</button>
+      <button class="speak-btn" onclick="speak('¡Qué cómic tan bonito!')">🔊 ¡Qué cómic tan bonito!</button>
+      <button class="speak-btn" onclick="speak('¡Me gusta tu vlog!')">🔊 ¡Me gusta tu vlog!</button>
+      <button class="speak-btn" onclick="speak('¡Eres un gran vlogger!')">🔊 ¡Eres un gran vlogger!</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: БЕЙДЖ -->
+  <section class="block" style="--c:#FFC93C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + закрытие блока + анонс</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎥</div>
+      <h3>Утренний влогер</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты прошёл путь от первого «me despierto» до собственного влога на испанском!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Утренний влогер» 🎥 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс недели 11 (финал станции 3):</strong> «Впереди хобби и интересы: ты выучишь «me gusta / me encanta» и создашь свой профиль в соцсети на испанском. ¡Vamos a por la Estación 3!» 🎯</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">🎬 Медиа-лексика</h4>
+    <div class="cards-grid" id="words-media"></div>
+    <h4 style="margin:14px 0 8px">🗣 Чанки влогера</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('¡Hola a todos!')"><div class="emo">👋</div><div class="es">¡Hola a todos!</div><div class="ru">Всем привет!</div></div>
+      <div class="word-card" onclick="speak('Hoy os enseño mi mañana.')"><div class="emo">📢</div><div class="es">Hoy os enseño mi mañana.</div><div class="ru">Сегодня покажу своё утро.</div></div>
+      <div class="word-card" onclick="speak('¡Y eso es todo, amigos!')"><div class="emo">🎬</div><div class="es">¡Y eso es todo, amigos!</div><div class="ru">И это всё, друзья!</div></div>
+      <div class="word-card" onclick="speak('¡Hasta la próxima!')"><div class="emo">👋</div><div class="es">¡Hasta la próxima!</div><div class="ru">До новых встреч!</div></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (<span id="match-total">10</span> пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Покажи родителям свой проект</strong> · 5 мин<br>«Выход в эфир» дома: комикс или влог.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎥 Финальная запись влога</strong> · 7 мин ⭐<br>12 лет: запиши видео по сценарию и отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🖍️ Укрась комикс</strong> · 7 мин ⭐<br>8 лет: добавь цвета, повесь на холодильник.</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Научи родителей чанкам влогера</strong> · 5 мин ⭐<br>«¡Hola a todos!», «¡Hasta la próxima!».</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎤 Голосовая версия проекта</strong> · 5 мин ⭐<br>Перескажи свой влог голосом, без опоры.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Продакшн»</strong> · 10 мин ⭐<br>Доделай подписи/сценарий.<br><a href="../../worksheets/w10-l3-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин<br>Нажми нужный цвет в таблице ниже.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть медиа-лексику (vídeo, cómic, guion...)</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Использовать чанки влогера</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Строить 4 части влога</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Создать комикс / сценарий влога</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Защитить проект перед «камерой»</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1224042844/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-3-%D1%83%D1%80%D0%BE%D0%BA-9-flash-cards/?i=2gqp1x&x=1qqt" target="_blank">
+    <span>📚 Карточки Quizlet · Станция 3 · Урок 9</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w10-l2.html" class="nav-prev"><div class="nav-small">← Урок 8 станции 3</div><div class="nav-title">Урок 29: Antes y después 🔄</div></a>
+    <span class="nav-soon"><div class="nav-small">Неделя 11 · Урок 10 станции 3 →</div><div class="nav-title">Урок 31: Deportes y hobbies ⚽ — скоро</div></span>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 3: Mi Mundo · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var MEDIA=[
+ {emo:'🎥',es:'el vídeo',ru:'видео'},
+ {emo:'📖',es:'el cómic',ru:'комикс'},
+ {emo:'📝',es:'el guion',ru:'сценарий'},
+ {emo:'🖼️',es:'la escena',ru:'сцена'},
+ {emo:'🎞️',es:'el cuadro',ru:'кадр'},
+ {emo:'🏷️',es:'el título',ru:'название'},
+ {emo:'👋',es:'¡Hola a todos!',ru:'Всем привет!'},
+ {emo:'👋',es:'¡Hasta la próxima!',ru:'До новых встреч!'}
+];
+var ROUTINE=[
+ {emo:'🛎️',es:'me despierto',ru:'просыпаюсь'},
+ {emo:'🧍',es:'me levanto',ru:'встаю'},
+ {emo:'🚿',es:'me ducho',ru:'принимаю душ'},
+ {emo:'🧼',es:'me lavo',ru:'умываюсь'},
+ {emo:'👕',es:'me visto',ru:'одеваюсь'},
+ {emo:'🪥',es:'me cepillo los dientes',ru:'чищу зубы'},
+ {emo:'💇',es:'me peino',ru:'причёсываюсь'},
+ {emo:'🥐',es:'desayuno',ru:'завтракаю'},
+ {emo:'🎒',es:'voy al colegio',ru:'иду в школу'},
+ {emo:'✍️',es:'hago los deberes',ru:'делаю домашку'},
+ {emo:'⚽',es:'juego al fútbol',ru:'играю в футбол'},
+ {emo:'🥗',es:'ceno con mi familia',ru:'ужинаю с семьёй'}
+];
+
+/* ===== БЛОК 0: БЛИЦ 60 СЕКУНД ===== */
+var blitzTimer=null,blitzTime=60,blitzCount=0,blitzDone=false;
+(function(){
+  var grid=document.getElementById('blitz-grid');
+  document.getElementById('blitz-total').textContent=ROUTINE.length;
+  ROUTINE.forEach(function(r){
+    var c=document.createElement('button');c.className='blitz-chip';c.dataset.done='0';
+    c.innerHTML='<span class="bc-emo">'+r.emo+'</span>'+r.es;
+    c.addEventListener('click',function(){
+      if(!blitzDone && c.dataset.done==='0'){
+        c.dataset.done='1';c.classList.add('done');
+        blitzCount++;speak(r.es+'.');
+        document.getElementById('blitz-count').textContent=blitzCount;
+        if(blitzCount===ROUTINE.length){stopBlitz(true);}
+      }
+    });
+    grid.appendChild(c);
+  });
+})();
+function startBlitz(){
+  if(blitzTimer)return;
+  blitzTime=60;blitzCount=0;blitzDone=false;
+  document.getElementById('blitz-count').textContent='0';
+  document.getElementById('blitz-fb').textContent='';
+  document.querySelectorAll('.blitz-chip').forEach(function(c){c.dataset.done='0';c.classList.remove('done');});
+  document.getElementById('blitz-timer').textContent='⏱ 60';
+  blitzTimer=setInterval(function(){
+    blitzTime--;
+    document.getElementById('blitz-timer').textContent='⏱ '+blitzTime;
+    if(blitzTime<=0){stopBlitz(false);}
+  },1000);
+}
+function stopBlitz(allDone){
+  clearInterval(blitzTimer);blitzTimer=null;blitzDone=true;
+  var fb=document.getElementById('blitz-fb');
+  if(allDone){
+    fb.textContent='🎉 ¡Increíble! Ты назвал все '+ROUTINE.length+' действий!';
+    document.getElementById('blitz-timer').textContent='🏆';
+    speak('¡Increíble!');confetti('🎬');
+  }else{
+    fb.textContent='⏰ Время вышло! Ты назвал '+blitzCount+' из '+ROUTINE.length+'. Отличная разминка!';
+    speak('¡Bien hecho!');
+  }
+}
+
+/* ===== БЛОК 1: МЕДИА-КАРТОЧКИ ===== */
+(function(){
+  var box=document.getElementById('media-cards');
+  MEDIA.forEach(function(m){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+m.emo+'</div><div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+    d.addEventListener('click',function(){speak(m.es);});
+    box.appendChild(d);
+  });
+  var wm=document.getElementById('words-media');
+  MEDIA.forEach(function(m){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+m.emo+'</div><div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+    d.addEventListener('click',function(){speak(m.es);});
+    wm.appendChild(d);
+  });
+})();
+function speakVlogSample(){
+  speak('¡Hola a todos! Me llamo Sofía y hoy os enseño mi mañana. Primero me despierto a las siete. Luego me ducho y me visto. Después de desayunar, voy al colegio. Por la tarde hago los deberes. ¡Y eso es todo, amigos! ¡Hasta la próxima!');
+}
+
+/* ===== БЛОК 2: РЕЖИССЁРСКИЙ СТОЛ ===== */
+var SLOT_LABELS=['👋 Приветствие','🥇 Кадр 2: Primero','➡️ Кадр 3: Luego','⏭️ Кадр 4: Después','🌇 Кадр 5: Por la tarde','🏁 Кадр 6: Прощание'];
+var slotValues=[null,null,null,null,null,null];
+(function(){
+  var pool=document.getElementById('dir-pool');
+  ROUTINE.forEach(function(r){
+    var c=document.createElement('button');c.className='dir-chip';c.dataset.es=r.es;
+    c.innerHTML='<span>'+r.emo+'</span>'+r.es;
+    c.addEventListener('click',function(){
+      if(c.classList.contains('used'))return;
+      var target=-1;
+      for(var i=1;i<=4;i++){if(slotValues[i]===null){target=i;break;}}
+      if(target===-1)return;
+      slotValues[target]={emo:r.emo,es:r.es};
+      c.classList.add('used');
+      renderSlots();
+    });
+    pool.appendChild(c);
+  });
+  renderSlots();
+})();
+function renderSlots(){
+  var wrap=document.getElementById('dir-slots');wrap.innerHTML='';
+  SLOT_LABELS.forEach(function(label,i){
+    var s=document.createElement('div');
+    s.className='dir-slot';
+    if(i===0||i===5){
+      s.classList.add('locked');
+      var txt=i===0?'«¡Hola a todos! Me llamo ___ y hoy os enseño mi mañana.»':'«¡Y eso es todo, amigos! ¡Hasta la próxima!»';
+      s.innerHTML='<span class="slot-label">'+label+'</span><span class="slot-val">'+txt+'</span>';
+    }else{
+      var v=slotValues[i];
+      if(v){
+        s.classList.add('filled');
+        s.innerHTML='<span class="slot-label">'+label+'</span><span class="slot-val">'+v.emo+' '+v.es+'</span>';
+        s.addEventListener('click',function(){
+          slotValues[i]=null;
+          document.querySelectorAll('.dir-chip').forEach(function(c){
+            if(c.dataset.es===v.es)c.classList.remove('used');
+          });
+          document.getElementById('script-output').classList.remove('show');
+          renderSlots();
+        });
+      }else{
+        s.innerHTML='<span class="slot-label">'+label+'</span><span class="slot-val" style="color:#bbb">— выбери действие —</span>';
+      }
+    }
+    wrap.appendChild(s);
+  });
+}
+function genScript(){
+  var filled=[1,2,3,4].every(function(i){return slotValues[i]!==null;});
+  var out=document.getElementById('script-output');
+  if(!filled){
+    out.classList.add('show');
+    out.innerHTML='<b style="color:var(--red)">⚠️ Заполни все 4 кадра рутины (2–5), нажимая на действия в пуле выше.</b>';
+    return;
+  }
+  var name=prompt('Как тебя зовут по-испански? (для сценария)','Sofía')||'Sofía';
+  var lines=[];
+  lines.push('¡Hola a todos! Me llamo '+name+' y hoy os enseño mi mañana.');
+  lines.push('Primero '+slotValues[1].es+'.');
+  lines.push('Luego '+slotValues[2].es+'.');
+  lines.push('Después, '+slotValues[3].es+'.');
+  lines.push('Por la tarde, '+slotValues[4].es+'.');
+  lines.push('¡Y eso es todo, amigos! ¡Hasta la próxima!');
+  out.classList.add('show');
+  out.innerHTML='<b style="color:var(--green)">📝 Твой сценарий готов! Переписать в тетрадь и прочитать вслух:</b><br><br>'+lines.join('<br>');
+  speak(lines.join(' '));
+  confetti('🎬');
+}
+function resetScript(){
+  slotValues=[null,null,null,null,null,null];
+  document.querySelectorAll('.dir-chip').forEach(function(c){c.classList.remove('used');});
+  document.getElementById('script-output').classList.remove('show');
+  renderSlots();
+}
+
+/* ===== БЛОК 4: ЧЕК-ЛИСТ ===== */
+function toggleCheck(el){
+  el.classList.toggle('checked');
+  var box=el.querySelector('.check-box');
+  box.textContent=el.classList.contains('checked')?'✓':'';
+  var n=document.querySelectorAll('#premiere-check .checked').length;
+  document.getElementById('check-count').textContent=n;
+  if(n===5){speak('¡Muy bien! ¡Estás listo para estrenar!');}
+}
+function resetChecks(){
+  document.querySelectorAll('#premiere-check .check-item').forEach(function(c){
+    c.classList.remove('checked');c.querySelector('.check-box').textContent='';
+  });
+  document.getElementById('check-count').textContent='0';
+}
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el vídeo','видео'],['el cómic','комикс'],['el guion','сценарий'],
+ ['la escena','сцена'],['el cuadro','кадр'],['el título','название'],
+ ['¡Hola a todos!','Всем привет!'],['¡Hasta la próxima!','До новых встреч!'],
+ ['hoy os enseño mi mañana','сегодня покажу своё утро'],
+ ['¡Y eso es todo, amigos!','И это всё, друзья!']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  document.getElementById('match-total').textContent=MATCH.length;
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/'+MATCH.length;
+    if(mFound===MATCH.length)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un vlogger de la mañana!');
+  confetti('🎥');
+  try{localStorage.setItem('mudro_kids_w10l3_badge_vloger','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w10l3_badge_vloger')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🎬','✨'];for(var i=0;i<26;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

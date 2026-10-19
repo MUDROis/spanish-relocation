@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 30 · Mi Morning Vlog (проект) — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E8604C; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --green:#2E7D32; --gold:#FFC93C; --cine:#1A3A6B;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--cine);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(26,58,107,.4)}
+  .print-btn:hover{background:#12294d}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--gold)}
+  .hero h1{font-size:21px;color:var(--cine);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--cine);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-gold{background:#B8860B}.c-cine{background:var(--cine)}.c-terra{background:var(--terra)}
+  .c-teal{background:var(--teal)}.c-pink{background:var(--pink)}.c-green{background:var(--green)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed #B8860B;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#B8860B;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .chunks-grid{display:grid;grid-template-columns:1fr;gap:8px}
+  .chunk-item{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13.5px;flex-wrap:wrap}
+  .chunk-item .part{font-weight:800;color:var(--cine);min-width:140px}
+  .chunk-item .bank{display:inline-block;min-width:200px;border-bottom:1.6px dashed var(--cine);height:20px;vertical-align:bottom}
+
+  .storyboard-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  .storyboard-table th{background:var(--cine);color:#fff;padding:8px 10px;text-align:left;font-weight:800;font-size:12px}
+  .storyboard-table td{padding:8px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .storyboard-table .frame-no{font-weight:800;color:var(--terra);width:30px}
+  .storyboard-table .blank{display:inline-block;min-width:120px;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+  .storyboard-table .blank.wide{min-width:220px}
+
+  .comic-title{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-weight:800;color:var(--cine)}
+  .comic-title .blank{flex:1;border-bottom:1.6px dashed var(--cine);height:22px;vertical-align:bottom}
+  .comic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .comic-frame{border:2px solid var(--cine);border-radius:8px;height:72px;position:relative;background:#fff}
+  .comic-frame .frame-label{position:absolute;top:-9px;left:8px;background:#fff;padding:0 6px;font-weight:800;color:var(--cine);font-size:11px}
+  .comic-caption{border-bottom:1.4px solid #ccc;height:20px;margin-top:2px;font-size:11px;padding:0 4px;color:#999}
+  .comic-cell{display:flex;flex-direction:column}
+
+  .script-lines{margin-top:6px}
+  .script-line{border-bottom:1.6px dashed var(--line);height:27px}
+  .script-part{font-weight:800;color:var(--cine);font-size:12.5px;margin-top:10px}
+
+  .premiere-list{list-style:none;margin:10px 0}
+  .premiere-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border:2px solid #f0e8dc;border-radius:12px;margin:7px 0;font-weight:700;font-size:13.5px}
+  .premiere-item .pbox{display:inline-block;width:20px;height:20px;border:1.6px solid #bbb;border-radius:5px;flex-shrink:0}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🎥 Mi Morning Vlog — проект</h1>
+    <div class="sub">Рабочий лист к Уроку 30 · Станция 3: Mi Mundo · Урок 9 из 12 · финал блока «Моя рутина»</div>
+    <div class="tag">Escuela MUDRO · ¡Luces, cámara, acción!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+    <span>Мой трек: <span class="w" style="min-width:110px"></span></span>
+  </div>
+
+  <div class="hint-box">🎬 Это <strong>план твоего проекта</strong>! Сначала заполни раскадровку (упр. 3), потом выбери свой трек: <strong>8 лет → комикс</strong> (упр. 4), <strong>12 лет → сценарий влога</strong> (упр. 5). В конце проверь себя по чек-листу и подготовься к защите.</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-gold">1</span>
+      <span class="ex-title">Медиа-лексика: соединяй слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🎥 el vídeo</td><td>а) название</td></tr>
+      <tr><td><span class="ans-box"></span>📖 el cómic</td><td>б) видео</td></tr>
+      <tr><td><span class="ans-box"></span>📝 el guion</td><td>в) комикс</td></tr>
+      <tr><td><span class="ans-box"></span>🖼️ la escena</td><td>г) сценарий</td></tr>
+      <tr><td><span class="ans-box"></span>🎞️ el cuadro</td><td>д) сцена</td></tr>
+      <tr><td><span class="ans-box"></span>🏷️ el título</td><td>е) кадр</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЧАНКИ ВЛОГЕРА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-cine">2</span>
+      <span class="ex-title">Чанки влогера: подбери фразу к части влога</span>
+      <span class="ex-skill">🗣 Говорение · чанки</span>
+    </div>
+    <div class="word-bank">💡 Банк чанков: <strong>¡Hola a todos! · hoy os enseño mi mañana · Primero... Luego... Después... · ¡Y eso es todo, amigos! ¡Hasta la próxima!</strong></div>
+    <div class="chunks-grid">
+      <div class="chunk-item"><span class="part">1. 👋 Приветствие</span>→ <span class="bank"></span></div>
+      <div class="chunk-item"><span class="part">2. 📢 Анонс</span>→ <span class="bank"></span></div>
+      <div class="chunk-item"><span class="part">3. 🎞️ Кадры рутины</span>→ <span class="bank"></span></div>
+      <div class="chunk-item"><span class="part">4. 👋 Прощание</span>→ <span class="bank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. РАСКАДРОВКА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">3</span>
+      <span class="ex-title">Раскадровка: заполни 6 кадров</span>
+      <span class="ex-skill">✍️ Планирование</span>
+    </div>
+    <div class="ex-instruction">Напиши, что будет в каждом кадре (какое действие) и какую подпись-чанк ты добавишь.</div>
+    <table class="storyboard-table">
+      <tr><th>Кадр</th><th>Что рисуешь / показываешь</th><th>Подпись-чанк (по-испански)</th></tr>
+      <tr><td class="frame-no">1</td><td>Приветствие в камеру</td><td><span class="blank wide"></span></td></tr>
+      <tr><td class="frame-no">2</td><td><span class="blank"></span></td><td>Primero <span class="blank"></span></td></tr>
+      <tr><td class="frame-no">3</td><td><span class="blank"></span></td><td>Luego <span class="blank"></span></td></tr>
+      <tr><td class="frame-no">4</td><td><span class="blank"></span></td><td>Después, <span class="blank"></span></td></tr>
+      <tr><td class="frame-no">5</td><td><span class="blank"></span></td><td>Por la tarde, <span class="blank"></span></td></tr>
+      <tr><td class="frame-no">6</td><td>Прощание в камеру</td><td><span class="blank wide"></span></td></tr>
+    </table>
+  </div>
+
+  <!-- 4. ТРЕК 8 ЛЕТ: КОМИКС -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">4</span>
+      <span class="ex-title">Трек 8 лет: комикс «¡Mi mañana!»</span>
+      <span class="ex-skill">✍️ Продукт · комикс</span>
+    </div>
+    <div class="comic-title">🏷️ Título: <span class="blank"></span></div>
+    <div class="comic-grid">
+      <div class="comic-cell">
+        <div class="comic-frame"><span class="frame-label">Cuadro 1</span></div>
+        <div class="comic-caption">¡Hola a todos! Me llamo...</div>
+      </div>
+      <div class="comic-cell">
+        <div class="comic-frame"><span class="frame-label">Cuadro 2</span></div>
+        <div class="comic-caption">Primero...</div>
+      </div>
+      <div class="comic-cell">
+        <div class="comic-frame"><span class="frame-label">Cuadro 3</span></div>
+        <div class="comic-caption">Luego...</div>
+      </div>
+      <div class="comic-cell">
+        <div class="comic-frame"><span class="frame-label">Cuadro 4</span></div>
+        <div class="comic-caption">Después...</div>
+      </div>
+      <div class="comic-cell">
+        <div class="comic-frame"><span class="frame-label">Cuadro 5</span></div>
+        <div class="comic-caption">Por la tarde,...</div>
+      </div>
+      <div class="comic-cell">
+        <div class="comic-frame"><span class="frame-label">Cuadro 6</span></div>
+        <div class="comic-caption">¡Y eso es todo! ¡Hasta la próxima!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. ТРЕК 12 ЛЕТ: СЦЕНАРИЙ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">5</span>
+      <span class="ex-title">Трек 12 лет: сценарий влога «Mi Morning Vlog»</span>
+      <span class="ex-skill">✍️ Продукт · сценарий</span>
+    </div>
+    <div class="script-part">👋 Приветствие + анонс:</div>
+    <div class="script-lines"><div class="script-line"></div><div class="script-line"></div></div>
+    <div class="script-part">🎞️ Кадры рутины (используй маркеры primero, luego, después, por la tarde):</div>
+    <div class="script-lines"><div class="script-line"></div><div class="script-line"></div><div class="script-line"></div><div class="script-line"></div></div>
+    <div class="script-part">🎤 Реплика «за кадром» / вопрос «¿Qué hora es?»:</div>
+    <div class="script-lines"><div class="script-line"></div></div>
+    <div class="script-part">🎬 Финал + прощание:</div>
+    <div class="script-lines"><div class="script-line"></div><div class="script-line"></div></div>
+  </div>
+
+  <!-- 6. ЧЕК-ЛИСТ ПРОЕКТА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-gold">6</span>
+      <span class="ex-title">Чек-лист проекта: всё ли готово?</span>
+      <span class="ex-skill">✅ Самопроверка продукта</span>
+    </div>
+    <div class="ex-instruction">Отметь галочкой пункты, которые есть в твоей работе.</div>
+    <ul class="premiere-list">
+      <li class="premiere-item"><span class="pbox"></span>Есть приветствие «¡Hola a todos!»</li>
+      <li class="premiere-item"><span class="pbox"></span>Минимум 3 маркера (primero, luego, después...)</li>
+      <li class="premiere-item"><span class="pbox"></span>Минимум 3 возвратных глагола (me despierto, me ducho...)</li>
+      <li class="premiere-item"><span class="pbox"></span>Есть прощание «¡Hasta la próxima!»</li>
+      <li class="premiere-item"><span class="pbox"></span>Есть название / título</li>
+    </ul>
+  </div>
+
+  <!-- 7. ПРЕЗЕНТАЦИЯ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">7</span>
+      <span class="ex-title">Подготовка к защите: «Выход в эфир»</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Запиши опорные слова для своей защиты. Говори по формуле: приветствие → кадры → прощание.</div>
+    <div class="script-part">Начну так:</div>
+    <div class="script-lines"><div class="script-line"></div></div>
+    <div class="script-part">Закончу так:</div>
+    <div class="script-lines"><div class="script-line"></div></div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-gold">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть медиа-лексику (vídeo, cómic, guion...)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Использовать чанки влогера</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Строить 4 части влога</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Создать комикс / сценарий влога</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Защитить проект перед «камерой»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 30 (9/12) · ¡Felicidades, vlogger! 🎥</div>
+</div>
+
+</body>
+</html>
