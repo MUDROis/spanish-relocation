@@ -305,14 +305,14 @@
   </div>
 
   <div class="card">
-    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <p class="hint">Нажмите на карточку — она перевернётся, покажет пример и озвучит слово.</p>
     <div class="tabs" id="vocab-tabs">
       <button class="tab active" onclick="showVocab('system',this)">🏥 Система (7)</button>
-      <button class="tab" onclick="showVocab('people',this)">👨‍⚕️ Люди (7)</button>
+      <button class="tab" onclick="showVocab('people',this)">👨‍⚕️ Люди (6)</button>
       <button class="tab" onclick="showVocab('services',this)">💊 Услуги (7)</button>
       <button class="tab" onclick="showVocab('verbs',this)">🗣 Глаголы (8)</button>
       <button class="tab" onclick="showVocab('docs',this)">📄 Документы (7)</button>
-      <button class="tab" onclick="showVocab('time',this)">🕐 Дни/месяцы (12)</button>
+      <button class="tab" onclick="showVocab('time',this)">🕐 Дни/месяцы (13)</button>
     </div>
     <div class="vocab-grid" id="vocab-grid"></div>
 
@@ -448,23 +448,11 @@
   <div class="card">
     <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
 
-    <button class="btn btn-secondary" onclick="speak('Buenos días, Centro de Salud San Fernando. ¿En qué puedo ayudarle? Buenos días. Quisiera solicitar la tarjeta sanitaria para mi familia. Somos nuevos en España. Muy bien. ¿Trae los documentos necesarios? Sí, tengo el NIE, el certificado de empadronamiento, los pasaportes y el contrato de trabajo. Perfecto. ¿Cuántas personas son? Somos cuatro: mi esposo, yo, mi hijo Leo de ocho años y mi hija Vega de doce años. Muy bien. Rellene este formulario con los datos de cada persona. Después le asignaremos un médico de cabecera y un pediatra. Perfecto. ¿Cuándo podemos venir a recoger las tarjetas? Las tarjetas estarán listas en dos semanas. Puede recogerlas un martes o un jueves por la mañana, de nueve a una. Perfecto. Vendré el jueves por la mañana. Muchas gracias por su tiempo. De nada. Que tenga un buen día.')" style="margin-bottom:12px">🔊 Прослушать диалог</button>
+    <button class="btn btn-secondary" onclick="speakDialog()" style="margin-bottom:12px">🔊 Прослушать диалог (два голоса)</button>
 
     <div class="dialog-box" onclick="this.classList.toggle('open')">
       <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
-      <div class="dialog-text">
-        <span class="who op">Регистратор:</span> Buenos días, Centro de Salud San Fernando. ¿En qué puedo ayudarle?<br>
-        <span class="who you">Родитель:</span> Buenos días. Quisiera solicitar la tarjeta sanitaria para mi familia. Somos nuevos en España.<br>
-        <span class="who op">Регистратор:</span> Muy bien. ¿Trae los documentos necesarios?<br>
-        <span class="who you">Родитель:</span> Sí, tengo el NIE, el certificado de empadronamiento, los pasaportes y el contrato de trabajo.<br>
-        <span class="who op">Регистратор:</span> Perfecto. ¿Cuántas personas son?<br>
-        <span class="who you">Родитель:</span> Somos cuatro: mi esposo, yo, mi hijo Leo de ocho años y mi hija Vega de doce años.<br>
-        <span class="who op">Регистратор:</span> Muy bien. Rellene este formulario con los datos de cada persona. Después le asignaremos un médico de cabecera y un pediatra.<br>
-        <span class="who you">Родитель:</span> Perfecto. ¿Cuándo podemos venir a recoger las tarjetas?<br>
-        <span class="who op">Регистратор:</span> Las tarjetas estarán listas en dos semanas. Puede recogerlas un martes o un jueves por la mañana, de nueve a una.<br>
-        <span class="who you">Родитель:</span> Perfecto. Vendré el jueves por la mañana. Muchas gracias por su tiempo.<br>
-        <span class="who op">Регистратор:</span> De nada. Que tenga un buen día.
-      </div>
+      <div class="dialog-text" id="dialog-text"></div>
     </div>
 
     <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
@@ -495,11 +483,11 @@
       3. <b>Conseguir el número de Seguridad Social</b> si se trabaja.<br>
       4. <b>Ir al Centro de Salud</b> con los documentos originales y copias.<br>
       5. <b>Rellenar el formulario</b> de solicitud.<br>
-      6. <b>Recoger la tarjeta</b> en 2–4 недели.</p>
+      6. <b>Recoger la tarjeta</b> en 2–4 semanas.</p>
 
       <h4>Estructura del sistema</h4>
       <p><b>Centro de Salud</b>: atención primaria. Aquí trabaja el médico de cabecera (adultos) y el pediatra (niños de 0 a 14 años).<br>
-      <b>Urgencias</b>: atención inmediata, 24 часа.<br>
+      <b>Urgencias</b>: atención inmediata, 24 horas.<br>
       <b>Especialistas</b>: cardiología, alergología, traumatología. Solo se accede con volante del médico de cabecera.<br>
       <b>Farmacias</b>: se dispensan medicamentos con receta electrónica.</p>
     </div>
@@ -594,7 +582,7 @@
       </div>
 
       <button class="btn btn-primary" onclick="buildScript()" style="margin-top:12px">🔧 Собрать скрипт</button>
-      <div id="dialog-result"></div>
+      <div id="dialog-result" class="dialog-result"></div>
     </div>
 
     <div class="note green">
@@ -632,7 +620,7 @@
     <div class="step-num">🏠</div>
     <div class="step-title">
       <h2>Домашнее задание · Урок 8.1</h2>
-      <span class="time">⏱ ~30–35 минут · 6 заданий</span>
+      <span class="time">⏱ ~35–40 минут · 6 заданий</span>
     </div>
   </div>
 
@@ -775,6 +763,15 @@
   8.1 · Sanidad Pública
 </footer>
 
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
 <script>
 // ===== TTS =====
 function speak(t){
@@ -791,6 +788,63 @@ function speak(t){
 if('speechSynthesis' in window){
   speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
   speechSynthesis.getVoices();
+}
+
+// ===== Диалог в два голоса (регистратор / родитель) =====
+var DIALOG_LINES = [
+  {who:'op',  label:'Регистратор:', es:'Buenos días, Centro de Salud San Fernando. ¿En qué puedo ayudarle?'},
+  {who:'you', label:'Родитель:',    es:'Buenos días. Quisiera solicitar la tarjeta sanitaria para mi familia. Somos nuevos en España.'},
+  {who:'op',  label:'Регистратор:', es:'Muy bien. ¿Trae los documentos necesarios?'},
+  {who:'you', label:'Родитель:',    es:'Sí, tengo el NIE, el certificado de empadronamiento, los pasaportes y el contrato de trabajo.'},
+  {who:'op',  label:'Регистратор:', es:'Perfecto. ¿Cuántas personas son?'},
+  {who:'you', label:'Родитель:',    es:'Somos cuatro: mi esposo, yo, mi hijo Leo de ocho años y mi hija Vega de doce años.'},
+  {who:'op',  label:'Регистратор:', es:'Muy bien. Rellene este formulario con los datos de cada persona. Después le asignaremos un médico de cabecera y un pediatra.'},
+  {who:'you', label:'Родитель:',    es:'Perfecto. ¿Cuándo podemos venir a recoger las tarjetas?'},
+  {who:'op',  label:'Регистратор:', es:'Las tarjetas estarán listas en dos semanas. Puede recogerlas un martes o un jueves por la mañana, de nueve a una.'},
+  {who:'you', label:'Родитель:',    es:'Perfecto. Vendré el jueves por la mañana. Muchas gracias por su tiempo.'},
+  {who:'op',  label:'Регистратор:', es:'De nada. Que tenga un buen día.'}
+];
+
+function renderDialogText(){
+  var el = document.getElementById('dialog-text');
+  if(!el) return;
+  el.innerHTML = DIALOG_LINES.map(function(l){
+    return '<span class="who ' + l.who + '">' + l.label + '</span> ' + l.es + '<br>';
+  }).join('');
+}
+renderDialogText();
+
+function speakDialog(){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var i = 0;
+  (function next(){
+    if(i >= DIALOG_LINES.length) return;
+    var line = DIALOG_LINES[i++];
+    var u = new SpeechSynthesisUtterance(line.es);
+    u.lang = 'es-ES';
+    if(line.who === 'you'){
+      u.rate = 1.0;   // родитель: чуть быстрее
+      u.pitch = 1.35; // и заметно выше
+    } else {
+      u.rate = 0.85;  // регистратор: чуть медленнее
+      u.pitch = 0.75; // и заметно ниже
+    }
+    var voices = speechSynthesis.getVoices();
+    var v = voices.find(function(x){ return x.lang && x.lang.toLowerCase().startsWith('es'); });
+    if(v) u.voice = v;
+    u.onend = next;
+    speechSynthesis.speak(u);
+  })();
+}
+
+// ===== SHUFFLE =====
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i]; array[i] = array[j]; array[j] = tmp;
+  }
+  return array;
 }
 
 // ===== GENERIC QUIZ RENDERER =====
@@ -878,8 +932,7 @@ var VOCAB = {
     {es:'el enfermero / la enfermera', ru:'медсестра / медбрат', ex:'La enfermera me tomó la tensión.', exRu:'Медсестра измерила мне давление.'},
     {es:'el recepcionista', ru:'регистратор, администратор', ex:'El recepcionista me dio la cita.', exRu:'Регистратор выдал мне талон.'},
     {es:'el paciente', ru:'пациент', ex:'El paciente espera en la sala de espera.', exRu:'Пациент ждёт в зале ожидания.'},
-    {es:'el médico', ru:'врач', ex:'El médico me escuchó y me examinó.', exRu:'Врач меня выслушал и осмотрел.'},
-    {es:'la consulta', ru:'приём, консультация', ex:'La consulta es a las diez.', exRu:'Приём в десять.'}
+    {es:'el médico', ru:'врач', ex:'El médico me escuchó y me examinó.', exRu:'Врач меня выслушал и осмотрел.'}
   ],
   services:[
     {es:'la cita', ru:'запись, талон на приём', ex:'Tengo una cita con el pediatra.', exRu:'У меня запись к педиатру.'},
@@ -919,11 +972,16 @@ var VOCAB = {
     {es:'enero', ru:'январь', ex:'en enero — в январе', exRu:'en enero — в январе'},
     {es:'junio', ru:'июнь', ex:'en junio — в июне', exRu:'en junio — в июне'},
     {es:'diciembre', ru:'декабрь', ex:'en diciembre — в декабре', exRu:'en diciembre — в декабре'},
-    {es:'por la mañana', ru:'утром', ex:'por la mañana — утром', exRu:'por la mañana — утром'}
+    {es:'por la mañana', ru:'утром', ex:'La cita es por la mañana.', exRu:'Приём утром.'},
+    {es:'por la tarde', ru:'днём, после обеда', ex:'El pediatra atiende por la tarde.', exRu:'Педиатр принимает днём.'},
+    {es:'por la noche', ru:'вечером, ночью', ex:'Las urgencias están abiertas por la noche.', exRu:'Скорая открыта ночью.'}
   ]
 };
 
 var vocabCat = 'system';
+function speakWord(es){
+  speak(String(es).replace(/\s*\/\s*/g, ' o '));
+}
 function showVocab(cat, btn){
   vocabCat = cat;
   document.querySelectorAll('#vocab-tabs .tab').forEach(function(t){ t.classList.remove('active'); });
@@ -937,7 +995,7 @@ function showVocab(cat, btn){
       '<div class="vocab-front"><div class="es">' + v.es + '</div><div class="ru">' + v.ru + '</div><div class="flip-hint">нажми →</div></div>' +
       '<div class="vocab-back"><div class="ex">' + v.ex + '</div><div class="ex-ru">' + v.exRu + '</div></div>' +
       '</div>';
-    d.onclick = function(){ d.classList.toggle('flipped'); };
+    d.onclick = function(){ d.classList.toggle('flipped'); speakWord(v.es); };
     grid.appendChild(d);
   });
 }
@@ -950,7 +1008,7 @@ var FILL = [
   {s:'La consulta es ___ enero.', ok:['en']},
   {s:'Las urgencias están abiertas ___ la noche.', ok:['por']},
   {s:'___ lunes voy al centro de salud.', ok:['El']},
-  {s:'___ diciembre es la fiesta.', ok:['En']}
+  {s:'La fiesta es ___ diciembre.', ok:['en']}
 ];
 var fillInputs = [];
 function renderFill(){
@@ -961,19 +1019,25 @@ function renderFill(){
     var parts = f.s.split('___');
     var d = document.createElement('div');
     d.style.marginBottom = '10px';
-    d.innerHTML = '<span style="font-weight:700;margin-right:8px;">' + (i+1) + '.</span>' +
-      '<span style="font-style:italic;">' + parts[0] + '</span>' +
-      '<input class="fill-input" data-i="' + i + '" data-p="0" style="min-width:80px">' +
-      '<span style="font-style:italic;">' + (parts[1] || '') + '</span>';
+    var html = '<span style="font-weight:700;margin-right:8px;">' + (i+1) + '.</span>';
+    for(var p = 0; p < parts.length; p++){
+      if(p > 0){
+        html += '<input class="fill-input" data-i="' + i + '" data-p="' + (p-1) + '" style="min-width:80px">';
+      }
+      html += '<span style="font-style:italic;">' + parts[p] + '</span>';
+    }
+    d.innerHTML = html;
     el.appendChild(d);
-    fillInputs.push({input: d.querySelector('input'), part: 0});
+    d.querySelectorAll('input').forEach(function(inp){
+      fillInputs.push({input: inp, i: i, p: +inp.dataset.p});
+    });
   });
 }
 function checkFill(){
-  fillInputs.forEach(function(fi, i){
+  fillInputs.forEach(function(fi){
     var inp = fi.input;
     var val = inp.value.trim().toLowerCase();
-    var ok = FILL[i].ok[fi.part].toLowerCase();
+    var ok = FILL[fi.i].ok[fi.p].toLowerCase();
     if(val === ok){
       inp.classList.add('correct');
       inp.classList.remove('wrong');
@@ -992,83 +1056,63 @@ var BUILD = [
   {w:['Las','urgencias','están','abiertas','por','la','noche.'], t:'Скорая работает ночью.'},
   {w:['Solicito','la','tarjeta','sanitaria','para','mi','familia.'], t:'Запрашиваю медицинскую карточку на семью.'}
 ];
-var buildI = 0, buildWords = [], buildTarget = [];
-function renderBuild(){
-  buildWords = [];
-  buildTarget = [];
-  var el = document.getElementById('build-exercise');
-  el.innerHTML = '';
-  var words = BUILD[buildI].w.slice();
-  // shuffle
-  for(var i = words.length - 1; i > 0; i--){
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = words[i]; words[i] = words[j]; words[j] = tmp;
+function initBuild(container, phraseList){
+  var state = { i: 0, words: [], line: null, fb: null };
+  function check(){
+    if(state.words.length !== phraseList[state.i].w.length) return;
+    var ok = state.words.every(function(w, idx){ return w === phraseList[state.i].w[idx]; });
+    state.fb.className = 'build-feedback ' + (ok ? 'ok' : 'bad');
+    state.fb.textContent = ok
+      ? '✅ ¡Perfecto! ' + phraseList[state.i].t
+      : '❌ Правильно: ' + phraseList[state.i].w.join(' ');
   }
-  var wordsDiv = document.createElement('div');
-  wordsDiv.className = 'build-words';
-  words.forEach(function(w){
-    var b = document.createElement('span');
-    b.className = 'bw';
-    b.textContent = w;
-    b.onclick = function(){
-      if(b.classList.contains('used')) return;
-      b.classList.add('used');
-      buildWords.push(w);
-      drawTarget();
-    };
-    wordsDiv.appendChild(b);
-  });
-  el.appendChild(wordsDiv);
-
-  var line = document.createElement('div');
-  line.className = 'build-line';
-  line.id = 'build-line';
-  el.appendChild(line);
-
-  var fb = document.createElement('div');
-  fb.className = 'build-feedback';
-  fb.id = 'build-fb';
-  el.appendChild(fb);
-
-  var next = document.createElement('button');
-  next.className = 'btn btn-ghost';
-  next.style.marginTop = '10px';
-  next.textContent = 'Следующая фраза →';
-  next.onclick = function(){
-    buildI = (buildI + 1) % BUILD.length;
-    renderBuild();
-  };
-  el.appendChild(next);
-}
-function drawTarget(){
-  var line = document.getElementById('build-line');
-  line.innerHTML = '';
-  buildWords.forEach(function(w, i){
-    var s = document.createElement('span');
-    s.className = 'bw-line-item';
-    s.textContent = w;
-    s.onclick = function(){
-      buildWords.splice(i, 1);
-      drawTarget();
-      checkBuild();
-    };
-    line.appendChild(s);
-  });
-  checkBuild();
-}
-function checkBuild(){
-  var fb = document.getElementById('build-fb');
-  if(buildWords.length !== BUILD[buildI].w.length) return;
-  var ok = buildWords.every(function(w, i){ return w === BUILD[buildI].w[i]; });
-  if(ok){
-    fb.className = 'build-feedback ok';
-    fb.textContent = '✅ ¡Perfecto! ' + BUILD[buildI].t;
-  } else {
-    fb.className = 'build-feedback bad';
-    fb.textContent = '❌ Правильно: ' + BUILD[buildI].w.join(' ');
+  function draw(){
+    state.line.innerHTML = '';
+    state.words.forEach(function(w, idx){
+      var s = document.createElement('span');
+      s.className = 'bw-line-item';
+      s.textContent = w;
+      s.onclick = function(){ state.words.splice(idx, 1); draw(); };
+      state.line.appendChild(s);
+    });
+    check();
   }
+  function render(){
+    state.words = [];
+    container.innerHTML = '';
+    var words = phraseList[state.i].w.slice();
+    shuffle(words);
+    var wordsDiv = document.createElement('div');
+    wordsDiv.className = 'build-words';
+    words.forEach(function(w){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = w;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        state.words.push(w);
+        draw();
+      };
+      wordsDiv.appendChild(b);
+    });
+    container.appendChild(wordsDiv);
+    state.line = document.createElement('div');
+    state.line.className = 'build-line';
+    container.appendChild(state.line);
+    state.fb = document.createElement('div');
+    state.fb.className = 'build-feedback';
+    container.appendChild(state.fb);
+    var next = document.createElement('button');
+    next.className = 'btn btn-ghost';
+    next.style.marginTop = '10px';
+    next.textContent = 'Следующая фраза →';
+    next.onclick = function(){ state.i = (state.i + 1) % phraseList.length; render(); };
+    container.appendChild(next);
+  }
+  render();
 }
-renderBuild();
+initBuild(document.getElementById('build-exercise'), BUILD);
 
 // ===== MATCH EXERCISE =====
 var MATCH = [
@@ -1136,7 +1180,7 @@ function mClick(d){
     mSel.classList.add('done');
     d.classList.add('done');
     mFound++;
-    speak(mSel.dataset.v);
+    speakWord(mSel.dataset.v);
   } else {
     d.classList.add('error');
     mSel.classList.add('error');
@@ -1169,7 +1213,18 @@ function buildScript(){
   var day = document.getElementById('b-day').value;
   var time = document.getElementById('b-time').value;
 
-  var script = 'Buenos días. Me llamo ' + name + '. Quisiera solicitar la tarjeta sanitaria para mi familia. Somos ' + count + ' personas: mi esposo, yo, mi hijo ' + c1 + ' de ' + a1 + ' años y mi hija ' + c2 + ' de ' + a2 + ' años. Somos de ' + country + ' y somos nuevos en España. Tengo el NIE, el empadronamiento, los pasaportes y el contrato de trabajo. ¿Cuándo podemos venir a recoger las tarjetas? Muchas gracias por su tiempo.';
+  var family;
+  if(count === 'dos'){
+    family = 'mi esposo y yo';
+  } else if(count === 'tres'){
+    family = 'mi esposo, yo y mi hijo ' + c1 + ' de ' + a1 + ' años';
+  } else if(count === 'cuatro'){
+    family = 'mi esposo, yo, mi hijo ' + c1 + ' de ' + a1 + ' años y mi hija ' + c2 + ' de ' + a2 + ' años';
+  } else {
+    family = 'mi esposo, yo, mi hijo ' + c1 + ' de ' + a1 + ' años, mi hija ' + c2 + ' de ' + a2 + ' años y nuestro bebé';
+  }
+
+  var script = 'Buenos días. Me llamo ' + name + '. Quisiera solicitar la tarjeta sanitaria para mi familia. Somos ' + count + ' personas: ' + family + '. Somos de ' + country + ' y somos nuevos en España. Tengo el NIE, el empadronamiento, los pasaportes y el contrato de trabajo. ¿Cuándo podemos venir a recoger las tarjetas? Vendré el ' + day + ' ' + time + '. Muchas gracias por su tiempo.';
 
   var res = document.getElementById('dialog-result');
   res.textContent = script;
@@ -1196,11 +1251,12 @@ function showTrain(mode, btn){
         '<div class="vocab-front"><div class="es">' + v.es + '</div><div class="ru">' + v.ru + '</div><div class="flip-hint">нажми →</div></div>' +
         '<div class="vocab-back"><div class="ex">' + v.ex + '</div><div class="ex-ru">' + v.exRu + '</div></div>' +
         '</div>';
-      d.onclick = function(){ d.classList.toggle('flipped'); };
+      d.onclick = function(){ d.classList.toggle('flipped'); speakWord(v.es); };
       grid.appendChild(d);
     });
     box.appendChild(grid);
   } else if(mode === 'match'){
+    mSel = null; mFound = 0;
     var cont = document.createElement('div');
     cont.className = 'match-container';
     var colL = document.createElement('div');
@@ -1238,34 +1294,7 @@ function showTrain(mode, btn){
     cont.appendChild(colR);
     box.appendChild(cont);
   } else if(mode === 'build'){
-    var words = BUILD[0].w.slice();
-    for(var i = words.length - 1; i > 0; i--){
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = words[i]; words[i] = words[j]; words[j] = tmp;
-    }
-    var wordsDiv = document.createElement('div');
-    wordsDiv.className = 'build-words';
-    words.forEach(function(w){
-      var b = document.createElement('span');
-      b.className = 'bw';
-      b.textContent = w;
-      b.onclick = function(){
-        if(b.classList.contains('used')) return;
-        b.classList.add('used');
-        buildWords.push(w);
-        drawTarget();
-      };
-      wordsDiv.appendChild(b);
-    });
-    box.appendChild(wordsDiv);
-    var line = document.createElement('div');
-    line.className = 'build-line';
-    line.id = 'build-line';
-    box.appendChild(line);
-    var fb = document.createElement('div');
-    fb.className = 'build-feedback';
-    fb.id = 'build-fb';
-    box.appendChild(fb);
+    initBuild(box, BUILD);
   }
 }
 showTrain('cards', document.querySelector('#train-tabs .tab'));
