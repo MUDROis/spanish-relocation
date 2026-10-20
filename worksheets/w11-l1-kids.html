@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 31 · Deportes y hobbies — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E8604C; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --green:#2E7D32; --sport:#43A047; --hobby:#FB8C00;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--sport);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(67,160,71,.4)}
+  .print-btn:hover{background:#2e7031}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#E8F5E9,#FFF3D6,#E8F5E9);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--sport)}
+  .hero h1{font-size:21px;color:var(--sport);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--sport);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-sport{background:var(--sport)}.c-hobby{background:var(--hobby)}.c-ocean{background:var(--ocean)}
+  .c-oliva{background:var(--oliva)}.c-pink{background:var(--pink)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-teal{background:var(--teal)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#E8F5E9;border:1.5px dashed var(--sport);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--sport);margin-bottom:10px}
+  .word-bank.orange{background:#FFF3E0;border-color:var(--hobby);color:var(--hobby)}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--hobby);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--hobby);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--hobby);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:80px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .choice-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .choice-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .choice-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .choice-item .opt{display:inline-block;border:1.6px solid var(--teal);border-radius:999px;padding:2px 12px;font-weight:700;font-size:12.5px;color:var(--teal);margin:0 3px}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--sport);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--sport)}
+  .build-line{border-bottom:1.6px dashed var(--sport);height:24px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>⚽ Deportes y hobbies 🎨</h1>
+    <div class="sub">Рабочий лист к Уроку 31 · Станция 3: Mi Mundo · Урок 10 из 12 · спорт, музыка, игры и 3 глагола</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Это <strong>экзамен по уроку 31</strong>! Работай самостоятельно, а потом проверь вместе с родителем или учителем. Вспоминай 3 глагола-«включателя»: <b>jugar a</b> (спорт), <b>hacer</b> (занятия), <b>tocar</b> (инструменты)!</div>
+
+  <!-- 1. ЛЕКСИКА: СПОРТ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sport">1</span>
+      <span class="ex-title">Спорт: соединяй слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · спорт</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>⚽ el fútbol</td><td>а) теннис</td></tr>
+      <tr><td><span class="ans-box"></span>🏀 el baloncesto</td><td>б) плавание</td></tr>
+      <tr><td><span class="ans-box"></span>🎾 el tenis</td><td>в) футбол</td></tr>
+      <tr><td><span class="ans-box"></span>🏊 la natación</td><td>г) гимнастика</td></tr>
+      <tr><td><span class="ans-box"></span>🚴 el ciclismo</td><td>д) баскетбол</td></tr>
+      <tr><td><span class="ans-box"></span>🤸 la gimnasia</td><td>е) велоспорт</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: ХОББИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-hobby">2</span>
+      <span class="ex-title">Хобби: соединяй слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · хобби</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🎨 dibujar</td><td>а) играть в видеоигры</td></tr>
+      <tr><td><span class="ans-box"></span>📚 leer</td><td>б) играть на гитаре</td></tr>
+      <tr><td><span class="ans-box"></span>🎸 tocar la guitarra</td><td>в) рисовать</td></tr>
+      <tr><td><span class="ans-box"></span>🎵 cantar</td><td>г) танцевать</td></tr>
+      <tr><td><span class="ans-box"></span>💃 bailar</td><td>д) читать</td></tr>
+      <tr><td><span class="ans-box"></span>🎮 jugar a los videojuegos</td><td>е) петь</td></tr>
+    </table>
+  </div>
+
+  <!-- 3. УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-hobby">3</span>
+      <span class="ex-title">Угадай занятие по описанию</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank orange">💡 Банк слов: <strong>el tenis · la natación · bailar · leer · tocar el piano · dibujar</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🎾</span> Golpeo una pelota con una raqueta. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🏊</span> Muevo los brazos y las piernas en el agua. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">💃</span> Muevo el cuerpo al ritmo de la música. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">📚</span> Descubro qué pasa en la historia de un libro. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">🎹</span> Toco las teclas blancas y negras. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🎨</span> Uso lápices de colores para hacer un cuadro. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: ВСТАВЬ ГЛАГОЛ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">4</span>
+      <span class="ex-title">Вставь глагол в нужной форме: jugar / hacer / tocar</span>
+      <span class="ex-skill">🧩 Грамматика · 3 паттерна</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> <b>jugar a</b> = спорт и игры, <b>hacer</b> = занятия (без артикля), <b>tocar</b> = музыкальные инструменты. Не забудь изменить глагол по лицу!</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Yo <span class="g"></span> al fútbol los martes.</div>
+      <div class="gap-item"><span class="num">2</span>Yo <span class="g"></span> natación los jueves.</div>
+      <div class="gap-item"><span class="num">3</span>Yo <span class="g"></span> la guitarra por la tarde.</div>
+      <div class="gap-item"><span class="num">4</span>Mi hermana <span class="g"></span> ballet.</div>
+      <div class="gap-item"><span class="num">5</span>Nosotros <span class="g"></span> al baloncesto.</div>
+      <div class="gap-item"><span class="num">6</span>Mi abuelo <span class="g"></span> el piano.</div>
+      <div class="gap-item"><span class="num">7</span>¿Tú <span class="g"></span> a los videojuegos?</div>
+      <div class="gap-item"><span class="num">8</span>Yo <span class="g"></span> gimnasia los viernes.</div>
+    </div>
+  </div>
+
+  <!-- 5. ГРАММАТИКА: ОБВЕДИ ПРАВИЛЬНУЮ ФОРМУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">5</span>
+      <span class="ex-title">Обведи правильную форму (ловушки!)</span>
+      <span class="ex-skill">🧩 Грамматика · предлоги</span>
+    </div>
+    <div class="hint-box">💡 <strong>Ловушка:</strong> <b>jugar a + el = al</b> (juego <b>al</b> fútbol). После <b>hacer</b> нет артикля (hago natación). На инструментах мы <b>tocamos</b>, а не jugamos.</div>
+    <div class="choice-grid">
+      <div class="choice-item"><span class="num">1</span>Juego <span class="opt">al fútbol</span> / <span class="opt">el fútbol</span>.</div>
+      <div class="choice-item"><span class="num">2</span>Hago <span class="opt">natación</span> / <span class="opt">la natación</span>.</div>
+      <div class="choice-item"><span class="num">3</span><span class="opt">Toco</span> / <span class="opt">Juego</span> la guitarra.</div>
+      <div class="choice-item"><span class="num">4</span>Juego <span class="opt">a los videojuegos</span> / <span class="opt">los videojuegos</span>.</div>
+      <div class="choice-item"><span class="num">5</span>Ella <span class="opt">toca</span> / <span class="opt">hace</span> el piano.</div>
+      <div class="choice-item"><span class="num">6</span>Juego <span class="opt">al tenis</span> / <span class="opt">a la tenis</span>.</div>
+    </div>
+  </div>
+
+  <!-- 6. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">los</span><span class="build-word">Juego</span><span class="build-word">martes.</span><span class="build-word">al</span><span class="build-word">fútbol</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">jueves.</span><span class="build-word">Hago</span><span class="build-word">los</span><span class="build-word">natación</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">la</span><span class="build-word">tarde.</span><span class="build-word">guitarra</span><span class="build-word">Toco</span><span class="build-word">por</span><span class="build-word">la</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">amigos.</span><span class="build-word">parque</span><span class="build-word">al</span><span class="build-word">Voy</span><span class="build-word">con</span><span class="build-word">mis</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 7. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">7</span>
+      <span class="ex-title">Прочитай текст «Увлечения Марты» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Marta y tengo 10 años. Me gustan mucho los deportes. Los lunes y los miércoles <b>juego al tenis</b> en el club. Los viernes <b>hago natación</b> en la piscina municipal. También me gustan las artes. <b>Toco la guitarra</b> desde los seis años y <b>dibujo</b> mucho. Los sábados por la mañana <b>leo</b> libros de aventuras. A veces <b>juego a los videojuegos</b> con mi primo. ¡Me encanta mi tiempo libre!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿A qué juega Marta los lunes y los miércoles? <span class="ru">(Во что играет Марта по понедельникам и средам?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué hace los viernes? <span class="ru">(Что она делает по пятницам?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Qué instrumento toca? <span class="ru">(На каком инструменте она играет?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué hace los sábados por la mañana? <span class="ru">(Что она делает по субботам утром?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Con quién juega a los videojuegos? <span class="ru">(С кем она играет в видеоигры?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 8. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">8</span>
+      <span class="ex-title">Послушай и напиши ответ</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши короткий ответ (занятие, инструмент, день недели или короткую фразу)!</div>
+    <div class="listen-item"><span class="lnum">1.</span>¿A qué juegas los martes? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span>¿Qué haces los jueves? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span>¿Qué instrumento tocas? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span>¿Qué haces los sábados? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span>¿Juegas a los videojuegos? ¿Con quién? → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) «Los martes juego al fútbol.» · 2) «Los jueves hago natación.» · 3) «Toco la guitarra.» · 4) «Los sábados leo y dibujo.» · 5) «Sí, juego a los videojuegos con mi primo.»</div>
+  </div>
+
+  <!-- 9. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">9</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Расскажи, в какой спорт ты играешь:<br><span class="tpl">Los martes juego al fútbol con mis amigos.</span><span class="ru">По вторникам я играю в футбол с друзьями.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Расскажи, чем занимаешься:<br><span class="tpl">Los jueves hago natación en la piscina.</span><span class="ru">По четвергам я плаваю в бассейне.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Расскажи, на чём играешь или что рисуешь:<br><span class="tpl">Toco la guitarra por la tarde. También dibujo mucho.</span><span class="ru">Я играю на гитаре днём. Ещё я много рисую.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Расскажи, чем занимаешься по выходным:<br><span class="tpl">Los sábados juego a los videojuegos con mi primo.</span><span class="ru">По субботам я играю в видеоигры с двоюродным братом.</span><span class="speak-check"></span></div>
+    <div class="speak-item">5. Расскажи о своих занятиях полностью (5 пунктов):<br><span class="tpl">¡Hola! Me llamo ___. Los __ juego al ___. Los __ hago ___. Toco ___. ¡Me gustan mis hobbies!</span><span class="ru">Привет! Меня зовут ___. По ___ я играю в ___. По ___ я занимаюсь ___. Я играю на ___. Мне нравятся мои увлечения!</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 10. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">10</span>
+      <span class="ex-title">Сочинение «Mis aficiones»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! Me llamo... y tengo... años. · 2) Me gustan mucho los deportes y los hobbies. · 3) Los martes juego al... · 4) Los jueves hago... · 5) Toco... / Dibujo... / Bailo... · 6) Los sábados juego a los videojuegos con... · 7) Mi afición favorita es... porque... · 8) ¿Y tú, qué haces?</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 11. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">11</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть 7 видов спорта</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Называть 7 хобби</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Использовать jugar a + deporte (al fútbol)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Использовать hacer + actividad (без артикля)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Использовать tocar + instrumento</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать о своих занятиях по формуле</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 31 (10/12) · ¡Me gustan mis hobbies! ⚽🎨</div>
+</div>
+
+</body>
+</html>

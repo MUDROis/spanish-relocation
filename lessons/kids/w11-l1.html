@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 31: Deportes y hobbies — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --sport:#43A047; --hobby:#FB8C00;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#E8F5E9 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(67,160,71,.2),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(251,140,0,.2),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--sport);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--sport)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#E8F5E9,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--sport);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--sport)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#E8F5E9;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #E8F5E9;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--sport)}
+  .word-card.hobby-card{border-color:#FFF3E0}
+  .word-card.hobby-card:hover{border-color:var(--hobby)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--sport)}
+  .word-card.hobby-card .es{color:var(--hobby)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .word-card .ges{display:block;font-size:.7rem;font-weight:800;color:var(--terra);margin-top:4px}
+  .speak-btn{background:var(--sport);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+  .speak-btn.orange{background:var(--hobby)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--sport);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#E8F5E9,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--sport);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #d8e0dc;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--sport);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #e0f0e6;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--sport)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .shadow-card{background:linear-gradient(135deg,#FFF3D6,#E8F5E9);border-radius:16px;padding:16px;margin:10px 0;text-align:center}
+  .shadow-phrase{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--sport);margin:8px 0}
+  .shadow-ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--sport)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #d8e0dc;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--sport)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--sport);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--sport);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--sport);background:#E8F5E9}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--sport);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--sport);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--sport),#2e7031);color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 3 · Mi Mundo · Урок 31 из 60</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">⚽ СТАНЦИЯ 3 · УРОК 10 · НЕДЕЛЯ 11</span>
+  <div class="hero-emojis">⚽ 🎸 🎨 🎮 💃</div>
+  <h1>Deportes y <span>hobbies</span></h1>
+  <p class="sub">Старт финального блока станции 3 — <strong>«Mis aficiones»</strong>! Чтобы найти друзей в новой школе, нужно уметь рассказать, <strong>чем ты увлекаешься</strong>. Сегодня выучим спорт, музыку и игры — и три волшебных глагола, которые их «включают»!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> испанский одноклассник спрашивает: <em>«¿Qué haces en tu tiempo libre?»</em> (Что ты делаешь в свободное время?), а ты отвечаешь:<br>
+    <em>«Juego al fútbol los martes. Hago natación los jueves. Toco la guitarra y dibujo. ¡Me gusta mucho el deporte!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">⚽</span> Называть 7 видов спорта</div>
+      <div class="goal-item"><span class="emoji">🎨</span> Называть 7 хобби (рисование, чтение, музыка, танцы, игры)</div>
+      <div class="goal-item"><span class="emoji">🧩</span> Использовать jugar a / hacer / tocar</div>
+      <div class="goal-item"><span class="emoji">📖</span> Понимать текст о хобби</div>
+      <div class="goal-item"><span class="emoji">🗣</span> Рассказать о своих занятиях</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Исследователь хобби»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение рутины</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola otra vez! Вспомним рутину из прошлой недели — ответь ВСЛУХ. Мостик: «Ты знаешь, как проходит твой день. А ЧЕМ ТЫ ЗАНИМАЕШЬСЯ в свободное время? ¿Juegas al fútbol? ¿Bailas? ¡Hoy aprendemos!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ЛЕКСИКА СПОРТА -->
+  <section class="block" style="--c:#43A047">
+    <div class="block-head">
+      <h2 class="block-title">⚽ 7 видов спорта</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Нажимай на карточку — услышишь слово. Показывай жест и повторяй!</p>
+    <div class="cards-grid" id="sport-cards"></div>
+    <div class="script">⚡ <strong>Секрет рода:</strong> 🔵 мужской (el): fútbol, baloncesto, tenis, ciclismo, béisbol. 🔴 женский (la): natación (слова на <b>-ción</b> ВСЕГДА женского рода!) и gimnasia.</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎮 Игра «Угадай спорт»: посмотри на жест-описание!</p>
+      <div class="game-emo" id="sport-emo">🤔</div>
+      <div class="game-q" id="sport-q">Нажми «▶ Начать»!</div>
+      <div class="opts" id="sport-opts"></div>
+      <div class="game-fb" id="sport-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="sport-stars">0</span> / <span id="sport-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="sportStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ЛЕКСИКА ХОББИ -->
+  <section class="block" style="--c:#FB8C00">
+    <div class="block-head">
+      <h2 class="block-title">🎨 7 хобби: творчество, музыка, чтение, танцы, игры</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Теперь — любимые занятия! Нажимай и повторяй с жестом.</p>
+    <div class="cards-grid" id="hobby-cards"></div>
+    <div class="script">🇪🇸 <strong>Культурный бонус:</strong> В Испании очень популярны <span class="grammar-hint" data-hint="extraescolares — кружки после школы: футбол, балет, английский, робототехника. Почти все испанские дети на них ходят!">las extraescolares</span> — кружки после школы. Футбол, балет, английский, робототехника!</div>
+  </section>
+
+  <!-- БЛОК 3: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: 3 глагола-«включателя»</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Паттерн</th><th>Формула</th><th>Пример</th><th>🔊</th></tr>
+      <tr onclick="speak('Juego al fútbol.')"><td><b>⚽ JUGAR A</b> (спорт/игры)</td><td>jugar <b>a</b> + el → <b>al</b></td><td>Juego <b>al</b> fútbol.</td><td>🔊</td></tr>
+      <tr onclick="speak('Juego a los videojuegos.')"><td><b>🎮 JUGAR A</b> (игры)</td><td>jugar <b>a</b> + los</td><td>Juego <b>a los</b> videojuegos.</td><td>🔊</td></tr>
+      <tr onclick="speak('Hago natación.')"><td><b>🏊 HACER</b> (занятия)</td><td>hacer + активность</td><td>Hago natación.</td><td>🔊</td></tr>
+      <tr onclick="speak('Toco la guitarra.')"><td><b>🎸 TOCAR</b> (инструменты)</td><td>tocar + инструмент</td><td>Toco la guitarra.</td><td>🔊</td></tr>
+      <tr onclick="speak('Voy al parque.')"><td><b>📍 IR A</b> (повторение)</td><td>ir <b>a</b> + место</td><td>Voy <b>al</b> parque.</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка:</strong> <span class="grammar-hint" data-hint="jugar требует предлог A: juego AL fútbol (a + el = al), juego A LOS videojuegos. НЕ «juego el fútbol»!">jugar A</span> (не ~~juego el fútbol~~)! А вот на инструментах мы <b>TOCAMOS</b>: <span class="grammar-hint" data-hint="tocar = играть НА инструменте. НЕ «juego la guitarra», а «toco la guitarra». tocar не требует предлога.">toco la guitarra</span> (не ~~juego la guitarra~~).</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Выбери глагол»</p>
+      <div class="game-q" id="verb-q"></div>
+      <div class="opts" id="verb-opts"></div>
+      <div class="game-fb" id="verb-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="verb-stars">0</span> / <span id="verb-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="verbStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: ПРАКТИКА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎮 Практика: 2 игры</h2>
+      <span class="time-badge">⏱ 9 минут</span>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 1: «Спорт или хобби?»</p>
+      <div class="game-emo" id="sort-emo">❓</div>
+      <div class="game-q" id="sort-q"></div>
+      <div class="opts">
+        <button class="opt" onclick="sortAns('sport')"><span class="opt-emo">⚽</span>DEPORTE</button>
+        <button class="opt" onclick="sortAns('hobby')"><span class="opt-emo">🎨</span>HOBBY</button>
+      </div>
+      <div class="game-fb" id="sort-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="sort-stars">0</span> / <span id="sort-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="sortStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🧩 Игра 2: Конструктор фраз</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: ЧТЕНИЕ + АУДИРОВАНИЕ -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head">
+      <h2 class="block-title">📖 Чтение: «Las aficiones de Marta»</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakMarta()">🔊 Послушать текст</button>
+    <div class="read-box">
+      ¡Hola! Me llamo Marta y tengo 10 años. <span class="grammar-hint" data-hint="Me gustan ... — «Мне нравятся...». Эту волшебную конструкцию разберём целиком на Уроке 32, а пока запомни фразу как есть!">Me gustan mucho los deportes.</span> Los lunes y los miércoles <b>juego al tenis</b> en el club. Los viernes <b>hago natación</b> en la piscina municipal. También me gustan las artes. <b>Toco la guitarra</b> desde los seis años y <b>dibujo</b> mucho. Los sábados por la mañana <b>leo</b> libros de aventuras. A veces <b>juego a los videojuegos</b> con mi primo. ¡Me encanta mi tiempo libre!
+    </div>
+    <div id="marta-quiz"></div>
+    <h4 style="margin-top:18px">🎧 Теневое повторение</h4>
+    <p class="block-sub">Слушай и повторяй ВСЛУХ за диктором, копируя интонацию!</p>
+    <div id="shadow-box"></div>
+  </section>
+
+  <!-- БЛОК 6: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Говорение: «Mis aficiones»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">ВЫВОД В РЕЧЬ! Расскажи о своих занятиях по формуле. Это черновик для профиля в соцсети на уроке 33! 📱</div>
+    <div class="read-box" style="background:#E8F5E9;border-color:var(--sport)">
+      <strong>📋 Формула речи (5 пунктов):</strong><br>
+      1. <em>¡Hola! Me llamo [имя].</em><br>
+      2. <em>Los [день] juego al [deporte].</em><br>
+      3. <em>Los [день] hago [actividad].</em><br>
+      4. <em>Toco [instrumento] / Dibujo / Bailo / Leo...</em><br>
+      5. <em>Por la tarde / noche [actividad].</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 7: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎯</div>
+      <h3>Исследователь хобби</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты знаешь спорт, музыку и игры — и умеешь о них рассказывать!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Исследователь хобби» 🎯 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 32:</strong> «Завтра ты по полочкам разберёшь самую важную конструкцию для поиска друзей — <em>«Мне нравится...»</em>: <em>Me gusta el fútbol. Me encanta bailar. ¡Odio madrugar!</em>»</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#43A047">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">⚽ Спорт (7)</h4>
+    <div class="cards-grid" id="words-sport"></div>
+    <h4 style="margin:14px 0 8px">🎨 Хобби (7)</h4>
+    <div class="cards-grid" id="words-hobby"></div>
+    <h4 style="margin:14px 0 8px">🧩 Конструкции</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('Juego al fútbol.')"><div class="emo">⚽</div><div class="es">Juego al fútbol.</div><div class="ru">Я играю в футбол.</div></div>
+      <div class="word-card" onclick="speak('Hago natación.')"><div class="emo">🏊</div><div class="es">Hago natación.</div><div class="ru">Я плаваю.</div></div>
+      <div class="word-card" onclick="speak('Toco la guitarra.')"><div class="emo">🎸</div><div class="es">Toco la guitarra.</div><div class="ru">Я играю на гитаре.</div></div>
+      <div class="word-card" onclick="speak('Juego a los videojuegos.')"><div class="emo">🎮</div><div class="es">Juego a los videojuegos.</div><div class="ru">Я играю в видеоигры.</div></div>
+      <div class="word-card" onclick="speak('Voy al parque.')"><div class="emo">🏞️</div><div class="es">Voy al parque.</div><div class="ru">Я иду в парк.</div></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (<span id="match-total">0</span> пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей спорту и хобби</strong> · 5 мин<br>Покажи 14 карточек с жестами. Пусть угадают перевод.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎯 Игра «Что ты делаешь?»</strong> · 7 мин ⭐<br>Родитель называет занятие по-русски — ты отвечаешь по-испански с правильным глаголом: «¡Juego al fútbol!»</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎨 Мини-проект «Постер моих хобби»</strong> · 7 мин ⭐<br>Нарисуй 4 любимых занятия и подпиши: <em>«Juego al fútbol»</em>, <em>«Toco la guitarra»</em>.</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br>«Спорт или хобби» + «Выбери глагол» + конструктор.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎤 Голосовой дневник</strong> · 5 мин ⭐<br>Расскажи о своих хобби по формуле 5 пунктов. Отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Deportes y hobbies»</strong> · 15 мин ⭐<br><a href="../../worksheets/w11-l1-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин<br>Нажми нужный цвет в таблице ниже.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть 7 видов спорта</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Называть 7 хобби</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Использовать jugar a + deporte (al fútbol)</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Использовать hacer + actividad (без артикля)</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Использовать tocar + instrumento</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Рассказать о своих занятиях по формуле</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/ru/1225011640/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-3-%D1%83%D1%80%D0%BE%D0%BA-10-flash-cards/?i=2gqp1x&x=1jqt" target="_blank">
+    <span>📚 Карточки Quizlet · Станция 3 · Урок 10</span><span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w10-l3.html" class="nav-prev"><div class="nav-small">← Урок 9 станции 3 (неделя 10)</div><div class="nav-title">Урок 30: Mi Morning Vlog 🎥</div></a>
+    <span class="nav-soon"><div class="nav-small">Урок 11 станции 3 →</div><div class="nav-title">Урок 32: Me gusta / Me encanta ❤️ — скоро</div></span>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 3: Mi Mundo · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var SPORTS=[
+ {id:'futbol',emo:'⚽',es:'el fútbol',ru:'футбол',ges:'бьём по мячу'},
+ {id:'baloncesto',emo:'🏀',es:'el baloncesto',ru:'баскетбол',ges:'бросаем в кольцо'},
+ {id:'tenis',emo:'🎾',es:'el tenis',ru:'теннис',ges:'размахиваем ракеткой'},
+ {id:'natacion',emo:'🏊',es:'la natación',ru:'плавание',ges:'плывём руками'},
+ {id:'ciclismo',emo:'🚴',es:'el ciclismo',ru:'велоспорт',ges:'крутим педали'},
+ {id:'gimnasia',emo:'🤸',es:'la gimnasia',ru:'гимнастика',ges:'делаем шпагат'},
+ {id:'beisbol',emo:'⚾',es:'el béisbol',ru:'бейсбол (бонус)',ges:'бьём битой'}
+];
+var HOBBIES=[
+ {id:'dibujar',emo:'🎨',es:'dibujar',ru:'рисовать',ges:'рисуем в воздухе'},
+ {id:'leer',emo:'📚',es:'leer',ru:'читать',ges:'держим книгу'},
+ {id:'guitarra',emo:'🎸',es:'tocar la guitarra',ru:'играть на гитаре',ges:'бренчим'},
+ {id:'piano',emo:'🎹',es:'tocar el piano',ru:'играть на пианино',ges:'нажимаем клавиши'},
+ {id:'cantar',emo:'🎵',es:'cantar',ru:'петь',ges:'поём с жестом'},
+ {id:'bailar',emo:'💃',es:'bailar',ru:'танцевать',ges:'танцуем'},
+ {id:'videojuegos',emo:'🎮',es:'jugar a los videojuegos',ru:'играть в видеоигры',ges:'держим геймпад'}
+];
+
+var WARM=[
+ {q:'¿Qué haces por la mañana?',model:'Me despierto a las siete, me ducho y desayuno.',ru:'Что ты делаешь утром?'},
+ {q:'¿Qué haces después del colegio?',model:'Después del colegio hago los deberes y juego con mis amigos.',ru:'Что ты делаешь после школы?'},
+ {q:'¿Qué haces antes de dormir?',model:'Antes de dormir me cepillo los dientes y leo.',ru:'Что ты делаешь перед сном?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== КАРТОЧКИ ===== */
+(function(){
+  var sb=document.getElementById('sport-cards');
+  SPORTS.forEach(function(s){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+s.emo+'</div><div class="es">'+s.es+'</div><div class="ru">'+s.ru+'</div><span class="ges">'+s.ges+'</span>';
+    d.addEventListener('click',function(){speak(s.es);});
+    sb.appendChild(d);
+  });
+  var hb=document.getElementById('hobby-cards');
+  HOBBIES.forEach(function(h){
+    var d=document.createElement('div');d.className='word-card hobby-card';
+    d.innerHTML='<div class="emo">'+h.emo+'</div><div class="es">'+h.es+'</div><div class="ru">'+h.ru+'</div><span class="ges">'+h.ges+'</span>';
+    d.addEventListener('click',function(){speak(h.es);});
+    hb.appendChild(d);
+  });
+  var ws=document.getElementById('words-sport');
+  SPORTS.forEach(function(s){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+s.emo+'</div><div class="es">'+s.es+'</div><div class="ru">'+s.ru+'</div>';
+    d.addEventListener('click',function(){speak(s.es);});
+    ws.appendChild(d);
+  });
+  var wh=document.getElementById('words-hobby');
+  HOBBIES.forEach(function(h){
+    var d=document.createElement('div');d.className='word-card hobby-card';
+    d.innerHTML='<div class="emo">'+h.emo+'</div><div class="es">'+h.es+'</div><div class="ru">'+h.ru+'</div>';
+    d.addEventListener('click',function(){speak(h.es);});
+    wh.appendChild(d);
+  });
+})();
+
+/* ===== УГАДАЙ СПОРТ ===== */
+var sportOrd=[],sportI=0,sportS=0;
+function sportStart(){sportOrd=shuffle(SPORTS.slice());sportI=0;sportS=0;document.getElementById('sport-total').textContent=sportOrd.length;document.getElementById('sport-stars').textContent='0';sportNext();}
+function sportNext(){
+  var box=document.getElementById('sport-opts');box.innerHTML='';
+  if(sportI>=sportOrd.length){document.getElementById('sport-emo').textContent='🏆';document.getElementById('sport-q').textContent='¡Perfecto! ⭐ '+sportS+' из '+sportOrd.length;return;}
+  var r=sportOrd[sportI];
+  document.getElementById('sport-emo').textContent=r.emo;
+  document.getElementById('sport-q').textContent='¿Qué deporte es? ('+r.ges+')';
+  document.getElementById('sport-fb').textContent='';
+  var wrong=shuffle(SPORTS.filter(function(x){return x.id!==r.id;})).slice(0,2);
+  shuffle([r].concat(wrong)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.innerHTML='<span class="opt-emo">'+o.emo+'</span>'+o.es;
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o.id===r.id){b.classList.add('correct');sportS++;document.getElementById('sport-stars').textContent=sportS;document.getElementById('sport-fb').textContent='✅ ¡Correcto!';speak(r.es);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent.indexOf(r.es)>=0)x.classList.add('correct');});document.getElementById('sport-fb').textContent='❌ Правильно: '+r.es;}
+      sportI++;setTimeout(sportNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ВЫБЕРИ ГЛАГОЛ ===== */
+var VERB=[
+ {q:'Yo ___ al fútbol.',ok:'juego',w:['hago','toco']},
+ {q:'Yo ___ natación.',ok:'hago',w:['juego','toco']},
+ {q:'Yo ___ la guitarra.',ok:'toco',w:['juego','hago']},
+ {q:'Los martes ___ al tenis.',ok:'juego',w:['hago','toco']},
+ {q:'Mi hermana ___ ballet.',ok:'hace',w:['juega','toca']},
+ {q:'Nosotros ___ al baloncesto.',ok:'jugamos',w:['hacemos','tocamos']},
+ {q:'¿Tú ___ a los videojuegos?',ok:'juegas',w:['haces','tocas']},
+ {q:'Mi abuelo ___ el piano.',ok:'toca',w:['juega','hace']}
+];
+var verbOrd=[],verbI=0,verbS=0;
+function verbStart(){verbOrd=shuffle(VERB.slice());verbI=0;verbS=0;document.getElementById('verb-total').textContent=verbOrd.length;document.getElementById('verb-stars').textContent='0';verbNext();}
+function verbNext(){
+  var box=document.getElementById('verb-opts');box.innerHTML='';
+  if(verbI>=verbOrd.length){document.getElementById('verb-q').textContent='🎉 ¡Muy bien!';document.getElementById('verb-fb').textContent='⭐ '+verbS+' из '+verbOrd.length;return;}
+  var r=verbOrd[verbI];
+  document.getElementById('verb-q').textContent=r.q;
+  document.getElementById('verb-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.style.minWidth='100px';b.textContent=o;
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');verbS++;document.getElementById('verb-stars').textContent=verbS;document.getElementById('verb-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('verb-fb').textContent='❌ Правильно: '+r.ok;}
+      verbI++;setTimeout(verbNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== СПОРТ ИЛИ ХОББИ ===== */
+var SORT=[
+ {emo:'⚽',es:'el fútbol',ok:'sport'},
+ {emo:'🎨',es:'dibujar',ok:'hobby'},
+ {emo:'🏊',es:'la natación',ok:'sport'},
+ {emo:'🎸',es:'tocar la guitarra',ok:'hobby'},
+ {emo:'🏀',es:'el baloncesto',ok:'sport'},
+ {emo:'📚',es:'leer',ok:'hobby'},
+ {emo:'🎾',es:'el tenis',ok:'sport'},
+ {emo:'💃',es:'bailar',ok:'hobby'},
+ {emo:'🚴',es:'el ciclismo',ok:'sport'},
+ {emo:'🎮',es:'jugar a los videojuegos',ok:'hobby'},
+ {emo:'🤸',es:'la gimnasia',ok:'sport'},
+ {emo:'🎵',es:'cantar',ok:'hobby'}
+];
+var sortOrd=[],sortI=0,sortS=0,sortLock=false;
+function sortStart(){sortOrd=shuffle(SORT.slice());sortI=0;sortS=0;sortLock=false;document.getElementById('sort-total').textContent=sortOrd.length;document.getElementById('sort-stars').textContent='0';sortNext();}
+function sortNext(){
+  if(sortI>=sortOrd.length){document.getElementById('sort-emo').textContent='🏆';document.getElementById('sort-q').textContent='¡Perfecto!';document.getElementById('sort-fb').textContent='⭐ '+sortS+' из '+sortOrd.length;return;}
+  var r=sortOrd[sortI];
+  document.getElementById('sort-emo').textContent=r.emo;
+  document.getElementById('sort-q').textContent=r.es;
+  document.getElementById('sort-fb').textContent='';
+  sortLock=false;
+}
+function sortAns(v){
+  if(sortLock||sortI>=sortOrd.length)return;
+  sortLock=true;
+  var r=sortOrd[sortI];
+  var fb=document.getElementById('sort-fb');
+  if(v===r.ok){sortS++;document.getElementById('sort-stars').textContent=sortS;fb.textContent='✅ ¡Correcto!';speak(r.es);}
+  else{fb.textContent='❌ Правильно: '+(r.ok==='sport'?'⚽ DEPORTE':'🎨 HOBBY');}
+  sortI++;setTimeout(sortNext,1200);
+}
+
+/* ===== КОНСТРУКТОР ===== */
+var SB=[
+ {w:['Juego','al','fútbol','los','martes.'],t:'Я играю в футбол по вторникам.'},
+ {w:['Hago','natación','los','jueves.'],t:'Я плаваю по четвергам.'},
+ {w:['Toco','la','guitarra','por','la','tarde.'],t:'Я играю на гитаре днём.'},
+ {w:['Dibujo','y','leo','por','la','noche.'],t:'Я рисую и читаю вечером.'},
+ {w:['Juego','a','los','videojuegos','los','sábados.'],t:'Я играю в видеоигры по субботам.'},
+ {w:['Voy','al','parque','con','mis','amigos.'],t:'Я иду в парк с друзьями.'}
+];
+var sbI=0;
+function renderSB(){
+  var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  var placed=[];
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');placed.push(w);t.textContent=placed.join(' ');
+      if(placed.length===SB[sbI].w.length){var ok=placed.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== ЧТЕНИЕ ===== */
+function speakMarta(){speak('¡Hola! Me llamo Marta y tengo 10 años. Me gustan mucho los deportes. Los lunes y los miércoles juego al tenis en el club. Los viernes hago natación en la piscina municipal. También me gustan las artes. Toco la guitarra desde los seis años y dibujo mucho. Los sábados por la mañana leo libros de aventuras. A veces juego a los videojuegos con mi primo. ¡Me encanta mi tiempo libre!');}
+var MARTA=[
+ {q:'¿A qué juega Marta los lunes y los miércoles?',ru:'Во что играет Марта по понедельникам и средам?',ok:'Al tenis.',w:['Al fútbol.','Al baloncesto.']},
+ {q:'¿Qué hace los viernes?',ru:'Что она делает по пятницам?',ok:'Hace natación.',w:['Juega al tenis.','Toca la guitarra.']},
+ {q:'¿Qué instrumento toca?',ru:'На каком инструменте она играет?',ok:'La guitarra.',w:['El piano.','El tenis.']},
+ {q:'¿Qué hace los sábados por la mañana?',ru:'Что она делает по субботам утром?',ok:'Lee libros de aventuras.',w:['Juega al fútbol.','Dibuja.']},
+ {q:'¿Con quién juega a los videojuegos?',ru:'С кем она играет в видеоигры?',ok:'Con su primo.',w:['Con su hermano.','Con su amiga.']}
+];
+(function(){
+  var wrap=document.getElementById('marta-quiz');
+  MARTA.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ТЕНЬ ===== */
+var SHAD=[
+ {es:'Juego al fútbol los martes.'},
+ {es:'Hago natación los jueves.'},
+ {es:'Toco la guitarra por la tarde.'},
+ {es:'Juego a los videojuegos con mi primo.'},
+ {es:'¡Me encanta mi tiempo libre!'}
+];
+(function(){
+  var box=document.getElementById('shadow-box');
+  SHAD.forEach(function(s,i){
+    var d=document.createElement('div');d.className='shadow-card';
+    d.innerHTML='<div style="font-size:.85rem;color:#999">Фраза '+(i+1)+'</div><div class="shadow-phrase">'+s.es+'</div>';
+    var ctrl=document.createElement('div');ctrl.className='shadow-ctrl';
+    var b1=document.createElement('button');b1.className='speak-btn';b1.textContent='🔊 Слушать';
+    b1.addEventListener('click',function(){speak(s.es);});
+    var b2=document.createElement('button');b2.className='speak-btn orange';b2.textContent='🎤 Повторил вслух';
+    b2.addEventListener('click',function(){b2.textContent='✅ Молодец!';b2.style.background='var(--green)';});
+    ctrl.appendChild(b1);ctrl.appendChild(b2);d.appendChild(ctrl);box.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Расскажи, в каком виде спорта ты играешь.',model:'Los martes juego al fútbol con mis amigos. Los jueves hago natación en la piscina.'},
+ {q:'Расскажи, на каком инструменте играешь или что рисуешь.',model:'Toco la guitarra por la tarde. También dibujo mucho. Me gusta dibujar animales.'},
+ {q:'Расскажи, чем занимаешься по выходным.',model:'Los sábados juego a los videojuegos con mi primo. Los domingos leo libros y voy al parque.'},
+ {q:'Расскажи о своих занятиях ПОЛНОСТЬЮ (5 пунктов).',model:'¡Hola! Me llamo Alex. Los martes juego al fútbol. Los jueves hago natación. Toco la guitarra por la tarde. Los sábados juego a los videojuegos. Por la noche leo un libro. ¡Me gustan mis hobbies!'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом расскажи о СЕБЕ вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el fútbol','футбол'],['el baloncesto','баскетбол'],['el tenis','теннис'],
+ ['la natación','плавание'],['el ciclismo','велоспорт'],['la gimnasia','гимнастика'],
+ ['dibujar','рисовать'],['leer','читать'],['tocar la guitarra','играть на гитаре'],
+ ['tocar el piano','играть на пианино'],['cantar','петь'],['bailar','танцевать'],
+ ['jugar a los videojuegos','играть в видеоигры'],['Juego al fútbol.','Я играю в футбол.']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  document.getElementById('match-total').textContent=MATCH.length;
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/'+MATCH.length;
+    if(mFound===MATCH.length)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un experto en tus aficiones!');
+  confetti('🎯');
+  try{localStorage.setItem('mudro_kids_w11l1_badge_aficiones','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w11l1_badge_aficiones')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'⚽','✨'];for(var i=0;i<26;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== ПОДСКАЗКИ (тап на мобильном) ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>
