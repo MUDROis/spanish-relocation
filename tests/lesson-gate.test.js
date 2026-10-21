@@ -27,3 +27,22 @@ test('every lesson loads lesson-gate.js (adds the "Завершить урок" 
     }
   }
 });
+
+/* Самопроверка «Светофор»: lesson-gate.js читает cell.dataset.color ('1'|'2'|'3')
+   и по нему сохраняет отметки в облако. Если урок отдаёт другой атрибут (data-c),
+   отметки молча не сохраняются. */
+test('traffic-light cells expose data-color (1|2|3) for the gate', () => {
+  for (const dir of LESSON_DIRS) {
+    for (const file of lessonFiles(dir)) {
+      const html = fs.readFileSync(file, 'utf8');
+      const rel = path.relative(path.join(__dirname, '..'), file);
+      const cells = html.match(/class="tl-cell[^"]*"[^>]*>/g) || [];
+      for (const cell of cells) {
+        assert.ok(
+          /data-color="[123]"/.test(cell),
+          rel + ': traffic-light cell must use data-color="1|2|3" — ' + cell
+        );
+      }
+    }
+  }
+});
