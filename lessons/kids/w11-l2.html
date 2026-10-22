@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 32: Me gusta / Me encanta — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#E91E63; --love:#C2185B;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FFE0EC 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(233,30,99,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FFE0EC;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #FFE0EC;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #ead6dc;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .survey-wrap{background:#fff;border:3px dashed var(--heart);border-radius:18px;padding:18px;margin:14px 0}
+  .survey-person{display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid #f0e6e8;cursor:pointer}
+  .survey-person:last-child{border-bottom:none}
+  .survey-person:hover{background:#FFF3EE}
+  .survey-avatar{width:50px;height:50px;border-radius:50%;background:#FFE0EC;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+  .survey-info{flex:1;font-size:.9rem}
+  .survey-name{font-weight:800;color:var(--heart);font-size:1rem}
+  .survey-likes{font-style:italic;color:var(--ink-soft);margin-top:2px}
+  .chart-wrap{background:#fff;border-radius:18px;padding:18px;margin:14px 0}
+  .chart-title{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.2rem;margin-bottom:10px}
+  .chart-bar{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:800;font-size:.9rem}
+  .chart-label{min-width:140px;font-size:.85rem}
+  .chart-fill{height:24px;border-radius:8px;background:linear-gradient(90deg,var(--heart),var(--star));transition:.5s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.8rem;font-weight:800;min-width:24px}
+
+  .warm-item{background:#fff;border:2px solid #f0e6e8;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #ead6dc;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#FFE0EC}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 3 · Mi Mundo · Урок 11 из 12</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">❤️ СТАНЦИЯ 3 · УРОК 11 · НЕДЕЛЯ 11</span>
+  <div class="hero-emojis">❤️ 💎 💔 🆚 👉</div>
+  <h1>Me <span>gusta</span> / Me encanta</h1>
+  <p class="sub">Вчера ты выучил все хобби. Сегодня ты научишься говорить, что ты <strong>любишь</strong>, что <strong>обожаешь</strong> и что <strong>ненавидишь</strong>! А ещё проведём настоящий социологический опрос среди виртуальных одноклассников 📊</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> испанский одноклассник спрашивает: <em>«¿Te gusta el fútbol?»</em>, а ты отвечаешь:<br>
+    <em>«¡Sí, me gusta mucho! Me encanta jugar los martes. ¿Y a ti?»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">❤️</span> Говорить что нравится (me gusta / me gustan)</div>
+      <div class="goal-item"><span class="emoji">💎</span> Использовать encantar / odiar / preferir</div>
+      <div class="goal-item"><span class="emoji">📊</span> Проводить опрос и строить диаграмму</div>
+      <div class="goal-item"><span class="emoji">🗣</span> Вести диалог «¿Y a ti?» — «A mí también»</div>
+      <div class="goal-item"><span class="emoji">📖</span> Понимать текст о вкусах</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Эксперт по интересам»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 31</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola otra vez! Вспомним хобби и спорт — ответь ВСЛУХ. Мостик: «Ты знаешь все занятия. А теперь узнаем, что из этого ты ЛЮБИШЬ!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ВВОД — ШКАЛА ЭМОЦИЙ -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">❤️ Шкала: от «ненавижу» до «обожаю»</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Кликай на каждую строчку и повторяй фразу вслух! Запомни шкалу эмоций.</p>
+    <div class="scale-wrap" id="scale-wrap"></div>
+    <div class="script">⚡ <strong>Секрет:</strong> шкала идёт от самого плохого к самому хорошему: <b>odio → no me gusta → me gusta → me encanta</b>. А <b>mucho / poco / nada</b> — это «усилители»!</div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: «обратное влияние» GUSTAR</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Me gusta el fútbol.')"><td><b>ME GUSTA + ед.ч.</b></td><td>Me gusta el fútbol.</td><td>Мне нравится футбол.</td><td>🔊</td></tr>
+      <tr onclick="speak('Me gustan los videojuegos.')"><td><b>ME GUSTAN + мн.ч.</b></td><td>Me gustan los videojuegos.</td><td>Мне нравятся видеоигры.</td><td>🔊</td></tr>
+      <tr onclick="speak('Me encanta bailar.')"><td><b>ME ENCANTA + инфинитив</b></td><td>Me encanta bailar.</td><td>Я обожаю танцевать.</td><td>🔊</td></tr>
+      <tr onclick="speak('Odio madrugar.')"><td><b>ODIO + инфинитив</b></td><td>Odio madrugar.</td><td>Я ненавижу рано вставать.</td><td>🔊</td></tr>
+      <tr onclick="speak('¿Te gusta el tenis? — Sí, mucho.')"><td><b>¿TE GUSTA...? / ¿Y A TI?</b></td><td>¿Te gusta el tenis? — Sí, mucho.</td><td>Тебе нравится? — Да, очень.</td><td>🔊</td></tr>
+      <tr onclick="speak('A mí también.')"><td><b>A MÍ TAMBIÉN / A MÍ NO</b></td><td>A mí también. / A mí no.</td><td>Мне тоже. / А мне нет.</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> GUSTAR работает <span class="grammar-hint" data-hint="Это «обратное влияние»: не «я люблю футбол», а «футбол нравится мне». Субъект — это вещь (fútbol), а не человек. Поэтому: ME GUSTA EL FÚTBOL (футбол = ед.ч., значит gusta в ед.ч.), ME GUSTAN LOS VIDEOJUEGOS (videojuegos = мн.ч., значит gustan во мн.ч.).">НАИЗНАНКУ</span>: не «я люблю футбол», а «футбол нравится мне». Поэтому <b>gusta</b> (ед.ч.) если нравится одна вещь, и <b>gustan</b> (мн.ч.) если много!<br>8 лет: просто запомни как песенку — <em>«Me gusta el fútbol, me gustan los videojuegos»</em>.</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «GUSTA или GUSTAN?»: 8 раундов</p>
+      <div class="game-q" id="num-q"></div>
+      <div class="opts" id="num-opts"></div>
+      <div class="game-fb" id="num-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="num-stars">0</span> / <span id="num-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="numStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: DRILL-ИГРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎮 3 drill-игры</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 1: «Выбери реакцию» (6 раундов)</p>
+      <div class="game-q" id="reac-q"></div>
+      <div class="opts" id="reac-opts"></div>
+      <div class="game-fb" id="reac-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="reac-stars">0</span> / <span id="reac-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="reacStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 2: «Конструктор фраз»</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 3: Диалог «¿Y a ti?»</p>
+      <div class="game-q" id="dial-q"></div>
+      <div class="opts" id="dial-opts"></div>
+      <div class="game-fb" id="dial-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="dial-stars">0</span> / <span id="dial-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="dialStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: CLIL — СОЦИОЛОГИЯ -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">📊 CLIL: Социология класса</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Мы спросили 6 виртуальных одноклассников: <em>«¿Qué te gusta?»</em>. Кликай на каждого, чтобы услышать. Потом посмотри на диаграмму!</p>
+    <div class="survey-wrap" id="survey-wrap"></div>
+    <div class="chart-wrap">
+      <div class="chart-title">📈 Что нравится больше всего?</div>
+      <div id="chart-area"></div>
+      <button class="speak-btn" onclick="renderChart()">🔄 Пересчитать диаграмму</button>
+    </div>
+    <div class="script">🧮 <strong>CLIL-математика (12 лет):</strong> Посчитай, сколько человек (из 6) любят футбол: <em>«A tres de seis les gusta el fútbol»</em>. Это <b>50%</b>! А какие хобби непопулярны?</div>
+  </section>
+
+  <!-- БЛОК 5: ЧТЕНИЕ -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head">
+      <h2 class="block-title">📖 Чтение: «Los gustos de Sofía»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakSofia()">🔊 Послушать текст</button>
+    <div class="read-box">
+      ¡Hola! Me llamo Sofía y tengo 11 años. <b>Me gusta mucho</b> el baloncesto. Juego al baloncesto los martes con mis amigos. <b>Me encantan</b> los libros de aventuras: leo todos los sábados por la mañana. También <b>me gusta</b> tocar la guitarra, pero <b>prefiero</b> el piano. <b>No me gustan</b> los videojuegos, <b>odio</b> los videojuegos de miedo. <b>Me encanta</b> bailar con mi hermana. <b>A mi hermana también le gusta</b> bailar. ¡Tenemos los mismos gustos!
+    </div>
+    <div id="sofia-quiz"></div>
+  </section>
+
+  <!-- БЛОК 6: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Говорение: «Lo que me gusta»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="script">ВЫВОД В РЕЧЬ! Расскажи о своих вкусах по формуле. Это почти готовая Bio для твоего профиля в соцсети на уроке 33! 📱</div>
+    <div class="read-box" style="background:#FFE0EC;border-color:var(--heart)">
+      <strong>📋 Формула речи (6 пунктов):</strong><br>
+      1. <em>¡Hola! Me llamo [имя] y tengo [возраст] años.</em><br>
+      2. <em><b>Me gusta mucho</b> [deporte / hobby en singular].</em><br>
+      3. <em><b>Me encantan</b> [cosas en plural].</em><br>
+      4. <em>También <b>me gusta</b> [otra actividad].</em><br>
+      5. <em><b>No me gustan</b> / <b>Odio</b> [lo que no te gusta].</em><br>
+      6. <em>¿<b>Y a ti</b>? ¿Qué te gusta?</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 7: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">❤️</div>
+      <h3>Эксперт по интересам</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты умеешь говорить о вкусах, вести диалог и даже проводить опросы!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Эксперт по интересам» ❤️ добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 33 (PBL, пятница):</strong> «Завтра финал станции 3 — ты создашь свой <b>профиль в соцсети</b> на испанском для поиска друзей! Аватар, Bio (<em>Me llamo... Me gusta... Busco amigos para...</em>), 3 поста. 12 лет — видео-визитка, 8 лет — комикс-профиль!» 📱</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">❤️ Глаголы чувств</h4>
+    <div class="cards-grid" id="words-feel"></div>
+    <h4 style="margin:14px 0 8px">📈 Усилители и реакции</h4>
+    <div class="cards-grid" id="words-mod"></div>
+    <h4 style="margin:14px 0 8px">🧩 Конструкции</h4>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('Me gusta el fútbol.')"><div class="emo">❤️</div><div class="es">Me gusta el fútbol.</div><div class="ru">Мне нравится футбол.</div></div>
+      <div class="word-card" onclick="speak('Me gustan los videojuegos.')"><div class="emo">❤️</div><div class="es">Me gustan los videojuegos.</div><div class="ru">Мне нравятся видеоигры.</div></div>
+      <div class="word-card" onclick="speak('Me encanta bailar.')"><div class="emo">💎</div><div class="es">Me encanta bailar.</div><div class="ru">Я обожаю танцевать.</div></div>
+      <div class="word-card" onclick="speak('Odio madrugar.')"><div class="emo">💔</div><div class="es">Odio madrugar.</div><div class="ru">Я ненавижу рано вставать.</div></div>
+      <div class="word-card" onclick="speak('¿Y a ti?')"><div class="emo">👉</div><div class="es">¿Y a ti?</div><div class="ru">А тебе?</div></div>
+      <div class="word-card" onclick="speak('A mí también.')"><div class="emo">✅</div><div class="es">A mí también.</div><div class="ru">Мне тоже.</div></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Научи родителей шкале чувств</strong> · 5 мин<br>Покажи жестами: odio (скрестил руки) → me gusta (❤️) → me encanta (💎).</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>👨‍👩‍👧 Семейный опрос «¿Qué te gusta?»</strong> · 7 мин ⭐<br>Задай каждому члену семьи 3 вопроса: <em>«¿Te gusta el fútbol? ¿Te gustan los libros? ¿Qué odias?»</em> Запиши ответы.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎨 Постер «Mis gustos»</strong> · 10 мин ⭐<br>Раздели лист на 3 колонки: ❤️ Me gusta · 💎 Me encanta · 💔 Odio. Нарисуй и подпиши!</div></div>
+    <div class="task"><div class="task-num">4</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br>«Gusta или gustan» + «Выбери реакцию» + диалог + конструктор.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎤 Голосовой дневник</strong> · 5 мин ⭐<br>Расскажи о своих вкусах по формуле 6 пунктов. Отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Рабочий лист «Me gusta / Me encanta»</strong> · 15 мин ⭐<br>🖨 <a href="../../worksheets/w11-l2-kids.html" target="_blank">Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Использовать шкалу: gusta / encanta / odia</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Различать me gusta (ед.ч.) и me gustan (мн.ч.)</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Использовать усилители mucho / poco / nada</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Вести диалог «¿Y a ti?» — «A mí también»</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Понимать текст о вкусах другого человека</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Рассказать о своих вкусах по формуле 6 пунктов</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="https://quizlet.com/fi/1226050801/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-3-%D1%83%D1%80%D0%BE%D0%BA-11-flash-cards/?i=2gqp1x&x=1jqt" target="_blank">
+    <span>📚 Карточки Quizlet · Станция 3 · Урок 11 (Me gusta / Me encanta)</span>
+    <span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w11-l1.html" class="nav-prev"><div class="nav-small">← Урок 10 станции 3</div><div class="nav-title">Урок 31: Deportes y hobbies ⚽</div></a>
+    <span class="nav-soon"><div class="nav-small">Урок 12 станции 3 (PBL) →</div><div class="nav-title">Урок 33: Mi Perfil de Instagram 📱 — скоро</div></span>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 3: Mi Mundo · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var SCALE=[
+ {emo:'💔',es:'Odio madrugar.',ru:'Я НЕНАВИЖУ рано вставать.'},
+ {emo:'😕',es:'No me gusta el tenis.',ru:'Мне НЕ нравится теннис.'},
+ {emo:'😐',es:'Me gusta un poco leer.',ru:'Мне немного нравится читать.'},
+ {emo:'❤️',es:'Me gusta el fútbol.',ru:'Мне НРАВИТСЯ футбол.'},
+ {emo:'💖',es:'Me gusta mucho bailar.',ru:'Мне ОЧЕНЬ нравится танцевать.'},
+ {emo:'💎',es:'Me encanta tocar la guitarra.',ru:'Я ОБОЖАЮ играть на гитаре.'}
+];
+
+var FEEL=[
+ {emo:'❤️',es:'gustar',ru:'нравиться'},
+ {emo:'💎',es:'encantar',ru:'обожать'},
+ {emo:'💔',es:'odiar',ru:'ненавидеть'},
+ {emo:'⚖️',es:'preferir',ru:'предпочитать'}
+];
+var MOD=[
+ {emo:'📈',es:'mucho',ru:'много, очень'},
+ {emo:'📉',es:'poco',ru:'мало, немного'},
+ {emo:'🚫',es:'nada',ru:'совсем не'},
+ {emo:'👉',es:'¿Y a ti?',ru:'А тебе?'},
+ {emo:'✅',es:'A mí también',ru:'Мне тоже'},
+ {emo:'❌',es:'A mí no',ru:'А мне нет'}
+];
+
+var WARM=[
+ {q:'¿Qué deportes conoces?',model:'Conozco el fútbol, el baloncesto, el tenis, la natación y el ciclismo.',ru:'Какие виды спорта ты знаешь?'},
+ {q:'¿Qué hobbies tienes?',model:'Tengo dibujar, leer, bailar, cantar y jugar a los videojuegos.',ru:'Какие у тебя хобби?'},
+ {q:'¿Qué haces los martes?',model:'Los martes juego al fútbol y toco la guitarra.',ru:'Что ты делаешь по вторникам?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ШКАЛА ===== */
+(function(){
+  var box=document.getElementById('scale-wrap');
+  SCALE.forEach(function(s){
+    var row=document.createElement('div');row.className='scale-row';
+    row.innerHTML='<span class="scale-emo">'+s.emo+'</span><div class="scale-text"><div class="scale-es">'+s.es+'</div><div class="scale-ru">'+s.ru+'</div></div><span style="font-size:1.2rem">🔊</span>';
+    row.addEventListener('click',function(){speak(s.es);});
+    box.appendChild(row);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+(function(){
+  var wf=document.getElementById('words-feel');
+  FEEL.forEach(function(f){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+    d.addEventListener('click',function(){speak(f.es);});
+    wf.appendChild(d);
+  });
+  var wm=document.getElementById('words-mod');
+  MOD.forEach(function(m){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+m.emo+'</div><div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div>';
+    d.addEventListener('click',function(){speak(m.es);});
+    wm.appendChild(d);
+  });
+})();
+
+/* ===== ИГРА 1: GUSTA / GUSTAN ===== */
+var NUM=[
+ {q:'Me ___ el fútbol.',ok:'gusta',w:['gustan']},
+ {q:'Me ___ los videojuegos.',ok:'gustan',w:['gusta']},
+ {q:'Me ___ la guitarra.',ok:'gusta',w:['gustan']},
+ {q:'Me ___ los libros.',ok:'gustan',w:['gusta']},
+ {q:'Me ___ bailar.',ok:'gusta',w:['gustan']},
+ {q:'Me ___ el baloncesto.',ok:'gusta',w:['gustan']},
+ {q:'Me ___ las canciones.',ok:'gustan',w:['gusta']},
+ {q:'Me ___ nadar.',ok:'gusta',w:['gustan']}
+];
+var numOrd=[],numI=0,numS=0;
+function numStart(){numOrd=shuffle(NUM.slice());numI=0;numS=0;document.getElementById('num-total').textContent=numOrd.length;document.getElementById('num-stars').textContent='0';numNext();}
+function numNext(){
+  var box=document.getElementById('num-opts');box.innerHTML='';
+  if(numI>=numOrd.length){document.getElementById('num-q').textContent='🎉 ¡Muy bien!';document.getElementById('num-fb').textContent='⭐ '+numS+' из '+numOrd.length;return;}
+  var r=numOrd[numI];
+  document.getElementById('num-q').textContent=r.q;
+  document.getElementById('num-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='100px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');numS++;document.getElementById('num-stars').textContent=numS;document.getElementById('num-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('num-fb').textContent='❌ Правильно: '+r.ok;}
+      numI++;setTimeout(numNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ИГРА 2: ВЫБЕРИ РЕАКЦИЮ ===== */
+var REAC=[
+ {q:'Tu amigo dice: «Me gusta el fútbol». Tú estás de acuerdo:',ok:'A mí también.',w:['A mí no.','Yo no.']},
+ {q:'Tu amigo dice: «Odio madrugar». Tú también odias:',ok:'Yo también.',w:['A mí no.','Yo no.']},
+ {q:'Quieres preguntar a tu amigo sobre sus gustos:',ok:'¿Y a ti?',w:['¿Y tú?','¿A ti?']},
+ {q:'Te preguntan: «¿Te gustan los libros?» — No te gustan:',ok:'No, nada.',w:['Sí, mucho.','Un poco.']},
+ {q:'Te preguntan: «¿Te gusta el tenis?» — Te gusta mucho:',ok:'Sí, mucho.',w:['No, nada.','Poco.']},
+ {q:'Tu amigo no ve la tele. Tú tampoco:',ok:'Yo tampoco.',w:['Yo también.','A mí sí.']}
+];
+var reacOrd=[],reacI=0,reacS=0;
+function reacStart(){reacOrd=shuffle(REAC.slice());reacI=0;reacS=0;document.getElementById('reac-total').textContent=reacOrd.length;document.getElementById('reac-stars').textContent='0';reacNext();}
+function reacNext(){
+  var box=document.getElementById('reac-opts');box.innerHTML='';
+  if(reacI>=reacOrd.length){document.getElementById('reac-q').textContent='🎉 ¡Muy bien!';document.getElementById('reac-fb').textContent='⭐ '+reacS+' из '+reacOrd.length;return;}
+  var r=reacOrd[reacI];
+  document.getElementById('reac-q').textContent=r.q;
+  document.getElementById('reac-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='130px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');reacS++;document.getElementById('reac-stars').textContent=reacS;document.getElementById('reac-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('reac-fb').textContent='❌ Правильно: '+r.ok;}
+      reacI++;setTimeout(reacNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== КОНСТРУКТОР ===== */
+var SB=[
+ {w:['Me','gusta','el','fútbol.'],t:'Мне нравится футбол.'},
+ {w:['Me','gustan','los','videojuegos.'],t:'Мне нравятся видеоигры.'},
+ {w:['Me','encanta','bailar.'],t:'Я обожаю танцевать.'},
+ {w:['Odio','madrugar','los','lunes.'],t:'Я ненавижу рано вставать по понедельникам.'},
+ {w:['¿Te','gusta','el','tenis?'],t:'Тебе нравится теннис?'},
+ {w:['A','mí','también.'],t:'Мне тоже.'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== ИГРА 3: ДИАЛОГ ===== */
+var DIAL=[
+ {q:'— ¿Te gusta el fútbol?<br>— ___',ok:'Sí, mucho.',w:['No, gracias.','Tengo fútbol.']},
+ {q:'— Me encanta bailar.<br>— ___',ok:'A mí también.',w:['Yo tengo.','Sí, bailo.']},
+ {q:'— Odio los deberes.<br>— ___',ok:'Yo también.',w:['A mí sí.','Yo gusto.']},
+ {q:'— ¿Qué te gusta hacer?<br>— ___',ok:'Me gusta leer libros.',w:['Tengo leer.','Soy leer.']},
+ {q:'— ¿Te gustan los videojuegos?<br>— ___',ok:'No, nada.',w:['Sí, nada.','No, mucho.']},
+ {q:'— Me gusta el baloncesto.<br>— ___ ¿Y a ti?',ok:'A mí también.',w:['A mí tengo.','Yo sí.']}
+];
+var dialOrd=[],dialI=0,dialS=0;
+function dialStart(){dialOrd=shuffle(DIAL.slice());dialI=0;dialS=0;document.getElementById('dial-total').textContent=dialOrd.length;document.getElementById('dial-stars').textContent='0';dialNext();}
+function dialNext(){
+  var box=document.getElementById('dial-opts');box.innerHTML='';
+  if(dialI>=dialOrd.length){document.getElementById('dial-q').textContent='🎉 ¡Muy bien!';document.getElementById('dial-fb').textContent='⭐ '+dialS+' из '+dialOrd.length;return;}
+  var r=dialOrd[dialI];
+  document.getElementById('dial-q').innerHTML=r.q;
+  document.getElementById('dial-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='140px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');dialS++;document.getElementById('dial-stars').textContent=dialS;document.getElementById('dial-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('dial-fb').textContent='❌ Правильно: '+r.ok;}
+      dialI++;setTimeout(dialNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 4: CLIL — СОЦИОЛОГИЯ ===== */
+var PEOPLE=[
+ {name:'Marta',av:'👧',likes:['el fútbol','bailar','los libros'],dislikes:['los videojuegos']},
+ {name:'Carlos',av:'👦',likes:['el fútbol','los videojuegos','la natación'],dislikes:['leer']},
+ {name:'Lucía',av:'👩',likes:['bailar','los libros','la guitarra'],dislikes:['el fútbol']},
+ {name:'Pablo',av:'🧒',likes:['el fútbol','los videojuegos'],dislikes:['bailar','leer']},
+ {name:'Ana',av:'👱‍♀️',likes:['bailar','los libros','el tenis'],dislikes:['los videojuegos']},
+ {name:'Diego',av:'👨',likes:['el fútbol','la natación','la guitarra'],dislikes:['leer']}
+];
+(function(){
+  var box=document.getElementById('survey-wrap');
+  PEOPLE.forEach(function(p){
+    var d=document.createElement('div');d.className='survey-person';
+    d.innerHTML='<div class="survey-avatar">'+p.av+'</div><div class="survey-info"><div class="survey-name">'+p.name+'</div><div class="survey-likes">❤️ '+p.likes.join(', ')+'<br>💔 no: '+p.dislikes.join(', ')+'</div></div>';
+    d.addEventListener('click',function(){
+      speak('A '+p.name+' le gusta '+p.likes.join(', ')+'.');
+    });
+    box.appendChild(d);
+  });
+  renderChart();
+})();
+function renderChart(){
+  var counts={'el fútbol':0,'bailar':0,'los libros':0,'los videojuegos':0,'la natación':0,'la guitarra':0,'el tenis':0};
+  PEOPLE.forEach(function(p){p.likes.forEach(function(l){if(counts[l]!==undefined)counts[l]++;});});
+  var area=document.getElementById('chart-area');area.innerHTML='';
+  var max=PEOPLE.length;
+  var sorted=Object.keys(counts).sort(function(a,b){return counts[b]-counts[a];});
+  sorted.forEach(function(k){
+    var val=counts[k];if(val===0)return;
+    var pct=Math.round(val/max*100);
+    var row=document.createElement('div');row.className='chart-bar';
+    row.innerHTML='<span class="chart-label">'+k+'</span><div class="chart-fill" style="width:'+pct*2+'px">'+val+' ('+pct+'%)</div>';
+    area.appendChild(row);
+  });
+}
+
+/* ===== БЛОК 5: ЧТЕНИЕ ===== */
+function speakSofia(){speak('¡Hola! Me llamo Sofía y tengo 11 años. Me gusta mucho el baloncesto. Juego al baloncesto los martes con mis amigos. Me encantan los libros de aventuras: leo todos los sábados por la mañana. También me gusta tocar la guitarra, pero prefiero el piano. No me gustan los videojuegos, odio los videojuegos de miedo. Me encanta bailar con mi hermana. A mi hermana también le gusta bailar. ¡Tenemos los mismos gustos!');}
+var SOFIA=[
+ {q:'¿Qué le gusta mucho a Sofía?',ru:'Что Софии очень нравится?',ok:'El baloncesto.',w:['El fútbol.','La natación.']},
+ {q:'¿Qué le encanta?',ru:'Что она обожает?',ok:'Los libros de aventuras y bailar.',w:['Los videojuegos.','El tenis.']},
+ {q:'¿Qué prefiere: la guitarra o el piano?',ru:'Что она предпочитает: гитару или пианино?',ok:'El piano.',w:['La guitarra.','Los dos igual.']},
+ {q:'¿Qué odia?',ru:'Что она ненавидит?',ok:'Los videojuegos de miedo.',w:['Leer.','Bailar.']},
+ {q:'¿Qué tiene en común con su hermana?',ru:'Что у неё общего с сестрой?',ok:'A las dos les gusta bailar.',w:['Las dos odian leer.','Las dos juegan al fútbol.']}
+];
+(function(){
+  var wrap=document.getElementById('sofia-quiz');
+  SOFIA.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Расскажи, что тебе очень нравится (один предмет).',model:'Me gusta mucho el fútbol. Juego al fútbol los martes con mis amigos.'},
+ {q:'Расскажи, что ты обожаешь (множ. число).',model:'Me encantan los libros de aventuras. Leo todos los sábados.'},
+ {q:'Расскажи, что ты не любишь или ненавидишь.',model:'No me gustan los videojuegos de miedo. Odio madrugar los lunes.'},
+ {q:'Спроси друга «¿Y a ti?» и ответь на его вопрос.',model:'— ¿Te gusta el tenis? — Sí, mucho. ¿Y a ti? — A mí también.'},
+ {q:'Расскажи о своих вкусах ПОЛНОСТЬЮ (6 пунктов).',model:'¡Hola! Me llamo Alex y tengo 10 años. Me gusta mucho el fútbol. Me encantan los videojuegos. También me gusta tocar la guitarra. No me gustan los libros aburridos. Odio madrugar. ¿Y a ti? ¿Qué te gusta?'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом расскажи о СЕБЕ вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['gustar','нравиться'],['encantar','обожать'],['odiar','ненавидеть'],
+ ['preferir','предпочитать'],['mucho','много, очень'],['poco','мало'],
+ ['nada','совсем не'],['¿Y a ti?','А тебе?'],
+ ['A mí también','Мне тоже'],['A mí no','А мне нет'],
+ ['Me gusta el fútbol.','Мне нравится футбол.'],
+ ['Me gustan los libros.','Мне нравятся книги.']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un experto en gustos!');
+  confetti('❤️');
+  try{localStorage.setItem('mudro_kids_s3l11_badge_gustar','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_s3l11_badge_gustar')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'💎','💖'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

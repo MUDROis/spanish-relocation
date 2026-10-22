@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 32 · Me gusta / Me encanta — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E8604C; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --pink:#E91E63; --green:#2E7D32; --heart:#E91E63;
+    --love:#C2185B; --star:#FFB300; --gold:#FFC93C; --soft-pink:#FFE0EC;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--heart);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,30,99,.4)}
+  .print-btn:hover{background:var(--love)}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFE0EC,#FFF3D6,#FFE0EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--heart)}
+  .hero h1{font-size:21px;color:var(--heart);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-heart{background:var(--heart)}.c-love{background:var(--love)}.c-star{background:#B8860B}
+  .c-ocean{background:var(--ocean)}.c-teal{background:var(--teal)}.c-pink{background:var(--pink)}
+  .c-oliva{background:var(--oliva)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:var(--soft-pink);border:1.5px dashed var(--heart);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--heart);margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .emo-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .emo-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .emo-item .num{display:inline-block;width:24px;height:24px;background:var(--soft-pink);border:1.6px solid var(--heart);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--heart);flex-shrink:0}
+  .emo-item .emoji{font-size:17px}
+  .emo-item .blank{display:inline-block;min-width:140px;border-bottom:1.6px dashed var(--heart);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:80px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .choice-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .choice-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .choice-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--teal);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--teal);flex-shrink:0}
+  .choice-item .opt{display:inline-block;border:1.6px solid var(--teal);border-radius:999px;padding:2px 12px;font-weight:700;font-size:12.5px;color:var(--teal);margin:0 3px}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--heart);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:var(--heart)}
+  .build-line{border-bottom:1.6px dashed var(--heart);height:24px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .listen-note{background:#E8F4F0;border-left:4px solid var(--ocean);border-radius:10px;padding:10px 14px;font-size:12.5px;margin-bottom:10px}
+  .listen-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13.5px}
+  .listen-item .lnum{font-weight:800;color:var(--ocean);min-width:20px}
+  .listen-item .blank{display:inline-block;min-width:130px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+  .parent-box{background:#f5f2ec;border:1.5px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:11.5px;color:#666;margin-top:10px}
+  .parent-box b{color:var(--ocean)}
+
+  .speak-item{background:#F5F3FF;border-left:4px solid #8B5CF6;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+  .speak-item .tpl{color:#6D28D9;font-weight:700}
+  .speak-item .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-top:2px}
+  .speak-check{display:inline-block;width:6mm;height:6mm;border:1.6px solid #999;border-radius:50%;vertical-align:middle;margin-left:8px}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>❤️ Me gusta / Me encanta 💎</h1>
+    <div class="sub">Рабочий лист к Уроку 32 · Станция 3: Mi Mundo · Урок 11 из 12 · что нравится, что обожаю, что ненавижу</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Это <strong>экзамен по уроку 32</strong>! Работай самостоятельно. Главное правило урока: <b>GUSTAR работает НАИЗНАНКУ</b> — не «я люблю футбол», а «футбол нравится мне». Поэтому: <em>Me gusta el fútbol</em> (ед.ч.) и <em>Me gustan los videojuegos</em> (мн.ч.)!</div>
+
+  <!-- 1. ЛЕКСИКА: ГЛАГОЛЫ ЧУВСТВ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-heart">1</span>
+      <span class="ex-title">Глаголы чувств: соедини слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · чувства</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>❤️ gustar</td><td>а) обожать</td></tr>
+      <tr><td><span class="ans-box"></span>💎 encantar</td><td>б) предпочитать</td></tr>
+      <tr><td><span class="ans-box"></span>💔 odiar</td><td>в) нравиться</td></tr>
+      <tr><td><span class="ans-box"></span>⚖️ preferir</td><td>г) ненавидеть</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УСИЛИТЕЛИ И РЕАКЦИИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-love">2</span>
+      <span class="ex-title">Усилители и реакции: соедини слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · диалог</span>
+    </div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>📈 mucho</td><td>а) совсем не</td></tr>
+      <tr><td><span class="ans-box"></span>📉 poco</td><td>б) мне тоже</td></tr>
+      <tr><td><span class="ans-box"></span>🚫 nada</td><td>в) много, очень</td></tr>
+      <tr><td><span class="ans-box"></span>👉 ¿Y a ti?</td><td>г) мало, немного</td></tr>
+      <tr><td><span class="ans-box"></span>✅ A mí también</td><td>д) я тоже (отриц.)</td></tr>
+      <tr><td><span class="ans-box"></span>❌ A mí no</td><td>е) а тебе?</td></tr>
+      <tr><td><span class="ans-box"></span>🔄 Yo también</td><td>ж) а мне нет</td></tr>
+      <tr><td><span class="ans-box"></span>🚫 Yo tampoco</td><td>з) я тоже</td></tr>
+    </table>
+  </div>
+
+  <!-- 3. УГАДАЙ ЭМОЦИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-heart">3</span>
+      <span class="ex-title">Угадай эмоцию по ситуации</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank">💡 Банк: <strong>odio · no me gusta · me gusta · me encanta · prefiero</strong></div>
+    <div class="emo-grid">
+      <div class="emo-item"><span class="num">1</span><span class="emoji">💔</span> Tener que madrugar los lunes. → <span class="blank"></span></div>
+      <div class="emo-item"><span class="num">2</span><span class="emoji">😕</span> El tenis: es aburrido para mí. → <span class="blank"></span></div>
+      <div class="emo-item"><span class="num">3</span><span class="emoji">❤️</span> El fútbol: juego todos los martes. → <span class="blank"></span></div>
+      <div class="emo-item"><span class="num">4</span><span class="emoji">💎</span> Bailar con mi hermana: ¡es lo mejor! → <span class="blank"></span></div>
+      <div class="emo-item"><span class="num">5</span><span class="emoji">⚖️</span> Entre la guitarra y el piano, elijo el piano. → <span class="blank"></span></div>
+      <div class="emo-item"><span class="num">6</span><span class="emoji">🚫</span> Los videojuegos de miedo: nunca los juego. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: GUSTA / GUSTAN -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">4</span>
+      <span class="ex-title">Вставь GUSTA или GUSTAN</span>
+      <span class="ex-skill">🧩 Грамматика · ед./мн. число</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> если после глагола <b>одна вещь</b> или <b>инфинитив</b> → <b>gusta</b>. Если <b>много вещей (мн.ч.)</b> → <b>gustan</b>.</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Me <span class="g"></span> el fútbol.</div>
+      <div class="gap-item"><span class="num">2</span>Me <span class="g"></span> los videojuegos.</div>
+      <div class="gap-item"><span class="num">3</span>Me <span class="g"></span> la guitarra.</div>
+      <div class="gap-item"><span class="num">4</span>Me <span class="g"></span> los libros de aventuras.</div>
+      <div class="gap-item"><span class="num">5</span>Me <span class="g"></span> bailar con mis amigos.</div>
+      <div class="gap-item"><span class="num">6</span>Me <span class="g"></span> el baloncesto.</div>
+      <div class="gap-item"><span class="num">7</span>Me <span class="g"></span> las canciones de Juanes.</div>
+      <div class="gap-item"><span class="num">8</span>Me <span class="g"></span> nadar en la piscina.</div>
+    </div>
+  </div>
+
+  <!-- 5. ГРАММАТИКА: ЛОВУШКИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-teal">5</span>
+      <span class="ex-title">Обведи правильную форму (осторожно, ловушки!)</span>
+      <span class="ex-skill">🧩 Грамматика · ловушки</span>
+    </div>
+    <div class="hint-box">💡 <strong>Ловушки:</strong> 1) После <b>encantar</b> с инфинитивом — всегда <b>encanta</b> (ед.ч.). 2) После <b>odiar</b> идёт <b>инфинитив</b> или существительное БЕЗ предлога. 3) <b>Gustar</b> не согласуется с <em>yo</em>, а согласуется с <em>тем, что нравится</em>!</div>
+    <div class="choice-grid">
+      <div class="choice-item"><span class="num">1</span>Me <span class="opt">gusta</span> / <span class="opt">gustan</span> los libros.</div>
+      <div class="choice-item"><span class="num">2</span>Me <span class="opt">encanta</span> / <span class="opt">encantan</span> bailar.</div>
+      <div class="choice-item"><span class="num">3</span><span class="opt">Odio</span> / <span class="opt">Odio a</span> madrugar.</div>
+      <div class="choice-item"><span class="num">4</span>No me <span class="opt">gusta</span> / <span class="opt">gustan</span> los videojuegos de miedo.</div>
+      <div class="choice-item"><span class="num">5</span>¿Te <span class="opt">gusta</span> / <span class="opt">gustan</span> el tenis?</div>
+      <div class="choice-item"><span class="num">6</span>A mi hermana también <span class="opt">le gusta</span> / <span class="opt">la gusta</span> bailar.</div>
+    </div>
+  </div>
+
+  <!-- 6. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Расставь слова в правильном порядке и запиши фразу.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Me</span><span class="build-word">gusta</span><span class="build-word">mucho</span><span class="build-word">el</span><span class="build-word">fútbol.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Me</span><span class="build-word">encantan</span><span class="build-word">los</span><span class="build-word">libros</span><span class="build-word">de</span><span class="build-word">aventuras.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Odio</span><span class="build-word">madrugar</span><span class="build-word">los</span><span class="build-word">lunes.</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">A</span><span class="build-word">mí</span><span class="build-word">también</span><span class="build-word">me</span><span class="build-word">gusta</span><span class="build-word">bailar.</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 7. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">7</span>
+      <span class="ex-title">Прочитай текст «Los gustos de Sofía» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Sofía y tengo 11 años. <b>Me gusta mucho</b> el baloncesto. Juego al baloncesto los martes con mis amigos. <b>Me encantan</b> los libros de aventuras: leo todos los sábados por la mañana. También <b>me gusta</b> tocar la guitarra, pero <b>prefiero</b> el piano. <b>No me gustan</b> los videojuegos, <b>odio</b> los videojuegos de miedo. <b>Me encanta</b> bailar con mi hermana. <b>A mi hermana también le gusta</b> bailar. ¡Tenemos los mismos gustos!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Qué le gusta mucho a Sofía? <span class="ru">(Что Софии очень нравится?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué le encanta? <span class="ru">(Что она обожает?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Qué prefiere: la guitarra o el piano? <span class="ru">(Что она предпочитает: гитару или пианино?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué odia? <span class="ru">(Что она ненавидит?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Qué tiene en común con su hermana? <span class="ru">(Что у неё общего с сестрой?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 8. АУДИРОВАНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">8</span>
+      <span class="ex-title">Послушай и напиши ответ</span>
+      <span class="ex-skill">👂 Аудирование</span>
+    </div>
+    <div class="listen-note">👂 Попроси родителя прочитать фразы вслух по-испански. Напиши короткий ответ: <em>sí mucho / no nada / a mí también</em> и т.д.</div>
+    <div class="listen-item"><span class="lnum">1.</span>¿Te gusta el fútbol? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">2.</span>¿Te gustan los videojuegos? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">3.</span>Me encanta bailar. ¿Y a ti? → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">4.</span>Odio madrugar los lunes. → <span class="blank"></span></div>
+    <div class="listen-item"><span class="lnum">5.</span>¿Qué te gusta hacer los sábados? → <span class="blank"></span></div>
+    <div class="parent-box"><b>👨 Для родителя (что читать):</b> 1) «¿Te gusta el fútbol?» · 2) «¿Te gustan los videojuegos?» · 3) «Me encanta bailar. ¿Y a ti?» · 4) «Odio madrugar los lunes.» · 5) «¿Qué te gusta hacer los sábados?»</div>
+  </div>
+
+  <!-- 9. ГОВОРЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-pink">9</span>
+      <span class="ex-title">Скажи вслух и раскрась кружок</span>
+      <span class="ex-skill">🗣 Говорение</span>
+    </div>
+    <div class="ex-instruction">Прочитай ситуацию, скажи фразу ВСЛУХ родителю и раскрась кружок «сделано».</div>
+    <div class="speak-item">1. Расскажи, что тебе очень нравится (один предмет):<br><span class="tpl">Me gusta mucho el fútbol. Juego al fútbol los martes.</span><span class="ru">Мне очень нравится футбол. Я играю по вторникам.</span><span class="speak-check"></span></div>
+    <div class="speak-item">2. Расскажи, что ты обожаешь (множ. число):<br><span class="tpl">Me encantan los libros de aventuras. Leo los sábados.</span><span class="ru">Я обожаю приключенческие книги. Читаю по субботам.</span><span class="speak-check"></span></div>
+    <div class="speak-item">3. Расскажи, что ты не любишь или ненавидишь:<br><span class="tpl">No me gustan los videojuegos de miedo. Odio madrugar.</span><span class="ru">Мне не нравятся страшные видеоигры. Ненавижу рано вставать.</span><span class="speak-check"></span></div>
+    <div class="speak-item">4. Спроси друга «¿Y a ti?» и ответь «A mí también»:<br><span class="tpl">— ¿Te gusta el tenis? — Sí, mucho. ¿Y a ti? — A mí también.</span><span class="ru">— Тебе нравится теннис? — Да, очень. А тебе? — Мне тоже.</span><span class="speak-check"></span></div>
+    <div class="speak-item">5. Расскажи о своих вкусах ПОЛНОСТЬЮ (6 пунктов):<br><span class="tpl">¡Hola! Me llamo ___ y tengo ___ años. Me gusta mucho ___. Me encantan ___. También me gusta ___. No me gustan / Odio ___. ¿Y a ti?</span><span class="ru">Привет! Меня зовут ___ и мне ___ лет. Мне очень нравится ___. Я обожаю ___. Ещё мне нравится ___. Мне не нравятся / Я ненавижу ___. А тебе?</span><span class="speak-check"></span></div>
+  </div>
+
+  <!-- 10. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">10</span>
+      <span class="ex-title">Сочинение «Mis gustos»</span>
+      <span class="ex-skill">✍️ Письмо · 8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План (8 пунктов):</strong> 1) ¡Hola! Me llamo... y tengo... años. · 2) Me gusta mucho... (один предмет). · 3) Me encantan... (мн.ч.). · 4) También me gusta... (ещё одно). · 5) Prefiero... a... (сравнение). · 6) No me gustan... / Odio... · 7) A mi mejor amigo/a también le gusta... · 8) ¿Y a ti? ¿Qué te gusta? ⭐ Это черновик Bio для твоего профиля в соцсети на уроке 33!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 11. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">11</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Использовать шкалу: gusta / encanta / odia / prefiero</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Различать me gusta (ед.ч.) и me gustan (мн.ч.)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Использовать усилители mucho / poco / nada</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Вести диалог «¿Y a ti?» — «A mí también / A mí no»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать текст о вкусах другого человека</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать о своих вкусах по формуле 6 пунктов</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 32 (11/12) · ¡Me encanta aprender español! ❤️</div>
+</div>
+
+</body>
+</html>
