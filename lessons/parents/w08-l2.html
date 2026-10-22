@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFF7EF">
+<meta name="description" content="Урок 8.2: Запись к врачу — звоним в регистратуру, объясняем симптомы, выбираем слот времени и подтверждаем визит.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<title>Урок 8.2 · Запись к врачу — МУДРО</title>
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--p5:#4CAF7D;
+    --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
+    --soft:#FBF3EA;--ink-soft:#7A6A5C;--teal:#2C5E8A;
+    --vocab:#BE8A55;
+    --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
+    --ok:#7A8B4C;--bad:#E2725B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c1{background:var(--p1)}
+  .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)} .step-num.c5{background:var(--p5)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-lightblue{background:var(--p5);color:#fff}.btn-lightblue:hover{background:#3d9168}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+
+  .situation-box{background:#fff;border:3px solid var(--p5);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p5)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#E8F5E9;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p5)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p5);color:#fff;border-color:var(--p5)}
+  .vocab-front .es{font-size:1.05rem;font-weight:800;margin-bottom:6px;line-height:1.3}
+  .vocab-front .ru{font-size:.88rem;opacity:.95;font-weight:600}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p5);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.9rem;font-weight:700;color:var(--p5);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:8px}
+  .grammar-box .formula{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.55}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+  .grammar-table th,.grammar-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .grammar-table th{background:#FBF3EA;color:var(--p1);font-size:.86rem}
+  .grammar-table tr:nth-child(even) td{background:#FFFDF9}
+  .grammar-table .practice{background:#F0F7E6;color:var(--p2);font-weight:700}
+  .grammar-table .reference{color:var(--muted);font-style:italic}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .note.lightblue{background:#E8F4FB;border-left-color:var(--p5)}
+  .note.teal{background:#E0F2F1;border-left-color:var(--p5)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:110px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:360px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.75}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.02rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p4)}
+  .dialog-box .who.you{color:var(--p1)}
+  .dialog-box .dialog-text{display:none}
+  .dialog-box.open .dialog-text{display:block;margin-top:10px}
+
+  .clil-text{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:18px;margin-bottom:16px}
+  .clil-text h4{color:var(--p4);margin-bottom:8px}
+  .clil-text p{font-size:.95rem;margin-bottom:10px}
+
+  .roleplay-box{background:#fff;border:2px solid var(--p5);border-radius:14px;padding:20px;margin-bottom:16px}
+  .roleplay-box h4{color:var(--p4);margin-bottom:10px;font-size:1.1rem}
+  .role-card{background:#E8F5E9;border-radius:10px;padding:14px;margin-bottom:10px}
+  .role-card h5{color:var(--p4);margin-bottom:6px;font-size:.95rem}
+  .role-card ul{margin-left:20px;font-size:.92rem;line-height:1.6}
+  .role-card li{margin-bottom:3px}
+
+  .dialog-builder{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p4);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .dialog-builder input[type="text"]:focus,.dialog-builder select:focus{outline:none;border-color:var(--p4)}
+  .dialog-result{background:#E0F2F1;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p5)}
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  .quizlet-box{background:var(--p4);color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-top:14px}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p4);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .resource-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.2s;border-top:4px solid var(--p4)}
+  .resource-card:hover{transform:translateY(-3px)}
+  .resource-card h4{font-size:1rem;margin-bottom:6px}
+  .resource-card p{font-size:.85rem;color:var(--muted);margin-bottom:12px;min-height:40px}
+  .resource-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem}
+  .resource-card a:hover{background:var(--p1)}
+  .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  .lesson-nav span.soon{background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--muted);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 8 · Урок 2 из 3 · Блок 2 El Cole y la Salud</span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">📞 БЛОК 2 · EL COLE Y LA SALUD</span>
+  <h1>Урок 8.2 · <em>Запись к врачу</em></h1>
+  <p class="sub">Звоним в регистратуру, объясняем симптомы, выбираем слот времени и подтверждаем визит.</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🧠 CLIL: как записываются к врачу в Испании</span>
+    <span class="meta-chip">🎯 Цель: записаться к педиатру по телефону</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 предлоги времени: de...a..., desde...hasta...</span>
+    <span class="meta-chip">🎭 Продукт: ролевая игра + скрипт звонка</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c1">0</div>
+    <div class="step-title">
+      <h2>Разминка + вопрос из жизни</h2>
+      <span class="time">00:00 – 05:00 · Повторение урока 8.1 и ночной звонок</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Вы получили карточку SIP и выучили дни недели. Теперь они работают на практике: запись к врачу невозможна без <i>el martes por la mañana</i> и <i>de nueve a una</i>. Но сначала — блиц по прошлому уроку.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 8.1</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🌙</div>
+      <div class="sit-title">Одна ситуация: ночной звонок</div>
+    </div>
+    <div class="sit-intro">
+      2 часа ночи. У Лео температура 38 и кашель. Утром вы звоните в свой <i>Centro de Salud</i>. Отвечайте вслух, нажимайте 🔊,.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш звонок:</div>
+      <div class="es">Buenos días. Quisiera pedir cita con el pediatra para mi hijo Leo.</div>
+      <div class="ru">Добрый день. Я хотел бы записаться к педиатру для сына Лео.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Quisiera pedir cita con el pediatra para mi hijo Leo.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Регистратура:</div>
+      <div class="es">¿Qué síntomas tiene?</div>
+      <div class="ru">Какие у него симптомы?</div>
+      <button class="speak-btn" onclick="speak('¿Qué síntomas tiene?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ:</div>
+      <div class="es">Tiene fiebre y tos desde ayer.</div>
+      <div class="ru">У него температура и кашель со вчерашнего дня.</div>
+      <button class="speak-btn" onclick="speak('Tiene fiebre y tos desde ayer.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">1</span>Что означает <i>pedir cita</i>?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Записаться на приём.</div>
+        <div class="q-opt" data-o="1">Попросить рецепт.</div>
+        <div class="q-opt" data-o="2">Вызвать скорую.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">2</span>Ребёнок болен <b>сегодня ночью</b>, температура 39.5. Куда обращаться?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Ждать записи на следующей неделе.</div>
+        <div class="q-opt" data-o="1">В <i>urgencias</i> — приёмное отделение без записи.</div>
+        <div class="q-opt" data-o="2">В аптеку за рецептом.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня научимся записываться к врачу по телефону: объяснять симптомы, понимать слоты времени и подтверждать запись. Главный инструмент — <b>предлоги времени</b>: <b>de lunes a viernes, desde...hasta, dentro de, antes de, después de</b>.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">1</div>
+    <div class="step-title">
+      <h2>Карточки со словами: 35 слов о записи к врачу</h2>
+      <span class="time">05:00 – 15:00 · 5 категорий</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('booking',this)">📞 Запись (7)</button>
+      <button class="tab" onclick="showVocab('people',this)">👨‍⚕️ Люди (7)</button>
+      <button class="tab" onclick="showVocab('symptoms',this)">🤒 Симптомы (7)</button>
+      <button class="tab" onclick="showVocab('prepositions',this)">🕐 Время (7)</button>
+      <button class="tab" onclick="showVocab('verbs',this)">🗣 Глаголы (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note lightblue" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> в Испании <b>без записи — никак</b>. К врачу не приходят «просто так»: только <i>cita previa</i> (телефон, портал, приложение) или <i>urgencias</i>. К узкому специалисту (<i>especialista</i>) попадают только с направлением (<i>volante</i>) от семейного врача.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      📞 <b>Отмена — вежливость:</b> если не можете прийти, обязательно звоните отменять: <i>«Quisiera cancelar la cita»</i>. Слот сгорает, и вы теряете доверие в системе.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c2">2</div>
+    <div class="step-title">
+      <h2>Грамматика: предлоги времени + глагол pedir</h2>
+      <span class="time">15:00 – 23:00 · Фокус: yo / nosotros / usted</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Чтобы записаться к врачу, нужно уметь говорить о времени и правильно использовать глагол <i>pedir</i>.</p>
+
+    <div class="grammar-box">
+      <h4>📐 Предлоги времени</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Предлог</th>
+          <th>Схема</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td><b>de ... a ...</b></td>
+          <td>de + день/час + a + день/час</td>
+          <td><i>De lunes a viernes, de nueve a una.</i></td>
+        </tr>
+        <tr>
+          <td><b>desde ... hasta ...</b></td>
+          <td>акцент на границы периода</td>
+          <td><i>Desde el lunes hasta el jueves.</i></td>
+        </tr>
+        <tr>
+          <td><b>dentro de</b></td>
+          <td>+ период («через сколько-то»)</td>
+          <td><i>Dentro de dos días, dentro de una semana.</i></td>
+        </tr>
+        <tr>
+          <td><b>antes de / después de</b></td>
+          <td>+ существительное или инфинитив</td>
+          <td><i>Antes de comer; después de rellenar la ficha.</i></td>
+        </tr>
+        <tr>
+          <td><b>a partir de</b></td>
+          <td>+ дата («начиная с»)</td>
+          <td><i>A partir del lunes.</i></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Глагол pedir (e → i)</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Лицо</th>
+          <th>Форма</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td class="practice">yo</td>
+          <td class="practice"><b>pido</b></td>
+          <td class="practice"><i>Pido cita para mi hijo.</i></td>
+        </tr>
+        <tr>
+          <td class="reference">tú</td>
+          <td class="reference">pides</td>
+          <td class="reference"><i>¿Pides cita por teléfono?</i></td>
+        </tr>
+        <tr>
+          <td class="practice">usted</td>
+          <td class="practice"><b>pide</b></td>
+          <td class="practice"><i>¿Usted pide cita online?</i></td>
+        </tr>
+        <tr>
+          <td class="practice">nosotros</td>
+          <td class="practice"><b>pedimos</b></td>
+          <td class="practice"><i>Pedimos cita el mismo día.</i></td>
+        </tr>
+        <tr>
+          <td class="reference">vosotros</td>
+          <td class="reference">pedís</td>
+          <td class="reference"><i>¿Pedís cita por la app?</i></td>
+        </tr>
+        <tr>
+          <td class="reference">ellos / ustedes</td>
+          <td class="reference">piden</td>
+          <td class="reference"><i>Muchas familias piden cita online.</i></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="note green">
+      📌 <b>Фокус практики:</b> формы <b>yo / nosotros / usted</b>; остальные — в справочной таблице для распознавания.
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Готовые чанки звонка</h4>
+      <div class="example">
+        <b>Quisiera pedir cita con el pediatra.</b> — Я хотел бы записаться к педиатру.<br>
+        <b>¿Puede darme cita para el martes?</b> — Можете дать запись на вторник?<br>
+        <b>Necesito una cita dentro de dos días.</b> — Мне нужна запись через два дня.<br>
+        <b>Quisiera cancelar / confirmar la cita.</b> — Я хотел бы отменить / подтвердить запись.<br>
+        <b>¿Hay consulta por la tarde?</b> — Есть приём вечером?
+      </div>
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«Pido una cita el martes.»</i> ❌ → <i>«Pido una cita <b>para</b> el martes.»</i> ✅ (день записи — через <b>para</b>)<br>
+      • <i>«De lunes a <b>el</b> viernes.»</i> ❌ → <i>«De lunes <b>a</b> viernes.»</i> ✅ (без артикля внутри диапазона)<br>
+      • <i>«Dentro dos días.»</i> ❌ → <i>«Dentro <b>de</b> dos días.»</i> ✅ (предлог <b>de</b> обязателен)<br>
+      • <i>«Antes comer.»</i> ❌ → <i>«Antes <b>de</b> comer.»</i> ✅ (<b>antes de</b> + инфинитив)
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c3">3</div>
+    <div class="step-title">
+      <h2>Практика: применим слова и грамматику</h2>
+      <span class="time">23:00 – 30:00 · 3 упражнения</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь предлог или форму глагола</h4>
+    <p class="hint">Используйте: <b>de, para, de, pedimos, pide, de</b>.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь термин и значение</h4>
+    <p class="hint">Нажмите испанский термин слева, затем его значение справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c5">4</div>
+    <div class="step-title">
+      <h2>Аудирование: телефонный диалог с регистратурой</h2>
+      <span class="time">30:00 – 37:00 · диалог «Запись к педиатру»</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speak('Centro de Salud San Fernando, buenos días. Buenos días. Quisiera pedir cita con el pediatra para mi hijo Leo. Muy bien. ¿Qué síntomas tiene? Tiene fiebre y tos desde ayer. Entiendo. Hay consulta el martes por la mañana, de nueve a una, o el jueves por la tarde, de cuatro a ocho. Mejor el martes. ¿A qué hora exactamente? A las diez y media. ¿Puede venir un poco antes para rellenar la ficha? Sí, claro. Llegaremos antes de las diez. Perfecto. Cita el martes a las diez y media con la doctora García. Si no puede venir, llame para cancelar. Muchas gracias. Hasta luego.')" style="margin-bottom:12px">🔊 Прослушать диалог</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who op">Регистратура:</span> Centro de Salud San Fernando, buenos días.<br>
+        <span class="who you">Родитель:</span> Buenos días. Quisiera pedir cita con el pediatra para mi hijo Leo.<br>
+        <span class="who op">Регистратура:</span> Muy bien. ¿Qué síntomas tiene?<br>
+        <span class="who you">Родитель:</span> Tiene fiebre y tos desde ayer.<br>
+        <span class="who op">Регистратура:</span> Entiendo. Hay consulta el martes por la mañana, de nueve a una, o el jueves por la tarde, de cuatro a ocho.<br>
+        <span class="who you">Родитель:</span> Mejor el martes. ¿A qué hora exactamente?<br>
+        <span class="who op">Регистратура:</span> A las diez y media. ¿Puede venir un poco antes para rellenar la ficha?<br>
+        <span class="who you">Родитель:</span> Sí, claro. Llegaremos antes de las diez.<br>
+        <span class="who op">Регистратура:</span> Perfecto. Cita el martes a las diez y media con la doctora García. Si no puede venir, llame para cancelar.<br>
+        <span class="who you">Родитель:</span> Muchas gracias. Hasta luego.
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: РОЛЕВАЯ ИГРА + ПРОДУКТ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      <h2>Ролевая игра + продукт: скрипт звонка</h2>
+      <span class="time">37:00 – 47:00 · CLIL + конструктор + парная игра</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 CLIL-мини-текст: как записываются к врачу в Испании</h4>
+
+    <div class="clil-text">
+      <h4>Cita previa — обязательная запись</h4>
+      <p><b>Способы:</b> телефон регистратуры, портал здравоохранения автономии, мобильное приложение, лично в <i>recepción</i>. Без записи врач не принимает. Исключение — <b>urgencias</b> (24/7).</p>
+
+      <h4>К узкому специалисту — через семейного врача</h4>
+      <p>К аллергологу или травматологу попадают только с <b>volante</b> (направлением) от <i>médico de cabecera</i> или <i>pediatra</i>.</p>
+
+      <h4>Отмена — вежливость</h4>
+      <p>Не пришли без предупреждения — слот сгорел. Звоните отменять заранее: <i>«Quisiera cancelar la cita»</i>.</p>
+    </div>
+
+    <div class="note green">
+      📋 <b>Чек-лист звонка:</b><br>
+      ☐ Назвать имя ребёнка и возраст<br>
+      ☐ Объяснить симптомы (1–2 слова)<br>
+      ☐ Спросить доступные слоты<br>
+      ☐ Выбрать удобный день и время<br>
+      ☐ Уточнить, нужно ли прийти раньше<br>
+      ☐ Подтвердить запись<br>
+      ☐ Запомнить: отменять — звонком заранее
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🔧 Конструктор: скрипт звонка в регистратуру</h4>
+    <p class="hint">Заполните поля — получите готовый скрипт звонка, который запишете голосовым.</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">📞 КОНСТРУКТОР: Mi llamada al Centro de Salud</div>
+
+      <div class="field">
+        <label>👤 Ваше имя:</label>
+        <input type="text" id="b-name" placeholder="Ana" value="Ana">
+      </div>
+
+      <div class="field">
+        <label>👦 Имя ребёнка:</label>
+        <input type="text" id="b-child" placeholder="Leo" value="Leo">
+      </div>
+
+      <div class="field">
+        <label>🔢 Возраст ребёнка:</label>
+        <select id="b-age">
+          <option value="siete">7</option>
+          <option value="ocho" selected>8</option>
+          <option value="nueve">9</option>
+          <option value="doce">12</option>
+          <option value="trece">13</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🤒 Причина визита:</label>
+        <select id="b-reason">
+          <option value="fiebre y tos" selected>fiebre y tos (температура и кашель)</option>
+          <option value="dolor de garganta">dolor de garganta (боль в горле)</option>
+          <option value="alergia">alergia (аллергия)</option>
+          <option value="resfriado">resfriado (простуда)</option>
+          <option value="dolor de estómago">dolor de estómago (боль в животе)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>📅 День записи:</label>
+        <select id="b-day">
+          <option value="el martes" selected>el martes</option>
+          <option value="el miércoles">el miércoles</option>
+          <option value="el jueves">el jueves</option>
+          <option value="el viernes">el viernes</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🕐 Часть дня:</label>
+        <select id="b-part">
+          <option value="por la mañana" selected>por la mañana</option>
+          <option value="por la tarde">por la tarde</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>⏰ Время:</label>
+        <select id="b-time">
+          <option value="a las diez y media" selected>a las diez y media</option>
+          <option value="a las once">a las once</option>
+          <option value="a las cuatro">a las cuatro</option>
+          <option value="a las cinco y media">a las cinco y media</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>✅ Действие в конце:</label>
+        <select id="b-action">
+          <option value="confirmar" selected>confirmar (подтвердить)</option>
+          <option value="cancelar">cancelar (отменить)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildScript()" style="margin-top:12px">🔧 Собрать скрипт</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с собранным скриптом (6–8 предложений, 2 дубля). Это ваш личный артефакт недели 8.
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🎭 Ролевая игра в парах</h4>
+    <p class="hint">Разыграйте диалог «родитель ↔ регистратура». Затем поменяйтесь ролями.</p>
+
+    <div class="roleplay-box">
+      <h4>🎭 Роли</h4>
+      <div class="role-card">
+        <h5>👩‍⚕️ Роль A — Регистратура</h5>
+        <ul>
+          <li>Здоровается: <i>«Centro de Salud San Fernando, buenos días.»</i></li>
+          <li>Спрашивает симптомы: <i>«¿Qué síntomas tiene?»</i></li>
+          <li>Предлагает 2 слота: <i>«el martes por la mañana o el jueves por la tarde»</i></li>
+          <li>Называет точное время</li>
+          <li>Просит прийти раньше: <i>«para rellenar la ficha»</i></li>
+          <li>Напоминает про отмену</li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <h5>👨‍👩‍👧 Роль B — Родитель</h5>
+        <ul>
+          <li>Просит запись: <i>«Quisiera pedir cita con el pediatra.»</i></li>
+          <li>Называет симптомы: <i>«Tiene fiebre y tos desde ayer.»</i></li>
+          <li>Выбирает слот: <i>«Mejor el martes por la mañana.»</i></li>
+          <li>Уточняет время: <i>«¿A qué hora exactamente?»</i></li>
+          <li>Подтверждает: <i>«Confirmo la cita.»</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note blue">
+      🆘 <b>Фразы-спасатели:</b><br>
+      • <i>«Perdone, no entiendo.»</i> — Извините, не понимаю.<br>
+      • <i>«¿Puede repetir, por favor?»</i> — Можете повторить?<br>
+      • <i>«¿Puede hablar más despacio?»</i> — Можете медленнее?<br>
+      • <i>«¿Puede escribirlo, por favor?»</i> — Можете написать?
+    </div>
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">✅</div>
+    <div class="step-title">
+      <h2>Самопроверка «Светофор»</h2>
+      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🏠</div>
+    <div class="step-title">
+      <h2>Домашнее задание · Урок 8.2</h2>
+      <span class="time">⏱ ~30–35 минут · 6 заданий</span>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и предлоги времени.</div>
+    <p>Карточки, сопоставление, «собери фразу» — фокус на формах <b>yo / nosotros / usted</b> и предлогах <b>de...a..., desde...hasta, dentro de, antes de, después de</b>.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Mi cita» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: проговорить скрипт звонка к врачу.</div>
+    <p>Запишите голосовое на 6–8 предложений по шаблону из конструктора, минимум 2 дубля:</p>
+    <div class="note blue">
+      Buenos días. Soy <b>[имя]</b>. Quisiera pedir cita con el pediatra para mi hijo/a <b>[имя]</b>, de <b>[возраст]</b> años.<br>
+      Tiene <b>[симптом]</b>. Mejor <b>[день]</b> <b>[часть дня]</b>.<br>
+      ¿A qué hora exactamente? Podemos llegar antes de <b>[время]</b> para rellenar la ficha.<br>
+      Confirmo la cita. Muchas gracias.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Soy Ana García. Quisiera pedir cita con el pediatra para mi hijo Leo, de ocho años. Tiene fiebre y tos desde ayer. Mejor el martes por la mañana. ¿A qué hora exactamente? Podemos llegar antes de las diez para rellenar la ficha. Confirmo la cita. Muchas gracias.')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📞 Задание 3. Реальное действие · 5 мин</h4>
+    <div class="hw-meta">Цель: перенести навык в реальную жизнь.</div>
+    <p>Найдите телефон и часы работы своего <i>Centro de Salud</i> (Google Maps / портал автономии). Выпишите:</p>
+    <div class="note">
+      Teléfono: ___<br>
+      Horario de consulta: de ___ a ___<br>
+      Dirección: ___<br>
+      App / portal para cita previa: ___
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: скрипт звонка · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить структуру звонка письменно.</div>
+    <p>Напишите 6–8 предложений: причина, день, время, подтверждение. Используйте предлоги времени и глагол <i>pedir</i>.</p>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Quisiera pedir cita con el pediatra para mi hijo Leo. Tiene fiebre y tos desde ayer. Necesito una cita dentro de dos días. Mejor el martes por la mañana. ¿Hay consulta de nueve a una? Sí, perfecto. Llegaremos antes de las diez para rellenar la ficha. Confirmo la cita. Muchas gracias por su tiempo.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 3 мин</h4>
+    <div class="hw-meta">Цель: связать родительский урок с детским курсом.</div>
+    <p>Спросите ребёнка:</p>
+    <div class="note green">
+      ¿Te duele algo?<br>
+      ¿Tienes fiebre?<br>
+      ¿Quieres ir al pediatra?
+    </div>
+    <p>Ребёнок отвечает:</p>
+    <div class="note blue">
+      Me duele la cabeza. No tengo fiebre.
+    </div>
+    <p>Родитель резюмирует:</p>
+    <div class="note">
+      Vale. Si tienes fiebre mañana, pedimos cita con el pediatra.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('¿Te duele algo? ¿Tienes fiebre? ¿Quieres ir al pediatra? Me duele la cabeza. No tengo fiebre. Vale. Si tienes fiebre mañana, pedimos cita con el pediatra.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 6. Рабочий лист · 10–12 мин</h4>
+    <div class="hw-meta">Цель: закрепить весь урок на бумаге.</div>
+    <p>Распечатайте или заполните с экрана: лексика, предлоги времени, диалог, скрипт звонка.</p>
+    <a href="../../worksheets/w08-l2-parents.html" class="btn btn-ghost" style="margin-top:8px">📄 Открыть рабочий лист (A4, печать)</a>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Mi cita» (2 дубля)<br>
+    • 📞 Данные поликлиники (телефон, часы, адрес)<br>
+    • ✍️ Скрипт звонка (6–8 предложений)<br>
+    • 📄 Фото рабочего листа<br>
+    • ✅ Светофор самопроверки
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head">
+    <div class="step-num">🎮</div>
+    <div class="step-title">
+      <h2>Тренажёр: слова и грамматика</h2>
+      <span class="time">~7–10 мин</span>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 8.2</h3>
+    <p>Повторите слова урока в приложении Quizlet: запись, симптомы, предлоги времени, глагол pedir.</p>
+    <a href="https://quizlet.com/fi/1226050047/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-8-%D1%83%D1%80%D0%BE%D0%BA-2-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- РЕСУРСЫ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🔗</div>
+    <div class="step-title">
+      <h2>Внешние ресурсы</h2>
+      <span class="time">Для проекта и самостоятельной практики</span>
+    </div>
+  </div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">🌐 Поиск</span>
+      <h4>centro de salud cerca de mí cita previa</h4>
+      <p>Найдите свою поликлинику и узнайте, как записаться онлайн.</p>
+      <a href="https://www.google.com/search?q=centro+de+salud+cerca+de+m%C3%AD+cita+previa" target="_blank" rel="noopener">Искать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>pedir cita médico España por teléfono</h4>
+      <p>Видео с разбором телефонных диалогов при записи к врачу.</p>
+      <a href="https://www.youtube.com/results?search_query=pedir+cita+m%C3%A9dico+Espa%C3%B1a+por+tel%C3%A9fono" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏛 Портал здоровья</span>
+      <h4>Sanidad + ваша автономия</h4>
+      <p>Официальный портал здравоохранения вашей автономии для онлайн-записи.</p>
+      <a href="https://www.google.com/search?q=sanidad+comunidad+aut%C3%B3noma+cita+previa" target="_blank" rel="noopener">Искать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📋 Инструкция</span>
+      <h4>cómo pedir cita en el centro de salud España</h4>
+      <p>Пошаговые инструкции по записи к врачу в разных регионах Испании.</p>
+      <a href="https://www.google.com/search?q=c%C3%B3mo+pedir+cita+centro+de+salud+Espa%C3%B1a" target="_blank" rel="noopener">Искать →</a>
+    </div>
+  </div>
+</section>
+
+<!-- КНОПКИ НАВИГАЦИИ -->
+<div class="lesson-nav">
+  <a href="w08-l1.html">← Предыдущий<br><small>Урок 8.1 · Sanidad Pública</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <span class="soon">Следующий →<br><small>Урок 8.3 · Логистика недели</small></span>
+</div>
+
+<!-- ФУТЕР -->
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · Блок 2 El Cole y la Salud<br>
+  8.2 · Запись к врачу
+</footer>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES'; u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      item.o.map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === questions[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[questions[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ (8.1) =====
+var warmQ = [
+  {q:'1. Как сказать «поликлиника / центр здоровья»?', o:['el centro de salud','el hospital','la farmacia'], c:0},
+  {q:'2. Что такое tarjeta sanitaria / SIP?', o:['медицинская карточка резидента','паспорт','водительские права'], c:0},
+  {q:'3. Кто врач для детей до 14 лет?', o:['el pediatra','el médico de cabecera','el especialista'], c:0},
+  {q:'4. Как сказать «в понедельник утром»?', o:['el lunes por la mañana','en el lunes','lunes mañana'], c:0},
+  {q:'5. Куда обращаться ночью и в выходные?', o:['a urgencias','al centro de salud','a la farmacia'], c:0},
+  {q:'6. Что нужно, чтобы попасть к узкому специалисту?', o:['volante (направление) от семейного врача','только SIP','ничего'], c:0}
+];
+
+function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  booking:[
+    {es:'pedir cita', ru:'записаться на приём', ex:'Quisiera pedir cita con el pediatra.', exRu:'Я хотел бы записаться к педиатру.'},
+    {es:'la cita', ru:'запись / приём', ex:'Tengo cita el martes a las diez.', exRu:'У меня запись во вторник в десять.'},
+    {es:'la consulta', ru:'приём / кабинет врача', ex:'La consulta es en el segundo piso.', exRu:'Приём на втором этаже.'},
+    {es:'la sala de espera', ru:'зал ожидания', ex:'Esperamos en la sala de espera.', exRu:'Мы ждём в зале ожидания.'},
+    {es:'el turno / el número', ru:'очередь / номерок', ex:'Coja el número en la entrada.', exRu:'Возьмите номерок на входе.'},
+    {es:'la recepción', ru:'регистратура', ex:'Pregunte en recepción.', exRu:'Спросите в регистратуре.'},
+    {es:'el horario de consulta', ru:'часы приёма', ex:'El horario de consulta es de nueve a una.', exRu:'Часы приёма — с девяти до часу.'}
+  ],
+  people:[
+    {es:'el médico de cabecera', ru:'семейный врач', ex:'Nuestro médico de cabecera es el doctor Ruiz.', exRu:'Наш семейный врач — доктор Руис.'},
+    {es:'el pediatra', ru:'педиатр', ex:'El pediatra atiende a los niños hasta los 14 años.', exRu:'Педиатр принимает детей до 14 лет.'},
+    {es:'el especialista', ru:'узкий специалист', ex:'Necesitamos un especialista: el alergólogo.', exRu:'Нам нужен специалист — аллерголог.'},
+    {es:'la enfermera', ru:'медсестра', ex:'La enfermera toma la temperatura.', exRu:'Медсестра измеряет температуру.'},
+    {es:'el centro de salud', ru:'поликлиника', ex:'Nuestro centro de salud está cerca de casa.', exRu:'Наша поликлиника рядом с домом.'},
+    {es:'el hospital', ru:'больница', ex:'El hospital está en el centro de la ciudad.', exRu:'Больница в центре города.'},
+    {es:'la farmacia', ru:'аптека', ex:'Compramos el medicamento en la farmacia.', exRu:'Мы покупаем лекарство в аптеке.'}
+  ],
+  symptoms:[
+    {es:'las urgencias', ru:'приёмное отделение / скорая', ex:'Por la noche vamos a urgencias.', exRu:'Ночью мы идём в приёмное отделение.'},
+    {es:'la fiebre', ru:'температура / жар', ex:'El niño tiene fiebre de 38.', exRu:'У ребёнка температура 38.'},
+    {es:'el dolor', ru:'боль', ex:'Tiene dolor de garganta.', exRu:'У него болит горло.'},
+    {es:'la tos', ru:'кашель', ex:'La tos es seca.', exRu:'Кашель сухой.'},
+    {es:'el resfriado', ru:'простуда', ex:'Es un resfriado común.', exRu:'Это обычная простуда.'},
+    {es:'la alergia', ru:'аллергия', ex:'Tiene alergia al polen.', exRu:'У него аллергия на пыльцу.'},
+    {es:'la receta', ru:'рецепт', ex:'El médico da la receta electrónica.', exRu:'Врач выписывает электронный рецепт.'}
+  ],
+  prepositions:[
+    {es:'de lunes a viernes', ru:'с понедельника по пятницу', ex:'La consulta es de lunes a viernes.', exRu:'Приём с понедельника по пятницу.'},
+    {es:'desde ... hasta ...', ru:'с ... до ...', ex:'Desde el lunes hasta el jueves.', exRu:'С понедельника до четверга.'},
+    {es:'dentro de', ru:'через / в течение', ex:'La cita es dentro de dos días.', exRu:'Запись через два дня.'},
+    {es:'antes de', ru:'до', ex:'Llegue antes de las diez.', exRu:'Приходите до десяти.'},
+    {es:'después de', ru:'после', ex:'Después de comer hay consulta.', exRu:'После обеда есть приём.'},
+    {es:'a partir de', ru:'начиная с', ex:'A partir del lunes, horario nuevo.', exRu:'С понедельника новое расписание.'},
+    {es:'de nueve a una', ru:'с девяти до часу', ex:'El médico atiende de nueve a una.', exRu:'Врач принимает с девяти до часу.'}
+  ],
+  verbs:[
+    {es:'pedir', ru:'просить / записываться', ex:'Pido cita por teléfono.', exRu:'Я записываюсь по телефону.'},
+    {es:'dar cita', ru:'дать запись', ex:'Me dan cita para el martes.', exRu:'Мне дают запись на вторник.'},
+    {es:'confirmar', ru:'подтвердить', ex:'Confirmo la cita del martes.', exRu:'Я подтверждаю запись на вторник.'},
+    {es:'cancelar / anular', ru:'отменить', ex:'Cancelo la cita por trabajo.', exRu:'Я отменяю запись из-за работы.'},
+    {es:'esperar', ru:'ждать', ex:'Esperamos cinco minutos.', exRu:'Мы ждём пять минут.'},
+    {es:'atender', ru:'принимать (о враче)', ex:'El médico le atiende enseguida.', exRu:'Врач примет вас сразу.'},
+    {es:'recetar', ru:'выписывать рецепт', ex:'El pediatra receta un jarabe.', exRu:'Педиатр выписывает сироп.'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('booking', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'La consulta es ___ lunes a viernes. (de)', ans:'de'},
+  {text:'Pido una cita ___ el martes. (para)', ans:'para'},
+  {text:'La cita es dentro ___ dos días. (de)', ans:'de'},
+  {text:'Nosotros ___ cita por teléfono. (pedir)', ans:'pedimos'},
+  {text:'¿Usted ___ cita online? (pedir)', ans:'pide'},
+  {text:'Llegue antes ___ las diez. (de)', ans:'de'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'Quisiera pedir cita con el pediatra.', translation:'Я хотел бы записаться к педиатру.'},
+  {target:'La consulta es de nueve a una.', translation:'Приём с девяти до часу.'},
+  {target:'El niño tiene fiebre desde ayer.', translation:'У ребёнка температура со вчерашнего дня.'},
+  {target:'Podemos venir el martes por la mañana.', translation:'Мы можем прийти во вторник утром.'},
+  {target:'Quisiera cancelar la cita del jueves.', translation:'Я хотел бы отменить запись на четверг.'},
+  {target:'El médico atiende de lunes a viernes.', translation:'Врач принимает с понедельника по пятницу.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'pedir cita', ru:'записаться на приём'},
+  {id:2, es:'la sala de espera', ru:'зал ожидания'},
+  {id:3, es:'las urgencias', ru:'приёмное отделение'},
+  {id:4, es:'la receta', ru:'рецепт'},
+  {id:5, es:'de lunes a viernes', ru:'с понедельника по пятницу'},
+  {id:6, es:'dentro de una semana', ru:'через неделю'},
+  {id:7, es:'cancelar', ru:'отменить'},
+  {id:8, es:'atender', ru:'принимать (о враче)'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZ =====
+var listenQ = [
+  {q:'1. ¿Con quién quiere la cita el padre?', o:['con el pediatra','con el médico de cabecera','con el especialista'], c:0},
+  {q:'2. ¿Qué síntomas tiene Leo?', o:['fiebre y tos desde ayer','dolor de garganta','alergia'], c:0},
+  {q:'3. ¿Qué dos horarios ofrece recepción?', o:['martes por la mañana (9–13) o jueves por la tarde (16–20)','lunes y miércoles','solo viernes'], c:0},
+  {q:'4. ¿A qué hora es la cita?', o:['a las diez y media','a las nueve','a las doce'], c:0},
+  {q:'5. ¿Por qué нужно прийти раньше?', o:['para rellenar la ficha','para pagar','para esperar'], c:0},
+  {q:'6. Что сделать, если не сможешь прийти?', o:['llamar para cancelar','no hacer nada','venir sin cita'], c:0}
+];
+
+renderQuiz('listening-quiz', listenQ, 'lq');
+
+// ===== SCRIPT BUILDER =====
+var lastScriptPlain = '';
+
+function buildScript(){
+  var name = document.getElementById('b-name').value || 'Ana';
+  var child = document.getElementById('b-child').value || 'Leo';
+  var age = document.getElementById('b-age').value;
+  var reason = document.getElementById('b-reason').value;
+  var day = document.getElementById('b-day').value;
+  var part = document.getElementById('b-part').value;
+  var time = document.getElementById('b-time').value;
+  var action = document.getElementById('b-action').value;
+
+  var text = 'Buenos días. Soy ' + name + ' García. ' +
+    'Quisiera pedir cita con el pediatra para mi hijo ' + child + ', de ' + age + ' años. ' +
+    'Tiene ' + reason + '. ' +
+    'Mejor ' + day + ' ' + part + '. ' +
+    '¿A qué hora exactamente? ' +
+    'Podemos llegar antes de las diez para rellenar la ficha. ' +
+    (action === 'confirmar' ? 'Confirmo la cita. ' : 'Quisiera cancelar la cita. ') +
+    'Muchas gracias por su tiempo.';
+
+  lastScriptPlain = text;
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML =
+    '<div class="dialog-result">' + text + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary" id="speak-script-btn">🔊 Прослушать скрипт</button>' +
+    '</div>';
+
+  document.getElementById('speak-script-btn').onclick = function(){
+    speak(lastScriptPlain);
+  };
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ===== TRAFFIC LIGHT =====
+var TL = [
+  'Просить запись: pedir cita, quisiera pedir',
+  'Называть симптомы: fiebre, tos, dolor',
+  'Понимать слоты времени: de nueve a una',
+  'Использовать предлоги: desde...hasta, dentro de, antes de',
+  'Подтвердить и отменить запись',
+  'Разыграть диалог «родитель ↔ регистратура»'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + rowIdx + '">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + rowIdx + '">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + rowIdx + '">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.booking, VOCAB.people, VOCAB.symptoms, VOCAB.prepositions, VOCAB.verbs);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    updateCard();
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Quisiera pedir cita con el pediatra', hint:'Я хотел бы записаться к педиатру'},
+    {target:'La consulta es de nueve a una', hint:'Приём с девяти до часу'},
+    {target:'El niño tiene fiebre desde ayer', hint:'У ребёнка температура со вчерашнего дня'},
+    {target:'Podemos venir el martes por la mañana', hint:'Мы можем прийти во вторник утром'},
+    {target:'El médico atiende de lunes a viernes', hint:'Врач принимает с понедельника по пятницу'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>
