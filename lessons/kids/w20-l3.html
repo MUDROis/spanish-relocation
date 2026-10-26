@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 60: ¡Graduación! — Школа МУДРО</title>
+<meta name="description" content="Урок 60, выпускной детского курса испанского: пост-карта «Мои 20 недель», счётчик достижений, диплом graduado и пожелания. Школа МУДРО.">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#E91E63; --love:#C2185B;
+    --hate:#424242; --star:#FFB300; --st7:#FFBE0B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FFE0EC 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(233,30,99,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FFE0EC;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #FFE0EC;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #ead6dc;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #f0e6e8;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#FFE0EC}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+
+  /* ==== СТАНЦИЯ 7 · ¡Preparados! · золотая тема ==== */
+  .hero{background:linear-gradient(180deg,#FFF1C9 0%,#FFF7E2 55%,var(--cream) 100%)}
+  .hero::before{background:radial-gradient(circle,rgba(255,190,11,.30),transparent 70%)}
+  .hero::after{background:radial-gradient(circle,rgba(232,96,76,.16),transparent 70%)}
+  .lesson-tag{background:var(--st7);color:#5b4300}
+  .hero h1 span{color:var(--terra)}
+  .goals{border-color:var(--st7)}
+  .goal-item{background:#FFF3D6}
+  .final-situation{border-left-color:var(--st7);background:linear-gradient(135deg,#FFF1C9,#FFF7E2)}
+
+  /* ==== Пост-карта ==== */
+  .pc-wrap{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:700px){.pc-wrap{grid-template-columns:1.2fr 1fr}}
+  .pc-q{background:#fff;border:2px solid #f0e6e8;border-radius:14px;padding:14px;margin:8px 0}
+  .pc-q .pc-title{font-weight:800;color:var(--terra);margin-bottom:2px}
+  .pc-q .pc-ru{color:#999;font-size:.8rem;font-style:italic;display:block;margin-bottom:8px}
+  .pc-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .pc-chip{background:#fff;border:2px solid var(--st7);border-radius:999px;padding:7px 14px;font-weight:800;cursor:pointer;font-size:.88rem;transition:.15s}
+  .pc-chip:hover{background:var(--st7);color:#5b4300}
+  .pc-chip.picked{background:var(--st7);color:#5b4300;box-shadow:0 0 0 3px rgba(255,190,11,.35)}
+  .postcard{background:linear-gradient(160deg,#FFFDF4,#FFF0C8);border:2px solid #C9A227;border-radius:16px;padding:18px;position:relative;box-shadow:0 8px 22px rgba(0,0,0,.08);align-self:start}
+  .postcard::after{content:'📮';position:absolute;top:-16px;right:-10px;font-size:2rem;transform:rotate(12deg)}
+  .pc-head{font-family:'Baloo 2',cursive;color:#8a6d1a;font-size:1.1rem;border-bottom:2px dashed #C9A227;padding-bottom:8px;margin-bottom:10px}
+  .pc-line{font-weight:700;min-height:26px;margin:6px 0;border-bottom:1px dotted #d8c58a;padding-bottom:4px;animation:popIn .4s}
+  .pc-line .es{color:var(--terra);font-family:'Baloo 2',cursive}
+  .pc-empty{color:#b7a77a;font-style:italic;font-weight:700}
+  /* ==== Наклейки-станции ==== */
+  .sticker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+  .sticker{background:#fff;border:3px solid var(--st7);border-radius:16px;padding:16px 12px;text-align:center;cursor:pointer;transition:.25s;position:relative;min-height:118px;display:flex;flex-direction:column;justify-content:center}
+  .sticker:hover{transform:translateY(-4px) rotate(-1deg)}
+  .sticker .st-cover{font-size:2rem;font-weight:800;color:#b7a77a}
+  .sticker .st-open{display:none}
+  .sticker.open{background:linear-gradient(160deg,#FFFDF4,#FFE9B8)}
+  .sticker.open .st-cover{display:none}
+  .sticker.open .st-open{display:block}
+  .st-open .st-ico{font-size:2.2rem}
+  .st-open .st-name{font-family:'Baloo 2',cursive;color:var(--terra);font-size:1.02rem;margin:4px 0}
+  .st-open .st-desc{font-size:.78rem;font-weight:700;color:var(--ink-soft)}
+  .counter-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+  .big-count{background:#fff;border:3px solid var(--st7);border-radius:18px;padding:14px 22px;text-align:center;min-width:130px}
+  .big-count .num{font-family:'Baloo 2',cursive;font-size:2.4rem;color:var(--terra);line-height:1}
+  .big-count .lbl{font-weight:800;font-size:.82rem;color:var(--ink-soft)}
+  /* ==== Диплом ==== */
+  .diploma{background:linear-gradient(160deg,#FFFDF4,#FFF3D6);border:6px double #C9A227;border-radius:18px;padding:30px 22px;text-align:center;box-shadow:0 10px 26px rgba(0,0,0,.08)}
+  .d-emblem{font-size:3.6rem}
+  .d-title{font-family:'Baloo 2',cursive;font-size:1.7rem;color:#8a6d1a;letter-spacing:1px;margin:6px 0 2px}
+  .d-sub{font-weight:800;color:var(--ink-soft);font-size:.92rem;margin-bottom:12px}
+  .d-name-in{font-family:'Baloo 2',cursive;font-size:1.3rem;text-align:center;border:none;border-bottom:2px solid #C9A227;background:transparent;color:var(--terra);padding:6px 10px;min-width:240px;max-width:90%}
+  .d-name-in:focus{outline:none}
+  .d-name-out{display:none;font-family:'Baloo 2',cursive;font-size:1.7rem;color:var(--terra);border-bottom:2px solid #C9A227;min-width:220px;padding:0 12px 2px}
+  .d-big{font-family:'Baloo 2',cursive;font-size:1.35rem;color:#8a6d1a;margin:12px 0;background:#FFF0C8;border-radius:12px;padding:10px}
+  .d-stats{font-weight:800;color:var(--ink-soft);font-size:.9rem;margin:8px 0}
+  .d-date{font-weight:800;color:var(--ink-soft);font-size:.9rem}
+  .d-sign{margin-top:12px;font-style:italic;font-weight:700;color:var(--ink-soft)}
+  .dip-btn{background:#C9A227;color:#fff;border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #9a7a15;margin-top:14px}
+  .dip-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #9a7a15}
+  /* ==== Тост ==== */
+  .toast-block{background:linear-gradient(135deg,#FFBE0B,#FFD54F);border-radius:22px;padding:34px 26px;text-align:center;margin:20px 0;border:3px solid #C9A227;position:relative;overflow:hidden}
+  .toast-block::before{content:'🎊';position:absolute;top:-10px;left:14px;font-size:2.4rem;opacity:.5}
+  .toast-block::after{content:'🎈';position:absolute;bottom:-8px;right:18px;font-size:2.4rem;opacity:.5}
+  .toast-title{font-family:'Baloo 2',cursive;font-size:2rem;color:#5b4300}
+  .toast-sub{font-weight:800;color:#6b5310;margin:8px 0 14px}
+  .wish-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .wish-chip{background:#fff;border:2px solid var(--terra);border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer;font-size:.95rem;transition:.15s}
+  .wish-chip:hover{background:var(--terra);color:#fff}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 7 · ¡Preparados! · Урок 3 из 3</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🎓 СТАНЦИЯ 7 · УРОК 3 · НЕДЕЛЯ 20</span>
+  <div class="hero-emojis">🎓 🏆 🎉 🥹 🇪🇸</div>
+  <h1>¡<span>Graduación</span>!</h1>
+  <p class="sub"><strong>60 уроков. 20 недель. 7 станций.</strong> Ты — выпускник курса «Миссия: Испанская школа»! Сегодня праздник: пост-карта воспоминаний, счётчик достижений, ДИПЛОМ и слёзы радости 🥹</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> мама смотрит на твой диплом:<br>
+    <em>«— ¿Recuerdas tu primer día? ¡No sabías nada!» — «¡Pues ahora estoy preparado! ¡Misión cumplida! ¡Nos vemos en España!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🗺️</span> Собрать личную пост-карту «Мои 20 недель»</div>
+      <div class="goal-item"><span class="emoji">🏆</span> Посчитать достижения: 7 станций, 60 уроков</div>
+      <div class="goal-item"><span class="emoji">🎓</span> Получить диплом Sobreviviente de la Escuela Española</div>
+      <div class="goal-item"><span class="emoji">🌟</span> Пожелать себе buena suerte на испанском</div>
+      <div class="goal-item"><span class="emoji">🎤</span> Сказать выпускную речь (3-5 фраз)</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить финальный бейдж «Graduado MUDRO»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E8A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 59</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola por última vez, campeón! Это ПОСЛЕДНИЙ урок курса — и мы немного плачем... от радости! 🥹 Мостик: сначала — воспоминания. Потом — ДИПЛОМ!</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ПОСТ-КАРТА -->
+  <section class="block" style="--c:#D98E00">
+    <div class="block-head">
+      <h2 class="block-title">🗺️ Пост-карта «Мои 20 недель»</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Ответь на 5 вопросов — и твоя личная пост-карта соберётся сама! Отправь её родителям в чат 📮</p>
+    <div class="pc-wrap">
+      <div>
+        <div class="pc-q">
+          <div class="pc-title">1. Что ты можешь сказать о курсе?</div>
+          <span class="pc-ru">Выбери ВСЁ, что про тебя.</span>
+          <div class="pc-chips" data-q="1">
+            <span class="pc-chip" onclick="pcPick(this,1,'he aprendido mucho','he aprendido mucho')">he aprendido mucho</span>
+            <span class="pc-chip" onclick="pcPick(this,1,'he hecho amigos','he hecho amigos')">he hecho amigos</span>
+            <span class="pc-chip" onclick="pcPick(this,1,'estoy listo para el cole','estoy listo para el cole')">estoy listo para el cole</span>
+          </div>
+        </div>
+        <div class="pc-q">
+          <div class="pc-title">2. Mi frase favorita — моя любимая фраза:</div>
+          <span class="pc-ru">Какая фраза осталась в сердце?</span>
+          <div class="pc-chips" data-q="2">
+            <span class="pc-chip" onclick="pcPick(this,2,'¡Misión cumplida!','mi frase favorita es ¡misión cumplida!')">¡Misión cumplida!</span>
+            <span class="pc-chip" onclick="pcPick(this,2,'¡Lo sé!','mi frase favorita es ¡lo sé!')">¡Lo sé!</span>
+            <span class="pc-chip" onclick="pcPick(this,2,'¿Quieres jugar conmigo?','mi frase favorita es ¿quieres jugar conmigo?')">¿Quieres jugar conmigo?</span>
+            <span class="pc-chip" onclick="pcPick(this,2,'Me encanta...','mi frase favorita es me encanta...')">Me encanta...</span>
+          </div>
+        </div>
+        <div class="pc-q">
+          <div class="pc-title">3. La palabra más difícil — самое сложное слово:</div>
+          <span class="pc-ru">Честно! С ним ты боролся больше всего.</span>
+          <div class="pc-chips" data-q="3">
+            <span class="pc-chip" onclick="pcPick(this,3,'el desayuno','la palabra más difícil es el desayuno')">el desayuno</span>
+            <span class="pc-chip" onclick="pcPick(this,3,'entonces','la palabra más difícil es entonces')">entonces</span>
+            <span class="pc-chip" onclick="pcPick(this,3,'alérgico','la palabra más difícil es alérgico')">alérgico</span>
+            <span class="pc-chip" onclick="pcPick(this,3,'la derecha','la palabra más difícil es la derecha')">la derecha</span>
+          </div>
+        </div>
+        <div class="pc-q">
+          <div class="pc-title">4. Mi estación favorita — любимая станция:</div>
+          <span class="pc-ru">Где было веселее всего?</span>
+          <div class="pc-chips" data-q="4">
+            <span class="pc-chip" onclick="pcPick(this,4,'Supervivencia','mi estación favorita es Supervivencia')">🆘 Supervivencia</span>
+            <span class="pc-chip" onclick="pcPick(this,4,'Mi Colegio','mi estación favorita es Mi Colegio')">🏫 Mi Colegio</span>
+            <span class="pc-chip" onclick="pcPick(this,4,'Mi Mundo','mi estación favorita es Mi Mundo')">🌍 Mi Mundo</span>
+            <span class="pc-chip" onclick="pcPick(this,4,'Mates y Ciencias','mi estación favorita es Mates y Ciencias')">🔢 Mates y Ciencias</span>
+            <span class="pc-chip" onclick="pcPick(this,4,'¡A Comer!','mi estación favorita es ¡A Comer!')">🍝 ¡A Comer!</span>
+            <span class="pc-chip" onclick="pcPick(this,4,'Mi Ciudad','mi estación favorita es Mi Ciudad')">🚌 Mi Ciudad</span>
+            <span class="pc-chip" onclick="pcPick(this,4,'¡Preparados!','mi estación favorita es ¡Preparados!')">🎓 ¡Preparados!</span>
+          </div>
+        </div>
+        <div class="pc-q">
+          <div class="pc-title">5. Cuando voy al cole en España... — когда я приду в школу в Испании...</div>
+          <span class="pc-ru">Как ты войдёшь в класс в первый день?</span>
+          <div class="pc-chips" data-q="5">
+            <span class="pc-chip" onclick="pcPick(this,5,'sin miedo','voy a la escuela sin miedo')">sin miedo</span>
+            <span class="pc-chip" onclick="pcPick(this,5,'paso a paso','voy a la escuela paso a paso')">paso a paso</span>
+            <span class="pc-chip" onclick="pcPick(this,5,'poco a poco','voy a la escuela poco a poco')">poco a poco</span>
+            <span class="pc-chip" onclick="pcPick(this,5,'preguntando siempre','voy a la escuela preguntando siempre')">preguntando siempre</span>
+          </div>
+        </div>
+      </div>
+      <div class="postcard" id="postcard">
+        <div class="pc-head">✉️ POST-CARD · Mis 20 semanas</div>
+        <div class="pc-line" id="pc-l1"><span class="pc-empty">— выбери ответ 1 —</span></div>
+        <div class="pc-line" id="pc-l2"><span class="pc-empty">— выбери ответ 2 —</span></div>
+        <div class="pc-line" id="pc-l3"><span class="pc-empty">— выбери ответ 3 —</span></div>
+        <div class="pc-line" id="pc-l4"><span class="pc-empty">— выбери ответ 4 —</span></div>
+        <div class="pc-line" id="pc-l5"><span class="pc-empty">— выбери ответ 5 —</span></div>
+        <button class="speak-btn" style="margin-top:12px" onclick="pcSpeak()">🔊 Leer mi post-card</button>
+        <div class="game-fb" id="pc-fb"></div>
+      </div>
+    </div>
+    <div class="script">⚡ <strong>CLIL (12 лет):</strong> конструкция <span class="grammar-hint" data-hint="HE APRENDIDO — «я научился» (pretérito perfecto: he + participio). Так испанцы говорят о результатах, которые важны сейчас: he aprendido mucho, he hecho amigos, he ganado. Курс пройден — и результат с тобой навсегда, поэтому perfecto!">he aprendido / he hecho</span> — это pretérito perfecto: «я научился» и «я завёл» — результат, который остался с тобой сейчас. Именно так благодарят на выпускных в Испании: <em>«He aprendido mucho. ¡Gracias!»</em><br>8 лет: просто скажи «he aprendido mucho» — это уже по-взрослому красиво!</div>
+  </section>
+
+  <!-- БЛОК 2: МИССИЯ ВЫПОЛНЕНА -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏆 «Миссия выполнена»: счётчик достижений</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Нажми кнопку — и цифры расскажут, как много ты сделал. А потом открой все 7 наклеек-станций!</p>
+    <div class="counter-row">
+      <div class="big-count"><div class="num" id="cnt-lessons">0</div><div class="lbl">уроков (lecciones)</div></div>
+      <div class="big-count"><div class="num" id="cnt-weeks">0</div><div class="lbl">недель (semanas)</div></div>
+      <div class="big-count"><div class="num" id="cnt-stations">0</div><div class="lbl">станций (estaciones)</div></div>
+      <div class="big-count"><div class="num" id="cnt-badges">14</div><div class="lbl">бейджей (cursos)</div></div>
+    </div>
+    <div style="text-align:center"><button class="dip-btn" onclick="countUp()">▶ Contar mis logros — посчитай мои достижения!</button></div>
+    <div class="sticker-grid" id="sticker-grid"></div>
+    <div class="game-fb" id="stk-fb" style="text-align:center">🎁 Наклеек открыто: <span id="stk-count">0</span> / 7 — кликай на подарки!</div>
+  </section>
+
+  <!-- БЛОК 3: ДИПЛОМ -->
+  <section class="block" style="--c:#D98E00">
+    <div class="block-head">
+      <h2 class="block-title">🎓 Диплом выпускника</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Напиши своё имя — и держи самый красивый документ курса. Его можно распечатать!</p>
+    <div class="diploma">
+      <div class="d-emblem">🎓</div>
+      <div class="d-title">DIPLOMA DE GRADUACIÓN</div>
+      <div class="d-sub">Sobreviviente de la Escuela Española · Escuela MUDRO</div>
+      <p style="font-weight:800">Se hace constar que</p>
+      <input class="d-name-in" id="dip-name" placeholder="escribe tu nombre" maxlength="24">
+      <div class="d-name-out" id="dip-name-out"></div>
+      <p style="font-weight:700;margin:10px 0">ha completado el curso <b>«Misión: Escuela Española»</b> y es oficialmente</p>
+      <div class="d-big">¡SOBREVIVIENTE DE LA ESCUELA ESPAÑOLA!</div>
+      <div class="d-stats">60 lecciones · 20 semanas · 7 estaciones · ¡listo para el cole!</div>
+      <div class="d-date" id="dip-date"></div>
+      <div class="d-sign">Firmado: la profesora de MUDRO · Señor Martínez, tutor 🎓</div>
+      <button class="dip-btn" id="dip-btn" onclick="emitDiploma()">🎓 ¡Recibir el diploma! 🎉</button>
+    </div>
+    <div class="script">📸 <strong>Фото на память (el foto recuerdo):</strong> покажи диплом на экране, улыбнись (¡sonríe!) и сфотографируйтесь всей семьёй. Через 10 лет будете пересматривать!</div>
+  </section>
+
+  <!-- БЛОК 4: БЕЙДЖ -->
+  <section class="block" style="--c:#D98E00">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Финальный бейдж</h2>
+      <span class="time-badge">⏱ 2 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎓</div>
+      <h3>Graduado MUDRO</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Последний бейдж курса! 14 бейджей в паспорте — как 14 медалей за 7 станций приключений.</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить финальный бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena, GRADUADO! Бейдж «Graduado MUDRO» 🎓 добавлен. Паспорт заполнен!</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: ПОЖЕЛАНИЯ + РЕЧЬ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🌟 Пожелания для испанской школы</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">Это твой «снаряжение-набор» на первый день в Испании. Кликай, слушай и запоминай!</p>
+    <h4 style="margin-bottom:8px">🌟 Пожелания</h4>
+    <div class="cards-grid" id="words-wish"></div>
+    <h4 style="margin:14px 0 8px">🎓 Выпускной</h4>
+    <div class="cards-grid" id="words-grad"></div>
+    <h4 style="margin:14px 0 8px">🏆 Итоги курса</h4>
+    <div class="cards-grid" id="words-total"></div>
+    <div class="script">ВЫПУСКНАЯ РЕЧЬ (el discurso)! Последнее слово курса. Расскажи вслух всей семье! 🎤</div>
+    <div class="read-box" style="background:#FFF1C9;border-color:var(--st7)">
+      <strong>📋 Формула речи (5 пунктов):</strong><br>
+      1. <em>¡Hola! Me llamo [имя] y hoy es mi graduación.</em><br>
+      2. <em><b>He aprendido mucho</b> en este curso: la escuela, la familia, la comida, la ciudad...</em><br>
+      3. <em><b>Mi frase favorita es</b> «...».</em><br>
+      4. <em><b>La palabra más difícil</b> es «...», ¡pero ya la sé!</em><br>
+      5. <em>¡Gracias, familia! <b>¡Misión cumplida! ¡Nos vemos en España!</b></em>
+    </div>
+    <div class="read-box" style="background:#FFF1C9;border-color:var(--st7)">
+      <strong>🎵 Прощальная песенка курса (спой мелодично!):</strong><br>
+      <em>«Veinte semanas ya pasaron, mucho español yo aprendí.</em><br>
+      <em>La escuela, la familia, la comida — todo lo sé decir.</em><br>
+      <em>He aprendido mucho, he hecho amigos también.</em><br>
+      <em>¡Misión cumplida! ¡Nos vemos en España! ¡Amen!» 🎶</em>
+      <div style="margin-top:8px"><button class="speak-btn" onclick="speak('Veinte semanas ya pasaron, mucho español yo aprendí. La escuela, la familia, la comida, todo lo sé decir. He aprendido mucho, he hecho amigos también. ¡Misión cumplida! ¡Nos vemos en España!')">🔊 Послушать песенку</button></div>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание (праздничное!)</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>🎓 Прочитай диплом вслух</strong> · 5 мин<br>Встань, как настоящий выпускник, и прочитай: <em>«¡He completado el curso! ¡Misión cumplida!»</em> Родители — аплодисменты (los aplausos)!</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎤 Финальное голосовое: выпускная речь</strong> · 7 мин ⭐<br>5 пунктов из формулы речи. Это последний голосовой дневник курса — сделай его блестящим!</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>📸 Видео-визитка / постер выпускника</strong> · 15 мин ⭐<br><b>12 лет:</b> видео 30-40 секунд: <em>«Me llamo... He aprendido mucho... ¡Nos vemos en España!»</em> <b>8 лет:</b> нарисуй постер «Yo, graduado MUDRO» с 3 испанскими фразами.</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🥳 Мини-выпускной дома</strong> · 20 мин ⭐<br>Чай + бисквит (¡como en España!), los aplausos, покажи пост-карту и все 7 наклеек-станций. Назови свою любимую станцию!</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🌟 Письмо себе на лето</strong> · 10 мин ⭐<br>Три пожелания по-испански: <em>«Buena suerte en el cole. Habla sin miedo. Pregunta siempre.»</em> Спрячь и открой 1 сентября!</div></div>
+    <div class="task"><div class="task-num">6</div><div><strong>👨‍👩‍👧 Семейная миссия: большой блиц</strong> · 10 мин<br>Родители задают 10 слов из ВСЕГО курса — ты отвечаешь <em>¡Lo sé!</em> или <em>Pues...</em> Счёт: сколько из 10? Это твой рекорд!</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Рассказать о курсе: he aprendido mucho, he hecho amigos</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Назвать mi frase favorita и la palabra más difícil</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Прочитать свой диплом вслух</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Пожелать: buena suerte, habla sin miedo, pregunta siempre</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Сказать выпускную речь (5 пунктов)</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Объявить: ¡Misión cumplida! ¡Nos vemos en España!</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 7 · Урок 60 (¡Graduación!)</span>
+    <span>Открыть карточки →</span>
+  </a>
+
+  <!-- QUIZLET: дети урок 60 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w20-l2.html" class="nav-prev"><div class="nav-small">← Урок 2 станции 7</div><div class="nav-title">Урок 59: FINAL BOSS 👑</div></a>
+    <a href="../../kids.html" class="nav-next"><div class="nav-small">Финал курса · ↺</div><div class="nav-title">↺ К карте курса — все 60 уроков</div></a>
+  </div>
+
+  <!-- ФИНАЛЬНЫЙ ТОСТ -->
+  <div class="toast-block">
+    <div class="toast-title">🥂 ¡FELICIDADES!</div>
+    <div class="toast-sub">60 уроков позади. Ты выучил школу, семью, еду, город, числа, погоду и эмоции.<br>Ты — <b>Graduado MUDRO</b> и <b>Sobreviviente de la Escuela Española</b>!</div>
+    <div class="wish-row">
+      <span class="wish-chip" onclick="speak('¡Buena suerte en el cole!')">🌟 ¡Buena suerte!</span>
+      <span class="wish-chip" onclick="speak('¡Habla sin miedo!')">💬 Habla sin miedo</span>
+      <span class="wish-chip" onclick="speak('¡Pregunta siempre!')">🙋 Pregunta siempre</span>
+      <span class="wish-chip" onclick="speak('¡Sonríe!')">😄 ¡Sonríe!</span>
+    </div>
+    <button class="dip-btn" style="margin-top:18px" onclick="finalToast()">🥂 ¡Brindemos! Nos vemos en España 🇪🇸</button>
+    <p style="font-weight:700;color:#6b5310;margin-top:14px">Мы гордимся тобой. Seriously. ¡Buen viaje, campeón! 🥹✨</p>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 7: ¡Preparados! · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var GRADW=[
+ {emo:'🎓',es:'la graduación',ru:'выпускной'},
+ {emo:'📜',es:'el diploma',ru:'диплом'},
+ {emo:'🏆',es:'el premio',ru:'награда'},
+ {emo:'👏',es:'los aplausos',ru:'аплодисменты'},
+ {emo:'📸',es:'el foto recuerdo',ru:'фото на память'},
+ {emo:'🎤',es:'el discurso',ru:'речь'},
+ {emo:'🎉',es:'¡enhorabuena!',ru:'поздравляю!'}
+];
+var TOTW=[
+ {emo:'📚',es:'he aprendido mucho',ru:'я многому научился'},
+ {emo:'💖',es:'mi frase favorita es...',ru:'моя любимая фраза — ...'},
+ {emo:'🧗',es:'la palabra más difícil',ru:'самое сложное слово'},
+ {emo:'🤝',es:'he hecho amigos',ru:'я завёл друзей'},
+ {emo:'🏫',es:'estoy listo para el cole',ru:'я готов к школе'},
+ {emo:'🗓️',es:'veinte semanas',ru:'двадцать недель'},
+ {emo:'🚀',es:'¡misión cumplida!',ru:'миссия выполнена!'}
+];
+var WISHW=[
+ {emo:'🌟',es:'buena suerte en el cole',ru:'удачи в школе'},
+ {emo:'💬',es:'habla sin miedo',ru:'говори без страха'},
+ {emo:'🙋',es:'pregunta siempre',ru:'всегда спрашивай'},
+ {emo:'😄',es:'sonríe',ru:'улыбайся'},
+ {emo:'👣',es:'poco a poco',ru:'шаг за шагом'},
+ {emo:'🇪🇸',es:'nos vemos en España',ru:'увидимся в Испании'},
+ {emo:'✨',es:'¡que te vaya genial!',ru:'пусть всё будет отлично!'}
+];
+
+var WARM=[
+ {q:'¿Qué hiciste en el FINAL BOSS?',model:'Pasé las seis estaciones y recibí seis sellos. ¡Todo superado!',ru:'Что ты сделал в FINAL BOSS?'},
+ {q:'¿Cómo te presentas al tutor?',model:'Me llamo... tengo... años y soy de Rusia. ¡Mucho gusto!',ru:'Как ты представишься классному руководителю?'},
+ {q:'¿Cómo estás hoy?',model:'¡Lo he conseguido! Estoy preparado y sin miedo.',ru:'Как ты себя чувствуешь сегодня?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+function fillCards(boxId,arr){
+  var box=document.getElementById(boxId);
+  arr.forEach(function(f){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+    d.addEventListener('click',function(){speak(f.es);});
+    box.appendChild(d);
+  });
+}
+fillCards('words-grad',GRADW);
+fillCards('words-total',TOTW);
+fillCards('words-wish',WISHW);
+
+/* ===== ПОСТ-КАРТА ===== */
+var PC={};
+function pcPick(chip,q,display,esOut){
+  var box=chip.parentNode;
+  box.querySelectorAll('.pc-chip').forEach(function(c){c.classList.remove('picked');});
+  chip.classList.add('picked');
+  PC[q]={display:display,es:esOut};
+  var line=document.getElementById('pc-l'+q);
+  line.innerHTML='<span class="es">'+display+'</span>';
+  speak(esOut);
+  if(Object.keys(PC).length===5){
+    document.getElementById('pc-fb').textContent='📮 ¡Post-card lista! Отправь её родителям — они растрогаются!';
+    confetti('📮');
+  }else{
+    document.getElementById('pc-fb').textContent='✅ Добавлено в пост-карту ('+Object.keys(PC).length+'/5)';
+  }
+}
+function pcSpeak(){
+  var parts=['¡Hola! Este es mi curso «Misión: Escuela Española».'];
+  if(PC[1])parts.push(PC[1].es+'.');
+  if(PC[2])parts.push(PC[2].es+'.');
+  if(PC[3])parts.push(PC[3].es+'.');
+  if(PC[4])parts.push(PC[4].es+'.');
+  if(PC[5])parts.push('Voy a la escuela '+PC[5].es+'.');
+  parts.push('¡Misión cumplida! ¡Nos vemos en España!');
+  speak(parts.join(' '));
+}
+
+/* ===== СЧЁТЧИК ДОСТИЖЕНИЙ ===== */
+function countUp(){
+  animCount('cnt-lessons',60,900);
+  animCount('cnt-weeks',20,700);
+  animCount('cnt-stations',7,500);
+  setTimeout(function(){speak('Sesenta lecciones. Veinte semanas. Siete estaciones. ¡Misión cumplida!');},500);
+}
+function animCount(id,target,dur){
+  var el=document.getElementById(id);
+  var t0=null;
+  function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min((ts-t0)/dur,1);
+    el.textContent=Math.round(target*p);
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ===== НАКЛЕЙКИ-СТАНЦИИ ===== */
+var STICKERS=[
+ {ico:'🆘',name:'Supervivencia',desc:'¡Hola! Me llamo... ¿Dónde está...?'},
+ {ico:'🏫',name:'Mi Colegio',desc:'la mochila, el recreo, los deberes'},
+ {ico:'🌍',name:'Mi Mundo',desc:'mi familia, me gusta / me encanta'},
+ {ico:'🔢',name:'Mates y Ciencias',desc:'números, ¿qué hora es?'},
+ {ico:'🍝',name:'¡A Comer!',desc:'el desayuno, la merienda, ¡qué rico!'},
+ {ico:'🚌',name:'Mi Ciudad',desc:'la calle, el transporte, la ruta'},
+ {ico:'🎓',name:'¡Preparados!',desc:'¡estoy preparado! ¡misión cumplida!'}
+];
+(function(){
+  var grid=document.getElementById('sticker-grid');
+  STICKERS.forEach(function(st,i){
+    var d=document.createElement('div');d.className='sticker';d.id='stk-'+i;
+    d.innerHTML='<div class="st-cover">🎁</div><div class="st-open"><div class="st-ico">'+st.ico+'</div><div class="st-name">Станция '+(i+1)+' · '+st.name+'</div><div class="st-desc">'+st.desc+'</div></div>';
+    d.addEventListener('click',function(){
+      if(d.classList.contains('open'))return;
+      d.classList.add('open');
+      speak('Estación '+(i+1)+'. '+st.name+'.');
+      var n=document.querySelectorAll('.sticker.open').length;
+      document.getElementById('stk-count').textContent=n;
+      if(n===7){
+        document.getElementById('stk-fb').textContent='🏆 ¡Todas las estaciones! Все 7 станций твои. ¡Misión cumplida!';
+        confetti('🏆');
+        speak('¡Misión cumplida! Todas las estaciones superadas.');
+      }
+    });
+    grid.appendChild(d);
+  });
+})();
+
+/* ===== ДИПЛОМ ===== */
+var MES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+(function(){
+  var d=new Date();
+  document.getElementById('dip-date').textContent='En Málaga, a '+d.getDate()+' de '+MES[d.getMonth()]+' de '+d.getFullYear()+'.';
+})();
+function emitDiploma(){
+  var nm=document.getElementById('dip-name').value.trim();
+  if(!nm){
+    document.getElementById('dip-name').style.borderColor='var(--red)';
+    document.getElementById('dip-name').focus();return;
+  }
+  document.getElementById('dip-name').style.display='none';
+  var out=document.getElementById('dip-name-out');
+  out.textContent=nm;
+  out.style.display='inline-block';
+  document.getElementById('dip-btn').style.display='none';
+  confetti('🎓');
+  speak('¡Enhorabuena, '+nm+'! ¡Misión cumplida! ¡Eres graduado de la escuela MUDRO!');
+}
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Представься и объяви: сегодня — твой выпускной!',model:'¡Hola! Me llamo Alex y hoy es mi graduación. ¡Estoy muy contento!'},
+ {q:'Расскажи, чему ты научился (he aprendido...).',model:'He aprendido mucho en este curso: la escuela, la familia, la comida, la ciudad y las emociones.'},
+ {q:'Назови любимую фразу и самое сложное слово.',model:'Mi frase favorita es «¡Misión cumplida!». La palabra más difícil es «el desayuno», ¡pero ya la sé!'},
+ {q:'Поблагодари семью.',model:'Gracias a mi familia por ayudarme cada día. ¡Sois los mejores!'},
+ {q:'Скажи финальные слова курса!',model:'¡Misión cumplida! ¡Nos vemos en España! ¡Buena suerte para mí!'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом скажи о СЕБЕ вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я сказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['la graduación','выпускной'],['el diploma','диплом'],['el premio','награда'],['los aplausos','аплодисменты'],
+ ['¡enhorabuena!','поздравляю!'],['he aprendido mucho','я многому научился'],['¡misión cumplida!','миссия выполнена!'],
+ ['buena suerte','удачи'],['sonríe','улыбайся'],['nos vemos en España','увидимся в Испании'],
+ ['habla sin miedo','говори без страха'],['pregunta siempre','всегда спрашивай']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== ФИНАЛЬНЫЙ ТОСТ ===== */
+function finalToast(){
+  confetti('🎉');
+  confetti('🎓');
+  speak('¡Felicidades! ¡Misión cumplida! ¡Nos vemos en España! ¡Que te vaya genial!');
+}
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres graduado de la escuela MUDRO! ¡Misión cumplida!');
+  confetti('🎓');
+  try{localStorage.setItem('mudro_kids_w20l3_badge_graduado','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w20l3_badge_graduado')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🎓','🏆'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

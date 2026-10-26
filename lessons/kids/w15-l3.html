@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 45: PBL: La nevera llena — Школа МУДРО</title>
+<meta name="description" content="Детский PBL-урок испанского 45: проект «Инвентаризация холодильника» — hay/no hay, ¿hay queso?, список покупок un kilo de, un litro de, un paquete de, ролевая «семья планирует покупки». Школа МУДРО.">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#E76F51; --love:#C64F33;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FBE3D8 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(231,111,81,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#FBE3D8,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FBE3D8;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #F6DCD0;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#FBE3D8,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#FBE3D8,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #eccdbf;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .survey-wrap{background:#fff;border:3px dashed var(--heart);border-radius:18px;padding:18px;margin:14px 0}
+  .survey-person{display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid #f0e6e8;cursor:pointer}
+  .survey-person:last-child{border-bottom:none}
+  .survey-person:hover{background:#FFF3EE}
+  .survey-avatar{width:50px;height:50px;border-radius:50%;background:#FBE3D8;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+  .survey-info{flex:1;font-size:.9rem}
+  .survey-name{font-weight:800;color:var(--heart);font-size:1rem}
+  .survey-likes{font-style:italic;color:var(--ink-soft);margin-top:2px}
+  .chart-wrap{background:#fff;border-radius:18px;padding:18px;margin:14px 0}
+  .chart-title{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.2rem;margin-bottom:10px}
+  .chart-bar{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:800;font-size:.9rem}
+  .chart-label{min-width:140px;font-size:.85rem}
+  .chart-fill{height:24px;border-radius:8px;background:linear-gradient(90deg,var(--heart),var(--star));transition:.5s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.8rem;font-weight:800;min-width:24px}
+
+  .warm-item{background:#fff;border:2px solid #f0e6e8;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #eccdbf;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#FBE3D8}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+
+  /* === PBL: ШАГИ ПРОЕКТА (уникальные стили урока 45) === */
+  .step-item{display:flex;align-items:center;gap:12px;background:#fff;border:2.5px solid #F6DCD0;border-radius:14px;padding:12px 14px;margin:8px 0;cursor:pointer;transition:.15s;text-align:left;font-family:'Nunito'}
+  .step-item:hover{border-color:var(--heart)}
+  .step-item.done{background:#E8F5E9;border-color:var(--green)}
+  .step-item.done .step-es::after{content:' ✅'}
+  .step-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .step-item.done .step-num{background:var(--green)}
+  .step-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .step-emo{font-size:1.5rem}
+  .step-ru{font-size:.82rem;color:var(--ink-soft);font-weight:700}
+
+  /* === ПРОЕКТ: ХОЛОДИЛЬНИК (уникальные стили урока 45) === */
+  .frigo{background:linear-gradient(180deg,#EFF8FF,#DDEFFB);border:4px solid var(--heart);border-radius:18px 18px 24px 24px;padding:14px 14px 18px;margin:14px 0;position:relative}
+  .frigo-handle{position:absolute;top:16px;right:20px;width:8px;height:60px;background:var(--heart);border-radius:6px;opacity:.45}
+  .frigo-freezer{background:#C9E4F6;border-radius:10px;padding:6px 12px;font-weight:800;font-size:.85rem;color:#2C5E8A;text-align:center;margin-bottom:8px}
+  .frigo-shelf{min-height:64px;border-bottom:3px solid #B9D9EE;display:flex;align-items:center;gap:8px;padding:6px 8px;flex-wrap:wrap}
+  .frigo-shelf:last-child{border-bottom:none}
+  .frigo-label{font-size:.72rem;color:#5b86a8;font-weight:800;margin-right:4px}
+  .frigo-item{background:#fff;border:2.5px solid var(--heart);border-radius:12px;padding:4px 10px;font-weight:800;cursor:pointer;font-size:1.05rem;font-family:'Nunito';animation:popIn .35s}
+  .frigo-item:hover{background:#FFE9E1}
+  .frigo-out{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;font-weight:700;line-height:1.9;min-height:60px;margin:12px 0}
+  .frigo-out b{color:var(--heart)}
+  .pb-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0;font-weight:800}
+  .pb-row select{font-family:'Nunito';font-weight:800;padding:8px 12px;border-radius:10px;border:2px solid var(--heart);background:#fff;color:var(--ink);font-size:.95rem}
+  .pb-out{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;font-weight:700;line-height:1.9;min-height:60px}
+  .pb-out b{color:var(--heart)}
+  .rubric{background:#FBE3D8;border-radius:16px;padding:14px 18px;margin:12px 0;font-weight:700;line-height:1.9}
+  .rubric b{color:var(--heart)}
+  .role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:12px 0}
+  .role-card{background:#fff;border:3px solid #F6DCD0;border-radius:16px;padding:14px}
+  .role-card h4{color:var(--heart);margin-bottom:6px}
+  .role-card em{display:block;font-weight:800;margin:4px 0}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 5 · ¡A Comer! · Урок 3 из 9</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🍕 СТАНЦИЯ 5 · УРОК 3 · НЕДЕЛЯ 15</span>
+  <div class="hero-emojis">🧊 🥚 🥛 📝 🛒</div>
+  <h1><span>PBL:</span> La nevera llena</h1>
+  <p class="sub">Сегодня — <strong>PBL-проект</strong>! 🏆 Ты — <strong>хозяин кухни</strong>: проверяешь, что есть в холодильнике (<em>Hay leche, pero no hay huevos</em>), пишешь <strong>список покупок</strong> и планируешь поход в магазин с семьёй!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> мама открывает холодильник и спрашивает: <em>«¿Hay leche?»</em>, а ты отвечаешь:<br>
+    <em>«Sí, hay leche, pero no hay huevos. Necesitamos comprar un litro de leche... ¡y un kilo de manzanas!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🧊</span> Проводить инвентаризацию холодильника</div>
+      <div class="goal-item"><span class="emoji">🔍</span> Говорить: hay / no hay / ¿hay...?</div>
+      <div class="goal-item"><span class="emoji">😟</span> Говорить: queda poco / está vacío</div>
+      <div class="goal-item"><span class="emoji">📝</span> Писать список: un kilo de, un litro de, un paquete de</div>
+      <div class="goal-item"><span class="emoji">🛒</span> Играть роль «семья планирует покупки»</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Хозяин кухни»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 44</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, jefe de la cocina! Вспомним режим дня — ответь ВСЛУХ. Мостик: «Ты знаешь, КОГДА есть. Но что делать, если в холодильнике пусто? ¡ESCRIBIR LA LISTA! Писать список покупок!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ПЛАН ПРОЕКТА + СЛОВА -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head">
+      <h2 class="block-title">⭐ План проекта: 6 шагов</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Кликай на каждый шаг — услышишь его по-испански и отметь как выполненный. Так делают настоящие хозяева кухни!</p>
+    <div id="steps-list"></div>
+    <div class="stars-line" style="text-align:center">📋 Шаги проекта: <span id="steps-count">0</span> / 6</div>
+    <h4 style="margin:16px 0 4px">⭐ Слова проекта</h4>
+    <div class="cards-grid" id="words-frigo"></div>
+    <div class="script">⚡ <strong>Секрет PBL:</strong> инвентаризация — это «ревизия»: <em>primero abrir, luego mirar, después contar y por último escribir la lista</em>. Сначала открываем, потом смотрим, считаем — и пишем список!</div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: hay / no hay / ¿hay...?</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Hay leche en la nevera.')"><td><b>HAY + еда</b></td><td>Hay leche en la nevera.</td><td>В холодильнике есть молоко.</td><td>🔊</td></tr>
+      <tr onclick="speak('No hay huevos.')"><td><b>NO HAY + еда</b></td><td>No hay huevos.</td><td>Нет яиц.</td><td>🔊</td></tr>
+      <tr onclick="speak('¿Hay queso?')"><td><b>¿HAY...?</b></td><td>¿Hay queso? — Sí, hay. / No, no hay.</td><td>Есть сыр? — Да, есть. / Нет, нету.</td><td>🔊</td></tr>
+      <tr onclick="speak('Queda poco pan.')"><td><b>QUEDA POCO</b></td><td>Queda poco pan.</td><td>Осталось мало хлеба.</td><td>🔊</td></tr>
+      <tr onclick="speak('El estante está vacío. La nevera está llena.')"><td><b>ESTÁ VACÍO / ESTÁ LLENO</b></td><td>El estante está vacío. La nevera está llena.</td><td>Полка пустая. Холодильник полный.</td><td>🔊</td></tr>
+      <tr onclick="speak('Necesitamos comprar un litro de leche.')"><td><b>NECESITAMOS COMPRAR</b></td><td>Necesitamos comprar un litro de leche.</td><td>Нам нужно купить литр молока.</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> <b>HAY</b> не меняется никогда — ни для одного, ни для многих: hay <span class="grammar-hint" data-hint="HAY — неизменяемая форма: hay leche (ед.ч.), hay huevos (мн.ч.). Нельзя: «han leche» или «hay leches». Это «волшебное слово-счётчик»: всё, что нужно, — поставить еду после него.">leche</span>, hay huevos. И не путай: hay = «есть, существует», está = «где находится / состояние» (el estante está vacío — полка ПУСТАЯ, а не «нет полки»!).<br>8 лет: hay — волшебное слово: «есть» и для одного, и для многих! 🪄</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Квиз «HAY o NO HAY?»: 8 раундов</p>
+      <div class="game-emo" id="hay-emo">🧊</div>
+      <div class="game-q" id="hay-q"></div>
+      <div class="opts" id="hay-opts"></div>
+      <div class="game-fb" id="hay-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="hay-stars">0</span> / <span id="hay-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="hayStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ПРОЕКТ — ХОЛОДИЛЬНИК -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🧊 ПРОЕКТ: инвентаризация холодильника</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <p class="block-sub">Шаг А (онлайн): кликай на продукты из пула — они окажутся на полках, а ты повторяй ВСЛУХ: <em>«Hay...»</em>. Кликни на продукт В холодильнике — уберёшь его: <em>«No hay...»</em>. Шаг Б (дома): проверь свой настоящий холодильник!</p>
+    <div class="frigo">
+      <div class="frigo-handle"></div>
+      <div class="frigo-freezer">❄️ el congelador (морозильник)</div>
+      <div id="frigo-shelves"></div>
+    </div>
+    <div class="stars-line" style="text-align:center">🧊 Продуктов в холодильнике: <span id="frigo-count">0</span> / 8 <span id="frigo-fb" style="color:var(--green)"></span></div>
+    <p class="block-sub" style="margin-top:10px">📥 Пул продуктов — кликай, чтобы положить в холодильник:</p>
+    <div class="sb-pool" id="frigo-pool"></div>
+    <button class="speak-btn" style="margin-top:12px" onclick="frigoReset()">🔄 Очистить холодильник</button>
+    <div class="frigo-out" id="frigo-out">Положи продукты в холодильник — «ревизия» напишется сама! 👆</div>
+    <button class="speak-btn" onclick="speakFrigo()">🔊 Послушать ревизию</button>
+    <h4 style="margin:18px 0 4px">📝 Конструктор списка покупок</h4>
+    <p class="block-sub">Чего нет в холодильнике? Собери список из 4 пунктов. Выбирай варианты — список соберётся сам!</p>
+    <div class="pb-row">1️⃣ No hay
+      <select id="lp-food" onchange="buildLista()"><option>huevos</option><option>leche</option><option>queso</option><option>pan</option><option>manzanas</option><option>zumo</option></select>.
+    </div>
+    <div class="pb-row">2️⃣ Necesitamos comprar
+      <select id="lp-buy1" onchange="buildLista()"><option>un kilo de manzanas</option><option>un litro de leche</option><option>un paquete de macarrones</option><option>una botella de zumo</option><option>un kilo de tomates</option></select>.
+    </div>
+    <div class="pb-row">3️⃣ También compramos
+      <select id="lp-buy2" onchange="buildLista()"><option>un paquete de macarrones</option><option>un litro de leche</option><option>un kilo de manzanas</option><option>una botella de zumo</option><option>un kilo de tomates</option></select>.
+    </div>
+    <div class="pb-row">4️⃣ ¡La lista está lista! ✅</div>
+    <div class="pb-out" id="lp-out">Выбери варианты выше — список покупок соберётся сам! 👆</div>
+    <button class="speak-btn" style="margin-top:10px" onclick="speakLista()">🔊 Послушать список</button>
+  </section>
+
+  <!-- БЛОК 4: РОЛЕВАЯ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎭 Ролевая: семья планирует покупки</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Играем в 2 роли: <strong>Mamá/Papá</strong> и <strong>Yo</strong>. Сначала прочитай карточки ролей, потом собери диалог в конструкторе — и разыграй с родителями!</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h4>👩 Роль 1: Mamá / Papá</h4>
+        <em onclick="speak('¿Hay leche?')">🔊 ¿Hay leche?</em>
+        <em onclick="speak('¿Hay huevos?')">🔊 ¿Hay huevos?</em>
+        <em onclick="speak('¿Qué necesitamos comprar?')">🔊 ¿Qué necesitamos comprar?</em>
+        <em onclick="speak('Escribe la lista, por favor.')">🔊 Escribe la lista, ¡por favor!</em>
+      </div>
+      <div class="role-card">
+        <h4>🧒 Роль 2: Yo (хозяин кухни)</h4>
+        <em onclick="speak('Sí, hay leche, pero no hay huevos.')">🔊 Sí, hay leche, pero no hay huevos.</em>
+        <em onclick="speak('Queda poco pan.')">🔊 Queda poco pan.</em>
+        <em onclick="speak('Necesitamos comprar un kilo de manzanas.')">🔊 Necesitamos comprar un kilo de manzanas.</em>
+        <em onclick="speak('¡La lista está lista!')">🔊 ¡La lista está lista!</em>
+      </div>
+    </div>
+    <h4 style="margin:14px 0 4px">🧩 Конструктор диалога</h4>
+    <div class="pb-row">1️⃣ Mamá pregunta:
+      <select id="rp-q1" onchange="buildRp()"><option>¿Hay leche?</option><option>¿Hay huevos?</option><option>¿Hay queso?</option><option>¿Hay pan?</option></select>
+    </div>
+    <div class="pb-row">2️⃣ Yo respondo:
+      <select id="rp-a1" onchange="buildRp()"><option>Sí, hay leche.</option><option>No, no hay huevos.</option><option>Sí, hay queso.</option><option>No, no hay pan.</option></select>
+    </div>
+    <div class="pb-row">3️⃣ Mamá dice:
+      <select id="rp-q2" onchange="buildRp()"><option>¿Qué necesitamos comprar?</option><option>¿Cuánto queda?</option><option>¿La nevera está llena?</option></select>
+    </div>
+    <div class="pb-row">4️⃣ Yo respondo:
+      <select id="rp-a2" onchange="buildRp()"><option>Necesitamos comprar un litro de leche.</option><option>Necesitamos comprar un kilo de manzanas.</option><option>Necesitamos comprar un paquete de macarrones.</option><option>Queda poco pan. Compramos pan.</option></select>
+    </div>
+    <div class="pb-out" id="rp-out">Выбери реплики — диалог соберётся сам! 👆</div>
+    <button class="speak-btn" style="margin-top:10px" onclick="speakRp()">🔊 Послушать диалог</button>
+    <div class="script">⚡ <strong>Секрет:</strong> следи, чтобы вопрос и ответ совпадали: <em>«¿Hay leche?» — «Sí, hay leche»</em>, а не «¿Hay leche? — No, no hay huevos»! Настоящий хозяин кухни не путает продукты! 😄</div>
+  </section>
+
+  <!-- БЛОК 5: CLIL — ЧТЕНИЕ -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">📖 CLIL: «La nevera de Lucía»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakLucia()">🔊 Послушать текст</button>
+    <div class="read-box">
+      La <b>nevera</b> de Lucía está en la cocina. Tiene tres <b>estantes</b> y el <b>congelador</b>. En el primer estante hay <b>leche</b>, yogur y una <b>botella</b> de zumo. En el segundo estante hay verdura: tomates y zanahorias. En el tercer estante hay <b>queso</b>, jamón y <b>huevos</b>. En la <b>puerta de la nevera</b> hay agua. ¿Qué no hay en la nevera? ¡No hay <b>pan</b>! El pan está en el armario. Queda poco leche también. Lucía <b>escribe la lista</b>: pan, un litro de leche, un kilo de manzanas. ¡Ahora la nevera va a estar <b>llena</b>!
+    </div>
+    <div id="lucia-quiz"></div>
+    <div class="script">🧮 <strong>CLIL-математика (12 лет):</strong> В холодильнике Люсии 3 полки, на первой — 3 продукта, на второй — 2, на третьей — 3, на дверце — 1. Сколько всего? <b>9 продуктов</b>! А сколько на каждой полке твоей nevera?<br>🧒 <strong>8 лет:</strong> назови вслух 5 частей холодильника: <em>la nevera, el congelador, el estante, la puerta, la botella</em>.</div>
+  </section>
+
+  <!-- БЛОК 6: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#C24E8C">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Презентация: rubric «Скажи 3 предложения»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="read-box" style="background:#FBE3D8;border-color:var(--heart)">
+      <strong>📋 Шаблон речи (3 предложения о твоей nevera):</strong><br>
+      1. <em>En mi nevera <b>hay</b> [leche] y <b>hay</b> [queso].</em><br>
+      2. <em>Pero <b>no hay</b> [huevos] / <b>queda poco</b> [pan].</em><br>
+      3. <em><b>Necesitamos comprar</b> [un kilo de manzanas / un litro de leche / un paquete de macarrones].</em>
+    </div>
+    <div class="rubric">
+      <strong>✅ Rubric «Скажи 3 предложения» (мини-защита проекта):</strong><br>
+      □ <b>Фраза 1:</b> En mi nevera hay... y hay...<br>
+      □ <b>Фраза 2:</b> Pero no hay... / Queda poco...<br>
+      □ <b>Фраза 3:</b> Necesitamos comprar... (un kilo de / un litro de / un paquete de)<br>
+      💡 Совет учителя: <em>«Habla como un verdadero jefe de la cocina. ¡Tú puedes!»</em> — говори как настоящий хозяин кухни!
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 7: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">👨‍🍳</div>
+      <h3>Хозяин кухни</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты провёл инвентаризацию холодильника, написал список покупок и спланировал закупку с семьёй!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Хозяин кухни» 👨‍🍳 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🎉 <strong>Первая неделя станции 5 — пройдена!</strong> Ты умеешь: испанские блюда, режим дня, инвентаризацию холодильника. 🔜 <strong>Анонс урока 46 (неделя 16):</strong> «<b>Pesos y medidas</b> ⚖ — взвешиваем un kilo de tomates на рынке и меряем un litro de leche!»</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head"><h2 class="block-title">🗣 Слова урока</h2></div>
+    <h4 style="margin-bottom:8px">🧊 Холодильник</h4>
+    <div class="cards-grid" id="words-nevera"></div>
+    <h4 style="margin:14px 0 8px">🔍 Hay / No hay</h4>
+    <div class="cards-grid" id="words-hay"></div>
+    <h4 style="margin:14px 0 8px">📝 Список покупок</h4>
+    <div class="cards-grid" id="words-lista"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание (проект!)</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Открой свой холодильник</strong> · 5 мин<br>Настоящий! Посчитай продукты на каждой полке. Повтори: <em>«Hay...»</em></div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🧊 ПРОЕКТ: Схема «Mi nevera»</strong> · 20 мин ⭐<br>Нарисуй свой холодильник с полками и продуктами, подпиши по-испански. <b>8 лет</b>: 6 продуктов. <b>12 лет</b>: все полки + дверца + congelador.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>📝 Список покупок</strong> · 10 мин ⭐<br>Напиши список из 4–5 пунктов по образцу: <em>un kilo de manzanas, un litro de leche, un paquete de macarrones...</em></div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🎭 Ролевая с родителями</strong> · 10 мин ⭐<br>Разыграй диалог из урока: родитель спрашивает <em>«¿Hay...? ¿Qué necesitamos comprar?»</em>, ты отвечаешь. Поменяйтесь ролями!</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎤 Голосовое по rubric</strong> · 5 мин ⭐<br>«Скажи 3 предложения» о своей nevera: hay... / no hay... / necesitamos comprar... Отправь учителю!</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>🔍 Детектив упаковок</strong> · 5 мин ⭐<br>Найди дома 3 упаковки и определи: un kilo de... / un litro de... / un paquete de... (мука, молоко, макароны, сок...)</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Говорить hay / no hay / ¿hay...?</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Называть части холодильника (nevera, estante, puerta...)</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Говорить queda poco / está vacío / está lleno</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Писать список: un kilo de / un litro de / un paquete de</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Играть ролевую «семья планирует покупки»</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Рассказать 3 предложения о своей nevera (rubric)</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 5 · Урок 3 (PBL: La nevera llena)</span>
+    <span>Открыть карточки →</span>
+  </a>
+  <!-- QUIZLET: дети урок 45 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w15-l2.html" class="nav-prev"><div class="nav-small">← Урок 2 станции 5</div><div class="nav-title">Урок 44: Las comidas del día ⏰</div></a>
+    <a href="./w16-l1.html"><div class="nav-small">Неделя 16 · Станция 5 →</div><div class="nav-title">Урок 46: Pesos y medidas ⚖ </div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 5: ¡A Comer! · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var WARM=[
+ {q:'¿A qué hora desayunas?',model:'Desayuno a las ocho: cereales y zumo.',ru:'Во сколько ты завтракаешь? (desayunar)'},
+ {q:'¿A qué hora comes y cenas?',model:'Como a las dos y ceno a las nueve.',ru:'Когда ты обедаешь и ужинаешь? (comer / cenar)'},
+ {q:'¿Tienes hambre ahora?',model:'¡Sí, tengo mucha hambre! / No, no tengo hambre.',ru:'Ты голоден сейчас? (tener hambre)'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ШАГИ ПРОЕКТА ===== */
+var STEPS=[
+ {emo:'🧊',es:'Abrir la nevera',ru:'Открой холодильник (дома или в игре)'},
+ {emo:'👀',es:'Mirar los estantes',ru:'Посмотри на полки: что там?'},
+ {emo:'🔢',es:'Contar: hay / no hay',ru:'Посчитай: что есть, а чего нет'},
+ {emo:'📝',es:'Escribir la lista',ru:'Напиши список покупок'},
+ {emo:'🛒',es:'Ir a la compra',ru:'Спланируй поход в магазин с семьёй'},
+ {emo:'🎤',es:'Presentar: 3 frases',ru:'Расскажи по rubric 3 предложения'}
+];
+var stepsN=0;
+(function(){
+  var box=document.getElementById('steps-list');
+  STEPS.forEach(function(s,i){
+    var d=document.createElement('div');d.className='step-item';d.id='pstep'+i;
+    d.innerHTML='<span class="step-num">'+(i+1)+'</span><span class="step-emo">'+s.emo+'</span><div><div class="step-es">'+s.es+'</div><div class="step-ru">'+s.ru+'</div></div>';
+    d.addEventListener('click',function(){
+      speak(s.es);
+      if(!d.classList.contains('done')){
+        d.classList.add('done');stepsN++;
+        document.getElementById('steps-count').textContent=stepsN;
+        if(stepsN===STEPS.length)confetti('📝');
+      }
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* ===== СЛОВА УРОКА ===== */
+var NEVERA=[
+ {emo:'🧊',es:'la nevera',ru:'холодильник'},
+ {emo:'❄️',es:'el congelador',ru:'морозильник'},
+ {emo:'🗃️',es:'el estante',ru:'полка'},
+ {emo:'🍾',es:'la botella',ru:'бутылка'},
+ {emo:'📦',es:'el envase',ru:'упаковка'},
+ {emo:'🚪',es:'la puerta de la nevera',ru:'дверца холодильника'},
+ {emo:'🥚',es:'el huevo / los huevos',ru:'яйцо / яйца'}
+];
+var HAYW=[
+ {emo:'🥛',es:'hay leche',ru:'есть молоко'},
+ {emo:'❌',es:'no hay huevos',ru:'нет яиц'},
+ {emo:'🧀',es:'¿hay queso?',ru:'есть сыр?'},
+ {emo:'⏳',es:'queda poco',ru:'осталось мало'},
+ {emo:'🌑',es:'está vacío',ru:'пусто'},
+ {emo:'🌕',es:'está lleno',ru:'полно'},
+ {emo:'🛒',es:'necesitamos comprar',ru:'нужно купить'}
+];
+var LISTA=[
+ {emo:'📋',es:'la lista',ru:'список'},
+ {emo:'✍️',es:'escribir la lista',ru:'написать список'},
+ {emo:'🛍️',es:'comprar',ru:'покупать'},
+ {emo:'⚖️',es:'un kilo de',ru:'килограмм'},
+ {emo:'💧',es:'un litro de',ru:'литр'},
+ {emo:'📦',es:'un paquete de',ru:'пачка'},
+ {emo:'🍾',es:'una botella de',ru:'бутылка'}
+];
+(function(){
+  function fill(id,arr,say){
+    var box=document.getElementById(id);
+    arr.forEach(function(f){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+      d.addEventListener('click',function(){speak(say?f.say||f.es:f.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-nevera',NEVERA,true);
+  fill('words-hay',HAYW,true);
+  fill('words-lista',LISTA,false);
+})();
+/* особое произношение для пар слов */
+NEVERA[6].say='el huevo. Los huevos.';
+HAYW[6].say='necesitamos comprar.';
+
+/* ===== ИГРА: HAY O NO HAY ===== */
+var HAYQ=[
+ {emo:'🥛',q:'В холодильнике есть молоко: ___ leche en la nevera.',ok:'Hay',w:['No hay']},
+ {emo:'🥚',q:'Яиц нет: ___ huevos.',ok:'No hay',w:['Hay']},
+ {emo:'🧀',q:'Ты спрашиваешь про сыр: ¿___ queso?',ok:'hay',w:['no hay']},
+ {emo:'🍶',q:'Есть йогурт: ___ yogur.',ok:'Hay',w:['No hay']},
+ {emo:'🥖',q:'Хлеба нет: ___ pan.',ok:'No hay',w:['Hay']},
+ {emo:'⏳',q:'Хлеба осталось мало: ___ poco pan.',ok:'Queda',w:['Hay']},
+ {emo:'🧃',q:'Есть сок: ___ zumo.',ok:'Hay',w:['No hay']},
+ {emo:'🗃️',q:'Полка пустая: el estante ___ vacío.',ok:'está',w:['hay']}
+];
+var hayOrd=[],hayI=0,hayS=0;
+function hayStart(){hayOrd=shuffle(HAYQ.slice());hayI=0;hayS=0;document.getElementById('hay-total').textContent=hayOrd.length;document.getElementById('hay-stars').textContent='0';hayNext();}
+function hayNext(){
+  var box=document.getElementById('hay-opts');box.innerHTML='';
+  if(hayI>=hayOrd.length){document.getElementById('hay-q').textContent='🎉 ¡Muy bien!';document.getElementById('hay-emo').textContent='🏆';document.getElementById('hay-fb').textContent='⭐ '+hayS+' из '+hayOrd.length;return;}
+  var r=hayOrd[hayI];
+  document.getElementById('hay-emo').textContent=r.emo;
+  document.getElementById('hay-q').textContent=r.q;
+  document.getElementById('hay-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='110px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');hayS++;document.getElementById('hay-stars').textContent=hayS;document.getElementById('hay-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('hay-fb').textContent='❌ Правильно: '+r.ok;}
+      hayI++;setTimeout(hayNext,1400);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 3: ПРОЕКТ — ХОЛОДИЛЬНИК ===== */
+var FRIGO=[
+ {emo:'🥛',es:'leche',ru:'молоко'},
+ {emo:'🥚',es:'huevos',ru:'яйца'},
+ {emo:'🧀',es:'queso',ru:'сыр'},
+ {emo:'🍅',es:'tomates',ru:'помидоры'},
+ {emo:'🍎',es:'manzanas',ru:'яблоки'},
+ {emo:'🥖',es:'pan',ru:'хлеб'},
+ {emo:'🍶',es:'yogur',ru:'йогурт'},
+ {emo:'🧃',es:'zumo',ru:'сок'}
+];
+var placed=[];
+function frigoIn(p){return placed.some(function(x){return x.es===p.es;});}
+function renderFrigoShelves(){
+  var box=document.getElementById('frigo-shelves');box.innerHTML='';
+  for(var s=0;s<4;s++){
+    var sh=document.createElement('div');sh.className='frigo-shelf';
+    var lab=document.createElement('span');lab.className='frigo-label';lab.textContent='el estante '+(s+1)+':';
+    sh.appendChild(lab);
+    placed.slice(s*2,s*2+2).forEach(function(p){
+      var it=document.createElement('button');it.className='frigo-item';it.textContent=p.emo+' '+p.es;
+      it.onclick=function(){removeFrigo(p);};
+      sh.appendChild(it);
+    });
+    box.appendChild(sh);
+  }
+}
+function renderFrigoPool(){
+  var pool=document.getElementById('frigo-pool');pool.innerHTML='';
+  shuffle(FRIGO.slice()).forEach(function(p){
+    var b=document.createElement('div');b.className='sb-word'+(frigoIn(p)?' placed':'');b.textContent=p.emo+' '+p.es;
+    b.addEventListener('click',function(){
+      if(frigoIn(p))return;
+      placed.push(p);speak('Hay '+p.es+'.');
+      refreshFrigo();
+    });
+    pool.appendChild(b);
+  });
+}
+function removeFrigo(p){
+  placed=placed.filter(function(x){return x.es!==p.es;});
+  speak('No hay '+p.es+'.');
+  refreshFrigo();
+}
+function updateFrigoOut(){
+  var out=document.getElementById('frigo-out');
+  var fb=document.getElementById('frigo-fb');
+  document.getElementById('frigo-count').textContent=placed.length;
+  if(placed.length===0){out.innerHTML='<b>¡La nevera está vacía!</b> 🌑 No hay nada. ¿Hay leche? No, no hay leche. ¿Hay huevos? No, no hay huevos.';fb.textContent='';return;}
+  if(placed.length===8){out.innerHTML='<b>¡La nevera está llena!</b> 🌕 Hay: '+placed.map(function(p){return p.es;}).join(', ')+'. ¡Todo está aquí!';fb.textContent='🏆 ¡Nevera llena!';return;}
+  var hay=placed.map(function(p){return p.es;});
+  var nohay=FRIGO.filter(function(p){return !frigoIn(p);}).map(function(p){return p.es;});
+  out.innerHTML='<b>Hay</b>: '+hay.join(', ')+'.<br><b>No hay</b>: '+nohay.join(', ')+'.<br>¿Hay queso? ¡Mira y contesta! 🔍';
+  fb.textContent='';
+}
+function frigoSpeakText(){
+  if(placed.length===0)return '¡La nevera está vacía! No hay nada.';
+  if(placed.length===8)return '¡La nevera está llena! Hay '+placed.map(function(p){return p.es;}).join(', ')+'.';
+  return 'Hay '+placed.map(function(p){return p.es;}).join(', ')+'. No hay '+FRIGO.filter(function(p){return !frigoIn(p);}).map(function(p){return p.es;}).join(', ')+'.';
+}
+function speakFrigo(){speak(frigoSpeakText());}
+function refreshFrigo(){renderFrigoShelves();renderFrigoPool();updateFrigoOut();}
+function frigoReset(){placed=[];refreshFrigo();}
+refreshFrigo();
+
+/* ===== КОНСТРУКТОР СПИСКА ===== */
+function lb(id){return document.getElementById(id).value;}
+function buildLista(){
+  var out=document.getElementById('lp-out');
+  out.innerHTML='<b>No hay</b> '+lb('lp-food')+'.<br><b>Necesitamos comprar</b> '+lb('lp-buy1')+'.<br><b>También compramos</b> '+lb('lp-buy2')+'.<br><b>✅ ¡La lista está lista!</b>';
+}
+function speakLista(){
+  speak('No hay '+lb('lp-food')+'. Necesitamos comprar '+lb('lp-buy1')+'. También compramos '+lb('lp-buy2')+'. ¡La lista está lista!');
+}
+buildLista();
+
+/* ===== РОЛЕВАЯ: КОНСТРУКТОР ДИАЛОГА ===== */
+function buildRp(){
+  var out=document.getElementById('rp-out');
+  out.innerHTML='<b>👩 Mamá/Papá:</b> '+lb('rp-q1')+'<br><b>🧒 Yo:</b> '+lb('rp-a1')+'<br><b>👩 Mamá/Papá:</b> '+lb('rp-q2')+'<br><b>🧒 Yo:</b> '+lb('rp-a2')+'<br><b>✅ ¡La lista está lista!</b>';
+}
+function speakRp(){
+  speak(lb('rp-q1')+' '+lb('rp-a1')+' '+lb('rp-q2')+' '+lb('rp-a2')+' ¡La lista está lista!');
+}
+buildRp();
+
+/* ===== БЛОК 5: CLIL — ЧТЕНИЕ ===== */
+function speakLucia(){speak('La nevera de Lucía está en la cocina. Tiene tres estantes y el congelador. En el primer estante hay leche, yogur y una botella de zumo. En el segundo estante hay verdura: tomates y zanahorias. En el tercer estante hay queso, jamón y huevos. En la puerta de la nevera hay agua. ¿Qué no hay en la nevera? ¡No hay pan! El pan está en el armario. Queda poco leche también. Lucía escribe la lista: pan, un litro de leche, un kilo de manzanas. ¡Ahora la nevera va a estar llena!');}
+var LUCIA=[
+ {q:'¿Cuántos estantes tiene la nevera de Lucía?',ru:'Сколько полок в холодильнике Люсии? [8 лет]',ok:'Tres.',w:['Dos.','Cuatro.']},
+ {q:'¿Dónde está la verdura?',ru:'Где находятся овощи? [8 лет]',ok:'En el segundo estante.',w:['En el primer estante.','En el congelador.']},
+ {q:'¿Qué no hay en la nevera?',ru:'Чего НЕТ в холодильнике? [8 лет]',ok:'El pan.',w:['El queso.','La leche.']},
+ {q:'¿Dónde está el pan?',ru:'Где находится хлеб? [12 лет]',ok:'En el armario.',w:['En la nevera.','En el congelador.']},
+ {q:'¿Qué escribe Lucía en la lista?',ru:'Что Люсия пишет в списке? [12 лет]',ok:'Pan, un litro de leche y un kilo de manzanas.',w:['Un paquete de macarrones y huevos.','Una botella de zumo y tomates.']}
+];
+(function(){
+  var wrap=document.getElementById('lucia-quiz');
+  LUCIA.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Скажи, какие 2 продукта есть в твоём холодильнике.',model:'En mi nevera hay leche y hay queso.'},
+ {q:'Скажи, чего нет или чего мало.',model:'Pero no hay huevos. Queda poco pan.'},
+ {q:'Скажи, что нужно купить (2 пункта с мерами).',model:'Necesitamos comprar un litro de leche y un kilo de manzanas.'},
+ {q:'Разыграй с родителем: вопрос «¿Hay...?» и ответ.',model:'— ¿Hay yogur? — No, no hay yogur. Necesitamos comprar un paquete de yogures.'},
+ {q:'Расскажи 3 предложения о своей nevera ПОЛНОСТЬЮ (rubric).',model:'En mi nevera hay leche y hay tomates. Pero no hay huevos, queda poco pan. Necesitamos comprar un kilo de manzanas y un litro de leche.'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом расскажи о СВОЁМ холодильнике вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['la nevera','холодильник'],['el congelador','морозильник'],
+ ['el estante','полка'],['la botella','бутылка'],
+ ['hay leche','есть молоко'],['no hay huevos','нет яиц'],
+ ['¿hay queso?','есть сыр?'],['queda poco','осталось мало'],
+ ['está vacío','пусто'],['un kilo de','килограмм'],
+ ['un litro de','литр'],['un paquete de','пачка']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres el jefe de la cocina!');
+  confetti('🧊');
+  try{localStorage.setItem('mudro_kids_w15l3_badge_jefe_cocina','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w15l3_badge_jefe_cocina')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🥛','🧀'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

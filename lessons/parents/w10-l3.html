@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFF7EF">
+<meta name="description" content="Урок 10.3: CHECKPOINT 2 — симуляция «Утро понедельника»: температура, рюкзак, аптека, письмо учителю. Финальный квиз по блоку 6–10 и продукт — реальная аптечка (botiquín).">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<title>Урок 10.3 · CHECKPOINT 2 · Ревизия блока 6–10 — МУДРО</title>
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--p5:#4CAF7D;
+    --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
+    --soft:#FBF3EA;--ink-soft:#7A6A5C;--teal:#2C5E8A;
+    --vocab:#BE8A55;
+    --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
+    --ok:#7A8B4C;--bad:#E2725B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c1{background:var(--p1)}
+  .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)} .step-num.c5{background:var(--p5)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-lightblue{background:var(--p5);color:#fff}.btn-lightblue:hover{background:#3d9168}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+
+  .situation-box{background:#fff;border:3px solid var(--p5);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p5)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#E8F5E9;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p5)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p5);color:#fff;border-color:var(--p5)}
+  .vocab-front .es{font-size:1.05rem;font-weight:800;margin-bottom:6px;line-height:1.3}
+  .vocab-front .ru{font-size:.88rem;opacity:.95;font-weight:600}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p5);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.9rem;font-weight:700;color:var(--p5);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:8px}
+  .grammar-box .formula{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.55}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+  .grammar-table th,.grammar-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .grammar-table th{background:#FBF3EA;color:var(--p1);font-size:.86rem}
+  .grammar-table tr:nth-child(even) td{background:#FFFDF9}
+  .grammar-table .practice{background:#F0F7E6;color:var(--p2);font-weight:700}
+  .grammar-table .reference{color:var(--muted);font-style:italic}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .note.lightblue{background:#E8F4FB;border-left-color:var(--p5)}
+  .note.teal{background:#E0F2F1;border-left-color:var(--p5)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:110px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:360px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.75}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.02rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p4)}
+  .dialog-box .who.you{color:var(--p1)}
+  .dialog-box .dialog-text{display:none}
+  .dialog-box.open .dialog-text{display:block;margin-top:10px}
+
+  .clil-text{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:18px;margin-bottom:16px}
+  .clil-text h4{color:var(--p4);margin-bottom:8px}
+  .clil-text p{font-size:.95rem;margin-bottom:10px}
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  .quizlet-box{background:var(--p4);color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-top:14px}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p4);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  .checkpoint-banner{background:linear-gradient(135deg,#7A8B4C,#4CAF7D);color:#fff;border-radius:20px;padding:36px 24px;text-align:center;margin-top:14px;box-shadow:var(--shadow)}
+  .checkpoint-banner h3{font-size:1.6rem;margin-bottom:10px}
+  .checkpoint-banner p{font-weight:700;opacity:.95;max-width:640px;margin:0 auto}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  .lesson-nav span.soon{background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--muted);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 10 · Урок 3 из 3 · Блок 2 El Cole y la Salud</span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🏫 БЛОК 2 · EL COLE Y LA SALUD</span>
+  <h1>Урок 10.3 · <em>CHECKPOINT 2 · Ревизия блока 6–10</em></h1>
+  <p class="sub">Пять недель — пять миссий: школа, записи к врачу, urgencias, прививки, психолог. Сегодня — симуляция «Утро понедельника», квиз-босс и ваш главный продукт: реальная аптечка (botiquín).</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🧠 CLIL: паспорт институтов — centro de salud, farmacia, escuela</span>
+    <span class="meta-chip">🎯 Цель: пройти симуляцию «Утро понедельника» из 4 станций</span>
+    <span class="meta-chip">🗣 35 слов повторения в 5 категориях</span>
+    <span class="meta-chip">🧩 повторение: Perfecto, причастия, маркеры времени</span>
+    <span class="meta-chip">🎭 Продукт: собранная аптечка (botiquín) + звонок в 112</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c1">0</div>
+    <div class="step-title">
+      <h2>Разминка + вопрос из жизни</h2>
+      <span class="time">00:00 – 05:00 · Повторение урока 10.2 и вечер воскресенья</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Психолог школы, поддержка, причастия — всё это ещё свежо в памяти? Проверим блицем, а потом поговорим о том, что бывает каждый понедельник.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 10.2 «Психолог в школе»</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🌙</div>
+      <div class="sit-title">Одна ситуация: воскресенье, 21:00</div>
+    </div>
+    <div class="sit-intro">
+      Звонит друг Костя, тоже релокант. Разговор короткий, но он настраивает на завтрашний день. Отвечайте вслух, нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Костя:</div>
+      <div class="es">Oye, mañana es lunes. ¿Todo listo en casa?</div>
+      <div class="ru">Слушай, завтра понедельник. Всё готово дома?</div>
+      <button class="speak-btn" onclick="speak('Oye, mañana es lunes. ¿Todo listo en casa?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ:</div>
+      <div class="es">Casi. Mira tose un poco, pero no tiene fiebre.</div>
+      <div class="ru">Почти. Мира немного кашляет, но температуры нет.</div>
+      <button class="speak-btn" onclick="speak('Casi. Mira tose un poco, pero no tiene fiebre.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Костя:</div>
+      <div class="es">¿Tenéis botiquín en casa? Mi hija vomitó en la noche del sábado.</div>
+      <div class="ru">У вас есть аптечка? Мою дочь рвало в ночь на субботу.</div>
+      <button class="speak-btn" onclick="speak('¿Tenéis botiquín en casa? Mi hija vomitó en la noche del sábado.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ:</div>
+      <div class="es">Sí, tenemos un botiquín nuevo: tiritas, suero oral y termómetro.</div>
+      <div class="ru">Да, у нас новая аптечка: пластыри, регидратация и термометр.</div>
+      <button class="speak-btn" onclick="speak('Sí, tenemos un botiquín nuevo: tiritas, suero oral y termómetro.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Что случилось у дочери Кости?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Она упала и сломала руку.</div>
+        <div class="q-opt" data-o="1">Её рвало в ночь на субботу.</div>
+        <div class="q-opt" data-o="2">У неё температура 39.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">2</span>Что есть в вашей аптечке?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Escayola и бинты.</div>
+        <div class="q-opt" data-o="1">Ничего: мы только приехали.</div>
+        <div class="q-opt" data-o="2">Tiritas, suero oral y termómetro.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня — <b>CHECKPOINT 2</b>. Никакой новой теории: сначала повторим слова и грамматику всего блока, а потом пройдём <b>симуляцию «Утро понедельника»</b> — 4 станции: температура, рюкзак, аптека, письмо учителю. В конце — квиз-босс и праздничный баннер.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ (ПОВТОРЕНИЕ) -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">1</div>
+    <div class="step-title">
+      <h2>Карточки: 35 ключевых слов блока 6–10</h2>
+      <span class="time">05:00 – 15:00 · 5 категорий · повторение</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Это ядро блока: школа (нед. 6–7), здоровье (нед. 8–9), симптомы, аптечка и маркеры времени. Правило игры: сначала назовите перевод вслух — потом переворачивайте карточку.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('colegio',this)">🏫 Школа (нед. 6–7) (7)</button>
+      <button class="tab" onclick="showVocab('salud',this)">🩺 Здоровье (нед. 8–9) (7)</button>
+      <button class="tab" onclick="showVocab('sintomas',this)">🤒 Симптомы (7)</button>
+      <button class="tab" onclick="showVocab('botiquin',this)">🧰 Аптечка (7)</button>
+      <button class="tab" onclick="showVocab('tiempo',this)">⏰ Маркеры времени (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note lightblue" style="margin-top:16px">
+      💡 <b>Связка блока:</b> школа сообщает о симптомах → вы звоните в centro de salud → pediatra даёт план → вы пишете tutora. Одни и те же 35 слов работают во всей цепочке. Если какая-то категория «красная» — именно её повторяйте в тренажёре внизу урока.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      🗺 <b>Лайфхак «3 контакта»:</b> у вас на холодильнике должны быть три номера: <i>centro de salud</i> (запись), <i>farmacia de guardia</i> (дежурная аптека) и <b>112</b> (всё экстренное). Проверьте, что они записаны — это часть домашки.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА (ПОВТОРЕНИЕ) -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c2">2</div>
+    <div class="step-title">
+      <h2>Грамматика-ревизия: Perfecto, причастия, маркеры</h2>
+      <span class="time">15:00 – 23:00 · Всё, что нужно для «утра понедельника»</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Весь блок 6–10 говорил о настоящем и о том, что уже случилось. Формула связи: <b>haber + причастие</b> + маркеры <b>hoy / ya / todavía no</b>.</p>
+
+    <div class="grammar-box">
+      <h4>📐 Pretérito Perfecto — быстрый прогон</h4>
+      <div class="formula">he / has / ha / hemos / habéis / han + participio</div>
+      <table class="grammar-table">
+        <tr>
+          <th>Ситуация</th>
+          <th>Фраза</th>
+        </tr>
+        <tr>
+          <td class="practice">Сегодня уже сделали</td>
+          <td class="practice"><i>Esta mañana hemos llamado al centro de salud.</i></td>
+        </tr>
+        <tr>
+          <td class="practice">Уже — «давай быстрее»</td>
+          <td class="practice"><i>Ya ha tomado el antitérmico.</i></td>
+        </tr>
+        <tr>
+          <td class="practice">Ещё не — «жду»</td>
+          <td class="practice"><i>Todavía no ha bajado la fiebre.</i></td>
+        </tr>
+        <tr>
+          <td class="reference">Что-то длилось</td>
+          <td class="reference"><i>La tos ha durado cinco días.</i></td>
+        </tr>
+        <tr>
+          <td class="reference">Причина пропуска школы</td>
+          <td class="reference"><i>Mira no viene hoy: ha tenido fiebre toda la noche.</i></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 7 неправильных причастий — ревизия</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Инфинитив</th>
+          <th>Причастие</th>
+          <th>Пример из жизни</th>
+        </tr>
+        <tr>
+          <td class="practice">hacer</td>
+          <td class="practice"><b>hecho</b></td>
+          <td class="practice"><i>¿Has hecho la cita?</i></td>
+        </tr>
+        <tr>
+          <td class="practice">decir</td>
+          <td class="practice"><b>dicho</b></td>
+          <td class="practice"><i>La tutora ha dicho que no pasa nada.</i></td>
+        </tr>
+        <tr>
+          <td class="practice">ver</td>
+          <td class="practice"><b>visto</b></td>
+          <td class="practice"><i>El pediatra ha visto a Mira tres veces.</i></td>
+        </tr>
+        <tr>
+          <td class="practice">escribir</td>
+          <td class="practice"><b>escrito</b></td>
+          <td class="practice"><i>He escrito un mensaje a la tutora.</i></td>
+        </tr>
+        <tr>
+          <td class="reference">abrir</td>
+          <td class="reference">abierto</td>
+          <td class="reference"><i>La farmacia está abierta hasta las nueve.</i></td>
+        </tr>
+        <tr>
+          <td class="reference">poner</td>
+          <td class="reference">puesto</td>
+          <td class="reference"><i>Le he puesto el antitérmico a las siete.</i></td>
+        </tr>
+        <tr>
+          <td class="reference">romper</td>
+          <td class="reference">roto</td>
+          <td class="reference"><i>Nada está roto, solo un golpe.</i></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Готовые чанки «утра понедельника»</h4>
+      <div class="example">
+        <b>Esta mañana hemos llamado al centro de salud.</b> — Сегодня утром мы позвонили в поликлинику.<br>
+        <b>Mira tiene fiebre desde anoche.</b> — У Миры температура со вчерашнего вечера.<br>
+        <b>Todavía no ha bajado la fiebre.</b> — Температура ещё не спала.<br>
+        <b>Necesitamos el antitérmico para la noche.</b> — Нам нужно жаропонижающее на ночь.<br>
+        <b>La tutora ha visto el parte del médico.</b> — Учительница видела справку от врача.<br>
+        <b>Poco a poco se ha puesto mejor.</b> — Постепенно ему стало лучше.
+      </div>
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Топ-4 ошибки всего блока:</b><br>
+      • <i>«He <b>hacido</b>»</i> ❌ → <i>«he <b>hecho</b>»</i> ✅<br>
+      • <i>«Ya <b>no</b> ha bajado»</i> ❌ (это «уже не») → <i>«<b>Todavía no</b> ha bajado»</i> ✅ (ещё не)<br>
+      • <i>«Pido cita <b>a</b> las once»</i> ✓, но <i>«la cita es <b>a las once</b>»</i> ✅ — «в 11 часов» всегда <b>a las</b><br>
+      • <i>«Tiene fiebre <b>por</b> anoche»</i> ❌ → <i>«<b>desde</b> anoche»</i> ✅ (с тех пор — desde)
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c3">3</div>
+    <div class="step-title">
+      <h2>Практика: применим всё вместе</h2>
+      <span class="time">23:00 – 30:00 · 3 упражнения</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь маркер или причастие</h4>
+    <p class="hint">Подсказка — в скобках. Ответ вводите маленькими буквами.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь термин и значение</h4>
+    <p class="hint">Нажмите испанский термин слева, затем его значение справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ + КАРТА БЛОКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c5">4</div>
+    <div class="step-title">
+      <h2>Аудирование: понедельник, 8:30 — звонок в centro de salud</h2>
+      <span class="time">30:00 – 37:00 · диалог + карта блока 6–10</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speakDialog()" style="margin-bottom:12px">🔊 Прослушать диалог (два голоса)</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who op">Регистратура:</span> Centro de Salud Alameda, buenos días.<br>
+        <span class="who you">Родитель:</span> Buenos días. Mi hija Mira tiene fiebre desde anoche, treinta y ocho y medio.<br>
+        <span class="who op">Регистратура:</span> ¿Ya ha tomado el antitérmico?<br>
+        <span class="who you">Родитель:</span> Sí, esta mañana. Todavía no ha bajado la fiebre.<br>
+        <span class="who op">Регистратура:</span> Vale. Hoy hay hueco a las once con el pediatra. ¿Le va bien?<br>
+        <span class="who you">Родитель:</span> Sí, perfecto. Llegaremos a las once menos cuarto.<br>
+        <span class="who op">Регистратура:</span> Perfecto. Cita a las once con la doctora Serrano. Lleven la tarjeta SIP.<br>
+        <span class="who you">Родитель:</span> Sí, la tenemos. Muchas gracias. Hasta luego.
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🗺 Карта блока 6–10: что вы прошли</h4>
+    <div class="clil-text">
+      <h4>Пять недель — пять институтов</h4>
+      <p>Блок «El Cole y la Salud» — это карта институтов, с которыми семья релоканта говорит в первую очередь. Проверьте себя: по каждой строке вы должны уметь сказать минимум 2 фразы.</p>
+      <table class="grammar-table">
+        <tr>
+          <th>Неделя</th>
+          <th>Тема</th>
+          <th>Главная фраза-инструмент</th>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Tipos de colegio: público, concertado, privado</td>
+          <td><i>Hemos elegido un colegio concertado.</i></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Matrícula, tutora, AMPA, deberes</td>
+          <td><i>La tutora ha escrito por la app.</i></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Sanidad pública, SIP, cita previa</td>
+          <td><i>Quisiera pedir cita con el pediatra.</i></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Urgencias, el 112, la ambulancia</td>
+          <td><i>Se ha caído. Necesito una ambulancia.</i></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Vacunas + orientador escolar</td>
+          <td><i>Le falta la varicela. / He notado que está callado.</i></td>
+        </tr>
+      </table>
+      <p style="margin-bottom:0">Теперь эта карта превратится в симуляцию: 4 станции — как настоящее утро понедельника.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 5: СИМУЛЯЦИЯ «УТРО ПОНЕДЕЛЬНИКА» -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      <h2>🎭 Симуляция: «Утро понедельника» — 4 станции</h2>
+      <span class="time">37:00 – 50:00 · понедельник, 7:45 → 9:30 · всё решаете вы</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сюжет один на все станции: <b>понедельник, 7:45</b>. У Миры (8 лет) подскочила температура, Илья (12 лет) вышел без рюкзака, а день только начался. На каждой станции читайте реплики 🔊, отвечайте вслух и выбирайте ответ. Правильный вариант подсветится.</p>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🤒</div>
+      <div class="sit-title">Станция 1 · У Миры температура — звонок в centro de salud</div>
+    </div>
+    <div class="sit-intro">
+      7:45. Термометр показывает 38.7. Школа отменяется. Вы звоните в свой centro de salud.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш звонок:</div>
+      <div class="es">Buenos días. Mi hija Mira tiene fiebre desde anoche, treinta y ocho y siete.</div>
+      <div class="ru">Добрый день. У моей дочери Миры температура со вчерашнего вечера, тридцать восемь и семь.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Mi hija Mira tiene fiebre desde anoche, treinta y ocho y siete.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Регистратура:</div>
+      <div class="es">¿Ya ha tomado el antitérmico?</div>
+      <div class="ru">Она уже принимала жаропонижающее?</div>
+      <button class="speak-btn" onclick="speak('¿Ya ha tomado el antitérmico?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ:</div>
+      <div class="es">Sí, esta mañana. Todavía no ha bajado la fiebre.</div>
+      <div class="ru">Да, сегодня утром. Температура ещё не спала.</div>
+      <button class="speak-btn" onclick="speak('Sí, esta mañana. Todavía no ha bajado la fiebre.')">🔊</button>
+    </div>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Какая фраза открывает звонок правильно?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">«Mira no quiere ir al cole hoy.»</div>
+        <div class="q-opt" data-o="1">«Mi hija tiene fiebre desde anoche.»</div>
+        <div class="q-opt" data-o="2">«Necesitamos una ambulancia ya.»</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">2</span>Температура держится 39.4, ребёнок вялый и не пьёт. Что делаете?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Ждём до вечера — может, само пройдёт.</div>
+        <div class="q-opt" data-o="1">Ведём в школу, там посмотрят.</div>
+        <div class="q-opt" data-o="2">Идём на приём сегодня, а если хуже — в urgencias.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      ✅ <b>Станция пройдена:</b> вы назвали симптом + срок (<i>desde anoche</i>), ответили про жаропонижающее (<i>ya / todavía no</i>) и получили слот. Это и есть Pretérito Perfecto в бою.
+    </div>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🎒</div>
+      <div class="sit-title">Станция 2 · 12-летний Илья без рюкзака — письмо tutora</div>
+    </div>
+    <div class="sit-intro">
+      Илья уехал в школу, а рюкзак остался дома: внутри <i>los deberes</i> и обед. Вы пишете сообщение классному руководителю (<i>la tutora</i>).
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Сообщение:</div>
+      <div class="es">Hola, soy la madre de Ilya, de 6º de Primaria.</div>
+      <div class="ru">Здравствуйте, я мама Ильи, из 6-го класса.</div>
+      <button class="speak-btn" onclick="speak('Hola, soy la madre de Ilya, de sexto de Primaria.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Сообщение:</div>
+      <div class="es">Ha olvidado la mochila en casa: dentro están los deberes y el lunch.</div>
+      <div class="ru">Он забыл рюкзак дома: внутри домашка и обед.</div>
+      <button class="speak-btn" onclick="speak('Ha olvidado la mochila en casa: dentro están los deberes y el lunch.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Сообщение:</div>
+      <div class="es">¿Le puedo llevar la mochila a las trece, a la salida?</div>
+      <div class="ru">Могу привезти рюкзак в тринадцать, к концу уроков?</div>
+      <button class="speak-btn" onclick="speak('¿Le puedo llevar la mochila a las trece, a la salida?')">🔊</button>
+    </div>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">1</span>Кому вы пишете и почему?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">La tutora — классному руководителю: он решает ежедневные вопросы класса.</div>
+        <div class="q-opt" data-o="1">La AMPA — родительский комитет занимается праздниками, не рюкзаками.</div>
+        <div class="q-opt" data-o="2">Al 112 — это не экстренный случай.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">2</span>Какое предложение вежливо закрывает письмо?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">«Traigo la mochila ahora mismo, es urgente.»</div>
+        <div class="q-opt" data-o="1">«Perdone las molestias. Muchas gracias.»</div>
+        <div class="q-opt" data-o="2">«Ilya no hará los deberes nunca.»</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      ✅ <b>Станция пройдена:</b> короткое письмо по формуле «кто я → что случилось → предложение → спасибо». Именно так пишут испанские родители.
+    </div>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">💊</div>
+      <div class="sit-title">Станция 3 · Аптека за жаропонижающим</div>
+    </div>
+    <div class="sit-intro">
+      Врач посоветовал <i>antitérmico</i> каждые 8 часов, а в вашей аптечке осталось мало. По дороге на приём заходитё в farmacia.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Фармацевт:</div>
+      <div class="es">Buenos días, ¿qué le pongo?</div>
+      <div class="ru">Добрый день, что вам взять?</div>
+      <button class="speak-btn" onclick="speak('Buenos días, ¿qué le pongo?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ:</div>
+      <div class="es">Buenos días. Necesito un antitérmico para una niña de ocho años.</div>
+      <div class="ru">Добрый день. Мне нужно жаропонижающее для девочки восьми лет.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Necesito un antitérmico para una niña de ocho años.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Фармацевт:</div>
+      <div class="es">¿Tiene receta electrónica?</div>
+      <div class="ru">У вас есть электронный рецепт?</div>
+      <button class="speak-btn" onclick="speak('¿Tiene receta electrónica?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ:</div>
+      <div class="es">No hace falta, ¿verdad? El paracetamol infantil se vende sin receta.</div>
+      <div class="ru">Не нужен же? Детский парацетамол продают без рецепта.</div>
+      <button class="speak-btn" onclick="speak('No hace falta, ¿verdad? El paracetamol infantil se vende sin receta.')">🔊</button>
+    </div>
+
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">1</span>Что вы просите в аптеке?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Las tiritas con dibujos.</div>
+        <div class="q-opt" data-o="1">El suero oral.</div>
+        <div class="q-opt" data-o="2">Un antitérmico para una niña de ocho años.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">2</span>Нужен ли рецепт на детский жаропонижающее?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Да, без receta не продадут.</div>
+        <div class="q-opt" data-o="1">Нет: se vende sin receta.</div>
+        <div class="q-opt" data-o="2">Только если ребёнку меньше 3 лет.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      ✅ <b>Станция пройдена:</b> назвали препарат + возраст + вопрос о рецепте. Фармацевт в Испании — ваш первый консультант: он охотно объясняет дозу, если спросить: <i>«¿Cada cuántas horas?»</i>
+    </div>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🏫</div>
+      <div class="sit-title">Станция 4 · Объяснение tutora, почему пропустим день</div>
+    </div>
+    <div class="sit-intro">
+      9:20. Пока Мира ждёт приёма в 11:00, вы пишете сообщение классному руководителю Миры.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Сообщение:</div>
+      <div class="es">Buenos días. Mira no viene hoy al cole.</div>
+      <div class="ru">Добрый день. Мира сегодня не придёт в школу.</div>
+      <button class="speak-btn" onclick="speak('Buenos días. Mira no viene hoy al cole.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Сообщение:</div>
+      <div class="es">Ha tenido fiebre toda la noche: treinta y nueve y medio.</div>
+      <div class="ru">У неё была температура всю ночь: тридцать девять и пять.</div>
+      <button class="speak-btn" onclick="speak('Ha tenido fiebre toda la noche: treinta y nueve y medio.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Сообщение:</div>
+      <div class="es">Esta mañana hemos estado en el centro de salud. Tenemos cita a las once.</div>
+      <div class="ru">Сегодня утром мы были в поликлинике. У нас приём в одиннадцать.</div>
+      <button class="speak-btn" onclick="speak('Esta mañana hemos estado en el centro de salud. Tenemos cita a las once.')">🔊</button>
+    </div>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Какая фраза объясняет причину пропуска?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">«Mira está cansada de la escuela.»</div>
+        <div class="q-opt" data-o="1">«Ha tenido fiebre toda la noche.»</div>
+        <div class="q-opt" data-o="2">«Tenemos planes en familia.»</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">2</span>Что вы готовы показать tutora, если попросит?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Ничего: школа не имеет права спрашивать.</div>
+        <div class="q-opt" data-o="1">Фото термометра.</div>
+        <div class="q-opt" data-o="2">El parte del médico — справку от врача.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🎯 <b>Все 4 станции пройдены!</b> Остался главный экзамен блока — квиз-босс. Дышите глубже: 12 вопросов по всему, чему вы научились за пять недель.
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">👹 КВИЗ-БОСС: 12 вопросов по блоку 6–10</h4>
+    <p class="hint">Школа, симптомы, аптека, прививки, психолог, экстренные случаи. Правильный ответ подсветится сразу. Считайте свои ✅: 10 и больше — CHECKPOINT сдан на отлично.</p>
+    <div id="final-boss-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderBossQuiz()" style="margin-top:10px">↺ Пройти босса ещё раз</button>
+  </div>
+
+  <div class="checkpoint-banner">
+    <h3>🎉 ¡CHECKPOINT 2 SUPERADO! · CHECKPOINT 2 пройден</h3>
+    <p>Пять недель, 150 слов, две важнейшие сферы жизни семьи — школа и здоровье. Вы умеете записаться к врачу, звонить в 112, объяснять симптомы, проверять календарь прививок и просить поддержку у школы. ¡Bravo! Скоро — Блок 3: магазины, деньги и быт.</p>
+  </div>
+</section>
+
+<!-- ПАСПОРТ ВЫЖИВАНИЯ (СВЕТОФОР) -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">✅</div>
+    <div class="step-title">
+      <h2>Паспорт выживания: что я умею</h2>
+      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «паспорт» преподавателю — строки с 🔴 повторим на первом уроке блока 3.</p>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🏠</div>
+    <div class="step-title">
+      <h2>Домашнее задание · Урок 10.3</h2>
+      <span class="time">⏱ ~35–40 минут · 6 заданий</span>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр блока · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить ядро из 35 слов блока 6–10.</div>
+    <p>Карточки, сопоставление, «собери фразу» — особое внимание категориям, где на паспорте 🟡 и 🔴.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Mi botiquín» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: рассказать про свою аптечку по-испански.</div>
+    <p>Запишите голосовое на 5–7 предложений, минимум 2 дубля:</p>
+    <div class="note blue">
+      Este es nuestro botiquín. Tenemos tiritas, gasas, un termómetro, un antitérmico, suero oral y una pomada.<br>
+      La pomada es para los golpes. El suero oral ayuda con el vómito.<br>
+      Todo está en el armario del baño, donde los niños lo ven fácilmente.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Este es nuestro botiquín. Tenemos tiritas, gasas, un termómetro, un antitérmico, suero oral y una pomada. La pomada es para los golpes. El suero oral ayuda con el vómito. Todo está en el armario del baño.')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🧰 Задание 3. Реальное действие: собрать аптечку · 15 мин ⭐</h4>
+    <div class="hw-meta">Цель: ГЛАВНЫЙ продукт блока — реальный botiquín в вашем доме.</div>
+    <p>Соберите или дозакупите аптечку по списку с урока и сфотографируйте её в чат группы. По каждому пункту отметьте статус:</p>
+    <div class="note">
+      ☐ las tiritas — ya / todavía no<br>
+      ☐ las gasas — ya / todavía no<br>
+      ☐ el termómetro — ya / todavía no<br>
+      ☐ el antitérmico infantil (paracetamol) — ya / todavía no<br>
+      ☐ el suero oral — ya / todavía no<br>
+      ☐ la pomada para golpes — ya / todavía no
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: сообщение tutora · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить письмо о пропуске дня (станция 4).</div>
+    <p>Напишите реальный шаблон сообщения классному руководителю о пропуске дня (5–6 предложений): причина, что делаете, когда вернётесь, справка.</p>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Mira no viene hoy al cole. Ha tenido fiebre toda la noche. Esta mañana hemos estado en el centro de salud. Tenemos cita a las once con el pediatra. Mañana vuelve a clase con el parte del médico. Muchas gracias.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия: план «Утро понедельника» · 5 мин</h4>
+    <div class="hw-meta">Цель: договориться семьёй ДО следующего кризиса.</div>
+    <p>За ужином обсудите: кто звонит в centro de salud, кто пишет tutora, где лежит SIP. Сделайте магнит на холодильник:</p>
+    <div class="note green">
+      📞 Centro de salud: ___<br>
+      🚑 Urgencias / 112: 112<br>
+      💊 Farmacia de guardia: ___<br>
+      🏫 Teléfono del cole: ___
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🗺 Задание 6. Мини-проект «Карта моих институтов» · 10–12 мин</h4>
+    <div class="hw-meta">Цель: чек-лист институтов блока — с реальными адресами.</div>
+    <p>Заполните карточку реальными данными вашей местности и сохраните в заметки:</p>
+    <div class="note">
+      1. Centro de salud: адрес + teléfono + app<br>
+      2. Urgencias más cercana: адрес + 24/7?<br>
+      3. Farmacia de guardia: как найти список<br>
+      4. Orientador escolar: имя + как записаться
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Mi botiquín» (2 дубля)<br>
+    • 🧰 Фото реальной аптечки + чек-лист ya / todavía no<br>
+    • ✍️ Шаблон сообщения tutora<br>
+    • 🗺 «Карта моих институтов» (4 строки)<br>
+    • ✅ Паспорт выживания (светофор)
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head">
+    <div class="step-num">🎮</div>
+    <div class="step-title">
+      <h2>Тренажёр: слова и грамматика блока</h2>
+      <span class="time">~7–10 мин</span>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 10.3</h3>
+    <p>Повторите ядро блока 6–10 в приложении Quizlet: школа, здоровье, симптомы, аптечка, маркеры времени.</p>
+    <!-- QUIZLET: родители урок 10.3 (ссылку добавит админ) -->
+    <a href="#" onclick="return false;">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- КНОПКИ НАВИГАЦИИ -->
+<div class="lesson-nav">
+  <a href="w10-l2.html">← Предыдущий<br><small>Урок 10.2 · Психолог в школе</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="w11-l1.html">Следующий →<br><small>Урок 11.1 · Mercadona, Consum, Lidl</small></a>
+</div>
+
+<!-- ФУТЕР -->
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · Блок 2 El Cole y la Salud<br>
+  10.3 · CHECKPOINT 2 · Ревизия блока 6–10
+</footer>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES'; u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Диалог в два голоса (регистратура / родитель) =====
+var DIALOG_LINES = [
+  {who:'op',  label:'Регистратура:', es:'Centro de Salud Alameda, buenos días.'},
+  {who:'you', label:'Родитель:',    es:'Buenos días. Mi hija Mira tiene fiebre desde anoche, treinta y ocho y medio.'},
+  {who:'op',  label:'Регистратура:', es:'¿Ya ha tomado el antitérmico?'},
+  {who:'you', label:'Родитель:',    es:'Sí, esta mañana. Todavía no ha bajado la fiebre.'},
+  {who:'op',  label:'Регистратура:', es:'Vale. Hoy hay hueco a las once con el pediatra. ¿Le va bien?'},
+  {who:'you', label:'Родитель:',    es:'Sí, perfecto. Llegaremos a las once menos cuarto.'},
+  {who:'op',  label:'Регистратура:', es:'Perfecto. Cita a las once con la doctora Serrano. Lleven la tarjeta SIP.'},
+  {who:'you', label:'Родитель:',    es:'Sí, la tenemos. Muchas gracias. Hasta luego.'}
+];
+
+function speakDialog(){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var i = 0;
+  (function next(){
+    if(i >= DIALOG_LINES.length) return;
+    var line = DIALOG_LINES[i++];
+    var u = new SpeechSynthesisUtterance(line.es);
+    u.lang = 'es-ES';
+    if(line.who === 'you'){
+      u.rate = 1.0;   // родитель: чуть быстрее
+      u.pitch = 1.35; // и заметно выше
+    } else {
+      u.rate = 0.85;  // регистратор: чуть медленнее
+      u.pitch = 0.75; // и заметно ниже
+    }
+    var voices = speechSynthesis.getVoices();
+    var v = voices.find(function(x){ return x.lang && x.lang.toLowerCase().startsWith('es'); });
+    if(v) u.voice = v;
+    u.onend = next;
+    speechSynthesis.speak(u);
+  })();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      item.o.map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === questions[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[questions[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ (10.2) =====
+var warmQ = [
+  {q:'1. Кто такой el orientador escolar?', o:['школьный психолог','классный руководитель','директор школы'], c:0},
+  {q:'2. Как сказать «я заметил, что...»?', o:['he notado que','he puesto que','he hecho que'], c:0},
+  {q:'3. Как сказать «меня беспокоит»?', o:['me preocupa','me gusta','me falta'], c:0},
+  {q:'4. Что такое el apoyo emocional?', o:['эмоциональная поддержка','домашнее задание','родительский комитет'], c:0},
+  {q:'5. «Психолог написал отчёт» — это...', o:['El orientador ha escrito un informe.','El orientador ha escribido un informe.','El orientador ha escritido un informe.'], c:0},
+  {q:'6. Как сказать «постепенно»?', o:['poco a poco','todo a todo','día a día solo'], c:0}
+];
+
+function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  colegio:[
+    {es:'el colegio público / concertado', ru:'гос. / полугос. школа', ex:'Hemos elegido un colegio concertado cerca de casa.', exRu:'Мы выбрали полугосударственную школу рядом с домом.'},
+    {es:'la matrícula', ru:'зачисление', ex:'La matrícula para septiembre se abre en mayo.', exRu:'Запись на сентябрь открывается в мае.'},
+    {es:'el tutor / la tutora', ru:'классный руководитель', ex:'La tutora ha escrito un mensaje por la app.', exRu:'Учительница написала сообщение в приложении.'},
+    {es:'los deberes', ru:'домашнее задание', ex:'Los deberes de lengua son para el jueves.', exRu:'Домашка по испанскому на четверг.'},
+    {es:'la AMPA', ru:'родительский комитет', ex:'La AMPA organiza las fiestas del cole.', exRu:'Родительский комитет организует школьные праздники.'},
+    {es:'las extraescolares', ru:'кружки', ex:'Las extraescolares empiezan en octubre.', exRu:'Кружки начинаются в октябре.'},
+    {es:'la evaluación', ru:'оценка / аттестация', ex:'La primera evaluación termina en diciembre.', exRu:'Первая аттестация заканчивается в декабре.'}
+  ],
+  salud:[
+    {es:'el centro de salud', ru:'поликлиника', ex:'Nuestro centro de salud abre a las ocho.', exRu:'Наша поликлиника открывается в восемь.'},
+    {es:'la tarjeta sanitaria / SIP', ru:'медкарта', ex:'Llevamos la SIP a todas las citas.', exRu:'Мы берём SIP на все приёмы.'},
+    {es:'pedir cita', ru:'записаться', ex:'Pedimos cita por la app del sistema.', exRu:'Мы записываемся через приложение системы.'},
+    {es:'el pediatra', ru:'педиатр', ex:'El pediatra ha visto a Mira tres veces.', exRu:'Педиатр смотрел Миру три раза.'},
+    {es:'las urgencias', ru:'приёмное отделение', ex:'Por la caída hemos ido a urgencias.', exRu:'Из-за падения мы пошли в приёмное.'},
+    {es:'el jarabe', ru:'сироп', ex:'El jarabe es para la tos de la noche.', exRu:'Сироп — от ночного кашля.'},
+    {es:'la receta electrónica', ru:'э-рецепт', ex:'La receta electrónica aparece en la app.', exRu:'Э-рецепт появляется в приложении.'}
+  ],
+  sintomas:[
+    {es:'la fiebre', ru:'температура', ex:'Tiene fiebre de treinta y nueve.', exRu:'У него температура тридцать девять.'},
+    {es:'la tos', ru:'кашель', ex:'La tos ha durado cinco días.', exRu:'Кашель длился пять дней.'},
+    {es:'los mocos', ru:'сопли', ex:'Solo tiene los mocos, nada grave.', exRu:'У него только сопли, ничего страшного.'},
+    {es:'me duele la cabeza', ru:'болит голова', ex:'«Me duele la cabeza», dice el niño.', exRu:'«У меня болит голова», говорит ребёнок.'},
+    {es:'el vómito', ru:'рвота', ex:'Ha habido dos vómitos por la noche.', exRu:'Ночью было две рвоты.'},
+    {es:'la alergia', ru:'аллергия', ex:'Tiene alergia al polen en primavera.', exRu:'У него аллергия на пыльцу весной.'},
+    {es:'el mareo', ru:'тошнота', ex:'El mareo pasa después del bus.', exRu:'Тошнота проходит после автобуса.'}
+  ],
+  botiquin:[
+    {es:'el botiquín', ru:'аптечка', ex:'El botiquín está en el armario del baño.', exRu:'Аптечка в шкафу в ванной.'},
+    {es:'las tiritas', ru:'пластыри', ex:'Compramos tiritas con dibujos de animales.', exRu:'Мы покупаем пластыри с животными.'},
+    {es:'las gasas', ru:'марля', ex:'Las gasas son para limpiar la herida.', exRu:'Марля — чтобы очистить рану.'},
+    {es:'el suero oral', ru:'регидратация', ex:'El suero oral ayuda con el vómito.', exRu:'Регидратация помогает при рвоте.'},
+    {es:'el termómetro', ru:'термометр', ex:'El termómetro digital marca en un segundo.', exRu:'Цифровой термометр показывает за секунду.'},
+    {es:'el antitérmico', ru:'жаропонижающее', ex:'Damos el antitérmico cada ocho horas.', exRu:'Даём жаропонижающее каждые восемь часов.'},
+    {es:'la pomada', ru:'мазь', ex:'La pomada es para los golpes.', exRu:'Мазь — от ушибов.'}
+  ],
+  tiempo:[
+    {es:'hoy', ru:'сегодня', ex:'Hoy no vamos al cole: hay fiebre.', exRu:'Сегодня мы не идём в школу: есть температура.'},
+    {es:'esta mañana', ru:'сегодня утром', ex:'Esta mañana hemos llamado al centro de salud.', exRu:'Сегодня утром мы позвонили в поликлинику.'},
+    {es:'ya', ru:'уже', ex:'Ya ha tomado el antitérmico.', exRu:'Он уже принял жаропонижающее.'},
+    {es:'todavía no', ru:'ещё не', ex:'Todavía no ha bajado la fiebre.', exRu:'Температура ещё не спала.'},
+    {es:'esta semana', ru:'на этой неделе', ex:'Esta semana hay revisión con el pediatra.', exRu:'На этой неделе осмотр у педиатра.'},
+    {es:'anoche', ru:'вчера вечером', ex:'Anoche no ha dormido bien.', exRu:'Вчера вечером он плохо спал.'},
+    {es:'desde ayer', ru:'со вчерашнего дня', ex:'Tiene tos desde ayer.', exRu:'У него кашель со вчерашнего дня.'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('colegio', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'___ mañana hemos llamado al centro de salud. (Esta)', ans:'esta'},
+  {text:'Mira ___ tomado el antitérmico. (ya)', ans:'ya'},
+  {text:'Todavía ___ ha bajado la fiebre. (no)', ans:'no'},
+  {text:'El orientador ha ___ un informe. (escribir)', ans:'escrito'},
+  {text:'La tutora ha ___ lo que ha pasado. (ver)', ans:'visto'},
+  {text:'Hemos ___ cita por la app. (pedir)', ans:'pedido'},
+  {text:'El niño ha ___ dos vómitos esta noche. (tener)', ans:'tenido'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'Esta mañana hemos llamado al centro de salud.', translation:'Сегодня утром мы позвонили в поликлинику.'},
+  {target:'Mira tiene fiebre desde anoche.', translation:'У Миры температура со вчерашнего вечера.'},
+  {target:'Todavía no ha bajado la fiebre.', translation:'Температура ещё не спала.'},
+  {target:'Necesitamos el antitérmico para la noche.', translation:'Нам нужно жаропонижающее на ночь.'},
+  {target:'La tutora ha visto el parte del médico.', translation:'Учительница видела справку от врача.'},
+  {target:'Poco a poco se ha puesto mejor.', translation:'Постепенно ему стало лучше.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'el botiquín', ru:'аптечка'},
+  {id:2, es:'el antitérmico', ru:'жаропонижающее'},
+  {id:3, es:'el suero oral', ru:'регидратация'},
+  {id:4, es:'las tiritas', ru:'пластыри'},
+  {id:5, es:'la matrícula', ru:'зачисление'},
+  {id:6, es:'la AMPA', ru:'родительский комитет'},
+  {id:7, es:'todavía no', ru:'ещё не'},
+  {id:8, es:'pedir cita', ru:'записаться'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZ =====
+var listenQ = [
+  {q:'1. ¿Quién tiene fiebre?', o:['la hija Mira','el hijo Ilya','la doctora Serrano'], c:0},
+  {q:'2. ¿Desde cuándo tiene fiebre?', o:['desde anoche','desde el lunes','desde la semana pasada'], c:0},
+  {q:'3. ¿Qué ha hecho la niña esta mañana?', o:['ha tomado el antitérmico','ha ido a urgencias','ha dormido todo el día'], c:0},
+  {q:'4. ¿A qué hora es la cita?', o:['a las once','a las nueve','a las doce y media'], c:0},
+  {q:'5. ¿Con qué doctora es la cita?', o:['con la doctora Serrano','con la doctora García','con el doctor Ruiz'], c:0},
+  {q:'6. ¿Qué pide la recepcionista llevar?', o:['la tarjeta SIP','la cartilla de vacunación','el parte de lesiones'], c:0}
+];
+
+renderQuiz('listening-quiz', listenQ, 'lq');
+
+// ===== FINAL BOSS QUIZ =====
+var bossQ = [
+  {q:'1. Как называется полугосударственная школа с небольшими взносами?', o:['el colegio concertado','la matrícula','la AMPA'], c:0},
+  {q:'2. Кто решает ежедневные вопросы класса?', o:['la tutora — классный руководитель','la AMPA','el orientador'], c:0},
+  {q:'3. Как сказать «записаться к педиатру»?', o:['pedir cita con el pediatra','pedir la escayola','poner el botiquín'], c:0},
+  {q:'4. Ребёнок упал и без сознания. Куда звонить?', o:['al 112','al centro de salud','a la tutora'], c:0},
+  {q:'5. Что такое la escayola?', o:['гипс','бинт','швы'], c:0},
+  {q:'6. Как сказать «у него температура со вчерашнего дня»?', o:['Tiene fiebre desde ayer.','Tiene fiebre por ayer.','Tiene fiebre hasta ayer.'], c:0},
+  {q:'7. Что из аптечки помогает при рвоте?', o:['el suero oral','la pomada','las tiritas'], c:0},
+  {q:'8. Как сказать «уже привит»?', o:['ya ha sido vacunado','todavía no ha sido vacunado','va a ser vacunado'], c:0},
+  {q:'9. Что верно про календарь прививок в Испании?', o:['общий минимум + добавки каждой comunidad autónoma','полностью одинаковый во всей стране','его создаёт школа'], c:0},
+  {q:'10. Как сказать «я заметил, что он молчит»?', o:['He notado que está callado.','Me notado que está callado.','He noto que está callado.'], c:0},
+  {q:'11. Кто такой el orientador escolar?', o:['школьный психолог','школьная медсестра','учитель физкультуры'], c:0},
+  {q:'12. Как сказать «врач ещё не пришёл»?', o:['El médico todavía no ha venido.','El médico ya no ha venido.','El médico todavía ya ha venido.'], c:0}
+];
+
+function renderBossQuiz(){ renderQuiz('final-boss-quiz', bossQ, 'bq'); }
+renderBossQuiz();
+
+// ===== TRAFFIC LIGHT / PASAPORTE =====
+var TL = [
+  'Школа: matrícula, tutora, AMPA, deberes, extraescolares',
+  'Симптомы: fiebre, tos, vómito, me duele la cabeza',
+  'Запись и визит: pedir cita, la SIP, el pediatra',
+  'Экстренные случаи: urgencias, el 112, la ambulancia, la escayola',
+  'Аптечка: botiquín, tiritas, suero oral, antitérmico, pomada',
+  'Прививки и психолог: la vacuna, el refuerzo, el orientador, he notado que'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + (rowIdx + 1) + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + (rowIdx + 1) + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + (rowIdx + 1) + '" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.colegio, VOCAB.salud, VOCAB.sintomas, VOCAB.botiquin, VOCAB.tiempo);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    updateCard();
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Esta semana hay revisión con el pediatra', hint:'На этой неделе осмотр у педиатра'},
+    {target:'Hoy no vamos al cole: hay fiebre', hint:'Сегодня мы не идём в школу: есть температура'},
+    {target:'El botiquín está en el armario del baño', hint:'Аптечка в шкафу в ванной'},
+    {target:'Anoche no ha dormido bien', hint:'Вчера вечером он плохо спал'},
+    {target:'Pedimos cita por la app del sistema', hint:'Мы записываемся через приложение системы'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>

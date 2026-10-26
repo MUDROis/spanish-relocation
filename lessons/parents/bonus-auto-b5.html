@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Бонус-урок B5 «День экзамена (практика)»: команды экзаменатора, симулятор из 5 сцен с аудио, фразы-спасатели, скрипт диалога и два финала — ha aprobado / ha suspendido por poco.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<title>Бонусный урок B5 · День экзамена (практика) — МУДРО</title>
+<style>
+  :root{--p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;--radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);--ok:#7A8B4C;--bad:#E2725B}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center;position:relative}
+  .lesson-hero::after{content:'🚗';position:absolute;right:24px;top:28px;font-size:3rem;opacity:.2;pointer-events:none}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c2{background:var(--p2)}.step-num.c3{background:var(--p3)}.step-num.c4{background:var(--p4)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  /* Разминка-квиз */
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+  .quiz-week{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px}
+  .quiz-week.b4{background:#F0F7E6;color:var(--p2)}
+
+  /* Ситуация из жизни */
+  .situation-box{background:#fff;border:3px solid var(--p3);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p3)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#FFF7E0;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p3)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  /* Табы и карточки лексики */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p4);color:#fff;border-color:var(--p4)}
+  .vocab-front .icon{font-size:2rem;margin-bottom:6px}
+  .vocab-front .es{font-size:1rem;font-weight:800;margin-bottom:4px;line-height:1.3;color:#fff}
+  .vocab-front .ru{font-size:.85rem;opacity:.95;font-weight:600;color:#fff}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8;color:#fff}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p4);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.9rem;font-weight:700;color:var(--p4);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  /* Грамматика */
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:6px}
+  .grammar-box .formula{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.5}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:.92rem}
+  .grammar-table th,.grammar-table td{border:1px dashed rgba(43,33,24,.3);padding:8px 10px;text-align:left;background:#fff}
+  .grammar-table th{background:var(--p4);color:#fff;border-color:rgba(255,255,255,.25)}
+  .grammar-table td b{color:var(--p4)}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .grammar-hint{position:relative;border-bottom:1.5px dashed var(--p4);cursor:help;color:var(--p4);font-weight:600}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 12px;border-radius:8px;font-size:.82rem;font-weight:500;font-style:normal;line-height:1.4;width:280px;max-width:90vw;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;white-space:normal}
+  .grammar-hint::before{content:'';position:absolute;bottom:120%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink);opacity:0;pointer-events:none;transition:opacity .2s}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  /* Сопоставление и сборка фраз */
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:340px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.7}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.05rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  /* Фразы-спасатели */
+  .savior-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:16px}
+  .savior-card{background:linear-gradient(135deg,#FFF7E0,#fff);border:2px solid var(--p3);border-radius:14px;padding:16px;text-align:center}
+  .savior-card .es{font-weight:800;color:var(--p1);margin-bottom:4px;font-style:italic}
+  .savior-card .ru{font-size:.85rem;color:var(--muted);margin-bottom:10px}
+
+  /* Симулятор экзамена */
+  .exam-sim{background:linear-gradient(135deg,#F0F4FF,#E8F0FE);border:2px solid var(--p4);border-radius:18px;padding:22px}
+  .sim-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .sim-head h3{color:var(--p4)}
+  .sim-progress{display:flex;gap:6px;margin-bottom:14px}
+  .sim-dot{width:14px;height:14px;border-radius:50%;background:#E8DCCF}
+  .sim-dot.done{background:var(--p2)}
+  .sim-dot.cur{background:var(--p4);box-shadow:0 0 0 3px rgba(62,124,179,.25)}
+  .cmd-card{background:#fff;border:2px solid var(--p3);border-radius:14px;padding:16px;text-align:center;margin-bottom:14px}
+  .cmd-card .cmd-hint{font-size:.85rem;color:var(--muted);margin-bottom:10px}
+  .cmd-card .cmd-btn{background:var(--p3);color:#fff;border:none;border-radius:999px;padding:12px 26px;font-weight:800;font-size:1rem;cursor:pointer;transition:.2s}
+  .cmd-card .cmd-btn:hover{background:#c9882a}
+  .sim-visual{background:#fff;border-radius:14px;padding:10px;border:2px solid #E8DCCF;margin-bottom:14px}
+  .sim-visual svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+  .sim-hot{cursor:pointer;transition:opacity .2s}
+  .sim-hot:hover{opacity:.75}
+  .sim-hot.hot-good{opacity:1}.sim-hot.hot-bad{opacity:.35}
+  .sim-fb{border-radius:12px;padding:14px 16px;margin-bottom:12px;display:none;font-weight:700;line-height:1.5}
+  .sim-fb.show{display:block}
+  .sim-fb.ok{background:#E8F5E9;border-left:4px solid var(--ok);color:var(--ok)}
+  .sim-fb.bad{background:#FFEBEE;border-left:4px solid var(--bad);color:var(--bad)}
+  .sim-final{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;text-align:center;display:none}
+  .sim-final.show{display:block}
+
+  /* Развилки результата */
+  .fork-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+  .fork-card{background:#fff;border-radius:16px;padding:20px;border-top:6px solid var(--p2);box-shadow:var(--shadow)}
+  .fork-card.bad-fork{border-top-color:var(--p1)}
+  .fork-card h4{font-size:1.1rem;margin-bottom:10px}
+  .fork-card .fr-line{background:#FFF7E0;border-radius:10px;padding:10px 12px;margin-bottom:8px;border-left:4px solid var(--p3)}
+  .fork-card .fr-line.you{background:#F0F4FF;border-left-color:var(--p4)}
+  .fork-card .fr-line .who{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--p1);margin-bottom:2px}
+  .fork-card .fr-line.you .who{color:var(--p4)}
+  .fork-card .fr-line .es{font-weight:700;font-style:italic;margin-bottom:2px}
+  .fork-card .fr-line .ru{font-size:.82rem;color:var(--muted);font-style:italic}
+
+  /* Конструктор скрипта */
+  .map-builder{background:#fff;border:2px solid var(--p2);border-radius:14px;padding:20px;margin-bottom:16px}
+  .map-builder .hdr{background:var(--p2);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .map-builder .field{margin-bottom:12px}
+  .map-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .map-builder input[type="text"],.map-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .map-result{background:#FFF7E0;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p3)}
+  .result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+  /* Домашка */
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  /* Светофор */
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  /* Quizlet */
+  .quizlet-box{background:var(--p2);color:#fff;border-radius:var(--radius);padding:26px;text-align:center}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box p{font-weight:700;opacity:.92;margin-bottom:16px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p2);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+  .quizlet-box a:hover{transform:translateY(-2px)}
+  .quizlet-box span.soon-inline{display:inline-block;background:#EDE4D8;color:var(--muted);padding:8px 16px;border-radius:8px;font-weight:700;font-size:.85rem}
+
+  /* Ресурсы */
+  .resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .resource-card{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.2s;border-top:4px solid var(--p4)}
+  .resource-card:hover{transform:translateY(-3px)}
+  .resource-card h4{font-size:1rem;margin-bottom:6px}
+  .resource-card p{font-size:.85rem;color:var(--muted);margin-bottom:12px;min-height:40px}
+  .resource-card a{display:inline-block;background:var(--p4);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem}
+  .resource-card a:hover{background:var(--p1)}
+  .resource-card .soon-inline{display:inline-block;background:#EDE4D8;color:var(--muted);padding:8px 16px;border-radius:8px;font-weight:700;font-size:.85rem}
+  .resource-card .tag{display:inline-block;background:#E8F0FE;color:var(--p4);padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:8px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#2B2118;color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.3s;z-index:100;font-weight:800;pointer-events:none;max-width:90vw;text-align:center;font-size:.9rem}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<script>document.body.insertAdjacentHTML('afterbegin','<div id="gate-overlay" style="position:fixed;inset:0;z-index:99999;background:#FFF7EF"></div>');</script>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">🎁 Бонусный модуль · Урок B5 из B5 · Misión Autoescuela</span>
+  <span id="auth-area"></span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🎁 Бонусный модуль · Misión Autoescuela</span>
+  <h1>Урок B5 · <em>День экзамена (практика)</em> — от arranque до apárquese</h1>
+  <p class="sub">Утро экзамена: nervios, el coche de la autoescuela и экзаменатор с командами. Слушайте 🔊 и действуйте — в нашем симуляторе провалить невозможно.</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🎯 Цель: понять команды экзаменатора и действовать</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 вежливый императив: continúe, gire, apárquese</span>
+    <span class="meta-chip">🎭 Продукт: скрипт экзамена с экзаменатором</span>
+    <span class="meta-chip">⏱ 50 минут · A2</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">0</div><div class="step-title"><h2>Разминка + вопрос из жизни</h2><span class="time">00:00 – 06:00</span></div></div>
+  <div class="card">
+    <p class="hint">Сегодня практика — но сначала проверим теорию из урока B4: на экзамене её тоже спросят (устно и на дороге).</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок B4</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🌅</div>
+      <div class="sit-title">Одна ситуация: утро экзамена</div>
+    </div>
+    <div class="sit-intro">
+      8:30 утра, вход в autoescuela. Вы почти не спали: сегодня el examen práctico. Руки холодные, в голове — все команды разом. Инструктор встречает вас у машины.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Инструктор:</div><div class="es">Buenos días. ¿Cómo estás? ¿Nervios?</div>
+      <div class="ru">Доброе утро. Как вы? Нервы?</div>
+      <button class="speak-btn" onclick="speak('Buenos días. ¿Cómo estás? ¿Nervios?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Вы:</div><div class="es">Un poco nervioso, la verdad.</div>
+      <div class="ru">Немного нервничаю, честно говоря.</div>
+      <button class="speak-btn" onclick="speak('Un poco nervioso, la verdad.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Инструктор:</div><div class="es">Tranquilo, respira. Es el coche de la autoescuela: doble pedal, yo te protejo.</div>
+      <div class="ru">Спокойно, дыши. Это учебная машина: двойные педали, я тебя подстрахую.</div>
+      <button class="speak-btn" onclick="speak('Tranquilo, respira. Es el coche de la autoescuela: doble pedal, yo te protejo.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Вы:</div><div class="es">¿Y el examinador? ¿Es amable?</div>
+      <div class="ru">А экзаменатор? Он добрый?</div>
+      <button class="speak-btn" onclick="speak('¿Y el examinador? ¿Es amable?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Инструктор:</div><div class="es">Es de la DGT: serio pero justo. Escucha sus comandos y si no entiendes, pregunta.</div>
+      <div class="ru">Он из DGT: серьёзный, но справедливый. Слушай команды и, если не понимаешь, — спрашивай.</div>
+      <button class="speak-btn" onclick="speak('Es de la DGT: serio pero justo. Escucha sus comandos y si no entiendes, pregunta.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Кто подстрахует, если за рулём что-то пойдёт не так?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">El examinador — у него двойные педали.</div>
+        <div class="q-opt" data-o="1">El instructor — у учебной машины двойные педали.</div>
+        <div class="q-opt" data-o="2">Никто: вы за рулём одни.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">2</span>Что делать, если вы не поняли команду экзаменатора?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Переспросить: «¿Puede repetir, por favor?»</div>
+        <div class="q-opt" data-o="1">Остановиться и молчать до конца экзамена.</div>
+        <div class="q-opt" data-o="2">Ехать прямо и надеяться на лучшее.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня — день экзамена. Вы выучите <b>35 слов</b> (утро, команды, машина, результат), разберёте <b>вежливый императив</b>, пройдёте <b>симулятор из 5 сцен</b> с аудио-командами экзаменатора и проживёте <b>оба финала</b>: ha aprobado и ha suspendido por poco.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: ЛЕКСИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">1</div><div class="step-title"><h2>Карточки: 35 слов — день экзамена</h2><span class="time">06:00 – 16:00</span></div></div>
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся. 🔊 — послушать произношение. Пройдите все 5 категорий.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showVocab('manana',this)">🌅 Утро экзамена (7)</button>
+      <button class="tab" onclick="showVocab('comandos',this)">🧭 Команды экзаменатора (7)</button>
+      <button class="tab" onclick="showVocab('coche',this)">🚗 В машине (7)</button>
+      <button class="tab" onclick="showVocab('durante',this)">💬 Во время экзамена (7)</button>
+      <button class="tab" onclick="showVocab('resultado',this)">🏅 Результат (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+    <div class="note" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> экзаменатор — это <span class="grammar-hint" data-hint="El examinador — сотрудник DGT, а не ваш инструктор. Он приезжает на экзамен отдельно и говорит на usted. Ваш инструктор сидит рядом, но экзаменует именно examinador.">el examinador</span> из DGT, а не ваш инструктор. Он говорит серьёзно и вежливо — на usted. Машина автошколы со знаком <b>la L de practicar</b> и двойными педалями: инструктор может затормозить за вас.
+    </div>
+    <div class="note" style="margin-top:10px">
+      ⚠️ <b>Ложные друзья переводчика:</b><br>
+      • <span class="grammar-hint" data-hint="El arrastre — это «трогание» (трогание с места), а не «перетаскивание» или «тяга». На экзамене оценивают el arrastre en pendiente — трогание на подъёме.">el arrastre</span> — трогание (не «перетаскивание»!)<br>
+      • <span class="grammar-hint" data-hint="La pendiente — «подъём, уклон», а не «пенденте» в значении «висеть» (colgar). En pendiente = на склоне.">la pendiente</span> — подъём (склон)<br>
+      • <span class="grammar-hint" data-hint="Conducir solo — «водить одному/самостоятельно», без инструктора. Solo здесь = «один», а не «только».">conducir solo</span> — водить самому (не «водить только»)
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num c2">2</div><div class="step-title"><h2>Грамматика: вежливый императив экзаменатора</h2><span class="time">16:00 – 24:00 · Язык команд на usted</span></div></div>
+  <div class="card">
+    <p class="hint">В B2 инструктор говорил вам на «tú»: <i>gira, sigue, pisa</i>. Экзаменатор говорит на «usted» — вежливо и официально. Формы меняются:</p>
+
+    <div class="grammar-box">
+      <h4>📐 Формула: императив на usted</h4>
+      <div class="formula">-ar → -e · -er/-ir → -a · возвратные → -se (с ударением!)</div>
+      <div class="example">
+        arrancar → <b>Arranque</b> el coche. · frenar → <b>Frene</b> suavemente.<br>
+        continuar → <b>Continúe</b> todo recto. · salir → <b>Salga</b> la segunda.<br>
+        incorporarse → <b>Incorpórese</b>. · aparcar → <b>Apárquese</b> aquí.
+      </div>
+    </div>
+
+    <table class="grammar-table">
+      <thead><tr><th>Инфинитив</th><th>Команда экзаменатора</th><th>Что делать</th></tr></thead>
+      <tbody>
+        <tr><td>arrancar</td><td><b>Arranque</b> el coche, por favor.</td><td>заведите машину</td></tr>
+        <tr><td>continuar</td><td><b>Continúe</b> todo recto.</td><td>продолжайте прямо</td></tr>
+        <tr><td>girar</td><td><b>Gire</b> a la izquierda en la próxima.</td><td>поверните налево на следующей</td></tr>
+        <tr><td>incorporarse</td><td><b>Incorpórese</b> a la autovía.</td><td>встройтесь в поток</td></tr>
+        <tr><td>salir</td><td><b>Salga</b> de la rotonda la segunda.</td><td>сойдите с круга на втором</td></tr>
+        <tr><td>frenar</td><td><b>Frene</b> suavemente.</td><td>тормозите плавно</td></tr>
+        <tr><td>aparcar</td><td><b>Apárquese</b> aquí.</td><td>припаркуйтесь здесь</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      ⚠️ <b>Частые ошибки (когда отвечаете сами):</b><br>
+      • <i>«Arranca usted»</i> ❌ → правильно <i>«<b>Arranque</b>»</i> (форма usted, не tú)<br>
+      • <i>«Gire a izquierdo»</i> ❌ → правильно <i>«Gire <b>a la izquierda</b>»</i><br>
+      • <i>«Incorpore a la autovía»</i> ❌ → правильно <i>«<b>Incorpórese</b>»</i> (возвратный глагол: -se + ударение)<br>
+      • <i>«Apárque aquí»</i> ❌ → правильно <i>«<b>Apárquese</b> aquí»</i>
+    </div>
+
+    <div class="note green">
+      💡 <b>Минус-команды:</b> отрицание — с no перед формой: <i>«No gire todavía»</i> (ещё не поворачивайте), <i>«No frene aquí»</i> (не тормозите здесь). И вежливый ответ экзаменатору тоже звучит на usted: <i>«¿Puede repetir, por favor?»</i>
+    </div>
+
+    <h4 style="margin:18px 0 10px">🎯 Квиз: команда на usted — какая верная?</h4>
+    <div id="imp-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderImpQuiz()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+</section>
+
+<!-- ШАГ 3: СИМУЛЯТОР ЭКЗАМЕНА -->
+<section class="section">
+  <div class="step-head"><div class="step-num c3">3</div><div class="step-title"><h2>Симулятор экзамена: 5 сцен с аудио-командами</h2><span class="time">24:00 – 38:00 · Главный тренажёр урока</span></div></div>
+
+  <div class="card">
+    <p class="hint">Так работает настоящий экзамен: экзаменатор говорит команду — вы действуете. Нажмите 🔊 «Слушать команду», затем выберите действие на мини-схеме. Команду можно слушать сколько угодно раз.</p>
+
+    <div class="exam-sim">
+      <div class="sim-head">
+        <h3>🧭 Examen práctico · simulador</h3>
+        <span id="sim-counter" style="font-weight:800;color:var(--muted)">Escena — de 5</span>
+      </div>
+      <div class="sim-progress" id="sim-progress"></div>
+      <div id="sim-box"></div>
+      <div class="sim-final" id="sim-final"></div>
+    </div>
+
+    <div class="note green" style="margin-top:16px">
+      💡 <b>Секрет симулятора:</b> если вы ошиблись — это не экзамен, а тренировка: после каждого ответа команда показывается текстом (es + перевод). Настоящие команды вы теперь узнаёте на слух.
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🛟 Фразы-спасатели: спросить — НЕ ошибка</h4>
+    <p class="hint">На настоящем экзамене переспрашивать можно. Это лучше, чем свернуть не туда. Запомните три фразы:</p>
+    <div class="savior-grid">
+      <div class="savior-card">
+        <div class="es">¿Puede repetir, por favor?</div><div class="ru">Можете повторить, пожалуйста?</div>
+        <button class="speak-btn" onclick="speak('¿Puede repetir, por favor?')">🔊</button>
+      </div>
+      <div class="savior-card">
+        <div class="es">No he entendido.</div><div class="ru">Я не понял.</div>
+        <button class="speak-btn" onclick="speak('No he entendido.')">🔊</button>
+      </div>
+      <div class="savior-card">
+        <div class="es">¿Por esta calle?</div><div class="ru">По этой улице?</div>
+        <button class="speak-btn" onclick="speak('¿Por esta calle?')">🔊</button>
+      </div>
+    </div>
+    <div class="note">
+      ➕ Бонус из словаря урока: <i>«Indíqueme la dirección»</i> (укажите мне направление) — так вы вежливо просите экзаменатора подсказать путь, если совсем растерялись.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 4: ДВЕ РАЗВИЛКИ РЕЗУЛЬТАТА -->
+<section class="section">
+  <div class="step-head"><div class="step-num c4">4</div><div class="step-title"><h2>Финал: две развилки результата</h2><span class="time">38:00 – 44:00 · Прорабатываем ОБА сценария</span></div></div>
+  <div class="card">
+    <p class="hint">В жизни бывает и так, и так. Мы прорабатываем обе развилки — чтобы ни одна не застала вас без слов.</p>
+
+    <div class="fork-grid">
+      <div class="fork-card">
+        <h4>🎉 Развилка 1: «Ha aprobado»</h4>
+        <div class="fr-line">
+          <div class="who">Examinador:</div><div class="es">Felicidades, ha aprobado. El permiso le llegará por correo en unos días.</div>
+          <div class="ru">Поздравляю, вы сдали. Права придут почтой через несколько дней.</div>
+          <button class="speak-btn" onclick="speak('Felicidades, ha aprobado. El permiso le llegará por correo en unos días.')">🔊</button>
+        </div>
+        <div class="fr-line you">
+          <div class="who">Вы:</div><div class="es">¡Muchas gracias! ¡Qué alegría!</div>
+          <div class="ru">Большое спасибо! Какая радость!</div>
+          <button class="speak-btn" onclick="speak('¡Muchas gracias! ¡Qué alegría!')">🔊</button>
+        </div>
+        <div class="fr-line">
+          <div class="who">Instructor:</div><div class="es">Ya puede conducir solo. Con cuidado, ¿eh?</div>
+          <div class="ru">Теперь можете водить сами. Осторожно, а?</div>
+          <button class="speak-btn" onclick="speak('Ya puede conducir solo. Con cuidado, ¿eh?')">🔊</button>
+        </div>
+        <div class="sit-question" data-correct="0">
+          <div class="q-text"><span class="q-num">1</span>Что говорит экзаменатор, если вы сдали?</div>
+          <div class="q-opts">
+            <div class="q-opt" data-o="0">«Felicidades, ha aprobado.»</div>
+            <div class="q-opt" data-o="1">«Ha suspendido por poco.»</div>
+            <div class="q-opt" data-o="2">«Deficiente en el aparcamiento.»</div>
+          </div>
+        </div>
+        <div class="sit-question" data-correct="1">
+          <div class="q-text"><span class="q-num">2</span>Что происходит с правами после сдачи?</div>
+          <div class="q-opts">
+            <div class="q-opt" data-o="0">Их выдают прямо в машине.</div>
+            <div class="q-opt" data-o="1">El permiso llega por correo — надо будет recoger el permiso.</div>
+            <div class="q-opt" data-o="2">Их нужно покупать заново в банке.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fork-card bad-fork">
+        <h4>🌧 Развилка 2: «Ha suspendido por poco»</h4>
+        <div class="fr-line">
+          <div class="who">Examinador:</div><div class="es">Ha suspendido por poco: un fallo en el aparcamiento.</div>
+          <div class="ru">Вы чуть не сдали: одна ошибка на парковке.</div>
+          <button class="speak-btn" onclick="speak('Ha suspendido por poco: un fallo en el aparcamiento.')">🔊</button>
+        </div>
+        <div class="fr-line you">
+          <div class="who">Вы:</div><div class="es">Perdone el fallo. ¿Cuándo puedo repetir?</div>
+          <div class="ru">Извините за ошибку. Когда я могу пересдать?</div>
+          <button class="speak-btn" onclick="speak('Perdone el fallo. ¿Cuándo puedo repetir?')">🔊</button>
+        </div>
+        <div class="fr-line">
+          <div class="who">Instructor:</div><div class="es">Paciente. La tasa tiene otra convocatoria. Ensayamos y volvemos.</div>
+          <div class="ru">Терпение. Пошлина включает ещё одну попытку. Потренируемся — и вернёмся.</div>
+          <button class="speak-btn" onclick="speak('Paciente. La tasa tiene otra convocatoria. Ensayamos y volvemos.')">🔊</button>
+        </div>
+        <div class="sit-question" data-correct="1">
+          <div class="q-text"><span class="q-num">1</span>Что значит «ha suspendido por poco»?</div>
+          <div class="q-opts">
+            <div class="q-opt" data-o="0">Вы совсем не были готовы.</div>
+            <div class="q-opt" data-o="1">Чуть-чуть не хватило: мелкий fallo, и всё пошло иначе.</div>
+            <div class="q-opt" data-o="2">Экзамен отменили по погоде.</div>
+          </div>
+        </div>
+        <div class="sit-question" data-correct="1">
+          <div class="q-text"><span class="q-num">2</span>Что делает тот, кто не сдал с первого раза?</div>
+          <div class="q-opts">
+            <div class="q-opt" data-o="0">Уезжает из Испании.</div>
+            <div class="q-opt" data-o="1">Pide otra convocatoria и тренируется дальше.</div>
+            <div class="q-opt" data-o="2">Платит новую полную tasa за каждую попытку.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note green">
+      💬 <b>Speaking drill (2 мин):</b> проиграйте вслух ОБЕ развилки — и «сдал», и «не сдал». Фраза для себя: <i>«Paciente, otra convocatoria»</i> — она работает не только на экзамене.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 5: ПРОДУКТ — СКРИПТ ЭКЗАМЕНА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">5</div><div class="step-title"><h2>Продукт: мой скрипт экзамена</h2><span class="time">44:00 – 50:00 · Конструктор диалога с экзаменатором</span></div></div>
+  <div class="card">
+    <p class="hint">Соберите полный скрипт вашего экзамена: команды экзаменатора, ваши реакции, результат. Прочитайте его вслух — это репетиция, которая снимает половину нервов.</p>
+
+    <div class="map-builder">
+      <div class="hdr">🎬 КОНСТРУКТОР: Mi guion del examen</div>
+
+      <div class="field">
+        <label>🙋 Ваше имя:</label>
+        <input type="text" id="g-nombre" placeholder="Sara">
+      </div>
+      <div class="field">
+        <label>🧭 Первая команда (arranque):</label>
+        <select id="g-cmd1">
+          <option>Arranque el coche, por favor.</option>
+          <option>Suba al coche y arranque, por favor.</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>💬 Ваша реакция (или фраза-спасатель):</label>
+        <select id="g-react">
+          <option>Vale.</option>
+          <option>¿Puede repetir, por favor?</option>
+          <option>No he entendido.</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>🔄 Вторая команда (en marcha):</label>
+        <select id="g-cmd2">
+          <option>Continúe todo recto.</option>
+          <option>Gire a la izquierda en la próxima.</option>
+          <option>Salga de la rotonda la segunda.</option>
+          <option>Incorpórese a la autovía.</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>🅿️ Команда парковки:</label>
+        <select id="g-park">
+          <option>Apárquese aquí, en batería.</option>
+          <option>Apárquese aquí, en línea.</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>🏅 Результат:</label>
+        <select id="g-res">
+          <option value="aprobado">¡He aprobado!</option>
+          <option value="suspendido">He suspendido por poco.</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildGuion()" style="margin-top:12px">🔧 Собрать скрипт</button>
+      <div id="guion-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока (и финала модуля):</b> скопируйте скрипт, запишите голосовое, где вы проигрываете ОБЕ роли (экзаменатор + вы), и пришлите преподавателю. Рекомендация: по одному дублю на каждую развилку — ha aprobado и ha suspendido por poco.
+    </div>
+  </div>
+</section>
+
+<!-- ДОМАШКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🏠</div><div class="step-title"><h2>Домашнее задание · Урок B5 (финал модуля)</h2><span class="time">⏱ ~30–35 минут</span></div></div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 1. «Симуляция: команды и реакции» (говорение) · 8 мин ⭐</h4>
+    <div class="hw-meta">Цель: довести императив экзаменатора до автоматизма.</div>
+    <p>Запишите голосовое: прочитайте 5 команд экзаменатора (arranque, continúe todo recto, gire a la izquierda en la próxima, incorpórese, apárquese aquí) — и после каждой свою реакцию на испанском. Минимум 2 дубля!</p>
+    <div style="background:#F0F4FF;padding:10px;border-radius:8px;margin-top:8px;font-style:italic">
+      Examinador: Arranque el coche, por favor. Yo: Vale, ya está. Examinador: Continúe todo recto. Yo: Sigo derecho. Examinador: Gire a la izquierda en la próxima. Yo: Vale, intermitente. Examinador: Incorpórese. Yo: Con cuidado, vale. Examinador: Apárquese aquí. Yo: Ya está, coche parado.
+    </div>
+    <button class="speak-btn" onclick="speak('Arranque el coche, por favor. Vale, ya está. Continúe todo recto. Sigo derecho. Gire a la izquierda en la próxima. Vale, intermitente. Incorpórese. Con cuidado, vale. Apárquese aquí. Ya está, coche parado.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📺 Задание 2. Реальное действие: видео экзамена · 10 мин ⭐</h4>
+    <div class="hw-meta">Цель: услышать настоящие команды.</div>
+    <p>Посмотрите видео реального практического экзамена (ссылка в ресурсах ниже). Выпишите 3 команды экзаменатора, которые вы услышали, и их перевод. Пришлите список текстом.</p>
+    <button class="speak-btn" onclick="speak('Escucha los comandos del examinador y anótalos. Es el mejor entrenamiento.')" style="margin-top:8px">🔊 Прослушать совет</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 3. Мой скрипт экзамена · 7 мин</h4>
+    <div class="hw-meta">Цель: продукт урока — готовый сценарий.</div>
+    <p>Скопируйте ваш guion из конструктора (выше), добавьте 2 свои реплики — и пришлите текстом преподавателю. Идеально: по версии на каждую развилку результата.</p>
+  </div>
+
+  <div class="hw-item">
+    <h4>✅ Задание 4. Чек-лист «Утро экзамена» · 5 мин</h4>
+    <div class="hw-meta">Цель: убрать 50% нервов заранее.</div>
+    <p>Составьте личный чек-лист из 6 пунктов: DNI, convocatoria (время и место), llegar con tiempo, agua, дыхание 4-4-4 и карточка с фразами-спасателями. Отметьте, что уже готово.</p>
+    <button class="speak-btn" onclick="speak('Necesito el DNI, la convocatoria, llegar con tiempo y mis frases de rescate. Tranquilo y respira.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия «Мини-автошкола» · 7 мин</h4>
+    <div class="hw-meta">Цель: императив через игру — дети командуют.</div>
+    <p>Игра в autoescuela: дети — экзаменаторы, вы — «машина». Дети командуют: <i>«¡Gire a la izquierda! ¡Continúe! ¡Apárquese aquí!»</i> — вы «едете» по квартире и выполняете. Потом меняйтесь ролями: теперь вы командуете, дети «едут». Смех гарантирован, императив — закреплён.</p>
+    <button class="speak-btn" onclick="speak('¡Gire a la izquierda! ¡Continúe todo recto! ¡Apárquese aquí! Muy bien.')" style="margin-top:8px">🔊 Прослушать команды</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎓 Задание 6. Финал модуля: «Мой план B» · 5 мин</h4>
+    <div class="hw-meta">Цель: проработать сценарий «не сдал» — чтобы он не пугал.</div>
+    <p>Напишите 3 фразы поддержки самому себе на случай «ha suspendido por poco» — используйте слова урока: paciente, otra convocatoria, perdone el fallo. Пример: <i>«Si suspendo, repito sin drama. La tasa tiene otra convocatoria.»</i></p>
+    <button class="speak-btn" onclick="speak('Si suspendo, repito sin drama. La tasa tiene otra convocatoria. Paciente: ensayo y vuelvo.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Команды и реакции» (задание 1)<br>
+    • 📺 3 команды из реального видео (задание 2)<br>
+    • ✍️ Скрипт экзамена из конструктора (задание 3)<br>
+    • ✅ Чек-лист «Утро экзамена» (задание 4)<br>
+    • ✅ «Светофор» самопроверки
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head"><div class="step-num">✅</div><div class="step-title"><h2>Самопроверка «Светофор»</h2><span class="time">Отметьте честно — нажмите на нужный цвет</span></div></div>
+  <div class="card">
+    <div style="overflow-x:auto">
+    <table class="tl-table">
+      <thead><tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr></thead>
+      <tbody id="tl-body"></tbody>
+    </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на разборе разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head"><div class="step-num">🎮</div><div class="step-title"><h2>Тренажёр: команды, машина, результат</h2><span class="time">~10 мин</span></div></div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока B5</h3>
+    <p>Повторите 35 слов урока в Quizlet: утро экзамена, команды экзаменатора, машина, результат. Финальный повтор бонусного модуля!</p>
+    <!-- QUIZLET: родители урок B5 (ссылку добавит админ) -->
+    <a href="#" onclick="return false;">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- РЕСУРСЫ -->
+<section class="section">
+  <div class="step-head"><div class="step-num">🔗</div><div class="step-title"><h2>Внешние ресурсы</h2><span class="time">Реальные экзамены и финал модуля</span></div></div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <span class="tag">📹 Instagram Reel</span>
+      <h4>Реальный практический экзамен</h4>
+      <p>Настоящий экзамен в Испании: команды экзаменатора, манёвры, типичные ошибки. Смотрите с блокнотом!</p>
+      <a href="https://www.instagram.com/reel/DRmyrZ9DF6Z/" target="_blank" rel="noopener">Смотреть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📺 YouTube</span>
+      <h4>Examen práctico DGT — поиск</h4>
+      <p>Полные записи экзаменов от разных авторов: слушайте команды в реальном темпе.</p>
+      <a href="https://www.youtube.com/results?search_query=examen+pr%C3%A1ctico+dgt+permiso+b" target="_blank" rel="noopener">Искать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🏛 Официально</span>
+      <h4>DGT — permiso de conducir</h4>
+      <p>Официальная страница: как проходит экзамен, что берут с собой, как получить permiso.</p>
+      <a href="https://www.dgt.es/" target="_blank" rel="noopener">Открыть →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🗺 Street View</span>
+      <h4>Маршрут экзамена заранее</h4>
+      <p>Узнайте у автошколы район экзамена и «проедьте» его в Google Street View — спокойнее на 30%.</p>
+      <a href="https://www.google.com/maps" target="_blank" rel="noopener">Открыть Maps →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">📰 Статья</span>
+      <h4>Полный гайд о правах в Испании</h4>
+      <p>Разбор на Хабре: теория, практика, цены и советы для релокантов.</p>
+      <a href="https://habr.com/ru/articles/813601/" target="_blank" rel="noopener">Читать →</a>
+    </div>
+    <div class="resource-card">
+      <span class="tag">🎓 Финал</span>
+      <h4>Бонусный модуль пройден!</h4>
+      <p>B1–B5: автошкола, машина, знаки, теория, экзамен. Вернитесь к карте курса — впереди следующий этап!</p>
+      <a href="../../index.html">↺ К карте курса →</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · 🎁 Бонусный модуль «Misión Autoescuela» · Финал</footer>
+
+<div class="lesson-nav">
+  <a href="bonus-auto-b4.html">← Предыдущий<br><small>Урок B4 · Теория и экзамен DGT</small></a>
+  <a href="../../index.html">↺ Вернуться к карте курса<br><small>Бонусный модуль пройден · ¡Enhorabuena!</small></a>
+</div>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES';
+  u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Grammar hints =====
+document.addEventListener('click', function(e){
+  var hint = e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){ if(el!==hint) el.classList.remove('active'); });
+  if(hint){ hint.classList.toggle('active'); e.stopPropagation(); }
+});
+
+// ===== РАЗМИНКА-КВИЗ (B4) =====
+var warmQ=[
+  {q:'1. Как сказать «сдать экзамен»?',o:['aprobar','suspender','ensayar'],c:0},
+  {q:'2. Как сказать «провалить»?',o:['aprobar','suspender','convocar'],c:1},
+  {q:'3. Сколько вопросов в экзамене теории DGT?',o:['20','30','50'],c:1},
+  {q:'4. Сколько ошибок допустимо?',o:['0','3','10'],c:1},
+  {q:'5. Как сказать «пошлина за экзамен»?',o:['la tasa de examen','la factura','la propina'],c:0},
+  {q:'6. Как сказать «если сдам, еду на практику»?',o:['Si suspendo, repito','Si apruebo, hago prácticas','Cuando termine, descanso'],c:1}
+];
+
+function renderWarmup(){
+  var el = document.getElementById('warmup-quiz');
+  el.innerHTML = '';
+  warmQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+' <span class="quiz-week b4">урок B4</span></h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="wf-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('wf-'+qi);
+      if(oi === warmQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[warmQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+warmQ[qi].o[warmQ[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderWarmup();
+
+// ===== СИТУАЦИИ И РАЗВИЛКИ (data-correct) =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== ЛЕКСИКА =====
+var VOCAB = {
+  manana:[
+    {icon:'📄', es:'el examen práctico', ru:'практический экзамен', ex:'El examen práctico es en la ciudad.', exRu:'Практический экзамен проходит по городу.'},
+    {icon:'😰', es:'los nervios', ru:'нервы', ex:'Los nervios son normales.', exRu:'Нервы — это нормально.'},
+    {icon:'🧘', es:'tranquilo, respira', ru:'спокойно, дыши', ex:'Tranquilo, respira hondo: dos dentro, cuatro fuera.', exRu:'Спокойно, дыши глубоко: вдох на два счёта, выдох на четыре.'},
+    {icon:'🚗', es:'el coche de la autoescuela', ru:'учебная машина', ex:'El coche de la autoescuela tiene doble pedal.', exRu:'У учебной машины двойные педали.'},
+    {icon:'🅛', es:'la L de practicar', ru:'знак «L»', ex:'El coche lleva la L de practicar.', exRu:'На машине знак «L» ученика.'},
+    {icon:'👨‍🏫', es:'el instructor', ru:'инструктор', ex:'Mi instructor me acompaña en el examen.', exRu:'Мой инструктор сопровождает меня на экзамене.'},
+    {icon:'🧑‍⚖️', es:'el examinador', ru:'экзаменатор', ex:'El examinador es de la DGT.', exRu:'Экзаменатор — из DGT.'}
+  ],
+  comandos:[
+    {icon:'🔑', es:'arranque', ru:'заведите', ex:'Arranque el coche, por favor.', exRu:'Заведите машину, пожалуйста.'},
+    {icon:'⬆️', es:'continúe todo recto', ru:'продолжайте прямо', ex:'Continúe todo recto hasta la rotonda.', exRu:'Продолжайте прямо до ро́тонды.'},
+    {icon:'↩️', es:'gire a la izquierda en la próxima', ru:'поверните налево на следующей', ex:'Gire a la izquierda en la próxima calle.', exRu:'Поверните налево на следующей улице.'},
+    {icon:'🛣', es:'incorpórese', ru:'встраивайтесь в поток', ex:'Incorpórese a la autovía con cuidado.', exRu:'Встройтесь в трассу осторожно.'},
+    {icon:'🅿️', es:'apárquese aquí', ru:'припаркуйтесь здесь', ex:'Apárquese aquí, junto a la acera.', exRu:'Припаркуйтесь здесь, у тротуара.'},
+    {icon:'🔄', es:'salga de la rotonda la segunda', ru:'сойдите с круга на втором', ex:'Salga de la rotonda la segunda, ¿de acuerdo?', exRu:'Сойдите с ро́тонды на втором съезде, ладно?'},
+    {icon:'🦶', es:'frene suavemente', ru:'тормозите плавно', ex:'Frene suavemente antes del paso de peatones.', exRu:'Тормозите плавно перед пешеходным переходом.'}
+  ],
+  coche:[
+    {icon:'🪞', es:'el espejo retrovisor', ru:'зеркало заднего вида', ex:'Mire el espejo retrovisor antes de girar.', exRu:'Посмотрите в зеркало заднего вида перед поворотом.'},
+    {icon:'🔒', es:'el cinturón, por favor', ru:'ремень, пожалуйста', ex:'El cinturón, por favor. Ya está.', exRu:'Ремень, пожалуйста. Уже пристёгнут.'},
+    {icon:'↩', es:'la marcha atrás', ru:'задний ход', ex:'La marcha atrás: despacio y mirando atrás.', exRu:'Задний ход: медленно и глядя назад.'},
+    {icon:'🦶', es:'la frenada', ru:'торможение', ex:'La frenada fue suave. Bien.', exRu:'Торможение было плавное. Хорошо.'},
+    {icon:'⚙️', es:'el arrastre', ru:'трогание', ex:'El arrastre en pendiente, sin miedo.', exRu:'Трогание на подъёме — без страха.'},
+    {icon:'⛰', es:'la pendiente', ru:'подъём', ex:'En la pendiente, arranco sin calar.', exRu:'На подъёме трогаюсь, не глохну.'},
+    {icon:'🅿️', es:'el aparcamiento en batería', ru:'парковка параллельно/поперечно', ex:'El aparcamiento en batería necesita cálculo.', exRu:'Парковка поперечно требует расчёта.'}
+  ],
+  durante:[
+    {icon:'🔁', es:'¿puede repetir, por favor?', ru:'можете повторить?', ex:'¿Puede repetir, por favor? No le oí.', exRu:'Можете повторить, пожалуйста? Я не расслышал.'},
+    {icon:'🤷', es:'no he entendido', ru:'я не понял', ex:'Perdone, no he entendido la dirección.', exRu:'Извините, я не понял направление.'},
+    {icon:'🛣', es:'¿por esta calle?', ru:'по этой улице?', ex:'¿Por esta calle o por la avenida?', exRu:'По этой улице или по проспекту?'},
+    {icon:'🧭', es:'indíqueme la dirección', ru:'укажите мне направление', ex:'Indíqueme la dirección cuando quiera.', exRu:'Укажите мне направление, когда будете готовы.'},
+    {icon:'🙏', es:'perdone el fallo', ru:'извините за ошибку', ex:'Perdone el fallo: es mi primer intento.', exRu:'Извините за ошибку: это моя первая попытка.'},
+    {icon:'➡️', es:'sigo derecho', ru:'еду прямо', ex:'Sigo derecho, ¿verdad?', exRu:'Еду прямо, верно?'},
+    {icon:'✅', es:'estoy en la buena', ru:'я на правильной полосе', ex:'Estoy en la buena para girar.', exRu:'Я на правильной полосе, чтобы повернуть.'}
+  ],
+  resultado:[
+    {icon:'🎉', es:'felicidades, ha aprobado', ru:'поздравляю, вы сдали', ex:'Felicidades, ha aprobado el examen.', exRu:'Поздравляю, вы сдали экзамен.'},
+    {icon:'🌧', es:'ha suspendido por poco', ru:'вы чуть не сдали', ex:'Ha suspendido por poco: solo un fallo.', exRu:'Вы чуть не сдали: всего одна ошибка.'},
+    {icon:'📉', es:'los fallos', ru:'ошибки', ex:'Los fallos son lecciones para la próxima.', exRu:'Ошибки — уроки на следующий раз.'},
+    {icon:'🚫', es:'deficiente', ru:'незачёт (по пункту)', ex:'Me pusieron deficiente en el aparcamiento.', exRu:'Мне поставили незачёт за парковку.'},
+    {icon:'🪪', es:'el permiso de conducir', ru:'водительское удостоверение', ex:'El permiso de conducir llega por correo.', exRu:'Водительское удостоверение приходит почтой.'},
+    {icon:'📬', es:'recoger el permiso', ru:'получить права', ex:'Voy a recoger el permiso a la DGT.', exRu:'Я иду получать права в DGT.'},
+    {icon:'🚙', es:'conducir solo', ru:'водить одному', ex:'Conducir solo es otra historia.', exRu:'Водить самому — уже другая история.'}
+  ]
+};
+
+function showVocab(key,btn){
+  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML = '<div class="vocab-inner">'+
+      '<div class="vocab-front">'+
+        '<div class="icon">'+w.icon+'</div>'+
+        '<div class="es">'+w.es+'</div>'+
+        '<div class="ru">'+w.ru+'</div>'+
+        '<button class="speak-btn" style="margin-top:6px" onclick="event.stopPropagation();speak(\''+w.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+        '<div class="flip-hint">нажмите для примера ↻</div>'+
+      '</div>'+
+      '<div class="vocab-back">'+
+        '<div class="ex">«'+w.ex+'»</div>'+
+        '<div class="ex-ru">'+w.exRu+'</div>'+
+        '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\''+w.ex.replace(/'/g,"\\'")+'\')">🔊</button>'+
+      '</div>'+
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('manana',document.querySelector('.tabs .tab'));
+
+// ===== КВИЗ: ИМПЕРАТИВ USTED =====
+var IMPQ=[
+  {q:'___ el coche, por favor. (заведите)',o:['Arranca','Arranque','Arrancas'],c:1,why:'usted от arrancar → arranque (без -s, без -a)'},
+  {q:'___ todo recto. (продолжайте прямо)',o:['Continúe','Continúa','Continuas'],c:0,why:'usted от continuar → continúe'},
+  {q:'___ a la izquierda en la próxima. (поверните налево)',o:['Giras','Girad','Gire'],c:2,why:'usted от girar → gire'},
+  {q:'___ a la autovía. (встройтесь в поток)',o:['Incorpórese','Incorpora','Incorpórate'],c:0,why:'возвратный: incorpórese — с -se и ударением'},
+  {q:'___ aquí, en batería. (припаркуйтесь здесь)',o:['Aparcas','Apárquese','Aparcad'],c:1,why:'usted от aparcar → apárquese (c → qu + ударение)'},
+  {q:'___ suavemente. (тормозите плавно)',o:['Frenas','Frenad','Frene'],c:2,why:'usted от frenar → frene'}
+];
+
+function renderImpQuiz(){
+  var el = document.getElementById('imp-quiz');
+  el.innerHTML = '';
+  IMPQ.forEach(function(item,qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>'+item.q+'</h4><div class="quiz-opts">'+item.o.map(function(o,oi){
+      return '<div class="quiz-opt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="iq-'+qi+'"></div>';
+    el.appendChild(d);
+  });
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q, oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById('iq-'+qi);
+      if(oi === IMPQ[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto! '+IMPQ[qi].why;
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[IMPQ[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: '+IMPQ[qi].o[IMPQ[qi].c]+'. '+IMPQ[qi].why;
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+renderImpQuiz();
+
+// ===== СИМУЛЯТОР ЭКЗАМЕНА =====
+var CROSS = '<svg viewBox="0 0 400 240">'+
+  '<rect x="0" y="0" width="400" height="240" fill="#F0F7E6"/>'+
+  '<rect x="170" y="0" width="60" height="240" fill="#E8DCCF"/>'+
+  '<rect x="0" y="90" width="400" height="60" fill="#E8DCCF"/>'+
+  '<line x1="200" y1="0" x2="200" y2="88" stroke="#fff" stroke-width="3" stroke-dasharray="8 8"/>'+
+  '<line x1="200" y1="152" x2="200" y2="240" stroke="#fff" stroke-width="3" stroke-dasharray="8 8"/>'+
+  '<line x1="0" y1="120" x2="168" y2="120" stroke="#fff" stroke-width="3" stroke-dasharray="8 8"/>'+
+  '<line x1="232" y1="120" x2="400" y2="120" stroke="#fff" stroke-width="3" stroke-dasharray="8 8"/>'+
+  '<text x="352" y="26" font-size="18">🏠</text><text x="30" y="26" font-size="18">🏠</text>'+
+  '<rect x="182" y="196" width="36" height="34" rx="8" fill="#E2725B"/>'+
+  '<text x="200" y="219" text-anchor="middle" font-size="14">🚗</text>'+
+  '<g class="sim-hot" data-opt="izquierda">'+
+    '<rect x="40" y="98" width="76" height="46" rx="8" fill="#3E7CB1" opacity=".15" stroke="#3E7CB1" stroke-width="2"/>'+
+    '<text x="78" y="122" text-anchor="middle" font-size="18">⬅️</text>'+
+    '<text x="78" y="137" text-anchor="middle" font-size="10" fill="#2B2118">налево</text>'+
+  '</g>'+
+  '<g class="sim-hot" data-opt="recto">'+
+    '<rect x="172" y="18" width="56" height="58" rx="8" fill="#3E7CB1" opacity=".15" stroke="#3E7CB1" stroke-width="2"/>'+
+    '<text x="200" y="46" text-anchor="middle" font-size="20">⬆️</text>'+
+    '<text x="200" y="66" text-anchor="middle" font-size="10" fill="#2B2118">прямо</text>'+
+  '</g>'+
+  '<g class="sim-hot" data-opt="derecha">'+
+    '<rect x="284" y="98" width="76" height="46" rx="8" fill="#3E7CB1" opacity=".15" stroke="#3E7CB1" stroke-width="2"/>'+
+    '<text x="322" y="122" text-anchor="middle" font-size="18">➡️</text>'+
+    '<text x="322" y="137" text-anchor="middle" font-size="10" fill="#2B2118">направо</text>'+
+  '</g>'+
+'</svg>';
+
+var SIM_SCENES = [
+  {
+    cmd:'Arranque el coche, por favor.',
+    title:'Escena 1 · En el coche',
+    svg:'<svg viewBox="0 0 400 240">'+
+      '<rect x="10" y="10" width="380" height="220" rx="16" fill="#F0F4FF" stroke="#3E7CB1" stroke-width="2"/>'+
+      '<text x="200" y="38" text-anchor="middle" font-size="13" font-weight="bold" fill="#3E7CB1">🚗 El coche de la autoescuela · кабина</text>'+
+      '<g class="sim-hot" data-opt="puerta">'+
+        '<rect x="26" y="60" width="70" height="130" rx="10" fill="#E8DCCF" stroke="#7A6A5C" stroke-width="2"/>'+
+        '<text x="61" y="115" text-anchor="middle" font-size="30">🚪</text><text x="61" y="148" text-anchor="middle" font-size="11" fill="#2B2118">дверь</text>'+
+      '</g>'+
+      '<g class="sim-hot" data-opt="volante">'+
+        '<circle cx="175" cy="128" r="44" fill="none" stroke="#2B2118" stroke-width="10"/><circle cx="175" cy="128" r="12" fill="#2B2118"/>'+
+        '<text x="175" y="206" text-anchor="middle" font-size="11" fill="#2B2118">руль</text>'+
+      '</g>'+
+      '<g class="sim-hot" data-opt="llave">'+
+        '<rect x="282" y="82" width="90" height="88" rx="10" fill="#FFF7E0" stroke="#E9A13B" stroke-width="2"/>'+
+        '<text x="327" y="122" text-anchor="middle" font-size="34">🔑</text><text x="327" y="152" text-anchor="middle" font-size="11" fill="#2B2118">зажигание</text>'+
+      '</g>'+
+    '</svg>',
+    opts:[
+      {id:'puerta', ok:false, fb:'Дверь закрыта ещё до команды: экзаменатор ждёт другого. Arranque = заведите машину (ключ зажигания).'},
+      {id:'volante', ok:false, fb:'Руль крутят, когда машина уже едет. Сначала — arranque: заведите (ключ зажигания).'},
+      {id:'llave', ok:true, fb:'¡Muy bien! Arranque = заведите машину. Вы повернули ключ — и вы в пути. Экзаменатор ставит первую галочку.'}
+    ]
+  },
+  {
+    cmd:'Continúe todo recto, por favor.',
+    title:'Escena 2 · En la ciudad',
+    svg:CROSS,
+    opts:[
+      {id:'izquierda', ok:false, fb:'Налево — это «gire a la izquierda». А вы услышали continúe todo recto — прямо.'},
+      {id:'recto', ok:true, fb:'¡Perfecto! Continúe todo recto = продолжайте прямо. Никаких поворотов — едете вперёд.'},
+      {id:'derecha', ok:false, fb:'Направо — это «gire a la derecha». А команда была continúe todo recto — прямо.'}
+    ]
+  },
+  {
+    cmd:'Gire a la izquierda en la próxima calle.',
+    title:'Escena 3 · El giro',
+    svg:CROSS,
+    opts:[
+      {id:'izquierda', ok:true, fb:'¡Exacto! Gire a la izquierda en la próxima = поверните налево на следующей. Вы включили левый поворотник и повернули.'},
+      {id:'recto', ok:false, fb:'Прямо — это continúe todo recto. А вы услышали gire a la izquierda — налево на следующей.'},
+      {id:'derecha', ok:false, fb:'Направо — gire a la derecha. Команда была про налево: la izquierda.'}
+    ]
+  },
+  {
+    cmd:'Incorpórese a la autovía con cuidado.',
+    title:'Escena 4 · La incorporación',
+    svg:'<svg viewBox="0 0 400 240">'+
+      '<rect x="0" y="0" width="400" height="240" fill="#F0F4FF"/>'+
+      '<rect x="0" y="55" width="400" height="46" fill="#E8DCCF"/>'+
+      '<rect x="0" y="101" width="400" height="6" fill="#fff"/>'+
+      '<rect x="0" y="107" width="400" height="46" fill="#E8DCCF"/>'+
+      '<text x="262" y="88" font-size="11" font-weight="bold" fill="#2B2118">LA AUTOVÍA →</text>'+
+      '<path d="M110,240 Q150,170 232,112" stroke="#E9DCC8" stroke-width="34" fill="none"/>'+
+      '<rect x="94" y="198" width="32" height="30" rx="7" fill="#E2725B"/>'+
+      '<text x="110" y="218" text-anchor="middle" font-size="13">🚗</text>'+
+      '<g class="sim-hot" data-opt="frenar">'+
+        '<rect x="40" y="140" width="96" height="52" rx="8" fill="#E2725B" opacity=".15" stroke="#E2725B" stroke-width="2"/>'+
+        '<text x="88" y="164" text-anchor="middle" font-size="18">🛑</text><text x="88" y="182" text-anchor="middle" font-size="10" fill="#2B2118">остановиться</text>'+
+      '</g>'+
+      '<g class="sim-hot" data-opt="incorporar">'+
+        '<circle cx="252" cy="108" r="30" fill="#7A8B4C" opacity=".2" stroke="#7A8B4C" stroke-width="2"/>'+
+        '<text x="252" y="106" text-anchor="middle" font-size="20">⤴️</text><text x="252" y="128" text-anchor="middle" font-size="9" fill="#2B2118">в поток</text>'+
+      '</g>'+
+      '<g class="sim-hot" data-opt="salir">'+
+        '<rect x="300" y="170" width="86" height="52" rx="8" fill="#3E7CB1" opacity=".15" stroke="#3E7CB1" stroke-width="2"/>'+
+        '<text x="343" y="194" text-anchor="middle" font-size="18">⬇️</text><text x="343" y="212" text-anchor="middle" font-size="10" fill="#2B2118">съехать назад</text>'+
+      '</g>'+
+    '</svg>',
+    opts:[
+      {id:'frenar', ok:false, fb:'Останавливаться на пандусе опасно и на экзамене это fallo. Incorpórese = встроитесь в поток на скорости движения.'},
+      {id:'incorporar', ok:true, fb:'¡Muy bien! Incorpórese = встроитесь в поток. Вы разогнались по пандусу, посмотрели в espejo retrovisor и влились в autovía.'},
+      {id:'salir', ok:false, fb:'Съезжать назад не просили. Incorpórese = встроитесь в поток autovía.'}
+    ]
+  },
+  {
+    cmd:'Apárquese aquí, por favor.',
+    title:'Escena 5 · El aparcamiento',
+    svg:'<svg viewBox="0 0 400 240">'+
+      '<rect x="0" y="0" width="400" height="240" fill="#FFF7EF"/>'+
+      '<rect x="0" y="0" width="400" height="44" fill="#D9CBBB"/>'+
+      '<text x="200" y="27" text-anchor="middle" font-size="12" font-weight="bold" fill="#2B2118">🌳 la acera · тротуар</text>'+
+      '<rect x="0" y="172" width="400" height="44" fill="#E8DCCF"/>'+
+      '<line x1="0" y1="172" x2="400" y2="172" stroke="#fff" stroke-width="3"/>'+
+      '<rect x="242" y="178" width="34" height="30" rx="7" fill="#E2725B"/>'+
+      '<text x="259" y="198" text-anchor="middle" font-size="13">🚗</text>'+
+      '<g class="sim-hot" data-opt="prohibido">'+
+        '<rect x="24" y="58" width="112" height="104" rx="10" fill="#fff" stroke="#D9CBBB" stroke-width="2"/>'+
+        '<text x="80" y="108" text-anchor="middle" font-size="30">🚫</text><text x="80" y="136" text-anchor="middle" font-size="10" fill="#2B2118">жёлтая линия</text>'+
+        '<rect x="24" y="166" width="112" height="5" fill="#E9A13B"/>'+
+      '</g>'+
+      '<g class="sim-hot" data-opt="ocupado">'+
+        '<rect x="150" y="58" width="112" height="104" rx="10" fill="#fff" stroke="#D9CBBB" stroke-width="2"/>'+
+        '<text x="206" y="112" text-anchor="middle" font-size="30">🚙</text><text x="206" y="136" text-anchor="middle" font-size="10" fill="#2B2118">занято</text>'+
+      '</g>'+
+      '<g class="sim-hot" data-opt="libre">'+
+        '<rect x="276" y="58" width="112" height="104" rx="10" fill="#F0F7E6" stroke="#7A8B4C" stroke-width="2"/>'+
+        '<text x="332" y="112" text-anchor="middle" font-size="30">🅿️</text><text x="332" y="136" text-anchor="middle" font-size="10" fill="#2B2118">свободно</text>'+
+      '</g>'+
+    '</svg>',
+    opts:[
+      {id:'prohibido', ok:false, fb:'Здесь жёлтая линия: prohibido aparcar! На экзамене это suspenso. Apárquese aquí = свободное место правее.'},
+      {id:'ocupado', ok:false, fb:'Место занято чужой машиной. Apárquese aquí = найдите свободное место — правее.'},
+      {id:'libre', ok:true, fb:'¡Perfecto! Apárquese aquí = припаркуйтесь здесь. Вы заняли свободное место ровно у тротуара. La maniobra final, ¡bien!'}
+    ]
+  }
+];
+
+var simIdx = 0, simOk = 0, simLocked = false;
+
+function startSim(){
+  simIdx = 0; simOk = 0;
+  document.getElementById('sim-final').classList.remove('show');
+  renderScene();
+}
+
+function renderProgress(){
+  var p = document.getElementById('sim-progress');
+  p.innerHTML = '';
+  for(var i = 0; i < SIM_SCENES.length; i++){
+    var d = document.createElement('span');
+    d.className = 'sim-dot' + (i < simIdx ? ' done' : (i === simIdx ? ' cur' : ''));
+    p.appendChild(d);
+  }
+  document.getElementById('sim-counter').textContent = 'Escena ' + Math.min(simIdx + 1, SIM_SCENES.length) + ' de 5';
+}
+
+function renderScene(){
+  simLocked = false;
+  renderProgress();
+  var box = document.getElementById('sim-box');
+  var sc = SIM_SCENES[simIdx];
+  box.innerHTML =
+    '<div class="cmd-card">'+
+      '<div class="cmd-hint">🎧 Escena ' + (simIdx + 1) + ' de 5 · ' + sc.title + ' — слушайте команду и выберите действие на схеме</div>'+
+      '<button class="cmd-btn" onclick="speak(\''+sc.cmd.replace(/'/g,"\\'")+'\')">🔊 Слушать команду</button>'+
+    '</div>'+
+    '<div class="sim-visual">'+sc.svg+'</div>'+
+    '<div class="sim-fb" id="sim-fb"></div>'+
+    '<div style="text-align:right"><button class="btn btn-primary" id="sim-next" style="display:none">'+(simIdx === SIM_SCENES.length-1 ? '🏁 Итог симуляции' : 'Следующая сцена →')+'</button></div>';
+  box.querySelectorAll('.sim-hot').forEach(function(h){
+    h.addEventListener('click', function(){ pickSceneOpt(h.dataset.opt); });
+  });
+  document.getElementById('sim-next').onclick = nextScene;
+}
+
+function pickSceneOpt(id){
+  if(simLocked) return;
+  simLocked = true;
+  var sc = SIM_SCENES[simIdx];
+  var opt = null;
+  sc.opts.forEach(function(o){ if(o.id === id) opt = o; });
+  var fb = document.getElementById('sim-fb');
+  document.querySelectorAll('#sim-box .sim-hot').forEach(function(h){
+    var o = null;
+    sc.opts.forEach(function(x){ if(x.id === h.dataset.opt) o = x; });
+    if(o && o.ok){ h.classList.add('hot-good'); }
+    else if(h.dataset.opt === id){ h.classList.add('hot-bad'); }
+  });
+  if(opt.ok){
+    simOk++;
+    fb.className = 'sim-fb ok show';
+    fb.textContent = '✅ ' + opt.fb;
+    speak(sc.cmd);
+  } else {
+    fb.className = 'sim-fb bad show';
+    fb.textContent = '❌ ' + opt.fb;
+  }
+  document.getElementById('sim-next').style.display = 'inline-block';
+}
+
+function nextScene(){
+  simIdx++;
+  if(simIdx >= SIM_SCENES.length){
+    renderSimFinal();
+  } else {
+    renderScene();
+  }
+}
+
+function renderSimFinal(){
+  renderProgress();
+  document.getElementById('sim-box').innerHTML = '';
+  var fin = document.getElementById('sim-final');
+  var verdict;
+  if(simOk === 5){
+    verdict = '🎉 ¡Perfecto! 5 de 5: вы услышали и выполнили все команды. Экзаменатор доволен.';
+  } else if(simOk >= 3){
+    verdict = '💪 ¡Muy bien! ' + simOk + ' de 5: команды вы уже узнаёте. Прогоните симулятор ещё раз для уверенности.';
+  } else {
+    verdict = '🎧 ' + simOk + ' de 5: слушайте команды по 2 раза и повторите симулятор — слух приходит быстро.';
+  }
+  fin.innerHTML =
+    '<div style="font-size:1.15rem;font-weight:900;color:var(--p2)">'+verdict+'</div>'+
+    '<p style="font-weight:800;margin-top:8px">Выполнено верно: '+simOk+' из 5 сцен</p>'+
+    '<div style="margin-top:10px;font-style:italic;color:var(--muted)">Кстати: переспрашивать на экзамене — не ошибка. <b>¿Puede repetir, por favor?</b> — и вы снова в игре.</div>'+
+    '<button class="btn btn-ghost" onclick="startSim()" style="margin-top:12px">↺ Пройти симулятор ещё раз</button>';
+  fin.classList.add('show');
+  fin.scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(simOk >= 4){ speak('¡Perfecto! Ha superado el simulador del examen. Enhorabuena.'); }
+}
+
+startSim();
+
+// ===== КОНСТРУКТОР СКРИПТА ЭКЗАМЕНА =====
+function buildGuion(){
+  var nombre = document.getElementById('g-nombre').value || 'Sara';
+  var cmd1 = document.getElementById('g-cmd1').value;
+  var react = document.getElementById('g-react').value;
+  var cmd2 = document.getElementById('g-cmd2').value;
+  var park = document.getElementById('g-park').value;
+  var res = document.getElementById('g-res').value;
+
+  var finalBlock;
+  if(res === 'aprobado'){
+    finalBlock =
+      'Examinador: Felicidades, ha aprobado. El permiso le llegará por correo.\n'+
+      'Yo: ¡Muchas gracias! ¡Qué alegría!\n'+
+      'Instructor: Ya puede conducir solo. Con cuidado, ¿eh?';
+  } else {
+    finalBlock =
+      'Examinador: Ha suspendido por poco: un fallo en el aparcamiento.\n'+
+      'Yo: Perdone el fallo. ¿Cuándo puedo repetir?\n'+
+      'Instructor: Paciente. La tasa tiene otra convocatoria. Ensayamos y volvemos.';
+  }
+
+  var text =
+    '🎬 MI GUION DEL EXAMEN PRÁCTICO\n\n'+
+    'Examinador: Buenos días. ¿Su nombre, por favor?\n'+
+    'Yo: Buenos días, soy '+nombre+'.\n\n'+
+    'Examinador: '+cmd1+'\n'+
+    'Yo: '+react+'\n\n'+
+    'Examinador: '+cmd2+'\n'+
+    'Yo: Vale, sigo la indicación.\n\n'+
+    'Examinador: '+park+'\n'+
+    'Yo: Ya está: el coche parado.\n\n'+
+    finalBlock;
+
+  var result = document.getElementById('guion-result');
+  result.innerHTML = '<div class="map-result">'+text+'</div>'+
+    '<div class="result-actions">'+
+    '<button class="btn btn-secondary" onclick="speak(\''+text.replace(/\n/g,'. ').replace(/'/g,"\\'")+'\')">🔊 Прослушать скрипт</button>'+
+    '<button class="btn btn-ghost" onclick="copyResult(this)">📋 Скопировать</button>'+
+    '</div>';
+  result.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function copyResult(btn){
+  var text = btn.parentElement.previousElementSibling.textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent = '✓ Скопировано!';
+    setTimeout(function(){ btn.textContent = '📋 Скопировать'; }, 2000);
+  });
+}
+
+// ===== СВЕТОФОР =====
+var TL = [
+  'Понимать команды экзаменатора на слух (arranque, continúe, gire…)',
+  'Действовать по команде: симулятор из 5 сцен',
+  'Переспрашивать вежливо: ¿Puede repetir? / No he entendido',
+  'Говорить в машине: el cinturón, el espejo retrovisor, la marcha atrás',
+  'Реагировать на результат: ha aprobado / ha suspendido por poco',
+  'Вести полный диалог с экзаменатором (мой скрипт)'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  if(!tb) return;
+  tb.innerHTML = '';
+  TL.forEach(function(t,rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+t+'</td>'+
+      '<td><button class="tl-cell green" data-row="'+(rowIdx+1)+'" data-color="1">🟢</button></td>'+
+      '<td><button class="tl-cell yellow" data-row="'+(rowIdx+1)+'" data-color="2">🟡</button></td>'+
+      '<td><button class="tl-cell red" data-row="'+(rowIdx+1)+'" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== ТРЕНАЖЁР =====
+var TRAIN_CARDS = [].concat(VOCAB.manana, VOCAB.comandos, VOCAB.coche, VOCAB.durante, VOCAB.resultado);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode,btn){
+  trainMode = mode;
+  document.querySelectorAll('#train-section .tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+    var updateCard = function(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML = '<div class="vocab-inner">'+
+        '<div class="vocab-front">'+
+          '<div class="icon" style="font-size:2.5rem">'+c.icon+'</div>'+
+          '<div class="es" style="font-size:1.2rem">'+c.es+'</div>'+
+          '<button class="speak-btn" onclick="event.stopPropagation();speak(\''+c.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+          '<div class="flip-hint">нажмите для перевода ↻</div>'+
+        '</div>'+
+        '<div class="vocab-back">'+
+          '<div class="ex" style="font-size:1.1rem">'+c.ru+'</div>'+
+        '</div>'+
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    };
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML = '<button class="btn btn-ghost" id="train-prev">← Назад</button>'+
+      '<span id="trainer-counter" style="font-weight:700">1 / '+TRAIN_CARDS.length+'</span>'+
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+    updateCard();
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderTrainMatch(c);
+  }
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainMatch(container){
+  var pairs = [
+    {id:1, es:'arranque', ru:'заведите'},
+    {id:2, es:'continúe todo recto', ru:'продолжайте прямо'},
+    {id:3, es:'apárquese aquí', ru:'припаркуйтесь здесь'},
+    {id:4, es:'el examinador', ru:'экзаменатор'},
+    {id:5, es:'la marcha atrás', ru:'задний ход'},
+    {id:6, es:'felicidades, ha aprobado', ru:'поздравляю, вы сдали'}
+  ];
+  container.innerHTML = '<div class="match-container"><div class="match-col" id="tm-left"></div><div class="match-col" id="tm-right"></div></div>';
+  var left = document.getElementById('tm-left');
+  var right = document.getElementById('tm-right');
+  var rightSh = pairs.slice().sort(function(){ return Math.random()-0.5; });
+  var selL = null, selR = null;
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+  rightSh.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Continúe todo recto y gire a la izquierda', hint:'Продолжайте прямо и поверните налево'},
+    {target:'¿Puede repetir, por favor?', hint:'Можете повторить, пожалуйста?'},
+    {target:'Apárquese aquí en batería', hint:'Припаркуйтесь здесь поперечно'},
+    {target:'Felicidades, ha aprobado el examen', hint:'Поздравляю, вы сдали экзамен'}
+  ];
+  var idx = 0;
+  var sel = [];
+  function render(){
+    sel = [];
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var words = p.target.split(' ').sort(function(){ return Math.random()-0.5; });
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: '+p.hint;
+    container.appendChild(h);
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+    words.forEach(function(w){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = w;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(w);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = w;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(w);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+        };
+        document.getElementById('tb-line').appendChild(chip);
+      };
+      wC.appendChild(b);
+    });
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML = '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>'+
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+    document.getElementById('tb-check').onclick = function(){
+      var got = sel.join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+        speak(p.target);
+      } else {
+        fb.innerHTML = '<span>❌</span><span>Правильно: «'+p.target+'»</span>';
+        fb.className = 'build-feedback bad';
+      }
+    };
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+  render();
+}
+
+renderTrain();
+</script>
+
+<div id="toast" role="status"></div>
+
+</body>
+</html>

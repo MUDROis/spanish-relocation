@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 55: Autobús y Metro — Школа МУДРО</title>
+<meta name="description" content="Испанский для детей 8 и 12 лет. Урок 55: Autobús y Metro — транспорт, билеты и валидация. Школа МУДРО, Станция 6 «Mi Ciudad».">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#3A86FF; --love:#2A5FC1;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#DCEAFF 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(58,134,255,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#DCEAFF;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #CFE0FF;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #cfd9ee;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .survey-wrap{background:#fff;border:3px dashed var(--heart);border-radius:18px;padding:18px;margin:14px 0}
+  .survey-person{display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid #e8edf7;cursor:pointer}
+  .survey-person:last-child{border-bottom:none}
+  .survey-person:hover{background:#F5F8FF}
+  .survey-avatar{width:50px;height:50px;border-radius:50%;background:#DCEAFF;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+  .survey-info{flex:1;font-size:.9rem}
+  .survey-name{font-weight:800;color:var(--heart);font-size:1rem}
+  .survey-likes{font-style:italic;color:var(--ink-soft);margin-top:2px}
+  .chart-wrap{background:#fff;border-radius:18px;padding:18px;margin:14px 0}
+  .chart-title{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.2rem;margin-bottom:10px}
+  .chart-bar{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:800;font-size:.9rem}
+  .chart-label{min-width:140px;font-size:.85rem}
+  .chart-fill{height:24px;border-radius:8px;background:linear-gradient(90deg,var(--heart),var(--star));transition:.5s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.8rem;font-weight:800;min-width:24px}
+
+  .warm-item{background:#fff;border:2px solid #e8edf7;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #cfd9ee;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#DCEAFF}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}.diff-box{grid-template-columns:1fr}.role-grid{grid-template-columns:1fr}}
+
+  /* === УРОК 55: АВТОБУС, РОЛИ, ДИАЛОГ-СБОРКА === */
+  .diff-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .diff8{background:#E8F5E9;border-radius:14px;padding:12px 14px;font-weight:700;border-left:4px solid var(--green)}
+  .diff12{background:#E3F2FD;border-radius:14px;padding:12px 14px;font-weight:700;border-left:4px solid var(--p4)}
+  .bus-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:12px 0}
+  .bus-part{background:#fff;border:3px solid #CFE0FF;border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:.15s;font-family:'Nunito'}
+  .bus-part:hover{border-color:var(--heart);transform:translateY(-3px)}
+  .bus-part.found{background:#E8F5E9;border-color:var(--green)}
+  .bus-part .emo{font-size:2.2rem;display:block;margin-bottom:4px}
+  .bus-part .es{font-family:'Baloo 2',cursive;color:var(--heart);font-weight:800;font-size:.95rem}
+  .bus-display{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;margin:12px 0;font-weight:700;min-height:56px;line-height:1.9}
+  .bus-display b{color:var(--heart)}
+  .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .role-card{background:#fff;border:3px solid #CFE0FF;border-radius:16px;padding:14px}
+  .role-card h4{color:var(--heart);margin-bottom:8px}
+  .role-card .ln{background:var(--soft);border-radius:10px;padding:7px 10px;margin:6px 0;font-weight:700;font-size:.9rem;cursor:pointer;transition:.15s}
+  .role-card .ln:hover{background:#DCEAFF}
+  .dl-item{display:flex;align-items:center;gap:10px;background:#fff;border:2.5px solid #CFE0FF;border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:700;text-align:left}
+  .dl-item .who{background:var(--heart);color:#fff;border-radius:8px;padding:2px 8px;font-size:.75rem;font-weight:800;white-space:nowrap}
+  .dl-item.con .who{background:var(--terra)}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 6 · Mi Ciudad · Урок 1 из 6</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🚌 СТАНЦИЯ 6 · УРОК 1 · НЕДЕЛЯ 19</span>
+  <div class="hero-emojis">🚌 🎫 🚇 ✅ 🚏</div>
+  <h1>Autobús y <span>Metro</span></h1>
+  <p class="sub">¡Bienvenido a bordo! Новая неделя — <strong>транспорт</strong>! Ты научишься садиться в автобус, покупать билет у водителя, <strong>валидировать</strong> его (иначе — штраф!) и считать остановки на слух. 🚏</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты заходишь в автобус и говоришь водителю:<br>
+    <em>«Buenos días. Una tarjeta, por favor. ¿Este autobús va al centro?» — «Sí. Valida el billete allí».</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🚌</span> Называть транспорт: autobús, metro, tranvía</div>
+      <div class="goal-item"><span class="emoji">🎫</span> Покупать билет у водителя</div>
+      <div class="goal-item"><span class="emoji">✅</span> Валидировать билет — и не платить штраф</div>
+      <div class="goal-item"><span class="emoji">🔢</span> Слушать объявления и считать остановки</div>
+      <div class="goal-item"><span class="emoji">🎭</span> Сыграть ролевую «покупка билета»</div>
+      <div class="goal-item"><span class="emoji">📖</span> Понимать, как устроены билеты в Испании</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Пассажир-профи»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 54</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, explorador! В пятницу ты рисовал <b>карту сокровищ</b> (el tesoro, la pista, gira, cuenta diez pasos). Ответь ВСЛУХ. Мостик: «Ты умеешь идти по маршруту пешком. А сегодня поедем — на АВТОБУСЕ и МЕТРО!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ИНТЕРАКТИВНЫЙ АВТОБУС -->
+  <section class="block" style="--c:#3A86FF">
+    <div class="block-head">
+      <h2 class="block-title">🚌 Интерактивный автобус</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Это твой автобус. Кликай на каждую часть: остановку, билет, компостер, место — услышишь слово и фразу из настоящего автобуса!</p>
+    <div class="bus-parts" id="bus-box"></div>
+    <div class="bus-display" id="bus-display">🚏 Кликни на часть автобуса — что это и что говорят?</div>
+    <div class="stars-line" style="text-align:center">🔎 Исследовано частей: <span id="bus-count">0</span> / 7</div>
+    <div class="script">⚡ <strong>Секрет:</strong> в Испании в автобус <b>входят через переднюю дверь</b> (por delante) и сразу покупают билет у водителя, а <b>выходят через заднюю</b> (por detrás). На остановке поднимают руку — иначе автобус проедет мимо!</div>
+  </section>
+
+  <!-- СЛОВА УРОКА: ТРАНСПОРТ -->
+  <section class="block" style="--c:#2A5FC1">
+    <div class="block-head"><h2 class="block-title">🗣 Слова урока · кликай и повторяй</h2></div>
+    <h4 style="margin-bottom:8px">🚌 Транспорт</h4>
+    <div class="cards-grid" id="words-g1"></div>
+    <h4 style="margin:14px 0 8px">🎫 В транспорте</h4>
+    <div class="cards-grid" id="words-g2"></div>
+    <h4 style="margin:14px 0 8px">🗣️ Фразы пассажира</h4>
+    <div class="cards-grid" id="words-g3"></div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: coger / tomar + validar</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Coger el autobús.')"><td><b>COGER + транспорт</b></td><td>Coger el autobús.</td><td>Сесть на автобус.</td><td>🔊</td></tr>
+      <tr onclick="speak('Tomar el metro.')"><td><b>TOMAR + транспорт</b></td><td>Tomar el metro.</td><td>Сесть на метро.</td><td>🔊</td></tr>
+      <tr onclick="speak('Coger el autobús = tomar el autobús.')"><td><b>COGER = TOMAR</b></td><td>Coger el autobús = tomar el autobús.</td><td>«coger» и «tomar» — одно и то же!</td><td>🔊</td></tr>
+      <tr onclick="speak('Valida el billete, por favor.')"><td><b>VALIDAR EL BILLETE</b></td><td>Valida el billete, por favor.</td><td>Прокомпостируй билет, пожалуйста.</td><td>🔊</td></tr>
+      <tr onclick="speak('¿Dónde se coge el autobús al centro?')"><td><b>¿DÓNDE SE COGE...?</b></td><td>¿Dónde se coge el autobús al centro?</td><td>Где сесть на автобус до центра?</td><td>🔊</td></tr>
+      <tr onclick="speak('Vamos al centro en metro.')"><td><b>VAMOS EN + транспорт</b></td><td>Vamos al centro en metro.</td><td>Мы едем в центр на метро.</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> <span class="grammar-hint" data-hint="В Испании coger — совершенно нормальное слово: coger el autobús, coger el teléfono, coger una silla. Но в некоторых странах Латинской Америки у этого слова есть грубое второе значение, поэтому туристу там безопаснее говорить tomar el autobús. В Испании — говори как испанцы: coger, и все тебя поймут правильно!">COGER</span> — главное транспортное слово Испании. А <b>tomar</b> — его близнец: <em>coger el autobús = tomar el autobús</em>. Оба — правильно!<br>8 лет: запомни парочку — <em>«coger el autobús, tomar el metro»</em>. И не забудь <b>validar el billete</b>! ✅</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Coger или Tomar? — оба!»: 8 раундов</p>
+      <p style="font-weight:700;color:var(--ink-soft);font-size:.9rem">Сюрприз: в этой игре МНОГО правильных ответов. Найди хотя бы один!</p>
+      <div class="game-q" id="ct-q"></div>
+      <div class="opts" id="ct-opts"></div>
+      <div class="game-fb" id="ct-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="ct-stars">0</span> / <span id="ct-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="ctStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: 3 DRILL-ИГРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎮 3 drill-игры</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 1: «Сколько остановок?» (6 раундов)</p>
+      <p style="font-weight:700;color:var(--ink-soft);font-size:.9rem">Слушай объявление водителя и выбери цифру. Можно слушать много раз!</p>
+      <div class="game-q" id="st-q">…</div>
+      <button class="speak-btn" onclick="stSpeak()">🔊 Escuchar de nuevo</button>
+      <div class="opts" id="st-opts" style="margin-top:10px"></div>
+      <div class="game-fb" id="st-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="st-stars">0</span> / <span id="st-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="stStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 2: «Конструктор фраз»</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 3: Диалог «¿Dónde bajo?»</p>
+      <div class="game-q" id="dial-q"></div>
+      <div class="opts" id="dial-opts"></div>
+      <div class="game-fb" id="dial-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="dial-stars">0</span> / <span id="dial-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="dialStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: CLIL — БИЛЕТЫ И ВАЛИДАЦИЯ -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">📖 CLIL: Билеты и валидация</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Как это устроено у настоящих испанских детей? Читай и слушай!</p>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakClil()">🔊 Послушать текст</button>
+    <div class="read-box">
+      En España los niños viajan en autobús y en metro casi todos los días. Hay diferentes billetes: el <b>billete normal</b>, la <b>tarjeta de diez viajes</b> y el <b>abono mensual</b>. En el autobús compras el billete al conductor y en el metro — en la máquina. Antes de viajar, siempre hay que <b>validar el billete</b>: metes la tarjeta en la <b>máquina amarilla</b> y ¡clac!, la máquina imprime la hora. Si no validas, puede haber una <b>multa</b>: hasta cien euros. En el metro y en el autobús hay <b>asientos preferentes</b> para personas mayores, embarazadas y con carrito. Es de buena educación ofrecer tu asiento. ¡Y validar el billete, también!
+    </div>
+    <div id="clil-quiz"></div>
+    <div class="diff-box">
+      <div class="diff8">🧒 <b>8 лет:</b> найди на автобусе или станции <b>жёлтую машину</b> (la máquina amarilla) — она компостирует билеты! Запомни: билет без валидации = недействительный.</div>
+      <div class="diff12">🧑 <b>12 лет:</b> посчитай, как настоящий экономист: поездка стоит <b>1,50 €</b>, а «tarjeta de 10 viajes» — <b>8,50 €</b>. Сколько семья сэкономит на 10 поездках? Ответ: <em>«Quince euros menos ocho euros y medio son seis euros y medio»</em> (15 − 8,5 = 6,5 €).</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: РОЛЕВАЯ — ПОКУПКА БИЛЕТА -->
+  <section class="block" style="--c:#C2185B">
+    <div class="block-head">
+      <h2 class="block-title">🎭 Ролевая: покупка билета у водителя</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">Кликай на фразы ролей — слушай и повторяй. Потом собери диалог по порядку!</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <h4>🧒 El pasajero (ты)</h4>
+        <div class="ln" onclick="speak('Buenos días. Una tarjeta, por favor.')">Buenos días. Una tarjeta, por favor. 🔊</div>
+        <div class="ln" onclick="speak('¿Este autobús va al centro?')">¿Este autobús va al centro? 🔊</div>
+        <div class="ln" onclick="speak('¿Cuántas paradas son?')">¿Cuántas paradas son? 🔊</div>
+        <div class="ln" onclick="speak('¿Dónde bajo?')">¿Dónde bajo? 🔊</div>
+      </div>
+      <div class="role-card">
+        <h4>🧑‍✈️ El conductor</h4>
+        <div class="ln" onclick="speak('¡Hola! ¿Billete o tarjeta?')">¡Hola! ¿Billete o tarjeta? 🔊</div>
+        <div class="ln" onclick="speak('Aquí tienes. Son un euro y medio.')">Aquí tienes. Son un euro y medio. 🔊</div>
+        <div class="ln" onclick="speak('Valida el billete en la máquina amarilla.')">Valida el billete en la máquina amarilla. 🔊</div>
+        <div class="ln" onclick="speak('¡Buen viaje!')">¡Buen viaje! 🔊</div>
+      </div>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎬 Собери диалог по порядку: 6 реплик</p>
+      <p style="font-weight:700;color:var(--ink-soft);font-size:.9rem">Выбери ПРАВИЛЬНУЮ следующую реплику — диалог соберётся сам!</p>
+      <div class="game-q" id="dl-q">Нажми ▶ Начать</div>
+      <div class="opts" id="dl-opts"></div>
+      <div class="game-fb" id="dl-fb"></div>
+      <div id="dl-list"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="dl-stars">0</span> / <span id="dl-total">0</span></div>
+      <button class="speak-btn" id="dl-audio" style="display:none;margin-top:10px" onclick="dlSpeak()">🔊 Послушать весь диалог</button>
+      <button class="speak-btn" style="margin-top:10px" onclick="dlStart()">▶ Начать</button>
+    </div>
+    <div class="read-box" style="background:#DCEAFF;border-color:var(--heart)">
+      <strong>📋 Формула пассажира (5 пунктов):</strong><br>
+      1. <em>Buenos días. <b>Una tarjeta, por favor</b>.</em><br>
+      2. <em><b>¿Este autobús va al centro?</b></em><br>
+      3. <em><b>¿Cuántas paradas son?</b></em><br>
+      4. <em><b>¿Dónde bajo?</b> / <b>¿Dónde valido el billete?</b></em><br>
+      5. <em><b>Gracias, adiós!</b></em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎫</div>
+      <h3>Пассажир-профи</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты умеешь купить билет, валидировать его, считать остановки и не заплутать в городе. ¡Buen viaje!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Пассажир-профи» 🎫 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 56:</strong> «<b>Mañana voy a...</b> — завтра я буду...! Научимся говорить о ПЛАНАХ: voy a jugar, vamos a ir al parque, va a llover (ой!) — и построим свою идеальную неделю!» 📅</div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#3A86FF">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Пройди все игры урока</strong> · 10 мин<br>Автобус (7 частей), «Coger o Tomar», «Сколько остановок?», конструктор, диалог и ролевая-сборка.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🚏 Реальная разведка остановки</strong> · 15 мин ⭐<br>Найди ближайшую остановку автобуса или метро. Запиши номер линии (la línea) и куда она идёт. 12 лет — засеки, через сколько минут придёт транспорт по расписанию.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎫 Поделка «Билет пассажира-профи»</strong> · 10 мин ⭐<br>Сделай из картона свой билет и подпиши 4 фразы: <em>Una tarjeta, por favor · ¿Este autobús va al centro? · ¿Cuántas paradas son? · ¿Dónde bajo?</em></div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🎭 Голосовая ролевая с родителем</strong> · 5 мин ⭐<br>Ты — пассажир, родитель — водитель (или наоборот!). Разыграй покупку билета по формуле 5 пунктов и отправь голосовое учителю.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>👨‍👩‍👧 Семейная миссия: поездка</strong> · 20 мин ⭐<br>Спланируйте поездку на автобусе/метро: сколько остановок, где валидировать билет. Если получится — прокомпостируй настоящий билет сам!</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>🧩 Тренажёр + все слова</strong> · 10 мин ⭐<br>Сопоставление (12 пар) + повтори все 21 слово урока вслух с 🔊.</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+    <div class="script" style="margin-top:14px">📤 <strong>Формат сдачи:</strong> голосовое-ролевая + фото билета-поделки. ¡Buen trabajo, pasajero!</div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть транспорт: autobús, metro, tranvía</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Говорить coger / tomar el autobús (оба правильно!)</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Купить билет: Una tarjeta, por favor.</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Валидировать билет: validar el billete (и знать, зачем)</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Слушать объявление и считать остановки</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Сыграть ролевую «покупка билета у водителя»</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 6 · Урок 1 (Autobús y Metro)</span>
+    <span>Открыть карточки →</span>
+  </a>
+  <!-- QUIZLET: дети урок 55 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w18-l3.html" class="nav-prev"><div class="nav-small">← Урок 3 станции 6</div><div class="nav-title">Урок 54: PBL Mapa del tesoro 🏴</div></a>
+    <a href="./w19-l2.html" class="nav-next"><div class="nav-small">Урок 2 станции 6 →</div><div class="nav-title">Урок 56: Mañana voy a... 📅</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 6: Mi Ciudad · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var WARM=[
+ {q:'¿Dónde está el tesoro en tu mapa?',model:'El tesoro está en el parque, cerca del árbol.',ru:'Где сокровище на твоей карте?'},
+ {q:'Dime dos pistas de tu mapa del tesoro.',model:'Primero, sigue hasta el semáforo. Después, gira a la derecha.',ru:'Скажи две подсказки с твоей карты.'}
+];
+WARM.push({q:'¿Cuántos pasos hay que contar?',model:'Hay que contar diez pasos.',ru:'Сколько шагов нужно отсчитать?'});
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ИНТЕРАКТИВНЫЙ АВТОБУС ===== */
+var BUS=[
+ {emo:'🚏',es:'la parada',phrase:'El autobús para en la parada.',ru:'Автобус останавливается на остановке.'},
+ {emo:'🚍',es:'el autobús',phrase:'Este autobús va al centro.',ru:'Этот автобус идёт в центр.'},
+ {emo:'🧑‍✈️',es:'el conductor',phrase:'El conductor vende billetes.',ru:'Водитель продаёт билеты.'},
+ {emo:'🎫',es:'el billete',phrase:'Una tarjeta, por favor.',ru:'Одну карту, пожалуйста.'},
+ {emo:'✅',es:'validar el billete',phrase:'Valida el billete en la máquina amarilla.',ru:'Прокомпостируй билет в жёлтой машине.'},
+ {emo:'💺',es:'el asiento',phrase:'Este asiento está libre.',ru:'Это место свободно.'},
+ {emo:'🚪',es:'bajar / subir',phrase:'Sube por delante y baja por detrás.',ru:'Входи спереди, выходи сзади.'}
+];
+(function(){
+  var box=document.getElementById('bus-box'),n=0;
+  BUS.forEach(function(p){
+    var b=document.createElement('div');b.className='bus-part';
+    b.innerHTML='<span class="emo">'+p.emo+'</span><span class="es">'+p.es+'</span>';
+    b.addEventListener('click',function(){
+      if(!b.classList.contains('found')){n++;document.getElementById('bus-count').textContent=n;b.classList.add('found');if(n===BUS.length)confetti('🚌');}
+      document.getElementById('bus-display').innerHTML='<b>'+p.es+'</b> — '+p.ru+'<br>🗣 '+p.phrase;
+      speak(p.phrase);
+    });
+    box.appendChild(b);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+var G1=[
+ {emo:'🚌',es:'el autobús',ru:'автобус'},
+ {emo:'🚇',es:'el metro',ru:'метро'},
+ {emo:'🚋',es:'el tranvía',ru:'трамвай'},
+ {emo:'🚏',es:'la parada',ru:'остановка'},
+ {emo:'🚉',es:'la estación',ru:'станция'},
+ {emo:'🎫',es:'el billete',ru:'билет'},
+ {emo:'🔢',es:'la línea',ru:'маршрут / линия'}
+];
+var G2=[
+ {emo:'🚌',es:'coger el autobús',ru:'сесть на автобус'},
+ {emo:'🚇',es:'tomar el metro',ru:'сесть на метро'},
+ {emo:'✅',es:'validar el billete',ru:'прокомпостировать билет'},
+ {emo:'⬇️',es:'bajar',ru:'выходить'},
+ {emo:'⬆️',es:'subir',ru:'входить / подниматься'},
+ {emo:'💺',es:'el asiento',ru:'место'},
+ {emo:'🧑‍✈️',es:'el conductor',ru:'водитель'}
+];
+var G3=[
+ {emo:'❓',es:'¿Este autobús va al centro?',ru:'Этот автобус идёт в центр?'},
+ {emo:'🔢',es:'¿Cuántas paradas son?',ru:'Сколько остановок?'},
+ {emo:'🎫',es:'Una tarjeta, por favor.',ru:'Одну карту, пожалуйста.'},
+ {emo:'🚪',es:'¿Dónde bajo?',ru:'Где мне выходить?'},
+ {emo:'📢',es:'La próxima parada es...',ru:'Следующая остановка — ...'},
+ {emo:'🚇',es:'vamos en metro',ru:'мы едем на метро'},
+ {emo:'😵',es:'me pierdo',ru:'я теряюсь'}
+];
+(function(){
+  function fill(id,arr){
+    var box=document.getElementById(id);
+    arr.forEach(function(f){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+      d.addEventListener('click',function(){speak(f.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-g1',G1);fill('words-g2',G2);fill('words-g3',G3);
+})();
+
+/* ===== ИГРА: COGER O TOMAR — ОБА! ===== */
+var CT=[
+ {q:'Сесть на автобус:',ok:['Coger el autobús','Tomar el autobús'],w:['Coger la parada']},
+ {q:'Сесть на метро:',ok:['Coger el metro','Tomar el metro'],w:['Tomar la parada']},
+ {q:'Сесть на трамвай:',ok:['Coger el tranvía','Tomar el tranvía'],w:['Coger el billete']},
+ {q:'Билет перед поездкой нужно:',ok:['Validar el billete'],w:['Coger el billete','Tomar el billete']},
+ {q:'Где садятся на автобус в центр?',ok:['¿Dónde se coge el autobús al centro?'],w:['¿Dónde coge el autobús?','¿Dónde está el autobús cogiendo?']},
+ {q:'Мы едем в центр на метро:',ok:['Vamos al centro en metro.'],w:['Vamos al centro a metro.','Vamos al centro por la metro.']},
+ {q:'Водитель просит прокомпостировать билет:',ok:['Valida el billete, por favor.'],w:['Coge el billete, por favor.','Toma el billete, por favor.']},
+ {q:'Глагол-близнец COGER — это...',ok:['tomar'],w:['comer','mirar']}
+];
+var ctOrd=[],ctI=0,ctS=0;
+function ctStart(){ctOrd=shuffle(CT.slice());ctI=0;ctS=0;document.getElementById('ct-total').textContent=ctOrd.length;document.getElementById('ct-stars').textContent='0';ctNext();}
+function ctNext(){
+  var box=document.getElementById('ct-opts');box.innerHTML='';
+  if(ctI>=ctOrd.length){document.getElementById('ct-q').textContent='🎉 ¡Muy bien!';document.getElementById('ct-fb').textContent='⭐ '+ctS+' из '+ctOrd.length;return;}
+  var r=ctOrd[ctI];
+  document.getElementById('ct-q').textContent=r.q;
+  document.getElementById('ct-fb').textContent='';
+  shuffle(r.ok.concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='150px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(r.ok.indexOf(o)>=0){
+        b.classList.add('correct');ctS++;document.getElementById('ct-stars').textContent=ctS;
+        box.querySelectorAll('.opt').forEach(function(x){if(r.ok.indexOf(x.textContent)>=0)x.classList.add('correct');});
+        document.getElementById('ct-fb').textContent=r.ok.length>1?'✅ ¡Los dos son correctos! coger = tomar':'✅ ¡Correcto!';
+        speak(r.ok[0]);
+      }else{
+        b.classList.add('wrong');
+        box.querySelectorAll('.opt').forEach(function(x){if(r.ok.indexOf(x.textContent)>=0)x.classList.add('correct');});
+        document.getElementById('ct-fb').textContent='❌ Правильно: '+r.ok.join(' / ');
+      }
+      ctI++;setTimeout(ctNext,1600);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ИГРА: СКОЛЬКО ОСТАНОВОК? ===== */
+var STOPS=[
+ {a:'Son dos paradas hasta el centro.',ok:'2',w:['3','5']},
+ {a:'Son tres paradas hasta tu parada.',ok:'3',w:['4','2']},
+ {a:'Son cinco paradas hasta el centro.',ok:'5',w:['4','6']},
+ {a:'Son cuatro paradas hasta la estación.',ok:'4',w:['5','3']},
+ {a:'Son seis paradas hasta el centro.',ok:'6',w:['5','7']},
+ {a:'Son diez paradas hasta tu parada.',ok:'10',w:['9','12']}
+];
+var stOrd=[],stI=0,stS=0;
+function stStart(){stOrd=shuffle(STOPS.slice());stI=0;stS=0;document.getElementById('st-total').textContent=stOrd.length;document.getElementById('st-stars').textContent='0';stNext();}
+function stSpeak(){if(stOrd.length&&stOrd[stI])speak(stOrd[stI].a);}
+function stNext(){
+  var box=document.getElementById('st-opts');box.innerHTML='';
+  if(stI>=stOrd.length){document.getElementById('st-q').textContent='🎉 ¡Muy bien!';document.getElementById('st-fb').textContent='⭐ '+stS+' из '+stOrd.length;return;}
+  var r=stOrd[stI];
+  document.getElementById('st-q').textContent='📢 Слушай объявление и считай остановки!';
+  document.getElementById('st-fb').textContent='';
+  speak(r.a);
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='70px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');stS++;document.getElementById('st-stars').textContent=stS;document.getElementById('st-fb').textContent='✅ ¡Correcto! '+r.a;}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('st-fb').textContent='❌ Правильно: '+r.ok+'. '+r.a;}
+      stI++;setTimeout(stNext,1700);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== КОНСТРУКТОР ФРАЗ ===== */
+var SB=[
+ {w:['Una','tarjeta,','por','favor.'],t:'Одну карту, пожалуйста.'},
+ {w:['¿Este','autobús','va','al','centro?'],t:'Этот автобус идёт в центр?'},
+ {w:['Valida','el','billete,','por','favor.'],t:'Прокомпостируй билет, пожалуйста.'},
+ {w:['Coge','el','autobús','en','la','parada.'],t:'Сядь на автобус на остановке.'},
+ {w:['Vamos','al','centro','en','metro.'],t:'Мы едем в центр на метро.'},
+ {w:['La','próxima','parada','es','la','plaza.'],t:'Следующая остановка — площадь.'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== ДИАЛОГ ¿DÓNDE BAJO? ===== */
+var DIAL=[
+ {q:'— El conductor pregunta: ¿billete o tarjeta?<br>— ___',ok:'Una tarjeta, por favor.',w:['Sí, soy tarjeta.','Valido autobús.']},
+ {q:'— ¿Este autobús va al centro?<br>— ___',ok:'Sí, son cinco paradas.',w:['Sí, coche.','No, billete.']},
+ {q:'— ¿Cuántas paradas son?<br>— ___',ok:'Son cuatro paradas.',w:['Es cuatro parada.','Cuatro billetes.']},
+ {q:'Ты не знаешь, где выходить. Спроси водителя:',ok:'¿Dónde bajo?',w:['¿Dónde subo?','¿Dónde valido la parada?']},
+ {q:'— La próxima parada es la plaza.<br>— Твоя остановка следующая. Ты говоришь:',ok:'Yo bajo en la próxima.',w:['Yo subo en la próxima.','Yo valido la próxima.']},
+ {q:'— ¡Gracias, adiós!<br>— ___',ok:'¡Hasta luego!',w:['¡Bajar luego!','¡Parada luego!']}
+];
+var dialOrd=[],dialI=0,dialS=0;
+function dialStart(){dialOrd=shuffle(DIAL.slice());dialI=0;dialS=0;document.getElementById('dial-total').textContent=dialOrd.length;document.getElementById('dial-stars').textContent='0';dialNext();}
+function dialNext(){
+  var box=document.getElementById('dial-opts');box.innerHTML='';
+  if(dialI>=dialOrd.length){document.getElementById('dial-q').textContent='🎉 ¡Muy bien!';document.getElementById('dial-fb').textContent='⭐ '+dialS+' из '+dialOrd.length;return;}
+  var r=dialOrd[dialI];
+  document.getElementById('dial-q').innerHTML=r.q;
+  document.getElementById('dial-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='140px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');dialS++;document.getElementById('dial-stars').textContent=dialS;document.getElementById('dial-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('dial-fb').textContent='❌ Правильно: '+r.ok;}
+      dialI++;setTimeout(dialNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 4: CLIL ===== */
+function speakClil(){speak('En España los niños viajan en autobús y en metro casi todos los días. Hay diferentes billetes: el billete normal, la tarjeta de diez viajes y el abono mensual. En el autobús compras el billete al conductor y en el metro, en la máquina. Antes de viajar, siempre hay que validar el billete: metes la tarjeta en la máquina amarilla y, clac, la máquina imprime la hora. Si no validas, puede haber una multa: hasta cien euros. En el metro y en el autobús hay asientos preferentes para personas mayores, embarazadas y con carrito. Es de buena educación ofrecer tu asiento. Y validar el billete, también.');}
+var CLIL=[
+ {q:'¿Dónde compras el billete en el autobús?',ru:'Где покупаешь билет в автобусе?',ok:'Al conductor.',w:['En la panadería.','En la parada verde.']},
+ {q:'¿Qué hay que hacer con el billete antes de viajar?',ru:'Что надо сделать с билетом перед поездкой?',ok:'Validar el billete.',w:['Comer el billete.','Guardarlo para siempre.']},
+ {q:'¿De qué color es la máquina de validar?',ru:'Какого цвета машина для компостирования?',ok:'Amarilla.',w:['Azul.','Verde.']},
+ {q:'¿Qué pasa si no validas el billete?',ru:'Что будет, если не прокомпостировать билет?',ok:'Una multa.',w:['Un regalo.','Un viaje gratis.']},
+ {q:'¿Para quién hay asientos preferentes?',ru:'Для кого есть приоритетные места?',ok:'Para personas mayores y embarazadas.',w:['Para el conductor.','Para los niños altos.']}
+];
+(function(){
+  var wrap=document.getElementById('clil-quiz');
+  CLIL.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 5: РОЛЕВАЯ — СБОРКА ДИАЛОГА ===== */
+var DL=[
+ {who:'Pasajero',es:'Buenos días. Una tarjeta, por favor.',w:'Dos autobuses, por favor.'},
+ {who:'Conductor',es:'Aquí tienes. Son un euro y medio.',w:'Aquí tienes. Son diez paradas.'},
+ {who:'Pasajero',es:'¿Este autobús va al centro?',w:'¿Este autobús es del centro?'},
+ {who:'Conductor',es:'Sí. Son cuatro paradas.',w:'Sí. Son cuatro billetes.'},
+ {who:'Pasajero',es:'¿Dónde valido el billete?',w:'¿Dónde como el billete?'},
+ {who:'Conductor',es:'Allí, en la máquina amarilla. ¡Buen viaje!',w:'Allí, en el asiento amarillo. ¡Buen viaje!'}
+];
+var dlI=0,dlS=0;
+function dlStart(){
+  dlI=0;dlS=0;
+  document.getElementById('dl-list').innerHTML='';
+  document.getElementById('dl-audio').style.display='none';
+  document.getElementById('dl-total').textContent=DL.length;
+  document.getElementById('dl-stars').textContent='0';
+  document.getElementById('dl-fb').textContent='';
+  dlNext();
+}
+function dlNext(){
+  var box=document.getElementById('dl-opts');box.innerHTML='';
+  if(dlI>=DL.length){
+    document.getElementById('dl-q').textContent='🎬 ¡Diálogo listo!';
+    document.getElementById('dl-fb').textContent='⭐ '+dlS+' из '+DL.length+' · теперь послушай весь!';
+    document.getElementById('dl-audio').style.display='inline-block';
+    confetti('🎫');return;
+  }
+  var r=DL[dlI];
+  document.getElementById('dl-q').innerHTML='Реплика '+(dlI+1)+' говорит: <b>'+r.who+'</b>';
+  document.getElementById('dl-fb').textContent='';
+  shuffle([r.es,r.w]).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='200px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.es){
+        b.classList.add('correct');dlS++;document.getElementById('dl-stars').textContent=dlS;
+        document.getElementById('dl-fb').textContent='✅ ¡Correcto!';
+        speak(r.es);
+        var item=document.createElement('div');item.className='dl-item'+(r.who==='Conductor'?' con':'');
+        item.innerHTML='<span class="who">'+r.who+'</span><span>'+r.es+'</span>';
+        document.getElementById('dl-list').appendChild(item);
+        dlI++;setTimeout(dlNext,1200);
+      }else{
+        b.classList.add('wrong');document.getElementById('dl-fb').textContent='❌ Не то! Подумай ещё.';
+      }
+    });
+    box.appendChild(b);
+  });
+}
+function dlSpeak(){var full='';DL.forEach(function(r){full+=r.es+' ';});speak(full);}
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Поздоровайся и попроси билет у водителя.',model:'Buenos días. Una tarjeta, por favor.'},
+ {q:'Спроси, идёт ли автобус в центр.',model:'Perdone, ¿este autobús va al centro?'},
+ {q:'Спроси, сколько остановок.',model:'¿Cuántas paradas son?'},
+ {q:'Спроси, где выходить и где компостировать.',model:'¿Dónde bajo? ¿Y dónde valido el billete?'},
+ {q:'Проведи всю ролевую ЦЕЛИКОМ (пассажир + водитель).',model:'Buenos días. Una tarjeta, por favor. — Aquí tienes. — ¿Este autobús va al centro? — Sí, cuatro paradas. — ¿Dónde valido el billete? — En la máquina amarilla. ¡Gracias, adiós!'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом расскажи о СЕБЕ вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el autobús','автобус'],['el metro','метро'],['el tranvía','трамвай'],
+ ['la parada','остановка'],['la estación','станция'],['el billete','билет'],
+ ['la línea','маршрут / линия'],['validar el billete','прокомпостировать билет'],
+ ['el asiento','место'],['el conductor','водитель'],
+ ['bajar','выходить'],['¿Dónde bajo?','Где мне выходить?']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un pasajero profesional!');
+  confetti('🎫');
+  try{localStorage.setItem('mudro_kids_w19l1_badge_pasajero_pro','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w19l1_badge_pasajero_pro')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🚌','🎫'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 40: El mapa de España — Школа МУДРО</title>
+<meta name="description" content="Детский урок испанского 40: карта Испании, города, ir/voy/vamos, venir, viajar, estar en. Станция 4 Mates y Ciencias — школа МУДРО.">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#2274A5; --love:#17547B;
+    --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#D9ECF8 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(34,116,165,.20),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#D9ECF8,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#DCEBF7;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #D8EAF6;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#D9ECF8,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #c3dcec;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #e3edf5;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #b9d6e8;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#DCEBF7}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+
+  /* === МИНИ-КАРТА ИСПАНИИ (уникальные стили урока 40) === */
+  .spain-map{position:relative;width:100%;max-width:660px;margin:14px auto;aspect-ratio:4/3;background:linear-gradient(180deg,#BFE0F5,#A9D4EF);border-radius:18px;overflow:hidden;border:3px solid #9CC7E4;box-shadow:inset 0 0 40px rgba(65,114,159,.15)}
+  .spain-map svg{position:absolute;inset:0;width:100%;height:100%}
+  .map-city{position:absolute;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;border:2.5px solid var(--heart);background:#fff;font-size:1.3rem;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;transition:.15s;font-family:'Nunito';padding:0}
+  .map-city:hover{transform:translate(-50%,-50%) scale(1.15)}
+  .map-city.active{background:var(--sun);border-color:#d9a520}
+  .map-city::after{content:attr(data-name);position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);font-size:.62rem;font-weight:800;background:#fff;color:var(--heart);padding:1px 6px;border-radius:6px;white-space:nowrap;border:1.5px solid var(--heart)}
+  .map-sea{position:absolute;transform:translate(-50%,-50%);font-size:.7rem;font-weight:800;color:#2C5E8A;background:rgba(255,255,255,.85);padding:2px 8px;border-radius:999px;cursor:pointer;border:1.5px dashed #7FB2D8;z-index:2;white-space:nowrap;font-family:'Nunito'}
+  .map-sea:hover{background:#fff}
+  .fact-box{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;min-height:80px;margin-top:14px;font-weight:700;text-align:left}
+  .fact-box .mf-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.15rem}
+  .fact-box .mf-ru{color:var(--ink-soft);font-size:.9rem;margin:4px 0}
+  .fact-box .mf-esf{font-style:italic}
+  .map-legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px;font-size:.85rem;font-weight:700;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 4 · Mates y Ciencias · Урок 1 из 9</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🧪 СТАНЦИЯ 4 · УРОК 1 · НЕДЕЛЯ 14</span>
+  <div class="hero-emojis">🗺️ 🌊 ⛰️ 🧭 ✈️</div>
+  <h1>El <span>mapa</span> de España</h1>
+  <p class="sub">Сегодня ты — <strong>штурман</strong>! 🧭 Мы пролетим всю Испанию: моря, горы, острова и города. А ещё научимся говорить, <strong>КУДА</strong> ты едешь (<em>voy a...</em>) и <strong>ОТКУДА</strong> приезжаешь (<em>vengo de...</em>). ¡Vamos!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> папа спрашивает: <em>«¿Adónde vamos en verano?»</em>, а ты показываешь на карту и отвечаешь:<br>
+    <em>«¡Vamos a Valencia! Voy a ir a la playa. Allí hay mar y sol.»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🗺️</span> Называть море, горы, острова и соседей Испании</div>
+      <div class="goal-item"><span class="emoji">🏙️</span> Находить на карте 6 городов и столицу</div>
+      <div class="goal-item"><span class="emoji">🧭</span> Спрягать ir: voy, vas, va, vamos, vengo</div>
+      <div class="goal-item"><span class="emoji">📌</span> Правильно говорить voy a / vengo de / está en</div>
+      <div class="goal-item"><span class="emoji">📖</span> Понимать географический текст об Испании</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Штурман»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 39</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola otra vez! Вспомним урок 39 про воду и растения — ответь ВСЛУХ. Мостик: «Вода путешествует по кругу: море → небо → дождь. А сегодня путешествуем МЫ — по карте Испании!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: МИНИ-КАРТА ИСПАНИИ + ЛЕКСИКА -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">🗺️ Интерактивная карта Испании</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">Кликай на кружки городов и названия морей — услышишь название и узнаешь факт! Найди: столицу, море, острова, соседей.</p>
+    <div class="spain-map" id="spain-map">
+      <svg viewBox="0 0 400 300" aria-hidden="true">
+        <path d="M62,58 L92,44 L150,30 L215,34 L252,44 L276,36 L300,52 L322,74 L330,100 L320,132 L304,160 L310,192 L292,222 L262,250 L224,270 L184,282 L144,284 L112,268 L92,240 L78,204 L64,164 L54,110 Z" fill="#F7E8C8" stroke="#C9A96E" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="352" cy="148" rx="7" ry="4.5" fill="#F7E8C8" stroke="#C9A96E" stroke-width="2"/>
+        <ellipse cx="368" cy="138" rx="10" ry="6" fill="#F7E8C8" stroke="#C9A96E" stroke-width="2"/>
+        <rect x="10" y="238" width="92" height="52" rx="10" fill="#CFE8F7" stroke="#9CC7E4" stroke-width="2"/>
+        <ellipse cx="34" cy="262" rx="7" ry="5" fill="#F7E8C8" stroke="#C9A96E" stroke-width="2"/>
+        <ellipse cx="80" cy="266" rx="8" ry="5" fill="#F7E8C8" stroke="#C9A96E" stroke-width="2"/>
+        <text x="16" y="285" font-size="11" font-weight="700" fill="#41729F">Islas Canarias</text>
+      </svg>
+      <span class="map-sea" style="left:66%;top:3%" onclick="speak('Francia')">Francia 🇫🇷</span>
+      <span class="map-sea" style="left:8%;top:14%" onclick="speak('el océano Atlántico')">Océano Atlántico 🌊</span>
+      <span class="map-sea" style="left:2%;top:56%" onclick="speak('Portugal')">Portugal 🇵🇹</span>
+      <span class="map-sea" style="left:76%;top:70%" onclick="speak('el mar Mediterráneo')">Mar Mediterráneo 🌊</span>
+      <button class="map-city" id="mc-madrid" style="left:42%;top:42%" data-name="Madrid" onclick="cityClick('madrid')">⭐</button>
+      <button class="map-city" id="mc-bilbao" style="left:57%;top:17%" data-name="Bilbao" onclick="cityClick('bilbao')">🖼️</button>
+      <button class="map-city" id="mc-barcelona" style="left:76%;top:30%" data-name="Barcelona" onclick="cityClick('barcelona')">🦎</button>
+      <button class="map-city" id="mc-valencia" style="left:66%;top:52%" data-name="Valencia" onclick="cityClick('valencia')">🥘</button>
+      <button class="map-city" id="mc-sevilla" style="left:31%;top:78%" data-name="Sevilla" onclick="cityClick('sevilla')">💃</button>
+      <button class="map-city" id="mc-malaga" style="left:45%;top:84%" data-name="Málaga" onclick="cityClick('malaga')">🎨</button>
+      <button class="map-city" id="mc-baleares" style="left:88%;top:46%" data-name="Baleares" onclick="cityClick('baleares')">🏝️</button>
+      <button class="map-city" id="mc-canarias" style="left:16%;top:86%" data-name="Canarias" onclick="cityClick('canarias')">🌋</button>
+    </div>
+    <div class="map-legend"><span>⭐ столица</span><span>🏝️ острова</span><span>🌊 два моря</span><span>🇫🇷🇵🇹 соседи</span></div>
+    <div class="fact-box" id="map-fact">👆 Кликни на любой город или море — узнаешь факт! Попробуй сначала столицу ⭐</div>
+    <h4 style="margin:18px 0 4px">🗺️ География</h4>
+    <div class="cards-grid" id="words-geo"></div>
+    <h4 style="margin:14px 0 4px">🏙️ Города (найди их на карте!)</h4>
+    <div class="cards-grid" id="words-city"></div>
+    <h4 style="margin:14px 0 4px">🧭 Движение</h4>
+    <div class="cards-grid" id="words-move"></div>
+    <div class="script">⚡ <strong>Секрет:</strong> города Испании не переводят — Barcelona и по-русски «Барселона». А вот <b>el Mediterráneo</b> — это не город, а МОРЕ, на берегу которого стоят Valencia, Barcelona и Málaga!</div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: ir, venir, viajar, estar en</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr><td><b>VOY A + место</b></td><td>Voy a Valencia.</td><td>Я еду в Валенсию.</td><td><button class="speak-btn" onclick="speak('Voy a Valencia.')">🔊</button></td></tr>
+      <tr><td><b>VAMOS A + место</b></td><td>¡Vamos a la playa!</td><td>Мы едем на пляж!</td><td><button class="speak-btn" onclick="speak('¡Vamos a la playa!')">🔊</button></td></tr>
+      <tr><td><b>VENGO DE + место</b></td><td>Vengo de Barcelona.</td><td>Я из Барселоны / приезжаю оттуда.</td><td><button class="speak-btn" onclick="speak('Vengo de Barcelona.')">🔊</button></td></tr>
+      <tr><td><b>VOY A + инфинитив = план</b></td><td>Voy a viajar a Sevilla.</td><td>Я собираюсь поехать в Севилью.</td><td><button class="speak-btn" onclick="speak('Voy a viajar a Sevilla.')">🔊</button></td></tr>
+      <tr><td><b>ESTAR EN + место</b></td><td>Sevilla está en el sur.</td><td>Севилья находится на юге.</td><td><button class="speak-btn" onclick="speak('Sevilla está en el sur.')">🔊</button></td></tr>
+      <tr><td><b>A + EL = <span class="grammar-hint" data-hint="A + EL сливаются в одно слово AL: voy + el centro = voy AL centro. Это единственное слияние: с городами (la Valencia исключений нет для детей) просто A: voy a Valencia, voy a Bilbao.">AL</span></b></td><td>Voy al centro.</td><td>Я еду в центр.</td><td><button class="speak-btn" onclick="speak('Voy al centro.')">🔊</button></td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> VOY <span class="grammar-hint" data-hint="A — когда есть ДВИЖЕНИЕ к месту: voy a Madrid (я еду в Мадрид). EN — когда ты уже ТАМ: estoy en Madrid (я нахожусь в Мадриде). Спроси себя: я еду или я уже там?">A</span> Madrid — я ЕДУ в Мадрид, но ESTOY <span class="grammar-hint" data-hint="EN — для места, где ты уже находишься: estoy en casa, Valencia está en el este. A — только для движения: voy a casa.">EN</span> Madrid — я НАХОЖУСЬ в Мадриде. Движение → a. Место → en.<br>8 лет: запомни пару-песенку: <em>«¡Vamos a la playa! ¡Estamos en la playa!»</em> — едем НА, находимся В.</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Собери глагол»: 8 раундов</p>
+      <div class="game-q" id="grm-q"></div>
+      <div class="opts" id="grm-opts"></div>
+      <div class="game-fb" id="grm-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="grm-stars">0</span> / <span id="grm-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="grmStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: DRILL-ИГРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎮 3 drill-игры</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 1: Квиз «Где это?» (8 раундов)</p>
+      <div class="game-emo" id="geo-emo">❓</div>
+      <div class="game-q" id="geo-q"></div>
+      <div class="opts" id="geo-opts"></div>
+      <div class="game-fb" id="geo-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="geo-stars">0</span> / <span id="geo-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="geoStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 2: Конструктор «Voy a viajar a...»</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 3: Диалог «В пути»</p>
+      <div class="game-q" id="dial-q"></div>
+      <div class="opts" id="dial-opts"></div>
+      <div class="game-fb" id="dial-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="dial-stars">0</span> / <span id="dial-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="dialStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: CLIL — ГЕОГРАФИЯ -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">📖 CLIL: География Испании</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakSpain()">🔊 Послушать текст</button>
+    <div class="read-box">
+      España es un país de Europa. Tiene dos costas: <b>el mar Mediterráneo</b> al este y <b>el océano Atlántico</b> al norte y al oeste. En España hay muchas <b>montañas</b>: los Pirineos están en la <b>frontera</b> con Francia, en el norte. También hay <b>ríos</b>: el río Ebro y el río Tajo. España tiene <b>islas</b>: las islas Baleares están en el Mediterráneo y las islas Canarias están en el Atlántico, cerca de África. Los vecinos de España son Francia y Portugal. La <b>capital</b> es Madrid. Está en el centro del país, lejos del mar.
+    </div>
+    <div id="spain-quiz"></div>
+    <div class="script">🧮 <strong>CLIL-математика (12 лет):</strong> Самая высокая гора Испании — вулкан Тейде на Канарах: <b>3718 метров</b>! Измерь свой рост (≈1,40 м) и посчитай: Тейде выше тебя примерно в 2656 раз! А длина границы-Пиренеев с Францией — около 430 км.<br>8 лет: посчитай по два: у Испании <b>2 моря</b>, <b>2 соседа</b>, <b>2 группы островов</b> — всё по два! 🎩✨</div>
+  </section>
+
+  <!-- БЛОК 5: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#C24E8C">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Говорение: «Mi viaje por España»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <div class="script">ВЫВОД В РЕЧЬ! Расскажи свой маршрут по формуле. Этот маршрут пригодится завтра: будем выбирать свой регион! 📍</div>
+    <div class="read-box" style="background:#DCEBF7;border-color:var(--heart)">
+      <strong>📋 Формула речи (6 пунктов):</strong><br>
+      1. <em>¡Hola! Me llamo [имя].</em><br>
+      2. <em><b>Voy a viajar a</b> [ciudad].</em><br>
+      3. <em>[Ciudad] <b>está en el</b> norte / sur / este / oeste.</em><br>
+      4. <em><b>Primero voy a</b> [lugar 1]. <b>Luego voy a</b> [lugar 2].</em><br>
+      5. <em>Allí <b>hay</b> el mar / montañas / una playa famosa.</em><br>
+      6. <em>¡<b>Vamos a España</b>!</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🧭</div>
+      <h3>Штурман</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты знаешь карту Испании, моря, острова и умеешь говорить «voy a» и «vengo de»!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Штурман» 🧭 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 41:</strong> «Завтра ты найдёшь на карте СВОЙ регион: флаг, язык и праздник! Примеры: Cataluña, Andalucía, Madrid... А может, Comunidad Valenciana? ¡Hasta mañana!» 📍</div>
+  </section>
+
+  <!-- СЛОВА УРОКА: КОНСТРУКЦИИ -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head"><h2 class="block-title">🗣 Фразы-конструкции урока</h2></div>
+    <div class="cards-grid">
+      <div class="word-card" onclick="speak('Voy a viajar a Madrid.')"><div class="emo">🚗</div><div class="es">Voy a viajar a Madrid.</div><div class="ru">Я собираюсь поехать в Мадрид.</div></div>
+      <div class="word-card" onclick="speak('¡Vamos a la playa!')"><div class="emo">🏖️</div><div class="es">¡Vamos a la playa!</div><div class="ru">Мы едем на пляж!</div></div>
+      <div class="word-card" onclick="speak('Vengo de Barcelona.')"><div class="emo">📍</div><div class="es">Vengo de Barcelona.</div><div class="ru">Я из Барселоны.</div></div>
+      <div class="word-card" onclick="speak('Valencia está en el este.')"><div class="emo">🧭</div><div class="es">Valencia está en el este.</div><div class="ru">Валенсия находится на востоке.</div></div>
+      <div class="word-card" onclick="speak('¿Adónde vas?')"><div class="emo">❓</div><div class="es">¿Adónde vas?</div><div class="ru">Куда ты едешь?</div></div>
+      <div class="word-card" onclick="speak('¡Vamos a España!')"><div class="emo">✈️</div><div class="es">¡Vamos a España!</div><div class="ru">Мы едем в Испанию!</div></div>
+    </div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Штурман дома</strong> · 5 мин<br>Покажи родителям карту урока и назови по-испански 5 городов + столицу.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎨 Нарисуй свою карту Испании</strong> · 10 мин ⭐<br>Обязательно: море, горы, острова, соседи и 4 города. Подпиши всё по-испански!</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>👨‍👩‍👧 Семейная игра «¿Adónde vamos?»</strong> · 7 мин ⭐<br>Каждый выбирает город и говорит: <em>«Voy a Sevilla»</em> / <em>«Vamos a Valencia»</em>. Минимум 5 раундов!</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>Тренажёры урока</strong> · 10 мин ⭐<br>Карта + квиз «Где это?» + конструктор + диалог + сопоставление. Собери все звёзды!</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎤 Голосовой дневник</strong> · 5 мин ⭐<br>Расскажи свой маршрут по формуле из 6 пунктов. Отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>🗺️ Мини-проект «Маршрут выходного дня»</strong> · 15 мин ⭐<br>Выбери 2 города и нарисуй/напиши план: <em>«Primero voy a... Luego voy a...»</em></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть море, горы, острова и соседей Испании</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Показать на карте 6 городов и столицу</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Спрягать ir: voy, vas, va, vamos</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Правильно говорить voy a / vengo de / está en</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Понимать географический текст об Испании</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Рассказать свой маршрут по формуле</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 4 · Урок 1 (El mapa de España)</span>
+    <span>Открыть карточки →</span>
+  </a>
+  <!-- QUIZLET: дети урок 40 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w13-l3.html" class="nav-prev"><div class="nav-small">← Урок 3 станции 3</div><div class="nav-title">Урок 39: STEAM El Ciclo del Agua 💧</div></a>
+    <a href="./w14-l2.html" class="nav-next"><div class="nav-small">Урок 2 станции 4 →</div><div class="nav-title">Урок 41: Mi comunidad autónoma 📍</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 4: Mates y Ciencias · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ: СЛОВА УРОКА (из словаря w14-l1.json, без изменений) ===== */
+var GEO=[
+ {emo:'🌊',es:'el mar',ru:'море'},
+ {emo:'⛰️',es:'la montaña',ru:'гора'},
+ {emo:'🏖️',es:'la playa',ru:'пляж'},
+ {emo:'🏞️',es:'el río',ru:'река'},
+ {emo:'🏝️',es:'la isla',ru:'остров'},
+ {emo:'🚧',es:'la frontera',ru:'граница'},
+ {emo:'⭐',es:'la capital',ru:'столица'}
+];
+var CITY=[
+ {emo:'⭐',es:'Madrid',ru:'Мадрид'},
+ {emo:'🦎',es:'Barcelona',ru:'Барселона'},
+ {emo:'🥘',es:'Valencia',ru:'Валенсия'},
+ {emo:'💃',es:'Sevilla',ru:'Севилья'},
+ {emo:'🎨',es:'Málaga',ru:'Малага'},
+ {emo:'🖼️',es:'Bilbao',ru:'Бильбао'},
+ {emo:'🌊',es:'el Mediterráneo',ru:'Средиземное море'}
+];
+var MOVE=[
+ {emo:'🚶',es:'ir',ru:'идти / ехать'},
+ {emo:'🚗',es:'voy',ru:'я иду / еду'},
+ {emo:'🚌',es:'vamos',ru:'мы идём / едем'},
+ {emo:'👋',es:'venir',ru:'приходить'},
+ {emo:'📍',es:'vengo',ru:'я прихожу'},
+ {emo:'✈️',es:'viajar',ru:'путешествовать'},
+ {emo:'📌',es:'estar en',ru:'находиться в'}
+];
+(function(){
+  function fill(id,arr){
+    var box=document.getElementById(id);
+    arr.forEach(function(w){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+w.emo+'</div><div class="es">'+w.es+'</div><div class="ru">'+w.ru+'</div>';
+      d.addEventListener('click',function(){speak(w.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-geo',GEO);fill('words-city',CITY);fill('words-move',MOVE);
+})();
+
+/* ===== РАЗМИНКА (урок 39) ===== */
+var WARM=[
+ {q:'¿Qué es el ciclo del agua?',model:'El agua va del mar al cielo y del cielo a la tierra.',ru:'Что такое круговорот воды?'},
+ {q:'¿Qué necesita la planta para crecer?',model:'La planta necesita agua, sol y tierra para crecer.',ru:'Что нужно растению, чтобы расти?'},
+ {q:'¿Con qué medimos el agua?',model:'Medimos el agua con una regla y con un vaso.',ru:'Чем мы измеряем воду?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: МИНИ-КАРТА ===== */
+var CITYFACT={
+ madrid:{es:'Madrid',ru:'Столица Испании. В центре страны. Здесь музей Прадо и медведь с земляничным деревом на гербе.',esFact:'Madrid es la capital de España. Está en el centro.'},
+ barcelona:{es:'Barcelona',ru:'Восток, берег Средиземного моря. Церковь Саграда Фамилия — её строили больше 140 лет и ещё не закончили!',esFact:'Barcelona está en el este, junto al mar Mediterráneo. Aquí está la Sagrada Familia.'},
+ valencia:{es:'Valencia',ru:'Восток, море. Здесь родилась паэлья, а в марте — праздник огня las Fallas!',esFact:'Valencia está en el este, junto al Mediterráneo. ¡Aquí nació la paella!'},
+ sevilla:{es:'Sevilla',ru:'Юг. Родина фламенко. Один из самых жарких городов Европы!',esFact:'Sevilla está en el sur. Aquí bailan flamenco y hace mucho calor.'},
+ malaga:{es:'Málaga',ru:'Юг, «Солнечный берег». Родина художника Пикассо.',esFact:'Málaga está en el sur, en la Costa del Sol. Aquí nació el pintor Picasso.'},
+ bilbao:{es:'Bilbao',ru:'Север, среди гор. Музей Гуггенхайм — как серебряный корабль!',esFact:'Bilbao está en el norte, entre montañas. Aquí está el museo Guggenheim.'},
+ baleares:{es:'las islas Baleares',ru:'Острова в Средиземном море: Мальорка, Менорка, Ибица.',esFact:'Las islas Baleares están en el mar Mediterráneo. La capital es Palma.'},
+ canarias:{es:'las islas Canarias',ru:'Острова в Атлантике у берегов Африки. Вулкан Тейде — самая высокая гора Испании!',esFact:'Las islas Canarias están en el océano Atlántico. Aquí está el volcán Teide.'}
+};
+function cityClick(id){
+  var c=CITYFACT[id];
+  document.querySelectorAll('.map-city').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('mc-'+id).classList.add('active');
+  document.getElementById('map-fact').innerHTML='<span class="mf-es">'+c.es+'</span><div class="mf-ru">'+c.ru+'</div><div class="mf-esf">'+c.esFact+' <button class="speak-btn" onclick="speak(\''+c.esFact.replace(/'/g,"\\'")+'\')">🔊</button></div>';
+  speak(c.es+'. '+c.esFact);
+}
+
+/* ===== БЛОК 2: ИГРА ГРАММАТИКИ ===== */
+var GRM=[
+ {q:'Voy ___ Madrid.',ok:'a',w:['en']},
+ {q:'Estoy ___ Madrid.',ok:'en',w:['a']},
+ {q:'Yo ___ a la escuela.',ok:'voy',w:['vamos']},
+ {q:'Nosotros ___ al parque.',ok:'vamos',w:['voy']},
+ {q:'Yo ___ de la playa.',ok:'vengo',w:['vamos']},
+ {q:'Voy a ___ a Sevilla.',ok:'viajar',w:['viajo']},
+ {q:'¿Adónde ___ tú?',ok:'vas',w:['voy']},
+ {q:'Valencia ___ en el este.',ok:'está',w:['es']}
+];
+var grmOrd=[],grmI=0,grmS=0;
+function grmStart(){grmOrd=shuffle(GRM.slice());grmI=0;grmS=0;document.getElementById('grm-total').textContent=grmOrd.length;document.getElementById('grm-stars').textContent='0';grmNext();}
+function grmNext(){
+  var box=document.getElementById('grm-opts');box.innerHTML='';
+  if(grmI>=grmOrd.length){document.getElementById('grm-q').textContent='🎉 ¡Muy bien!';document.getElementById('grm-fb').textContent='⭐ '+grmS+' из '+grmOrd.length;return;}
+  var r=grmOrd[grmI];
+  document.getElementById('grm-q').textContent=r.q;
+  document.getElementById('grm-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='100px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');grmS++;document.getElementById('grm-stars').textContent=grmS;document.getElementById('grm-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('grm-fb').textContent='❌ Правильно: '+r.ok;}
+      grmI++;setTimeout(grmNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ИГРА 1: ГДЕ ЭТО? ===== */
+var GEOQ=[
+ {emo:'⭐',q:'Es la capital de España. ¿Qué ciudad es?',ok:'Madrid',w:['Barcelona','Sevilla']},
+ {emo:'🥘',q:'Está junto al Mediterráneo. ¡Aquí nació la paella!',ok:'Valencia',w:['Bilbao','Madrid']},
+ {emo:'🦎',q:'Esta ciudad tiene la Sagrada Familia.',ok:'Barcelona',w:['Málaga','Sevilla']},
+ {emo:'💃',q:'Está en el sur. Aquí bailan flamenco.',ok:'Sevilla',w:['Bilbao','Valencia']},
+ {emo:'🎨',q:'Aquí nació el pintor Picasso. Es la Costa del Sol.',ok:'Málaga',w:['Madrid','Barcelona']},
+ {emo:'🖼️',q:'Este museo famoso está aquí: el Guggenheim.',ok:'Bilbao',w:['Sevilla','Valencia']},
+ {emo:'🏝️',q:'Estas islas están en el Mediterráneo. Capital: Palma.',ok:'las islas Baleares',w:['las islas Canarias','Portugal']},
+ {emo:'🌋',q:'El volcán Teide está en estas islas del Atlántico.',ok:'las islas Canarias',w:['las islas Baleares','Francia']}
+];
+var geoOrd=[],geoI=0,geoS=0;
+function geoStart(){geoOrd=shuffle(GEOQ.slice());geoI=0;geoS=0;document.getElementById('geo-total').textContent=geoOrd.length;document.getElementById('geo-stars').textContent='0';geoNext();}
+function geoNext(){
+  var box=document.getElementById('geo-opts');box.innerHTML='';
+  if(geoI>=geoOrd.length){document.getElementById('geo-q').textContent='🎉 ¡Muy bien!';document.getElementById('geo-emo').textContent='🏆';document.getElementById('geo-fb').textContent='⭐ '+geoS+' из '+geoOrd.length;return;}
+  var r=geoOrd[geoI];
+  document.getElementById('geo-q').textContent=r.q;
+  document.getElementById('geo-emo').textContent=r.emo;
+  document.getElementById('geo-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='130px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');geoS++;document.getElementById('geo-stars').textContent=geoS;document.getElementById('geo-fb').textContent='✅ ¡Correcto!';speak(o);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('geo-fb').textContent='❌ Правильно: '+r.ok;}
+      geoI++;setTimeout(geoNext,1400);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ИГРА 2: КОНСТРУКТОР ===== */
+var SB=[
+ {w:['Voy','a','viajar','a','Madrid.'],t:'Я собираюсь поехать в Мадрид.'},
+ {w:['Vamos','a','la','playa.'],t:'Мы едем на пляж.'},
+ {w:['Vengo','de','Barcelona.'],t:'Я из Барселоны / приезжаю оттуда.'},
+ {w:['¿Adónde','vas?'],t:'Куда ты едешь?'},
+ {w:['Valencia','está','en','el','este.'],t:'Валенсия находится на востоке.'},
+ {w:['¡Vamos','a','España!'],t:'Мы едем в Испанию!'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== ИГРА 3: ДИАЛОГ ===== */
+var DIAL=[
+ {q:'— ¿Adónde vas?<br>— ___',ok:'Voy a Valencia.',w:['Estoy Valencia.','Vengo Valencia.']},
+ {q:'— ¿De dónde vienes?<br>— ___',ok:'Vengo de Madrid.',w:['Voy de Madrid.','Estoy de Madrid.']},
+ {q:'— ¡Vamos a la playa!<br>— ___',ok:'¡Sí, vamos!',w:['Sí, voy cama.','No vamos.']},
+ {q:'— ¿Dónde está Sevilla?<br>— ___',ok:'Está en el sur.',w:['Es en el sur.','Vas en el sur.']},
+ {q:'— ¿Cómo viajas a España?<br>— ___',ok:'En avión.',w:['Con avión.','De avión.']},
+ {q:'— ¿Dónde está la capital?<br>— ___',ok:'En el centro.',w:['En el mar.','En la frontera.']}
+];
+var dialOrd=[],dialI=0,dialS=0;
+function dialStart(){dialOrd=shuffle(DIAL.slice());dialI=0;dialS=0;document.getElementById('dial-total').textContent=dialOrd.length;document.getElementById('dial-stars').textContent='0';dialNext();}
+function dialNext(){
+  var box=document.getElementById('dial-opts');box.innerHTML='';
+  if(dialI>=dialOrd.length){document.getElementById('dial-q').textContent='🎉 ¡Muy bien!';document.getElementById('dial-fb').textContent='⭐ '+dialS+' из '+dialOrd.length;return;}
+  var r=dialOrd[dialI];
+  document.getElementById('dial-q').innerHTML=r.q;
+  document.getElementById('dial-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='140px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');dialS++;document.getElementById('dial-stars').textContent=dialS;document.getElementById('dial-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('dial-fb').textContent='❌ Правильно: '+r.ok;}
+      dialI++;setTimeout(dialNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 4: CLIL ЧТЕНИЕ ===== */
+var SPAIN_TEXT='España es un país de Europa. Tiene dos costas: el mar Mediterráneo al este y el océano Atlántico al norte y al oeste. En España hay muchas montañas: los Pirineos están en la frontera con Francia, en el norte. También hay ríos: el río Ebro y el río Tajo. España tiene islas: las islas Baleares están en el Mediterráneo y las islas Canarias están en el Atlántico, cerca de África. Los vecinos de España son Francia y Portugal. La capital es Madrid. Está en el centro del país, lejos del mar.';
+function speakSpain(){speak(SPAIN_TEXT);}
+var SQ=[
+ {q:'¿Dónde están los Pirineos?',ru:'Где находятся Пиренеи?',ok:'En la frontera con Francia.',w:['En el mar.','En África.']},
+ {q:'¿Qué dos mares hay en España?',ru:'Какие два моря есть в Испании?',ok:'El Mediterráneo y el Atlántico.',w:['El mar Rojo y el mar Negro.','Solo el Mediterráneo.']},
+ {q:'¿Dónde están las islas Canarias?',ru:'Где находятся Канарские острова?',ok:'En el océano Atlántico.',w:['En el Mediterráneo.','En el centro del país.']},
+ {q:'¿Quiénes son los vecinos de España?',ru:'Кто соседи Испании?',ok:'Francia y Portugal.',w:['Italia y Grecia.','México y Perú.']},
+ {q:'¿Dónde está Madrid?',ru:'Где находится Мадрид?',ok:'En el centro, lejos del mar.',w:['En el norte.','En una isla.']}
+];
+(function(){
+  var wrap=document.getElementById('spain-quiz');
+  SQ.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Скажи, куда ты едешь.',model:'Voy a viajar a Valencia. ¡Vamos a España!'},
+ {q:'Скажи, где находится город.',model:'Valencia está en el este, junto al mar Mediterráneo.'},
+ {q:'Расскажи план: сначала... потом...',model:'Primero voy a la playa. Luego voy al museo.'},
+ {q:'Скажи, откуда ты приехал.',model:'Vengo de Madrid. Ahora estoy en Sevilla.'},
+ {q:'Расскажи весь маршрут по формуле (6 пунктов).',model:'¡Hola! Me llamo Alex. Voy a viajar a España. Primero voy a Madrid: está en el centro. Luego voy a Valencia: está junto al mar. Allí hay playa y sol. ¡Vamos a España!'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом расскажи о СЕБЕ вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el mar','море'],['la montaña','гора'],['la playa','пляж'],['el río','река'],
+ ['la isla','остров'],['la frontera','граница'],['la capital','столица'],
+ ['voy','я еду / еду'],['vamos','мы едем'],['vengo','я прихожу'],
+ ['viajar','путешествовать'],['estar en','находиться в']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres el navegante de España!');
+  confetti('🧭');
+  try{localStorage.setItem('mudro_kids_w14l1_badge_shturman','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w14l1_badge_shturman')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🗺️','🌊'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

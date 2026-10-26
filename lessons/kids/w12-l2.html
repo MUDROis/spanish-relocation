@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 35: Problemas de Mates — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#2274A5; --love:#1B5A80;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#D6EAF8 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(34,116,165,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#D6EAF8,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#D6EAF8;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #D6EAF8;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#D6EAF8,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#D6EAF8,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #d5e4ee;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #e6eef4;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+  .age-tag{display:inline-block;background:var(--sun);color:var(--ink);border-radius:999px;padding:1px 10px;font-size:.72rem;font-weight:800;margin-left:6px;vertical-align:middle}
+  .expl{display:none;background:#E8F5E9;border-radius:10px;padding:8px 12px;margin-top:8px;font-weight:800;color:var(--green);font-size:.9rem}
+  .expl.show{display:block}
+
+  .sb-target{background:#fff;border:2px dashed #d5e4ee;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#D6EAF8}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.75;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 4 · Mates y Ciencias · Урок 2 из 9</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🧪 СТАНЦИЯ 4 · УРОК 2 · НЕДЕЛЯ 12</span>
+  <div class="hero-emojis">🧮 📖 🧑‍🏫 ✋ 🏆</div>
+  <h1>Problemas de <span>Mates</span></h1>
+  <p class="sub">Сегодня откроем <strong>настоящий испанский учебник</strong> и научимся понимать учителя с первого раза: ¡Abrid el libro! ¡Leed el problema! ¡Resolvemos juntos!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> учитель говорит: <em>«Abrid el libro por la página diez. Leed el problema. ¿Quién sabe la respuesta?»</em> —<br>
+    а ты уверенно поднимаешь руку: <em>«¡Yo! La solución es siete. ¡Hecho!»</em> ✋
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🧑‍🏫</span> Понимать команды учителя (Abrid, Leed, Sacad...)</div>
+      <div class="goal-item"><span class="emoji">🧮</span> Знать слова задачи (enunciado, solución, resultado)</div>
+      <div class="goal-item"><span class="emoji">📖</span> Читать настоящую задачу из испанского учебника</div>
+      <div class="goal-item"><span class="emoji">✏️</span> Решать задачи вслух (Resolvemos juntos)</div>
+      <div class="goal-item"><span class="emoji">🎭</span> Побыть учителем: игра «Simón dice»</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Помощник учителя»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 34</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola! Числа твои — теперь напали настоящие ЗАДАЧИ из испанского учебника. Но сначала нужно понять УЧИТЕЛЯ. Мостик: «Что толку считать, если не понял, о чём спрашивают?»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ВВОД — ПУЛЬТ УЧИТЕЛЯ -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">🧑‍🏫 Ввод лексики: пульт учителя</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Это команды настоящего испанского учителя. Кликай на каждую — слушай и выполняй как настоящий ученик!</p>
+    <div class="scale-wrap" id="pult-wrap"></div>
+    <div class="script">⚡ <strong>Секрет (12 лет):</strong> «Abrid», «Leed», «Sacad» — это команды для ВСЕГО класса (<span class="grammar-hint" data-hint="Это vosotros-форма повелительного наклонения: ABRID = откройте (все), LEED = читайте (все), SACAD = достаньте (все). Если учитель обращается к одному ученику, он скажет: ABRE, LEE, SACA.">vosotros</span>). Если говорят одному — «Abre», «Lee», «Saca». А 8 лет: просто запомни команды как пароль класса!</div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА — КОМАНДЫ -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: что делает класс?</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Команда</th><th>Что делаем</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Abrid el libro por la página diez.')"><td><b>ABRID EL LIBRO</b></td><td>📖 открываем книгу</td><td>Откройте книгу на странице десять.</td><td>🔊</td></tr>
+      <tr onclick="speak('Leed el problema.')"><td><b>LEED EL PROBLEMA</b></td><td>👀 читаем задачу</td><td>Прочитайте задачу.</td><td>🔊</td></tr>
+      <tr onclick="speak('Resolvemos juntos.')"><td><b>RESOLVEMOS JUNTOS</b></td><td>🤝 решаем вместе</td><td>Решаем вместе.</td><td>🔊</td></tr>
+      <tr onclick="speak('Sacad los cuadernos.')"><td><b>SACAD LOS CUADERNOS</b></td><td>📓 достаём тетради</td><td>Достаньте тетради.</td><td>🔊</td></tr>
+      <tr onclick="speak('Silencio, por favor.')"><td><b>SILENCIO, POR FAVOR</b></td><td>🤫 замолкаем</td><td>Тишина, пожалуйста.</td><td>🔊</td></tr>
+      <tr onclick="speak('¿Quién sabe la respuesta?')"><td><b>¿QUIÉN SABE LA RESPUESTA?</b></td><td>✋ поднимаем руку</td><td>Кто знает ответ?</td><td>🔊</td></tr>
+    </table>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Что делает класс?»: 8 раундов</p>
+      <div class="game-q" id="cmd-q"></div>
+      <div class="opts" id="cmd-opts"></div>
+      <div class="game-fb" id="cmd-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="cmd-stars">0</span> / <span id="cmd-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="cmdStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: DRILL-ИГРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎮 3 drill-игры</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 1: «Simón dice» — учитель говорит! (6 раундов)</p>
+      <div class="game-q" id="sim-q"></div>
+      <div class="opts" id="sim-opts"></div>
+      <div class="game-fb" id="sim-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="sim-stars">0</span> / <span id="sim-total">0</span></div>
+      <div style="margin-top:10px">
+        <button class="speak-btn" style="margin-top:0" onclick="simStart()">▶ Начать</button>
+        <button class="speak-btn" style="background:var(--teal);margin-top:0" onclick="simSay()">🔊 Повторить</button>
+      </div>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 2: «Конструктор команд»</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 3: Реакция ученика (6 раундов)</p>
+      <div class="game-q" id="dial-q"></div>
+      <div class="opts" id="dial-opts"></div>
+      <div class="game-fb" id="dial-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="dial-stars">0</span> / <span id="dial-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="dialStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: CLIL — НАСТОЯЩИЙ УЧЕБНИК -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">📖 CLIL: решаем задачи из испанского учебника</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Алгоритм: 1) leemos el enunciado → 2) calculamos → 3) escribimos el resultado → 4) ¡Hecho!</p>
+
+    <div class="warm-item">
+      <div class="warm-q">🟢 Задача 1<span class="age-tag">8 лет — решаем вместе</span></div>
+      <div class="read-box" style="margin-top:8px">
+        <b>ENUNCIADO:</b> María tiene <b>tres lápices</b> y Pablo tiene <b>cuatro lápices</b>. ¿Cuántos lápices tienen <b>en total</b>?
+      </div>
+      <button class="speak-btn" onclick="speak('María tiene tres lápices y Pablo tiene cuatro lápices. Cuántos lápices tienen en total?')">🔊 Послушать задачу</button>
+      <div class="warm-ru">Мария имеет 3 карандаша, а Пабло — 4. Сколько всего карандашей? Считаем: la suma — сложение!</div>
+      <div id="prob1"></div>
+    </div>
+
+    <div class="warm-item">
+      <div class="warm-q">🟢 Задача 2<span class="age-tag">8 лет — решаем вместе</span></div>
+      <div class="read-box" style="margin-top:8px">
+        <b>ENUNCIADO:</b> En el árbol hay <b>diez pájaros</b>. <b>Cinco pájaros</b> vuelan. ¿Cuántos pájaros <b>quedan</b>?
+      </div>
+      <button class="speak-btn" onclick="speak('En el árbol hay diez pájaros. Cinco pájaros vuelan. Cuántos pájaros quedan?')">🔊 Послушать задачу</button>
+      <div class="warm-ru">На дереве 10 птиц. 5 улетели. Сколько осталось? Теперь la resta — вычитание!</div>
+      <div id="prob2"></div>
+    </div>
+
+    <div class="warm-item">
+      <div class="warm-q">🔵 Задача 3<span class="age-tag">12 лет — сами!</span></div>
+      <div class="read-box" style="margin-top:8px">
+        <b>ENUNCIADO:</b> Un paquete de folios cuesta <b>tres euros</b>. Ana compra <b>cuatro paquetes</b>. ¿Cuánto paga <b>en total</b>?
+      </div>
+      <button class="speak-btn" onclick="speak('Un paquete de folios cuesta tres euros. Ana compra cuatro paquetes. Cuánto paga en total?')">🔊 Послушать задачу</button>
+      <div class="warm-ru">Пачка бумаги стоит 3 евро. Аня покупает 4 пачки. Сколько она платит всего? La multiplicación!</div>
+      <div id="prob3"></div>
+    </div>
+
+    <div class="warm-item">
+      <div class="warm-q">🔵 Задача 4<span class="age-tag">12 лет — сами!</span></div>
+      <div class="read-box" style="margin-top:8px">
+        <b>ENUNCIADO:</b> Hay <b>veinticuatro caramelos entre seis niños</b>. ¿Cuántos caramelos recibe <b>cada niño</b>?
+      </div>
+      <button class="speak-btn" onclick="speak('Hay veinticuatro caramelos entre seis niños. Cuántos caramelos recibe cada niño?')">🔊 Послушать задачу</button>
+      <div class="warm-ru">24 конфеты на 6 детей. Сколько конфет получает каждый? La división!</div>
+      <div id="prob4"></div>
+    </div>
+
+    <div class="script">🧮 <strong>CLIL-словарь учебника:</strong> la suma — сложение (+), la resta — вычитание (−), la multiplicación — умножение (×), la división — деление (:). Слово <b>«enunciado»</b> = условие задачи. Наше слово дня — <b>«¡hecho!»</b> = «готово!»</div>
+  </section>
+
+  <!-- БЛОК 5: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Говорение: «Soy el profesor»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="script">ВЫВОД В РЕЧЬ! Теперь ТЫ — учитель. Проведи мини-урок для семьи или игрушек!</div>
+    <div class="read-box" style="background:#D6EAF8;border-color:var(--heart)">
+      <strong>📋 Формула речи (6 пунктов):</strong><br>
+      1. <em><b>Sacad los cuadernos</b>, por favor.</em><br>
+      2. <em><b>Abrid el libro</b> por la página diez.</em><br>
+      3. <em><b>Leed el problema</b> y pensad.</em><br>
+      4. <em><b>¿Quién sabe la respuesta?</b></em><br>
+      5. <em>¡Muy bien! <b>Resolvemos juntos</b>: la solución es...</em><br>
+      6. <em><b>¡Hecho!</b> <b>Silencio, por favor</b>...</em> 😄
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🧑‍🏫</div>
+      <h3>Помощник учителя</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты понимаешь команды учителя, читаешь задачи из учебника и сам можешь провести урок!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Помощник учителя» 🧑‍🏫 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 36 (PBL, пятница):</strong> «Завтра — ПРОЕКТ <b>La Tiendita</b>: превратим комнату в магазин! Товары с ценниками, сдача, скидки REBAJAS и настоящий диалог покупки!» 🏪</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">🧮 Слова задачи</h4>
+    <div class="cards-grid" id="words-prob"></div>
+    <h4 style="margin:14px 0 8px">📓 Учебные слова</h4>
+    <div class="cards-grid" id="words-study"></div>
+    <h4 style="margin:14px 0 8px">🧑‍🏫 Фразы учителя</h4>
+    <div class="cards-grid" id="words-teach"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>🧑‍🏫 Поиграй в учителя</strong> · 5 мин<br>Скажи семье 4 команды урока: «Sacad los cuadernos», «Abrid el libro», «Leed el problema», «Silencio, por favor».</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>✏️ Своя задача</strong> · 10 мин ⭐<br>Придумай задачу про свою семью на испанском (как «tres lápices + cuatro lápices») и реши её: la solución es...</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎤 Голосовое-диктант</strong> · 5 мин ⭐<br>Запиши голосовое: прочитай любую задачу из урока и назови решение. Отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🧠 Тренажёры</strong> · 10 мин ⭐<br>«Что делает класс?» + «Simón dice» + конструктор + реакция ученика + сопоставление.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>👨‍👩‍👧 Семейная миссия: Simón dice</strong> · 7 мин ⭐<br>Проведи игру «Учитель говорит» с семьёй: ты говоришь команды по-испански, они выполняют. Перепутай их хотя бы раз! 😄</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>📝 Мини-словарь</strong> · 5 мин ⭐<br>Запиши по памяти 4 слова: la suma, la resta, la multiplicación, la división — и нарисуй знаки (+ − × :).</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Понимать команды учителя (Abrid, Leed, Sacad...)</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Знать слова задачи (enunciado, solución, resultado)</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Прочитать enunciado из учебника</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Решить задачу вслух: la solución es...</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Побыть учителем (Simón dice)</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Различать suma / resta / multiplicación / división</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <!-- QUIZLET: дети урок 35 (ссылку добавит админ) -->
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 4 · Урок 2 (Problemas de Mates)</span>
+    <span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w12-l1.html" class="nav-prev"><div class="nav-small">← Урок 1 станции 4</div><div class="nav-title">Урок 34: Números hasta 1000 🔢</div></a>
+    <a href="./w12-l3.html" class="nav-next"><div class="nav-small">Урок 3 станции 4 (PBL) →</div><div class="nav-title">Урок 36: La Tiendita 🏪</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 4: Mates y Ciencias · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var PROB=[
+ {emo:'🧮',es:'el problema',ru:'задача'},
+ {emo:'💡',es:'la solución',ru:'решение'},
+ {emo:'🖼',es:'el dibujo',ru:'рисунок'},
+ {emo:'➕',es:'la suma',ru:'сложение'},
+ {emo:'➖',es:'la resta',ru:'вычитание'},
+ {emo:'✖️',es:'la multiplicación',ru:'умножение'},
+ {emo:'➗',es:'la división',ru:'деление'}
+];
+var STUDY=[
+ {emo:'📄',es:'el enunciado',ru:'условие задачи'},
+ {emo:'🔍',es:'resolver',ru:'решать'},
+ {emo:'🔢',es:'calcular',ru:'вычислять'},
+ {emo:'💯',es:'contar',ru:'считать'},
+ {emo:'🎨',es:'dibujar',ru:'рисовать'},
+ {emo:'✍️',es:'escribir el resultado',ru:'записать результат'},
+ {emo:'✅',es:'¡hecho!',ru:'готово!'}
+];
+var TEACH=[
+ {emo:'📖',es:'Abrid el libro por la página diez.',ru:'Откройте книгу на странице десять.'},
+ {emo:'👀',es:'Leed el problema.',ru:'Прочитайте задачу.'},
+ {emo:'🤝',es:'Resolvemos juntos.',ru:'Решаем вместе.'},
+ {emo:'✋',es:'¿Quién sabe la respuesta?',ru:'Кто знает ответ?'},
+ {emo:'👏',es:'Muy bien, María.',ru:'Очень хорошо, Мария.'},
+ {emo:'📓',es:'Sacad los cuadernos.',ru:'Достаньте тетради.'},
+ {emo:'🤫',es:'Silencio, por favor.',ru:'Тишина, пожалуйста.'}
+];
+
+var WARM=[
+ {q:'¿Cuánto es doscientos más trescientos?',model:'Doscientos más trescientos son quinientos.',ru:'Сколько будет 200 + 300?'},
+ {q:'¿Cómo se dice 1000 en español?',model:'Mil. Y cien, doscientos, trescientos... hasta mil.',ru:'Как сказать 1000 по-испански?'},
+ {q:'Dime un ejemplo con «por».',model:'Diez por diez son cien.',ru:'Назови пример с умножением (por).'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ПУЛЬТ УЧИТЕЛЯ ===== */
+var PULT=[
+ {emo:'📖',es:'Abrid el libro por la página diez.',ru:'открываем книгу на стр. 10'},
+ {emo:'👀',es:'Leed el problema.',ru:'читаем задачу'},
+ {emo:'🤝',es:'Resolvemos juntos.',ru:'решаем вместе'},
+ {emo:'📓',es:'Sacad los cuadernos.',ru:'достаём тетради'},
+ {emo:'🤫',es:'Silencio, por favor.',ru:'тихо...'},
+ {emo:'✋',es:'¿Quién sabe la respuesta?',ru:'поднимаем руку!'},
+ {emo:'👏',es:'Muy bien, María.',ru:'урра, молодец!'}
+];
+(function(){
+  var box=document.getElementById('pult-wrap');
+  PULT.forEach(function(p){
+    var row=document.createElement('div');row.className='scale-row';
+    row.innerHTML='<span class="scale-emo">'+p.emo+'</span><div class="scale-text"><div class="scale-es">'+p.es+'</div><div class="scale-ru">'+p.ru+'</div></div><span style="font-size:1.2rem">🔊</span>';
+    row.addEventListener('click',function(){speak(p.es);});
+    box.appendChild(row);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+(function(){
+  function fill(id,arr){
+    var box=document.getElementById(id);
+    arr.forEach(function(f){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+      d.addEventListener('click',function(){speak(f.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-prob',PROB);fill('words-study',STUDY);fill('words-teach',TEACH);
+})();
+
+/* ===== ИГРА: ЧТО ДЕЛАЕТ КЛАСС? ===== */
+var CMD=[
+ {q:'Silencio, por favor.',ok:'🤫 Молчим',w:['📓 Достаём тетради','🤝 Решаем вместе']},
+ {q:'Sacad los cuadernos.',ok:'📓 Достаём тетради',w:['🤫 Молчим','📖 Открываем книгу']},
+ {q:'Abrid el libro por la página diez.',ok:'📖 Открываем страницу 10',w:['📓 Достаём тетради','👀 Читаем задачу']},
+ {q:'Leed el problema.',ok:'👀 Читаем задачу',w:['✋ Поднимаем руку','🤫 Молчим']},
+ {q:'Resolvemos juntos.',ok:'🤝 Решаем вместе',w:['🤫 Молчим','📖 Открываем страницу 10']},
+ {q:'¿Quién sabe la respuesta?',ok:'✋ Поднимаем руку',w:['👀 Читаем задачу','🤝 Решаем вместе']},
+ {q:'Muy bien, María.',ok:'👏 Мария молодец',w:['✋ Поднимаем руку','📓 Достаём тетради']},
+ {q:'Escribid el resultado.',ok:'✍️ Записываем результат',w:['📖 Закрываем книгу','🤫 Молчим']}
+];
+var cmdOrd=[],cmdI=0,cmdS=0;
+function cmdStart(){cmdOrd=shuffle(CMD.slice());cmdI=0;cmdS=0;document.getElementById('cmd-total').textContent=cmdOrd.length;document.getElementById('cmd-stars').textContent='0';cmdNext();}
+function cmdNext(){
+  var box=document.getElementById('cmd-opts');box.innerHTML='';
+  if(cmdI>=cmdOrd.length){document.getElementById('cmd-q').textContent='🎉 ¡Muy bien!';document.getElementById('cmd-fb').textContent='⭐ '+cmdS+' из '+cmdOrd.length;return;}
+  var r=cmdOrd[cmdI];
+  document.getElementById('cmd-q').textContent=r.q;
+  document.getElementById('cmd-fb').textContent='';
+  speak(r.q);
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='150px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');cmdS++;document.getElementById('cmd-stars').textContent=cmdS;document.getElementById('cmd-fb').textContent='✅ ¡Correcto!';speak(r.q);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('cmd-fb').textContent='❌ Правильно: '+r.ok;}
+      cmdI++;setTimeout(cmdNext,1400);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ИГРА 1: SIMÓN DICE ===== */
+var SIM=[
+ {say:'Silencio, por favor.',ok:'🤫 Молчим',w:['📓 Достаём тетради','🤝 Решаем вместе']},
+ {say:'Sacad los cuadernos.',ok:'📓 Достаём тетради',w:['🤫 Молчим','📖 Открываем книгу']},
+ {say:'Abrid el libro por la página diez.',ok:'📖 Открываем страницу 10',w:['📓 Достаём тетради','👀 Читаем задачу']},
+ {say:'Leed el problema.',ok:'👀 Читаем задачу',w:['✋ Поднимаем руку','🤫 Молчим']},
+ {say:'¿Quién sabe la respuesta?',ok:'✋ Поднимаем руку',w:['👀 Читаем задачу','🤝 Решаем вместе']},
+ {say:'Resolvemos juntos.',ok:'🤝 Решаем вместе',w:['🤫 Молчим','📖 Открываем страницу 10']}
+];
+var simOrd=[],simI=0,simS=0,simCur=null;
+function simStart(){simOrd=shuffle(SIM.slice());simI=0;simS=0;document.getElementById('sim-total').textContent=simOrd.length;document.getElementById('sim-stars').textContent='0';simNext();}
+function simSay(){if(simCur)speak(simCur.say);}
+function simNext(){
+  var box=document.getElementById('sim-opts');box.innerHTML='';
+  if(simI>=simOrd.length){document.getElementById('sim-q').textContent='🎉 ¡Muy bien!';document.getElementById('sim-fb').textContent='⭐ '+simS+' из '+simOrd.length;simCur=null;return;}
+  var r=simOrd[simI];simCur=r;
+  document.getElementById('sim-q').innerHTML='🧑‍🏫 El profesor dice: «'+r.say+'»';
+  document.getElementById('sim-fb').textContent='';
+  speak(r.say);
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='150px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');simS++;document.getElementById('sim-stars').textContent=simS;document.getElementById('sim-fb').textContent='✅ ¡Correcto!';speak(r.say);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('sim-fb').textContent='❌ Правильно: '+r.ok;}
+      simI++;setTimeout(simNext,1400);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ИГРА 2: КОНСТРУКТОР КОМАНД ===== */
+var SB=[
+ {w:['Abrid','el','libro','por','la','página','diez.'],t:'Откройте книгу на странице десять.'},
+ {w:['Leed','el','problema.'],t:'Прочитайте задачу.'},
+ {w:['Resolvemos','juntos.'],t:'Решаем вместе.'},
+ {w:['Sacad','los','cuadernos.'],t:'Достаньте тетради.'},
+ {w:['¿Quién','sabe','la','respuesta?'],t:'Кто знает ответ?'},
+ {w:['La','solución','es','cinco.'],t:'Решение — пять.'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== ИГРА 3: РЕАКЦИЯ УЧЕНИКА ===== */
+var DIAL=[
+ {q:'— ¿Quién sabe la respuesta?<br>— ___',ok:'¡Yo! ¡Yo!',w:['Yo no libro.','Silencio, yo.']},
+ {q:'— ¿Cuánto es tres más cuatro?<br>— ___',ok:'Tres más cuatro son siete.',w:['Tres más cuatro son libro.','Siete problema.']},
+ {q:'— Muy bien, María.<br>— ___',ok:'Gracias, señor.',w:['Leed, señor.','Abrid, señor.']},
+ {q:'— Sacad los cuadernos.<br>— ___',ok:'¡Hecho!',w:['¡Silencio!','¡Libro!']},
+ {q:'— ¿Cuánto es diez entre dos?<br>— ___',ok:'Cinco.',w:['Veinte.','Libro.']},
+ {q:'— Leed el problema. ¿Qué hacemos ahora?<br>— ___',ok:'Leemos el problema.',w:['Escribimos el libro.','Cerramos el problema.']}
+];
+var dialOrd=[],dialI=0,dialS=0;
+function dialStart(){dialOrd=shuffle(DIAL.slice());dialI=0;dialS=0;document.getElementById('dial-total').textContent=dialOrd.length;document.getElementById('dial-stars').textContent='0';dialNext();}
+function dialNext(){
+  var box=document.getElementById('dial-opts');box.innerHTML='';
+  if(dialI>=dialOrd.length){document.getElementById('dial-q').textContent='🎉 ¡Muy bien!';document.getElementById('dial-fb').textContent='⭐ '+dialS+' из '+dialOrd.length;return;}
+  var r=dialOrd[dialI];
+  document.getElementById('dial-q').innerHTML=r.q;
+  document.getElementById('dial-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='150px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');dialS++;document.getElementById('dial-stars').textContent=dialS;document.getElementById('dial-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('dial-fb').textContent='❌ Правильно: '+r.ok;}
+      dialI++;setTimeout(dialNext,1400);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 4: ЗАДАЧИ ИЗ УЧЕБНИКА ===== */
+var PROBLEMS=[
+ {id:'prob1',ok:'Siete lápices.',w:['Cuatro lápices.','Tres lápices.'],expl:'La suma: tres más cuatro son siete. ¡Hecho!'},
+ {id:'prob2',ok:'Cinco pájaros.',w:['Diez pájaros.','Cinco pájaros vuelan.'],expl:'La resta: diez menos cinco son cinco. ¡Hecho!'},
+ {id:'prob3',ok:'Doce euros.',w:['Siete euros.','Tres euros.'],expl:'La multiplicación: tres por cuatro son doce. ¡Hecho!'},
+ {id:'prob4',ok:'Cuatro caramelos.',w:['Seis caramelos.','Veinticuatro caramelos.'],expl:'La división: veinticuatro entre seis son cuatro. ¡Hecho!'}
+];
+(function(){
+  PROBLEMS.forEach(function(r){
+    var wrap=document.getElementById(r.id);
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">¿Cuál es la solución?</div><span class="ru">Выбери решение — resolvemos juntos!</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        var ex=wrap.querySelector('.expl');
+        if(o===r.ok){
+          b.classList.add('correct');
+          if(!ex){ex=document.createElement('div');ex.className='expl';wrap.appendChild(ex);}
+          ex.textContent='💡 '+r.expl;ex.classList.add('show');speak(r.expl);
+        }else{
+          b.classList.add('wrong');
+          d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});
+        }
+      });
+      d.appendChild(b);
+    });
+    var ex0=document.createElement('div');ex0.className='expl';wrap.appendChild(ex0);
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Попроси всех достать тетради.',model:'Sacad los cuadernos, por favor.'},
+ {q:'Попроси открыть книгу на странице diez.',model:'Abrid el libro por la página diez.'},
+ {q:'Попроси прочитать задачу и подумать.',model:'Leed el problema y pensad.'},
+ {q:'Спроси, кто знает ответ, и похвали.',model:'¿Quién sabe la respuesta? ¡Muy bien!'},
+ {q:'Подведи итог: решаем вместе, решение — семь.',model:'Resolvemos juntos: la solución es siete. ¡Hecho!'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом скажи команду САМ — как настоящий profesor!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я сказал команду</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el problema','задача'],['la solución','решение'],['el enunciado','условие задачи'],
+ ['resolver','решать'],['calcular','вычислять'],['contar','считать'],
+ ['la suma','сложение'],['la resta','вычитание'],['la multiplicación','умножение'],
+ ['la división','деление'],['el dibujo','рисунок'],['dibujar','рисовать']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un gran ayudante del profesor!');
+  confetti('🧑‍🏫');
+  try{localStorage.setItem('mudro_kids_w12l2_badge_ayudante_profesor','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w12l2_badge_ayudante_profesor')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'📖','✏️'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

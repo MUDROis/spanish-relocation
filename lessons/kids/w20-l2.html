@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 59: FINAL BOSS: El primer día en la escuela — Школа МУДРО</title>
+<meta name="description" content="Урок 59 детского курса испанского: финальный квест «Первый день в испанской школе» — 6 станций, 6 штампов, диплом. Школа МУДРО.">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#E91E63; --love:#C2185B;
+    --hate:#424242; --star:#FFB300; --st7:#FFBE0B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FFE0EC 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(233,30,99,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FFE0EC;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #FFE0EC;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #ead6dc;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #f0e6e8;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .sb-target{background:#fff;border:2px dashed #ead6dc;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#FFE0EC}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+
+  /* ==== СТАНЦИЯ 7 · ¡Preparados! · золотая тема ==== */
+  .hero{background:linear-gradient(180deg,#FFF1C9 0%,#FFF7E2 55%,var(--cream) 100%)}
+  .hero::before{background:radial-gradient(circle,rgba(255,190,11,.30),transparent 70%)}
+  .hero::after{background:radial-gradient(circle,rgba(232,96,76,.16),transparent 70%)}
+  .lesson-tag{background:var(--st7);color:#5b4300}
+  .hero h1 span{color:var(--terra)}
+  .goals{border-color:var(--st7)}
+  .goal-item{background:#FFF3D6}
+  .final-situation{border-left-color:var(--st7);background:linear-gradient(135deg,#FFF1C9,#FFF7E2)}
+
+  .quest-hud{background:#fff;border:3px solid var(--st7);border-radius:18px;padding:16px;margin:14px 0;text-align:center;position:sticky;top:64px;z-index:40;box-shadow:0 6px 16px rgba(0,0,0,.07)}
+  .sellos-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0}
+  .sello{width:56px;height:56px;border-radius:50%;background:var(--soft);border:2.5px dashed #c9b98a;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.4rem;color:#b7a77a;transition:.3s;font-weight:800}
+  .sello small{font-size:.6rem;font-weight:800}
+  .sello.got{background:#FFE9B8;border:2.5px solid var(--st7);color:var(--ink);animation:popIn .5s}
+  .mood-line{font-weight:800;font-size:1.05rem;margin:6px 0 2px}
+  .sello-count{font-weight:800;color:var(--terra);font-size:1.1rem}
+  .station{background:#fff;border:2px solid #f0e6d2;border-radius:16px;padding:18px;margin:14px 0;text-align:left;transition:.3s}
+  .station.done{border-color:var(--green);background:#F1F8E9}
+  .st-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .st-ico{font-size:1.8rem}
+  .st-title{font-family:'Baloo 2',cursive;font-size:1.2rem;color:var(--terra);flex:1}
+  .st-stamp{background:var(--soft);border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:800;color:var(--ink-soft)}
+  .station.done .st-stamp{background:var(--st7);color:#5b4300}
+  .sit-text{background:linear-gradient(135deg,#FFF7E2,#FFF3D6);border-radius:12px;padding:12px 14px;font-weight:700;margin:8px 0;border-left:4px solid var(--st7)}
+  .cons-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin:8px 0;font-weight:700;text-align:center}
+  .cons-row select,.cons-row input{font-family:'Nunito';font-weight:700;border:2px solid #ead6dc;border-radius:10px;padding:8px 10px;font-size:.95rem;background:#fff}
+  .cons-row input{min-width:160px}
+  .live-sentence{background:#fff;border:2px dashed var(--heart);border-radius:14px;padding:12px;font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--heart);margin:10px 0;text-align:center;min-height:44px}
+  .qrow{background:#fff;border:2px solid #f0e6e8;border-radius:14px;padding:12px;margin:10px 0}
+  .qrow .qq{font-weight:800;color:var(--terra);margin-bottom:2px}
+  .qrow .qru{color:#999;font-size:.8rem;font-style:italic;display:block;margin-bottom:8px}
+  .seq-line{background:#fff;border:2px dashed #c9b98a;border-radius:14px;padding:12px;min-height:56px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:10px 0;font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--green)}
+  .seq-chip{background:#fff;border:2px solid var(--st7);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .seq-chip:hover{background:var(--st7);color:#5b4300}
+  .seq-chip.locked{border-color:var(--green);background:#C8E6C9;cursor:default}
+  .seq-chip.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  .diploma-box{display:none;margin:20px 0}
+  .diploma-box.show{display:block;animation:popIn .6s}
+  .diploma{background:linear-gradient(160deg,#FFFDF4,#FFF3D6);border:6px double #C9A227;border-radius:18px;padding:28px 22px;text-align:center;box-shadow:0 10px 26px rgba(0,0,0,.08)}
+  .d-emblem{font-size:3.4rem}
+  .d-title{font-family:'Baloo 2',cursive;font-size:1.6rem;color:#8a6d1a;letter-spacing:1px;margin:6px 0 2px}
+  .d-sub{font-weight:800;color:var(--ink-soft);font-size:.9rem;margin-bottom:12px}
+  .d-name-in{font-family:'Baloo 2',cursive;font-size:1.25rem;text-align:center;border:none;border-bottom:2px solid #C9A227;background:transparent;color:var(--terra);padding:6px 10px;min-width:240px;max-width:90%}
+  .d-name-in:focus{outline:none}
+  .d-name-out{display:none;font-family:'Baloo 2',cursive;font-size:1.6rem;color:var(--terra);border-bottom:2px solid #C9A227;min-width:220px;padding:0 12px 2px}
+  .d-big{font-family:'Baloo 2',cursive;font-size:1.3rem;color:#8a6d1a;margin:12px 0;background:#FFF0C8;border-radius:12px;padding:10px}
+  .d-date{font-weight:800;color:var(--ink-soft);font-size:.9rem}
+  .d-sign{margin-top:12px;font-style:italic;font-weight:700;color:var(--ink-soft)}
+  .dip-btn{background:#C9A227;color:#fff;border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #9a7a15;margin-top:14px}
+  .dip-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #9a7a15}
+  .food-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+  .food-chip{background:#fff;border:2px solid var(--terra);border-radius:999px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.9rem}
+  .food-chip:hover{background:var(--terra);color:#fff}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 7 · ¡Preparados! · Урок 2 из 3</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🎓 СТАНЦИЯ 7 · УРОК 2 · НЕДЕЛЯ 20</span>
+  <div class="hero-emojis">👑 🏫 😰 💪 🎉</div>
+  <h1>FINAL BOSS: <span>El primer día</span> en la escuela</h1>
+  <p class="sub">Сегодня — ГЛАВНОЕ испытание всего курса: симуляция первого дня в испанской школе. <strong>6 станций, 6 штампов (sellos)</strong>. Пройдёшь все — получишь ДИПЛОМ «¡Sobreviviente de la Escuela Española!» 🎓</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> 8:50 утра, ворота школы. У тебя за спиной — <strong>60 уроков</strong>. Ты делаешь вдох:<br>
+    <em>«— ¡Buenos días! Me llamo... y soy de Rusia. ¿Dónde está el aula de tercero?»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">👑</span> Пройти все 6 станций финального квеста</div>
+      <div class="goal-item"><span class="emoji">🎫</span> Собрать 6 штампов: ¡superado!</div>
+      <div class="goal-item"><span class="emoji">🤝</span> Представиться el tutor: Me llamo... tengo... soy de...</div>
+      <div class="goal-item"><span class="emoji">🧭</span> Найти класс: ¿Dónde está...? + gira / sigue</div>
+      <div class="goal-item"><span class="emoji">🍽️</span> Заказать в столовой и сказать про аллергию</div>
+      <div class="goal-item"><span class="emoji">🎓</span> Получить диплом ¡Sobreviviente!</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E8A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 58</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, campeón! Вчера ты был «Мастером игры» и прошёл все 14 клеток. Мостик: сегодня игра становится РЕАЛЬНОСТЬЮ — первый день в испанской школе. Возьми с собой всё, что умеешь!</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ВВОД ЛЕКСИКИ -->
+  <section class="block" style="--c:#D98E00">
+    <div class="block-head">
+      <h2 class="block-title">🗺️ Слова финального квеста</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Кликай на градусник настроения — он покажет, как меняются твои эмоции за день в школе!</p>
+    <div class="scale-wrap" id="mood-wrap"></div>
+    <div class="script">⚡ <strong>Дуга дня:</strong> утром — <b>estoy nervioso</b> 😰, на перемене — <b>estoy preparado</b> 💪, вечером — <b>¡lo he conseguido!</b> 🎉. Это «эмоциональный маршрут» квеста — следи за ним в HUD!</div>
+    <h4 style="margin-bottom:8px">🏁 Станции квеста</h4>
+    <div class="cards-grid" id="words-kvest"></div>
+    <h4 style="margin:14px 0 8px">🗣️ Речевые блоки</h4>
+    <div class="cards-grid" id="words-frases"></div>
+    <h4 style="margin:14px 0 8px">💪 Настроение</h4>
+    <div class="cards-grid" id="words-mood"></div>
+    <div class="script">⚡ <strong>Секрет (12 лет):</strong> <span class="grammar-hint" data-hint="SIN MIEDO — «без страха»: habla sin miedo, говори без страха. PASO A PASO — «шаг за шагом»: любой большой квест проходится маленькими шагами. PUEDO HACERLO — «я могу это сделать»: формула уверенности. Скажи это себе перед станцией — и рука сама поднимется!">sin miedo, paso a paso, puedo hacerlo</span> — три волшебные фразы перед трудным заданием. Скажи любую вслух — и страх уменьшается вдвое!<br>8 лет: повторяй «Puedo hacerlo!» перед каждой станцией — это как суперсила 🦸</div>
+  </section>
+
+  <!-- БЛОК 2: FINAL BOSS КВЕСТ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">👑 FINAL BOSS: 6 станций первого дня</h2>
+      <span class="time-badge">⏱ 20 минут</span>
+    </div>
+    <p class="block-sub">Пройди все станции по порядку. За каждую — штамп <b>sello</b> 🎫. 6 из 6 → ДИПЛОМ!</p>
+    <div class="quest-hud" id="quest-hud">
+      <div class="mood-line" id="quest-mood">😰 Estoy nervioso... (первый день — волнительно!)</div>
+      <div class="sellos-row" id="sellos-row"></div>
+      <div class="sello-count">🎫 Sellos: <span id="sello-count">0</span> / 6</div>
+    </div>
+
+    <!-- СТАНЦИЯ 1 -->
+    <div class="station" id="st-1">
+      <div class="st-head"><span class="st-ico">🚪</span><span class="st-title">Станция 1 · La puerta del cole — представиться el tutor</span><span class="st-stamp" id="stamp-1">sello 1</span></div>
+      <div class="sit-text">8:50. У ворот стоит <b>señor Martínez</b> — твой tutor (классный руководитель). Он улыбается: <em>«¡Buenos días! ¿Y tú quién eres?»</em> <button class="speak-btn" onclick="speak('¡Buenos días! ¿Y tú quién eres?')">🔊</button></div>
+      <div class="cons-row">
+        Me llamo <input id="s1-name" placeholder="твоё имя" maxlength="20"> y tengo
+      </div>
+      <div class="cons-row">
+        <select id="s1-age">
+          <option value="ocho">ocho (8)</option>
+          <option value="nueve">nueve (9)</option>
+          <option value="diez">diez (10)</option>
+          <option value="once">once (11)</option>
+          <option value="doce">doce (12)</option>
+        </select> años. Soy
+      </div>
+      <div class="cons-row">
+        <select id="s1-from">
+          <option value="de Rusia">de Rusia</option>
+          <option value="de Ucrania">de Ucrania</option>
+          <option value="de Kazajistán">de Kazajistán</option>
+          <option value="de Bielorrusia">de Bielorrusia</option>
+          <option value="de Georgia">de Georgia</option>
+        </select>. ¡Mucho gusto!
+      </div>
+      <div class="live-sentence" id="s1-live">Me llamo ___ y tengo diez años. Soy de Rusia. ¡Mucho gusto!</div>
+      <div style="text-align:center">
+        <button class="speak-btn" onclick="s1Speak()">🔊 Послушать</button>
+        <button class="dip-btn" onclick="finishS1()">✋ Saludar al tutor — пройти станцию</button>
+      </div>
+      <div class="game-fb" id="s1-fb"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 2 -->
+    <div class="station" id="st-2">
+      <div class="st-head"><span class="st-ico">🧭</span><span class="st-title">Станция 2 · El pasillo — найти класс</span><span class="st-stamp" id="stamp-2">sello 2</span></div>
+      <div class="sit-text">Tutor говорит: <em>«Tu aula es la de tercero. El pasillo está lleno de puertas...»</em> <button class="speak-btn" onclick="speak('Tu aula es la de tercero. El pasillo está lleno de puertas.')">🔊</button> Коридор полон дверей! Два шага — и ты на месте.</div>
+      <div id="s2-quiz"></div>
+      <div class="game-fb" id="s2-fb"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 3 -->
+    <div class="station" id="st-3">
+      <div class="st-head"><span class="st-ico">🆘</span><span class="st-title">Станция 3 · La clase — попросить помощи</span><span class="st-stamp" id="stamp-3">sello 3</span></div>
+      <div class="sit-text">La profesora говорит быстро: <em>«Sacamos los deberes y los corregimos en voz alta...»</em> <button class="speak-btn" onclick="speak('Sacamos los deberes y los corregimos en voz alta.')">🔊</button> Ты понял только слово «deberes»! Спасайся фразами!</div>
+      <div id="s3-quiz"></div>
+      <div class="game-fb" id="s3-fb"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 4 -->
+    <div class="station" id="st-4">
+      <div class="st-head"><span class="st-ico">⚽</span><span class="st-title">Станция 4 · El recreo — перемена</span><span class="st-stamp" id="stamp-4">sello 4</span></div>
+      <div class="sit-text">¡El recreo! Во дворе дети играют в fútbol. Девочка по имени <b>Lucía</b> смотрит на тебя и улыбается... Это твой шанс найти первого друга!</div>
+      <div id="s4-quiz"></div>
+      <div class="game-fb" id="s4-fb"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 5 -->
+    <div class="station" id="st-5">
+      <div class="st-head"><span class="st-ico">🍽️</span><span class="st-title">Станция 5 · El comedor — столовая</span><span class="st-stamp" id="stamp-5">sello 5</span></div>
+      <div class="sit-text">13:00. ¡El comedor! Меню дня: <b>Menú uno</b>: sopa + pollo con arroz + fruta. <b>Menú dos</b>: pasta + pescado + yogur. <button class="speak-btn" onclick="speak('Menú uno: sopa, pollo con arroz y fruta. Menú dos: pasta, pescado y yogur.')">🔊</button></div>
+      <div class="food-chips">
+        <span class="food-chip" onclick="speak('la sopa')">🍲 la sopa</span>
+        <span class="food-chip" onclick="speak('el pollo con arroz')">🍗 el pollo con arroz</span>
+        <span class="food-chip" onclick="speak('el pescado')">🐟 el pescado</span>
+        <span class="food-chip" onclick="speak('la fruta')">🍎 la fruta</span>
+        <span class="food-chip" onclick="speak('el yogur')">🥛 el yogur</span>
+      </div>
+      <div class="cons-row">
+        Quiero <select id="s5-menu"><option value="el menú uno">el menú uno</option><option value="el menú dos">el menú dos</option></select>, por favor.
+      </div>
+      <div class="cons-row">
+        Y soy <select id="s5-gen"><option value="alérgico">alérgico (мальчик)</option><option value="alérgica">alérgica (девочка)</option></select> a
+        <select id="s5-alg">
+          <option value="nada">nada — ни на что</option>
+          <option value="la lactosa">la lactosa — лактозу</option>
+          <option value="el gluten">el gluten — глютен</option>
+          <option value="los frutos secos">los frutos secos — орехи</option>
+        </select>.
+      </div>
+      <div class="live-sentence" id="s5-live">Quiero el menú uno, por favor. Y no soy alérgico a nada.</div>
+      <div style="text-align:center">
+        <button class="speak-btn" onclick="s5Speak()">🔊 Послушать</button>
+        <button class="dip-btn" onclick="finishS5()">🍽 Pedir el menú — пройти станцию</button>
+      </div>
+      <div class="game-fb" id="s5-fb"></div>
+    </div>
+
+    <!-- СТАНЦИЯ 6 -->
+    <div class="station" id="st-6">
+      <div class="st-head"><span class="st-ico">🏠</span><span class="st-title">Станция 6 · La salida — маршрут домой</span><span class="st-stamp" id="stamp-6">sello 6</span></div>
+      <div class="sit-text">15:00. ¡El timbre! Завтра ты скажешь: <em>«Mañana voy a venir otra vez»</em> <button class="speak-btn" onclick="speak('Mañana voy a venir otra vez.')">🔊</button> — но сначала собери маршрут домой по порядку!</div>
+      <div class="seq-line" id="s6-line">…</div>
+      <div class="sb-pool" id="s6-pool"></div>
+      <div class="game-fb" id="s6-fb"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ДИПЛОМ -->
+  <section class="block" style="--c:#D98E00">
+    <div class="block-head">
+      <h2 class="block-title">🎓 Диплом: ¡Sobreviviente!</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Диплом откроется, когда соберёшь все 6 sellos. Впереди — самый красивый документ курса!</p>
+    <div class="diploma-box" id="diploma-box">
+      <div class="diploma">
+        <div class="d-emblem">🎓</div>
+        <div class="d-title">DIPLOMA DE SUPERVIVIENTE</div>
+        <div class="d-sub">Curso «Misión: Escuela Española» · Escuela MUDRO · FINAL BOSS</div>
+        <p style="font-weight:800">Se hace constar que</p>
+        <input class="d-name-in" id="dip-name" placeholder="escribe tu nombre" maxlength="24">
+        <div class="d-name-out" id="dip-name-out"></div>
+        <p style="font-weight:700;margin:10px 0">ha completado el <b>FINAL BOSS</b>: las 6 estaciones del primer día en la escuela — ¡todas superadas!</p>
+        <div class="d-big">¡SOBREVIVIENTE DE LA ESCUELA ESPAÑOLA!</div>
+        <div class="d-date" id="dip-date"></div>
+        <div class="d-sign">Firmado: Señor Martínez, tutor · 👩‍🏫 Escuela MUDRO</div>
+        <button class="dip-btn" id="dip-btn" onclick="emitDiploma()">🎓 ¡Emitir el diploma!</button>
+      </div>
+    </div>
+    <div class="script">🔒 <strong>Как открыть:</strong> пройди все 6 станций квеста выше. Штампы — это твои «сохранения» в игре!</div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎫</div>
+      <h3>¡Soy un superviviente!</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">6 станций, 6 штампов, 1 диплом. Первый день в испанской школе — ТЫ СПРАВИЛСЯ!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «¡Soy un superviviente!» 🎫 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 60 (¡GRADUACIÓN!):</strong> «ФИНАЛ курса: пост-карта твоих 20 недель, счётчик достижений — 7 станций, 60 уроков — и большой ДИПЛОМ ВЫПУСКНИКА. Приходи праздновать! 🥳»</div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Пройди квест-симуляцию</strong> · 15 мин ⭐<br>Все 6 станций — до диплома! Потом пройди ещё раз «на скорость» и засеки время.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎤 Голосовое: полное самопредставление</strong> · 5 мин ⭐<br><em>«¡Hola! Me llamo... tengo... años y soy de... ¡Mucho gusto!»</em> — как на станции 1, только целиком вслух.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🧭 Репетиция маршрута</strong> · 7 мин ⭐<br>Опиши путь «от комнаты до кухни» по-испански: <em>Salgo de mi habitación, giro a la derecha, sigo recto y llego a la cocina. Tardo cinco segundos.</em></div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🍽 Меню мечты</strong> · 10 мин ⭐<br>Нарисуй своё идеальное «menú del día» (3 блюда) и подпиши: <em>«Quiero el menú..., por favor»</em>. Найди в своём меню слово-аллерген, если есть!</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎭 Семейная сценка «Первый день»</strong> · 10 мин ⭐<br>Родители говорят по-русски («Ты новенький! Представься!»), ты отвечаешь ТОЛЬКО по-испански. Роль el tutor — у папы или мамы!</div></div>
+    <div class="task"><div class="task-num">6</div><div><strong>💪 Три суперсилы</strong> · 3 мин<br>Повесь на зеркало записку: <em>«Sin miedo. Paso a paso. ¡Puedo hacerlo!»</em> Прочитай вслух перед школой.</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Представиться: Me llamo... tengo... soy de...</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Спросить дорогу: ¿Dónde está...? + gira / sigue</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Попросить помощи: No entiendo, ¿puede repetir?</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Позвать играть: ¿Quieres jugar conmigo?</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Заказать: Quiero el menú..., soy alérgico a...</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Описать маршрут домой: salgo, giro, sigo, llego, tardo</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 7 · Урок 59 (FINAL BOSS: El primer día)</span>
+    <span>Открыть карточки →</span>
+  </a>
+
+  <!-- QUIZLET: дети урок 59 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w20-l1.html" class="nav-prev"><div class="nav-small">← Урок 1 станции 7</div><div class="nav-title">Урок 58: La Gran Repasación 🎲</div></a>
+    <a href="./w20-l3.html" class="nav-next"><div class="nav-small">Урок 3 станции 7 →</div><div class="nav-title">Урок 60: ¡Graduación! 🎓</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 7: ¡Preparados! · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var MOODS=[
+ {emo:'😰',es:'estoy nervioso',ru:'я нервничаю'},
+ {emo:'💪',es:'estoy preparado',ru:'я готов'},
+ {emo:'🎉',es:'¡lo he conseguido!',ru:'у меня получилось!'}
+];
+var KW=[
+ {emo:'🏁',es:'la estación',ru:'станция квеста'},
+ {emo:'👨‍🏫',es:'el tutor',ru:'классный руководитель'},
+ {emo:'🚪',es:'el aula',ru:'класс'},
+ {emo:'🛤️',es:'el pasillo',ru:'коридор'},
+ {emo:'🔑',es:'la llave',ru:'ключ'},
+ {emo:'🎫',es:'el sello',ru:'штамп (за станцию)'},
+ {emo:'✅',es:'¡superado!',ru:'пройдено!'}
+];
+var RW=[
+ {emo:'🤝',es:'Me llamo... y tengo... años.',ru:'Меня зовут... и мне ... лет.'},
+ {emo:'🧭',es:'¿Dónde está el aula de tercero?',ru:'Где класс третьего года?'},
+ {emo:'🆘',es:'No entiendo, ¿puede repetir?',ru:'Не понимаю, можете повторить?'},
+ {emo:'⚽',es:'¿Quieres jugar conmigo?',ru:'Хочешь поиграть со мной?'},
+ {emo:'🍽️',es:'Quiero el menú uno, por favor.',ru:'Я хочу первое меню, пожалуйста.'},
+ {emo:'🏠',es:'Mañana voy a venir otra vez.',ru:'Завтра я приду снова.'},
+ {emo:'💖',es:'¡me ha gustado mucho!',ru:'мне очень понравилось!'}
+];
+var MW=[
+ {emo:'😰',es:'estoy nervioso',ru:'я нервничаю'},
+ {emo:'💪',es:'estoy preparado',ru:'я готов'},
+ {emo:'🦁',es:'sin miedo',ru:'без страха'},
+ {emo:'🦸',es:'puedo hacerlo',ru:'я могу это сделать'},
+ {emo:'👣',es:'paso a paso',ru:'шаг за шагом'},
+ {emo:'🎉',es:'¡lo he conseguido!',ru:'у меня получилось!'},
+ {emo:'🏆',es:'¡soy un superviviente!',ru:'я выживший!'}
+];
+
+var WARM=[
+ {q:'¿Cómo se dice «кубик» en español?',model:'¡Lo sé! El dado. Y la ficha es «фишка».',ru:'Как сказать «кубик»?'},
+ {q:'¿Qué pasa si respondes mal en la casilla?',model:'La ficha da un paso atrás. ¡Casi!',ru:'Что происходит, если ты не ответил на клетке?'},
+ {q:'¿Cómo se dice «я выиграл!»?',model:'¡Gano yo! ¡He ganado la Gran Repasación!',ru:'Как сказать «я выиграл!»?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ГРАДУСНИК НАСТРОЕНИЯ ===== */
+(function(){
+  var box=document.getElementById('mood-wrap');
+  MOODS.forEach(function(m){
+    var row=document.createElement('div');row.className='scale-row';
+    row.innerHTML='<span class="scale-emo">'+m.emo+'</span><div class="scale-text"><div class="scale-es">'+m.es+'</div><div class="scale-ru">'+m.ru+'</div></div><span style="font-size:1.2rem">🔊</span>';
+    row.addEventListener('click',function(){speak(m.es);});
+    box.appendChild(row);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+function fillCards(boxId,arr,small){
+  var box=document.getElementById(boxId);
+  arr.forEach(function(f){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es"'+(small?' style="font-size:.92rem"':'')+'>'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+    d.addEventListener('click',function(){speak(f.es);});
+    box.appendChild(d);
+  });
+}
+fillCards('words-kvest',KW,false);
+fillCards('words-frases',RW,true);
+fillCards('words-mood',MW,false);
+
+/* ===== КВЕСТ: HUD ===== */
+var SELLO_ICO=['🚪','🧭','🆘','⚽','🍽️','🏠'];
+var SELLO_NOM=['la puerta','el pasillo','la clase','el recreo','el comedor','la salida'];
+var sellos=[false,false,false,false,false,false];
+(function(){
+  var row=document.getElementById('sellos-row');
+  SELLO_ICO.forEach(function(ic,i){
+    var s=document.createElement('div');s.className='sello';s.id='sello-'+i;
+    s.innerHTML=ic+'<small>'+(i+1)+'</small>';
+    row.appendChild(s);
+  });
+})();
+function qCount(){var n=0;sellos.forEach(function(x){if(x)n++;});return n;}
+function updateQuest(){
+  var n=qCount();
+  document.getElementById('sello-count').textContent=n;
+  var m=document.getElementById('quest-mood');
+  if(n<=1)m.innerHTML='😰 Estoy nervioso... (первый день — волнительно!)';
+  else if(n<=4)m.innerHTML='💪 ¡Estoy preparado! (60 уроков за спиной!)';
+  else if(n<=5)m.innerHTML='🎉 ¡Lo he conseguido... casi todo! (остался один sello!)';
+  else m.innerHTML='🎉 ¡LO HE CONSEGUIDO! ¡Todos los sellos! 🏆';
+  if(n===6)revealDiploma();
+}
+function giveSello(i){
+  if(sellos[i])return;
+  sellos[i]=true;
+  var s=document.getElementById('sello-'+i);
+  s.classList.add('got');
+  s.innerHTML=SELLO_ICO[i]+'<small>✅</small>';
+  var st=document.getElementById('st-'+(i+1));
+  st.classList.add('done');
+  document.getElementById('stamp-'+(i+1)).textContent='¡superado!';
+  speak('¡Superado! Estación '+SELLO_NOM[i]);
+  updateQuest();
+}
+
+/* ===== генерик мини-квиз для станций ===== */
+var QDONE={};
+function mkQuiz(boxId,prefix,questions,onDone){
+  QDONE[boxId]=0;
+  var wrap=document.getElementById(boxId);
+  questions.forEach(function(r){
+    var d=document.createElement('div');d.className='qrow';
+    d.innerHTML='<div class="qq">'+r.q+'</div><span class="qru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        if(o===r.ok){
+          d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+          b.classList.add('correct');speak(r.ok);
+          QDONE[boxId]++;
+          if(QDONE[boxId]===questions.length)onDone();
+        }else{
+          b.classList.add('wrong');b.disabled=true;
+          d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});
+        }
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+}
+
+/* ===== СТАНЦИЯ 1: КОНСТРУКТОР ЗНАКОМСТВА ===== */
+function s1Text(){
+  var nm=document.getElementById('s1-name').value.trim();
+  if(!nm)nm='___';
+  return 'Me llamo '+nm+' y tengo '+document.getElementById('s1-age').value+' años. Soy '+document.getElementById('s1-from').value+'. ¡Mucho gusto!';
+}
+function s1Speak(){speak(s1Text().replace('___',''));}
+function finishS1(){
+  var nm=document.getElementById('s1-name');
+  if(!nm.value.trim()){
+    nm.style.borderColor='var(--red)';
+    document.getElementById('s1-fb').textContent='✏️ Напиши своё имя по-английски/латиницей: Anna, Máximo...';
+    nm.focus();return;
+  }
+  document.getElementById('s1-fb').textContent='🤝 ¡Encantado de conocerte! Señor Martínez доволен!';
+  giveSello(0);
+}
+document.getElementById('s1-name').addEventListener('input',function(){this.style.borderColor='#ead6dc';document.getElementById('s1-live').textContent=s1Text();});
+document.getElementById('s1-age').addEventListener('change',function(){document.getElementById('s1-live').textContent=s1Text();});
+document.getElementById('s1-from').addEventListener('change',function(){document.getElementById('s1-live').textContent=s1Text();});
+
+/* ===== СТАНЦИЯ 2: НАЙТИ КЛАСС ===== */
+mkQuiz('s2-quiz','s2',[
+ {q:'Что ты спросишь у старшего ученика в коридоре?',ru:'Тебе нужно найти класс третьего года...',ok:'¿Dónde está el aula de tercero?',w:['¿Dónde está el baño?','¿Quieres jugar conmigo?']},
+ {q:'Тебе отвечают: «Sigue recto y gira a la izquierda». Твой план:',ru:'Что ты сделаешь?',ok:'Sigo recto... ¡y giro a la izquierda!',w:['Giro a la derecha y salgo del cole.','Subo al autobús.']}
+],function(){
+  document.getElementById('s2-fb').textContent='🧭 ¡Estás delante de tu aula! Дверь нашлась!';
+  giveSello(1);
+});
+
+/* ===== СТАНЦИЯ 3: ПОПРОСИТЬ ПОМОЩИ ===== */
+mkQuiz('s3-quiz','s3',[
+ {q:'Ты ничего не понял. Что скажешь?',ru:'Нужна помощь!',ok:'No entiendo, ¿puede repetir?',w:['¡Lo he conseguido!','Me llamo... y soy de...']},
+ {q:'Ты не знаешь слово «corregimos». Спросишь:',ru:'Что значит это слово?',ok:'¿Qué significa «corregimos»?',w:['¿Cómo se dice «corregimos»?','¡Superado!']},
+ {q:'Всё равно сложно. Попроси ещё подсказку:',ru:'Ещё подсказку, пожалуйста!',ok:'Otra pista, por favor.',w:['Mañana voy a venir otra vez.','Quiero el menú uno.']}
+],function(){
+  document.getElementById('s3-fb').textContent='🆘 La profesora всё объяснила! Просить помощи — это суперсила!';
+  giveSello(2);
+});
+
+/* ===== СТАНЦИЯ 4: ПЕРЕМЕНА ===== */
+mkQuiz('s4-quiz','s4',[
+ {q:'Как позвать Lucía играть?',ru:'Лучший способ найти друга!',ok:'¿Quieres jugar conmigo?',w:['¿Puede repetir?','Soy alérgico al gluten.']},
+ {q:'Lucía: «¡Sí, quiero! ¿Fútbol o baloncesto?» Твой ответ:',ru:'Соглашайся и выбирай!',ok:'¡Vamos! Yo el fútbol.',w:['No, gracias. Estoy nervioso.','¿Puede hablar más despacio?']}
+],function(){
+  document.getElementById('s4-fb').textContent='⚽ ¡Ya tienes una amiga! Lucía — твой первый друг в испанской школе!';
+  giveSello(3);
+});
+
+/* ===== СТАНЦИЯ 5: СТОЛОВАЯ ===== */
+function s5Text(){
+  var menu=document.getElementById('s5-menu').value;
+  var gen=document.getElementById('s5-gen').value;
+  var alg=document.getElementById('s5-alg').value;
+  if(alg==='nada')return 'Quiero '+menu+', por favor. Y no soy '+gen+' a nada.';
+  return 'Quiero '+menu+', por favor. Y soy '+gen+' a '+alg+'.';
+}
+function s5Speak(){speak(s5Text());}
+function finishS5(){
+  document.getElementById('s5-fb').textContent='🍽 ¡Que aproveche! Señora del comedor улыбается!';
+  giveSello(4);
+}
+document.getElementById('s5-menu').addEventListener('change',function(){document.getElementById('s5-live').textContent=s5Text();});
+document.getElementById('s5-gen').addEventListener('change',function(){document.getElementById('s5-live').textContent=s5Text();});
+document.getElementById('s5-alg').addEventListener('change',function(){document.getElementById('s5-live').textContent=s5Text();});
+
+/* ===== СТАНЦИЯ 6: МАРШРУТ ДОМОЙ ===== */
+var STEPS=[
+ {es:'Salgo del cole.',ru:'я выхожу из школы'},
+ {es:'Giro a la derecha.',ru:'поворачиваю направо'},
+ {es:'Sigo recto.',ru:'иду прямо'},
+ {es:'Paso el parque.',ru:'прохожу парк'},
+ {es:'Llego a casa.',ru:'прихожу домой'}
+];
+var s6n=0;
+(function(){
+  var pool=document.getElementById('s6-pool');
+  shuffle(STEPS.slice()).forEach(function(st){
+    var b=document.createElement('span');b.className='seq-chip';b.textContent=st.es;b.title=st.ru;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('locked'))return;
+      if(st.es===STEPS[s6n].es){
+        b.classList.add('locked');
+        s6n++;
+        var line=document.getElementById('s6-line');
+        if(s6n===1)line.textContent='';
+        line.textContent+=(s6n>1?' ':'')+st.es;
+        speak(st.es);
+        if(s6n===STEPS.length){
+          document.getElementById('s6-fb').textContent='🏠 ¡Perfecto! ¡Y tardo quince minutos! Маршрут домой собран!';
+          speak('¡Y tardo quince minutos! ¡Lo he conseguido!');
+          giveSello(5);
+        }
+      }else{
+        b.classList.add('wrong');
+        setTimeout(function(){b.classList.remove('wrong');},500);
+      }
+    });
+    pool.appendChild(b);
+  });
+  document.getElementById('s6-line').textContent='…';
+})();
+
+/* ===== ДИПЛОМ ===== */
+var MES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+(function(){
+  var d=new Date();
+  document.getElementById('dip-date').textContent='En Málaga, a '+d.getDate()+' de '+MES[d.getMonth()]+' de '+d.getFullYear()+'.';
+})();
+function revealDiploma(){
+  var db=document.getElementById('diploma-box');
+  if(!db.classList.contains('show')){
+    db.classList.add('show');
+    setTimeout(function(){db.scrollIntoView({behavior:'smooth',block:'center'});},400);
+  }
+}
+function emitDiploma(){
+  var nm=document.getElementById('dip-name').value.trim();
+  if(!nm){
+    document.getElementById('dip-name').style.borderColor='var(--red)';
+    document.getElementById('dip-name').focus();return;
+  }
+  document.getElementById('dip-name').style.display='none';
+  var out=document.getElementById('dip-name-out');
+  out.textContent=nm;
+  out.style.display='inline-block';
+  document.getElementById('dip-btn').style.display='none';
+  confetti('🎓');
+  speak('¡Enhorabuena, '+nm+'! ¡Lo has conseguido! ¡Eres un superviviente de la escuela española!');
+}
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['la estación','станция квеста'],['el tutor','классный руководитель'],['el aula','класс'],['el pasillo','коридор'],
+ ['el sello','штамп за станцию'],['¡superado!','пройдено!'],['estoy nervioso','я нервничаю'],['estoy preparado','я готов'],
+ ['¡lo he conseguido!','у меня получилось!'],['sin miedo','без страха'],['paso a paso','шаг за шагом'],['¡soy un superviviente!','я выживший!']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un superviviente de la escuela española!');
+  confetti('🎫');
+  try{localStorage.setItem('mudro_kids_w20l2_badge_superviviente','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w20l2_badge_superviviente')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  revealDiploma();
+}
+
+function confetti(icon){var c=['🎉','⭐',icon,'🎫','🎓'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

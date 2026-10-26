@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 57: STEAM: Google Maps — Школа МУДРО</title>
+<meta name="description" content="Испанский для детей 8 и 12 лет. Урок 57: STEAM-проект «Google Maps» — маршрут дом → школа с аудио-гидом. Школа МУДРО, Станция 6 «Mi Ciudad», финал станции.">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#3A86FF; --love:#2A5FC1;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#DCEAFF 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(58,134,255,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#DCEAFF;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #CFE0FF;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #cfd9ee;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .survey-wrap{background:#fff;border:3px dashed var(--heart);border-radius:18px;padding:18px;margin:14px 0}
+  .survey-person{display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid #e8edf7;cursor:pointer}
+  .survey-person:last-child{border-bottom:none}
+  .survey-person:hover{background:#F5F8FF}
+  .survey-avatar{width:50px;height:50px;border-radius:50%;background:#DCEAFF;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+  .survey-info{flex:1;font-size:.9rem}
+  .survey-name{font-weight:800;color:var(--heart);font-size:1rem}
+  .survey-likes{font-style:italic;color:var(--ink-soft);margin-top:2px}
+  .chart-wrap{background:#fff;border-radius:18px;padding:18px;margin:14px 0}
+  .chart-title{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.2rem;margin-bottom:10px}
+  .chart-bar{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:800;font-size:.9rem}
+  .chart-label{min-width:140px;font-size:.85rem}
+  .chart-fill{height:24px;border-radius:8px;background:linear-gradient(90deg,var(--heart),var(--star));transition:.5s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.8rem;font-weight:800;min-width:24px}
+
+  .warm-item{background:#fff;border:2px solid #e8edf7;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #cfd9ee;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#DCEAFF}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}.diff-box{grid-template-columns:1fr}}
+
+  /* === УРОК 57 STEAM/PBL: ШАГИ, МАРШРУТ, ТАЙМЕР, РУБРИКА === */
+  .diff-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .diff8{background:#E8F5E9;border-radius:14px;padding:12px 14px;font-weight:700;border-left:4px solid var(--green)}
+  .diff12{background:#E3F2FD;border-radius:14px;padding:12px 14px;font-weight:700;border-left:4px solid var(--p4)}
+  .step-item{display:flex;align-items:center;gap:12px;background:#fff;border:2.5px solid #CFE0FF;border-radius:14px;padding:12px 14px;margin:8px 0;cursor:pointer;transition:.15s;text-align:left;font-family:'Nunito'}
+  .step-item:hover{border-color:var(--heart)}
+  .step-item.done{background:#E8F5E9;border-color:var(--green)}
+  .step-item.done .step-es::after{content:' ✅'}
+  .step-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .step-item.done .step-num{background:var(--green)}
+  .step-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .step-emo{font-size:1.5rem}
+  .step-ru{font-size:.82rem;color:var(--ink-soft);font-weight:700}
+  .rt-item{display:flex;align-items:center;gap:10px;background:#fff;border:2.5px solid #CFE0FF;border-radius:14px;padding:10px 14px;margin:8px 0}
+  .rt-item .num{background:var(--heart);color:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .rt-emo{font-size:1.5rem}
+  .rt-es{font-family:'Baloo 2',cursive;color:var(--heart);font-weight:800;font-size:1rem}
+  .rt-ru{font-size:.8rem;color:var(--ink-soft);font-weight:700}
+  .tm-out{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;margin:12px 0;font-weight:700;min-height:56px;line-height:1.9}
+  .tm-out b{color:var(--heart)}
+  .rubric{background:#DCEAFF;border-radius:16px;padding:14px 18px;margin:12px 0;font-weight:700;line-height:1.9}
+  .rubric b{color:var(--heart)}
+  .cp-banner{background:linear-gradient(135deg,#2A5FC1,#3A86FF);color:#fff;border-radius:18px;padding:18px 22px;margin:14px 0;font-weight:800;text-align:center;font-size:1.05rem;line-height:1.8}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 6 · Mi Ciudad · Урок 3 из 6</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🚌 СТАНЦИЯ 6 · УРОК 3 · НЕДЕЛЯ 19</span>
+  <div class="hero-emojis">🔬 💻 🛠️ 🎨 ⏱️</div>
+  <h1>STEAM: Google <span>Maps</span></h1>
+  <p class="sub">¡Último paso, ingeniero! ФИНАЛ станции 6 — <strong>STEAM-проект</strong>: строим маршрут <strong>дом → школа</strong> из 6 шагов, считаем время и записываем настоящий <strong>аудио-гид</strong> своим голосом! 🎙️</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация (аудио-гид):</strong> ты нажимаешь «запись» и ведёшь экскурсию:<br>
+    <em>«Salgo de casa a las ocho. Giro a la derecha. Paso por el parque. Cruzo en el paso de peatones. Tardo diez minutos. ¡Y ya estoy en el cole!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🔬</span> Исследовать свой маршрут (наука!)</div>
+      <div class="goal-item"><span class="emoji">💻</span> Строить маршрут в Google Maps</div>
+      <div class="goal-item"><span class="emoji">🛠️</span> Собирать маршрут из 6 шагов по порядку</div>
+      <div class="goal-item"><span class="emoji">⏱️</span> Считать время: tardo diez minutos</div>
+      <div class="goal-item"><span class="emoji">🎙️</span> Озвучить аудио-гид (6 фраз)</div>
+      <div class="goal-item"><span class="emoji">🏁</span> Пройти мини-чекпоинт станции 6</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Мастер маршрутов»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 56</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, ingeniero! Вчера ты строил <b>планы</b> (mañana voy a..., vamos a ir...). Ответь ВСЛУХ. Мостик: «Сегодня планы станут МАРШРУТОМ: дом → школа, как в Google Maps!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ПЛАН STEAM -->
+  <section class="block" style="--c:#3A86FF">
+    <div class="block-head">
+      <h2 class="block-title">🗺️ План STEAM: 6 шагов инженера</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">STEAM — это наука, технология, инженерия, искусство и математика. Кликай на каждый шаг и отмечай его!</p>
+    <div id="steps-list"></div>
+    <div class="stars-line" style="text-align:center">🗺️ Шаги проекта: <span id="steps-count">0</span> / 6</div>
+    <div class="script">⚡ <strong>Секрет STEAM:</strong> настоящий маршрут строят по порядку: <em>primero investigas, luego usas la tecnología, después construyes, dibujas, calculas el tiempo y por último grabas el audio</em>. Инженер не спешит!</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2A5FC1">
+    <div class="block-head"><h2 class="block-title">🗣 Слова урока · кликай и повторяй</h2></div>
+    <h4 style="margin-bottom:8px">🗺️ Маршрут</h4>
+    <div class="cards-grid" id="words-g1"></div>
+    <h4 style="margin:14px 0 8px">⏱️ Время</h4>
+    <div class="cards-grid" id="words-g2"></div>
+    <h4 style="margin:14px 0 8px">🎙️ Аудио-гид</h4>
+    <div class="cards-grid" id="words-g3"></div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: глаголы моего маршрута</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Salgo de casa a las ocho.')"><td><b>SALGO DE CASA</b></td><td>Salgo de casa a las ocho.</td><td>Я выхожу из дома в восемь.</td><td>🔊</td></tr>
+      <tr onclick="speak('Giro a la derecha.')"><td><b>GIRO A LA DERECHA / IZQUIERDA</b></td><td>Giro a la derecha.</td><td>Я поворачиваю направо.</td><td>🔊</td></tr>
+      <tr onclick="speak('Paso por el parque.')"><td><b>PASO POR...</b></td><td>Paso por el parque.</td><td>Я иду через парк.</td><td>🔊</td></tr>
+      <tr onclick="speak('Cruzo en el paso de peatones.')"><td><b>CRUZO EN...</b></td><td>Cruzo en el paso de peatones.</td><td>Я перехожу по пешеходному переходу.</td><td>🔊</td></tr>
+      <tr onclick="speak('Tardo diez minutos.')"><td><b>TARDO... MINUTOS</b></td><td>Tardo diez minutos.</td><td>Это занимает десять минут.</td><td>🔊</td></tr>
+      <tr onclick="speak('¡Y ya llego al cole!')"><td><b>LLEGO A...</b></td><td>¡Y ya llego al cole!</td><td>И вот я прихожу в школу!</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> все глаголы здесь в <span class="grammar-hint" data-hint="Глаголы в 1-м лице единственного числа (я): salgo, giro, paso, cruzo, tardo, llego. Внимание: salir → YO SALGO (не «salo»!) — как hacer → hago. Это «глаголы-исключения на -go»: salgo, hago, pongo, tengo, vengo. Tardar = «занимать время»: tardo diez minutos = «мне нужно десять минут».">1-м лице (я)</span>: salgo, giro, paso, cruzo, tardo, llego. <b>salir → salgo</b> — исключение, как hago!<br>8 лет: повторяй как рэп: <em>salgo — giro — paso — cruzo — tardo — llego</em> 🎤</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Глагол маршрута»: 8 раундов</p>
+      <div class="game-q" id="vb-q"></div>
+      <div class="opts" id="vb-opts"></div>
+      <div class="game-fb" id="vb-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="vb-stars">0</span> / <span id="vb-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="vbStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ПРОЕКТ -->
+  <section class="block" style="--c:#C2185B">
+    <div class="block-head">
+      <h2 class="block-title">🗺️ ПРОЕКТ: маршрут дом → школа</h2>
+      <span class="time-badge">⏱ 15 минут</span>
+    </div>
+    <p class="block-sub">Три части проекта: 1) собери маршрут из 6 шагов, 2) поставь таймер, 3) озвучь аудио-гид!</p>
+
+    <h4 style="margin:8px 0 4px">🛠️ Часть 1. Собери маршрут из 6 шагов (по порядку!)</h4>
+    <p class="block-sub" style="margin-bottom:6px">Кликай на шаги В ПРАВИЛЬНОМ ПОРЯДКЕ — от дома до школы!</p>
+    <div class="opts" id="rt-pool"></div>
+    <div class="stars-line" style="text-align:center;margin-top:10px">🛠️ Шагов собрано: <span id="rt-count">0</span> / 6 <button class="speak-btn" style="margin-left:10px" onclick="rtReset()">🔄 Собрать заново</button></div>
+    <div id="rt-list"></div>
+    <div class="game-fb" id="rt-fb" style="text-align:center"></div>
+
+    <h4 style="margin:18px 0 4px">⏱️ Часть 2. Таймер: tardo X minutos</h4>
+    <p class="block-sub">Сколько времени занимает твой маршрут? Выбери — и фраза пересоберётся сама!</p>
+    <div class="opts" id="tm-box"></div>
+    <div class="tm-out" id="tm-out">⏱️ Выбери время маршрута 👆</div>
+
+    <h4 style="margin:18px 0 4px">🎙️ Часть 3. Аудио-гид: озвучь маршрут</h4>
+    <p class="block-sub">Слушай свой маршрут целиком — с ТВОИМ временем! А потом играй: что идёт дальше?</p>
+    <div style="text-align:center;margin:10px 0">
+      <button class="speak-btn" style="font-size:1.05rem;padding:12px 26px" onclick="routeSpeak()">▶ Escuchar mi ruta completa</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра «Что дальше?»: 6 раундов</p>
+      <div class="game-q" id="nx-q"></div>
+      <div class="opts" id="nx-opts"></div>
+      <div class="game-fb" id="nx-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="nx-stars">0</span> / <span id="nx-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="nxStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: CLIL — GOOGLE MAPS -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">💻 CLIL: Google Maps en España</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Как устроен настоящий навигатор? Читай и слушай — как технолог!</p>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakClil()">🔊 Послушать текст</button>
+    <div class="read-box">
+      En España casi todo el mundo usa <b>Google Maps</b>. Escribe tu casa y tu colegio y la app te da <b>la ruta</b>: <b>a pie</b> (caminando), en autobús o en metro. La app dice el tiempo: «Diez minutos a pie». El icono azul es tú y la <b>línea azul</b> es tu ruta. También muestra el paso de peatones y la parada más cercana. ¡Pero <b>cuidado</b>! Antes de cruzar, mira izquierda y derecha: la app <b>no ve los coches</b>. Tu ruta tiene que ser <b>segura</b> — como la de un ingeniero de verdad.
+    </div>
+    <div id="clil-quiz"></div>
+    <div class="diff-box">
+      <div class="diff8">🧒 <b>8 лет:</b> открой Google Maps с родителями, найди свой дом и школу, посмотри время: <em>a pie</em>. Нарисуй схему маршрута с 6 точками!</div>
+      <div class="diff12">🧑 <b>12 лет:</b> сравни два маршрута: <em>a pie</em> vs <em>en autobús</em>. Скажи: «A pie tardo diez minutos, en autobús tardo tres minutos». Какой быстрее? Какой безопаснее?</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: МИНИ-ЧЕКПОИНТ СТАНЦИИ 6 -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🏁 Мини-чекпоинт: «Опиши свой маршрут — 4 фразы»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="cp-banner">🏁 СТАНЦИЯ 6 «MI CIUDAD» — ФИНАЛ!<br>6 уроков пройдено: mi barrio → ¿cómo llego? → mapa del tesoro → autobús y metro → mañana voy a... → ¡TU RUTA!</div>
+    <div class="rubric">
+      <strong>✅ Rubric «Скажи 4 фразы» (мини-защита маршрута):</strong><br>
+      □ <b>Фраза 1:</b> Salgo de casa a las [время].<br>
+      □ <b>Фраза 2:</b> Giro a la derecha. / Paso por [место].<br>
+      □ <b>Фраза 3:</b> Cruzo en el paso de peatones.<br>
+      □ <b>Фраза 4:</b> Tardo [X] minutos. ¡Y ya estoy en el cole!<br>
+      💡 Совет учителя: <em>«Habla claro, como un guía de museo. ¡Tu ruta es única!»</em>
+    </div>
+    <div class="read-box" style="background:#DCEAFF;border-color:var(--heart)">
+      <strong>📋 Формула аудио-гида (6 пунктов):</strong><br>
+      1. <em><b>Salgo de casa</b> a las [время].</em><br>
+      2. <em><b>Giro a la derecha</b> / a la izquierda.</em><br>
+      3. <em><b>Paso por</b> el parque / la plaza.</em><br>
+      4. <em><b>Cruzo en el paso de peatones</b>.</em><br>
+      5. <em><b>Tardo</b> [X] <b>minutos</b>.</em><br>
+      6. <em>¡<b>Y ya estoy en el cole</b>! ¡Hasta mañana!</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🗺️</div>
+      <h3>Мастер маршрутов</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты построил маршрут из 6 шагов, посчитал время и записал аудио-гид. ¡Eres un ingeniero de verdad!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Мастер маршрутов» 🗺️ добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🎉 <strong>Станция 6 пройдена!</strong> Ты умеешь: mi barrio, команды навигатора, карта сокровищ, автобус, планы и свой маршрут. 🔜 <strong>Анонс недели 20:</strong> «Урок 58: <b>La Gran Repasación 🎲</b> — большое повторение и открытие станции 7!»</div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#3A86FF">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание (проект!)</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Пройди проект в уроке</strong> · 5 мин<br>Все 3 части: маршрут из 6 шагов, таймер, аудио-гид + игра «Что дальше?». Проговаривай каждую фразу вслух!</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎙️ ГЛАВНОЕ ЗАДАНИЕ: аудио-гид твоего маршрута</strong> · 15 мин ⭐<br>Запиши голосовое: маршрут дом → школа из 6 фраз (<em>Salgo de casa a las ocho. Giro a la derecha. Paso por el parque. Cruzo en el paso de peatones. Tardo diez minutos. ¡Y ya estoy en el cole!</em>) — со СВОИМ временем и своими местами. Отправь учителю!</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎨 Карта-схема маршрута</strong> · 20 мин ⭐<br>Нарисуй маршрут дом → школа: 6 точек + время (tardo X minutos). 8 лет — с эмодзи, 12 лет — как настоящая карта: улицы, стрелки, paso de peatones.</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🚶 Реальная проверка маршрута</strong> · 20 мин ⭐<br>Пройди маршрут с родителями и засеки время: <em>¿tardo cinco o diez minutos?</em> Скажи фразу вслух на финише: <em>«¡Tardo diez minutos! ¡Y ya estoy en el cole!»</em></div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🏁 Чекпоинт: 4 фразы другу</strong> · 5 мин ⭐<br>Расскажи свой маршрут другу, брату, сестре или родственнику по rubric «4 фразы». Пусть поставит тебе оценку от 1 до 5!</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>💻 Google Maps: сравни маршруты</strong> · 10 мин ⭐<br>С родителями сравни: <em>a pie</em> vs <em>en autobús</em>. Что быстрее? А что безопаснее? Ответь двумя фразами.</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+    <div class="script" style="margin-top:14px">📤 <strong>Формат сдачи:</strong> голосовой аудио-гид + фото карты-схемы. ¡Hasta la estación 7, ingeniero!</div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Глаголы маршрута: salgo, giro, paso, cruzo, tardo, llego</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Собрать маршрут из 6 шагов по порядку</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Сказать время: tardo diez minutos</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Понимать, как работает Google Maps (CLIL)</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Озвучить аудио-гид (6 фраз)</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Чекпоинт: описать маршрут 4 фразами</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 6 · Урок 3 (STEAM: Google Maps)</span>
+    <span>Открыть карточки →</span>
+  </a>
+  <!-- QUIZLET: дети урок 57 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w19-l2.html" class="nav-prev"><div class="nav-small">← Урок 2 станции 6</div><div class="nav-title">Урок 56: Mañana voy a... 📅</div></a>
+    <a href="./w20-l1.html" class="nav-next"><div class="nav-small">Неделя 20 · Станция 7 →</div><div class="nav-title">Урок 58: La Gran Repasación 🎲 — станция 7</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 6: Mi Ciudad · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var WARM=[
+ {q:'¿Qué vas a hacer mañana?',model:'Mañana voy a jugar al fútbol.',ru:'Что ты будешь делать завтра?'},
+ {q:'¿Qué van a hacer tus papás el fin de semana?',model:'Van a descansar en casa.',ru:'Что будут делать твои родители на выходных?'},
+ {q:'¿Vamos juntos al parque mañana?',model:'¡Sí, vamos juntos! A las cinco.',ru:'Пойдём вместе в парк завтра?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ПЛАН STEAM ===== */
+var STEPS=[
+ {emo:'🔬',es:'Ciencia: investigar',ru:'Наука: посмотри, что на пути дом → школа'},
+ {emo:'💻',es:'Tecnología: Google Maps',ru:'Технология: найди маршрут в Google Maps'},
+ {emo:'🛠️',es:'Ingeniería: seis pasos',ru:'Инженерия: собери маршрут из 6 шагов'},
+ {emo:'🎨',es:'Arte: el mapa',ru:'Арт: нарисуй схему маршрута'},
+ {emo:'⏱️',es:'Matemáticas: el tiempo',ru:'Математика: сколько минут (tardo...)'},
+ {emo:'🎙️',es:'El audio-guía',ru:'Озвучь аудио-гид и защити проект'}
+];
+(function(){
+  var box=document.getElementById('steps-list'),count=0;
+  STEPS.forEach(function(s,i){
+    var d=document.createElement('div');d.className='step-item';
+    d.innerHTML='<span class="step-num">'+(i+1)+'</span><span class="step-emo">'+s.emo+'</span><div><div class="step-es">'+s.es+'</div><div class="step-ru">'+s.ru+'</div></div>';
+    d.addEventListener('click',function(){
+      if(!d.classList.contains('done')){count++;document.getElementById('steps-count').textContent=count;}
+      d.classList.add('done');speak(s.es);
+      if(count===STEPS.length)confetti('🗺️');
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+var G1=[
+ {emo:'🗺️',es:'la ruta',ru:'маршрут'},
+ {emo:'🏠',es:'salgo de casa',ru:'я выхожу из дома'},
+ {emo:'⏱️',es:'tardo diez minutos',ru:'это занимает десять минут'},
+ {emo:'🚶',es:'camino',ru:'я иду пешком'},
+ {emo:'🚸',es:'cruzo la calle',ru:'я перехожу улицу'},
+ {emo:'🏫',es:'llego al cole',ru:'я прихожу в школу'},
+ {emo:'✅',es:'mi ruta es segura',ru:'мой маршрут безопасный'}
+];
+var G2=[
+ {emo:'1️⃣',es:'un minuto',ru:'минута'},
+ {emo:'5️⃣',es:'cinco minutos',ru:'пять минут'},
+ {emo:'⏰',es:'media hora',ru:'полчаса'},
+ {emo:'⚡',es:'rápido',ru:'быстро'},
+ {emo:'🐢',es:'lento',ru:'медленно'},
+ {emo:'🌅',es:'temprano',ru:'рано'},
+ {emo:'🌆',es:'tarde',ru:'поздно'}
+];
+var G3=[
+ {emo:'🏠',es:'Salgo de casa a las ocho.',ru:'Я выхожу из дома в восемь.'},
+ {emo:'➡️',es:'Giro a la derecha.',ru:'Я поворачиваю направо.'},
+ {emo:'🌳',es:'Paso por el parque.',ru:'Я иду через парк.'},
+ {emo:'🚸',es:'Cruzo en el paso de peatones.',ru:'Я перехожу по пешеходному переходу.'},
+ {emo:'⏱️',es:'Tardo diez minutos.',ru:'Это занимает десять минут.'},
+ {emo:'🏫',es:'¡Y ya estoy en el cole!',ru:'И вот я уже в школе!'},
+ {emo:'🎧',es:'escucha mi ruta',ru:'слушай мой маршрут'}
+];
+(function(){
+  function fill(id,arr){
+    var box=document.getElementById(id);
+    arr.forEach(function(f){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+      d.addEventListener('click',function(){speak(f.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-g1',G1);fill('words-g2',G2);fill('words-g3',G3);
+})();
+
+/* ===== ИГРА: ГЛАГОЛ МАРШРУТА ===== */
+var VB=[
+ {q:'Yo ___ de casa a las ocho.',ok:'salgo',w:['salir','giro']},
+ {q:'___ a la derecha en el semáforo.',ok:'Giro',w:['Salgo','Cruzo']},
+ {q:'___ por el parque.',ok:'Paso',w:['Llego','Tardo']},
+ {q:'___ en el paso de peatones.',ok:'Cruzo',w:['Paso','Giro']},
+ {q:'___ diez minutos.',ok:'Tardo',w:['Cruzo','Salgo']},
+ {q:'___ al cole y... ¡ya estoy!',ok:'Llego',w:['Tardo','Giro']},
+ {q:'salir → yo ___ (исключение!)',ok:'salgo',w:['salo','saló']},
+ {q:'La ruta es ___ (безопасная).',ok:'segura',w:['seguro','rápido']}
+];
+var vbOrd=[],vbI=0,vbS=0;
+function vbStart(){vbOrd=shuffle(VB.slice());vbI=0;vbS=0;document.getElementById('vb-total').textContent=vbOrd.length;document.getElementById('vb-stars').textContent='0';vbNext();}
+function vbNext(){
+  var box=document.getElementById('vb-opts');box.innerHTML='';
+  if(vbI>=vbOrd.length){document.getElementById('vb-q').textContent='🎉 ¡Muy bien!';document.getElementById('vb-fb').textContent='⭐ '+vbS+' из '+vbOrd.length;return;}
+  var r=vbOrd[vbI];
+  document.getElementById('vb-q').textContent=r.q;
+  document.getElementById('vb-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='110px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');vbS++;document.getElementById('vb-stars').textContent=vbS;document.getElementById('vb-fb').textContent='✅ ¡Correcto!';speak(o==='salgo'||o==='segura'?r.q.replace('___','')+' '+r.ok:r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('vb-fb').textContent='❌ Правильно: '+r.ok;}
+      vbI++;setTimeout(vbNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ПРОЕКТ. ЧАСТЬ 1: МАРШРУТ ИЗ 6 ШАГОВ ===== */
+var RT=[
+ {emo:'🏠',es:'Salgo de casa a las ocho.',ru:'Я выхожу из дома в восемь.'},
+ {emo:'➡️',es:'Giro a la derecha.',ru:'Я поворачиваю направо.'},
+ {emo:'🌳',es:'Paso por el parque.',ru:'Я иду через парк.'},
+ {emo:'🚸',es:'Cruzo en el paso de peatones.',ru:'Я перехожу по пешеходному переходу.'},
+ {emo:'⏱️',es:'Tardo diez minutos.',ru:'Это занимает десять минут.'},
+ {emo:'🏫',es:'¡Y ya estoy en el cole!',ru:'И вот я уже в школе!'}
+];
+var RT_HINT=['Primero: salgo de casa.','Después: giro.','Luego: paso por el parque.','Ahora: cruzo el paso de peatones.','Después: tardo... minutos.','¡Al final: ya estoy en el cole!'];
+var rtN=0;
+function rtReset(){
+  rtN=0;
+  document.getElementById('rt-count').textContent='0';
+  document.getElementById('rt-list').innerHTML='';
+  document.getElementById('rt-fb').textContent='';
+  var pool=document.getElementById('rt-pool');pool.innerHTML='';
+  shuffle(RT.slice()).forEach(function(p,idx){
+    var b=document.createElement('button');b.className='opt';b.style.minWidth='200px';
+    b.innerHTML='<span class="opt-emo">'+p.emo+'</span>'+p.es;
+    b.addEventListener('click',function(){
+      var pos=RT.indexOf(p);
+      if(pos===rtN){
+        rtN++;
+        b.classList.add('correct');b.disabled=true;
+        document.getElementById('rt-count').textContent=rtN;
+        document.getElementById('rt-fb').textContent='';
+        speak(p.es);
+        var item=document.createElement('div');item.className='rt-item';
+        item.innerHTML='<span class="num">'+rtN+'</span><span class="rt-emo">'+p.emo+'</span><span><span class="rt-es">'+p.es+'</span><br><span class="rt-ru">'+p.ru+'</span></span>';
+        document.getElementById('rt-list').appendChild(item);
+        if(rtN===6){document.getElementById('rt-fb').textContent='🎉 ¡Ruta lista! Seis pasos en orden. ¡Escucha tu audio-guía!';confetti('🗺️');}
+      }else{
+        b.classList.add('wrong');
+        document.getElementById('rt-fb').textContent='❌ Порядок! Подсказка: '+RT_HINT[rtN];
+        setTimeout(function(){b.classList.remove('wrong');},600);
+      }
+    });
+    pool.appendChild(b);
+  });
+}
+rtReset();
+
+/* ===== ПРОЕКТ. ЧАСТЬ 2: ТАЙМЕР ===== */
+var TM=[
+ {es:'cinco minutos',note:'¡Cinco! ¡Qué rápido!'},
+ {es:'diez minutos',note:'¡Diez minutos — como en el audio-guía!'},
+ {es:'quince minutos',note:'¡Quince! Un paseo largo.'},
+ {es:'veinte minutos',note:'¡Veinte! ¡Qué lejano el cole!'},
+ {es:'media hora',note:'¡Media hora = treinta minutos!'}
+];
+var tmChosen=false;
+(function(){
+  var box=document.getElementById('tm-box');
+  TM.forEach(function(t){
+    var b=document.createElement('button');b.className='opt';b.style.minWidth='150px';
+    b.innerHTML='<span class="opt-emo">⏱️</span>'+t.es;
+    b.addEventListener('click',function(){
+      document.getElementById('tm-out').innerHTML='<b>Tardo '+t.es+'.</b> <span style="color:var(--ink-soft)">(Маршрут занимает '+t.es+')</span><br>💡 '+t.note;
+      speak('Tardo '+t.es+'.');
+      if(!tmChosen){tmChosen=true;confetti('⏱️');}
+    });
+    box.appendChild(b);
+  });
+})();
+
+/* ===== ПРОЕКТ. ЧАСТЬ 3: АУДИО-ГИД + ИГРА ===== */
+function routeSpeak(){
+  var t=tmChosen?'':' (Tardo diez minutos)';
+  speak('Salgo de casa a las ocho. Giro a la derecha. Paso por el parque. Cruzo en el paso de peatones. Tardo diez minutos. Y ya estoy en el cole.');
+}
+var NX=[
+ {q:'Шаг 1: «Salgo de casa a las ocho.» — что дальше?',ok:'Giro a la derecha.',w:['Tardo diez minutos.','¡Y ya estoy en el cole!']},
+ {q:'Шаг 2: «Giro a la derecha.» — что дальше?',ok:'Paso por el parque.',w:['Salgo de casa a las ocho.','Tardo diez minutos.']},
+ {q:'Шаг 3: «Paso por el parque.» — что дальше?',ok:'Cruzo en el paso de peatones.',w:['Giro a la derecha.','Tardo diez minutos.']},
+ {q:'Шаг 4: «Cruzo en el paso de peatones.» — что дальше?',ok:'Tardo diez minutos.',w:['Paso por el parque.','Giro a la derecha.']},
+ {q:'Шаг 5: «Tardo diez minutos.» — что дальше?',ok:'¡Y ya estoy en el cole!',w:['Salgo de casa otra vez.','Giro a la izquierda.']},
+ {q:'Финал: «¡Y ya estoy en el cole!» — что скажет гид?',ok:'Mi ruta es segura. ¡Hasta mañana!',w:['Salgo de casa otra vez.','Tardo veinte horas.']}
+];
+var nxOrd=[],nxI=0,nxS=0;
+function nxStart(){nxOrd=shuffle(NX.slice());nxI=0;nxS=0;document.getElementById('nx-total').textContent=nxOrd.length;document.getElementById('nx-stars').textContent='0';nxNext();}
+function nxNext(){
+  var box=document.getElementById('nx-opts');box.innerHTML='';
+  if(nxI>=nxOrd.length){document.getElementById('nx-q').textContent='🎉 ¡Muy bien!';document.getElementById('nx-fb').textContent='⭐ '+nxS+' из '+nxOrd.length;return;}
+  var r=nxOrd[nxI];
+  document.getElementById('nx-q').textContent=r.q;
+  document.getElementById('nx-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='200px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');nxS++;document.getElementById('nx-stars').textContent=nxS;document.getElementById('nx-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('nx-fb').textContent='❌ Правильно: '+r.ok;}
+      nxI++;setTimeout(nxNext,1400);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 4: CLIL ===== */
+function speakClil(){speak('En España casi todo el mundo usa Google Maps. Escribe tu casa y tu colegio y la app te da la ruta: a pie, caminando, en autobús o en metro. La app dice el tiempo: diez minutos a pie. El icono azul es tú y la línea azul es tu ruta. También muestra el paso de peatones y la parada más cercana. Pero cuidado: antes de cruzar, mira izquierda y derecha. La app no ve los coches. Tu ruta tiene que ser segura, como la de un ingeniero de verdad.');}
+var CLIL=[
+ {q:'¿Qué te da la app cuando escribes tu ruta?',ru:'Что даёт приложение, когда вводишь маршрут?',ok:'La ruta y el tiempo.',w:['La multa.','Un billete de autobús.']},
+ {q:'¿Qué significa «a pie»?',ru:'Что значит «a pie»?',ok:'Caminando.',w:['En autobús.','En metro.']},
+ {q:'¿Qué es la línea azul en el mapa?',ru:'Что такое синяя линия на карте?',ok:'Tu ruta.',w:['Tu casa.','El río.']},
+ {q:'¿Qué NO ve la app antes de cruzar?',ru:'Чего приложение НЕ видит перед переходом?',ok:'Los coches.',w:['El tiempo.','La parada.']},
+ {q:'¿Cómo tiene que ser tu ruta?',ru:'Каким должен быть твой маршрут?',ok:'Seguro.',w:['Largo.','Caro.']}
+];
+(function(){
+  var wrap=document.getElementById('clil-quiz');
+  CLIL.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Скажи, во сколько выходишь из дома.',model:'Salgo de casa a las ocho.'},
+ {q:'Скажи, куда поворачиваешь.',model:'Giro a la derecha en el semáforo.'},
+ {q:'Скажи, через что идёшь и где переходишь.',model:'Paso por el parque y cruzo en el paso de peatones.'},
+ {q:'Скажи, сколько времени занимает маршрут.',model:'Tardo diez minutos.'},
+ {q:'Озвучь ВЕСЬ аудио-гид (6 фраз) — это защита проекта!',model:'Salgo de casa a las ocho. Giro a la derecha. Paso por el parque. Cruzo en el paso de peatones. Tardo diez minutos. Y ya estoy en el cole.'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом расскажи о СЕБЕ вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['la ruta','маршрут'],['salgo de casa','я выхожу из дома'],['tardo diez minutos','это занимает десять минут'],
+ ['camino','я иду пешком'],['cruzo la calle','я перехожу улицу'],['llego al cole','я прихожу в школу'],
+ ['mi ruta es segura','мой маршрут безопасный'],['cinco minutos','пять минут'],
+ ['media hora','полчаса'],['rápido','быстро'],
+ ['temprano','рано'],['Cruzo en el paso de peatones.','Я перехожу по пешеходному переходу.']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena, maestro de rutas!');
+  confetti('🗺️');
+  try{localStorage.setItem('mudro_kids_w19l3_badge_maestro_rutas','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w19l3_badge_maestro_rutas')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🗺️','🎙️'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

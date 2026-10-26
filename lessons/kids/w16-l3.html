@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 48: Family Task: Mercado — Школа МУДРО</title>
+<meta name="description" content="Урок 48 (PBL Family Task): семейный поход на рынок с чек-листом на испанском, роли в семье, итоги Hemos comprado todo. Школа МУДРО, станция 5 ¡A Comer!">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#E76F51; --love:#C14E32;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FBE3DA 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(231,111,81,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#FBE3DA,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FBE3DA;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #F6D5CB;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#FBE3DA,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#FBE3DA,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #eed4cb;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .survey-wrap{background:#fff;border:3px dashed var(--heart);border-radius:18px;padding:18px;margin:14px 0}
+  .survey-person{display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid #f3e5df;cursor:pointer}
+  .survey-person:last-child{border-bottom:none}
+  .survey-person:hover{background:#FFF6F3}
+  .survey-avatar{width:50px;height:50px;border-radius:50%;background:#FBE3DA;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+  .survey-info{flex:1;font-size:.9rem}
+  .survey-name{font-weight:800;color:var(--heart);font-size:1rem}
+  .survey-likes{font-style:italic;color:var(--ink-soft);margin-top:2px}
+  .chart-wrap{background:#fff;border-radius:18px;padding:18px;margin:14px 0}
+  .chart-title{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.2rem;margin-bottom:10px}
+  .chart-bar{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:800;font-size:.9rem}
+  .chart-label{min-width:140px;font-size:.85rem}
+  .chart-fill{height:24px;border-radius:8px;background:linear-gradient(90deg,var(--heart),var(--star));transition:.5s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.8rem;font-weight:800;min-width:24px}
+
+  .warm-item{background:#fff;border:2px solid #f3e5df;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #eed4cb;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#FBE3DA}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+
+  /* === FAMILY TASK: ШАГИ, ЧЕК-ЛИСТ, РОЛИ (уникальные стили урока 48) === */
+  .step-item{display:flex;align-items:center;gap:12px;background:#fff;border:2.5px solid #F6D5CB;border-radius:14px;padding:12px 14px;margin:8px 0;cursor:pointer;transition:.15s;text-align:left;font-family:'Nunito'}
+  .step-item:hover{border-color:var(--heart)}
+  .step-item.done{background:#E8F5E9;border-color:var(--green)}
+  .step-item.done .step-es::after{content:' ✅'}
+  .step-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .step-item.done .step-num{background:var(--green)}
+  .step-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .step-emo{font-size:1.5rem}
+  .step-ru{font-size:.82rem;color:var(--ink-soft);font-weight:700}
+  .chk-item{display:flex;align-items:center;gap:10px;background:#fff;border:2.5px solid #F6D5CB;border-radius:14px;padding:10px 14px;margin:8px 0;flex-wrap:wrap}
+  .chk-item.done{background:#E8F5E9;border-color:var(--green)}
+  .chk-emo{font-size:1.5rem}
+  .chk-es{font-family:'Baloo 2',cursive;color:var(--heart);font-weight:800;font-size:1rem}
+  .chk-ru{color:var(--ink-soft);font-size:.8rem;font-weight:700}
+  .chk-find{background:var(--green);color:#fff;border:none;border-radius:10px;padding:6px 12px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-left:auto}
+  .chk-item.done .chk-find{display:none}
+  .pb-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0;font-weight:800}
+  .pb-row select{font-family:'Nunito';font-weight:800;padding:8px 12px;border-radius:10px;border:2px solid var(--heart);background:#fff;color:var(--ink);font-size:.95rem}
+  .pb-out{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;font-weight:700;line-height:1.9;min-height:60px}
+  .pb-out b{color:var(--heart)}
+  .rubric{background:#FBE3DA;border-radius:16px;padding:14px 18px;margin:12px 0;font-weight:700;line-height:1.9}
+  .rubric b{color:var(--heart)}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 5 · ¡A Comer! · Урок 3 из 9</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🍕 СТАНЦИЯ 5 · УРОК 3 · НЕДЕЛЯ 16</span>
+  <div class="hero-emojis">🧺 🏪 ✅ 🎭 🥇</div>
+  <h1>Family Task: <span>Mercado</span></h1>
+  <p class="sub">Сегодня — <strong>СЕМЕЙНАЯ МИССИЯ</strong>! Ты собираешь чек-лист на испанском, распределяешь роли в семье и идёшь на рынок или в онлайн-супермаркет. Цель миссии: <em>«Hemos comprado todo»</em>! 🧺</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> после похода ты докладываешь:<br>
+    <em>«Hemos comprado todo. Ha costado veinte euros. La fruta está rica. ¡Buen trabajo en equipo!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🧺</span> Собрать чек-лист из 10 продуктов на испанском</div>
+      <div class="goal-item"><span class="emoji">🏪</span> Различать: el mercado, el puesto, el supermercado</div>
+      <div class="goal-item"><span class="emoji">🎭</span> Распределять роли: lista, pagar, bolsa, elegir</div>
+      <div class="goal-item"><span class="emoji">🔎</span> Говорить: buscar → ¡encontrado!</div>
+      <div class="goal-item"><span class="emoji">🥇</span> Подводить итоги: Hemos comprado todo / Ha costado...</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Командный игрок»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 47</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, capitán de la misión! Вчера вы выбирали фрукты во <b>frutería</b>. Ответь ВСЛУХ. Мостик: «Фрукты покупать умеешь. Сегодня вся семья идёт в большой поход — за ПОЛНЫМ списком покупок!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ПЛАН ПРОЕКТА -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head">
+      <h2 class="block-title">⭐ План Family Task: 6 шагов</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Кликай на каждый шаг — услышишь его по-испански и отметь как выполненный. Так работают настоящие командные миссии!</p>
+    <div id="steps-list"></div>
+    <div class="stars-line" style="text-align:center">📋 Шаги миссии: <span id="steps-count">0</span> / 6</div>
+    <div class="script">⚡ <strong>Секрет PBL:</strong> миссия семьи = шаги по порядку: <em>primero la lista, luego los papeles, después la compra y por último el informe</em>. Сначала готовимся — потом идём в магазин!</div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: миссия и итоги</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Vamos al mercado con la lista.')"><td><b>VAMOS AL MERCADO</b></td><td>Vamos al mercado con la lista.</td><td>Мы идём на рынок со списком.</td><td>🔊</td></tr>
+      <tr onclick="speak('Busco el pescado. ¡Lo encuentro!')"><td><b>BUSCAR → ENCONTRAR</b></td><td>Busco el pescado. ¡Lo encuentro!</td><td>Ищу рыбу. Нашёл!</td><td>🔊</td></tr>
+      <tr onclick="speak('Yo soy el encargado de la lista.')"><td><b>EL ENCARGADO DE LA LISTA</b></td><td>Yo soy el encargado de la lista.</td><td>Я ответственный за список.</td><td>🔊</td></tr>
+      <tr onclick="speak('Tú pagas y yo llevo la bolsa.')"><td><b>TÚ PAGAS, YO LLEVO LA BOLSA</b></td><td>Tú pagas y yo llevo la bolsa.</td><td>Ты платишь, я несу пакет.</td><td>🔊</td></tr>
+      <tr onclick="speak('¡Hemos comprado todo!')"><td><b>HEMOS COMPRADO TODO</b></td><td>¡Hemos comprado todo!</td><td>Мы купили всё!</td><td>🔊</td></tr>
+      <tr onclick="speak('Ha costado veinte euros.')"><td><b>HA COSTADO... EUROS</b></td><td>Ha costado veinte euros.</td><td>Обошлось в двадцать евро.</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> <span class="grammar-hint" data-hint="Pretérito Perfecto: hemos/ha + причастие. HEMOS comprado = МЫ купили (мы — несколько человек). HA costado = ЭТО стоило (покупка в целом). Не путай: «Hemos comprado todo» (мы купили), но «Ha costado veinte euros» (вся покупка стоила).">hemos vs ha</span>: <b>hemos comprado</b> = «мы купили» (вся команда), а <b>ha costado</b> = «это стоило» (о покупке целиком).<br>8 лет: hemos = «мы сделали», ha = «оно было». 🤖</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Миссия: слово по месту»: 8 раундов</p>
+      <div class="game-q" id="go-q"></div>
+      <div class="opts" id="go-opts"></div>
+      <div class="game-fb" id="go-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="go-stars">0</span> / <span id="go-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="goStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ПРОЕКТ — ЧЕК-ЛИСТ + РОЛИ + ИТОГИ -->
+  <section class="block" style="--c:#C2185B">
+    <div class="block-head">
+      <h2 class="block-title">🧺 ПРОЕКТ: собираем миссию</h2>
+      <span class="time-badge">⏱ 15 минут</span>
+    </div>
+    <p class="block-sub">Три части проекта: 1) чек-лист из 10 продуктов, 2) роли в семье, 3) отчёт об итогах.</p>
+
+    <h4 style="margin:8px 0 4px">🛒 Часть 1. Собери чек-лист (выбери 10 продуктов)</h4>
+    <div class="opts" id="chk-pool"></div>
+    <div class="stars-line" style="text-align:center;margin-top:10px">📝 В списке: <span id="chk-count">0</span> / 10 · 🔎 Найдено: <span id="chk-found">0</span> / 10 <span id="chk-fb" style="color:var(--green)"></span></div>
+    <div id="chk-list"></div>
+    <button class="speak-btn" style="margin-top:10px" onclick="chkReset()">🔄 Собрать список заново</button>
+
+    <h4 style="margin:18px 0 4px">🎭 Часть 2. Роли в семье</h4>
+    <p class="block-sub">Кто что делает в миссии? Выбирай — текст и озвучка соберутся сами!</p>
+    <div class="pb-row">📝 <b>El encargado de la lista</b> —
+      <select id="role-lista"><option>yo</option><option>mamá</option><option>papá</option><option>mi hermana</option><option>mi hermano</option></select>
+    </div>
+    <div class="pb-row">💶 <b>El que paga</b> —
+      <select id="role-paga"><option>mamá</option><option>papá</option><option>yo</option><option>mi hermana</option><option>mi hermano</option></select>
+    </div>
+    <div class="pb-row">🛍️ <b>El que lleva la bolsa</b> —
+      <select id="role-bolsa"><option>papá</option><option>mamá</option><option>yo</option><option>mi hermana</option><option>mi hermano</option></select>
+    </div>
+    <div class="pb-row">🍎 <b>El que elige la fruta</b> —
+      <select id="role-fruta"><option>yo</option><option>mamá</option><option>papá</option><option>mi hermana</option><option>mi hermano</option></select>
+    </div>
+    <div class="pb-out" id="roles-out">Выбери участников — репетиция ролей соберётся сама! 👆</div>
+    <button class="speak-btn" style="margin-top:10px" onclick="speakRoles()">🔊 Reparto de papeles</button>
+
+    <h4 style="margin:18px 0 4px">🥇 Часть 3. Итоги миссии (информе)</h4>
+    <div class="pb-row">1️⃣ Al final:
+      <select id="fin-res"><option>Hemos comprado todo</option><option>Casi todo: nos faltan las fresas</option></select>.
+    </div>
+    <div class="pb-row">2️⃣ El precio:
+      <select id="fin-price"><option>Ha costado veinte euros</option><option>Ha costado treinta euros</option><option>Ha costado doce euros</option></select>.
+    </div>
+    <div class="pb-row">3️⃣ La opinión:
+      <select id="fin-op"><option>La fruta está rica</option><option>La fruta está muy fresca</option></select>.
+    </div>
+    <div class="pb-row">4️⃣ Y ahora:
+      <select id="fin-home"><option>en casa preparamos una ensalada</option><option>en casa preparamos una tortilla de patatas</option><option>en casa preparamos un bocadillo</option><option>en casa preparamos zumo de naranja</option></select>.
+    </div>
+    <div class="pb-out" id="fin-out">Выбери варианты — отчёт соберётся сам! 👆</div>
+    <button class="speak-btn" style="margin-top:10px" onclick="speakFin()">🔊 Informe de la misión</button>
+  </section>
+
+  <!-- БЛОК 4: CLIL — MERCADO VS SUPERMERCADO -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">🏪 CLIL: ¿mercado o supermercado?</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Куда идти за покупками в Испании? Сравниваем!</p>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakClil()">🔊 Послушать текст</button>
+    <div class="read-box">
+      En España hay <b>mercados municipales</b> famosos: el Mercado Central de Valencia, La Boqueria en Barcelona y el Mercado de San Miguel en Madrid. Dentro hay <b>puestos</b>: frutas, pescado, carne y pan. Traes tu <b>bolsa reutilizable</b>, porque las bolsas de plástico cuestan dinero. En el <b>supermercado</b> (Mercadona, Lidl, Carrefour) todo está en un sitio y el ticket tiene todos los precios. ¿Mercado o supermercado? El mercado suele ser más fresco; el supermercado, más rápido. ¡Los dos son buenos para la misión familiar!
+    </div>
+    <div id="clil-quiz"></div>
+    <div class="script">🌱 <strong>Экология (12 лет):</strong> bolsa reutilizable — это не только мода: в Испании за пластиковые пакеты теперь надо платить, а многие рынки просят свои сумки. 8 лет: посчитай, сколько пластиковых пакетов сэкономит семья за год, если брать свою сумку каждую неделю!</div>
+  </section>
+
+  <!-- БЛОК 5: ГОВОРЕНИЕ — ОТЧЁТ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Informe de la misión: отчёт семьи</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="read-box" style="background:#FBE3DA;border-color:var(--heart)">
+      <strong>📋 Формула отчёта (6 пунктов):</strong><br>
+      1. <em><b>Vamos al mercado</b> con la lista de la compra.</em><br>
+      2. <em><b>Yo soy el encargado de la lista</b>; mamá paga; papá lleva la bolsa.</em><br>
+      3. <em><b>Busco</b> el pescado... <b>¡Lo encuentro!</b></em><br>
+      4. <em><b>¿Cuánto es todo?</b> — <b>Ha costado veinte euros</b>.</em><br>
+      5. <em><b>Hemos comprado todo</b>. La fruta está rica.</em><br>
+      6. <em>En casa preparamos una ensalada. <b>¡Buen trabajo en equipo!</b></em>
+    </div>
+    <div class="rubric">
+      <strong>✅ Rubric «Скажи 3 предложения» (мини-защита миссии):</strong><br>
+      □ <b>Фраза 1:</b> Hemos comprado todo. / Nos faltan...<br>
+      □ <b>Фраза 2:</b> Ha costado ... euros.<br>
+      □ <b>Фраза 3:</b> La fruta está rica. / En casa preparamos...<br>
+      💡 Совет учителя: <em>«Habla claro y con orgullo. ¡La misión es de toda la familia!»</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🤝</div>
+      <h3>Командный игрок</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты собрал чек-лист, распределил роли и готов привести семью к победе: ¡Hemos comprado todo!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Командный игрок» 🤝 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🎉 <strong>Неделя 16 пройдена!</strong> Ты умеешь: веса и цены, фрукты и спелость, семейная миссия. 🔜 <strong>Анонс недели 17:</strong> «Урок 49: El menú y las alergias 🥣 — составляем меню и учимся говорить об аллергиях!»</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">✅ Семейный чек-лист</h4>
+    <div class="cards-grid" id="words-list"></div>
+    <h4 style="margin:14px 0 8px">🎭 Роли</h4>
+    <div class="cards-grid" id="words-roles"></div>
+    <h4 style="margin:14px 0 8px">🥇 Итоги</h4>
+    <div class="cards-grid" id="words-final"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание (миссия!)</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Собери чек-лист в уроке</strong> · 5 мин<br>Пройди все 3 части проекта в уроке: список, роли, отчёт. Проговаривай каждую фразу вслух!</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🧺 РЕАЛЬНАЯ МИССИЯ: семейный поход в магазин</strong> · 30-60 мин ⭐<br>Сходите ВСЕЙ СЕМЬЁЙ на рынок / в супермаркет (или сделайте онлайн-заказ) со списком на испанском. Отмечай: <em>«¡Encontrado!»</em>. Это главное задание недели!</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎭 Роли вслух</strong> · 5 мин ⭐<br>Перед походом скажи по-испански, кто что делает: <em>«Yo soy el encargado de la lista. Mamá paga. Papá lleva la bolsa»</em>.</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🎮 Тренажёры урока</strong> · 10 мин ⭐<br>Игра «Миссия» + проект + сопоставление.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎤 Голосовое: informe</strong> · 5 мин ⭐<br>Запиши отчёт по формуле 6 пунктов (или rubric 3 предложения) и отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>📝 Бумажный чек-лист с ценами</strong> · 15 мин ⭐<br>Начерти список из 10 продуктов по-испански. 8 лет: отмечай ✅ найденное. 12 лет: добавь цены каждого продукта и посчитай total — сравни с чеком!</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+    <div class="script" style="margin-top:14px">📤 <strong>Формат сдачи:</strong> голосовое-отчёт + фото бумажного чек-листа (или чека магазина). ¡Buen trabajo en equipo!</div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Составлять чек-лист из 10 продуктов на испанском</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Различать: mercado / puesto / supermercado</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Распределять роли: lista, pagar, bolsa, elegir</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Говорить: buscar → ¡lo encuentro!</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Подводить итоги: Hemos comprado todo / Ha costado...</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Работать в команде и дать отчёт (3 предложения)</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 5 · Урок 3 (Family Task: Mercado)</span>
+    <span>Открыть карточки →</span>
+  </a>
+  <!-- QUIZLET: дети урок 48 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w16-l2.html" class="nav-prev"><div class="nav-small">← Урок 2 станции 5</div><div class="nav-title">Урок 47: En la frutería 🍎</div></a>
+    <a href="./w17-l1.html"><div class="nav-small">Неделя 17 · Урок 1 →</div><div class="nav-title">Урок 49: El menú y las alergias 🥣 </div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 5: ¡A Comer! · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ: СЛОВА УРОКА (из словаря w16-l3.json, без изменений) ===== */
+var LISTW=[
+ {emo:'📝',es:'la lista de la compra',ru:'список покупок'},
+ {emo:'🛒',es:'comprar',ru:'купить'},
+ {emo:'🔎',es:'buscar',ru:'искать'},
+ {emo:'✅',es:'encontrar',ru:'находить'},
+ {emo:'🏪',es:'el puesto',ru:'прилавок'},
+ {emo:'🏢',es:'el mercado',ru:'рынок'},
+ {emo:'🛍️',es:'la bolsa reutilizable',ru:'многоразовый пакет'}
+];
+var ROLES=[
+ {emo:'📝',es:'el encargado de la lista',ru:'ответственный за список'},
+ {emo:'💶',es:'el que paga',ru:'тот кто платит'},
+ {emo:'🛍️',es:'el que lleva la bolsa',ru:'тот кто носит пакет'},
+ {emo:'🎯',es:'elegir',ru:'выбирать'},
+ {emo:'😋',es:'probar',ru:'пробовать'},
+ {emo:'🤔',es:'decidir',ru:'решать'},
+ {emo:'👏',es:'¡bien hecho!',ru:'хорошо сделано!'}
+];
+var FINAL=[
+ {emo:'🥇',es:'Hemos comprado todo.',ru:'Мы купили всё.'},
+ {emo:'😍',es:'La fruta está rica.',ru:'Фрукты вкусные.'},
+ {emo:'💶',es:'Ha costado veinte euros.',ru:'Обошлось в двадцать евро.'},
+ {emo:'⭐',es:'Mi tarea favorita',ru:'Моё любимое задание'},
+ {emo:'🔁',es:'otra vez',ru:'ещё раз'},
+ {emo:'🍲',es:'en casa preparamos...',ru:'дома мы приготовим...'},
+ {emo:'🤝',es:'¡buen trabajo en equipo!',ru:'отличная командная работа!'}
+];
+(function(){
+  function fill(id,arr){
+    var box=document.getElementById(id);
+    arr.forEach(function(w){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+w.emo+'</div><div class="es">'+w.es+'</div><div class="ru">'+w.ru+'</div>';
+      d.addEventListener('click',function(){speak(w.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-list',LISTW);fill('words-roles',ROLES);fill('words-final',FINAL);
+})();
+
+/* ===== РАЗМИНКА (урок 47: En la frutería) ===== */
+var WARM=[
+ {q:'¿Qué frutas hay en la frutería?',model:'Hay manzanas, naranjas, plátanos, fresas, uvas y melocotones.',ru:'Какие фрукты есть во фруктовой лавке?'},
+ {q:'¿Cómo pides un kilo de plátanos?',model:'¿Me da un kilo de plátanos, por favor?',ru:'Как попросить килограмм бананов?'},
+ {q:'¿Cuándo está maduro un plátano?',model:'Cuando es amarillo, tiene manchitas y es blando.',ru:'Когда банан спелый?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ШАГИ МИССИИ ===== */
+var STEPS=[
+ {emo:'✍️',es:'Escribe la lista de la compra.',ru:'Составь список покупок из 10 продуктов (в уроке или на бумаге).'},
+ {emo:'🎭',es:'Reparte los papeles.',ru:'Распредели роли: lista, pagar, bolsa, elegir.'},
+ {emo:'🏪',es:'Elige el sitio: ¿mercado o supermercado?',ru:'Рынок, супермаркет или интернет-магазин?'},
+ {emo:'🛒',es:'Busca los productos.',ru:'Ищи продукты: buscar → encontrar, отмечай найденное.'},
+ {emo:'💶',es:'Paga y guarda el ticket.',ru:'Оплати и сохрани чек (ticket).'},
+ {emo:'🥇',es:'Cuenta los resultados en casa.',ru:'Подведи итоги: Hemos comprado todo. Ha costado...'}
+];
+(function(){
+  var box=document.getElementById('steps-list');var done=0;
+  STEPS.forEach(function(s,i){
+    var d=document.createElement('button');d.className='step-item';
+    d.innerHTML='<span class="step-num">'+(i+1)+'</span><span class="step-emo">'+s.emo+'</span><span style="flex:1"><span class="step-es">'+s.es+'</span><br><span class="step-ru">'+s.ru+'</span></span>';
+    d.addEventListener('click',function(){
+      if(d.classList.contains('done'))return;
+      d.classList.add('done');done++;speak(s.es);
+      document.getElementById('steps-count').textContent=done;
+      if(done===STEPS.length){confetti('⭐');speak('¡El plan de la misión está listo!');}
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ИГРА ГРАММАТИКИ ===== */
+var GOQ=[
+ {q:'Primero ___ el producto en el mercado.',ok:'busco',w:['encuentro']},
+ {q:'¡Lo ___! Está aquí, en el puesto.',ok:'encuentro',w:['busco']},
+ {q:'No ___ las fresas. ¿Dónde están?',ok:'encuentro',w:['busco']},
+ {q:'Vamos a ___ una bolsa reutilizable.',ok:'comprar',w:['comprado']},
+ {q:'Mi hermana ___ la lista de la compra.',ok:'lleva',w:['encuentra']},
+ {q:'La compra ___ veinte euros.',ok:'ha costado',w:['hemos comprado']},
+ {q:'¡___ todo! ¡Bien hecho!',ok:'Hemos comprado',w:['Ha costado']},
+ {q:'El papá ___ en la caja.',ok:'paga',w:['elige']}
+];
+var goOrd=[],goI=0,goS=0;
+function goStart(){goOrd=shuffle(GOQ.slice());goI=0;goS=0;document.getElementById('go-total').textContent=goOrd.length;document.getElementById('go-stars').textContent='0';goNext();}
+function goNext(){
+  var box=document.getElementById('go-opts');box.innerHTML='';
+  if(goI>=goOrd.length){document.getElementById('go-q').textContent='🎉 ¡Muy bien!';document.getElementById('go-fb').textContent='⭐ '+goS+' из '+goOrd.length;return;}
+  var r=goOrd[goI];
+  document.getElementById('go-q').textContent=r.q;
+  document.getElementById('go-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='130px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');goS++;document.getElementById('go-stars').textContent=goS;document.getElementById('go-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('go-fb').textContent='❌ Правильно: '+r.ok;}
+      goI++;setTimeout(goNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ПРОЕКТ ЧАСТЬ 1: ЧЕК-ЛИСТ ===== */
+var POOL=[
+ {emo:'🥖',es:'el pan',ru:'хлеб'},
+ {emo:'🥛',es:'la leche',ru:'молоко'},
+ {emo:'🥚',es:'los huevos',ru:'яйца'},
+ {emo:'🧀',es:'el queso',ru:'сыр'},
+ {emo:'🍎',es:'las manzanas',ru:'яблоки'},
+ {emo:'🍌',es:'los plátanos',ru:'бананы'},
+ {emo:'🍅',es:'los tomates',ru:'помидоры'},
+ {emo:'🥓',es:'el jamón',ru:'хамон'},
+ {emo:'🍦',es:'el yogur',ru:'йогурт'},
+ {emo:'🐟',es:'el pescado',ru:'рыба'},
+ {emo:'🍓',es:'las fresas',ru:'клубника'},
+ {emo:'💧',es:'el agua',ru:'вода'},
+ {emo:'🍪',es:'las galletas',ru:'печенье'},
+ {emo:'🍚',es:'el arroz',ru:'рис'}
+];
+var chkN=0,chkF=0;
+(function(){
+  var pool=document.getElementById('chk-pool');
+  POOL.forEach(function(p,i){
+    var b=document.createElement('button');b.className='opt';b.id='chk-'+i;b.style.minWidth='150px';
+    b.innerHTML='<span class="opt-emo">'+p.emo+'</span>'+p.es;
+    b.addEventListener('click',function(){
+      if(b.disabled)return;
+      if(chkN>=10){
+        document.getElementById('chk-fb').textContent=' ⚠️ Ya tienes 10 productos. ¡Recolecta o borra!';
+        return;
+      }
+      b.disabled=true;b.style.opacity=.4;
+      chkN++;
+      var row=document.createElement('div');row.className='chk-item';row.id='chkrow-'+i;
+      row.innerHTML='<span class="chk-emo">'+p.emo+'</span><span class="chk-es">'+p.es+'</span><span class="chk-ru">'+p.ru+'</span>'+
+        '<button class="speak-btn" style="margin:0;padding:4px 10px" onclick="speak(\''+p.es.replace(/'/g,"\\'")+'\')">🔊</button>'+
+        '<button class="chk-find" onclick="chkFound('+i+',\''+p.es.replace(/'/g,"\\'")+'\')">✅ encontrado</button>';
+      document.getElementById('chk-list').appendChild(row);
+      document.getElementById('chk-count').textContent=chkN;
+      document.getElementById('chk-fb').textContent='';
+      speak(p.es);
+      if(chkN===10){document.getElementById('chk-fb').textContent=' 📝 ¡Lista completa! Ahora — a la misión: marca lo encontrado!';confetti('📝');speak('¡La lista está completa! ¡Vamos a la misión!');}
+    });
+    pool.appendChild(b);
+  });
+})();
+function chkFound(i,es){
+  var row=document.getElementById('chkrow-'+i);
+  if(!row||row.classList.contains('done'))return;
+  row.classList.add('done');chkF++;
+  document.getElementById('chk-found').textContent=chkF;
+  speak('¡Encontrado! '+es);
+  if(chkF===10){
+    document.getElementById('chk-fb').textContent=' 🏆 ¡Hemos comprado todo!';
+    confetti('🏆');
+    speak('¡Hemos comprado todo! ¡Buen trabajo en equipo!');
+  }
+}
+function chkReset(){
+  chkN=0;chkF=0;
+  document.getElementById('chk-count').textContent='0';
+  document.getElementById('chk-found').textContent='0';
+  document.getElementById('chk-fb').textContent='';
+  document.getElementById('chk-list').innerHTML='';
+  POOL.forEach(function(p,i){var b=document.getElementById('chk-'+i);b.disabled=false;b.style.opacity=1;});
+}
+
+/* ===== ПРОЕКТ ЧАСТЬ 2: РОЛИ ===== */
+function buildRoles(){
+  var a=document.getElementById('role-lista').value;
+  var b=document.getElementById('role-paga').value;
+  var c=document.getElementById('role-bolsa').value;
+  var d=document.getElementById('role-fruta').value;
+  window.rolesText='El encargado de la lista: '+a+'. El que paga: '+b+'. El que lleva la bolsa: '+c+'. El que elige la fruta: '+d+'. ¡Bien hecho!';
+  var out=document.getElementById('roles-out');
+  out.innerHTML='📝 Encargado de la lista: <b>'+a+'</b>.<br>💶 El que paga: <b>'+b+'</b>.<br>🛍️ El que lleva la bolsa: <b>'+c+'</b>.<br>🍎 El que elige la fruta: <b>'+d+'</b>.<br>👏 ¡<b>Bien hecho</b>!';
+}
+function speakRoles(){speak(window.rolesText||'El encargado de la lista: yo. El que paga: mamá. El que lleva la bolsa: papá. El que elige la fruta: yo. ¡Bien hecho!');}
+['role-lista','role-paga','role-bolsa','role-fruta'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',buildRoles);
+});
+buildRoles();
+
+/* ===== ПРОЕКТ ЧАСТЬ 3: ИТОГИ ===== */
+function buildFin(){
+  var r=document.getElementById('fin-res').value;
+  var p=document.getElementById('fin-price').value;
+  var o=document.getElementById('fin-op').value;
+  var h=document.getElementById('fin-home').value;
+  window.finText=r+'. '+p+'. '+o+'. '+h+'. ¡Buen trabajo en equipo!';
+  var out=document.getElementById('fin-out');
+  out.innerHTML='1. <b>'+r+'</b>.<br>2. <b>'+p+'</b>.<br>3. <b>'+o+'</b>.<br>4. <b>'+h+'</b>.<br>🤝 ¡<b>Buen trabajo en equipo</b>!';
+}
+function speakFin(){speak(window.finText||'Hemos comprado todo. Ha costado veinte euros. La fruta está rica. En casa preparamos una ensalada. ¡Buen trabajo en equipo!');}
+['fin-res','fin-price','fin-op','fin-home'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',buildFin);
+});
+buildFin();
+
+/* ===== БЛОК 4: CLIL ===== */
+function speakClil(){speak('En España hay mercados municipales famosos: el Mercado Central de Valencia, La Boqueria en Barcelona y el Mercado de San Miguel en Madrid. Dentro hay puestos: frutas, pescado, carne y pan. Traes tu bolsa reutilizable, porque las bolsas de plástico cuestan dinero. En el supermercado, Mercadona, Lidl o Carrefour, todo está en un sitio y el ticket tiene todos los precios. ¿Mercado o supermercado? El mercado suele ser más fresco; el supermercado, más rápido. ¡Los dos son buenos para la misión familiar!');}
+var CLILQ=[
+ {q:'¿Qué hay dentro del mercado municipal?',ru:'Что находится внутри городского рынка? (8 лет)',ok:'Puestos de frutas, pescado, carne y pan.',w:['Solo una caja grande.','Una piscina y un parque.']},
+ {q:'¿Por qué traes tu bolsa reutilizable?',ru:'Зачем брать свой многоразовый пакет? (8 лет)',ok:'Porque las bolsas de plástico cuestan dinero.',w:['Porque es muy grande.','Porque el mercado está lejos.']},
+ {q:'¿Cómo se llama el mercado famoso de Valencia?',ru:'Как называется знаменитый рынок Валенсии? (12 лет)',ok:'El Mercado Central.',w:['La Boqueria.','Mercadona.']},
+ {q:'¿Qué tiene el ticket del supermercado?',ru:'Что есть в чеке супермаркета? (12 лет)',ok:'Todos los precios.',w:['Solo el nombre de la tienda.','Una foto de la familia.']},
+ {q:'¿Qué suele ser más fresco?',ru:'Что обычно свежее? (12 лет)',ok:'La comida del mercado.',w:['La comida en lata.','La comida congelada.']}
+];
+(function(){
+  var wrap=document.getElementById('clil-quiz');
+  CLILQ.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Скажи, куда идёт семья и с чем.',model:'Vamos al mercado con la lista de la compra y la bolsa reutilizable.'},
+ {q:'Расскажи о ролях в команде.',model:'Yo soy el encargado de la lista. Mamá paga y papá lleva la bolsa.'},
+ {q:'Расскажи о поиске продуктов.',model:'Busco el pescado... ¡Lo encuentro! También compramos fruta en el puesto.'},
+ {q:'Спроси цену и назови итог.',model:'¿Cuánto es todo? — Ha costado veinte euros.'},
+ {q:'Дай ПОЛНЫЙ отчёт миссии (rubric: 3+ предложения).',model:'Hemos comprado todo. Ha costado veinte euros. La fruta está rica. En casa preparamos una ensalada. ¡Buen trabajo en equipo!'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом дай СВОЙ отчёт вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['la lista de la compra','список покупок'],['comprar','купить'],['buscar','искать'],
+ ['encontrar','находить'],['el puesto','прилавок'],['el mercado','рынок'],
+ ['la bolsa reutilizable','многоразовый пакет'],['elegir','выбирать'],['probar','пробовать'],
+ ['decidir','решать'],['Hemos comprado todo.','Мы купили всё.'],['Ha costado veinte euros.','Обошлось в двадцать евро.']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un gran jugador de equipo!');
+  confetti('🤝');
+  try{localStorage.setItem('mudro_kids_w16l3_badge_jugador_equipo','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w16l3_badge_jugador_equipo')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🧺','🥇'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

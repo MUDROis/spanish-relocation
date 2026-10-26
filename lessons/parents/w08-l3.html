@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFF7EF">
+<meta name="description" content="Урок 8.3: Логистика недели — кто кого возит, кто забирает и что после школы. Глаголы llevar, recoger, dejar и слова последовательности primero, antes de, después de. PBL-продукт: карта маршрутов детей на неделю.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<title>Урок 8.3 · Логистика недели — МУДРО</title>
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--p5:#4CAF7D;
+    --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
+    --soft:#FBF3EA;--ink-soft:#7A6A5C;--teal:#2C5E8A;
+    --vocab:#BE8A55;
+    --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
+    --ok:#7A8B4C;--bad:#E2725B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c1{background:var(--p1)}
+  .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)} .step-num.c5{background:var(--p5)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-lightblue{background:var(--p5);color:#fff}.btn-lightblue:hover{background:#3d9168}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+
+  .situation-box{background:#fff;border:3px solid var(--p5);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p5)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#E8F5E9;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p5)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p5);color:#fff;border-color:var(--p5)}
+  .vocab-front .es{font-size:1.05rem;font-weight:800;margin-bottom:6px;line-height:1.3}
+  .vocab-front .ru{font-size:.88rem;opacity:.95;font-weight:600}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p5);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.9rem;font-weight:700;color:var(--p5);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:8px}
+  .grammar-box .formula{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.55}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+  .grammar-table th,.grammar-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .grammar-table th{background:#FBF3EA;color:var(--p1);font-size:.86rem}
+  .grammar-table tr:nth-child(even) td{background:#FFFDF9}
+  .grammar-table .practice{background:#F0F7E6;color:var(--p2);font-weight:700}
+  .grammar-table .reference{color:var(--muted);font-style:italic}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .note.lightblue{background:#E8F4FB;border-left-color:var(--p5)}
+  .note.teal{background:#E0F2F1;border-left-color:var(--p5)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:110px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:360px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.75}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.02rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p4)}
+  .dialog-box .who.you{color:var(--p1)}
+  .dialog-box .dialog-text{display:none}
+  .dialog-box.open .dialog-text{display:block;margin-top:10px}
+
+  .clil-text{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:18px;margin-bottom:16px}
+  .clil-text h4{color:var(--p4);margin-bottom:8px}
+  .clil-text p{font-size:.95rem;margin-bottom:10px}
+
+  .roleplay-box{background:#fff;border:2px solid var(--p5);border-radius:14px;padding:20px;margin-bottom:16px}
+  .roleplay-box h4{color:var(--p4);margin-bottom:10px;font-size:1.1rem}
+  .role-card{background:#E8F5E9;border-radius:10px;padding:14px;margin-bottom:10px}
+  .role-card h5{color:var(--p4);margin-bottom:6px;font-size:.95rem}
+  .role-card ul{margin-left:20px;font-size:.92rem;line-height:1.6}
+  .role-card li{margin-bottom:3px}
+
+  .dialog-builder{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p4);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .dialog-builder input[type="text"]:focus,.dialog-builder select:focus{outline:none;border-color:var(--p4)}
+  .dialog-result{background:#E0F2F1;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p5)}
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  .quizlet-box{background:var(--p4);color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-top:14px}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p4);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  .lesson-nav span.soon{background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--muted);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 8 · Урок 3 из 3 · Блок 2 El Cole y la Salud</span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🏫 БЛОК 2 · EL COLE Y LA SALUD</span>
+  <h1>Урок 8.3 · <em>Логистика недели</em></h1>
+  <p class="sub">Воскресный вечер, впереди неделя: договариваемся, кто отвозит детей, кто забирает и что происходит после школы. Финал недели 8 — PBL-продукт «Карта маршрутов детей».</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🧠 CLIL: день испанского школьника</span>
+    <span class="meta-chip">🎯 Цель: описать маршрут дня ребёнка</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 primero / antes de / después de + llevar, recoger, dejar</span>
+    <span class="meta-chip">🎭 Продукт недели: карта маршрутов (PBL)</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c1">0</div>
+    <div class="step-title">
+      <h2>Разминка + вопрос из жизни</h2>
+      <span class="time">00:00 – 05:00 · Повторение урока 8.2 и воскресный вечер</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Неделя 8 почти закрыта: вы умеете читать карточку SIP и записываться к врачу. Осталась последняя задача — логистика. Но сначала блиц по уроку 8.2 «Запись к врачу».</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 8.2</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🗓️</div>
+      <div class="sit-title">Одна ситуация: воскресный вечер</div>
+    </div>
+    <div class="sit-intro">
+      Воскресенье, 21:00. Завтра начинается неделя. Семья рисует на листе схему маршрутов: кто кого возит, кто забирает, что после школы. Отвечайте вслух, нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Мама:</div>
+      <div class="es">Mañana empieza la semana. ¿Quién lleva a Leo al colegio?</div>
+      <div class="ru">Завтра начинается неделя. Кто отвозит Лео в школу?</div>
+      <button class="speak-btn" onclick="speak('Mañana empieza la semana. ¿Quién lleva a Leo al colegio?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Папа:</div>
+      <div class="es">Yo llevo a Leo a las nueve y después voy al trabajo. ¿Y quién recoge a María?</div>
+      <div class="ru">Я отвезу Лео в девять, потом на работу. А кто забирает Марию?</div>
+      <button class="speak-btn" onclick="speak('Yo llevo a Leo a las nueve y después voy al trabajo. ¿Y quién recoge a María?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Мама:</div>
+      <div class="es">Yo recojo a María a las cinco y la llevo a natación.</div>
+      <div class="ru">Я заберу Марию в пять и отвезу её на плавание.</div>
+      <button class="speak-btn" onclick="speak('Yo recojo a María a las cinco y la llevo a natación.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Папа:</div>
+      <div class="es">Perfecto. Entonces yo paso por Leo después del entrenamiento, a las seis.</div>
+      <div class="ru">Отлично. Тогда я заеду за Лео после тренировки, в шесть.</div>
+      <button class="speak-btn" onclick="speak('Perfecto. Entonces yo paso por Leo después del entrenamiento, a las seis.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Мама:</div>
+      <div class="es">Vale. Escribo la ruta en la nevera y todos la ven.</div>
+      <div class="ru">Договорились. Напишу маршрут на холодильнике, и все его увидят.</div>
+      <button class="speak-btn" onclick="speak('Vale. Escribo la ruta en la nevera y todos la ven.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">1</span>Кто отвозит Лео в школу и во сколько?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">El papá, a las nueve.</div>
+        <div class="q-opt" data-o="1">La mamá, a las nueve.</div>
+        <div class="q-opt" data-o="2">El papá, a las cinco.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">2</span>Что означает <i>«recoger a María a las cinco»</i>?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Забрать Марию в пять.</div>
+        <div class="q-opt" data-o="1">Отвезти Марию в пять.</div>
+        <div class="q-opt" data-o="2">Проводить Марию в пять.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> маршрут — это цепочка событий. Сегодня учимся её связывать: <b>primero, antes de, después de, luego, más tarde, al final</b> + глаголы движения <b>llevar, recoger, dejar, acompañar</b>. Итог недели 8 — PBL-продукт <b>«Карта маршрутов детей на неделю»</b>.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">1</div>
+    <div class="step-title">
+      <h2>Карточки со словами: 35 слов о логистике</h2>
+      <span class="time">05:00 – 15:00 · 5 категорий</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('verbs',this)">🚗 Глаголы логистики (7)</button>
+      <button class="tab" onclick="showVocab('ruta',this)">🗺️ Маршрут (7)</button>
+      <button class="tab" onclick="showVocab('seq',this)">⏭️ Последовательность (7)</button>
+      <button class="tab" onclick="showVocab('day',this)">🏫 Школьный день (7)</button>
+      <button class="tab" onclick="showVocab('week',this)">📅 Неделя семьи (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note lightblue" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> в Испании многие школы работают по модели <i>jornada continua</i>: с 9:00 до 14:00 без обеда. Сборы — вопрос скорости: <i>mochila</i> готовят с вечера. Опоздание (<i>retraso</i>) фиксируется в журнале, а после нескольких — родителей приглашают на разговор.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      🗺️ <b>Лайфхак:</b> повесьте на холодильник «mapa de rutas»: 5 колонок (lunes–viernes) × 3 строки (¿Quién lleva? ¿Quién recoge? Actividad). Дети любят ставить галочки сами — и утро проходит спокойнее.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c2">2</div>
+    <div class="step-title">
+      <h2>Грамматика: последовательность + глаголы движения</h2>
+      <span class="time">15:00 – 23:00 · Фокус: yo / él + слова-мосты</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Маршрут — это цепочка: сначала... потом... после... Свяжем её словами последовательности и глаголами движения.</p>
+
+    <div class="grammar-box">
+      <h4>📐 Слова последовательности</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Слово</th>
+          <th>Употребление</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td><b>primero</b></td>
+          <td>первое действие цепочки</td>
+          <td><i>Primero desayunamos.</i> — Сначала завтракаем.</td>
+        </tr>
+        <tr>
+          <td><b>antes de</b></td>
+          <td>+ существительное / инфинитив</td>
+          <td><i>Salimos antes de las ocho.</i> — Выходим до восьми.</td>
+        </tr>
+        <tr>
+          <td><b>después de</b></td>
+          <td>+ существительное / инфинитив</td>
+          <td><i>Después de clase hay entrenamiento.</i> — После занятий тренировка.</td>
+        </tr>
+        <tr>
+          <td><b>luego</b></td>
+          <td>следующее действие</td>
+          <td><i>Luego vamos al parque.</i> — Потом идём в парк.</td>
+        </tr>
+        <tr>
+          <td><b>más tarde</b></td>
+          <td>позже, в тот же день</td>
+          <td><i>Más tarde recogemos a María.</i> — Позже забираем Марию.</td>
+        </tr>
+        <tr>
+          <td><b>en cuanto</b></td>
+          <td>как только (сразу после)</td>
+          <td><i>En cuanto salga, te llamo.</i> — Как только выйду, позвоню.</td>
+        </tr>
+        <tr>
+          <td><b>al final</b></td>
+          <td>в конце (дня, цепочки)</td>
+          <td><i>Al final del día, todos en casa.</i> — В конце дня все дома.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Глаголы движения</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Глагол</th>
+          <th>Схема</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td class="practice"><b>llevar</b></td>
+          <td class="practice">llevar a + человек + a + место</td>
+          <td class="practice"><i>Llevo a Leo al colegio.</i> — Я отвожу Лео в школу.</td>
+        </tr>
+        <tr>
+          <td class="practice"><b>recoger</b></td>
+          <td class="practice">recoger a + человек</td>
+          <td class="practice"><i>Recogemos a los niños a las cinco.</i> — Забираем детей в пять.</td>
+        </tr>
+        <tr>
+          <td><b>dejar</b></td>
+          <td>dejar a + человек + en + место</td>
+          <td><i>Dejo a María en la entrada.</i> — Высаживаю Марию у входа.</td>
+        </tr>
+        <tr>
+          <td><b>acompañar</b></td>
+          <td>acompañar a + человек + a + место</td>
+          <td><i>El abuelo acompaña al niño a clase.</i> — Дедушка провожает ребёнка в класс.</td>
+        </tr>
+        <tr>
+          <td class="reference"><b>venir a buscar</b></td>
+          <td class="reference">venir a buscar a + человек</td>
+          <td class="reference"><i>Yo vengo a buscar a los niños hoy.</i> — Сегодня я приду за детьми.</td>
+        </tr>
+        <tr>
+          <td class="reference"><b>pasar por</b></td>
+          <td class="reference">pasar por + человек / место</td>
+          <td class="reference"><i>Paso por la abuela a las cuatro.</i> — Заеду за бабушкой в четыре.</td>
+        </tr>
+        <tr>
+          <td class="reference"><b>traer</b></td>
+          <td class="reference">traer + вещь + a / de</td>
+          <td class="reference"><i>Traigo la mochila al club.</i> — Принесу рюкзак в клуб.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="note green">
+      📌 <b>Фокус практики:</b> формы <b>yo / él-ella</b> в настоящем времени: <b>llevo / lleva, recojo / recoge, dejo / deja, traigo / trae</b>. Обратите внимание: <b>recojo</b> (c → g) и <b>traigo</b> — исключения, их просто выучить.
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«Llevo Leo al colegio.»</i> ❌ → <i>«Llevo <b>a</b> Leo al colegio.»</i> ✅ (личное a с людьми)<br>
+      • <i>«Recoger María a las cinco.»</i> ❌ → <i>«Recoger <b>a</b> María a las cinco.»</i> ✅<br>
+      • <i>«Después clase hay entrenamiento.»</i> ❌ → <i>«Después <b>de</b> clase...»</i> ✅ (<b>de</b> обязательно)<br>
+      • <i>«Primero que desayuno, llevo a los niños.»</i> ❌ → <i>«Primero desayuno, luego llevo a los niños.»</i> ✅ (primero — без «que»)
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Готовые чанки маршрута</h4>
+      <div class="example">
+        <b>¿Quién lleva a los niños al cole?</b> — Кто отвозит детей в школу?<br>
+        <b>Yo vengo a buscar a los niños a las cinco.</b> — Я приду за детьми в пять.<br>
+        <b>Después de clase hay entrenamiento de fútbol.</b> — После занятий — футбольная тренировка.<br>
+        <b>La salida del cole es a la misma hora.</b> — Окончание школы в одно и то же время.<br>
+        <b>Al final del día, toda la familia está en casa.</b> — В конце дня вся семья дома.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь слово последовательности или форму глагола</h4>
+    <p class="hint">Используйте: <b>primero, antes, después, recojo, lleva, al final</b>.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c3">3</div>
+    <div class="step-title">
+      <h2>Практика: собери маршрут</h2>
+      <span class="time">23:00 – 30:00 · 2 упражнения</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь слово и значение</h4>
+    <p class="hint">Нажмите испанское слово слева, затем его значение справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c5">4</div>
+    <div class="step-title">
+      <h2>Аудирование: планируем неделю семьи</h2>
+      <span class="time">30:00 – 37:00 · диалог «Кто кого возит?»</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speakDialog()" style="margin-bottom:12px">🔊 Прослушать диалог (два голоса)</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who you">Mamá:</span> Mañana empieza la semana. ¿Quién lleva a Leo al colegio?<br>
+        <span class="who op">Papá:</span> Yo llevo a Leo a las nueve y después voy al trabajo.<br>
+        <span class="who you">Mamá:</span> Perfecto. Yo salgo antes, a las ocho y media, con María.<br>
+        <span class="who op">Papá:</span> ¿Y quién recoge a los niños por la tarde?<br>
+        <span class="who you">Mamá:</span> Yo recojo a María a las cinco y la llevo a natación.<br>
+        <span class="who op">Papá:</span> Entonces yo paso por Leo a las seis, después del entrenamiento.<br>
+        <span class="who you">Mamá:</span> Vale. Antes de la cena, todos en casa.<br>
+        <span class="who op">Papá:</span> ¿A qué hora es la cena?<br>
+        <span class="who you">Mamá:</span> A las ocho y media, como siempre. Escribo la ruta en la nevera.<br>
+        <span class="who op">Papá:</span> Perfecto. Buena idea.
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: РОЛЕВАЯ ИГРА + PBL-ПРОДУКТ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      <h2>Ролевая игра + PBL-продукт: карта маршрутов</h2>
+      <span class="time">37:00 – 47:00 · CLIL + проект + парная игра</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 CLIL-мини-текст: день испанского школьника</h4>
+
+    <div class="clil-text">
+      <h4>El horario: dos modelos</h4>
+      <p>Многие школы работают по <i>jornada continua</i>: с 9:00 до 14:00 без обеда. Другие — по <i>jornada partida</i>: с 9:00 до 12:30, затем <i>comedor</i>, и снова с 15:00 до 16:30. Узнайте модель своего <i>cole</i> заранее — от неё зависит вся логистика семьи.</p>
+
+      <h4>El comedor y la merienda</h4>
+      <p>Если ребёнок остаётся на <i>comedor</i>, обед платный (5–8 евро в день) и требует записи заранее. <i>La merienda</i> — полдник после школы: fruta o bocadillo. Дети, которые идут на тренировку, едят в машине или в парке.</p>
+
+      <h4>Las actividades extraescolares</h4>
+      <p>После занятий — ajedrez, fútbol, inglés, natación. Обычно с 16:30 до 18:00 прямо в школе. Запись — в сентябре, и очередь распределяется по скорости: кто первый заполнил форму, тот и попал.</p>
+    </div>
+
+    <div class="note teal">
+      🧩 <b>ПРОЕКТ НЕДЕЛИ (PBL): «Карта маршрутов детей на неделю»</b><br>
+      <b>Шаг 1.</b> Выпишите все точки недели: cole, actividades, trabajo, casa, abuela.<br>
+      <b>Шаг 2.</b> Нарисуйте таблицу Пн–Пт: ¿Quién lleva? ¿Quién recoge? ¿A qué hora?<br>
+      <b>Шаг 3.</b> Опишите словами каждый день: primero..., después de..., luego...<br>
+      <b>Шаг 4.</b> Соберите скрипт в конструкторе ниже и запишите голосовое.<br>
+      ✅ <b>Rubric:</b> минимум 3 предложения, 3 слова последовательности + 2 глагола движения.
+    </div>
+
+    <div class="note green">
+      📋 <b>Чек-лист маршрута недели:</b><br>
+      ☐ ¿Quién lleva? (утро)<br>
+      ☐ ¿A qué hora es la entrada?<br>
+      ☐ ¿Quién recoge? (salida)<br>
+      ☐ ¿Hay actividad? ¿Qué día?<br>
+      ☐ Plan B: если задержался — кто забирает?<br>
+      ☐ Схема на холодильнике — все видят
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🔧 Конструктор: скрипт «La ruta de la semana»</h4>
+    <p class="hint">Заполните поля — получите готовое описание маршрута для PBL-продукта, которое запишете голосовым.</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">🗺️ КОНСТРУКТОР: Mi mapa de rutas</div>
+
+      <div class="field">
+        <label>👤 Ваше имя:</label>
+        <input type="text" id="b-name" placeholder="Ana" value="Ana">
+      </div>
+
+      <div class="field">
+        <label>👦 Дети:</label>
+        <select id="b-child">
+          <option value="Leo" selected>Leo</option>
+          <option value="María">María</option>
+          <option value="Leo y María">Leo y María</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🚗 Кто отвозит утром:</label>
+        <select id="b-who1">
+          <option value="Yo llevo" selected>Yo llevo (я отвожу)</option>
+          <option value="Mi marido lleva">Mi marido lleva (муж отвозит)</option>
+          <option value="Mi mujer lleva">Mi mujer lleva (жена отвозит)</option>
+          <option value="La abuela lleva">La abuela lleva (бабушка отвозит)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🕐 Время утром:</label>
+        <select id="b-morning">
+          <option value="a las ocho y media" selected>a las ocho y media</option>
+          <option value="a las nueve">a las nueve</option>
+          <option value="a las nueve y media">a las nueve y media</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🏀 Активность после школы:</label>
+        <select id="b-activity">
+          <option value="natación" selected>natación (плавание)</option>
+          <option value="fútbol">fútbol (футбол)</option>
+          <option value="inglés">inglés (английский)</option>
+          <option value="baloncesto">baloncesto (баскетбол)</option>
+          <option value="no hay actividad">no hay actividad (нет занятий)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🎒 Кто забирает:</label>
+        <select id="b-who2">
+          <option value="Yo recojo" selected>Yo recojo (я забираю)</option>
+          <option value="Mi marido recoge">Mi marido recoge (муж забирает)</option>
+          <option value="Mi mujer recoge">Mi mujer recoge (жена забирает)</option>
+          <option value="La abuela recoge">La abuela recoge (бабушка забирает)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>⏰ Время вечером:</label>
+        <select id="b-afterhour">
+          <option value="a las cinco" selected>a las cinco</option>
+          <option value="a las cinco y media">a las cinco y media</option>
+          <option value="a las seis">a las seis</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🍽️ Ужин:</label>
+        <select id="b-cena">
+          <option value="a las ocho" selected>a las ocho</option>
+          <option value="a las ocho y media">a las ocho y media</option>
+          <option value="a las nueve">a las nueve</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildScript()" style="margin-top:12px">🔧 Собрать скрипт</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт недели:</b> запишите голосовое с собранным скриптом (6–8 предложений, 2 дубля) и приложите к карте маршрутов. Это ваш финальный артефакт недели 8.
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🎭 Ролевая игра в парах</h4>
+    <p class="hint">Разыграйте диалог «утро понедельника: договариваемся об изменениях». Затем поменяйтесь ролями.</p>
+
+    <div class="roleplay-box">
+      <h4>🎭 Роли</h4>
+      <div class="role-card">
+        <h5>👩 Роль A — Мама (утро, спешит)</h5>
+        <ul>
+          <li>Сообщает об изменении: <i>«Mañana tengo reunión temprano.»</i></li>
+          <li>Просит помочь: <i>«¿Puedes llevar tú a los niños?»</i></li>
+          <li>Договаривается: <i>«Yo recojo a Leo a las cinco.»</i></li>
+          <li>Страховка: <i>«Llamo a la abuela por si acaso.»</i></li>
+          <li>Напоминает: <i>«Sé puntual, la salida es a la misma hora.»</i></li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <h5>👨 Роль B — Папа (договаривается)</h5>
+        <ul>
+          <li>Соглашается: <i>«Vale, yo llevo a los niños a las nueve.»</i></li>
+          <li>Берёт задачу: <i>«Después del trabajo paso por María a las cinco.»</i></li>
+          <li>Уточняет: <i>«¿A qué hora es la salida del cole?»</i></li>
+          <li>Подтверждает: <i>«A la misma hora, como siempre.»</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note blue">
+      🆘 <b>Фразы-спасатели:</b><br>
+      • <i>«¿Puedes recoger a los niños hoy?»</i> — Можешь сегодня забрать детей?<br>
+      • <i>«¿Hay algún problema con la hora?»</i> — Есть проблема со временем?<br>
+      • <i>«¿A qué hora sales del trabajo?»</i> — Во сколько ты с работы?<br>
+      • <i>«Llámame cuando salgas.»</i> — Позвони, когда выйдешь.
+    </div>
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">✅</div>
+    <div class="step-title">
+      <h2>Самопроверка «Светофор»</h2>
+      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🏠</div>
+    <div class="step-title">
+      <h2>Домашнее задание · Урок 8.3</h2>
+      <span class="time">⏱ ~30–35 минут · 6 заданий</span>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и слова последовательности.</div>
+    <p>Карточки, сопоставление, «собери фразу» — фокус на глаголах <b>llevar, recoger, dejar</b> и цепочках <b>primero → después de → luego → al final</b>.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «La ruta de la semana» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: проговорить маршрут недели целиком.</div>
+    <p>Запишите голосовое на 6–8 предложений по шаблону из конструктора, минимум 2 дубля:</p>
+    <div class="note blue">
+      Esta es la ruta de la semana. <b>[Кто]</b> lleva a <b>[ребёнок]</b> al colegio <b>[время]</b>.<br>
+      Después de clase hay <b>[активность]</b>. <b>[Кто]</b> recoge a <b>[ребёнок]</b> <b>[время]</b>.<br>
+      Más tarde hacemos los deberes. Antes de la cena, preparo la mochila. Al final del día, cenamos <b>[время]</b>.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Esta es la ruta de la semana. Yo llevo a Leo al colegio a las nueve. Después de clase hay entrenamiento de fútbol. Mi marido recoge a Leo a las seis, después del entrenamiento. Más tarde hacemos los deberes. Antes de la cena preparo la mochila. Al final del día cenamos a las ocho y media.')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🗓️ Задание 3. Реальное действие · 5 мин</h4>
+    <div class="hw-meta">Цель: перенести навык в реальную жизнь.</div>
+    <p>Заполните реальную таблицу недели (на бумаге или в календаре) и сфотографируйте:</p>
+    <div class="note">
+      Lunes — ¿Quién lleva? ___ · ¿Quién recoge? ___ · Actividad: ___<br>
+      Martes — ¿Quién lleva? ___ · ¿Quién recoge? ___ · Actividad: ___<br>
+      Miércoles — ¿Quién lleva? ___ · ¿Quién recoge? ___ · Actividad: ___<br>
+      Jueves — ¿Quién lleva? ___ · ¿Quién recoge? ___ · Actividad: ___<br>
+      Viernes — ¿Quién lleva? ___ · ¿Quién recoge? ___ · Actividad: ___
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: один день из недели · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить последовательность письменно.</div>
+    <p>Напишите 5–6 предложений об одном дне, используя <i>primero, después de, luego, más tarde, al final</i>.</p>
+    <button class="btn btn-ghost" onclick="speak('El lunes es el día más difícil. Primero llevo a Leo al colegio a las nueve. Después de clase hay entrenamiento de fútbol. Mi marido recoge a Leo a las seis. Luego cenamos todos juntos a las ocho y media. Al final del día, la familia descansa.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 3 мин</h4>
+    <div class="hw-meta">Цель: связать родительский урок с детским курсом.</div>
+    <p>Спросите ребёнка:</p>
+    <div class="note green">
+      ¿Quién te lleva al cole?<br>
+      ¿Quién te recoge?<br>
+      ¿Qué actividad tienes después del cole?
+    </div>
+    <p>Ребёнок отвечает:</p>
+    <div class="note blue">
+      Me lleva mamá. Me recoge papá. Tengo natación.
+    </div>
+    <p>Родитель резюмирует:</p>
+    <div class="note">
+      Vale. Mañana llevo yo, y papá recoge después del entrenamiento.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('¿Quién te lleva al cole? ¿Quién te recoge? ¿Qué actividad tienes después del cole? Me lleva mamá. Me recoge papá. Tengo natación. Vale. Mañana llevo yo, y papá recoge después del entrenamiento.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🗺️ Задание 6. Мини-проект: финал PBL · 10–12 мин</h4>
+    <div class="hw-meta">Цель: завершить продукт недели 8.</div>
+    <p>Завершите <b>«Карту маршрутов детей на неделю»</b>: схема (таблица Пн–Пт) + 3 предложения голосом по ней. Убедитесь, что использованы 3 слова последовательности и 2 глагола движения. Приложите фото карты к домашке.</p>
+    <div class="note teal">
+      ✅ Критерии готовности:<br>
+      ☐ Схема: 5 дней × 3 вопроса (quién lleva / quién recoge / actividad)<br>
+      ☐ Голосовое: 3+ предложения, испанские слова-мосты<br>
+      ☐ Партнёр видел карту и согласился<br>
+      ☐ Plan B указан
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «La ruta de la semana» (2 дубля)<br>
+    • 🗓️ Фото таблицы недели<br>
+    • ✍️ Письмо про один день (5–6 предложений)<br>
+    • 🗺️ Карта маршрутов + голосовое по ней (PBL-продукт)<br>
+    • ✅ Светофор самопроверки
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head">
+    <div class="step-num">🎮</div>
+    <div class="step-title">
+      <h2>Тренажёр: слова и грамматика</h2>
+      <span class="time">~7–10 мин</span>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 8.3</h3>
+    <p>Повторите слова урока в приложении Quizlet: глаголы логистики, маршрут, последовательность, школьный день, неделя семьи.</p>
+    <!-- QUIZLET: родители урок 8.3 (ссылку добавит админ) -->
+    <a href="#" onclick="return false;">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- КНОПКИ НАВИГАЦИИ -->
+<div class="lesson-nav">
+  <a href="w08-l2.html">← Предыдущий<br><small>Урок 8.2 · Запись к врачу</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="w09-l1.html">Следующий →<br><small>Урок 9.1 · Симптомы детей</small></a>
+</div>
+
+<!-- ФУТЕР -->
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · Блок 2 El Cole y la Salud<br>
+  8.3 · Логистика недели
+</footer>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES'; u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Диалог в два голоса (папа / мама) =====
+var DIALOG_LINES = [
+  {who:'you', label:'Mamá:', es:'Mañana empieza la semana. ¿Quién lleva a Leo al colegio?'},
+  {who:'op',  label:'Papá:', es:'Yo llevo a Leo a las nueve y después voy al trabajo.'},
+  {who:'you', label:'Mamá:', es:'Perfecto. Yo salgo antes, a las ocho y media, con María.'},
+  {who:'op',  label:'Papá:', es:'¿Y quién recoge a los niños por la tarde?'},
+  {who:'you', label:'Mamá:', es:'Yo recojo a María a las cinco y la llevo a natación.'},
+  {who:'op',  label:'Papá:', es:'Entonces yo paso por Leo a las seis, después del entrenamiento.'},
+  {who:'you', label:'Mamá:', es:'Vale. Antes de la cena, todos en casa.'},
+  {who:'op',  label:'Papá:', es:'¿A qué hora es la cena?'},
+  {who:'you', label:'Mamá:', es:'A las ocho y media, como siempre. Escribo la ruta en la nevera.'},
+  {who:'op',  label:'Papá:', es:'Perfecto. Buena idea.'}
+];
+
+function speakDialog(){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var i = 0;
+  (function next(){
+    if(i >= DIALOG_LINES.length) return;
+    var line = DIALOG_LINES[i++];
+    var u = new SpeechSynthesisUtterance(line.es);
+    u.lang = 'es-ES';
+    if(line.who === 'you'){
+      u.rate = 1.0;   // мама: чуть быстрее
+      u.pitch = 1.35; // и заметно выше
+    } else {
+      u.rate = 0.85;  // папа: чуть медленнее
+      u.pitch = 0.75; // и заметно ниже
+    }
+    var voices = speechSynthesis.getVoices();
+    var v = voices.find(function(x){ return x.lang && x.lang.toLowerCase().startsWith('es'); });
+    if(v) u.voice = v;
+    u.onend = next;
+    speechSynthesis.speak(u);
+  })();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      item.o.map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === questions[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[questions[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ (8.2) =====
+var warmQ = [
+  {q:'1. Как сказать «записаться на приём»?', o:['pedir cita','pedir hora','pedir turno'], c:0},
+  {q:'2. Кто врач для детей до 14 лет?', o:['el pediatra','el médico de cabecera','el enfermero'], c:0},
+  {q:'3. Как сказать «поликлиника / центр здоровья»?', o:['el centro de salud','el hospital','la farmacia'], c:0},
+  {q:'4. Куда идти без записи, если ребёнку плохо?', o:['a urgencias','a la consulta','al comedor'], c:0},
+  {q:'5. Как сказать «приём / кабинет врача»?', o:['la consulta','la cita','la sala de espera'], c:0},
+  {q:'6. Как врач сегодня выписывает лекарства?', o:['con la receta electrónica','на бумажке от руки','устно'], c:0}
+];
+
+function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  verbs:[
+    {es:'llevar', ru:'отвозить', ex:'Llevo a Leo al colegio a las nueve.', exRu:'Я отвожу Лео в школу в девять.'},
+    {es:'recoger', ru:'забирать', ex:'Recogemos a los niños a las cinco.', exRu:'Мы забираем детей в пять.'},
+    {es:'dejar', ru:'оставлять / высаживать', ex:'Dejo a María en la entrada del cole.', exRu:'Я высаживаю Марию у входа в школу.'},
+    {es:'acompañar', ru:'сопровождать', ex:'El abuelo acompaña al niño a clase.', exRu:'Дедушка провожает ребёнка в класс.'},
+    {es:'venir a buscar', ru:'приходить за кем-то', ex:'Yo vengo a buscar a los niños hoy.', exRu:'Сегодня я прихожу за детьми.'},
+    {es:'pasar por', ru:'заезжать за', ex:'Paso por la abuela a las cuatro.', exRu:'Я заезжаю за бабушкой в четыре.'},
+    {es:'traer', ru:'приносить', ex:'Traigo la mochila al club.', exRu:'Я приношу рюкзак в клуб.'}
+  ],
+  ruta:[
+    {es:'la ruta', ru:'маршрут', ex:'Nuestra ruta pasa por el parque.', exRu:'Наш маршрут проходит через парк.'},
+    {es:'el camino', ru:'дорога / путь', ex:'El camino al cole dura diez minutos.', exRu:'Дорога в школу занимает десять минут.'},
+    {es:'la parada', ru:'остановка', ex:'La parada del autobús está aquí.', exRu:'Автобусная остановка здесь.'},
+    {es:'la salida', ru:'выход / окончание занятий', ex:'La salida es a las cinco.', exRu:'Окончание занятий в пять.'},
+    {es:'la entrada', ru:'начало занятий', ex:'La entrada al cole es a las nueve.', exRu:'Начало занятий в девять.'},
+    {es:'la vuelta a casa', ru:'дорога домой', ex:'La vuelta a casa pasa por el mercado.', exRu:'Дорога домой проходит через рынок.'},
+    {es:'el trayecto', ru:'отрезок пути', ex:'El trayecto dura veinte minutos.', exRu:'Отрезок пути занимает двадцать минут.'}
+  ],
+  seq:[
+    {es:'primero', ru:'сначала', ex:'Primero desayunamos.', exRu:'Сначала мы завтракаем.'},
+    {es:'antes de', ru:'до / перед', ex:'Salimos antes de las ocho.', exRu:'Мы выходим до восьми.'},
+    {es:'después de', ru:'после', ex:'Después de clase hay entrenamiento.', exRu:'После занятий есть тренировка.'},
+    {es:'luego', ru:'потом', ex:'Luego vamos al parque.', exRu:'Потом мы идём в парк.'},
+    {es:'más tarde', ru:'позже', ex:'Más tarde recogemos a María.', exRu:'Позже мы забираем Марию.'},
+    {es:'en cuanto', ru:'как только', ex:'En cuanto salga, te llamo.', exRu:'Как только выйду, позвоню.'},
+    {es:'al final', ru:'в конце', ex:'Al final del día todos están en casa.', exRu:'В конце дня все дома.'}
+  ],
+  day:[
+    {es:'la actividad extraescolar', ru:'внешкольное занятие', ex:'La actividad extraescolar empieza a las cinco.', exRu:'Внешкольное занятие начинается в пять.'},
+    {es:'el entrenamiento', ru:'тренировка', ex:'El entrenamiento de fútbol es el martes.', exRu:'Футбольная тренировка во вторник.'},
+    {es:'el recreo', ru:'перемена', ex:'El recreo es a las once.', exRu:'Перемена в одиннадцать.'},
+    {es:'la merienda', ru:'полдник', ex:'Después del cole, merienda.', exRu:'После школы — полдник.'},
+    {es:'el comedor', ru:'столовая', ex:'Come en el comedor del cole.', exRu:'Он ест в школьной столовой.'},
+    {es:'la salida del cole', ru:'окончание школы', ex:'La salida del cole es a las dos.', exRu:'Окончание школы в два.'},
+    {es:'la biblioteca', ru:'библиотека', ex:'Estudia en la biblioteca los lunes.', exRu:'Он занимается в библиотеке по понедельникам.'}
+  ],
+  week:[
+    {es:'entre semana', ru:'в будние дни', ex:'Entre semana nos levantamos temprano.', exRu:'В будни мы встаём рано.'},
+    {es:'el fin de semana', ru:'выходные', ex:'El fin de semana no hay cole.', exRu:'В выходные нет школы.'},
+    {es:'todos los días', ru:'каждый день', ex:'Llevo a los niños todos los días.', exRu:'Я отвожу детей каждый день.'},
+    {es:'a la misma hora', ru:'в одно и то же время', ex:'La salida es a la misma hora.', exRu:'Окончание в одно и то же время.'},
+    {es:'puntual', ru:'пунктуально / вовремя', ex:'Sé puntual, por favor.', exRu:'Будь пунктуален, пожалуйста.'},
+    {es:'el horario', ru:'расписание', ex:'Nuestro horario de la semana está en la nevera.', exRu:'Наше расписание недели на холодильнике.'},
+    {es:'la agenda', ru:'план дел', ex:'Mi agenda está llena esta semana.', exRu:'Мой план дел полон на этой неделе.'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('verbs', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'___ llevo a Leo al colegio y luego voy al trabajo. (primero)', ans:'primero'},
+  {text:'Salimos de casa ___ de las ocho y media. (antes)', ans:'antes'},
+  {text:'___ de clase hay entrenamiento de fútbol. (después)', ans:'después'},
+  {text:'Yo ___ a María a las cinco. (recoger)', ans:'recojo'},
+  {text:'El abuelo ___ al niño a clase hoy. (llevar)', ans:'lleva'},
+  {text:'___ del día, toda la familia está en casa. (al final)', ans:'al final'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'Primero llevo a Leo al colegio.', translation:'Сначала я отвожу Лео в школу.'},
+  {target:'¿Quién recoge a los niños hoy?', translation:'Кто сегодня забирает детей?'},
+  {target:'Después de clase hay entrenamiento.', translation:'После занятий тренировка.'},
+  {target:'Dejo a María en la entrada del cole.', translation:'Я высаживаю Марию у входа в школу.'},
+  {target:'Luego vamos a la biblioteca.', translation:'Потом мы идём в библиотеку.'},
+  {target:'La salida del cole es a la misma hora.', translation:'Окончание школы в одно и то же время.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'llevar', ru:'отвозить'},
+  {id:2, es:'recoger', ru:'забирать'},
+  {id:3, es:'dejar', ru:'оставлять / высаживать'},
+  {id:4, es:'la ruta', ru:'маршрут'},
+  {id:5, es:'la salida', ru:'выход / окончание занятий'},
+  {id:6, es:'primero', ru:'сначала'},
+  {id:7, es:'en cuanto', ru:'как только'},
+  {id:8, es:'la merienda', ru:'полдник'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZ =====
+var listenQ = [
+  {q:'1. ¿Quién lleva a Leo al colegio?', o:['el papá, a las nueve','la mamá, a las nueve','el abuelo'], c:0},
+  {q:'2. ¿A qué hora sale la mamá con María?', o:['a las ocho y media','a las nueve','a las cinco'], c:0},
+  {q:'3. ¿Qué actividad tiene María por la tarde?', o:['natación','fútbol','biblioteca'], c:0},
+  {q:'4. ¿Cuándo pasa el papá por Leo?', o:['a las seis, después del entrenamiento','a las cinco','a las cuatro'], c:0},
+  {q:'5. ¿A qué hora es la cena?', o:['a las ocho y media','a las nueve','a las ocho'], c:0},
+  {q:'6. ¿Dónde escribe la mamá la ruta de la semana?', o:['en la nevera','en la agenda del cole','en el móvil'], c:0}
+];
+
+renderQuiz('listening-quiz', listenQ, 'lq');
+
+// ===== SCRIPT BUILDER =====
+var lastScriptPlain = '';
+
+function buildScript(){
+  var name = document.getElementById('b-name').value || 'Ana';
+  var child = document.getElementById('b-child').value;
+  var who1 = document.getElementById('b-who1').value;
+  var morning = document.getElementById('b-morning').value;
+  var activity = document.getElementById('b-activity').value;
+  var who2 = document.getElementById('b-who2').value;
+  var afterhour = document.getElementById('b-afterhour').value;
+  var cena = document.getElementById('b-cena').value;
+
+  var text = 'Esta es la ruta de la semana de ' + child + '. ' +
+    'Primero, ' + who1 + ' a ' + child + ' al colegio ' + morning + '. ' +
+    'La entrada del cole es a las nueve y la salida a las dos. ' +
+    (activity === 'no hay actividad'
+      ? 'Después del cole volvemos a casa y merendamos. '
+      : 'Después de clase hay ' + activity + '. ' + who2 + ' a ' + child + ' ' + afterhour + ', justo a la salida del cole. ') +
+    'Más tarde, en casa, hacemos los deberes. ' +
+    'Antes de la cena preparo la mochila del día siguiente. ' +
+    'Al final del día cenamos ' + cena + ' y, ¡por fin!, descansamos. ' +
+    'Firman: ' + name + ' y toda la familia.';
+
+  lastScriptPlain = text;
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML =
+    '<div class="dialog-result">' + text + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary" id="speak-script-btn">🔊 Прослушать скрипт</button>' +
+    '</div>';
+
+  document.getElementById('speak-script-btn').onclick = function(){
+    speak(lastScriptPlain);
+  };
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ===== TRAFFIC LIGHT =====
+var TL = [
+  'Говорить, кто отвозит: llevar, dejar, acompañar',
+  'Договариваться, кто забирает: recoger, venir a buscar, pasar por',
+  'Строить последовательность: primero, después de, luego',
+  'Называть время и части дня: a las nueve, antes de las ocho',
+  'Описать маршрут дня ребёнка (5–6 фраз)',
+  'Составить карту маршрутов на неделю (PBL-продукт)'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + (rowIdx + 1) + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + (rowIdx + 1) + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + (rowIdx + 1) + '" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.verbs, VOCAB.ruta, VOCAB.seq, VOCAB.day, VOCAB.week);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    updateCard();
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Primero llevo a Leo al colegio', hint:'Сначала я отвожу Лео в школу'},
+    {target:'Después de clase hay entrenamiento', hint:'После занятий тренировка'},
+    {target:'¿Quién recoge a los niños hoy?', hint:'Кто сегодня забирает детей?'},
+    {target:'Dejo a María en la entrada del cole', hint:'Я высаживаю Марию у входа в школу'},
+    {target:'La salida del cole es a la misma hora', hint:'Окончание школы в одно и то же время'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>

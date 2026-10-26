@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFF7EF">
+<meta name="description" content="Урок 18.1: Sobremesa — поддерживаем беседу после обеда, приглашаем соседей по-испански и понимаем, почему в Испании никто не уходит сразу после еды.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<title>Урок 18.1 · Sobremesa — МУДРО</title>
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--p5:#4CAF7D;
+    --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
+    --soft:#FBF3EA;--ink-soft:#7A6A5C;--teal:#2C5E8A;
+    --vocab:#BE8A55;
+    --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
+    --ok:#7A8B4C;--bad:#E2725B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c1{background:var(--p1)}
+  .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)} .step-num.c5{background:var(--p5)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-lightblue{background:var(--p5);color:#fff}.btn-lightblue:hover{background:#3d9168}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+
+  .situation-box{background:#fff;border:3px solid var(--p5);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p5)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#E8F5E9;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p5)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p5);color:#fff;border-color:var(--p5)}
+  .vocab-front .es{font-size:1.05rem;font-weight:800;margin-bottom:6px;line-height:1.3}
+  .vocab-front .ru{font-size:.88rem;opacity:.95;font-weight:600}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p5);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.9rem;font-weight:700;color:var(--p5);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:8px}
+  .grammar-box .formula{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.55}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+  .grammar-table th,.grammar-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .grammar-table th{background:#FBF3EA;color:var(--p1);font-size:.86rem}
+  .grammar-table tr:nth-child(even) td{background:#FFFDF9}
+  .grammar-table .practice{background:#F0F7E6;color:var(--p2);font-weight:700}
+  .grammar-table .reference{color:var(--muted);font-style:italic}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .note.lightblue{background:#E8F4FB;border-left-color:var(--p5)}
+  .note.teal{background:#E0F2F1;border-left-color:var(--p5)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:110px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:360px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.75}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.02rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p4)}
+  .dialog-box .who.you{color:var(--p1)}
+  .dialog-box .dialog-text{display:none}
+  .dialog-box.open .dialog-text{display:block;margin-top:10px}
+
+  .clil-text{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:18px;margin-bottom:16px}
+  .clil-text h4{color:var(--p4);margin-bottom:8px}
+  .clil-text p{font-size:.95rem;margin-bottom:10px}
+
+  .roleplay-box{background:#fff;border:2px solid var(--p5);border-radius:14px;padding:20px;margin-bottom:16px}
+  .roleplay-box h4{color:var(--p4);margin-bottom:10px;font-size:1.1rem}
+  .role-card{background:#E8F5E9;border-radius:10px;padding:14px;margin-bottom:10px}
+  .role-card h5{color:var(--p4);margin-bottom:6px;font-size:.95rem}
+  .role-card ul{margin-left:20px;font-size:.92rem;line-height:1.6}
+  .role-card li{margin-bottom:3px}
+
+  .dialog-builder{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p4);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .dialog-builder input[type="text"]:focus,.dialog-builder select:focus{outline:none;border-color:var(--p4)}
+  .dialog-result{background:#E0F2F1;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p5)}
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  .quizlet-box{background:var(--p4);color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-top:14px}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p4);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  .lesson-nav span.soon{background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--muted);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65}
+
+  /* === Дополнительные стили урока 18.1 === */
+  .chat-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .chat-chip{border:2px solid var(--p4);color:var(--p4);background:#fff;border-radius:999px;padding:9px 16px;font-weight:700;font-size:.92rem;cursor:pointer;transition:.2s;font-family:inherit}
+  .chat-chip:hover{background:#E8F0FE}
+  .chat-chip.active{background:var(--p4);color:#fff}
+  .chat-panel{background:#F0F4FF;border:2px solid var(--p4);border-radius:12px;padding:16px;min-height:96px}
+  .chat-panel .cp-es{font-size:1.15rem;font-weight:800;color:var(--p4);margin-bottom:4px}
+  .chat-panel .cp-ru{font-weight:700;margin-bottom:6px}
+  .chat-panel .cp-txt{font-size:.92rem;color:var(--muted);line-height:1.55}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 18 · Урок 1 из 3 · Блок 4 Vida Social</span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🥂 БЛОК 4 · VIDA SOCIAL Y CHOQUE CULTURAL</span>
+  <h1>Урок 18.1 · <em>Sobremesa</em></h1>
+  <p class="sub">После семейного обеда никто не уходит — сорок минут болтовни. Учимся держать беседу и приглашать соседей по-испански.</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🧠 CLIL: la sobremesa — третье блюдо обеда</span>
+    <span class="meta-chip">🎯 Цель: поддержать беседу и позвать гостей</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 приглашения: ¿Te apetece...?, ¿Quedamos...?</span>
+    <span class="meta-chip">🎭 Продукт: голосовое «Mi sobremesa»</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c1">0</div>
+    <div class="step-title">
+      <h2>Разминка + вопрос из жизни</h2>
+      <span class="time">00:00 – 05:00 · Повторение урока 17.3 и воскресный обед</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Прошлый урок был про конфликт с соседом. Хорошая новость: после примирения в Испании обычно зовут на обед, а после обеда — начинается sobremesa. Сначала блиц.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 17.3</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🍽️</div>
+      <div class="sit-title">Одна ситуация: обед закончился... а никто не уходит</div>
+    </div>
+    <div class="sit-intro">
+      Воскресенье, 15:40. Вы пришли на обед к соседям Ruiz. Соус съеден, стол убран... но никто не встаёт. Уже 40 минут все сидят и болтают. Вы посматриваете на часы: впереди дела. Отвечайте вслух и нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Marta, vecina:</div>
+      <div class="es">¿Más café? Se hace en un momento.</div>
+      <div class="ru">Ещё кофе? Сделаю за минуту.</div>
+      <button class="speak-btn" onclick="speak('¿Más café? Se hace en un momento.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ:</div>
+      <div class="es">No, gracias. Ya he tomado dos.</div>
+      <div class="ru">Нет, спасибо. Я уже выпил два.</div>
+      <button class="speak-btn" onclick="speak('No, gracias. Ya he tomado dos.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Marta, vecina:</div>
+      <div class="es">¿Y qué me cuentas? Carla nos dijo que Leo cambia de cole.</div>
+      <div class="ru">И что расскажешь? Карла сказала, что Лео меняет школу.</div>
+      <button class="speak-btn" onclick="speak('¿Y qué me cuentas? Carla nos dijo que Leo cambia de cole.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Ваш ответ:</div>
+      <div class="es">Sí, en serio, está encantado con el nuevo.</div>
+      <div class="ru">Да, правда, он в восторге от новой школы.</div>
+      <button class="speak-btn" onclick="speak('Sí, en serio, está encantado con el nuevo.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Marta, vecina:</div>
+      <div class="es">¡Qué fuerte! El otro cole era carísimo.</div>
+      <div class="ru">Ничего себе! Та школа была очень дорогой.</div>
+      <button class="speak-btn" onclick="speak('¡Qué fuerte! El otro cole era carísimo.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="1">
+      <div class="q-text"><span class="q-num">1</span>Что сейчас происходит у Ruiz?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Обед ещё не начался.</div>
+        <div class="q-opt" data-o="1">Еда давно закончилась, но все продолжают сидеть и болтать — это <i>la sobremesa</i>.</div>
+        <div class="q-opt" data-o="2">Гости собираются уходить.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">2</span>Как показать Марте, что вам интересна история?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">«¿En serio? ¡Cuéntame!»</div>
+        <div class="q-opt" data-o="1">«Estoy lleno.»</div>
+        <div class="q-opt" data-o="2">«¿Me pasas la sal?»</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> <b>sobremesa — не «еда», а отдельная часть дня</b>: тарелки убраны, а встреча продолжается. Сегодня учимся: 1) держать беседу — <b>¿qué me cuentas?, cuéntame, ¿en serio?, qué fuerte</b>; 2) приглашать и договариваться — <b>¿te apetece...?, ¿quedamos...?, ven cuando quieras</b>. Сорок минут болтовни после обеда — не опоздание к вашим делам. Это и есть жизнь в Испании.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">1</div>
+    <div class="step-title">
+      <h2>Карточки со словами: 35 слов о sobremesa</h2>
+      <span class="time">05:00 – 15:00 · 5 категорий</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('sobremesa',this)">☕ Sobremesa (7)</button>
+      <button class="tab" onclick="showVocab('charla',this)">🗣️ Беседа (7)</button>
+      <button class="tab" onclick="showVocab('invites',this)">🤗 Приглашения (7)</button>
+      <button class="tab" onclick="showVocab('mesa',this)">🍽️ За столом (7)</button>
+      <button class="tab" onclick="showVocab('topics',this)">🎯 Темы (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note lightblue" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> в Испании <b>нельзя уйти сразу после еды</b> — это воспринимается как «мне тут с вами скучно». Sobremesa длится от 40 минут до двух часов, в воскресенье — с семьёй и дольше. Гость не встаёт первым, хозяин не намекает на уход.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      🎧 <b>Лайфхак для понимания:</b> в разговоре вы услышите знакомые слова с усилением: <i>charlar → charlando</i>, <i>fuerte → fortísimo</i>. Не пугайтесь — это всё те же слова, просто «с громкостью на максимум». Реагируйте коротко: <i>«En serio?»</i> — и вас считают отличным собеседником.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c2">2</div>
+    <div class="step-title">
+      <h2>Грамматика: приглашения ¿Te apetece...? и ¿Quedamos...?</h2>
+      <span class="time">15:00 – 23:00 · Фокус: te / os / quedar con</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Два главных глагола приглашения: <i>apetecer</i> («хочется») и <i>quedar</i> («договориться о встрече»). Они работают не как русский «хотеть» и «оставаться».</p>
+
+    <div class="grammar-box">
+      <h4>📐 Глагол apetecer: ¿Te apetece...?</h4>
+      <p class="formula">Apetecer работает как gustar: то, что «хочется», — подлежащее, а человек — косвенное дополнение.</p>
+      <table class="grammar-table">
+        <tr>
+          <th>Лицо</th>
+          <th>Форма</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td class="practice">yo</td>
+          <td class="practice"><b>me apetece</b></td>
+          <td class="practice"><i>Me apetece un café.</i></td>
+        </tr>
+        <tr>
+          <td class="practice">tú</td>
+          <td class="practice"><b>te apetece</b></td>
+          <td class="practice"><i>¿Te apetece un café?</i></td>
+        </tr>
+        <tr>
+          <td class="reference">él / ella</td>
+          <td class="reference">le apetece</td>
+          <td class="reference"><i>¿Le apetece venir?</i></td>
+        </tr>
+        <tr>
+          <td class="practice">nosotros</td>
+          <td class="practice"><b>nos apetece</b></td>
+          <td class="practice"><i>Nos apetece quedar un rato más.</i></td>
+        </tr>
+        <tr>
+          <td class="practice">vosotros</td>
+          <td class="practice"><b>os apetece</b></td>
+          <td class="practice"><i>¿Os apetece paella el sábado?</i></td>
+        </tr>
+        <tr>
+          <td class="reference">ellos</td>
+          <td class="reference">les apetece</td>
+          <td class="reference"><i>A los niños les apetece helado.</i></td>
+        </tr>
+      </table>
+      <div class="example">
+        + существительное: <b>¿Te apetece un café?</b> — Хочешь кофе?<br>
+        + инфинитив: <b>¿Te apetece venir a cenar?</b> — Хочешь прийти на ужин?<br>
+        Ответы: <b>Sí, me apetece mucho</b> / <b>Me encantaría</b> / <b>Hoy no me apetece, gracias</b>.
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Глагол quedar: ¿Quedamos...?</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Схема</th>
+          <th>Пример</th>
+          <th>Перевод</th>
+        </tr>
+        <tr>
+          <td class="practice"><b>¿Quedamos + день?</b></td>
+          <td class="practice"><i>¿Quedamos el sábado?</i></td>
+          <td class="practice">Встретимся в субботу?</td>
+        </tr>
+        <tr>
+          <td><b>¿Quedamos + a las...?</b></td>
+          <td><i>¿Quedamos a las ocho?</i></td>
+          <td>Встретимся в восемь?</td>
+        </tr>
+        <tr>
+          <td><b>¿Quedamos + en + место?</b></td>
+          <td><i>¿Quedamos en la puerta del cole?</i></td>
+          <td>Встретимся у входа в школу?</td>
+        </tr>
+        <tr>
+          <td><b>quedar con + человек</b></td>
+          <td><i>Quedo con Marta el viernes.</i></td>
+          <td>Договорюсь с Мартой на пятницу.</td>
+        </tr>
+        <tr>
+          <td><b>¿A qué hora / dónde quedamos?</b></td>
+          <td><i>¿Dónde quedamos?</i></td>
+          <td>Где встречаемся?</td>
+        </tr>
+      </table>
+      <div class="note green" style="margin-top:10px">
+        📌 <b>Не путайте:</b> <b>quedar</b> = договориться о встрече; <b>quedarse</b> = остаться (где-то). «Nos quedamos un rato más» — мы остаёмся ещё ненадолго; «¿Quedamos a las ocho?» — встретимся в восемь?
+      </div>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Готовые чанки приглашения</h4>
+      <div class="example">
+        <b>¿Te apetece un café ahora mismo?</b> — Хочешь кофе прямо сейчас?<br>
+        <b>¿Quedamos un rato en la plaza?</b> — Встретимся ненадолго на площади?<br>
+        <b>Ven cuando quieras, estás invitado.</b> — Приходи когда хочешь, ты приглашён.<br>
+        <b>Pásate por casa y charlamos.</b> — Загляни к нам и поболтаем.<br>
+        <b>Nos encantaría que vinierais el sábado.</b> — Нам было бы приятно, если бы вы пришли в субботу.
+      </div>
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«¿Tú apetece un café?»</i> ❌ → <i>«¿Te apetece un café?»</i> ✅ (apetecer работает как gustar: te / os, не tú)<br>
+      • <i>«Quedamos en las ocho.»</i> ❌ → <i>«Quedamos a las ocho.»</i> ✅ (время — через <b>a</b>)<br>
+      • <i>«Voy a quedar mi vecina.»</i> ❌ → <i>«Voy a quedar <b>con</b> mi vecina.»</i> ✅ (quedar con = встретиться с кем-то)<br>
+      • <i>«Hasta que hace tarde.»</i> ❌ → <i>«Hasta que se hace tarde.»</i> ✅ (se hace tarde — «позднеет»)
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c3">3</div>
+    <div class="step-title">
+      <h2>Практика: применим слова и грамматику</h2>
+      <span class="time">23:00 – 30:00 · 3 упражнения</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь слово</h4>
+    <p class="hint">Используйте: <b>apetece, quedamos, apetece, os, a, en, cuando</b>.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь фразу и перевод</h4>
+    <p class="hint">Нажмите испанскую фразу слева, затем её перевод справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c5">4</div>
+    <div class="step-title">
+      <h2>Аудирование: sobremesa у соседей Ruiz</h2>
+      <span class="time">30:00 – 37:00 · диалог «La sobremesa del domingo»</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speakDialog()" style="margin-bottom:12px">🔊 Прослушать диалог (два голоса)</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who op">Marta:</span> Bueno, comidita terminada. ¿Quién quiere café de sobremesa?<br>
+        <span class="who you">Родитель:</span> Yo sí, gracias. Está todo buenísimo, Marta.<br>
+        <span class="who op">Marta:</span> ¡Que aproveche! ¿Y qué me cuentas? Me dijo Carla que Leo empieza en el nuevo cole.<br>
+        <span class="who you">Родитель:</span> Sí, en serio, está encantado. Los niños del barrio van allí también.<br>
+        <span class="who op">Marta:</span> ¡Qué fuerte! Y vosotros, ¿cómo estáis? Ya más adaptados, ¿no?<br>
+        <span class="who you">Родитель:</span> Poco a poco. Yo qué sé: un día parece fácil y otro difícil.<br>
+        <span class="who op">Marta:</span> Normal. Nosotros también pasamos por eso. Bueno, pues... ¿tenéis planes para el sábado?<br>
+        <span class="who you">Родитель:</span> Nada aún. ¿Por qué?<br>
+        <span class="who op">Marta:</span> ¿Quedamos aquí para la sobremesa del sábado? Hacemos paella y los niños juegan.<br>
+        <span class="who you">Родитель:</span> ¡Nos encantaría! ¿A las dos?<br>
+        <span class="who op">Marta:</span> Perfecto, a las dos. Ven cuando quieras, no hay prisa.<br>
+        <span class="who you">Родитель:</span> Vale. Nos quedamos un rato más: ¡la sobremesa nos ha encantado!
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz"></div>
+
+    <div class="note teal" style="margin-top:14px">
+      📖 <b>CLIL-заметка: язык поддержания беседы.</b> Обратите внимание, как Марта «ведёт» разговор: <i>«¿Y qué me cuentas?»</i> — открывает тему; <i>«Normal»</i> — поддерживает; <i>«Bueno, pues...»</i> — меняет тему; <i>«¿Quedamos...?»</i> — приглашает. Три вопроса подряд — и разговор не умрёт никогда.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 5: РОЛЕВАЯ ИГРА + ПРОДУКТ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      <h2>Ролевая игра + продукт: guion de sobremesa</h2>
+      <span class="time">37:00 – 47:00 · CLIL + интерактив + конструктор + парная игра</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 CLIL-мини-текст: la sobremesa — третье блюдо обеда</h4>
+
+    <div class="clil-text">
+      <h4>Три части приёма пищи</h4>
+      <p><b>La comida</b> (сама еда) → <b>la sobremesa</b> (болтовня за столом) → <b>el café de sobremesa</b>. Слово sobremesa буквально «над столом»: тарелки убраны, а разговор живёт. Нормальная длительность — от 40 минут до двух часов; в воскресенье с семьёй — и больше.</p>
+
+      <h4>Правила sobremesa</h4>
+      <p>Гость не встаёт первым; хозяин не намекает на уход; телефон убирается на второй план; дети играют вокруг стола — это часть ритуала, а не помеха. Уйти можно фразой: <i>«Bueno, nos tenemos que ir... ¡qué bien lo hemos pasado!»</i></p>
+
+      <h4>Почему это святое</h4>
+      <p>Sobremesa — главный тренажёр испанского языка: здесь рождаются дружба с соседями, приглашения на paella и история района. Кто убегает сразу после еды, тот вписывается медленнее. Дать собремесе «дозреть» — лучший вклад в вашу адаптацию.</p>
+    </div>
+
+    <div class="note green">
+      📋 <b>Чек-лист «Как выжить в sobremesa»:</b><br>
+      ☐ Не вставайте первым — это сигнал «обед кончился»<br>
+      ☐ Задайте 2–3 вопроса: <i>¿qué me cuentas? / cuéntame</i><br>
+      ☐ Реагируйте: <i>¿en serio? / qué fuerte / no me lo puedo creer</i><br>
+      ☐ Примите кофе: <i>«Sí, un cortado, gracias»</i><br>
+      ☐ Меняйте тему мягко: <i>«Bueno, pues...»</i><br>
+      ☐ Уходите красиво: <i>«Bueno, nos tenemos que ir... ¡gracias por todo!»</i>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">💬 Интерактив: 8 фраз, которые держат беседу</h4>
+    <p class="hint">Нажмите на фразу — услышите её и узнаете, когда она уместна. Это ядро sobremesa-выживания.</p>
+
+    <div class="chat-chips">
+      <button class="chat-chip" onclick="showChat(0)">¿qué me cuentas?</button>
+      <button class="chat-chip" onclick="showChat(1)">cuéntame</button>
+      <button class="chat-chip" onclick="showChat(2)">¿en serio?</button>
+      <button class="chat-chip" onclick="showChat(3)">qué fuerte</button>
+      <button class="chat-chip" onclick="showChat(4)">no me lo puedo creer</button>
+      <button class="chat-chip" onclick="showChat(5)">yo qué sé</button>
+      <button class="chat-chip" onclick="showChat(6)">bueno, pues...</button>
+      <button class="chat-chip" onclick="showChat(7)">¡qué bien!</button>
+    </div>
+
+    <div id="chat-panel" class="chat-panel">Нажмите на фразу выше 👆</div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🔧 Конструктор: guion de sobremesa</h4>
+    <p class="hint">Заполните поля — получите готовый сценарий, который запишете голосовым.</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">☕ КОНСТРУКТОР: Mi sobremesa</div>
+
+      <div class="field">
+        <label>👤 Имя соседа / соседки:</label>
+        <input type="text" id="b-name" placeholder="Marta" value="Marta">
+      </div>
+
+      <div class="field">
+        <label>☕ Предлагаете (¿Te apetece...?):</label>
+        <select id="b-drink">
+          <option value="un café" selected>un café (кофе)</option>
+          <option value="una infusión">una infusión (травяной чай)</option>
+          <option value="otra ración de tortilla">otra ración de tortilla (ещё тортильи)</option>
+          <option value="un refresco">un refresco (газировка)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🎯 Тема разговора (¿Qué me cuentas de...?):</label>
+        <select id="b-topic">
+          <option value="vuestro barrio" selected>vuestro barrio (ваш район)</option>
+          <option value="el nuevo cole de Leo">el nuevo cole de Leo (новая школа Лео)</option>
+          <option value="la cocina española">la cocina española (испанская кухня)</option>
+          <option value="vuestros planes del finde">vuestros planes del finde (ваши планы на выходные)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>😲 Ваша реакция на историю:</label>
+        <select id="b-react">
+          <option value="¡Qué fuerte!" selected>¡Qué fuerte! (ничего себе)</option>
+          <option value="¿En serio?">¿En serio? (серьёзно?)</option>
+          <option value="¡No me lo puedo creer!">¡No me lo puedo creer! (не могу поверить)</option>
+          <option value="¡Qué bien!">¡Qué bien! (как здорово)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>📅 Приглашение (¿Quedamos...?):</label>
+        <select id="b-invite">
+          <option value="el sábado por la tarde" selected>el sábado por la tarde (в субботу днём)</option>
+          <option value="el domingo para la sobremesa">el domingo para la sobremesa (в воскресенье на собремесу)</option>
+          <option value="un día de esta semana">un día de esta semana (какой-нибудь день на этой неделе)</option>
+          <option value="para cenar el viernes">para cenar el viernes (поужинать в пятницу)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>⏰ Сколько останетесь:</label>
+        <select id="b-time">
+          <option value="hasta que se hace tarde" selected>hasta que se hace tarde (пока не станет поздно)</option>
+          <option value="un rato más">un rato más (ещё ненадолго)</option>
+          <option value="un par de horas">un par de horas (пары часов)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>👋 Финальная фраза:</label>
+        <select id="b-close">
+          <option value="Nos vemos el sábado" selected>Nos vemos el sábado (увидимся в субботу)</option>
+          <option value="Te llamo esta semana">Te llamo esta semana (позвоню на этой неделе)</option>
+          <option value="Pásate por casa cuando quieras">Pásate por casa cuando quieras (загляни когда хочешь)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildScript()" style="margin-top:12px">🔧 Собрать сценарий</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с собранным сценарием (6–8 предложений, 2 дубля). Это ваш артефакт недели 18: «как я держу sobremesa».
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🎭 Ролевая игра в парах</h4>
+    <p class="hint">Разыграйте «La sobremesa del domingo». Затем поменяйтесь ролями.</p>
+
+    <div class="roleplay-box">
+      <h4>🎭 Роли</h4>
+      <div class="role-card">
+        <h5>👩 Роль A — Marta, vecina española</h5>
+        <ul>
+          <li>Предлагает кофе: <i>«¿Más café? Se hace en un momento.»</i></li>
+          <li>Открывает темы: <i>«¿Y qué me cuentas?»</i></li>
+          <li>Реагирует: <i>«¿En serio?», «¡Qué fuerte!»</i></li>
+          <li>Приглашает: <i>«¿Quedamos el sábado para la paella?»</i></li>
+          <li>Не отпускает быстро: <i>«¡Quedarse un rato más!»</i></li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <h5>👨‍👩‍👧 Роль B — родитель-релокант</h5>
+        <ul>
+          <li>Принимает: <i>«Sí, gracias, muy rico.»</i></li>
+          <li>Рассказывает: про cole, barrio, los niños</li>
+          <li>Реагирует: <i>«¿En serio?», «Yo qué sé...»</i></li>
+          <li>Договаривается: <i>«¡Nos encantaría! ¿A las dos?»</i></li>
+          <li>Уходит красиво: <i>«Bueno, nos tenemos que ir. ¡Qué bien lo hemos pasado!»</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note blue">
+      🆘 <b>Фразы-спасатели:</b><br>
+      • <i>«Perdone, no entiendo.»</i> — Извините, не понимаю.<br>
+      • <i>«¿Puede repetir, por favor?»</i> — Можете повторить?<br>
+      • <i>«¿Puede hablar más despacio?»</i> — Можете медленнее?<br>
+      • <i>«Lo estoy aprendiendo, poco a poco.»</i> — Я учусь, понемногу.
+    </div>
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">✅</div>
+    <div class="step-title">
+      <h2>Самопроверка «Светофор»</h2>
+      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🏠</div>
+    <div class="step-title">
+      <h2>Домашнее задание · Урок 18.1</h2>
+      <span class="time">⏱ ~30–35 минут · 6 заданий</span>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и конструкции приглашения.</div>
+    <p>Карточки, сопоставление, «собери фразу» — фокус на <b>te / os apetece</b> и <b>quedar</b>.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Mi sobremesa» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: проговорить сценарий собремесы целиком.</div>
+    <p>Запишите голосовое на 6–8 предложений по шаблону из конструктора, минимум 2 дубля:</p>
+    <div class="note blue">
+      ¡Que aproveche! ¿Te apetece un café? Yo sí, gracias.<br>
+      ¿Y qué me cuentas del barrio? — ¿En serio? ¡Qué fuerte!<br>
+      Oye, ¿quedamos el sábado por la tarde para la paella?<br>
+      ¡Nos encantaría! Ven cuando quieras, no hay prisa.<br>
+      Bueno, pues... nos quedamos un rato más. ¡Qué bien lo hemos pasado!
+    </div>
+    <button class="btn btn-ghost" onclick="speak('¡Que aproveche! ¿Te apetece un café? Yo sí, gracias. ¿Y qué me cuentas del barrio? ¿En serio? ¡Qué fuerte! Oye, ¿quedamos el sábado por la tarde para la paella? ¡Nos encantaría! Ven cuando quieras, no hay prisa. Bueno, pues... nos quedamos un rato más. ¡Qué bien lo hemos pasado!')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📱 Задание 3. Реальное действие · 5 мин</h4>
+    <div class="hw-meta">Цель: перенести приглашение в реальную жизнь.</div>
+    <p>Напишите в чат родителям из класса или соседу (WhatsApp, приложение школы):</p>
+    <div class="note">
+      Hola, soy [имя], la madre / el padre de [имя ребёнка].<br>
+      ¿Te apetece un café esta semana? ¿Quedamos por el barrio?
+    </div>
+    <p>Зафиксируйте ответ (даже «ahora no puedo» — это уже диалог).</p>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: мини-диалог sobremesa · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить фазы беседы письменно.</div>
+    <p>Напишите 6–8 строк: приглашение → тема → реакция → новое приглашение → прощание. Используйте минимум <b>5 фраз-поддержек</b> из интерактива.</p>
+    <button class="btn btn-ghost" onclick="speak('¿Y qué me cuentas? Cuéntame del barrio. ¿En serio? ¡Qué fuerte! No me lo puedo creer. Bueno, pues... ¿otro café? Ven cuando quieras, estás invitado.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 3 мин</h4>
+    <div class="hw-meta">Цель: устроить sobremesa с ребёнком — связь с детским курсом.</div>
+    <p>За ужином спросите ребёнка по-испански:</p>
+    <div class="note green">
+      ¿Qué me cuentas del cole?<br>
+      ¿La comida estaba buena?<br>
+      ¿Te apetece un postre?
+    </div>
+    <p>Ребёнок отвечает, родитель реагирует:</p>
+    <div class="note blue">
+      ¡Qué bien! Cuéntame más.<br>
+      Vale, pues... un yogur, ¿no?
+    </div>
+    <button class="btn btn-ghost" onclick="speak('¿Qué me cuentas del cole? ¿La comida estaba buena? ¿Te apetece un postre? ¡Qué bien! Cuéntame más. Vale, pues... un yogur, ¿no?')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📄 Задание 6. Мини-проект «Mi chuleta de sobremesa» · 10–12 мин</h4>
+    <div class="hw-meta">Цель: собрать личную шпаргалку выживания в беседе.</div>
+    <p>Сделайте карточку (бумага или заметка в телефоне): <b>8 фраз-поддержок</b> + <b>2 приглашения</b> (¿te apetece...? / ¿quedamos...?) + <b>1 фраза ухода</b>. Повесьте на холодильник или поставьте как закреплённую заметку.</p>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Mi sobremesa» (2 дубля)<br>
+    • 📱 Скриншот/текст приглашения в чат<br>
+    • ✍️ Мини-диалог (6–8 строк)<br>
+    • 📄 Фото шпаргалки «Mi chuleta de sobremesa»<br>
+    • ✅ Светофор самопроверки
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head">
+    <div class="step-num">🎮</div>
+    <div class="step-title">
+      <h2>Тренажёр: слова и грамматика</h2>
+      <span class="time">~7–10 мин</span>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 18.1</h3>
+    <p>Повторите слова урока в приложении Quizlet: sobremesa, беседа, приглашения, за столом, темы для разговора.</p>
+    <!-- QUIZLET: родители урок 18.1 (ссылку добавит админ) -->
+    <a href="#" onclick="return false;">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- КНОПКИ НАВИГАЦИИ -->
+<div class="lesson-nav">
+  <a href="./w17-l3.html">← Предыдущий<br><small>Урок 17.3 · Конфликт с соседом</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="w18-l2.html">Следующий →<br><small>Урок 18.2 · Погода и футбол</small></a>
+</div>
+
+<!-- ФУТЕР -->
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · Блок 4 Vida Social y Choque Cultural<br>
+  18.1 · Sobremesa
+</footer>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES'; u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Диалог в два голоса (vecina / родитель) =====
+var DIALOG_LINES = [
+  {who:'op',  label:'Marta:',   es:'Bueno, comidita terminada. ¿Quién quiere café de sobremesa?'},
+  {who:'you', label:'Родитель:', es:'Yo sí, gracias. Está todo buenísimo, Marta.'},
+  {who:'op',  label:'Marta:',   es:'¡Que aproveche! ¿Y qué me cuentas? Me dijo Carla que Leo empieza en el nuevo cole.'},
+  {who:'you', label:'Родитель:', es:'Sí, en serio, está encantado. Los niños del barrio van allí también.'},
+  {who:'op',  label:'Marta:',   es:'¡Qué fuerte! Y vosotros, ¿cómo estáis? Ya más adaptados, ¿no?'},
+  {who:'you', label:'Родитель:', es:'Poco a poco. Yo qué sé: un día parece fácil y otro difícil.'},
+  {who:'op',  label:'Marta:',   es:'Normal. Nosotros también pasamos por eso. Bueno, pues... ¿tenéis planes para el sábado?'},
+  {who:'you', label:'Родитель:', es:'Nada aún. ¿Por qué?'},
+  {who:'op',  label:'Marta:',   es:'¿Quedamos aquí para la sobremesa del sábado? Hacemos paella y los niños juegan.'},
+  {who:'you', label:'Родитель:', es:'¡Nos encantaría! ¿A las dos?'},
+  {who:'op',  label:'Marta:',   es:'Perfecto, a las dos. Ven cuando quieras, no hay prisa.'},
+  {who:'you', label:'Родитель:', es:'Vale. Nos quedamos un rato más: ¡la sobremesa nos ha encantado!'}
+];
+
+function speakDialog(){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var i = 0;
+  (function next(){
+    if(i >= DIALOG_LINES.length) return;
+    var line = DIALOG_LINES[i++];
+    var u = new SpeechSynthesisUtterance(line.es);
+    u.lang = 'es-ES';
+    if(line.who === 'you'){
+      u.rate = 1.0;   // родитель: чуть быстрее
+      u.pitch = 1.35; // и заметно выше
+    } else {
+      u.rate = 0.85;  // соседка: чуть медленнее
+      u.pitch = 0.75; // и заметно ниже
+    }
+    var voices = speechSynthesis.getVoices();
+    var v = voices.find(function(x){ return x.lang && x.lang.toLowerCase().startsWith('es'); });
+    if(v) u.voice = v;
+    u.onend = next;
+    speechSynthesis.speak(u);
+  })();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      item.o.map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === questions[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[questions[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ (17.3) =====
+var warmQ = [
+  {q:'1. Как сказать «жалоба»?', o:['la queja','la multa','la sobremesa'], c:0},
+  {q:'2. Как вежливо начать трудный разговор с соседом?', o:['¿podemos hablar un momento?','¿qué me cuentas?','estoy lleno'], c:0},
+  {q:'3. Что такое la mediación?', o:['нейтральный посредник помогает договориться','штраф от полиции','письмо от управляющего'], c:0},
+  {q:'4. Как усилить просьбу?', o:['te lo pido por favor','es que...','huele mal'], c:0},
+  {q:'5. К кому идти, если разговор с соседом не помог?', o:['al administrador (управляющий домом)','al bar de la plaza','al árbol del patio'], c:0},
+  {q:'6. Какой шаг в конфликте был первым по уроку 17.3?', o:['поговорить и попытаться llegar a un acuerdo','сразу вызвать полицию','сделать la denuncia'], c:0}
+];
+
+function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  sobremesa:[
+    {es:'la sobremesa', ru:'посиделки после еды', ex:'Después de comer llega la sobremesa.', exRu:'После еды наступает собремеса.'},
+    {es:'charlar', ru:'болтать', ex:'Charlamos un rato en el sofá.', exRu:'Мы болтаем немного на диване.'},
+    {es:'la tertulia', ru:'беседа (кружок)', ex:'En el barrio hay una tertulia de padres.', exRu:'В районе есть беседный кружок родителей.'},
+    {es:'la anécdota', ru:'анекдот / история', ex:'Cuenta siempre la misma anécdota.', exRu:'Он всегда рассказывает одну и ту же историю.'},
+    {es:'el café de sobremesa', ru:'кофе после еды', ex:'¿Quién quiere café de sobremesa?', exRu:'Кто хочет кофе после еды?'},
+    {es:'quedarse un rato más', ru:'остаться ещё ненадолго', ex:'Nos quedamos un rato más.', exRu:'Мы остаёмся ещё ненадолго.'},
+    {es:'hasta que se hace tarde', ru:'пока не станет поздно', ex:'Charlamos hasta que se hace tarde.', exRu:'Болтаем, пока не станет поздно.'}
+  ],
+  charla:[
+    {es:'¿qué me cuentas?', ru:'что расскажешь?', ex:'Pues nada, ¿qué me cuentas?', exRu:'Ну как, что расскажешь?'},
+    {es:'cuéntame', ru:'расскажи мне', ex:'Cuéntame del cumpleaños de Leo.', exRu:'Расскажи мне о дне рождения Лео.'},
+    {es:'no me lo puedo creer', ru:'не могу поверить', ex:'¿Lo hizo de verdad? No me lo puedo creer.', exRu:'Он правда так сделал? Не могу поверить.'},
+    {es:'en serio?', ru:'серьёзно?', ex:'¿En serio? ¡Qué fuerte!', exRu:'Серьёзно? Ничего себе!'},
+    {es:'qué fuerte', ru:'ничего себе', ex:'Qué fuerte, sin avisar ni nada.', exRu:'Ничего себе — без предупреждения.'},
+    {es:'yo qué sé', ru:'понятия не имею', ex:'Yo qué sé, luego lo preguntamos.', exRu:'Понятия не имею, потом спросим.'},
+    {es:'bueno, pues...', ru:'ну, значит...', ex:'Bueno, pues... ¿otro café?', exRu:'Ну, значит... ещё кофе?'}
+  ],
+  invites:[
+    {es:'¿te apetece un café?', ru:'хочешь кофе?', ex:'¿Te apetece un café en la terraza?', exRu:'Хочешь кофе на террасе?'},
+    {es:'¿quedamos el sábado?', ru:'встретимся в субботу?', ex:'¿Quedamos el sábado por la tarde?', exRu:'Встретимся в субботу днём?'},
+    {es:'¿te vienes con nosotros?', ru:'пойдёшь с нами?', ex:'¿Te vienes con nosotros al parque?', exRu:'Пойдёшь с нами в парк?'},
+    {es:'ven cuando quieras', ru:'приходи когда хочешь', ex:'Ven cuando quieras, aquí estamos.', exRu:'Приходи когда хочешь, мы на месте.'},
+    {es:'estás invitado', ru:'ты приглашён', ex:'El sábado hay paella, estás invitado.', exRu:'В субботу паэлья, ты приглашён.'},
+    {es:'pásate por casa', ru:'загляни к нам', ex:'Pásate por casa un rato.', exRu:'Загляни к нам ненадолго.'},
+    {es:'nos encantaría que vinierais', ru:'нам было бы приятно, если бы вы пришли', ex:'Nos encantaría que vinierais a cenar.', exRu:'Нам было бы приятно, если бы вы пришли на ужин.'}
+  ],
+  mesa:[
+    {es:'¡que aproveche!', ru:'приятного аппетита!', ex:'¡Que aproveche, está recién hecho!', exRu:'Приятного аппетита, только что приготовлено!'},
+    {es:'está buenísimo', ru:'очень вкусно', ex:'El guiso está buenísimo.', exRu:'Тушёное очень вкусное.'},
+    {es:'la receta', ru:'рецепт', ex:'¿Me das la receta de la tarta?', exRu:'Дашь мне рецепт торта?'},
+    {es:'¿me pasas la sal?', ru:'передай соль', ex:'¿Me pasas la sal, por favor?', exRu:'Передай соль, пожалуйста.'},
+    {es:'otra ración', ru:'ещё порцию', ex:'Quiero otra ración de tortilla.', exRu:'Хочу ещё порцию тортильи.'},
+    {es:'estoy lleno', ru:'я наелся', ex:'Estoy lleno, no puedo más.', exRu:'Я наелся, больше не могу.'},
+    {es:'estaba delicioso', ru:'было восхитительно', ex:'El arroz estaba delicioso.', exRu:'Рис был восхитителен.'}
+  ],
+  topics:[
+    {es:'el trabajo', ru:'работа', ex:'Hablamos del trabajo un rato.', exRu:'Мы немного поговорим о работе.'},
+    {es:'los niños', ru:'дети', ex:'Los niños juegan en el jardín.', exRu:'Дети играют в саду.'},
+    {es:'el cole', ru:'школа', ex:'¿Cómo va el cole?', exRu:'Как дела в школе?'},
+    {es:'el barrio', ru:'район', ex:'En el barrio hay fiesta en junio.', exRu:'В районе в июне праздник.'},
+    {es:'el fútbol', ru:'футбол', ex:'¿Viste el fútbol ayer?', exRu:'Видел футбол вчера?'},
+    {es:'la cocina', ru:'готовка', ex:'Me gusta hablar de cocina.', exRu:'Мне нравится говорить о готовке.'},
+    {es:'los planes del finde', ru:'планы на выходные', ex:'¿Cuáles son vuestros planes del finde?', exRu:'Какие у вас планы на выходные?'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('sobremesa', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'¿Te ___ un café? (apetecer)', ans:'apetece'},
+  {text:'¿___ el sábado por la tarde? (quedar)', ans:'quedamos'},
+  {text:'No me ___ nada de bailar. (apetecer)', ans:'apetece'},
+  {text:'¿___ venir a la sobremesa? (apetecer, vosotros)', ans:'os'},
+  {text:'¿Quedamos ___ las nueve? (a/en)', ans:'a'},
+  {text:'Quedamos ___ la puerta del parque. (a/en)', ans:'en'},
+  {text:'Ven ___ quieras. (cuando)', ans:'cuando'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'¿Te apetece un café?', translation:'Хочешь кофе?'},
+  {target:'¿Quedamos el sábado por la tarde?', translation:'Встретимся в субботу днём?'},
+  {target:'Nos apetece quedar un rato más.', translation:'Нам хочется остаться ещё ненадолго.'},
+  {target:'¿Qué me cuentas de vuestro barrio?', translation:'Что расскажешь о вашем районе?'},
+  {target:'Ven cuando quieras, estás invitado.', translation:'Приходи когда хочешь, ты приглашён.'},
+  {target:'Charlamos hasta que se hace tarde.', translation:'Болтаем, пока не станет поздно.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'la sobremesa', ru:'посиделки после еды'},
+  {id:2, es:'¿qué me cuentas?', ru:'что расскажешь?'},
+  {id:3, es:'¿te apetece un café?', ru:'хочешь кофе?'},
+  {id:4, es:'¿quedamos el sábado?', ru:'встретимся в субботу?'},
+  {id:5, es:'¡que aproveche!', ru:'приятного аппетита!'},
+  {id:6, es:'estoy lleno', ru:'я наелся'},
+  {id:7, es:'los planes del finde', ru:'планы на выходные'},
+  {id:8, es:'pásate por casa', ru:'загляни к нам'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZ =====
+var listenQ = [
+  {q:'1. ¿Qué ofrece Marta después de comer?', o:['café de sobremesa','helado','una cuenta'], c:0},
+  {q:'2. ¿Qué cuenta el padre?', o:['que Leo está encantado con el cole nuevo','que se mudan a otra ciudad','que la paella estaba mala'], c:0},
+  {q:'3. ¿Cómo reacciona Marta a la noticia?', o:['¡Qué fuerte! (удивлённая поддержка)','se enfada','cuelga el teléfono'], c:0},
+  {q:'4. ¿Qué proponen para el sábado?', o:['paella y sobremesa en casa de los Ruiz','ir al parque','ver un partido en el bar'], c:0},
+  {q:'5. ¿A qué hora quedan?', o:['a las dos','a las nueve','a las ocho'], c:0},
+  {q:'6. Что значит «ven cuando quieras, no hay prisa»?', o:['приходи когда хочешь, никто не торопит','приходи пораньше','не приходи'], c:0}
+];
+
+renderQuiz('listening-quiz', listenQ, 'lq');
+
+// ===== CHAT PHRASES INTERACTIVE =====
+var CHAT_PHRASES = [
+  {es:'¿qué me cuentas?', ru:'что расскажешь?', txt:'Открывает тему и показывает интерес. Главный вопрос sobremesa: задайте его — и вам расскажут всё про barrio, cole и соседей.'},
+  {es:'cuéntame', ru:'расскажи мне', txt:'Мягкая просьба продолжить. Говорите с интонацией интереса: «Cuéntame, cuéntame...» — и рассказчик не остановится.'},
+  {es:'¿en serio?', ru:'серьёзно?', txt:'Универсальное удивление. Работает на любую новость и просит собеседника продолжать историю.'},
+  {es:'qué fuerte', ru:'ничего себе', txt:'Сильная реакция. В Испании так отвечают и на шокирующее, и на просто яркое: «Qué fuerte, qué casa tan grande».'},
+  {es:'no me lo puedo creer', ru:'не могу поверить', txt:'«Да ладно, не верю!» Подогревает рассказчика — история точно продолжится.'},
+  {es:'yo qué sé', ru:'понятия не имею', txt:'Честное «не знаю» без паузы-ступора. Спасает, когда вопрос неожиданный: «Yo qué sé, luego lo preguntamos».'},
+  {es:'bueno, pues...', ru:'ну, значит...', txt:'Мостик для смены темы или мягкого завершения: «Bueno, pues... ¿otro café?»'},
+  {es:'¡qué bien!', ru:'как здорово!', txt:'Поддержка и радость за собеседника. Реагируйте так на хорошие новости — вас полюбят весь подъезд.'}
+];
+
+function showChat(i){
+  document.querySelectorAll('.chat-chip').forEach(function(c){ c.classList.remove('active'); });
+  document.querySelectorAll('.chat-chip')[i].classList.add('active');
+  var p = CHAT_PHRASES[i];
+  var panel = document.getElementById('chat-panel');
+  panel.innerHTML = '<div class="cp-es">' + p.es + ' <button class="speak-btn" id="chat-speak">🔊</button></div>' +
+    '<div class="cp-ru">' + p.ru + '</div>' +
+    '<div class="cp-txt">' + p.txt + '</div>';
+  document.getElementById('chat-speak').onclick = function(){ speak(p.es); };
+  speak(p.es);
+}
+
+// ===== SCRIPT BUILDER =====
+var lastScriptPlain = '';
+
+function buildScript(){
+  var name = document.getElementById('b-name').value || 'Marta';
+  var drink = document.getElementById('b-drink').value;
+  var topic = document.getElementById('b-topic').value;
+  var react = document.getElementById('b-react').value;
+  var invite = document.getElementById('b-invite').value;
+  var time = document.getElementById('b-time').value;
+  var close = document.getElementById('b-close').value;
+
+  var text = '¡Que aproveche! ¿Te apetece ' + drink + ', ' + name + '? ' +
+    '¿Qué me cuentas de ' + topic + '? ' + react + ' ' +
+    'Oye, ¿quedamos ' + invite + '? ' +
+    'Genial. Bueno, pues... charlamos ' + time + '. ' +
+    close + '. ¡Hasta luego!';
+
+  lastScriptPlain = text;
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML =
+    '<div class="dialog-result">' + text + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary" id="speak-script-btn">🔊 Прослушать сценарий</button>' +
+    '</div>';
+
+  document.getElementById('speak-script-btn').onclick = function(){
+    speak(lastScriptPlain);
+  };
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ===== TRAFFIC LIGHT =====
+var TL = [
+  'Поддерживать беседу: ¿qué me cuentas?, cuéntame, ¿en serio?',
+  'Реагировать на новости: qué fuerte, no me lo puedo creer',
+  'Приглашать: ¿te apetece...?, ¿quedamos...?, estás invitado',
+  'Говорить за столом: ¡que aproveche!, la receta, estoy lleno',
+  'Объяснить, что такое sobremesa и её правила',
+  'Разыграть sobremesa с соседями без пауз'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + (rowIdx + 1) + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + (rowIdx + 1) + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + (rowIdx + 1) + '" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.sobremesa, VOCAB.charla, VOCAB.invites, VOCAB.mesa, VOCAB.topics);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    updateCard();
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'¿Te apetece un café?', hint:'Хочешь кофе?'},
+    {target:'¿Quedamos el sábado por la tarde?', hint:'Встретимся в субботу днём?'},
+    {target:'¿Qué me cuentas de tu barrio?', hint:'Что расскажешь о своём районе?'},
+    {target:'Nos apetece quedar un rato más', hint:'Нам хочется остаться ещё ненадолго'},
+    {target:'Ven cuando quieras, estás invitado', hint:'Приходи когда хочешь, ты приглашён'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>

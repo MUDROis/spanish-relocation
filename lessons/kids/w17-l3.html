@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 51: PBL: Menú de la semana — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#E76F51; --love:#C14E32;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FBE3DA 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(231,111,81,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#FBE3DA,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FBE3DA;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #F6D5CB;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#FBE3DA,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #eed4cb;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #f3e5df;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#FBE3DA}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+
+  /* === УРОК 51: PBL «МЕНЮ НЕДЕЛИ» (уникальные стили) === */
+  .step-item{display:flex;align-items:center;gap:12px;background:#fff;border:2.5px solid #F6D5CB;border-radius:14px;padding:12px 14px;margin:8px 0;cursor:pointer;transition:.15s;text-align:left;font-family:'Nunito'}
+  .step-item:hover{border-color:var(--heart)}
+  .step-item.done{background:#E8F5E9;border-color:var(--green)}
+  .step-item.done .step-es::after{content:' ✅'}
+  .step-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .step-item.done .step-num{background:var(--green)}
+  .step-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .step-emo{font-size:1.5rem}
+  .step-ru{font-size:.82rem;color:var(--ink-soft);font-weight:700}
+  .menu-day{background:#fff;border:2.5px solid #F6D5CB;border-radius:14px;padding:12px;margin:8px 0}
+  .menu-day h5{color:var(--love);font-size:1rem;margin-bottom:6px}
+  .menu-day select{width:100%;margin:4px 0;font-family:'Nunito';font-weight:800;padding:8px 10px;border-radius:10px;border:2px solid #F6D5CB;background:#fff;color:var(--ink);font-size:.9rem}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+  .sana-out{background:#FFECDD;border:2.5px solid var(--red);border-radius:14px;padding:14px 18px;margin:12px 0;font-weight:700;line-height:1.9}
+  .sana-out.ok{background:#E8F5E9;border-color:var(--green)}
+  .sana-out b{color:var(--love)}
+  .sana-out.ok b{color:var(--green)}
+  .menu-preview{background:#fff;border:3px double var(--heart);border-radius:18px;padding:20px 24px;margin:14px 0;text-align:center}
+  .menu-preview h4{letter-spacing:2px;color:var(--love);text-transform:uppercase}
+  .menu-preview .mp-sub{color:var(--ink-soft);font-weight:700;font-size:.85rem;margin-bottom:10px}
+  .mp-day{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px dashed #f3e5df;padding:8px 2px;font-weight:700;text-align:left;font-size:.9rem;flex-wrap:wrap}
+  .mp-day .d{font-family:'Baloo 2',cursive;color:var(--heart);min-width:110px}
+  .mp-price{color:var(--green);white-space:nowrap;font-weight:800}
+  .menu-title-in{width:100%;max-width:420px;font-family:'Baloo 2',cursive;font-size:1.1rem;padding:10px 14px;border-radius:12px;border:2.5px dashed var(--heart);text-align:center;color:var(--love)}
+  .pb-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0;font-weight:800}
+  .pb-row select{font-family:'Nunito';font-weight:800;padding:8px 12px;border-radius:10px;border:2px solid var(--heart);background:#fff;color:var(--ink);font-size:.95rem}
+  .pb-out{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;font-weight:700;line-height:1.9;min-height:60px}
+  .pb-out b{color:var(--heart)}
+  .rubric{background:#FBE3DA;border-radius:16px;padding:14px 18px;margin:12px 0;font-weight:700;line-height:1.9}
+  .rubric b{color:var(--heart)}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 5 · ¡A Comer! · Урок 6 из 9</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🍕 СТАНЦИЯ 5 · УРОК 6 · НЕДЕЛЯ 17</span>
+  <div class="hero-emojis">📋 🥗 🎨 🎤 👨‍🍳</div>
+  <h1>PBL: Menú de la <span>semana</span></h1>
+  <p class="sub"><strong>ФИНАЛ станции 5!</strong> Сегодня ты — шеф-повар: собираешь <strong>меню недели</strong> для столовой из блюд с ценами, проверяешь «¿sano?» и оформляешь его как ресторанное меню. А на защите скажешь: <em>«¡Nuestro menú es el mejor!»</em> 🏆</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты защищаешь свой проект:<br>
+    <em>«Nuestro menú es el mejor porque es equilibrado: hay fruta cada día, verduras de primero y pescado de segundo. ¡Buen provecho!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">📅</span> Составить меню на 5 дней: primero, segundo, postre</div>
+      <div class="goal-item"><span class="emoji">💶</span> Работать с ценами: el precio, el total</div>
+      <div class="goal-item"><span class="emoji">🍎</span> Проверить «¿Sano?»: фрукты — каждый день!</div>
+      <div class="goal-item"><span class="emoji">🎨</span> Оформить ресторанное меню: título y dibujo</div>
+      <div class="goal-item"><span class="emoji">🎤</span> Защитить проект: «Nuestro menú es el mejor porque...»</div>
+      <div class="goal-item"><span class="emoji">🏁</span> Пройти чекпоинт станции: заказ обеда + аллергия</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 50</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, capitán! Вчера ты командовал столовой. Ответь ВСЛУХ. Мостик: «Командовать умеешь. Сегодня ты становишься ШЕФ-ПОВАРОМ и создаёшь МЕНЮ НЕДЕЛИ!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ПЛАН ПРОЕКТА -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head">
+      <h2 class="block-title">⭐ План проекта: 6 шагов</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">Кликай на каждый шаг — услышишь его по-испански и отметь как выполненный. Так работают настоящие шеф-повара!</p>
+    <div id="steps-list"></div>
+    <div class="stars-line" style="text-align:center">📋 Шаги проекта: <span id="steps-count">0</span> / 6</div>
+    <div class="script">⚡ <strong>Секрет PBL:</strong> сначала изучаем образец (<em>el menú escolar</em>), потом выбираем блюда, проверяем пользу, оформляем — и только в конце защищаем. ¡Por partes!</div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: язык меню</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('El lunes comemos sopa.')"><td><b>EL LUNES COMEMOS...</b></td><td>El lunes comemos sopa.</td><td>В понедельник мы едим суп.</td><td>🔊</td></tr>
+      <tr onclick="speak('De primero hay ensalada.')"><td><b>DE PRIMERO / SEGUNDO / POSTRE</b></td><td>De primero hay ensalada.</td><td>На первое — салат.</td><td>🔊</td></tr>
+      <tr onclick="speak('Nuestro menú es equilibrado.')"><td><b>NUESTRO MENÚ ES...</b></td><td>Nuestro menú es equilibrado.</td><td>Наше меню сбалансированное.</td><td>🔊</td></tr>
+      <tr onclick="speak('Es sano porque hay fruta cada día.')"><td><b>ES SANO PORQUE...</b></td><td>Es sano porque hay fruta cada día.</td><td>Это полезно, потому что фрукты каждый день.</td><td>🔊</td></tr>
+      <tr onclick="speak('El plato del día es el pescado.')"><td><b>EL PLATO DEL DÍA</b></td><td>El plato del día es el pescado.</td><td>Блюдо дня — рыба.</td><td>🔊</td></tr>
+      <tr onclick="speak('El menú cuesta veintiún euros.')"><td><b>EL MENÚ CUESTA...</b></td><td>El menú cuesta veintiún euros.</td><td>Меню стоит двадцать один евро.</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> <span class="grammar-hint" data-hint="DE PRIMERO — часть меню: «De primero hay sopa». А «el primer plato» — само блюдо: «el primer plato es la sopa». Дни недели с артиклем: EL lunes, EL martes... «El lunes comemos» = «в понедельник мы едим». Порядок дней: lunes, martes, miércoles, jueves, viernes.">de primero vs el primer plato</span>: <b>de primero</b> — «на первое» (графа меню), <b>el plato</b> — само блюдо. Дни: <em>el lunes, el martes, el miércoles...</em><br>8 лет: просто копируй формулу: <em>«El [день] comemos [еда]»</em>. 📅</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Собери фразу меню»: 8 раундов</p>
+      <div class="game-q" id="gm-q"></div>
+      <div class="opts" id="gm-opts"></div>
+      <div class="game-fb" id="gm-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="gm-stars">0</span> / <span id="gm-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="gmStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ПРОЕКТ -->
+  <section class="block" style="--c:#C2185B">
+    <div class="block-head">
+      <h2 class="block-title">📋 ПРОЕКТ: Menú de la semana</h2>
+      <span class="time-badge">⏱ 20 минут</span>
+    </div>
+    <p class="block-sub">Три части: 1) собери меню на 5 дней и проверь «¿Sano?», 2) оформи как ресторанное меню, 3) подготовь защиту.</p>
+
+    <h4 style="margin:8px 0 4px">🍽️ Часть 1. Конструктор: 5 дней × primero/segundo/postre</h4>
+    <p class="block-sub">В каждом блюде есть цена (el precio). Выбирай — сумма недели посчитается сама!</p>
+    <div class="menu-grid" id="menu-days"></div>
+    <div class="sana-out" id="sana-out">👆 Собери меню на все 5 дней и нажми «¿Sano?» — проверим, полезное ли оно! Правило шефа: <b>🍎 fruta cada día</b>!</div>
+    <button class="speak-btn" style="margin-top:10px" onclick="checkSano()">🍎 ¿Sano? Проверить меню</button>
+
+    <h4 style="margin:18px 0 4px">🎨 Часть 2. Оформи как ресторанное меню</h4>
+    <p class="block-sub">Придумай título (заголовок), потом нажми кнопку — меню примет вид ресторанной карточки. Дома перепиши его на бумагу и добавь dibujo (аппетитный рисунок)!</p>
+    <input class="menu-title-in" id="menu-title" placeholder="Título: La Cantina del Chef..." value="La Cantina del Chef">
+    <div class="menu-preview" id="menu-preview"></div>
+    <button class="speak-btn" style="margin-top:10px" onclick="renderMenu()">🖼️ Оформить меню</button>
+    <button class="speak-btn" style="margin-top:10px;background:var(--green)" onclick="speakMenu()">🔊 Escuchar el menú</button>
+
+    <h4 style="margin:18px 0 4px">🎤 Часть 3. Защита: «Nuestro menú es el mejor porque...»</h4>
+    <p class="block-sub">Выбирай аргументы — защита соберётся сама. Потренируйся вслух!</p>
+    <div class="pb-row">1️⃣
+      <select id="def-1"><option>Nuestro menú tiene fruta cada día</option><option>Nuestro menú tiene verduras de primero</option><option>Nuestro menú tiene pescado dos veces</option></select>.
+    </div>
+    <div class="pb-row">2️⃣
+      <select id="def-2"><option>Es sano porque hay fruta cada día</option><option>Es sano porque hay verduras y fruta</option><option>Es sano porque no hay muchos dulces</option></select>.
+    </div>
+    <div class="pb-row">3️⃣
+      <select id="def-3"><option>El miércoles hay sopa.</option><option>El martes hay ensalada.</option><option>El jueves hay pescado.</option></select>
+    </div>
+    <div class="pb-row">4️⃣
+      <select id="def-4"><option>Los niños comen fruta cada día.</option><option>Los niños comen verduras cada día.</option><option>Los niños beben agua cada día.</option></select>
+    </div>
+    <div class="pb-out" id="def-out">Выбери аргументы — защита соберётся сама! 👆</div>
+    <button class="speak-btn" style="margin-top:10px" onclick="speakDef()">🔊 Defensa del proyecto</button>
+    <div class="rubric">
+      <strong>✅ Rubric «Скажи 3 предложения» (мини-защита проекта):</strong><br>
+      □ <b>Фраза 1:</b> Nuestro menú es el mejor porque tiene...<br>
+      □ <b>Фраза 2:</b> Es sano porque hay fruta cada día.<br>
+      □ <b>Фраза 3:</b> El [день] hay [блюдо]. ¡Buen provecho!<br>
+      💡 Совет учителя: <em>«Habla con orgullo: ¡eres el chef de la semana!»</em>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: CLIL -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">🔬 CLIL: кто и как составляет меню недели</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">Секрет профессии nutricionista — специалиста, который придумывает меню. Читаем!</p>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakClil()">🔊 Послушать текст</button>
+    <div class="read-box">
+      El menú de la semana lo hace un <b>nutricionista</b>. Un menú <b>equilibrado</b> tiene: verduras, arroz o pasta <b>de primero</b>; carne o pescado <b>de segundo</b>; y <b>fruta de postre cada día</b>. El pescado suele estar dos veces por semana, y los dulces, muy poco. Cada comunidad de España publica sus menús escolares en internet: puedes ver el <b>plato del día</b> y <b>el precio</b>. Ahora tú también puedes diseñar un menú: ¡de primero, de segundo y de postre para cada día!
+    </div>
+    <div id="clil-quiz"></div>
+    <div class="script">🔬 <strong>CLIL-наука (12 лет):</strong> «equilibrado» — как весы ⚖️: овощи + белок (carne/pescado) + fruta. Диетологи советуют: pescado 2 раза в неделю, dulces — редко. 8 лет: найди в своём проекте самое полезное блюдо и скажи: <em>«Es sano porque...»</em></div>
+  </section>
+
+  <!-- БЛОК 5: ГОВОРЕНИЕ — ЗАЩИТА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Говорение: защита проекта</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="script">ВЫВОД В РЕЧЬ! Защита = формула из 6 пунктов. Расскажи вслух, как настоящий шеф-повар!</div>
+    <div class="read-box" style="background:#FBE3DA;border-color:var(--heart)">
+      <strong>📋 Формула защиты (6 пунктов):</strong><br>
+      1. <em><b>Este es nuestro menú de la semana</b> para el comedor.</em><br>
+      2. <em><b>El lunes comemos</b> sopa, pollo y manzana.</em><br>
+      3. <em><b>De primero</b> hay [блюдо]; <b>de segundo</b>, [блюдо].</em><br>
+      4. <em><b>Es sano porque</b> hay fruta cada día.</em><br>
+      5. <em><b>El menú cuesta</b> [цена] euros.</em><br>
+      6. <em>¿<b>Preguntas</b>? Gracias por escuchar. ¡Nuestro menú es el mejor!</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- ЧЕКПОИНТ СТАНЦИИ 5 -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🏁 Мини-чекпоинт: «Закажи обед и скажи про аллергию»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">Финальная проверка всей станции 5! Пройди 3 шага вслух — как в настоящей столовой.</p>
+    <div id="cp-list"></div>
+    <div class="stars-line" style="text-align:center">🏁 Чекпоинт: <span id="cp-count">0</span> / 3</div>
+    <div class="script">🏆 <strong>Чекпоинт = выпускной станции «¡A Comer!»:</strong> ты умеешь заказать обед, сказать про аллергию и вежливо закончить. ¡Estás listo!</div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">👨‍🍳</div>
+      <h3>Шеф-повар года</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты собрал меню недели, проверил его «¿sano?», оформил как ресторан и защитил проект!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Шеф-повар года» 👨‍🍳 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🎉 <strong>Станция 5 пройдена!</strong> Ты умеешь: еда и напитки, веса и цены, frutería, семейная миссия, меню и аллергия, verduras и команды. 🔜 <strong>Анонс недели 18:</strong> «Урок 52: <b>Mi barrio</b> 🏘 — новая станция 6! Гуляем по своему району и узнаём, где la panadería, el parque y el supermercado!»</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">📋 Меню</h4>
+    <div class="cards-grid" id="words-g1"></div>
+    <h4 style="margin:14px 0 8px">🎨 Дизайн</h4>
+    <div class="cards-grid" id="words-g2"></div>
+    <h4 style="margin:14px 0 8px">🎤 Защита проекта</h4>
+    <div class="cards-grid" id="words-g3"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E76F51">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание (продукт недели!)</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Пройди проект в уроке</strong> · 15 мин<br>Собери меню на 5 дней, пройди проверку «¿Sano?» и оформи ресторанное меню с título.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>📋 ПРОДУКТ НЕДЕЛИ: бумажное меню</strong> · 20 мин ⭐<br>Перепиши меню недели на лист как РЕСТОРАННОЕ: título, 5 дней × (primero / segundo / postre), el precio, apetitoso dibujo, decoración. Это главное задание!</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎤 Голосовое: защита проекта</strong> · 5 мин ⭐<br>По rubric «3 предложения» или по формуле 6 пунктов: <em>«Nuestro menú es el mejor porque...»</em>. Отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🏁 Чекпоинт станции 5</strong> · 5 мин ⭐<br>Запиши голосовое (или видео): закажи обед (<em>«El menú, por favor»</em>) и скажи про аллергию (<em>«Soy alérgico a... / No tengo alergias»</em>).</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🧩 Тренажёры</strong> · 10 мин ⭐<br>Игра «Собери фразу меню» + сопоставление 12 пар + повтори меню вслух.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>🔎 Дифференциация</strong> · 10 мин ⭐<br><b>12 лет:</b> найди в интернете настоящее menú escolar твоей будущей школы/региона и сравни с проектом: что совпало? Посчитай разницу цен.<br><b>8 лет:</b> нарисуй apetitoso dibujo к одному дню недели и подпиши блюда по-испански.</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+    <div class="script" style="margin-top:14px">📤 <strong>Формат сдачи:</strong> фото меню + 2 голосовых (защита + чекпоинт). ¡Felicidades, chef de la semana!</div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Говорить «el lunes comemos... de primero/segundo/postre»</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Собрать меню недели из блюд с ценами</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Проверять меню «¿Sano?»: фрукты каждый день</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Оформить меню: título, precio, dibujo</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Защитить проект: «Nuestro menú es el mejor porque...»</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Чекпоинт: заказать обед и сказать про аллергию</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 5 · Урок 6 (PBL: Menú de la semana)</span>
+    <span>Открыть карточки →</span>
+  </a>
+  <!-- QUIZLET: дети урок 51 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w17-l2.html" class="nav-prev"><div class="nav-small">← Урок 5 станции 5</div><div class="nav-title">Урок 50: ¡Come las verduras! 🥦</div></a>
+    <a href="./w18-l1.html"><div class="nav-small">Неделя 18 · Урок 1 →</div><div class="nav-title">Урок 52: Mi barrio 🏘 — станция 6 </div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 5: ¡A Comer! · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ: СЛОВА УРОКА (из словаря w17-l3.json, без изменений) ===== */
+var G1=[
+ {emo:'📋',es:'el menú de la semana',ru:'меню недели'},
+ {emo:'🗓️',es:'el lunes comemos',ru:'в понедельник мы едим'},
+ {emo:'🥣',es:'de primero',ru:'на первое'},
+ {emo:'🍗',es:'de segundo',ru:'на второе'},
+ {emo:'🍰',es:'de postre',ru:'на десерт'},
+ {emo:'⭐',es:'el plato del día',ru:'блюдо дня'},
+ {emo:'⚖️',es:'equilibrado',ru:'сбалансированный'}
+];
+var G2=[
+ {emo:'✏️',es:'diseñar',ru:'разрабатывать (дизайн)'},
+ {emo:'🎨',es:'decorar',ru:'украшать'},
+ {emo:'🖍️',es:'el dibujo',ru:'рисунок'},
+ {emo:'🔤',es:'el título',ru:'заголовок'},
+ {emo:'💶',es:'el precio',ru:'цена'},
+ {emo:'🤤',es:'apetitoso',ru:'аппетитный'},
+ {emo:'😋',es:'¡buen provecho!',ru:'приятного аппетита!'}
+];
+var G3=[
+ {emo:'📋',es:'Nuestro menú tiene...',ru:'В нашем меню есть...'},
+ {emo:'💚',es:'Es sano porque...',ru:'Это полезно, потому что...'},
+ {emo:'🥣',es:'El miércoles hay sopa.',ru:'В среду суп.'},
+ {emo:'🍎',es:'Los niños comen fruta cada día.',ru:'Дети едят фрукты каждый день.'},
+ {emo:'❓',es:'¿Preguntas?',ru:'Вопросы?'},
+ {emo:'🙏',es:'gracias por escuchar',ru:'спасибо за внимание'},
+ {emo:'🏆',es:'¡nuestro menú es el mejor!',ru:'наше меню лучшее!'}
+];
+function renderCards(list,id){
+  var box=document.getElementById(id);
+  list.forEach(function(w){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+w.emo+'</div><div class="es">'+w.es+'</div><div class="ru">'+w.ru+'</div>';
+    d.addEventListener('click',function(){speak(w.es);});
+    box.appendChild(d);
+  });
+}
+renderCards(G1,'words-g1');renderCards(G2,'words-g2');renderCards(G3,'words-g3');
+
+/* ===== РАЗМИНКА (урок 50: ¡Come las verduras!) ===== */
+var WARM=[
+ {q:'¿Qué dice el monitor si corres?',model:'Dice: «¡No corras! Espera tu turno.»',ru:'Что говорит монитор, если ты бежишь?'},
+ {q:'¿Qué verduras son buenas para ti?',model:'La zanahoria, el brócoli y la espinaca son buenos para ti.',ru:'Какие овощи полезны?'},
+ {q:'¿Qué estás comiendo ahora?',model:'Estoy comiendo la ensalada y bebiendo agua.',ru:'Что ты сейчас ешь?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ПЛАН ПРОЕКТА ===== */
+var STEPS=[
+ {emo:'🔍',es:'Mira el menú escolar.',ru:'Изучи образец: как устроено настоящее меню (блок CLIL ниже).'},
+ {emo:'🧩',es:'Elige los platos.',ru:'Выбери блюда из пула: primero, segundo y postre.'},
+ {emo:'📅',es:'Completa los cinco días.',ru:'Собери меню на 5 дней: lunes–viernes.'},
+ {emo:'🍎',es:'Comprueba: ¿sano?',ru:'Проверь «¿Sano?»: фрукты — каждый день!'},
+ {emo:'🎨',es:'Decora tu menú.',ru:'Оформи как ресторанное меню: título, precios, dibujo.'},
+ {emo:'🎤',es:'Defiende tu proyecto.',ru:'Защити: «Nuestro menú es el mejor porque...»'}
+];
+(function(){
+  var box=document.getElementById('steps-list');var done=0;
+  STEPS.forEach(function(s,i){
+    var d=document.createElement('button');d.className='step-item';
+    d.innerHTML='<span class="step-num">'+(i+1)+'</span><span class="step-emo">'+s.emo+'</span><span style="flex:1"><span class="step-es">'+s.es+'</span><br><span class="step-ru">'+s.ru+'</span></span>';
+    d.addEventListener('click',function(){
+      if(d.classList.contains('done'))return;
+      d.classList.add('done');done++;speak(s.es);
+      document.getElementById('steps-count').textContent=done;
+      if(done===STEPS.length){confetti('⭐');speak('¡El plan del proyecto está listo, chef!');}
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ИГРА ГРАММАТИКИ ===== */
+var GMQ=[
+ {q:'___ lunes comemos sopa.',ok:'El',w:['La']},
+ {q:'___ primero hay ensalada mixta.',ok:'De',w:['En']},
+ {q:'El pollo está ___ segundo.',ok:'de',w:['por']},
+ {q:'___ postre hay manzana.',ok:'De',w:['El']},
+ {q:'Nuestro menú ___ equilibrado.',ok:'es',w:['tiene']},
+ {q:'Es sano porque ___ fruta cada día.',ok:'hay',w:['es']},
+ {q:'El plato ___ día es el pescado.',ok:'del',w:['de la']},
+ {q:'¡Buen ___!',ok:'provecho',w:['precio']}
+];
+var gmOrd=[],gmI=0,gmS=0;
+function gmStart(){gmOrd=shuffle(GMQ.slice());gmI=0;gmS=0;document.getElementById('gm-total').textContent=gmOrd.length;document.getElementById('gm-stars').textContent='0';gmNext();}
+function gmNext(){
+  var box=document.getElementById('gm-opts');box.innerHTML='';
+  if(gmI>=gmOrd.length){document.getElementById('gm-q').textContent='🎉 ¡Muy bien!';document.getElementById('gm-fb').textContent='⭐ '+gmS+' из '+gmOrd.length;return;}
+  var r=gmOrd[gmI];
+  document.getElementById('gm-q').textContent=r.q;
+  document.getElementById('gm-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='100px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');gmS++;document.getElementById('gm-stars').textContent=gmS;document.getElementById('gm-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('gm-fb').textContent='❌ Правильно: '+r.ok;}
+      gmI++;setTimeout(gmNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ПРОЕКТ ЧАСТЬ 1: КОНСТРУКТОР МЕНЮ ===== */
+var DAYS=['el lunes','el martes','el miércoles','el jueves','el viernes'];
+var PRIMERO=[
+ {name:'la sopa de fideos',p:1.50,verd:false},
+ {name:'la ensalada mixta',p:1.20,verd:true},
+ {name:'el arroz con verduras',p:1.60,verd:true},
+ {name:'la pasta con tomate',p:1.40,verd:false},
+ {name:'el puré de calabacín',p:1.30,verd:true}
+];
+var SEGUNDO=[
+ {name:'el pollo asado',p:2.20},
+ {name:'la merluza con patatas',p:2.40},
+ {name:'la tortilla de patatas',p:1.80},
+ {name:'el guiso de ternera',p:2.50},
+ {name:'el salmón con arroz',p:2.60}
+];
+var POSTRE=[
+ {name:'la manzana',p:0.50,fruta:true},
+ {name:'la naranja',p:0.50,fruta:true},
+ {name:'el plátano',p:0.60,fruta:true},
+ {name:'el yogur natural',p:0.70,fruta:false},
+ {name:'el flan',p:0.80,fruta:false},
+ {name:'el helado',p:1.00,fruta:false}
+];
+function fillSelect(sel,pool){
+  pool.forEach(function(it,i){
+    var o=document.createElement('option');
+    o.value=i;o.textContent=it.name+' · '+it.p.toFixed(2)+' €';
+    sel.appendChild(o);
+  });
+}
+(function(){
+  var grid=document.getElementById('menu-days');
+  DAYS.forEach(function(day,i){
+    var d=document.createElement('div');d.className='menu-day';
+    d.innerHTML='<h5>📅 '+day.charAt(0).toUpperCase()+day.slice(1)+'</h5>';
+    var sf=document.createElement('select');sf.id='m'+i+'-f';
+    var ss=document.createElement('select');ss.id='m'+i+'-s';
+    var sp=document.createElement('select');sp.id='m'+i+'-p';
+    fillSelect(sf,PRIMERO);fillSelect(ss,SEGUNDO);fillSelect(sp,POSTRE);
+    d.appendChild(sf);d.appendChild(ss);d.appendChild(sp);
+    grid.appendChild(d);
+  });
+})();
+function getDay(i){
+  return {
+    f:PRIMERO[document.getElementById('m'+i+'-f').value],
+    s:SEGUNDO[document.getElementById('m'+i+'-s').value],
+    p:POSTRE[document.getElementById('m'+i+'-p').value]
+  };
+}
+function checkSano(){
+  var fruta=0,verd=0,total=0;
+  for(var i=0;i<5;i++){
+    var d=getDay(i);
+    if(d.p.fruta)fruta++;
+    if(d.f.verd)verd++;
+    total=total+d.f.p+d.s.p+d.p.p;
+  }
+  var out=document.getElementById('sana-out');
+  var head='🍎 Fruta: <b>'+fruta+'/5</b> días · 🥦 Verduras de primero: <b>'+verd+'/5</b> días · 💶 El menú cuesta <b>'+total.toFixed(2)+' €</b> por semana.<br>';
+  var verdict,ok=false;
+  if(fruta===5){ok=true;verdict='<b>¡MUY SANO! 🏆 Hay fruta cada día y tu menú es equilibrado. ¡Buen trabajo, chef!</b>';speak('¡Tu menú es muy sano! Hay fruta cada día.');confetti('🍎');}
+  else if(fruta>=3){verdict='<b>Casi... 🤔 ¡Aún más fruta! En un menú equilibrado la fruta debe ser CADA día.</b>';speak('Casi. La fruta debe ser cada día.');}
+  else{verdict='<b>❌ ¡Faltan frutas! De postre debe haber fruta cada día: manzana, naranja o plátano.</b>';speak('Faltan frutas. La fruta cada día.');}
+  out.className=ok?'sana-out ok':'sana-out';
+  out.innerHTML=head+verdict;
+}
+
+/* ===== ПРОЕКТ ЧАСТЬ 2: РЕСТОРАННОЕ МЕНЮ ===== */
+function renderMenu(){
+  var titulo=document.getElementById('menu-title').value||'La Cantina del Chef';
+  var total=0;
+  for(var i=0;i<5;i++){var d=getDay(i);total=total+d.f.p+d.s.p+d.p.p;}
+  var h='<h4>🍽️ '+titulo+'</h4><div class="mp-sub">Menú de la semana · Precio total: '+total.toFixed(2)+' € · ¡Buen provecho!</div>';
+  for(var j=0;j<5;j++){
+    var dd=getDay(j);
+    h+='<div class="mp-day"><span class="d">📅 '+DAYS[j].charAt(0).toUpperCase()+DAYS[j].slice(1)+'</span><span>🥣 '+dd.f.name+' · 🍗 '+dd.s.name+' · 🍎 '+dd.p.name+'</span><span class="mp-price">'+(dd.f.p+dd.s.p+dd.p.p).toFixed(2)+' €</span></div>';
+  }
+  h+='<div style="margin-top:10px;font-weight:800;color:var(--love)">✏️ diseñado por un chef de la escuela МУДРО</div>';
+  document.getElementById('menu-preview').innerHTML=h;
+}
+renderMenu();
+function speakMenu(){
+  var t='Menú de la semana: '+document.getElementById('menu-title').value+'. ';
+  for(var i=0;i<5;i++){var d=getDay(i);t+='El '+DAYS[i]+': de primero '+d.f.name+', de segundo '+d.s.name+', de postre '+d.p.name+'. ';}
+  t+='¡Buen provecho!';
+  speak(t);
+}
+
+/* ===== ПРОЕКТ ЧАСТЬ 3: ЗАЩИТА ===== */
+function buildDef(){
+  var a=document.getElementById('def-1').value;
+  var b=document.getElementById('def-2').value;
+  var c=document.getElementById('def-3').value;
+  var d=document.getElementById('def-4').value;
+  window.defText=a+'. '+b+'. '+c+' '+d+' ¡Nuestro menú es el mejor! ¿Preguntas? Gracias por escuchar.';
+  var out=document.getElementById('def-out');
+  out.innerHTML='1. <b>'+a+'</b>.<br>2. <b>'+b+'</b>.<br>3. '+c+'<br>4. '+d+'<br>🏆 ¡<b>Nuestro menú es el mejor</b>! ❓ ¿Preguntas? 🙏 Gracias por escuchar.';
+}
+function speakDef(){speak(window.defText||'Nuestro menú tiene fruta cada día. Es sano porque hay verduras y fruta. El miércoles hay sopa. Los niños comen fruta cada día. ¡Nuestro menú es el mejor! ¿Preguntas? Gracias por escuchar.');}
+['def-1','def-2','def-3','def-4'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',buildDef);
+});
+buildDef();
+
+/* ===== БЛОК 4: CLIL ===== */
+function speakClil(){speak('El menú de la semana lo hace un nutricionista. Un menú equilibrado tiene: verduras, arroz o pasta de primero; carne o pescado de segundo; y fruta de postre cada día. El pescado suele estar dos veces por semana, y los dulces, muy poco. Cada comunidad de España publica sus menús escolares en internet: puedes ver el plato del día y el precio. Ahora tú también puedes diseñar un menú: ¡de primero, de segundo y de postre para cada día!');}
+var CLILQ=[
+ {q:'¿Quién hace el menú de la semana?',ru:'Кто составляет меню недели? (8 лет)',ok:'Un nutricionista.',w:['Un futbolista.','El cartero.']},
+ {q:'¿Qué hay de postre cada día?',ru:'Что на десерт каждый день? (8 лет)',ok:'Fruta.',w:['Helado.','Galletas.']},
+ {q:'¿Cuántas veces hay pescado por semana?',ru:'Сколько раз в неделю бывает рыба? (12 лет)',ok:'Dos veces, normalmente.',w:['Todos los días.','Nunca.']},
+ {q:'¿Dónde puedes ver los menús escolares?',ru:'Где можно посмотреть школьные меню? (12 лет)',ok:'En internet, en la web de cada comunidad.',w:['En el cine.','En el estadio.']},
+ {q:'¿Qué es un menú equilibrado?',ru:'Что такое сбалансированное меню? (12 лет)',ok:'Tiene verduras, carne o pescado y fruta cada día.',w:['Solo dulces y refrescos.','Solo pasta todos los días.']}
+];
+(function(){
+  var wrap=document.getElementById('clil-quiz');
+  CLILQ.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Представь своё меню.',model:'Este es nuestro menú de la semana para el comedor.'},
+ {q:'Расскажи про понедельник.',model:'El lunes comemos sopa, pollo y manzana.'},
+ {q:'Расскажи про вторник: primero y segundo.',model:'De segundo hay merluza; de primero, arroz con verduras.'},
+ {q:'Скажи, почему меню полезное.',model:'Es sano porque hay fruta cada día y verduras de primero.'},
+ {q:'Дай ПОЛНУЮ защиту (rubric: 3+ предложения).',model:'Este es nuestro menú de la semana. Es sano porque hay fruta cada día. El miércoles hay sopa. El menú cuesta veintiún euros. ¡Nuestro menú es el mejor! ¿Preguntas? Gracias por escuchar.'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом защити СВОЙ проект вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ЧЕКПОИНТ СТАНЦИИ 5 ===== */
+var CP=[
+ {emo:'🍽️',es:'El menú del día, por favor. De primero quiero la sopa.',ru:'Закажи обед: меню дня и первое.'},
+ {emo:'⚠️',es:'Soy alérgico a la lactosa. ¿Tiene leche el postre?',ru:'Скажи про аллергию (или: No tengo alergias).'},
+ {emo:'👋',es:'Ya he terminado. ¡Buen provecho!',ru:'Вежливо закончи обед.'}
+];
+(function(){
+  var box=document.getElementById('cp-list');var done=0;
+  CP.forEach(function(s,i){
+    var d=document.createElement('button');d.className='step-item';
+    d.innerHTML='<span class="step-num">'+(i+1)+'</span><span class="step-emo">'+s.emo+'</span><span style="flex:1"><span class="step-es">'+s.es+'</span><br><span class="step-ru">'+s.ru+'</span></span>';
+    d.addEventListener('click',function(){
+      if(d.classList.contains('done'))return;
+      d.classList.add('done');done++;speak(s.es);
+      document.getElementById('cp-count').textContent=done;
+      if(done===CP.length){confetti('🏁');speak('¡Checkpoint de la estación cinco completado! ¡Enhorabuena, chef!');}
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el menú de la semana','меню недели'],['de primero','на первое'],['de segundo','на второе'],
+ ['de postre','на десерт'],['el plato del día','блюдо дня'],['equilibrado','сбалансированный'],
+ ['el precio','цена'],['apetitoso','аппетитный'],['¡buen provecho!','приятного аппетита!'],
+ ['diseñar','разрабатывать'],['El miércoles hay sopa.','В среду суп.'],
+ ['¡Nuestro menú es el mejor!','Наше меню лучшее!']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres el chef del año!');
+  confetti('👨‍🍳');
+  try{localStorage.setItem('mudro_kids_w17l3_badge_chef_del_ano','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w17l3_badge_chef_del_ano')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'📋','🍎'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

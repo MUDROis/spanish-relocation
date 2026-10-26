@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 58: La Gran Repasación — Школа МУДРО</title>
+<meta name="description" content="Урок 58 детского курса испанского: настольная игра-бродилка по всем 7 темам курса. Школа МУДРО.">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#E91E63; --love:#C2185B;
+    --hate:#424242; --star:#FFB300; --st7:#FFBE0B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#FFE0EC 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(233,30,99,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#FFE0EC;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #FFE0EC;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#FFE0EC,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #ead6dc;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #f0e6e8;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .sb-target{background:#fff;border:2px dashed #ead6dc;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#FFE0EC}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+
+  /* ==== СТАНЦИЯ 7 · ¡Preparados! · золотая тема ==== */
+  .hero{background:linear-gradient(180deg,#FFF1C9 0%,#FFF7E2 55%,var(--cream) 100%)}
+  .hero::before{background:radial-gradient(circle,rgba(255,190,11,.30),transparent 70%)}
+  .hero::after{background:radial-gradient(circle,rgba(232,96,76,.16),transparent 70%)}
+  .lesson-tag{background:var(--st7);color:#5b4300}
+  .hero h1 span{color:var(--terra)}
+  .goals{border-color:var(--st7)}
+  .goal-item{background:#FFF3D6}
+  .final-situation{border-left-color:var(--st7);background:linear-gradient(135deg,#FFF1C9,#FFF7E2)}
+
+  .dice-btn{background:var(--st7);color:#5b4300;border:none;border-radius:16px;padding:14px 26px;font-family:'Nunito';font-weight:800;font-size:1.12rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin:6px;transition:.1s}
+  .dice-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #d9a520}
+  .dice-btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+  .dice-face{font-size:2.3rem;min-width:86px;font-family:'Baloo 2',cursive}
+  .game-hud{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:10px 0}
+  .game-msg{font-weight:800;color:var(--ink-soft);min-height:24px}
+  .blk-stars{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+  .blk-chip{background:#fff;border-radius:12px;padding:6px 12px;font-weight:800;font-size:.85rem;border:2px solid #ead6dc;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+  .blk-chip.complete{background:#C8E6C9;border-color:var(--green)}
+  .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:12px 10px;margin:18px 0 8px}
+  .cell{background:linear-gradient(160deg,#fff,#FFF6DE);border:2.5px solid var(--cb,#bbb);border-radius:14px;padding:8px 6px 10px;text-align:center;position:relative;min-height:96px;transition:.25s}
+  .cell .c-num{position:absolute;top:5px;left:8px;font-size:.72rem;font-weight:800;color:#b7a77a}
+  .cell .c-ico{font-size:1.7rem;margin-top:12px}
+  .cell .c-lbl{font-size:.66rem;font-weight:800;color:var(--ink-soft);margin-top:2px}
+  .cell.done{background:#E8F5E9}
+  .cell.done::after{content:'✅';position:absolute;top:2px;right:4px;font-size:.9rem}
+  .cell.here{border-color:var(--st7);box-shadow:0 0 0 3px rgba(255,190,11,.4);transform:scale(1.06)}
+  .cell.here::before{content:'🎒';position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);font-size:1.3rem;z-index:5}
+  .qcard{background:linear-gradient(135deg,#FFF7E2,#FFE9B8);border:3px solid var(--st7);border-radius:18px;padding:18px;margin:16px 0;text-align:center;animation:popIn .4s}
+  .qc-meta{font-size:.82rem;font-weight:800;color:var(--ink-soft)}
+  .qc-q{font-family:'Baloo 2',cursive;font-size:1.2rem;color:var(--terra);margin:8px 0 2px}
+  .qc-ru{color:#999;font-size:.85rem;font-style:italic;margin-bottom:12px}
+  .victory{display:none;background:linear-gradient(135deg,#FFE9B8,#FFD54F);border:3px solid var(--st7);border-radius:20px;padding:24px;text-align:center;margin:16px 0}
+  .victory.show{display:block;animation:popIn .5s}
+  .rules-list{background:#fff;border-radius:14px;padding:14px 18px 14px 32px;margin:10px 0;font-weight:700}
+  .rules-list li{margin:6px 0}
+  .intro-dice{background:linear-gradient(135deg,#FFF1C9,#FFE9B8);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .intro-word{font-family:'Baloo 2',cursive;font-size:1.35rem;color:var(--terra);min-height:44px;margin-top:10px}
+  .conn-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+  .conn-chip{background:#fff;border:2px solid var(--st7);border-radius:999px;padding:7px 15px;font-weight:800;cursor:pointer;font-size:.92rem;transition:.15s}
+  .conn-chip:hover{background:var(--st7);color:#5b4300}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 7 · ¡Preparados! · Урок 1 из 3</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🎓 СТАНЦИЯ 7 · УРОК 1 · НЕДЕЛЯ 20</span>
+  <div class="hero-emojis">🎲 🏫 👨‍👩‍👧 🍕 🌦️</div>
+  <h1>La Gran <span>Repasación</span></h1>
+  <p class="sub">ФИНАЛЬНАЯ неделя! Сегодня — гигантская настольная игра-бродилка по всем темам курса: <strong>14 клеток, кубик и 20 недель знаний</strong>. Бросай кубик, отвечай — и собери звёзды всех 7 блоков! 🏆</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты бросаешь кубик:<br>
+    <em>«— ¡Cinco! La ficha avanza a la casilla cinco... ¡la comida! — ¿Cómo se dice «яблоко»? — Pues... ¡Lo sé! ¡La manzana!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🎲</span> Играть по правилам: el dado, la ficha, la casilla</div>
+      <div class="goal-item"><span class="emoji">🗂️</span> Повторить все 7 тем: escuela, familia, comida, ciudad, números, clima, emociones</div>
+      <div class="goal-item"><span class="emoji">💭</span> Использовать слова-связки: pues, entonces, bueno</div>
+      <div class="goal-item"><span class="emoji">🙋</span> Говорить ¡Lo sé! (я знаю!) и ¡Casi! (почти!)</div>
+      <div class="goal-item"><span class="emoji">🏆</span> Пройти все 14 клеток и собрать звёзды всех блоков</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Мастер игры»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E8A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 57</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, campeón! Неделя 20 — ФИНАЛЬНАЯ! Вчера ты прокладывал маршруты как настоящий картограф. Мостик: сегодня твой маршрут — через ВСЁ, что ты выучил за 20 недель. На старте... <b>¡Preparados, listos... ya!</b></div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ВВОД ЛЕКСИКИ -->
+  <section class="block" style="--c:#D98E00">
+    <div class="block-head">
+      <h2 class="block-title">🎲 Слова настольной игры</h2>
+      <span class="time-badge">⏱ 7 минут</span>
+    </div>
+    <p class="block-sub">Кликай на кубик — он выбрасывает слово из игры. Повторяй ВСЛУХ!</p>
+    <div class="intro-dice">
+      <button class="dice-btn" id="intro-dice-btn" onclick="rollIntro()">🎲 Бросить кубик знаний</button>
+      <div class="intro-word" id="intro-word">…</div>
+    </div>
+    <h4 style="margin-bottom:8px">🎲 Настольная игра</h4>
+    <div class="cards-grid" id="words-juego"></div>
+    <h4 style="margin:14px 0 8px">🗂️ 7 категорий курса</h4>
+    <div class="cards-grid" id="words-cat"></div>
+    <h4 style="margin:14px 0 8px">⚡ Быстрые фразы</h4>
+    <div class="cards-grid" id="words-frases"></div>
+    <div class="script">⚡ <strong>Секрет (12 лет):</strong> слова-связки — это «мосты» в речи. <span class="grammar-hint" data-hint="PUES — слово-пауза, когда думаешь, что ответить: «— ¿Cómo se dice? — Pues... la ventana». ENTONCES — вывод или план: «Entonces lanzo yo el dado». BUENO — «ну, ладно», начало действия: «Bueno, ¡jugamos!». Эти слова делают речь живой — так говорят настоящие испанские дети!">pues / entonces / bueno</span> — испанские дети говорят их по 50 раз в день. А <b>¡Lo sé!</b> — это «я знаю!», и <b>casi</b> — «почти» (когда ответ был близко!).<br>8 лет: просто повторяй эти слова, когда играешь — они приклеиваются сами!</div>
+    <div class="conn-chips">
+      <span class="conn-chip" onclick="speak('pues')">💭 pues...</span>
+      <span class="conn-chip" onclick="speak('entonces')">➡️ entonces...</span>
+      <span class="conn-chip" onclick="speak('bueno')">👌 bueno...</span>
+      <span class="conn-chip" onclick="speak('¡Lo sé!')">🙋 ¡Lo sé!</span>
+      <span class="conn-chip" onclick="speak('casi')">😅 casi</span>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ИГРА СО СВЯЗКАМИ -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">⚡ Игра: «Что ты скажешь?»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <p class="block-sub">6 раундов: выбери фразу, которая подходит к ситуации. Эти фразы выручат тебя в любой игре — и в любой школе!</p>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Раунд за раундом:</p>
+      <div class="game-q" id="lnk-q"></div>
+      <div class="opts" id="lnk-opts"></div>
+      <div class="game-fb" id="lnk-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="lnk-stars">0</span> / <span id="lnk-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="lnkStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: НАСТОЛЬНАЯ ИГРА -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🎲 НАСТОЛЬНАЯ ИГРА: La Gran Repasación</h2>
+      <span class="time-badge">⏱ 15 минут</span>
+    </div>
+    <p class="block-sub">14 клеток = 7 тем курса × 2. На каждой клетке — карточка-вопрос. Собери звёзды всех блоков и доберись до 🎉!</p>
+    <div class="script">📋 <strong>Правила:</strong></div>
+    <ol class="rules-list">
+      <li>🎲 Бросай кубик (<b>lanzar el dado</b>) — фишка 🎒 идёт вперёд (<b>avanzar</b>).</li>
+      <li>🃏 На клетке — вопрос из темы клетки. Ответил → <b>остался на месте</b> (¡Lo sé!).</li>
+      <li>❌ Не ответил → <b>шаг назад</b> (¡Casi!). Ничего страшного — бросай снова!</li>
+      <li>⭐ За первую верную клетку блока — ⭐ блоку. Всего можно собрать 14 звёзд!</li>
+      <li>🎉 Дойди до клетки 14 и ответь правильно — <b>¡Gano yo!</b></li>
+    </ol>
+    <div class="game-hud">
+      <button class="dice-btn" id="dice-btn" onclick="rollDice()">🎲 Lanzar el dado</button>
+      <div class="dice-face" id="dice-face">🎲</div>
+      <div class="stars-line">⭐ Звёзды: <span id="game-stars">0</span> / 14</div>
+    </div>
+    <div class="game-msg" id="game-msg">¡Lanza el dado, campeón! Бросай кубик!</div>
+    <div class="blk-stars" id="blk-stars"></div>
+    <div class="board" id="board"></div>
+    <div class="qcard" id="qcard" style="display:none">
+      <div class="qc-meta" id="qc-meta"></div>
+      <div class="qc-q" id="qc-q"></div>
+      <button class="speak-btn" id="qc-spk" onclick="qcSpeak()">🔊 Послушать вопрос</button>
+      <div class="qc-ru" id="qc-ru"></div>
+      <div class="opts" id="qc-opts"></div>
+      <div class="game-fb" id="qc-fb"></div>
+    </div>
+    <div class="victory" id="victory">
+      <div style="font-size:3.2rem">🏆</div>
+      <h3>¡GANO YO! ¡HE GANADO LA GRAN REPASACIÓN!</h3>
+      <p style="font-weight:800">Ты прошёл маршрут по всем 7 темам курса. 20 недель работы — в одном броске кубика!</p>
+      <div id="victory-stars" style="font-size:1.2rem;font-weight:800;margin:8px 0"></div>
+      <p style="color:var(--ink-soft);font-weight:700">Завтра тебя ждёт FINAL BOSS — симуляция первого дня в испанской школе. 👑</p>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎲 Бонус: кубик-челлендж (для всей семьи!)</p>
+      <p style="font-weight:700;color:var(--ink-soft)">Брось настоящий кубик — и выполни задание под его номером:</p>
+      <div class="opts">
+        <span class="opt" style="min-width:200px" onclick="speak('¡Di tres palabras de la escuela!')">1️⃣ 3 слова из la escuela</span>
+        <span class="opt" style="min-width:200px" onclick="speak('¡Di tres palabras de la comida!')">2️⃣ 3 слова из la comida</span>
+        <span class="opt" style="min-width:200px" onclick="speak('¡Cuenta de uno a quince!')">3️⃣ Посчитай от 1 до 15</span>
+        <span class="opt" style="min-width:200px" onclick="speak('¡Pregunta: cómo se dice...!')">4️⃣ Задай вопрос ¿Cómo se dice...?</span>
+        <span class="opt" style="min-width:200px" onclick="speak('¡Di una frase con bueno!')">5️⃣ Фраза со словом bueno</span>
+        <span class="opt" style="min-width:200px" onclick="speak('¡Grita: gano yo!')">6️⃣ Крикни ¡Gano yo! 🏆</span>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <button class="speak-btn" style="background:var(--ink-soft)" onclick="gInit(true)">↺ Nueva partida — новая игра</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: БЕЙДЖ -->
+  <section class="block" style="--c:#D98E00">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🎲</div>
+      <h3>Мастер игры</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты знаешь все слова игры, все 7 тем и можешь объяснить правила по-испански. ¡Felicidades!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Мастер игры» 🎲 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 59 (FINAL BOSS):</strong> «Завтра игра станет РЕАЛЬНОСТЬЮ: 6 станций первого дня в испанской школе — от «Me llamo...» до маршрута домой. Соберёшь 6 штампов — получишь ДИПЛОМ ¡Sobreviviente! 👑»</div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Сыграй в игру на этой странице</strong> · 10 мин ⭐<br>Пройди маршрут до клетки 14. На сложных клетках — нажми «↺ Nueva partida» и попробуй снова!</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🎲 Своя бумажная игра</strong> · 15 мин ⭐<br>Нарисуй ленту из 14 клеток и подпиши темы: la escuela, la familia, la comida, la ciudad, los números, el clima, las emociones. Сыграй с родителями: ты — ведущий!</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎤 Голосовой дневник: мой ход</strong> · 5 мин ⭐<br>Запиши, как ты бросаешь кубик: <em>«¡Tres! La ficha avanza a la casilla tres. ¡La escuela! Pues... ¡Lo sé! El libro!»</em></div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🃏 Карточки-вопросы</strong> · 10 мин ⭐<br>Придумай по 2 вопроса для тем «школа» и «еда» (¿Cómo se dice...? / ¿Qué significa...?). Задай их родителям — кто выигрывает?</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>💭 Связки-волшебники</strong> · 7 мин ⭐<br>Придумай 5 предложений со словами: pues, entonces, bueno, ¡Lo sé!, casi. Пример: «Bueno, ¡jugamos otra vez!»</div></div>
+    <div class="task"><div class="task-num">6</div><div><strong>👨‍👩‍👧 Семейная миссия: викторина за ужином</strong> · 10 мин<br>Задай каждому по 2 вопроса из игры (по-испански!). Кто наберёт больше ⭐ — тот «Мастер игры» недели.</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть слова игры: el dado, la ficha, la casilla, avanzar</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Называть все 7 тем-категорий курса</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Отвечать на вопросы по любой из 7 тем</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Использовать связки: pues, entonces, bueno</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Реагировать: ¡Lo sé! / ¡Casi! / ¿Otra pista, por favor?</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Объяснить правила настольной игры по-испански</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 7 · Урок 58 (La Gran Repasación)</span>
+    <span>Открыть карточки →</span>
+  </a>
+
+  <!-- QUIZLET: дети урок 58 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w19-l3.html" class="nav-prev"><div class="nav-small">← Урок 3 станции 6</div><div class="nav-title">Урок 57: STEAM Google Maps 🗺</div></a>
+    <a href="./w20-l2.html" class="nav-next"><div class="nav-small">Урок 2 станции 7 →</div><div class="nav-title">Урок 59: FINAL BOSS 👑</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 7: ¡Preparados! · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var GAMEW=[
+ {emo:'🎲',es:'el dado',ru:'кубик'},
+ {emo:'🎒',es:'la ficha',ru:'фишка'},
+ {emo:'⬜',es:'la casilla',ru:'клетка'},
+ {emo:'🙌',es:'lanzar el dado',ru:'бросить кубик'},
+ {emo:'🔄',es:'gana el turno',ru:'ходит следующий'},
+ {emo:'🚀',es:'avanzar',ru:'продвигаться'},
+ {emo:'🏆',es:'¡gano yo!',ru:'я выиграл!'}
+];
+var CATW=[
+ {emo:'🏫',es:'la escuela',ru:'школа'},
+ {emo:'👨‍👩‍👧',es:'la familia',ru:'семья'},
+ {emo:'🍕',es:'la comida',ru:'еда'},
+ {emo:'🏙️',es:'la ciudad',ru:'город'},
+ {emo:'🔢',es:'los números',ru:'числа'},
+ {emo:'🌦️',es:'el clima',ru:'погода'},
+ {emo:'💗',es:'las emociones',ru:'эмоции'}
+];
+var PHRW=[
+ {emo:'❓',es:'¿Cómo se dice...?',ru:'Как сказать...?'},
+ {emo:'🤔',es:'¿Qué significa...?',ru:'Что значит...?'},
+ {emo:'💡',es:'otra pista, por favor',ru:'ещё подсказку, пожалуйста'},
+ {emo:'🙋',es:'¡lo sé!',ru:'я знаю!'},
+ {emo:'😅',es:'casi',ru:'почти'},
+ {emo:'💭',es:'pues...',ru:'ну...'},
+ {emo:'➡️',es:'entonces...',ru:'значит...'}
+];
+
+var WARM=[
+ {q:'¿Cómo sales de casa para ir al cole?',model:'Salgo de casa y giro a la derecha. Mi ruta es fácil.',ru:'Как ты выходишь из дома в школу?'},
+ {q:'¿Cuánto tardas de casa al cole?',model:'Tardo diez minutos. Voy andando y sigo recto.',ru:'Сколько времени ты тратишь от дома до школы?'},
+ {q:'¿Qué hay en tu ruta al cole?',model:'En mi ruta hay un parque, una panadería y una parada de autobús.',ru:'Что есть на твоём маршруте в школу?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== КУБИК ЗНАНИЙ ===== */
+function rollIntro(){
+  var r=GAMEW[Math.floor(Math.random()*GAMEW.length)];
+  document.getElementById('intro-word').innerHTML='🎲 → <b style="color:var(--terra)">'+r.es+'</b> — '+r.ru;
+  speak(r.es);
+}
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+function fillCards(boxId,arr){
+  var box=document.getElementById(boxId);
+  arr.forEach(function(f){
+    var d=document.createElement('div');d.className='word-card';
+    d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+    d.addEventListener('click',function(){speak(f.es);});
+    box.appendChild(d);
+  });
+}
+fillCards('words-juego',GAMEW);
+fillCards('words-cat',CATW);
+fillCards('words-frases',PHRW);
+
+/* ===== ИГРА: ЧТО ТЫ СКАЖЕШЬ? ===== */
+var LNK=[
+ {q:'Ты думаешь, что ответить. Говоришь: ___',ok:'Pues...',w:['¡Lo sé!','¡Gano yo!']},
+ {q:'Ты уверен в ответе на 100%. Говоришь: ___',ok:'¡Lo sé!',w:['Pues...','Otra pista, por favor']},
+ {q:'Твой ответ был близко, но не точный. Говоришь: ___',ok:'Casi',w:['¡Lo sé!','Entonces...']},
+ {q:'Друг спрашивает, что значит «gana el turno». Ты не знаешь. Спрашиваешь: ___',ok:'¿Qué significa «gana el turno»?',w:['¿Cómo se dice «gana el turno»?','¡Lo sé!']},
+ {q:'Хочешь узнать, как сказать «фишка» по-испански. Спрашиваешь: ___',ok:'¿Cómo se dice «фишка»?',w:['¿Qué significa «фишка»?','¡Casi!']},
+ {q:'Ты победил в игре. Объявляешь: ___',ok:'¡Gano yo!',w:['Gana el turno','Casi']}
+];
+var lnkOrd=[],lnkI=0,lnkS=0;
+function lnkStart(){lnkOrd=shuffle(LNK.slice());lnkI=0;lnkS=0;document.getElementById('lnk-total').textContent=lnkOrd.length;document.getElementById('lnk-stars').textContent='0';lnkNext();}
+function lnkNext(){
+  var box=document.getElementById('lnk-opts');box.innerHTML='';
+  if(lnkI>=lnkOrd.length){document.getElementById('lnk-q').textContent='🎉 ¡Muy bien!';document.getElementById('lnk-fb').textContent='⭐ '+lnkS+' из '+lnkOrd.length;return;}
+  var r=lnkOrd[lnkI];
+  document.getElementById('lnk-q').textContent=r.q;
+  document.getElementById('lnk-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='130px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');lnkS++;document.getElementById('lnk-stars').textContent=lnkS;document.getElementById('lnk-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('lnk-fb').textContent='❌ Правильно: '+r.ok;}
+      lnkI++;setTimeout(lnkNext,1400);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== НАСТОЛЬНАЯ ИГРА ===== */
+var BOARD=[
+ {b:'escuela',ico:'🏫',lbl:'la escuela',col:'#2C5E8A'},
+ {b:'escuela',ico:'✏️',lbl:'el lápiz',col:'#2C5E8A'},
+ {b:'familia',ico:'👨‍👩‍👧',lbl:'la familia',col:'#E91E63'},
+ {b:'familia',ico:'👵',lbl:'los abuelos',col:'#E91E63'},
+ {b:'comida',ico:'🍕',lbl:'la comida',col:'#E8A13B'},
+ {b:'comida',ico:'🍎',lbl:'la fruta',col:'#E8A13B'},
+ {b:'ciudad',ico:'🏙️',lbl:'la ciudad',col:'#2A9D8F'},
+ {b:'ciudad',ico:'🚌',lbl:'el barrio',col:'#2A9D8F'},
+ {b:'numeros',ico:'🔢',lbl:'los números',col:'#9D4EDD'},
+ {b:'numeros',ico:'➕',lbl:'las mates',col:'#9D4EDD'},
+ {b:'clima',ico:'🌦️',lbl:'el clima',col:'#3E7CB1'},
+ {b:'clima',ico:'☀️',lbl:'el sol',col:'#3E7CB1'},
+ {b:'emociones',ico:'💗',lbl:'las emociones',col:'#E8604C'},
+ {b:'emociones',ico:'🎉',lbl:'¡meta!',col:'#E8604C'}
+];
+var BLKS=[
+ {k:'escuela',ico:'🏫',n:'la escuela'},
+ {k:'familia',ico:'👨‍👩‍👧',n:'la familia'},
+ {k:'comida',ico:'🍕',n:'la comida'},
+ {k:'ciudad',ico:'🏙️',n:'la ciudad'},
+ {k:'numeros',ico:'🔢',n:'los números'},
+ {k:'clima',ico:'🌦️',n:'el clima'},
+ {k:'emociones',ico:'💗',n:'las emociones'}
+];
+var QUESTS={
+ escuela:[
+  {q:'¿Cómo se dice «учебник»?',ru:'Как сказать «учебник»?',ok:'el libro',w:['la mochila','el recreo']},
+  {q:'¿Qué llevas en la mochila?',ru:'Что ты несёшь в рюкзаке?',ok:'Libros y lápices.',w:['Pizza y helado.','Lluvia y viento.']},
+  {q:'¿Dónde escribe la profesora?',ru:'Где пишет учительница?',ok:'En la pizarra.',w:['En la nevera.','En la cama.']},
+  {q:'¿Qué haces en el recreo?',ru:'Что ты делаешь на перемене?',ok:'Juego con mis amigos.',w:['Duermo en la cama.','Como en el restaurante.']}
+ ],
+ familia:[
+  {q:'¿Cómo se dice «мама»?',ru:'Как сказать «мама»?',ok:'la madre',w:['la hermana','la tía']},
+  {q:'El padre de tu padre es tu...',ru:'Отец твоего отца — это твой...',ok:'abuelo',w:['hermano','tío']},
+  {q:'¿Cómo se dice «брат»?',ru:'Как сказать «брат»?',ok:'el hermano',w:['el primo','el padre']},
+  {q:'La hermana de tu madre es tu...',ru:'Сестра твоей мамы — это твоя...',ok:'tía',w:['abuela','prima']}
+ ],
+ comida:[
+  {q:'¿Cómo se dice «яблоко»?',ru:'Как сказать «яблоко»?',ok:'la manzana',w:['la naranja','la patata']},
+  {q:'Bebes agua en...',ru:'Воду ты пьёшь из...',ok:'el vaso',w:['el plato','la sartén']},
+  {q:'¿Cómo se dice «завтрак»?',ru:'Как сказать «завтрак»?',ok:'el desayuno',w:['la cena','la merienda']},
+  {q:'Comes la sopa con...',ru:'Суп ты ешь...',ok:'la cuchara',w:['el tenedor','el vaso']}
+ ],
+ ciudad:[
+  {q:'¿Dónde compras el pan?',ru:'Где ты покупаешь хлеб?',ok:'En la panadería.',w:['En la farmacia.','En el museo.']},
+  {q:'¿Cómo se dice «улица»?',ru:'Как сказать «улица»?',ok:'la calle',w:['la plaza','la cocina']},
+  {q:'¿Dónde toma el autobús?',ru:'Где ты садишься на автобус?',ok:'En la parada.',w:['En la cocina.','En el banco.']},
+  {q:'Los coches circulan por...',ru:'Машины едут по...',ok:'la calle',w:['el teatro','el correo']}
+ ],
+ numeros:[
+  {q:'¿Cómo se dice «пятнадцать»?',ru:'Как сказать «пятнадцать»?',ok:'quince',w:['cinco','cincuenta']},
+  {q:'¿Cuánto es tres y cuatro?',ru:'Сколько будет три плюс четыре?',ok:'siete',w:['seis','doce']},
+  {q:'¿Cuántos días tiene una semana?',ru:'Сколько дней в неделе?',ok:'siete',w:['cinco','diez']},
+  {q:'¿Cómo se dice «первый»?',ru:'Как сказать «первый»?',ok:'primero',w:['primavera','pequeño']}
+ ],
+ clima:[
+  {q:'Si cae agua del cielo...',ru:'Если с неба падает вода — то...',ok:'llueve',w:['nieva','hace sol']},
+  {q:'En verano en Sevilla hace...',ru:'Летом в Севилье...',ok:'calor',w:['frío','viento']},
+  {q:'¿Cómo se dice «снег»?',ru:'Как сказать «снег»?',ok:'la nieve',w:['la lluvia','la nube']},
+  {q:'En invierno en la montaña hace...',ru:'Зимой в горах...',ok:'frío',w:['calor','sol']}
+ ],
+ emociones:[
+  {q:'Tu helado cae al suelo. Estás...',ru:'Твоё мороженое упало на землю. Ты...',ok:'triste',w:['contento','tranquilo']},
+  {q:'¿Cómo se dice «счастливый»?',ru:'Как сказать «счастливый»?',ok:'contento',w:['triste','cansado']},
+  {q:'¿Cómo se dice «уставший»?',ru:'Как сказать «уставший»?',ok:'cansado',w:['contento','enfadado']},
+  {q:'Tu hermana rompe tu juguete. Estás...',ru:'Сестра сломала твою игрушку. Ты...',ok:'enfadado',w:['contento','tranquilo']}
+ ]
+};
+var QUEUES={},QI={},gPos=1,gDone=[],gStars=0,gWon=false,curQ=null;
+
+function renderBoard(){
+  var b=document.getElementById('board');b.innerHTML='';
+  BOARD.forEach(function(c,i){
+    var d=document.createElement('div');d.className='cell';d.id='cell-'+i;
+    d.style.setProperty('--cb',c.col);
+    d.innerHTML='<span class="c-num">'+(i+1)+'</span><div class="c-ico">'+c.ico+'</div><div class="c-lbl">'+c.lbl+'</div>';
+    if(gDone[i])d.classList.add('done');
+    if(i+1===gPos)d.classList.add('here');
+    b.appendChild(d);
+  });
+}
+function renderChips(){
+  var w=document.getElementById('blk-stars');w.innerHTML='';
+  BLKS.forEach(function(bl){
+    var n=0;BOARD.forEach(function(c,i){if(c.b===bl.k&&gDone[i])n++;});
+    var s=document.createElement('span');s.className='blk-chip'+(n===2?' complete':'');s.id='chip-'+bl.k;
+    s.textContent=bl.ico+' ⭐'+n+'/2 · '+bl.n;
+    w.appendChild(s);
+  });
+}
+function updateStars(){
+  gStars=0;gDone.forEach(function(x){if(x)gStars++;});
+  document.getElementById('game-stars').textContent=gStars;
+}
+function markBoard(){
+  document.querySelectorAll('.cell').forEach(function(c){c.classList.remove('here');});
+  var cur=document.getElementById('cell-'+(gPos-1));
+  if(cur)cur.classList.add('here');
+}
+function gInit(isReplay){
+  gDone=[];for(var i=0;i<14;i++)gDone.push(false);
+  QUEUES={};QI={};gPos=1;gStars=0;gWon=false;curQ=null;
+  document.getElementById('dice-face').textContent='🎲';
+  document.getElementById('dice-btn').disabled=false;
+  document.getElementById('game-msg').textContent='¡Lanza el dado, campeón! Бросай кубик!';
+  document.getElementById('qcard').style.display='none';
+  document.getElementById('victory').classList.remove('show');
+  renderBoard();renderChips();updateStars();
+  if(isReplay)window.scrollTo({top:document.getElementById('board').offsetTop-120,behavior:'smooth'});
+}
+function rollDice(){
+  if(gWon)return;
+  document.getElementById('qcard').style.display='none';
+  var roll=Math.floor(Math.random()*6)+1;
+  document.getElementById('dice-face').textContent='🎲 '+roll;
+  var target=Math.min(gPos+roll,14);
+  gPos=target;
+  markBoard();
+  document.getElementById('game-msg').textContent='🚀 La ficha avanza a la casilla '+gPos+'...';
+  speak('La casilla '+gPos);
+  setTimeout(showQ,900);
+}
+function showQ(){
+  if(gWon)return;
+  var cell=BOARD[gPos-1],blk=cell.b;
+  if(!QUEUES[blk]||QI[blk]>=QUEUES[blk].length){QUEUES[blk]=shuffle(QUESTS[blk].slice());QI[blk]=0;}
+  curQ=QUEUES[blk][QI[blk]];QI[blk]++;
+  var blMeta=BLKS.filter(function(x){return x.k===blk;})[0];
+  document.getElementById('qc-meta').textContent='🃏 КАРТОЧКА · casilla '+gPos+' · '+blMeta.n+' '+blMeta.ico;
+  document.getElementById('qc-q').textContent=curQ.q;
+  document.getElementById('qc-ru').textContent=curQ.ru;
+  document.getElementById('qc-fb').textContent='';
+  var box=document.getElementById('qc-opts');box.innerHTML='';
+  shuffle([curQ.ok].concat(curQ.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='130px';
+    b.addEventListener('click',function(){answerQ(o,b);});
+    box.appendChild(b);
+  });
+  document.getElementById('qcard').style.display='block';
+}
+function qcSpeak(){if(curQ)speak(curQ.q);}
+function answerQ(o,btn){
+  var box=document.getElementById('qc-opts');
+  box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+  if(o===curQ.ok){
+    btn.classList.add('correct');
+    speak(curQ.ok);
+    var firstTime=!gDone[gPos-1];
+    if(firstTime){
+      gDone[gPos-1]=true;
+      document.getElementById('cell-'+(gPos-1)).classList.add('done');
+    }
+    renderChips();updateStars();
+    document.getElementById('qc-fb').textContent='✅ ¡Lo sé! Gana el turno: ¡tú!';
+    document.getElementById('game-msg').textContent='✅ ¡Lo sé! Фишка остаётся на клетке '+gPos+'. Бросай кубик!';
+    if(gPos===14&&!gWon){setTimeout(gWin,900);}
+  }else{
+    btn.classList.add('wrong');
+    box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===curQ.ok)x.classList.add('correct');});
+    gPos=Math.max(1,gPos-1);
+    markBoard();
+    document.getElementById('qc-fb').textContent='❌ ¡Casi! Un paso atrás.';
+    document.getElementById('game-msg').textContent='❌ ¡Casi! Шаг назад — на клетку '+gPos+'. Не сдавайся!';
+    speak('¡Casi!');
+  }
+  setTimeout(function(){if(!gWon)document.getElementById('qcard').style.display='none';},1600);
+}
+function gWin(){
+  gWon=true;
+  document.getElementById('dice-btn').disabled=true;
+  document.getElementById('qcard').style.display='none';
+  document.getElementById('game-msg').textContent='🏆 ¡Meta! Ты дошёл до клетки 14 и ответил правильно!';
+  document.getElementById('victory-stars').textContent='⭐ Звёзд собрано: '+gStars+' из 14';
+  document.getElementById('victory').classList.add('show');
+  confetti('🏆');
+  speak('¡Gano yo! ¡He completado la Gran Repasación!');
+}
+gInit(false);
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el dado','кубик'],['la ficha','фишка'],['la casilla','клетка'],['avanzar','продвигаться'],
+ ['¡gano yo!','я выиграл!'],['la escuela','школа'],['la familia','семья'],['la comida','еда'],
+ ['la ciudad','город'],['el clima','погода'],['¡lo sé!','я знаю!'],['casi','почти']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un maestro del juego!');
+  confetti('🎲');
+  try{localStorage.setItem('mudro_kids_w20l1_badge_master_juego','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w20l1_badge_master_juego')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🎲','🏆'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

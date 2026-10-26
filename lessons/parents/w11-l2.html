@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFF7EF">
+<meta name="description" content="Урок 11.2: Mercado Central — покупаем рыбу, просим почистить и нарезать, торгуемся вежливо. Квантификаторы un kilo de / medio kilo de + si puedo, vengo por.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<title>Урок 11.2 · Mercado Central — МУДРО</title>
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--p5:#4CAF7D;
+    --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
+    --soft:#FBF3EA;--ink-soft:#7A6A5C;--teal:#2C5E8A;
+    --vocab:#BE8A55;
+    --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
+    --ok:#7A8B4C;--bad:#E2725B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c1{background:var(--p1)}
+  .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)} .step-num.c5{background:var(--p5)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-lightblue{background:var(--p5);color:#fff}.btn-lightblue:hover{background:#3d9168}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+
+  .situation-box{background:#fff;border:3px solid var(--p5);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p5)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#E8F5E9;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p5)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p5);color:#fff;border-color:var(--p5)}
+  .vocab-front .es{font-size:1.05rem;font-weight:800;margin-bottom:6px;line-height:1.3}
+  .vocab-front .ru{font-size:.88rem;opacity:.95;font-weight:600}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p5);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.9rem;font-weight:700;color:var(--p5);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:8px}
+  .grammar-box .formula{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.55}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+  .grammar-table th,.grammar-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .grammar-table th{background:#FBF3EA;color:var(--p1);font-size:.86rem}
+  .grammar-table tr:nth-child(even) td{background:#FFFDF9}
+  .grammar-table .practice{background:#F0F7E6;color:var(--p2);font-weight:700}
+  .grammar-table .reference{color:var(--muted);font-style:italic}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .note.lightblue{background:#E8F4FB;border-left-color:var(--p5)}
+  .note.teal{background:#E0F2F1;border-left-color:var(--p5)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:110px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:360px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.75}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.02rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p4)}
+  .dialog-box .who.you{color:var(--p1)}
+  .dialog-box .dialog-text{display:none}
+  .dialog-box.open .dialog-text{display:block;margin-top:10px}
+
+  .clil-text{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:18px;margin-bottom:16px}
+  .clil-text h4{color:var(--p4);margin-bottom:8px}
+  .clil-text p{font-size:.95rem;margin-bottom:10px}
+
+  .roleplay-box{background:#fff;border:2px solid var(--p5);border-radius:14px;padding:20px;margin-bottom:16px}
+  .roleplay-box h4{color:var(--p4);margin-bottom:10px;font-size:1.1rem}
+  .role-card{background:#E8F5E9;border-radius:10px;padding:14px;margin-bottom:10px}
+  .role-card h5{color:var(--p4);margin-bottom:6px;font-size:.95rem}
+  .role-card ul{margin-left:20px;font-size:.92rem;line-height:1.6}
+  .role-card li{margin-bottom:3px}
+
+  .dialog-builder{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p4);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .dialog-builder input[type="text"]:focus,.dialog-builder select:focus{outline:none;border-color:var(--p4)}
+  .dialog-result{background:#E0F2F1;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p5)}
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  .quizlet-box{background:var(--p4);color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-top:14px}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p4);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  .lesson-nav span.soon{background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--muted);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 11 · Урок 2 из 3 · Блок 3 Logística Diaria</span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🛒 БЛОК 3 · LOGÍSTICA DIARIA</span>
+  <h1>Урок 11.2 · <em>Mercado Central</em></h1>
+  <p class="sub">Рынок — душа испанского района: пробуем бесплатно, взвешиваем, просим почистить рыбу. Говорим о количестве: un kilo de, medio kilo de...</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🧠 CLIL: культура рынка — пробы, puentear, цены</span>
+    <span class="meta-chip">🎯 Цель: купить рыбу и попросить почистить</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 un kilo de / medio kilo de + si puedo, vengo</span>
+    <span class="meta-chip">🎭 Продукт: ролевая «диалог с pescadero»</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c1">0</div>
+    <div class="step-title">
+      <h2>Разминка + вопрос из жизни</h2>
+      <span class="time">00:00 – 05:00 · Повторение урока 11.1 и суббота на рынке</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Вчера вы освоили супермаркет и этикетки. Сегодня следующий уровень взрослости: рынок, где всё живое, всё пахнет и где без слов не купишь.</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 11.1</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🐟</div>
+      <div class="sit-title">Одна ситуация: суббота, 9 утра, рынок</div>
+    </div>
+    <div class="sit-intro">
+      Вы впервые на <i>Mercado Central</i>. У pescadero очередь из трёх бабушек, но всё движется. Ваша миссия: рыба на ужин и... легально попробовать клубнику бесплатно. Проговаривайте вслух.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Pescadero:</div>
+      <div class="es">¡Buenos días! ¿Qué le pongo?</div>
+      <div class="ru">Доброе утро! Что вам положить?</div>
+      <button class="speak-btn" onclick="speak('¡Buenos días! ¿Qué le pongo?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Вы:</div>
+      <div class="es">¿A cuánto está la dorada?</div>
+      <div class="ru">Почём дорада?</div>
+      <button class="speak-btn" onclick="speak('¿A cuánto está la dorada?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Pescadero:</div>
+      <div class="es">A doce euros el kilo, muy fresca. Y las fresas del puesto de al lado las puede probar gratis.</div>
+      <div class="ru">Двенадцать евро за килограмм, очень свежая. А клубникой с соседнего прилавка можете угоститься бесплатно.</div>
+      <button class="speak-btn" onclick="speak('A doce euros el kilo, muy fresca. Y las fresas del puesto de al lado las puede probar gratis.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Вы:</div>
+      <div class="es">Póngame medio kilo, si puedo. ¿Me lo limpia?</div>
+      <div class="ru">Взвесьте мне полкило, если можно. И почистите его?</div>
+      <button class="speak-btn" onclick="speak('Póngame medio kilo, si puedo. ¿Me lo limpia?')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">1</span>Что значит <i>¿Qué le pongo?</i></div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">«Что вам положить / взвесить?» — приветствие продавца.</div>
+        <div class="q-opt" data-o="1">«Куда положить сумку?»</div>
+        <div class="q-opt" data-o="2">«Вы положили деньги на карту?»</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="2">
+      <div class="q-text"><span class="q-num">2</span>Сколько стоит дорада и что предлагают бесплатно?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">12 € за штуку; бесплатно пакет.</div>
+        <div class="q-opt" data-o="1">20 € за кило; бесплатно лимон.</div>
+        <div class="q-opt" data-o="2">12 € за кило; пробы клубники и чистка рыбы.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня — лексика рынка и <b>квантификаторы</b>: <b>un kilo de, medio kilo de, un cuarto de</b>. Плюс два магических слова вежливости: <b>si puedo</b> («если можно») и <b>vengo por...</b> («я пришёл за...»). В CLIL — культура рынка: почему пробы это норма, что такое <b>puentear</b> и как сравнивать цены.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">1</div>
+    <div class="step-title">
+      <h2>Карточки со словами: 35 слов о рынке</h2>
+      <span class="time">05:00 – 15:00 · 5 категорий</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('market',this)">🍊 Рынок (7)</button>
+      <button class="tab" onclick="showVocab('qty',this)">⚖️ Количество (7)</button>
+      <button class="tab" onclick="showVocab('stall',this)">🔪 Просьбы продавцу (7)</button>
+      <button class="tab" onclick="showVocab('meat',this)">🥩 Мясо и рыба (7)</button>
+      <button class="tab" onclick="showVocab('fruit',this)">🍅 Фрукты и овощи (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note lightblue" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> фрукты на рынке <b>не трогают руками</b> — укажите пальцем или скажите <i>«póngame...»</i>, продавец сам выберет. Очередь — это <i>«el turno»</i>: не знаете, кто последний, — спросите <i>«¿Quién es el último?»</i>. Дети придают рынку шум и жизнь — до 14:00 тут договориться проще всего.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      📞 <b>Лайфхак:</b> придите за час до закрытия — продавцы сбрасывают цены (<i>«lo dejo a la mitad»</i>), но выбор меньше. И помните: почти все puestos принимают карту, но мелкие наличные (<i>billetes y monedas</i>) ускоряют очередь и настроение pescadero.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c2">2</div>
+    <div class="step-title">
+      <h2>Грамматика: квантификаторы + si puedo / vengo por</h2>
+      <span class="time">15:00 – 23:00 · Фокус: сколько именно и как вежливо</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">На рынке нельзя сказать просто «pescado» — надо сказать СКОЛЬКО. Квантификаторы + предлог <b>de</b> — ваш главный инструмент.</p>
+
+    <div class="grammar-box">
+      <h4>📐 Квантификаторы: количество + de</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Формула</th>
+          <th>Значение</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td class="practice"><b>un kilo de + сущ.</b></td>
+          <td class="practice">килограмм</td>
+          <td class="practice"><i>Quiero un kilo de tomates.</i></td>
+        </tr>
+        <tr>
+          <td class="practice"><b>medio kilo de + сущ.</b></td>
+          <td class="practice">полкило</td>
+          <td class="practice"><i>Póngame medio kilo de gambas.</i></td>
+        </tr>
+        <tr>
+          <td class="practice"><b>un cuarto de + сущ.</b></td>
+          <td class="practice">четверть (250 г)</td>
+          <td class="practice"><i>Un cuarto de jamón, por favor.</i></td>
+        </tr>
+        <tr>
+          <td class="reference"><b>un trozo de / un par de</b></td>
+          <td class="reference">кусок / пара</td>
+          <td class="reference"><i>Un trozo de queso; un par de limones.</i></td>
+        </tr>
+        <tr>
+          <td class="reference"><b>un paquete de / mucho / poco</b></td>
+          <td class="reference">пачка / много / мало</td>
+          <td class="reference"><i>Un paquete de arroz; compro poco.</i></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Вежливые смягчители: si puedo / vengo por</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Формула</th>
+          <th>Схема</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td class="practice"><b>..., si puedo</b></td>
+          <td class="practice">«если можно» — смягчает просьбу</td>
+          <td class="practice"><i>Póngame medio kilo, si puedo.</i></td>
+        </tr>
+        <tr>
+          <td class="practice"><b>si hay</b></td>
+          <td class="practice">«если есть» — про товар</td>
+          <td class="practice"><i>Un kilo de naranjas, si hay.</i></td>
+        </tr>
+        <tr>
+          <td class="practice"><b>vengo por + сущ.</b></td>
+          <td class="practice">«я пришёл за...»</td>
+          <td class="practice"><i>Vengo por las fresas.</i></td>
+        </tr>
+        <tr>
+          <td class="reference"><b>¿Me da...? / póngame</b></td>
+          <td class="reference">дайте мне / взвесьте мне</td>
+          <td class="reference"><i>¿Me da un par de aguacates?</i></td>
+        </tr>
+        <tr>
+          <td class="reference"><b>¿a cuánto está...?</b></td>
+          <td class="reference">почём сейчас? (о цене сегодня)</td>
+          <td class="reference"><i>¿A cuánto está el salmón?</i></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="note green">
+      📌 <b>Фокус практики:</b> связка <b>póngame + количество + de + продукт</b> — универсальный заказ на любом puesto. <b>Si puedo</b> добавляйте в конец — и продавец улыбнётся.
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«un kilo tomates»</i> ❌ → <i>«un kilo <b>de</b> tomates.»</i> ✅ (предлог de обязателен)<br>
+      • <i>«medio de kilo»</i> ❌ → <i>«<b>medio kilo</b>.»</i> ✅ (никакого «de» внутри)<br>
+      • <i>«¿A cuánto es el pescado?»</i> — можно, но рыночная классика: <i>«¿A cuánto <b>está</b>?»</i> ✅ (цена «сегодня», она живая)<br>
+      • <i>«Vengo por fresas.»</i> ❌ → <i>«Vengo por <b>las</b> fresas.»</i> ✅ (с артиклем: за КОНКРЕТНЫМИ клубникой)
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c3">3</div>
+    <div class="step-title">
+      <h2>Практика: применим слова и грамматику</h2>
+      <span class="time">23:00 – 30:00 · 3 упражнения</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь слово</h4>
+    <p class="hint">Используйте: <b>medio, me, de, cuánto, en, por, pescado</b>.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь термин и значение</h4>
+    <p class="hint">Нажмите испанский термин слева, затем его значение справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c5">4</div>
+    <div class="step-title">
+      <h2>Аудирование: диалог «En el puesto de pescado»</h2>
+      <span class="time">30:00 – 37:00 · полный заказ: рыба + gambas + лимоны</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speakDialog()" style="margin-bottom:12px">🔊 Прослушать диалог (два голоса)</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who op">Pescadero:</span> ¡Buenos días! ¿Qué le pongo?<br>
+        <span class="who you">Клиент:</span> Buenos días. ¿A cuánto está la merluza hoy?<br>
+        <span class="who op">Pescadero:</span> A diez euros el kilo. Está fresquísima, llegó esta mañana del puerto.<br>
+        <span class="who you">Клиент:</span> Póngame medio kilo, si puedo. ¿Me lo limpia, por favor?<br>
+        <span class="who op">Pescadero:</span> Claro, aquí limpiamos gratis. ¿En filetes o entera?<br>
+        <span class="who you">Клиент:</span> En filetes, por favor. Y también un cuarto de gambas.<br>
+        <span class="who op">Pescadero:</span> Marchando. Las gambas están en oferta: once euros el kilo.<br>
+        <span class="who you">Клиент:</span> Perfecto. ¿Me da un par de limones también?<br>
+        <span class="who op">Pescadero:</span> Tome, y una ramita de perejil de regalo. ¿Algo más?<br>
+        <span class="who you">Клиент:</span> Nada más, gracias. ¿Cuánto es todo?
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: РОЛЕВАЯ ИГРА + ПРОДУКТ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      <h2>Ролевая игра + продукт: диалог с pescadero</h2>
+      <span class="time">37:00 – 47:00 · CLIL + конструктор + парная игра</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 CLIL-мини-текст: культура рынка</h4>
+
+    <div class="clil-text">
+      <h4>Pruebas gratis — попробовать это норма</h4>
+      <p>Продавцы дают попробовать: frutero отрежет кусочек melón, pescadero — покажет жабры как доказательство свежести. Попросить пробу не стыдно: <i>«¿Puedo probar?»</i>. Это и отбор товара, и часть игры в доверие.</p>
+
+      <h4>Puentear — обойти посредника</h4>
+      <p><b>Puentear</b> (от «puente», мост) — «перепрыгнуть посредника». Рынок ближе к фермеру и рыбаку, часто дешевле супермаркета. Но не факт: <b>сравнивайте</b>. Спросите <i>«¿a cuánto está?»</i> у двух puestos с одной и той же рыбой — и вы уже эксперт по puentear.</p>
+
+      <h4>Часы — почти военные</h4>
+      <p>Рынки работают обычно <b>lunes a sábado, de 8:00 до 14:00–15:00</b>. Вечером рынок спит. Отсюда закон жизни: свежая рыба — ранним утром, скидки — в последний час. Разовая покупка «вместо супермаркета» превращается в воскресную традицию семьи.</p>
+    </div>
+
+    <h4 style="margin:16px 0 12px">🧮 Мини-квиз: посчитаем заказ</h4>
+    <p class="hint">На рынке цены называют за килограмм. Умеете пересчитать, сколько заплатите за <i>medio kilo</i>?</p>
+    <div id="price-quiz"></div>
+
+    <div class="note green">
+      📋 <b>Чек-лист покупателя рынка:</b><br>
+      ☐ Спросить цену: <i>¿a cuánto está...?</i><br>
+      ☐ Назвать количество: <i>póngame un kilo de / medio kilo de...</i><br>
+      ☐ Добавить вежливость: <i>si puedo / si hay</i><br>
+      ☐ Попросить обработку: <i>¿me lo limpia? / en filetes / a máquina</i><br>
+      ☐ Взять подарочную мелочь: limones, perejil<br>
+      ☐ Спросить итог: <i>¿cuánto es todo?</i><br>
+      ☐ Поблагодарить: <i>gracias, hasta la semana que viene</i>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🔧 Конструктор: mi pedido</h4>
+    <p class="hint">Заполните поля — получите готовый заказ, который запишете голосовым.</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">🐟 КОНСТРУКТОР: Mi pedido en el mercado</div>
+
+      <div class="field">
+        <label>👤 Ваше имя:</label>
+        <input type="text" id="b-name" placeholder="Ana" value="Ana">
+      </div>
+
+      <div class="field">
+        <label>🏪 Прилавок:</label>
+        <select id="b-stall">
+          <option value="en el puesto de pescado" selected>en el puesto de pescado (рыбный)</option>
+          <option value="en la carnicería">en la carnicería (мясной)</option>
+          <option value="en el puesto de frutas">en el puesto de frutas (фрукты)</option>
+          <option value="en el puesto de verduras">en el puesto de verduras (овощи)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>⚖️ Количество:</label>
+        <select id="b-quant">
+          <option value="un kilo de " selected>un kilo de (килограмм)</option>
+          <option value="medio kilo de ">medio kilo de (полкило)</option>
+          <option value="un cuarto de ">un cuarto de (четверть)</option>
+          <option value="un trozo de ">un trozo de (кусок)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🥘 Продукт:</label>
+        <select id="b-product">
+          <option value="merluza|la merluza" selected>merluza (мерлуза)</option>
+          <option value="gambas|las gambas">gambas (креветки)</option>
+          <option value="pollo|el pollo">pollo (курица)</option>
+          <option value="naranjas|las naranjas">naranjas (апельсины)</option>
+          <option value="tomates|los tomates">tomates (помидоры)</option>
+          <option value="fresas|las fresas">fresas (клубника)</option>
+          <option value="limones|los limones">limones (лимоны)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>💬 Как попросим:</label>
+        <select id="b-ask">
+          <option value="pon" selected>Póngame... (взвесьте мне)</option>
+          <option value="da">¿Me da...? (дайте мне)</option>
+          <option value="quiero">Quiero... (я хочу — прямее)</option>
+          <option value="vengo">Vengo por... (я пришёл за...) — без количества</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🔪 Обработка:</label>
+        <select id="b-prep">
+          <option value="¿Me lo limpia, por favor?" selected>¿Me lo limpia? (почистить)</option>
+          <option value="En filetes, por favor.">En filetes (кусками / филе)</option>
+          <option value="Córtelo a máquina, por favor.">Córtelo a máquina (нарезать на машине, тонко)</option>
+          <option value="Tal cual, gracias.">Tal cual (как есть)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>💰 Финал:</label>
+        <select id="b-final">
+          <option value="¿Cuánto es todo?" selected>¿Cuánto es todo? (сколько всего?)</option>
+          <option value="¿Puedo pagar con tarjeta?">¿Puedo pagar con tarjeta? (можно картой?)</option>
+          <option value="Nada más, gracias.">Nada más, gracias. (ничего больше)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildScript()" style="margin-top:12px">🔧 Собрать заказ</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с собранным заказом (6–7 предложений, 2 дубля) и разыграйте его с pescadero в реальности.
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🎭 Ролевая игра в парах</h4>
+    <p class="hint">Разыграйте диалог «клиент ↔ pescadero/carnicero». Затем поменяйтесь ролями.</p>
+
+    <div class="roleplay-box">
+      <h4>🎭 Роли</h4>
+      <div class="role-card">
+        <h5>🐟 Роль A — Pescadero / Carnicero</h5>
+        <ul>
+          <li>Приветствует: <i>«¡Buenos días! ¿Qué le pongo?»</i></li>
+          <li>Называет цену за кило: <i>«A diez euros el kilo.»</i></li>
+          <li>Хвастается свежестью: <i>«Llegó esta mañana del puerto.»</i></li>
+          <li>Уточняет обработку: <i>«¿En filetes o entera?»</i></li>
+          <li>Дарит мелочь: <i>«Una ramita de perejil de regalo.»</i></li>
+          <li>Итог: <i>«Son veintiuno con cincuenta.»</i></li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <h5>🧺 Роль B — Клиент</h5>
+        <ul>
+          <li>Спрашивает цену: <i>«¿A cuánto está la merluza?»</i></li>
+          <li>Называет количество: <i>«Póngame medio kilo, si puedo.»</i></li>
+          <li>Объясняет приход: <i>«Vengo por las fresas.»</i></li>
+          <li>Просит обработку: <i>«¿Me lo limpia? / Córtelo a máquina.»</i></li>
+          <li>Просит добавку: <i>«¿Me da un par de limones?»</i></li>
+          <li>Спрашивает итог: <i>«¿Cuánto es todo?»</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note blue">
+      🆘 <b>Фразы-спасатели:</b><br>
+      • <i>«Perdone, ¿quién es el último?»</i> — Извините, кто последний в очереди?<br>
+      • <i>«¿Puedo probar?»</i> — Можно попробовать?<br>
+      • <i>«¿Puede repetir, por favor?»</i> — Можете повторить?<br>
+      • <i>«Es para hoy, para comer.»</i> — Это на сегодня, на обед.
+    </div>
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">✅</div>
+    <div class="step-title">
+      <h2>Самопроверка «Светофор»</h2>
+      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🏠</div>
+    <div class="step-title">
+      <h2>Домашнее задание · Урок 11.2</h2>
+      <span class="time">⏱ ~30–35 минут · 6 заданий</span>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и квантификаторы.</div>
+    <p>Карточки, сопоставление, «собери фразу» — фокус на <b>un kilo de / medio kilo de / un cuarto de</b> и просьбах продавцу.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Mi pedido en el mercado» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: проговорить заказ с квантификаторами.</div>
+    <p>Запишите голосовое на 6–7 предложений по шаблону из конструктора, минимум 2 дубля:</p>
+    <div class="note blue">
+      Buenos días. Vengo por <b>[продукт]</b>.<br>
+      ¿A cuánto está <b>[продукт]</b>?<br>
+      Póngame <b>[un kilo de / medio kilo de]</b> <b>[продукт]</b>, si puedo.<br>
+      <b>[¿Me lo limpia? / En filetes / A máquina]</b>, por favor.<br>
+      ¿Cuánto es todo? Muchas gracias.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. Vengo por la merluza. ¿A cuánto está la merluza hoy? Póngame medio kilo, si puedo. ¿Me lo limpia, por favor? En filetes. Y un par de limones. ¿Cuánto es todo? Muchas gracias.')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📞 Задание 3. Реальное действие · 5 мин</h4>
+    <div class="hw-meta">Цель: перенести навык в реальную жизнь.</div>
+    <p>Сходите на ближайший рынок (или загляните в онлайн-прайс). Спросите <i>«¿a cuánto está...?»</i> об одном продукте у двух продавцов. Выпишите:</p>
+    <div class="note">
+      Producto: ___<br>
+      Puesto 1: ___ € / kilo<br>
+      Puesto 2: ___ € / kilo<br>
+      ¿A quién compro y por qué? ___
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: отчёт «En el mercado» · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить квантификаторы письменно.</div>
+    <p>Напишите 6–8 предложений о походе на рынок: <i>vengo por..., ¿a cuánto está...?, póngame medio kilo de..., me lo limpia..., son... euros</i>.</p>
+    <button class="btn btn-ghost" onclick="speak('Este sábado vengo por las gambas. El pescadero dice que están en oferta. Póngame medio kilo de gambas, si puedo. También un cuarto de salmón, en filetes. Me lo limpia y me regala perejil. En total son dieciocho euros. Vuelvo la semana que viene.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 3 мин</h4>
+    <div class="hw-meta">Цель: связать родительский урок с детским курсом.</div>
+    <p>На детском курсе был урок «La Tiendita» — репетиция покупок. Устройте рынок дома:</p>
+    <div class="note green">
+      — ¡Buenos días! ¿Qué le pongo?<br>
+      — Póngame un kilo de manzanas, si puedo.<br>
+      — Son tres euros. ¿Algo más?<br>
+      — Un par de plátanos. ¿Cuánto es todo?
+    </div>
+    <p>Ребёнок — продавец, вы — клиент. Потом поменяйтесь. Родитель резюмирует:</p>
+    <div class="note">
+      Muy bien. El domingo vamos al mercado de verdad.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Buenos días. ¿Qué le pongo? Póngame un kilo de manzanas, si puedo. Son tres euros. ¿Algo más? Un par de plátanos. ¿Cuánto es todo? Muy bien. El domingo vamos al mercado de verdad.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🗂 Задание 6. Мини-проект «Таблица цен» · 10–12 мин</h4>
+    <div class="hw-meta">Цель: продукт урока — вы умеете сравнивать цены (puentear).</div>
+    <p>Заполните таблицу из 5 продуктов: цена на рынке vs цена в супермаркете:</p>
+    <div class="note">
+      <b>Producto</b> | <b>Mercado (€/kilo)</b> | <b>Supermercado (€/kilo)</b><br>
+      tomates | ___ | ___<br>
+      naranjas | ___ | ___<br>
+      merluza | ___ | ___<br>
+      pollo | ___ | ___<br>
+      fresas | ___ | ___<br><br>
+      Вывод: где дешевле и почему? ¿Dónde hacemos la compra grande?
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Mi pedido en el mercado» (2 дубля)<br>
+    • 📞 Сравнение цен у двух puestos<br>
+    • ✍️ Отчёт «En el mercado» (6–8 предложений)<br>
+    • 🗂 Таблица цен mercado vs supermercado<br>
+    • ✅ Светофор самопроверки
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head">
+    <div class="step-num">🎮</div>
+    <div class="step-title">
+      <h2>Тренажёр: слова и грамматика</h2>
+      <span class="time">~7–10 мин</span>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 11.2</h3>
+    <p>Повторите слова урока в приложении Quizlet: рынок, количество, просьбы продавцу, мясо и рыба, фрукты.</p>
+    <!-- QUIZLET: родители урок 11.2 (ссылку добавит админ) -->
+    <a href="#" onclick="return false;">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- КНОПКИ НАВИГАЦИИ -->
+<div class="lesson-nav">
+  <a href="w11-l1.html">← Предыдущий<br><small>Урок 11.1 · Mercadona, Consum, Lidl</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="w11-l3.html">Следующий →<br><small>Урок 11.3 · Мусор и переработка</small></a>
+</div>
+
+<!-- ФУТЕР -->
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · Блок 3 Logística Diaria<br>
+  11.2 · Mercado Central
+</footer>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES'; u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Диалог в два голоса (pescadero / клиент) =====
+var DIALOG_LINES = [
+  {who:'op',  label:'Pescadero:', es:'¡Buenos días! ¿Qué le pongo?'},
+  {who:'you', label:'Клиент:',    es:'Buenos días. ¿A cuánto está la merluza hoy?'},
+  {who:'op',  label:'Pescadero:', es:'A diez euros el kilo. Está fresquísima, llegó esta mañana del puerto.'},
+  {who:'you', label:'Клиент:',    es:'Póngame medio kilo, si puedo. ¿Me lo limpia, por favor?'},
+  {who:'op',  label:'Pescadero:', es:'Claro, aquí limpiamos gratis. ¿En filetes o entera?'},
+  {who:'you', label:'Клиент:',    es:'En filetes, por favor. Y también un cuarto de gambas.'},
+  {who:'op',  label:'Pescadero:', es:'Marchando. Las gambas están en oferta: once euros el kilo.'},
+  {who:'you', label:'Клиент:',    es:'Perfecto. ¿Me da un par de limones también?'},
+  {who:'op',  label:'Pescadero:', es:'Tome, y una ramita de perejil de regalo. ¿Algo más?'},
+  {who:'you', label:'Клиент:',    es:'Nada más, gracias. ¿Cuánto es todo?'}
+];
+
+function speakDialog(){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var i = 0;
+  (function next(){
+    if(i >= DIALOG_LINES.length) return;
+    var line = DIALOG_LINES[i++];
+    var u = new SpeechSynthesisUtterance(line.es);
+    u.lang = 'es-ES';
+    if(line.who === 'you'){
+      u.rate = 1.0;   // клиент: чуть быстрее
+      u.pitch = 1.35; // и заметно выше
+    } else {
+      u.rate = 0.85;  // pescadero: чуть медленнее
+      u.pitch = 0.75; // и заметно ниже
+    }
+    var voices = speechSynthesis.getVoices();
+    var v = voices.find(function(x){ return x.lang && x.lang.toLowerCase().startsWith('es'); });
+    if(v) u.voice = v;
+    u.onend = next;
+    speechSynthesis.speak(u);
+  })();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      item.o.map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === questions[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[questions[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ (11.1) =====
+var warmQ = [
+  {q:'1. Как сказать «я хотел бы»?', o:['me gustaría','me llamo','¿a cuánto?'], c:0},
+  {q:'2. «Leche sin lactosa» — это молоко...', o:['без лактозы','с сахаром','с солью'], c:0},
+  {q:'3. Где платим в супермаркете?', o:['en la caja','en el puesto','en la cesta'], c:0},
+  {q:'4. «En oferta» — это...', o:['по акции','тяжёлый','свежий'], c:2},
+  {q:'5. Что в испанских супермаркетах платное?', o:['la bolsa','la cesta','la fila'], c:0},
+  {q:'6. «La fecha de caducidad» — это...', o:['срок годности','цена за кило','список ингредиентов'], c:0}
+];
+
+function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  market:[
+    {es:'el mercado', ru:'рынок', ex:'El Mercado Central abre de lunes a sábado.', exRu:'Центральный рынок открыт с понедельника по субботу.'},
+    {es:'el puesto', ru:'прилавок / точка', ex:'Nuestro puesto favorito es el de frutas.', exRu:'Наш любимый прилавок — фруктовый.'},
+    {es:'el carnicero', ru:'мясник', ex:'El carnicero corta el pollo en filetes.', exRu:'Мясник нарезает курицу кусками.'},
+    {es:'el pescadero', ru:'рыбник', ex:'El pescadero limpia la merluza en un minuto.', exRu:'Рыбник чистит мерлузу за минуту.'},
+    {es:'el frutero', ru:'зеленной / фруктовщик', ex:'El frutero me da una fresa para probar.', exRu:'Фруктовщик даёт мне клубнику попробовать.'},
+    {es:'el quiosco', ru:'киоск', ex:'En el quiosco compramos flores.', exRu:'В киоске мы покупаем цветы.'},
+    {es:'fresco', ru:'свежий', ex:'Este pescado es muy fresco, llegó esta mañana.', exRu:'Эта рыба очень свежая, пришла сегодня утром.'}
+  ],
+  qty:[
+    {es:'un kilo de', ru:'килограмм', ex:'Quiero un kilo de tomates.', exRu:'Я хочу килограмм помидоров.'},
+    {es:'medio kilo de', ru:'полкило', ex:'Póngame medio kilo de gambas.', exRu:'Взвесьте мне полкило креветок.'},
+    {es:'un cuarto de', ru:'четверть', ex:'Un cuarto de kilo de jamón, por favor.', exRu:'Четверть килограмма хамона, пожалуйста.'},
+    {es:'un trozo de', ru:'кусок', ex:'Un trozo de queso manchego.', exRu:'Кусок сыра манчего.'},
+    {es:'un par de', ru:'пара', ex:'Un par de limones para el pescado.', exRu:'Пара лимонов к рыбе.'},
+    {es:'mucho / poco', ru:'много / мало', ex:'Hoy compro poco, mañana viene la abuela.', exRu:'Сегодня покупаю мало, завтра приедет бабушка.'},
+    {es:'un paquete de', ru:'пачка', ex:'Un paquete de arroz para la paella.', exRu:'Пачка риса для паэльи.'}
+  ],
+  stall:[
+    {es:'cortar a máquina', ru:'нарезать на машине (тонко)', ex:'Córtelo a máquina, muy fino.', exRu:'Нарежьте на машине, очень тонко.'},
+    {es:'en filetes', ru:'кусками (филе)', ex:'El salmón en filetes, por favor.', exRu:'Лосось кусками, пожалуйста.'},
+    {es:'picar', ru:'покрошить', ex:'Pique medio kilo de cebolla, por favor.', exRu:'Покрошите полкило лука, пожалуйста.'},
+    {es:'limpiar el pescado', ru:'почистить рыбу', ex:'¿Me limpia el pescado, por favor?', exRu:'Почистите мне рыбу, пожалуйста.'},
+    {es:'¿me da...?', ru:'дайте мне, пожалуйста', ex:'¿Me da un par de aguacates?', exRu:'Дайте мне, пожалуйста, пару авокадо.'},
+    {es:'¿a cuánto está?', ru:'почём сейчас?', ex:'¿A cuánto está el salmón hoy?', exRu:'Почём сегодня лосось?'},
+    {es:'póngame', ru:'взвесьте мне', ex:'Póngame tres manzanas reinetas.', exRu:'Взвесьте мне три яблока рейнет.'}
+  ],
+  meat:[
+    {es:'el pollo', ru:'курица', ex:'El pollo entero sale más barato.', exRu:'Целая курица выходит дешевле.'},
+    {es:'el cerdo / la carne de cerdo', ru:'свинина', ex:'La carne de cerdo para el asado.', exRu:'Свинина на запекание.'},
+    {es:'el ternera', ru:'говядина', ex:'Un kilo de ternera para el estofado.', exRu:'Килограмм говядины на рагу.'},
+    {es:'el pavo', ru:'индейка', ex:'El pavo es más ligero que el cerdo.', exRu:'Индейка легче свинины.'},
+    {es:'el jamón', ru:'хамон / ветчина', ex:'El jamón ibérico es un capricho carísimo.', exRu:'Хамон иберико — очень дорогое удовольствие.'},
+    {es:'el salmón', ru:'лосось', ex:'El salmón está a doce euros el kilo.', exRu:'Лосось по двенадцать евро за килограмм.'},
+    {es:'las gambas', ru:'креветки', ex:'Las gambas están en oferta.', exRu:'Креветки по акции.'}
+  ],
+  fruit:[
+    {es:'las naranjas', ru:'апельсины', ex:'Las naranjas de Valencia son las mejores.', exRu:'Апельсины из Валенсии — лучшие.'},
+    {es:'los tomates', ru:'помидоры', ex:'Estos tomates huelen a tomate de verdad.', exRu:'Эти помидоры пахнут настоящим помидором.'},
+    {es:'las manzanas', ru:'яблоки', ex:'Un kilo de manzanas para la tarta.', exRu:'Килограмм яблок на торт.'},
+    {es:'el aguacate', ru:'авокадо', ex:'El aguacate está maduro cuando cede un poco.', exRu:'Авокадо спелое, когда слегка проминается.'},
+    {es:'las fresas', ru:'клубника', ex:'Las fresas de Huelva son dulcísimas.', exRu:'Клубника из Уэльвы очень сладкая.'},
+    {es:'la lechuga', ru:'салат-латук', ex:'Una lechuga fresca para la cena.', exRu:'Свежий салат на ужин.'},
+    {es:'maduro', ru:'спелый', ex:'¿Están maduros los plátanos?', exRu:'Бананы спелые?'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('market', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'Póngame ___ kilo de tomates. (medio)', ans:'medio'},
+  {text:'¿___ da un par de limones? (me)', ans:'me'},
+  {text:'Un cuarto ___ jamón, por favor. (de)', ans:'de'},
+  {text:'¿A ___ está el pescado? (cuánto)', ans:'cuánto'},
+  {text:'Corte el pollo ___ filetes. (en)', ans:'en'},
+  {text:'Vengo ___ las fresas. (por)', ans:'por'},
+  {text:'¿Me limpia el ___, por favor? (pescado)', ans:'pescado'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'Póngame medio kilo de gambas, por favor.', translation:'Взвесьте мне полкило креветок, пожалуйста.'},
+  {target:'¿A cuánto está el salmón hoy?', translation:'Почём сегодня лосось?'},
+  {target:'¿Me da un kilo de naranjas, si puedo?', translation:'Дайте мне килограмм апельсинов, если можно?'},
+  {target:'Vengo por las fresas y los tomates.', translation:'Я пришёл за клубникой и помидорами.'},
+  {target:'¿Me limpia el pescado, por favor?', translation:'Почистите мне рыбу, пожалуйста?'},
+  {target:'Corte el pollo en filetes, a máquina.', translation:'Нарежьте курицу кусками, на машине.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'el puesto', ru:'прилавок / точка'},
+  {id:2, es:'el pescadero', ru:'рыбник'},
+  {id:3, es:'medio kilo de', ru:'полкило'},
+  {id:4, es:'un cuarto de', ru:'четверть'},
+  {id:5, es:'cortar a máquina', ru:'нарезать на машине'},
+  {id:6, es:'¿a cuánto está?', ru:'почём сейчас?'},
+  {id:7, es:'póngame', ru:'взвесьте мне'},
+  {id:8, es:'las gambas', ru:'креветки'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZ =====
+var listenQ = [
+  {q:'1. ¿Cuánto cuesta la merluza?', o:['diez euros el kilo','doce euros el kilo','cincuenta céntimos'], c:0},
+  {q:'2. ¿Cuánta merluza pide el cliente?', o:['medio kilo','dos kilos','un kilo'], c:0},
+  {q:'3. ¿Qué hace el pescadero gratis?', o:['limpia el pescado','fríe el pescado','domicilia la compra'], c:0},
+  {q:'4. ¿Cómo pide cortar?', o:['en filetes','entera','a la plancha'], c:0},
+  {q:'5. ¿Qué más lleva el pedido?', o:['un cuarto de gambas y un par de limones','un kilo de pollo','una lechuga'], c:0},
+  {q:'6. Что pescadero дарит в конце?', o:['una ramita de perejil','una bolsa','una caja'], c:0}
+];
+
+renderQuiz('listening-quiz', listenQ, 'lq');
+
+// ===== PRICE QUIZ (CLIL: пересчёт цены за кило) =====
+var priceQ = [
+  {q:'El salmón está a 12 € el kilo. ¿Cuánto cuesta medio kilo?', o:['6 €','12 €','24 €'], c:0},
+  {q:'Las gambas: 8 € el kilo. ¿Cuánto es un cuarto de kilo?', o:['2 €','4 €','8 €'], c:0},
+  {q:'Las naranjas: 2 € el kilo. ¿Cuánto son tres kilos?', o:['3 €','6 €','9 €'], c:1},
+  {q:'El jamón está a 20 € el kilo. ¿Cuánto es un cuarto de kilo?', o:['4 €','5 €','10 €'], c:1}
+];
+
+renderQuiz('price-quiz', priceQ, 'pq');
+
+// ===== SCRIPT BUILDER =====
+var lastScriptPlain = '';
+
+function buildScript(){
+  var name = document.getElementById('b-name').value || 'Ana';
+  var stall = document.getElementById('b-stall').value;
+  var quant = document.getElementById('b-quant').value;
+  var productParts = document.getElementById('b-product').value.split('|');
+  var product = productParts[0];
+  var productArt = productParts[1];
+  var ask = document.getElementById('b-ask').value;
+  var prep = document.getElementById('b-prep').value;
+  var fin = document.getElementById('b-final').value;
+
+  var askSentence = '';
+  if(ask === 'pon'){ askSentence = 'Póngame ' + quant + product + ', por favor.'; }
+  else if(ask === 'da'){ askSentence = '¿Me da ' + quant + product + ', si puedo?'; }
+  else if(ask === 'quiero'){ askSentence = 'Quiero ' + quant + product + '.'; }
+  else { askSentence = 'Vengo por ' + productArt + '.'; }
+
+  var text = 'Buenos días. Soy ' + name + ' García. ' +
+    'Estoy ' + stall + '. ' +
+    askSentence + ' ' +
+    prep + ' ' +
+    fin + ' Muchas gracias.';
+
+  lastScriptPlain = text;
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML =
+    '<div class="dialog-result">' + text + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary" id="speak-script-btn">🔊 Прослушать заказ</button>' +
+    '</div>';
+
+  document.getElementById('speak-script-btn').onclick = function(){
+    speak(lastScriptPlain);
+  };
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ===== TRAFFIC LIGHT =====
+var TL = [
+  'Спрашивать цену: ¿a cuánto está...?',
+  'Называть количество: un kilo de, medio kilo de, un cuarto de',
+  'Просить продавца: póngame, ¿me da...?, si puedo',
+  'Просить обработку: limpiar, cortar a máquina, en filetes',
+  'Объяснять приход: vengo por... + благодарить',
+  'Разыграть диалог «клиент ↔ pescadero/carnicero»'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + (rowIdx + 1) + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + (rowIdx + 1) + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + (rowIdx + 1) + '" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.market, VOCAB.qty, VOCAB.stall, VOCAB.meat, VOCAB.fruit);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    updateCard();
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Póngame medio kilo de gambas', hint:'Взвесьте мне полкило креветок'},
+    {target:'¿A cuánto está el salmón?', hint:'Почём лосось?'},
+    {target:'Vengo por las fresas', hint:'Я пришёл за клубникой'},
+    {target:'¿Me limpia el pescado, por favor?', hint:'Почистите мне рыбу, пожалуйста?'},
+    {target:'Un cuarto de jamón, si puedo', hint:'Четверть хамона, если можно'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>

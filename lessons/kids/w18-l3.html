@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 54: PBL Mapa del tesoro — Школа МУДРО</title>
+<meta name="description" content="Урок 54 испанского курса для детей (PBL): карта сокровищ района — 5 секретных точек, подсказки-инструкции empieza/gira/cuenta diez pasos, игра «найди X» и защита проекта. Школа МУДРО, станция 6 Mi Ciudad">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#3A86FF; --love:#2A5FC1;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#DCEAFF 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(58,134,255,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#DCEAFF;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #CFE0FF;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#DCEAFF,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #cfd9ee;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .survey-wrap{background:#fff;border:3px dashed var(--heart);border-radius:18px;padding:18px;margin:14px 0}
+  .survey-person{display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid #e8edf7;cursor:pointer}
+  .survey-person:last-child{border-bottom:none}
+  .survey-person:hover{background:#F5F8FF}
+  .survey-avatar{width:50px;height:50px;border-radius:50%;background:#DCEAFF;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+  .survey-info{flex:1;font-size:.9rem}
+  .survey-name{font-weight:800;color:var(--heart);font-size:1rem}
+  .survey-likes{font-style:italic;color:var(--ink-soft);margin-top:2px}
+  .chart-wrap{background:#fff;border-radius:18px;padding:18px;margin:14px 0}
+  .chart-title{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.2rem;margin-bottom:10px}
+  .chart-bar{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:800;font-size:.9rem}
+  .chart-label{min-width:140px;font-size:.85rem}
+  .chart-fill{height:24px;border-radius:8px;background:linear-gradient(90deg,var(--heart),var(--star));transition:.5s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.8rem;font-weight:800;min-width:24px}
+
+  .warm-item{background:#fff;border:2px solid #e8edf7;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #cfd9ee;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#DCEAFF}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}.diff-box{grid-template-columns:1fr}}
+
+  /* === УРОК 54 PBL: ШАГИ, ТОЧКИ, КАРТА-ИГРА, РУБРИКА === */
+  .step-item{display:flex;align-items:center;gap:12px;background:#fff;border:2.5px solid #CFE0FF;border-radius:14px;padding:12px 14px;margin:8px 0;cursor:pointer;transition:.15s;text-align:left;font-family:'Nunito'}
+  .step-item:hover{border-color:var(--heart)}
+  .step-item.done{background:#E8F5E9;border-color:var(--green)}
+  .step-item.done .step-es::after{content:' ✅'}
+  .step-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .step-item.done .step-num{background:var(--green)}
+  .step-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .step-emo{font-size:1.5rem}
+  .step-ru{font-size:.82rem;color:var(--ink-soft);font-weight:700}
+  .pt-item{display:flex;align-items:center;gap:10px;background:#fff;border:2.5px solid #CFE0FF;border-radius:14px;padding:10px 14px;margin:8px 0}
+  .pt-item .num{background:var(--heart);color:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .pt-emo{font-size:1.5rem}
+  .pt-es{font-family:'Baloo 2',cursive;color:var(--heart);font-weight:800;font-size:1rem}
+  .pb-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0;font-weight:800}
+  .pb-row select{font-family:'Nunito';font-weight:800;padding:8px 12px;border-radius:10px;border:2px solid var(--heart);background:#fff;color:var(--ink);font-size:.95rem}
+  .pb-out{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;font-weight:700;line-height:1.9;min-height:60px}
+  .pb-out b{color:var(--heart)}
+  .map-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:360px;margin:12px auto}
+  .map-cell{background:#fff;border:3px solid #CFE0FF;border-radius:14px;font-size:2.2rem;padding:14px 0;cursor:pointer;transition:.15s;font-family:'Nunito'}
+  .map-cell:hover{border-color:var(--heart);transform:translateY(-2px)}
+  .map-cell.correct{background:#C8E6C9;border-color:var(--green)}
+  .map-cell.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  .rubric{background:#DCEAFF;border-radius:16px;padding:14px 18px;margin:12px 0;font-weight:700;line-height:1.9}
+  .rubric b{color:var(--heart)}
+  .diff-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .diff8{background:#E8F5E9;border-radius:14px;padding:12px 14px;font-weight:700;border-left:4px solid var(--green)}
+  .diff12{background:#E3F2FD;border-radius:14px;padding:12px 14px;font-weight:700;border-left:4px solid var(--p4)}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 6 · Mi Ciudad · Урок 3 из 6</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🚌 СТАНЦИЯ 6 · УРОК 3 · НЕДЕЛЯ 18</span>
+  <div class="hero-emojis">🏴‍☠️ 🗺️ 💎 📜 🎯</div>
+  <h1>PBL: Mapa del <span>tesoro</span></h1>
+  <p class="sub">¡Ahoy, pirata! Финал недели 18 — <strong>ПРОЕКТ</strong>! Ты — пират-картограф: рисуешь карту сокровищ района, отмечаешь <strong>5 секретных точек</strong>, пишешь подсказки-инструкции и играешь с друзьями: следуй инструкциям и найди X! ❌</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация (защита):</strong> ты показываешь друзьям карту и объявляешь:<br>
+    <em>«Mi mapa tiene cinco puntos. El primero es la fuente. El tesoro está en el parque. ¡¿Queréis jugar?!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">📍</span> Отмечать 5 точек на карте района</div>
+      <div class="goal-item"><span class="emoji">📜</span> Писать подсказки: empieza, gira, cuenta diez pasos</div>
+      <div class="goal-item"><span class="emoji">🎲</span> Играть: следуй инструкциям и найди X</div>
+      <div class="goal-item"><span class="emoji">1️⃣</span> Считать по порядку: primero, segundo, tercero...</div>
+      <div class="goal-item"><span class="emoji">🧭</span> Понимать leyenda и brújula настоящих карт</div>
+      <div class="goal-item"><span class="emoji">🎤</span> Защитить проект: «Mi mapa tiene cinco puntos...»</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Пират-картограф»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 53</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Ahoy, navegante! Вчера ты был <b>навигатором</b> и давал команды. Ответь ВСЛУХ. Мостик: «Команды готовы — сегодня они станут ПОДСКАЗКАМИ на пиратской карте!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ПЛАН ПРОЕКТА -->
+  <section class="block" style="--c:#3A86FF">
+    <div class="block-head">
+      <h2 class="block-title">🏴‍☠️ План PBL: 6 шагов картографа</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Кликай на каждый шаг — услышишь его по-испански и отметь как выполненный. Так работают настоящие картографы!</p>
+    <div id="steps-list"></div>
+    <div class="stars-line" style="text-align:center">🗺️ Шаги проекта: <span id="steps-count">0</span> / 6</div>
+    <div class="script">⚡ <strong>Секрет PBL:</strong> карта сокровищ = план по порядку: <em>primero el mapa, luego los puntos, después las pistas y por último el juego</em>. Сначала готовим карту — потом играем!</div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: инструкции и порядок</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Empieza en la plaza.')"><td><b>EMPIEZA EN...</b></td><td>Empieza en la plaza.</td><td>Начни на площади.</td><td>🔊</td></tr>
+      <tr onclick="speak('Sigue hasta el semáforo.')"><td><b>SIGUE HASTA...</b></td><td>Sigue hasta el semáforo.</td><td>Иди до светофора.</td><td>🔊</td></tr>
+      <tr onclick="speak('Gira a la izquierda y cuenta diez pasos.')"><td><b>GIRA + CUENTA PASOS</b></td><td>Gira a la izquierda y cuenta diez pasos.</td><td>Поверни налево и отсчитай десять шагов.</td><td>🔊</td></tr>
+      <tr onclick="speak('Busca cerca del árbol.')"><td><b>BUSCA CERCA DE...</b></td><td>Busca cerca del árbol.</td><td>Ищи возле дерева.</td><td>🔊</td></tr>
+      <tr onclick="speak('El primero es la fuente. El segundo es el árbol.')"><td><b>EL PRIMERO / EL SEGUNDO</b></td><td>El primero es la fuente. El segundo es el árbol.</td><td>Первый — фонтан. Второй — дерево.</td><td>🔊</td></tr>
+      <tr onclick="speak('Mi mapa tiene cinco puntos.')"><td><b>MI MAPA TIENE...</b></td><td>Mi mapa tiene cinco puntos.</td><td>В моей карте пять точек.</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> <span class="grammar-hint" data-hint="Порядковые числительные: primero (1-й), segundo (2-й), tercero (3-й), cuarto (4-й), quinto (5-й). Перед существительным они становятся короче: el primer punto, la segunda pista. Род важен: EL primero (el punto), LA primera (la pista). Не путай: el primero es... = «первый — это...», но el primer punto = «первая точка».">ordinales</span>: <b>primero, segundo, tercero, cuarto, quinto</b>. Род важен: el punto → <b>el primero</b>, la pista → <b>la primera</b>.<br>8 лет: просто считай точки: primero, segundo, tercero! ✋</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Какой по счёту?»: 8 раундов</p>
+      <div class="game-q" id="ord-q"></div>
+      <div class="opts" id="ord-opts"></div>
+      <div class="game-fb" id="ord-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="ord-stars">0</span> / <span id="ord-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="ordStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ПРОЕКТ -->
+  <section class="block" style="--c:#C2185B">
+    <div class="block-head">
+      <h2 class="block-title">🏴‍☠️ ПРОЕКТ: строим карту сокровищ</h2>
+      <span class="time-badge">⏱ 15 минут</span>
+    </div>
+    <p class="block-sub">Три части проекта: 1) отметь 5 точек, 2) напиши подсказки-инструкции, 3) играй: найди X!</p>
+
+    <h4 style="margin:8px 0 4px">📍 Часть 1. Отметь 5 секретных точек</h4>
+    <p class="block-sub" style="margin-bottom:6px">Кликай на места — они станут точками на твоей карте. Всего нужно 5!</p>
+    <div class="opts" id="pt-pool"></div>
+    <div class="stars-line" style="text-align:center;margin-top:10px">📍 Точек на карте: <span id="pt-count">0</span> / 5 <span id="pt-fb" style="color:var(--green)"></span></div>
+    <div id="pt-list"></div>
+    <button class="speak-btn" style="margin-top:10px" onclick="ptReset()">🔄 Нарисовать карту заново</button>
+
+    <h4 style="margin:18px 0 4px">📜 Часть 2. Подсказки-инструкции (las pistas)</h4>
+    <p class="block-sub">Собери маршрут из 3 подсказок — так игрок найдёт твоё сокровище!</p>
+    <div class="pb-row">1️⃣ Pista uno: <select id="ps-1"></select></div>
+    <div class="pb-row">2️⃣ Pista dos: <select id="ps-2"></select></div>
+    <div class="pb-row">3️⃣ Pista tres: <select id="ps-3"></select></div>
+    <div class="pb-out" id="ps-out">Выбери подсказки — маршрут соберётся сам! 👆</div>
+    <button class="speak-btn" style="margin-top:10px" onclick="speakPs()">🔊 Mis pistas</button>
+
+    <h4 style="margin:18px 0 4px">❌ Часть 3. Игра: следуй инструкциям, найди X</h4>
+    <p class="block-sub">Карта района: ⛲ plaza · 🌳 parque · 🥖 panadería · 💊 farmacia · 🚦 semáforo · 🏫 colegio · 📰 kiosco · 🛒 supermercado · 📚 biblioteca. Читай инструкцию и нажимай правильное место!</p>
+    <div class="game-zone">
+      <div class="game-q" id="tr-q">…</div>
+      <div class="map-grid" id="tr-grid"></div>
+      <div class="game-fb" id="tr-fb"></div>
+      <div class="stars-line">🎯 Раунд: <span id="tr-status">1</span> / 5 · ⭐ Звёзд: <span id="tr-stars">0</span> <button class="speak-btn" style="margin-left:10px" onclick="trStart()">🔄 Играть заново</button></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: CLIL — ЛЕГЕНДА И БУССОЛА -->
+  <section class="block" style="--c:#3E7CB1">
+    <div class="block-head">
+      <h2 class="block-title">🧭 CLIL: La leyenda y la brújula</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Настоящие карты хранят секреты. Узнаем, как их читать — как настоящие пираты!</p>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakClil()">🔊 Послушать текст</button>
+    <div class="read-box">
+      Los mapas de verdad tienen una <b>leyenda</b>: símbolos que explican qué es cada cosa. En España, la farmacia tiene una <b>cruz verde</b>, el hospital una <b>H grande</b> y el parque un <b>árbol</b>. Y arriba del mapa vive <b>la brújula</b>: <b>N</b> de norte arriba, <b>S</b> de sur abajo, <b>E</b> de este a la derecha y <b>O</b> de oeste a la izquierda. Con la leyenda y la brújula nunca te pierdes. ¡Como un pirata de verdad!
+    </div>
+    <div id="clil-quiz"></div>
+    <div class="diff-box">
+      <div class="diff8">🧒 <b>8 лет:</b> запомни — el norte всегда сверху, как голова! Найди cruz verde на схеме: это farmacia.</div>
+      <div class="diff12">🧑 <b>12 лет:</b> нарисуй на своей бумажной карте brújula (N arriba, S abajo, E справа, O слева) и маленькую leyenda со значками своих 5 точек.</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: ЗАЩИТА ПРОЕКТА -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎤 Защита: «Mi mapa del tesoro»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="read-box" style="background:#DCEAFF;border-color:var(--heart)">
+      <strong>📋 Формула защиты (6 пунктов):</strong><br>
+      1. <em>¡Hola! <b>Es mi mapa del tesoro</b>.</em><br>
+      2. <em><b>Mi mapa tiene cinco puntos</b>.</em><br>
+      3. <em><b>El primero es la fuente. El segundo es el árbol</b>.</em><br>
+      4. <em><b>Empieza en la plaza, gira a la derecha, cuenta diez pasos</b>.</em><br>
+      5. <em><b>El tesoro está en el parque</b>.</em><br>
+      6. <em>¿<b>Queréis jugar</b>? ¡<b>A jugar</b>!</em>
+    </div>
+    <div class="rubric">
+      <strong>✅ Rubric «Скажи 3 предложения» (мини-защита карты):</strong><br>
+      □ <b>Фраза 1:</b> Mi mapa tiene cinco puntos.<br>
+      □ <b>Фраза 2:</b> El primero es... / Empieza en...<br>
+      □ <b>Фраза 3:</b> El tesoro está en... ¡¿Queréis jugar?!<br>
+      💡 Совет учителя: <em>«Habla claro y con orgullo, pirata. ¡Tu mapa es el mejor de la clase!»</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🏴‍☠️</div>
+      <h3>Пират-картограф</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты построил карту сокровищ: 5 точек, подсказки-инструкции и настоящая игра. ¡Enhorabuena, pirata!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Пират-картограф» 🏴‍☠️ добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🎉 <strong>Неделя 18 пройдена!</strong> Ты умеешь: места района, hay/está, команды навигатора и своя карта сокровищ. 🔜 <strong>Анонс недели 19:</strong> «Урок 55: <b>Autobús y Metro 🚌</b> — покупаем билет, выбираем линию и едем исследовать город!»</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#3A86FF">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">🏴‍☠️ Квест</h4>
+    <div class="cards-grid" id="words-g1"></div>
+    <h4 style="margin:14px 0 8px">📜 Инструкции</h4>
+    <div class="cards-grid" id="words-g2"></div>
+    <h4 style="margin:14px 0 8px">🎤 Презентация</h4>
+    <div class="cards-grid" id="words-g3"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#3A86FF">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание (проект!)</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Пройди проект в уроке</strong> · 5 мин<br>Все 3 части: точки, подсказки, игра «найди X». Проговаривай каждую фразу вслух!</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🏴‍☠️ ГЛАВНОЕ ЗАДАНИЕ: бумажная карта сокровищ</strong> · 30 мин ⭐<br>Нарисуй карту своего района: 5 секретных точек + 3 подсказки-инструкции (<em>empieza en la plaza, gira a la derecha, cuenta diez pasos</em>). 8 лет — подпиши точки по-испански. 12 лет — добавь <em>brújula</em> (N/S/E/O) и <em>leyenda</em> со значками.</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🎲 Сыграй по-настоящему</strong> · 15 мин ⭐<br>Спрячь «сокровище» (игрушку) дома и дай карту родителям, брату или сестре. Скажи: <em>«¡¿Queréis jugar?! ¡A jugar!»</em> — и следуй инструкциям вместе!</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🎤 Голосовое-защита</strong> · 5 мин ⭐<br>Защити проект по формуле 6 пунктов (или rubric «3 предложения») и отправь учителю.</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎮 Тренажёры урока</strong> · 10 мин ⭐<br>«Какой по счёту?» + игра «найди X» + сопоставление.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>📸 Сдача проекта</strong> · 5 мин ⭐<br>Отправь учителю фото бумажной карты + голосовое-защиту. Можно добавить видео, как семья играет по твоей карте!</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+    <div class="script" style="margin-top:14px">📤 <strong>Формат сдачи:</strong> фото карты сокровищ + голосовое-защита. ¡Buen trabajo, pirata!</div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть 5 точек по порядку (el primero, el segundo...)</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Писать подсказки: empieza, gira, cuenta diez pasos</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Следовать инструкциям и находить точку X</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Понимать leyenda и brújula на настоящей карте</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Защитить проект: 3 предложения о карте</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Играть в карту сокровищ с другом или семьёй</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 6 · Урок 3 (PBL: Mapa del tesoro)</span>
+    <span>Открыть карточки →</span>
+  </a>
+  <!-- QUIZLET: дети урок 54 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w18-l2.html" class="nav-prev"><div class="nav-small">← Урок 2 станции 6</div><div class="nav-title">Урок 53: ¿Cómo llego a...? 🧭</div></a>
+    <a href="./w19-l1.html" class="nav-next"><div class="nav-small">Неделя 19 · Урок 1 →</div><div class="nav-title">Урок 55: Autobús y Metro 🚌</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 6: Mi Ciudad · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var WARM=[
+ {q:'El señor pregunta: ¿cómo llego al parque? Dale dos comandos (usted).',model:'Siga todo recto y gire a la derecha en el semáforo.',ru:'Сеньор спрашивает, как пройти в парк. Дай 2 команды (вежливо).'},
+ {q:'¿Cómo llego a la farmacia?',model:'Cruce la calle. Está al lado de la panadería.',ru:'Как пройти в аптеку?'},
+ {q:'¿Está lejos el colegio?',model:'No, está muy cerca. ¡Cinco minutos!',ru:'Школа далеко?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ПЛАН PBL ===== */
+var STEPS=[
+ {emo:'🗺️',es:'El mapa',ru:'Нарисуй карту района: улицы и места'},
+ {emo:'📍',es:'Los puntos',ru:'Отметь 5 секретных точек'},
+ {emo:'⛲',es:'La salida',ru:'Выбери старт: empieza en la plaza'},
+ {emo:'📜',es:'Las pistas',ru:'Напиши 3 подсказки-инструкции'},
+ {emo:'🎲',es:'El juego',ru:'Играй: друг следует инструкциям и ищет X'},
+ {emo:'🎤',es:'La defensa',ru:'Защита: «Mi mapa tiene cinco puntos...»'}
+];
+(function(){
+  var box=document.getElementById('steps-list'),count=0;
+  STEPS.forEach(function(s,i){
+    var d=document.createElement('div');d.className='step-item';
+    d.innerHTML='<span class="step-num">'+(i+1)+'</span><span class="step-emo">'+s.emo+'</span><div><div class="step-es">'+s.es+'</div><div class="step-ru">'+s.ru+'</div></div>';
+    d.addEventListener('click',function(){
+      if(!d.classList.contains('done')){count++;document.getElementById('steps-count').textContent=count;}
+      d.classList.add('done');speak(s.es);
+      if(count===STEPS.length){document.getElementById('steps-count').textContent=count;confetti('🏴‍☠️');}
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+var G1=[
+ {emo:'💎',es:'el tesoro',ru:'сокровище'},
+ {emo:'🗺️',es:'el mapa del tesoro',ru:'карта сокровищ'},
+ {emo:'🧩',es:'la pista',ru:'подсказка'},
+ {emo:'📍',es:'el punto',ru:'точка (на карте)'},
+ {emo:'🤫',es:'el secreto',ru:'секрет'},
+ {emo:'🔎',es:'encontrar',ru:'найти'},
+ {emo:'🔍',es:'buscar',ru:'искать'}
+];
+var G2=[
+ {emo:'⛲',es:'empieza en la plaza',ru:'начни на площади'},
+ {emo:'🚦',es:'sigue hasta el semáforo',ru:'иди до светофора'},
+ {emo:'⬅️',es:'gira a la izquierda',ru:'поверни налево'},
+ {emo:'🌳',es:'busca cerca del árbol',ru:'ищи возле дерева'},
+ {emo:'🔟',es:'cuenta diez pasos',ru:'отсчитай десять шагов'},
+ {emo:'🏆',es:'¡enhorabuena, has ganado!',ru:'поздравляю, ты выиграл!'},
+ {emo:'🎲',es:'el siguiente jugador',ru:'следующий игрок'}
+];
+var G3=[
+ {emo:'🗺️',es:'Mi mapa tiene cinco puntos.',ru:'В моей карте пять точек.'},
+ {emo:'1️⃣',es:'El primero es la fuente.',ru:'Первая — фонтан.'},
+ {emo:'💎',es:'El tesoro está en el parque.',ru:'Сокровище в парке.'},
+ {emo:'🙋',es:'¿Queréis jugar?',ru:'Хотите поиграть?'},
+ {emo:'🙂',es:'es fácil',ru:'это просто'},
+ {emo:'😬',es:'es difícil',ru:'это сложно'},
+ {emo:'🚀',es:'¡a jugar!',ru:'за игру!'}
+];
+(function(){
+  function fill(id,arr){
+    var box=document.getElementById(id);
+    arr.forEach(function(f){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+f.emo+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+      d.addEventListener('click',function(){speak(f.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-g1',G1);fill('words-g2',G2);fill('words-g3',G3);
+})();
+
+/* ===== ИГРА: ORDINALES ===== */
+var ORD=[
+ {q:'El punto 1️⃣ = el punto...',ok:'primero',w:['primera','segundo']},
+ {q:'El punto 2️⃣ = el punto...',ok:'segundo',w:['segunda','tercero']},
+ {q:'El punto 3️⃣ = el punto...',ok:'tercero',w:['tercera','cuarto']},
+ {q:'El punto 4️⃣ = el punto...',ok:'cuarto',w:['quinto','primero']},
+ {q:'El punto 5️⃣ = el punto...',ok:'quinto',w:['cuarto','segundo']},
+ {q:'La primera pista = la pista número...',ok:'1️⃣',w:['2️⃣','3️⃣']},
+ {q:'El quinto punto = el punto número...',ok:'5️⃣',w:['4️⃣','1️⃣']},
+ {q:'La fuente es el punto... (1)',ok:'primero',w:['uno','primera']}
+];
+var ordOrd=[],ordI=0,ordS=0;
+function ordStart(){ordOrd=shuffle(ORD.slice());ordI=0;ordS=0;document.getElementById('ord-total').textContent=ordOrd.length;document.getElementById('ord-stars').textContent='0';ordNext();}
+function ordNext(){
+  var box=document.getElementById('ord-opts');box.innerHTML='';
+  if(ordI>=ordOrd.length){document.getElementById('ord-q').textContent='🎉 ¡Muy bien!';document.getElementById('ord-fb').textContent='⭐ '+ordS+' из '+ordOrd.length;return;}
+  var r=ordOrd[ordI];
+  document.getElementById('ord-q').textContent=r.q;
+  document.getElementById('ord-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='110px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');ordS++;document.getElementById('ord-stars').textContent=ordS;document.getElementById('ord-fb').textContent='✅ ¡Correcto!';speak(o.indexOf('1️⃣')===0||o.indexOf('5️⃣')===0?r.q:r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('ord-fb').textContent='❌ Правильно: '+r.ok;}
+      ordI++;setTimeout(ordNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ПРОЕКТ. ЧАСТЬ 1: PUNTOS ===== */
+var PT_POOL=[
+ {emo:'🏛️',es:'la plaza'},
+ {emo:'⛲',es:'la fuente'},
+ {emo:'🌳',es:'el árbol'},
+ {emo:'🚦',es:'el semáforo'},
+ {emo:'🥖',es:'la panadería'},
+ {emo:'🏞️',es:'el parque'},
+ {emo:'🏫',es:'el colegio'},
+ {emo:'💊',es:'la farmacia'},
+ {emo:'📰',es:'el kiosco'},
+ {emo:'📚',es:'la biblioteca'}
+];
+var ptSel=[],ptN=0;
+function renderPt(){
+  ptSel=[];ptN=0;
+  document.getElementById('pt-count').textContent='0';
+  document.getElementById('pt-fb').textContent='';
+  document.getElementById('pt-list').innerHTML='';
+  var pool=document.getElementById('pt-pool');pool.innerHTML='';
+  PT_POOL.forEach(function(p){
+    var b=document.createElement('button');b.className='opt';b.style.minWidth='150px';
+    b.innerHTML='<span class="opt-emo">'+p.emo+'</span>'+p.es;
+    b.addEventListener('click',function(){
+      if(ptN>=5){document.getElementById('pt-fb').textContent='🗺️ ¡Ya hay cinco puntos! ¡Mapa listo!';return;}
+      ptN++;ptSel.push(p);
+      b.classList.add('correct');b.disabled=true;
+      document.getElementById('pt-count').textContent=ptN;
+      document.getElementById('pt-fb').textContent='';
+      speak(p.es);
+      var item=document.createElement('div');item.className='pt-item';
+      item.innerHTML='<span class="num">'+ptN+'</span><span class="pt-emo">'+p.emo+'</span><span class="pt-es">'+p.es+'</span>';
+      document.getElementById('pt-list').appendChild(item);
+      if(ptN===5){
+        document.getElementById('pt-fb').textContent='🗺️ ¡Mapa listo! Cinco puntos.';
+        speak('Mi mapa tiene cinco puntos.');
+        confetti('📍');
+      }
+    });
+    pool.appendChild(b);
+  });
+}
+function ptReset(){renderPt();}
+renderPt();
+
+/* ===== ПРОЕКТ. ЧАСТЬ 2: PISTAS ===== */
+var PS1=['Empieza en la plaza.','Empieza en el colegio.','Empieza en la panadería.'];
+var PS2=['Sigue hasta el semáforo.','Gira a la izquierda en la fuente.','Gira a la derecha en el árbol.'];
+var PS3=['Cuenta diez pasos.','Busca cerca del árbol.','Cruza el parque.'];
+(function(){
+  function fillSel(id,arr){
+    var s=document.getElementById(id);
+    arr.forEach(function(v){var o=document.createElement('option');o.textContent=v;s.appendChild(o);});
+    s.addEventListener('change',updatePs);
+  }
+  fillSel('ps-1',PS1);fillSel('ps-2',PS2);fillSel('ps-3',PS3);
+})();
+function psText(){
+  var p1=PS1[document.getElementById('ps-1').selectedIndex];
+  var p2=PS2[document.getElementById('ps-2').selectedIndex];
+  var p3=PS3[document.getElementById('ps-3').selectedIndex];
+  return 'Pista uno: '+p1+' Pista dos: '+p2+' Pista tres: '+p3+' ¡El tesoro está muy cerca!';
+}
+function updatePs(){
+  var p1=PS1[document.getElementById('ps-1').selectedIndex];
+  var p2=PS2[document.getElementById('ps-2').selectedIndex];
+  var p3=PS3[document.getElementById('ps-3').selectedIndex];
+  document.getElementById('ps-out').innerHTML='<b>Pista uno:</b> '+p1+' <b>Pista dos:</b> '+p2+' <b>Pista tres:</b> '+p3+' ¡El tesoro está muy cerca!';
+}
+function speakPs(){speak(psText());}
+updatePs();
+
+/* ===== ПРОЕКТ. ЧАСТЬ 3: НАЙДИ X ===== */
+var GRIDEMO=['⛲','🌳','🥖','💊','🚦','🏫','📰','🛒','📚'];
+var GRIDNAME=['la plaza','el parque','la panadería','la farmacia','el semáforo','el colegio','el kiosco','el supermercado','la biblioteca'];
+var TR=[
+ {q:'Empieza en la plaza. Dos pasos a la derecha. ¿Dónde estás?',ok:2},
+ {q:'Empieza en el colegio. Dos pasos a la izquierda. ¿Dónde estás?',ok:3},
+ {q:'Empieza en el semáforo. Un paso hacia arriba. ¿Dónde estás?',ok:1},
+ {q:'Empieza en el kiosco. Dos pasos a la derecha. ¿Dónde estás?',ok:8},
+ {q:'Empieza en la panadería. Un paso abajo y un paso a la izquierda. ¿Dónde estás?',ok:4}
+];
+var trI=0,trS=0;
+function trStart(){trI=0;trS=0;document.getElementById('tr-stars').textContent='0';document.getElementById('tr-status').textContent='1';trRound();}
+function trRound(){
+  var grid=document.getElementById('tr-grid');grid.innerHTML='';
+  document.getElementById('tr-status').textContent=trI+1;
+  document.getElementById('tr-fb').textContent='';
+  document.getElementById('tr-q').innerHTML='📜 '+TR[trI].q+' <button class="speak-btn" onclick="speak(\''+TR[trI].q.replace(/'/g,"\\'")+'\')">🔊</button>';
+  GRIDEMO.forEach(function(e,idx){
+    var c=document.createElement('button');c.className='map-cell';c.textContent=e;
+    c.addEventListener('click',function(){
+      if(trI>=TR.length)return;
+      if(idx===TR[trI].ok){
+        c.classList.add('correct');trS++;
+        document.getElementById('tr-stars').textContent=trS;
+        document.getElementById('tr-fb').textContent='✅ ¡Enhorabuena! Has encontrado '+GRIDNAME[idx]+'!';
+        speak('¡Enhorabuena! Has encontrado '+GRIDNAME[idx]+'!');
+        trI++;
+        if(trI>=TR.length){
+          document.getElementById('tr-fb').textContent='🏆 ¡Has encontrado el tesoro! ¡Eres un pirata-cartógrafo de verdad!';
+          confetti('💎');
+        }else{setTimeout(trRound,1800);}
+      }else{
+        c.classList.add('wrong');
+        document.getElementById('tr-fb').textContent='❌ Mmm... no es '+GRIDNAME[idx]+'. ¡Lee la pista otra vez!';
+        var cc=c;
+        setTimeout(function(){cc.classList.remove('wrong');},600);
+      }
+    });
+    grid.appendChild(c);
+  });
+}
+trStart();
+
+/* ===== БЛОК 4: CLIL — ЛЕГЕНДА И БРУХУЛА ===== */
+function speakClil(){speak('Los mapas de verdad tienen una leyenda: símbolos que explican qué es cada cosa. En España, la farmacia tiene una cruz verde, el hospital una H grande y el parque un árbol. Y arriba del mapa vive la brújula: N de norte arriba, S de sur abajo, E de este a la derecha y O de oeste a la izquierda. Con la leyenda y la brújula nunca te pierdes. ¡Como un pirata de verdad!');}
+var CLIL=[
+ {q:'¿Qué es la leyenda de un mapa?',ru:'Что такое легенда карты?',ok:'Los símbolos con su significado.',w:['El nombre del pirata.','Una canción.']},
+ {q:'¿Qué símbolo tiene la farmacia en España?',ru:'Какой значок у аптеки в Испании?',ok:'Una cruz verde.',w:['Una cruz roja.','Un pan grande.']},
+ {q:'¿Dónde está el norte en un mapa?',ru:'Где север на карте?',ok:'Arriba.',w:['Abajo.','A la izquierda.']},
+ {q:'En la brújula, ¿qué significa la letra E?',ru:'Что означает буква E на компасе?',ok:'Este: a la derecha.',w:['Enero.','Abajo.']},
+ {q:'¿Qué letra usamos para el oeste?',ru:'Какая буква обозначает запад?',ok:'La O.',w:['La E.','La A.']}
+];
+(function(){
+  var wrap=document.getElementById('clil-quiz');
+  CLIL.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ЗАЩИТА: ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Скажи, сколько точек на твоей карте.',model:'Mi mapa tiene cinco puntos.'},
+ {q:'Назови первую и вторую точку.',model:'El primero es la fuente. El segundo es el árbol.'},
+ {q:'Дай три инструкции-подсказки.',model:'Empieza en la plaza. Gira a la derecha. Cuenta diez pasos.'},
+ {q:'Скажи, где спрятано сокровище.',model:'El tesoro está en el parque.'},
+ {q:'Защити проект ЦЕЛИКОМ (6 пунктов формулы).',model:'¡Hola! Es mi mapa del tesoro. Mi mapa tiene cinco puntos. El primero es la fuente. El segundo es el árbol. Empieza en la plaza, gira a la derecha, cuenta diez pasos. El tesoro está en el parque. ¿Queréis jugar? ¡A jugar!'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом защити СВОЮ карту вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el tesoro','сокровище'],['el mapa del tesoro','карта сокровищ'],
+ ['la pista','подсказка'],['el punto','точка (на карте)'],
+ ['el secreto','секрет'],['encontrar','найти'],
+ ['buscar','искать'],['empieza en la plaza','начни на площади'],
+ ['cuenta diez pasos','отсчитай десять шагов'],['¡enhorabuena, has ganado!','поздравляю, ты выиграл!'],
+ ['el siguiente jugador','следующий игрок'],['es fácil','это просто']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un pirata-cartógrafo de verdad!');
+  confetti('🏴‍☠️');
+  try{localStorage.setItem('mudro_kids_w18l3_badge_pirata_cartografo','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w18l3_badge_pirata_cartografo')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'💎','🗺️'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

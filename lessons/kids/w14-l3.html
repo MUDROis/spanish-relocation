@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 42: PBL: Mi futuro mapa — Школа МУДРО</title>
+<meta name="description" content="Детский PBL-урок испанского 42: проект «Карта будущего», планы voy a + инфинитив, porque, presentación. Финал станции 4 Mates y Ciencias — школа МУДРО.">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#2274A5; --love:#17547B;
+    --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#D9ECF8 0%,#FFF3D6 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(34,116,165,.20),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#D9ECF8,#FFF3D6);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#DCEBF7;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #D8EAF6;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#D9ECF8,#FFF3D6);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #c3dcec;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .warm-item{background:#fff;border:2px solid #e3edf5;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#DCEBF7}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}}
+
+  /* === PBL: ШАГИ ПРОЕКТА, КАРТА, ЧЕКПОИНТ (уникальные стили урока 42) === */
+  .step-item{display:flex;align-items:center;gap:12px;background:#fff;border:2.5px solid #D8EAF6;border-radius:14px;padding:12px 14px;margin:8px 0;cursor:pointer;transition:.15s;text-align:left;font-family:'Nunito'}
+  .step-item:hover{border-color:var(--heart)}
+  .step-item.done{background:#E8F5E9;border-color:var(--green)}
+  .step-item.done .step-es::after{content:' ✅'}
+  .step-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .step-item.done .step-num{background:var(--green)}
+  .step-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .step-emo{font-size:1.5rem}
+  .step-ru{font-size:.82rem;color:var(--ink-soft);font-weight:700}
+  .plan-map{position:relative;height:340px;border-radius:18px;border:3px solid var(--heart);overflow:hidden;background:linear-gradient(180deg,#CDEBF7 0%,#CDEBF7 16%,#DDEECF 16%,#E9F4DB 70%,#9ED2EE 70%,#7FC4E8 100%)}
+  .plan-map svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .place-marker{position:absolute;transform:translate(-50%,-50%);font-size:1.8rem;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));animation:popIn .4s;z-index:2;cursor:default}
+  .place-marker span{display:block;font-size:.62rem;font-weight:800;background:#fff;color:var(--heart);border:1.5px solid var(--heart);border-radius:6px;padding:0 5px;margin-top:2px;white-space:nowrap;text-align:center}
+  .pb-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0;font-weight:800}
+  .pb-row select{font-family:'Nunito';font-weight:800;padding:8px 12px;border-radius:10px;border:2px solid var(--heart);background:#fff;color:var(--ink);font-size:.95rem}
+  .pb-out{background:#fff;border:3px dashed var(--heart);border-radius:16px;padding:14px 18px;font-weight:700;line-height:1.9;min-height:60px}
+  .pb-out b{color:var(--heart)}
+  .cp-item{display:flex;align-items:center;gap:12px;background:#fff;border:2.5px solid #D8EAF6;border-radius:14px;padding:12px 14px;margin:8px 0}
+  .cp-item.done{background:#E8F5E9;border-color:var(--green)}
+  .cp-bar{height:28px;background:#fff;border-radius:999px;border:2.5px solid var(--heart);overflow:hidden;margin:12px 0}
+  .cp-fill{height:100%;background:linear-gradient(90deg,var(--heart),var(--sun));width:0;transition:.4s;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-weight:800;font-size:.8rem}
+  .cp-done{display:none;background:#E8F5E9;border:3px dashed var(--green);border-radius:16px;padding:16px;font-weight:800;color:var(--green);text-align:center;margin-top:10px}
+  .cp-done.show{display:block;animation:popIn .5s}
+  .rubric{background:#DCEBF7;border-radius:16px;padding:14px 18px;margin:12px 0;font-weight:700;line-height:1.9}
+  .rubric b{color:var(--heart)}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 4 · Mates y Ciencias · Урок 3 из 9</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🧪 СТАНЦИЯ 4 · УРОК 3 · НЕДЕЛЯ 14</span>
+  <div class="hero-emojis">🗺️ 🏠 🏫 🏖️ 🎤</div>
+  <h1><span>PBL:</span> Mi futuro mapa</h1>
+  <p class="sub">Сегодня — <strong>ФИНАЛ станции 4</strong>! 🏆 Ты создаёшь <strong>карту будущего</strong>: дом, школа, пляж или парк. А потом презентуешь её по-испански: <em>«Voy a vivir en... porque... Primero... Luego...»</em> ¡Ánimo, мастер проектов!</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> ты держишь свою карту и говоришь:<br>
+    <em>«¡Mira! Aquí está mi casa, aquí la escuela y allí la playa. Voy a vivir aquí porque hay playa. Primero la escuela... ¡luego la playa!»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">🗺️</span> Создать карту будущего города</div>
+      <div class="goal-item"><span class="emoji">📌</span> Отмечать дом, школу, пляж/парк по-испански</div>
+      <div class="goal-item"><span class="emoji">🚀</span> Строить планы: voy a + инфинитив</div>
+      <div class="goal-item"><span class="emoji">💬</span> Объяснять причину: porque hay...</div>
+      <div class="goal-item"><span class="emoji">🎤</span> Презентовать карту: 3 предложения</div>
+      <div class="goal-item"><span class="emoji">🏆</span> Получить бейдж «Мастер проектов»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 41</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, maestro de proyectos! Вспомним урок 41 про регион — ответь ВСЛУХ. Мостик: «Ты знаток своего региона. Сегодня — финал: рисуем карту будущего и презентуем её!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ШАГИ ПРОЕКТА + ЛЕКСИКА -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">⭐ План проекта: 6 шагов</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Кликай на каждый шаг — услышишь его по-испански и отметь как выполненный. Так работают настоящие проектные команды!</p>
+    <div id="steps-list"></div>
+    <div class="stars-line" style="text-align:center">📋 Шаги проекта: <span id="steps-count">0</span> / 6</div>
+    <h4 style="margin:16px 0 4px">⭐ Слова проекта</h4>
+    <div class="cards-grid" id="words-proj"></div>
+    <div class="script">⚡ <strong>Секрет PBL:</strong> любой проект = <b>шаги по порядку</b>: <em>primero dibujar, luego marcar, después escribir y por último presentar</em>. Это работает и в школе в Испании!</div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: планы и причины</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr><td><b>VOY A + <span class="grammar-hint" data-hint="IR A + инфинитив = план на будущее: voy a vivir (буду жить), vamos a visitar (мы посетим). Инфинитив — начальная форма глагола: vivir, visitar, ir, comer, dibujar.">инфинитив</span></b></td><td>Voy a vivir en Valencia.</td><td>Я буду жить в Валенсии.</td><td><button class="speak-btn" onclick="speak('Voy a vivir en Valencia.')">🔊</button></td></tr>
+      <tr><td><b>VAMOS A + инфинитив</b></td><td>Vamos a visitar el centro.</td><td>Мы посетим центр.</td><td><button class="speak-btn" onclick="speak('Vamos a visitar el centro.')">🔊</button></td></tr>
+      <tr><td><b>VOY A IR A + место</b></td><td>Voy a ir a la playa.</td><td>Я пойду на пляж.</td><td><button class="speak-btn" onclick="speak('Voy a ir a la playa.')">🔊</button></td></tr>
+      <tr><td><b>PORQUE + причина</b></td><td>...porque hay playa.</td><td>...потому что там пляж.</td><td><button class="speak-btn" onclick="speak('Voy a vivir allí porque hay playa.')">🔊</button></td></tr>
+      <tr><td><b>PRIMERO... LUEGO...</b></td><td>Primero la escuela, luego la playa.</td><td>Сначала школа, потом пляж.</td><td><button class="speak-btn" onclick="speak('Primero la escuela, luego la playa.')">🔊</button></td></tr>
+      <tr><td><b>¡AQUÍ VIVIREMOS!</b></td><td>¡Aquí viviremos!</td><td>Вот тут мы будем жить!</td><td><button class="speak-btn" onclick="speak('¡Aquí viviremos!')">🔊</button></td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> после <b>voy a</b> всегда инфинитив: voy a <span class="grammar-hint" data-hint="Правильно: voy a VIVIR, vamos a VISITAR. Нельзя: voy a vivo, vamos a visitamos. После «a» — только начальная форма глагола (-ar, -er, -ir).">vivir</span>, voy a <span class="grammar-hint" data-hint="Правильно: voy a DIBUJAR, voy a EXPLICAR. Глагол не меняется: кто бы ни был «я, ты, мы» — форма одна: voy a / vas a / vamos a + инфинитив.">dibujar</span>. Нельзя «voy a vivo»!<br>8 лет: запомни как робота: «Я БУДУ + делать»: voy a vivir = я буду жить. 🤖</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Собери план»: 8 раундов</p>
+      <div class="game-q" id="plan-q"></div>
+      <div class="opts" id="plan-opts"></div>
+      <div class="game-fb" id="plan-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="plan-stars">0</span> / <span id="plan-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="planStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ПРОЕКТ — КАРТА БУДУЩЕГО -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🗺️ ПРОЕКТ: собери карту будущего</h2>
+      <span class="time-badge">⏱ 12 минут</span>
+    </div>
+    <p class="block-sub">Шаг А (онлайн): кликай на места — они появятся на карте, а ты повторяй ВСЛУХ: <em>«Aquí está...»</em>. Шаг Б (на бумаге): нарисуй такую же карту дома для домашки!</p>
+    <div class="plan-map" id="plan-map">
+      <svg viewBox="0 0 400 340" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,64 C80,58 180,80 400,66" stroke="#ffffff" stroke-width="7" fill="none" opacity=".85"/>
+        <path d="M118,0 C130,120 110,220 150,340" stroke="#ffffff" stroke-width="7" fill="none" opacity=".85"/>
+        <path d="M0,210 C120,200 260,220 400,204" stroke="#ffffff" stroke-width="5" fill="none" opacity=".7"/>
+      </svg>
+    </div>
+    <div class="stars-line" style="text-align:center;margin-top:10px">📌 Отмечено мест: <span id="places-count">0</span> / 6 <span id="places-fb" style="color:var(--green)"></span></div>
+    <div class="opts" id="places-pool" style="margin-top:10px"></div>
+    <button class="speak-btn" style="margin-top:12px" onclick="placesReset()">🔄 Очистить карту</button>
+    <h4 style="margin:18px 0 4px">🎤 Конструктор презентации</h4>
+    <p class="block-sub">Выбери варианты — собери презентацию из 5 предложений. Потом запиши её на бумаге под своей картой!</p>
+    <div class="pb-row">1️⃣ Voy a vivir en
+      <select id="pb-city"><option>Valencia</option><option>Barcelona</option><option>Madrid</option><option>Sevilla</option><option>Bilbao</option></select>.
+    </div>
+    <div class="pb-row">2️⃣ Voy a esta ciudad porque
+      <select id="pb-reason"><option>hay playa</option><option>hay montañas</option><option>hay una plaza famosa</option><option>hay un parque grande</option><option>me gusta mucho</option></select>.
+    </div>
+    <div class="pb-row">3️⃣ Primero voy a
+      <select id="pb-first"><option>la escuela</option><option>la playa</option><option>el parque</option><option>el centro</option></select>.
+    </div>
+    <div class="pb-row">4️⃣ Luego
+      <select id="pb-luego"><option>visitamos el centro</option><option>vamos al mercado</option><option>vamos a la plaza</option><option>comemos paella</option></select>.
+    </div>
+    <div class="pb-row">5️⃣ ¡Aquí viviremos! ¡Enhorabuena!</div>
+    <div class="pb-out" id="pb-out">Выбери варианты выше — презентация соберётся сама! 👆</div>
+    <button class="speak-btn" id="pb-speak" style="margin-top:10px" onclick="speakPres()">🔊 Послушать презентацию</button>
+  </section>
+
+  <!-- БЛОК 4: МИНИ-ЧЕКПОИНТ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🏁 Мини-чекпоинт: 4 фразы о своём регионе</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <p class="block-sub">ФИНАЛ СТАНЦИИ 4! Расскажи вслух 4 фразы о своём регионе. После каждой нажимай «Я сказал вслух».</p>
+    <div id="cp-box"></div>
+    <div class="cp-bar"><div class="cp-fill" id="cp-fill"></div></div>
+    <div class="stars-line" style="text-align:center">🏁 Фраз рассказано: <span id="cp-count">0</span> / 4</div>
+    <div class="cp-done" id="cp-done">🎉 ¡CHECKPOINT SUPERADO! Станция 4 «Mates y Ciencias» завершена — ты рассказал о своём регионе 4 фразы! 🏆</div>
+  </section>
+
+  <!-- БЛОК 5: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#C24E8C">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Презентация: шаблон 5 предложений</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="read-box" style="background:#DCEBF7;border-color:var(--heart)">
+      <strong>📋 Шаблон речи (5 предложений):</strong><br>
+      1. <em><b>Voy a vivir en</b> [ciudad / región].</em><br>
+      2. <em><b>Voy a vivir allí porque</b> hay [playa / montañas / un parque] / me gusta.</em><br>
+      3. <em><b>Aquí está</b> mi casa. <b>Aquí está</b> la escuela. (показываешь на карте 🏠🏫)</em><br>
+      4. <em><b>Primero</b> voy a la escuela. <b>Luego</b> voy a la playa.</em><br>
+      5. <em>¡<b>Aquí viviremos</b>! ¡Enhorabuena a mí!</em>
+    </div>
+    <div class="rubric">
+      <strong>✅ Rubric «Скажи 3 предложения» (мини-защита):</strong><br>
+      □ <b>Фраза 1:</b> Voy a vivir en... porque hay... <br>
+      □ <b>Фраза 2:</b> Aquí está mi casa / mi escuela (покажи на карте)<br>
+      □ <b>Фраза 3:</b> Primero... luego...<br>
+      💡 Совет учителя: <em>«Habla más alto. No tengas miedo!»</em> — говори громче и не бойся!
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + финал станции</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">🏆</div>
+      <h3>Мастер проектов</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты создал карту будущего и презентовал её по-испански. Это настоящий PBL-результат!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Мастер проектов» 🏆 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🎉 <strong>Станция 4 «Mates y Ciencias» — пройдена!</strong> Ты умеешь: числа и счёт, время, географию Испании и свой регион. 🔜 <strong>Анонс недели 15 (станция 5 — La Cocina):</strong> «Урок 43: La comida española 🥘 — паэлья, чуррос, tortilla de patatas и поход в магазин!»</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head"><h2 class="block-title">🗣 Слова урока: планы и оценки</h2></div>
+    <h4 style="margin-bottom:8px">🚀 Планы</h4>
+    <div class="cards-grid" id="words-plan"></div>
+    <h4 style="margin:14px 0 8px">🏅 Оценка (слова учителя)</h4>
+    <div class="cards-grid" id="words-eval"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание (проект!)</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Собери материалы</strong> · 5 мин<br>Лист, карандаши, фломастеры. Прокликай шаги проекта в уроке и вспомни план.</div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>🗺️ ПРОЕКТ: «Карта будущего»</strong> · 20 мин ⭐<br>Нарисуй карту своего будущего города/района: дом 🏠, школа 🏫, пляж или парк 🏖️🌳 + ещё 3 места. Подпиши места по-испански: <em>mi casa, la escuela, la playa...</em></div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>✍️ Шаблон речи на карте</strong> · 10 мин ⭐<br>Напиши под картой 5 предложений из шаблона (подставь СВОЙ город и причины).</div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🎤 Презентация-защита</strong> · 10 мин ⭐<br>Покажи карту и расскажи по rubric «Скажи 3 предложения». Запиши голосовое и отправь учителю!</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🏁 Мини-чекпоинт</strong> · 5 мин ⭐<br>Расскажи о своём регионе 4 фразы (блок чекпоинта в уроке). Добей полоску до 4/4!</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>👨‍👩‍👧 Семейная защита проекта</strong> · 10 мин ⭐<br>Презентуй карту родителям. Они задают 2 вопроса: <em>«¿Qué hay aquí?»</em> — а ты отвечаешь: <em>«Aquí hay...»</em></div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть шаги проекта на испанском</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Строить планы: voy a + инфинитив</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Объяснять причину: porque hay...</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Говорить primero... luego...</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Презентовать карту (3 предложения по rubric)</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Рассказать о своём регионе 4 фразы</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 4 · Урок 3 (PBL: Mi futuro mapa)</span>
+    <span>Открыть карточки →</span>
+  </a>
+  <!-- QUIZLET: дети урок 42 (ссылку добавит админ) -->
+
+  <div class="lesson-nav">
+    <a href="./w14-l2.html" class="nav-prev"><div class="nav-small">← Урок 2 станции 4</div><div class="nav-title">Урок 41: Mi comunidad autónoma 📍</div></a>
+    <a href="./w15-l1.html" class="nav-next"><div class="nav-small">Неделя 15 · Станция 5 →</div><div class="nav-title">Урок 43: La comida española 🥘 — станция 5</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 4: Mates y Ciencias · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ: СЛОВА УРОКА (из словаря w14-l3.json, без изменений) ===== */
+var PROJ=[
+ {emo:'🗺️',es:'el mapa',ru:'карта'},
+ {emo:'📁',es:'el proyecto',ru:'проект'},
+ {emo:'🎤',es:'la presentación',ru:'презентация'},
+ {emo:'🖼️',es:'el póster',ru:'постер'},
+ {emo:'📌',es:'marcar',ru:'отмечать'},
+ {emo:'✏️',es:'dibujar',ru:'рисовать'},
+ {emo:'💬',es:'explicar',ru:'объяснять'}
+];
+var PLAN=[
+ {emo:'🏡',es:'Voy a vivir en...',ru:'Я буду жить в...'},
+ {emo:'🏖️',es:'Voy a ir a la playa.',ru:'Я пойду на пляж.'},
+ {emo:'🚶',es:'Vamos a visitar el centro.',ru:'Мы посетим центр.'},
+ {emo:'💡',es:'porque hay playa',ru:'потому что там пляж'},
+ {emo:'❤️',es:'porque me gusta',ru:'потому что мне нравится'},
+ {emo:'1️⃣',es:'primero... luego...',ru:'сначала... потом...'},
+ {emo:'📌',es:'¡Aquí viviremos!',ru:'Вот тут мы будем жить!'}
+];
+var EVAL=[
+ {emo:'👏',es:'¡Muy bien presentado!',ru:'Очень хорошо представлено!'},
+ {emo:'📢',es:'Habla más alto.',ru:'Говори громче.'},
+ {emo:'💪',es:'No tengas miedo.',ru:'Не бойся.'},
+ {emo:'🎉',es:'¡Enhorabuena!',ru:'Поздравляю!'},
+ {emo:'🌟',es:'Excelente trabajo',ru:'Отличная работа'},
+ {emo:'❓',es:'Pregunta:',ru:'Вопрос:'},
+ {emo:'✅',es:'La respuesta correcta',ru:'Правильный ответ'}
+];
+(function(){
+  function fill(id,arr){
+    var box=document.getElementById(id);
+    arr.forEach(function(w){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+w.emo+'</div><div class="es">'+w.es+'</div><div class="ru">'+w.ru+'</div>';
+      d.addEventListener('click',function(){speak(w.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-proj',PROJ);fill('words-plan',PLAN);fill('words-eval',EVAL);
+})();
+
+/* ===== РАЗМИНКА (урок 41) ===== */
+var WARM=[
+ {q:'¿Cómo se llama tu comunidad autónoma?',model:'Mi comunidad autónoma se llama Comunidad Valenciana. La capital es Valencia.',ru:'Как называется твой регион?'},
+ {q:'¿Qué hay en tu ciudad?',model:'Hay una playa, una plaza y un mercado.',ru:'Что есть в твоём городе?'},
+ {q:'¿Por qué te gusta tu región?',model:'Me gusta porque hay playa y hace mucho sol.',ru:'Почему тебе нравится твой регион?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ШАГИ ПРОЕКТА ===== */
+var STEPS=[
+ {emo:'✏️',es:'Dibuja el mapa.',ru:'Нарисуй карту своего города или региона.'},
+ {emo:'🏠',es:'Marca tu casa.',ru:'Отметь дом: «Aquí está mi casa.»'},
+ {emo:'🏫',es:'Marca la escuela.',ru:'Отметь школу: «Aquí está mi escuela.»'},
+ {emo:'🏖️',es:'Marca la playa o el parque.',ru:'Отметь пляж или парк: «Aquí está la playa / el parque.»'},
+ {emo:'✍️',es:'Escribe 5 frases.',ru:'Напиши 5 предложений по шаблону.'},
+ {emo:'🎤',es:'Presenta tu mapa.',ru:'Презентуй карту: «Скажи 3 предложения».'}
+];
+(function(){
+  var box=document.getElementById('steps-list');var done=0;
+  STEPS.forEach(function(s,i){
+    var d=document.createElement('button');d.className='step-item';
+    d.innerHTML='<span class="step-num">'+(i+1)+'</span><span class="step-emo">'+s.emo+'</span><span style="flex:1"><span class="step-es">'+s.es+'</span><br><span class="step-ru">'+s.ru+'</span></span>';
+    d.addEventListener('click',function(){
+      if(d.classList.contains('done'))return;
+      d.classList.add('done');done++;speak(s.es);
+      document.getElementById('steps-count').textContent=done;
+      if(done===STEPS.length){confetti('⭐');speak('¡Tu plan de proyecto está listo!');}
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 2: ИГРА ГРАММАТИКИ ===== */
+var PLANQ=[
+ {q:'Voy a ___ en Valencia.',ok:'vivir',w:['vivo','viviendo']},
+ {q:'Vamos a ___ el centro.',ok:'visitar',w:['visita','visitamos']},
+ {q:'Voy a ___ a la playa.',ok:'ir',w:['voy','vas']},
+ {q:'Elijo esta ciudad ___ hay playa.',ok:'porque',w:['pero','qué']},
+ {q:'Primero la escuela, ___ la playa.',ok:'luego',w:['primero','hay']},
+ {q:'Aquí ___ mi casa.',ok:'está',w:['hay','es']},
+ {q:'En mi mapa ___ un parque y una playa.',ok:'hay',w:['está','son']},
+ {q:'Mi mapa ___ genial.',ok:'es',w:['hay','está en']}
+];
+var planOrd=[],planI=0,planS=0;
+function planStart(){planOrd=shuffle(PLANQ.slice());planI=0;planS=0;document.getElementById('plan-total').textContent=planOrd.length;document.getElementById('plan-stars').textContent='0';planNext();}
+function planNext(){
+  var box=document.getElementById('plan-opts');box.innerHTML='';
+  if(planI>=planOrd.length){document.getElementById('plan-q').textContent='🎉 ¡Muy bien!';document.getElementById('plan-fb').textContent='⭐ '+planS+' из '+planOrd.length;return;}
+  var r=planOrd[planI];
+  document.getElementById('plan-q').textContent=r.q;
+  document.getElementById('plan-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='100px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');planS++;document.getElementById('plan-stars').textContent=planS;document.getElementById('plan-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('plan-fb').textContent='❌ Правильно: '+r.ok;}
+      planI++;setTimeout(planNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 3: КАРТА БУДУЩЕГО ===== */
+var PLACES=[
+ {id:'casa',emo:'🏠',name:'mi casa',es:'Aquí está mi casa.',ru:'дом',x:20,y:26},
+ {id:'escuela',emo:'🏫',name:'la escuela',es:'Aquí está mi escuela.',ru:'школа',x:52,y:16},
+ {id:'parque',emo:'🌳',name:'el parque',es:'Aquí está el parque.',ru:'парк',x:82,y:30},
+ {id:'plaza',emo:'⛲',name:'la plaza',es:'Aquí está la plaza.',ru:'площадь',x:70,y:56},
+ {id:'mercado',emo:'🏪',name:'el mercado',es:'Aquí está el mercado.',ru:'рынок',x:38,y:54},
+ {id:'playa',emo:'🏖️',name:'la playa',es:'Aquí está la playa.',ru:'пляж',x:22,y:84}
+];
+var placedN=0;
+(function(){
+  var pool=document.getElementById('places-pool');
+  PLACES.forEach(function(p){
+    var b=document.createElement('button');b.className='opt';b.id='pl-'+p.id;b.style.minWidth='150px';
+    b.innerHTML='<span class="opt-emo">'+p.emo+'</span>'+p.name;
+    b.addEventListener('click',function(){
+      if(b.disabled)return;
+      b.disabled=true;b.style.opacity=.45;
+      var map=document.getElementById('plan-map');
+      var m=document.createElement('div');m.className='place-marker';
+      var jx=p.x+(Math.random()*6-3),jy=p.y+(Math.random()*4-2);
+      m.style.left=jx+'%';m.style.top=jy+'%';
+      m.innerHTML=p.emo+'<span>'+p.name+'</span>';
+      map.appendChild(m);
+      placedN++;document.getElementById('places-count').textContent=placedN;
+      speak(p.es);
+      if(placedN===PLACES.length){document.getElementById('places-fb').textContent=' 🗺️ ¡Mapa completo!';confetti('🗺️');speak('¡Mapa completo! ¡Enhorabuena!');}
+    });
+    pool.appendChild(b);
+  });
+})();
+function placesReset(){
+  placedN=0;document.getElementById('places-count').textContent='0';document.getElementById('places-fb').textContent='';
+  document.querySelectorAll('.place-marker').forEach(function(m){m.remove();});
+  PLACES.forEach(function(p){var b=document.getElementById('pl-'+p.id);b.disabled=false;b.style.opacity=1;});
+}
+
+/* ===== КОНСТРУКТОР ПРЕЗЕНТАЦИИ ===== */
+function buildPres(){
+  var city=document.getElementById('pb-city').value;
+  var reason=document.getElementById('pb-reason').value;
+  var first=document.getElementById('pb-first').value;
+  var luego=document.getElementById('pb-luego').value;
+  window.pbText='Voy a vivir en '+city+'. Voy a esta ciudad porque '+reason+'. Primero voy a '+first+'. Luego '+luego+'. ¡Aquí viviremos! ¡Enhorabuena!';
+  var out=document.getElementById('pb-out');
+  out.innerHTML='1. Voy a vivir en <b>'+city+'</b>.<br>2. Voy a esta ciudad porque <b>'+reason+'</b>.<br>3. Primero voy a <b>'+first+'</b>.<br>4. Luego <b>'+luego+'</b>.<br>5. ¡<b>Aquí viviremos</b>! ¡Enhorabuena!';
+}
+function speakPres(){speak(window.pbText||'Voy a vivir en Valencia. Voy a esta ciudad porque hay playa. Primero voy a la escuela. Luego vamos al mercado. ¡Aquí viviremos! ¡Enhorabuena!');}
+['pb-city','pb-reason','pb-first','pb-luego'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',buildPres);
+});
+buildPres();
+
+/* ===== БЛОК 4: МИНИ-ЧЕКПОИНТ ===== */
+var CP=[
+ {es:'Mi región se llama Comunidad Valenciana.',ru:'Мой регион называется... (скажи СВОЙ!)',btn:'Mi región se llama Comunidad Valenciana.'},
+ {es:'Está en el este de España.',ru:'Он находится на востоке/юге/севере/в центре.',btn:'Está en el este de España.'},
+ {es:'Allí hay playa y una plaza famosa.',ru:'Там есть пляж и знаменитая площадь. (что есть у тебя?)',btn:'Allí hay playa y una plaza famosa.'},
+ {es:'Voy a vivir allí porque hay playa y hace mucho sol.',ru:'Я буду там жить, потому что там пляж и много солнца.',btn:'Voy a vivir allí porque hay playa y hace mucho sol.'}
+];
+var cpN=0;
+(function(){
+  var box=document.getElementById('cp-box');
+  CP.forEach(function(c,i){
+    var d=document.createElement('div');d.className='cp-item';d.id='cp-'+(i+1);
+    d.innerHTML='<span class="step-num">'+(i+1)+'</span><span style="flex:1"><span class="step-es">'+c.es+'</span> <button class="speak-btn" style="margin:0 4px;padding:4px 10px" onclick="speak(\''+c.btn.replace(/'/g,"\\'")+'\')">🔊</button><br><span class="step-ru">'+c.ru+'</span></span>'+
+      '<button class="speak-btn" style="background:var(--green);margin:0" onclick="cpDone('+(i+1)+')">✅ Я сказал вслух</button>';
+    box.appendChild(d);
+  });
+})();
+function cpDone(i){
+  var d=document.getElementById('cp-'+i);
+  if(d.classList.contains('done'))return;
+  d.classList.add('done');
+  cpN++;
+  document.getElementById('cp-count').textContent=cpN;
+  var fill=document.getElementById('cp-fill');
+  fill.style.width=(cpN*25)+'%';
+  fill.textContent=cpN<4?(cpN*25)+'%':'100% 🏁';
+  if(cpN===4){
+    document.getElementById('cp-done').classList.add('show');
+    confetti('🏆');
+    speak('¡Enhorabuena! ¡Estación cuatro completada!');
+  }
+}
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Скажи, где ты будешь жить и почему.',model:'Voy a vivir en Valencia porque hay playa.'},
+ {q:'Покажи на карте дом и школу.',model:'Aquí está mi casa. Aquí está mi escuela.'},
+ {q:'Расскажи порядок: сначала и потом.',model:'Primero voy a la escuela. Luego voy a la playa.'},
+ {q:'Позови всех смотреть: где вы будете жить.',model:'¡Mira! ¡Aquí viviremos! ¡Excelente trabajo!'},
+ {q:'Презентуй карту ЦЕЛИКОМ (5 предложений).',model:'Voy a vivir en Valencia porque hay playa. Aquí está mi casa y aquí está mi escuela. Allí está la playa. Primero la escuela, luego la playa. ¡Aquí viviremos! ¡Enhorabuena!'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом презентуй СВОЮ карту вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я презентовал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['el mapa','карта'],['el proyecto','проект'],['la presentación','презентация'],['el póster','постер'],
+ ['marcar','отмечать'],['dibujar','рисовать'],['explicar','объяснять'],
+ ['Voy a vivir en...','Я буду жить в...'],['porque hay playa','потому что там пляж'],
+ ['primero... luego...','сначала... потом...'],['¡Aquí viviremos!','Вот тут мы будем жить!'],['¡Enhorabuena!','Поздравляю!']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un maestro de proyectos!');
+  confetti('🏆');
+  try{localStorage.setItem('mudro_kids_w14l3_badge_master','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w14l3_badge_master')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'🗺️','🏅'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

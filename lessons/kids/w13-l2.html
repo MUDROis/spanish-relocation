@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 38: La ropa — Школа МУДРО</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --cream:#FFF8EC; --ink:#33322E; --sun:#FFC93C; --terra:#E8604C;
+    --teal:#2A9D8F; --soft:#FFF3D6; --ink-soft:#6b675f;
+    --green:#2E7D32; --red:#D62828; --p4:#2C5E8A; --pink:#E91E63;
+    --wine:#9D4EDD; --gold:#FFC93C; --heart:#2274A5; --love:#1B5E8A;
+    --hate:#424242; --star:#FFB300;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;padding-bottom:60px}
+  h1,h2,h3,h4{font-family:'Baloo 2',cursive;line-height:1.3}
+
+  .top-nav{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:50}
+  .nav-left{display:flex;align-items:center;gap:14px}
+  .back-btn{background:var(--soft);border:none;border-radius:12px;padding:8px 16px;font-family:'Nunito';font-weight:800;cursor:pointer;text-decoration:none;color:var(--ink)}
+  .brand{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem}
+  .brand span{color:var(--terra)}
+  .nav-right{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .hero{text-align:center;padding:50px 20px 40px;background:linear-gradient(180deg,#D6EAF8 0%,#E8F3FB 55%,var(--cream) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(34,116,165,.22),transparent 70%);border-radius:50%}
+  .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,179,0,.22),transparent 70%);border-radius:50%}
+  .lesson-tag{display:inline-block;background:var(--heart);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:.85rem;position:relative;z-index:2}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem);margin:16px 0 10px;position:relative;z-index:2}
+  .hero h1 span{color:var(--heart)}
+  .hero .sub{max-width:680px;margin:0 auto;font-weight:700;color:var(--ink-soft);position:relative;z-index:2}
+  .hero-emojis{font-size:3rem;margin:12px 0;position:relative;z-index:2;letter-spacing:8px}
+  .final-situation{background:linear-gradient(135deg,#D6EAF8,#E8F3FB);border-radius:16px;padding:18px;margin-top:16px;font-weight:700;border-left:5px solid var(--heart);text-align:left;position:relative;z-index:2}
+
+  .container{max-width:880px;margin:40px auto;padding:0 20px}
+  .goals{background:#fff;border-radius:22px;padding:26px;box-shadow:0 8px 22px rgba(0,0,0,.06);margin-bottom:26px;border:3px solid var(--heart)}
+  .goals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .goal-item{background:#D6EAF8;border-radius:14px;padding:12px;font-weight:700;font-size:.95rem}
+  .goal-item .emoji{font-size:1.3rem;margin-right:6px}
+
+  .block{background:#fff;border-radius:22px;padding:26px;margin-bottom:20px;box-shadow:0 8px 22px rgba(0,0,0,.06);border-left:6px solid var(--c)}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .block-title{font-size:1.35rem;display:flex;align-items:center;gap:10px}
+  .time-badge{background:var(--c);color:#fff;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;white-space:nowrap}
+  .block-sub{color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+
+  .script{background:var(--soft);border-left:4px solid var(--sun);padding:12px 18px;border-radius:12px;margin:12px 0;font-style:italic}
+  .script strong{font-style:normal;color:var(--terra)}
+  .script::before{content:'👩‍🏫 Учитель:';display:block;font-weight:800;font-style:normal;font-size:.8rem;color:var(--terra);margin-bottom:6px}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .word-card{background:#fff;border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;border:3px solid #D6EAF8;transition:.25s;user-select:none}
+  .word-card:hover{transform:translateY(-4px);border-color:var(--heart)}
+  .word-card .emo{font-size:2.5rem;display:block;margin-bottom:4px}
+  .word-card .es{font-family:'Baloo 2',cursive;font-size:1.05rem;color:var(--heart)}
+  .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
+  .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
+  .speak-btn:active{transform:scale(.93)}
+
+  .scale-wrap{background:linear-gradient(135deg,#D6EAF8,#E8F3FB);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
+  .scale-row:hover{transform:translateX(4px)}
+  .scale-emo{font-size:2.2rem}
+  .scale-text{text-align:left;flex:1}
+  .scale-es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.05rem}
+  .scale-ru{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .gram-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .gram-table th{background:var(--heart);color:#fff;padding:10px 14px;text-align:left;font-size:.9rem}
+  .gram-table td{padding:12px 14px;border-bottom:1px solid #f0ede6}
+  .gram-table tr:hover td{background:var(--soft)}
+
+  .game-zone{background:linear-gradient(135deg,#D6EAF8,#E8F3FB);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
+  .game-q{font-family:'Baloo 2',cursive;font-size:1.25rem;color:var(--heart);margin:10px 0;min-height:36px}
+  .game-emo{font-size:4rem;margin:10px 0;min-height:70px}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .opt{background:#fff;border:2.5px solid #c9ddec;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.15s;font-family:'Nunito';font-size:.95rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+  .opt .opt-emo{font-size:1.8rem;display:block;margin-bottom:4px}
+  .opt:hover:not(:disabled){border-color:var(--heart);transform:translateY(-2px)}
+  .opt:disabled{cursor:not-allowed}
+  .opt.correct{background:#C8E6C9;border-color:var(--green)}
+  .opt.wrong{background:#FFCDD2;border-color:var(--red);animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .game-fb{font-weight:800;margin-top:12px;min-height:26px}
+  .stars-line{font-weight:800;margin-top:8px}
+
+  .survey-wrap{background:#fff;border:3px dashed var(--heart);border-radius:18px;padding:18px;margin:14px 0}
+  .survey-person{display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid #f0e6e8;cursor:pointer}
+  .survey-person:last-child{border-bottom:none}
+  .survey-person:hover{background:#EFF7FD}
+  .survey-avatar{width:50px;height:50px;border-radius:50%;background:#D6EAF8;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+  .survey-info{flex:1;font-size:.9rem}
+  .survey-name{font-weight:800;color:var(--heart);font-size:1rem}
+  .survey-likes{font-style:italic;color:var(--ink-soft);margin-top:2px}
+  .chart-wrap{background:#fff;border-radius:18px;padding:18px;margin:14px 0}
+  .chart-title{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.2rem;margin-bottom:10px}
+  .chart-bar{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:800;font-size:.9rem}
+  .chart-label{min-width:140px;font-size:.85rem}
+  .chart-fill{height:24px;border-radius:8px;background:linear-gradient(90deg,var(--heart),var(--star));transition:.5s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:.8rem;font-weight:800;min-width:24px}
+
+  .warm-item{background:#fff;border:2px solid #f0e6e8;border-radius:14px;padding:14px;margin:10px 0}
+  .warm-q{font-family:'Baloo 2',cursive;font-size:1.12rem;color:var(--heart)}
+  .warm-ru{color:#999;font-size:.85rem;font-style:italic;margin:4px 0 8px}
+  .warm-model{display:none;background:#E8F5E9;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:800;color:var(--green)}
+  .warm-model.show{display:block}
+
+  .read-box{background:#F4F7EE;border-left:4px solid #7A8B4C;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.8;margin:10px 0}
+  .read-q{margin:10px 0}
+  .read-q .q{font-weight:800;margin-bottom:4px;color:var(--heart)}
+  .read-q .ru{color:#999;font-size:11px;font-style:italic;display:block;margin-bottom:6px}
+
+  .sb-target{background:#fff;border:2px dashed #c9ddec;border-radius:14px;padding:16px;min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-family:'Baloo 2',cursive;font-size:1.15rem;color:var(--heart)}
+  .sb-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .sb-word{background:#fff;border:2px solid var(--heart);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;transition:.15s}
+  .sb-word:hover{background:var(--heart);color:#fff}
+  .sb-word.placed{opacity:.3;cursor:default}
+
+  .badge-zone{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:30px;text-align:center;margin:20px 0;border:3px dashed var(--sun)}
+  .badge-icon{font-size:4rem;margin-bottom:10px}
+  .badge-btn{background:var(--sun);color:var(--ink);border:none;border-radius:16px;padding:14px 28px;font-family:'Nunito';font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 0 #d9a520;margin-top:12px}
+  .badge-stamped{display:none;font-weight:800;font-size:1.1rem;color:var(--green);margin-top:12px}
+  .badge-stamped.show{display:block;animation:popIn .5s}
+  @keyframes popIn{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+  .match-game{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+  .match-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .match-item{background:var(--soft);border:3px solid transparent;border-radius:12px;padding:11px;font-weight:800;cursor:pointer;text-align:center;font-size:.92rem;transition:.15s}
+  .match-item.selected{border-color:var(--heart);background:#D6EAF8}
+  .match-item.matched{background:#C8E6C9;border-color:var(--green);cursor:default;opacity:.85}
+  .match-item.wrong{background:#FFCDD2;animation:shake .4s}
+
+  .grammar-hint{color:var(--p4);border-bottom:1.5px dashed var(--p4);cursor:help;position:relative}
+  .grammar-hint::after{content:attr(data-hint);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1A3A6B;color:#fff;padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;width:max-content;max-width:320px;opacity:0;pointer-events:none;transition:.2s;z-index:100;line-height:1.4}
+  .grammar-hint::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1A3A6B;opacity:0;pointer-events:none;transition:.2s;z-index:100}
+  .grammar-hint:hover::after,.grammar-hint:hover::before,.grammar-hint.active::after,.grammar-hint.active::before{opacity:1}
+
+  .diff-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .diff-card{background:#fff;border-radius:14px;padding:14px 16px;border-left:5px solid var(--sun);font-weight:600;font-size:.93rem}
+  .diff-card h4{margin-bottom:6px}
+  .tl-wrap{background:#fff;border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 6px 16px rgba(0,0,0,.06);overflow-x:auto}
+  .tl-table{width:100%;border-collapse:collapse;min-width:500px}
+  .tl-table th{background:var(--soft);padding:9px 12px;text-align:left;font-weight:800;font-size:.9rem}
+  .tl-table th:not(:first-child){text-align:center;width:90px}
+  .tl-table td{padding:9px 12px;border-bottom:1px solid #f0ede6}
+  .tl-table td:first-child{font-weight:600}
+  .tl-table td:not(:first-child){text-align:center}
+  .tl-cell{width:6mm;height:6mm;border-radius:50%;border:1.6px solid #bbb;background:#fff;cursor:pointer;display:inline-block;vertical-align:middle;padding:0}
+  .tl-cell[data-color="1"].active{background:#4CAF50;border-color:#2E7D32}
+  .tl-cell[data-color="2"].active{background:#FFC107;border-color:#F57F17}
+  .tl-cell[data-color="3"].active{background:#F44336;border-color:#C62828}
+  .tl-reset{background:var(--soft);border:none;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Nunito'}
+  .tl-note{margin-top:12px;font-size:.85rem;color:var(--ink-soft);font-weight:700}
+
+  .homework{background:linear-gradient(135deg,#FFF3D6,#FFE9B8);border-radius:22px;padding:26px;margin:20px 0;border:3px dashed var(--sun)}
+  .homework h3{color:var(--terra);font-size:1.35rem;margin-bottom:14px}
+  .task{background:#fff;border-radius:14px;padding:16px;margin:10px 0;display:flex;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .task-num{background:var(--heart);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .task-num.star{background:var(--sun);color:var(--ink)}
+  .task a{color:var(--heart);font-weight:800}
+
+  .quizlet-link{background:#4255FF;color:#fff;border-radius:16px;padding:18px 24px;margin:20px 0;display:flex;justify-content:space-between;text-decoration:none;font-weight:800;transition:.2s}
+  .quizlet-link:hover{transform:translateY(-3px)}
+
+  .lesson-nav{display:flex;gap:14px;margin:30px 0;flex-wrap:wrap}
+  .lesson-nav a,.lesson-nav .nav-soon{flex:1;min-width:200px;border-radius:18px;padding:20px;text-decoration:none;text-align:center;transition:.2s;display:block}
+  .nav-prev{background:var(--soft);color:var(--ink)}
+  .nav-next{background:linear-gradient(135deg,var(--heart),var(--love));color:#fff}
+  .nav-soon{background:var(--soft);color:var(--ink-soft);opacity:.7;cursor:default}
+  .nav-small{font-size:.85rem;opacity:.8;font-weight:700}
+  .nav-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-top:4px}
+  .footer{text-align:center;padding:20px;color:var(--ink-soft);font-weight:700;font-size:.85rem}
+  .confetti{position:fixed;top:-50px;z-index:200;font-size:26px;animation:fall linear forwards;pointer-events:none}
+  @keyframes fall{to{transform:translateY(115vh) rotate(560deg)}}
+  @media(max-width:600px){.cards-grid{grid-template-columns:1fr 1fr}.match-columns{grid-template-columns:1fr}.diff-box{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../../kids.html" class="back-btn">← К карте</a>
+    <div class="brand">Школа <span>МУДРО</span></div>
+  </div>
+  <div class="nav-right">Станция 4 · Mates y Ciencias · Урок 2 из 9</div>
+</nav>
+
+<header class="hero">
+  <span class="lesson-tag">🧪 СТАНЦИЯ 4 · УРОК 2 · НЕДЕЛЯ 13</span>
+  <div class="hero-emojis">👕 👗 🧥 🧣 🩴</div>
+  <h1>La <span>ropa</span></h1>
+  <p class="sub">Вчера ты стал синоптиком. Сегодня — <strong>стилистом</strong>! Оденем всех по погоде: <em>Llevo un abrigo porque hace frío</em>. А ещё узнаем, как сказать, что вещь тебе <strong>идёт</strong> ✨</p>
+  <div class="final-situation">
+    <strong>Итоговая ситуация:</strong> испанский друг спрашивает: <em>«¿Qué te pones hoy?»</em>, а ты отвечаешь:<br>
+    <em>«Llevo una camiseta y un pantalón. Hace frío, así que me pongo la chaqueta. ¿Y tú?»</em>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="goals">
+    <h2>🎯 Сегодня ты научишься</h2>
+    <div class="goals-grid">
+      <div class="goal-item"><span class="emoji">👕</span> Называть одежду: camiseta, abrigo, sandalias...</div>
+      <div class="goal-item"><span class="emoji">🧍</span> Говорить llevo / llevas / lleva</div>
+      <div class="goal-item"><span class="emoji">⬆️</span> Надевать и снимать: me pongo / me quito</div>
+      <div class="goal-item"><span class="emoji">✨</span> Скажу, что вещь идёт: me queda bien</div>
+      <div class="goal-item"><span class="emoji">🌦️</span> Объясню выбор: llevo... porque hace frío</div>
+      <div class="goal-item"><span class="emoji">🏅</span> Получить бейдж «Стилист»</div>
+    </div>
+  </section>
+
+  <!-- БЛОК 0: РАЗМИНКА -->
+  <section class="block" style="--c:#E9A13B">
+    <div class="block-head">
+      <h2 class="block-title">🔁 Разминка: повторение урока 37 (El clima)</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="script">¡Hola, estilista! Вчера ты выучил погоду: hace sol, llueve, la estación. Ответь ВСЛУХ. Мостик: «Погода мы знаем. Теперь — что НОСИТЬ в такую погоду!»</div>
+    <div id="warm-box"></div>
+  </section>
+
+  <!-- БЛОК 1: ВВОД — ТЕРМОМЕТР ГАРДЕРОБА -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head">
+      <h2 class="block-title">🌡️ Термометр гардероба</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <p class="block-sub">Кликай на каждую строчку и повторяй ВСЛУХ: какая погода → какая одежда!</p>
+    <div class="scale-wrap" id="scale-wrap"></div>
+    <div class="script">⚡ <strong>Секрет:</strong> <b>llevo</b> = «на мне / я ношу». Строжки идут от жары к холоду: чем холоднее — тем больше одежды! 🧥🧣🧢</div>
+    <div class="diff-box">
+      <div class="diff-card"><h4>📗 8 лет</h4>Выучи <b>6 предметов</b>: la camiseta, el pantalón, el vestido, la chaqueta, el abrigo, los zapatos. С ними играй во все игры урока!</div>
+      <div class="diff-card"><h4>📘 12 лет</h4>+ <b>размеры и материалы</b>: la talla (размер: Talla S / M / L), el número (размер обуви), de algodón (из хлопка), de lana (из шерсти). В магазине: <em>¿Qué talla necesitas? — Talla M, de algodón.</em></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: ГРАММАТИКА -->
+  <section class="block" style="--c:#9D4EDD">
+    <div class="block-head">
+      <h2 class="block-title">🧩 Грамматика: LLEVAR, PONERSE, QUEDA BIEN</h2>
+      <span class="time-badge">⏱ 8 минут</span>
+    </div>
+    <table class="gram-table">
+      <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
+      <tr onclick="speak('Llevo un abrigo.')"><td><b>LLEVO + одежда</b></td><td>Llevo un abrigo.</td><td>На мне пальто. / Я ношу пальто.</td><td>🔊</td></tr>
+      <tr onclick="speak('¿Llevas gorro? Mi mamá lleva un vestido.')"><td><b>LLEVAS / LLEVA</b></td><td>¿Llevas gorro? Mi mamá lleva un vestido.</td><td>Ты в шапке? Мама в платье.</td><td>🔊</td></tr>
+      <tr onclick="speak('Me pongo la chaqueta. Me quito el abrigo.')"><td><b>ME PONGO / ME QUITO</b></td><td>Me pongo la chaqueta. Me quito el abrigo.</td><td>Я надеваю куртку. Я снимаю пальто.</td><td>🔊</td></tr>
+      <tr onclick="speak('Este vestido me queda bien.')"><td><b>QUEDA BIEN / MAL</b></td><td>Este vestido me queda bien.</td><td>Это платье мне идёт.</td><td>🔊</td></tr>
+      <tr onclick="speak('Llevo un abrigo porque hace frío.')"><td><b>LLEVO... PORQUE HACE...</b></td><td>Llevo un abrigo porque hace frío.</td><td>Я в пальто, потому что холодно.</td><td>🔊</td></tr>
+      <tr onclick="speak('En verano llevo sandalias.')"><td><b>EN VERANO / EN INVIERNO LLEVO...</b></td><td>En verano llevo sandalias.</td><td>Летом я ношу сандалии.</td><td>🔊</td></tr>
+    </table>
+    <div class="script">⚡ <strong>Ловушка (12 лет):</strong> <span class="grammar-hint" data-hint="PONERSE и QUITARSE — возвратные глаголы: me pongo, te pones, se pone (надеваю на СЕБЯ). Не говори ❌ pongo la chaqueta о себе — нужно ME pongo. А вот llevo — невозвратный: llevo la chaqueta.">me pongo</span>, а не просто «pongo»! Глаголы ponerse (надевать) и quitarse (снимать) всегда дружат с me / te / se.<br>8 лет: <b>ponerse</b> = надеть, <b>quitarse</b> = снять. Песенка: <em>Me pongo el gorro, me quito el gorro</em> 🧢.</div>
+    <div class="game-zone">
+      <p style="font-weight:800">🕵️ Игра «Одень по погоде»: 8 раундов</p>
+      <div class="game-q" id="num-q"></div>
+      <div class="opts" id="num-opts"></div>
+      <div class="game-fb" id="num-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="num-stars">0</span> / <span id="num-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="numStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: DRILL-ИГРЫ -->
+  <section class="block" style="--c:#2A9D8F">
+    <div class="block-head">
+      <h2 class="block-title">🎮 3 drill-игры</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 1: «Llevo, llevas o lleva?» (6 раундов)</p>
+      <div class="game-q" id="reac-q"></div>
+      <div class="opts" id="reac-opts"></div>
+      <div class="game-fb" id="reac-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="reac-stars">0</span> / <span id="reac-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="reacStart()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 2: «Конструктор: Llevo... porque hace...»</p>
+      <div class="sb-target" id="sb-target">…</div>
+      <div class="sb-pool" id="sb-pool"></div>
+      <div class="game-fb" id="sb-fb"></div>
+      <button class="speak-btn" onclick="nextSB()">Следующая фраза →</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🎯 Игра 3: Диалог «Модный приговор»</p>
+      <div class="game-q" id="dial-q"></div>
+      <div class="opts" id="dial-opts"></div>
+      <div class="game-fb" id="dial-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="dial-stars">0</span> / <span id="dial-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="dialStart()">▶ Начать</button>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: ЧТЕНИЕ -->
+  <section class="block" style="--c:#7A8B4C">
+    <div class="block-head">
+      <h2 class="block-title">📖 Чтение: «El armario de Lucía»</h2>
+      <span class="time-badge">⏱ 5 минут</span>
+    </div>
+    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakLucia()">🔊 Послушать текст</button>
+    <div class="read-box">
+      ¡Hola! Me llamo Lucía y tengo 10 años. Mi armario no es muy grande. Tengo tres camisetas, dos pantalones y un vestido rojo. También tengo una chaqueta azul y un abrigo negro para el invierno. <b>En invierno llevo</b> un abrigo, un gorro y una bufanda <b>porque hace frío</b>. <b>En verano llevo</b> sandalias y vestidos <b>porque hace calor</b>. Mi vestido rojo <b>me queda muy bien</b>: ¡es mi favorito! Hoy <b>está nublado y llueve</b>, así que <b>me pongo la chaqueta</b>. ¿Qué llevas tú?
+    </div>
+    <div id="lucia-quiz"></div>
+    <div class="script">🧮 <strong>CLIL-математика (12 лет):</strong> Посчитай всю одежду Люсии: 3 + 2 + 1 + 1 + 1 = <b>8 вещей</b> → <em>«Lucía tiene ocho cosas de ropa»</em>. А теперь посчитай одежду в СВОЁМ шкафу и скажи: <em>«Tengo cuatro camisetas...»</em> 📦 8 лет: посчитай только футболки!</div>
+  </section>
+
+  <!-- БЛОК 5: ГОВОРЕНИЕ -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">🗣 Говорение: «Mi armario»</h2>
+      <span class="time-badge">⏱ 6 минут</span>
+    </div>
+    <div class="script">ВЫВОД В РЕЧЬ! Расскажи о своём гардеробе по формуле. Это подготовка к голосовому домашке! 👕</div>
+    <div class="read-box" style="background:#D6EAF8;border-color:var(--heart)">
+      <strong>📋 Формула речи (6 пунктов):</strong><br>
+      1. <em>¡Hola! Hoy <b>llevo</b> una camiseta verde y un pantalón azul.</em><br>
+      2. <em><b>En invierno llevo</b> un abrigo, un gorro y una bufanda.</em><br>
+      3. <em><b>En verano llevo</b> una camiseta y sandalias.</em><br>
+      4. <em>Mi prenda favorita es... porque <b>me queda bien</b>.</em><br>
+      5. <em>Hoy hace frío / hace calor, así que <b>me pongo</b>...</em><br>
+      6. <em>¿<b>Qué llevas</b> tú hoy?</em>
+    </div>
+    <div id="pres-box"></div>
+  </section>
+
+  <!-- БЛОК 6: БЕЙДЖ -->
+  <section class="block" style="--c:#E8604C">
+    <div class="block-head">
+      <h2 class="block-title">🏅 Бейдж + анонс</h2>
+      <span class="time-badge">⏱ 3 минуты</span>
+    </div>
+    <div class="badge-zone">
+      <div class="badge-icon">👗</div>
+      <h3>Стилист</h3>
+      <p style="font-weight:700;color:var(--ink-soft)">Ты умеешь называть одежду, одевать всех по погоде и делать модные комплименты!</p>
+      <button class="badge-btn" id="badge-btn" onclick="stampBadge()">🏆 Получить бейдж!</button>
+      <div class="badge-stamped" id="badge-stamped">🎉 ¡Enhorabuena! Бейдж «Стилист» 👗 добавлен в твой паспорт!</div>
+    </div>
+    <div class="script">🔜 <strong>Анонс урока 39 (STEAM, пятница):</strong> «Завтра ты станешь <b>учёным-исследователем</b>: вырастим фасоль и построим <b>круговорот воды</b> в пакете! Настоящий эксперимент и дневник наблюдений на испанском! 🔬💧»</div>
+  </section>
+
+  <!-- СЛОВА УРОКА -->
+  <section class="block" style="--c:#2274A5">
+    <div class="block-head"><h2 class="block-title">🗣 Все слова урока</h2></div>
+    <h4 style="margin-bottom:8px">👕 Одежда</h4>
+    <div class="cards-grid" id="words-clothes"></div>
+    <h4 style="margin:14px 0 8px">🧍 Глагол llevar</h4>
+    <div class="cards-grid" id="words-llevar"></div>
+    <h4 style="margin:14px 0 8px">🗣️ Фразы</h4>
+    <div class="cards-grid" id="words-phrases"></div>
+  </section>
+
+  <!-- ТРЕНАЖЁР -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head"><h2 class="block-title">🧩 Тренажёр: сопоставление</h2></div>
+    <div class="match-game">
+      <h4>🧩 «Испанский ↔ русский» (12 пар)</h4>
+      <div class="match-columns"><div id="match-left"></div><div id="match-right"></div></div>
+      <div class="game-fb" id="match-fb"></div>
+      <button class="speak-btn" onclick="renderMatch()">🔄 Начать заново</button>
+    </div>
+  </section>
+
+  <!-- ДОМАШКА -->
+  <section class="homework">
+    <h3>🏡 Домашнее задание</h3>
+    <div class="task"><div class="task-num">1</div><div><strong>Покажи «термометр гардероба»</strong> · 5 мин<br>Родители говорят погоду (hace frío / llueve / hace calor) — ты показываешь и называешь одежду: <em>¡Me pongo el abrigo!</em></div></div>
+    <div class="task"><div class="task-num star">2</div><div><strong>📦 Инвентаризация шкафа</strong> · 10 мин ⭐<br>Посчитай одежду и запиши по-испански: <em>Tengo tres camisetas, dos pantalones...</em> 8 лет — 6 предметов; 12 лет — всё + материалы (<em>de algodón / de lana</em>).</div></div>
+    <div class="task"><div class="task-num star">3</div><div><strong>🌦️ Одень по прогнозу</strong> · 5 мин ⭐<br>Посмотри прогноз на завтра и составь 3 фразы: <em>Mañana va a hacer frío. Llevo un abrigo. Me pongo el gorro.</em></div></div>
+    <div class="task"><div class="task-num star">4</div><div><strong>🎤 Голосовое «Mi armario»</strong> · 5 мин ⭐<br>Расскажи о своём гардеробе по формуле 6 пунктов (см. Блок 5). Отправь учителю!</div></div>
+    <div class="task"><div class="task-num star">5</div><div><strong>🎨 Наряды стилиста</strong> · 10 мин ⭐<br>Нарисуй 2 наряда: для жары ☀️ и для холода ❄️. Подпиши по-испански. 12 лет: укажи размер — <em>Talla M, de algodón</em>.</div></div>
+    <div class="task"><div class="task-num star">6</div><div><strong>Тренажёры</strong> · 10 мин ⭐<br>«Одень по погоде» + «Llevo, llevas o lleva?» + конструктор + диалог + сопоставление.</div></div>
+    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин<br>Нажми нужный цвет в таблице ниже.</div></div>
+  </section>
+
+  <!-- СВЕТОФОР -->
+  <section class="tl-wrap">
+    <h4>🚦 Самопроверка «Светофор»</h4>
+    <table class="tl-table">
+      <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+      <tr><td>Называть предметы одежды (6 предметов)</td><td><button class="tl-cell" data-row="1" data-color="1"></button></td><td><button class="tl-cell" data-row="1" data-color="2"></button></td><td><button class="tl-cell" data-row="1" data-color="3"></button></td></tr>
+      <tr><td>Говорить: llevo / llevas / lleva</td><td><button class="tl-cell" data-row="2" data-color="1"></button></td><td><button class="tl-cell" data-row="2" data-color="2"></button></td><td><button class="tl-cell" data-row="2" data-color="3"></button></td></tr>
+      <tr><td>Надевать и снимать: me pongo / me quito</td><td><button class="tl-cell" data-row="3" data-color="1"></button></td><td><button class="tl-cell" data-row="3" data-color="2"></button></td><td><button class="tl-cell" data-row="3" data-color="3"></button></td></tr>
+      <tr><td>Сказать, что вещь идёт: me queda bien</td><td><button class="tl-cell" data-row="4" data-color="1"></button></td><td><button class="tl-cell" data-row="4" data-color="2"></button></td><td><button class="tl-cell" data-row="4" data-color="3"></button></td></tr>
+      <tr><td>Объяснить выбор: llevo... porque hace frío</td><td><button class="tl-cell" data-row="5" data-color="1"></button></td><td><button class="tl-cell" data-row="5" data-color="2"></button></td><td><button class="tl-cell" data-row="5" data-color="3"></button></td></tr>
+      <tr><td>Рассказать «Mi armario» по формуле 6 пунктов</td><td><button class="tl-cell" data-row="6" data-color="1"></button></td><td><button class="tl-cell" data-row="6" data-color="2"></button></td><td><button class="tl-cell" data-row="6" data-color="3"></button></td></tr>
+    </table>
+    <button class="tl-reset" id="tlReset">↺ Сбросить отметки</button>
+    <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
+  </section>
+
+  <!-- QUIZLET: дети урок 38 -->
+  <a class="quizlet-link" href="#" onclick="return false;">
+    <span>📚 Карточки Quizlet · Станция 4 · Урок 5 (La ropa)</span>
+    <span>Открыть карточки →</span>
+  </a>
+
+  <div class="lesson-nav">
+    <a href="./w13-l1.html" class="nav-prev"><div class="nav-small">← Урок 1 станции 4</div><div class="nav-title">Урок 37: El clima y las estaciones 🌤️</div></a>
+    <a href="./w13-l3.html" class="nav-next"><div class="nav-small">Урок 3 станции 4 (STEAM) →</div><div class="nav-title">Урок 39: El Ciclo del Agua 💧</div></a>
+  </div>
+
+  <div class="footer">Интерактивная школа МУДРО · Курс «Миссия: Испанская школа» · Станция 4: Mates y Ciencias · 2026</div>
+</main>
+
+<script>
+var esVoice=null;
+function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0;i<v.length;i++){if(v[i].lang&&v[i].lang.indexOf('es')===0){esVoice=v[i];break;}}}
+if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+
+/* ===== ДАННЫЕ ===== */
+var WARM=[
+ {q:'¿Qué tiempo hace hoy?',model:'Hoy hace sol y hace calor.',ru:'Какая сегодня погода?'},
+ {q:'¿Qué tiempo hace en invierno?',model:'En invierno hace frío y nieva.',ru:'Какая погода зимой?'},
+ {q:'¿Cuál es tu estación favorita?',model:'Mi estación favorita es el verano porque hace calor.',ru:'Какое твоё любимое время года?'}
+];
+(function(){
+  var box=document.getElementById('warm-box');
+  WARM.forEach(function(w,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+      '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
+      '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
+      '<div class="warm-model">'+w.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== БЛОК 1: ТЕРМОМЕТР ГАРДЕРОБА ===== */
+var SCALE=[
+ {emo:'☀️',es:'Hace calor. → Llevo una camiseta y sandalias.',ru:'Жарко → я в футболке и сандалиях.'},
+ {emo:'☁️',es:'Está nublado. → Llevo una chaqueta.',ru:'Облачно → я в куртке.'},
+ {emo:'💨',es:'Hace viento. → Llevo una chaqueta y un gorro.',ru:'Ветрено → я в куртке и шапке.'},
+ {emo:'🌧️',es:'Llueve. → Me pongo la chaqueta.',ru:'Дождь → я надеваю куртку.'},
+ {emo:'❄️',es:'Hace frío. → Llevo un abrigo, un gorro y una bufanda.',ru:'Холодно → я в пальто, шапке и шарфе.'},
+ {emo:'📅',es:'En verano llevo sandalias. En invierno llevo un abrigo.',ru:'Летом — сандалии. Зимой — пальто.'}
+];
+(function(){
+  var box=document.getElementById('scale-wrap');
+  SCALE.forEach(function(s){
+    var row=document.createElement('div');row.className='scale-row';
+    row.innerHTML='<span class="scale-emo">'+s.emo+'</span><div class="scale-text"><div class="scale-es">'+s.es+'</div><div class="scale-ru">'+s.ru+'</div></div><span style="font-size:1.2rem">🔊</span>';
+    row.addEventListener('click',function(){speak(s.es);});
+    box.appendChild(row);
+  });
+})();
+
+/* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
+var CLOTHES=[
+ {e:'👕',es:'la camiseta',ru:'футболка'},
+ {e:'👖',es:'el pantalón / los pantalones',ru:'брюки'},
+ {e:'👗',es:'el vestido',ru:'платье'},
+ {e:'🧥',es:'la chaqueta',ru:'куртка'},
+ {e:'🥼',es:'el abrigo',ru:'пальто'},
+ {e:'👞',es:'los zapatos',ru:'обувь'},
+ {e:'🩴',es:'las sandalias',ru:'сандалии'}
+];
+var LLEVAR=[
+ {e:'🧍',es:'llevo',ru:'я ношу / на мне'},
+ {e:'🧍‍♂️',es:'llevas',ru:'ты носишь'},
+ {e:'🧍‍♀️',es:'lleva',ru:'он/она носит'},
+ {e:'⬆️',es:'ponerse',ru:'надевать'},
+ {e:'⬇️',es:'quitarse',ru:'снимать'},
+ {e:'🔍',es:'probarse',ru:'примерять'},
+ {e:'✨',es:'queda bien',ru:'идёт (по размеру/стилю)'}
+];
+var PHRASES=[
+ {e:'🥶',es:'Llevo un abrigo porque hace frío.',ru:'Я в пальто, потому что холодно.'},
+ {e:'🩴',es:'En verano llevo sandalias.',ru:'Летом я ношу сандалии.'},
+ {e:'🧥',es:'Me pongo la chaqueta.',ru:'Я надеваю куртку.'},
+ {e:'✨',es:'Este vestido me queda bien.',ru:'Это платье мне идёт.'},
+ {e:'❓',es:'¿Qué te pones hoy?',ru:'Что ты наденешь сегодня?'},
+ {e:'🧢',es:'el gorro',ru:'шапка'},
+ {e:'🧣',es:'la bufanda',ru:'шарф'}
+];
+(function(){
+  function fill(id,arr){
+    var box=document.getElementById(id);
+    arr.forEach(function(f){
+      var d=document.createElement('div');d.className='word-card';
+      d.innerHTML='<div class="emo">'+f.e+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
+      d.addEventListener('click',function(){speak(f.es);});
+      box.appendChild(d);
+    });
+  }
+  fill('words-clothes',CLOTHES);fill('words-llevar',LLEVAR);fill('words-phrases',PHRASES);
+})();
+
+/* ===== ИГРА 1: ОДЕНЬ ПО ПОГОДЕ ===== */
+var NUM=[
+ {q:'❄️ Hace frío. ¿Qué te pones?',ok:'Un abrigo.',w:['Una camiseta.','Las sandalias.']},
+ {q:'☀️ Hace calor. ¿Qué te pones?',ok:'Una camiseta.',w:['Un abrigo.','Un gorro.']},
+ {q:'🌧️ Llueve. ¿Qué te pones?',ok:'Una chaqueta.',w:['Las sandalias.','Un vestido.']},
+ {q:'🏖️ Estamos en la playa, en verano. ¿Qué llevas?',ok:'Las sandalias.',w:['El abrigo.','La bufanda.']},
+ {q:'⛄ En invierno, en la nieve. ¿Qué llevas?',ok:'El gorro y la bufanda.',w:['Las sandalias.','El vestido.']},
+ {q:'📅 Día normal en casa. ¿Qué te pones?',ok:'Una camiseta y un pantalón.',w:['Un abrigo y un gorro.','La bufanda y el abrigo.']},
+ {q:'🧔 Papá sale al frío. ¿Qué lleva?',ok:'Papá lleva un abrigo.',w:['Papá lleva una camiseta.','Papá lleva sandalias.']},
+ {q:'🏠 En casa tienes calor con la chaqueta. ¿Qué haces?',ok:'Me quito la chaqueta.',w:['Me pongo la chaqueta.','Llevo la chaqueta.']}
+];
+var numOrd=[],numI=0,numS=0;
+function numStart(){numOrd=shuffle(NUM.slice());numI=0;numS=0;document.getElementById('num-total').textContent=numOrd.length;document.getElementById('num-stars').textContent='0';numNext();}
+function numNext(){
+  var box=document.getElementById('num-opts');box.innerHTML='';
+  if(numI>=numOrd.length){document.getElementById('num-q').textContent='🎉 ¡Muy bien!';document.getElementById('num-fb').textContent='⭐ '+numS+' из '+numOrd.length;return;}
+  var r=numOrd[numI];
+  document.getElementById('num-q').textContent=r.q;
+  document.getElementById('num-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='100px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');numS++;document.getElementById('num-stars').textContent=numS;document.getElementById('num-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('num-fb').textContent='❌ Правильно: '+r.ok;}
+      numI++;setTimeout(numNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== ИГРА 2: LLEVO / LLEVAS / LLEVA ===== */
+var REAC=[
+ {q:'Yo ___ un abrigo.',ok:'llevo',w:['llevas','lleva']},
+ {q:'Tú ___ una camiseta nueva.',ok:'llevas',w:['llevo','lleva']},
+ {q:'Mi mamá ___ un vestido rojo.',ok:'lleva',w:['llevo','llevas']},
+ {q:'En verano yo ___ sandalias.',ok:'llevo',w:['lleva','llevas']},
+ {q:'Mi hermano ___ un gorro.',ok:'lleva',w:['llevo','llevas']},
+ {q:'¿Tú ___ bufanda?',ok:'llevas',w:['lleva','llevo']}
+];
+var reacOrd=[],reacI=0,reacS=0;
+function reacStart(){reacOrd=shuffle(REAC.slice());reacI=0;reacS=0;document.getElementById('reac-total').textContent=reacOrd.length;document.getElementById('reac-stars').textContent='0';reacNext();}
+function reacNext(){
+  var box=document.getElementById('reac-opts');box.innerHTML='';
+  if(reacI>=reacOrd.length){document.getElementById('reac-q').textContent='🎉 ¡Muy bien!';document.getElementById('reac-fb').textContent='⭐ '+reacS+' из '+reacOrd.length;return;}
+  var r=reacOrd[reacI];
+  document.getElementById('reac-q').textContent=r.q;
+  document.getElementById('reac-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='130px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');reacS++;document.getElementById('reac-stars').textContent=reacS;document.getElementById('reac-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('reac-fb').textContent='❌ Правильно: '+r.ok;}
+      reacI++;setTimeout(reacNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== КОНСТРУКТОР ===== */
+var SB=[
+ {w:['Llevo','un','abrigo','porque','hace','frío.'],t:'Я в пальто, потому что холодно.'},
+ {w:['En','verano','llevo','sandalias.'],t:'Летом я ношу сандалии.'},
+ {w:['Me','pongo','la','chaqueta.'],t:'Я надеваю куртку.'},
+ {w:['Este','vestido','me','queda','bien.'],t:'Это платье мне идёт.'},
+ {w:['¿Qué','te','pones','hoy?'],t:'Что ты наденешь сегодня?'},
+ {w:['Mi','mamá','lleva','un','gorro.'],t:'Моя мама в шапке.'}
+];
+var sbI=0,sbP=[];
+function renderSB(){
+  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  var pool=document.getElementById('sb-pool');pool.innerHTML='';
+  shuffle(SB[sbI].w.slice()).forEach(function(w){
+    var b=document.createElement('div');b.className='sb-word';b.textContent=w;
+    b.addEventListener('click',function(){
+      if(b.classList.contains('placed'))return;
+      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
+      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
+        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
+        if(ok)speak(SB[sbI].w.join(' '));}});
+    pool.appendChild(b);
+  });
+}
+function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
+renderSB();
+
+/* ===== ИГРА 3: ДИАЛОГ ===== */
+var DIAL=[
+ {q:'— ¿Qué te pones hoy?<br>— ___',ok:'Me pongo una camiseta.',w:['Soy una camiseta.','Llevo un camiseta.']},
+ {q:'— Hace frío. ¡Ponte el gorro!<br>— ___',ok:'Vale, me pongo el gorro.',w:['Vale, me quito el gorro.','No, hago frío.']},
+ {q:'— Este vestido me queda bien.<br>— ___',ok:'¡Sí, te queda muy bien!',w:['¡Sí, está muy frío!','¡Sí, hace muy bien!']},
+ {q:'— ¿Qué lleva tu mamá?<br>— ___',ok:'Lleva un vestido.',w:['Llevas un vestido.','Llevo un vestido.']},
+ {q:'— ¿Por qué llevas abrigo?<br>— ___',ok:'Porque hace frío.',w:['Porque hace calor.','Porque llevo frío.']},
+ {q:'— En verano, ¿qué llevas?<br>— ___',ok:'Llevo sandalias.',w:['Llevo un abrigo.','Llevo un gorro.']}
+];
+var dialOrd=[],dialI=0,dialS=0;
+function dialStart(){dialOrd=shuffle(DIAL.slice());dialI=0;dialS=0;document.getElementById('dial-total').textContent=dialOrd.length;document.getElementById('dial-stars').textContent='0';dialNext();}
+function dialNext(){
+  var box=document.getElementById('dial-opts');box.innerHTML='';
+  if(dialI>=dialOrd.length){document.getElementById('dial-q').textContent='🎉 ¡Muy bien!';document.getElementById('dial-fb').textContent='⭐ '+dialS+' из '+dialOrd.length;return;}
+  var r=dialOrd[dialI];
+  document.getElementById('dial-q').innerHTML=r.q;
+  document.getElementById('dial-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='140px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');dialS++;document.getElementById('dial-stars').textContent=dialS;document.getElementById('dial-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('dial-fb').textContent='❌ Правильно: '+r.ok;}
+      dialI++;setTimeout(dialNext,1300);
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ===== БЛОК 4: ЧТЕНИЕ ===== */
+function speakLucia(){speak('¡Hola! Me llamo Lucía y tengo 10 años. Mi armario no es muy grande. Tengo tres camisetas, dos pantalones y un vestido rojo. También tengo una chaqueta azul y un abrigo negro para el invierno. En invierno llevo un abrigo, un gorro y una bufanda porque hace frío. En verano llevo sandalias y vestidos porque hace calor. Mi vestido rojo me queda muy bien: ¡es mi favorito! Hoy está nublado y llueve, así que me pongo la chaqueta. ¿Qué llevas tú?');}
+var LUCIA=[
+ {q:'¿Cuántas camisetas tiene Lucía?',ru:'Сколько футболок у Люсии?',ok:'Tres.',w:['Dos.','Cuatro.']},
+ {q:'¿Qué lleva Lucía en invierno?',ru:'Что Люсия носит зимой?',ok:'Un abrigo, un gorro y una bufanda.',w:['Sandalias y vestidos.','Una camiseta.']},
+ {q:'¿Por qué lleva abrigo?',ru:'Почему она носит пальто?',ok:'Porque hace frío.',w:['Porque hace calor.','Porque llueve.']},
+ {q:'¿Qué se pone hoy (llueve)?',ru:'Что она наденет сегодня (дождь)?',ok:'La chaqueta.',w:['Las sandalias.','El abrigo negro.']},
+ {q:'12 лет: ¿Cuántas cosas de ropa tiene Lucía en total?',ru:'12 лет: сколько всего вещей у Люсии?',ok:'Ocho.',w:['Seis.','Diez.']}
+];
+(function(){
+  var wrap=document.getElementById('lucia-quiz');
+  LUCIA.forEach(function(r){
+    var d=document.createElement('div');d.className='read-q';
+    d.innerHTML='<div class="q">'+r.q+'</div><span class="ru">'+r.ru+'</span>';
+    shuffle([r.ok].concat(r.w)).forEach(function(o){
+      var b=document.createElement('button');b.className='opt';b.style.display='inline-flex';b.style.margin='3px';b.style.minWidth='auto';b.textContent=o;
+      b.addEventListener('click',function(){
+        d.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+        if(o===r.ok){b.classList.add('correct');speak(r.ok);}
+        else{b.classList.add('wrong');d.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});}
+      });
+      d.appendChild(b);
+    });
+    wrap.appendChild(d);
+  });
+})();
+
+/* ===== ГОВОРЕНИЕ ===== */
+var PRES=[
+ {q:'Скажи, что на тебе сегодня (2 вещи).',model:'Hoy llevo una camiseta roja y un pantalón azul.'},
+ {q:'Что ты носишь зимой и летом?',model:'En invierno llevo un abrigo y en verano llevo sandalias.'},
+ {q:'Что ты наденешь и что снимешь по погоде?',model:'Hace frío: me pongo el gorro. En casa me quito la chaqueta.'},
+ {q:'Спроси члена семьи, что он наденет, и сделай комплимент.',model:'— ¿Qué te pones hoy? — Me pongo un vestido. — ¡Te queda muy bien!'},
+ {q:'Полный рассказ «Mi armario» (формула 6 пунктов).',model:'¡Hola! Hoy llevo una camiseta y un pantalón. En invierno llevo un abrigo, un gorro y una bufanda. En verano llevo sandalias. Mi favorita es mi chaqueta azul: me queda muy bien. Hoy llueve, así que me pongo la chaqueta. ¿Qué llevas tú?'}
+];
+(function(){
+  var box=document.getElementById('pres-box');
+  PRES.forEach(function(p,i){
+    var d=document.createElement('div');d.className='warm-item';
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+      '<div class="warm-ru">Послушай образец, а потом расскажи о СЕБЕ вслух!</div>'+
+      '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
+      '<div class="warm-model">💬 '+p.model+'</div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ===== ТРЕНАЖЁР ===== */
+var MATCH=[
+ ['la camiseta','футболка'],['el pantalón','брюки'],['el vestido','платье'],
+ ['la chaqueta','куртка'],['el abrigo','пальто'],['los zapatos','обувь'],
+ ['las sandalias','сандалии'],['el gorro','шапка'],['la bufanda','шарф'],
+ ['llevo','я ношу'],['ponerse','надевать'],['queda bien','идёт (по размеру)']
+];
+var mSel=null,mFound=0;
+function renderMatch(){
+  mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
+  var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+}
+function mClick(d){
+  if(d.classList.contains('matched'))return;
+  if(!mSel){mSel=d;d.classList.add('selected');return;}
+  if(mSel===d){d.classList.remove('selected');mSel=null;return;}
+  if(mSel.dataset.v===d.dataset.v){
+    mSel.classList.remove('selected');mSel.classList.add('matched');d.classList.add('matched');
+    mFound++;speak(mSel.dataset.v);
+    document.getElementById('match-fb').textContent='✅ Найдено '+mFound+'/12';
+    if(mFound===12)document.getElementById('match-fb').textContent='🏆 ¡Perfecto! Все пары!';
+  }else{
+    d.classList.add('wrong');mSel.classList.add('wrong');
+    var a=mSel;
+    setTimeout(function(){a.classList.remove('wrong','selected');d.classList.remove('wrong');},600);
+  }
+  mSel=null;
+}
+renderMatch();
+
+/* ===== БЕЙДЖ ===== */
+function stampBadge(){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+  speak('¡Enhorabuena! ¡Eres un gran estilista!');
+  confetti('👗');
+  try{localStorage.setItem('mudro_kids_w13l2_badge_stilist','true');}catch(e){}
+}
+if(localStorage.getItem('mudro_kids_w13l2_badge_stilist')==='true'){
+  document.getElementById('badge-stamped').classList.add('show');
+  document.getElementById('badge-btn').style.display='none';
+}
+function confetti(icon){var c=['🎉','⭐',icon,'👕','✨'];for(var i=0;i<24;i++){var s=document.createElement('span');s.className='confetti';s.textContent=c[Math.floor(Math.random()*c.length)];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.2+Math.random()*1.2)+'s';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(s),3200);}}
+
+/* ===== СВЕТОФОР ===== */
+document.querySelectorAll('.tl-cell').forEach(function(c){
+  c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
+});
+document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== GRAMMAR HINT ===== */
+document.addEventListener('click',function(e){
+  var hint=e.target.closest('.grammar-hint');
+  document.querySelectorAll('.grammar-hint.active').forEach(function(el){if(el!==hint)el.classList.remove('active');});
+  if(hint){hint.classList.toggle('active');e.stopPropagation();}
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+</body>
+</html>

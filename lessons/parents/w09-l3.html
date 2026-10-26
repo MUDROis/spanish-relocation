@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFF7EF">
+<meta name="description" content="Урок 9.3: Urgencias и звонок в 112 — описываем травму, называем адрес и спокойно проходим triaje. Грамматика: императив + se ha caído / se ha roto.">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<title>Урок 9.3 · Urgencias и звонок в 112 — МУДРО</title>
+<link rel="stylesheet" href="../../assets/css/lesson-base.css">
+<style>
+  :root{
+    --p1:#E2725B;--p2:#7A8B4C;--p3:#E9A13B;--p4:#3E7CB1;--p5:#4CAF7D;
+    --bg:#FFF7EF;--card:#fff;--ink:#2B2118;--muted:#7A6A5C;
+    --soft:#FBF3EA;--ink-soft:#7A6A5C;--teal:#2C5E8A;
+    --vocab:#BE8A55;
+    --radius:18px;--shadow:0 10px 30px rgba(43,33,24,.08);
+    --ok:#7A8B4C;--bad:#E2725B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--p4)}
+  .lesson-topbar{position:sticky;top:0;z-index:50;background:rgba(255,247,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,33,24,.06)}
+  .lesson-topbar .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .back-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:900;font-size:.92rem}
+  .back-link:hover{color:var(--p1)}
+  .lesson-id{font-weight:900;color:var(--muted);font-size:.85rem}
+  #auth-area{display:inline-flex}
+
+  .lesson-hero{max-width:1100px;margin:0 auto;padding:40px 20px 30px;text-align:center}
+  .lesson-hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:900;line-height:1.15}
+  .lesson-hero h1 em{font-style:normal;color:var(--p1)}
+  .lesson-hero .sub{max-width:700px;margin:12px auto 0;color:var(--muted);font-weight:700}
+  .phase-tag{display:inline-flex;align-items:center;gap:8px;background:var(--p1);color:#fff;font-weight:900;font-size:.8rem;padding:7px 16px;border-radius:999px;margin-bottom:14px}
+  .lesson-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;justify-content:center}
+  .meta-chip{background:#fff;border-radius:999px;padding:9px 16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow);display:inline-flex;align-items:center;gap:7px}
+
+  .section{max-width:1000px;margin:0 auto;padding:36px 20px}
+  .section:nth-child(even){background:var(--card)}
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .step-num{width:48px;height:48px;border-radius:50%;background:var(--p1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;flex-shrink:0}
+  .step-num.c1{background:var(--p1)}
+  .step-num.c2{background:var(--p2)} .step-num.c3{background:var(--p3)} .step-num.c4{background:var(--p4)} .step-num.c5{background:var(--p5)}
+  .step-title h2{font-size:1.3rem}
+  .step-title .time{font-size:.85rem;color:var(--muted);font-weight:600}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+  .hint{font-size:.9rem;font-style:italic;color:var(--muted);margin-bottom:12px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:10px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.2s}
+  .btn-primary{background:var(--p1);color:#fff}.btn-primary:hover{background:#c05a45}
+  .btn-secondary{background:var(--p2);color:#fff}.btn-secondary:hover{background:#66743f}
+  .btn-blue{background:var(--p4);color:#fff}.btn-blue:hover{background:#2C5E8A}
+  .btn-lightblue{background:var(--p5);color:#fff}.btn-lightblue:hover{background:#3d9168}
+  .btn-ghost{background:transparent;border:2px solid var(--p4);color:var(--p4)}.btn-ghost:hover{background:var(--p4);color:#fff}
+  .speak-btn{background:var(--p2);color:#fff;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin:0 4px}
+  .speak-btn:hover{background:#66743f}
+
+  .quiz-q{margin-bottom:16px}
+  .quiz-q h4{margin-bottom:8px}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{padding:11px 16px;border:2px solid #ddd;border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+  .quiz-opt:hover{border-color:var(--p4)}
+  .quiz-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .quiz-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .quiz-feedback{margin-top:8px;font-weight:700;display:none}
+  .quiz-feedback.show{display:block}
+
+  .situation-box{background:#fff;border:3px solid var(--p5);border-radius:16px;padding:22px;margin-bottom:16px}
+  .situation-box .sit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .situation-box .sit-icon{font-size:2.4rem}
+  .situation-box .sit-title{font-size:1.15rem;font-weight:800;color:var(--p5)}
+  .situation-box .sit-intro{font-size:.95rem;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .sit-dialog{background:#E8F5E9;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p5)}
+  .sit-dialog .who{font-weight:800;color:var(--p1);font-size:.85rem;text-transform:uppercase;margin-bottom:4px;letter-spacing:.5px}
+  .sit-dialog .who.you{color:var(--p4)}
+  .sit-dialog .es{font-weight:700;font-style:italic;color:var(--ink);margin-bottom:3px}
+  .sit-dialog .ru{font-size:.85rem;color:var(--muted);font-style:italic}
+  .sit-question{background:#F0F4FF;border-radius:12px;padding:14px 18px;margin-bottom:10px;border-left:4px solid var(--p4)}
+  .sit-question .q-num{display:inline-block;background:var(--p4);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:800;margin-right:8px;font-size:.85rem}
+  .sit-question .q-text{font-weight:700;margin-bottom:8px}
+  .sit-question .q-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+  .sit-question .q-opt{padding:8px 12px;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:.9rem}
+  .sit-question .q-opt:hover{border-color:var(--p4)}
+  .sit-question .q-opt.correct{background:#E8F5E9;border-color:var(--ok)}
+  .sit-question .q-opt.wrong{background:#FFEBEE;border-color:var(--bad)}
+  .sit-bridge{background:#F0F7E6;border-radius:12px;padding:14px 18px;border-left:4px solid var(--p2);margin-top:14px;font-size:.9rem;line-height:1.5}
+  .sit-bridge b{color:var(--p2)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:2px solid #ddd;background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.9rem}
+  .tab.active{border-color:var(--p4);background:#E8F0FE;color:var(--p4)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .vocab-card{perspective:1000px;height:180px;cursor:pointer}
+  .vocab-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .vocab-card.flipped .vocab-inner{transform:rotateY(180deg)}
+  .vocab-front,.vocab-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;border:2px solid transparent}
+  .vocab-front{background:var(--p5);color:#fff;border-color:var(--p5)}
+  .vocab-front .es{font-size:1.05rem;font-weight:800;margin-bottom:6px;line-height:1.3}
+  .vocab-front .ru{font-size:.88rem;opacity:.95;font-weight:600}
+  .vocab-front .flip-hint{position:absolute;bottom:10px;font-size:.7rem;opacity:.8}
+  .vocab-back{background:#fff;color:var(--ink);border-color:var(--p5);transform:rotateY(180deg)}
+  .vocab-back .ex{font-size:.9rem;font-weight:700;color:var(--p5);margin-bottom:6px;line-height:1.3;font-style:italic}
+  .vocab-back .ex-ru{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.3}
+
+  .grammar-box{background:#F0F4FF;border-left:4px solid var(--p4);border-radius:12px;padding:16px;margin-bottom:14px}
+  .grammar-box h4{color:var(--p4);margin-bottom:8px}
+  .grammar-box .formula{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+  .grammar-box .example{font-style:italic;color:var(--muted);line-height:1.55}
+  .grammar-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+  .grammar-table th,.grammar-table td{border:1px solid #E8DCCF;padding:8px;text-align:left;vertical-align:top}
+  .grammar-table th{background:#FBF3EA;color:var(--p1);font-size:.86rem}
+  .grammar-table tr:nth-child(even) td{background:#FFFDF9}
+  .grammar-table .practice{background:#F0F7E6;color:var(--p2);font-weight:700}
+  .grammar-table .reference{color:var(--muted);font-style:italic}
+  .note{background:#FFF7E0;border-left:4px solid var(--p3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+  .note b{color:var(--ink)}
+  .note.green{background:#F0F7E6;border-left-color:var(--p2)}
+  .note.blue{background:#F0F4FF;border-left-color:var(--p4)}
+  .note.lightblue{background:#E8F4FB;border-left-color:var(--p5)}
+  .note.teal{background:#E0F2F1;border-left-color:var(--p5)}
+  .note.red{background:#FBF0ED;border-left-color:var(--p1)}
+
+  .fill-input{border:none;border-bottom:2px dashed var(--p4);background:transparent;padding:4px 8px;font-size:1rem;font-weight:700;color:var(--p4);min-width:110px;text-align:center;font-family:inherit}
+  .fill-input.correct{border-bottom-color:var(--ok);color:var(--ok)}
+  .fill-input.wrong{border-bottom-color:var(--bad);color:var(--bad)}
+
+  .match-container{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .match-col{display:flex;flex-direction:column;gap:10px;flex:1;max-width:360px}
+  .match-item{padding:12px;border:2px solid #ddd;border-radius:10px;background:#fff;cursor:pointer;text-align:center;font-weight:600;transition:.2s;user-select:none}
+  .match-item:hover{border-color:var(--p3)}
+  .match-item.sel{border-color:var(--p3);background:#FFF7E0;transform:scale(1.02)}
+  .match-item.done{border-color:var(--ok);background:#E8F5E9;color:var(--ok);cursor:default;opacity:.75}
+  .match-item.error{border-color:var(--bad);background:#FFEBEE;animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .build-words{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center}
+  .bw{border:2px solid var(--p4);color:var(--p4);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;background:#fff;transition:.2s}
+  .bw:hover{background:#E8F0FE}
+  .bw.used{opacity:.3;pointer-events:none}
+  .build-line{min-height:56px;background:#F0F4FF;border:2px dashed var(--p4);border-radius:10px;padding:10px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .bw-line-item{background:var(--p4);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s}
+  .bw-line-item:hover{background:#2C5E8A}
+  .build-feedback{padding:12px;border-radius:10px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;font-size:1.02rem}
+  .build-feedback.ok{display:flex;background:#E8F5E9;color:var(--ok)}
+  .build-feedback.bad{display:flex;background:#FFEBEE;color:var(--bad)}
+
+  .dialog-box{background:#fff;border:1.5px solid #E8DCCF;border-radius:12px;padding:16px;margin-bottom:12px;font-size:.95rem;line-height:1.7;cursor:pointer}
+  .dialog-box .who{font-weight:800;display:block;margin-top:8px}
+  .dialog-box .who.op{color:var(--p4)}
+  .dialog-box .who.you{color:var(--p1)}
+  .dialog-box .dialog-text{display:none}
+  .dialog-box.open .dialog-text{display:block;margin-top:10px}
+
+  .clil-text{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:18px;margin-bottom:16px}
+  .clil-text h4{color:var(--p4);margin-bottom:8px}
+  .clil-text p{font-size:.95rem;margin-bottom:10px}
+
+  .roleplay-box{background:#fff;border:2px solid var(--p5);border-radius:14px;padding:20px;margin-bottom:16px}
+  .roleplay-box h4{color:var(--p4);margin-bottom:10px;font-size:1.1rem}
+  .role-card{background:#E8F5E9;border-radius:10px;padding:14px;margin-bottom:10px}
+  .role-card h5{color:var(--p4);margin-bottom:6px;font-size:.95rem}
+  .role-card ul{margin-left:20px;font-size:.92rem;line-height:1.6}
+  .role-card li{margin-bottom:3px}
+
+  .dialog-builder{background:#fff;border:2px solid var(--p4);border-radius:14px;padding:20px;margin-bottom:16px}
+  .dialog-builder .hdr{background:var(--p4);color:#fff;padding:12px 16px;font-weight:700;font-size:1rem;margin:-20px -20px 16px;border-radius:12px 12px 0 0;text-align:center}
+  .dialog-builder .field{margin-bottom:12px}
+  .dialog-builder label{font-weight:700;font-size:.9rem;color:var(--ink);display:block;margin-bottom:4px}
+  .dialog-builder input[type="text"],.dialog-builder select{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit}
+  .dialog-builder input[type="text"]:focus,.dialog-builder select:focus{outline:none;border-color:var(--p4)}
+  .dialog-result{background:#E0F2F1;border-radius:12px;padding:18px;font-family:'Courier New',monospace;font-size:.92rem;line-height:1.8;white-space:pre-wrap;margin-top:16px;border-left:4px solid var(--p5)}
+
+  .hw-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .hw-item h4{color:var(--p1);margin-bottom:4px}
+  .hw-item .hw-meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+
+  .tl-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .tl-table th,.tl-table td{padding:10px;border-bottom:1px solid #eee;text-align:center;font-size:.92rem;word-wrap:break-word}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left;width:auto}
+  .tl-table th:not(:first-child),.tl-table td:not(:first-child){width:80px}
+  .tl-cell{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;font-size:1.1rem;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center}
+  .tl-cell.green{background:#C8E6C9}.tl-cell.yellow{background:#FFF9C4}.tl-cell.red{background:#FFCDD2}
+  .tl-cell.active{border-color:var(--ink);transform:scale(1.1)}
+
+  .quizlet-box{background:var(--p4);color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-top:14px}
+  .quizlet-box h3{margin-bottom:8px}
+  .quizlet-box a{display:inline-block;background:#fff;color:var(--p4);padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:800;margin-top:12px}
+
+  footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.85rem;line-height:1.5}
+  .lesson-nav{display:flex;justify-content:space-between;gap:16px;max-width:1000px;margin:0 auto;padding:30px 20px;flex-wrap:wrap}
+  .lesson-nav a{text-decoration:none;background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--ink);flex:1;min-width:200px;text-align:center}
+  .lesson-nav a:hover{background:var(--p1);color:#fff}
+  .lesson-nav span.soon{background:var(--card);padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-weight:700;color:var(--muted);flex:1;min-width:200px;text-align:center;cursor:default;opacity:.65}
+</style>
+</head>
+<body>
+
+<div class="lesson-topbar"><div class="inner">
+  <a href="../../index.html" class="back-link">← К карте курса</a>
+  <span class="lesson-id">Неделя 9 · Урок 3 из 3 · Блок 2 El Cole y la Salud</span>
+</div></div>
+
+<section class="lesson-hero">
+  <span class="phase-tag">🏫 БЛОК 2 · EL COLE Y LA SALUD</span>
+  <h1>Урок 9.3 · <em>Urgencias и звонок в 112</em></h1>
+  <p class="sub">21:00, парк, ребёнок упал с горки. Учимся звонить в 112, говорить, что случилось, и спокойно проходить triaje в urgencias. Проговорить один раз — значит не растеряться.</p>
+  <div class="lesson-meta">
+    <span class="meta-chip">🧠 CLIL: как работает triaje в испанских urgencias</span>
+    <span class="meta-chip">🎯 Цель: позвонить в 112 и описать травму</span>
+    <span class="meta-chip">🗣 35 слов в 5 категориях</span>
+    <span class="meta-chip">🧩 императив + se ha caído / se ha roto</span>
+    <span class="meta-chip">🎭 Продукт: скрипт звонка в 112</span>
+  </div>
+</section>
+
+<!-- ШАГ 0: РАЗМИНКА + ЖИЗНЕННАЯ СИТУАЦИЯ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c1">0</div>
+    <div class="step-title">
+      <h2>Разминка + вопрос из жизни</h2>
+      <span class="time">00:00 – 05:00 · Повторение урока 9.2 и вечерний парк</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Аптечка собрана, jarabe куплен. Теперь — самый серьёзный урок блока: что делать, если случилось плохое. Сначала блиц по уроку 9.2 «Испанская аптека».</p>
+    <h4 style="margin-bottom:10px">⚡ Блиц-квиз: урок 9.2</h4>
+    <div id="warmup-quiz"></div>
+    <button class="btn btn-ghost" onclick="renderWarmup()" style="margin-top:10px">↺ Пройти ещё раз</button>
+  </div>
+
+  <div class="situation-box">
+    <div class="sit-head">
+      <div class="sit-icon">🛝</div>
+      <div class="sit-title">Одна ситуация: звонок в 112</div>
+    </div>
+    <div class="sit-intro">
+      21:00, парк. Ребёнок упал с горки и держится за руку. Вы звоните на 112. Отвечайте вслух, нажимайте 🔊.
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Вы:</div>
+      <div class="es">Emergencias, buenas noches. Hay un accidente.</div>
+      <div class="ru">Служба спасения, добрый вечер. Произошёл несчастный случай.</div>
+      <button class="speak-btn" onclick="speak('Emergencias, buenas noches. Hay un accidente.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Оператор:</div>
+      <div class="es">¿Qué ha pasado?</div>
+      <div class="ru">Что случилось?</div>
+      <button class="speak-btn" onclick="speak('¿Qué ha pasado?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Вы:</div>
+      <div class="es">Mi hijo se ha caído de un tobogán en el parque. Tiene siete años y llora mucho.</div>
+      <div class="ru">Мой сын упал с горки в парке. Ему семь лет, он сильно плачет.</div>
+      <button class="speak-btn" onclick="speak('Mi hijo se ha caído de un tobogán en el parque. Tiene siete años y llora mucho.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Оператор:</div>
+      <div class="es">¿Está consciente? ¿Respira?</div>
+      <div class="ru">Он в сознании? Дышит?</div>
+      <button class="speak-btn" onclick="speak('¿Está consciente? ¿Respira?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Вы:</div>
+      <div class="es">Sí, respira, pero tiene un golpe en el brazo y no puede moverlo bien.</div>
+      <div class="ru">Да, дышит, но у него ушиб руки, и он не может ею нормально двигать.</div>
+      <button class="speak-btn" onclick="speak('Sí, respira, pero tiene un golpe en el brazo y no puede moverlo bien.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Оператор:</div>
+      <div class="es">Tranquilo. ¿Dónde están exactamente?</div>
+      <div class="ru">Спокойно. Где вы точно находитесь?</div>
+      <button class="speak-btn" onclick="speak('Tranquilo. ¿Dónde están exactamente?')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who you">Вы:</div>
+      <div class="es">En el parque del Oeste, junto a la entrada principal.</div>
+      <div class="ru">В парке Оэсте, у главного входа.</div>
+      <button class="speak-btn" onclick="speak('En el parque del Oeste, junto a la entrada principal.')">🔊</button>
+    </div>
+
+    <div class="sit-dialog">
+      <div class="who">Оператор:</div>
+      <div class="es">De acuerdo. Mando una ambulancia. No lo mueva y espere.</div>
+      <div class="ru">Принято. Отправляю скорую. Не двигайте его и ждите.</div>
+      <button class="speak-btn" onclick="speak('De acuerdo. Mando una ambulancia. No lo mueva y espere.')">🔊</button>
+    </div>
+
+    <h4 style="margin:16px 0 12px">❓ Два вопроса по ситуации</h4>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">1</span>Что случилось с ребёнком?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">Se ha caído de un tobogán.</div>
+        <div class="q-opt" data-o="1">Se ha perdido en el parque.</div>
+        <div class="q-opt" data-o="2">Se ha quemado la mano.</div>
+      </div>
+    </div>
+
+    <div class="sit-question" data-correct="0">
+      <div class="q-text"><span class="q-num">2</span>Что просит оператор сделать родителя?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-o="0">No mover al niño y esperar.</div>
+        <div class="q-opt" data-o="1">Llevar al niño al hospital en coche.</div>
+        <div class="q-opt" data-o="2">Darle agua al niño.</div>
+      </div>
+    </div>
+
+    <div class="sit-bridge">
+      🧩 <b>Мост к теме урока:</b> сегодня — экстренный испанский: <b>императив</b> (¡Espere!, No lo mueva) и <b>прошедшее</b> (se ha caído, se ha roto). Продукт урока — скрипт звонка в 112: адрес → что случилось → возраст → состояние. Надеемся, он не понадобится никогда. Но проговорить его один раз стоит.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 1: КАРТОЧКИ СЛОВ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">1</div>
+    <div class="step-title">
+      <h2>Карточки со словами: 35 слова об экстренных ситуациях</h2>
+      <span class="time">05:00 – 15:00 · 5 категорий</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Нажмите на карточку — она перевернётся и покажет пример. 🔊 — послушать произношение.</p>
+    <div class="tabs" id="vocab-tabs">
+      <button class="tab active" onclick="showVocab('emerg',this)">🚑 Экстренные службы (7)</button>
+      <button class="tab" onclick="showVocab('heridas',this)">🩼 Травмы (7)</button>
+      <button class="tab" onclick="showVocab('llamada',this)">📞 Звонок в 112 (7)</button>
+      <button class="tab" onclick="showVocab('hospital',this)">🏥 В больнице (7)</button>
+      <button class="tab" onclick="showVocab('calmar',this)">🧸 Успокоить ребёнка (7)</button>
+    </div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+
+    <div class="note lightblue" style="margin-top:16px">
+      💡 <b>Культурный нюанс:</b> <b>112</b> — единый номер экстренных служб всей Европы: бесплатно, круглосуточно, с переводчиками (говорите медленно: «¿Habla inglés?»). В urgencias порядок не «кто первый пришёл», а <b>triaje</b>: красные — сразу, жёлтые — ждут, зелёные — терпят. Это нормально, что вы ждали час: значит, было не критично.
+    </div>
+
+    <div class="note blue" style="margin-top:10px">
+      📱 <b>Лайфхак:</b> сделайте карточку «Emergencia» в телефоне: адрес дома, SIP каждого члена семьи, аллергии, контакт партнёра. При triaje спрашивают быстро — покажите экран. И сохраните адрес ближайшего больничного urgencias pediátricas заранее.
+    </div>
+  </div>
+</section>
+
+<!-- ШАГ 2: ГРАММАТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c2">2</div>
+    <div class="step-title">
+      <h2>Грамматика: императив + se ha caído / se ha roto</h2>
+      <span class="time">15:00 – 23:00 · Фокус: команды + Pretérito Perfecto</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">В экстренной ситуации нужны две вещи: короткие команды (<i>¡Espere!</i>) и рассказ, что уже случилось (<i>se ha caído</i>).</p>
+
+    <div class="grammar-box">
+      <h4>📐 Императив: команды в экстренной ситуации</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Инфинитив</th>
+          <th>Tú (на «ты»)</th>
+          <th>Usted (вежливо)</th>
+          <th>Пример в urgencias</th>
+        </tr>
+        <tr>
+          <td class="practice"><b>esperar</b></td>
+          <td class="practice"><b>espera</b></td>
+          <td class="practice"><b>espere</b></td>
+          <td class="practice"><i>Espera aquí, ya voy.</i></td>
+        </tr>
+        <tr>
+          <td class="practice"><b>mirar</b></td>
+          <td class="practice"><b>mira</b></td>
+          <td class="practice"><b>mire</b></td>
+          <td class="practice"><i>Mire aquí, cariño.</i></td>
+        </tr>
+        <tr>
+          <td><b>respirar</b></td>
+          <td><b>respira</b></td>
+          <td><b>respire</b></td>
+          <td><i>Respira tranquilo.</i></td>
+        </tr>
+        <tr>
+          <td><b>soplar</b></td>
+          <td><b>sopla</b></td>
+          <td><b>sople</b></td>
+          <td><i>Sopla fuerte para el espray.</i></td>
+        </tr>
+        <tr>
+          <td class="reference"><b>venir</b></td>
+          <td class="reference"><b>ven</b></td>
+          <td class="reference"><b>venga</b></td>
+          <td class="reference"><i>Ven aquí, te ayudo.</i></td>
+        </tr>
+        <tr>
+          <td class="reference"><b>mover</b></td>
+          <td class="reference"><b>mueve</b></td>
+          <td class="reference"><b>mueva</b></td>
+          <td class="reference"><i>No lo mueva, espere.</i></td>
+        </tr>
+        <tr>
+          <td class="reference"><b>coger</b></td>
+          <td class="reference"><b>coge</b></td>
+          <td class="reference"><b>coja</b></td>
+          <td class="reference"><i>Coja el número, por favor.</i></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="note green">
+      📌 <b>Фокус практики:</b> в 112 и в больнице говорите коротко: <b>¡Espere! / ¡Venga! / No lo mueva!</b> С ребёнком — на «ты» (sopla, mira), с врачом и оператором — на usted (espere, mire). Отрицательные команды: <b>No + форма</b>: <i>No lo muevas, no llores, no cuelgue.</i>
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Se ha caído / se ha roto: что уже случилось</h4>
+      <table class="grammar-table">
+        <tr>
+          <th>Что</th>
+          <th>Форма</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td class="practice">упасть (caer)</td>
+          <td class="practice"><b>se ha caído</b></td>
+          <td class="practice"><i>Leo se ha caído del tobogán.</i> — Лео упал с горки.</td>
+        </tr>
+        <tr>
+          <td class="practice">сломать (romper)</td>
+          <td class="practice"><b>se ha roto</b></td>
+          <td class="practice"><i>Se ha caído y se ha roto el brazo.</i> — Упал и сломал руку.</td>
+        </tr>
+        <tr>
+          <td>удариться (golpear)</td>
+          <td><b>se ha golpeado</b></td>
+          <td><i>Se ha golpeado la cabeza.</i> — Ударился головой.</td>
+        </tr>
+        <tr>
+          <td>порезаться (cortar)</td>
+          <td><b>se ha cortado</b></td>
+          <td><i>Se ha cortado el dedo.</i> — Порезал палец.</td>
+        </tr>
+        <tr>
+          <td class="reference">обжечься (quemar)</td>
+          <td class="reference"><b>se ha quemado</b></td>
+          <td class="reference"><i>Se ha quemado la mano.</i> — Обжёг руку.</td>
+        </tr>
+        <tr>
+          <td class="reference">случиться (pasar)</td>
+          <td class="reference"><b>ha pasado</b></td>
+          <td class="reference"><i>¿Qué ha pasado?</i> — Что случилось?</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="note red">
+      ⚠️ <b>Частые ошибки:</b><br>
+      • <i>«Se caído del tobogán.»</i> ❌ → <i>«Se <b>ha</b> caído del tobogán.»</i> ✅ (ha — обязательно)<br>
+      • <i>«Se ha rotado el brazo.»</i> ❌ → <i>«Se ha <b>roto</b> el brazo.»</i> ✅ (rotar — другое слово)<br>
+      • <i>«Se ha cayido.»</i> ❌ → <i>«Se ha <b>caído</b>.»</i> ✅ (особая форма причастия)<br>
+      • <i>«No mueva lo.»</i> ❌ → <i>«No <b>lo</b> mueva.»</i> ✅ (местоимение перед глаголом)
+    </div>
+
+    <div class="grammar-box">
+      <h4>📐 Готовые чанки экстренного разговора</h4>
+      <div class="example">
+        <b>Emergencias, es una urgencia.</b> — Скорая, это экстренный случай.<br>
+        <b>Mi hijo se ha caído de un tobogán.</b> — Мой сын упал с горки.<br>
+        <b>Está consciente y respira.</b> — Он в сознании и дышит.<br>
+        <b>Necesito una ambulancia, por favor.</b> — Мне нужна скорая, пожалуйста.<br>
+        <b>¿Cuánto hay que esperar?</b> — Сколько нужно ждать?
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь форму глагола</h4>
+    <p class="hint">Используйте: <b>respira, mueva, ha, roto, Coja, pone, sopla</b>.</p>
+    <div id="fill-exercise"></div>
+    <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
+    <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
+  </div>
+</section>
+
+<!-- ШАГ 3: ПРАКТИКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c3">3</div>
+    <div class="step-title">
+      <h2>Практика: применим слова и грамматику</h2>
+      <span class="time">23:00 – 30:00 · 2 упражнения</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 2: Собери фразу</h4>
+    <p class="hint">Кликайте по словам по порядку. Клик по слову в строке — убирает его.</p>
+    <div id="build-exercise"></div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🧩 Упражнение 3: Сопоставь слово и значение</h4>
+    <p class="hint">Нажмите испанское слово слева, затем его значение справа.</p>
+    <div id="match-exercise"></div>
+    <button class="btn btn-ghost" onclick="renderMainMatch()" style="margin-top:10px">↺ Перемешать заново</button>
+  </div>
+</section>
+
+<!-- ШАГ 4: АУДИРОВАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num c5">4</div>
+    <div class="step-title">
+      <h2>Аудирование: звонок в 112 и triaje</h2>
+      <span class="time">30:00 – 37:00 · диалог «Emergencia en el parque»</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="hint">Сначала послушайте без текста. Затем откройте транскрипт и ответьте на вопросы.</p>
+
+    <button class="btn btn-secondary" onclick="speakDialog()" style="margin-bottom:12px">🔊 Прослушать диалог (два голоса)</button>
+
+    <div class="dialog-box" onclick="this.classList.toggle('open')">
+      <div style="font-weight:700;margin-bottom:8px">👆 Нажмите, чтобы показать текст диалога</div>
+      <div class="dialog-text">
+        <span class="who op">Operadora 112:</span> Emergencias, dígame.<br>
+        <span class="who you">Padre:</span> Buenas noches. Hay un accidente, mi hijo se ha caído de un tobogán.<br>
+        <span class="who op">Operadora 112:</span> Tranquilo. ¿Dónde están exactamente?<br>
+        <span class="who you">Padre:</span> En el parque del Oeste, junto a la entrada principal, en la zona de juegos.<br>
+        <span class="who op">Operadora 112:</span> ¿Cuántos años tiene el niño? ¿Está consciente? ¿Respira?<br>
+        <span class="who you">Padre:</span> Tiene siete años. Está consciente, respira, pero se ha golpeado el brazo y llora mucho.<br>
+        <span class="who op">Operadora 112:</span> De acuerdo. Mando una ambulancia. No lo mueva y espere allí.<br>
+        <span class="who you">Padre:</span> Vale, gracias.<br>
+        <span class="who op">Enfermera (triaje):</span> En urgencias, primero el triaje. ¿Qué ha pasado?<br>
+        <span class="who you">Padre:</span> Se ha caído de un tobogán, un golpe en el brazo.<br>
+        <span class="who op">Enfermera (triaje):</span> Vale. Le pongo la muñequita, nivel amarillo. Esperen en la sala de observación.<br>
+        <span class="who you">Padre:</span> ¿Cuánto hay que esperar?<br>
+        <span class="who op">Enfermera (triaje):</span> Unos veinte minutos. El médico hace una radiografía y vemos si hay fractura.
+      </div>
+    </div>
+
+    <h4 style="margin:14px 0 10px">❓ Вопросы на понимание</h4>
+    <div id="listening-quiz"></div>
+  </div>
+</section>
+
+<!-- ШАГ 5: РОЛЕВАЯ ИГРА + ПРОДУКТ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      <h2>Ролевая игра + продукт: скрипт звонка в 112</h2>
+      <span class="time">37:00 – 47:00 · CLIL + конструктор + парная игра</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">📖 CLIL-мини-текст: как работает urgencias для детей</h4>
+
+    <div class="clil-text">
+      <h4>El 112</h4>
+      <p>Единый номер: полиция, скорая, пожарные. Бесплатно, 24/7, с переводчиками. Порядок разговора: адрес → что случилось → возраст → состояние. Не вешайте трубку первым: оператор сам завершит звонок.</p>
+
+      <h4>El triaje: rojo, amarillo, verde</h4>
+      <p>Медсестра сортирует по тяжести: <b>rojo</b> — сразу к врачу, <b>amarillo</b> — ждёте десятки минут, <b>verde</b> — терпите часы. Детские urgencias обычно отдельные (<i>urgencias pediátricas</i>) — уточните заранее, куда везут в вашем городе.</p>
+
+      <h4>La muñequita y el parte de lesiones</h4>
+      <p>После triaje ребёнку надевают браслет с номером — <i>la muñequita</i>. При травме попросите <i>el parte de lesiones</i>: он нужен для страховки, школы и спортивных секций. Выписка — <i>el alta</i> — вместе с рекомендациями.</p>
+    </div>
+
+    <div class="note green">
+      📋 <b>Чек-лист звонка в 112:</b><br>
+      ☐ ¿Qué ha pasado? (1 фраза)<br>
+      ☐ ¿Dónde están? (адрес / ориентир)<br>
+      ☐ Edad del herido<br>
+      ☐ ¿Está consciente? ¿Respira?<br>
+      ☐ Не вешайте трубку первым<br>
+      ☐ После: SIP, вода, телефон заряжен
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🔧 Конструктор: скрипт «Mi llamada al 112»</h4>
+    <p class="hint">Заполните поля — получите готовый скрипт звонка, который отрепетируете голосовым.</p>
+
+    <div class="dialog-builder">
+      <div class="hdr">📞 КОНСТРУКТОР: Mi llamada al 112</div>
+
+      <div class="field">
+        <label>👤 Ваше имя:</label>
+        <input type="text" id="b-name" placeholder="Ana" value="Ana">
+      </div>
+
+      <div class="field">
+        <label>👦 Имя ребёнка:</label>
+        <input type="text" id="b-child" placeholder="Leo" value="Leo">
+      </div>
+
+      <div class="field">
+        <label>🔢 Возраст пострадавшего:</label>
+        <select id="b-age">
+          <option value="cinco">5</option>
+          <option value="siete" selected>7</option>
+          <option value="diez">10</option>
+          <option value="trece">13</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>📍 Место:</label>
+        <select id="b-place">
+          <option value="en el parque del Oeste" selected>en el parque del Oeste</option>
+          <option value="en la plaza Mayor">en la plaza Mayor</option>
+          <option value="en el patio del colegio">en el patio del colegio</option>
+          <option value="en casa, en la calle Serrano 12">en casa, en la calle Serrano 12</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🩼 Что случилось:</label>
+        <select id="b-accident">
+          <option value="se ha caído de un tobogán" selected>se ha caído de un tobogán (упал с горки)</option>
+          <option value="se ha caído de la bici">se ha caído de la bici (упал с велосипеда)</option>
+          <option value="se ha caído en el patio y sangra">se ha caído en el patio y sangra (упал и идёт кровь)</option>
+          <option value="se ha quemado la mano">se ha quemado la mano (обжёг руку)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>😷 Состояние:</label>
+        <select id="b-state">
+          <option value="Está consciente y respira." selected>está consciente y respira</option>
+          <option value="Llora mucho, pero respira.">llora mucho, pero respira</option>
+          <option value="Está inconsciente, no respira bien.">está inconsciente, no respira bien</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🚑 Какая помощь нужна:</label>
+        <select id="b-help">
+          <option value="una ambulancia" selected>una ambulancia (скорая)</option>
+          <option value="ayuda y consejos">ayuda y consejos (помощь и советы)</option>
+          <option value="los bomberos">los bomberos (пожарные)</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="buildScript()" style="margin-top:12px">🔧 Собрать скрипт</button>
+      <div id="dialog-result"></div>
+    </div>
+
+    <div class="note green">
+      📸 <b>Продукт урока:</b> запишите голосовое с собранным скриптом (6–8 предложений, 2 дубля). Пусть он лежит в заметках — как огнетушитель: нужен один раз в жизни.
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="margin-bottom:10px">🎭 Ролевая игра в парах</h4>
+    <p class="hint">Разыграйте диалог «родитель ↔ оператор 112». Затем поменяйтесь ролями. Говорите спокойно и коротко.</p>
+
+    <div class="roleplay-box">
+      <h4>🎭 Роли</h4>
+      <div class="role-card">
+        <h5>☎️ Роль A — Оператор 112</h5>
+        <ul>
+          <li>Отвечает: <i>«Emergencias, dígame.»</i></li>
+          <li>Спрашивает: <i>«¿Qué ha pasado? ¿Dónde están?»</i></li>
+          <li>Уточняет: <i>«¿Edad? ¿Está consciente? ¿Respira?»</i></li>
+          <li>Даёт команду: <i>«No lo mueva y espere allí.»</i></li>
+          <li>Завершает: <i>«Mando una ambulancia. No cuelgue.»</i></li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <h5>😨 Роль B — Родитель</h5>
+        <ul>
+          <li>Звонит: <i>«Es una urgencia, mi hijo se ha caído.»</i></li>
+          <li>Называет адрес: <i>«Estamos en el parque del Oeste.»</i></li>
+          <li>Возраст и состояние: <i>«Tiene siete años, está consciente y respira.»</i></li>
+          <li>Просит: <i>«Necesito una ambulancia, por favor.»</i></li>
+          <li>Подтверждает: <i>«Vale, no cuelgo el teléfono.»</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note blue">
+      🆘 <b>Фразы-спасатели:</b><br>
+      • <i>«Más despacio, por favor.»</i> — Медленнее, пожалуйста.<br>
+      • <i>«¿Puede repetir la dirección?»</i> — Можете повторить адрес?<br>
+      • <i>«¿Habla inglés? ¿Habla ruso?»</i> — Говорите по-английски? По-русски?<br>
+      • <i>«Un momento, ahora lo miro.»</i> — Секунду, сейчас посмотрю.
+    </div>
+  </div>
+</section>
+
+<!-- САМОПРОВЕРКА -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">✅</div>
+    <div class="step-title">
+      <h2>Самопроверка «Светофор»</h2>
+      <span class="time">Отметьте честно — нажмите на нужный цвет</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="overflow-x:auto">
+      <table class="tl-table">
+        <thead>
+          <tr><th>Умею</th><th>🟢 уверенно</th><th>🟡 с подсказкой</th><th>🔴 пока сложно</th></tr>
+        </thead>
+        <tbody id="tl-body"></tbody>
+      </table>
+    </div>
+    <button class="btn btn-ghost" onclick="resetTL()" style="margin-top:12px">↺ Сбросить отметки</button>
+    <p class="hint" style="margin-top:10px">📸 Отправьте «светофор» преподавателю — на следующем уроке разберём всё, что 🟡 и 🔴.</p>
+  </div>
+</section>
+
+<!-- ДОМАШНЕЕ ЗАДАНИЕ -->
+<section class="section">
+  <div class="step-head">
+    <div class="step-num">🏠</div>
+    <div class="step-title">
+      <h2>Домашнее задание · Урок 9.3</h2>
+      <span class="time">⏱ ~30–35 минут · 6 заданий</span>
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎮 Задание 1. Тренажёр слов и грамматики · 7 мин</h4>
+    <div class="hw-meta">Цель: довести до автоматизма 35 слов и две грамматики.</div>
+    <p>Карточки, сопоставление, «собери фразу» — фокус на <b>se ha caído / se ha roto</b> и командах <b>espere, no lo mueva, coja</b>.</p>
+    <button class="btn btn-ghost" onclick="document.getElementById('train-section').scrollIntoView({behavior:'smooth'})">▶ Открыть тренажёр</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🎤 Задание 2. Голосовое «Mi llamada al 112» · 6 мин ⭐</h4>
+    <div class="hw-meta">Цель: отрепетировать звонок вслух, два дубля.</div>
+    <p>Запишите голосовое на 6–8 предложений по шаблону из конструктора:</p>
+    <div class="note blue">
+      Buenas noches. Es una emergencia. Soy <b>[имя]</b>.<br>
+      Mi hijo/a <b>[имя]</b>, de <b>[возраст]</b> años, <b>[что случилось]</b> <b>[где]</b>.<br>
+      <b>[состояние]</b>. Necesito <b>[помощь]</b>, por favor.<br>
+      No cuelgo el teléfono.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('Buenas noches. Es una emergencia. Soy Ana. Mi hijo Leo, de siete años, se ha caído de un tobogán en el parque del Oeste. Está consciente y respira, pero llora mucho y no mueve bien el brazo. Necesito una ambulancia, por favor. No cuelgo el teléfono.')" style="margin-top:10px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>📱 Задание 3. Реальное действие · 5 мин</h4>
+    <div class="hw-meta">Цель: подготовить экстренные контакты заранее.</div>
+    <p>Сохраните в телефон и запишите на бумажку:</p>
+    <div class="note">
+      112 — emergencias (todos los servicios)<br>
+      Urgencias pediátricas de mi ciudad: ___ (dirección)<br>
+      Farmacia de guardia de mi zona: ___<br>
+      Teléfono del partner: ___
+    </div>
+  </div>
+
+  <div class="hw-item">
+    <h4>✍️ Задание 4. Письмо: скрипт звонка · 7 мин</h4>
+    <div class="hw-meta">Цель: закрепить структуру звонка письменно.</div>
+    <p>Напишите скрипт звонка в 112: 6–8 предложений (адрес, что случилось, возраст, состояние, какая помощь нужна). Используйте <i>se ha caído</i> и минимум одну команду.</p>
+    <button class="btn btn-ghost" onclick="speak('Buenas tardes. Hay un accidente en el patio del colegio. Mi hija María, de diez años, se ha caído de la barra y se ha golpeado la rodilla. Está consciente y respira, pero sangra un poco. No la movemos y esperamos a la ambulancia. Necesito ayuda, por favor.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>👨‍👩‍👧 Задание 5. Семейная миссия · 3 мин</h4>
+    <div class="hw-meta">Цель: связать родительский урок с детским курсом.</div>
+    <p>Поиграйте с ребёнком в «что делать, если упал». Родитель спрашивает:</p>
+    <div class="note green">
+      ¿Qué ha pasado? ¿Dónde te duele?
+    </div>
+    <p>Ребёнок учится говорить:</p>
+    <div class="note blue">
+      Me he caído. Me duele la rodilla.
+    </div>
+    <p>Родитель отвечает словами утешения:</p>
+    <div class="note">
+      Tranquilo. Aguanta un poquito. Eres muy valiente. Luego vamos por un helado.
+    </div>
+    <button class="btn btn-ghost" onclick="speak('¿Qué ha pasado? ¿Dónde te duele? Me he caído. Me duele la rodilla. Tranquilo. Aguanta un poquito. Eres muy valiente. Luego vamos por un helado.')" style="margin-top:8px">🔊 Прослушать образец</button>
+  </div>
+
+  <div class="hw-item">
+    <h4>🧾 Задание 6. Мини-проект: «Plan de emergencia» · 10–12 мин</h4>
+    <div class="hw-meta">Цель: собрать карточку, которая спасёт время в критический момент.</div>
+    <p>Сделайте карточку (бумага в кошелёк + фото в телефоне) на испанском:</p>
+    <div class="note teal">
+      PLAN DE EMERGENCIA<br>
+      Dirección de casa: ___<br>
+      SIP de los niños: ___<br>
+      Alergias: ___<br>
+      Urgencias pediátricas: ___<br>
+      Teléfono del partner: ___<br>
+      ☐ Скопируйте карточку партнёру
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    📤 <b>Формат сдачи домашки:</b><br>
+    • 🎤 Голосовое «Mi llamada al 112» (2 дубля)<br>
+    • 📱 Фото контактов 112 / urgencias / farmacia de guardia<br>
+    • ✍️ Скрипт звонка (6–8 предложений)<br>
+    • 🧾 Фото «Plan de emergencia»<br>
+    • ✅ Светофор самопроверки
+  </div>
+</section>
+
+<!-- ТРЕНАЖЁР -->
+<section class="section" id="train-section">
+  <div class="step-head">
+    <div class="step-num">🎮</div>
+    <div class="step-title">
+      <h2>Тренажёр: слова и грамматика</h2>
+      <span class="time">~7–10 мин</span>
+    </div>
+  </div>
+  <div class="card">
+    <p class="hint">🃏 Карточки — называйте перевод ДО переворота. 🧩 Сопоставление — соедините пары. 🔤 Соберите фразу из кусочков.</p>
+    <div class="tabs" id="train-tabs">
+      <button class="tab active" onclick="showTrain('cards',this)">🃏 Карточки</button>
+      <button class="tab" onclick="showTrain('match',this)">🧩 Сопоставление</button>
+      <button class="tab" onclick="showTrain('build',this)">🔤 Собери фразу</button>
+    </div>
+    <div id="train-box" style="min-height:250px"></div>
+  </div>
+</section>
+
+<!-- QUIZLET -->
+<section class="section">
+  <div class="quizlet-box">
+    <h3>🃏 Карточки Quizlet · Слова урока 9.3</h3>
+    <p>Повторите слова урока в приложении Quizlet: экстренные службы, травмы, звонок в 112, в больнице, успокоить ребёнка.</p>
+    <!-- QUIZLET: родители урок 9.3 (ссылку добавит админ) -->
+    <a href="#" onclick="return false;">Открыть карточки →</a>
+  </div>
+</section>
+
+<!-- КНОПКИ НАВИГАЦИИ -->
+<div class="lesson-nav">
+  <a href="w09-l2.html">← Предыдущий<br><small>Урок 9.2 · Испанская аптека</small></a>
+  <a href="../../index.html">↺ Вернуться<br><small>Карта курса</small></a>
+  <a href="w10-l1.html">Следующий →<br><small>Урок 10.1 · Calendario de vacunación</small></a>
+</div>
+
+<!-- ФУТЕР -->
+<footer>
+  © 2026 Интерактивная школа МУДРО · ¡Rumbo a España! · Блок 2 El Cole y la Salud<br>
+  9.3 · Urgencias и звонок в 112
+</footer>
+
+<!-- Скрипт-стек lesson-gate -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="../../assets/js/firebase-config.js"></script>
+<script src="../../assets/js/app-logic.js"></script>
+<script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/lesson-gate.js"></script>
+
+<script>
+// ===== TTS =====
+function speak(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-ES'; u.rate = 0.88;
+  var voices = speechSynthesis.getVoices();
+  var v = voices.find(function(x){ return x.lang.startsWith('es'); });
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  speechSynthesis.getVoices();
+}
+
+// ===== Диалог в два голоса (оператор 112 / медсестра + родитель) =====
+var DIALOG_LINES = [
+  {who:'op',  label:'Operadora 112:',     es:'Emergencias, dígame.'},
+  {who:'you', label:'Padre:',             es:'Buenas noches. Hay un accidente, mi hijo se ha caído de un tobogán.'},
+  {who:'op',  label:'Operadora 112:',     es:'Tranquilo. ¿Dónde están exactamente?'},
+  {who:'you', label:'Padre:',             es:'En el parque del Oeste, junto a la entrada principal, en la zona de juegos.'},
+  {who:'op',  label:'Operadora 112:',     es:'¿Cuántos años tiene el niño? ¿Está consciente? ¿Respira?'},
+  {who:'you', label:'Padre:',             es:'Tiene siete años. Está consciente, respira, pero se ha golpeado el brazo y llora mucho.'},
+  {who:'op',  label:'Operadora 112:',     es:'De acuerdo. Mando una ambulancia. No lo mueva y espere allí.'},
+  {who:'you', label:'Padre:',             es:'Vale, gracias.'},
+  {who:'op',  label:'Enfermera (triaje):', es:'En urgencias, primero el triaje. ¿Qué ha pasado?'},
+  {who:'you', label:'Padre:',             es:'Se ha caído de un tobogán, un golpe en el brazo.'},
+  {who:'op',  label:'Enfermera (triaje):', es:'Vale. Le pongo la muñequita, nivel amarillo. Esperen en la sala de observación.'},
+  {who:'you', label:'Padre:',             es:'¿Cuánto hay que esperar?'},
+  {who:'op',  label:'Enfermera (triaje):', es:'Unos veinte minutos. El médico hace una radiografía y vemos si hay fractura.'}
+];
+
+function speakDialog(){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var i = 0;
+  (function next(){
+    if(i >= DIALOG_LINES.length) return;
+    var line = DIALOG_LINES[i++];
+    var u = new SpeechSynthesisUtterance(line.es);
+    u.lang = 'es-ES';
+    if(line.who === 'you'){
+      u.rate = 1.0;   // родитель: чуть быстрее
+      u.pitch = 1.35; // и заметно выше
+    } else {
+      u.rate = 0.85;  // оператор и медсестра: чуть медленнее
+      u.pitch = 0.75; // и заметно ниже
+    }
+    var voices = speechSynthesis.getVoices();
+    var v = voices.find(function(x){ return x.lang && x.lang.toLowerCase().startsWith('es'); });
+    if(v) u.voice = v;
+    u.onend = next;
+    speechSynthesis.speak(u);
+  })();
+}
+
+// ===== GENERIC QUIZ RENDERER =====
+function renderQuiz(containerId, questions, feedbackPrefix){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '';
+  questions.forEach(function(item, qi){
+    var d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = '<h4>' + item.q + '</h4><div class="quiz-opts">' +
+      item.o.map(function(o, oi){
+        return '<div class="quiz-opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</div>';
+      }).join('') +
+      '</div><div class="quiz-feedback" id="' + feedbackPrefix + '-' + qi + '"></div>';
+    el.appendChild(d);
+  });
+
+  el.querySelectorAll('.quiz-opt').forEach(function(b){
+    b.onclick = function(){
+      var qi = +b.dataset.q;
+      var oi = +b.dataset.o;
+      var sibs = b.parentElement.querySelectorAll('.quiz-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var fb = document.getElementById(feedbackPrefix + '-' + qi);
+      if(oi === questions[qi].c){
+        b.classList.add('correct');
+        fb.textContent = '✅ ¡Correcto!';
+        fb.style.color = 'var(--ok)';
+      } else {
+        b.classList.add('wrong');
+        sibs[questions[qi].c].classList.add('correct');
+        fb.textContent = '❌ Правильно: ' + questions[qi].o[questions[qi].c];
+        fb.style.color = 'var(--bad)';
+      }
+      fb.classList.add('show');
+    };
+  });
+}
+
+// ===== WARMUP QUIZ (9.2) =====
+var warmQ = [
+  {q:'1. Как сказать «аптека»?', o:['la farmacia','la farmacéutica','el hospital'], c:0},
+  {q:'2. Как сказать «сироп»?', o:['el jarabe','el espray','la pomada'], c:0},
+  {q:'3. Как сказать «без рецепта»?', o:['sin receta','con receta','la receta'], c:0},
+  {q:'4. Как сказать «каждые 8 часов»?', o:['cada 8 horas','8 horas cada','por 8 horas'], c:0},
+  {q:'5. Как спросить «Что вы посоветуете?»', o:['¿Qué me recomienda?','¿Qué quiere?','¿Qué hace?'], c:0},
+  {q:'6. Как сказать «Мне нужно что-то от кашля»?', o:['Necesito algo para la tos','Necesito algo de la tos','Quiero algo para toser'], c:0}
+];
+
+function renderWarmup(){ renderQuiz('warmup-quiz', warmQ, 'wf'); }
+renderWarmup();
+
+// ===== LIFE SITUATION QUESTIONS =====
+document.querySelectorAll('.sit-question').forEach(function(q){
+  var correct = +q.dataset.correct;
+  q.querySelectorAll('.q-opt').forEach(function(opt){
+    opt.onclick = function(){
+      var sibs = q.querySelectorAll('.q-opt');
+      sibs.forEach(function(s){ s.style.pointerEvents = 'none'; });
+      var oi = +opt.dataset.o;
+      if(oi === correct){
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        sibs[correct].classList.add('correct');
+      }
+    };
+  });
+});
+
+// ===== VOCAB =====
+var VOCAB = {
+  emerg:[
+    {es:'las urgencias', ru:'приёмное отделение', ex:'Llevamos a Leo a urgencias.', exRu:'Мы везём Лео в приёмное отделение.'},
+    {es:'el 112', ru:'номер экстренной помощи', ex:'Llame al 112, es gratis.', exRu:'Позвоните 112, это бесплатно.'},
+    {es:'la ambulancia', ru:'скорая помощь', ex:'La ambulancia llega en diez minutos.', exRu:'Скорая приезжает через десять минут.'},
+    {es:'el triaje', ru:'сортировка пациентов', ex:'En urgencias, primero el triaje.', exRu:'В приёмном сначала — сортировка.'},
+    {es:'la muñequita', ru:'браслет с номерком', ex:'Le ponen la muñequita con el número.', exRu:'Ему надевают браслет с номерком.'},
+    {es:'la sala de observación', ru:'палата наблюдения', ex:'Esperamos en la sala de observación.', exRu:'Мы ждём в палате наблюдения.'},
+    {es:'el alta', ru:'выписка', ex:'A las dos de la noche, el alta.', exRu:'В два часа ночи — выписка.'}
+  ],
+  heridas:[
+    {es:'la caída', ru:'падение', ex:'Es una caída del tobogán.', exRu:'Это падение с горки.'},
+    {es:'el golpe', ru:'ушиб / удар', ex:'Tiene un golpe en la frente.', exRu:'У него ушиб лба.'},
+    {es:'la herida', ru:'рана', ex:'La herida es pequeña pero profunda.', exRu:'Ранка маленькая, но глубокая.'},
+    {es:'el corte', ru:'порез', ex:'Es un corte en la mano.', exRu:'Это порез на руке.'},
+    {es:'la fractura', ru:'перелом', ex:'La radiografía muestra una fractura.', exRu:'Рентген показывает перелом.'},
+    {es:'el esguince', ru:'растяжение', ex:'Es un esguince del tobillo.', exRu:'Это растяжение лодыжки.'},
+    {es:'la quemadura', ru:'ожог', ex:'La quemadura es de primer grado.', exRu:'Ожог первой степени.'}
+  ],
+  llamada:[
+    {es:'¿Qué ha pasado?', ru:'Что случилось?', ex:'El operador pregunta: ¿qué ha pasado?', exRu:'Оператор спрашивает: что случилось?'},
+    {es:'¿Dónde están?', ru:'Где вы находитесь?', ex:'¿Dónde están exactamente?', exRu:'Где вы точно находитесь?'},
+    {es:'hay un accidente', ru:'произошёл несчастный случай', ex:'Hay un accidente en el parque.', exRu:'В парке несчастный случай.'},
+    {es:'necesito una ambulancia', ru:'мне нужна скорая', ex:'Necesito una ambulancia, por favor.', exRu:'Мне нужна скорая, пожалуйста.'},
+    {es:'se ha caído', ru:'он упал', ex:'Mi hijo se ha caído de la bici.', exRu:'Мой сын упал с велосипеда.'},
+    {es:'está inconsciente', ru:'он без сознания', ex:'El niño está inconsciente.', exRu:'Ребёнок без сознания.'},
+    {es:'respira', ru:'он дышит', ex:'No respira bien, rápido.', exRu:'Он плохо дышит, быстро!'}
+  ],
+  hospital:[
+    {es:'la radiografía', ru:'рентген', ex:'Hacen una radiografía del brazo.', exRu:'Делают рентген руки.'},
+    {es:'la escayola', ru:'гипс', ex:'Lleva escayola tres semanas.', exRu:'Он в гипсе три недели.'},
+    {es:'la venda', ru:'бинт', ex:'La enfermera pone una venda.', exRu:'Медсестра накладывает бинт.'},
+    {es:'los puntos', ru:'швы', ex:'Le dan tres puntos en la frente.', exRu:'Ему накладывают три шва на лоб.'},
+    {es:'el parte de lesiones', ru:'справка о травме', ex:'El parte de lesiones es para el seguro.', exRu:'Справка о травме — для страховки.'},
+    {es:'la revisión', ru:'контрольный осмотр', ex:'La revisión es la próxima semana.', exRu:'Контрольный осмотр на следующей неделе.'},
+    {es:'el dolor agudo', ru:'острая боль', ex:'Si hay dolor agudo, vuelva.', exRu:'Если будет острая боль, возвращайтесь.'}
+  ],
+  calmar:[
+    {es:'aguanta un poquito', ru:'потерпи немного', ex:'Aguanta un poquito, ya casi está.', exRu:'Потерпи немного, почти готово.'},
+    {es:'ya casi está', ru:'почти готово', ex:'Ya casi está, eres muy valiente.', exRu:'Почти готово, ты очень храбрый.'},
+    {es:'eres muy valiente', ru:'ты очень храбрый', ex:'Eres muy valiente, campeón.', exRu:'Ты очень храбрый, чемпион.'},
+    {es:'sopla fuerte', ru:'сильно подуй', ex:'Sopla fuerte mientras pongo el espray.', exRu:'Сильно подуй, пока я распыляю спрей.'},
+    {es:'mira aquí', ru:'посмотри сюда', ex:'Mira aquí, mira la muñequita.', exRu:'Посмотри сюда, посмотри на браслет.'},
+    {es:'te va a poner mejor', ru:'тебе станет лучше', ex:'Te va a poner mejor enseguida.', exRu:'Тебе сразу станет лучше.'},
+    {es:'luego vamos por un helado', ru:'потом пойдём за мороженым', ex:'Luego vamos por un helado, ¿vale?', exRu:'Потом пойдём за мороженым, ладно?'}
+  ]
+};
+
+function showVocab(key, btn){
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+
+  var g = document.getElementById('vocab-grid');
+  g.innerHTML = '';
+  VOCAB[key].forEach(function(w){
+    var c = document.createElement('div');
+    c.className = 'vocab-card';
+    c.innerHTML =
+      '<div class="vocab-inner">' +
+        '<div class="vocab-front">' +
+          '<div class="es">' + w.es + '</div>' +
+          '<div class="ru">' + w.ru + '</div>' +
+          '<button class="speak-btn" style="margin-top:8px" onclick="event.stopPropagation();speak(\'' + w.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="flip-hint">нажмите, чтобы увидеть пример ↻</div>' +
+        '</div>' +
+        '<div class="vocab-back">' +
+          '<div class="ex">«' + w.ex + '»</div>' +
+          '<div class="ex-ru">' + w.exRu + '</div>' +
+          '<button class="speak-btn" style="margin-top:10px" onclick="event.stopPropagation();speak(\'' + w.ex.replace(/'/g, "\\'") + '\')">🔊</button>' +
+        '</div>' +
+      '</div>';
+    c.onclick = function(e){
+      if(e.target.closest('.speak-btn')) return;
+      c.classList.toggle('flipped');
+    };
+    g.appendChild(c);
+  });
+}
+showVocab('emerg', document.querySelector('#vocab-tabs .tab'));
+
+// ===== FILL EXERCISE =====
+var fillQ = [
+  {text:'___ tranquilo, mamá está aquí. (respirar, tú)', ans:'respira'},
+  {text:'No ___ al niño, espere a la ambulancia. (mover, usted)', ans:'mueva'},
+  {text:'Mi hijo se ___ caído en el parque. (ha)', ans:'ha'},
+  {text:'Se ha ___ el brazo. (romper)', ans:'roto'},
+  {text:'___ el número, por favor. (coger, usted)', ans:'coja'},
+  {text:'La enfermera le ___ una venda. (poner)', ans:'pone'},
+  {text:'___ fuerte, ya casi está. (soplar, tú)', ans:'sopla'}
+];
+
+function renderFill(){
+  var el = document.getElementById('fill-exercise');
+  el.innerHTML = '';
+  fillQ.forEach(function(item, i){
+    var d = document.createElement('div');
+    d.style.marginBottom = '10px';
+    d.style.fontSize = '1.02rem';
+    d.innerHTML =
+      '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
+      item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    el.appendChild(d);
+  });
+}
+
+function checkFill(){
+  document.querySelectorAll('#fill-exercise .fill-input').forEach(function(inp){
+    var got = inp.value.trim().toLowerCase();
+    var correct = inp.dataset.ans;
+    inp.classList.remove('correct','wrong');
+    if(got === correct){
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      inp.value = correct;
+    }
+  });
+}
+renderFill();
+
+// ===== BUILD EXERCISE =====
+var buildPhrases = [
+  {target:'Mi hijo se ha caído de un tobogán.', translation:'Мой сын упал с горки.'},
+  {target:'Necesito una ambulancia, por favor.', translation:'Мне нужна скорая, пожалуйста.'},
+  {target:'Estamos en el parque del Oeste.', translation:'Мы в парке Оэсте.'},
+  {target:'Tiene siete años y respira.', translation:'Ему семь лет, он дышит.'},
+  {target:'No lo mueva, espere aquí.', translation:'Не двигайте его, ждите здесь.'},
+  {target:'Eres muy valiente, ya casi está.', translation:'Ты очень храбрый, почти готово.'}
+];
+
+var buildIdx = 0;
+var buildSel = [];
+var buildTokensMap = {};
+
+function shuffle(array){
+  for(var i = array.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+
+function renderBuild(){
+  buildSel = [];
+  buildTokensMap = {};
+  var el = document.getElementById('build-exercise');
+  var p = buildPhrases[buildIdx];
+  var tokens = p.target.split(' ').map(function(text, i){
+    var id = 'token-' + buildIdx + '-' + i;
+    buildTokensMap[id] = text;
+    return {id:id, text:text};
+  });
+
+  shuffle(tokens);
+
+  el.innerHTML =
+    '<div style="margin-bottom:10px;font-weight:700;color:var(--p4)">Фраза ' + (buildIdx+1) + ' из ' + buildPhrases.length + ': <span style="color:var(--muted);font-style:italic">' + p.translation + '</span></div>' +
+    '<div class="build-words" id="bw-words"></div>' +
+    '<div class="build-line" id="bw-line"></div>' +
+    '<div class="build-feedback" id="bw-fb"></div>' +
+    '<button class="btn btn-ghost" onclick="nextBuild()" style="margin-top:10px">Следующая фраза →</button>';
+
+  var wEl = document.getElementById('bw-words');
+  tokens.forEach(function(tok){
+    var b = document.createElement('span');
+    b.className = 'bw';
+    b.textContent = tok.text;
+    b.dataset.id = tok.id;
+    b.onclick = function(){
+      if(b.classList.contains('used')) return;
+      b.classList.add('used');
+      buildSel.push(tok.id);
+
+      var chip = document.createElement('span');
+      chip.className = 'bw-line-item';
+      chip.textContent = tok.text;
+      chip.dataset.id = tok.id;
+      chip.onclick = function(){
+        chip.remove();
+        var idx = buildSel.indexOf(tok.id);
+        if(idx > -1) buildSel.splice(idx, 1);
+        b.classList.remove('used');
+        checkBuild();
+      };
+
+      document.getElementById('bw-line').appendChild(chip);
+      checkBuild();
+    };
+    wEl.appendChild(b);
+  });
+}
+
+function checkBuild(){
+  var got = buildSel.map(function(id){ return buildTokensMap[id]; }).join(' ');
+  var target = buildPhrases[buildIdx].target;
+  var fb = document.getElementById('bw-fb');
+
+  if(got === target){
+    fb.innerHTML = '<span>✅</span><span>¡Muy bien! — ' + buildPhrases[buildIdx].translation + '</span>';
+    fb.className = 'build-feedback ok';
+  } else if(got.length >= target.length){
+    fb.innerHTML = '<span>❌</span><span>Правильно: «' + target + '»</span>';
+    fb.className = 'build-feedback bad';
+  } else {
+    fb.className = 'build-feedback';
+    fb.style.display = 'none';
+  }
+}
+
+function nextBuild(){
+  buildIdx = (buildIdx + 1) % buildPhrases.length;
+  renderBuild();
+}
+renderBuild();
+
+// ===== MATCH EXERCISE =====
+var mainMatchPairs = [
+  {id:1, es:'las urgencias', ru:'приёмное отделение'},
+  {id:2, es:'el triaje', ru:'сортировка пациентов'},
+  {id:3, es:'la ambulancia', ru:'скорая помощь'},
+  {id:4, es:'se ha caído', ru:'он упал'},
+  {id:5, es:'la escayola', ru:'гипс'},
+  {id:6, es:'el alta', ru:'выписка'},
+  {id:7, es:'la muñequita', ru:'браслет с номерком'},
+  {id:8, es:'la quemadura', ru:'ожог'}
+];
+
+function renderMatch(containerId, pairs){
+  var el = document.getElementById(containerId);
+  el.innerHTML = '<div class="match-container"><div class="match-col" id="' + containerId + '-left"></div><div class="match-col" id="' + containerId + '-right"></div></div>';
+  var left = document.getElementById(containerId + '-left');
+  var right = document.getElementById(containerId + '-right');
+  var rightShuffled = pairs.slice().sort(function(){ return Math.random() - 0.5; });
+  var selL = null, selR = null;
+
+  pairs.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.es;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selL) selL.classList.remove('sel');
+      it.classList.add('sel');
+      selL = it;
+      check();
+    };
+    left.appendChild(it);
+  });
+
+  rightShuffled.forEach(function(p){
+    var it = document.createElement('div');
+    it.className = 'match-item';
+    it.textContent = p.ru;
+    it.dataset.id = p.id;
+    it.onclick = function(){
+      if(it.classList.contains('done')) return;
+      if(selR) selR.classList.remove('sel');
+      it.classList.add('sel');
+      selR = it;
+      check();
+    };
+    right.appendChild(it);
+  });
+
+  function check(){
+    if(selL && selR){
+      if(selL.dataset.id === selR.dataset.id){
+        selL.classList.add('done');
+        selL.classList.remove('sel');
+        selR.classList.add('done');
+        selR.classList.remove('sel');
+      } else {
+        selL.classList.add('error');
+        selR.classList.add('error');
+        var l = selL, r = selR;
+        setTimeout(function(){
+          l.classList.remove('sel','error');
+          r.classList.remove('sel','error');
+        }, 600);
+      }
+      selL = null; selR = null;
+    }
+  }
+}
+
+function renderMainMatch(){
+  renderMatch('match-exercise', mainMatchPairs);
+}
+renderMainMatch();
+
+// ===== LISTENING QUIZ =====
+var listenQ = [
+  {q:'1. ¿Dónde está el niño?', o:['en el parque del Oeste','en el colegio','en casa'], c:0},
+  {q:'2. ¿Qué edad tiene?', o:['siete años','cinco años','diez años'], c:0},
+  {q:'3. ¿Cómo está el niño?', o:['consciente y respira, pero llora','inconsciente','no respira'], c:0},
+  {q:'4. ¿Qué hace la operadora?', o:['manda una ambulancia','da consejos por teléfono','llama a la policía'], c:0},
+  {q:'5. ¿Qué hace la enfermera del triaje?', o:['pone la muñequita, nivel amarillo','hace una radiografía','pone una venda'], c:0},
+  {q:'6. ¿Cuánto hay que esperar?', o:['unos veinte minutos','dos horas','nada, pasa enseguida'], c:0}
+];
+
+renderQuiz('listening-quiz', listenQ, 'lq');
+
+// ===== SCRIPT BUILDER =====
+var lastScriptPlain = '';
+
+function buildScript(){
+  var name = document.getElementById('b-name').value || 'Ana';
+  var child = document.getElementById('b-child').value || 'Leo';
+  var age = document.getElementById('b-age').value;
+  var place = document.getElementById('b-place').value;
+  var accident = document.getElementById('b-accident').value;
+  var state = document.getElementById('b-state').value;
+  var help = document.getElementById('b-help').value;
+
+  var text = 'Buenas noches. Es una emergencia. Soy ' + name + '. ' +
+    'Mi hijo ' + child + ', de ' + age + ' años, ' + accident + ' ' + place + '. ' +
+    state + ' ' +
+    'Necesito ' + help + ', por favor. ' +
+    'No cuelgo el teléfono.';
+
+  lastScriptPlain = text;
+
+  var result = document.getElementById('dialog-result');
+  result.innerHTML =
+    '<div class="dialog-result">' + text + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary" id="speak-script-btn">🔊 Прослушать скрипт</button>' +
+    '</div>';
+
+  document.getElementById('speak-script-btn').onclick = function(){
+    speak(lastScriptPlain);
+  };
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ===== TRAFFIC LIGHT =====
+var TL = [
+  'Звать помощь: llamar al 112, necesito una ambulancia',
+  'Говорить, что случилось: se ha caído, se ha roto, hay un accidente',
+  'Называть адрес и ориентиры: estamos en..., junto a...',
+  'Отвечать о состоянии: respira, está consciente, llora',
+  'Понимать команды врача: espere, no lo mueva, coja el número',
+  'Скрипт звонка в 112 от начала до конца (продукт урока)'
+];
+
+function renderTL(){
+  var tb = document.getElementById('tl-body');
+  tb.innerHTML = '';
+  TL.forEach(function(t, rowIdx){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + t + '</td>' +
+      '<td><button class="tl-cell green" data-row="' + (rowIdx + 1) + '" data-color="1">🟢</button></td>' +
+      '<td><button class="tl-cell yellow" data-row="' + (rowIdx + 1) + '" data-color="2">🟡</button></td>' +
+      '<td><button class="tl-cell red" data-row="' + (rowIdx + 1) + '" data-color="3">🔴</button></td>';
+    tr.querySelectorAll('.tl-cell').forEach(function(b){
+      b.onclick = function(){
+        tr.querySelectorAll('.tl-cell').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      };
+    });
+    tb.appendChild(tr);
+  });
+}
+renderTL();
+
+function resetTL(){
+  document.querySelectorAll('.tl-cell').forEach(function(b){ b.classList.remove('active'); });
+}
+
+// ===== TRAINER =====
+var TRAIN_CARDS = [].concat(VOCAB.emerg, VOCAB.heridas, VOCAB.llamada, VOCAB.hospital, VOCAB.calmar);
+var trainMode = 'cards';
+var trainerIdx = 0;
+
+function showTrain(mode, btn){
+  trainMode = mode;
+  var wrap = btn.closest('.tabs');
+  wrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  trainerIdx = 0;
+  renderTrain();
+}
+
+function renderTrain(){
+  var box = document.getElementById('train-box');
+  box.innerHTML = '';
+
+  if(trainMode === 'cards'){
+    var cardContainer = document.createElement('div');
+    cardContainer.style.textAlign = 'center';
+
+    var card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.style.maxWidth = '500px';
+    card.style.margin = '0 auto';
+    card.onclick = function(){ card.classList.toggle('flipped'); };
+
+    function updateCard(){
+      var c = TRAIN_CARDS[trainerIdx];
+      card.innerHTML =
+        '<div class="vocab-inner">' +
+          '<div class="vocab-front">' +
+            '<div class="es" style="font-size:1.15rem">' + c.es + '</div>' +
+            '<button class="speak-btn" onclick="event.stopPropagation();speak(\'' + c.es.replace(/'/g, "\\'") + '\')">🔊</button>' +
+            '<div class="flip-hint">нажмите, чтобы увидеть перевод ↻</div>' +
+          '</div>' +
+          '<div class="vocab-back">' +
+            '<div class="ex" style="font-size:1.05rem">' + c.ru + '</div>' +
+          '</div>' +
+        '</div>';
+      card.classList.remove('flipped');
+      document.getElementById('trainer-counter').textContent = (trainerIdx + 1) + ' / ' + TRAIN_CARDS.length;
+    }
+
+    var controls = document.createElement('div');
+    controls.style.marginTop = '16px';
+    controls.style.display = 'flex';
+    controls.style.justifyContent = 'center';
+    controls.style.alignItems = 'center';
+    controls.style.gap = '20px';
+    controls.innerHTML =
+      '<button class="btn btn-ghost" id="train-prev">← Назад</button>' +
+      '<span id="trainer-counter" style="font-weight:700">1 / ' + TRAIN_CARDS.length + '</span>' +
+      '<button class="btn btn-primary" id="train-next">Дальше →</button>';
+
+    cardContainer.appendChild(card);
+    cardContainer.appendChild(controls);
+    box.appendChild(cardContainer);
+
+    updateCard();
+
+    document.getElementById('train-prev').onclick = function(){
+      if(trainerIdx > 0){ trainerIdx--; updateCard(); }
+    };
+    document.getElementById('train-next').onclick = function(){
+      if(trainerIdx < TRAIN_CARDS.length - 1){ trainerIdx++; updateCard(); }
+    };
+  }
+
+  if(trainMode === 'match'){
+    var c = document.createElement('div');
+    c.id = 'train-match';
+    box.appendChild(c);
+    renderMatch('train-match', mainMatchPairs);
+  }
+
+  if(trainMode === 'build'){
+    var b = document.createElement('div');
+    b.id = 'train-build';
+    box.appendChild(b);
+    renderTrainBuild(b);
+  }
+}
+
+function renderTrainBuild(container){
+  var phrases = [
+    {target:'Mi hijo se ha caído de un tobogán', hint:'Мой сын упал с горки'},
+    {target:'Necesito una ambulancia, por favor', hint:'Мне нужна скорая, пожалуйста'},
+    {target:'Estamos en el parque del Oeste', hint:'Мы в парке Оэсте'},
+    {target:'Tiene siete años y respira', hint:'Ему семь лет, он дышит'},
+    {target:'No lo mueva, espere aquí', hint:'Не двигайте его, ждите здесь'}
+  ];
+  var idx = 0;
+  var sel = [];
+  var tokensMap = {};
+
+  function render(){
+    sel = [];
+    tokensMap = {};
+    container.innerHTML = '';
+    var p = phrases[idx];
+    var tokens = p.target.split(' ').map(function(text, i){
+      var id = 'train-token-' + idx + '-' + i;
+      tokensMap[id] = text;
+      return {id:id, text:text};
+    });
+
+    shuffle(tokens);
+
+    var h = document.createElement('div');
+    h.style.marginBottom = '12px';
+    h.style.fontStyle = 'italic';
+    h.style.color = 'var(--muted)';
+    h.textContent = 'Перевод: ' + p.hint;
+    container.appendChild(h);
+
+    var wC = document.createElement('div');
+    wC.className = 'build-words';
+
+    tokens.forEach(function(tok){
+      var b = document.createElement('span');
+      b.className = 'bw';
+      b.textContent = tok.text;
+      b.onclick = function(){
+        if(b.classList.contains('used')) return;
+        b.classList.add('used');
+        sel.push(tok.id);
+        var chip = document.createElement('span');
+        chip.className = 'bw-line-item';
+        chip.textContent = tok.text;
+        chip.onclick = function(){
+          chip.remove();
+          var i = sel.indexOf(tok.id);
+          if(i > -1) sel.splice(i,1);
+          b.classList.remove('used');
+          check();
+        };
+        document.getElementById('tb-line').appendChild(chip);
+        check();
+      };
+      wC.appendChild(b);
+    });
+
+    var line = document.createElement('div');
+    line.className = 'build-line';
+    line.id = 'tb-line';
+
+    var fb = document.createElement('div');
+    fb.className = 'build-feedback';
+
+    var btns = document.createElement('div');
+    btns.style.textAlign = 'center';
+    btns.style.marginTop = '12px';
+    btns.innerHTML =
+      '<button class="btn btn-primary" id="tb-check">✓ Проверить</button>' +
+      '<button class="btn btn-ghost" id="tb-next" style="margin-left:8px">Следующая →</button>';
+
+    container.appendChild(wC);
+    container.appendChild(line);
+    container.appendChild(fb);
+    container.appendChild(btns);
+
+    function check(){
+      var got = sel.map(function(id){ return tokensMap[id]; }).join(' ');
+      if(got === p.target){
+        fb.innerHTML = '<span>✅</span><span>¡Muy bien!</span>';
+        fb.className = 'build-feedback ok';
+      } else if(got.length >= p.target.length){
+        fb.innerHTML = '<span>❌</span><span>Правильно: «' + p.target + '»</span>';
+        fb.className = 'build-feedback bad';
+      } else {
+        fb.className = 'build-feedback';
+        fb.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tb-check').onclick = check;
+
+    document.getElementById('tb-next').onclick = function(){
+      idx = (idx + 1) % phrases.length;
+      render();
+    };
+  }
+
+  render();
+}
+
+renderTrain();
+</script>
+
+</body>
+</html>
