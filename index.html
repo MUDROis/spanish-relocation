@@ -168,6 +168,7 @@ h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:900;text-align:center}
 .lesson-link.live:hover{filter:brightness(.92);color:#fff}
 .lesson-link.passed{background:#2E7D32;color:#fff;border-style:solid;border-color:#2E7D32}
 .lesson-link.locked{opacity:.55;cursor:not-allowed;background:#fff;border-style:dashed;border-color:rgba(43,33,24,.2);color:#b3aa9d}
+.lesson-link.next{outline:2px solid #FFD75E;outline-offset:2px;box-shadow:0 0 0 4px rgba(255,215,94,.25)}
 .week.live{border-color:var(--pc);box-shadow:0 0 0 3px var(--pc-soft),var(--shadow)}
 
 /* ---------- бонусный модуль ---------- */
@@ -366,8 +367,14 @@ const PHASES=[
 const container=document.getElementById('weeks-container');
 const READY=new Set(['1-1','1-2','1-3','2-1','2-2','2-3','3-1','3-2','3-3','4-1','4-2','4-3','5-1','5-2','5-3','6-1','6-2','6-3','7-1','7-2','7-3','8-1','8-2','8-3','9-1','9-2','9-3','10-1','10-2','10-3','11-1','11-2','11-3','12-1','12-2','12-3','13-1','13-2','13-3','14-1','14-2','14-3','15-1','15-2','15-3','16-1','16-2','16-3','17-1','17-2','17-3','18-1','18-2','18-3','19-1','19-2','19-3','20-1','20-2','20-3','3-4']); // готовые уроки: неделя-номер (все 60 + 3.4) // готовые уроки: неделя-номер
 
-// Определяем текущую неделю по READY: максимальный номер недели с готовым уроком
-const currentWeek=[...READY].reduce((max,id)=>{const w=parseInt(id.split('-')[0],10);return w>max?w:max;},0);
+// Определяем «сейчас» по прогрессу: урок, следующий за последним проведённым
+function getNextLesson(){
+  const order=[...READY].map(id=>{const p=id.split('-');return{w:+p[0],l:+p[1],key:id};}).sort((a,b)=>a.w-b.w||a.l-b.l);
+  const done=new Set(getParentsDone().map(id=>id.replace(/^w(\d\d)-l(\d)$/,(_,w,l)=>(+w)+'-'+(+l))));
+  return order.find(it=>!done.has(it.key)) || null;
+}
+const nextLesson=getNextLesson();
+const currentWeek=nextLesson?nextLesson.w:-1;
 
 container.innerHTML=PHASES.map(ph=>`
  <section class="phase reveal" style="--pc:${ph.color};--pc-soft:${ph.soft}">
@@ -396,12 +403,14 @@ container.innerHTML=PHASES.map(ph=>`
               const nn=String(w.n).padStart(2,'0');
               const href=`${LESSONS_BASE}w${nn}-l${i}.html`;
               const st=READY.has(`${w.n}-${i}`)?'live':'locked';
-              return `<a class="lesson-link ${st}" data-href="${href}" href="${href}">Урок ${i}</a>`;
+              const isNext=nextLesson && nextLesson.key===`${w.n}-${i}`;
+              return `<a class="lesson-link ${st}${isNext?' next':''}" data-href="${href}" href="${href}">Урок ${i}${isNext?' ▶':''}</a>`;
             }).join('')}
             ${w.n===3 ? (()=>{
               const href=`${LESSONS_BASE}w03-l4.html`;
               const st=READY.has('3-4')?'live':'locked';
-              return `<a class="lesson-link ${st}" data-href="${href}" href="${href}">Повторение</a>`;
+              const isNext=nextLesson && nextLesson.key==='3-4';
+              return `<a class="lesson-link ${st}${isNext?' next':''}" data-href="${href}" href="${href}">Повторение${isNext?' ▶':''}</a>`;
             })() : ''}
           </div>
        </div></div></div>
