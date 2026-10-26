@@ -228,7 +228,7 @@
     </div>
     <p class="block-sub">ФИНАЛЬНАЯ проверка по всей станции «Mi Mundo»! Здесь и лексика, и грамматика: семья, дом, распорядок, хобби и вкусы. Отвечай сам, без подсказок, и собери все звёзды!</p>
     <div class="game-zone">
-      <p style="font-weight:800">🧩 Часть 1 · Лексика: 6 вопросов</p>
+      <p style="font-weight:800">🧩 Часть 1 · Лексика: 12 вопросов</p>
       <div class="game-q" id="t1-q"></div>
       <div class="opts" id="t1-opts"></div>
       <div class="game-fb" id="t1-fb"></div>
@@ -557,12 +557,18 @@ var WARM=[
 
 /* ===== ПРОВЕРОЧНАЯ РАБОТА ПО СТАНЦИИ 3 ===== */
 var TEST1=[
- {q:'Как будет по-испански «мама»?',ok:'la madre',w:['el padre','la abuela']},
- {q:'Как называется комната / спальня?',ok:'la habitación',w:['la cocina','el salón']},
- {q:'Переведи «плавание» (вид спорта)',ok:'la natación',w:['el fútbol','el tenis']},
- {q:'«El abuelo» — это...',ok:'дедушка',w:['бабушка','брат']},
- {q:'Переведи «desayuno»',ok:'я завтракаю',w:['я обедаю','я ужинаю']},
- {q:'«Me levanto» значит...',ok:'я встаю',w:['я ложусь спать','я одеваюсь']}
+ {q:'Как будет по-испански «мама»?',ok:'la madre',w:['el padre','la abuela'],es:'la madre'},
+ {q:'Как называется комната / спальня?',ok:'la habitación',w:['la cocina','el salón'],es:'la habitación'},
+ {q:'Переведи «плавание» (вид спорта)',ok:'la natación',w:['el fútbol','el tenis'],es:'la natación'},
+ {q:'«El abuelo» — это...',ok:'дедушка',w:['бабушка','брат'],es:'el abuelo'},
+ {q:'Переведи «desayuno»',ok:'я завтракаю',w:['я обедаю','я ужинаю'],es:'desayuno'},
+ {q:'«Me levanto» значит...',ok:'я встаю',w:['я ложусь спать','я одеваюсь'],es:'Me levanto'},
+ {q:'Как по-испански «сестра»?',ok:'la hermana',w:['el hermano','la prima'],es:'la hermana'},
+ {q:'«La casa» — это...',ok:'дом',w:['школа','город'],es:'la casa'},
+ {q:'Переведи «me visto»',ok:'я одеваюсь',w:['я встаю','я умываюсь'],es:'Me visto'},
+ {q:'Как называется «хобби» по-испански?',ok:'el pasatiempo',w:['la escuela','la familia'],es:'el pasatiempo'},
+ {q:'«Me gusta leer» — что это значит?',ok:'мне нравится читать',w:['мне нравится рисовать','я люблю плавать'],es:'Me gusta leer'},
+ {q:'Переведи «el salón»',ok:'гостиная',w:['кухня','спальня'],es:'el salón'}
 ];
 var t1Ord=[],t1I=0,t1S=0;
 function test1Start(){t1Ord=shuffle(TEST1.slice());t1I=0;t1S=0;document.getElementById('t1-total').textContent=t1Ord.length;document.getElementById('t1-stars').textContent='0';t1Next();}
@@ -576,7 +582,7 @@ function t1Next(){
     var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='150px';
     b.addEventListener('click',function(){
       box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
-      if(o===r.ok){b.classList.add('correct');t1S++;document.getElementById('t1-stars').textContent=t1S;document.getElementById('t1-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      if(o===r.ok){b.classList.add('correct');t1S++;document.getElementById('t1-stars').textContent=t1S;document.getElementById('t1-fb').textContent='✅ ¡Correcto!';if(r.es)speak(r.es);}
       else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('t1-fb').textContent='❌ Правильно: '+r.ok;}
       t1I++;setTimeout(t1Next,1400);
     });
@@ -617,7 +623,7 @@ function t2Next(){
   PROFILE_PARTS.forEach(function(p){
     var d=document.createElement('div');d.className='phone-part';
     d.innerHTML='<div style="font-size:1.6rem">'+p.emo+'</div><div class="pp-es">'+p.es+'</div><div class="pp-ru">'+p.ru+'</div>';
-    d.addEventListener('click',function(){speak(p.say);});
+    d.addEventListener('click',function(){speak(p.es);});
     box.appendChild(d);
   });
 })();
