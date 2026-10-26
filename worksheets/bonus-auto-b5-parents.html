@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок B5 · День экзамена (практика) — Школа МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🅿️'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🅿️ Рабочий лист · Урок B5 «День экзамена (практика)»</h1>
+    <div class="meta">Бонус · Misión Autoescuela · El día del examen práctico: от arranque до apárquese, императив на usted</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🚗 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el examen práctico</div>
+          <div class="item">2. arranque</div>
+          <div class="item">3. el espejo retrovisor</div>
+          <div class="item">4. ¿puede repetir, por favor?</div>
+          <div class="item">5. felicidades, ha aprobado</div>
+          <div class="item">6. los nervios</div>
+          <div class="item">7. apárquese aquí</div>
+          <div class="item">8. la marcha atrás</div>
+        </div>
+        <div class="col">
+          <div class="item">а) заведите</div>
+          <div class="item">б) нервы</div>
+          <div class="item">в) можете повторить?</div>
+          <div class="item">г) зеркало заднего вида</div>
+          <div class="item">д) припаркуйтесь здесь</div>
+          <div class="item">е) задний ход</div>
+          <div class="item">ж) практический экзамен</div>
+          <div class="item">з) поздравляю, вы сдали</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ СЛОВО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду одно слово выбивается из темы</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">В каждом ряду 4 слова из урока. Три — на одну тему, одно — «шпион». Найди его и выпиши.</div>
+      1. 🧭 Команды экзаменатора: continúe todo recto · frene suavemente · incorpórese · el examinador → <span class="wline long"></span><br>
+      2. 🌅 День экзамена: el espejo retrovisor · los nervios · la frenada · la pendiente → <span class="wline long"></span><br>
+      3. 🚗 Утро в автошколе: la L de practicar · el instructor · el coche de la autoescuela · apárquese aquí → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ИМПЕРАТИВ USTED, ПРОПУСКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧭 Грамматика: команды экзаменатора — заполни пропуски</h2>
+        <div class="tag">шпаргалка + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило: императив на usted</b> — вежливые команды экзаменатора:<br>
+        • -ar → -e: arrancar → <i>Arranque el coche.</i> · frenar → <i>Frene suavemente.</i><br>
+        • -er/-ir → -a: salir → <i>Salga la segunda.</i><br>
+        • возвратные → -se (с ударением!): incorporarse → <i>Incorpórese a la autovía.</i> · aparcar → <i>Apárquese aquí.</i>
+      </div>
+
+      <div class="formula">💡 Впишите команду экзаменатора:</div>
+
+      1. ___ el coche, por favor. <span class="ru-sub">(arrancar — заведите)</span><br>
+      2. ___ todo recto. <span class="ru-sub">(continuar — продолжайте прямо)</span><br>
+      3. ___ a la izquierda en la próxima. <span class="ru-sub">(girar — поверните налево на следующей)</span><br>
+      4. ___ suavemente. <span class="ru-sub">(frenar — тормозите плавно)</span><br>
+      5. ___ a la autovía. <span class="ru-sub">(incorporarse — встраивайтесь в поток)</span><br>
+      6. ___ aquí, en batería. <span class="ru-sub">(aparcar — припаркуйтесь здесь)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА-ПРАКТИКА — ДОПОЛНИ ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>💬 Дополни диалог: экзамен от arranque до apárquese</h2>
+        <div class="tag">впиши реплику водителя по подсказке</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Экзаменатор говорит полными фразами — ваша задача: вписать ваши реплики. Читайте вслух за двоих!</div>
+      <div class="note blue"><b>Ваш лозунг дня:</b> понимайте команды (<i>arranque, continúe...</i>), переспрашивайте вежливо, реагируйте спокойно.</div>
+      <div class="formula">Examinador: Buenos días. ¿Todo preparado?<br>
+      Yo (para mí): «___». <span class="ru-sub">(спокойно, дыши)</span><br>
+      Examinador: Arranque el coche, por favor.<br>
+      Yo: Vale, ya está. ¿___? <span class="ru-sub">(по этой улице?)</span><br>
+      Examinador: Continúe todo recto y gire a la izquierda en la próxima.<br>
+      Yo: Perdone, ___. <span class="ru-sub">(я не понял)</span> ¿Puede repetir, por favor?<br>
+      Examinador: Sí: continúe todo recto y salga de la rotonda la segunda.<br>
+      Yo: La segunda, vale. ___. <span class="ru-sub">(я на правильной полосе)</span><br>
+      Examinador: Muy bien. Frene suavemente... y apárquese aquí, en batería.<br>
+      Yo: Vale... ya está, coche parado. ¡Perdón, he tocado el bordillo! ___. <span class="ru-sub">(извините за ошибку)</span><br>
+      Examinador: No pasa nada. Felicidades, ha aprobado. Puede recoger el permiso mañana.<br>
+      Yo: ¡Muchas gracias! ¿Puedo ___ mañana mismo? <span class="ru-sub">(получить права)</span></div>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: el día del examen práctico</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Antes de salir</h4>
+        <p>El día del <b>examen práctico</b> (практический экзамен) llega con <b>los nervios</b> (нервы) — es normal. El mantra del graduado: «tranquilo, respira». Llegas a la autoescuela veinte minutos antes: allí espera <b>el coche de la autoescuela</b> (учебная машина) con <b>la L de practicar</b> (знак «L») en el techo. Tu instructor (инструктор) repasa contigo el espejo retrovisor y el asiento; después llega <b>el examinador</b> (экзаменатор) de la DGT con su tabla.</p>
+
+        <h4>En el coche: las manías del examen</h4>
+        <p>El examinador valora los detalles: ajustar <b>el espejo retrovisor</b> (зеркало заднего вида), poner <b>el cinturón, por favor</b> (ремень, пожалуйста), y dominar <b>la marcha atrás</b> (задний ход), <b>la frenada</b> (торможение), <b>el arrastre</b> (трогание) en <b>la pendiente</b> (подъём) y <b>el aparcamiento en batería</b> (парковка параллельно/поперечно). Si no entiendes una orden, pregunta: «¿Puede repetir, por favor?» — no es un fallo.</p>
+
+        <h4>El resultado</h4>
+        <p>Al final, el examinador dice la palabra mágica: «<b>Felicidades, ha aprobado</b> (поздравляю, вы сдали)». A veces es «<b>ha suspendido por poco</b> (вы чуть не сдали)»: <b>los fallos</b> (ошибки) marcados «<b>deficiente</b>» (незачёт (по пункту)) y otra convocatoria. Con el aprobado, <b>el permiso de conducir</b> (водительское удостоверение) llega por correo — o vas a <b>recoger el permiso</b> (получить права) a la DGT. Y por fin: <b>conducir solo</b> (водить одному). ¡Felicidades, conducirás por España!</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué hay en el techo del coche de la autoescuela?
+      <span class="wline xlong"></span><br>
+      2. ¿Quién llega después del instructor y con qué?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué cuatro maniobras valora el examinador?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué pasa si ha suspendido por poco?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист утра экзамена</h4>
+        <div class="item"><div class="box"></div><div>DNI y cita — документы и время подтверждены</div></div>
+        <div class="item"><div class="box"></div><div>El coche de la autoescuela con la L — машина готова</div></div>
+        <div class="item"><div class="box"></div><div>Espejo retrovisor, asiento — настройка до arranque</div></div>
+        <div class="item"><div class="box"></div><div>El cinturón, por favor — пристегнулись сами и напомнили экзаменатору</div></div>
+        <div class="item"><div class="box"></div><div>Tranquilo, respira — три вдоха перед ключом</div></div>
+        <div class="item"><div class="box"></div><div>Если не понял команду — ¿puede repetir, por favor?</div></div>
+        <div class="item"><div class="box"></div><div>Al final: recoger el permiso или ждать письмо DGT</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: 5 сцен с экзаменатором</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Examinador: Buenos días. El cinturón, por favor. — Yo: Listo. El espejo retrovisor, ajustado. — Examinador: Arranque el coche, por favor. — Yo: Ya está. — Examinador: Continúe todo recto. — Yo: Sigo derecho. — Examinador: Gire a la izquierda en la próxima. — Yo: ¿Por esta calle? — Examinador: Sí. En la rotonda, salga de la rotonda la segunda. — Yo: La segunda... vale, estoy en la buena. — Examinador: Incorpórese a la autovía. — Yo: Perdone el fallo, he frenado tarde. — Examinador: No pasa nada. Frene suavemente. Y apárquese aquí, en batería. — Yo: Ya está, coche parado. — Examinador: Muy bien. Felicidades, ha aprobado. Puede recoger el permiso esta semana en la DGT.»
+      </div>
+      <div class="hint">Словарик: sigo derecho — еду прямо; salga de la rotonda la segunda — сойдите с круга на втором; recoger el permiso — получить права.</div>
+      1. ¿Qué pide el examinador antes de arrancar?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué hace el conductor en la rotonda?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pregunta el conductor sobre la calle?
+      <span class="wline xlong"></span><br>
+      4. ¿Por qué dice «perdone el fallo»?
+      <span class="wline xlong"></span><br>
+      5. ¿Cómo aparca al final?
+      <span class="wline xlong"></span><br>
+      6. ¿Cuándo puede recoger el permiso?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: реплики в машине</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Утро экзамена, накручиваете себя.<br>
+        <div class="tmpl">«Tranquilo, respira. Los nervios son normales. Es mi día.»</div>
+        <div class="tmpl-ru">(Спокойно, дыши. Нервы — это нормально. Это мой день.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Не расслышали команду экзаменатора.<br>
+        <div class="tmpl">«Perdone, no he entendido. ¿Puede repetir, por favor?»</div>
+        <div class="tmpl-ru">(Извините, я не понял. Можете повторить?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Уточняете маршрут.<br>
+        <div class="tmpl">«Sigo derecho, ¿por esta calle? Indíqueme la dirección, por favor.»</div>
+        <div class="tmpl-ru">(Еду прямо. По этой улице? Укажите мне направление, пожалуйста.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Допустили мелкую ошибку — отреагируйте спокойно.<br>
+        <div class="tmpl">«Perdone el fallo. Sigo atento a las indicaciones.»</div>
+        <div class="tmpl-ru">(Извините за ошибку. Продолжаю внимательно следить за указаниями.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Результат «почти» — реагируете без драмы.<br>
+        <div class="tmpl">«Ha suspendido por poco, pero tranquilo: repito y apruebo. ¿Cuándo es la otra convocatoria?»</div>
+        <div class="tmpl-ru">(Вы чуть не сдали, но спокойно: пересдам и сдам. Когда следующая попытка?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: «Mi script del examen práctico»</h2>
+        <div class="tag">6–8 предложений по плану · продукт урока</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Утро: tranquilo, respira — los nervios son normales.<br>
+        3. En el coche: el espejo retrovisor, el cinturón, por favor.<br>
+        4. Arranque: ya está, sigo las órdenes del examinador.<br>
+        5. Si no entiendo: ¿puede repetir, por favor? No he entendido.<br>
+        6. Las maniobras: la marcha atrás, la pendiente, el aparcamiento en batería.<br>
+        7. Si fallo: perdone el fallo — y sigo.<br>
+        8. El final: «Felicidades, ha aprobado» — recoger el permiso y conducir solo.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Понимать команды экзаменатора на слух (arranque, continúe, gire…)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Действовать по команде: симулятор из 5 сцен</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Переспрашивать вежливо: ¿Puede repetir? / No he entendido</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить в машине: el cinturón, el espejo retrovisor, la marcha atrás</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Реагировать на результат: ha aprobado / ha suspendido por poco</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Вести полный диалог с экзаменатором (мой скрипт)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист (особенно скрипт!) и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- ФИНАЛ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">🎉</div>
+      <div>
+        <h2>🎉 ¡Felicidades, conducirás por España!</h2>
+        <div class="tag">бонус-модуль Misión Autoescuela · финал</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🚗 <b>¡Misión cumplida!</b> Бонус-модуль «Misión Autoescuela» пройден от первой фразы в автошколе до команды «apárquese aquí». Теперь вы знаете, как устроены teoría y práctica, говорите с экзаменатором без паники и понимаете его команды. Осталось одно — прийти на экзамен и повторить ваш скрипт вслух. <b>¡Felicidades, conducirás por España!</b> Playa, montaña, rotondas imposibles — España ваша. Y recuerda el mantra del curso (правило родителей-релокантов): tranquilo, no pasa nada — y sin prisa. 🥂
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

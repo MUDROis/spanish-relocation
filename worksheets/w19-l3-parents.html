@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 19.3 · Fiestas и традиции — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🎆'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🎆 Рабочий лист · Урок 19.3 «Fiestas и традиции»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Fiestas y tradiciones: PBL «план локальной фиесты», уступки aunque / a pesar de</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🎆 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la mascletá</div>
+          <div class="item">2. los petardos</div>
+          <div class="item">3. las fallas</div>
+          <div class="item">4. la Nochevieja</div>
+          <div class="item">5. la verbena</div>
+          <div class="item">6. a pesar de</div>
+          <div class="item">7. merece la pena</div>
+          <div class="item">8. reservar sitio</div>
+        </div>
+        <div class="col">
+          <div class="item">а) канун Нового года</div>
+          <div class="item">б) того стоит</div>
+          <div class="item">в) масклета (полуденный салют)</div>
+          <div class="item">г) вечернее гулянье</div>
+          <div class="item">д) петарды</div>
+          <div class="item">е) занять место</div>
+          <div class="item">ж) фальяс (март, Валенсия)</div>
+          <div class="item">з) несмотря на</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🎆 Впиши слово по описанию</h2>
+        <div class="tag">календарь фиест</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Грандиозный шумовой концерт в Валенсии ровно в два часа дня: несколько минут грохота, и вся площадь в восторге. → <span class="wline long"></span><br>
+      2. Мартовский праздник Валенсии: огромные картонные фигуры, которые сжигают в финале. → <span class="wline long"></span><br>
+      3. Ночь, когда под 12 ударов часов съедают 12 виноградин. → <span class="wline long"></span><br>
+      4. Взрывная «музыка» фиест, от которой надо беречь уши детей. → <span class="wline long"></span><br>
+      5. Вечернее гулянье с музыкой, танцами и барами в честь праздника района. → <span class="wline long"></span><br>
+      6. Прийти заранее и занять место у парада: «___ sitio pronto». → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — УСТУПКИ, ПРОПУСКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🔗 Грамматика: уступки aunque / a pesar de</h2>
+        <div class="tag">заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>aunque</b> + глагол (хотя): <i>Aunque es ruidoso, vamos a la mascletá.</i><br>
+        • <b>a pesar de</b> + существительное / инфинитив (несмотря на): <i>A pesar del ruido, lo disfrutamos. A pesar de llegar tarde, llegamos felices.</i><br>
+        • <b>sin embargo</b> — однако, новая мысль после точки: <i>Es fuerte. Sin embargo, dura solo diez minutos.</i><br>
+        • <b>de todos modos</b> — в любом случае: <i>De todos modos, reservamos sitio pronto.</i><br>
+        • <b>merece la pena</b> — того стоит: <i>Aunque no me gusta el ruido, merece la pena.</i>
+      </div>
+
+      <div class="formula">💡 Впиши слово:</div>
+
+      1. ___ es ruidoso, los niños lo adoran. <span class="ru-sub">(хотя)</span><br>
+      2. A ___ del ruido, lo disfrutamos. <span class="ru-sub">(несмотря на шум)</span><br>
+      3. Es fuerte. ___, dura solo diez minutos. <span class="ru-sub">(однако)</span><br>
+      4. ___ modos, reservamos sitio pronto. <span class="ru-sub">(в любом случае)</span><br>
+      5. ¿___ es la fiesta del barrio? <span class="ru-sub">(когда праздник района?)</span><br>
+      6. ¿Dónde ___ la verbena? <span class="ru-sub">(где проходит?)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА УСТУПОК -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: инструменты уступки</h2>
+        <div class="tag">таблица + выбери конструкцию</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> <b>aunque + глагол</b> и <b>a pesar de + сущ./инфинитив</b>. Остальные конструкции — для распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Конструкция</th>
+          <th>Схема</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">aunque</td><td class="practice">aunque + глагол</td><td class="practice">Aunque es ruidoso, vamos a la mascletá.</td></tr>
+        <tr><td class="practice">a pesar de</td><td class="practice">a pesar de + сущ. / инфинитив</td><td class="practice">A pesar del ruido, lo disfrutamos.</td></tr>
+        <tr><td class="reference">sin embargo</td><td class="reference">после точки</td><td class="reference">Es fuerte. Sin embargo, dura solo diez minutos.</td></tr>
+        <tr><td class="reference">de todos modos</td><td class="reference">в любом случае</td><td class="reference">De todos modos, reservamos sitio pronto.</td></tr>
+        <tr><td class="reference">merece la pena</td><td class="reference">финал уступки</td><td class="reference">Aunque no me gusta el ruido, merece la pena.</td></tr>
+        <tr><td class="reference">pero</td><td class="reference">простое «но»</td><td class="reference">Es ruidoso, pero los niños lo adoran.</td></tr>
+      </table>
+
+      <div class="formula">💡 Выбери и впиши:</div>
+
+      1. ___ es ruidoso, vamos a la mascletá. <span class="ru-sub">(aunque / a pesar de)</span> → <span class="wline short"></span><br>
+      2. A pesar de ___ tarde, llegamos felices. <span class="ru-sub">(llegar / llegamos — нужен инфинитив)</span> → <span class="wline short"></span><br>
+      3. Los petardos son fuertes. ___, la verbena es preciosa. <span class="ru-sub">(Sin embargo / De todos modos — «однако»)</span> → <span class="wline short"></span><br>
+      4. ___ no me gusta el ruido, merece la pena. <span class="ru-sub">(Aunque / A pesar de — дальше глагол)</span> → <span class="wline short"></span><br>
+      5. Aunque ___ el ruido, merece la pena. <span class="ru-sub">(no me gusta / no gusto)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: mascletá, fallas y doce uvas</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La mascletá: el espectáculo del mediodía</h4>
+        <p>En Valencia, cada día de fallas (март, Валенсия), a las dos de la tarde hay mascletá (масклета (полуденный салют)): cien kilos de petardos (петарды) en la plaza, un espectáculo (представление) de seis minutos de ruido brutal. Es ruidoso, pero... (шумно, но...) la gente lo adora. Aunque no me gusta el ruido... (хоть мне и не нравится шум...) merece la pena. Con los niños: tapones para los oídos de los niños (уши детей (петарды!)) y un sitio lejos del centro. Al final, los fuegos artificiales (фейерверк) cierran la noche de la fiesta local (местный праздник).</p>
+
+        <h4>El calendario de las fiestas</h4>
+        <p>Los Reyes Magos (Волхвы (6 января)) traen regalos a los niños; la Nochevieja (канун Нового года) son doce uvas por campanada; Semana Santa (Пасхальная неделя) trae la procesión (процессия) y silencio; el carnaval (карнавал), disfraces. Además: la feria (ферия (ярмарка-гулянье)) con atracciones y, en cada pueblo, el día del patrón (день святого покровителя) — el día festivo (нерабочий праздничный день) con verbena.</p>
+
+        <h4>Ir en familia: el plan</h4>
+        <p>Ir en familia (идти всей семьёй) es lo normal: la verbena (вечернее гулянье) es de todos. Primero: ¿cuándo es la fiesta del barrio?, ¿dónde se celebra?, ¿a qué hora empieza? (во сколько начинается?) Después: reservar sitio (занять место) pronto para el desfile — la desfile (парад) con carrozas, el traje regional (национальный костюм), la charanga (духовой оркестрик), bailar la jota (танцевать хоту) y la lluvia de confeti (дождь из конфетти). Plan B si los niños se cansan: la carroza (платформа (на параде)) en la avenida, sin petardos. A pesar del ruido: disfrutar de la fiesta (наслаждаться праздником) — de todos modos, merece la pena.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué es la mascletá y a qué hora es?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuántas uvas se comen en la Nochevieja y cuándo?
+      <span class="wline xlong"></span><br>
+      3. ¿Quién trae los regalos a los niños el 6 de enero?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué hay que llevar para los oídos de los niños?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: PBL «пойти на mascletá с детьми»</h4>
+        <div class="item"><div class="box"></div><div>Узнать: ¿cuándo es?, ¿dónde se celebra?, ¿a qué hora empieza?</div></div>
+        <div class="item"><div class="box"></div><div>Взять беруши: tapones para los oídos de los niños</div></div>
+        <div class="item"><div class="box"></div><div>Встать подальше: no en el centro de la plaza</div></div>
+        <div class="item"><div class="box"></div><div>План Б: si los niños se cansan — la charanga, la carroza</div></div>
+        <div class="item"><div class="box"></div><div>Занять место: reservar sitio pronto</div></div>
+        <div class="item"><div class="box"></div><div>Точка встречи: «nos vemos en la fuente»</div></div>
+        <div class="item"><div class="box"></div><div>Финал: a pesar del ruido, merece la pena</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: план на mascletá</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Usted: Ana, ¿cuándo es la fiesta del barrio? — Ana: El sábado. Hay mascletá a las dos y verbena por la noche. — Usted: ¿Dónde se celebra? — Ana: En la plaza Mayor. Aunque es ruidoso, merece la pena. — Usted: Los petardos asustan a los niños… — Ana: Lleva tapones para los oídos. A pesar del ruido, los niños lo adoran. — Usted: ¿A qué hora empieza? — Ana: A las dos en punto. Reservamos sitio pronto, a la una. — Usted: ¿Y si los niños se cansan? — Ana: Plan B: la charanga y las carrozas en la avenida, sin petardos. — Usted: Perfecto. ¿Y por la noche? — Ana: Verbena: bailar la jota, lluvia de confeti. De todos modos, si se cansan, nos vamos a casa. — Usted: Aunque no me gusta el ruido… ¡esta vez voy a disfrutar!»
+      </div>
+      1. ¿Cuándo es la fiesta del barrio?
+      <span class="wline xlong"></span><br>
+      2. ¿Dónde se celebra y a qué hora empieza la mascletá?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué hay que llevar para los oídos?
+      <span class="wline xlong"></span><br>
+      4. ¿A qué hora hay que llegar para reservar sitio?
+      <span class="wline xlong"></span><br>
+      5. ¿Cuál es el plan B si los niños se cansan?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué hay en la verbena por la noche?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: спросить про фиесту и договориться</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Спросить о празднике района.<br>
+        <div class="tmpl">«¿Cuándo es la fiesta del barrio? ¿Dónde se celebra?»</div>
+        <div class="tmpl-ru">(Когда праздник района? Где проходит?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Уточнить время начала.<br>
+        <div class="tmpl">«¿A qué hora empieza la mascletá?»</div>
+        <div class="tmpl-ru">(Во сколько начинается масклета?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Сказать с уступкой «хотя».<br>
+        <div class="tmpl">«Aunque es ruidoso, vamos toda la familia.»</div>
+        <div class="tmpl-ru">(Хоть и шумно, мы идём всей семьёй.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Сказать с уступкой «несмотря на» + план Б.<br>
+        <div class="tmpl">«A pesar del ruido, los niños lo adoran. Si se cansan, plan B: la charanga.»</div>
+        <div class="tmpl-ru">(Несмотря на шум, дети в восторге. Если устанут — план Б: духовой оркестрик.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Финал договорённости.<br>
+        <div class="tmpl">«De todos modos, reservamos sitio pronto. ¡Merece la pena!»</div>
+        <div class="tmpl-ru">(В любом случае, займём место заранее. Того стоит!)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: план локальной фиесты для семьи</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Разведка: ¿cuándo es la fiesta del barrio?, ¿dónde se celebra?, ¿a qué hora empieza?<br>
+        3–4. Семья и безопасность: ir en familia, tapones para los oídos de los niños.<br>
+        5–6. Логистика: reservar sitio pronto + plan B (la charanga, la carroza).<br>
+        7. Уступка: aunque es ruidoso… / a pesar del ruido…<br>
+        8. Финал: de todos modos vamos — ¡merece la pena!
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Спросить про фиесту: ¿cuándo es?, ¿dónde se celebra?, ¿a qué hora empieza?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать уступки: aunque + глагол, a pesar de + существительное</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Отличать fallas / Reyes Magos / Nochevieja (12 uvas) в календаре региона</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Составить план: что взять, план Б для детей, tapones para los oídos</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Решить по «аудио-тесту», где стоять с детьми во время mascletá</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Представить план фиесты: 3 предложения о своей семье голосом</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 20.1: Экзамен-квест 1</h2>
+        <div class="tag">Boss Fight: el boiler y Hacienda</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>¡Merece la pena!</b> Блок 4 почти пройден: вы умеете собирать людей, сравнивать культуры и говорить «шумно, но того стоит». На следующем уроке (20.1) — <b>экзамен-квест</b>: два босса сразу. <b>Босс 1: el boiler</b> se ha estropeado — звонок мастеру. <b>Босс 2: carta de Hacienda</b> — importe, plazo, justificante. Повторяем Presente и Perfecto: ¿puede venir hoy? — he recibido una carta.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

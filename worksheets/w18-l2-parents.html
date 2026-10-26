@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 18.2 · Погода и футбол — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'⚽'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>⚽ Рабочий лист · Урок 18.2 «Погода и футбол»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Small talk: погода, футбол и восклицания ¡Qué...!</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>⚽ Лексика: соедини слово и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. está nublado</div>
+          <div class="item">2. el bochorno</div>
+          <div class="item">3. la estación</div>
+          <div class="item">4. el hincha</div>
+          <div class="item">5. ¡qué lastima!</div>
+          <div class="item">6. el golazo</div>
+          <div class="item">7. el árbitro</div>
+          <div class="item">8. está en racha</div>
+        </div>
+        <div class="col">
+          <div class="item">а) фанат</div>
+          <div class="item">б) облачно</div>
+          <div class="item">в) судья</div>
+          <div class="item">г) какая жалость!</div>
+          <div class="item">д) душнота</div>
+          <div class="item">е) он в ударной серии</div>
+          <div class="item">ж) время года</div>
+          <div class="item">з) какой голище</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🌦 Впиши слово по описанию</h2>
+        <div class="tag">погода и футбол</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Ответы — слова из урока (смотрите словарик в упр. 5).</div>
+      1. Так говорят, когда светит солнце. → <span class="wline long"></span><br>
+      2. Сезон, когда в Испании жарче всего. → <span class="wline long"></span><br>
+      3. Матч, за который болеют в баре. → <span class="wline long"></span><br>
+      4. Человек, который свистит на поле. → <span class="wline long"></span><br>
+      5. Восклицание, когда команда выигрывает Ла Лигу. → <span class="wline long"></span><br>
+      6. Влажность воздуха, от которой тяжело дышать летом. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ВСТАВЬ ПРОПУСК -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: погода и восклицания — вставь слово</h2>
+        <div class="tag">hace / está / llueve / ¡qué...!</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>hace + sol / calor / frío / viento</b> — <i>Hace calor en Sevilla.</i><br>
+        • <b>está + nublado</b> — состояние неба — <i>Está nublado hoy.</i><br>
+        • <b>llueve</b> — идёт дождь — <i>Llueve mucho en Bilbao.</i><br>
+        • Сравнение: <b>más... que</b> — <i>Hace más calor en Sevilla que en Bilbao.</i><br>
+        • Восклицания: <b>¡Qué bien!, ¡Qué fuerte!, ¡Qué lastima!, ¡Enhorabuena!, ¡No me digas!</b>
+      </div>
+
+      <div class="formula">💡 Вставь hace / está / llueve или восклицание:</div>
+
+      1. Hoy ___ sol y ___ calor. → <span class="wline short"></span> + <span class="wline short"></span><br>
+      2. En Bilbao ___ más frío que en Málaga. → <span class="wline short"></span><br>
+      3. ¡___ bien, has ganado! → <span class="wline short"></span><br>
+      4. ¿___ visto el partido? ¡___ golazo! → <span class="wline short"></span> + <span class="wline short"></span><br>
+      5. Penal fallado... ¡___ lastima! → <span class="wline short"></span><br>
+      6. ¡Enhorabuena por la Liga! — ¡No me ___! → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ДОПОЛНИ ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>💬 Дополни диалог: small talk в баре</h2>
+        <div class="tag">впиши слова из банка</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Банк слов: calor · partido · hincha · golazo · árbitro · lastima · bien · racha</div>
+      — ¡Qué <span class="wline short"></span> hace hoy! ¿Vamos a la terraza?<br>
+      — Vale. ¿Has visto el <span class="wline short"></span> de ayer?<br>
+      — ¡Sí! Dos a cero. ¡Qué <span class="wline short"></span> del delantero!<br>
+      — Fue penal, dice el <span class="wline short"></span>...<br>
+      — ¡Qué <span class="wline short"></span>! El portero estaba en <span class="wline short"></span>.<br>
+      — Es un gran <span class="wline short"></span>, tu equipo está muy bien este año. ¡<span class="wline short"></span> por la Liga!
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: small talk en el bar</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El tiempo: el tema seguro</h4>
+        <p>En España el small talk empieza con el tiempo. En el sur: <b>hace calor</b>, <b>el bochorno</b> (душнота) y <b>la humedad</b> (влажность) cerca del mar. En el norte: <b>llueve</b> (идёт дождь), <b>está nublado</b>. Se comparan ciudades: <b>hace más calor en Sevilla que en Bilbao</b>. Las estaciones (времена года): <b>el verano, el invierno, la primavera, el otoño</b>.</p>
+
+        <h4>El fútbol: la pasión nacional</h4>
+        <p>El segundo tema es el fútbol: <b>¿has visto el partido?</b> (видел матч?), <b>la Liga</b>, <b>el golazo</b> (голище), <b>el hincha</b> (фанат). En el bar todos gritan: <b>¡qué bien!, ¡qué fuerte!, ¡qué lastima!</b> Si el equipo gana: <b>¡enhorabuena!</b>. El <b>árbitro</b> (судья) siempre tiene la culpa: <b>fue penal</b> (это был пенальти) — o no.</p>
+
+        <h4>La cadena del small talk</h4>
+        <p>El small talk va en cadena: <b>el tiempo → el fútbol → los niños</b>. No se habla de dinero ni de política con desconocidos. Si no sabes qué decir: <b>¡no me digas!</b> (да ладно!), <b>¡ándale!</b> (вот это да!), <b>¡venga!</b> (давай!). Así, de comentario en comentario, nace la amistad en la barra del bar.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Con qué tema empieza el small talk en España?
+      <span class="wline xlong"></span><br>
+      2. ¿Cómo se comparan dos ciudades?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué gritan los hinchas en el bar cuando gana el equipo?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué temas no se tocan con desconocidos?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист «Small talk в баре»</h4>
+        <div class="item"><div class="box"></div><div>Начать с погоды: ¡qué calor hoy! / está nublado</div></div>
+        <div class="item"><div class="box"></div><div>Сравнить города: hace más calor en... que en...</div></div>
+        <div class="item"><div class="box"></div><div>Перейти на футбол: ¿has visto el partido?</div></div>
+        <div class="item"><div class="box"></div><div>Восклицать с эмоцией: ¡qué bien!, ¡qué lastima!</div></div>
+        <div class="item"><div class="box"></div><div>Поздравить: ¡enhorabuena por la Liga!</div></div>
+        <div class="item"><div class="box"></div><div>Не говорить о деньгах и политике</div></div>
+      </div>
+
+      <div class="note" style="margin-top:3mm">
+        <b>📚 Словарик урока:</b> hace sol — солнечно · hace calor / frío — жарко / холодно · hace viento — ветрено · está nublado — облачно · llueve — идёт дождь · la lluvia — дождь · el bochorno — душнота · el verano — лето · el invierno — зима · la primavera — весна · el otoño — осень · la estación — время года · el calor del sur — южная жара · la humedad — влажность · el fútbol — футбол · el partido — матч · el equipo — команда · la Liga — Ла Лига · ganar / perder — выиграть / проиграть · el gol — гол · hincha — фанат · ¡qué bien! — как здорово! · ¡qué fuerte! — ничего себе! · ¡qué lastima! — какая жалость! · ¡enhorabuena! — поздравляю! · ¡no me digas! — да ладно! · ¡ándale! — вот это да! · ¡venga!, ¡vamos! — давай!, поехали! · ¿has visto el partido? — видел матч? · qué golazo — какой голище · el árbitro — судья · fue penal — это был пенальти · está en racha — он в ударной серии · la final — финал · vuestro equipo — ваша команда
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: en el bar, minuto 89</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— ¡Qué calor hace hoy! (какой сегодня жар!) ¿Vemos el partido aquí en la barra? — Sí, hace viento en la terraza (на террасе ветрено). ¡Venga! — Minuto 89... ¡GOL! ¡Qué golazo! (какой голище!) — ¡Qué bien! (как здорово!) Dos a uno. ¡Está en racha! (он в ударной серии!) — Y el árbitro (судья) no vio el penal antes... — ¡No me digas! (да ладно!) ¿Fue penal? — Sí, claro. Pero ganamos igual. — ¡Enhorabuena! (поздравляю!) ¿Y el domingo? ¿La final? — Sí, ¡la final! Está nublado hoy (сегодня облачно), pero llueve poco (дождь идёт мало). — Si llueve, vemos el partido aquí. — Perfecto. ¡Hasta el domingo! — ¡Qué fuerte! ¡Hasta luego!»
+      </div>
+      1. ¿Qué tiempo hace hoy?
+      <span class="wline xlong"></span><br>
+      2. ¿Por qué no ven el partido en la terraza?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pasa en el minuto 89?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué dice uno sobre el árbitro y el penal?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué hay el domingo?
+      <span class="wline xlong"></span><br>
+      6. ¿Dónde ven el partido si llueve?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: small talk по шагам</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Начать с погоды в лифте.<br>
+        <div class="tmpl">«¡Qué calor hace hoy! ¿Verdad que hace más calor que ayer?»</div>
+        <div class="tmpl-ru">(Какой жар сегодня! Правда, жарче, чем вчера?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Перейти на футбол с соседом.<br>
+        <div class="tmpl">«¿Has visto el partido? ¡Qué golazo del delantero!»</div>
+        <div class="tmpl-ru">(Видел матч? Какой голище от форварда!)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Отреагировать на проигрыш команды соседа.<br>
+        <div class="tmpl">«¡Qué lastima, penal fallado! La próxima vez ganarán.»</div>
+        <div class="tmpl-ru">(Какая жалость, пенальти не забит! В следующий раз выиграют.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Поздравить с победой.<br>
+        <div class="tmpl">«¡Enhorabuena por la Liga! ¡Vuestro equipo está en racha!»</div>
+        <div class="tmpl-ru">(Поздравляю с Ла Лигой! Ваша команда в ударной серии!)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Выразить удивление новости.<br>
+        <div class="tmpl">«¡No me digas! ¡Qué fuerte! ¿Y luego qué pasó?»</div>
+        <div class="tmpl-ru">(Да ладно! Ничего себе! И что потом случилось?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: сообщение соседу о матче</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План (WhatsApp соседу-фанату):</b><br>
+        1–2. Приветствие + погода (¡Qué calor! ¿Vemos el partido en el bar?).<br>
+        3. Вопрос о матче (¿Has visto el partido de anoche?).<br>
+        4. Эмоция о голе (¡Qué golazo! / ¡Qué lastima, fue penal!).<br>
+        5. О команде (vuestro equipo está en racha).<br>
+        6. Приглашение (el domingo hay final: ¡venga, vamos juntos!).<br>
+        7. Условие погоды (si llueve, en la barra; si hace sol, en la terraza).<br>
+        8. Финал (¡enhorabuena otra vez! + hasta el domingo).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Говорить о погоде: hace sol / calor, está nublado, llueve</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Сравнивать: hace más calor en Sevilla que en Bilbao</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Восклицать: ¡qué bien!, ¡qué fuerte!, ¡qué lastima!</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить о футболе: partido, equipo, golazo, hincha</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Держать small talk: погода → футбол → дети</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть сцену в баре с криками фаната</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 18.3: Приглашение в бар</h2>
+        <div class="tag">yo invito, pagamos a medias, la ronda</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>¡Muy bien!</b> Small talk теперь ваш инструмент: <i>el tiempo → el fútbol → los niños</i>. На следующем уроке (18.3) — <b>барная культура</b>: как позвать (<i>yo invito</i>), как делить счёт (<i>pagamos a medias</i>), что такое <i>la ronda</i> и фраза <i>«la última y nos vamos»</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 17.1 · Собрание жильцов — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🏛️'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏛️ Рабочий лист · Урок 17.1 «Собрание жильцов»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Собрание жильцов, hay que / se debe / no se puede + habrá</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🏛️ Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el presidente</div>
+          <div class="item">2. la junta de propietarios</div>
+          <div class="item">3. la convocatoria</div>
+          <div class="item">4. el acta</div>
+          <div class="item">5. la derrama</div>
+          <div class="item">6. la azotea</div>
+          <div class="item">7. hay que respetar</div>
+          <div class="item">8. se aprueba</div>
+        </div>
+        <div class="col">
+          <div class="item">а) протокол</div>
+          <div class="item">б) уведомление о собрании</div>
+          <div class="item">в) разовый сбор</div>
+          <div class="item">г) надо уважать</div>
+          <div class="item">д) президент (старший)</div>
+          <div class="item">е) крыша</div>
+          <div class="item">ж) собрание жильцов</div>
+          <div class="item">з) утверждается</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ СЛОВО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">3 ряда — вычеркни лишнее и впиши его</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подсказка: trastero — кладовка, jardín — сад, aprobar — утверждать, portal — подъезд, garaje — гараж, piscina — бассейн.</div>
+      1. 🏛️ Органы и документы собрания: el administrador · el orden del día · el trastero · la votación → лишнее: <span class="wline long"></span><br>
+      2. 💶 Деньги дома: las cuotas · los gastos comunes · el presupuesto · el jardín → лишнее: <span class="wline long"></span><br>
+      3. 🏢 Части дома: el portal · el ascensor · el garaje · aprobar → лишнее: <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ВЫБЕРИ А/Б -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🅰️ Грамматика: hay que / se debe — выбери А / Б</h2>
+        <div class="tag">обведи верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>hay que + инфинитив</b> — надо (всем, безлично) — <i>Hay que votar los acuerdos.</i><br>
+        • <b>se debe + инфинитив</b> — следует (чуть формальнее) — <i>Se debe pagar las cuotas.</i><br>
+        • <b>es necesario + инфинитив</b> — необходимо — <i>Es necesario leer la convocatoria.</i><br>
+        • <b>no se puede + инфинитив</b> — нельзя (запрет) — <i>No se puede aparcar en la entrada.</i><br>
+        • <b>habrá</b> — будет / состоится (будущее от haber) — <i>Habrá una derrama.</i>
+      </div>
+
+      <div class="formula">💡 Обведи верную форму:</div>
+
+      1. ___ pagar las cuotas antes del día 5. А) Se debe · Б) Se debes <span class="ru-sub">(нужно платить до 5 числа)</span><br>
+      2. ___ aparcar en la entrada del portal. А) No se puede · Б) No se pueden <span class="ru-sub">(нельзя парковаться в подъезде)</span><br>
+      3. ___ leer la convocatoria antes de la junta. А) Es necesario · Б) Es necesaria <span class="ru-sub">(необходимо прочитать)</span><br>
+      4. ___ votar todos los acuerdos. А) Hay que · Б) Hay ques <span class="ru-sub">(надо голосовать)</span><br>
+      5. ¿___ una derrama el año que viene? А) Habrá · Б) Habran <span class="ru-sub">(будет / состоится разовый сбор?)</span><br>
+      6. ___ respetar el silencio en el edificio. А) Se deber · Б) Se debe <span class="ru-sub">(следует уважать тишину)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА + ПРАКТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: безличные конструкции + futuro receptivo</h2>
+        <div class="tag">таблица + впиши конструкцию</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> <b>hay que / se debe / no se puede</b> — правила дома; <b>habrá / se tratará / se aprobará</b> — будущие события собрания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Конструкция</th>
+          <th>Смысл</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">hay que + инфинитив</td><td class="practice">надо (всем, безлично)</td><td class="practice">Hay que votar los acuerdos.</td></tr>
+        <tr><td class="practice">se debe + инфинитив</td><td class="practice">следует (чуть формальнее)</td><td class="practice">Se debe pagar antes del día 5.</td></tr>
+        <tr><td class="practice">no se puede + инфинитив</td><td class="practice">нельзя (запрет)</td><td class="practice">No se puede aparcar en la entrada.</td></tr>
+        <tr><td class="reference">es necesario + инфинитив</td><td class="reference">необходимо</td><td class="reference">Es necesario leer la convocatoria.</td></tr>
+        <tr><td class="practice">habrá + существительное</td><td class="practice">будет / состоится</td><td class="practice">Habrá una derrama de novecientos euros.</td></tr>
+        <tr><td class="reference">se tratará el tema de...</td><td class="reference">будет обсуждаться тема...</td><td class="reference">Se tratará el tema de la piscina.</td></tr>
+        <tr><td class="reference">se aprobará / se votará</td><td class="reference">будет утверждено / проголосовано</td><td class="reference">Se aprobará el presupuesto.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши конструкцию:</div>
+
+      1. ___ respetar el silencio por la noche. <span class="ru-sub">(надо — для всех, безлично)</span> → <span class="wline short"></span><br>
+      2. ___ votar los acuerdos de la junta. <span class="ru-sub">(необходимо голосовать)</span> → <span class="wline short"></span><br>
+      3. ___ una reunión el martes día 12. <span class="ru-sub">(будет / состоится)</span> → <span class="wline short"></span><br>
+      4. En la junta se ___ el tema de la azotea. <span class="ru-sub">(будет обсуждаться)</span> → <span class="wline short"></span><br>
+      5. Los vecinos ___ el ascensor nuevo. <span class="ru-sub">(утверждают)</span> → <span class="wline short"></span><br>
+      6. ___ aparcar delante del garaje. <span class="ru-sub">(нельзя парковаться)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: la junta de propietarios в Испании</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La junta de propietarios — как это устроено</h4>
+        <p>En España cada edificio forma una <b>comunidad de propietarios</b> — домовладение (комьюнити). Los vecinos toman decisiones juntos en la <b>junta de propietarios</b>: la dirige el <b>presidente</b> y la organiza el <b>administrador</b> (управляющий). La <b>convocatoria</b> llega al portal y por correo: incluye el <b>orden del día</b> (повестка дня), el día y la hora. Sin convocatoria no hay junta.</p>
+
+        <h4>Derramas y presupuesto</h4>
+        <p>Las <b>cuotas</b> (взносы) pagan los <b>gastos comunes</b> (общие расходы): el portal, el ascensor, la piscina. Para una obra grande — el <b>ascensor nuevo</b> (новый лифт) o la <b>reforma</b> (ремонт) de la azotea — hay una <b>derrama</b>: un pago extra. El <b>presupuesto</b> (смета) se aprueba cada año: si la mayoría (большинство) dice sí, se aprueba; si no, se puede <b>rechazar</b> (отклонять).</p>
+
+        <h4>El acta y los acuerdos</h4>
+        <p>De cada junta se levanta el <b>acta</b>: allí quedan los <b>acuerdos</b> (решения) y la <b>votación</b> (голосование): «¿Alguien a favor?... En contra... Se aprueba». Es necesario votar (необходимо голосовать) cada acuerdo importante; cada propietario vota según sus cuotas, por eso hay que llegar con las cuentas al día.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Quién dirige la junta y quién la organiza?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué incluye la convocatoria?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pagan las cuotas y cuándo existe una derrama?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué hay en el acta de la junta?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист «Перед собранием жильцов»</h4>
+        <div class="item"><div class="box"></div><div>Найти уведомление о собрании и прочитать повестку дня</div></div>
+        <div class="item"><div class="box"></div><div>Проверить, что взносы уплачены до даты собрания</div></div>
+        <div class="item"><div class="box"></div><div>Посчитать голоса вашей квартиры (они зависят от площади)</div></div>
+        <div class="item"><div class="box"></div><div>Решить заранее: что поддержите, а что отклоните</div></div>
+        <div class="item"><div class="box"></div><div>Подготовить 1–2 своих предложения (yo propongo...)</div></div>
+        <div class="item"><div class="box"></div><div>Перечитать прошлогодний протокол: что уже решили</div></div>
+        <div class="item"><div class="box"></div><div>После собрания запросить протокол с решениями</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: junta ordinaria</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Buenas tardes. Se abre la junta de propietarios del edificio Arenales 12. ¿Estamos todos? — Perdone, ¿cuándo es la junta? (когда собрание?) Me enteré ayer. — Hoy, no se preocupe. Primero: se lee el acta de la reunión anterior. ¿Alguien a favor? (кто за?) — A favor, todos. — Segundo: se tratará el tema del ascensor nuevo. — ¿Otra vez el ascensor? ¡Si funciona! — El administrador explica: la reforma es urgente, sin ella no hay certificado. — ¿Y cuánto cuesta? — Habrá una derrama de novecientos euros por vivienda. — ¡Madre mía! — Yo propongo (я предлагаю) pagar en dos partes: enero y julio. — Buena idea. ¿Alguien a favor? — A favor. — ¿Y en contra? (против) — En contra, nadie. — Pues se aprueba y se anota en el acta. — Última votación: el presupuesto del año que viene. — Aprobado, gracias. — Se cierra la junta. ¡Hasta la próxima!»
+      </div>
+      1. ¿Qué se lee al principio de la junta? <span class="ru-sub">(что читают первым делом?)</span>
+      <span class="wline xlong"></span><br>
+      2. ¿Qué tema se tratará? <span class="ru-sub">(какая тема?)</span>
+      <span class="wline xlong"></span><br>
+      3. ¿Cuánto es la derrama? <span class="ru-sub">(сколько?)</span>
+      <span class="wline xlong"></span><br>
+      4. ¿Qué propone un vecino para pagarla? <span class="ru-sub">(что предлагает сосед?)</span>
+      <span class="wline xlong"></span><br>
+      5. ¿Quiénes votan en contra? <span class="ru-sub">(кто голосует против?)</span>
+      <span class="wline xlong"></span><br>
+      6. ¿Qué se aprueba al final? <span class="ru-sub">(что утверждается в конце?)</span>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: на собрании и в лифте</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Спросить соседа, когда собрание.<br>
+        <div class="tmpl">«Perdone, ¿cuándo es la junta?»</div>
+        <div class="tmpl-ru">(Простите, когда собрание?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Сообщить новость о собрании.<br>
+        <div class="tmpl">«Habrá una reunión el martes a las siete, en el portal.»</div>
+        <div class="tmpl-ru">(Будет собрание во вторник в семь, в подъезде.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Предложить свою идею.<br>
+        <div class="tmpl">«Yo propongo pagar la derrama en dos partes.»</div>
+        <div class="tmpl-ru">(Я предлагаю платить разовый сбор двумя частями.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Голосование: вы не согласны.<br>
+        <div class="tmpl">«¿Alguien a favor? … Yo estoy en contra: es muy caro.»</div>
+        <div class="tmpl-ru">(Кто за? … Я против: это слишком дорого.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Спросить про деньги дома.<br>
+        <div class="tmpl">«Las cuotas son muy altas este año. ¿Cuánto es el presupuesto?»</div>
+        <div class="tmpl-ru">(Взносы в этом году очень высокие. Сколько смета?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: carta al administrador</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и цель (Estimado administrador: escribo por la junta del martes…).<br>
+        3. Вопрос по повестке (¿Se tratará el tema de...? …).<br>
+        4. Ваше предложение (Yo propongo...).<br>
+        5. Вопрос про деньги (¿Habrá una derrama? ¿Cuánto?).<br>
+        6. Напомнить про взносы (Las cuotas están pagadas hasta...).<br>
+        7. Просьба прислать протокол после собрания (el acta).<br>
+        8. Прощание (Muchas gracias, un saludo).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть органы дома: presidente, administrador, acta</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Читать convocatoria: orden del día, habrá</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить о правилах: hay que, se debe, no se puede</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Деньги дома: cuotas, derrama, presupuesto</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Голосовать: a favor, en contra, se aprueba</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Выступить на junta со своим мнением</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 17.2: Правила общежития</h2>
+        <div class="tag">мнение: creo que, me parece + запреты</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете читать convocatoria и говорить о правилах: <i>hay que, se debe, no se puede</i>. На следующем уроке (17.2) — <b>las normas de la comunidad</b>: часы тишины, общие зоны и вежливое мнение — <i>creo que, me parece bien / mal</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

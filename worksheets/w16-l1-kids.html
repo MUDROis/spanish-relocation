@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 46 · Pesos y medidas — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>⚖️ Pesos y medidas</h1>
+    <div class="sub">Рабочий лист к Уроку 46 · Станция 5: ¡A Comer! · вес, цена и глагол costar</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Сегодня — рынок! Взвешиваем un kilo, medio kilo и считаем euros y céntimos. Не бойся спрашивать у продавца: это совершенно нормально. ¡A comprar!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · вес и цена</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>⚖️ el kilo</td><td>а) грамм</td></tr>
+      <tr><td><span class="ans-box"></span>⚖️ medio kilo</td><td>б) Сколько стоит?</td></tr>
+      <tr><td><span class="ans-box"></span>🤏 el gramo</td><td>в) деньги</td></tr>
+      <tr><td><span class="ans-box"></span>🥛 el litro</td><td>г) пол-литра</td></tr>
+      <tr><td><span class="ans-box"></span>🧴 medio litro</td><td>д) килограмм</td></tr>
+      <tr><td><span class="ans-box"></span>🥖 la barra de pan</td><td>е) цент</td></tr>
+      <tr><td><span class="ans-box"></span>🪙 el céntimo</td><td>ж) полкило</td></tr>
+      <tr><td><span class="ans-box"></span>💰 el dinero</td><td>з) буханка хлеба</td></tr>
+      <tr><td><span class="ans-box"></span>❓ ¿Cuánto cuesta?</td><td>и) почём килограмм?</td></tr>
+      <tr><td><span class="ans-box"></span>💬 ¿a cuánto está el kilo?</td><td>к) литр</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Угадай слово по описанию</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>el kilo · el gramo · el litro · la loncha · el dinero · el céntimo</strong></div>
+    <div class="ex-instruction">Подсказка: medio kilo — полкило · la loncha — ломтик.</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">⚖️</span> 1000 gramos. ¡Es mucho peso! → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🤏</span> Es muy pequeño: 1000 de estos = un kilo. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🥛</span> Es para la leche y el agua. Medio = medio litro. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">🥓</span> Es un trozo de jamón o de queso. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">💰</span> Euros y céntimos: lo pagas en el mercado. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🪙</span> 100 de estos = un euro. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ПРОПУСКИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь слово: cuesta / cuestan</span>
+      <span class="ex-skill">🧩 Грамматика · COSTAR</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило (COSTAR: o → ue):</strong> одна вещь → <b>cuesta</b> = стоит · много вещей → <b>cuestan</b> = стоят (мн.) · <b>costar</b> = стоить · <b>¿a cuánto está el kilo?</b> = почём килограмм? · <b>a dos euros</b> = по два евро.<br><strong>Фразы у прилавка:</strong> dos euros con cincuenta = два евро пятьдесят · es caro / barato = дорого / дёшево · me llevo dos = я возьму два · póngame medio kilo = взвесьте мне полкило · nada más = больше ничего · aquí tiene = вот, пожалуйста.</div>
+    <div class="word-bank">Банк слов: <strong>cuesta · cuestan · A cuánto está · Póngame</strong></div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>¿Cuánto <span class="g"></span> el kilo de manzanas?</div>
+      <div class="gap-item"><span class="num">2</span>¿Cuánto <span class="g"></span> los tomates?</div>
+      <div class="gap-item"><span class="num">3</span>El pan <span class="g"></span> un euro.</div>
+      <div class="gap-item"><span class="num">4</span>Los macarrones <span class="g"></span> dos euros.</div>
+      <div class="gap-item"><span class="num">5</span>¿<span class="g"></span> el kilo? — A dos euros.</div>
+      <div class="gap-item"><span class="num">6</span><span class="g"></span> medio kilo, por favor.</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу у прилавка</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Слова перепутаны. Расставь их в правильном порядке и запиши готовую фразу на линии.<br>Образцы: ¿Cuánto cuesta? — Сколько стоит? · aquí tiene — вот, пожалуйста · ¡Es barato! — Дёшево!</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">kilo?</span><span class="build-word">el</span><span class="build-word">cuesta</span><span class="build-word">¿Cuánto</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">con</span><span class="build-word">Cuesta</span><span class="build-word">cincuenta.</span><span class="build-word">euros</span><span class="build-word">dos</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">dos</span><span class="build-word">llevo</span><span class="build-word">Me</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Nada</span><span class="build-word">gracias.</span><span class="build-word">más,</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЛОГИКА: ПРАВДА / НЕПРАВДА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Правда или неправда?</span>
+      <span class="ex-skill">🔢 Логика · CLIL</span>
+    </div>
+    <div class="ex-instruction">Поставь галочку в нужную коробочку: ✓ — правда, ✗ — неправда.</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Un kilo son 1000 gramos. → <span class="ans-box"></span>✓ <span class="ans-box"></span>✗</div>
+      <div class="gap-item"><span class="num">2</span>Medio kilo son 500 gramos. → <span class="ans-box"></span>✓ <span class="ans-box"></span>✗</div>
+      <div class="gap-item"><span class="num">3</span>La loncha es una fruta. → <span class="ans-box"></span>✓ <span class="ans-box"></span>✗</div>
+      <div class="gap-item"><span class="num">4</span>El litro es para la leche y el agua. → <span class="ans-box"></span>✓ <span class="ans-box"></span>✗</div>
+      <div class="gap-item"><span class="num">5</span>Un euro son 100 céntimos. → <span class="ans-box"></span>✓ <span class="ans-box"></span>✗</div>
+      <div class="gap-item"><span class="num">6</span>La barra de pan cuesta cien litros. → <span class="ans-box"></span>✓ <span class="ans-box"></span>✗</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Люсия на рынке» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Lucía. Hoy voy al mercado con mi papá. Compramos la comida para la semana. Primero, la fruta: «¿A cuánto está el kilo de manzanas? — A dos euros. — Póngame medio kilo, por favor». Después, el pan: una barra de pan. También compro queso: «Póngame tres lonchas, por favor». El queso cuesta dos euros con cincuenta. Los tomates cuestan un euro. Papá pregunta: «¿Cuánto es todo?» — «Son seis euros». Papá dice: «Aquí tiene». Yo llevo el dinero. ¡Me gusta el mercado!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Adónde van Lucía y su papá? <span class="ru">(Куда идут Люсия и её папа?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Cuánto cuesta el kilo de manzanas? <span class="ru">(Сколько стоит килограмм яблок?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Qué compra después de la fruta? <span class="ru">(Что она покупает после фруктов?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Cuánto cuesta el queso? <span class="ru">(Сколько стоит сыр?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Quién lleva el dinero? <span class="ru">(Кто несёт деньги?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Сочинение «Mi compra en el mercado»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! Voy al mercado con... · 2) Compramos... (fruta / pan / queso) · 3) «¿A cuánto está el kilo?» · 4) «Póngame medio kilo, por favor». · 5) El queso cuesta... / Los tomates cuestan... · 6) «¿Cuánto es todo?» — «Son... euros». · 7) «Aquí tiene». · 8) ¡Me gusta el mercado!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть вес и объём: kilo, medio kilo, gramo, litro</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Спрашивать цену: ¿Cuánto cuesta? / ¿A cuánto está?</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Выбирать cuesta (ед.ч.) или cuestan (мн.ч.)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Просить: póngame medio kilo, por favor</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать цены: euros, céntimos, coma (1,20 €)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Вести диалог покупки от приветствия до «aquí tiene»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 5: ¡A Comer! · Урок 46 · ¡A comprar! ⚖️</div>
+</div>
+
+</body>
+</html>

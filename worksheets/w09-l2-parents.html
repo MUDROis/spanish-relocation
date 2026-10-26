@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 9.2 · Испанская аптека — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'💊'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>💊 Рабочий лист · Урок 9.2 «Испанская аптека»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Аптека: лекарства и просьбы · tener + симптом, estar + состояние, ¿Puede...? / Me pone...?</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>💊 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la farmacia</div>
+          <div class="item">2. la receta electrónica</div>
+          <div class="item">3. sin receta</div>
+          <div class="item">4. el jarabe</div>
+          <div class="item">5. las pastillas</div>
+          <div class="item">6. el prospecto</div>
+          <div class="item">7. cada 8 horas</div>
+          <div class="item">8. ¿cuánto cuesta?</div>
+        </div>
+        <div class="col">
+          <div class="item">а) сколько стоит?</div>
+          <div class="item">б) сироп</div>
+          <div class="item">в) без рецепта</div>
+          <div class="item">г) инструкция к лекарству</div>
+          <div class="item">д) аптека</div>
+          <div class="item">е) каждые 8 часов</div>
+          <div class="item">ж) таблетки</div>
+          <div class="item">з) электронный рецепт</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ДВЕ КОРЗИНЫ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🧺 Раздели слова на 2 корзины</h2>
+        <div class="tag">впиши номера слов (1–12) в нужную корзину</div>
+      </div>
+    </div>
+    <div class="card">
+      1. la pomada &nbsp;·&nbsp; 2. el parche / la tirita &nbsp;·&nbsp; 3. el espray &nbsp;·&nbsp; 4. la crema solar &nbsp;·&nbsp; 5. el supositorio &nbsp;·&nbsp; 6. la gasa<br>
+      7. el jarabe &nbsp;·&nbsp; 8. el gel hidroalcohólico &nbsp;·&nbsp; 9. las gotas &nbsp;·&nbsp; 10. el termómetro &nbsp;·&nbsp; 11. las pastillas &nbsp;·&nbsp; 12. el suero oral
+      <div class="match" style="margin-top:2.5mm">
+        <div class="col">
+          <div class="item" style="background:#F0F7E6"><b>🧴 Корзина A: формы лекарств</b></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+        </div>
+        <div class="col">
+          <div class="item" style="background:#FFF7E0"><b>🩹 Корзина B: аптечка — полезные мелочи</b></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+          <div class="item">№ <span class="wline short"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ИСПРАВЬ ОШИБКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🩹 Грамматика: tener, estar и просьбы</h2>
+        <div class="tag">шпаргалка + исправь ошибки</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>tener + симптом</b>: tiene fiebre / tos / mocos · no le baja la fiebre<br>
+        • <b>estar + состояние</b>: está enfermo, está mejor hoy, está peor<br>
+        • <b>Просьбы</b>: ¿Tiene algo para...? · ¿Qué me recomienda? · ¿Puede darme...? · ¿Me pone...?<br>
+        • <b>Инструкции</b>: cada 8 horas, después de las comidas, antes de dormir, con comida, agitar antes de usar<br>
+        • <b>para</b> = «от / для»: para la tos, para el niño, para dormir · Проверьте: ¿tiene algo sin azúcar?
+      </div>
+
+      <div class="formula">💡 В каждом предложении есть ошибка. Исправь и запиши верно:</div>
+
+      1. Necesito algo de la tos. <span class="ru-sub">(подсказка: para, не de)</span><br>
+      → <span class="wline xlong"></span><br>
+      2. Me pone dar dos cajas, por favor. <span class="ru-sub">(подсказка: после me pone — просто существительное)</span><br>
+      → <span class="wline xlong"></span><br>
+      3. El jarabe es cada ocho horas de tiempo. <span class="ru-sub">(подсказка: без лишних слов)</span><br>
+      → <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ДОПОЛНИ ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>💬 Грамматика: формулы просьбы — дополни диалог</h2>
+        <div class="tag">таблица + впиши пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="grammar-ref">
+        <tr>
+          <th>Формула</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">¿Tiene algo para...?</td><td class="practice">¿Tiene algo para la tos? — Есть что-то от кашля?</td></tr>
+        <tr><td class="practice">¿Qué me recomienda?</td><td class="practice">¿Qué me recomienda para el niño?</td></tr>
+        <tr><td class="practice">¿Puede darme...?</td><td class="practice">¿Puede darme dos cajas, por favor?</td></tr>
+        <tr><td class="practice">¿Me pone...?</td><td class="practice">¿Me pone un termómetro digital?</td></tr>
+        <tr><td class="reference">Necesito algo para...</td><td class="reference">Necesito algo para el dolor de cabeza.</td></tr>
+      </table>
+
+      <div class="formula">💡 Дополни реплики диалога:</div>
+
+      — Buenos días. ¿Tiene ___ para la tos? <span class="ru-sub">(что-то)</span> → <span class="wline short"></span><br>
+      — Buenos días. ¿Es para usted o para el niño?<br>
+      — Es ___ mi hijo, tiene cuatro años. <span class="ru-sub">(для)</span> → <span class="wline short"></span><br>
+      — Vale. ¿Tos seca o con flema?<br>
+      — Seca, por la noche. ¿Qué ___ recomienda? <span class="ru-sub">(мне)</span> → <span class="wline short"></span><br>
+      — Este jarabe. ¿Cuál es la ___? <span class="ru-sub">(дозировка)</span> → <span class="wline short"></span><br>
+      — Una dosis cada ocho horas, después de las comidas. El tratamiento dura cinco días.<br>
+      — Vale. ¿___ cuesta? <span class="ru-sub">(сколько)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: la farmacia en España</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La cruz verde</h4>
+        <p>La farmacia en España tiene una cruz verde brillante. En el mostrador atiende el farmacéutico / la farmacéutica: es un profesional con título universitario. Para muchos problemas pequeños no hace falta ir al médico: si no sabe qué pedir, diga «necesito algo para...» y le ayudan.</p>
+
+        <h4>La receta electrónica</h4>
+        <p>En España la receta electrónica ya está en la tarjeta sanitaria. En la farmacia, con el SIP, el farmacéutico ve el medicamento que toma el niño. Cada medicamento viene en la caja con el prospecto: léalo en casa.</p>
+
+        <h4>La farmacia de guardia</h4>
+        <p>Cada noche y cada fin de semana hay una farmacia de guardia abierta. La lista está en la puerta de cada farmacia. Sin receta hay muchos productos básicos: el gel hidroalcohólico, la crema solar, el antimosquitos y la sobreína / el sobre para la hidratación del niño.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué significa la cruz verde?
+      <span class="wline xlong"></span><br>
+      2. ¿Dónde está la receta electrónica?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué ve el farmacéutico con el SIP?
+      <span class="wline xlong"></span><br>
+      4. ¿Dónde está la lista de la farmacia de guardia?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: визит в аптеку</h4>
+        <div class="item"><div class="box"></div><div>Назвать, для кого: es para mi hijo, tiene N años</div></div>
+        <div class="item"><div class="box"></div><div>Симптом: no me baja la fiebre, tiene tos</div></div>
+        <div class="item"><div class="box"></div><div>Сказать про аллергию: tiene alergia a la penicilina</div></div>
+        <div class="item"><div class="box"></div><div>Попросить совет: ¿Qué me recomienda?</div></div>
+        <div class="item"><div class="box"></div><div>Уточнить дозу (la dosis): cada 8 horas, con comida</div></div>
+        <div class="item"><div class="box"></div><div>Спросить цену: ¿cuánto cuesta?</div></div>
+        <div class="item"><div class="box"></div><div>Если закрыто: ¿hay farmacia de guardia?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: полный визит в аптеку</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Buenos días. — Buenos días. ¿Tiene algo para la tos? Es para mi hijo, tiene cuatro años. — ¿Tos seca o con flema? — Seca, por la noche. — ¿Tiene receta electrónica o buscamos algo sin receta? — El pediatra no recetó nada. Buscamos sin receta. — Entonces este jarabe. ¿Tiene algo sin azúcar? — Sí, este jarabe es sin azúcar. — Perfecto. ¿Cuál es la dosis? — Una dosis cada ocho horas, después de las comidas. El tratamiento dura cinco días. — ¿Y para los mocos? ¿Tiene gotas? — Sí, estas gotas. Agitar antes de usar. — Vale, dos cosas. ¿Puede darme también tiritas? — Sí, el paquete está aquí. Son nueve euros, todo. — Gracias, adiós.»
+      </div>
+      1. ¿Para quién busca la madre un jarabe?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué tipo de tos tiene el niño?
+      <span class="wline xlong"></span><br>
+      3. ¿El jarabe tiene azúcar?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuál es la dosis y cuánto dura el tratamiento?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué más pide la madre, además del jarabe?
+      <span class="wline xlong"></span><br>
+      6. ¿Cuánto cuesta todo?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации в аптеке</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы приходите и просите что-то от кашля для ребёнка.<br>
+        <div class="tmpl">«¿Tiene algo para la tos? Es para mi hijo.»</div>
+        <div class="tmpl-ru">(Есть что-то от кашля? Это для моего сына.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы говорите, что температура не спадает.<br>
+        <div class="tmpl">«No me baja la fiebre. No le baja la fiebre desde ayer.»</div>
+        <div class="tmpl-ru">(У меня температура не спадает. У него не спадает со вчера.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы просите совет для ребёнка.<br>
+        <div class="tmpl">«¿Qué me recomienda para el niño? Tiene tres años.»</div>
+        <div class="tmpl-ru">(Что вы посоветуете для ребёнка? Ему три года.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы просите две упаковки и термометр.<br>
+        <div class="tmpl">«¿Puede darme dos cajas? Y ¿me pone un termómetro digital?»</div>
+        <div class="tmpl-ru">(Дайте две упаковки, пожалуйста. И цифровой термометр?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Аптека закрыта, вы спрашиваете про дежурную.<br>
+        <div class="tmpl">«¿Hay farmacia de guardia hoy? ¿Dónde está?»</div>
+        <div class="tmpl-ru">(Есть сегодня дежурная аптека? Где она?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: диалог с фармацевтом — продукт урока</h2>
+        <div class="tag">6–8 реплик по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и цель (Buenos días. ¿Tiene algo para...? Es para mi hijo.).<br>
+        3. Возраст и симптом (Tiene cuatro años. Tiene tos seca por la noche.).<br>
+        4. Аллергия — важно сказать (No tiene alergia a la penicilina.).<br>
+        5. Просьба о совете (¿Qué me recomienda? ¿Tiene algo sin azúcar?).<br>
+        6. Инструкция фармацевта (Una dosis cada 8 horas, después de las comidas.).<br>
+        7. Цена и решение (¿Cuánto cuesta? Vale, me lo pone.).<br>
+        8. Прощание (Muchas gracias. Adiós.).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>la caja</b> — коробочка / упаковка · <b>la pomada</b> — мазь · <b>las gotas</b> — капли · <b>el espray</b> — спрей · <b>el supositorio</b> — свеча · <b>la sobreína / el sobre</b> — пакетик (порошок) · <b>después de las comidas</b> — после еды · <b>antes de dormir</b> — перед сном · <b>con comida</b> — с едой · <b>agitar antes de usar</b> — взболтать перед употреблением · <b>el tratamiento</b> — курс лечения · <b>¿Qué me recomienda?</b> — Что вы посоветуете? · <b>necesito algo para</b> — мне нужно что-то от · <b>¿tiene algo sin azúcar?</b> — есть что-то без сахара? · <b>¿hay farmacia de guardia?</b> — есть дежурная аптека? · <b>el parche / la tirita</b> — пластырь · <b>la gasa</b> — марля · <b>el suero oral</b> — регидратационный раствор · <b>el gel hidroalcohólico</b> — антисептик · <b>la crema solar</b> — солнцезащитный крем · <b>el antimosquitos</b> — средство от комаров
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Просить лекарство: ¿Tiene algo para...?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Объяснять, для кого: es para mi hijo, tiene N años</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описывать симптомы: no le baja la fiebre, tos seca</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать инструкцию: cada 8 horas, con comida, antes de dormir</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Спрашивать цену и платить: ¿cuánto es?, ¿cuánto cuesta?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Провести диалог с фармацевтом от начала до конца (продукт)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 9.3: Urgencias и звонок в 112</h2>
+        <div class="tag">императив + se ha caído / se ha roto</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете купить лекарство и понять инструкцию. На следующем уроке (9.3) — экстренный испанский: звонок в 112, короткие команды <i>¡Espere! / ¡Venga!</i> и фразы <i>se ha caído, se ha roto</i> — на случай, если случилось что-то серьёзное.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 56 · Mañana voy a... — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" id="printBtn">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>📅 Mañana voy a...</h1>
+    <div class="sub">Рабочий лист к Уроку 56 · Станция 6: Mi Ciudad · планы на завтра и неделю: ir a + инфинитив</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ ¡Hola! Магия планов: voy a + глагол — «я буду...». Расскажи, что будешь делать завтра и на неделе, и спроси друга: «¿Qué vas a hacer mañana?». ¡Qué buen plan! 📅</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини план и перевод</span>
+      <span class="ex-skill">🗣 Лексика · planes</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>📅 mañana voy a...</td><td>з) завтра я собираюсь...</td></tr>
+      <tr><td><span class="ans-box"></span>🎲 voy a jugar</td><td>в) я буду играть</td></tr>
+      <tr><td><span class="ans-box"></span>📚 voy a estudiar</td><td>к) я буду учиться</td></tr>
+      <tr><td><span class="ans-box"></span>👫 vamos a ir</td><td>а) мы пойдём</td></tr>
+      <tr><td><span class="ans-box"></span>🌧️ va a llover</td><td>е) будет дождь</td></tr>
+      <tr><td><span class="ans-box"></span>🌳 ir al parque</td><td>б) идти в парк</td></tr>
+      <tr><td><span class="ans-box"></span>⚽ jugar al fútbol</td><td>и) играть в футбол</td></tr>
+      <tr><td><span class="ans-box"></span>✏️ hacer los deberes</td><td>г) делать уроки</td></tr>
+      <tr><td><span class="ans-box"></span>👴 visitar a los abuelos</td><td>д) навестить бабушку и дедушку</td></tr>
+      <tr><td><span class="ans-box"></span>🛋️ descansar</td><td>ж) отдыхать</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ДЕЛО ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Угадай дело по описанию</span>
+      <span class="ex-skill">🗣 Лексика · planes</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>ir al parque · ir al cole · jugar al fútbol · hacer los deberes · visitar a los abuelos · descansar</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🌳</span> Cojo la bici y juego con mis amigos entre los árboles. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🎒</span> Por la mañana cojo la mochila y voy a clase. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">⚽</span> Pateo el balón en el campo con mi equipo. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">✏️</span> Abro los libros y escribo los ejercicios en mi cuarto. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">👴</span> El domingo estoy en la casa de mis abuelos: ¡los abrazo! → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🛋️</span> No hago nada: estoy en el sofá con mi manta. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ВСТАВЬ VOY / VA / VAMOS -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Планы: вставь voy / va / vamos</span>
+      <span class="ex-skill">🧩 Грамматика · ir a</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> план = voy a + глагол: <em>voy a jugar</em> (я буду играть) · <em>vas a...</em> (ты будешь...) · <em>va a...</em> (он/она будет...) · <em>vamos a...</em> (мы пойдём...) · <em>va a llover</em> (будет дождь).<br><strong>Словарик планов:</strong> ir a casa de mi amigo — идти к другу · ir al cole — идти в школу · el lunes voy a... — в понедельник я... · el fin de semana vamos a... — на выходных мы... · primero... luego... — сначала... потом... · después voy a... — потом я... · ¿Adónde vas? — Куда ты идёшь? · ¿A qué hora? — Во сколько? · ¡qué buen plan! — какой хороший план!</div>
+    <div class="ex-instruction">Вставь voy, va или vamos.</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Mañana <span class="g"></span> a jugar al fútbol con Pablo.</div>
+      <div class="gap-item"><span class="num">2</span>Mi hermana <span class="g"></span> a estudiar francés.</div>
+      <div class="gap-item"><span class="num">3</span><span class="g"></span> a ir al parque todos juntos.</div>
+      <div class="gap-item"><span class="num">4</span>Mamá dice: mañana <span class="g"></span> a llover.</div>
+      <div class="gap-item"><span class="num">5</span>El lunes <span class="g"></span> a hacer los deberes.</div>
+      <div class="gap-item"><span class="num">6</span>El fin de semana <span class="g"></span> a visitar a los abuelos.</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: ДОПОЛНИ ДИАЛОГ О ПЛАНАХ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Дополни диалог «Планы на завтра»</span>
+      <span class="ex-skill">💬 Диалог · planes</span>
+    </div>
+    <div class="hint-box">💡 <strong>Шпаргалка:</strong> ¿Qué vas a hacer mañana? — Что ты будешь делать завтра? · ¿Vamos juntos? — Пойдём вместе? · vamos a ir — мы пойдём · primero... luego... — сначала... потом...</div>
+    <div class="word-bank">💡 Банк слов: <strong>¿Qué vas a hacer mañana? · después voy a... · ¿Vamos juntos? · ¿A qué hora? · vamos a ir · ¡qué buen plan!</strong></div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>— ¡Hola, Pablo! <span class="g"></span> — Mañana voy a jugar al fútbol.</div>
+      <div class="gap-item"><span class="num">2</span>— ¡Qué bien! ¿Y luego? — <span class="g"></span> hacer los deberes.</div>
+      <div class="gap-item"><span class="num">3</span>— <span class="g"></span> — ¡Sí! Vamos al parque.</div>
+      <div class="gap-item"><span class="num">4</span>— <span class="g"></span> — A las cinco, en la parada del autobús.</div>
+      <div class="gap-item"><span class="num">5</span>— ¿Y el domingo? — El fin de semana <span class="g"></span> a la playa.</div>
+      <div class="gap-item"><span class="num">6</span>— ¡<span class="g"></span>! ¡Hasta mañana!</div>
+    </div>
+  </div>
+
+  <!-- 5. ПОРЯДОК: ДЕНЬ ПО ПЛАНУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">День по плану: расставь по порядку</span>
+      <span class="ex-skill">🔢 Логика · agenda</span>
+    </div>
+    <div class="ex-instruction">Пронумеруй дела дня от 1 до 6 (впиши цифру в квадратик перед делом).</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">⚽</span> Voy a jugar al fútbol en el parque.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🌙</span> Descanso y leo un libro.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🍽️</span> Ceno con mi familia a las nueve.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🎒</span> Voy al cole por la mañana.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🛎️</span> Me despierto a las ocho.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">✏️</span> Hago los deberes después del cole.</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Los planes de Lucía» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Lucía. ¿Qué vas a hacer mañana? Yo ya tengo un plan. Mañana voy a estudiar: tengo matemáticas. Después voy a jugar al fútbol con mi amiga Ana. Por la tarde, vamos a ir al parque: primero jugamos, luego descansamos un poco. Mi mamá dice: «Mañana va a llover». ¡No pasa nada! Si llueve, jugamos en casa. El fin de semana vamos a visitar a los abuelos. Voy a ayudar en la cocina y voy a descansar. ¡Qué buen plan!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Qué va a hacer Lucía por la mañana? <span class="ru">(Что Люсия будет делать утром?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Con quién va a jugar al fútbol? <span class="ru">(С кем она будет играть в футбол?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Adónde van por la tarde? <span class="ru">(Куда они пойдут днём?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué dice mamá del tiempo? <span class="ru">(Что мама говорит о погоде?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Qué van a hacer el fin de semana? <span class="ru">(Что они будут делать на выходных?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Сочинение «Mis planes para la semana»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! ¿Qué voy a hacer esta semana? · 2) El lunes voy a... · 3) El martes voy a ir al... · 4) El miércoles voy a jugar... / voy a estudiar... · 5) Después voy a... · 6) El sábado, vamos a ir a... · 7) El fin de semana vamos a... · 8) ¡Qué buen plan!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Говорить о будущем: voy a + инфинитив</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Спросить: ¿Qué vas a hacer mañana?</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Планировать неделю: el lunes voy a...</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить за всех: vamos a... / van a...</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать текст об агенде испанских детей</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать свои планы по формуле 6 пунктов</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 6: Mi Ciudad · Урок 56 · ¡Qué buen plan! 📅</div>
+</div>
+
+<script>
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+</script>
+
+</body>
+</html>

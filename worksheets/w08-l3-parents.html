@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 8.3 · Логистика недели — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🚗'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🚗 Рабочий лист · Урок 8.3 «Логистика недели»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Кто отвозит и кто забирает, el horario de la semana · primero / antes de / después de / luego</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🚗 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. llevar</div>
+          <div class="item">2. recoger</div>
+          <div class="item">3. la parada</div>
+          <div class="item">4. la salida</div>
+          <div class="item">5. primero</div>
+          <div class="item">6. después de</div>
+          <div class="item">7. el entrenamiento</div>
+          <div class="item">8. entre semana</div>
+        </div>
+        <div class="col">
+          <div class="item">а) после</div>
+          <div class="item">б) тренировка</div>
+          <div class="item">в) забирать</div>
+          <div class="item">г) выход / окончание занятий</div>
+          <div class="item">д) сначала</div>
+          <div class="item">е) остановка</div>
+          <div class="item">ж) в будние дни</div>
+          <div class="item">з) отвозить</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🗺️ Впиши слово по описанию</h2>
+        <div class="tag">маршрут и школьный день</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Дедушка идёт вместе с ребёнком в класс в первый день. → <span class="wline long"></span><br>
+      2. Место на улице, где ждут автобус или папу после уроков. → <span class="wline long"></span><br>
+      3. Момент, когда уроки закончились и дети выходят из школы. → <span class="wline long"></span><br>
+      4. Первое действие в цепочке дня: «сначала». → <span class="wline long"></span><br>
+      5. Футбол, плавание или английский после уроков. → <span class="wline long"></span><br>
+      6. Суббота и воскресенье, когда можно спать долго. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ПОСЛЕДОВАТЕЛЬНОСТЬ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>⏭️ Грамматика: слова-мосты недели</h2>
+        <div class="tag">шпаргалка + заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>primero</b> — первое действие цепочки — <i>Primero desayunamos.</i><br>
+        • <b>antes de</b> + сущ. / инфинитив — до / перед — <i>Salimos antes de las ocho.</i><br>
+        • <b>después de</b> + сущ. / инфинитив — после — <i>Después de clase hay entrenamiento.</i><br>
+        • <b>luego</b> — потом — <i>Luego vamos al parque.</i><br>
+        • <b>más tarde</b> — позже — <i>Más tarde recogemos a María.</i><br>
+        • <b>en cuanto</b> — как только — <i>En cuanto salga, te llamo.</i><br>
+        • <b>al final</b> — в конце — <i>Al final del día, todos en casa.</i><br>
+        Глаголы движения (с личным <b>a</b>!): <b>llevar</b> (отвозить), <b>recoger</b> (забирать), <b>dejar</b> (оставлять / высаживать), <b>acompañar</b> (сопровождать)
+      </div>
+
+      <div class="formula">💡 Впиши слово или форму глагола:</div>
+
+      1. ___ llevo a Leo al colegio, a las nueve. <span class="ru-sub">(сначала)</span> → <span class="wline short"></span><br>
+      2. Salimos de casa ___ las ocho y media. <span class="ru-sub">(до восьми тридцати)</span> → <span class="wline short"></span><br>
+      3. ___ de clase hay natación. <span class="ru-sub">(после занятий)</span> → <span class="wline short"></span><br>
+      4. ___ hacemos los deberes. <span class="ru-sub">(потом)</span> → <span class="wline short"></span><br>
+      5. Papá ___ a los niños a las cinco. <span class="ru-sub">(забирает)</span> → <span class="wline short"></span><br>
+      6. ___ del día, toda la familia está en casa. <span class="ru-sub">(в конце)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ГЛАГОЛЫ ДВИЖЕНИЯ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: глаголы движения + yo / él</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> формы <b>yo / él-ella</b>: llevo / lleva, recojo / recoge, dejo / deja, traigo / trae. Остальные — для распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Глагол</th>
+          <th>Схема</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">llevar</td><td class="practice">llevar a + человек + a + место</td><td class="practice">Llevo a Leo al colegio.</td></tr>
+        <tr><td class="practice">recoger</td><td class="practice">recoger a + человек</td><td class="practice">Recogemos a los niños a las cinco.</td></tr>
+        <tr><td>dejar</td><td>dejar a + человек + en + место</td><td>Dejo a María en la entrada.</td></tr>
+        <tr><td>acompañar</td><td>acompañar a + человек + a + место</td><td>El abuelo acompaña al niño a clase.</td></tr>
+        <tr><td class="reference">venir a buscar</td><td class="reference">venir a buscar a + человек</td><td class="reference">Yo vengo a buscar a los niños hoy.</td></tr>
+        <tr><td class="reference">pasar por</td><td class="reference">pasar por + человек / место</td><td class="reference">Paso por la abuela a las cuatro.</td></tr>
+        <tr><td class="reference">traer</td><td class="reference">traer + вещь</td><td class="reference">Traigo la mochila al club.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши форму yo или él-ella:</div>
+
+      1. Yo ___ a Leo al colegio. <span class="ru-sub">(llevar)</span> → <span class="wline short"></span><br>
+      2. Ella ___ a los niños a las cinco. <span class="ru-sub">(recoger)</span> → <span class="wline short"></span><br>
+      3. Yo ___ a María en la entrada. <span class="ru-sub">(dejar)</span> → <span class="wline short"></span><br>
+      4. El abuelo ___ al niño a clase. <span class="ru-sub">(acompañar)</span> → <span class="wline short"></span><br>
+      5. Yo ___ la mochila al club. <span class="ru-sub">(traer)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: el horario del colegio</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El colegio: entrada y salida</h4>
+        <p>El colegio español abre la entrada a las nueve de la mañana. La salida es a las cinco, todos los días. Muchos niños comen en el comedor del colegio y juegan en el recreo con la merienda, y el camino de casa al colegio es corto: diez minutos.</p>
+
+        <h4>Las actividades extraescolares</h4>
+        <p>Después de clase hay muchas actividades: fútbol, natación, inglés o música. El entrenamiento es una o dos veces a la semana, y el horario es distinto en cada colegio. Después del entrenamiento, los padres recogen a los niños en la parada.</p>
+
+        <h4>La agenda familiar</h4>
+        <p>En muchas familias hay una agenda grande en la cocina: la ruta de cada día. ¿Quién lleva, quién recoge, a qué hora? Los españoles son puntuales: los niños llegan a la misma hora todos los días, y la vuelta a casa repite el trayecto de la mañana.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿A qué hora es la entrada y la salida del colegio?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué hay después de clase y cuándo es el entrenamiento?
+      <span class="wline xlong"></span><br>
+      3. ¿Dónde recogen los padres a los niños?
+      <span class="wline xlong"></span><br>
+      4. ¿Dónde está la agenda familiar y qué preguntas hay en ella?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: карта маршрутов на неделю (PBL-финал)</h4>
+        <div class="item"><div class="box"></div><div>Выписать дни: entre semana, от понедельника до пятницы</div></div>
+        <div class="item"><div class="box"></div><div>Каждый день: ¿quién lleva al cole y a qué hora?</div></div>
+        <div class="item"><div class="box"></div><div>Каждый день: ¿quién recoge y en la parada dónde?</div></div>
+        <div class="item"><div class="box"></div><div>Отметить la actividad extraescolar и el entrenamiento</div></div>
+        <div class="item"><div class="box"></div><div>Проверить время: a la misma hora, puntual</div></div>
+        <div class="item"><div class="box"></div><div>Plan B: кто venir a buscar, если кто-то опаздывает</div></div>
+        <div class="item"><div class="box"></div><div>Повесить карту на холодильник и показать партнёру</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: планируем неделю</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Buenos días, Marta. ¿Cómo va la semana? — Llena, papá. La salida del cole es a las cinco, todos los días. — Vale. Yo llevo a Leo al colegio a las nueve. — Perfecto. ¿Y quién recoge a María hoy? — Yo paso por ella a las cinco, después del entrenamiento. — Gracias. Luego tengo la biblioteca con Leo. — ¿Y mañana? — Mañana el abuelo acompaña a los niños a clase: yo tengo el coche en el taller. — Vale, apunto. ¿Y el fin de semana? — El fin de semana no hay actividades extraescolares. ¡Por fin, todos en casa! — Pues perfecto. ¡Hasta la tarde!»
+      </div>
+      1. ¿A qué hora es la salida del cole?
+      <span class="wline xlong"></span><br>
+      2. ¿Quién lleva a Leo al colegio y a qué hora?
+      <span class="wline xlong"></span><br>
+      3. ¿Quién recoge a María hoy y cuándo?
+      <span class="wline xlong"></span><br>
+      4. ¿Por qué el abuelo acompaña a los niños mañana?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué hay el fin de semana?
+      <span class="wline xlong"></span><br>
+      6. ¿Quién va a la biblioteca y con quién?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: договариваемся о маршрутах</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы говорите партнёру, что отвозите ребёнка в школу.<br>
+        <div class="tmpl">«Yo llevo a Leo al colegio a las nueve, ¿vale?»</div>
+        <div class="tmpl-ru">(Я отвожу Лео в школу в девять, договорились?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы спрашиваете, кто заберёт детей после тренировки.<br>
+        <div class="tmpl">«¿Quién recoge a los niños después del entrenamiento?»</div>
+        <div class="tmpl-ru">(Кто заберёт детей после тренировки?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы описываете цепочку дня ребёнка.<br>
+        <div class="tmpl">«Primero el cole, después de clase hay natación, luego los deberes.»</div>
+        <div class="tmpl-ru">(Сначала школа, после занятий плавание, потом уроки.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы обещаете заехать за бабушкой и принести рюкзак.<br>
+        <div class="tmpl">«Paso por la abuela a las cuatro y traigo la mochila al club.»</div>
+        <div class="tmpl-ru">(Заеду за бабушкой в четыре и принесу рюкзак в клуб.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы объясняете, кто придёт за детьми сегодня.<br>
+        <div class="tmpl">«Hoy vengo a buscar a los niños yo, más tarde al final del día llamamos a la abuela.»</div>
+        <div class="tmpl-ru">(Сегодня я приду за детьми, в конце дня позвоним бабушке.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: «La ruta de la semana» — финал PBL</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. День недели и первый шаг (El lunes, primero llevo a Leo al colegio a las nueve).<br>
+        3. Кто и где забирает (Papá recoge a los niños a las cinco, en la entrada).<br>
+        4. Активность после школы (Después de clase hay entrenamiento de fútbol).<br>
+        5. Что дальше (Luego hacemos los deberes o vamos a la biblioteca).<br>
+        6. Вечер (Más tarde cenamos a las ocho y media).<br>
+        7. Конец дня (Al final del día, todos en casa).<br>
+        8. Plan B (Si hay problema, la abuela viene a buscar a los niños).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>venir a buscar</b> — приходить за кем-то · <b>pasar por</b> — заезжать за · <b>traer</b> — приносить · <b>el camino</b> — дорога / путь · <b>la entrada</b> — начало занятий · <b>la vuelta a casa</b> — дорога домой · <b>el trayecto</b> — отрезок пути · <b>la actividad extraescolar</b> — внешкольное занятие · <b>el recreo</b> — перемена · <b>la merienda</b> — полдник · <b>el comedor</b> — столовая · <b>la salida del cole</b> — окончание школы · <b>la biblioteca</b> — библиотека · <b>el fin de semana</b> — выходные · <b>a la misma hora</b> — в одно и то же время · <b>puntual</b> — пунктуально / вовремя · <b>el horario</b> — расписание · <b>la agenda</b> — план дел
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Говорить, кто отвозит: llevar, dejar, acompañar</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Договариваться, кто забирает: recoger, venir a buscar, pasar por</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить последовательность: primero, después de, luego</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Называть время и части дня: a las nueve, antes de las ocho</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описать маршрут дня ребёнка (5–6 фраз)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Составить карту маршрутов на неделю (PBL-продукт)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 9.1: Симптомы детей</h2>
+        <div class="tag">doler: me duele / le duelen + tener, estar</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Неделя собрана: маршруты, время, план B. На следующем уроке (9.1) учимся говорить о здоровье детей: <i>me duele, le duelen, tiene fiebre, está pálido</i> — чтобы вы могли объяснить врачу и учителю, что случилось с ребёнком.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 15.1 · Renfe и Vueling — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🚄'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🚄 Рабочий лист · Урок 15.1 «Renfe и Vueling»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · Renfe и Vueling: билеты и расписания · Futuro: ir a + инфинитив; вопросы о расписании</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🚄 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el billete de tren</div>
+          <div class="item">2. el andén</div>
+          <div class="item">3. el equipaje de mano</div>
+          <div class="item">4. la puerta de embarque</div>
+          <div class="item">5. el retraso</div>
+          <div class="item">6. ida y vuelta</div>
+          <div class="item">7. el localizador</div>
+          <div class="item">8. el transbordo</div>
+        </div>
+        <div class="col">
+          <div class="item">а) задержка</div>
+          <div class="item">б) выход на посадку</div>
+          <div class="item">в) платформа</div>
+          <div class="item">г) туда-обратно</div>
+          <div class="item">д) код бронирования</div>
+          <div class="item">е) билет на поезд</div>
+          <div class="item">ж) пересадка</div>
+          <div class="item">з) ручная кладь</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ СЛОВО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду 3 слова из одной темы + 1 лишнее</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подчеркни лишнее слово и выпиши его в строку. Слова берутся из словаря урока 15.1.</div>
+      1. el AVE · el vagón · el vuelo · el andén → <span class="wline short"></span><br>
+      <span class="ru-sub">(три — поезд: скоростной, вагон, платформа; одно — рейс самолёта)</span><br>
+      2. facturar · la maleta · el embarque · el andén → <span class="wline short"></span><br>
+      <span class="ru-sub">(три — аэропорт: сдавать багаж, чемодан, посадка; одно — платформа вокзала)</span><br>
+      3. ida y vuelta · el precio · tarjeta de descuento · la llegada → <span class="wline short"></span><br>
+      <span class="ru-sub">(три — покупка билета: туда-обратно, цена, карта скидок; одно — прибытие из расписания)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — IR A + ИНФИНИТИВ, ИСПРАВЬ ОШИБКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: ir a + инфинитив, исправь ошибки</h2>
+        <div class="tag">найди ошибку и впиши верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> <b>ir + a + инфинитив</b> = план на будущее.<br>
+        • voy / vas / va / vamos / vais / van + a + comprar, salir, llegar…<br>
+        • <i>Voy a comprar los billetes ahora mismo.</i> · <i>El tren va a salir del andén tres.</i><br>
+        • Вопросы о расписании: <i>¿A qué hora sale el tren?</i> — <i>A las ocho en punto.</i> · <i>¿Desde qué andén sale?</i><br>
+        Словарик: <i>el horario</i> — расписание · <i>la salida</i> — отправление · <i>el precio</i> — цена · <i>la cancelación</i> — отмена · <i>el andén number tres</i> — платформа номер три · <i>la parada</i> — остановка / стоянка
+      </div>
+
+      <div class="formula">💡 Найди ошибку и впиши верный вариант:</div>
+
+      1. «Yo va a comprar los billetes ahora mismo.» <span class="ru-sub">(yo → voy)</span><br>
+      → <span class="wline long"></span><br>
+      2. «El tren van a salir del andén tres.» <span class="ru-sub">(el tren → va)</span><br>
+      → <span class="wline long"></span><br>
+      3. «¿Tú vas a pagar con la tarjeta?» <span class="ru-sub">(верно или нет?)</span><br>
+      → <span class="wline long"></span><br>
+      4. «Los niños va a llegar cansados.» <span class="ru-sub">(los niños → van)</span><br>
+      → <span class="wline long"></span><br>
+      5. «Nosotros vais a viajar a Madrid en Avlo.» <span class="ru-sub">(nosotros → vamos)</span><br>
+      → <span class="wline long"></span><br>
+      6. «Ellos vais a reservar el hotel.» <span class="ru-sub">(ellos → van)</span><br>
+      → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — IR A + ИНФИНИТИВ, ТАБЛИЦА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🚆 Грамматика: ir a + инфинитив</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> формы <b>yo, tú, él/ella (el tren), nosotros</b>. Остальные — для распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Лицо</th>
+          <th>Форма</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">yo</td><td class="practice">voy a comprar</td><td class="practice">Voy a comprar los billetes ahora mismo.</td></tr>
+        <tr><td class="practice">tú</td><td class="practice">vas a pagar</td><td class="practice">¿Vas a pagar con la tarjeta?</td></tr>
+        <tr><td class="practice">él / ella / el tren</td><td class="practice">va a salir</td><td class="practice">El tren va a salir del andén tres.</td></tr>
+        <tr><td class="practice">nosotros</td><td class="practice">vamos a viajar</td><td class="practice">Vamos a viajar a Madrid en Avlo.</td></tr>
+        <tr><td class="reference">vosotros</td><td class="reference">vais a reservar</td><td class="reference">¿Vais a reservar el hotel vosotros?</td></tr>
+        <tr><td class="reference">ellos / ustedes</td><td class="reference">van a llegar</td><td class="reference">Los niños van a llegar cansados.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши форму ir + a:</div>
+
+      1. Yo ___ los billetes ahora mismo. <span class="ru-sub">(comprar)</span> → <span class="wline short"></span><br>
+      2. ¿Tú ___ con la tarjeta? <span class="ru-sub">(pagar)</span> → <span class="wline short"></span><br>
+      3. El tren ___ del andén tres. <span class="ru-sub">(salir)</span> → <span class="wline short"></span><br>
+      4. Nosotros ___ a Madrid en Avlo. <span class="ru-sub">(viajar)</span> → <span class="wline short"></span><br>
+      5. Los niños ___ cansados. <span class="ru-sub">(llegar)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: Renfe, AVE y Vueling</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Renfe: AVE, Avlo y Alvia</h4>
+        <p><b>Renfe</b> es la empresa pública de trenes de España. <b>El AVE</b> es el tren de alta velocidad: Madrid–Barcelona en dos horas y media. <b>El Avlo</b> es su versión low cost, más barato. <b>El Alvia</b> cambia de ancho de vía y llega a ciudades donde el AVE no entra. Mira <b>el horario</b> en la web: la <b>salida</b>, la <b>llegada</b>, <b>el andén</b> y si el tren es <b>directo</b> o tiene <b>transbordo</b>.</p>
+
+        <h4>Vueling y el aeropuerto</h4>
+        <p><b>Vueling</b> es una aerolínea low cost con base en Barcelona. En el aeropuerto: <b>facturar la maleta</b>, pasar <b>el control de seguridad</b> y buscar <b>la puerta de embarque</b>. <b>El embarque</b> empieza unos 40 minutos antes. La <b>web / la app</b> envía <b>el localizador</b> y los avisos de <b>retraso</b> o <b>cancelación</b>.</p>
+
+        <h4>El billete</h4>
+        <p>Compras el billete en <b>la web / la app</b> o <b>en ventanilla</b>. <b>Ida y vuelta</b> suele ser más barato que dos billetes de <b>ida</b>. Con <b>tarjeta de descuento</b> (joven, familia numerosa) hay rebajas en <b>el precio</b>. Elige <b>el asiento ventanilla</b> o <b>el asiento pasillo</b>. Si hay <b>transbordo</b>, hay que <b>cambiar de tren</b>. En el viaje: <b>la cafetería del tren</b>, el revisor pasa por <b>el vagón</b> y el tren hace alguna <b>parada</b>.</p>
+      </div>
+
+      <div class="ru-sub">Словарик: facturar — сдавать багаж / чекиниться · el control — контроль · la web / la app — сайт / приложение · en ventanilla — в кассе · directo — без пересадок · la maleta — чемодан · el AVE — скоростной поезд · Renfe — компания Renfe · el control de seguridad — досмотр · la cafetería del tren — вагон-буфет</div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué empresa española opera el AVE y el Avlo?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuál es más barato, el AVE o el Avlo?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué tres cosas hay que hacer en el aeropuerto antes del embarque?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué es más barato: ida y vuelta o dos billetes de ida? ¿Y qué tarjeta da rebajas?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист покупки билета</h4>
+        <div class="item"><div class="box"></div><div>Выбрать tren o vuelo: AVE, Avlo, Alvia, Vueling</div></div>
+        <div class="item"><div class="box"></div><div>Проверить el horario: la salida y la llegada, directo / transbordo</div></div>
+        <div class="item"><div class="box"></div><div>Спросить: ¿A qué hora sale? ¿Desde qué andén?</div></div>
+        <div class="item"><div class="box"></div><div>Выбрать билет: ida y vuelta, la tarjeta de descuento</div></div>
+        <div class="item"><div class="box"></div><div>Выбрать asiento: ventanilla / pasillo</div></div>
+        <div class="item"><div class="box"></div><div>Оплатить en la web / la app o en ventanilla</div></div>
+        <div class="item"><div class="box"></div><div>Сохранить el localizador; проверить retraso / cancelación перед выходом</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: в кассе Renfe</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Buenos días. Quisiera dos billetes para Madrid para mañana, ida y vuelta. — A las ocho en punto sale el Alvia, desde el andén number tres. Llega a las once y media. — ¿Es directo? — Sí, directo, sin transbordo. También hay un AVE a las diez, pero es más caro. — ¿Cuál es el precio del Alvia? — Setenta y dos euros de ida y vuelta; el AVE, noventa y ocho. — El Alvia, por favor. ¿Asiento ventanilla? Mi hijo prefiere el asiento pasillo. — Vale: vagón cinco, asientos doce y trece. ¿Pagan con tarjeta? — Sí, aquí tiene. ¿Y si hay retraso o cancelación? — Con el localizador puede cambiar el billete en la web o en la app. — Perfecto. ¿Hay algo para desayunar? — Sí, y dentro del tren está la cafetería del tren, en el vagón cuatro. — Muchas gracias. ¡Hasta luego!»
+      </div>
+      1. ¿Para dónde y para qué día quiere los billetes el padre?
+      <span class="wline xlong"></span><br>
+      2. ¿A qué hora sale el Alvia y desde qué andén?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuál es el precio del Alvia de ida y vuelta?
+      <span class="wline xlong"></span><br>
+      4. ¿Por qué el padre elige el Alvia y no el AVE?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué puede hacer con el localizador si hay retraso o cancelación?
+      <span class="wline xlong"></span><br>
+      6. ¿Dónde está la cafetería del tren?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации на вокзале и в аэропорту</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Спрашиваете расписание.<br>
+        <div class="tmpl">«¿A qué hora sale el tren para Sevilla? ¿Desde qué andén?»</div>
+        <div class="tmpl-ru">(Во сколько отходит поезд на Севилью? С какой платформы?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Покупаете билет туда-обратно.<br>
+        <div class="tmpl">«Quisiera un billete de ida y vuelta para Valencia, por favor.»</div>
+        <div class="tmpl-ru">(Я хотел бы билет туда-обратно в Валенсию, пожалуйста.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Выбираете места для семьи.<br>
+        <div class="tmpl">«Asiento ventanilla, por favor. Mi hijo prefiere el asiento pasillo.»</div>
+        <div class="tmpl-ru">(Место у окна, пожалуйста. Мой сын предпочитает место у прохода.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Уточняете, прямой ли поезд.<br>
+        <div class="tmpl">«¿Es directo o hay que cambiar de tren? ¿Dónde es el transbordo?»</div>
+        <div class="tmpl-ru">(Он прямой или надо пересесть на поезд? Где пересадка?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Спрашиваете про самолёт в аэропорту.<br>
+        <div class="tmpl">«¿El vuelo tiene retraso? ¿Dónde está la puerta de embarque?»</div>
+        <div class="tmpl-ru">(Рейс с задержкой? Где выход на посадку?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: Mis billetes para el puente</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Куда и когда едем (El sábado vamos a viajar a Sevilla…).<br>
+        3. Где покупаем (Voy a comprar los billetes en la web / la app de Renfe…).<br>
+        4. Какие билеты (dos billetes de ida y vuelta, el precio…).<br>
+        5. Места (asiento ventanilla / asiento pasillo, el vagón…).<br>
+        6. Расписание (la salida a las ocho en punto, la llegada, ¿desde qué andén?…).<br>
+        7. Localizador (Voy a guardar el localizador para cambiar el billete…).<br>
+        8. Если летим (facturar la maleta, el control de seguridad, la puerta de embarque…).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Говорить о планах: voy a / vamos a + инфинитив</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Различать поезда: AVE, Avlo, Alvia</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Спрашивать расписание: ¿A qué hora sale...? ¿Desde qué andén?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Выбирать билет: ida y vuelta, tarifa, asiento</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Оплачивать и сохранять localizador</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть диалог «родитель ↔ агент Renfe»</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 15.2: Отели и хостелы</h2>
+        <div class="tag">la reserva · el check-in · hay / tiene</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете купить билет, спросить расписание и выбрать место. На следующем уроке (15.2) доезжаем до места: бронь отеля и хостела, <b>la reserva</b> и заселение, спрашиваем про завтрак, WiFi и <i>hay / tiene</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

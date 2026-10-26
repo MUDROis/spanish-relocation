@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 12.2 · Парковка и ORA — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🅿️'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🅿️ Рабочий лист · Урок 12.2 «Парковка и ORA»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · Aparcamiento y ORA: зоны, parquímetro, предлоги направления: hacia, hasta, por</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🅿️ Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la zona azul</div>
+          <div class="item">2. el parquímetro</div>
+          <div class="item">3. la multa</div>
+          <div class="item">4. la grúa</div>
+          <div class="item">5. hacia</div>
+          <div class="item">6. la matrícula</div>
+          <div class="item">7. todo recto</div>
+          <div class="item">8. el maletero</div>
+        </div>
+        <div class="col">
+          <div class="item">а) паркомат</div>
+          <div class="item">б) прямо</div>
+          <div class="item">в) эвакуатор</div>
+          <div class="item">г) номер машины</div>
+          <div class="item">д) багажник</div>
+          <div class="item">е) штраф</div>
+          <div class="item">ж) по направлению к</div>
+          <div class="item">з) синяя зона (платная)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду 3 слова из одной темы + 1 лишнее</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подчеркни лишнее слово и выпиши его: почему оно не подходит?</div>
+      1. la multa · la grúa · la denuncia · <b>el ticket</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — про штрафы и проблемы, одно — квитанция паркомата)</span><br>
+      2. el coche · el maletero · la rueda · <b>el aparcamiento</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — части машины, одно — место для машины)</span><br>
+      3. hacia · hasta · por · <b>libre</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — предлоги направления, одно — надпись на дисплее места)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ПРЕДЛОГИ НАПРАВЛЕНИЯ, ИСПРАВЬ ОШИБКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧭 Грамматика: предлоги направления, исправь ошибки</h2>
+        <div class="tag">найди ошибку и впиши верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>hacia</b> — по направлению к (ещё едем): <i>Siga hacia la plaza mayor.</i><br>
+        • <b>hasta</b> — до (там остановимся): <i>Siga todo recto hasta el semáforo.</i><br>
+        • <b>por</b> — через / по (маршрут внутри): <i>Pase por la calle del Carmen.</i><br>
+        • Императив из урока 12.1: <b>siga, gire, ponga</b>
+      </div>
+
+      <div class="formula">💡 Найди ошибку и впиши верный вариант:</div>
+
+      1. «Siga hasta al semáforo.» <span class="ru-sub">(hasta — не «a», артикль не сливается)</span><br>
+      → <span class="wline long"></span><br>
+      2. «Pongo el ticket en el parabrisas.» <span class="ru-sub">(под стеклом, а не в стекло)</span><br>
+      → <span class="wline long"></span><br>
+      3. «Vamos por el centro.» <span class="ru-sub">(о направлении: «в сторону»)</span><br>
+      → <span class="wline long"></span><br>
+      4. «Está prohibido estacionar en frente de la salida.» <span class="ru-sub">(верный предлог места)</span><br>
+      → <span class="wline long"></span><br>
+      5. «Siga recto todo.» <span class="ru-sub">(устойчивый порядок слов)</span><br>
+      → <span class="wline long"></span><br>
+      6. «El parking está a el final de la calle.» <span class="ru-sub">(в конце улицы; a + el = al)</span><br>
+      → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ДОПОЛНИ ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: дополни диалог «родитель ↔ сосед о парковке»</h2>
+        <div class="tag">впиши слово в реплику</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Словарь диалога:</b> aparcar — припарковаться · estacionar — припарковаться (форм.) · poner el ticket — положить квитанцию под лобовое · la zona verde — зелёная зона (для жителей) · el tiempo máximo — максимальное время
+      </div>
+
+      <div class="formula">💡 Впиши слово по переводу в скобках:</div>
+
+      — Vecino: ¿Buscas sitio para el coche?<br>
+      — Usted: Sí, un momento. ¿Se puede ___ en la zona verde? <span class="ru-sub">(припарковаться)</span><br>
+      — Vecino: No, la verde es solo para residentes. Vamos ___ el centro: allí hay zona azul. <span class="ru-sub">(по направлению к)</span><br>
+      — Vecino: Siga todo recto ___ el semáforo y gire a la derecha. <span class="ru-sub">(до)</span><br>
+      — Usted: ¿Y después del semáforo?<br>
+      — Vecino: Después pase ___ la calle del Carmen. El parquímetro está al final de la calle. <span class="ru-sub">(через / по)</span><br>
+      — Vecino: Y recuerda: no pases del tiempo máximo — son dos horas.<br>
+      — Usted: Vale. ¿Y el ticket, dónde lo pongo?<br>
+      — Vecino: Bajo el parabrisas. Y no aparques delante de la salida: te lleva la grúa y luego tienes que pagar la multa.<br>
+      — Usted: Gracias, vecino. ¿La plaza de parking que está a la izquierda está libre?
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: как работает ORA в Испании</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Zona azul: todos pagan, máximo dos horas</h4>
+        <p>Las líneas azules son de pago para todos. La tarifa suele ser de cero coma ochenta a dos euros por hora, y el tiempo máximo es de una a dos horas. Paga en el parquímetro con monedas o tarjeta, o con la app de aparcamiento: introduce la matrícula, elige el tiempo y guarda el ticket.</p>
+
+        <h4>Zona verde: solo residentes</h4>
+        <p>Las líneas verdes son para residentes con acreditación municipal. Sin permiso no se puede estacionar: si el agente ve el coche sin ticket, la grúa se lo lleva al depósito municipal. Busca también la franja horaria en el cartel: «L-V 9-14 y 16-20». Si el disco pone «libre», el sitio es gratuito.</p>
+
+        <h4>Si el coche no está</h4>
+        <p>¿No ves el coche? Mira el cartel: pone el teléfono del depósito y «que se la llevan». Llama al local (092), pregunta dónde está, paga y recoge el coche. ¿Crees que la multa es injusta? Tienes veinte días para recurrir la multa con descuento o recurrir la denuncia en un mes.</p>
+      </div>
+
+      <div class="note" style="margin-top:2mm">
+        📋 <b>Словарик водителя:</b> la zona verde — зелёная зона (для жителей) · el aparcamiento — парковка · libre — свободно · la denuncia — протокол · recurrir la multa — обжаловать штраф · la tarifa — тариф · el coche — машина · la rueda — колесо · el dépósito — бак · a la derecha — направо · a la izquierda — налево
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Cuánto cuesta la zona azul y cuál es el tiempo máximo?
+      <span class="wline xlong"></span><br>
+      2. ¿Quién puede aparcar en la zona verde?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pone el cartel si se llevan el coche?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuántos días tienes para recurrir la multa?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист парковки «5 шагов»</h4>
+        <div class="item"><div class="box"></div><div>Посмотреть разметку и знак: ¿azul, verde, carga y descarga?</div></div>
+        <div class="item"><div class="box"></div><div>Проверить часы действия зоны (la franja horaria): сейчас платное время?</div></div>
+        <div class="item"><div class="box"></div><div>Оплатить: parquímetro (monedas/tarjeta) или app (matrícula + tiempo)</div></div>
+        <div class="item"><div class="box"></div><div>Положить ticket под лобовое стекло — цифрами наружу</div></div>
+        <div class="item"><div class="box"></div><div>Сфотографировать место и знак — пригодится при споре</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: разговор у паркомата</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Perdone, ¿esta calle es zona azul? — Sí. La franja horaria es de nueve a dos y de cuatro a ocho. — ¿Dónde está el parquímetro? — En la esquina. La tarifa es un euro la hora. — No tengo monedas. ¿Puedo pagar con tarjeta? — Sí, o con la app de aparcamiento: introduce la matrícula y el tiempo. — Perfecto. ¿Y dónde pongo el ticket? — Bajo el parabrisas, que lo vea el agente. — ¿El agente pasa a menudo? — Cada media hora. Sin ticket, hay multa. — ¿Y si no hay plaza de parking aquí? — Hay un parking subterráneo detrás del mercado. — Muchas gracias. ¡Buen día! — ¡Hasta luego!»
+      </div>
+
+      <div class="note blue">
+        💬 <b>Слова для ответов:</b> la plaza de parking — парковочное место · el parking subterráneo — подземный паркинг · el agente — полицейский · pagar la multa — оплатить штраф · que se la llevan — что машину увезли · la app de aparcamiento — приложение для парковки
+      </div>
+
+      1. ¿Cuál es la franja horaria de la zona?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuánto cuesta la tarifa?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué dos formas de pago menciona el vecino?
+      <span class="wline xlong"></span><br>
+      4. ¿Dónde pone el ticket?
+      <span class="wline xlong"></span><br>
+      5. ¿Con qué frecuencia pasa el agente?
+      <span class="wline xlong"></span><br>
+      6. ¿Dónde hay otro aparcamiento?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации с парковкой</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы спрашиваете у соседа, можно ли встать в зелёной зоне.<br>
+        <div class="tmpl">«Disculpe, ¿se puede aparcar en la zona verde?»</div>
+        <div class="tmpl-ru">(Извините, можно припарковаться в зелёной зоне?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы объясняете другу дорогу до парковки.<br>
+        <div class="tmpl">«Siga todo recto hasta el semáforo y gire a la izquierda tras el puente.»</div>
+        <div class="tmpl-ru">(Идите прямо до светофора и поверните налево после моста.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы оплачиваете парковку через приложение.<br>
+        <div class="tmpl">«Pago con la app de aparcamiento: pongo la matrícula y el tiempo.»</div>
+        <div class="tmpl-ru">(Оплата через приложение: ввожу номер машины и время.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы объясняете, куда кладёте квитанцию.<br>
+        <div class="tmpl">«Pongo el ticket bajo el parabrisas, que lo vea el agente.»</div>
+        <div class="tmpl-ru">(Кладу квитанцию под лобовое стекло, чтобы видел полицейский.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Машина пропала с места парковки.<br>
+        <div class="tmpl">«No veo el coche. — Que se la llevan: mira el cartel del depósito municipal.»</div>
+        <div class="tmpl-ru">(Не вижу машину. — Что машину увезли: посмотри знак штрафстоянки.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: «Mi plan de aparcamiento»</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Куда едете и зачем: Vamos hacia el centro, hay parking por allí.<br>
+        3. Какая зона: la zona azul, de pago: la tarifa es un euro la hora.<br>
+        4. Как оплатить: parquímetro (monedas) o la app de aparcamiento (matrícula + tiempo).<br>
+        5. Куда положить ticket: bajo el parabrisas, que lo vea el agente.<br>
+        6. Сколько максимум: el tiempo máximo es de dos horas (franja horaria).<br>
+        7. Если по пути нужна заправка: la gasolinera está en la avenida (заправка).<br>
+        8. Если увезли машину: pagar la multa y recurrir la denuncia si es injusto.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Различать зоны: azul, verde, carga y descarga</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Оплачивать парковку: parquímetro, app, matrícula</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Класть ticket под лобовое: ponga el ticket</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать направления: hacia, hasta, por</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Действовать при grúa: depósito municipal, multa</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть диалог «родитель ↔ сосед о парковке»</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 12.3: ДТП и страховка</h2>
+        <div class="tag">глаголы движения: seguir, girar, cruzar + претерито: chocó, ocurrió</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете читать знаки, платить за парковку и объяснять дорогу. На следующем уроке (12.3) — сложная тема без паники: ДТП и страховка. Разберём алгоритм «5 шагов», <i>parte amistoso</i> и как рассказать, <i>cómo ocurrió</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

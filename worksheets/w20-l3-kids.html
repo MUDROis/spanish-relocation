@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 60 · ¡Graduación! — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🎓 ¡Graduación!</h1>
+    <div class="sub">Рабочий лист к Уроку 60 · Станция 7: ¡Preparados! · выпускной: итоги курса, диплом и письмо себе на лето</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ ¡Enhorabuena! Это последний, 60-й лист курса. Вспомни все 20 недель, получи диплом (<b>el diploma</b>) и напиши письмо себе на лето. ¡Misión cumplida!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини слово выпускного и перевод</span>
+      <span class="ex-skill">🗣 Лексика · выпускной</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🎓 la graduación</td><td>з) выпускной</td></tr>
+      <tr><td><span class="ans-box"></span>📜 el diploma</td><td>а) диплом</td></tr>
+      <tr><td><span class="ans-box"></span>🏅 el premio</td><td>к) награда</td></tr>
+      <tr><td><span class="ans-box"></span>👏 los aplausos</td><td>б) аплодисменты</td></tr>
+      <tr><td><span class="ans-box"></span>📸 el foto recuerdo</td><td>и) фото на память</td></tr>
+      <tr><td><span class="ans-box"></span>🎤 el discurso</td><td>г) речь</td></tr>
+      <tr><td><span class="ans-box"></span>🎉 ¡enhorabuena!</td><td>д) поздравляю!</td></tr>
+      <tr><td><span class="ans-box"></span>📚 he aprendido mucho</td><td>ж) я многому научился</td></tr>
+      <tr><td><span class="ans-box"></span>🤝 he hecho amigos</td><td>е) я завёл друзей</td></tr>
+      <tr><td><span class="ans-box"></span>✅ ¡misión cumplida!</td><td>в) миссия выполнена!</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: ДВЕ КОРЗИНЫ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Раздели слова на 2 корзины</span>
+      <span class="ex-skill">🗣 Лексика · сортировка</span>
+    </div>
+    <div class="hint-box">💡 <strong>Подсказка:</strong> el discurso — речь · el premio — награда · sonríe — улыбайся · pregunta siempre — всегда спрашивай.</div>
+    <div class="word-bank">💡 Банк слов: <strong>el discurso · los aplausos · el foto recuerdo · el premio · habla sin miedo · pregunta siempre · sonríe · ¡que te vaya genial!</strong></div>
+    <div class="ex-instruction">Перепиши каждое слово в нужную корзину: церемония — слева, пожелания себе — справа.</div>
+    <div class="desc-grid" style="grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <div class="word-bank" style="margin-bottom:6px">🎓 En la ceremonia (4 слова)</div>
+        <div class="desc-item"><span class="num">1</span><span class="emoji">🎓</span> <span class="blank"></span></div>
+        <div class="desc-item"><span class="num">2</span><span class="emoji">🎓</span> <span class="blank"></span></div>
+        <div class="desc-item"><span class="num">3</span><span class="emoji">🎓</span> <span class="blank"></span></div>
+        <div class="desc-item"><span class="num">4</span><span class="emoji">🎓</span> <span class="blank"></span></div>
+      </div>
+      <div>
+        <div class="word-bank" style="margin-bottom:6px">🌟 Deseos para el verano (4 слова)</div>
+        <div class="desc-item"><span class="num">1</span><span class="emoji">🌟</span> <span class="blank"></span></div>
+        <div class="desc-item"><span class="num">2</span><span class="emoji">🌟</span> <span class="blank"></span></div>
+        <div class="desc-item"><span class="num">3</span><span class="emoji">🌟</span> <span class="blank"></span></div>
+        <div class="desc-item"><span class="num">4</span><span class="emoji">🌟</span> <span class="blank"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. ИТОГИ: ВЫБЕРИ ВЕРНУЮ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Итоги курса: выбери фразу А или Б</span>
+      <span class="ex-skill">🧩 Грамматика · итоги</span>
+    </div>
+    <div class="hint-box">💡 <strong>Итоги курса:</strong> he aprendido mucho — я многому научился · he hecho amigos — я завёл друзей · mi frase favorita es... — моя любимая фраза — ... · la palabra más difícil — самое сложное слово · poco a poco — шаг за шагом. Впиши букву верной фразы!</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>(А) He aprendido muchos. (Б) He aprendido mucho. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">2</span>(А) Mi frase favorita es «¡Lo sé!». (Б) Mi frase favorita son «¡Lo sé!». → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">3</span>(А) La palabra más difícil están «avanzar». (Б) La palabra más difícil es «avanzar». → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">4</span>(А) He hecho amigos en el curso. (Б) He hecho amigo en el curso. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">5</span>(А) ¡Enhorabuena, graduado! (Б) ¡Enhorabuenas, graduado! → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">6</span>(А) Pocos a pocos. (Б) Poco a poco. → <span class="g"></span></div>
+    </div>
+  </div>
+
+  <!-- 4. СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="hint-box">💡 <strong>Словарик выпускного:</strong> estoy listo para el cole — я готов к школе · veinte semanas — двадцать недель · nos vemos en España — увидимся в Испании · ¡que te vaya genial! — пусть всё будет отлично!</div>
+    <div class="ex-instruction">Слова перепутаны. Расставь их в правильном порядке и запиши готовую фразу на линии.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">mucho</span><span class="build-word">He</span><span class="build-word">semanas.</span><span class="build-word">veinte</span><span class="build-word">aprendido</span><span class="build-word">en</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">es</span><span class="build-word">"¡Lo</span><span class="build-word">favorita</span><span class="build-word">Mi</span><span class="build-word">frase</span><span class="build-word">sé!".</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">para</span><span class="build-word">¡Estoy</span><span class="build-word">el</span><span class="build-word">listo</span><span class="build-word">cole:</span><span class="build-word">¡misión</span><span class="build-word">cumplida!</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">España:</span><span class="build-word">vemos</span><span class="build-word">¡que</span><span class="build-word">Nos</span><span class="build-word">genial!</span><span class="build-word">vaya</span><span class="build-word">en</span><span class="build-word">te</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЦЕРЕМОНИЯ ПО ПОРЯДКУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Церемония выпуска по порядку</span>
+      <span class="ex-skill">🔢 Логика · graduación</span>
+    </div>
+    <div class="ex-instruction">Пронумеруй моменты выпускного от 1 до 6 — так проходит церемония (впиши цифру в квадратик).</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🧃</span> El té con la tarta: ¡delicioso!</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🎤</span> El discurso: «He aprendido mucho...»</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">📸</span> El foto recuerdo con todos</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">📜</span> Recibo el diploma: ¡enhorabuena!</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">👏</span> ¡Los aplausos para todos!</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🎬</span> El vídeo-recuerdo: «¡Misión cumplida! ¡Nos vemos en España!»</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Выпускной Люсии» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Lucía. Hoy es la graduación. ¡Enhorabuena a todos! El curso tiene veinte semanas y he aprendido mucho. Mi frase favorita es «¡Lo sé!». La palabra más difícil es «desayunar». He hecho amigos: Leo y Sofía son mis amigos. En la ceremonia digo mi discurso y recibo el diploma. ¡Los aplausos son muy fuertes! Después hacemos el foto recuerdo con todos. Estoy contenta y estoy lista para el cole. ¡Misión cumplida! ¡Nos vemos en España!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Qué celebran hoy? <span class="ru">(Что сегодня празднуют?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Cuántas semanas tiene el curso? <span class="ru">(Сколько недель в курсе?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cuál es la frase favorita de Lucía? <span class="ru">(Какая любимая фраза Люсии?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué recibe Lucía en la ceremonia? <span class="ru">(Что Люсия получает на церемонии?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Cómo está Lucía al final? <span class="ru">(Как Люсия себя чувствует в конце?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Письмо «Carta para el verano» (себе на лето)</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>Пост-карта выпускника — план письма:</strong> 1) ¡Hola, yo del futuro! · 2) El curso tiene veinte semanas: he aprendido mucho. · 3) Mi frase favorita es... · 4) La palabra más difícil es... · 5) He hecho amigos: ... · 6) En el verano quiero... · 7) Recuerda: habla sin miedo (говори без страха), pregunta siempre (всегда спрашивай), sonríe (улыбайся). ¡Poco a poco! · 8) ¡Buena suerte en el cole (удачи в школе)! ¡Nos vemos en España!<br><strong>Прочитай письмо вслух — это твой обет выпускника!</strong></div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно. Все 🟢 — ¡misión cumplida!</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Рассказать о курсе: he aprendido mucho, he hecho amigos</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Назвать mi frase favorita и la palabra más difícil</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Прочитать свой диплом вслух</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Пожелать: buena suerte, habla sin miedo, pregunta siempre</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сказать выпускную речь (5 пунктов)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Объявить: ¡Misión cumplida! ¡Nos vemos en España!</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 7: ¡Preparados! · Урок 60 · ¡Felicidades, graduado! 🎓</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 33 · PBL: Mi Perfil de Instagram — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="printSheet()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>📱 PBL: Mi Perfil de Instagram</h1>
+    <div class="sub">Рабочий лист к Уроку 33 · Станция 3: Mi Mundo · профиль в соцсети, Bio по формуле (Me llamo, tengo, soy de...)</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">🚀 Проектный урок — финал станции 3! Сегодня ты соберёшь свой настоящий профиль: аватар, Bio и посты. Всё как у блогеров — только на испанском и в безопасности (без телефона и адреса)!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини слово профиля и перевод</span>
+      <span class="ex-skill">🗣 Лексика · профиль</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🪪 el perfil</td><td>а) заглавная буква</td></tr>
+      <tr><td><span class="ans-box"></span>🆔 el nombre de usuario</td><td>б) био (о себе)</td></tr>
+      <tr><td><span class="ans-box"></span>🔑 la contraseña</td><td>в) профиль</td></tr>
+      <tr><td><span class="ans-box"></span>🧑‍🎨 el avatar</td><td>г) публиковать</td></tr>
+      <tr><td><span class="ans-box"></span>📝 la bio</td><td>д) подписчик</td></tr>
+      <tr><td><span class="ans-box"></span>👥 el seguidor</td><td>е) аватар</td></tr>
+      <tr><td><span class="ans-box"></span>📤 publicar</td><td>ж) пароль</td></tr>
+      <tr><td><span class="ans-box"></span>🔠 mayúscula</td><td>з) с ударением</td></tr>
+      <tr><td><span class="ans-box"></span>🔡 minúscula</td><td>и) имя пользователя</td></tr>
+      <tr><td><span class="ans-box"></span>❗ con acento</td><td>к) строчная буква</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Угадай слово по описанию</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>la bio · el avatar · la contraseña · el seguidor · publicar · ¿Cómo se escribe?</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🧑‍🎨</span> Es tu imagen en el perfil: un gato, un robot o un dragón. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">📝</span> Es un texto corto: aquí escribes quién eres y qué te gusta. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🔑</span> Es un secreto. ¡No lo digas a nadie! → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">👥</span> Esta persona ve tus posts y te sigue. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">📤</span> Haces esto cuando quieres enseñar un post nuevo. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">❓</span> Preguntas esto cuando no sabes escribir el nombre de tu amigo. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: BIO ПО ФОРМУЛЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь пропущенное слово в Bio</span>
+      <span class="ex-skill">🧩 Грамматика · формула</span>
+    </div>
+    <div class="hint-box">💡 <strong>Формула Bio:</strong> Me llamo... (Меня зовут...) · Tengo... años (Мне ... лет) · Soy de... (Я из...) · Vivo en... (Я живу в...) · Me gusta... (Мне нравится...) · Busco amigos para... (Ищу друзей чтобы...) · Mi nombre se escribe... (Моё имя пишется...). Друг спрашивает: ¿Cómo se escribe? (Как это пишется?) Отвечай: se escribe con H (пишется с H), con acento (с ударением), A de Antonio (А как Antonio). ¡correcto! (правильно!)</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Me <span class="g"></span> Ana.</div>
+      <div class="gap-item"><span class="num">2</span>Tengo nueve <span class="g"></span>.</div>
+      <div class="gap-item"><span class="num">3</span>Soy de Moscú y <span class="g"></span> en Moscú.</div>
+      <div class="gap-item"><span class="num">4</span>Me <span class="g"></span> el fútbol.</div>
+      <div class="gap-item"><span class="num">5</span>Busco amigos <span class="g"></span> jugar.</div>
+      <div class="gap-item"><span class="num">6</span>Mi nombre se <span class="g"></span> con mayúscula.</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Слова перепутаны. Расставь их в правильном порядке и запиши готовую фразу на линии.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">llamo</span><span class="build-word">Me</span><span class="build-word">Leo</span><span class="build-word">años</span><span class="build-word">y</span><span class="build-word">tengo</span><span class="build-word">nueve</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Vivo</span><span class="build-word">Madrid</span><span class="build-word">en</span><span class="build-word">y</span><span class="build-word">me</span><span class="build-word">bailar</span><span class="build-word">gusta</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">amigos</span><span class="build-word">Busco</span><span class="build-word">jugar</span><span class="build-word">para</span><span class="build-word">fútbol</span><span class="build-word">al</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">nombre</span><span class="build-word">Mi</span><span class="build-word">escribe</span><span class="build-word">se</span><span class="build-word">con</span><span class="build-word">mayúscula</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. PBL: ШАГИ ПРОЕКТА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Шаги проекта «Mi Perfil» по порядку</span>
+      <span class="ex-skill">🚀 PBL · логика</span>
+    </div>
+    <div class="ex-instruction">Пронумеруй шаги проекта от 1 до 6 (впиши цифру в квадратик перед шагом): что делаешь сначала, а что в самом конце?</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🔒</span> Compruebo: ¡sin teléfono y sin dirección!</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🧑‍🎨</span> Elijo mi avatar</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🏁</span> Digo 5 frases sobre mí</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">📸</span> Hago tres posts con sus textos</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🔤</span> Dicto mi nombre por letras</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">📝</span> Escribo mi bio con la fórmula</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «El perfil de Lucía» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Este es mi perfil. Me llamo Lucía y tengo 9 años. Soy de Valencia y vivo en Valencia con mi familia. Mi avatar es una gatita porque me gustan los gatos. En mi bio escribo: «Me gusta bailar y cantar. Busco amigos para jugar y nadar». Tengo quince seguidores y publico dos posts: mi perro Toby y mi escuela. Mi contraseña es secreta. ¿Cómo se escribe mi nombre? L de Lorenzo, U de uno, C de casa, I de Isabel, A de Antonio. ¡Escríbeme!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Cómo se llama la chica del perfil? <span class="ru">(Как зовут девочку из профиля?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué animal es su avatar? <span class="ru">(Какое животное — её аватар?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Qué escribe Lucía en su bio? <span class="ru">(Что Люсия пишет в био?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Cuántos seguidores tiene Lucía? <span class="ru">(Сколько у Люсии подписчиков?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Es la contraseña un secreto? <span class="ru">(Пароль — это секрет?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО (PBL: ЗАЩИТА ПРОЕКТА) -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Защита проекта: сочинение «Mi perfil»</span>
+      <span class="ex-skill">✍️ Письмо · защита</span>
+    </div>
+    <div class="hint-box">💡 <strong>Рубрика защиты:</strong> расскажи о себе минимум 3 предложения (сможешь 5 — ты Мастер проектов 👑)! <strong>План:</strong> 1) ¡Hola! Me llamo... y tengo... años. · 2) Vivo en... · 3) Mi avatar es... · 4) Me gusta... y me encantan... · 5) Busco amigos para... · 6) Mi nombre se escribe... — ¡Escríbeme!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть части профиля (el perfil, la bio, el avatar)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать о себе по формуле Bio (5 фраз)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Продиктовать имя по буквам (A de Antonio)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Придумать подпись к посту на испанском</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понять чужой профиль-текст</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сказать о себе 5 предложений без подсказки (чекпоинт!)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 3: Mi Mundo · Урок 33 · ¡Tu perfil está listo! 📱</div>
+</div>
+
+<script>
+  function printSheet(){ window.print(); }
+</script>
+
+</body>
+</html>

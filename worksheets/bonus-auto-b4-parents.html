@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок B4 · Теория и экзамен DGT — Школа МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🚗'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🚗 Рабочий лист · Урок B4 «Теория и экзамен DGT»</h1>
+    <div class="meta">Бонус · Misión Autoescuela · Teoría y examen DGT: la pregunta tipo test и la tasa, es necesario / hace falta + инфинитив</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>📚 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la pregunta tipo test</div>
+          <div class="item">2. la tasa de examen</div>
+          <div class="item">3. suspender</div>
+          <div class="item">4. la prioridad</div>
+          <div class="item">5. hace falta practicar</div>
+          <div class="item">6. el temario</div>
+          <div class="item">7. el cinturón</div>
+          <div class="item">8. leer despacio</div>
+        </div>
+        <div class="col">
+          <div class="item">а) учебный курс</div>
+          <div class="item">б) приоритет</div>
+          <div class="item">в) провалить</div>
+          <div class="item">г) читать медленно</div>
+          <div class="item">д) ремень</div>
+          <div class="item">е) нужно тренироваться</div>
+          <div class="item">ж) вопрос с вариантами</div>
+          <div class="item">з) пошлина за экзамен</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ДВЕ КОРЗИНЫ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🧺 Раздели слова на две корзины</h2>
+        <div class="tag">теория и экзамен ↔ темы ПДД</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Из банка слов разложи 8 слов по двум корзинам: что относится к учёбе и экзамену, а что — к темам правил дорожного движения. (Словарик: aprobar — сдать, suspender — провалить.)</div>
+      <div class="note blue"><b>Банк слов:</b> la teoría · el adelantamiento · aprobar · la distancia de seguridad · la app de tests · los errores permitidos · la alcoholimetría · el test</div>
+      <div class="match">
+        <div class="col">
+          <div class="item"><b>📚 Корзина 1 · Теория и экзамен</b></div>
+          <div class="item">1. <span class="wline long"></span></div>
+          <div class="item">2. <span class="wline long"></span></div>
+          <div class="item">3. <span class="wline long"></span></div>
+          <div class="item">4. <span class="wline long"></span></div>
+        </div>
+        <div class="col">
+          <div class="item"><b>🚸 Корзина 2 · Темы ПДД</b></div>
+          <div class="item">1. <span class="wline long"></span></div>
+          <div class="item">2. <span class="wline long"></span></div>
+          <div class="item">3. <span class="wline long"></span></div>
+          <div class="item">4. <span class="wline long"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ES NECESARIO / HACE FALTA, ИСПРАВЬ ОШИБКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: es necesario / hace falta — исправь ошибки</h2>
+        <div class="tag">4 предложения с ошибкой + 2 верных</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> <b>es necesario + инфинитив</b>, <b>hace falta + инфинитив</b> (и уже знакомое <b>hay que + инфинитив</b>) — необходимость.<br>
+        • <i>Es necesario pagar la tasa.</i> — Необходимо оплатить пошлину.<br>
+        • <i>Hace falta llevar el DNI.</i> — Нужно принести DNI.<br>
+        • <i>Es necesario estudiar los signos.</i> — Необходимо учить знаки. · <i>Hace falta practicar cada día.</i> — Нужно тренироваться каждый день.
+      </div>
+
+      <div class="formula">💡 Найди ошибку и впиши верную форму (✓ — предложение верное):</div>
+
+      1. Es necesario pagando la tasa. → <span class="wline short"></span><br>
+      2. Hace falta lleva el DNI. → <span class="wline short"></span><br>
+      3. Si apruebo, hago prácticas. → <span class="wline short"></span><br>
+      4. Es necesario estudia los signos. → <span class="wline short"></span><br>
+      5. Hace falta practicando cada día. → <span class="wline short"></span><br>
+      6. Si suspendo, repito el test. → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА КОНСТРУКЦИЙ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🔗 Грамматика: конструкции необходимости и условия</h2>
+        <div class="tag">таблица «конструкция ↔ пример» + впиши</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> <b>es necesario / hace falta</b> — говорим о требованиях DGT; <b>si apruebo / si suspendo</b> — два сценария экзамена.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Конструкция</th>
+          <th>Смысл</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">es necesario + inf</td><td class="practice">необходимо</td><td class="practice">Es necesario pagar la tasa.</td></tr>
+        <tr><td class="practice">hace falta + inf</td><td class="practice">нужно</td><td class="practice">Hace falta practicar cada día.</td></tr>
+        <tr><td class="reference">hay que + inf</td><td class="reference">надо (безличное)</td><td class="reference">Hay que llevar el DNI.</td></tr>
+        <tr><td class="practice">si apruebo</td><td class="practice">если сдам</td><td class="practice">Si apruebo, hago prácticas.</td></tr>
+        <tr><td class="practice">si suspendo</td><td class="practice">если провалю</td><td class="practice">Si suspendo, repito.</td></tr>
+        <tr><td class="reference">cuando termine</td><td class="reference">когда закончу</td><td class="reference">Cuando termine la teoría, examen.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши конструкцию:</div>
+
+      1. ___ estudiar los signos. <span class="ru-sub">(необходимо учить)</span> → <span class="wline short"></span><br>
+      2. ___ practicar cada día. <span class="ru-sub">(нужно тренироваться)</span> → <span class="wline short"></span><br>
+      3. ___ la teoría, pido la convocatoria. <span class="ru-sub">(когда закончу теорию)</span> → <span class="wline short"></span><br>
+      4. ___, hago prácticas. <span class="ru-sub">(если сдам)</span> → <span class="wline short"></span><br>
+      5. ___, repito el test sin drama. <span class="ru-sub">(если провалю)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: el examen teórico de la DGT</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>30 preguntas, 3 errores</h4>
+        <p>El examen teórico (теоретический экзамен) de la DGT — «Dirección General de Tráfico» — tiene <b>30 preguntas</b> y un máximo de <b>3 errores permitidos</b> (допустимые ошибки). Cada pregunta tipo test tiene tres opciones (a, b, c) y, a veces, una foto de una situación real. El test (тест) se hace en español, en la oficina de la DGT o en la autoescuela. El resultado (результат) aparece casi al momento en la pantalla.</p>
+
+        <h4>La tasa y la convocatoria</h4>
+        <p>Antes del examen (перед экзаменом) hay que pagar <b>la tasa</b>: son 94 euros, y la tasa incluye <b>dos convocatorias</b> (попытка / сессия). Si suspendo, repito sin pagar otra vez. Después del examen (после экзамена), si apruebo, la tasa «viaja» conmigo a las prácticas.</p>
+
+        <h4>Los temas del test</h4>
+        <p>El temario incluye: <b>la prioridad</b> (приоритет), <b>el adelantamiento</b> (обгон), <b>la distancia de seguridad</b> (дистанция безопасности), <b>los límites de velocidad</b> (ограничения скорости), <b>la alcoholimetría</b> (допустимый алкоголь), <b>el cinturón</b> (ремень) y <b>la silla infantil</b> (детское кресло). Consejo de oro: leer despacio y fijarse en las palabras «no» y «siempre» (следить за словами «нет» и «всегда») — ahí se esconde la mitad de los errores.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Cuántas preguntas tiene el examen y cuántos errores permite?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuánto cuesta la tasa y qué incluye?
+      <span class="wline xlong"></span><br>
+      3. ¿En qué idioma es el examen?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuál es el «consejo de oro» para las preguntas tipo test?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист перед экзаменом (теория)</h4>
+        <div class="item"><div class="box"></div><div>La tasa pagada (94 €, dos convocatorias)</div></div>
+        <div class="item"><div class="box"></div><div>Llevar el DNI (приносить DNI) — без него не пустят</div></div>
+        <div class="item"><div class="box"></div><div>Каждый день — la app de tests: ensayar (тренировать) 20 минут</div></div>
+        <div class="item"><div class="box"></div><div>La noche antes, descansar (накануне — отдыхать)</div></div>
+        <div class="item"><div class="box"></div><div>Llegar con tiempo (приходить заранее) и не импровизировать — no improvise</div></div>
+        <div class="item"><div class="box"></div><div>Confiar en la práctica (доверяться практике): тесты решали — справитесь</div></div>
+        <div class="item"><div class="box"></div><div>После экзамена (después del examen) записать трудные вопросы для репетиции</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: разговор в автошколе</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Autoescuela Sanz, buenos días. — Buenos días. Quiero apuntarme al examen teórico de la DGT. — Muy bien. ¿Puede pagar la tasa hoy? — ¿La tasa? ¿Cuánto es? — Son 94 euros; la tasa incluye dos convocatorias. — Vale, la pago online ahora mismo. — Perfecto. La convocatoria llega por correo en unos días. — ¿El examen es en inglés? — No, en español: 30 preguntas, tres opciones y máximo 3 errores permitidos. — Entiendo. ¿Y si suspendo? — Si suspende, tiene otra convocatoria sin pagar. — Y si apruebo, ¿cuándo empiezan las prácticas? — La semana siguiente. — Hace falta practicar cada día en la app de tests, ¿no? — Exacto: ensayar con la app, leer despacio y confiar en la práctica. ¡Buena suerte! — Gracias, hasta pronto.»
+      </div>
+      1. ¿Para qué llama la persona a la autoescuela?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuánto cuesta la tasa y qué incluye?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuántas preguntas y cuántos errores tiene el examen?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué pasa si suspende?
+      <span class="wline xlong"></span><br>
+      5. ¿Cuándo empiezan las prácticas si aprueba?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué tres consejos da la autoescuela?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации в автошколе</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Записываетесь на теоретический экзамен.<br>
+        <div class="tmpl">«Quiero apuntarme al examen teórico. ¿Puedo pagar la tasa hoy?»</div>
+        <div class="tmpl-ru">(Хочу записаться на теоретический экзамен. Могу оплатить пошлину сегодня?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Рассказываете, как готовитесь.<br>
+        <div class="tmpl">«Hace falta practicar cada día en la app de tests. Es necesario estudiar los signos.»</div>
+        <div class="tmpl-ru">(Нужно тренироваться каждый день в приложении с тестами. Необходимо учить знаки.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Говорите о сценарии «сдал».<br>
+        <div class="tmpl">«Si apruebo, hago prácticas enseguida.»</div>
+        <div class="tmpl-ru">(Если сдам, еду на практику сразу же.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Спокойный план Б — «не сдал».<br>
+        <div class="tmpl">«Si suspendo, repito. La tasa tiene dos convocatorias.»</div>
+        <div class="tmpl-ru">(Если провалю, повторю. У пошлины есть две попытки / сессии.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Даёте совет другу перед тестом.<br>
+        <div class="tmpl">«Leer despacio. Fijarse en las palabras «no» y «siempre». No improvise.»</div>
+        <div class="tmpl-ru">(Читать медленно. Следить за словами «нет» и «всегда». Не импровизируйте.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: «Mi plan para el examen DGT»</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Цель и срок: antes del examen (перед экзаменом) quiero tener 20 tests hechos.<br>
+        3. Каждый день: la app de tests (приложение с тестами) — ensayar (тренировать) cada día.<br>
+        4. Необходимость: es necesario estudiar (необходимо учить) los signos.<br>
+        5. Техника: leer despacio (читать медленно), fijarse en «no» y «siempre».<br>
+        6. Накануне: la noche antes, descansar (накануне — отдыхать).<br>
+        7. День экзамена: llegar con tiempo (приходить заранее), llevar el DNI (приносить DNI).<br>
+        8. Результат (el resultado): si apruebo, hago prácticas; si suspendo, repito.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Понимать вопросы теста «типа DGT» (la pregunta tipo test)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить о записи на экзамен: la tasa, la convocatoria</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить необходимость: es necesario / hace falta + инфинитив</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить условия: si apruebo / si suspendo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Пройти мини-тест DGT с максимум 2 ошибками</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Объяснить, как устроен экзамен (30 preguntas, 3 errores, tasa 4.2)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок B5: День экзамена (практика)</h2>
+        <div class="tag">comandos del examinador · de arranque a apárquese</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🚗 <b>La teoría — dominada!</b> Вы знаете формулу «30 preguntas, 3 errores», говорите о tasa и convocatoria без словаря. На следующем уроке (B5) — репетиция <b>дня практического экзамена</b>: утро, команды экзаменатора (<i>arranque, continúe, apárquese</i>) и результат. Последний шаг до «¡Felicidades, ha aprobado!».
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

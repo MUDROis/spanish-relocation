@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 49 · El menú y las alergias — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" id="printBtn">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🍽️ El menú y las alergias</h1>
+    <div class="sub">Рабочий лист к Уроку 49 · Станция 5: ¡A Comer! · меню столовой и аллергия («Soy alérgico a...»), приборы за столом</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ ¡Hola, campeón! Сегодня ты настоящий герой столовой: читаешь меню, собираешь обед и — самое важное — говоришь волшебную фразу-щит: <em>«Soy alérgico a...»</em>. ¡Vamos a comer!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини слово столовой и перевод</span>
+      <span class="ex-skill">🗣 Лексика · comedor</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🥣 el comedor</td><td>е) столовая</td></tr>
+      <tr><td><span class="ans-box"></span>📋 el menú</td><td>а) меню</td></tr>
+      <tr><td><span class="ans-box"></span>🍽️ el plato</td><td>к) блюдо / тарелка</td></tr>
+      <tr><td><span class="ans-box"></span>🍲 la sopa</td><td>в) суп</td></tr>
+      <tr><td><span class="ans-box"></span>🍰 el postre</td><td>з) десерт</td></tr>
+      <tr><td><span class="ans-box"></span>🥜 los frutos secos</td><td>г) орехи</td></tr>
+      <tr><td><span class="ans-box"></span>🦐 el marisco</td><td>и) морепродукты</td></tr>
+      <tr><td><span class="ans-box"></span>🥛 la lactosa</td><td>б) лактоза</td></tr>
+      <tr><td><span class="ans-box"></span>🌾 el gluten</td><td>д) глютен</td></tr>
+      <tr><td><span class="ans-box"></span>🤒 me enferma</td><td>ж) меня делает больным</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Угадай слово по описанию</span>
+      <span class="ex-skill">🗣 Лексика · приборы</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>la cuchara · el tenedor · el cuchillo · el vaso · la servilleta · el segundo plato</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🥄</span> Como la sopa con esto. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🍴</span> Cojo la ensalada con esto. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🔪</span> Corto el pescado con esto. ¡Cuidado, corta mucho! → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">💧</span> Bebo agua de esto. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">🧻</span> Limpio la boca con esto. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🍗</span> En el comedor comes esto después de la sopa. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ИСПРАВЬ ОШИБКИ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Исправь ошибки: аллергия за столом</span>
+      <span class="ex-skill">🧩 Грамматика · alergia</span>
+    </div>
+    <div class="hint-box">💡 <strong>Шпаргалка:</strong> soy alérgico a... — у меня аллергия на... · no como... — я не ем... · a + el = al → <em>Soy alérgico al gluten</em> · девочка говорит: <em>soy alérgica</em> · ¿Tiene gluten este pan? — В этом хлебе есть глютен? · ya he terminado — я уже закончил. Найди 4 ошибки, а 2 предложения правильные — рядом поставь ✓!</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Soy alérgico a el gluten. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">2</span>No como los frutos secos. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">3</span>Marina es alérgico al marisco. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">4</span>Me enferma la lactosa. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">5</span>¿Tienes gluten este pan? → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">6</span>Ya he terminando. → <span class="g"></span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: ДОПОЛНИ ДИАЛОГ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Дополни диалог «В столовой»</span>
+      <span class="ex-skill">💬 Диалог · заказ</span>
+    </div>
+    <div class="hint-box">💡 <strong>Шпаргалка:</strong> ¿me pasas...? — передай мне...? · ya he terminado — я уже закончил · la cuchara — ложка · el tenedor — вилка · el cuchillo — нож · el vaso — стакан · la servilleta — салфетка · el segundo plato — второе блюдо · la fruta — фрукт</div>
+    <div class="word-bank">💡 Банк слов: <strong>primero · sopa · alérgico · fruta · ¿me pasas...? · ya he terminado</strong></div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>— ¡Hola! ¿Qué hay de <span class="g"></span> hoy?</div>
+      <div class="gap-item"><span class="num">2</span>— De primero hay <span class="g"></span>. ¿Quieres el menú?</div>
+      <div class="gap-item"><span class="num">3</span>— Sí, pero soy <span class="g"></span> a la lactosa. ¿El postre tiene leche?</div>
+      <div class="gap-item"><span class="num">4</span>— No. El postre es la <span class="g"></span>. Toma el vaso y la servilleta.</div>
+      <div class="gap-item"><span class="num">5</span>— Gracias. <span class="g"></span> la cuchara, por favor?</div>
+      <div class="gap-item"><span class="num">6</span>— Ten. — ¡Gracias! ¡<span class="g"></span>!</div>
+    </div>
+  </div>
+
+  <!-- 5. ПОРЯДОК ОБЕДА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Собери обед по порядку</span>
+      <span class="ex-skill">🔢 Логика · comedor</span>
+    </div>
+    <div class="ex-instruction">Пронумеруй шаги обеда в столовой от 1 до 6 (впиши цифру в квадратик перед шагом).</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🧻</span> Limpio la boca con la servilleta.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🍲</span> Cojo la sopa de primero.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">✅</span> Digo: «ya he terminado».</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🥣</span> Entro en el comedor y leo el menú.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🍎</span> De postre: la fruta.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🍗</span> Como el segundo plato.</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Leo en el comedor» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Leo. Como en el comedor de mi colegio. Leo el menú: de primero hay sopa, de segundo hay pescado y de postre hay fruta. Yo soy alérgico a los frutos secos. Digo a la señora: «Soy alérgico a los frutos secos. No como frutos secos». Ella dice: «No hay problema». Cojo la cuchara y como la sopa. Me pasan el vaso. Uso el tenedor y el cuchillo para el pescado. Limpio la boca con la servilleta. ¡Ya he terminado! ¡El comedor es genial!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Dónde come Leo? <span class="ru">(Где ест Лео?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué hay de primero en el menú? <span class="ru">(Что на первое в меню?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿A qué es alérgico Leo? <span class="ru">(На что у Лео аллергия?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Con qué come el pescado? <span class="ru">(Чем он ест рыбу?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Qué dice Leo al final? <span class="ru">(Что Лео говорит в конце?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Сочинение «Mi menú»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! En mi colegio como en el comedor. · 2) Leo el menú. · 3) De primero hay... · 4) De segundo hay... · 5) De postre hay... · 6) Soy alérgico a... / No como... (o: No tengo alergias) · 7) La cuchara, el tenedor y el vaso están en la mesa. · 8) Cuando acabo, digo: «ya he terminado». ¡Buen provecho!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Понимать меню: primero, segundo, postre</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить «Soy alérgico a...» и «No como...»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Спрашивать «¿Tiene...?» и «¿Me pasas...?»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Называть приборы: cuchara, tenedor, cuchillo, vaso</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Собрать поднос: sopa, segundo, postre, fruta</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Закончить обед: «Ya he terminado»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 5: ¡A Comer! · Урок 49 · ¡Buen provecho! 🍽️</div>
+</div>
+
+<script>
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+</script>
+
+</body>
+</html>

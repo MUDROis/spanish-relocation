@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 20.1 · Экзамен-квест 1 — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'⚔️'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>⚔️ Рабочий лист · Урок 20.1 «Экзамен-квест 1»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Boss Fight 1: el boiler y Hacienda — задания-испытания, повторение Presente + Perfecto</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>⚔️ Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву — оружие против боссов</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. se ha estropeado</div>
+          <div class="item">2. el técnico de guardia</div>
+          <div class="item">3. está en garantía</div>
+          <div class="item">4. el importe</div>
+          <div class="item">5. el plazo</div>
+          <div class="item">6. el justificante</div>
+          <div class="item">7. el IBI</div>
+          <div class="item">8. paso a paso</div>
+        </div>
+        <div class="col">
+          <div class="item">а) срок</div>
+          <div class="item">б) сломался</div>
+          <div class="item">в) шаг за шагом</div>
+          <div class="item">г) квитанция</div>
+          <div class="item">д) дежурный техник</div>
+          <div class="item">е) налог на недвижимость</div>
+          <div class="item">ж) сумма</div>
+          <div class="item">з) на гарантии</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ДВЕ КОРЗИНЫ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🧺 Раздели слова на две корзины</h2>
+        <div class="tag">босс 1: boiler ↔ босс 2: Hacienda</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Банк слов: la avería · el importe · el técnico de guardia · el plazo · se ha estropeado · el justificante · no hay agua caliente · el modelo 790 · urgente · el recibo. Впиши каждое слово в свою корзину.</div>
+      <div class="match">
+        <div class="col">
+          <div class="item">🔥 <b>Корзина 1: boiler — поломка и мастер</b></div>
+          <div class="item">1. <span class="wline long"></span></div>
+          <div class="item">2. <span class="wline long"></span></div>
+          <div class="item">3. <span class="wline long"></span></div>
+          <div class="item">4. <span class="wline long"></span></div>
+          <div class="item">5. <span class="wline long"></span></div>
+        </div>
+        <div class="col">
+          <div class="item">📮 <b>Корзина 2: Hacienda — письмо и налоги</b></div>
+          <div class="item">1. <span class="wline long"></span></div>
+          <div class="item">2. <span class="wline long"></span></div>
+          <div class="item">3. <span class="wline long"></span></div>
+          <div class="item">4. <span class="wline long"></span></div>
+          <div class="item">5. <span class="wline long"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — PRESENTE/PERFECTO, ИСПРАВЬ ОШИБКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: Presente vs Perfecto — исправь ошибки</h2>
+        <div class="tag">найди ошибку и впиши верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>Presente</b> — звонить и спрашивать: <i>Llamo al técnico ahora mismo. No podemos duchar sin agua caliente.</i> (не можем мыться)<br>
+        • <b>Perfecto</b> — статус «случилось и важно сейчас»: <i>se ha estropeado (сломался), he recibido (я получил), hemos pagado</i><br>
+        • <b>Hacienda (налоговая служба):</b> importe (сумма) + plazo (срок) → pagar antes del plazo, guardar el justificante
+      </div>
+
+      <div class="formula">💡 Найди ошибку и впиши верный вариант (если верно — обведи ✓):</div>
+
+      1. «El boiler se ha estropeado esta mañana.» <span class="ru-sub">(верно или нет?)</span><br>
+      → <span class="wline long"></span><br>
+      2. «He recibía una carta de Hacienda.» <span class="ru-sub">(Perfecto: he + participio)</span><br>
+      → <span class="wline long"></span><br>
+      3. «No podamos duchar sin agua caliente.» <span class="ru-sub">(poder: nosotros — podemos)</span><br>
+      → <span class="wline long"></span><br>
+      4. «¿Puede venir hoy por la tarde?» <span class="ru-sub">(верно или нет?)</span><br>
+      → <span class="wline long"></span><br>
+      5. «Hemos pagó el IBI antes del plazo.» <span class="ru-sub">(participio de pagar)</span><br>
+      → <span class="wline long"></span><br>
+      6. «¿Cuánto cuesta la visita?» <span class="ru-sub">(верно или нет?)</span><br>
+      → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ДОПОЛНИ ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🎯 Босс 1: дополни диалог с мастером</h2>
+        <div class="tag">впиши слово в реплику</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Словарь диалога:</b> la avería — поломка · urgente — срочно · la garantía — гарантия · la visita — визит · la llamada — звонок
+      </div>
+
+      <div class="formula">💡 Впиши слово по переводу в скобках:</div>
+
+      — Técnico de guardia: Buenos días, ¿dígame?<br>
+      — Usted: Buenos días, ___ un problema: no hay agua caliente en casa. <span class="ru-sub">(имею)</span><br>
+      — Técnico: Tranquilo. ¿Qué ha pasado?<br>
+      — Usted: El boiler ___ esta mañana. Llevamos toda la mañana sin agua. <span class="ru-sub">(сломался; без воды)</span><br>
+      — Técnico: ¿Es la primera avería? ¿El boiler está en ___? <span class="ru-sub">(гарантия)</span><br>
+      — Usted: Sí, es nuevo. ¿___ venir hoy? <span class="ru-sub">(можете)</span><br>
+      — Técnico: Esta tarde, a las cinco. ¿Le va bien?<br>
+      — Usted: Bien. ¿Cuánto ___ la visita? <span class="ru-sub">(стоит)</span><br>
+      — Técnico: Treinta euros; la pieza, en garantía, gratis. ¿Es urgente?<br>
+      — Usted: Sí, un poco: niños sin baño. <span class="ru-sub">(срочно)</span><br>
+      — Técnico: Vale, lo miro ahora mismo. Paso a paso: primero el boiler, después la revisión.<br>
+      — Usted: Perfecto. ___ su llamada. <span class="ru-sub">(жду вашего звонка)</span><br>
+      — Técnico: Tranquilo, hay solución. Hasta luego.<br>
+      — Usted: Muchas gracias, hasta luego. <span class="ru-sub">(спасибо, до свидания)</span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: el boiler y Hacienda — los dos jefes</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Jefe 1: el boiler</h4>
+        <p>El boiler / el termo (бойлер / водонагреватель) vive en el armario o en el techo del baño y dura unos diez años. Un día: no hay agua caliente (нет горячей воды) — se ha estropeado. Es la avería (поломка) más típica de un piso alquilado. Llama al técnico de guardia y pregunta dos cosas: ¿está en garantía (на гарантии)? y ¿cuánto cuesta la visita? Pide el presupuesto por escrito. Sin agua caliente no se puede duchar: es urgente (срочно), pero respira.</p>
+
+        <h4>Jefe 2: la carta de Hacienda</h4>
+        <p>No la tires a la basura: la carta oficial (официальное письмо) de Hacienda tiene tres datos: el importe (сумма), el plazo (срок) y el modelo (por ejemplo, el modelo 790 — форма 790). Vayas al banco o pague online: pagar antes del... (оплатить до...) la fecha del plazo, y guardar el justificante (квитанция) o el recibo — es su escudo. Cada año llegan cartas parecidas: el IBI (налог на недвижимость), la tasa de basura; en el ayuntamiento también hay una tasa (госпошлина) por la basura: la basura (tasa) (налог на мусор). El impuesto (налог) no es una multa: se declara y se paga — declarar (декларировать) es un verbo tranquilo.</p>
+
+        <h4>Paso a paso</h4>
+        <p>Tranquilo, hay solución (спокойно, решение есть). Si no entiende la carta, pida la cita en Hacienda (запись в налоговую) y siga el ritmo primero..., después... (сначала..., потом...): primero lee, después pregunta, al final todo funciona (в итоге всё работает). El empleado dice «lo miro ahora mismo» (посмотрю сейчас же) y no pasa nada (ничего страшного). Estamos aprendiendo (мы учимся): cada carta es un mini-boss, y usted ya sabe el combo: importe → plazo → justificante.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿A quién llamas si no hay agua caliente?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué dos preguntas hay que hacer sobre la garantía y el precio?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué tres datos tiene la carta de Hacienda?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué hay que guardar después de pagar y por qué?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: carta de Hacienda</h4>
+        <div class="item"><div class="box"></div><div>Прочитать: el importe (сумма) y el plazo (срок)</div></div>
+        <div class="item"><div class="box"></div><div>Найти форму: el modelo (por ejemplo, 790)</div></div>
+        <div class="item"><div class="box"></div><div>Оплатить: pagar antes del plazo — banco u online</div></div>
+        <div class="item"><div class="box"></div><div>Сохранить: el justificante / el recibo</div></div>
+        <div class="item"><div class="box"></div><div>Проверить раз в год: el IBI, la tasa de basura</div></div>
+        <div class="item"><div class="box"></div><div>Не понял — pedir la cita en Hacienda</div></div>
+        <div class="item"><div class="box"></div><div>Спокойствие: tranquilo, hay solución — paso a paso</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: двойной босс — звонок + письмо</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «(Jefe 1) — Empleado: Servicio técnico, buenos días. — Usted: Buenos días, tengo un problema: no hay agua caliente en casa. — Empleado: ¿El boiler se ha estropeado? ¿Desde cuándo? — Usted: Desde esta mañana. Está en garantía. — Empleado: ¿Puede esperar hasta las cinco? — Usted: ¿Qué horario tiene exactamente? ¿Y cuánto cuesta la visita? — Empleado: De nueve a seis; hoy a las cinco, treinta euros, y la pieza en garantía, gratis. — Usted: Perfecto. Espero su llamada. — (Jefe 2) — Usted: He recibido una carta de Hacienda… — Vecina: ¿Qué pone? — Usted: Un importe de ciento veinte euros y un plazo: pagar antes del día veinte. — Vecina: Es el IBI. Paga en el banco, guarda el justificante y tranquilidad: no pasa nada. — Usted: ¿Y si no entiendo el modelo 790? — Vecina: Pide cita en Hacienda. Paso a paso: primero lee, después pregunta, al final todo funciona.»
+      </div>
+      1. ¿Cuál es el problema de usted en el jefe 1?
+      <span class="wline xlong"></span><br>
+      2. ¿Desde cuándo está roto el boiler?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué horario tiene el servicio técnico y cuánto cuesta la visita?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué recibió usted en el jefe 2 y cuál es el plazo?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué aconseja la vecina hacer después de pagar?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué hay que hacer si no entiende el modelo 790?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: реплики против боссов</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Позвонить мастеру.<br>
+        <div class="tmpl">«Buenos días, tengo un problema: no hay agua caliente. ¿Puede venir hoy?»</div>
+        <div class="tmpl-ru">(Здравствуйте, у меня проблема: нет горячей воды. Можете прийти сегодня?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Спросить про цену, часы и гарантию.<br>
+        <div class="tmpl">«¿Cuánto cuesta la visita? ¿Qué horario tiene? El boiler está en garantía.»</div>
+        <div class="tmpl-ru">(Сколько стоит визит? Какие у вас часы? Бойлер на гарантии.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Обсудить письмо из налоговой.<br>
+        <div class="tmpl">«He recibido una carta de Hacienda. ¿Cuál es el plazo?»</div>
+        <div class="tmpl-ru">(Я получил письмо из налоговой. Какой срок?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Составить план оплаты.<br>
+        <div class="tmpl">«Voy a pagar antes del día veinte y guardar el justificante.»</div>
+        <div class="tmpl-ru">(Заплачу до двадцатого числа и сохраню квитанцию.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Сохранить спокойствие.<br>
+        <div class="tmpl">«Tranquilo, hay solución. Paso a paso: primero el boiler, después Hacienda.»</div>
+        <div class="tmpl-ru">(Спокойно, решение есть. Шаг за шагом: сначала бойлер, потом налоговая.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: памятка соседу «Mis dos jefes»</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Босс 1: avería del boiler (se ha estropeado, no hay agua caliente, es urgente).<br>
+        3–4. Llamada al técnico: ¿puede venir hoy?, ¿cuánto cuesta la visita?, ¿está en garantía?<br>
+        5–6. Босс 2: carta de Hacienda (el importe, el plazo, pagar antes del…, guardar el justificante).<br>
+        7. Si no entiendo: la cita en Hacienda.<br>
+        8. Final tranquilo: paso a paso, al final todo funciona.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Звонить мастеру: avería, garantía, presupuesto, ¿cuánto cuesta?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разбирать официальное письмо: importe, plazo, modelo, justificante</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Presente для вопросов: ¿puede venir?, ¿qué horario tiene?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Perfecto для статуса: se ha estropeado, he recibido, hemos pagado</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Платить вовремя: pagar antes del..., guardar el justificante</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Держать спокойствие: no pasa nada, paso a paso, hay solución</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 20.2: Экзамен-квест 2</h2>
+        <div class="tag">Boss Fight 2: compras y el cole</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>¡Jefe 1 derrotado!</b> Boiler починен, письмо из Hacienda оплачено вовремя, justificante — на месте. На следующем уроке (20.2) — <b>второй босс</b>: <i>compras</i> (возвраты, чеки, гарантии магазина) и <i>el cole</i> (школьные записки и разговор с учителем). Тот же арсенал: Presente для вопросов, Perfecto для статуса, paso a paso — tranquilo.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

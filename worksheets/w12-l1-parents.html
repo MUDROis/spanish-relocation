@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 12.1 · Общественный транспорт — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🚌'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🚌 Рабочий лист · Урок 12.1 «Общественный транспорт»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · El transporte público: abono, маршруты, Imperativo: Siga, Gire, Tome, Valide</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🎫 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el abono transportes</div>
+          <div class="item">2. el andén</div>
+          <div class="item">3. siga todo recto</div>
+          <div class="item">4. ¿cuántas paradas?</div>
+          <div class="item">5. el billete de ida y vuelta</div>
+          <div class="item">6. el validador</div>
+          <div class="item">7. ¿con qué frecuencia?</div>
+          <div class="item">8. el saldo</div>
+        </div>
+        <div class="col">
+          <div class="item">а) платформа</div>
+          <div class="item">б) транспортная карта</div>
+          <div class="item">в) сколько остановок?</div>
+          <div class="item">г) баланс</div>
+          <div class="item">д) идите прямо</div>
+          <div class="item">е) валидатор</div>
+          <div class="item">ж) билет туда-обратно</div>
+          <div class="item">з) как часто ходит?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🚏 Впиши слово по описанию</h2>
+        <div class="tag">остановки, линии, билеты</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Место у дороги со знаком и навесом, где ждут автобус. → <span class="wline long"></span><br>
+      2. Карта без имени владельца: купил — и на ней уже десять поездок. → <span class="wline long"></span><br>
+      3. Поезд, который связывает город с пригородами и ходит часто. → <span class="wline long"></span><br>
+      4. Городской транспорт на рельсах посреди улицы: тише автобуса. → <span class="wline long"></span><br>
+      5. Автомат на вокзале: принимает деньги и карту, выдаёт билеты. → <span class="wline long"></span><br>
+      6. Красная «полоса» на карте метро, по которой идёт поезд: это... → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — IMPERATIVO, ПРОПУСКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧭 Грамматика: Imperativo — команды станции</h2>
+        <div class="tag">заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило (usted):</b> -ar → <b>-e</b> (tome), -er / -ir → <b>-a</b> (siga)<br>
+        • Команды станции: <b>valide el billete</b> — прокомпостируйте билет · <b>tome la línea uno</b> — сядьте на первую линию<br>
+        • Вопросы пассажира: <b>¿qué línea va a...?</b> — какая линия идёт в...? · <b>¿cuántas paradas?</b> — сколько остановок?
+      </div>
+
+      <div class="formula">💡 Впиши команду в нужной форме:</div>
+
+      1. ___ todo recto hasta el andén dos. <span class="ru-sub">(идите прямо)</span><br>
+      2. ___ a la derecha en la taquilla. <span class="ru-sub">(поверните направо)</span><br>
+      3. ___ la línea uno hasta el centro. <span class="ru-sub">(сядьте на первую линию)</span><br>
+      4. ___ el billete al entrar. <span class="ru-sub">(прокомпостируйте билет)</span><br>
+      5. ___ en la próxima parada. <span class="ru-sub">(выйдите на следующей)</span><br>
+      6. ___ de línea en la próxima estación. <span class="ru-sub">(пересаживайтесь)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА IMPERATIVO + ПРАКТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: строим команду (usted)</h2>
+        <div class="tag">таблица + образуй форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> команды <b>siga / gire / tome / valide</b>. Остальные формы — для распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Глагол</th>
+          <th>Команда (usted)</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">seguir</td><td class="practice">siga — идите / продолжайте</td><td class="practice">Siga todo recto hasta el andén dos.</td></tr>
+        <tr><td class="practice">girar</td><td class="practice">gire — поверните</td><td class="practice">Gire a la derecha en la taquilla.</td></tr>
+        <tr><td class="practice">tomar</td><td class="practice">tome — возьмите / поезжайте</td><td class="practice">Tome la línea dos hasta Sol.</td></tr>
+        <tr><td class="practice">validar</td><td class="practice">valide — прокомпостируйте</td><td class="practice">Valide el billete al entrar.</td></tr>
+        <tr><td class="reference">bajar</td><td class="reference">baje — выходите</td><td class="reference">Baje en la próxima parada.</td></tr>
+        <tr><td class="reference">cambiar</td><td class="reference">cambie — пересаживайтесь</td><td class="reference">Cambie de línea en la próxima estación.</td></tr>
+        <tr><td class="reference">disculpar</td><td class="reference">disculpe — извините</td><td class="reference">Disculpe, ¿dónde está el validador?</td></tr>
+      </table>
+
+      <div class="formula">💡 Образуй команду (usted):</div>
+
+      1. Escuchar: «___ más despacio, por favor.» <span class="ru-sub">(послушайте)</span><br>
+      2. Pulsar: «___ el botón de la línea uno.» <span class="ru-sub">(нажмите)</span><br>
+      3. Hacer: «___ la fila aquí.» <span class="ru-sub">(сделайте / займите)</span><br>
+      4. Poner: «___ la tarjeta aquí.» <span class="ru-sub">(положите)</span><br>
+      5. Ir: «___ al andén tres.» <span class="ru-sub">(идите)</span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: abono transportes в Испании</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Zonas tarifarias: A, B1, B2, B3</h4>
+        <p>Las ciudades dividen el transporte en zonas: la <b>zona</b> A es el centro de la ciudad, B1, B2 y B3 son los suburbios, cada vez más lejos. El precio del abono depende de las zonas que cruzas. Si vives y trabajas en la ciudad, te basta la zona A; si vienes del pueblo, necesitas dos zonas.</p>
+
+        <h4>Abono vs bonometro</h4>
+        <p>El <b>abono transportes</b> es personal, con tu foto: cuesta unos treinta euros al mes y sirve para el autobús, el metro y el tranvía. La <b>bonometro</b> son diez viajes sin nombre. Regla fácil: viajas cada día — abono; una vez a la semana — bonometro. Hay también tarifa reducida para jubilados y billete sencillo para un viaje.</p>
+
+        <h4>Valide siempre</h4>
+        <p>En el metro valida al pasar el molinete; en el autobús, junto al conductor; en Cercanías, antes de bajar al andén. Sin validar es como viajar sin billete: los inspectores ponen una multa. Recargar el abono es fácil: en la taquilla, en la máquina de billetes o en el estanco.</p>
+      </div>
+
+      <div class="note" style="margin-top:2mm">
+        📋 <b>Словарик тарифов:</b> la tarifa — тариф · reducida — льготный · sencillo — разовый · gratuito / gratis — бесплатно · la bonometro — поездки по карте · recargar — пополнять · la zona — зона (тарифная)
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué es la zona A?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué diferencia hay entre el abono y la bonometro?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pasa si no validas el billete?
+      <span class="wline xlong"></span><br>
+      4. ¿Dónde puedes recargar el abono?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист покупки абонемента в кассе</h4>
+        <div class="item"><div class="box"></div><div>Сказать: Quisiera un abono transportes, por favor</div></div>
+        <div class="item"><div class="box"></div><div>Уточнить зону: Para la zona A, por favor</div></div>
+        <div class="item"><div class="box"></div><div>Сказать тип: personal con foto / para mi hijo</div></div>
+        <div class="item"><div class="box"></div><div>Спросить про оплату: ¿Puedo pagar con tarjeta?</div></div>
+        <div class="item"><div class="box"></div><div>Уточнить пополнение: ¿Dónde puedo recargar cada mes?</div></div>
+        <div class="item"><div class="box"></div><div>Проверить имя и фото на карте</div></div>
+        <div class="item"><div class="box"></div><div>Спросить: ¿Dónde valido el billete al entrar?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: в кассе вокзала</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Taquilla de la estación de Cercanías, buenos días. — Buenos días. Quisiera un abono transportes, por favor. — ¿Para una zona o dos? — Para la zona A: vivo y trabajo en la ciudad. — ¿Es personal, con foto? — Sí, para mí. — Son treinta euros. ¿Paga con tarjeta o en efectivo? — Con tarjeta. Una pregunta: ¿dónde puedo recargar el mes que viene? — Aquí, en la taquilla, o en la máquina de billetes del vestíbulo. — Gracias. Y mi hijo va al colegio en autobús: ¿cuántas paradas son hasta el colegio? — Depende de la línea. La parada está a la salida, a la derecha. — ¿Y cuánto tarda el viaje? — Unos veinte minutos. — Perfecto, muchas gracias. — De nada. ¡Buen día!»
+      </div>
+
+      <div class="note blue">
+        💬 <b>Слова для ответов:</b> la estación — станция / вокзал · la parada — остановка · la máquina de billetes — автомат с билетами · la línea — линия / маршрут · Cercanías — пригородные электрички · ¿cuánto tarda? — сколько ехать?
+      </div>
+
+      1. ¿Qué quiere comprar el padre?
+      <span class="wline xlong"></span><br>
+      2. ¿Para qué zona?
+      <span class="wline xlong"></span><br>
+      3. ¿Dónde puede recargar el abono?
+      <span class="wline xlong"></span><br>
+      4. ¿Cómo va el hijo al colegio?
+      <span class="wline xlong"></span><br>
+      5. ¿Dónde está la parada?
+      <span class="wline xlong"></span><br>
+      6. ¿Cuánto tarda el viaje?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: вопросы пассажира</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы спрашиваете у прохожего, какая линия идёт в центр.<br>
+        <div class="tmpl">«Disculpe, ¿qué línea va al centro?»</div>
+        <div class="tmpl-ru">(Извините, какая линия идёт в...?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы на остановке уточняете, тот ли это автобус.<br>
+        <div class="tmpl">«¿Este autobús va a la playa?»</div>
+        <div class="tmpl-ru">(Этот автобус идёт в...?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы спрашиваете, как часто ходит автобус.<br>
+        <div class="tmpl">«¿Con qué frecuencia pasa el autobús?»</div>
+        <div class="tmpl-ru">(Как часто ходит?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы интересуетесь временем отправления последнего поезда.<br>
+        <div class="tmpl">«¿A qué hora sale el último tren?»</div>
+        <div class="tmpl-ru">(Во сколько отправление?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы узнаёте, где пополнить транспортную карту.<br>
+        <div class="tmpl">«¿Dónde puedo recargar el abono?»</div>
+        <div class="tmpl-ru">(Где можно пополнить?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: «Mi ruta al colegio»</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. С чего начинается маршрут: primero voy a la parada del autobús / al metro.<br>
+        3. Чем едете: el autobús (автобус), el metro (метро) или el tranvía (трамвай).<br>
+        4. Какая линия и сколько остановок: tomo la línea veintisiete, son seis paradas.<br>
+        5. Что делают при входе: valide el billete / valido el billete.<br>
+        6. Сколько ехать: el viaje tarda veinte minutos.<br>
+        7. Где пополнить карту: ¿dónde puedo recargar? — en la máquina de billetes.<br>
+        8. Прощание: muchas gracias / hasta luego.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>¿a qué hora sale?</b> — во сколько отправление? · <b>¿este autobús va a...?</b> — этот автобус идёт в...?
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Просить карту: quisiera un abono transportes</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать команды станции: siga, gire, tome, valide</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Спрашивать о маршруте: ¿qué línea va a...?, ¿cuántas paradas?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Знать тарифные зоны: A, B1, B2, B3</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать объявления: próxima estación, cambio con...</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Валидировать билет и пополнять abono</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 12.2: Парковка и ORA</h2>
+        <div class="tag">предлоги направления: hacia, hasta, por + императив</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете покупать abono, спрашивать маршрут и понимать команды станции. На следующем уроке (12.2) садимся за руль: зоны ORA, parquímetro, ticket под лобовое стекло — и объясняем дорогу с предлогами <i>hacia / hasta / por</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

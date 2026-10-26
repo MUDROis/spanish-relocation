@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 10.2 · Психолог в школе — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🧠'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🧠 Рабочий лист · Урок 10.2 «Психолог в школе»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · разговор со школой, 7 неправильных причастий + me preocupa / he notado que</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🧠 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el orientador escolar</div>
+          <div class="item">2. el acoso escolar</div>
+          <div class="item">3. sentirse solo</div>
+          <div class="item">4. me preocupa</div>
+          <div class="item">5. hecho</div>
+          <div class="item">6. visto</div>
+          <div class="item">7. el seguimiento</div>
+          <div class="item">8. poco a poco</div>
+        </div>
+        <div class="col">
+          <div class="item">а) наблюдение</div>
+          <div class="item">б) сделанный</div>
+          <div class="item">в) школьный психолог</div>
+          <div class="item">г) постепенно</div>
+          <div class="item">д) травля (буллинг)</div>
+          <div class="item">е) увиденный</div>
+          <div class="item">ж) чувствовать себя одиноким</div>
+          <div class="item">з) меня беспокоит</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>😟 Впиши слово по описанию</h2>
+        <div class="tag">поддержка и сигналы ребёнка</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Отдел школы, где работают с эмоциями, адаптацией и буллингом. → <span class="wline long"></span><br>
+      2. Помощь, которую предлагает orientador: разговоры и занятия для чувств ребёнка. → <span class="wline long"></span><br>
+      3. Состояние ребёнка перед контрольной или при перегрузке. → <span class="wline long"></span><br>
+      4. Занятия с психологом — обычно раз в неделю. → <span class="wline long"></span><br>
+      5. Слёзы ребёнка в школе — важный сигнал для взрослых. → <span class="wline long"></span><br>
+      6. Ребёнок стал заметно тише, меньше говорит. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — НЕПРАВИЛЬНЫЕ ПРИЧАСТИЯ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: неправильные причастия</h2>
+        <div class="tag">заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • Pretérito Perfecto: <b>he / has / ha / hemos / habéis / han</b> + причастие<br>
+        • Регулярные: -ar → <b>-ado</b> (hablado, notado), -er/-ir → <b>-ido</b> (sentido)<br>
+        • 7 неправильных (без ударения на -ído): <b>hecho, dicho, visto, escrito, abierto, puesto, roto</b><br>
+        • Конструктор беспокойства: <b>He notado que...</b> (наблюдение) → <b>Me preocupa que...</b> (чувство) → <b>¿Puede ayudarle?</b> (просьба)
+      </div>
+
+      <div class="formula">💡 Впиши правильное причастие:</div>
+
+      1. Ha ___ pocos amigos. <span class="ru-sub">(hacer — сделал)</span><br>
+      2. Ha ___ que el patio le da estrés. <span class="ru-sub">(decir — сказал)</span><br>
+      3. La tutora ha ___ lo mismo. <span class="ru-sub">(ver — увидела)</span><br>
+      4. El orientador ha ___ un informe. <span class="ru-sub">(escribir — написал)</span><br>
+      5. La puerta del despacho está ___. <span class="ru-sub">(abrir — открыта)</span><br>
+      6. He ___ las cartas de las emociones en la mesa. <span class="ru-sub">(poner — положил)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА + КОНСТРУКТОР БЕСПОКОЙСТВА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🗣 Грамматика: конструктор беспокойства</h2>
+        <div class="tag">таблица + впиши конструкцию</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> hecho, dicho, visto, escrito — наизусть. Открытые/справочные строки — для распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Инфинитив</th>
+          <th>Причастие</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">hacer</td><td class="practice">hecho</td><td class="practice">¿Has hecho la cita con el orientador?</td></tr>
+        <tr><td class="practice">decir</td><td class="practice">dicho</td><td class="practice">Ha dicho que se siente solo.</td></tr>
+        <tr><td class="practice">ver</td><td class="practice">visto</td><td class="practice">La tutora ha visto lo mismo.</td></tr>
+        <tr><td class="practice">escribir</td><td class="practice">escrito</td><td class="practice">El orientador ha escrito un informe.</td></tr>
+        <tr><td class="reference">abrir</td><td class="reference">abierto</td><td class="reference">La puerta del despacho está abierta.</td></tr>
+        <tr><td class="reference">poner</td><td class="reference">puesto</td><td class="reference">Ha puesto las cartas de emociones sobre la mesa.</td></tr>
+        <tr><td class="reference">romper</td><td class="reference">roto</td><td class="reference">Nada está roto: solo necesita tiempo.</td></tr>
+        <tr><td class="reference">hablar (regular)</td><td class="reference">hablado</td><td class="reference">Hemos hablado con la tutora.</td></tr>
+      </table>
+
+      <div class="formula">💡 Свяжи наблюдение, чувство и просьбу:</div>
+
+      1. ___ que está más callado en clase. <span class="ru-sub">(я заметил, что)</span> → <span class="wline short"></span><br>
+      2. ___ que no quiere ir al cole. <span class="ru-sub">(меня беспокоит, что)</span> → <span class="wline short"></span><br>
+      3. ___ que el patio le da estrés. <span class="ru-sub">(он сказал, что)</span> → <span class="wline short"></span><br>
+      4. ___ dos veces con la tutora. <span class="ru-sub">(мы поговорили)</span> → <span class="wline short"></span><br>
+      5. ¿___ con la adaptación? <span class="ru-sub">(вы можете ему помочь?)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: el departamento de orientación</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El departamento de orientación</h4>
+        <p>En las escuelas españolas hay un departamento de orientación. El orientador escolar da el apoyo emocional y ayuda a los niños con las emociones, la adaptación y el estrés. También atiende casos de acoso escolar. Los padres no van solos: primero hablan con la tutora y ella pide cita.</p>
+
+        <h4>¿Cómo funciona?</h4>
+        <p>La familia dice: «He notado que mi hijo está más callado». Después empiezan las sesiones con el orientador, normalmente semanalmente. El orientador hace un seguimiento y escribe un informe para la familia.</p>
+
+        <h4>No hay etiquetas</h4>
+        <p>Ir al orientador no es grave: es normal. Estar nervioso ante un examen es normal; estar triste unos días también. Pero no querer ir al cole o llorar en clase muchas semanas es una señal. La paciencia y la confianza: poco a poco, los niños van mejor. El objetivo es mejorar, sin prisa.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Quién ayuda a los niños en el departamento de orientación?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué dice la familia primero al orientador o a la tutora?
+      <span class="wline xlong"></span><br>
+      3. ¿Con qué frecuencia son las sesiones?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué señal es importante: llorar en clase una vez o muchas semanas?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист встречи с orientador</h4>
+        <div class="item"><div class="box"></div><div>Записаться через tutora (ella pide cita)</div></div>
+        <div class="item"><div class="box"></div><div>Подготовить 2–3 факта: he notado que...</div></div>
+        <div class="item"><div class="box"></div><div>Назвать сигналы: no querer ir al cole, llorar en clase, estar más callado</div></div>
+        <div class="item"><div class="box"></div><div>Пересказать слова ребёнка: ha dicho que...</div></div>
+        <div class="item"><div class="box"></div><div>Спросить: ¿puede ayudarle? / cómo son las sesiones</div></div>
+        <div class="item"><div class="box"></div><div>Уточнить el seguimiento: когда снова встретимся</div></div>
+        <div class="item"><div class="box"></div><div>Дома: la paciencia, poco a poco, sin prisa</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: встреча с orientador</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Departamento de orientación, buenos días. — Buenos días. Soy la madre de Leo, de 2º de Primaria. Me preocupa que está muy callado en clase. — Entiendo. ¿Ha hablado con la tutora? — Sí, hemos hablado dos veces. La tutora ha visto lo mismo. — ¿Y en casa? ¿Ha dicho algo Leo? — Ha dicho que se siente solo en el patio. Ha hecho pocos amigos en clase. — ¿Desde cuándo veis este cambio? — Desde septiembre. Además, no quiere ir al cole por la mañana. — Propongo tres sesiones de apoyo emocional, semanalmente. Después hacemos un seguimiento. — ¿Puede ayudarle con la adaptación? — Sí, claro. Poco a poco. Yo escribo un informe para vosotros. — Muchas gracias. Hasta luego.»
+      </div>
+      1. ¿Quién llama y por qué?
+      <span class="wline xlong"></span><br>
+      2. ¿Quién más ha visto el cambio?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué ha dicho Leo sobre el patio y los amigos?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuántas sesiones propone el orientador?
+      <span class="wline xlong"></span><br>
+      5. ¿Con qué frecuencia son las sesiones?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué hace el orientador al final?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: разговор со школой</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Сообщить наблюдение учителю.<br>
+        <div class="tmpl">«He notado que Leo está más callado en clase.»</div>
+        <div class="tmpl-ru">(Я заметил, что Лео стал молчаливее на уроках.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Назвать беспокойство.<br>
+        <div class="tmpl">«Me preocupa que no quiera ir al cole.»</div>
+        <div class="tmpl-ru">(Меня беспокоит, что он не хочет идти в школу.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Сказать, что уже говорили с ребёнком.<br>
+        <div class="tmpl">«Sí, hemos hablado con él esta semana.»</div>
+        <div class="tmpl-ru">(Да, мы с ним говорили на этой неделе.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Пересказать слова ребёнка.<br>
+        <div class="tmpl">«Ha dicho que se siente solo en el patio.»</div>
+        <div class="tmpl-ru">(Он сказал, что чувствует себя одиноким на перемене во дворе.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Попросить поддержку.<br>
+        <div class="tmpl">«Necesitamos apoyo. ¿Puede ayudarle? ¿Las sesiones son semanalmente?»</div>
+        <div class="tmpl-ru">(Нам нужна поддержка. Вы можете ему помочь? Сессии — еженедельно?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: запрос поддержки для ребёнка</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1. Приветствие (Buenos días, soy la madre / el padre de...).<br>
+        2. Наблюдение (He notado que...).<br>
+        3. Сигналы (está más callado / llora en clase).<br>
+        4. Слова ребёнка (Ha dicho que...).<br>
+        5. Беспокойство (Me preocupa que...).<br>
+        6. Что уже сделали (Hemos hablado con él / con la tutora).<br>
+        7. Просьба и цель (Necesitamos apoyo, ¿puede ayudarle? Queremos mejorar la confianza).<br>
+        8. Прощание (Muchas gracias, poco a poco).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>el departamento de orientación</b> — отдел поддержки · <b>el apoyo emocional</b> — эмоциональная поддержка · <b>el estrés</b> — стресс · <b>la adaptación</b> — адаптация · <b>las emociones</b> — эмоции · <b>estar triste</b> — быть грустным · <b>estar nervioso</b> — нервничать · <b>tener miedo</b> — бояться · <b>llorar en clase</b> — плакать в классе · <b>no querer ir al cole</b> — не хотеть идти в школу · <b>estar más callado</b> — стать молчаливее · <b>ha hecho pocos amigos</b> — он завёл мало друзей · <b>abierto</b> — открытый · <b>dicho</b> — сказанный · <b>puesto</b> — положенный · <b>escrito</b> — написанный · <b>roto</b> — сломанный · <b>las sesiones</b> — сессии (занятия) · <b>mejorar</b> — улучшать · <b>la confianza</b> — доверие · <b>la paciencia</b> — терпение
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Выражать беспокойство: me preocupa, he notado que...</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Неправильные причастия: hecho, dicho, visto, escrito, abierto, puesto, roto</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Словарь поддержки: orientador, apoyo emocional, sesiones, seguimiento</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описывать чувства ребёнка: estar triste, tener miedo, sentirse solo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать систему: departamento de orientación, adaptación, acoso escolar</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть встречу с психологом школы</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 10.3: CHECKPOINT 2 · Ревизия блока</h2>
+        <div class="tag">симуляция «Утро понедельника» + квиз-босс + botiquín</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете спокойно и по фактам говорить со школой: <i>he notado que..., me preocupa...</i>. На следующем уроке — CHECKPOINT: симуляция «Утро понедельника» на 4 станции, квиз-босс по всему блоку и главный продукт — <b>реальная аптечка (botiquín)</b> для дома.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

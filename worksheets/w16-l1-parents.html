@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 16.1 · Аудит родительского чата — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'💬'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>💬 Рабочий лист · Урок 16.1 «Аудит родительского чата»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · El chat de padres: сленг, этикет · косвенная речь: dice que...</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>💬 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el grupo de WhatsApp</div>
+          <div class="item">2. wapa / guapa</div>
+          <div class="item">3. ha dicho que...</div>
+          <div class="item">4. la salida</div>
+          <div class="item">5. apuntado</div>
+          <div class="item">6. el administrador del grupo</div>
+          <div class="item">7. gracias de antemano</div>
+          <div class="item">8. el disfraz</div>
+        </div>
+        <div class="col">
+          <div class="item">а) записан (я в деле)</div>
+          <div class="item">б) он сказал, что...</div>
+          <div class="item">в) админ группы</div>
+          <div class="item">г) красавица (приветствие)</div>
+          <div class="item">д) выезд / выход</div>
+          <div class="item">е) группа в WhatsApp</div>
+          <div class="item">ж) костюм</div>
+          <div class="item">з) спасибо заранее</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ДВЕ КОРЗИНЫ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🗑️ Раздели слова на две корзины</h2>
+        <div class="tag">впиши номер слова в нужную строку</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Банк слов: 1. dice que... · 2. apuntado · 3. pregunta si... · 4. contad conmigo · 5. ha dicho que... · 6. yo también · 7. nos avisa que... · 8. vale, gracias · 9. me ha escrito que... · 10. qué fuerte</div>
+      <div class="match">
+        <div class="col">
+          <div class="item" style="justify-content:center;background:#E8F4FB"><b>🔁 Пересказ новости (косвенная речь)</b></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+        </div>
+        <div class="col">
+          <div class="item" style="justify-content:center;background:#F0F7E6"><b>👍 Реакция в чате (ответ)</b></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+          <div class="item">Nº <span class="wline short"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — КОСВЕННАЯ РЕЧЬ, ИСПРАВЬ ОШИБКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🔍 Грамматика: косвенная речь, исправь ошибки</h2>
+        <div class="tag">найди ошибку и впиши верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> <b>dice que / ha dicho que</b> + фраза КАК ЕСТЬ.<br>
+        • Вопрос → <b>pregunta si...</b> (знак ¿? пропадает) · Предупреждение → <b>nos avisa que...</b><br>
+        • Времена НЕ сдвигаются, как в английском: «Dijo que viene mañana» — норма.
+      </div>
+
+      <div class="formula">💡 Найди ошибку и впиши верный вариант:</div>
+
+      1. «Dijo que venía mañana a la excursión.» <span class="ru-sub">(времена не сдвигаются!)</span><br>
+      → <span class="wline long"></span><br>
+      2. «Pregunta que vengo a la salida.» <span class="ru-sub">(вопрос в косвенной речи → si)</span><br>
+      → <span class="wline long"></span><br>
+      3. «Ha dice que el dinero es antes del viernes.» <span class="ru-sub">(причастие от decir)</span><br>
+      → <span class="wline long"></span><br>
+      4. «Pregunta si hay excursión mañana?» <span class="ru-sub">(косвенный вопрос — без ¿?)</span><br>
+      → <span class="wline long"></span><br>
+      5. «Dice la profe que hayan examen el viernes.» <span class="ru-sub">(после dice que — обычная форма)</span><br>
+      → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ФОРМУЛА DICE QUE -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🔁 Грамматика: формула dice que + фраза как есть</h2>
+        <div class="tag">таблица + впиши связку</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Хорошая новость:</b> в испанском <b>нет сдвига времён</b>. Пересказывайте прямо: <i>Dice que mañana hay excursión.</i>
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Прямая речь (в аудио)</th>
+          <th>Косвенная речь (в чате)</th>
+        </tr>
+        <tr><td class="practice">«Mañana hay excursión.»</td><td class="practice">Dice que mañana hay excursión.</td></tr>
+        <tr><td class="practice">«El dinero es antes del viernes.»</td><td class="practice">Ha dicho que el dinero es antes del viernes.</td></tr>
+        <tr><td class="practice">«¿Vienes a la salida?»</td><td class="practice">Pregunta si voy a la salida.</td></tr>
+        <tr><td class="reference">«Ojo: el plazo acaba el lunes.»</td><td class="reference">Nos avisa que el plazo acaba el lunes.</td></tr>
+        <tr><td class="reference">«La salida es a las nueve.»</td><td class="reference">Me ha escrito que la salida es a las nueve.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши связку: dice que / pregunta si / nos avisa que / ha dicho que / me ha escrito que:</div>
+
+      1. «Mañana hay excursión.» → ___ mañana hay excursión. <span class="ru-sub">(она говорит)</span> → <span class="wline short"></span><br>
+      2. «¿Vienes a la salida?» → ___ voy a la salida. <span class="ru-sub">(она спрашивает)</span> → <span class="wline short"></span><br>
+      3. «Ojo: el plazo acaba el lunes.» → ___ el plazo acaba el lunes. <span class="ru-sub">(она предупреждает)</span> → <span class="wline short"></span><br>
+      4. «La salida es a las nueve.» → ___ la salida es a las nueve. <span class="ru-sub">(она мне написала)</span> → <span class="wline short"></span><br>
+      5. «El dinero es antes del viernes.» → ___ el dinero es antes del viernes. <span class="ru-sub">(только что сказала)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: этикет родительского чата</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El grupo y sus reglas</h4>
+        <p>Cada clase tiene un grupo de WhatsApp con los padres. La madre delegada es el <b>administrador del grupo</b>: escribe las noticias y fija el mensaje importante («mensaje fijo»). Las normas de oro: nada de audios largos, nada de fotos de los niños sin permiso y los temas de dinero, siempre en privado, no en el grupo.</p>
+
+        <h4>El audio y el tono</h4>
+        <p>Los <b>audios</b> son normales en España: la gente habla y no escribe. Pero en el chat del cole es mejor un mensaje corto: se lee en diez segundos y se puede releer. Y cuidado con el horario: un audio a las once de la noche molesta; lo normal es escribir entre las nueve y las veinte. Si te equivocas, un «perdón, se me ha ido» arregla todo.</p>
+
+        <h4>Contestar y apuntarse</h4>
+        <p>Para apuntarse a una excursión se escribe <b>«apuntado»</b> o <b>«contad conmigo»</b>. Si piden voluntarios, responde «yo también». Y siempre cierra con «<b>gracias de antemano</b>». Si no sabías la noticia, «no lo sabía, gracias». Y si es algo increíble: «¡qué fuerte!». En la esquina, «vale, gracias» confirma que has leído sin escribir un párrafo.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Quién es el administrador del grupo y qué hace?
+      <span class="wline xlong"></span><br>
+      2. ¿Por qué es mejor un mensaje corto que un audio largo?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué escribes para apuntarte a la excursión?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué temas se hablan en privado, no en el grupo?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: пишем в чат 3ºB</h4>
+        <div class="item"><div class="box"></div><div>Приветствие по делу: Buenas, soy la madre de Leo de 3ºB</div></div>
+        <div class="item"><div class="box"></div><div>«wapa / guapa» — только с близкими; в общий чат — нейтральный тон</div></div>
+        <div class="item"><div class="box"></div><div>Вопрос по делу: ¿el dinero para la excursión es antes del viernes?</div></div>
+        <div class="item"><div class="box"></div><div>Реакция коротко: apuntado / contad conmigo / vale, gracias</div></div>
+        <div class="item"><div class="box"></div><div>Не писать ночью: между 9:00 и 20:00</div></div>
+        <div class="item"><div class="box"></div><div>Деньги и личное — в приват, не в общий чат</div></div>
+        <div class="item"><div class="box"></div><div>Прослушал аудио? Ответь: no lo sabía, gracias / ¡qué fuerte!</div></div>
+      </div>
+
+      <div class="note" style="margin-top:3mm">
+        📚 <b>Словарик урока:</b><br>
+        💬 el grupo de WhatsApp — группа в WhatsApp · el chat de la clase — чат класса · el mensaje — сообщение · el audio — голосовое · contestar / responder — отвечать · escribir — писать · el administrador del grupo — админ группы<br>
+        🤙 wapa / guapa — красавица (приветствие) · profe — учитель (сокр.) · el finde — выходные (сокр.) · tqm = te quiero mucho — целую-обнимаю · k tal = ¿qué tal? — как дела? · x favor = por favor — пожалуйста (сокр.) · dtb = dtb (dios te bendiga) — благослови тебя бог<br>
+        🔁 dice que... — он говорит, что... · ha dicho que... — он сказал, что... · me ha escrito que... — он мне написал, что... · dice la profe que... — учительница говорит, что... · nos avisa que... — он нас предупреждает, что... · pregunta si... — спрашивает, ... · comenta que... — комментирует, что...<br>
+        🏫 la excursión — экскурсия · la salida — выезд / выход · el dinero para... — деньги на... · la firma del papel — подписать бумажку · el cumpleaños — день рождения · la fiesta del cole — школьный праздник · el disfraz — костюм<br>
+        👍 apuntado — записан (я в деле) · contad conmigo — считайте на меня · yo también — я тоже · vale, gracias — окей, спасибо · gracias de antemano — спасибо заранее · no lo sabía — не знал · qué fuerte — ничего себе
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: пересказ аудио из чата</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— ¿Has escuchado los audios de la delegada? — Dos: uno largo y uno corto. Escúchalos, que son importantes. — Vale, ¿y qué dice? — Dice que mañana hay excursión al parque y que el dinero es antes del viernes. — ¿Cuánto es? — Cinco euros. Ha dicho que los niños van con disfraz de vaquero. — ¿Vaquero? No tengo disfraz... — Tranquilo: pregunta si basta con un sombrero. — Le escribo ahora: «Buenas, ¿un sombrero vale?» — Contesta: «Vale, gracias. Es para la foto del grupo». — ¿Algo más? — Nos avisa que hay que firmar el papel antes del jueves, es la firma del papel de la excursión. — Ya lo he firmado. Y yo ya he escrito «apuntado» en el grupo. — ¡Qué fuerte, un día entero en el parque y sin ordenadores!»
+      </div>
+      1. ¿Cuántos audios ha enviado la delegada?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué dice que hay mañana y cuándo es el dinero?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuánto cuesta la excursión?
+      <span class="wline xlong"></span><br>
+      4. ¿Con qué van los niños y qué propone el padre?
+      <span class="wline xlong"></span><br>
+      5. ¿Para qué es el sombrero según la delegada?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué avisa que hay que hacer antes del jueves?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации в чате класса</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Пересказать новость от учительницы.<br>
+        <div class="tmpl">«Dice la profe que mañana hay excursión al parque.»</div>
+        <div class="tmpl-ru">(Учительница говорит, что завтра экскурсия в парк.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Пересказать вопрос учительницы.<br>
+        <div class="tmpl">«Pregunta si vamos a la salida con el disfraz puesto.»</div>
+        <div class="tmpl-ru">(Спрашивает, идём ли мы на выезд в костюме.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Записаться на экскурсию в чате.<br>
+        <div class="tmpl">«Apuntado. Contad conmigo para la excursión del viernes.»</div>
+        <div class="tmpl-ru">(Записан. Считайте на меня для экскурсии в пятницу.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Поблагодарить организаторов.<br>
+        <div class="tmpl">«Vale, gracias. Gracias de antemano por organizarlo.»</div>
+        <div class="tmpl-ru">(Окей, спасибо. Спасибо заранее за организацию.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Удивиться новости.<br>
+        <div class="tmpl">«¿Un día entero en el parque? ¡Qué fuerte! No lo sabía.»</div>
+        <div class="tmpl-ru">(Целый день в парке? Ничего себе! Я не знал.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: пересказ четырёх аудио в чате</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1. Прослушать аудио два раза (в наушниках, не ночью).<br>
+        2. Выписать ключевые слова: excursión, dinero, disfraz, firma.<br>
+        3. Пересказ 1: Dice que mañana hay excursión...<br>
+        4. Пересказ 2: Ha dicho que el dinero es antes del viernes.<br>
+        5. Пересказ 3 (вопрос): Pregunta si...<br>
+        6. Пересказ 4 (предупреждение): Nos avisa que...<br>
+        7. Ответ-реакция: apuntado / contad conmigo / gracias de antemano.<br>
+        8. Перечитать: по делу? между 9:00 и 20:00? Отправить.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Понимать сленг чата: wapa, profe, finde, tqm, k tal</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Пересказывать новости: dice que..., ha dicho que...</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Различать dice que / pregunta si / nos avisa que</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Расшифровать 10 сообщений чата 3ºB</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Отвечать по-местному: apuntado, contad conmigo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Соблюдать этикет: аудио, время, отвечать по делу</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 16.2: Вежливый отказ</h2>
+        <div class="tag">формула-сэндвич · espero que..., ojalá</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы читаете чат класса как местные: сленг, косвенная речь, реакции. На следующем уроке — сложнее искусство: <b>отказывать красиво</b>. Формула-сэндвич «спасибо → нет → мостик», складчины и subjuntivo на слух (<i>espero que..., ojalá</i>).
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

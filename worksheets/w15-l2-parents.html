@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 15.2 · Отели и хостелы — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🏨'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏨 Рабочий лист · Урок 15.2 «Отели и хостелы»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · Hoteles y alojamientos: бронь, номер, услуги · cuando + subjuntivo, вежливые просьбы</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🏨 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el hostal</div>
+          <div class="item">2. la reserva</div>
+          <div class="item">3. la cuna</div>
+          <div class="item">4. las vistas al mar</div>
+          <div class="item">5. el desayuno bufé</div>
+          <div class="item">6. para dos noches</div>
+          <div class="item">7. cuando lleguemos</div>
+          <div class="item">8. el número de confirmación</div>
+        </div>
+        <div class="col">
+          <div class="item">а) шведский стол</div>
+          <div class="item">б) номер подтверждения</div>
+          <div class="item">в) хостел</div>
+          <div class="item">г) когда мы приедем</div>
+          <div class="item">д) детская кроватка</div>
+          <div class="item">е) бронь</div>
+          <div class="item">ж) на две ночи</div>
+          <div class="item">з) вид на море</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🛏️ Впиши слово по описанию</h2>
+        <div class="tag">загадки-описания, ответ — слово урока</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Человек на ресепшене: заселяет, принимает жалобы, вызывает такси. → <span class="wline long"></span><br>
+      2. Номер для одного: если вы едете без детей, он дешевле. → <span class="wline long"></span><br>
+      3. В номере не течёт вода — скажите об этом на ресепшене. → <span class="wline long"></span><br>
+      4. Жалоба на соседей сверху: за стеной очень шумно. → <span class="wline long"></span><br>
+      5. Она приходит утром: меняет полотенца и пылесосит. → <span class="wline long"></span><br>
+      6. Вопрос про деньги, когда вы звоните забронировать: сколько стоит ночь? → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — CUANDO + SUBJUNTIVO -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🕐 Грамматика: cuando + presente vs subjuntivo</h2>
+        <div class="tag">заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • Привычка (обычно так) → <b>cuando + presente</b>: <i>Cuando llegamos a casa, cenamos a las nueve.</i><br>
+        • Будущее (поездка ещё впереди) → <b>cuando + subjuntivo</b>: <i>llegue, llegues, llegue, lleguemos, lleguéis, lleguen</i><br>
+        • <i>Cuando lleguemos, pedimos las toallas.</i> — приехать ещё предстоит, поэтому subjuntivo.
+      </div>
+
+      <div class="formula">💡 Впиши верную форму глагола:</div>
+
+      1. Cuando ___ al hotel, pedimos las toallas. <span class="ru-sub">(когда мы приедем — поездка впереди)</span><br>
+      2. Cuando el recepcionista ___ la reserva, la corregimos. <span class="ru-sub">(когда он найдёт — будущее)</span><br>
+      3. Cuando ___ el desayuno, dejamos las maletas en el hotel. <span class="ru-sub">(когда вы закончите — будущее)</span><br>
+      4. Cuando ___ de viaje, reservamos con antelación. <span class="ru-sub">(когда мы ездим — привычка)</span><br>
+      5. Cuando ___ a casa, cenamos a las nueve. <span class="ru-sub">(когда мы приходим — привычка)</span><br>
+      6. Cuando ___ el camarero, pedimos el desayuno. <span class="ru-sub">(когда он придёт — будущее)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА + ПРАКТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: futuro в придаточных + вежливые просьбы</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Вежливые просьбы на ресепшене:</b> <i>¿Nos puede traer...?</i> (можете принести нам...?) · <i>Queríamos pedir...</i> (мы хотели попросить...)
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Ситуация</th>
+          <th>Форма</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">будущее (мы)</td><td class="practice">lleguemos</td><td class="practice">Cuando lleguemos, pedimos las toallas.</td></tr>
+        <tr><td class="practice">будущее (кто-то третий)</td><td class="practice">encuentre</td><td class="practice">Cuando el recepcionista encuentre la reserva, la corregimos.</td></tr>
+        <tr><td class="practice">будущее (вы все)</td><td class="practice">terminéis</td><td class="practice">Cuando terminéis el desayuno, dejamos las maletas.</td></tr>
+        <tr><td class="reference">привычка (обычно так)</td><td class="reference">presente</td><td class="reference">Cuando llegamos a casa, cenamos a las nueve.</td></tr>
+        <tr><td class="reference">привычка (каждый раз)</td><td class="reference">presente</td><td class="reference">Cuando vamos de viaje, reservamos con antelación.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши форму глагола в скобках:</div>
+
+      1. Cuando (nosotros / llegar) ___ al hotel, pedimos las toallas. <span class="ru-sub">(будущее)</span> → <span class="wline short"></span><br>
+      2. Cuando el recepcionista (encontrar) ___ la reserva, la corregimos. <span class="ru-sub">(будущее)</span> → <span class="wline short"></span><br>
+      3. Cuando (vosotros / terminar) ___ el desayuno, dejamos las maletas. <span class="ru-sub">(будущее)</span> → <span class="wline short"></span><br>
+      4. Cuando (nosotros / ir) ___ de viaje, reservamos con antelación. <span class="ru-sub">(привычка)</span> → <span class="wline short"></span><br>
+      5. Cuando (el camarero / llegar) ___ , pedimos el desayuno. <span class="ru-sub">(будущее)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: dormir en España — hotel, hostal o apartamento</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La tasa turística: un euro por noche</h4>
+        <p>En algunas comunidades autónomas (Cataluña, Baleares, Comunidad Valenciana) los huéspedes pagan una <b>tasa turística</b>: un impuesto por persona y noche, de cero coma cincuenta a tres euros. Los niños suelen estar exentos. Se paga en recepción, al hacer el check-in o el check-out, en efectivo o con tarjeta. El dinero va a la limpieza de las playas y al mantenimiento de las ciudades.</p>
+
+        <h4>Check-in y check-out: las horas</h4>
+        <p>El <b>check-in</b> suele ser a partir de las catorce o las dieciséis, y el <b>check-out</b>, hasta las doce. Si el tren sale más tarde, piden <b>guardar las maletas</b> en recepción: es gratis. Si la habitación no está lista, las guardan y ustedes van a la piscina o toman un café.</p>
+
+        <h4>Hotel, hostal o apartamento turístico</h4>
+        <p>Ojo con la palabra <b>hostal</b>: en España no es un albergue juvenil, es un hotel pequeño y barato con habitaciones privadas. El albergue con camas compartidas se dice <i>albergue</i> u <i>hostel</i>. El <b>apartamento turístico</b> tiene cocina y lavadora: es ideal para familias y debe tener un número de registro turístico. Las vistas al mar cuestan más, claro.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué es la tasa turística y quién la paga?
+      <span class="wline xlong"></span><br>
+      2. ¿A qué hora suele ser el check-in y hasta cuándo el check-out?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué es un hostal en España? ¿Es lo mismo que un albergue?
+      <span class="wline xlong"></span><br>
+      4. ¿Por qué un apartamento turístico es ideal para familias?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист заселения в отель</h4>
+        <div class="item"><div class="box"></div><div>Подтвердить бронь и сохранить номер подтверждения (confirmar la reserva)</div></div>
+        <div class="item"><div class="box"></div><div>Проверить часы check-in / check-out (обычно 14:00 / до 12:00)</div></div>
+        <div class="item"><div class="box"></div><div>Попросить детскую кроватку или дополнительную кровать заранее</div></div>
+        <div class="item"><div class="box"></div><div>Уточнить парковку и её цену</div></div>
+        <div class="item"><div class="box"></div><div>Спросить код вай-фая на ресепшене</div></div>
+        <div class="item"><div class="box"></div><div>Уточнить завтрак: включён или шведский стол</div></div>
+        <div class="item"><div class="box"></div><div>Держать мелочь на туристический налог — берут при заселении</div></div>
+      </div>
+
+      <div class="note" style="margin-top:3mm">
+        📚 <b>Словарик урока:</b><br>
+        🏨 el hotel — отель · el hostal — хостел · el apartamento turístico — туристическая квартира · la reserva — бронь · el check-in — заселение · el check-out — выселение · el recepcionista — администратор<br>
+        🛏️ la habitación doble — двухместный номер · la habitación individual — одноместный · la cama extra — дополнительная кровать · la cuna — детская кроватка · las vistas al mar — вид на море · el aire acondicionado — кондиционер · el ascensor — лифт<br>
+        🍳 el desayuno incluido — завтрак включён · el desayuno bufé — шведский стол · el aparcamiento — парковка · el wifi — вай-фай · la piscina — бассейн · las toallas — полотенца · la limpieza — уборка<br>
+        📞 ¿tienen habitaciones libres? — есть свободные номера? · para dos noches — на две ночи · ¿cuánto cuesta la noche? — сколько стоит ночь? · ¿incluye el desayuno? — с завтраком? · confirmar la reserva — подтвердить бронь · cancelar — отменить · el número de confirmación — номер подтверждения<br>
+        🛠️ cuando lleguemos — когда мы приедем · no funciona la ducha — не работает душ · hace mucho ruido — очень шумно · la habitación está sucia — номер грязный · ¿pueden cambiarla? — можете заменить? · hasta las doce — до двенадцати · ¿pueden guardar las maletas? — можете оставить чемоданы?
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: звонок в отель</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Hotel Marina, buenos días. — Buenos días. Llamamos para confirmar una reserva para dos noches, a nombre de Familia Álvarez. — Un momento... Sí, aquí está la reserva. Pero ojo: el nombre pone «Álvares», con «s». — Sí, es una errata. ¿Pueden corregirla? El número de confirmación es 88214. — Ya está, la corregimos. ¿Qué necesitan? — Una habitación doble y una cama extra para el niño, si hay. — Sí, hay camas extra. ¿Algo más? — Sí, ¿tienen aparcamiento? — El aparcamiento cuesta doce euros al día. — Vale. Y cuando lleguemos, ¿pueden guardar las maletas? Nuestro tren llega a las doce, pero el check-in es a las cuatro. — Claro, las guardamos en recepción. — Gracias. ¿Cómo se paga la tasa turística? — En recepción, al llegar: un euro por persona y noche. — Perfecto. Y cuando lleguemos, ¿nos puede traer una cuna a la habitación? — Sí, sin problema. Hasta el viernes.»
+      </div>
+      1. ¿Qué quieren confirmar por teléfono?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué errata tiene la reserva y cómo la corrigen?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué piden para el niño?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuánto cuesta el aparcamiento?
+      <span class="wline xlong"></span><br>
+      5. ¿Por qué piden guardar las maletas?
+      <span class="wline xlong"></span><br>
+      6. ¿Cómo se paga la tasa turística?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации на ресепшене</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы звоните и спрашиваете о свободных номерах.<br>
+        <div class="tmpl">«Buenas tardes. ¿Tienen habitaciones libres para dos noches?»</div>
+        <div class="tmpl-ru">(Добрый день. У вас есть свободные номера на две ночи?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы спрашиваете цену и завтрак.<br>
+        <div class="tmpl">«¿Cuánto cuesta la noche? ¿Incluye el desayuno?»</div>
+        <div class="tmpl-ru">(Сколько стоит ночь? С завтраком?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы вежливо жалуетесь на номер.<br>
+        <div class="tmpl">«Perdonen, no funciona la ducha, hace mucho ruido y la habitación está sucia.»</div>
+        <div class="tmpl-ru">(Простите, не работает душ, очень шумно и номер грязный.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы просите заменить номер и добавить кровать.<br>
+        <div class="tmpl">«¿Pueden cambiarla, por favor? Queríamos pedir una cama extra.»</div>
+        <div class="tmpl-ru">(Можете заменить её, пожалуйста? Мы хотели попросить дополнительную кровать.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы выезжаете, но поезд вечером.<br>
+        <div class="tmpl">«Hasta las doce dejamos la habitación. ¿Pueden guardar las maletas?»</div>
+        <div class="tmpl-ru">(До двенадцати освободим номер. Можете оставить чемоданы?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: скрипт звонка в отель</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и цель (Buenas tardes. ¿Tienen habitaciones libres?...).<br>
+        3. Даты и гости (Para dos noches, del viernes al domingo, dos adultos y un niño...).<br>
+        4. Цена и завтрак (¿Cuánto cuesta la noche? ¿Incluye el desayuno?...).<br>
+        5. Комната и детская кроватка (Queríamos una habitación doble y una cuna...).<br>
+        6. Парковка и wifi (¿Tienen aparcamiento? ¿Cuál es la clave del wifi?...).<br>
+        7. Подтвердить бронь (¿Me da el número de confirmación, por favor?).<br>
+        8. Прощание (Muchas gracias, hasta el viernes).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Проходить check-in: reserva, a nombre de...</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Решать проблему с бронью: errata, número de confirmación</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Просить вежливо: ¿Nos puede traer...? Queríamos pedir...</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать cuando + subjuntivo: cuando lleguemos</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Различать жильё: hotel, hostal, apartamento turístico</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Знать про tasa turística, check-in y check-out</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 15.3: CHECKPOINT 3 · Идеальный уикенд</h2>
+        <div class="tag">симуляция 4 станции · повторение блока 3</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы бронируете жильё, решаете проблемы с номером и просите вежливо. На следующем уроке — <b>CHECKPOINT</b>: симуляция «Идеальный уикенд» на 4 станции (билеты → отель → бюджет → маршрут). Повторим <i>ir a</i>, <i>cuando lleguemos</i> и все слова блока 3.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

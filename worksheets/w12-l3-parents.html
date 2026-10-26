@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 12.3 · ДТП и страховка — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'💥'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>💥 Рабочий лист · Урок 12.3 «ДТП и страховка»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · Accidente y seguro: parte amistoso, глаголы движения: seguir, girar, cruzar, претерито: chocó, ocurrió</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>💥 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el accidente</div>
+          <div class="item">2. el parte amistoso</div>
+          <div class="item">3. el testigo</div>
+          <div class="item">4. la culpa</div>
+          <div class="item">5. chocar</div>
+          <div class="item">6. el carné de conducir</div>
+          <div class="item">7. la rotonda</div>
+          <div class="item">8. la aseguradora</div>
+        </div>
+        <div class="col">
+          <div class="item">а) свидетель</div>
+          <div class="item">б) столкнуться</div>
+          <div class="item">в) круговое движение</div>
+          <div class="item">г) европротокол</div>
+          <div class="item">д) авария</div>
+          <div class="item">е) вина</div>
+          <div class="item">ж) страховая компания</div>
+          <div class="item">з) водительское удостоверение</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ДВЕ КОРЗИНЫ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🗂 Две корзины: разложи слова</h2>
+        <div class="tag">действия на месте ↔ документы и страховка</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Банк слов: ¿está bien? · saque fotos · llame a la policía · no hay heridos · el seguro · la póliza · el DNI · la firma. Выпиши каждое слово в нужную корзину.</div>
+      <table class="grammar-ref">
+        <tr><th>🆘 Действия и фразы на месте</th><th>📋 Документы и страховка</th></tr>
+        <tr><td><span class="wline long"></span></td><td><span class="wline long"></span></td></tr>
+        <tr><td><span class="wline long"></span></td><td><span class="wline long"></span></td></tr>
+        <tr><td><span class="wline long"></span></td><td><span class="wline long"></span></td></tr>
+        <tr><td><span class="wline long"></span></td><td><span class="wline long"></span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ПРЕТЕРИТО, ВЫБЕРИ А/Б -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: претерито, выбери форму</h2>
+        <div class="tag">А или Б — впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> -ar → -é / -aste / -ó · -er / -ir → -í / -iste / -ió<br>
+        • Три формы на месте аварии: <b>chocó</b> (он ударил), <b>ocurrió</b> (произошло), <b>fue</b> (было)<br>
+        • Для yo: <b>frené</b> (я затормозил), а не «frenó»<br>
+        • Глагол движения: <b>chocar → chocó contra</b> mi puerta
+      </div>
+
+      <div class="formula">💡 Выбери верную форму: А или Б:</div>
+
+      1. El otro coche ___ contra mi puerta. А) chocó Б) choca → <span class="wline short"></span><br>
+      2. El accidente ___ a las doce. А) ocurró Б) ocurrió → <span class="wline short"></span><br>
+      3. Yo ___ en el último momento. А) frenó Б) frené → <span class="wline short"></span><br>
+      4. El guardia ___ todo desde la puerta. А) vio Б) vid → <span class="wline short"></span><br>
+      5. ¿Dónde ___ el golpe? А) fue Б) fué → <span class="wline short"></span><br>
+      6. Yo estaba aparcado: no me ___. А) movó Б) moví → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ГЛАГОЛЫ ДВИЖЕНИЯ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🚦 Грамматика: глаголы движения</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> команды движения (siga, gire, cruce) — чтобы объяснить дорогу; претерито — для графы «Cómo ocurrió». Справка: frenar — тормозить · arrancar — трогаться · darse la vuelta — разворачиваться.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Глагол</th>
+          <th>Формы</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">seguir</td><td class="practice">sigo, sigue, siga (e → i)</td><td class="practice">Siga por esta calle hasta el parking.</td></tr>
+        <tr><td class="practice">girar</td><td class="practice">giro, gira, gire</td><td class="practice">Gire en la segunda rotonda.</td></tr>
+        <tr><td class="practice">cruzar</td><td class="practice">cruzo, cruza, cruce</td><td class="practice">Cruce el puente y gire a la derecha.</td></tr>
+        <tr><td class="reference">frenar</td><td class="reference">freno, frena, frene</td><td class="reference">Frené en el último momento.</td></tr>
+        <tr><td class="reference">arrancar</td><td class="reference">arranco, arranca</td><td class="reference">Arranqué el coche y salí del aparcamiento.</td></tr>
+        <tr><td class="reference">darse la vuelta</td><td class="reference">me doy la vuelta, dio la vuelta</td><td class="reference">Dio la vuelta en la rotonda.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши форму:</div>
+
+      1. ___ por esta calle hasta el parking. <span class="ru-sub">(следовать / продолжать → команда)</span><br>
+      2. ___ en la segunda rotonda. <span class="ru-sub">(поворачивать → команда)</span><br>
+      3. ___ el puente y después gire a la derecha. <span class="ru-sub">(пересекать → команда)</span><br>
+      4. «Yo ___ el coche y salí del aparcamiento.» <span class="ru-sub">(трогаться → yo, претерито)</span><br>
+      5. «Ella ___ la vuelta en la rotonda.» <span class="ru-sub">(разворачиваться → ella, претерито)</span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: алгоритм при ДТП</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Cinco pasos</h4>
+        <p>Si hay un accidente, para y pon las señales de emergencia. Primero pregunta: «¿Está bien? ¿Hay heridos?». Si hay heridos, llama al 112 y no muevas nada. Después saca fotos: el plan general, el punto de contacto y las matrículas. Intercambia datos: nombre, DNI, carné de conducir, teléfono y aseguradora.</p>
+
+        <h4>El parte amistoso</h4>
+        <p>Rellena el parte con hechos, no con opiniones: «Al arrancar, chocó contra mi puerta». Busca un testigo y escribe su nombre en observaciones. No firmes en blanco y no escribas «es mi culpa»: eso lo decide el perito y la aseguradora, no tú.</p>
+
+        <h4>Qué NO hacer</h4>
+        <p>No te vayas del lugar: eso convierte un rayón en un delito. No pagues en efectivo «para resolverlo». Llama a tu aseguradora el mismo día: revisa la cobertura y envía un perito en dos o tres días. Guarda siempre una copia del parte.</p>
+      </div>
+
+      <div class="note" style="margin-top:2mm">
+        📋 <b>Словарик ДТП:</b> el golpe — удар · el rayón — царапина · la abolladura — вмятина · el seguro — страховка · la póliza — страховой полис · la cobertura — покрытие · el perito — аварийный комиссар · firmar — подписать · la firma — подпись
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué haces primero si hay heridos?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué fotos sacas?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué escribes en el parte: opiniones o hechos? ¿Y por qué no «es mi culpa»?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué hace la aseguradora después de tu llamada?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист «в бардачке у спокойного родителя»</h4>
+        <div class="item"><div class="box"></div><div>Póliza (копия) + телефон aseguradora 24 ч</div></div>
+        <div class="item"><div class="box"></div><div>Parte amistoso (2 бланка) или приложение страховщика</div></div>
+        <div class="item"><div class="box"></div><div>Carné de conducir + DNI</div></div>
+        <div class="item"><div class="box"></div><div>Triángulos de emergencia + chaleco reflectante</div></div>
+        <div class="item"><div class="box"></div><div>В телефоне: шаблон фото (общий план / точка касания / matrícula)</div></div>
+        <div class="item"><div class="box"></div><div>Памятка: no firmar en blanco, no irse del lugar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: обмен данными на месте</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— ¿Está bien? — Sí, sí, estoy bien, no hay heridos. — Menos mal. ¿Qué pasó? — Yo aparcaba y al arrancar chocó contra su puerta. Perdone. — No pasa nada: es un rayón y una abolladura pequeña. — Vamos a rellenar el parte amistoso, entonces. — De acuerdo. Pero primero saque fotos: el punto de contacto y las dos matrículas. — Vale. ¿Me da su nombre, DNI y teléfono? — Ana García, DNI 50123456X, teléfono 600 123 456. — ¿Y su aseguradora y el número de póliza? — Mapfre, póliza 889900. ¿Y usted? — Yo soy Luis: carné de conducir y póliza de Generali. ¿Llamamos a la policía? — No hace falta si firmamos el parte. — De acuerdo. ¿Escribo «es mi culpa»? — Mejor solo los hechos: lo decide el perito. Llamo a mi aseguradora ahora mismo.»
+      </div>
+
+      <div class="note blue">
+        💬 <b>Фразы на месте:</b> ¿está bien? — вы в порядке? · llame a la policía — позвоните в полицию · saque fotos — сфотографируйте · no hay heridos — пострадавших нет · es mi culpa — это моя вина · no es mi culpa — это не моя вина · vamos a rellenar el parte — давайте заполним протокол<br>
+        <b>Данные:</b> rellenar el parte — заполнить протокол · la matrícula — номер машины · el DNI — удостоверение личности · el teléfono — телефон · el número de póliza — номер полиса
+      </div>
+
+      1. ¿Qué pasó exactamente?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué daños tienen los coches?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué hace primero antes del parte?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué datos da Ana?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué escribe al final: «es mi culpa» o los hechos?
+      <span class="wline xlong"></span><br>
+      6. ¿Por qué no llaman a la policía?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: фразы на месте аварии</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы выходите из машины и проверяете, всё ли в порядке.<br>
+        <div class="tmpl">«¿Está bien? ¿Hay heridos?»</div>
+        <div class="tmpl-ru">(Вы в порядке? Есть пострадавшие?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы просите второго водителя всё зафиксировать.<br>
+        <div class="tmpl">«Saque fotos del punto de contacto, por favor.»</div>
+        <div class="tmpl-ru">(Сфотографируйте точку касания, пожалуйста.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы обмениваетесь данными.<br>
+        <div class="tmpl">«¿Me da su nombre, DNI y número de póliza?»</div>
+        <div class="tmpl-ru">(Дадите имя, удостоверение личности и номер полиса?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы объясняете, что произошло.<br>
+        <div class="tmpl">«Yo aparcaba y al arrancar chocó contra su puerta.»</div>
+        <div class="tmpl-ru">(Я парковался и, трогаясь, ударил вашу дверь.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы предлагаете заполнить европротокол.<br>
+        <div class="tmpl">«Vamos a rellenar el parte amistoso.»</div>
+        <div class="tmpl-ru">(Давайте заполним европротокол.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: графа «Cómo ocurrió»</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Где и когда: El accidente ocurrió en la calle Mayor, a las doce.<br>
+        3. Что вы делали: Yo iba por la fila central / Yo estaba aparcado.<br>
+        4. Что случилось: El otro coche salió y chocó contra mi puerta.<br>
+        5. Ваши действия: Yo frené, pero no hubo tiempo.<br>
+        6. Последствия: solo un rayón y una abolladura.<br>
+        7. Свидетель: el testigo con nombre y teléfono.<br>
+        8. Финал: vamos a rellenar el parte y firmar.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Реагировать на месте: ¿está bien?, no hay heridos</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описать движение: siga, gire, cruce (императив)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Рассказать о прошлом: chocó, ocurrió, frené</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Фиксировать и обмениваться: saque fotos, testigos, datos</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Заполнить parte amistoso: número de póliza, firma</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Знать «чего НЕ делать»: no firmar en blanco, no irse</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 13.1: Вызов сантехника</h2>
+        <div class="tag">исчисляемое / неисчисляемое + se ha atascado, gotea</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> У вас есть алгоритм на случай ДТП и заполненный parte amistoso. На следующем уроке (13.1) возвращаемся домой: забился слив, капает кран — учимся звонить сантехнику и описывать поломку словами <i>se ha atascado, gotea</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 47 · En la frutería — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🍎 En la frutería</h1>
+    <div class="sub">Рабочий лист к Уроку 47 · Станция 5: ¡A Comer! · фрукты, спелость и вежливые просьбы</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ Сегодня — фруктовая лавка! Выбирай самые спелые фрукты: maduro, dulce, fresco. И помни: попросить дольку на пробу — совершенно нормально. ¡Mm, qué rico!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соединить фрукт и перевод</span>
+      <span class="ex-skill">🗣 Лексика · фрукты</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🍎 las manzanas</td><td>а) яблоки</td></tr>
+      <tr><td><span class="ans-box"></span>🍊 las naranjas</td><td>б) зелёный / неспелый</td></tr>
+      <tr><td><span class="ans-box"></span>🍌 los plátanos</td><td>в) апельсины</td></tr>
+      <tr><td><span class="ans-box"></span>🍓 las fresas</td><td>г) спелый</td></tr>
+      <tr><td><span class="ans-box"></span>🍉 la sandía</td><td>д) бананы</td></tr>
+      <tr><td><span class="ans-box"></span>🍇 las uvas</td><td>е) дайте килограмм?</td></tr>
+      <tr><td><span class="ans-box"></span>🍑 el melocotón</td><td>ж) арбуз</td></tr>
+      <tr><td><span class="ans-box"></span>😋 maduro</td><td>з) клубника</td></tr>
+      <tr><td><span class="ans-box"></span>⏳ verde</td><td>и) виноград</td></tr>
+      <tr><td><span class="ans-box"></span>🗣️ ¿me da un kilo?</td><td>к) персик</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: НАЙДИ ЛИШНЕЕ СЛОВО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Найди лишнее слово</span>
+      <span class="ex-skill">🗣 Лексика · логика</span>
+    </div>
+    <div class="ex-instruction">В каждом ряду спряталось слово-шпион. Вычеркни его и запиши на линии. Подсказка: фрукты 🍎 и слова-качества 👀.</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🕵️</span> las manzanas · las naranjas · blando · las fresas → лишнее: <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🕵️</span> el melocotón · la sandía · las uvas · el pan → лишнее: <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🕵️</span> dulce · ácido · rico · los plátanos → лишнее: <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ВЫБЕРИ А/Б -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Выбери верную форму: А или Б</span>
+      <span class="ex-skill">🧩 Грамматика · estar</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> состояние фрукта → <b>ESTAR</b>: está maduro (спелый), está verde (неспелый). Один фрукт → <b>está</b>, много фруктов → <b>están</b>.<br><strong>Словарик вкуса:</strong> maduro = спелый · verde = зелёный / неспелый · dulce = сладкий · ácido = кислый · rico = вкусный · fresco = свежий · blando = мягкий · ¿están dulces? = они сладкие?</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>El plátano <span class="g"></span> maduro. <b>А)</b> está · <b>Б)</b> están</div>
+      <div class="gap-item"><span class="num">2</span>Las naranjas <span class="g"></span> dulces. <b>А)</b> está · <b>Б)</b> están</div>
+      <div class="gap-item"><span class="num">3</span>La sandía <span class="g"></span> verde. <b>А)</b> está · <b>Б)</b> es</div>
+      <div class="gap-item"><span class="num">4</span>Las fresas <span class="g"></span> dulces. <b>А)</b> está · <b>Б)</b> están</div>
+      <div class="gap-item"><span class="num">5</span>El zumo <span class="g"></span> fresco. <b>А)</b> está · <b>Б)</b> es</div>
+      <div class="gap-item"><span class="num">6</span>Las uvas <span class="g"></span> frescas. <b>А)</b> está · <b>Б)</b> están</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: в frutería</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Слова перепутаны. Расставь их в правильном порядке и запиши готовую фразу на линии.<br>Формулы с переводом: ¿me da un kilo? — дайте килограмм? · elija uno bueno — выберите хороший · cortar a máquina — нарезать на машине · para hoy — на сегодня · ¿cuánto es todo? — сколько всего? · gracias, hasta luego — спасибо, до свидания.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">de</span><span class="build-word">un</span><span class="build-word">plátanos?</span><span class="build-word">¿Me</span><span class="build-word">da</span><span class="build-word">kilo</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">fresas?</span><span class="build-word">dulces</span><span class="build-word">¿Están</span><span class="build-word">las</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">uno</span><span class="build-word">Elija</span><span class="build-word">favor.</span><span class="build-word">por</span><span class="build-word">bueno,</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">es</span><span class="build-word">todo?</span><span class="build-word">¿Cuánto</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ЛОГИКА: ПОКУПКА ПО ПОРЯДКУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Расставь покупку по порядку</span>
+      <span class="ex-skill">🔢 Логика · диалог</span>
+    </div>
+    <div class="ex-instruction">Пронумеруй шаги покупки от 1 до 6 (впиши цифру в квадратик перед фразой).</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🍊</span> ¿Me da un kilo de naranjas, por favor?</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🙋</span> ¡Buenas tardes!</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">💶</span> ¿Cuánto es todo? — Son dos euros.</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">👀</span> ¿Están dulces?</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">👋</span> Aquí tiene. ¡Gracias, hasta luego!</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">😋</span> Prueba una. ¡Mm, qué dulces!</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Лео в frutería» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Leo. Hoy voy a la frutería con mi mamá. Hay muchas frutas: manzanas, naranjas, plátanos, fresas y uvas. Quiero un melocotón. Mamá pregunta: «¿Me da un kilo de naranjas, por favor?» — «Sí, claro. Elija uno bueno». Yo pregunto: «¿Están dulces?» — «Sí, están muy dulces. Prueba una». ¡Mm, qué dulces! La sandía está verde, pero los plátanos están maduros. Compramos medio kilo de fresas para hoy. «¿Cuánto es todo?» — «Son tres euros». Mamá paga y dice: «¡Gracias, hasta luego!»
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Adónde van Leo y su mamá? <span class="ru">(Куда идут Лео и его мама?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué pide mamá? <span class="ru">(Что просит мама?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cómo están las naranjas? <span class="ru">(Какие апельсины на вкус?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Cómo está la sandía? <span class="ru">(Какой арбуз?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Cuánto cuesta todo? <span class="ru">(Сколько стоит всё?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Сочинение «Mi visita a la frutería»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! Voy a la frutería. · 2) Hay muchas frutas: ... · 3) «¿Me da un kilo de...?» · 4) «¿Están dulces?» · 5) — «Elija uno bueno» / «Prueba una». · 6) Está maduro / está dulce. ¡Qué rico! · 7) «¿Cuánto es todo?» — «Son... euros». · 8) Aquí tiene. ¡Gracias, hasta luego!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть фрукты: manzanas, naranjas, plátanos, fresas...</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Определять спелость: maduro / verde / dulce / ácido</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Вежливо просить: ¿me da un kilo?, para hoy</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать продавца: elija uno bueno, cortar a máquina</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Вести диалог покупки на 2 € (клиент и продавец)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Пробовать фрукты и оценивать вкус по-испански</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 5: ¡A Comer! · Урок 47 · ¡Mmm, qué frutas tan ricas! 🍎</div>
+</div>
+
+</body>
+</html>

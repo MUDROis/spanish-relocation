@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 9.3 · Urgencias и звонок в 112 — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🚑'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🚑 Рабочий лист · Урок 9.3 «Urgencias и звонок в 112»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Экстренные ситуации: травмы и вызов помощи · императив + se ha caído / se ha roto</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🚑 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. las urgencias</div>
+          <div class="item">2. la ambulancia</div>
+          <div class="item">3. la caída</div>
+          <div class="item">4. la fractura</div>
+          <div class="item">5. se ha caído</div>
+          <div class="item">6. está inconsciente</div>
+          <div class="item">7. la escayola</div>
+          <div class="item">8. el alta</div>
+        </div>
+        <div class="col">
+          <div class="item">а) перелом</div>
+          <div class="item">б) выписка</div>
+          <div class="item">в) он упал</div>
+          <div class="item">г) скорая помощь</div>
+          <div class="item">д) гипс</div>
+          <div class="item">е) падение</div>
+          <div class="item">ж) приёмное отделение</div>
+          <div class="item">з) он без сознания</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🩼 Впиши слово по описанию</h2>
+        <div class="tag">травмы и экстренные службы</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Один номер всех служб помощи в Испании и Европе. → <span class="wline long"></span><br>
+      2. Рука болит, висит и странно гнётся: врач говорит, это... → <span class="wline long"></span><br>
+      3. Ногу подвернули, ходить больно, но кости целы: это... → <span class="wline long"></span><br>
+      4. Горячий чай пролился на руку и кожа покраснела: это... → <span class="wline long"></span><br>
+      5. Браслет с номерком в urgencias, по нему зовут пациента. → <span class="wline long"></span><br>
+      6. Рана длинная и глубокая, врачу нужны швы. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ВЫБЕРИ ВЕРНУЮ ФОРМУ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🚨 Грамматика: императив + se ha caído</h2>
+        <div class="tag">шпаргалка + выбери верную форму А/Б</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • Команды на «ты» (ребёнку): <b>espera, mira, respira, sopla</b><br>
+        • Команды вежливо, на usted (врач, оператор): <b>espere, mire, no lo mueva, coja el número</b><br>
+        • Отрицание: <b>No + форма</b>: No lo muevas, no llores, no cuelgue<br>
+        • Что уже случилось: <b>se ha caído</b>, <b>se ha roto</b>, se ha golpeado, se ha cortado, se ha quemado<br>
+        • Слова травм: la caída (падение), el golpe (ушиб / удар), la herida (рана), el corte (порез), el esguince (растяжение), la quemadura (ожог), los puntos (швы)<br>
+        • <b>ha</b> — обязательно: se ha caído (не «se cayido»!), se ha roto (не «rotado»)
+      </div>
+
+      <div class="formula">💡 Выбери верную форму (А или Б), впиши букву:</div>
+
+      1. Ребёнку: «¡___ aquí, ya voy!» <span class="ru-sub">(А) espera · (Б) espere</span> → <span class="wline short"></span><br>
+      2. Оператору 112 говорят: «___ la ambulancia, por favor.» <span class="ru-sub">(А) Espere · (Б) Espera</span> → <span class="wline short"></span><br>
+      3. Ребёнку: «___ fuerte, así se lo manda al doctor.» <span class="ru-sub">(А) Sopla · (Б) Sople</span> → <span class="wline short"></span><br>
+      4. «Mi hijo se ___ caído del tobogán.» <span class="ru-sub">(А) es · (Б) ha</span> → <span class="wline short"></span><br>
+      5. «Se ha ___ el brazo.» <span class="ru-sub">(А) roto · (Б) rotado</span> → <span class="wline short"></span><br>
+      6. Ребёнку: «___ aquí, cariño, miro la herida.» <span class="ru-sub">(А) Ven · (Б) Venga</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА ИМПЕРАТИВА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: команды в экстренной ситуации</h2>
+        <div class="tag">таблица + впиши команду или форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> с ребёнком — на «ты» (sopla, mira), с врачом и оператором — на usted (espere, mire).
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Инфинитив</th>
+          <th>Tú (на «ты»)</th>
+          <th>Usted (вежливо)</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">esperar</td><td class="practice">espera</td><td class="practice">espere</td><td class="practice">Espera aquí, ya voy.</td></tr>
+        <tr><td class="practice">mirar</td><td class="practice">mira</td><td class="practice">mire</td><td class="practice">Mira aquí, cariño.</td></tr>
+        <tr><td>respirar</td><td>respira</td><td>respire</td><td>Respira tranquilo.</td></tr>
+        <tr><td>soplar</td><td>sopla</td><td>sople</td><td>Sopla fuerte para el espray.</td></tr>
+        <tr><td class="reference">venir</td><td class="reference">ven</td><td class="reference">venga</td><td class="reference">Ven aquí, te ayudo.</td></tr>
+        <tr><td class="reference">mover</td><td class="reference">mueve</td><td class="reference">mueva</td><td class="reference">No lo mueva, espere.</td></tr>
+        <tr><td class="reference">coger</td><td class="reference">coge</td><td class="reference">coja</td><td class="reference">Coja el número, por favor.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши команду или форму:</div>
+
+      1. (tú, soplar) ___ fuerte, cariño. → <span class="wline short"></span><br>
+      2. (usted, esperar) ___, la ambulancia viene. → <span class="wline short"></span><br>
+      3. (usted, mover) No lo ___, espere. → <span class="wline short"></span><br>
+      4. (usted, coger) ___ el número, por favor. → <span class="wline short"></span><br>
+      5. Leo se ha ___ el brazo. <span class="ru-sub">(romper)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: urgencias y el 112 en España</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El 112: un número para todo</h4>
+        <p>En toda Europa el 112 es el número de las emergencias: policía, bomberos, ambulancia. El operador pregunta primero: «¿Qué ha pasado? ¿Dónde están?». Hable despacio y diga la dirección con calma. «Hay un accidente, necesito una ambulancia» es suficiente para empezar.</p>
+
+        <h4>El triaje: quién pasa primero</h4>
+        <p>En urgencias no hay orden de llegada: hay triaje. Una enfermera mira al paciente y pone un color: rojo, naranja, amarillo, verde. Después del triaje, el niño lleva la muñequita con el número y espera en la sala de observación. Si el médico piensa en una fractura, la radiografía es obligatoria. Si la herida sangra, primero ponen la venda.</p>
+
+        <h4>El alta y el parte</h4>
+        <p>Si todo va bien, llega el alta: el niño se va a casa. Con la fractura, la escayola, y la revisión es en una semana. Si el dolor agudo no baja, el médico revisa otra vez. Para el seguro o el colegio piden el parte de lesiones: lo saca en admisión.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué número llama en una emergencia y qué servicios hay detrás?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué pregunta el operador primero?
+      <span class="wline xlong"></span><br>
+      3. ¿Hay orden de llegada en urgencias? ¿Cómo funciona el triaje?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué es el alta y dónde sacan el parte de lesiones?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: звонок в 112</h4>
+        <div class="item"><div class="box"></div><div>Спокойно: llame al 112, hable despacio</div></div>
+        <div class="item"><div class="box"></div><div>Назвать суть: hay un accidente, necesito una ambulancia</div></div>
+        <div class="item"><div class="box"></div><div>Адрес и ориентир: estamos en..., junto a la entrada</div></div>
+        <div class="item"><div class="box"></div><div>Состояние: respira, está inconsciente, llora</div></div>
+        <div class="item"><div class="box"></div><div>Помочь врачу: sopla fuerte, mira aquí, no lo mueva</div></div>
+        <div class="item"><div class="box"></div><div>Не класть трубку первым: no cuelgue</div></div>
+        <div class="item"><div class="box"></div><div>Успокоить и пообещать: ya casi está, aguanta un poquito, eres muy valiente, te va a poner mejor, luego vamos por un helado</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: звонок в 112</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— 112, ¿dígame? — Buenas tardes. Hay un accidente. Mi hijo se ha caído del tobogán del parque. — Tranquilo. ¿Dónde están? — En el parque de la Constitución, junto a la entrada principal. — ¿El niño respira? — Sí, respira. Está consciente, pero llora mucho. — ¿Está sangrando? — No, pero el brazo está hinchado. — Vale. Mando una ambulancia. Deje la puerta del parque abierta y espere junto al niño. No le dé agua. — Vale. ¿Cuánto hay que esperar? — Unos diez minutos. No cuelgue, se queda la línea abierta. — Gracias, gracias. — Tranquilo, mamá, ya llega.»
+      </div>
+      1. ¿Qué ha pasado el niño?
+      <span class="wline xlong"></span><br>
+      2. ¿Dónde están?
+      <span class="wline xlong"></span><br>
+      3. ¿El niño respira y está consciente?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué parte del cuerpo le duele y cómo está?
+      <span class="wline xlong"></span><br>
+      5. ¿Cuánto hay que esperar la ambulancia?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué dos cosas pide el operador a la madre?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: экстренные ситуации</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы звоните в 112 и говорите, что случилось.<br>
+        <div class="tmpl">«¡Ayuda! Mi hijo se ha caído del tobogán y se ha roto el brazo.»</div>
+        <div class="tmpl-ru">(Помогите! Мой сын упал с горки и сломал руку.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы называете адрес и ориентир.<br>
+        <div class="tmpl">«Estamos en el parque de la Constitución, junto a la entrada principal.»</div>
+        <div class="tmpl-ru">(Мы в парке Конституции, у главного входа.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы отвечаете о состоянии ребёнка.<br>
+        <div class="tmpl">«Respira, está consciente, pero llora mucho.»</div>
+        <div class="tmpl-ru">(Он дышит, в сознании, но сильно плачет.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы успокаиваете ребёнка до приезда врача.<br>
+        <div class="tmpl">«Aguanta un poquito, cariño. Eres muy valiente. Te va a poner mejor.»</div>
+        <div class="tmpl-ru">(Потерпи немного, милый. Ты очень храбрый. Тебе станет лучше.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы обещаете награду после визита к врачу.<br>
+        <div class="tmpl">«Ya casi está. Luego vamos por un helado.»</div>
+        <div class="tmpl-ru">(Почти готово. Потом пойдём за мороженым.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: скрипт звонка в 112 — продукт урока</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и суть (¡Emergencias! Hay un accidente, necesito una ambulancia.).<br>
+        3. Что случилось (Mi hijo se ha caído del tobogán y se ha roto el brazo.).<br>
+        4. Где вы находитесь (Estamos en el parque..., junto a...).<br>
+        5. Состояние (Respira. Está consciente. Llora mucho.).<br>
+        6. Что вы делаете (No lo muevo. Aguanta un poquito.).<br>
+        7. Вопрос (¿Cuánto hay que esperar? ¿Vienen enseguida?).<br>
+        8. Финал (Vale. No cuelgo. Muchas gracias.).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>el 112</b> — номер экстренной помощи · <b>el triaje</b> — сортировка пациентов · <b>la sala de observación</b> — палата наблюдения · <b>¿Qué ha pasado?</b> — Что случилось? · <b>¿Dónde están?</b> — Где вы находитесь? · <b>hay un accidente</b> — произошёл несчастный случай · <b>necesito una ambulancia</b> — мне нужна скорая · <b>la radiografía</b> — рентген · <b>la venda</b> — бинт · <b>el parte de lesiones</b> — справка о травме · <b>la revisión</b> — контрольный осмотр · <b>el dolor agudo</b> — острая боль · <b>sopla fuerte</b> — сильно подуй · <b>mira aquí</b> — посмотри сюда
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Звать помощь: llamar al 112, necesito una ambulancia</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить, что случилось: se ha caído, se ha roto, hay un accidente</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Называть адрес и ориентиры: estamos en..., junto a...</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Отвечать о состоянии: respira, está consciente, llora</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать команды врача: espere, no lo mueva, coja el número</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Скрипт звонка в 112 от начала до конца (продукт урока)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 10.1: Calendario de vacunación</h2>
+        <div class="tag">Pretérito Perfecto: he/ha/hemos + ya / todavía no</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Экстренный испанский — теперь и ваш: 112, <i>se ha caído, se ha roto</i>, команды врачу. На следующем уроке (10.1) разбираем календарь прививок Испании и <b>Pretérito Perfecto</b>: <i>he ido, ha tenido, ya / todavía no</i> — спокойная тема после экстренной недели.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

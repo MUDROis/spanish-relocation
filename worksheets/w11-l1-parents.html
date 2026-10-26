@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 11.1 · Mercadona, Consum, Lidl — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🛒'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🛒 Рабочий лист · Урок 11.1 «Mercadona, Consum, Lidl»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · супермаркет и этикетки, condicional de cortesía: me gustaría</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🛒 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la cesta</div>
+          <div class="item">2. la oferta</div>
+          <div class="item">3. sin gluten</div>
+          <div class="item">4. la caducidad</div>
+          <div class="item">5. me gustaría</div>
+          <div class="item">6. pagar en efectivo</div>
+          <div class="item">7. el cambio</div>
+          <div class="item">8. la lactancia-free / sin lactosa</div>
+        </div>
+        <div class="col">
+          <div class="item">а) срок годности</div>
+          <div class="item">б) платить наличными</div>
+          <div class="item">в) акция / скидка</div>
+          <div class="item">г) я хотел бы</div>
+          <div class="item">д) безлактозный</div>
+          <div class="item">е) без глютена</div>
+          <div class="item">ж) сдача</div>
+          <div class="item">з) корзина</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду 3 слова из одной темы + 1 лишнее</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подчеркни лишнее слово и выпиши его: почему оно не подходит?</div>
+      1. los conservantes · el colorante · el azúcar · <b>la caja</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — про состав продукта, одно — место в магазине)</span><br>
+      2. contactless · el datáfono · pagar con tarjeta · <b>el huevo</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — про оплату, одно — продукт)</span><br>
+      3. busco · ¿dónde está...? · ¿tiene...? · <b>los frutos secos</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — фразы покупателя, одно — продукт)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ME GUSTARÍA -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>💬 Грамматика: me gustaría + фразы покупателя</h2>
+        <div class="tag">заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>Me gustaría + сущ.</b> — Me gustaría un kilo de naranjas.<br>
+        • <b>Me gustaría + инфинитив</b> — Me gustaría pagar con tarjeta.<br>
+        • Форма не меняется: <b>Me / Le / Nos gustaría...</b><br>
+        • <b>Quisiera...</b> — ещё вежливее (официально).<br>
+        • Три рабочих вопроса: <b>busco...</b> (я ищу), <b>¿Dónde está...?</b> (где находится?), <b>¿Tiene...?</b> (у вас есть?)
+      </div>
+
+      <div class="formula">💡 Впиши вежливую фразу:</div>
+
+      1. ___ un pan sin gluten, por favor. <span class="ru-sub">(я хотел бы)</span><br>
+      2. ___ pagar con tarjeta. <span class="ru-sub">(я хотел бы)</span><br>
+      3. ___ leche sin lactosa. <span class="ru-sub">(я ищу)</span><br>
+      4. ¿___ la sección de frutas? <span class="ru-sub">(где находится)</span><br>
+      5. ¿___ pan de molde sin gluten? <span class="ru-sub">(у вас есть)</span><br>
+      6. ___ dos leches, por favor. <span class="ru-sub">(я хотел бы — форма не меняется!)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА ФРАЗ + ПРАКТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: готовые фразы покупателя</h2>
+        <div class="tag">таблица + исправь типичную ошибку</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> me gustaría и busco — ваши две «рабочие лошадки». Остальные фразы — для распознавания на слух.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Фраза</th>
+          <th>Когда использовать</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">Me gustaría + сущ.</td><td class="practice">попросить товар</td><td class="practice">Me gustaría aguacates maduros.</td></tr>
+        <tr><td class="practice">busco + сущ.</td><td class="practice">ищете сами на полке</td><td class="practice">Busco leche sin lactosa.</td></tr>
+        <tr><td class="practice">¿Dónde está la sección...?</td><td class="practice">найти отдел</td><td class="practice">¿Dónde está la sección sin gluten?</td></tr>
+        <tr><td class="reference">¿Tiene...?</td><td class="reference">спросить о наличии</td><td class="reference">¿Tiene pan de molde?</td></tr>
+        <tr><td class="reference">¿A qué sección es...?</td><td class="reference">в каком отделе товар</td><td class="reference">¿A qué sección es el queso fresco?</td></tr>
+        <tr><td class="reference">¿Paga con tarjeta?</td><td class="reference">вопрос кассира — понимаем</td><td class="reference">¿Paga con tarjeta o en efectivo?</td></tr>
+        <tr><td class="reference">Quisiera...</td><td class="reference">официально</td><td class="reference">Quisiera hacer una devolución.</td></tr>
+      </table>
+
+      <div class="formula">💡 Исправь частую ошибку:</div>
+
+      1. «Quiero dos leche.» ❌ → «Me gustaría dos ___.» <span class="ru-sub">(множественное после числа)</span> → <span class="wline short"></span><br>
+      2. «Me gusta un pan.» ❌ → «Me ___ un pan.» <span class="ru-sub">(gusta = факт, gustaría = просьба)</span> → <span class="wline short"></span><br>
+      3. «Busco por leche.» ❌ → «Busco ___.» <span class="ru-sub">(buscar идёт без предлога)</span> → <span class="wline short"></span><br>
+      4. «¿Dónde ___ la sección sin gluten?» <span class="ru-sub">(глагол estar)</span> → <span class="wline short"></span><br>
+      5. «¿Paga con tarjeta o en ___?» <span class="ru-sub">(наличными)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: супермаркеты Испании</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Mercadona, Consum, Lidl</h4>
+        <p>En el supermercado español hay de todo, y hay muchas cadenas. Mercadona es el más famoso, con sus productos «Hacendado» y precios buenos. Consum es una cooperativa valenciana, con ofertas cada semana. Lidl es alemán, barato, con productos europeos. Abren de lunes a sábado; algunos cierran el domingo. Al entrar, coges el carrito o la cesta.</p>
+
+        <h4>La etiqueta</h4>
+        <p>La etiqueta da información: los ingredientes, la fecha de caducidad y el precio por kilo. Si tu hijo es alérgico, busca «sin gluten», «sin lactosa» o «sin frutos secos»: por ejemplo, la leche sin lactosa. ¡Ojo con los conservantes y el colorante!</p>
+
+        <h4>La caja</h4>
+        <p>En la caja, el cajero escanea los productos. Puedes pagar con tarjeta (contactless en el datáfono) o en efectivo. La bolsa cuesta unos céntimos: mucha gente trae su propia bolsa. Guarda el ticket de compra.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Cuáles son los tres supermercados del texto?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué información da la etiqueta? (tres cosas)
+      <span class="wline xlong"></span><br>
+      3. ¿A qué sección va a buscar el queso fresco el cliente?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuánto cuesta la bolsa? ¿Qué hace la gente para no pagarla?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист похода в супермаркет</h4>
+        <div class="item"><div class="box"></div><div>Взять свою bolsa (экономия + экология)</div></div>
+        <div class="item"><div class="box"></div><div>Взять mi lista de la compra</div></div>
+        <div class="item"><div class="box"></div><div>Найти отдел: ¿Dónde está la sección...?</div></div>
+        <div class="item"><div class="box"></div><div>Проверить этикетку: caducidad, ingredientes, precio por kilo</div></div>
+        <div class="item"><div class="box"></div><div>Аллергии семьи: sin gluten / sin lactosa / sin frutos secos</div></div>
+        <div class="item"><div class="box"></div><div>Оплата: tarjeta (contactless) o efectivo</div></div>
+        <div class="item"><div class="box"></div><div>Сохранить el ticket de compra</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: диалог в Mercadona</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Buenos días, ¿le ayudo? — Buenos días. Sí, busco pan sin gluten. ¿Dónde está la sección? — En la pasada número cuatro, al lado de la panadería. — Gracias. ¿Tiene leche sin lactosa? — Claro, aquí la tiene. También hay queso fresco bajo en sal. — Me gustaría dos leches, por favor. — Perfecto. ¿Algo más? — ¿A qué sección es el queso fresco? — En la última pasada, junto a los yogures. — ¿Las naranjas están en oferta? — Sí, hoy hay oferta: un euro el kilo. — Pues me gustaría un kilo. — Vale. En la caja puede pagar contactless o en efectivo. — ¿Me da el ticket de compra, por favor? — Aquí tiene. Gracias, adiós.»
+      </div>
+      1. ¿Qué busca el cliente primero?
+      <span class="wline xlong"></span><br>
+      2. ¿Dónde está el pan sin gluten?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuántas leches pide el cliente?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuánto cuesta el kilo de naranjas hoy?
+      <span class="wline xlong"></span><br>
+      5. ¿Cómo puede pagar en la caja?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué pide el cliente al final?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации в супермаркете</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Попросить товар вежливо.<br>
+        <div class="tmpl">«Me gustaría dos leches sin lactosa, por favor.»</div>
+        <div class="tmpl-ru">(Я хотел бы два пакета безлактозного молока, пожалуйста.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Найти отдел.<br>
+        <div class="tmpl">«Perdone, ¿dónde está la sección sin gluten?»</div>
+        <div class="tmpl-ru">(Извините, где отдел без глютена?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Спросить о наличии.<br>
+        <div class="tmpl">«¿Tiene yogures sin lactosa?»</div>
+        <div class="tmpl-ru">(У вас есть йогурты без лактозы?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Спросить про акцию.<br>
+        <div class="tmpl">«¿Las naranjas están en oferta hoy?»</div>
+        <div class="tmpl-ru">(Апельсины сегодня по акции?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Оплата на кассе.<br>
+        <div class="tmpl">«Me gustaría pagar en efectivo. ¿Me da la factura?»</div>
+        <div class="tmpl-ru">(Я хотел бы заплатить наличными. Дайте мне счёт, пожалуйста.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: Mi lista de la compra</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Магазин и день (Voy a Mercadona el sábado por la mañana).<br>
+        3. Первые отделы (Primero, frutas y verduras: un kilo de naranjas...).<br>
+        4. Ещё 3–4 позиции (dos leches, pan sin gluten...).<br>
+        5. Этикетки для аллергии (sin lactosa, la fecha de caducidad).<br>
+        6. Акции (Hay una oferta de...).<br>
+        7. Оплата (Me gustaría pagar con tarjeta, contactless).<br>
+        8. После кассы (Guardo el ticket de compra. Gracias, adiós).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>el carrito</b> — тележка · <b>bajo en sal</b> — с пониженным содержанием соли · <b>la fecha de caducidad</b> — дата окончания срока · <b>los ingredientes</b> — ингредиенты · <b>el precio por kilo</b> — цена за килограмм · <b>los frutos secos</b> — орехи · <b>el huevo</b> — яйцо · <b>la leche</b> — молоко · <b>los conservantes</b> — консерванты · <b>el azúcar</b> — сахар · <b>el colorante</b> — краситель · <b>¿dónde está...?</b> — где находится...? · <b>¿tiene...?</b> — у вас есть...? · <b>¿a qué sección es...?</b> — в каком отделе...? · <b>gracias, adiós</b> — спасибо, до свидания · <b>¿paga con tarjeta?</b> — оплатить картой? · <b>pagar con tarjeta</b> — платить картой · <b>el datáfono</b> — терминал · <b>contactless</b> — бесконтактно · <b>el cajero</b> — кассир / банкомат · <b>la factura</b> — счёт / чек
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Вежливо просить: me gustaría, busco, ¿tiene...?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Находить отдел: ¿dónde está la sección...?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Читать этикетку: sin gluten, caducidad, precio por kilo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Оплачивать: con tarjeta / en efectivo, contactless</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать кассира: ¿paga con tarjeta?, el cambio, el ticket</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть диалог «покупатель ↔ empleado»</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 11.2: Mercado Central</h2>
+        <div class="tag">un kilo de / medio kilo de · si puedo · пробы</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Супермаркет побеждён!</b> Этикетки читаются, касса не пугает. Дальше — душа района: <b>рынок</b>. Пробы бесплатно, живые цены (<i>¿a cuánto está?</i>) и заказ у pescadero: <i>un kilo de, medio kilo de, póngame... si puedo</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

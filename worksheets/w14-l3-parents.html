@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 14.3 · Аллергии в ресторанах — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🥜'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🥜 Рабочий лист · Урок 14.3 «Аллергии в ресторанах»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · Аллергии в ресторанах: разговор с официантом и кухней · Estar + participio: está estropeado; вежливая настоятельность</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🥜 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la alergia</div>
+          <div class="item">2. los frutos secos</div>
+          <div class="item">3. el marisco</div>
+          <div class="item">4. la reacción alérgica</div>
+          <div class="item">5. contaminación cruzada</div>
+          <div class="item">6. el cocinero</div>
+          <div class="item">7. está agotado</div>
+          <div class="item">8. el inyector de adrenalina (Epipen)</div>
+        </div>
+        <div class="col">
+          <div class="item">а) аллергическая реакция</div>
+          <div class="item">б) повар</div>
+          <div class="item">в) орехи</div>
+          <div class="item">г) нет в наличии</div>
+          <div class="item">д) аллергия</div>
+          <div class="item">е) шприц (Epipen)</div>
+          <div class="item">ж) морепродукты</div>
+          <div class="item">з) перекрёстное загрязнение</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ДВЕ КОРЗИНЫ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🧺 Раздели слова на две корзины</h2>
+        <div class="tag">аллергены ↔ действия кухни</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Банк слов: limpiar la superficie · el huevo · guantes nuevos · el marisco · aparte · el gluten · los utensilios · los frutos secos · sin sésamo · el pescado · el cocinero · la leche / los lácteos. Впиши каждое слово в свою корзину.</div>
+      <div class="match">
+        <div class="col">
+          <div class="item">⚠️ <b>Корзина 1: аллергены</b></div>
+          <div class="item">1. <span class="wline long"></span></div>
+          <div class="item">2. <span class="wline long"></span></div>
+          <div class="item">3. <span class="wline long"></span></div>
+          <div class="item">4. <span class="wline long"></span></div>
+          <div class="item">5. <span class="wline long"></span></div>
+          <div class="item">6. <span class="wline long"></span></div>
+        </div>
+        <div class="col">
+          <div class="item">👨‍🍳 <b>Корзина 2: кухня действует</b></div>
+          <div class="item">1. <span class="wline long"></span></div>
+          <div class="item">2. <span class="wline long"></span></div>
+          <div class="item">3. <span class="wline long"></span></div>
+          <div class="item">4. <span class="wline long"></span></div>
+          <div class="item">5. <span class="wline long"></span></div>
+          <div class="item">6. <span class="wline long"></span></div>
+        </div>
+      </div>
+      <div class="ru-sub">Словарик корзин: los frutos secos — орехи · el marisco — морепродукты · el pescado — рыба · el huevo — яйцо · la leche / los lácteos — молоко / молочные продукты · el gluten — глютен · limpiar la superficie — очистить поверхность · guantes nuevos — новые перчатки · aparte — отдельно · los utensilios — утварь · sin sésamo — без кунжута · el cocinero — повар · la cocina — кухня</div>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ESTAR + PARTICIPIO, ВЫБЕРИ А/Б -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🅰️ Грамматика: estar + participio, выбери А / Б</h2>
+        <div class="tag">обведи верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> <b>estar + participio</b> = состояние сейчас.<br>
+        • <i>El datáfono está estropeado.</i> · <i>Lo siento, el pavo está agotado.</i><br>
+        • <i>La mesa está reservada a las nueve.</i> · <i>El pan está incluido en el menú.</i><br>
+        • <i>La terraza está abierta hasta las doce.</i> · <i>El aseo está ocupado.</i> · <i>Su pedido está listo.</i><br>
+        📌 <b>Согласование:</b> причастие меняется по роду и числу, как прилагательное: <i>la mesa está reservada, la terraza está abierta</i>.
+      </div>
+
+      <div class="formula">💡 Выбери А или Б и впиши:</div>
+
+      1. El datáfono no funciona: no imprime, no lee la tarjeta. → <span class="wline short"></span><br>
+      <span class="ru-sub">А) está estropeado / Б) está agotado (испорчен)</span><br>
+      2. Lo siento, el pavo ya no hay hoy. → <span class="wline short"></span><br>
+      <span class="ru-sub">А) está reservado / Б) está agotado (нет в наличии)</span><br>
+      3. La mesa de las nueve para la familia Ruiz → <span class="wline short"></span><br>
+      <span class="ru-sub">А) está reservada / Б) está reservado (забронировано — женский род!)</span><br>
+      4. El pan está ___ en el menú del día. → <span class="wline short"></span><br>
+      <span class="ru-sub">А) está incluida / Б) está incluido (включено)</span><br>
+      5. La terraza ___ hasta las doce. → <span class="wline short"></span><br>
+      <span class="ru-sub">А) está abierto / Б) está abierta (открыто — женский род!)</span><br>
+      6. El aseo, lo siento, no se puede usar: → <span class="wline short"></span><br>
+      <span class="ru-sub">А) está ocupado / Б) está ocupada (занято)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ДОПОЛНИ ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: дополни диалог «родитель ↔ официант»</h2>
+        <div class="tag">впиши слово в реплику</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Словарь диалога:</b> mi hijo es alérgico a — мой сын аллергик на · es grave — это серьёзно · ¿lleva frutos secos? — там есть орехи? · ¿se puede hacer sin...? — можно без...? · ¿se fríe en el mismo aceite? — жарите в том же масле? · por favor, tenga cuidado — пожалуйста, будьте осторожны · es muy importante — это очень важно · contaminación cruzada — перекрёстное загрязнение
+      </div>
+
+      <div class="formula">💡 Впиши слово по переводу в скобках:</div>
+
+      — Camarero: Buenas tardes, ¿qué desea?<br>
+      — Usted: Antes de pedir, una cosa importante: mi hijo ___ los frutos secos. <span class="ru-sub">(аллергик на)</span><br>
+      — Camarero: Entiendo, sin problema.<br>
+      — Usted: ___: puede ir al hospital. <span class="ru-sub">(это серьёзно)</span><br>
+      — Camarero: Lo tengo en cuenta. ¿Qué va a tomar?<br>
+      — Usted: La paella para compartir. ¿___ marisco? <span class="ru-sub">(там есть)</span><br>
+      — Camarero: Sí, lleva marisco y pescado.<br>
+      — Usted: ¿___ hacer sin marisco? <span class="ru-sub">(можно)</span><br>
+      — Camarero: Sí. En la cocina el cocinero va a limpiar la superficie y usará guantes nuevos.<br>
+      — Usted: ¿___ en el mismo aceite? <span class="ru-sub">(жарите)</span><br>
+      — Camarero: No, lo hacemos aparte, en una sartén limpia. También hay pan sin sésamo.<br>
+      — Usted: Perfecto. Por favor, tenga cuidado: es muy importante para nosotros.<br>
+      — Camarero: No se preocupe. Si quiere, le traigo la carta de alérgenos.
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: alergias в испанских ресторанах</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La carta de alérgenos</h4>
+        <p>Desde 2015 todos los restaurantes de la Unión Europea tienen que dar información sobre <b>14 alérgenos</b>: gluten, crustáceos, huevos, pescado, cacahuetes, soja, leche, <b>frutos secos</b>, apio, mostaza, sésamo, sulfitos, altramuces y moluscos. Pide <b>la carta de alérgenos</b>: es gratis, en papel o en la web del restaurante.</p>
+
+        <h4>Es grave — la cocina lo sabe</h4>
+        <p>Explique con calma: «Mi hijo <b>es alérgico a</b> los frutos secos. <b>Es grave</b>». Una <b>reacción alérgica</b> puede ser <b>hinchazón</b> o <b>falta de aire</b>; en el caso peor, <b>el shock anafiláctico</b> — y la persona <b>puede ir al hospital</b>. Por eso <b>es muy importante</b> preguntar por la <b>contaminación cruzada</b>: ¿se fríe en el mismo aceite? ¿se limpia la superficie antes de cocinar?</p>
+
+        <h4>Sin gluten y Epipen</h4>
+        <p>Cada vez hay más cafeterías <b>sin gluten</b> y menús <b>sin sésamo</b> o <b>sin lácteos</b>. Si la alergia es grave, la familia lleva siempre <b>el inyector de adrenalina (Epipen)</b>. Y en <b>la cocina</b> del restaurante el personal usa <b>guantes nuevos</b> y <b>utensilios</b> aparte para el plato seguro.</p>
+      </div>
+
+      <div class="ru-sub">Словарик: la reacción alérgica — аллергическая реакция · hinchazón — отёк · falta de aire — нехватка воздуха · el shock anafiláctico — анафилактический шок · puede ir al hospital — может попасть в больницу</div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Cuántos alérgenos hay en la lista de la UE y qué restaurante los tiene que nombrar?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué tiene que pedir usted para ver los alérgenos de un plato?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué puede ser una reacción alérgica en el caso peor?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué llevan siempre las familias con una alergia grave?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист разговора с официантом</h4>
+        <div class="item"><div class="box"></div><div>Сказать, кто аллергик: mi hijo es alérgico a…</div></div>
+        <div class="item"><div class="box"></div><div>Назвать аллерген из 14: frutos secos, marisco, gluten, leche…</div></div>
+        <div class="item"><div class="box"></div><div>Подчеркнуть серьёзность: es grave, es muy importante</div></div>
+        <div class="item"><div class="box"></div><div>Спросить состав: ¿lleva…? ¿se puede hacer sin…?</div></div>
+        <div class="item"><div class="box"></div><div>Спросить про кухню: ¿se fríe en el mismo aceite? ¿contaminación cruzada?</div></div>
+        <div class="item"><div class="box"></div><div>Попросить: limpiar la superficie, guantes nuevos, aparte</div></div>
+        <div class="item"><div class="box"></div><div>Взять la carta de alérgenos и проверить гарнир (pan, salsas)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: ужин в ресторане</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Buenas noches, ¿tiene reserva? — Sí, a nombre de Ruiz. — La mesa está reservada a las nueve, aquí está, en la terraza. La terraza está abierta hasta las doce. — Gracias. Antes de pedir: mi hija es alérgica a la leche. ¿El pavo lleva leche o huevo? — Lo siento, el pavo está agotado hoy. Tenemos lomo con patatas. — ¿Se puede hacer sin mantequilla? — Sí, lo hacemos aparte, en la cocina. — ¿Y el pan está incluido en el menú? — Sí, el pan está incluido y hay sin gluten. — Perfecto. — ¿Algo más? El aseo está al fondo… — La cuenta, ¿puedo pagar con tarjeta? — Lo siento, el datáfono está estropeado. ¿Puede pagar en efectivo? — Vale, sin problema. — Su pedido está listo, ¡buen provecho!»
+      </div>
+      1. ¿A qué hora está reservada la mesa y dónde está?
+      <span class="wline xlong"></span><br>
+      2. ¿A qué es alérgica la hija?
+      <span class="wline xlong"></span><br>
+      3. ¿Por qué no pueden tomar el pavo?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué está incluido en el menú?
+      <span class="wline xlong"></span><br>
+      5. ¿Por qué el padre no puede pagar con tarjeta?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué significa «está agotado»? Explique con otra palabra.
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации с аллергией</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Объясняете аллергию серьёзно.<br>
+        <div class="tmpl">«Mi hijo es alérgico a los frutos secos. Es grave. Puede ir al hospital.»</div>
+        <div class="tmpl-ru">(Мой сын аллергик на орехи. Это серьёзно. Может попасть в больницу.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Спрашиваете состав блюда.<br>
+        <div class="tmpl">«¿Lleva leche o huevo? ¿Se puede hacer sin gluten?»</div>
+        <div class="tmpl-ru">(Там есть молоко или яйцо? Можно без глютена?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Проверяете кухню.<br>
+        <div class="tmpl">«¿Se fríe en el mismo aceite? ¿Hay contaminación cruzada?»</div>
+        <div class="tmpl-ru">(Жарите в том же масле? Есть перекрёстное загрязнение?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Просите быть осторожными.<br>
+        <div class="tmpl">«Por favor, tenga cuidado. Es muy importante. ¿Se puede hacer sin sésamo?»</div>
+        <div class="tmpl-ru">(Пожалуйста, будьте осторожны. Это очень важно. Можно без кунжута?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Уточняете состояние заказа и столика.<br>
+        <div class="tmpl">«¿El pavo está agotado? ¿La mesa está reservada? ¿El pedido está listo?»</div>
+        <div class="tmpl-ru">(Индейка — нет в наличии? Столик — забронировано? Заказ — готово?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: tarjeta de alergias</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Кто и на что аллергик (Mi hijo Leo es alérgico a los frutos secos y al marisco…).<br>
+        3. Серьёзность (Es grave: puede ir al hospital, el shock anafiláctico…).<br>
+        4. Симптомы (la reacción alérgica: hinchazón, falta de aire…).<br>
+        5. Что делаем (tenemos el inyector de adrenalina (Epipen)…).<br>
+        6–7. Просьбы к кухне (limpiar la superficie, guantes nuevos, aparte, sin sésamo…).<br>
+        8. Благодарность (Muchas gracias, por favor, tenga cuidado).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Объяснить аллергию серьёзно: es alérgico a..., es grave</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Спрашивать состав: ¿lleva...? ¿se puede hacer sin...?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Проверять кухню: ¿se fríe en el mismo aceite?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать состояния: está agotado, incluido, listo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Estar + participio: está reservada, está abierta</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Знать про carta de alérgenos и 14 аллергенов</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 15.1: Renfe и Vueling</h2>
+        <div class="tag">ir a + инфинитив · вопросы о расписании</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете объяснить аллергию официанту и проверить кухню. На следующем уроке (15.1) — дорога: поезда <b>AVE, Avlo, Alvia</b> и самолёты <b>Vueling</b>, покупка билетов <b>ida y vuelta</b> и будущее время через <b>ir a + инфинитив</b> (<i>vamos a viajar a Madrid</i>).
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

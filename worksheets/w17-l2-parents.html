@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 17.2 · Правила общежития — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'📜'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>📜 Рабочий лист · Урок 17.2 «Правила общежития»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Правила общежития, мнение: creo que, me parece + запреты</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>📜 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. las normas</div>
+          <div class="item">2. está permitido</div>
+          <div class="item">3. los ruidos</div>
+          <div class="item">4. el taladro</div>
+          <div class="item">5. la terraza</div>
+          <div class="item">6. me parece bien</div>
+          <div class="item">7. pesados</div>
+          <div class="item">8. el aviso</div>
+        </div>
+        <div class="col">
+          <div class="item">а) шумы</div>
+          <div class="item">б) дрель</div>
+          <div class="item">в) предупреждение</div>
+          <div class="item">г) правила</div>
+          <div class="item">д) надоедливые (разг.)</div>
+          <div class="item">е) мне кажется, это хорошо</div>
+          <div class="item">ж) разрешено</div>
+          <div class="item">з) терраса</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ СЛОВО ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🕵️ Впиши слово по описанию</h2>
+        <div class="tag">загадки: ответ — испанское слово</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подсказка: obras — ремонт (работы), vestuario — раздевалка, horario de ruidos — часы, когда можно шуметь.</div>
+      1. Главный документ дома: там записаны все правила общежития — устав. → <span class="wline long"></span><br>
+      2. Слово на табличках у входа: короткое и строгое — «запрещено...». → <span class="wline long"></span><br>
+      3. Сквозь стену слышны колонки соседа: это шум музыки. → <span class="wline long"></span><br>
+      4. Работы по ремонту: сверлить и стучать можно только в будни с 9 до 19. → <span class="wline long"></span><br>
+      5. Официальное время для дрели и громкой музыки: часы, когда можно шуметь. → <span class="wline long"></span><br>
+      6. Комната при бассейне, где вы переодеваетесь. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ПРОПУСКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>✏️ Грамматика: мнение и запреты — вставь пропуск</h2>
+        <div class="tag">впиши слово по подсказке</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>creo que + фраза</b> — думаю, что... — <i>Creo que es justo.</i><br>
+        • <b>me parece + bien / mal</b> — мне кажется (хорошим / плохим) — <i>Me parece bien la norma.</i><br>
+        • <b>estoy de acuerdo (con)</b> — согласен (с) — <i>Estoy de acuerdo con el aviso.</i><br>
+        • <b>lo entiendo, pero...</b> — понимаю, но... — <i>Lo entiendo, pero son las once.</i><br>
+        • <b>prohibido / está prohibido</b> — запрещено (табличка / речь)<br>
+        • <b>está permitido</b> — разрешено — <i>Está permitido tener mascotas.</i>
+      </div>
+
+      <div class="formula">💡 Впиши слово:</div>
+
+      1. ___ que el horario nuevo es justo. <span class="ru-sub">(думаю, что...)</span> → <span class="wline short"></span><br>
+      2. Me ___ bien la norma de la piscina. <span class="ru-sub">(кажется, это хорошо)</span> → <span class="wline short"></span><br>
+      3. Está ___ fumar en la escalera. <span class="ru-sub">(запрещено)</span> → <span class="wline short"></span><br>
+      4. ___ permitido tener mascotas pequeñas. <span class="ru-sub">(разрешено)</span> → <span class="wline short"></span><br>
+      5. ___ las diez no se puede taladrar. <span class="ru-sub">(после десяти нельзя)</span> → <span class="wline short"></span><br>
+      6. Estoy ___ acuerdo con el aviso. <span class="ru-sub">(согласен с предупреждением)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА + ПРАКТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: мнение + запреты</h2>
+        <div class="tag">таблица + впиши слово</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> реагируем на правила вежливо — согласие, несогласие, «понимаю, но...».
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Конструкция</th>
+          <th>Смысл</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">creo que + фраза</td><td class="practice">думаю, что...</td><td class="practice">Creo que es justo el horario nuevo.</td></tr>
+        <tr><td class="practice">me parece + bien / mal / una tontería</td><td class="practice">мне кажется (хорошим / плохим / глупым)</td><td class="practice">Me parece bien la norma. / Es una tontería.</td></tr>
+        <tr><td class="practice">estoy de acuerdo (con)</td><td class="practice">согласен (с)</td><td class="practice">Estoy de acuerdo con el aviso.</td></tr>
+        <tr><td class="practice">lo entiendo, pero...</td><td class="practice">понимаю, но...</td><td class="practice">Lo entiendo, pero son las once.</td></tr>
+        <tr><td class="reference">prohibido...</td><td class="reference">запрещено...</td><td class="reference">Prohibido fumar en la escalera.</td></tr>
+        <tr><td class="reference">está prohibido + инфинитив</td><td class="reference">запрещено (в речи)</td><td class="reference">Está prohibido taladrar después de las diez.</td></tr>
+        <tr><td class="reference">está permitido + инфинитив</td><td class="reference">разрешено</td><td class="reference">Está permitido tener mascotas pequeñas.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши слово:</div>
+
+      1. ___ que la piscina cierra a las 22:00. <span class="ru-sub">(думаю)</span> → <span class="wline short"></span><br>
+      2. Me ___ mal el ruido por la noche. <span class="ru-sub">(кажется — плохо)</span> → <span class="wline short"></span><br>
+      3. Lo ___, pero son las once de la noche. <span class="ru-sub">(понимаю)</span> → <span class="wline short"></span><br>
+      4. ¿Está ___ hacer barbacoa en la terraza? <span class="ru-sub">(разрешено?)</span> → <span class="wline short"></span><br>
+      5. ___ fumar en el portal. <span class="ru-sub">(табличка: запрещено)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: las normas de la comunidad</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Los estatutos y el horario de ruidos</h4>
+        <p>Cada comunidad tiene sus <b>estatutos</b> (устав): allí están las <b>normas</b> (правила) del edificio. El <b>horario de ruidos</b> (часы, когда можно шуметь) lo fija el ayuntamiento: <b>las obras</b> (ремонт (работы)) solo de 9 a 19 en días laborables, y <b>el taladro</b> (дрель) — lo mismo. A partir de las diez de la noche <b>no se puede molestar</b> (мешать) a los vecinos: <b>el ruido de la música</b> (шум музыки) también cuenta.</p>
+
+        <h4>La piscina y las zonas comunes</h4>
+        <p>En la piscina (бассейн) <b>el horario de piscina</b> (часы бассейна) empieza después de comer; antes de entrar — ducha obligatoria. El vestuario — раздевалка — cierra a las 21:00. La barbacoa — барбекю — solo con reserva por escrito. <b>Las plantas</b> (растения) y <b>el mobiliario</b> (мебель) de las zonas comunes no se tocan: está prohibido moverlos. En la <b>terraza</b> los muebles deben estar en su sitio.</p>
+
+        <h4>Quejas y convivencia</h4>
+        <p>¿Problemas con el <b>vecino de arriba</b> (сосед сверху)? Primero habla con él; si no funciona, manda <b>quejas</b> (жалобы) por escrito. <b>Incumplir</b> (нарушать) las normas trae avisos: primero <b>el aviso</b> (предупреждение), después la sanción. <b>Respetar</b> (соблюдать) las normas es la regla número uno. La mayoría de los vecinos son <b>majos</b> (хорошие люди (разг.)) y <b>amable</b> (дружелюбный); los <b>pesados</b> — excepción.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué son los estatutos de una comunidad?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuándo se pueden hacer las obras?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué hay que hacer antes de entrar en la piscina?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué pasa si alguien incumple las normas?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист «Читаем правила дома»</h4>
+        <div class="item"><div class="box"></div><div>Найти устав и правила: стенд в подъезде или приложение дома</div></div>
+        <div class="item"><div class="box"></div><div>Выписать часы шума: когда можно дрель, когда музыку</div></div>
+        <div class="item"><div class="box"></div><div>Проверить часы бассейна и правила барбекю</div></div>
+        <div class="item"><div class="box"></div><div>Запомнить: мебель и растения общих зон не двигаем</div></div>
+        <div class="item"><div class="box"></div><div>Конфликт — сначала вежливый разговор, потом жалоба письменно</div></div>
+        <div class="item"><div class="box"></div><div>Предупреждение не игнорировать: дальше может быть штраф</div></div>
+        <div class="item"><div class="box"></div><div>Своё мнение говорить вежливо: me parece bien / mal</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: вечерний шум</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— ¡Buenas noches! ¿Se puede? — ¡Hola, Marta! Pasa, pasa. — No quería molestar. Es que el ruido de la música (шум музыки) llega hasta mi dormitorio y los niños no duermen. — ¡Ay, lo siento! Es el cumpleaños de los niños del tercero (дети с третьего этажа). — Lo entiendo, pero son las once y media. — Tienes razón: a partir de las diez no se puede. Bajamos el volumen ahora mismo. — Gracias por entender. Por cierto, ¿el perro del quinto (собака с пятого) sigue solo por las noches? — La vecina de al lado (соседка рядом) le da de comer cuando ella trabaja. — ¿Y el vecino de arriba (сосед сверху)? ¿Todavía taladra? — Solo hasta las siete de la tarde. — Qué bien. Perdona las quejas (жалобы). — ¡Qué va! Somos vecinos majos (хорошие люди (разг.)); los pesados (надоедливые (разг.)) son otros. — (Risas) Hasta mañana, Carmen. Eres muy amable (дружелюбный). — ¡Que descanses!»
+      </div>
+      1. ¿Qué ruido molesta a Marta? <span class="ru-sub">(какой шум?)</span>
+      <span class="wline xlong"></span><br>
+      2. ¿De quién es el cumpleaños? <span class="ru-sub">(чей праздник?)</span>
+      <span class="wline xlong"></span><br>
+      3. ¿Qué dice la norma sobre las diez? <span class="ru-sub">(что за правило?)</span>
+      <span class="wline xlong"></span><br>
+      4. ¿Quién cuida al perro del quinto? <span class="ru-sub">(кто ухаживает за собакой?)</span>
+      <span class="wline xlong"></span><br>
+      5. ¿Qué hace el vecino de arriba? <span class="ru-sub">(что делает сосед сверху?)</span>
+      <span class="wline xlong"></span><br>
+      6. ¿Cómo reacciona Carmen a las quejas? <span class="ru-sub">(как она реагирует?)</span>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: обсудить правило</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Согласиться с новым расписанием.<br>
+        <div class="tmpl">«Creo que es justo el horario nuevo.»</div>
+        <div class="tmpl-ru">(Думаю, это справедливо — новое расписание.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Не согласиться и объяснить почему.<br>
+        <div class="tmpl">«No me parece bien: los niños duermen a las diez.»</div>
+        <div class="tmpl-ru">(Мне это не нравится: дети спят в десять.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Принять предупреждение спокойно.<br>
+        <div class="tmpl">«Estoy de acuerdo con el aviso, la próxima vez bajaré la música.»</div>
+        <div class="tmpl-ru">(Я согласен с предупреждением, в следующий раз сделаю тише.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Сказать мягко, что правило необдуманное.<br>
+        <div class="tmpl">«Es una tontería cerrar la piscina en agosto.»</div>
+        <div class="tmpl-ru">(Это глупость — закрывать бассейн в августе.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Понимать соседа, но просить тишину.<br>
+        <div class="tmpl">«Lo entiendo, pero son las once de la noche.»</div>
+        <div class="tmpl-ru">(Я понимаю, но уже одиннадцать вечера.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: список правил нашей квартиры</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Заголовок и зачем список (Nuestras normas — para la convivencia en casa…).<br>
+        3. Правило 1: часы тишины (a partir de las diez no se puede...).<br>
+        4. Правило 2: общие зоны (la terraza, la piscina: cada cosa en su sitio).<br>
+        5. Правило 3: уважение друг к другу (respetar...).<br>
+        6. Правило 4: ремонт и дрель (el taladro — solo de 9 a 19).<br>
+        7. Что бывает при нарушении (primero el aviso, después...).<br>
+        8. Подписи всех членов семьи (¡estamos de acuerdo!).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Читать нормы: prohibido, está permitido</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Часы шума: horario de ruidos, no se puede</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Мнение: creo que, me parece bien / mal</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Вежливо о соседях: amable, majos, pesados</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Общие зоны: terraza, piscina, barbacoa</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Защитить мнение в дискуссии (6 ситуаций)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 17.3: Конфликт с соседом</h2>
+        <div class="tag">условное + imperativo + мнение</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете читать правила и вежливо выражать мнение: <i>creo que, me parece bien / mal</i>. На следующем уроке (17.3) — <b>конфликт с соседом</b>: как решить всё миром — <i>¿podrías...?, ¿te importaría...?, seamos buenos vecinos</i> — и каскад: administrador → mediación → policía local.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

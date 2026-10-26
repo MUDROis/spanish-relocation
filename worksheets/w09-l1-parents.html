@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 9.1 · Симптомы детей — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🤒'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🤒 Рабочий лист · Урок 9.1 «Симптомы детей»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Симптомы и «где болит» · doler: me duele / le duelen, tener + estar</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🤒 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la fiebre</div>
+          <div class="item">2. la tos</div>
+          <div class="item">3. los mocos</div>
+          <div class="item">4. me duele</div>
+          <div class="item">5. le duelen</div>
+          <div class="item">6. la garganta</div>
+          <div class="item">7. no tiene apetito</div>
+          <div class="item">8. quejarse</div>
+        </div>
+        <div class="col">
+          <div class="item">а) у него/неё болят</div>
+          <div class="item">б) сопли</div>
+          <div class="item">в) горло</div>
+          <div class="item">г) температура / жар</div>
+          <div class="item">д) жаловаться</div>
+          <div class="item">е) кашель</div>
+          <div class="item">ж) у меня болит</div>
+          <div class="item">з) нет аппетита</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ СЛОВО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду одно слово не из группы — вычеркни и впиши</div>
+      </div>
+    </div>
+    <div class="card">
+      1. la garganta · la cabeza · la oreja · la tos<br>
+      <span class="ru-sub">(три части тела и один симптом — что лишнее?)</span> → лишнее: <span class="wline short"></span><br><br>
+      2. la fiebre · la diarrea · el vómito · la garganta<br>
+      <span class="ru-sub">(три симптома и одна часть тела — что лишнее?)</span> → лишнее: <span class="wline short"></span><br><br>
+      3. estar pálido · estar cansado · tomar la temperatura · estar decaído<br>
+      <span class="ru-sub">(три состояния и одно действие мамы — что лишнее?)</span> → лишнее: <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — DOLE / TENER / ESTAR -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🌡️ Грамматика: doler, tener, estar</h2>
+        <div class="tag">шпаргалка + заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>doler</b> — болеть (работает как gustar): <b>me duele</b> la cabeza (одно) / <b>me duelen</b> las orejas (много) — <i>A Leo le duele la cabeza.</i><br>
+        • <b>tener + симптом</b>: tiene fiebre, tiene tos, tiene mocos, tiene alergia<br>
+        • <b>estar + состояние</b>: estar enfermo, estar pálido, estar cansado, estar decaído (жен. род: enferm<b>a</b>, pálid<b>a</b>)<br>
+        • <b>Действия мамы</b>: tomar la temperatura, reposar, beber líquidos, abrigar, sonarse, vigilar
+      </div>
+
+      <div class="formula">💡 Впиши форму глагола:</div>
+
+      1. A Leo ___ la cabeza. <span class="ru-sub">(болит голова)</span> → <span class="wline short"></span><br>
+      2. A María ___ las orejas. <span class="ru-sub">(болят уши)</span> → <span class="wline short"></span><br>
+      3. El niño ___ fiebre desde anoche. <span class="ru-sub">(имеет температуру)</span> → <span class="wline short"></span><br>
+      4. Leo ___ pálido y no tiene apetito. <span class="ru-sub">(бледный)</span> → <span class="wline short"></span><br>
+      5. Mi hija ___ alergia al polen. <span class="ru-sub">(имеет аллергию)</span> → <span class="wline short"></span><br>
+      6. María está enferm___. <span class="ru-sub">(женский род — допиши окончание)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА DOLE -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: таблица doler</h2>
+        <div class="tag">таблица + выбери форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> <b>me / te / le</b> + <b>duele</b> (одна часть тела) или <b>duelen</b> (много). Остальные формы — для распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Кому</th>
+          <th>Болит ОДНО</th>
+          <th>Болят МНОГО</th>
+        </tr>
+        <tr><td class="practice">a mí (у меня)</td><td class="practice">me duele la cabeza</td><td class="practice">me duelen las orejas</td></tr>
+        <tr><td class="practice">a ti (у тебя)</td><td class="practice">te duele la garganta</td><td class="practice">te duelen los pies</td></tr>
+        <tr><td class="practice">a él / ella (у него / у неё)</td><td class="practice">le duele el estómago</td><td class="practice">le duelen las orejas</td></tr>
+        <tr><td class="reference">a nosotros</td><td class="reference">nos duele</td><td class="reference">nos duelen</td></tr>
+        <tr><td class="reference">a vosotros</td><td class="reference">os duele</td><td class="reference">os duelen</td></tr>
+        <tr><td class="reference">a ellos</td><td class="reference">les duele</td><td class="reference">les duelen</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши me / te / le / les:</div>
+
+      1. A Leo ___ duele la garganta. → <span class="wline short"></span><br>
+      2. A los niños ___ duelen las orejas. → <span class="wline short"></span><br>
+      3. ¿A ti ___ duele la cabeza? → <span class="wline short"></span><br>
+      4. A mí ___ duelen los pies. → <span class="wline short"></span><br>
+      5. A María ___ duele el estómago. → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: cuando el niño se pone enfermo</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La fiebre: el termómetro primero</h4>
+        <p>En España casi todas las familias tienen un termómetro digital en casa. La fiebre leve es de 37,5 a 38; la fiebre alta, más de 39. Si hay fiebre, primero beber líquidos y reposar en la cama.</p>
+
+        <h4>¿Cuándo llamamos al pediatra?</h4>
+        <p>Con un catarro normal — mocos, tos, un poco de fiebre — esperamos dos o tres días. Llamamos si el niño empieza a llorar mucho, se queja, tiene el vómito, la diarrea o también el mareo. Y si tiene la alergia y no sabemos a qué, preguntamos siempre. El pediatra pregunta: ¿está pálido? ¿cómo está el apetito?</p>
+
+        <h4>Palabras que calman</h4>
+        <p>Las madres españolas repiten las mismas palabras: «Tranquilo, no pasa nada», «Ya verás, mañana estás mejor», «Descansa, mamá está aquí». Al final se dice: «mucha fuerza» y «que te mejores». Con palabras bonitas, el niño enfermo baja la fiebre más rápido.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué fiebre es leve y qué fiebre es alta?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué hacemos primero si hay fiebre?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuándo llamamos al pediatra? (3–4 situaciones)
+      <span class="wline xlong"></span><br>
+      4. ¿Qué palabras repiten las madres españolas?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: ребёнок заболел — первые 10 минут</h4>
+        <div class="item"><div class="box"></div><div>Измерить температуру (tomar la temperatura, el termómetro)</div></div>
+        <div class="item"><div class="box"></div><div>Посмотреть состояние: ¿está pálido, decaído, cansado?</div></div>
+        <div class="item"><div class="box"></div><div>Спросить ребёнка: ¿dónde te duele?</div></div>
+        <div class="item"><div class="box"></div><div>Пить и лежать: beber líquidos, reposar</div></div>
+        <div class="item"><div class="box"></div><div>Укрыть и научить сморкаться: abrigar, sonarse</div></div>
+        <div class="item"><div class="box"></div><div>Записать симптомы для врача и vigilar всю ночь</div></div>
+        <div class="item"><div class="box"></div><div>Успокоить: tranquilo, no pasa nada, ya verás</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: вечер, когда ребёнок заболел</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— ¿Y Leo? Está muy callado hoy. — No come nada, no tiene apetito. — ¿Está pálido? — Sí, muy pálido y decaído. Se queja. — ¿Qué le duele? — Dice que le duele la cabeza y le duelen las orejas. — ¿Tiene fiebre? — Treinta y ocho y medio. Acabo de tomar la temperatura. — Vale. Reposo, líquidos y a la cama. — Ya está en la cama. Le he dicho: tranquilo, ya verás, mamá está aquí. — ¿Lloró? — Un poquito. No pasa nada. — Bien. Si mañana sigue con la fiebre, pido cita con el pediatra. — Vale, vigilo la temperatura toda la noche. — Mucha fuerza, cariño.»
+      </div>
+      1. ¿Cómo está Leo hoy?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué le duele?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuánta fiebre tiene?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué tres cosas recomienda el padre?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué pasa si mañana sigue con la fiebre?
+      <span class="wline xlong"></span><br>
+      6. ¿Quién vigila la temperatura por la noche?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: объясняем симптомы</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Ребёнок жалуется вам утром.<br>
+        <div class="tmpl">«Mamá, me duele la cabeza y me duelen las orejas.»</div>
+        <div class="tmpl-ru">(Мама, у меня болит голова и болят уши.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы объясняете врачу, что болит у дочки.<br>
+        <div class="tmpl">«A María le duelen las orejas desde anoche.»</div>
+        <div class="tmpl-ru">(У Марии болят уши со вчерашнего вечера.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы называете симптомы: температура и кашель.<br>
+        <div class="tmpl">«Tiene fiebre y tos seca desde ayer.»</div>
+        <div class="tmpl-ru">(У него температура и сухой кашель со вчера.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы описываете состояние ребёнка.<br>
+        <div class="tmpl">«Está pálido, cansado y no tiene apetito.»</div>
+        <div class="tmpl-ru">(Он бледный, уставший и без аппетита.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы успокаиваете ребёнка перед сном.<br>
+        <div class="tmpl">«Tranquilo, no pasa nada. Descansa, ya verás. Mamá está aquí.»</div>
+        <div class="tmpl-ru">(Спокойно, ничего страшного. Отдыхай, увидишь, всё пройдёт. Мама рядом.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: описание 3 симптомов — продукт урока</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Кто болен и как выглядит (Mi hijo Leo está enfermo. Está pálido y decaído.).<br>
+        3. Симптом 1: температура (Tiene fiebre de treinta y ocho y medio.).<br>
+        4. Симптом 2: где болит (Le duele la garganta y le duelen las orejas.).<br>
+        5. Симптом 3: аппетит и настроение (No tiene apetito, llora y se queja.).<br>
+        6. Что делаете (Le doy líquidos, descansa en la cama.).<br>
+        7. Как утешаете (Tranquilo, no pasa nada, ya verás.).<br>
+        8. Вопрос к врачу (¿Necesita antibiótico? ¿Vigilar la temperatura?).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>el vómito</b> — рвота · <b>la diarrea</b> — диарея · <b>el mareo</b> — головокружение / тошнота · <b>la alergia</b> — аллергия · <b>el estómago</b> — живот · <b>estar enfermo</b> — быть больным · <b>estar pálido</b> — быть бледным · <b>estar cansado</b> — быть уставшим · <b>estar decaído</b> — быть вялым · <b>llorar</b> — плакать · <b>tomar la temperatura</b> — измерять температуру · <b>el termómetro</b> — термометр · <b>reposar</b> — соблюдать покой · <b>beber líquidos</b> — пить жидкость · <b>abrigar</b> — укрывать / тепло одевать · <b>vigilar</b> — следить · <b>mucha fuerza</b> — держись · <b>que te mejores</b> — поправляйся
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Называть симптомы: fiebre, tos, mocos, vómito</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить, где болит: me duele / le duelen</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описывать состояние: está pálido, decaído, sin apetito</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Рассказывать о действиях: tomar la temperatura, reposo, líquidos</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Успокаивать ребёнка: tranquilo, no pasa nada</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описать 3 симптома ребёнка (продукт урока)</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 9.2: Испанская аптека</h2>
+        <div class="tag">tener + симптом, estar + состояние, ¿Puede...? / Me pone...?</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Теперь вы можете описать симптомы ребёнка любому врачу. На следующем уроке (9.2) идём в аптеку: <i>¿Tiene algo para...?, ¿Me pone...?</i>, сиропы и таблетки, электронный рецепт и дежурные аптеки.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

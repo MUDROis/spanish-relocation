@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 16.2 · Вежливый отказ — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🙅'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🙅 Рабочий лист · Урок 16.2 «Вежливый отказ»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Decir no con elegancia: складчины, приглашения · subjuntivo на слух: espero que..., ojalá</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🙅 Лексика: соедини фразу и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. perdona, no puedo</div>
+          <div class="item">2. la colecta</div>
+          <div class="item">3. ¿cuánto toca?</div>
+          <div class="item">4. ¡ojalá pudiera!</div>
+          <div class="item">5. espero que la paséis bien</div>
+          <div class="item">6. nos encantaría</div>
+          <div class="item">7. sin compromiso</div>
+          <div class="item">8. el plazo</div>
+        </div>
+        <div class="col">
+          <div class="item">а) сколько с каждого?</div>
+          <div class="item">б) нам бы очень хотелось</div>
+          <div class="item">в) извини, не могу</div>
+          <div class="item">г) срок</div>
+          <div class="item">д) ах, если бы мог!</div>
+          <div class="item">е) без обязательств</div>
+          <div class="item">ж) складчина</div>
+          <div class="item">з) надеюсь, хорошо проведёте время</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>💰 Впиши слово по описанию</h2>
+        <div class="tag">загадки-описания, ответ — фраза урока</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Общий котёл: все скидываются понемногу на подарок учителю. → <span class="wline long"></span><br>
+      2. Фраза в чате, когда хотите узнать сумму с каждого. → <span class="wline long"></span><br>
+      3. Так пишут, когда не участвуют в складчине: «пропущу». → <span class="wline long"></span><br>
+      4. Мягкий отказ по-местному: «мне неудобно / не подходит». → <span class="wline long"></span><br>
+      5. Пожелание в конце отказа: «надеюсь, хорошо проведёте время». → <span class="wline long"></span><br>
+      6. Так принимают чужой отказ без обид: «спокойно, ничего страшного». → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — SUBJUNTIVO RECEPTIVO -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🕊️ Грамматика: subjuntivo receptivo — espero que..., ojalá</h2>
+        <div class="tag">заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> paséis, pudiera, disfrutéis, tenga — это <b>subjuntivo</b>: наклонение пожеланий и сомнений. Говорить эти фразы нужно <b>кирпичиками целиком</b>, узнавать их — обязательно.
+      </div>
+
+      <div class="formula">💡 Дополни фразу-кирпичик:</div>
+
+      1. ___ que la paséis bien. <span class="ru-sub">(надеюсь)</span><br>
+      2. ¡Ojalá ___! <span class="ru-sub">(ах, если бы мог!)</span><br>
+      3. No creo que ___ venir, la verdad. <span class="ru-sub">(не думаю, что смогу — мягкий отказ)</span><br>
+      4. Ojalá ___ suerte. <span class="ru-sub">(вам повезёт)</span><br>
+      5. Que lo ___ , chicos. <span class="ru-sub">(повеселитесь)</span><br>
+      6. Espero que te ___ pronto. <span class="ru-sub">(поправишься)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ДОПОЛНИ ДИАЛОГ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: дополни диалог «родительница ↔ соседка»</h2>
+        <div class="tag">впиши фразу по переводу в скобках</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Формула-сэндвич:</b> 1. Gracias (поблагодарить) → 2. причина коротко → 3. нет чётко → 4. мостик (otra vez será) → 5. пожелание (que lo disfrutéis).
+      </div>
+
+      <div class="formula">💡 Впиши фразу по переводу:</div>
+
+      — Vecina: ¡Hola! ¿Has visto el chat? Organizamos la colecta para el regalo del profe. ¿Te apetece aportar?<br>
+      — Usted: ___ . <span class="ru-sub">(извини, не могу)</span><br>
+      — Vecina: ¡Venga, son solo tres euros!<br>
+      — Usted: Lo siento mucho, ___ . <span class="ru-sub">(в этом месяце не тянем)</span><br>
+      — Vecina: Bueno... ¿y el domingo? Hacemos una comida en el parque, nos encantaría que vinierais.<br>
+      — Usted: ___ , la verdad. Estamos agotados y tenemos familia en casa. <span class="ru-sub">(мне неудобно)</span><br>
+      — Vecina: ¡Qué pena!<br>
+      — Usted: Pero ___ que la paséis bien. ¡Que lo disfrutéis! <span class="ru-sub">(надеюсь)</span><br>
+      — Vecina: Vale, tranquilo, no pasa nada. ¿Y la colecta, te la pasas?<br>
+      — Usted: Sí, ___ , gracias por pensar en mí. <span class="ru-sub">(пропущу)</span> ___ . <span class="ru-sub">(в другой раз)</span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: saber decir no en España</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La colecta del cole</h4>
+        <p>En los colegios españoles las <b>colectas</b> son normales: el regalo del profe a final de curso, el <b>bote</b> para el cumpleaños de un niño, la tacita para el café de las profes. Organiza la madre delegada: pregunta «¿cuánto toca?» y cada familia pone su <b>mi parte</b>, tres o cinco euros. Si no quieres participar, escribes «me lo paso»: nadie se ofende. Lo que molesta es el silencio: mejor un no amable que no contestar.</p>
+
+        <h4>El sándwich del no</h4>
+        <p>La fórmula local para rechazar: primero <b>gracias</b> («gracias por pensar en mí»), luego la razón corta («estamos agotados», «este mes no llegamos»), después el no claro («perdona, no puedo», «no me viene bien») y para terminar el <b>puente</b>: «otra vez será», «ya te contaré», «lo dejamos para otra ocasión». Una razón basta: sin excusas largas, sin drama.</p>
+
+        <h4>Cuando te dicen que no</h4>
+        <p>Si te rechazan, la respuesta correcta es «<b>tranquilo, no pasa nada</b>». Insistir («venga, venga, venga») se considera mala educación. Y ojo con «<b>sin compromiso</b>»: significa sin obligación, la puerta queda abierta. También suena: «de momento no», «ahora mismo es complicado», «cuando puedas». Todos son no amables, nadie miente.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué escribe usted en el chat si no quiere participar en la colecta?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuáles son las capas del sándwich del no?
+      <span class="wline xlong"></span><br>
+      3. ¿Por qué es mejor contestar un no amable que callar?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué significa sin compromiso?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист вежливого отказа</h4>
+        <div class="item"><div class="box"></div><div>Поблагодарить первым делом: Gracias por pensar en mí</div></div>
+        <div class="item"><div class="box"></div><div>Одна короткая причина: estamos agotados / este mes no llegamos</div></div>
+        <div class="item"><div class="box"></div><div>Чёткое нет без вины: perdona, no puedo / no me viene bien</div></div>
+        <div class="item"><div class="box"></div><div>Мостик: otra vez será / lo dejamos para otra ocasión</div></div>
+        <div class="item"><div class="box"></div><div>Пожелание: espero que la paséis bien / que lo disfrutéis</div></div>
+        <div class="item"><div class="box"></div><div>Не извиняться пять раз: одного lo siento mucho достаточно</div></div>
+        <div class="item"><div class="box"></div><div>Чужой отказ принимать спокойно: tranquilo, no pasa nada</div></div>
+      </div>
+
+      <div class="note" style="margin-top:3mm">
+        📚 <b>Словарик урока:</b><br>
+        🙅 perdona, no puedo — извини, не могу · no me viene bien — мне неудобно · otra vez será — в другой раз · gracias por pensar en mí — спасибо, что подумали обо мне · estamos agotados — мы вымотались · este mes no llegamos — в этом месяце не тянем · lo siento mucho — очень сожалею<br>
+        💰 la colecta — складчина · el bote — общий котёл · aportar — вносить долю · el regalo del profe — подарок учителю · mi parte — моя часть · ¿cuánto toca? — сколько с каждого? · me lo paso — пропущу (не участвуя)<br>
+        🎉 ¿te apetece...? — тебе хочется...? · ¿te vienes? — пойдёшь с нами? · nos encantaría — нам бы очень хотелось · ¡ojalá pudiera! — ах, если бы мог! · espero que la paséis bien — надеюсь, хорошо проведёте время · que lo disfrutéis — повеселитесь! · ya te contaré — потом расскажу<br>
+        🕊️ de momento no — пока нет · ahora mismo es complicado — сейчас сложно · ya te diré — я тебе скажу потом · lo dejamos para otra ocasión — оставим на другой раз · sin compromiso — без обязательств · cuando puedas — когда сможешь · tranquilo, no pasa nada — спокойно, ничего страшного<br>
+        🙏 ¿alguien puede...? — кто-нибудь может...? · necesitamos voluntarios — нужны волонтёры · ¿quién se apunta? — кто записывается? · plazas limitadas — мест мало · hay que reservar — надо бронировать · el plazo — срок · última hora — срочная новость
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: приглашение и отказ</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— ¡Hola! El sábado hacemos una comida en el parque por el cumpleaños de Marta. ¿Te vienes? — Uf, perdona, no puedo. Tenemos la casa llena de familia. — ¡Venga! Son solo unas tapas, los niños se lo pasan genial. — Lo siento mucho, de verdad, pero no me viene bien este finde. — Bueno, ¿y la próxima? En mayo hay una excursión a la montaña, plazas limitadas. — Eso sí, otra vez será. En mayo apúntanos, hay que reservar pronto. — ¡Genial! ¿Y el pádel el martes? — Ahí me lo paso, llego tarde del trabajo. — Sin compromiso, ya te diré. — Espero que la paséis bien el sábado. ¡Que lo disfrutéis! — ¡Gracias! Otra vez será una comida tranquila, sin niños. — Jaja, cuando puedas, te invito a un café sin compromiso.»
+      </div>
+      1. ¿Qué celebran el sábado en el parque?
+      <span class="wline xlong"></span><br>
+      2. ¿Por qué no puede venir usted el sábado?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué plan de mayo acepta usted?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué dice usted sobre el pádel?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué desea usted a la vecina para el sábado?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué le invita la vecina cuando pueda?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: пять отказов</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Отказ от складчины на подарок учителю.<br>
+        <div class="tmpl">«Gracias por pensar en mí, pero este mes no llegamos. Me lo paso.»</div>
+        <div class="tmpl-ru">(Спасибо, что подумали обо мне, но в этом месяце мы не тянем. Пропущу.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Отказ от приглашения на выходные.<br>
+        <div class="tmpl">«Perdona, no puedo. No me viene bien este finde. Otra vez será.»</div>
+        <div class="tmpl-ru">(Извини, не могу. Мне неудобно в эти выходные. В другой раз.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Отказ по времени.<br>
+        <div class="tmpl">«Ahora mismo es complicado, llego tarde del trabajo. Ya te diré.»</div>
+        <div class="tmpl-ru">(Сейчас сложно, я поздно с работы. Я тебе скажу потом.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Мягкий отказ с пожеланием.<br>
+        <div class="tmpl">«Lo dejamos para otra ocasión. ¡Espero que la paséis bien!»</div>
+        <div class="tmpl-ru">(Оставим на другой раз. Надеюсь, хорошо проведёте время!)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Принять чужой отказ.<br>
+        <div class="tmpl">«Tranquilo, no pasa nada. Cuando puedas, tomamos un café sin compromiso.»</div>
+        <div class="tmpl-ru">(Спокойно, ничего страшного. Когда сможешь, выпьем кофе без обязательств.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: отказ-сэндвич в чат (складчина)</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1. Прочитать сообщение и не отвечать первые тридцать секунд.<br>
+        2. Капа 1: gracias — «Gracias por pensar en mí».<br>
+        3. Начинка: причина коротко — «este mes no llegamos».<br>
+        4. Капа 2: нет чётко — «perdona, no puedo» / «me lo paso».<br>
+        5. Мостик — «otra vez será» / «lo dejamos para otra ocasión».<br>
+        6. Пожелание — «espero que la paséis bien» / «que lo disfrutéis».<br>
+        7. Перечитать: одна причина, без длинных извинений.<br>
+        8. Отправить до восьми вечера, не ночью.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Отказывать мягко: perdona, no puedo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Формула-сэндвич: спасибо → нет → мостик</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Узнавать subjuntivo: espero que..., ojalá</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Отказ от складчины: ¿cuánto toca? — me lo paso</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Отказ по сценарию: деньги / время / интерес</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Принимать чужой отказ: tranquilo, no pasa nada</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 16.3: Соцсети и приватность</h2>
+        <div class="tag">creo que, me parece que · permiso fotográfico</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы отказываете красиво и без чувства вины. На следующем уроке — <b>соцсети и приватность</b>: можно ли публиковать фото детей, permiso fotográfico школы, закон LOPDGDD и вежливое «creo que... / me parece que...».
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

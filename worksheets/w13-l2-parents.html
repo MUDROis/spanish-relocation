@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 13.2 · Электрик и кондиционеры — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'⚡'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>⚡ Рабочий лист · Урок 13.2 «Электрик и кондиционеры»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · Electricista y aire acondicionado: заявка мастеру, квантификаторы: un poco de, bastante, demasiado</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>⚡ Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el cortocircuito</div>
+          <div class="item">2. el enchufe</div>
+          <div class="item">3. el mando a distancia</div>
+          <div class="item">4. demasiado</div>
+          <div class="item">5. se ha ido la luz</div>
+          <div class="item">6. la nevera</div>
+          <div class="item">7. la limpieza de filtros</div>
+          <div class="item">8. el interruptor</div>
+        </div>
+        <div class="col">
+          <div class="item">а) пульт</div>
+          <div class="item">б) короткое замыкание</div>
+          <div class="item">в) чистка фильтров</div>
+          <div class="item">г) слишком</div>
+          <div class="item">д) выключатель</div>
+          <div class="item">е) холодильник</div>
+          <div class="item">ж) выключился свет</div>
+          <div class="item">з) розетка</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду 3 слова из одной темы + 1 лишнее</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подчеркни лишнее слово и выпиши его: почему оно не подходит?</div>
+      1. el enchufe · el interruptor · la bombilla · <b>la nevera</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — электрика в стене, одно — бытовая техника)</span><br>
+      2. la lavadora · el lavavajillas · el horno · <b>el filtro</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — бытовая техника, одно — часть кондиционера)</span><br>
+      3. un poco de · bastante · demasiado · <b>el termostato</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — квантификаторы, одно — часть кондиционера)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — КВАНТИФИКАТОРЫ, ИСПРАВЬ ОШИБКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: квантификаторы, исправь ошибки</h2>
+        <div class="tag">найди ошибку и впиши верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>un poco de</b> + ед. ч. — немного: <i>un poco de agua</i><br>
+        • <b>bastante</b> — довольно, без изменений: <i>hace bastante ruido</i><br>
+        • <b>demasiado</b> — слишком, согласуется: <i>demasiado calor, demasiados enchufes</i><br>
+        • Усиление одно: <i>no enfría nada</i> (ничего) · шкала: <i>mucho / poco</i> — много / мало, <i>suficiente</i> — достаточно
+      </div>
+
+      <div class="formula">💡 Найди ошибку и впиши верный вариант:</div>
+
+      1. «Un poco de enchufes no funcionan.» <span class="ru-sub">(un poco de — только ед. ч.)</span><br>
+      → <span class="wline long"></span><br>
+      2. «Hace demasiado calor en la cocina.» <span class="ru-sub">(верно или нет?)</span><br>
+      → <span class="wline long"></span><br>
+      3. «Hay bastante de ruido en la nevera.» <span class="ru-sub">(bastante — без de)</span><br>
+      → <span class="wline long"></span><br>
+      4. «No enfría bastante nada.» <span class="ru-sub">(одно усиление — nada)</span><br>
+      → <span class="wline long"></span><br>
+      5. «Demasiado cables detrás del televisor.» <span class="ru-sub">(согласование, мн. ч.)</span><br>
+      → <span class="wline long"></span><br>
+      6. «El aire hace bastantes ruido.» <span class="ru-sub">(bastante — без изменений)</span><br>
+      → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ВЕЖЛИВЫЕ КОМАНДЫ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🔌 Грамматика: вежливые команды мастеру</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> квантификаторы в УПР 3, а здесь — команды (usted): мастер их говорит вам, вы — мастеру.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Команда</th>
+          <th>Пример</th>
+          <th>Перевод</th>
+        </tr>
+        <tr><td class="practice">pase</td><td class="practice">Pase cuando pueda.</td><td class="practice">Приходите, когда сможете.</td></tr>
+        <tr><td class="practice">no lo use</td><td class="practice">No lo use más, es peligroso.</td><td class="practice">Больше этим не пользуйтесь — опасно.</td></tr>
+        <tr><td class="reference">espere</td><td class="reference">Espere dos días, por favor.</td><td class="reference">Подождите два дня.</td></tr>
+        <tr><td class="reference">revise</td><td class="reference">Revise el cuadro, por favor.</td><td class="reference">Проверьте щиток.</td></tr>
+        <tr><td class="reference">llame</td><td class="reference">Si se repite, llame de nuevo.</td><td class="reference">Позвоните снова.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши команду:</div>
+
+      1. «___ cuando pueda.» <span class="ru-sub">(приходите)</span><br>
+      2. «___ dos días, por favor.» <span class="ru-sub">(подождите)</span><br>
+      3. «___ el cuadro, por favor.» <span class="ru-sub">(проверьте)</span><br>
+      4. «Si se repite, ___ de nuevo.» <span class="ru-sub">(позвоните)</span><br>
+      5. «No lo ___ más, es peligroso.» <span class="ru-sub">(используйте)</span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: el diferencial y el aire acondicionado</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El cuadro eléctrico: кто здесь главный</h4>
+        <p>En cada casa hay un cuadro eléctrico con el <b>diferencial</b> y los magnetotérmicos. Palanca arriba: encendido; abajo: apagado. Si <b>se ha ido la luz</b>, sube primero el diferencial. Si se baja solo, hay un <b>cortocircuito</b> o un <b>enchufe</b> con agua: apaga todo y prueba las zonas de una en una.</p>
+
+        <h4>Prueba de una en una</h4>
+        <p>Apaga los magnetotérmicos, sube el diferencial y conecta las zonas de una en una: cocina, luces, lavadora. La zona que «baja» tiene el problema. A veces es un enchufe viejo o el cable del microondas: ese enchufe no tiene suficiente potencia y hace bastante ruido la nevera vieja.</p>
+
+        <h4>La limpieza de filtros</h4>
+        <p>Limpia los filtros del aire acondicionado una vez al año, antes del verano: abre la rejilla, saca los filtros, lávalos con agua y sécalos. Si después de la limpieza no enfría, puede faltar gas refrigerante: eso lo revisa un técnico con factura. Y si huele a quemado, no lo use más: llama al técnico.</p>
+      </div>
+
+      <div class="note" style="margin-top:2mm">
+        📋 <b>Словарик техники:</b> la bombilla — лампочка · el cable — провод · el diferencial — УЗО (автомат) · el aire acondicionado — кондиционер · el filtro — фильтр · el termostato — термостат · enfriar — охлаждать · calentar — греть · suficiente — достаточно · mucho / poco — много / мало
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué haces primero si se ha ido la luz?
+      <span class="wline xlong"></span><br>
+      2. ¿Cómo encuentras la zona con el problema?
+      <span class="wline xlong"></span><br>
+      3. ¿Con qué frecuencia limpias los filtros?
+      <span class="wline xlong"></span><br>
+      4. ¿Por qué hay que llamar al técnico si huele a quemado?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист заявки мастеру</h4>
+        <div class="item"><div class="box"></div><div>Назвать прибор: el aire acondicionado / la lavadora / el calentador</div></div>
+        <div class="item"><div class="box"></div><div>Сказать, что происходит: no enfría / no funciona / huele a quemado</div></div>
+        <div class="item"><div class="box"></div><div>Сказать, насколько серьёзно: un poco de / bastante / demasiado</div></div>
+        <div class="item"><div class="box"></div><div>Назвать время: esta tarde / mañana por la mañana</div></div>
+        <div class="item"><div class="box"></div><div>Спросить: ¿cuánto tarda? ¿cuánto cuesta la visita?</div></div>
+        <div class="item"><div class="box"></div><div>Договориться на повтор: si se repite, llame de nuevo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: заявка электрику</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Electricista Navarro, buenas tardes. — Buenas tardes. Se ha ido la luz en toda la casa. — ¿Ha subido el diferencial? — Sí, pero se baja solo. — Entonces hay un problema en una zona. Apague los magnetotérmicos y pruebe de una en una. — Vale... es la cocina: se baja cuando conecto la cocina. — Puede ser un enchufe o el cable de la lavadora. Lo miro esta tarde. — Gracias. Y el aire acondicionado no enfría y hace un ruido extraño. — ¿Huele a quemado? — Un poco. He probado el mando a distancia un par de veces y nada. — No lo use más. Hay que revisar los filtros y el termostato. — ¿Cuánto tarda? — Una hora, más o menos. Pase cuando pueda. — Perfecto. Hasta esta tarde. — Hasta luego.»
+      </div>
+
+      <div class="note blue">
+        💬 <b>Фразы заявки:</b> no funciona — не работает · hace un ruido extraño — издаёт странный шум · no enfría — не охлаждает · huele a quemado — пахнет горелым · hay que revisar — надо проверить · ¿cuánto tarda? — сколько времени займёт? · pase cuando pueda — приходите, когда сможете · un par de veces — пара раз<br>
+        <b>Бытовая техника:</b> la lavadora — стиральная машина · el lavavajillas — посудомойка · el horno — духовка · el microondas — микроволновка · el calentador / termo — водонагреватель · la secadora — сушильная машина
+      </div>
+
+      1. ¿Qué ha pasado en la casa?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué prueba hace el electricista por teléfono?
+      <span class="wline xlong"></span><br>
+      3. ¿Dónde está el problema?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué pasa con el aire acondicionado?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué consejo da el electricista sobre el aire?
+      <span class="wline xlong"></span><br>
+      6. ¿Cuánto tarda y cuándo puede venir?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: заявка мастеру</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы сообщаете мастеру о проблеме.<br>
+        <div class="tmpl">«Se ha ido la luz y el aire acondicionado no enfría.»</div>
+        <div class="tmpl-ru">(Выключился свет и кондиционер не охлаждает.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы описываете, насколько всё плохо.<br>
+        <div class="tmpl">«Hace bastante ruido y huele un poco a quemado.»</div>
+        <div class="tmpl-ru">(Довольно шумит и немного пахнет горелым.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы приглашаете мастера домой.<br>
+        <div class="tmpl">«Pase cuando pueda, esta tarde estoy en casa.»</div>
+        <div class="tmpl-ru">(Приходите, когда сможете, вечером я дома.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы спрашиваете о времени и цене.<br>
+        <div class="tmpl">«¿Cuánto tarda? ¿Cuánto cuesta la visita?»</div>
+        <div class="tmpl-ru">(Сколько времени займёт? Сколько стоит визит?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы просите звонить при повторении.<br>
+        <div class="tmpl">«Si se repite, llame de nuevo, por favor.»</div>
+        <div class="tmpl-ru">(Если повторится, позвоните снова, пожалуйста.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: «Mi solicitud al técnico»</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и проблема: Buenos días. No funciona el aire acondicionado / se ha ido la luz.<br>
+        3. Что именно: no enfría, hace un ruido extraño, huele un poco a quemado.<br>
+        4. Насколько серьёзно: bastante ruido / demasiado calor / un poco de agua bajo la nevera.<br>
+        5. Что уже пробовали: he subido el diferencial un par de veces.<br>
+        6. Когда готовы принять: esta tarde / mañana por la mañana.<br>
+        7. Вопросы: ¿cuánto tarda? ¿cuánto cuesta la visita?<br>
+        8. Финал: pase cuando pueda, gracias.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Понять щиток: el diferencial, palanca arriba = encendido</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Описать проблему: no funciona, no enfría, huele a quemado</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Мерить интенсивность: un poco de, bastante, demasiado</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Сказать, что делать: hay que revisar, hay que limpiar</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Договориться о визите: ¿cuánto tarda? pase cuando pueda</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть заявку электрику + план чистки фильтров</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 13.3: Насекомые и дезинсекция</h2>
+        <div class="tag">hormigas, cucarachas + se ve / se oye</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Ваш дом снова под контролем: свет работает, кондиционер охлаждает, у мастера есть заявка. На следующем уроке (13.3) — незваные гости: hormigas y cucarachas, борьба с ними и чем поможет <i>control de plagas</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

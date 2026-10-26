@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 20.2 · Экзамен-квест 2 — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🎯'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🎯 Рабочий лист · Урок 20.2 «Экзамен-квест 2»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · ФИНАЛ · Boss Fight 2: el cole y la compra — звонок из школы и экспресс-магазин, ir a + инфинитив · императив</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>⚔️ Испытание 1. Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">⚔️ <b>Boss Fight 2: el cole y la compra.</b> Лист — это 8 испытаний. Пройдёте все — босс побеждён, а вы готовы к любому звонку из школы и к любому магазину.</div>
+      <div class="match">
+        <div class="col">
+          <div class="item">1. ha tenido un pequeño incidente</div>
+          <div class="item">2. voy para allí ahora mismo</div>
+          <div class="item">3. la lista de la compra</div>
+          <div class="item">4. no olvide la bolsa</div>
+          <div class="item">5. primero... luego...</div>
+          <div class="item">6. ¿hablo con la madre de Leo?</div>
+          <div class="item">7. el pescado fresco</div>
+          <div class="item">8. gracias por avisar</div>
+        </div>
+        <div class="col">
+          <div class="item">а) я говорю с мамой Лео?</div>
+          <div class="item">б) сначала... потом...</div>
+          <div class="item">в) еду сейчас же</div>
+          <div class="item">г) спасибо что предупредили</div>
+          <div class="item">д) список покупок</div>
+          <div class="item">е) у него был маленький инцидент</div>
+          <div class="item">ж) свежая рыба</div>
+          <div class="item">з) не забудьте пакет</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ СЛОВО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Испытание 2. Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду одно слово выбивается из темы</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">В каждом ряду 4 слова из урока. Три — на одну тему, одно — «шпион». Найди его и выпиши.</div>
+      1. 🛒 Магазин: la bolsa de la compra · el pan del día · la fruta de temporada · pagar rápido → <span class="wline long"></span><br>
+      2. 🧭 Команды: compre fruta · pida pan · traiga recibo · la lista de la compra → <span class="wline long"></span><br>
+      3. 📞 Разговор с школой: sí, soy yo · ¿está bien? · gracias por avisar · ha discutido con un compañero → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — IR A + ИНФИНИТИВ, ПРОПУСКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>📐 Испытание 3. Грамматика: щит «ir a + инфинитив»</h2>
+        <div class="tag">шпаргалка + заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>ir a + инфинитив</b> — планы «собираюсь / сделаю сейчас»: voy a, vas a, va a, vamos a, vais a, van a — <i>Voy a recoger a Leo ahora mismo.</i><br>
+        • <b>Императив usted</b> — вежливая команда: -ar → -e (<i>compre</i>), -er/-ir → -a (<i>pida</i>), отрицание: no + форма (<i>no olvide</i>).<br>
+        • Смягчаем приказ вежливостью: <i>por favor</i> — Compre pollo y pimiento, por favor.
+      </div>
+
+      <div class="formula">💡 Впишите глагол из подсказки:</div>
+
+      1. Voy a ___ a Leo ahora mismo. <span class="ru-sub">(забрать — recoger)</span><br>
+      2. ¿Vas a ___ tarde? <span class="ru-sub">(опоздать — llegar)</span><br>
+      3. El padre va a ___ la paella. <span class="ru-sub">(готовить — cocinar)</span><br>
+      4. Los amigos van a ___ el postre. <span class="ru-sub">(принести — traer)</span><br>
+      5. ¡Hecho! Vamos a ___ con los vecinos. <span class="ru-sub">(ужинать — cenar)</span><br>
+      6. No ___ la bolsa, por favor. <span class="ru-sub">(забывать — olvidar)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА ФОРМ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Испытание 4. Грамматика: формы на босса</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> <b>usted</b> (вежливость со школой и продавцом) и <b>nosotros</b> (планы семьи). Остальные формы — для распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Лицо</th>
+          <th>Форма</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">yo</td><td class="practice">voy a</td><td class="practice">Voy a recoger a Leo ahora mismo.</td></tr>
+        <tr><td class="reference">tú</td><td class="reference">vas a</td><td class="reference">¿Vas a llegar tarde?</td></tr>
+        <tr><td class="practice">usted / él / ella</td><td class="practice">va a</td><td class="practice">El padre va a cocinar la paella.</td></tr>
+        <tr><td class="practice">nosotros</td><td class="practice">vamos a</td><td class="practice">Vamos a cenar con los vecinos.</td></tr>
+        <tr><td class="reference">vosotros</td><td class="reference">vais a</td><td class="reference">¿Vais a venir a la paella?</td></tr>
+        <tr><td class="reference">ustedes / ellos</td><td class="reference">van a</td><td class="reference">Los amigos van a traer el postre.</td></tr>
+      </table>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Глагол</th>
+          <th>Команда usted</th>
+          <th>Отрицание</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">comprar</td><td class="practice">compre</td><td class="practice">no compre</td><td class="practice">Compre pollo y pimiento, por favor.</td></tr>
+        <tr><td class="reference">pedir</td><td class="reference">pida</td><td class="reference">no pida</td><td class="reference">Pida pan en la panadería.</td></tr>
+        <tr><td class="reference">tener</td><td class="reference">tenga</td><td class="reference">no tenga</td><td class="reference">Tenga un buen día.</td></tr>
+      </table>
+
+      <div class="formula">💡 Выбери / впиши форму:</div>
+
+      1. ¿Usted ___ a venir a la paella? <span class="ru-sub">(ir)</span> → <span class="wline short"></span><br>
+      2. Nosotros ___ a cenar con los vecinos. <span class="ru-sub">(ir)</span> → <span class="wline short"></span><br>
+      3. Vaya al mercado y ___ pan, por favor. <span class="ru-sub">(pedir, usted — сходите на рынок, закажите хлеб)</span> → <span class="wline short"></span><br>
+      4. ___ fruta, por favor. <span class="ru-sub">(comprar, usted — купите фрукты)</span> → <span class="wline short"></span><br>
+      5. ___ un buen día. <span class="ru-sub">(tener, usted — хорошего дня)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Испытание 5. Чтение + CLIL: протокол школы и покупка-экспресс</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El aviso del colegio</h4>
+        <p>En España, si el niño tiene un pequeño problema en el cole, la secretaría llama a los padres: «¿Hablo con la madre de Leo? Ha tenido un pequeño incidente». El mensaje clave: <b>no es nada grave</b>, pero hay que ir. El colegio siempre pregunta: «¿Puede venir a recogerlo?». Es normal que el niño vuelva a casa ese día y que el tutor diga: «lo hablamos mañana». Guardad el número del cole en el móvil: la llamada llega siempre de un número desconocido.</p>
+
+        <h4>La enfermería</h4>
+        <p>Casi todos los colegios tienen <b>enfermería</b>. Ahí el niño se sienta, bebe agua y espera a los padres. La persona de la enfermería apunta la hora y lo que pasó en un parte interno. Si es algo serio, el colegio llama al 112 y después a la familia. Para una discusión o un golpe ligero, basta con recoger al niño y hablar en casa.</p>
+
+        <h4>La compra exprés</h4>
+        <p>Camino a casa, muchos padres hacen la compra exprés: <b>la lista de la compra</b> en el móvil, el pan del día, el pescado fresco y la fruta de temporada. Se entra con la bolsa de la compra propia, se paga rápido con tarjeta o móvil y, al salir, el vendedor dice: «tenga un buen día». Total: quince minutos, ¡y hecho!</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Quién llama a los padres si hay un incidente en el cole?
+      <span class="wline xlong"></span><br>
+      2. ¿Es grave el incidente de Leo en el texto?
+      <span class="wline xlong"></span><br>
+      3. ¿Dónde espera el niño a los padres?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué tres productos compra el padre en la compra exprés?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист «звонок из школы»</h4>
+        <div class="item"><div class="box"></div><div>Ответить спокойно: «sí, soy yo» — да, это я</div></div>
+        <div class="item"><div class="box"></div><div>Уточнить, где ребёнок (он в медпункте) и что случилось</div></div>
+        <div class="item"><div class="box"></div><div>Спросить ключевой вопрос: можете его забрать? — и когда</div></div>
+        <div class="item"><div class="box"></div><div>Назвать время: llego en veinte minutos</div></div>
+        <div class="item"><div class="box"></div><div>Записать имя сотрудника и, если нужно, что принести</div></div>
+        <div class="item"><div class="box"></div><div>Договориться поговорить завтра: lo hablamos mañana</div></div>
+        <div class="item"><div class="box"></div><div>Поблагодарить: gracias por avisar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Испытание 6. Аудирование: звонок + магазин</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «CEIP Mediterráneo, secretaría, buenos días. — Buenos días. ¿Hablo con la madre de Leo? — Sí, soy yo. — Ha tenido un pequeño incidente en el patio: ha discutido con un compañero. No es nada grave, pero está en la enfermería. — ¿Está bien? — Sí, tranquila. ¿Puede venir a recogerlo antes de las seis? — Claro, voy para allí ahora mismo, llego en veinte minutos. — Perfecto. Lo hablamos mañana con el tutor. — Gracias por avisar. Hasta pronto. ... (en el supermercado) — ¿Dónde está el pan? — Al fondo, a la derecha. El pan del día está caliente. — Perfecto: el pescado fresco y la fruta de temporada también, por favor. — ¿Algo más? — No, gracias. Apúrese un poco, cerramos pronto. Pagar rápido, por favor. — Tenga un buen día.»
+      </div>
+      1. ¿Quién llama y por qué?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué ha pasado en el patio?
+      <span class="wline xlong"></span><br>
+      3. ¿Dónde está Leo y hasta qué hora puede venir la madre?
+      <span class="wline xlong"></span><br>
+      4. ¿En cuántos minutos llega la madre?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué tres productos compra en el supermercado?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué dice la madre al final de la llamada?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Испытание 7. Говорение: телефон и касса</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Телефон звонит — это школа. Ответьте.<br>
+        <div class="tmpl">«¿Hablo con la madre de Leo?» — «Sí, soy yo.»</div>
+        <div class="tmpl-ru">(Я говорю с мамой Лео? — Да, это я.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Скажите, когда приедете за ребёнком.<br>
+        <div class="tmpl">«Voy para allí ahora mismo. Llego en veinte minutos.»</div>
+        <div class="tmpl-ru">(Еду сейчас же. Буду через двадцать минут.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Спросите, всё ли в порядке с ребёнком.<br>
+        <div class="tmpl">«¿Está bien? No es nada grave, ¿verdad?»</div>
+        <div class="tmpl-ru">(Он в порядке? Ничего серьёзного, правда?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> В магазине ищете хлеб.<br>
+        <div class="tmpl">«Perdone, ¿dónde está el pan? Quiero el pan del día.»</div>
+        <div class="tmpl-ru">(Извините, где хлеб? Хочу свежий хлеб.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Прощание с секретарём школы.<br>
+        <div class="tmpl">«Muchas gracias por avisar. Lo hablamos mañana. Hasta pronto.»</div>
+        <div class="tmpl-ru">(Большое спасибо за предупреждение. Обсудим завтра. До скорого.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Испытание 8. Письмо: Mi plan de la tarde</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Ответ на звонок (Sí, soy yo. Voy para allí ahora mismo, antes de las seis).<br>
+        3. Дорога: после школы (después del colegio) и до шести (antes de las seis).<br>
+        4. Разговор с Лео: ha discutido con un compañero (он поспорил с товарищем), no es nada grave, hablaremos con él (мы с ним поговорим).<br>
+        5. Магазин: la lista de la compra — el pan del día (свежий хлеб), la fruta de temporada (сезонные фрукты).<br>
+        6. Пакет (no olvide la bolsa, пакет покупок) и касса: apúrese un poco (поторопитесь немного), pagar rápido (быстро оплатить), traiga recibo (принесите чек).<br>
+        7. Дома: mientras cocino (пока я готовлю), al mismo tiempo (в то же время) — primero... luego...<br>
+        8. Финал дня: por fin (наконец) — ¡hecho! (сделано!)
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Отвечать на звонок школы: ¿hablo con...?, sí, soy yo, ¿está bien?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Вежливый императив: compre, pida, no olvide, tenga</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>ir a + инфинитив: voy a recogerlo, vamos a cocinar</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Экспресс-магазин: lista, ¿cuánto es?, bolsa, pagar rápido</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Время и порядок: antes de las seis, primero...luego, por fin</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Сохранять спокойствие: no es nada grave, gracias por avisar</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 20.3: Финальная рефлексия + ВЫПУСКНОЙ</h2>
+        <div class="tag">итоги 20 недель · Graduación</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Босс 2 побеждён!</b> Звонок из школы вас больше не пугает, а список покупок собирается за 15 минут. Остался финальный шаг: урок 20.3 — итоговая рефлексия, ваш <b>Кодекс выживания в Испании</b> и настоящий <b>ВЫПУСКНОЙ</b> с дипломом и тостом: «¡Lo hemos logrado!».
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

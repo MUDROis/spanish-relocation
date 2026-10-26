@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 19.2 · Отношение к детям — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🧒'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🧒 Рабочий лист · Урок 19.2 «Отношение к детям»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Los niños en España: Pretérito Perfecto (he / hemos + participio), сравнение стран</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🧒 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la confianza</div>
+          <div class="item">2. pasear de noche</div>
+          <div class="item">3. hemos notado</div>
+          <div class="item">4. ya he probado</div>
+          <div class="item">5. en cambio</div>
+          <div class="item">6. la sobremesa familiar</div>
+          <div class="item">7. la merienda</div>
+          <div class="item">8. me sorprende</div>
+        </div>
+        <div class="col">
+          <div class="item">а) семейные посиделки</div>
+          <div class="item">б) доверие</div>
+          <div class="item">в) я уже попробовал</div>
+          <div class="item">г) гулять ночью</div>
+          <div class="item">д) меня удивляет</div>
+          <div class="item">е) зато / напротив</div>
+          <div class="item">ж) полдник</div>
+          <div class="item">з) мы заметили</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду 3 слова из одной темы + 1 лишнее</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подчеркни лишнее слово и выпиши его: почему оно не подходит?</div>
+      1. he visto · hemos notado · ya he probado · la seguridad → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — формы Pretérito Perfecto, одно — ценность вокруг детей)</span><br>
+      2. la merienda · la sobremesa familiar · el cumpleaños infantil · en cambio → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — семейные сцены, одно — слово для сравнения)</span><br>
+      3. me encanta que... · me sorprende · me da confianza · los abuelos → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — фразы-впечатления: «мне нравится, что...», «меня удивляет», «даёт мне уверенность», одно — члены семьи)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — PERFECTO, ВЫБЕРИ А/Б -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🅰️ Грамматика: Pretérito Perfecto — выбери А / Б</h2>
+        <div class="tag">обведи верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • Pretérito Perfecto: <b>he / has / ha / hemos / habéis / han</b> + participio<br>
+        • Регулярные: -ar → <b>-ado</b> (probado, acostumbrado); неправильные: <b>visto, hecho, dicho, sido</b><br>
+        • Для опыта: <i>he visto, ya he probado, nunca he visto</i> (я видел, я уже попробовал, я никогда не видел)<br>
+        • Сравнение стран: <i>en mi país… aquí… en cambio…</i> (в моей стране… здесь… зато / напротив…)
+      </div>
+
+      <div class="formula">💡 Обведи верную форму:</div>
+
+      1. ¿___ la merienda española? А) Has probé · Б) Has probado <span class="ru-sub">(ты пробовал)</span><br>
+      2. ___ a bebés en la verbena. А) He visto · Б) He vistó <span class="ru-sub">(я видел)</span><br>
+      3. Mi hijo se ___ rápido. А) ha acostumbrado · Б) ha acostumbró <span class="ru-sub">(привык)</span><br>
+      4. Hemos ___ que la cena es tardía. А) notó · Б) notado <span class="ru-sub">(мы заметили)</span><br>
+      5. En mi país la cena es temprana; aquí, ___, tardía. А) en cambio · Б) lo mismo pasa con <span class="ru-sub">(зато / напротив)</span><br>
+      6. Nunca ___ visto nada igual. А) es · Б) he <span class="ru-sub">(я никогда не видел)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — HE/HAN + PARTICIPIO -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: he / hemos + participio</h2>
+        <div class="tag">таблица + впиши причастие</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> формы <b>he / hemos / ha</b> для опыта и впечатлений. Остальные — в таблице для распознавания.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Лицо</th>
+          <th>Форма</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">yo</td><td class="practice">he + participio</td><td class="practice">He visto a bebés en la verbena.</td></tr>
+        <tr><td class="reference">tú</td><td class="reference">has + participio</td><td class="reference">¿Has probado la merienda española?</td></tr>
+        <tr><td class="practice">él / ella</td><td class="practice">ha + participio</td><td class="practice">Mi hijo se ha acostumbrado rápido.</td></tr>
+        <tr><td class="practice">nosotros</td><td class="practice">hemos + participio</td><td class="practice">Hemos notado que la cena es tardía.</td></tr>
+        <tr><td class="reference">vosotros</td><td class="reference">habéis + participio</td><td class="reference">¿Habéis paseado de noche?</td></tr>
+        <tr><td class="reference">ellos</td><td class="reference">han + participio</td><td class="reference">Los vecinos han sido muy amables.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши participio:</div>
+
+      1. He ___ (ver) a bebés en la verbena. <span class="ru-sub">(я видел)</span> → <span class="wline short"></span><br>
+      2. Ya he ___ (probar) la merienda española. <span class="ru-sub">(попробовал)</span> → <span class="wline short"></span><br>
+      3. Me he ___ (acostumbrar) a la sobremesa. <span class="ru-sub">(я привык)</span> → <span class="wline short"></span><br>
+      4. Hemos ___ (notar) que la cena es tardía. <span class="ru-sub">(заметили)</span> → <span class="wline short"></span><br>
+      5. Los vecinos han ___ (ser) muy amables. <span class="ru-sub">(были)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: los niños hasta la medianoche</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Niños en la verbena: ¿por qué es normal?</h4>
+        <p>En España es normal ver a los niños (дети) en la verbena, en la terraza, estar en el bar con los padres (быть в баре с родителями) a las once de la noche. Los niños juegan en la plaza mientras los padres hablan. La clave son tres palabras: la libertad (свобода), la seguridad (безопасность) y la comunidad (община / соседство) — el barrio entero cuida de los niños. ¿Te sorprende? Está bien así (пусть будет так): es una decisión cultural, no un descuido.</p>
+
+        <h4>Sobremesa, merienda y abuelos</h4>
+        <p>Después de comer viene la sobremesa familiar (семейные посиделки): nadie se levanta de la mesa una hora más. A las seis, la merienda (полдник) para los niños; las tardes en el parque (вечера в парке), el cumpleaños infantil (детский день рождения) y el fin de semana en familia (выходные с семьёy) son rituales. Los abuelos (бабушки и дедушки) son parte del día, igual que (так же как) los vecinos: la familia extendida es en familia (вся семья) — todos juntos. Lo mismo pasa con (то же самое с) las fiestas del barrio: los niños van al desfile. Es muy diferente de (отличный от) lo que conoces; al contrario (наоборот), aquí el niño es parte de la vida social.</p>
+
+        <h4>He visto, hemos notado</h4>
+        <p>Las familias extranjeras cuentan: «He visto a bebés dormidos en la verbena. Hemos notado que la cena es tardía. Me he acostumbrado a este ritmo». Otras: «Todavía no me acostumbro» (я ещё не привык). ¿Ha sido fácil (было легко) entrar en este ritmo? En mi país (в моей стране) los niños duermen temprano; aquí (здесь), en cambio, hay vida hasta la medianoche. Un dicho español: poco ruido y buenas letras (тише едешь — дальше будешь): sin prisas, aprovechar (использовать (возможность)) cada tarde y disfrutar (наслаждаться). ¡Me encanta que... (мне нравится, что...) los niños estén en todas partes!</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Dónde se ven los niños por la noche en España?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué tres palabras explican esta cultura?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué es la sobremesa familiar?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué han notado las familias extranjeras sobre la cena?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: объяснить «детей в баре» спокойно</h4>
+        <div class="item"><div class="box"></div><div>Назвать ценности: libertad, confianza, comunidad</div></div>
+        <div class="item"><div class="box"></div><div>Рассказать опыт: he visto…, hemos notado…, me he acostumbrado…</div></div>
+        <div class="item"><div class="box"></div><div>Сравнить страны: en mi país… aquí… en cambio…</div></div>
+        <div class="item"><div class="box"></div><div>Признать чувства: al principio me parecía raro</div></div>
+        <div class="item"><div class="box"></div><div>Дать себе время: todavía no me acostumbro, poco a poco</div></div>
+        <div class="item"><div class="box"></div><div>Спросить местных: ¿es normal aquí?</div></div>
+        <div class="item"><div class="box"></div><div>Решить своё: está bien así / prefiero otra cosa</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: разговор с соседкой Marisol</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Usted: Perdona, Marisol… ¿aquí los niños pueden estar en el bar tan tarde? — Marisol: ¡Claro! He visto a bebés dormidos en la verbena. — Usted: En mi país los niños duermen a las nueve. Aquí, en cambio, están en la terraza a las once. — Marisol: Es normal: libertad, confianza, comunidad. El barrio entero cuida de los niños. — Usted: Hemos notado que la cena es tardía y los niños van a dormir tarde. — Marisol: ¿Y cómo va la adaptación? — Usted: Al principio me parecía raro. Ya he probado la sobremesa con los niños: ¡me encanta que estén en familia! — Marisol: Los abuelos también ayudan: la merienda en el parque, las tardes juntos. — Usted: ¿Nunca te ha dado miedo pasear de noche con ellos? — Marisol: No, la plaza está llena de familias. Está bien así. — Usted: Todavía no me acostumbro del todo, pero poco a poco. — Marisol: Ya verás: al final disfrutas igual que ellos.»
+      </div>
+      1. ¿Dónde ha visto Marisol a bebés dormidos?
+      <span class="wline xlong"></span><br>
+      2. ¿A qué hora duermen los niños en el país de usted?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué tres palabras dice Marisol sobre esta cultura?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué ha probado usted ya y qué le encanta?
+      <span class="wline xlong"></span><br>
+      5. ¿Quién ayuda a Marisol con los niños?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué dice usted sobre la adaptación al final?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: сравнить и объяснить</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Поделиться опытом и впечатлением.<br>
+        <div class="tmpl">«He visto a bebés en la verbena. Me sorprende, pero me da confianza.»</div>
+        <div class="tmpl-ru">(Я видел младенцев на вечернем гулянье. Меня удивляет, но даёт мне уверенность.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Сравнить две страны.<br>
+        <div class="tmpl">«En mi país la cena es temprana; aquí, en cambio, es tardía.»</div>
+        <div class="tmpl-ru">(В моей стране ужин ранний; здесь, зато / напротив, поздний.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Объяснить ценности.<br>
+        <div class="tmpl">«Es libertad y confianza: la comunidad cuida de los niños.»</div>
+        <div class="tmpl-ru">(Это свобода и доверие: община заботится о детях.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Признаться, что ещё не привык.<br>
+        <div class="tmpl">«Todavía no me acostumbro, pero poco a poco.»</div>
+        <div class="tmpl-ru">(Я ещё не привык, но постепенно.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Закончить позитивно.<br>
+        <div class="tmpl">«Me encanta que los niños estén en familia. Está bien así.»</div>
+        <div class="tmpl-ru">(Мне нравится, что дети — со всей семьёй. Пусть будет так.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: эссе «Tres cosas, a las que me he acostumbrado»</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Интро: en España he visto… hemos notado… (введение опыта).<br>
+        3–5. Три вещи: me he acostumbrado a… (cena tardía / sobremesa / niños en la verbena).<br>
+        6. Сравнение стран: en mi país… aquí… en cambio…<br>
+        7. Чувство: me encanta que… / me da confianza…<br>
+        8. Вывод: está bien así, poco a poco — disfrutar.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Образовать Pretérito Perfecto: he / hemos + participio</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать participios: visto, probado, acostumbrado</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Сравнивать страны: en mi país… aquí… en cambio…</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Рассказать об опыте: he visto, ya he probado, nunca he visto</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Спокойно объяснить «детей в баре»: libertad, confianza, comunidad</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Составить эссе «3 вещи, к которым я привык»</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 19.3: Fiestas и традиции</h2>
+        <div class="tag">aunque / a pesar de · PBL: план фиесты</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>¡Está bien así!</b> Вы умеете говорить об опыте через Pretérito Perfecto и сравнивать страны без раздражения. На следующем уроке (19.3) — финал блока, <b>PBL «план локальной фиесты»</b>: mascletá, fallas и 12 uvas de Nochevieja, а для сложных чувств — <b>уступки</b>: <i>aunque</i> / <i>a pesar de</i> («шумно, но того стоит»).
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

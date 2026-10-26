@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 18.3 · Приглашение в бар — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🍻'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🍻 Рабочий лист · Урок 18.3 «Приглашение в бар»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Invitación al bar: PBL «ужин с соседями», yo invito / a medias / la ronda</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🍻 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. quedar</div>
+          <div class="item">2. confirmar</div>
+          <div class="item">3. una mesa para ocho</div>
+          <div class="item">4. el tinto de verano</div>
+          <div class="item">5. la ronda</div>
+          <div class="item">6. pagamos a medias</div>
+          <div class="item">7. la última y nos vamos</div>
+          <div class="item">8. hay que repetir</div>
+        </div>
+        <div class="col">
+          <div class="item">а) последняя и уходим</div>
+          <div class="item">б) подтвердить</div>
+          <div class="item">в) раунд (заказ на всех)</div>
+          <div class="item">г) договариваться о встрече</div>
+          <div class="item">д) тинто де верано</div>
+          <div class="item">е) надо повторить</div>
+          <div class="item">ж) платим пополам</div>
+          <div class="item">з) столик на восьмерых</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🍻 Впиши слово по описанию</h2>
+        <div class="tag">бар и приглашения</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Глагол-жест щедрости: позвать соседей в бар и заплатить за всех. → <span class="wline long"></span><br>
+      2. Самый популярный напиток в испанском баре: маленький стакан очень холодного пива. → <span class="wline long"></span><br>
+      3. Вопрос-фраза, которой узнают удобный день у всей компании. → <span class="wline long"></span><br>
+      4. Ответ на неё, если подходит пятница: «___ el viernes». → <span class="wline long"></span><br>
+      5. Просить ещё один круг напитков на всю компанию: «___ ronda». → <span class="wline long"></span><br>
+      6. Звук-формула, когда чокаются бокалами (а не «¡salud!»). → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — ПРИГЛАШЕНИЯ, ПРОПУСКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>📝 Грамматика: приглашение для группы</h2>
+        <div class="tag">заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>¿Os apetece + инфинитив?</b> — хотите…? — <i>¿Os apetece quedar para cenar?</i> (Хотите встретиться поужинать?)<br>
+        • <b>¿Cuándo os va bien?</b> — когда вам удобно? — <i>¿Cuándo os va bien, el viernes o el sábado?</i><br>
+        • <b>Nos va bien / mal + день</b> — нам подходит / неудобно — <i>Nos va bien el viernes. Nos va mal el sábado.</i><br>
+        • <b>¿Quedamos + день + a las + место?</b> — встретимся? — <i>¿Quedamos el viernes a las nueve en el bar?</i><br>
+        • <b>Confirmar:</b> <i>Confirmo. / Yo voy seguro. / Esta vez no puedo.</i> (Подтверждаю. / Я точно иду. / В этот раз не смогу.)
+      </div>
+
+      <div class="formula">💡 Впиши слово:</div>
+
+      1. ¿___ os va bien, el viernes o el sábado? <span class="ru-sub">(когда вам удобно?)</span><br>
+      2. ___ va bien el viernes. <span class="ru-sub">(пятница нам подходит)</span><br>
+      3. ¿___ el viernes a las nueve en el bar? <span class="ru-sub">(встретимся в пятницу в девять в баре?)</span><br>
+      4. Hoy ___ yo: celebramos la nueva vida en España. <span class="ru-sub">(я угощаю)</span><br>
+      5. Pagamos ___: la mitad para ti, la mitad para mí. <span class="ru-sub">(пополам)</span><br>
+      6. Para la quedada grande ___ un bote. <span class="ru-sub">(скидаемся)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ОПЛАТА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>💳 Грамматика: кто платит? — таблица оплаты</h2>
+        <div class="tag">таблица + впиши фразу</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> четыре сценария счёта — <b>за всех, пополам, каждый за себя, общий котёл</b>. Таблицу читаем, фразы — проговариваем вслух.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Ситуация</th>
+          <th>Фраза</th>
+          <th>Перевод</th>
+        </tr>
+        <tr><td class="practice">за всех</td><td class="practice">yo invito / invito yo</td><td class="practice">я угощаю</td></tr>
+        <tr><td class="practice">пополам</td><td class="practice">pagamos a medias</td><td class="practice">платим пополам</td></tr>
+        <tr><td class="practice">каждый за себя</td><td class="practice">cada uno paga lo suyo</td><td class="practice">каждый платит за себя</td></tr>
+        <tr><td class="practice">общий котёл</td><td class="practice">hacemos un bote</td><td class="practice">скидаемся</td></tr>
+        <tr><td class="reference">заказ для себя</td><td class="reference">ponme una caña</td><td class="reference">налей мне пива</td></tr>
+        <tr><td class="reference">закрыть вечер</td><td class="reference">cuenta, por favor</td><td class="reference">счёт, пожалуйста</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши фразу по переводу:</div>
+
+      1. Hoy ___ yo. <span class="ru-sub">(угощаю — сценарий «за всех»)</span> → <span class="wline short"></span><br>
+      2. Pagamos ___, ¿vale? <span class="ru-sub">(пополам)</span> → <span class="wline short"></span><br>
+      3. ___ paga lo suyo. <span class="ru-sub">(каждый платит за себя)</span> → <span class="wline short"></span><br>
+      4. ___, por favor. <span class="ru-sub">(налей мне пива)</span> → <span class="wline short"></span><br>
+      5. Camarero, la ___, por favor. <span class="ru-sub">(счёт)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: la ronda — ритуал испанского бара</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La ronda: el ritual del bar</h4>
+        <p>En España la bebida se pide por rondas (по раундам): primero «una ronda de cañas», más tarde «¿otra ronda?». La caña (стакан пива) es un vaso pequeño de cerveza bien fría; el tinto de verano (тинто де верано) es vino con gaseosa, hielo y una rodaja de naranja. Y el mejor gesto del año: invitar (приглашать / угощать) a los vecinos por la nueva vida en España. Cuando llega la cuenta, el grupo elige: «yo invito» (я угощаю), «pagamos a medias» (платим пополам), «cada uno paga lo suyo» (каждый платит за себя) o «hacemos un bote» (скидаемся): todos ponen la misma cantidad en el centro de la mesa.</p>
+
+        <h4>La quedada y las tapas</h4>
+        <p>La quedada (встреча) nace en el chat del edificio: uno escribe la idea, otro ayuda a pasar la lista (распространить список) y cada uno puede confirmar (подтвердить) con un mensaje. En el bar las tapas van al centro: las patatas bravas (бравас (острая картошка)), la tortilla (тортилья), el pulpo (осьминог) y los pinchos (пинчос (закуски)), todos para compartir.</p>
+
+        <h4>«La última y nos vamos»</h4>
+        <p>Es la frase mágica para cerrar la noche: «¡La última y nos vamos!» (последняя и уходим). Antes, un brindis (тост): «¡Salud!» (за здоровье!), «chin chin» (чинк-чинк (звон бокалов)), por la nueva vida en España (за новую жизнь в Испании) y por los vecinos (за соседей). Al final: «qué bien lo hemos pasado» (как хорошо мы провели время), «me lo paso genial» (мне очень весело), «hay que repetir» (надо повторить), «te llamo» (позвоню тебе), «nos vemos» (увидимся), «hasta el viernes» (до пятницы) y «un abrazo» (обнимаю).</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué es una «ronda» en el bar de España?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué cuatro opciones hay para pagar la cuenta?
+      <span class="wline xlong"></span><br>
+      3. ¿De qué está hecho el tinto de verano?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué frase cierra la noche y qué dicen antes de irse?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: PBL «ужин с соседями»</h4>
+        <div class="item"><div class="box"></div><div>Написать в чат дома: «¿Os apetece quedar para cenar?»</div></div>
+        <div class="item"><div class="box"></div><div>Спросить день: «¿Cuándo os va bien, el viernes o el sábado?»</div></div>
+        <div class="item"><div class="box"></div><div>Зафиксировать: «nos va bien el viernes» / «nos va mal el sábado»</div></div>
+        <div class="item"><div class="box"></div><div>Забронировать: «una mesa para ocho, a nombre de…»</div></div>
+        <div class="item"><div class="box"></div><div>Собрать подтверждения: confirmo / esta vez no puedo</div></div>
+        <div class="item"><div class="box"></div><div>Решить оплату заранее: yo invito / a medias / cada uno / un bote</div></div>
+        <div class="item"><div class="box"></div><div>Закрыть вечер: brindis, «la última y nos vamos», «hay que repetir»</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: чат соседей + вечер в баре</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Ana (vecina): ¡Hola! ¿Os apetece quedar para cenar el viernes? — Usted: ¡Sí! ¿Cuándo os va bien, el viernes o el sábado? — Carlos: Nos va bien el viernes a las nueve, en el bar La Terraza. — Usted: Perfecto, reservo: una mesa para ocho, a nombre de García. Yo paso la lista por el chat. — (El viernes) Camarero: Buenas noches. ¿Reserva a nombre de García? Aquí tienen. ¿Qué toman? — Carlos: Una ronda de cañas y pinchos para el centro: patatas bravas, tortilla y pulpo. — Ana: Y un tinto de verano para mí, por favor. — Usted: ¡Chin chin! ¡Salud! Por la nueva vida en España y por los vecinos. — Todos: ¡Salud! — Ana: ¿Pagamos a medias? — Usted: No, hoy invito yo. La próxima hacemos un bote. — Carlos: Vale. Camarero, la última y nos vamos: la cuenta, por favor. — Camarero: Ahora mismo. — Ana: ¡Qué bien lo hemos pasado! Hay que repetir. Te llamo por el grupo: ¡un abrazo, nos vemos!»
+      </div>
+      1. ¿Para qué día queda la quedada y a qué hora?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué reserva usted y a nombre de quién?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué piden de beber y de picar?
+      <span class="wline xlong"></span><br>
+      4. ¿Por quién brinda usted?
+      <span class="wline xlong"></span><br>
+      5. ¿Cómo pagan hoy y cómo pagarán la próxima vez?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué frase cierra la noche y qué propone Ana al final?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: сценарии вечера в баре</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Пригласить соседей на ужин.<br>
+        <div class="tmpl">«¿Os apetece quedar para cenar? ¿Cuándo os va bien?»</div>
+        <div class="tmpl-ru">(Хотите встретиться поужинать? Когда вам удобно?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Предложить день и время.<br>
+        <div class="tmpl">«Nos va bien el viernes. ¿Quedamos a las nueve en el bar?»</div>
+        <div class="tmpl-ru">(Пятница нам подходит. Встретимся в девять в баре?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Забронировать столик.<br>
+        <div class="tmpl">«Una mesa para ocho, a nombre de García, por favor.»</div>
+        <div class="tmpl-ru">(Столик на восьмерых, на имя Гарсия, пожалуйста.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Сделать заказ на себя и на всех.<br>
+        <div class="tmpl">«Ponme una caña. Y otra ronda para todos.»</div>
+        <div class="tmpl-ru">(Налей мне пива. И ещё раунд для всех.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Тост и закрытие вечера.<br>
+        <div class="tmpl">«¡Salud! Por los vecinos. La última y nos vamos. ¡Qué bien lo hemos pasado!»</div>
+        <div class="tmpl-ru">(За здоровье! За соседей. Последняя и уходим. Как хорошо мы провели время!)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: сообщение в чат «Организация ужина с соседями»</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приглашение и день (¿Os apetece quedar para cenar? ¿Cuándo os va bien?).<br>
+        3. Бронь (una mesa para ocho, a nombre de…, confirmar).<br>
+        4. Заказ (ponme una caña, otra ronda, pinchos para el centro).<br>
+        5. Тост (¡Salud! Por la nueva vida en España, por los vecinos).<br>
+        6. Оплата (yo invito / pagamos a medias / hacemos un bote).<br>
+        7. Закрыть вечер (la última y nos vamos, la cuenta, por favor).<br>
+        8. Прощание (qué bien lo hemos pasado, hay que repetir, un abrazo, nos vemos).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Приглашать группу: ¿os apetece...?, ¿cuándo os va bien?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Бронировать стол: mesa para ocho, a nombre de...</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Говорить об оплате: yo invito, a medias, cada uno, un bote</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Заказывать в баре: ponme una caña, otra ronda</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Знать культуру: caña, ronda, «la última y nos vamos»</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Провести PBL: приглашение → бронь → счёт</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 19.1: Концепт времени</h2>
+        <div class="tag">antes / ahora · imperfecto vs presente</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>¡Qué bien lo hemos pasado!</b> Вы умеете собирать соседей на ужин: от «¿os apetece…?» до «la última y nos vamos». На следующем уроке (19.1) — самый «медленный» навык Испании: <b>концепт времени</b>. Разберём, что реально значит <i>ahora mismo</i> и <i>enseguida</i>, и поставим контраст <b>antes / ahora</b> (imperfecto vs presente): почему обед в два, а ужин в девять.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 16.3 · Соцсети и приватность — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'📸'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>📸 Рабочий лист · Урок 16.3 «Соцсети и приватность»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · Redes sociales y privacidad: фото детей, permiso fotográfico · мнение: creo que, me parece que</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>📸 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. publicar</div>
+          <div class="item">2. el consentimiento</div>
+          <div class="item">3. el perfil privado</div>
+          <div class="item">4. no estoy de acuerdo</div>
+          <div class="item">5. el permiso fotográfico</div>
+          <div class="item">6. etiquetar</div>
+          <div class="item">7. sonar borde</div>
+          <div class="item">8. los ajustes</div>
+        </div>
+        <div class="col">
+          <div class="item">а) звучать грубо</div>
+          <div class="item">б) публиковать</div>
+          <div class="item">в) разрешение на фото</div>
+          <div class="item">г) я не согласен</div>
+          <div class="item">д) настройки</div>
+          <div class="item">е) отмечать (тегать)</div>
+          <div class="item">ж) закрытый профиль</div>
+          <div class="item">з) согласие</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду 3 слова из одной темы + 1 лишнее</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подчеркни лишнее слово и выпиши его: почему оно не подходит?</div>
+      1. publicar · borrar · compartir · <b>la historia</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — действия с фото, одно — формат публикации)</span><br>
+      2. el perfil privado · los ajustes · ocultar · <b>los seguidores</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — про приватность, одно — люди, которые читают вас)</span><br>
+      3. creo que... · me parece que... · en mi opinión · <b>el emoji</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — фразы мнения, одно — картинка-смайлик)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — МНЕНИЕ, ВЫБЕРИ А/Б -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>💭 Грамматика: мнение, выбери А/Б</h2>
+        <div class="tag">creo que vs no creo que</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> после <b>creo que</b> — обычная форма глагола: <i>creo que es una buena idea</i>.<br>
+        После <b>no creo que</b> — subjuntivo: <i>no creo que sea una buena idea</i> (узнавайте, не порождайте).
+      </div>
+
+      <div class="formula">💡 Выбери верный вариант: А или Б</div>
+
+      1. «Creo que es / sea una foto preciosa.» <span class="ru-sub">(creo que +)</span> А) es Б) sea → <span class="wline short"></span><br>
+      2. «No creo que es / sea buena idea etiquetar a los niños.» <span class="ru-sub">(no creo que — subjuntivo)</span> А) es Б) sea → <span class="wline short"></span><br>
+      3. «Me parece que hay / haya que pedir permiso.» <span class="ru-sub">(me parece que +)</span> А) hay Б) haya → <span class="wline short"></span><br>
+      4. «¿Publicamos la foto? ___ del perfil.» <span class="ru-sub">(смотря как)</span> А) Depende Б) Tiene razón → <span class="wline short"></span><br>
+      5. «— Me parece que hay que borrarla. — Vale, ___ , mejor borrarla.» <span class="ru-sub">(вы правы)</span> А) tienes razón Б) depende → <span class="wline short"></span><br>
+      6. «No estoy de acuerdo con publicar / publique eso.» <span class="ru-sub">(de + инфинитив)</span> А) publicar Б) publique → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — МНЕНИЕ: ТАБЛИЦА + ПРАКТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🗨️ Грамматика: фразы мнения</h2>
+        <div class="tag">таблица + впиши фразу</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> сказать мнение мягко — и попросить удалить фото без скандала.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Фраза</th>
+          <th>Перевод</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">creo que...</td><td class="practice">я думаю, что...</td><td class="practice">Creo que es una foto preciosa.</td></tr>
+        <tr><td class="practice">me parece que...</td><td class="practice">мне кажется, что...</td><td class="practice">Me parece que hay que pedir permiso.</td></tr>
+        <tr><td class="reference">en mi opinión</td><td class="reference">по моему мнению</td><td class="reference">En mi opinión, la cara debe taparse.</td></tr>
+        <tr><td class="reference">para mí</td><td class="reference">для меня</td><td class="reference">Para mí, la privacidad es lo primero.</td></tr>
+        <tr><td class="reference">no estoy de acuerdo</td><td class="reference">я не согласен</td><td class="reference">No estoy de acuerdo con publicar eso.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши фразу мнения по переводу:</div>
+
+      1. «___ es una foto preciosa.» <span class="ru-sub">(я думаю, что)</span> → <span class="wline short"></span><br>
+      2. «___ hay que pedir permiso.» <span class="ru-sub">(мне кажется, что)</span> → <span class="wline short"></span><br>
+      3. «___ , la cara debe taparse.» <span class="ru-sub">(по моему мнению)</span> → <span class="wline short"></span><br>
+      4. «___ , la privacidad es lo primero.» <span class="ru-sub">(для меня)</span> → <span class="wline short"></span><br>
+      5. «Tienes razón, mejor ___.» <span class="ru-sub">(удалить её)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: fotos de niños — la ley y el cole</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El permiso fotográfico del cole</h4>
+        <p>En septiembre el colegio pide una <b>autorización</b> firmada: ¿puede usar fotos del cole en la <b>web del cole</b>, en la <b>revista escolar</b> o en el <b>vídeo de fin de curso</b>? Ustedes eligen: sí, <b>solo para la familia</b> o no. Sin consentimiento escrito, el cole no puede publicar nada con caras de niños.</p>
+
+        <h4>La LOPDGDD: la cara es un dato</h4>
+        <p>La ley española de protección de datos (<b>LOPDGDD</b>) protege también la imagen de los menores: la cara de un niño es un dato personal. Por eso hay que <b>pedir permiso</b> antes de publicar y <b>borrar</b> la foto si un padre lo pide. Un malentendido se arregla con un mensaje amable: «Perdona, ¿puedes borrar la foto?» — «Tranquila, borrada».</p>
+
+        <h4>Tu perfil, tus reglas</h4>
+        <p><b>Perfil privado</b>, no <b>etiquetar</b> a los niños, <b>ocultar</b> la cara con un emoji en las fotos de grupo. Cuidado con el tono: un mensaje sarcástico puede <b>sonar borde</b> y acabar en malentendido; un emoji con risa suaviza todo. Y revisa <b>los ajustes</b> del móvil: apaga la geolocalización de las fotos antes de compartirlas.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué eligen los padres en la autorización del cole?
+      <span class="wline xlong"></span><br>
+      2. ¿Por qué la cara de un niño es un dato personal?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué hay que hacer si un padre pide borrar una foto?
+      <span class="wline xlong"></span><br>
+      4. ¿Cómo suavizamos el tono en un mensaje?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: публикуем фото детей</h4>
+        <div class="item"><div class="box"></div><div>Спросить permiso у родителей других детей перед публикацией</div></div>
+        <div class="item"><div class="box"></div><div>Проверить la autorización школы: solo para la familia или public</div></div>
+        <div class="item"><div class="box"></div><div>Perfil privado и не отмечать детей (no etiquetar)</div></div>
+        <div class="item"><div class="box"></div><div>Лицо в групповом фото закрыть эмодзи или стикером</div></div>
+        <div class="item"><div class="box"></div><div>Тон: без сарказма — эмодзи вместо него</div></div>
+        <div class="item"><div class="box"></div><div>Просьба удалить фото — выполнить сразу и ответить tranquilo</div></div>
+        <div class="item"><div class="box"></div><div>Настройки: выключить геолокацию фото (los ajustes)</div></div>
+      </div>
+
+      <div class="note" style="margin-top:3mm">
+        📚 <b>Словарик урока:</b><br>
+        📸 publicar — публиковать · la foto — фото · la historia — сторис · etiquetar — отмечать (тегать) · borrar — удалять · compartir — делиться · los seguidores — подписчики<br>
+        🔒 el consentimiento — согласие · la privacidad — приватность · el perfil privado — закрытый профиль · pedir permiso — спросить разрешения · no publicar caras de niños — не публиковать лица детей · ocultar — скрывать · los ajustes — настройки<br>
+        💭 creo que... — я думаю, что... · me parece que... — мне кажется, что... · no estoy de acuerdo — я не согласен · en mi opinión — по моему мнению · para mí — для меня · depende — смотря как · tiene razón — вы правы<br>
+        🏫 el permiso fotográfico — разрешение на фото · la autorización — разрешение (документ) · la web del cole — сайт школы · la revista escolar — школьный журнал · el vídeo de fin de curso — видео конца года · fotos del cole — школьные фото · solo para la familia — только для семьи<br>
+        😀 el emoji — эмодзи · el guion — смайлик-скобка :) · la risa — смех · sarcástico — саркастичный · malentendido — недоразумение · el tono — тон · sonar borde — звучать грубо
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: фото с праздника в школе</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— ¿Has visto la foto del cumpleaños en el grupo? La ha publicado la madre de Marco. — Sí, y sales tú y el niño con la cara entera. A mí no me gusta. — Pues escribe en privado: «Perdona, ¿puedes borrar la foto o tapar la cara?» — Hecho. Ha contestado: «Tranquila, la borro ahora mismo». — Es que en mi perfil no quiero caras de niños. — Totalmente: yo tengo el perfil privado y no etiqueto a nadie. — ¿Y las fotos del cole en la web? Sale la foto de la fiesta. — Eso está bien: el cole tiene el permiso fotográfico, la autorización la firmamos en septiembre. — ¿Y la LOPDGDD? He leído que protege los datos de los niños. — Sí: sin consentimiento no pueden publicar. Creo que es una ley buena. — Me parece que hay que pedir lo mismo a la revista escolar. — Tienes razón. Y para el vídeo de fin de curso, decidimos entre todos.»
+      </div>
+      1. ¿Quién ha publicado la foto del cumpleaños?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué pide usted en privado?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué contesta la madre de Marco?
+      <span class="wline xlong"></span><br>
+      4. ¿Por qué no quiere caras de niños en su perfil?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué firma usted en septiembre?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué decide entre todos para el vídeo de fin de curso?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации с фото</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Попросить удалить фото вежливо.<br>
+        <div class="tmpl">«Perdona, ¿puedes borrar la foto? No publicamos caras de niños.»</div>
+        <div class="tmpl-ru">(Извини, можешь удалить фото? Мы не публикуем лица детей.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Дать согласие с условием.<br>
+        <div class="tmpl">«Vale, pero tapa la cara con un emoji y no etiquetes a nadie.»</div>
+        <div class="tmpl-ru">(Ладно, но закрой лицо эмодзи и никого не отмечай.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Выразить мнение с доводом.<br>
+        <div class="tmpl">«Creo que es una foto preciosa, pero me parece que hay que pedir permiso.»</div>
+        <div class="tmpl-ru">(Я думаю, фото прекрасное, но мне кажется, надо спросить разрешения.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Не согласиться вежливо.<br>
+        <div class="tmpl">«No estoy de acuerdo. Para mí, la privacidad es lo primero.»</div>
+        <div class="tmpl-ru">(Я не согласен. Для меня приватность — прежде всего.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Ответить «смотря как».<br>
+        <div class="tmpl">«¿Publicamos la foto de la fiesta? Depende del perfil: si es privado, vale.»</div>
+        <div class="tmpl-ru">(Публикуем фото с праздника? Смотря какой профиль: если закрытый, ладно.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: правила публикации фото в нашей семье</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1. Regla 1: perfil privado, los seguidores — solo la familia.<br>
+        2. Regla 2: pedir permiso antes de publicar (niños + otros padres).<br>
+        3. Regla 3: no etiquetar a los niños nunca.<br>
+        4. Regla 4: caras tapadas con un emoji en fotos de grupo.<br>
+        5. Regla 5: borrar enseguida si un padre lo pide.<br>
+        6. Regla 6: la web del cole y la revista escolar — solo con la autorización firmada.<br>
+        7. Regla 7: tono amable, sin sarcasmo — un emoji ayuda.<br>
+        8. Repasar los ajustes del móvil cada curso escolar.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Выражать мнение: creo que, me parece que</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Просить удалить фото вежливо</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Знать permiso fotográfico y la LOPDGDD</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Оценивать ситуации: ¿vale o no vale?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Управлять тоном: эмодзи вместо сарказма</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Настраивать приватность: perfil privado, ajustes</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 17.1: Собрание жильцов</h2>
+        <div class="tag">la comunidad de vecinos · presidente, derramas</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете выражать мнение и защищать приватность семьи. На следующем уроке — <b>собрание жильцов</b>: la comunidad de vecinos, presidente, cuotas и письма в общий почтовый ящик. Первая неделя новой станции!
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

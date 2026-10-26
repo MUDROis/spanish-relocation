@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 20.3 · Финальная рефлексия + ВЫПУСКНОЙ — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🎓'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🎓 Рабочий лист · Урок 20.3 «Финальная рефлексия + ВЫПУСКНОЙ»</h1>
+    <div class="meta">Блок 4 · Vida Social y Choque Cultural · ФИНАЛ · Graduación: итоги 20 недель, кодекс выживания и праздник, Perfecto: he / hemos + participio</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🎓 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">🎓 <b>Лист выпускника.</b> 20 недель позади: соберите слова курса, проверьте формулы и напишите свой Кодекс выживания. ¡Lo hemos logrado!</div>
+      <div class="match">
+        <div class="col">
+          <div class="item">1. he aprendido</div>
+          <div class="item">2. apuntarlo todo</div>
+          <div class="item">3. ha sido un placer</div>
+          <div class="item">4. las series en español</div>
+          <div class="item">5. el brindis</div>
+          <div class="item">6. el logro</div>
+          <div class="item">7. preguntar dos veces</div>
+          <div class="item">8. buena suerte</div>
+        </div>
+        <div class="col">
+          <div class="item">а) тост</div>
+          <div class="item">б) удачи</div>
+          <div class="item">в) записывать всё</div>
+          <div class="item">г) я научился</div>
+          <div class="item">д) спрашивать дважды</div>
+          <div class="item">е) сериалы на испанском</div>
+          <div class="item">ж) достижение</div>
+          <div class="item">з) было приятно</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ СЛОВО ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>📜 Впиши слово по описанию: кодекс выживания</h2>
+        <div class="tag">правила курса — в испанских лозунгах</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Каждое описание — правило из вашего кодекса. Впишите испанский лозунг (инфинитив — это нормально!).</div>
+      1. Правило № 1: не паникуем — спокойно, ничего страшного. → <span class="wline long"></span><br>
+      2. Правило про непонимание: если не понял — спрашивать дважды. → <span class="wline long"></span><br>
+      3. Правило про бюрократию: их всегда не хватает — бумаги, всегда бумаги. → <span class="wline long"></span><br>
+      4. Правило про темп: делаем всё с терпением. → <span class="wline long"></span><br>
+      5. Правило про систему записи: всегда с предварительной записью. → <span class="wline long"></span><br>
+      6. Первый шаг после курса: продолжать практиковаться. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — PERFECTO, ВЫБЕРИ А/Б -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>📐 Грамматика: Perfecto — итоги курса. Выбери А / Б</h2>
+        <div class="tag">обведи верный вариант</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b> <b>he / has / ha / hemos / habéis / han + participio</b> — результаты курса:<br>
+        • <i>He aprendido mucho español en veinte semanas.</i> — Я научился многому за 20 недель.<br>
+        • <i>Hemos conseguido el nivel A2 survival.</i> — Мы добились уровня A2.<br>
+        • <i>Ha sido un placer.</i> — Было приятно. · <i>He conocido vecinos estupendos.</i> — Я познакомился с отличными соседями.<br>
+        • <i>Nos lo hemos ganado.</i> — Мы это заслужили.
+      </div>
+
+      <div class="formula">💡 Выбери форму итогов:</div>
+
+      1. ___ mucho español en veinte semanas. <span class="ru-sub">(я научился)</span><br>
+      &nbsp;&nbsp;&nbsp;А) He aprendido &nbsp;&nbsp;&nbsp; Б) He aprendendo → <span class="wline short"></span><br>
+      2. ___ el nivel A2 survival. <span class="ru-sub">(мы добились)</span><br>
+      &nbsp;&nbsp;&nbsp;А) Hemos conseguir &nbsp;&nbsp;&nbsp; Б) Hemos conseguido → <span class="wline short"></span><br>
+      3. ___ un placer. <span class="ru-sub">(было приятно)</span><br>
+      &nbsp;&nbsp;&nbsp;А) Ha sido &nbsp;&nbsp;&nbsp; Б) Ha ser → <span class="wline short"></span><br>
+      4. ___ vecinos estupendos. <span class="ru-sub">(я познакомился)</span><br>
+      &nbsp;&nbsp;&nbsp;А) He conocí &nbsp;&nbsp;&nbsp; Б) He conocido → <span class="wline short"></span><br>
+      5. Nos lo ___. <span class="ru-sub">(мы это заслужили)</span><br>
+      &nbsp;&nbsp;&nbsp;А) hemos ganado &nbsp;&nbsp;&nbsp; Б) hemos ganido → <span class="wline short"></span><br>
+      6. ___ aplausos para los graduados. <span class="ru-sub">(есть — hay)</span><br>
+      &nbsp;&nbsp;&nbsp;А) Hay &nbsp;&nbsp;&nbsp; Б) Haber → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА ФОРМ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: формула выпускного + кодекс</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> <b>he / hemos + participio</b> — говорим об итогах. Правила кодекса звучат как команды-лозунги: <b>инфинитив</b> — <i>Preguntar dos veces. Apuntarlo todo.</i>
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Форма</th>
+          <th>Пример выпускного</th>
+          <th>Перевод</th>
+        </tr>
+        <tr><td class="practice">he aprendido</td><td class="practice">He aprendido mucho español en veinte semanas.</td><td class="practice">Я научился многому за 20 недель</td></tr>
+        <tr><td class="practice">hemos conseguido</td><td class="practice">Hemos conseguido el nivel A2 survival.</td><td class="practice">Мы добились уровня A2</td></tr>
+        <tr><td class="practice">ha sido</td><td class="practice">Ha sido un placer.</td><td class="practice">Было приятно</td></tr>
+        <tr><td class="reference">he conocido</td><td class="reference">He conocido vecinos estupendos.</td><td class="reference">Я познакомился с отличными соседями</td></tr>
+        <tr><td class="practice">nos lo hemos ganado</td><td class="practice">Nos lo hemos ganado.</td><td class="practice">Мы это заслужили</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши форму:</div>
+
+      1. Yo ___ (aprender) a vivir en España. <span class="ru-sub">(я научился)</span> → <span class="wline short"></span><br>
+      2. Nosotros ___ (conseguir) el nivel A2 survival. <span class="ru-sub">(мы добились)</span> → <span class="wline short"></span><br>
+      3. ___ (ser) un placer. <span class="ru-sub">(было приятно)</span> → <span class="wline short"></span><br>
+      4. Preguntar ___ veces es normal. <span class="ru-sub">(спрашивать дважды)</span> → <span class="wline short"></span><br>
+      5. Con paciencia, ___. <span class="ru-sub">(и без спешки)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: 20 semanas — карта курса</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Veinte semanas, cuatro bloques</h4>
+        <p>Veinte semanas en España, cuatro bloques: <b>los primeros pasos</b> (semanas 1–5), <b>El Cole y la Salud</b> (6–10), <b>Logística Diaria</b> (11–15) y <b>Vida Social</b> (16–20). Al principio todo era nuevo: la cita previa, el papeleo, la farmacia. Ahora haces la compra, hablas con los profes y organizas una sobremesa con los vecinos. El progreso (прогресс) se ve en las hojas del curso: mira las primeras semanas y las últimas.</p>
+
+        <h4>Tu nivel: A2 survival</h4>
+        <p>«A2 survival» significa: sobrevives en español. Pides una cita, entiendes el recibo, explicas que tu hijo está en la enfermería, dices «no pasa nada». No eres bilingüe — y no importa: <b>el nivel</b> (уровень) que tienes ya funciona en la vida real. Tu meta (цель) siguiente puede ser B1, pero hoy celebramos el A2.</p>
+
+        <h4>Los siguientes pasos</h4>
+        <p>El secreto final es simple: <b>seguir practicando</b> (продолжать практиковаться). Los intercambios de idiomas (языковые обмены) son gratis; la radio española (испанское радио) suena en el coche; las series en español (сериалы на испанском) con subtítulos. Los grupos locales (местные группы) y el voluntariado (волонтёрство) dan amigos; y la mejor escuela es la conversación diaria (ежедневный разговор) — en la frutería, en el cole, en el ascensor.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Cuántas semanas y cuántos bloques tiene el curso?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué significa «A2 survival»?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué tres formas de practicar menciona el texto?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuál es la mejor escuela según el texto?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист выпускника</h4>
+        <div class="item"><div class="box"></div><div>Могу позвонить и записаться: cita previa, ¿dígame?</div></div>
+        <div class="item"><div class="box"></div><div>Могу объяснить, что случилось с ребёнком в школе</div></div>
+        <div class="item"><div class="box"></div><div>Могу купить продукты и оплатить: ¿cuánto es?</div></div>
+        <div class="item"><div class="box"></div><div>Могу поддержать разговор с соседями: ¿qué me cuentas?</div></div>
+        <div class="item"><div class="box"></div><div>Вижу свой прогресс за 20 недель по светофорам листов</div></div>
+        <div class="item"><div class="box"></div><div>Записал мою цель (la meta) на следующие 3 месяца</div></div>
+        <div class="item"><div class="box"></div><div>Мой кодекс выживания (10 правил) готов к холодильнику</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: el brindis de graduación</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «Buenas noches, familias. Veinte semanas... ¡y aquí estamos! Ha sido un placer trabajar con vosotros. — Muchas gracias por todo, profesora. — ¡Felicidades! Hemos conseguido el nivel A2 survival. — ¡Lo hemos logrado! — ¿Preparados para el brindis? ¡Por nosotros! — ¡Felicidades! — Y ahora, ¿qué? — Yo, seguir practicando: la radio española en el coche y las series en español. — Yo, los intercambios de idiomas los jueves. — Nosotros vamos a celebrar: la tortilla de celebración ya está en la sartén y el cava está frío. — ¡Los aplausos para los graduados! — Nos vemos por el barrio. — Buena suerte. — Un abrazo. — Hasta pronto.»
+      </div>
+      <div class="hint">Словарик: los aplausos — аплодисменты, ¡felicidades! — поздравляю!</div>
+      1. ¿Cuántas semanas ha durado el curso?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué nivel han conseguido?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué dos planes tiene el primer graduado?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué plan tienen los intercambios de idiomas?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué hay en la sartén y qué está frío?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué dice la profesora al final de la fiesta?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: реплики выпускного</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Поздравьте группу.<br>
+        <div class="tmpl">«¡Felicidades por el nivel A2! ¡Lo hemos logrado!»</div>
+        <div class="tmpl-ru">(Поздравляю с уровнем A2! Мы это сделали!)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Поблагодарите преподавателя.<br>
+        <div class="tmpl">«Muchas gracias por todo. Ha sido un placer.»</div>
+        <div class="tmpl-ru">(Спасибо большое за всё. Было приятно.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Расскажите, как будете праздновать.<br>
+        <div class="tmpl">«Vamos a celebrar: la tortilla de celebración y el cava. El brindis: ¡por nosotros!»</div>
+        <div class="tmpl-ru">(Будем праздновать: тортилья для праздника и кава (игристое). Тост: за нас!)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Прощайтесь с одногруппниками — живёте в одном районе.<br>
+        <div class="tmpl">«Nos vemos por el barrio. ¡Buena suerte!»</div>
+        <div class="tmpl-ru">(Увидимся в районе. Удачи!)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Тёплое напутствие другу по курсу.<br>
+        <div class="tmpl">«Un abrazo. Hasta pronto. Y recuerda: tranquilo, no pasa nada.»</div>
+        <div class="tmpl-ru">(Обнимаю. До скорого. И помни: спокойно, ничего страшного.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: «Mi código de supervivencia»</h2>
+        <div class="tag">6–8 предложений по плану · главный продукт курса</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Лозунг кодекса: с терпением (con paciencia) и без спешки (y sin prisa) — это мой Испания-план.<br>
+        3. Бюрократия: siempre con cita previa, papeles, siempre papeles.<br>
+        4. Общение: preguntar dos veces, apuntarlo todo.<br>
+        5. Спокойствие: tranquilo, no pasa nada.<br>
+        6–7. Итоги: he aprendido..., hemos conseguido el nivel A2 survival.<br>
+        8. Финал: ¡Felicidades! Nos lo hemos ganado.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Документы и звонки: cita previa, ¿dígame?, papeles, justificante</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Жильё и быт: avería, presupuesto, importe, plazo, recibo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Школа и здоровье: ¿hablo con...?, enfermería, urgencias 112</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Социум: ¿os apetece?, la ronda, no pasa nada, ¿qué me cuentas?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Грамматика-выживание: he + participio, ir a, imperativo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Мой кодекс выживания: 10 правил, собранных и озвученных</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист (особенно кодекс!) и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- ВЫПУСКНОЙ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">🎉</div>
+      <div>
+        <h2>🎉 ВЫПУСКНОЙ · ¡Graduación A2 Survival!</h2>
+        <div class="tag">20 недель · финал курса · ¡nos lo hemos ganado!</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎓 <b>¡Felicidades!</b> Вы прошли <b>20 недель</b> и четыре блока: от первых слов и cita previa — до собрания жильцов, билетов Renfe и paella con los vecinos. За это время вы: записались к врачу и звонили в 112, освоили Mercadona и mercado, перестали бояться слова <i>papeles</i>, нашли общий язык с соседями и со школой. Ваш продукт — <b>Кодекс выживания</b>: повесьте его на холодильник, отправьте другу-релоканту и произнесите тост вслух: <i>«El brindis: ¡por nosotros!»</i> El nivel A2 survival — это не финиш, это билет в реальную жизнь в Испании. ¡Buen viaje y nos vemos por el barrio! 🥂
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

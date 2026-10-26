@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 15.3 · CHECKPOINT 3 · Идеальный уикенд — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🏖️'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🏖️ Рабочий лист · Урок 15.3 «CHECKPOINT 3 · Идеальный уикенд»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · ревизия недель 11–15: покупки, транспорт, дом, рестораны, поездки · ir a + союзы porque / pero / así que</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА БЛОКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🏁 Лексика блока: соедини слово и перевод</h2>
+        <div class="tag">впиши букву · слова из разных недель</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el presupuesto</div>
+          <div class="item">2. el billete</div>
+          <div class="item">3. porque</div>
+          <div class="item">4. el casco antiguo</div>
+          <div class="item">5. los documentos</div>
+          <div class="item">6. el peaje</div>
+          <div class="item">7. el acuario</div>
+          <div class="item">8. la crema solar</div>
+        </div>
+        <div class="col">
+          <div class="item">а) платная дорога</div>
+          <div class="item">б) бюджет</div>
+          <div class="item">в) старый город</div>
+          <div class="item">г) потому что</div>
+          <div class="item">д) аквариум</div>
+          <div class="item">е) солнцезащитный крем</div>
+          <div class="item">ж) билет</div>
+          <div class="item">з) документы</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду 3 слова из одной темы + 1 лишнее</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="hint">Подчеркни лишнее слово и выпиши его: почему оно не подходит?</div>
+      1. el billete · el andén · el peaje · <b>la mochila</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — дорога и поезд, одно — вещь, которую носит ребёнок)</span><br>
+      2. la playa · el museo · el acuario · <b>el cargador</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — места, куда ходят смотреть, одно — заряжает телефон)</span><br>
+      3. la crema solar · el bañador · la gorra · <b>el presupuesto</b> → <span class="wline short"></span><br>
+      <span class="ru-sub">(три слова — пляжная сумка, одно — деньги)</span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — IR A + СОЮЗЫ, ВЫБЕРИ А/Б -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: ir a + союзы, выбери А/Б</h2>
+        <div class="tag">повторение блока 3</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Повторение:</b><br>
+        • Будущее = <b>ir a + инфинитив</b>: voy / vas / va / vamos / vais / van + a + infinitivo<br>
+        • Союзы: <b>porque</b> (потому что — причина) · <b>pero</b> (но) · <b>así que</b> (поэтому — следствие) · <b>primero... luego</b> (сначала... потом)
+      </div>
+
+      <div class="formula">💡 Выбери верный вариант: А или Б</div>
+
+      1. «___ comprar los billetes de ida y vuelta.» <span class="ru-sub">(будущее, я)</span> А) Voy a Б) Voy → <span class="wline short"></span><br>
+      2. «Los niños ___ llevar su mochila.» <span class="ru-sub">(будущее, они)</span> А) van Б) van a → <span class="wline short"></span><br>
+      3. «El Avlo sale a las nueve, ___ llegamos tarde.» <span class="ru-sub">(поэтому)</span> А) pero Б) así que → <span class="wline short"></span><br>
+      4. «Cogemos el GPS ___ no nos gusta perderse.» <span class="ru-sub">(потому что)</span> А) porque Б) pero → <span class="wline short"></span><br>
+      5. «___ dejamos las maletas, ___ vamos al casco antiguo.» <span class="ru-sub">(сначала... потом)</span> А) Primero... luego Б) Pero... luego → <span class="wline short"></span><br>
+      6. «___ gastar unos trescientos euros los dos días.» <span class="ru-sub">(будущее, мы вдвоём)</span> А) Vamos a Б) Voy a → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — IR A: ТАБЛИЦА + ПРАКТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>⏰ Грамматика: futuro con ir a — быстрый прогон</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус:</b> план поездки через <b>ir a</b>. Когда встречаете <i>cuando lleguemos</i> — это subjuntivo урока 15.2: узнавайте.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Шаг поездки</th>
+          <th>Фраза</th>
+        </tr>
+        <tr><td class="practice">Билеты</td><td class="practice">Voy a comprar los billetes de ida y vuelta.</td></tr>
+        <tr><td class="practice">Жильё</td><td class="practice">Vamos a reservar un hotel con desayuno.</td></tr>
+        <tr><td class="practice">Поезд</td><td class="practice">El Avlo va a salir del andén tres.</td></tr>
+        <tr><td class="reference">Бюджет</td><td class="reference">Vamos a gastar unos trescientos euros.</td></tr>
+        <tr><td class="reference">Дети</td><td class="reference">Los niños van a llevar su mochila.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши верную форму ir a:</div>
+
+      1. Yo ___ comprar los billetes de ida y vuelta. <span class="ru-sub">(yo)</span> → <span class="wline short"></span><br>
+      2. Nosotros ___ reservar un hotel con desayuno. <span class="ru-sub">(nosotros)</span> → <span class="wline short"></span><br>
+      3. El tren ___ salir del andén tres. <span class="ru-sub">(el tren = él)</span> → <span class="wline short"></span><br>
+      4. Los niños ___ llevar su mochila. <span class="ru-sub">(ellos)</span> → <span class="wline short"></span><br>
+      5. ¿Vosotros ___ viajar el sábado? <span class="ru-sub">(vosotros)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: CLIL — КАРТА БЛОКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 CLIL: карта блока 3 (недели 11–15)</h2>
+        <div class="tag">что изучили + чек-лист ситуации</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El mapa del bloque 3</h4>
+        <p>Cinco semanas, un bloque: la compra, el coche y la calle, la casa, la mesa y el viaje. Este checkpoint es una revisión: mira la tabla, recuerda las palabras llave y prepárate para la simulación «El fin de semana perfecto» — cuatro paradas: billetes, hotel, presupuesto y plan.</p>
+        <table>
+          <tr><th>Semana</th><th>Misión</th><th>Palabras llave</th></tr>
+          <tr><td>11</td><td>Supermercado y mercado</td><td>me gustaría · si puedo · un kilo de · hay que reciclar</td></tr>
+          <tr><td>12</td><td>Transporte y aparcamiento</td><td>Siga · Gire · Valide · la zona verde · la ORA</td></tr>
+          <tr><td>13</td><td>Fontanero, electricista, plagas</td><td>se ha atascado · un poco de · más... que · el diferencial</td></tr>
+          <tr><td>14</td><td>Restaurantes y delivery</td><td>se ha roto · hace dos días · está estropeado · soy alérgico</td></tr>
+          <tr><td>15</td><td>Trenes, hoteles y el plan</td><td>ir a + infinitivo · cuando lleguemos · la ida y vuelta · la tasa turística</td></tr>
+        </table>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué aprendemos en la semana 12?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué frases usamos en el mercado (semana 11)?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pasa en la semana 14 si la mesa está rota?
+      <span class="wline xlong"></span><br>
+      4. ¿Cómo se forma el futuro con ir a? Da un ejemplo.
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист «Идеальный уикенд»</h4>
+        <div class="item"><div class="box"></div><div>Бюджет: посчитать el presupuesto (бензин, peaje, отель, еда)</div></div>
+        <div class="item"><div class="box"></div><div>Билеты: ida y vuelta, asiento, localizador</div></div>
+        <div class="item"><div class="box"></div><div>Жильё: confirmar la reserva, проверить errata, número de confirmación</div></div>
+        <div class="item"><div class="box"></div><div>Чемодан детей: la mochila, la gorra, la crema solar, el bañador</div></div>
+        <div class="item"><div class="box"></div><div>Документы: DNI, tarjeta sanitaria</div></div>
+        <div class="item"><div class="box"></div><div>Маршрут: el mapa / el GPS, primero... luego</div></div>
+        <div class="item"><div class="box"></div><div>План Б: si llueve — el museo o el acuario</div></div>
+      </div>
+
+      <div class="note" style="margin-top:3mm">
+        📚 <b>Словарик блока:</b><br>
+        🗓️ el presupuesto — бюджет · el itinerario — маршрут (план) · el plan — план · la excursión — экскурсия / выезд · reservar — бронировать · organizar — организовать · salir el sábado — выехать в субботу<br>
+        🚆 el billete — билет · el andén — платформа · el coche de alquiler — прокатная машина · el combustible — топливо · el peaje — платная дорога · el mapa — карта · el GPS — навигатор<br>
+        🔗 porque — потому что · pero — но · así que — поэтому · primero... luego — сначала... потом · también — тоже · además — кроме того · al final — в итоге<br>
+        🏰 la playa — пляж · el museo — музей · el casco antiguo — старый город · la catedral — собор · el parque — парк · el acuario — аквариум · el parque de atracciones — парк аттракционов<br>
+        🎒 el alojamiento — жильё · la mochila — рюкзак · la crema solar — солнцезащитный крем · el bañador — купальник · la gorra — кепка · el cargador — зарядка · los documentos — документы
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ — СИМУЛЯЦИЯ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование-симуляция: «Идеальный уикенд»</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза. Синтетическая ситуация блока: поезд + отель + бюджет + план</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Web de Renfe: dos billetes de ida y vuelta para el sábado, Valencia. — Son cuarenta y ocho euros. El Avlo va a salir del andén tres a las nueve y diez. — Perfecto, compro los billetes. ¿Y el presupuesto? — Vamos a gastar unos trescientos euros los dos días: tren, hotel y comida. — Vale. Ahora el alojamiento: tenemos la reserva, pero el nombre tiene una errata. — Llamo a recepción: ¿Pueden corregir la reserva, por favor? — Ya está. Cuando lleguemos, dejamos las maletas y vamos al casco antiguo. — Los niños van a llevar su mochila con la gorra y la crema solar. — ¿Y el domingo? — Vamos al acuario, pero primero desayunamos en el hotel. — ¿Cuánto cuesta el acuario? — Unos quince euros por persona. Así que son sesenta: lo ponemos en el presupuesto. — Perfecto. Este es el itinerario: primero el tren, luego el hotel y, al final, ¡la playa!»
+      </div>
+      1. ¿Qué compran primero y para qué día?
+      <span class="wline xlong"></span><br>
+      2. ¿De qué andén va a salir el Avlo?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuánto es el presupuesto de los dos días?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué problema tiene la reserva y qué piden?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué llevan los niños en la mochila?
+      <span class="wline xlong"></span><br>
+      6. ¿Cuál es el itinerario: primero, luego, al final?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: пять миссий блока</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1 (нед. 15.1):</b> Купить билеты на поезд.<br>
+        <div class="tmpl">«Dos billetes de ida y vuelta para Valencia, por favor. ¿De qué andén sale el Avlo?»</div>
+        <div class="tmpl-ru">(Два билета туда-обратно в Валенсию, пожалуйста. С какой платформы идёт Авло?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2 (нед. 15.2):</b> Заселиться в отель.<br>
+        <div class="tmpl">«Buenos días, tenemos una reserva a nombre de Álvarez, para dos noches.»</div>
+        <div class="tmpl-ru">(Добрый день, у нас бронь на имя Альварес, на две ночи.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3 (нед. 15.2):</b> Вежливая просьба на ресепшене.<br>
+        <div class="tmpl">«Cuando lleguemos, ¿nos puede traer una cuna? Queríamos pedir también toallas.»</div>
+        <div class="tmpl-ru">(Когда мы приедем, можете принести детскую кроватку? Мы хотели попросить и полотенца.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4 (нед. 11):</b> На рынке в субботу утром.<br>
+        <div class="tmpl">«Un kilo de naranjas, si puedo pagar con tarjeta. ¿Cuánto es?»</div>
+        <div class="tmpl-ru">(Кило апельсинов, если можно картой. Сколько с меня?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5 (нед. 14):</b> Обед в ресторане по дороге.<br>
+        <div class="tmpl">«Perdonen, se ha roto un vaso. Y soy alérgico a la fruta seca.»</div>
+        <div class="tmpl-ru">(Простите, разбился стакан. И у меня аллергия на сухофрукты.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: мой план действий — уикенд от А до Я</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1. Бюджет: Vamos a gastar unos ___ euros el fin de semana.<br>
+        2. Транспорт: Voy a comprar los billetes de ida y vuelta / Voy a alquilar un coche.<br>
+        3. Жильё: Vamos a reservar un hotel / un hostal / un apartamento turístico.<br>
+        4. Суббота утром: Primero vamos al casco antiguo / a la playa.<br>
+        5. Суббота после обеда: Luego, el museo / el parque de atracciones.<br>
+        6. Воскресенье: Al final, el acuario. Comemos cerca.<br>
+        7. Объясни выбор: ... porque... / pero... / así que...<br>
+        8. Чемодан: Los niños van a llevar su mochila con la gorra y la crema solar.
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Покупать билеты: ir a, ida y vuelta, asiento, localizador</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Заселяться: reserva, check-in, errata, número de confirmación</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Просить вежливо: cuando lleguemos + ¿Nos puede traer...?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Считать бюджет: presupuesto, числительные, gastos</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Строить план: primero, luego, porque, pero, así que</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Пройти симуляцию «Идеальный уикенд» — 4 станции</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 16.1: Аудит родительского чата</h2>
+        <div class="tag">Блок 4 · Vida Social y Choque Cultural · сленг + dice que...</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>¡Checkpoint superado!</b> Блок 3 закрыт: покупки, транспорт, дом, рестораны, поездки. Впереди новый блок — <b>Vida Social y Choque Cultural</b>: чат класса в WhatsApp, сленг (<i>wapa, finde, tqm</i>), косвенная речь «<i>dice que...</i>» и первые культурные ловушки испанского родительства.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

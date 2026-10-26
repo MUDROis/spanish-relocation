@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 11.2 · Mercado Central — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🍊'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🍊 Рабочий лист · Урок 11.2 «Mercado Central»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · рынок, пробы, цены · un kilo de / medio kilo de + si puedo</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🍊 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el puesto</div>
+          <div class="item">2. el pescadero</div>
+          <div class="item">3. un kilo de</div>
+          <div class="item">4. medio kilo de</div>
+          <div class="item">5. ¿a cuánto está?</div>
+          <div class="item">6. póngame</div>
+          <div class="item">7. el salmón</div>
+          <div class="item">8. maduro</div>
+        </div>
+        <div class="col">
+          <div class="item">а) взвесьте мне</div>
+          <div class="item">б) спелый</div>
+          <div class="item">в) килограмм</div>
+          <div class="item">г) прилавок / точка</div>
+          <div class="item">д) рыбник</div>
+          <div class="item">е) лосось</div>
+          <div class="item">ж) полкило</div>
+          <div class="item">з) почём сейчас?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>⚖️ Впиши слово по описанию</h2>
+        <div class="tag">люди и количества рынка</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Мясник, у которого покупаем carne fresca. → <span class="wline long"></span><br>
+      2. Продавец фруктов и овощей на рынке. → <span class="wline long"></span><br>
+      3. Крошечная точка с водой, газетами и оливками. → <span class="wline long"></span><br>
+      4. 250 граммов — четверть килограмма. → <span class="wline long"></span><br>
+      5. Кусок — так просят queso o jamón. → <span class="wline long"></span><br>
+      6. Так называют свинину — базу jamón y chorizo. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — КВАНТИФИКАТОРЫ, ИСПРАВЬ ОШИБКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧩 Грамматика: количества, исправь ошибки</h2>
+        <div class="tag">3 предложения — найди и исправь</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • Количество + <b>de</b>: <b>un kilo de, medio kilo de, un cuarto de, un trozo de, un par de, un paquete de</b><br>
+        • <b>mucho / poco</b> — много / мало: compro poco.<br>
+        • Вежливые просьбы: <b>póngame</b> (взвесьте мне), <b>¿me da...?</b> (дайте мне), <b>si puedo</b> (если можно)<br>
+        • Цена сегодня: <b>¿a cuánto está?</b> — она живая, меняется каждый день
+      </div>
+
+      <div class="formula">💡 Найди ошибку и впиши верный вариант:</div>
+
+      1. «Quiero un kilo tomates.» <span class="ru-sub">(предлог de обязателен)</span><br>
+      → <span class="wline long"></span><br>
+      2. «Póngame medio de kilo de gambas.» <span class="ru-sub">(никакого «de» внутри)</span><br>
+      → <span class="wline long"></span><br>
+      3. «¿A cuánto es el pescado?» <span class="ru-sub">(рыночная классика — цена «сегодня»)</span><br>
+      → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА МЯСО/РЫБА + ПРАКТИКА -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🥩 Грамматика: слова прилавка + практика</h2>
+        <div class="tag">таблица + впиши слово</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> связка <b>póngame + количество + de + продукт</b>. Строки-справка — чтобы узнавать на слух.
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Слово</th>
+          <th>Перевод</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">el pollo</td><td class="practice">курица</td><td class="practice">¿El pollo está fresco?</td></tr>
+        <tr><td class="practice">el salmón</td><td class="practice">лосось</td><td class="practice">¿A cuánto está el salmón hoy?</td></tr>
+        <tr><td class="practice">las gambas</td><td class="practice">креветки</td><td class="practice">Póngame medio kilo de gambas.</td></tr>
+        <tr><td class="reference">el cerdo / la carne de cerdo</td><td class="reference">свинина</td><td class="reference">El cerdo ibérico es famoso.</td></tr>
+        <tr><td class="reference">el ternera</td><td class="reference">говядина</td><td class="reference">Un kilo de ternera, por favor.</td></tr>
+        <tr><td class="reference">el pavo</td><td class="reference">индейка</td><td class="reference">El pavo es más suave.</td></tr>
+        <tr><td class="reference">el jamón</td><td class="reference">хамон / ветчина</td><td class="reference">Un cuarto de jamón, por favor.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши слово:</div>
+
+      1. ¿___ está la dorada hoy? <span class="ru-sub">(почём)</span> → <span class="wline short"></span><br>
+      2. Póngame medio kilo, ___ puedo. <span class="ru-sub">(если можно)</span> → <span class="wline short"></span><br>
+      3. Un ___ de limones, por favor. <span class="ru-sub">(пара)</span> → <span class="wline short"></span><br>
+      4. ¿Me da un ___ de arroz? <span class="ru-sub">(пачка)</span> → <span class="wline short"></span><br>
+      5. Vengo ___ las fresas. <span class="ru-sub">(за — с артиклем!)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: культура рынка</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>El mercado municipal</h4>
+        <p>En cada barrio hay un mercado municipal. Los puestos son de frutas, carne, pescado, queso y flores, y al lado está el quiosco de prensa. El pescado llega fresco del puerto cada mañana: la comida es fresquísima.</p>
+
+        <h4>Las pruebas (пробы)</h4>
+        <p>En el mercado puedes probar gratis: un trozo de melón, una fresa, una aceituna. El frutero corta la prueba con una sonrisa y el carnicero pica la carne para las albóndigas. Si compras, te hacen precio.</p>
+
+        <h4>Trucos del comprador</h4>
+        <p>Compra la lechuga por la mañana: está más fresca. Las manzanas Reineta son buenas para la compota. El aguacate está maduro cuando cede al tacto. Y cuidado: los precios cambian cada día, por eso preguntamos ¿a cuánto está? antes de pedir.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Qué puedes probar gratis en el mercado?
+      <span class="wline xlong"></span><br>
+      2. ¿Quién pica la carne para las albóndigas?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuándo compras la lechuga: por la mañana o por la tarde?
+      <span class="wline xlong"></span><br>
+      4. ¿Por qué preguntamos ¿a cuánto está? antes de pedir?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист покупателя рынка</h4>
+        <div class="item"><div class="box"></div><div>Поздороваться: ¡Buenos días!</div></div>
+        <div class="item"><div class="box"></div><div>Спросить цену: ¿a cuánto está...?</div></div>
+        <div class="item"><div class="box"></div><div>Назвать количество: un kilo de / medio kilo de / un cuarto de</div></div>
+        <div class="item"><div class="box"></div><div>Попросить обработку: limpiar el pescado, cortar a máquina</div></div>
+        <div class="item"><div class="box"></div><div>Смягчить просьбу: si puedo / si hay</div></div>
+        <div class="item"><div class="box"></div><div>Объяснить приход: vengo por las fresas</div></div>
+        <div class="item"><div class="box"></div><div>Поблагодарить: muchas gracias, ¡adiós!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: диалог с frutero</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— ¡Buenos días! ¿Qué le pongo? — Buenos días. Vengo por las naranjas. ¿A cuánto están? — A un euro veinte el kilo. Son de Valencia, muy dulces. — Póngame dos kilos, si puedo. — Marchando. ¿Algo más? — Medio kilo de tomates y medio kilo de manzanas. — Tome. Los tomates están maduros, para ensalada. — ¿Y el pavo? ¿Tiene pechuga de pavo? — Sí, aquí la tiene. — Póngame un cuarto, por favor. ¿Y me da un par de limones también? — Claro, y una ramita de perejil de regalo. — Gracias. ¿Cuánto es todo? — Cinco euros cuarenta. — Aquí tiene. ¡Adiós!»
+      </div>
+      1. ¿Qué busca el cliente primero?
+      <span class="wline xlong"></span><br>
+      2. ¿De dónde son las naranjas?
+      <span class="wline xlong"></span><br>
+      3. ¿Cuántos kilos de naranjas pide?
+      <span class="wline xlong"></span><br>
+      4. ¿Cómo están los tomates?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué carne pide el cliente?
+      <span class="wline xlong"></span><br>
+      6. ¿Cuánto es todo?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации на рынке</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Объяснить, за чем пришли.<br>
+        <div class="tmpl">«Vengo por las fresas. ¿Están dulces?»</div>
+        <div class="tmpl-ru">(Я пришёл за клубникой. Она сладкая?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Спросить цену.<br>
+        <div class="tmpl">«¿A cuánto está el salmón hoy?»</div>
+        <div class="tmpl-ru">(Почём сегодня лосось?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Сделать заказ со смягчителем.<br>
+        <div class="tmpl">«Póngame medio kilo de gambas, si puedo.»</div>
+        <div class="tmpl-ru">(Взвесьте мне полкило креветок, если можно.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Попросить обработать рыбу.<br>
+        <div class="tmpl">«¿Puede limpiar el pescado, por favor? En filetes.»</div>
+        <div class="tmpl-ru">(Можете почистить рыбу, пожалуйста? Кусками-филе.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Попросить нарезать тонко.<br>
+        <div class="tmpl">«¿Puede cortar a máquina el jamón, por favor?»</div>
+        <div class="tmpl-ru">(Можете нарезать хамон на машине, пожалуйста?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: Mi pedido en el mercado</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1. Приветствие (¡Buenos días!).<br>
+        2. За чем пришли (Vengo por...).<br>
+        3. Цена (¿A cuánto está...?).<br>
+        4. Количество (Póngame un kilo de / medio kilo de...).<br>
+        5. Обработка (limpiar el pescado / en filetes / cortar a máquina / picar).<br>
+        6. Дополнительно (¿Me da un par de...?).<br>
+        7. Оплата (¿Cuánto es todo?).<br>
+        8. Прощание (Muchas gracias, ¡adiós!).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>el frutero</b> — зеленной / фруктовщик · <b>el quiosco</b> — киоск · <b>fresco</b> — свежий · <b>cortar a máquina</b> — нарезать на машине (тонко) · <b>en filetes</b> — кусками (филе) · <b>picar</b> — покрошить · <b>¿me da...?</b> — дайте мне, пожалуйста · <b>las naranjas</b> — апельсины · <b>los tomates</b> — помидоры · <b>las manzanas</b> — яблоки · <b>el aguacate</b> — авокадо · <b>las fresas</b> — клубника · <b>la lechuga</b> — салат-латук
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Спрашивать цену: ¿a cuánto está...?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Называть количество: un kilo de, medio kilo de, un cuarto de</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Просить продавца: póngame, ¿me da...?, si puedo</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Просить обработку: limpiar, cortar a máquina, en filetes</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Объяснять приход: vengo por... + благодарить</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть диалог «клиент ↔ pescadero/carnicero»</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 11.3: Мусор и переработка</h2>
+        <div class="tag">hay que / se puede · cinco contenedores · график</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Закупились!</b> Но у покупок есть продолжение: мусор. На следующем уроке разбираем <b>пять контейнеров</b> двора (amarillo, azul, verde, marrón + punto limpio), график выноса и правила без «ты должен»: <i>hay que</i> и <i>se puede</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

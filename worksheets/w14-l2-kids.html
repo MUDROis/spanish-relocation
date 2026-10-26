@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 41 · Mi comunidad autónoma — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" id="printBtn">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>📍 Mi comunidad autónoma</h1>
+    <div class="sub">Рабочий лист к Уроку 41 · Станция 4: CLIL Mates y Ciencias · мой регион и город, hay и está</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ ¡Hola, explorador! Испания — большой пазл из 17 регионов. Найди свой кусочек пазла и расскажи о нём! Спроси себя: что есть? → <b>hay</b>, где находится? → <b>está</b>.</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини слово и перевод</span>
+      <span class="ex-skill">🗣 Лексика · регион</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>📍 la comunidad autónoma</td><td>а) Каталония</td></tr>
+      <tr><td><span class="ans-box"></span>🚩 Cataluña</td><td>б) мэрия</td></tr>
+      <tr><td><span class="ans-box"></span>💃 Andalucía</td><td>в) автономное сообщество</td></tr>
+      <tr><td><span class="ans-box"></span>🏝️ las islas Baleares</td><td>г) замок</td></tr>
+      <tr><td><span class="ans-box"></span>🇪🇸 el país</td><td>д) Андалусия</td></tr>
+      <tr><td><span class="ans-box"></span>🏛️ el ayuntamiento</td><td>е) площадь</td></tr>
+      <tr><td><span class="ans-box"></span>⛲ la plaza</td><td>ж) страна</td></tr>
+      <tr><td><span class="ans-box"></span>🚏 la calle</td><td>з) рынок</td></tr>
+      <tr><td><span class="ans-box"></span>🏰 el castillo</td><td>и) Балеарские острова</td></tr>
+      <tr><td><span class="ans-box"></span>🍅 el mercado</td><td>к) улица</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Угадай место в городе по описанию</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>el castillo · el mercado · el barrio · la plaza · la calle · el ayuntamiento</strong></div>
+    <div class="hint-box">💡 Подсказка: <b>el ayuntamiento (edificio)</b> — это здание мэрии, там работает alcalde (мэр).</div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🏰</span> Es viejo y muy grande. Aquí vivían los reyes. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🍅</span> Aquí compras frutas, verduras y pescado. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🏘️</span> Es una parte de la ciudad. Yo vivo aquí. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">⛲</span> Es grande y bonita. En el centro hay una fuente. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">🚏</span> Los coches van por aquí. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🏛️</span> Aquí trabaja el alcalde de la ciudad. → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ИСПРАВЬ ОШИБКУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">hay или está? Найди и исправь ошибку!</span>
+      <span class="ex-skill">🧩 Грамматика · hay / está</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> <b>HAY</b> = «есть» (что?): <em>Hay una plaza.</em> Hay не меняется никогда. <b>ESTÁ</b> = «находится» (где?): <em>La plaza está en el centro.</em> Пример: <em>Voy a vivir en Valencia.</em> — Я буду жить в Валенсии. Если предложение верное — поставь на линии ✓, если нет — впиши правильное слово (hay или está).</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>En Valencia <b>está</b> una playa famosa. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">2</span>La Comunidad Valenciana <b>hay</b> en el este de España. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">3</span>En mi barrio <b>está</b> un mercado pequeño. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">4</span>¿Dónde <b>hay</b> el mercado? → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">5</span>En mi ciudad <b>hay</b> una fiesta famosa. → <span class="g"></span></div>
+      <div class="gap-item"><span class="num">6</span>El castillo <b>está</b> en el centro. → <span class="g"></span></div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу о своём городе</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Слова перепутаны. Расставь их в правильном порядке и запиши готовую фразу на линии.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Valencia.</span><span class="build-word">a</span><span class="build-word">vivir</span><span class="build-word">Voy</span><span class="build-word">en</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">playa.</span><span class="build-word">ciudad</span><span class="build-word">Mi</span><span class="build-word">tiene</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">sol.</span><span class="build-word">mucho</span><span class="build-word">Allí</span><span class="build-word">hace</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">fiesta</span><span class="build-word">Hay</span><span class="build-word">una</span><span class="build-word">famosa.</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ПОРЯДОК: ПРОГУЛКА ПО ГОРОДУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Прогулка по городу: расставь по порядку</span>
+      <span class="ex-skill">🔢 Логика · город</span>
+    </div>
+    <div class="ex-instruction">Ты идёшь гулять от дома к мэрии. Пронумеруй места от 1 до 6 в правильном порядке прогулки (впиши цифру в квадратик).</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">⛲</span> La plaza</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🍅</span> El mercado</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🏠</span> Mi casa</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🏰</span> El castillo</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🚏</span> La calle de mi barrio</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🏛️</span> El ayuntamiento</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Регион Лео» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Leo. Voy a vivir en Valencia, en la Comunidad Valenciana. Está en el este de España. Mi ciudad tiene playa. Allí hace mucho sol. En el centro hay una plaza grande y un mercado pequeño. También hay un castillo y el ayuntamiento. En mi barrio hay una calle muy bonita. Hay una fiesta famosa en marzo. Mi amiga Sofía vive en Madrid, en otra comunidad autónoma. ¿Qué hay en tu ciudad? ¡Me gusta mi futuro hogar!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Dónde va a vivir Leo? <span class="ru">(Где будет жить Лео?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Dónde está la Comunidad Valenciana? <span class="ru">(Где находится Валенсийское сообщество?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Qué hay en el centro? <span class="ru">(Что есть в центре?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Cómo es la calle de su barrio? <span class="ru">(Какая улица в его районе?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Dónde vive Sofía? <span class="ru">(Где живёт София?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Паспорт региона «Mi comunidad autónoma»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) Mi comunidad autónoma es... · 2) La capital es... · 3) Está en el este de España. (norte / sur / este / oeste). · 4) Mi ciudad tiene playa. / Hay un castillo. · 5) Allí hace mucho sol. · 6) Hay una fiesta famosa. · 7) Responde: ¿Qué hay en tu ciudad? · 8) ¡Me gusta mi futuro hogar!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="exercise">
+    <div class="ex-head">
+      <div class="ex-num c-terra">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>Madrid</b> — Мадрид (регион) · <b>Mi ciudad tiene playa.</b> — В моём городе есть пляж. · <b>Allí hace mucho sol.</b> — Там много солнца. · <b>Hay una fiesta famosa.</b> — Там есть знаменитый праздник. · <b>¿Qué hay en tu ciudad?</b> — Что есть в твоём городе? · <b>Está en el este de España.</b> — Это на востоке Испании. · <b>¡Me gusta mi futuro hogar!</b> — Мне нравится мой будущий дом!
+      </div>
+    </div>
+  </div>
+
+    <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть регион, столицу и где он находится</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать hay и está и не путать их</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать флаг, язык и праздник региона</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Строить фразу «Voy a vivir en... porque hay...»</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать текст о регионе на слух</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать о своём регионе по формуле 6 пунктов</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 4: CLIL Mates y Ciencias · Урок 41 · ¡Viva mi región! 📍</div>
+</div>
+
+<script>
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+</script>
+
+</body>
+</html>

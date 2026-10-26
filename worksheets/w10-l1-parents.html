@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 10.1 · Calendario de vacunación — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'💉'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>💉 Рабочий лист · Урок 10.1 «Calendario de vacunación»</h1>
+    <div class="meta">Блок 2 · El Cole y la Salud · Календарь прививок Испании · Pretérito Perfecto: he/ha/hemos + ya / todavía no</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>💉 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. la vacuna</div>
+          <div class="item">2. el calendario vacunal</div>
+          <div class="item">3. el refuerzo</div>
+          <div class="item">4. la punción</div>
+          <div class="item">5. la cartilla de vacunación</div>
+          <div class="item">6. poner al día</div>
+          <div class="item">7. ya ha sido vacunado</div>
+          <div class="item">8. todavía no he traducido</div>
+        </div>
+        <div class="col">
+          <div class="item">а) карта прививок</div>
+          <div class="item">б) календарь прививок</div>
+          <div class="item">в) я ещё не перевёл</div>
+          <div class="item">г) укол</div>
+          <div class="item">д) прививка / вакцина</div>
+          <div class="item">е) ревакцинация / повтор</div>
+          <div class="item">ж) уже привит</div>
+          <div class="item">з) актуализировать / доделать</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — НАЙДИ ЛИШНЕЕ СЛОВО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🔎 Найди лишнее слово</h2>
+        <div class="tag">в каждом ряду одно слово не из группы — вычеркни и впиши</div>
+      </div>
+    </div>
+    <div class="card">
+      1. la vacuna · el refuerzo · la cartilla de vacunación · la punción<br>
+      <span class="ru-sub">(три процедуры и один документ — что лишнее?)</span> → лишнее: <span class="wline short"></span><br><br>
+      2. la triple vírica · la varicela · la meningitis · el bracito hinchado<br>
+      <span class="ru-sub">(три прививки/болезни и одна реакция — что лишнее?)</span> → лишнее: <span class="wline short"></span><br><br>
+      3. he traído la cartilla · hemos ido al pediatra · ha tenido fiebre · la cita de vacunación<br>
+      <span class="ru-sub">(три фразы в Pretérito Perfecto и одно существительное — что лишнее?)</span> → лишнее: <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — PRETÉRITO PERFECTO -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>✅ Грамматика: Pretérito Perfecto</h2>
+        <div class="tag">шпаргалка + заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • <b>Pretérito Perfecto</b> = haber + participio: <b>he / ha / hemos</b> + -ado / -ido<br>
+        • Чанки: he traído la cartilla, ha tenido fiebre, hemos ido al pediatra<br>
+        • Маркеры: <b>ya</b> (уже), <b>todavía no</b> (ещё не), <b>hoy</b>, <b>este mes</b><br>
+        • Причастия: vacunar → vacunado, traducir → traducido, recibir → recibido, ir → ido, traer → traído<br>
+        • Прививка «от»: <b>vacunado contra</b> la varicela (не de!)
+      </div>
+
+      <div class="formula">💡 Впиши форму:</div>
+
+      1. ¿___ ido ya al pediatra? <span class="ru-sub">(tú / ir)</span> → <span class="wline short"></span><br>
+      2. Ha ___ fiebre leve. <span class="ru-sub">(tener)</span> → <span class="wline short"></span><br>
+      3. ___ traído la cartilla traducida. <span class="ru-sub">(yo)</span> → <span class="wline short"></span><br>
+      4. Todavía ___ he traducido la segunda página. <span class="ru-sub">(отрицание)</span> → <span class="wline short"></span><br>
+      5. Ya ha sido ___ contra la varicela. <span class="ru-sub">(vacunar)</span> → <span class="wline short"></span><br>
+      6. ___ venido para revisar el calendario vacunal. <span class="ru-sub">(nosotros)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — ТАБЛИЦА HABER -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🧩 Грамматика: формы he / ha / hemos</h2>
+        <div class="tag">таблица + впиши форму</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Фокус урока:</b> формы <b>he / ha / hemos</b> и два главных маркера <b>ya / todavía no</b>: «¿Ya la ha recibido?» — «Todavía no».
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Лицо</th>
+          <th>Форма</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">yo</td><td class="practice">he traído</td><td class="practice">He traído la cartilla traducida.</td></tr>
+        <tr><td class="reference">tú</td><td class="reference">has ido</td><td class="reference">¿Has ido ya al pediatra?</td></tr>
+        <tr><td class="practice">él / ella / niño</td><td class="practice">ha tenido</td><td class="practice">Ha tenido fiebre leve.</td></tr>
+        <tr><td class="practice">nosotros</td><td class="practice">hemos venido</td><td class="practice">Hemos venido para revisar el calendario.</td></tr>
+        <tr><td class="reference">vosotros</td><td class="reference">habéis visto</td><td class="reference">¿Habéis visto el calendario español?</td></tr>
+        <tr><td class="reference">ellos</td><td class="reference">han vacunado</td><td class="reference">Han vacunado a muchos niños hoy.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши he / ha / hemos / habéis / han:</div>
+
+      1. Yo ___ traído la cartilla. <span class="ru-sub">(traer)</span> → <span class="wline short"></span><br>
+      2. El niño ___ tenido fiebre leve. <span class="ru-sub">(tener)</span> → <span class="wline short"></span><br>
+      3. Nosotros ___ ido dos veces este mes. <span class="ru-sub">(ir)</span> → <span class="wline short"></span><br>
+      4. ¿___ visto el calendario español? <span class="ru-sub">(vosotros)</span> → <span class="wline short"></span><br>
+      5. Ellos ___ vacunado a muchos niños hoy. <span class="ru-sub">(vacunar)</span> → <span class="wline short"></span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: el calendario vacunal en España</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>Cada comunidad, su calendario</h4>
+        <p>En España no hay un calendario nacional único: cada comunidad autónoma tiene su calendario vacunal. Por eso, al llegar, el pediatra revisa la cartilla y pone al día la dosis que falta. En general, todas las comunidades vacunan contra la triple vírica, la varicela y la meningitis; más tarde, en la escuela, llega el VPH.</p>
+
+        <h4>La cartilla y el certificado</h4>
+        <p>La cartilla de vacunación es un cuaderno pequeño y muy importante: cada vacuna, cada dosis, cada refuerzo. Puedes pedir el certificado vacunal internacional. En el centro de salud y en el colegio siempre piden este documento. Si falta una vacuna, el calendario ruso y el español no coinciden.</p>
+
+        <h4>Las reacciones normales</h4>
+        <p>Después de la punción el bracito puede estar hinchado, la fiebre leve también es normal, el niño puede llorar un poco y pedir la chuche. Es la reacción normal. Para estar bien: descansar, beber líquidos y vigilar. Al día siguiente, el niño está bien.</p>
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Hay un calendario vacunal único en toda España?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué hace el pediatra al llegar a España?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué es la cartilla de vacunación y qué documento más puedes pedir?
+      <span class="wline xlong"></span><br>
+      4. ¿Qué reacciones son normales después de la punción?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист: визит к педиатру с картой прививок</h4>
+        <div class="item"><div class="box"></div><div>Взять документы: he traído la cartilla y el SIP</div></div>
+        <div class="item"><div class="box"></div><div>Перевести страницы: todavía no he traducido la segunda</div></div>
+        <div class="item"><div class="box"></div><div>Сравнить календари: el calendario ruso y el español, faltar una vacuna</div></div>
+        <div class="item"><div class="box"></div><div>Спросить, чего не хватает: ¿le falta la vacuna de la varicela?</div></div>
+        <div class="item"><div class="box"></div><div>Записаться: la cita de vacunación en el centro de salud</div></div>
+        <div class="item"><div class="box"></div><div>После укола: la chuche, descansar, vigilar — estar bien</div></div>
+        <div class="item"><div class="box"></div><div>Записать el refuerzo в семейный календарь</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: визит к педиатру</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Buenos días. Hemos venido para revisar el calendario vacunal de Leo. — Buenos días. ¿Ha traído la cartilla? — Sí, aquí está. Todavía no he traducido la segunda página, lo siento. — No pasa nada. Veo que ya ha sido vacunado contra el sarampión. ¿Y la varicela? — La varicela no. ¿No la ha recibido? — Todavía no. En Rusia es otra edad. — Vale. Le falta la vacuna de la varicela. ¿Le parece si ponemos la cita? — Sí, por favor. ¿Y el refuerzo de la triple vírica? — Toca en enero, este mes no. — Perfecto. ¿Ha tenido fiebre o algún problema con las vacunas antes? — Una vez ha tenido fiebre leve al día siguiente. — Es la reacción normal. Hoy ponemos solo una dosis. — Vale, muchas gracias. — De nada. Después de la punción le daremos una chuche al niño.»
+      </div>
+      1. ¿Para qué han venido al pediatra?
+      <span class="wline xlong"></span><br>
+      2. ¿Qué falta en la cartilla?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué vacuna no ha recibido Leo todavía?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuándo toca el refuerzo de la triple vírica?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué reacción tuvo Leo una vez?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué dan al niño después de la punción?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: визит к педиатру</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы приходите к педиатру и говорите цель визита.<br>
+        <div class="tmpl">«Hemos venido para revisar el calendario vacunal de Leo.»</div>
+        <div class="tmpl-ru">(Мы пришли проверить календарь прививок Лео.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы показываете документы.<br>
+        <div class="tmpl">«He traído la cartilla. Aquí está.»</div>
+        <div class="tmpl-ru">(Я принёс карту. Вот она.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы объясняете, что ещё не перевели страницу.<br>
+        <div class="tmpl">«Todavía no he traducido la segunda página, lo siento.»</div>
+        <div class="tmpl-ru">(Я ещё не перевёл вторую страницу, извините.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы говорите, что ребёнок уже привит.<br>
+        <div class="tmpl">«Ya ha sido vacunado contra el sarampión en Rusia.»</div>
+        <div class="tmpl-ru">(Он уже привит от кори в России.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы спрашиваете про отсутствующую прививку.<br>
+        <div class="tmpl">«¿Le falta la vacuna de la varicela? ¿Cuándo toca el refuerzo?»</div>
+        <div class="tmpl-ru">(Ему не хватает прививки от ветрянки? Когда пора на ревакцинацию?)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: сравнение календарей — продукт урока</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Вступление: приехали и проверили календарь (Hemos venido a España este mes.).<br>
+        3. Что уже сделано (Ya ha sido vacunado contra la triple vírica. He traducido la cartilla.).<br>
+        4. Чего ещё нет (Todavía no ha recibido el refuerzo. Le falta la vacuna de la varicela.).<br>
+        5. Отличие календарей (En Rusia la varicela es otra edad. Cada comunidad autónoma tiene su calendario.).<br>
+        6. Запись на прививку (Hemos pedido la cita de vacunación en el centro de salud.).<br>
+        7. Реакция после укола (Ha tenido fiebre leve y el bracito hinchado, pero está bien.).<br>
+        8. План (Pongo al día el calendario y apunto el refuerzo en enero.).
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>vacunar</b> — делать прививку · <b>la dosis</b> — доза · <b>el certificado vacunal</b> — сертификат прививок · <b>traducir</b> — переводить · <b>revisar</b> — проверять · <b>el centro de salud</b> — поликлиника · <b>hemos ido al pediatra</b> — мы ходили к педиатру · <b>ha tenido fiebre</b> — у него была температура · <b>hoy</b> — сегодня · <b>este mes</b> — в этом месяце · <b>el bracito hinchado</b> — припухшая ручка · <b>la fiebre leve</b> — лёгкая температура · <b>llorar un poco</b> — немного поплакать · <b>la chuche</b> — конфетка (утешение) · <b>estar bien</b> — быть в порядке · <b>descansar</b> — отдыхать · <b>la triple vírica</b> — корь-краснуха-паротит (MMR) · <b>la varicela</b> — ветрянка · <b>la meningitis</b> — менингит · <b>el VPH</b> — ВПЧ (папилломавирус) · <b>el calendario ruso</b> — российский календарь · <b>comunidad autónoma</b> — автономное сообщество (регион)
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Говорить о сделанном: he ido, ha tenido, hemos venido</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Словарь прививок: la vacuna, la dosis, el refuerzo, la punción</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Понимать, чего не хватает: le falta la vacuna de...</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Использовать маркеры: ya, todavía no, hoy, este mes</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Знать календарь Испании: triple vírica, varicela, VPH, comunidad autónoma</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть визит к педиатру с картой прививок</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 10.2: Психолог в школе</h2>
+        <div class="tag">el orientador escolar + неправильные причастия</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Календарь прививок под контролем: <i>ya / todavía no, he / ha / hemos</i>. На следующем уроке (10.2) — разговор с orientador escolar: неправильные причастия (<i>hecho, dicho, visto, escrito</i>), адаптация ребёнка и первые вопросы к школьному психологу.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

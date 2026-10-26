@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист 13.1 · Вызов сантехника — МУДРО</title>
+<style>
+  :root{
+    --p1:#E2725B; --p2:#7A8B4C; --p3:#E9A13B; --p4:#3E7CB1; --p5:#5FA8D3;
+    --bg:#FFF7EF; --card:#FFFFFF; --ink:#2B2118; --muted:#7A6A5C;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Segoe UI','Nunito',Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    background:#E3DACB;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .print-btn{
+    position:fixed; top:15px; right:15px; z-index:1000;
+    background:var(--p1); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px;
+    font-size:13px; font-weight:700; cursor:pointer;
+    box-shadow:0 6px 20px rgba(226,114,91,.4);
+    display:flex; align-items:center; gap:8px;
+  }
+  .print-btn:hover{ background:#c05a45; }
+
+  .sheet{
+    max-width:210mm;
+    margin:8mm auto; padding:10mm 11mm;
+    background:var(--bg);
+    box-shadow:0 8px 28px rgba(43,33,24,.25);
+  }
+
+  .hero{
+    background:linear-gradient(135deg,var(--p4),var(--p5));
+    color:#fff; border-radius:14px; padding:5mm 6mm; margin-bottom:6mm;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:'🔧'; position:absolute; right:12px; top:50%;
+    transform:translateY(-50%); font-size:48px; opacity:.25;
+  }
+  .hero .brand{ font-size:9.5px; font-weight:700; letter-spacing:1px; opacity:.95; }
+  .hero h1{ font-size:18px; margin:2px 0; }
+  .hero .meta{ font-size:10px; opacity:.95; }
+  .hero .name-row{ display:flex; gap:5mm; margin-top:3mm; }
+  .hero .name-row span{ flex:1; border-bottom:2px solid rgba(255,255,255,.85); height:6mm; font-size:10px; padding:0 2px; }
+
+  .ex{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
+  .ex-head{ display:flex; align-items:center; gap:3mm; margin-bottom:2mm; }
+  .ex-num{
+    width:7.5mm; height:7.5mm; border-radius:50%; background:var(--p1); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:12px; flex-shrink:0;
+  }
+  .ex-num.c2{ background:var(--p2);} .ex-num.c3{ background:var(--p3);} .ex-num.c4{ background:var(--p4);} .ex-num.c5{ background:var(--p5);}
+  .ex-head h2{ font-size:12.5px; margin:0; }
+  .ex-head .tag{ font-size:9px; color:var(--muted); font-weight:600; }
+
+  .card{ background:var(--card); border-radius:10px; padding:3mm 4mm; box-shadow:0 2px 8px rgba(43,33,24,.06); }
+  .hint{ font-size:9.5px; font-style:italic; color:var(--muted); margin-bottom:2mm; }
+
+  .match{ display:flex; gap:6mm; }
+  .match .col{ flex:1; display:flex; flex-direction:column; gap:2mm; }
+  .match .item{
+    border:1.5px solid #D5E5EF; border-radius:6px; padding:2px 6px; background:#fff;
+    font-size:10px; min-height:22px; display:flex; align-items:center;
+  }
+
+  .wline{ display:inline-block; min-width:28mm; border-bottom:1.5px dashed #A7C5DD; height:5mm; vertical-align:bottom; }
+  .wline.short{ min-width:15mm; } .wline.long{ min-width:50mm; } .wline.xlong{ min-width:80mm; }
+
+  table{ border-collapse:collapse; width:100%; }
+  td,th{ border:1px solid #D5E5EF; padding:2px 6px; font-size:10px; text-align:left; vertical-align:middle; }
+  th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+
+  .formula{ background:#E8F4FB; border-left:1.2mm solid var(--p4); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:10px; }
+  .formula b{ color:var(--p4); }
+  .note{ background:#FFF7E0; border-left:1.2mm solid var(--p3); border-radius:6px; padding:2mm 3mm; margin:0 0 2mm; font-size:9.5px; }
+  .note b{ color:var(--ink); }
+  .note.green{ background:#F0F7E6; border-left-color:var(--p2); }
+  .note.blue{ background:#E8F4FB; border-left-color:var(--p4); }
+
+  .grammar-ref{ width:100%; border-collapse:collapse; margin:2mm 0; font-size:9.5px; }
+  .grammar-ref th,.grammar-ref td{ border:1px solid #D5E5EF; padding:2px 5px; text-align:center; }
+  .grammar-ref th{ background:#E8F4FB; color:var(--p4); }
+  .grammar-ref td:first-child{ text-align:left; font-weight:700; }
+  .grammar-ref .practice{ background:#F0F7E6; font-weight:800; color:var(--p2); }
+  .grammar-ref .reference{ color:var(--muted); font-style:italic; }
+
+  .audio-box{ background:#F0F7E6; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; font-style:italic; }
+
+  .sit-box{ background:#fff; border:1.5px solid #D5E5EF; border-radius:8px; padding:2.5mm 3mm; margin-bottom:2mm; font-size:10px; }
+  .sit-box b{ color:var(--p4); }
+  .sit-box .tmpl{ background:#E8F4FB; border-radius:6px; padding:2mm; margin-top:1.5mm; font-size:9.5px; font-style:italic; color:var(--p4); }
+  .sit-box .tmpl-ru{ font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .plan-box{ background:#E8F4FB; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .plan-box b{ color:var(--p4); }
+
+  .clil-box{ background:#fff; border:1.5px solid var(--p4); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; line-height:1.55; }
+  .clil-box h4{ color:var(--p4); margin:0 0 1mm; font-size:10.5px; }
+  .clil-box p{ margin:0 0 1.5mm; }
+
+  .checklist{ background:#fff; border:1.5px solid var(--p2); border-radius:8px; padding:3mm; margin-bottom:2mm; font-size:10px; }
+  .checklist h4{ color:var(--p2); margin:0 0 2mm; font-size:10.5px; }
+  .checklist .item{ display:flex; align-items:flex-start; gap:2mm; margin-bottom:1.5mm; }
+  .checklist .box{
+    width:4.5mm; height:4.5mm; border:1.5px solid var(--p2); border-radius:2px;
+    flex-shrink:0; margin-top:0.5mm;
+  }
+
+  .ru-sub{ display:block; font-size:8.5px; color:var(--muted); font-style:italic; }
+
+  .tl-table{ width:100%; border-collapse:collapse; }
+  .tl-table th,.tl-table td{ padding:2mm 4px; border:1px solid #D5E5EF; font-size:10px; }
+  .tl-table th{ background:#E8F4FB; color:var(--p4); font-size:9.5px; }
+  .tl-table th:first-child,.tl-table td:first-child{ text-align:left; width:auto; }
+  .tl-table td:not(:first-child){ text-align:center; width:12mm; }
+  .tl-btn{
+    display:inline-block; width:6mm; height:6mm;
+    border-radius:50%; border:1px solid #D5E5EF;
+  }
+  .tl-btn.green{ background:#C8E6C9; }
+  .tl-btn.yellow{ background:#FFF9C4; }
+  .tl-btn.red{ background:#FFCDD2; }
+
+  @page{ size:A4; margin:12mm; }
+  @media print{
+    body{ background:#fff; }
+    .sheet{ margin:0; box-shadow:none; width:auto; }
+    .print-btn{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <div class="brand">ИНТЕРАКТИВНАЯ ШКОЛА МУДРО · ¡RUMBO A ESPAÑA! 🇪🇸</div>
+    <h1>🔧 Рабочий лист · Урок 13.1 «Вызов сантехника»</h1>
+    <div class="meta">Блок 3 · Logística Diaria · El fontanero: поломки, смета, se ha atascado, gotea + исчисляемое / неисчисляемое</div>
+    <div class="name-row"><span>Имя:</span><span>Дата:</span></div>
+  </div>
+
+  <!-- УПР 1: ЛЕКСИКА — СОПОСТАВЛЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div>
+        <h2>🔧 Лексика: соедини термин и перевод</h2>
+        <div class="tag">впиши букву</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="match">
+        <div class="col">
+          <div class="item">1. el fontanero</div>
+          <div class="item">2. la fuga</div>
+          <div class="item">3. el desagüe</div>
+          <div class="item">4. la cisterna</div>
+          <div class="item">5. el presupuesto</div>
+          <div class="item">6. la llave de paso</div>
+          <div class="item">7. el desatascador</div>
+          <div class="item">8. la herramienta</div>
+        </div>
+        <div class="col">
+          <div class="item">а) слив</div>
+          <div class="item">б) бачок</div>
+          <div class="item">в) сантехник</div>
+          <div class="item">г) смета</div>
+          <div class="item">д) вантус</div>
+          <div class="item">е) перекрывающий вентиль</div>
+          <div class="item">ж) протечка</div>
+          <div class="item">з) инструмент</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 2: ЛЕКСИКА — ВПИШИ ПО ОПИСАНИЮ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">2</div>
+      <div>
+        <h2>🚿 Впиши слово по описанию</h2>
+        <div class="tag">мастера и поломки</div>
+      </div>
+    </div>
+    <div class="card">
+      1. Мастер по проводам, розеткам и свету. → <span class="wline long"></span><br>
+      2. Мастер, который откроет замок, если ключ потерялся. → <span class="wline long"></span><br>
+      3. Мастер по стенам и штукатурке. → <span class="wline long"></span><br>
+      4. Мастер, который ставит кондиционеры и чинит стиральные машины. → <span class="wline long"></span><br>
+      5. Сам приезд мастера: стоит от тридцати до шестидесяти евро. → <span class="wline long"></span><br>
+      6. Засор в трубе: вода уходит медленно или не уходит совсем. → <span class="wline long"></span>
+    </div>
+  </div>
+
+  <!-- УПР 3: ГРАММАТИКА — SE HA + PARTICIPIO, ПРОПУСКИ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">3</div>
+      <div>
+        <h2>🧰 Грамматика: что случилось vs что происходит</h2>
+        <div class="tag">заполни пропуски</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Правило:</b><br>
+        • Уже случилось: <b>se ha atascado el desagüe</b> — забился слив · <b>se ha roto</b> la cisterna — сломался бачок<br>
+        • Происходит сейчас: <b>gotea el grifo</b> — капает кран · <b>hay una fuga</b> — есть протечка<br>
+        • Неправильные participios: <b>roto, escrito, visto, hecho, puesto</b>
+      </div>
+
+      <div class="formula">💡 Впиши формулу:</div>
+
+      1. ___ el desagüe de la cocina: el agua va muy lenta. <span class="ru-sub">(забился слив)</span><br>
+      2. ___ el grifo desde ayer. <span class="ru-sub">(капает кран)</span><br>
+      3. ___ bajo el fregadero. <span class="ru-sub">(есть протечка)</span><br>
+      4. ___ la cisterna del váter. <span class="ru-sub">(сломался бачок)</span><br>
+      5. El baño se ha ___: cerré la llave de paso. <span class="ru-sub">(затопить)</span><br>
+      6. El grifo no ___ bien. <span class="ru-sub">(закрывается)</span>
+    </div>
+  </div>
+
+  <!-- УПР 4: ГРАММАТИКА — САНАУЗЕЛ + СЧЁТ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">4</div>
+      <div>
+        <h2>🚽 Грамматика: санузел + счёт</h2>
+        <div class="tag">таблица + mucha/muchos</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note blue">
+        <b>Исчисляемое / неисчисляемое:</b><br>
+        • Неисчисляемое (el agua, la silicona): <b>mucha / poca</b> + ед. ч. — <i>Hay mucha agua en el suelo.</i><br>
+        • Исчисляемое (los grifos, los azulejos): <b>muchos / pocas</b> + мн. ч. — <i>Hay muchos azulejos sueltos.</i><br>
+        • <b>un poco de</b> + ед. ч. (немного) · <b>un par de</b> + мн. ч. (пара)
+      </div>
+
+      <table class="grammar-ref">
+        <tr>
+          <th>Слово</th>
+          <th>Перевод</th>
+          <th>Пример</th>
+        </tr>
+        <tr><td class="practice">el váter / la taza</td><td class="practice">унитаз</td><td class="practice">Se ha roto la cisterna del váter.</td></tr>
+        <tr><td class="practice">la ducha</td><td class="practice">душ</td><td class="practice">Poca presión en la ducha.</td></tr>
+        <tr><td class="practice">el lavabo</td><td class="practice">раковина</td><td class="practice">El desagüe del lavabo va lento.</td></tr>
+        <tr><td class="reference">la bañera</td><td class="reference">ванна</td><td class="reference">Limpio la bañera cada semana.</td></tr>
+        <tr><td class="reference">el bidé</td><td class="reference">биде</td><td class="reference">El bidé está junto al váter.</td></tr>
+        <tr><td class="reference">el espejo</td><td class="reference">зеркало</td><td class="reference">El espejo está sobre el lavabo.</td></tr>
+        <tr><td class="reference">el destornillador</td><td class="reference">отвёртка</td><td class="reference">Necesito un destornillador pequeño.</td></tr>
+        <tr><td class="reference">la llave inglesa</td><td class="reference">гаечный ключ</td><td class="reference">La llave inglesa está en la caja.</td></tr>
+      </table>
+
+      <div class="formula">💡 Впиши слово:</div>
+
+      1. Hay ___ agua en el suelo. <span class="ru-sub">(много, неисчисл.)</span><br>
+      2. Hay ___ azulejos sueltos. <span class="ru-sub">(много, счётн.)</span><br>
+      3. Queda ___ de agua en el cubo. <span class="ru-sub">(немного)</span><br>
+      4. Necesito ___ juntas nuevas. <span class="ru-sub">(пара)</span><br>
+      5. Hay ___ presión en la ducha. <span class="ru-sub">(мало)</span>
+    </div>
+  </div>
+
+  <!-- УПР 5: ЧТЕНИЕ + CLIL -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">5</div>
+      <div>
+        <h2>📖 Чтение + CLIL: как работают испанские мастера</h2>
+        <div class="tag">прочитай текст и заполни чек-лист</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="clil-box">
+        <h4>La visita — платный выезд</h4>
+        <p>El fontanero, el electricista, el cerrajero y el albañil cobran la visita: entre treinta y sesenta euros. Pregunta el precio antes: «¿Cuánto cuesta la visita?». Los sábados y las urgencias son más caros: si es urgente, pagas más.</p>
+
+        <h4>El presupuesto — смета</h4>
+        <p>Para un atasco o una junta, el fontanero trabaja el mismo día. Para algo grande, pide el presupuesto por escrito: «Deje su presupuesto, por favor». Si aceptas el trabajo, la visita a veces es gratis.</p>
+
+        <h4>La factura — гарантия</h4>
+        <p>Pide siempre factura: tiene garantía de un año. Si inundas a los vecinos, el seguro de hogar paga el daño, pero solo con factura. Y fotos del daño antes de la reparación.</p>
+      </div>
+
+      <div class="note" style="margin-top:2mm">
+        📋 <b>Словарик дома:</b> el electricista — электрик · el cerrajero — слесарь (замки) · el albañil — строитель · el técnico — техник · la visita — визит · el atasco — засор · gotear — капать · inundar — затопить · el betún / silicona — герметик · el azulejo — плитка · la junta — стык / прокладка
+      </div>
+
+      <div class="hint">Ответьте на вопросы:</div>
+      1. ¿Cuánto cuesta la visita?
+      <span class="wline xlong"></span><br>
+      2. ¿Cuándo es más caro el fontanero?
+      <span class="wline xlong"></span><br>
+      3. ¿Qué pides por escrito para un trabajo grande?
+      <span class="wline xlong"></span><br>
+      4. ¿Por qué es importante la factura?
+      <span class="wline xlong"></span>
+
+      <div class="checklist" style="margin-top:3mm">
+        <h4>📋 Чек-лист звонка сантехнику</h4>
+        <div class="item"><div class="box"></div><div>Сказать, где поломка: en la cocina, bajo el fregadero</div></div>
+        <div class="item"><div class="box"></div><div>Сказать, что случилось: se ha atascado / gotea / hay una fuga</div></div>
+        <div class="item"><div class="box"></div><div>Подтвердить: он закрыл la llave de paso (he cerrado la llave de paso)</div></div>
+        <div class="item"><div class="box"></div><div>Назвать, когда готовы принять: mañana por la mañana</div></div>
+        <div class="item"><div class="box"></div><div>Спросить: ¿cuánto cuesta la visita?</div></div>
+        <div class="item"><div class="box"></div><div>Попросить: presupuesto por escrito y factura</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 6: АУДИРОВАНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num">6</div>
+      <div>
+        <h2>🎧 Аудирование: телефонный звонок сантехнику</h2>
+        <div class="tag">попроси родителя/преподавателя прочитать вслух 2 раза</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="audio-box">
+        <b>📢 Для родителя/преподавателя — прочитать вслух (медленно, 2 раза):</b><br>
+        «— Fontanero Ramos, buenos días. — Buenos días. Es urgente: hay una fuga bajo el fregadero de la cocina. — ¿Ha cerrado la llave de paso? — Sí, ya está cerrado, pero el mueble se ha mojado. — Bien. ¿Cuándo puede venir usted? — Esta tarde, a las cinco. — Perfecto. ¿Cuánto cuesta el arreglo? — La visita son cuarenta euros y el presupuesto se lo doy antes de trabajar. — ¿Me deja su presupuesto por escrito? — Sí, con factura y garantía de un año. — Gracias. También gotea el grifo del baño. — Lo miro, no pasa nada. Llevo desatascador y llave inglesa. — Hasta las cinco, entonces. ¡Gracias! — ¡Hasta luego!»
+      </div>
+
+      <div class="note blue">
+        💬 <b>Слова для ответов:</b> ¿cuándo puede venir? — когда сможете прийти? · ¿cuánto cuesta el arreglo? — сколько стоит ремонт? · es urgente — срочно · deje su presupuesto — оставьте смету
+      </div>
+
+      1. ¿Qué pasa en la cocina?
+      <span class="wline xlong"></span><br>
+      2. ¿Ha cerrado la llave de paso?
+      <span class="wline xlong"></span><br>
+      3. ¿A qué hora puede venir el fontanero?
+      <span class="wline xlong"></span><br>
+      4. ¿Cuánto cuesta la visita?
+      <span class="wline xlong"></span><br>
+      5. ¿Qué más está roto en el baño?
+      <span class="wline xlong"></span><br>
+      6. ¿Qué documentos da el fontanero?
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- УПР 7: ГОВОРЕНИЕ -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">7</div>
+      <div>
+        <h2>🗣 Говорение: ситуации «поломка дома»</h2>
+        <div class="tag">используй шаблоны, произнеси вслух</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sit-box">
+        <b>Ситуация 1:</b> Вы сообщаете мастеру о поломке.<br>
+        <div class="tmpl">«Se ha atascado el desagüe de la cocina y gotea el grifo del baño.»</div>
+        <div class="tmpl-ru">(Забился слив на кухне и капает кран в ванной.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 2:</b> Вы объясняете, что протечка срочная.<br>
+        <div class="tmpl">«Es urgente: hay una fuga bajo el fregadero.»</div>
+        <div class="tmpl-ru">(Срочно: есть протечка под мойкой.)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 3:</b> Вы договариваетесь о визите.<br>
+        <div class="tmpl">«¿Cuándo puede venir? ¿Está libre esta tarde?»</div>
+        <div class="tmpl-ru">(Когда сможете прийти? Вы свободны сегодня вечером?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 4:</b> Вы спрашиваете про цену.<br>
+        <div class="tmpl">«¿Cuánto cuesta el arreglo? ¿Y la visita?»</div>
+        <div class="tmpl-ru">(Сколько стоит ремонт? А визит?)</div>
+      </div>
+      <div class="sit-box">
+        <b>Ситуация 5:</b> Вы просите смету и гарантию.<br>
+        <div class="tmpl">«Deje su presupuesto por escrito y la factura, por favor.»</div>
+        <div class="tmpl-ru">(Оставьте смету письменно и счёт-фактуру, пожалуйста.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- УПР 8: ПИСЬМО -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c3">8</div>
+      <div>
+        <h2>✍️ Письмо: описание поломки</h2>
+        <div class="tag">6–8 предложений по плану</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="plan-box">
+        <b>План:</b><br>
+        1–2. Приветствие и имя: Buenos días, soy Ana García, llamo por una avería.<br>
+        3. Что случилось: se ha atascado el desagüe / gotea el grifo / hay una fuga.<br>
+        4. Где: en la cocina, bajo el fregadero / en el baño.<br>
+        5. Что уже сделали: cerré la llave de paso.<br>
+        6. Насколько серьёзно: hay mucha agua, el mueble se ha mojado.<br>
+        7. Когда готовы принять: esta tarde / mañana por la mañana.<br>
+        8. Вопросы: ¿cuándo puede venir? ¿cuánto cuesta el arreglo?
+      </div>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span><br>
+      <span class="wline xlong"></span>
+    </div>
+  </div>
+
+  <!-- САМОПРОВЕРКА -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c2">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>el desatascador</b> — вантуз
+      </div>
+    </div>
+  </div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c4">✓</div>
+      <div>
+        <h2>🚦 Самопроверка «Светофор»</h2>
+        <div class="tag">закрась нужный кружок</div>
+      </div>
+    </div>
+    <div class="card">
+      <table class="tl-table">
+        <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+        <tr><td>Описать поломку: se ha atascado, gotea, hay una fuga</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Перекрыть воду: cerrar la llave de paso</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Считать и не считать: mucha agua, muchos azulejos</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Договориться о визите: ¿cuándo puede venir?</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Спросить цену и смету: presupuesto por escrito, factura</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+        <tr><td>Разыграть звонок сантехнику от начала до конца</td><td><span class="tl-btn green"></span></td><td><span class="tl-btn yellow"></span></td><td><span class="tl-btn red"></span></td></tr>
+      </table>
+      <p class="hint" style="margin-top:2.5mm">📸 Сфотографируйте заполненный лист и отправьте преподавателю. Ключей нет — проверим вместе.</p>
+    </div>
+  </div>
+
+  <!-- АНОНС -->
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-num c5">➡️</div>
+      <div>
+        <h2>Впереди — Урок 13.2: Электрик и кондиционеры</h2>
+        <div class="tag">квантификаторы: un poco de, bastante, demasiado + imperativo</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note green">
+        🎉 <b>Отлично!</b> Вы умеете описать поломку и договориться о визите со сметой. На следующем уроке (13.2) — электричество и кондиционеры: щиток, el diferencial и заявка мастеру, где важно сказать, <i>насколько</i> всё плохо: <i>un poco de, bastante, demasiado</i>.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

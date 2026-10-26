@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 38 · La ropa — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" id="printBtn">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>👕 La ropa</h1>
+    <div class="sub">Рабочий лист к Уроку 38 · Станция 4: CLIL Mates y Ciencias · одежда по погоде, llevo / me pongo / me queda bien</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">✏️ ¡Hola, estilista! Сегодня ты — стилист: оденешь всех по погоде и расскажешь о своём гардеробе по-испански. Вспоминай: <b>llevo</b> = на мне, <b>me pongo</b> = я надеваю, <b>me queda bien</b> = мне идёт!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини одежду и перевод</span>
+      <span class="ex-skill">🗣 Лексика · одежда</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>👕 la camiseta</td><td>а) платье</td></tr>
+      <tr><td><span class="ans-box"></span>👗 el vestido</td><td>б) шапка</td></tr>
+      <tr><td><span class="ans-box"></span>🧥 el abrigo</td><td>в) куртка</td></tr>
+      <tr><td><span class="ans-box"></span>👟 los zapatos</td><td>г) надевать</td></tr>
+      <tr><td><span class="ans-box"></span>🩴 las sandalias</td><td>д) футболка</td></tr>
+      <tr><td><span class="ans-box"></span>🥼 la chaqueta</td><td>е) шарф</td></tr>
+      <tr><td><span class="ans-box"></span>🧢 el gorro</td><td>ж) снимать</td></tr>
+      <tr><td><span class="ans-box"></span>🧣 la bufanda</td><td>з) обувь</td></tr>
+      <tr><td><span class="ans-box"></span>⬆️ ponerse</td><td>и) сандалии</td></tr>
+      <tr><td><span class="ans-box"></span>⬇️ quitarse</td><td>к) пальто</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: УГАДАЙ ПО ОПИСАНИЮ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Угадай слово по описанию</span>
+      <span class="ex-skill">🗣 Лексика · понимание</span>
+    </div>
+    <div class="word-bank">💡 Банк слов: <strong>el abrigo · la bufanda · el gorro · las sandalias · los zapatos · probarse</strong></div>
+    <div class="desc-grid">
+      <div class="desc-item"><span class="num">1</span><span class="emoji">🧥</span> Hace frío. Me pongo esta ropa en invierno, es larga y caliente. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">2</span><span class="emoji">🧣</span> Está en mi cuello, junto al gorro. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">3</span><span class="emoji">🧢</span> Está en mi cabeza en invierno. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">4</span><span class="emoji">🩴</span> En verano llevo esto en la playa. No son zapatos cerrados. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">5</span><span class="emoji">👟</span> Los llevo en los pies: uno en el pie izquierdo y uno en el derecho. → <span class="blank"></span></div>
+      <div class="desc-item"><span class="num">6</span><span class="emoji">🪞</span> En la tienda te pones la ropa delante del espejo. ¿Qué haces? → <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ВСТАВЬ СЛОВО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь: llevo / llevas / lleva / me pongo / me quito / queda bien</span>
+      <span class="ex-skill">🧩 Грамматика · llevo</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> <b>llevo</b> = я ношу, <b>llevas</b> = ты носишь, <b>lleva</b> = он/она носит. С хвостиком <b>me</b>: me pongo = я надеваю, me quito = я снимаю. <b>queda bien</b> = идёт (по размеру/стилю). Запомни: <b>el pantalón / los pantalones</b> — брюки. Примеры: <em>Llevo un abrigo porque hace frío.</em> · <em>Me pongo la chaqueta.</em> · <em>Este vestido me queda bien.</em> · <em>En verano llevo sandalias.</em></div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>Yo <span class="g"></span> un abrigo porque hace frío.</div>
+      <div class="gap-item"><span class="num">2</span>¿Tú <span class="g"></span> gorro en invierno?</div>
+      <div class="gap-item"><span class="num">3</span>Mamá <span class="g"></span> un vestido bonito.</div>
+      <div class="gap-item"><span class="num">4</span>Hace frío: yo <span class="g"></span> la chaqueta.</div>
+      <div class="gap-item"><span class="num">5</span>En casa yo <span class="g"></span> los zapatos.</div>
+      <div class="gap-item"><span class="num">6</span>El gorro me <span class="g"></span>.</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Слова перепутаны. Расставь их в правильном порядке и запиши готовую фразу на линии.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">porque</span><span class="build-word">Llevo</span><span class="build-word">hace</span><span class="build-word">un</span><span class="build-word">frío.</span><span class="build-word">abrigo</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">sandalias.</span><span class="build-word">verano</span><span class="build-word">llevo</span><span class="build-word">En</span><span class="build-word">la</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">pongo</span><span class="build-word">chaqueta.</span><span class="build-word">Me</span><span class="build-word">la</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Este</span><span class="build-word">queda</span><span class="build-word">vestido</span><span class="build-word">bien.</span><span class="build-word">me</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. ПОРЯДОК: ОДЕВАЕМСЯ ПО ПОГОДЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Расставь утро стилиста по порядку</span>
+      <span class="ex-skill">🔢 Логика · одежда</span>
+    </div>
+    <div class="ex-instruction">На улице зима ❄️. Пронумеруй действия от 1 до 6: что ты наденешь сначала, а что — в самом конце (впиши цифру в квадратик).</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🧣</span> Me pongo la bufanda</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🎒</span> ¡Listo! Voy al colegio</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">👕</span> Me pongo la camiseta</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🧢</span> Me pongo el gorro</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">👖</span> Me pongo el pantalón</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🧥</span> Me pongo la chaqueta</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Зима Люсии» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Lucía. Tengo 10 años y vivo en Madrid. Ahora es invierno y hace frío. Por la mañana me pongo la camiseta, luego el pantalón y después la chaqueta. En invierno llevo un abrigo, un gorro y una bufanda porque hace frío. Mi vestido rojo me queda bien, pero hoy llevo pantalón. En verano llevo sandalias porque hace calor. ¿Y tú? ¿Qué te pones hoy?
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Dónde vive Lucía? <span class="ru">(Где живёт Люсия?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Qué se pone primero por la mañana? <span class="ru">(Что она надевает сначала?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Qué lleva en invierno y por qué? <span class="ru">(Что она носит зимой и почему?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué le queda bien? <span class="ru">(Что ей идёт?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Qué lleva en verano? <span class="ru">(Что она носит летом?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Сочинение «Mi armario»</span>
+      <span class="ex-skill">✍️ Письмо · 7–8 предложений</span>
+    </div>
+    <div class="hint-box">💡 <strong>План:</strong> 1) ¡Hola! Me llamo... y tengo... años. · 2) En mi armario tengo: una camiseta, un pantalón... · 3) En invierno llevo... porque hace frío. · 4) Por la mañana me pongo... · 5) En verano llevo... porque hace calor. · 6) Mi ropa favorita: este/esta... me queda bien. · 7) ¿Qué te pones hoy? · 8) ¡Así es mi armario!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <!-- СЛОВАРИК (добавлен при валидации) -->
+  <div class="exercise">
+    <div class="ex-head">
+      <div class="ex-num c-terra">📚</div>
+      <div>
+        <h2>Словарик: слова и выражения этого листа</h2>
+        <div class="tag">справка — используй при выполнении заданий</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="note">
+        <b>llevo</b> — я ношу / на мне · <b>probarse</b> — примерять · <b>Llevo un abrigo porque hace frío.</b> — Я в пальто, потому что холодно. · <b>En verano llevo sandalias.</b> — Летом я ношу сандалии. · <b>Me pongo la chaqueta.</b> — Я надеваю куртку. · <b>Este vestido me queda bien.</b> — Это платье мне идёт. · <b>¿Qué te pones hoy?</b> — Что ты наденешь сегодня?
+      </div>
+    </div>
+  </div>
+
+    <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть предметы одежды (6 предметов)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Говорить: llevo / llevas / lleva</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Надевать и снимать: me pongo / me quito</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сказать, что вещь идёт: me queda bien</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Объяснить выбор: llevo... porque hace frío</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Рассказать «Mi armario» по формуле 6 пунктов</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 4: CLIL Mates y Ciencias · Урок 38 · ¡Qué buen estilo tienes! 👕</div>
+</div>
+
+<script>
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+</script>
+
+</body>
+</html>

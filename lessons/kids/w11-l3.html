@@ -220,6 +220,32 @@
     <div id="warm-box"></div>
   </section>
 
+  <!-- БЛОК 0.5: ПРОВЕРОЧНАЯ РАБОТА ПО СТАНЦИИ 3 -->
+  <section class="block" style="--c:#E91E63">
+    <div class="block-head">
+      <h2 class="block-title">📝 Проверочная работа по станции 3</h2>
+      <span class="time-badge">⏱ 10 минут</span>
+    </div>
+    <p class="block-sub">ФИНАЛЬНАЯ проверка по всей станции «Mi Mundo»! Здесь и лексика, и грамматика: семья, дом, распорядок, хобби и вкусы. Отвечай сам, без подсказок, и собери все звёзды!</p>
+    <div class="game-zone">
+      <p style="font-weight:800">🧩 Часть 1 · Лексика: 6 вопросов</p>
+      <div class="game-q" id="t1-q"></div>
+      <div class="opts" id="t1-opts"></div>
+      <div class="game-fb" id="t1-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="t1-stars">0</span> / <span id="t1-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="test1Start()">▶ Начать</button>
+    </div>
+    <div class="game-zone">
+      <p style="font-weight:800">🧠 Часть 2 · Грамматика: 6 вопросов</p>
+      <div class="game-q" id="t2-q"></div>
+      <div class="opts" id="t2-opts"></div>
+      <div class="game-fb" id="t2-fb"></div>
+      <div class="stars-line">⭐ Звёзд: <span id="t2-stars">0</span> / <span id="t2-total">0</span></div>
+      <button class="speak-btn" style="margin-top:10px" onclick="test2Start()">▶ Начать</button>
+    </div>
+    <div class="script">⚡ <strong>Как пройти проверочную:</strong> сначала Часть 1 (лексика), потом Часть 2 (грамматика). Если что-то 🔴 — повтори уроки станции 3 и попробуй ещё раз!</div>
+  </section>
+
   <!-- БЛОК 1: ВВОД ЛЕКСИКИ — ПРОФИЛЬ-КОНСТРУКТОР -->
   <section class="block" style="--c:#E91E63">
     <div class="block-head">
@@ -433,7 +459,8 @@
     <div class="task"><div class="task-num star">4</div><div><strong>🧠 Тренажёры</strong> · 10 мин ⭐<br>«Собери Bio» + «Опиши аватар» + «Подбери подпись» + «Диктант наоборот» + тренажёр-сопоставление.</div></div>
     <div class="task"><div class="task-num star">5</div><div><strong>🎤 Голосовой дневник (чекпоинт!)</strong> · 5 мин ⭐<br>Запиши голосовое: 5 предложений о себе по формуле. Отправь учителю.</div></div>
     <div class="task"><div class="task-num star">6</div><div><strong>🧸 Семейная миссия</strong> · 5 мин ⭐<br>Создай «профиль» для любимой игрушки: аватар + Bio из 3 фраз («Se llama... Vive en mi habitación. Le gusta...»).</div></div>
-    <div class="task"><div class="task-num">7</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
+    <div class="task"><div class="task-num star">7</div><div><strong>Рабочий лист «PBL: Mi Perfil de Instagram»</strong> · 15 мин ⭐<br>Распечатай, выполни задания и раскрась светофор самооценки.<br><a href="../../worksheets/w11-l3-kids.html" target="_blank">🖨 Открыть и распечатать</a></div></div>
+    <div class="task"><div class="task-num">8</div><div><strong>Самопроверка «Светофор»</strong> · 3 мин</div></div>
   </section>
 
   <!-- СВЕТОФОР -->
@@ -527,6 +554,62 @@ var WARM=[
     box.appendChild(d);
   });
 })();
+
+/* ===== ПРОВЕРОЧНАЯ РАБОТА ПО СТАНЦИИ 3 ===== */
+var TEST1=[
+ {q:'Как будет по-испански «мама»?',ok:'la madre',w:['el padre','la abuela']},
+ {q:'Как называется комната / спальня?',ok:'la habitación',w:['la cocina','el salón']},
+ {q:'Переведи «плавание» (вид спорта)',ok:'la natación',w:['el fútbol','el tenis']},
+ {q:'«El abuelo» — это...',ok:'дедушка',w:['бабушка','брат']},
+ {q:'Переведи «desayuno»',ok:'я завтракаю',w:['я обедаю','я ужинаю']},
+ {q:'«Me levanto» значит...',ok:'я встаю',w:['я ложусь спать','я одеваюсь']}
+];
+var t1Ord=[],t1I=0,t1S=0;
+function test1Start(){t1Ord=shuffle(TEST1.slice());t1I=0;t1S=0;document.getElementById('t1-total').textContent=t1Ord.length;document.getElementById('t1-stars').textContent='0';t1Next();}
+function t1Next(){
+  var box=document.getElementById('t1-opts');box.innerHTML='';
+  if(t1I>=t1Ord.length){document.getElementById('t1-q').textContent='🎉 ¡Muy bien!';document.getElementById('t1-fb').textContent='⭐ '+t1S+' из '+t1Ord.length;return;}
+  var r=t1Ord[t1I];
+  document.getElementById('t1-q').textContent=r.q;
+  document.getElementById('t1-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='150px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');t1S++;document.getElementById('t1-stars').textContent=t1S;document.getElementById('t1-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('t1-fb').textContent='❌ Правильно: '+r.ok;}
+      t1I++;setTimeout(t1Next,1400);
+    });
+    box.appendChild(b);
+  });
+}
+var TEST2=[
+ {q:'«Yo ___ alto» (я высокий — постоянный признак)',ok:'soy',w:['estoy','tengo']},
+ {q:'«___ nueve años» (мне девять лет)',ok:'Tengo',w:['Soy','Estoy']},
+ {q:'«En el salón ___ un sofá» (в гостиной есть диван)',ok:'hay',w:['está','soy']},
+ {q:'«Me ___ los animales» (мне нравятся животные)',ok:'gustan',w:['gusta','encanta']},
+ {q:'«Me gusta ___» (танцевать)',ok:'bailar',w:['bailo','baile']},
+ {q:'«Busco amigos ___ jugar» (чтобы играть)',ok:'para',w:['por','con']}
+];
+var t2Ord=[],t2I=0,t2S=0;
+function test2Start(){t2Ord=shuffle(TEST2.slice());t2I=0;t2S=0;document.getElementById('t2-total').textContent=t2Ord.length;document.getElementById('t2-stars').textContent='0';t2Next();}
+function t2Next(){
+  var box=document.getElementById('t2-opts');box.innerHTML='';
+  if(t2I>=t2Ord.length){document.getElementById('t2-q').textContent='🎉 ¡Muy bien!';document.getElementById('t2-fb').textContent='⭐ '+t2S+' из '+t2Ord.length;return;}
+  var r=t2Ord[t2I];
+  document.getElementById('t2-q').textContent=r.q;
+  document.getElementById('t2-fb').textContent='';
+  shuffle([r.ok].concat(r.w)).forEach(function(o){
+    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='150px';
+    b.addEventListener('click',function(){
+      box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
+      if(o===r.ok){b.classList.add('correct');t2S++;document.getElementById('t2-stars').textContent=t2S;document.getElementById('t2-fb').textContent='✅ ¡Correcto!';speak(r.ok);}
+      else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('t2-fb').textContent='❌ Правильно: '+r.ok;}
+      t2I++;setTimeout(t2Next,1400);
+    });
+    box.appendChild(b);
+  });
+}
 
 /* ===== БЛОК 1: ПРОФИЛЬ-КОНСТРУКТОР ===== */
 (function(){

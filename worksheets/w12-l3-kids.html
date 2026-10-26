@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист · Урок 36 · PBL: La Tiendita — Школа МУДРО</title>
+<style>
+  :root{
+    --terra:#E2725B; --oliva:#7A8B4C; --afran:#E9A13B; --ocean:#3E7CB1;
+    --teal:#2A9D8F; --green:#2E7D32; --sky:#3E7CB1;
+    --ink:#2D2A26; --soft:#FFF8EC; --line:#D6CFC4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:var(--ink);padding:20px;font-size:14px;line-height:1.5}
+
+  .print-btn{position:fixed;top:20px;right:20px;background:var(--afran);color:#fff;border:none;border-radius:12px;padding:14px 26px;font-size:15px;font-weight:800;cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(233,161,59,.4)}
+  .print-btn:hover{background:#c97f1f}
+
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:14mm 16mm;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  .hero{background:linear-gradient(135deg,#FFF3D6,#FFE9B8,#FFF8EC);border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;border:2px solid var(--afran)}
+  .hero h1{font-size:21px;color:var(--afran);margin-bottom:4px}
+  .hero .sub{color:#666;font-size:12.5px;font-weight:600}
+  .hero .tag{display:inline-block;background:var(--afran);color:#fff;border-radius:999px;padding:4px 14px;font-weight:800;font-size:11px;margin-top:8px}
+  .name-row{display:flex;gap:18px;margin-bottom:16px;font-weight:700;font-size:13px}
+  .name-row .w{display:inline-block;min-width:150px;border-bottom:1.6px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .exercise{margin-bottom:22px;page-break-inside:avoid}
+  .ex-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .ex-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  .c-teal{background:var(--teal)}.c-ocean{background:var(--ocean)}.c-oliva{background:var(--oliva)}
+  .c-afran{background:var(--afran)}.c-terra{background:var(--terra)}.c-green{background:var(--green)}.c-sky{background:var(--sky)}
+  .ex-title{font-weight:800;font-size:14.5px}
+  .ex-skill{margin-left:auto;font-size:10.5px;font-weight:700;color:#777;background:#f5f2ec;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .ex-instruction{color:#666;font-size:12.5px;margin-bottom:8px;font-style:italic}
+
+  .hint-box{background:#FFF8E1;border-left:3px solid var(--afran);padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:10px;color:#555}
+  .hint-box strong{color:var(--ink)}
+  .word-bank{background:#FFF3D6;border:1.5px dashed var(--afran);border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;color:#b07a1f;margin-bottom:10px}
+
+  .match-table{width:100%;border-collapse:collapse;font-size:13px}
+  .match-table th{background:var(--soft);padding:7px 10px;text-align:left;font-weight:800;border-bottom:2px solid var(--line)}
+  .match-table td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}
+  .ans-box{display:inline-block;width:24px;height:24px;border:1.6px solid var(--line);border-radius:5px;text-align:center;line-height:21px;font-weight:800;margin-right:8px}
+
+  .desc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .desc-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .desc-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--afran);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--afran);flex-shrink:0}
+  .desc-item .emoji{font-size:17px}
+  .desc-item .blank{display:inline-block;min-width:160px;border-bottom:1.6px dashed var(--afran);height:20px;vertical-align:bottom}
+
+  .gap-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  .gap-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13.5px;flex-wrap:wrap}
+  .gap-item .num{display:inline-block;width:24px;height:24px;background:var(--soft);border:1.6px solid var(--ocean);border-radius:5px;text-align:center;line-height:21px;font-weight:800;color:var(--ocean);flex-shrink:0}
+  .gap-item .g{display:inline-block;min-width:70px;border-bottom:1.6px dashed var(--ocean);height:20px;vertical-align:bottom;text-align:center}
+
+  .build-item{margin:9px 0;padding:10px;background:#f9f9f7;border-radius:10px}
+  .build-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .build-word{background:#fff;border:1.6px solid var(--afran);border-radius:999px;padding:4px 12px;font-weight:700;font-size:12.5px;color:#b07a1f}
+  .build-line{border-bottom:1.6px dashed var(--afran);height:24px}
+
+  .order-words{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .order-row{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+  .order-slot{display:inline-block;width:26px;height:26px;border:1.8px solid var(--afran);border-radius:6px;flex-shrink:0}
+  .order-row .ow-emo{font-size:16px}
+
+  .reading-box{background:#F4F7EE;border-left:4px solid var(--oliva);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.8;margin-bottom:10px}
+  .reading-q{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:13px}
+  .reading-q .qnum{font-weight:800;color:var(--oliva);min-width:20px}
+  .reading-q .ru{display:block;color:#999;font-size:11px;font-style:italic}
+  .reading-q .blank{display:inline-block;flex:1;border-bottom:1.4px dashed var(--line);height:18px;vertical-align:bottom}
+
+  .write-lines{margin-top:8px}
+  .write-line{border-bottom:1.6px dashed var(--line);height:27px}
+
+  .selfcheck-table{width:100%;border-collapse:collapse;font-size:13px}
+  .selfcheck-table th{background:var(--soft);padding:8px 10px;text-align:left;font-weight:800}
+  .selfcheck-table th:not(:first-child){text-align:center;width:80px}
+  .selfcheck-table td{padding:8px 10px;border-bottom:1px solid #eee}
+  .selfcheck-table td:first-child{font-weight:600}
+  .selfcheck-table td:not(:first-child){text-align:center}
+  .sc-circle{display:inline-block;width:6mm;height:6mm;border:1.6px solid #bbb;border-radius:50%;vertical-align:middle}
+
+  .footer-note{text-align:center;color:#777;font-size:11px;margin-top:18px;padding-top:10px;border-top:1px solid #eee;font-weight:700}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .print-btn{display:none}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="printSheet()">🖨 Распечатать</button>
+
+<div class="sheet">
+
+  <div class="hero">
+    <h1>🏪 PBL: La Tiendita</h1>
+    <div class="sub">Рабочий лист к Уроку 36 · Станция 4: Mates y Ciencias · магазин: цены, покупка и сдача, формулы ¿Cuánto cuesta? — Cuesta...</div>
+    <div class="tag">Escuela MUDRO · ¡A escribir!</div>
+  </div>
+
+  <div class="name-row">
+    <span>Имя: <span class="w"></span></span>
+    <span>Дата: <span class="w" style="min-width:90px"></span></span>
+  </div>
+
+  <div class="hint-box">🚀 Проектный урок! Твоя комната превращается в магазин: делай товары с ценниками, считай сдачу и устраивай настоящие REBAJAS — распродажу. ¡Bienvenido a La Tiendita!</div>
+
+  <!-- 1. ЛЕКСИКА: СОПОСТАВЛЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-afran">1</span>
+      <span class="ex-title">Соедини слово магазина и перевод</span>
+      <span class="ex-skill">🗣 Лексика · магазин</span>
+    </div>
+    <div class="ex-instruction">Впиши букву перевода рядом с испанским словом.</div>
+    <table class="match-table">
+      <tr><th style="width:55%">Испанский</th><th>Перевод</th></tr>
+      <tr><td><span class="ans-box"></span>🏪 la tienda</td><td>а) скидка</td></tr>
+      <tr><td><span class="ans-box"></span>🧑‍💼 el vendedor</td><td>б) покупатель</td></tr>
+      <tr><td><span class="ans-box"></span>🛒 el cliente</td><td>в) магазин</td></tr>
+      <tr><td><span class="ans-box"></span>🏷️ el precio</td><td>г) бесплатно</td></tr>
+      <tr><td><span class="ans-box"></span>💰 el dinero</td><td>д) сдача</td></tr>
+      <tr><td><span class="ans-box"></span>🪙 el cambio</td><td>е) цена</td></tr>
+      <tr><td><span class="ans-box"></span>💶 el euro</td><td>ж) продавец</td></tr>
+      <tr><td><span class="ans-box"></span>📉 la rebaja</td><td>з) акция</td></tr>
+      <tr><td><span class="ans-box"></span>📢 la oferta</td><td>и) деньги</td></tr>
+      <tr><td><span class="ans-box"></span>🎁 gratis</td><td>к) евро</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ЛЕКСИКА: ДВЕ КОРЗИНЫ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">2</span>
+      <span class="ex-title">Раздели слова на 2 корзины</span>
+      <span class="ex-skill">🗣 Лексика · сортировка</span>
+    </div>
+    <div class="word-bank">💡 Слова: <strong>1) la tienda · 2) el precio · 3) el vendedor · 4) la rebaja · 5) el cliente · 6) la oferta · 7) ¿Cuánto cuesta? · 8) gratis</strong></div>
+    <div class="ex-instruction">Впиши номер каждого слова в нужную корзину: люди и место магазина — слева, цены и скидки — справа.</div>
+    <table class="match-table">
+      <tr><th>🏪 Люди и место</th><th>🏷️ Цены и скидки</th></tr>
+      <tr><td><span class="ans-box"></span> Word №&nbsp;<span class="blank" style="min-width:60px"></span></td><td><span class="ans-box"></span> Word №&nbsp;<span class="blank" style="min-width:60px"></span></td></tr>
+      <tr><td><span class="ans-box"></span> Word №&nbsp;<span class="blank" style="min-width:60px"></span></td><td><span class="ans-box"></span> Word №&nbsp;<span class="blank" style="min-width:60px"></span></td></tr>
+      <tr><td><span class="ans-box"></span> Word №&nbsp;<span class="blank" style="min-width:60px"></span></td><td><span class="ans-box"></span> Word №&nbsp;<span class="blank" style="min-width:60px"></span></td></tr>
+      <tr><td><span class="ans-box"></span> Word №&nbsp;<span class="blank" style="min-width:60px"></span></td><td><span class="ans-box"></span> Word №&nbsp;<span class="blank" style="min-width:60px"></span></td></tr>
+    </table>
+  </div>
+
+  <!-- 3. ГРАММАТИКА: ФОРМУЛЫ МАГАЗИНА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-ocean">3</span>
+      <span class="ex-title">Вставь слово в формулу магазина</span>
+      <span class="ex-skill">🧩 Грамматика · покупка</span>
+    </div>
+    <div class="hint-box">💡 <strong>Правило:</strong> спрашиваем цену: <b>¿Cuánto cuesta?</b> (Сколько стоит?) — отвечаем: <b>Cuesta dos euros.</b> (Стоит два евро.) Покупатель: <b>Me llevo esto.</b> (Я возьму это.), <b>Aquí tienes.</b> (Вот, держи.), <b>Gracias, adiós.</b> (Спасибо, пока.). Продавец: <b>¿Tienes cambio?</b> (У тебя есть сдача?). Дорого: <b>Es muy caro.</b> (Очень дорого.). Скидки: <b>barato</b> (дешёвый), <b>caro</b> (дорогой), <b>más barato</b> (дешевле), <b>más caro</b> (дороже).</div>
+    <div class="gap-grid">
+      <div class="gap-item"><span class="num">1</span>— ¿<span class="g"></span> cuesta? — Cuesta tres euros.</div>
+      <div class="gap-item"><span class="num">2</span>Cuesta dos <span class="g"></span> con cincuenta.</div>
+      <div class="gap-item"><span class="num">3</span>— <span class="g"></span> tienes. — Gracias, adiós.</div>
+      <div class="gap-item"><span class="num">4</span>— ¿Tienes <span class="g"></span>? — Sí, tengo.</div>
+      <div class="gap-item"><span class="num">5</span>Cuesta diez euros. ¡Es muy <span class="g"></span>!</div>
+      <div class="gap-item"><span class="num">6</span>En las rebajas todo es más <span class="g"></span>.</div>
+    </div>
+  </div>
+
+  <!-- 4. ГРАММАТИКА: СОБЕРИ ФРАЗУ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">4</span>
+      <span class="ex-title">Собери фразу: слова перепутаны!</span>
+      <span class="ex-skill">🧩 Порядок слов</span>
+    </div>
+    <div class="ex-instruction">Слова перепутаны. Расставь их в правильном порядке и запиши готовую фразу на линии.</div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">cuesta</span><span class="build-word">¿</span><span class="build-word">Cuánto</span><span class="build-word">esto?</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">Cuesta</span><span class="build-word">euros</span><span class="build-word">dos</span><span class="build-word">cincuenta</span><span class="build-word">con</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">tienes</span><span class="build-word">Me</span><span class="build-word">esto</span><span class="build-word">llevo</span><span class="build-word">Aquí</span></div>
+      <div class="build-line"></div>
+    </div>
+    <div class="build-item">
+      <div class="build-words"><span class="build-word">cambio</span><span class="build-word">Es</span><span class="build-word">muy</span><span class="build-word">¿Tienes</span><span class="build-word">caro?</span></div>
+      <div class="build-line"></div>
+    </div>
+  </div>
+
+  <!-- 5. PBL: ШАГИ ПРОЕКТА -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-sky">5</span>
+      <span class="ex-title">Шаги проекта «La Tiendita» по порядку</span>
+      <span class="ex-skill">🚀 PBL · логика</span>
+    </div>
+    <div class="ex-instruction">Пронумеруй шаги проекта от 1 до 6 (впиши цифру в квадратик): с чего начинаем открытие магазина и чем заканчиваем?</div>
+    <div class="order-words">
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🧮</span> Calculo el cambio</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">✂️</span> Hago los productos con los precios</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">👋</span> Juego la compra completa: ¡de «¡Hola!» a «¡Adiós!»!</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🎭</span> Reparto los roles: vendedor y cliente</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">🏷️</span> Organizo las REBAJAS</div>
+      <div class="order-row"><span class="order-slot"></span><span class="ow-emo">💬</span> Practico el diálogo: «¿Cuánto cuesta?»</div>
+    </div>
+  </div>
+
+  <!-- 6. ЧТЕНИЕ -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-oliva">6</span>
+      <span class="ex-title">Прочитай текст «Leo en la tiendita» и ответь</span>
+      <span class="ex-skill">📖 Чтение</span>
+    </div>
+    <div class="reading-box">
+      ¡Hola! Me llamo Leo. Hoy tengo una tienda en mi habitación: La Tiendita. Soy el vendedor y mi hermana es la cliente. En mi tienda hay un lápiz, un balón y un libro. El lápiz cuesta un euro. El balón cuesta cinco euros. El libro cuesta tres euros con cincuenta. Mi hermana pregunta: «¿Cuánto cuesta el balón?» Yo respondo: «Cuesta cinco euros». Ella dice: «Me llevo esto. Aquí tienes». Yo doy el cambio. ¡Hoy hay rebajas: todo es más barato!
+    </div>
+    <div class="reading-q"><span class="qnum">1.</span><span>¿Dónde está la tienda de Leo? <span class="ru">(Где находится магазин Лео?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">2.</span><span>¿Quién es la cliente? <span class="ru">(Кто покупатель?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">3.</span><span>¿Cuánto cuesta el balón? <span class="ru">(Сколько стоит мяч?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">4.</span><span>¿Qué dice la hermana? <span class="ru">(Что говорит сестра?)</span> → <span class="blank"></span></span></div>
+    <div class="reading-q"><span class="qnum">5.</span><span>¿Qué hay hoy en la tienda? <span class="ru">(Что сегодня в магазине?)</span> → <span class="blank"></span></span></div>
+  </div>
+
+  <!-- 7. ПИСЬМО (PBL: ЗАЩИТА ПРОЕКТА) -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-terra">7</span>
+      <span class="ex-title">Защита проекта: сочинение «Mi Tiendita»</span>
+      <span class="ex-skill">✍️ Письмо · защита</span>
+    </div>
+    <div class="hint-box">💡 <strong>Рубрика защиты:</strong> расскажи о своём магазине минимум 3 предложения! <strong>План:</strong> 1) Mi tienda se llama... · 2) Soy el vendedor / la vendedora. · 3) En mi tienda hay... · 4) El/la... cuesta... euros. · 5) Hoy hay una oferta: ... · 6) En las rebajas todo es más barato. · 7) Mi cliente dice: «Me llevo esto. Aquí tienes». · 8) ¡Gracias, adiós!</div>
+    <div class="write-lines">
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <!-- 8. СВЕТОФОР -->
+  <div class="exercise">
+    <div class="ex-head">
+      <span class="ex-num c-green">8</span>
+      <span class="ex-title">Самопроверка «Светофор»</span>
+      <span class="ex-skill">🚦 Рефлексия</span>
+    </div>
+    <div class="ex-instruction">Раскрась кружок: 🟢 уверенно · 🟡 с подсказкой · 🔴 пока сложно.</div>
+    <table class="selfcheck-table">
+      <tr><th>Умею</th><th>🟢</th><th>🟡</th><th>🔴</th></tr>
+      <tr><td>Называть цены (el precio, cuesta... euros)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Спросить и ответить: ¿Cuánto cuesta? — Cuesta...</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Считать сдачу (el cambio)</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Понимать вывески REBAJAS, oferta, gratis</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Сыграть обе роли: vendedor и cliente</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+      <tr><td>Провести полную покупку от ¡Hola! до ¡Adiós!</td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td><td><span class="sc-circle"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer-note">Интерактивная школа МУДРО · Станция 4: Mates y Ciencias · Урок 36 · ¡Bienvenido a La Tiendita! 🏪</div>
+</div>
+
+<script>
+  function printSheet(){ window.print(); }
+</script>
+
+</body>
+</html>
