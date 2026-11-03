@@ -59,6 +59,8 @@
   .word-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
   .speak-btn{background:var(--heart);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;margin-top:8px;transition:.15s}
   .speak-btn:active{transform:scale(.93)}
+  .inp{background:#fff;border:2.5px solid var(--heart);border-radius:12px;padding:10px 14px;font-family:'Nunito';font-weight:700;font-size:.95rem;margin:4px 6px 4px 0}
+  [tabindex]:focus-visible{outline:3px solid var(--heart);outline-offset:2px}
 
   .scale-wrap{background:linear-gradient(135deg,#D6EAF8,#E8F3FB);border-radius:18px;padding:20px;margin:14px 0;text-align:center}
   .scale-row{display:flex;align-items:center;gap:12px;margin:10px 0;background:#fff;border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s}
@@ -410,8 +412,8 @@
   </section>
 
   <!-- QUIZLET: дети урок 37 -->
-  <a class="quizlet-link" href="#" onclick="return false;">
-    <span>📚 Карточки Quizlet · Станция 4 · Урок 4 (El clima y las estaciones)</span>
+  <a class="quizlet-link" href="https://quizlet.com/fi/1230951658/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-8-%D1%83%D1%80%D0%BE%D0%BA-4-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">
+    <span>📚 Карточки Quizlet · Станция 4 · Урок 1 (El clima y las estaciones)</span>
     <span>Открыть карточки →</span>
   </a>
 
@@ -429,6 +431,7 @@ function loadVoices(){var v=speechSynthesis.getVoices();esVoice=null;for(var i=0
 if(typeof speechSynthesis!=='undefined'){speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
 function speak(t){if(!t||typeof speechSynthesis==='undefined')return;var u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.85;u.pitch=1.05;if(esVoice)u.voice=esVoice;speechSynthesis.cancel();speechSynthesis.speak(u);}
 function shuffle(a){return a.map(function(v){return[Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(v){return v[1];});}
+function enableKeyboard(el,fn){el.setAttribute('tabindex','0');el.setAttribute('role','button');el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();fn();}});}
 
 /* ===== ДАННЫЕ ===== */
 var WARM=[
@@ -440,7 +443,7 @@ var WARM=[
   var box=document.getElementById('warm-box');
   WARM.forEach(function(w,i){
     var d=document.createElement('div');d.className='warm-item';
-    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
+    d.innerHTML='<div class="warm-q">'+(i+1)+'. '+w.q+' <button class="speak-btn" aria-label="Произнести по-испански" onclick="speak(\''+w.q.replace(/'/g,"\\'")+'\')">🔊</button></div>'+
       '<div class="warm-ru">'+w.ru+' — ответь ВСЛУХ!</div>'+
       '<button class="speak-btn" style="background:var(--green)" onclick="this.nextElementSibling.classList.add(\'show\');speak(\''+w.model.replace(/'/g,"\\'")+'\')">Показать ответ ✅</button>'+
       '<div class="warm-model">'+w.model+'</div>';
@@ -465,15 +468,15 @@ var DAYS=[
     b.addEventListener('click',function(){selectDay(i);});
     row.appendChild(b);
   });
-  selectDay(0);
+  selectDay(0,false);
 })();
-function selectDay(i){
+function selectDay(i,speakOn){
   var chips=document.querySelectorAll('#day-chips .chip');
   chips.forEach(function(c,j){c.classList.toggle('active',j===i);});
   var dd=DAYS[i];
   var card=document.getElementById('day-card');
   card.innerHTML='<div class="day-emo">'+dd.emo+'</div><div class="day-es">'+dd.d+': '+dd.es+'</div><div class="day-ru">'+dd.ru+'</div>';
-  speak(dd.es);
+  if(speakOn!==false)speak(dd.es);
 }
 
 /* ===== КАРТОЧКИ ЛЕКСИКИ ===== */
@@ -511,6 +514,7 @@ var PHRASES=[
       var d=document.createElement('div');d.className='word-card';
       d.innerHTML='<div class="emo">'+f.e+'</div><div class="es">'+f.es+'</div><div class="ru">'+f.ru+'</div>';
       d.addEventListener('click',function(){speak(f.es);});
+      enableKeyboard(d,function(){speak(f.es);});
       box.appendChild(d);
     });
   }
@@ -598,6 +602,7 @@ function renderSB(){
       if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
         document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
         if(ok)speak(SB[sbI].w.join(' '));}});
+    enableKeyboard(b,function(){b.click();});
     pool.appendChild(b);
   });
 }
@@ -647,6 +652,7 @@ var CITY=[
     var d=document.createElement('div');d.className='survey-person';
     d.innerHTML='<div class="survey-avatar">'+c.av+'</div><div class="survey-info"><div class="survey-name">'+c.name+'</div><div class="survey-likes">🌡️ '+c.t+' °C · Кликни, чтобы услышать прогноз 🔊</div></div>';
     d.addEventListener('click',function(){speak(c.es);});
+    enableKeyboard(d,function(){speak(c.es);});
     box.appendChild(d);
   });
   renderTempChart();
@@ -707,7 +713,7 @@ var PRES=[
   var box=document.getElementById('pres-box');
   PRES.forEach(function(p,i){
     var d=document.createElement('div');d.className='warm-item';
-    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
+    d.innerHTML='<div class="warm-q" style="font-size:1rem">'+(i+1)+'. '+p.q+' <button class="speak-btn" aria-label="Произнести образец по-испански" onclick="speak(\''+p.model.replace(/'/g,"\\'")+'\')">🔊 образец</button></div>'+
       '<div class="warm-ru">Послушай образец, а потом расскажи о СЕБЕ вслух!</div>'+
       '<button class="speak-btn" style="background:var(--pink)" onclick="this.nextElementSibling.classList.add(\'show\')">✅ Я рассказал вслух</button>'+
       '<div class="warm-model">💬 '+p.model+'</div>';
@@ -726,8 +732,8 @@ var mSel=null,mFound=0;
 function renderMatch(){
   mSel=null;mFound=0;document.getElementById('match-fb').textContent='';
   var L=document.getElementById('match-left'),R=document.getElementById('match-right');L.innerHTML='';R.innerHTML='';
-  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};L.appendChild(d);});
-  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};R.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[0];d.dataset.v=p[0];d.onclick=function(){mClick(d);};enableKeyboard(d,function(){mClick(d);});L.appendChild(d);});
+  shuffle(MATCH.slice()).forEach(function(p){var d=document.createElement('div');d.className='match-item';d.textContent=p[1];d.dataset.v=p[0];d.onclick=function(){mClick(d);};enableKeyboard(d,function(){mClick(d);});R.appendChild(d);});
 }
 function mClick(d){
   if(d.classList.contains('matched'))return;
@@ -766,6 +772,12 @@ document.querySelectorAll('.tl-cell').forEach(function(c){
   c.addEventListener('click',function(){var row=c.getAttribute('data-row');document.querySelectorAll('.tl-cell[data-row="'+row+'"]').forEach(function(x){x.classList.remove('active');});c.classList.add('active');});
 });
 document.getElementById('tlReset').addEventListener('click',function(){document.querySelectorAll('.tl-cell').forEach(function(x){x.classList.remove('active');});});
+
+/* ===== ДОСТУПНОСТЬ: клавиатура для таблицы грамматики ===== */
+document.querySelectorAll('.gram-table tr[onclick]').forEach(function(tr){
+  tr.setAttribute('tabindex','0');
+  tr.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tr.click();}});
+});
 
 /* ===== GRAMMAR HINT ===== */
 document.addEventListener('click',function(e){

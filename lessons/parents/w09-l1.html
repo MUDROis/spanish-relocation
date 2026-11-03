@@ -850,8 +850,8 @@
   <div class="quizlet-box">
     <h3>🃏 Карточки Quizlet · Слова урока 9.1</h3>
     <p>Повторите слова урока в приложении Quizlet: симптомы, где болит, состояние, действия мамы, утешение.</p>
-    <!-- QUIZLET: родители урок 9.1 (ссылку добавит админ) -->
-    <a href="#" onclick="return false;">Открыть карточки →</a>
+    <!-- QUIZLET: родители урок 9.1 -->
+    <a href="https://quizlet.com/fi/1230953577/%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F-9-%D1%83%D1%80%D0%BE%D0%BA-1-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">Открыть карточки →</a>
   </div>
 </section>
 
@@ -1323,12 +1323,22 @@ function buildScript(){
 
   var painPhrase = (pain === 'no le duele nada') ? 'No le duele nada. ' : 'También ' + pain + '. ';
 
+  // Согласование рода: для женских имён — hija / enferma + прилагательные ж.р.
+  var FEM = ['María','Lucía'];
+  var fem = FEM.indexOf(child) !== -1;
+  var hijoWord = fem ? 'hija' : 'hijo';
+  var enfermoWord = fem ? 'enferma' : 'enfermo';
+  var stateAdj = state
+    .replace('pálido y cansado', 'pálida y cansada')
+    .replace('decaído y sin apetito', 'decaída y sin apetito')
+    .replace('cansado, pero con apetito', 'cansada, pero con apetito');
+
   var text = 'Buenos días. Soy ' + name + '. ' +
-    'Mi hijo ' + child + ', de ' + age + ' años, está enfermo ' + days + '. ' +
+    'Mi ' + hijoWord + ' ' + child + ', de ' + age + ' años, está ' + enfermoWord + ' ' + days + '. ' +
     'Tiene ' + temp + ' de temperatura. ' +
     'Tiene ' + symptom + '. ' +
     painPhrase +
-    'Está ' + state + '. ' +
+    'Está ' + stateAdj + '. ' +
     '¿Qué me recomienda? ' + action;
 
   lastScriptPlain = text;
@@ -1571,6 +1581,26 @@ function renderTrainBuild(container){
 }
 
 renderTrain();
+
+// ===== ДОСТУПНОСТЬ: клавиатура для интерактивных элементов =====
+(function(){
+  var INTERACTIVE='.vocab-card,.dialog-box,.match-item,.bw,.bw-line-item,.quiz-opt,.q-opt';
+  function ensureTabs(){
+    document.querySelectorAll(INTERACTIVE).forEach(function(el){
+      if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex','0');
+    });
+  }
+  ensureTabs();
+  if(window.MutationObserver){
+    new MutationObserver(ensureTabs).observe(document.body,{childList:true,subtree:true});
+  }
+  document.addEventListener('keydown',function(e){
+    var t=e.target;
+    if(t && t.matches && t.matches(INTERACTIVE) && (e.key==='Enter'||e.key===' ')){
+      e.preventDefault(); t.click();
+    }
+  });
+})();
 </script>
 
 </body>
