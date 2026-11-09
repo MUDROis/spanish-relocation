@@ -171,6 +171,14 @@
   .diagram-row .sel{margin:0}
   .diagram-fb{font-weight:800;margin-top:8px;min-height:22px}
 
+  .circle-wrap{position:relative}
+  .circle-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .c-arrow{position:absolute;background:#fff;border:2px solid #c9ddec;color:var(--heart);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:800;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+  .c-a-top{top:-18px;left:50%;transform:translateX(-50%)}
+  .c-a-right{right:-18px;top:50%;transform:translateY(-50%)}
+  .c-a-bottom{bottom:-18px;left:50%;transform:translateX(-50%)}
+  .c-a-left{left:-18px;top:50%;transform:translateY(-50%)}
+
   .tf-row{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid #e8eef4;border-radius:14px;padding:12px 14px;margin:8px 0;flex-wrap:wrap}
   .tf-text{flex:1;font-weight:700;font-size:.95rem;min-width:180px}
   .tf-btn{border:2.5px solid #c9ddec;background:#fff;border-radius:10px;padding:8px 18px;font-weight:800;cursor:pointer;font-family:'Nunito';font-size:.9rem;transition:.15s}
@@ -359,7 +367,7 @@
       <h2 class="block-title">✂️ Colorear, cortar y pegar</h2>
       <span class="time-badge">⏱ 6 минут</span>
     </div>
-    <p class="block-sub">Нижние карточки уже лежат в порядке круга: слева направо — как вода путешествует. Нажимай их по порядку и переноси в пустые рамки: слева-вверх — evaporación, справа-вверх — condensación, справа-вниз — precipitación, слева-вниз — acumulación.</p>
+    <p class="block-sub">Карточки разложены по кругу: верхние — слева направо, нижние — справа налево. Нажимай их по порядку и переноси в пустые рамки: слева-вверх — evaporación, справа-вверх — condensación, справа-вниз — precipitación, слева-вниз — acumulación.</p>
     <div class="diagram-wrap" id="paste-board"></div>
     <div class="diagram-fb" id="paste-fb"></div>
     <button class="speak-btn" onclick="renderPaste()">🔄 Начать заново</button>
@@ -729,12 +737,18 @@ var WHEEL=[
  {e:'🌧️',es:'precipitación',ru:'осадки',say:'Llueve: el agua cae a la tierra.'},
  {e:'🏞️',es:'acumulación',ru:'накопление',say:'El agua vuelve al río y al mar.'}
 ];
+/* Порядок по кругу: верх слева направо, низ справа налево */
+var CIRCLE_ORDER=[0,1,3,2];
 (function(){
   var box=document.getElementById('wheel-box');if(!box)return;
-  box.innerHTML='<p style="font-weight:800;margin-bottom:10px">🎡 Нажми на этап — он повернётся и заговорит!</p>';
+  box.innerHTML='<p style="font-weight:800;margin-bottom:10px">🎡 Нажми на этап — он повернётся и заговорит! Стрелки показывают, куда вода идёт дальше.</p>';
+  var wrap=document.createElement('div');
+  wrap.className='circle-wrap';
+  wrap.style.cssText='max-width:420px;margin:0 auto';
   var wheel=document.createElement('div');
-  wheel.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;margin:0 auto';
-  WHEEL.forEach(function(w){
+  wheel.className='circle-grid';
+  CIRCLE_ORDER.forEach(function(i){
+    var w=WHEEL[i];
     var d=document.createElement('button');
     d.style.cssText='border:3px solid #c9ddec;background:#fff;border-radius:16px;padding:16px 8px;cursor:pointer;font-family:Nunito;font-weight:800;transition:.25s';
     d.innerHTML='<span style="font-size:2.2rem;display:block">'+w.e+'</span><span style="color:#2274A5;font-family:Baloo 2,cursive;font-size:1.02rem">'+w.es+'</span><br><span style="font-size:.78rem;color:#6b675f">'+w.ru+'</span>';
@@ -746,7 +760,14 @@ var WHEEL=[
     });
     wheel.appendChild(d);
   });
-  box.appendChild(wheel);
+  wrap.appendChild(wheel);
+  [['→','top'],['↓','right'],['←','bottom'],['↑','left']].forEach(function(a){
+    var s=document.createElement('span');
+    s.className='c-arrow c-a-'+a[1];
+    s.textContent=a[0];
+    wrap.appendChild(s);
+  });
+  box.appendChild(wrap);
 })();
 
 /* ===== COLOREAR, CORTAR Y PEGAR ===== */
@@ -761,17 +782,23 @@ function renderPaste(){
   var box=document.getElementById('paste-board');if(!box)return;
   pasteNext=0;
   document.getElementById('paste-fb').textContent='Нажимай этапы по порядку: evaporación → condensación → precipitación → acumulación.';
-  box.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px" id="paste-zones"></div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center" id="paste-chips"></div>';
+  box.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px" id="paste-zones"></div><div style="max-width:420px;margin:0 auto" id="paste-chips-wrap"></div>';
   var zones=box.querySelector('#paste-zones');
-  PASTE.forEach(function(p){
+  CIRCLE_ORDER.forEach(function(i){
+    var p=PASTE[i];
     var z=document.createElement('div');
     z.style.cssText='border:3px dashed #c9ddec;border-radius:14px;min-height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#F4F9FD;font-weight:800;color:#9aa7b3;padding:8px';
     z.innerHTML='<span style="font-size:1.4rem">'+p.zone+'</span><span style="font-size:.8rem">пустая рамка</span>';
     z.dataset.want=p.id;
     zones.appendChild(z);
   });
-  var chips=box.querySelector('#paste-chips');
-  PASTE.forEach(function(p){
+  var chipsWrap=box.querySelector('#paste-chips-wrap');
+  chipsWrap.className+=' circle-wrap';
+  var chips=document.createElement('div');
+  chips.id='paste-chips';
+  chips.className='circle-grid';
+  CIRCLE_ORDER.forEach(function(i){
+    var p=PASTE[i];
     var c=document.createElement('button');
     c.className='sort-item';
     c.style.cssText='background:#fff;border:2.5px solid #c9ddec;border-radius:14px;padding:10px 14px;font-weight:800;cursor:pointer;font-family:Nunito';
@@ -781,7 +808,7 @@ function renderPaste(){
       if(c.classList.contains('done'))return;
       var fb=document.getElementById('paste-fb');
       if(p.id===PASTE[pasteNext].id){
-        var target=zones.querySelectorAll('div')[pasteNext];
+        var target=zones.querySelector('[data-want="'+p.id+'"]');
         target.innerHTML='<span style="font-size:1.6rem">'+p.e+'</span><span style="font-size:.85rem;color:#2274A5">'+p.es+'</span>';
         target.style.borderStyle='solid';target.style.borderColor='#2E7D32';target.style.background='#E8F5E9';target.style.color='#2E7D32';
         c.classList.add('done');c.style.opacity='.35';
@@ -796,6 +823,13 @@ function renderPaste(){
       }
     });
     chips.appendChild(c);
+  });
+  chipsWrap.appendChild(chips);
+  [['→','top'],['↓','right'],['←','bottom'],['↑','left']].forEach(function(a){
+    var s=document.createElement('span');
+    s.className='c-arrow c-a-'+a[1];
+    s.textContent=a[0];
+    chipsWrap.appendChild(s);
   });
 }
 renderPaste();
