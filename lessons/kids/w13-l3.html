@@ -691,11 +691,11 @@ function diAdd(){
 
 /* ===== БЛОК 1: ПОДПИШИ СХЕМУ (word bank) ===== */
 var DIAGRAM=[
- {e:'☀️',es:'el sol',ru:'солнце',ok:'_____ calienta el agua.',ans:'el sol'},
- {e:'💨',es:'el vapor',ru:'пар',ok:'El _____ sube al cielo.',ans:'el vapor'},
- {e:'☁️',es:'la nube',ru:'облако',ok:'El vapor forma la _____.',ans:'la nube'},
- {e:'🌧️',es:'la lluvia',ru:'дождь',ok:'_____: el agua cae a la tierra.',ans:'la lluvia'},
- {e:'🏞️',es:'el mar',ru:'море',ok:'El agua vuelve al río y al _____.',ans:'el mar'}
+ {e:'☀️',es:'el sol',ru:'солнце',ok:'_____ calienta el agua.',ans:'el sol',say:'El sol calienta el agua.'},
+ {e:'💨',es:'el vapor',ru:'пар',ok:'El _____ sube al cielo.',ans:'el vapor',say:'El vapor sube al cielo.'},
+ {e:'☁️',es:'la nube',ru:'облако',ok:'El vapor forma la _____.',ans:'la nube',say:'El vapor forma la nube.'},
+ {e:'🌧️',es:'la lluvia',ru:'дождь',ok:'_____: el agua cae a la tierra.',ans:'la lluvia',say:'La lluvia: el agua cae a la tierra.'},
+ {e:'🏞️',es:'el mar',ru:'море',ok:'El agua vuelve al río y al _____.',ans:'el mar',say:'El agua vuelve al río y al mar.'}
 ];
 function renderDiagram(){
   var bank=document.getElementById('bank-cycle');
@@ -714,7 +714,7 @@ function renderDiagram(){
     sel.addEventListener('change',function(){
       if(sel.value===d.ans){
         sel.style.borderColor='#2E7D32';sel.style.background='#C8E6C9';
-        speak(d.ok);
+        speak(d.say);
       }else{
         sel.style.borderColor='#D62828';sel.style.background='#FFCDD2';
         setTimeout(function(){sel.style.borderColor='';sel.style.background='';},700);
