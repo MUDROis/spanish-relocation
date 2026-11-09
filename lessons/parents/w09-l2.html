@@ -430,7 +430,7 @@
       ⚠️ <b>Частые ошибки:</b><br>
       • <i>«Necesito algo de la tos.»</i> ❌ → <i>«Necesito algo <b>para</b> la tos.»</i> ✅ (para = «от / для»)<br>
       • <i>«Me pone dar dos cajas.»</i> ❌ → <i>«¿Me pone dos cajas?»</i> ✅ (после me pone — просто существительное)<br>
-      • <i>«¿Cuánto es?»</i> — про цену товара; <i>«¿Cuánto es?»</i> — на кассе. Не перепутайте: на кассе чаще всего говорят именно <b>¿Cuánto es?</b><br>
+      • <i>«¿Cuánto cuesta?»</i> — про цену товара; <i>«¿Cuánto es?»</i> — на кассе. Не перепутайте: на кассе чаще всего говорят именно <b>¿Cuánto es?</b><br>
       • <i>«Cada ocho horas de tiempo.»</i> ❌ → <i>«Cada ocho horas.»</i> ✅ (без лишних слов)
     </div>
 
@@ -448,7 +448,7 @@
 
   <div class="card">
     <h4 style="margin-bottom:10px">🧩 Упражнение 1: Вставь слово или форму глагола</h4>
-    <p class="hint">Используйте: <b>tiene, para, cada, de, cuesta, está</b>.</p>
+    <p class="hint">Кликайте на пропуск, затем на слово из банка (слова перемешаны).</p>
     <div id="fill-exercise"></div>
     <button class="btn btn-ghost" onclick="checkFill()" style="margin-top:12px">✓ Проверить</button>
     <button class="btn btn-ghost" onclick="renderFill()" style="margin-top:12px">↺ Сбросить</button>
@@ -545,7 +545,7 @@
       ☐ Ответить «¿para quién es?»: возраст ребёнка<br>
       ☐ Показать SIP / сказать про receta electrónica<br>
       ☐ Понять инструкцию: dosis, cada X horas, con comida<br>
-      ☐ Спросить цену: <i>¿Cuánto es?</i><br>
+      ☐ Спросить цену товара: <i>¿Cuánto cuesta?</i><br>
       ☐ На будущее: <i>¿Dónde está la farmacia de guardia?</i>
     </div>
   </div>
@@ -1058,6 +1058,30 @@ var fillQ = [
 function renderFill(){
   var el = document.getElementById('fill-exercise');
   el.innerHTML = '';
+  // Банк слов: перемешаны перед заданием
+  var bank = document.createElement('div');
+  bank.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px';
+  var need = [];
+  fillQ.forEach(function(item){ need.push(item.ans); });
+  shuffle(need).forEach(function(w){
+    var chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'btn btn-ghost';
+    chip.style.padding = '6px 16px';
+    chip.textContent = w;
+    chip.addEventListener('click', function(){
+      var inp = null;
+      if(lastFillInp && !lastFillInp.value.trim()) inp = lastFillInp;
+      if(!inp) inp = Array.prototype.find.call(el.querySelectorAll('.fill-input'), function(x){ return !x.value.trim(); });
+      if(!inp) return;
+      inp.value = w;
+      chip.disabled = true;
+      chip.style.opacity = '.45';
+    });
+    bank.appendChild(chip);
+  });
+  el.appendChild(bank);
+  var lastFillInp = null;
   fillQ.forEach(function(item, i){
     var d = document.createElement('div');
     d.style.marginBottom = '10px';
@@ -1065,6 +1089,9 @@ function renderFill(){
     d.innerHTML =
       '<span style="font-weight:700;color:var(--p4);margin-right:6px">' + (i+1) + '.</span>' +
       item.text.replace('___', '<input type="text" class="fill-input" data-ans="' + item.ans + '" autocomplete="off">');
+    var inp = d.querySelector('.fill-input');
+    inp.addEventListener('focus', function(){ lastFillInp = inp; });
+    inp.addEventListener('click', function(){ if(inp.value.trim()) inp.value = ''; });
     el.appendChild(d);
   });
 }
