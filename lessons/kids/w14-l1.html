@@ -178,7 +178,7 @@
 </nav>
 
 <header class="hero">
-  <span class="lesson-tag">🧪 СТАНЦИЯ 4 · УРОК 1 · НЕДЕЛЯ 14</span>
+  <span class="lesson-tag">🧪 СТАНЦИЯ 4 · УРОК 7 ИЗ 9</span>
   <div class="hero-emojis">🗺️ 🌊 ⛰️ 🧭 ✈️</div>
   <h1>El <span>mapa</span> de España</h1>
   <p class="sub">Сегодня ты — <strong>штурман</strong>! 🧭 Мы пролетим всю Испанию: моря, горы, острова и города. А ещё научимся говорить, <strong>КУДА</strong> ты едешь (<em>voy a...</em>) и <strong>ОТКУДА</strong> приезжаешь (<em>vengo de...</em>). ¡Vamos!</p>
@@ -263,6 +263,7 @@
       <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
       <tr><td><b>VOY A + место</b></td><td>Voy a Valencia.</td><td>Я еду в Валенсию.</td><td><button class="speak-btn" onclick="speak('Voy a Valencia.')">🔊</button></td></tr>
       <tr><td><b>VAMOS A + место</b></td><td>¡Vamos a la playa!</td><td>Мы едем на пляж!</td><td><button class="speak-btn" onclick="speak('¡Vamos a la playa!')">🔊</button></td></tr>
+      <tr><td><b>СПРЯЖЕНИЕ ir: voy · vas · va · vamos</b></td><td>¿Adónde vas? Yo voy a Valencia.</td><td>Куда ты едешь? Я еду в Валенсию.</td><td><button class="speak-btn" onclick="speak('¿Adónde vas? Yo voy a Valencia.')">🔊</button></td></tr>
       <tr><td><b>VENGO DE + место</b></td><td>Vengo de Barcelona.</td><td>Я из Барселоны / приезжаю оттуда.</td><td><button class="speak-btn" onclick="speak('Vengo de Barcelona.')">🔊</button></td></tr>
       <tr><td><b>VOY A + инфинитив = план</b></td><td>Voy a viajar a Sevilla.</td><td>Я собираюсь поехать в Севилью.</td><td><button class="speak-btn" onclick="speak('Voy a viajar a Sevilla.')">🔊</button></td></tr>
       <tr><td><b>ESTAR EN + место</b></td><td>Sevilla está en el sur.</td><td>Севилья находится на юге.</td><td><button class="speak-btn" onclick="speak('Sevilla está en el sur.')">🔊</button></td></tr>
@@ -270,7 +271,7 @@
     </table>
     <div class="script">⚡ <strong>Ловушка (12 лет):</strong> VOY <span class="grammar-hint" data-hint="A — когда есть ДВИЖЕНИЕ к месту: voy a Madrid (я еду в Мадрид). EN — когда ты уже ТАМ: estoy en Madrid (я нахожусь в Мадриде). Спроси себя: я еду или я уже там?">A</span> Madrid — я ЕДУ в Мадрид, но ESTOY <span class="grammar-hint" data-hint="EN — для места, где ты уже находишься: estoy en casa, Valencia está en el este. A — только для движения: voy a casa.">EN</span> Madrid — я НАХОЖУСЬ в Мадриде. Движение → a. Место → en.<br>8 лет: запомни пару-песенку: <em>«¡Vamos a la playa! ¡Estamos en la playa!»</em> — едем НА, находимся В.</div>
     <div class="game-zone">
-      <p style="font-weight:800">🕵️ Игра «Собери глагол»: 8 раундов</p>
+      <p style="font-weight:800">🕵️ Игра «Найди потерянное слово»: 8 раундов</p>
       <div class="game-q" id="grm-q"></div>
       <div class="opts" id="grm-opts"></div>
       <div class="game-fb" id="grm-fb"></div>
@@ -413,11 +414,10 @@
     <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
   </section>
 
-  <a class="quizlet-link" href="#" onclick="return false;">
-    <span>📚 Карточки Quizlet · Станция 4 · Урок 1 (El mapa de España)</span>
+  <a class="quizlet-link" href="https://quizlet.com/fi/1233901816/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-4-%D1%83%D1%80%D0%BE%D0%BA-7-flash-cards/?i=2gqp1x&x=1jqt" target="_blank" rel="noopener">
+    <span>📚 Карточки Quizlet · Станция 4 · Урок 7 (El mapa de España)</span>
     <span>Открыть карточки →</span>
   </a>
-  <!-- QUIZLET: дети урок 40 (ссылку добавит админ) -->
 
   <div class="lesson-nav">
     <a href="./w13-l3.html" class="nav-prev"><div class="nav-small">← Урок 6 станции 4</div><div class="nav-title">Урок 39: STEAM El Ciclo del Agua 💧</div></a>
@@ -586,18 +586,36 @@ var SB=[
 ];
 var sbI=0,sbP=[];
 function renderSB(){
-  sbP=[];var t=document.getElementById('sb-target');t.textContent='…';document.getElementById('sb-fb').textContent='';
+  sbP=[];var t=document.getElementById('sb-target');t.innerHTML='…';document.getElementById('sb-fb').textContent='';
   var pool=document.getElementById('sb-pool');pool.innerHTML='';
   shuffle(SB[sbI].w.slice()).forEach(function(w){
     var b=document.createElement('div');b.className='sb-word';b.textContent=w;
     b.addEventListener('click',function(){
       if(b.classList.contains('placed'))return;
-      b.classList.add('placed');sbP.push(w);t.textContent=sbP.join(' ');
-      if(sbP.length===SB[sbI].w.length){var ok=sbP.every(function(x,i){return x===SB[sbI].w[i];});
-        document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+SB[sbI].w.join(' ');
-        if(ok)speak(SB[sbI].w.join(' '));}});
+      b.classList.add('placed');
+      var entry={word:w, btn:b};
+      sbP.push(entry);
+      var chip=document.createElement('div');chip.className='sb-word';chip.title='Убрать слово';chip.textContent=w;
+      chip.onclick=function(){
+        var idx=sbP.indexOf(entry);if(idx>-1)sbP.splice(idx,1);
+        b.classList.remove('placed');
+        chip.remove();
+        document.getElementById('sb-fb').textContent='';
+      };
+      t.appendChild(chip);
+      checkSB();
+    });
     pool.appendChild(b);
   });
+}
+function checkSB(){
+  var target=SB[sbI].w;
+  var cur=sbP.map(function(e){return e.word;});
+  if(cur.length===target.length){
+    var ok=cur.every(function(x,i){return x===target[i];});
+    document.getElementById('sb-fb').textContent=ok?'✅ ¡Perfecto! '+SB[sbI].t:'❌ Правильно: '+target.join(' ');
+    if(ok)speak(target.join(' '));
+  }
 }
 function nextSB(){sbI=(sbI+1)%SB.length;renderSB();}
 renderSB();
@@ -606,7 +624,7 @@ renderSB();
 var DIAL=[
  {q:'— ¿Adónde vas?<br>— ___',ok:'Voy a Valencia.',w:['Estoy Valencia.','Vengo Valencia.']},
  {q:'— ¿De dónde vienes?<br>— ___',ok:'Vengo de Madrid.',w:['Voy de Madrid.','Estoy de Madrid.']},
- {q:'— ¡Vamos a la playa!<br>— ___',ok:'¡Sí, vamos!',w:['Sí, voy cama.','No vamos.']},
+ {q:'— ¡Vamos a la playa!<br>— ___',ok:'¡Sí, vamos!',w:['Sí, voy a la escuela.','No vamos.']},
  {q:'— ¿Dónde está Sevilla?<br>— ___',ok:'Está en el sur.',w:['Es en el sur.','Vas en el sur.']},
  {q:'— ¿Cómo viajas a España?<br>— ___',ok:'En avión.',w:['Con avión.','De avión.']},
  {q:'— ¿Dónde está la capital?<br>— ___',ok:'En el centro.',w:['En el mar.','En la frontera.']}
