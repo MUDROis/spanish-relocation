@@ -182,6 +182,13 @@
   .menu-card .es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.08rem}
   .menu-card .ru{color:var(--ink-soft);font-size:.78rem;font-weight:700}
   .menu-card .d{font-size:.76rem;color:var(--ink-soft);margin-top:6px;font-weight:700}
+  .menu-card .dr{display:none;margin-top:8px;padding-top:8px;border-top:1.5px dashed #eccdbf;font-size:.8rem;color:var(--p4);font-weight:700;text-align:left}
+  .menu-card .dr.show{display:block}
+
+  .trans-btn{background:var(--p4);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;transition:.15s;font-size:.9rem}
+  .trans-btn:hover{filter:brightness(1.1)}
+  .trans-box{display:none;background:#EDF3FA;border-left:4px solid var(--p4);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:13.5px;line-height:1.8}
+  .trans-box.show{display:block}
 </style>
 </head>
 <body>
@@ -235,8 +242,9 @@
       <h2 class="block-title">🍽️ Меню дня: 4 знаменитых блюда</h2>
       <span class="time-badge">⏱ 8 минут</span>
     </div>
-    <p class="block-sub">Это меню настоящего испанского кафе. Кликай на каждое блюдо — услышишь название и описание. Повторяй ВСЛУХ! Попробуй все 4 «виртуальных блюда»!</p>
+    <p class="block-sub">Это меню настоящего испанского кафе. Кликай на каждое блюдо — услышишь название и описание по-испански. Повторяй ВСЛУХ! Попробуй все 4 «виртуальных блюда»! Не понял описание? Нажми 📖 — перевод откроется.</p>
     <div class="menu-board" id="menu-board"></div>
+    <div style="text-align:center;margin:6px 0"><button class="trans-btn" id="menu-trans-btn" onclick="toggleMenuTrans()">📖 Показать перевод описаний</button></div>
     <div class="stars-line" style="text-align:center">🍽️ Блюд попробовано: <span id="menu-count">0</span> / 4 <span id="menu-fb" style="color:var(--green)"></span></div>
     <div class="script">⚡ <strong>Секрет:</strong> tortilla de patatas — это НЕ лепёшка! Это омлет с картошкой 🥔. А gazpacho — холодный томатный суп, идеальный в жару. <b>Bocadillo</b> — король школьного ланчбокса: багет с начинкой!</div>
     <div class="script">🍴 <strong>Дифференциация:</strong> <b>8 лет</b>: прокликай меню и назови вслух <b>6 блюд</b> из блока «Слова урока» ниже. <b>12 лет</b>: к каждому блюду добавь комментарий о вкусе: <em>¡Qué rico! / Me gusta / No me gusta</em>.</div>
@@ -306,11 +314,15 @@
       <h2 class="block-title">📊 CLIL: Что едят испанские дети</h2>
       <span class="time-badge">⏱ 8 минут</span>
     </div>
-    <p class="block-sub">Познакомься с Мартой из Валенсии. Она расскажет о своём дне еды! Слушай 🔊 и читай.</p>
-    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakMarta()">🔊 Послушать текст</button>
+    <p class="block-sub">Познакомься с Мартой из Валенсии. Она расскажет о своём дне еды! Слушай 🔊 и читай. Если что-то непонятно — открой перевод по кнопке 📖.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakMarta()">🔊 Послушать текст</button>
+      <button class="trans-btn" style="font-size:1.05rem;padding:10px 22px" id="marta-trans-btn" onclick="toggleMartaTrans()">📖 Перевод текста</button>
+    </div>
     <div class="read-box">
       ¡Hola! Me llamo Marta y tengo 9 años. Vivo en Valencia. Para el <b>almuerzo</b>, en el colegio, como un <b>bocadillo</b>: pan con jamón o con queso. ¡Es mi momento favorito! A las dos, en casa, como con mi familia: a veces <b>paella</b>, a veces <b>macarrones</b> o pescado con <b>ensalada</b>. A las cinco tengo la <b>merienda</b>: una tostada con chocolate o yogur con fruta. En verano me encanta el <b>gazpacho</b>: es una sopa fría de tomates. ¡Y los domingos probamos la <b>tortilla</b> de mi abuela! ¡Qué rico!
     </div>
+    <div class="trans-box" id="marta-trans">📖 <b>Привет! Меня зовут Марта, мне 9 лет.</b> Я живу в Валенсии. На <b>второй завтрак</b> (almuerzo) в школе я ем <b>бокадильо</b>: хлеб с хамоном или с сыром. Это мой любимый момент! В два часа дома я ем с семьёй: иногда <b>паэлью</b>, иногда <b>макароны</b> или рыбу с <b>салатом</b>. В пять часов у меня <b>полдник</b> (merienda): тост с шоколадом или йогурт с фруктами. Летом я обожаю <b>гаспачо</b> — это холодный томатный суп. А по воскресеньям мы пробуем <b>тортилью</b> моей бабушки! Как вкусно!</div>
     <div id="marta-quiz"></div>
     <div class="script">🧮 <strong>CLIL-математика (12 лет):</strong> Посчитай приёмы пищи Марты: almuerzo (11:00), comida (14:00), merienda (17:00) и завтрак. Сколько раз в день ест испанский ребёнок? <b>4 раза</b>! А ты?<br>🧒 <strong>8 лет:</strong> назови вслух <b>6 блюд</b>, которые Марта ест за день.<br>🧑 <strong>12 лет:</strong> сравни свой день с днём Марты. Что совпадает? Что бы ты сказал: <em>«No me gusta el gazpacho»</em> или <em>«¡Me encanta!»</em>?</div>
     <div class="script">⚡ <strong>Интересный факт:</strong> bocadillo — самый частый «перекус» в испанских школах. Его дают с собой в ланчбоксе, а в школьной столовой на almuerzo часто бывают fruta или bocadillo. Merienda — святое время: примерно в 17:00 вся Испания пьёт шоколад с churros!</div>
@@ -443,16 +455,16 @@ var WARM=[
 
 /* ===== БЛОК 1: МЕНЮ ДНЯ ===== */
 var MENU=[
- {emo:'🥔',es:'La tortilla de patatas',ru:'тортилья с картошкой',d:'Patatas, huevos y aceite. ¡El plato más famoso!'},
- {emo:'🍅',es:'El gazpacho',ru:'гаспачо',d:'Sopa fría de tomates. ¡Perfecta para el verano!'},
- {emo:'🥪',es:'El bocadillo',ru:'бокадильо (бутерброд)',d:'Pan con jamón, queso o chocolate. ¡El rey del cole!'},
- {emo:'🥘',es:'La paella',ru:'паэлья',d:'Arroz con marisco o pollo. De Valencia, ¡claro!'}
+ {emo:'🥔',es:'La tortilla de patatas',ru:'тортилья с картошкой',d:'Patatas, huevos y aceite. ¡El plato más famoso!',dr:'Картошка, яйца и оливковое масло. Самое знаменитое блюдо!'},
+ {emo:'🍅',es:'El gazpacho',ru:'гаспачо',d:'Sopa fría de tomates. ¡Perfecta para el verano!',dr:'Холодный томатный суп. Идеален в жаркую погоду!'},
+ {emo:'🥪',es:'El bocadillo',ru:'бокадильо (бутерброд)',d:'Pan con jamón, queso o chocolate. ¡El rey del cole!',dr:'Хлеб с хамоном, сыром или шоколадом. Король школьного ланчбокса!'},
+ {emo:'🥘',es:'La paella',ru:'паэлья',d:'Arroz con marisco o pollo. De Valencia, ¡claro!',dr:'Рис с морепродуктами или курицей. Из Валенсии, конечно!'}
 ];
 (function(){
   var box=document.getElementById('menu-board');var n=0;
   MENU.forEach(function(m){
     var d=document.createElement('div');d.className='menu-card';
-    d.innerHTML='<span class="emo">'+m.emo+'</span><div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div><div class="d">'+m.d+'</div>';
+    d.innerHTML='<span class="emo">'+m.emo+'</span><div class="es">'+m.es+'</div><div class="ru">'+m.ru+'</div><div class="d">'+m.d+'</div><div class="dr">📖 '+m.dr+'</div>';
     d.addEventListener('click',function(){
       speak(m.es+'. '+m.d);
       if(!d.classList.contains('tried')){
@@ -464,6 +476,13 @@ var MENU=[
     box.appendChild(d);
   });
 })();
+function toggleMenuTrans(){
+  var btn=document.getElementById('menu-trans-btn');
+  var show=btn.getAttribute('data-show')!=='1';
+  document.querySelectorAll('#menu-board .dr').forEach(function(el){el.classList.toggle('show',show);});
+  btn.setAttribute('data-show',show?'1':'0');
+  btn.textContent=show?'🙈 Скрыть перевод':'📖 Показать перевод описаний';
+}
 
 /* ===== СЛОВА УРОКА ===== */
 var PLATOS=[
@@ -530,7 +549,7 @@ function qpNext(){
     var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.minWidth='110px';
     b.addEventListener('click',function(){
       box.querySelectorAll('.opt').forEach(function(x){x.disabled=true;});
-      if(o===r.ok){b.classList.add('correct');qpS++;document.getElementById('qp-stars').textContent=qpS;document.getElementById('qp-fb').textContent='✅ ¡Correcto!';speak(r.q.replace('___',r.ok));}
+      if(o===r.ok){b.classList.add('correct');qpS++;document.getElementById('qp-stars').textContent=qpS;document.getElementById('qp-fb').textContent='✅ ¡Correcto!';speak(r.ok+r.q.split('___')[1]);}
       else{b.classList.add('wrong');box.querySelectorAll('.opt').forEach(function(x){if(x.textContent===r.ok)x.classList.add('correct');});document.getElementById('qp-fb').textContent='❌ Правильно: '+r.ok;}
       qpI++;setTimeout(qpNext,1400);
     });
@@ -625,6 +644,11 @@ function dialNext(){
 
 /* ===== БЛОК 4: CLIL — ЧТЕНИЕ О МАРТЕ ===== */
 function speakMarta(){speak('¡Hola! Me llamo Marta y tengo 9 años. Vivo en Valencia. Para el almuerzo, en el colegio, como un bocadillo: pan con jamón o con queso. ¡Es mi momento favorito! A las dos, en casa, como con mi familia: a veces paella, a veces macarrones o pescado con ensalada. A las cinco tengo la merienda: una tostada con chocolate o yogur con fruta. En verano me encanta el gazpacho: es una sopa fría de tomates. ¡Y los domingos probamos la tortilla de mi abuela! ¡Qué rico!');}
+function toggleMartaTrans(){
+  var box=document.getElementById('marta-trans'),btn=document.getElementById('marta-trans-btn');
+  box.classList.toggle('show');
+  btn.textContent=box.classList.contains('show')?'🙈 Скрыть перевод':'📖 Перевод текста';
+}
 var MARTA=[
  {q:'¿Qué come Marta para el almuerzo en el colegio?',ru:'Что Марта ест на второй завтрак в школе? [8 лет]',ok:'Un bocadillo.',w:['Una paella.','Un yogur.']},
  {q:'¿A qué hora come en casa?',ru:'В какое время она обедает дома? [8 лет]',ok:'A las dos.',w:['A las ocho.','A las cinco.']},
