@@ -184,12 +184,17 @@
   .sb-word.shake{animation:shake .45s}
 
   /* === ПИРАМИДА ПИТАНИЯ (уникальные стили урока 44) === */
-  .pyr{display:flex;flex-direction:column-reverse;gap:8px;margin:14px 0}
-  .pyr-level{border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s;border:3px solid transparent;font-family:'Nunito'}
+  .pyr{display:flex;flex-direction:column;align-items:center;gap:8px;margin:14px 0}
+  .pyr-level{border-radius:14px;padding:14px 16px;cursor:pointer;transition:.15s;border:3px solid transparent;font-family:'Nunito';width:100%;text-align:center}
   .pyr-level:hover{transform:scale(1.02)}
-  .pyr-1{background:#E8F5E9;clip-path:polygon(35% 0,65% 0,100% 100%,0 100%);text-align:center}
-  .pyr-2{background:#FFF3D6;clip-path:polygon(18% 0,82% 0,100% 100%,0 100%);text-align:center}
-  .pyr-3{background:#FBE3D8}
+  .pyr-1{background:#E8F5E9;clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);max-width:380px}
+  .pyr-2{background:#FFF3D6;clip-path:polygon(20% 0,80% 0,100% 100%,0 100%);max-width:560px}
+  .pyr-3{background:#FBE3D8;max-width:720px}
+
+  .trans-btn{background:var(--p4);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-family:'Nunito';font-weight:800;cursor:pointer;transition:.15s;font-size:.9rem}
+  .trans-btn:hover{filter:brightness(1.1)}
+  .trans-box{display:none;background:#EDF3FA;border-left:4px solid var(--p4);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:13.5px;line-height:1.8}
+  .trans-box.show{display:block}
   .pyr-level .es{font-family:'Baloo 2',cursive;color:var(--heart);font-size:1.1rem}
   .pyr-level .ru{font-size:.8rem;color:var(--ink-soft);font-weight:700}
 </style>
@@ -261,12 +266,14 @@
     </div>
     <table class="gram-table">
       <tr><th>Формула</th><th>Пример</th><th>Перевод</th><th>🔊</th></tr>
-      <tr onclick="speak('Desayuno a las ocho.')"><td><b>EL DESAYUNO → DESAYUNAR</b></td><td>Desayuno a las ocho.</td><td>Я завтракаю в восемь.</td><td>🔊</td></tr>
-      <tr onclick="speak('Almuerzo en el colegio a las once.')"><td><b>EL ALMUERZO → ALMUERZO</b></td><td>Almuerzo en el colegio a las once.</td><td>Я ем второй завтрак в школе в одиннадцать.</td><td>🔊</td></tr>
-      <tr onclick="speak('Como a las dos.')"><td><b>LA COMIDA → COMER</b></td><td>Como a las dos.</td><td>Я обедаю в два.</td><td>🔊</td></tr>
-      <tr onclick="speak('Meriendo a las cinco.')"><td><b>LA MERIENDA → MERIENDO</b></td><td>Meriendo a las cinco.</td><td>Я полдничаю в пять.</td><td>🔊</td></tr>
-      <tr onclick="speak('Ceno a las nueve.')"><td><b>LA CENA → CENAR</b></td><td>Ceno a las nueve.</td><td>Я ужинаю в девять.</td><td>🔊</td></tr>
-      <tr onclick="speak('¡Tengo mucha hambre!')"><td><b>TENER HAMBRE</b></td><td>¡Tengo mucha hambre!</td><td>Я очень голоден!</td><td>🔊</td></tr>
+      <tr onclick="speak('Desayuno a las ocho.')"><td><b>EL DESAYUNO → (yo) DESAYUNO</b></td><td>Desayuno a las ocho.</td><td>Я завтракаю в восемь.</td><td>🔊</td></tr>
+      <tr onclick="speak('Almuerzo en el colegio a las once.')"><td><b>EL ALMUERZO → (yo) ALMUERZO</b></td><td>Almuerzo en el colegio a las once.</td><td>Я ем второй завтрак в школе в одиннадцать.</td><td>🔊</td></tr>
+      <tr onclick="speak('Como a las dos.')"><td><b>LA COMIDA → (yo) COMO</b></td><td>Como a las dos.</td><td>Я обедаю в два.</td><td>🔊</td></tr>
+      <tr onclick="speak('Meriendo a las cinco.')"><td><b>LA MERIENDA → (yo) MERIENDO</b></td><td>Meriendo a las cinco.</td><td>Я полдничаю в пять.</td><td>🔊</td></tr>
+      <tr onclick="speak('Ceno a las nueve.')"><td><b>LA CENA → (yo) CENO</b></td><td>Ceno a las nueve.</td><td>Я ужинаю в девять.</td><td>🔊</td></tr>
+      <tr onclick="speak('Tomo leche con cereales.')"><td><b>(yo) TOMO</b></td><td>Tomo leche con cereales.</td><td>Я запиваю молоко с хлопьями.</td><td>🔊</td></tr>
+      <tr onclick="speak('Bebo agua.')"><td><b>(yo) BEBO</b></td><td>Bebo agua.</td><td>Я пью воду.</td><td>🔊</td></tr>
+      <tr onclick="speak('¡Tengo mucha hambre!')"><td><b>TENER HAMBRE → (yo) TENGO HAMBRE</b></td><td>¡Tengo mucha hambre!</td><td>Я очень голоден!</td><td>🔊</td></tr>
     </table>
     <div class="script">⚡ <strong>Ловушка (12 лет):</strong> merendar меняет <span class="grammar-hint" data-hint="MERENDAR — глагол с чередованием e→ie: yo MERIENDO, tú meriendas, él merienda. Такие же «пilleurs»: PREFERIR (prefiero), QUERER (quiero). Запомни: e→ie под ударением!">e → ie</span>: merendar → <b>meriendo</b>. И помни: <b>tengo hambre</b> — буквально «имею голод», а не «есть я»!<br>8 лет: спой песенку дня: «Desayuno, almuerzo, como, meriendo, ceno — ¡yum, yum, yum!» 🎵</div>
     <div class="game-zone">
@@ -317,16 +324,20 @@
       <h2 class="block-title">🔺 CLIL: Пирамида питания</h2>
       <span class="time-badge">⏱ 8 минут</span>
     </div>
-    <p class="block-sub">Что нужно есть <strong>cada día</strong> (каждый день), а что — только <strong>a veces</strong> (иногда)? Кликай на уровни пирамиды!</p>
+    <p class="block-sub">Что нужно есть <strong>cada día</strong> (каждый день), а что — только <strong>a veces</strong> (иногда)? Кликай на уровни пирамиды! Если что-то непонятно — открой перевод по кнопке 📖.</p>
     <div class="pyr">
       <div class="pyr-level pyr-1" onclick="speak('La punta de la pirámide: dulces y refrescos. A veces, pero no cada día.')"><div class="es">🍬 A veces: dulces y refrescos</div><div class="ru">иногда: сладости и газировка</div></div>
       <div class="pyr-level pyr-2" onclick="speak('El centro: yogur, huevos y pescado. Cuatro o cinco veces por semana.')"><div class="es">🐟 A veces: yogur, huevos, pescado</div><div class="ru">несколько раз в неделю</div></div>
       <div class="pyr-level pyr-3" onclick="speak('La base: fruta, verdura, pan, cereales y agua. ¡Cada día!')"><div class="es">🍎 Cada día: fruta, verdura, pan, agua</div><div class="ru">каждый день — основа!</div></div>
     </div>
-    <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakPiramide()">🔊 Послушать текст</button>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <button class="speak-btn" style="font-size:1.05rem;padding:10px 22px" onclick="speakPiramide()">🔊 Послушать текст</button>
+      <button class="trans-btn" style="font-size:1.05rem;padding:10px 22px" id="piramide-trans-btn" onclick="togglePiramideTrans()">📖 Перевод текста</button>
+    </div>
     <div class="read-box">
       La <b>pirámide de la alimentación</b> es un mapa de la comida sana. En la base, <b>cada día</b>: fruta, verdura, pan y agua. ¡Es la parte más grande! En el centro, <b>a veces</b>: yogur, huevos y pescado. Y en la punta, muy arriba, los dulces y los refrescos: <b>a veces</b>, pero no <b>cada día</b>. Marta desayuna <b>cereales</b> con leche cada día. Come verdura y fruta <b>cada día</b>. Los sábados toma un helado: ¡a veces está bien! La comida sana no es aburrida: ¡es colorida!
     </div>
+    <div class="trans-box" id="piramide-trans">📖 <b>Пирамида питания — это карта здоровой еды.</b> В основании — <b>каждый день</b>: фрукты, овощи, хлеб и вода. Это самая большая часть! В центре — <b>иногда</b>: йогурт, яйца и рыба. А на вершине, очень высоко, — сладости и газировка: <b>иногда</b>, но не <b>каждый день</b>. Марта каждый день завтракает <b>хлопьями</b> с молоком. Каждый день она ест овощи и фрукты. По субботам она ест мороженое: иногда это нормально! Здоровая еда — не скучная: она разноцветная!</div>
     <div id="piramide-quiz"></div>
     <div class="script">🧮 <strong>CLIL-математика (12 лет):</strong> У испанского ребёнка 5 приёмов пищи в день. Посчитай: 5 × 7 дней = <b>35 приёмов пищи в неделю</b>! Если в пирамиде «сладости — a veces», сколько раз в неделю можно есть helado?<br>🧒 <strong>8 лет:</strong> покажи на пирамиде, что ты ел(а) сегодня. Скажи: <em>«Cada día como...»</em> или <em>«A veces como...»</em></div>
   </section>
@@ -417,11 +428,11 @@
     <p class="tl-note">📸 Покажи светофор родителям — вместе разберём всё, что 🔴!</p>
   </section>
 
-  <a class="quizlet-link" href="#" onclick="return false;">
+  <!-- QUIZLET: дети урок 44 -->
+  <a class="quizlet-link" href="https://quizlet.com/de/1240178254/%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F-5-%D1%83%D1%80%D0%BE%D0%BA-2-flash-cards/?i=2gqp1x&x=1qqt" target="_blank" rel="noopener">
     <span>📚 Карточки Quizlet · Станция 5 · Урок 2 (Las comidas del día)</span>
     <span>Открыть карточки →</span>
   </a>
-  <!-- QUIZLET: дети урок 44 (ссылку добавит админ) -->
 
   <div class="lesson-nav">
     <a href="./w15-l1.html" class="nav-prev"><div class="nav-small">← Урок 1 станции 5</div><div class="nav-title">Урок 43: La comida española 🥘</div></a>
@@ -665,6 +676,11 @@ function dialNext(){
 
 /* ===== БЛОК 4: CLIL — ПИРАМИДА ===== */
 function speakPiramide(){speak('La pirámide de la alimentación es un mapa de la comida sana. En la base, cada día: fruta, verdura, pan y agua. ¡Es la parte más grande! En el centro, a veces: yogur, huevos y pescado. Y en la punta, muy arriba, los dulces y los refrescos: a veces, pero no cada día. Marta desayuna cereales con leche cada día. Come verdura y fruta cada día. Los sábados toma un helado: ¡a veces está bien! La comida sana no es aburrida: ¡es colorida!');}
+function togglePiramideTrans(){
+  var box=document.getElementById('piramide-trans'),btn=document.getElementById('piramide-trans-btn');
+  box.classList.toggle('show');
+  btn.textContent=box.classList.contains('show')?'🙈 Скрыть перевод':'📖 Перевод текста';
+}
 var PIRQ=[
  {q:'¿Qué está en la base de la pirámide?',ru:'Что находится в основании пирамиды? [8 лет]',ok:'Fruta, verdura, pan y agua.',w:['Dulces y refrescos.','Pescado y huevos.']},
  {q:'¿Qué está en la punta de la pirámide?',ru:'Что находится на вершине пирамиды? [8 лет]',ok:'Los dulces y los refrescos.',w:['La fruta y el agua.','El pan y los cereales.']},
